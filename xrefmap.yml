@@ -45763,6 +45763,582 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync
   nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab(System.String,Uri,Guid)
+  name: AddExcelTab(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTab_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTab(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab*
+  name: AddExcelTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTab
+  nameWithType: ITeamChannelTabCollection.AddExcelTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync(System.String,Uri,Guid)
+  name: AddExcelTabAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTabAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync*
+  name: AddExcelTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabAsync
+  nameWithType: ITeamChannelTabCollection.AddExcelTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddExcelTabBatch(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatch_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatch(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(System.String,Uri,Guid)
+  name: AddExcelTabBatch(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatch(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch*
+  name: AddExcelTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatch
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddExcelTabBatchAsync(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatchAsync_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatchAsync(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(System.String,Uri,Guid)
+  name: AddExcelTabBatchAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatchAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatchAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync*
+  name: AddExcelTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddExcelTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddExcelTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddExcelTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab(System.String)
+  name: AddFormsTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab*
+  name: AddFormsTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTab
+  nameWithType: ITeamChannelTabCollection.AddFormsTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync(System.String)
+  name: AddFormsTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync*
+  name: AddFormsTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabAsync
+  nameWithType: ITeamChannelTabCollection.AddFormsTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddFormsTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(System.String)
+  name: AddFormsTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch*
+  name: AddFormsTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatch
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddFormsTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(System.String)
+  name: AddFormsTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync*
+  name: AddFormsTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddFormsTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddFormsTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddFormsTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab(System.String)
+  name: AddOneNoteTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab*
+  name: AddOneNoteTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTab
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync(System.String)
+  name: AddOneNoteTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync*
+  name: AddOneNoteTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabAsync
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddOneNoteTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(System.String)
+  name: AddOneNoteTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch*
+  name: AddOneNoteTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatch
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddOneNoteTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(System.String)
+  name: AddOneNoteTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync*
+  name: AddOneNoteTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddOneNoteTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddOneNoteTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddOneNoteTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab(System.String,Uri,Guid)
+  name: AddPdfTab(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTab_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTab(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab*
+  name: AddPdfTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTab
+  nameWithType: ITeamChannelTabCollection.AddPdfTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync(System.String,Uri,Guid)
+  name: AddPdfTabAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTabAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync*
+  name: AddPdfTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabAsync
+  nameWithType: ITeamChannelTabCollection.AddPdfTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddPdfTabBatch(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatch_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatch(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(System.String,Uri,Guid)
+  name: AddPdfTabBatch(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatch(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch*
+  name: AddPdfTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatch
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddPdfTabBatchAsync(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatchAsync_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatchAsync(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(System.String,Uri,Guid)
+  name: AddPdfTabBatchAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatchAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatchAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync*
+  name: AddPdfTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPdfTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPdfTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddPdfTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab(System.String)
+  name: AddPlannerTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab*
+  name: AddPlannerTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTab
+  nameWithType: ITeamChannelTabCollection.AddPlannerTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync(System.String)
+  name: AddPlannerTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync*
+  name: AddPlannerTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabAsync
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddPlannerTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(System.String)
+  name: AddPlannerTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch*
+  name: AddPlannerTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatch
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddPlannerTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(System.String)
+  name: AddPlannerTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync*
+  name: AddPlannerTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPlannerTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPlannerTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddPlannerTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab(System.String)
+  name: AddPowerBiTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab*
+  name: AddPowerBiTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTab
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync(System.String)
+  name: AddPowerBiTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync*
+  name: AddPowerBiTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabAsync
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddPowerBiTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(System.String)
+  name: AddPowerBiTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch*
+  name: AddPowerBiTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatch
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddPowerBiTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(System.String)
+  name: AddPowerBiTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync*
+  name: AddPowerBiTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPowerBiTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPowerBiTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddPowerBiTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab(System.String,Uri,Guid)
+  name: AddPptTab(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTab_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTab(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab*
+  name: AddPptTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTab
+  nameWithType: ITeamChannelTabCollection.AddPptTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync(System.String,Uri,Guid)
+  name: AddPptTabAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTabAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync*
+  name: AddPptTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabAsync
+  nameWithType: ITeamChannelTabCollection.AddPptTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddPptTabBatch(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatch_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatch(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(System.String,Uri,Guid)
+  name: AddPptTabBatch(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatch(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch*
+  name: AddPptTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatch
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddPptTabBatchAsync(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatchAsync_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatchAsync(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(System.String,Uri,Guid)
+  name: AddPptTabBatchAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatchAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatchAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync*
+  name: AddPptTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddPptTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddPptTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddPptTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab(System.String)
+  name: AddSharePointPageOrListTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab*
+  name: AddSharePointPageOrListTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTab
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync(System.String)
+  name: AddSharePointPageOrListTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync*
+  name: AddSharePointPageOrListTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabAsync
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddSharePointPageOrListTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(System.String)
+  name: AddSharePointPageOrListTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch*
+  name: AddSharePointPageOrListTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatch
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddSharePointPageOrListTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(System.String)
+  name: AddSharePointPageOrListTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync*
+  name: AddSharePointPageOrListTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddSharePointPageOrListTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddSharePointPageOrListTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab(System.String)
+  name: AddStreamsTab(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTab_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab(System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTab(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab*
+  name: AddStreamsTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTab
+  nameWithType: ITeamChannelTabCollection.AddStreamsTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync(System.String)
+  name: AddStreamsTabAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync*
+  name: AddStreamsTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabAsync
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(PnP.Core.Services.Batch,System.String)
+  name: AddStreamsTabBatch(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatch(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(System.String)
+  name: AddStreamsTabBatch(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch(System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch*
+  name: AddStreamsTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatch
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddStreamsTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(System.String)
+  name: AddStreamsTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync*
+  name: AddStreamsTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddStreamsTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddStreamsTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddStreamsTabBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWebsiteTab(System.String,Uri)
   name: AddWebsiteTab(String, Uri)
   href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWebsiteTab_System_String_Uri_
@@ -45891,6 +46467,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync
   nameWithType: ITeamChannelTabCollection.AddWikiTabBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab(System.String,Uri,Guid)
+  name: AddWordTab(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTab_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTab(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab*
+  name: AddWordTab
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTab_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTab
+  nameWithType: ITeamChannelTabCollection.AddWordTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync(System.String,Uri,Guid)
+  name: AddWordTabAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTabAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync*
+  name: AddWordTabAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabAsync
+  nameWithType: ITeamChannelTabCollection.AddWordTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddWordTabBatch(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatch_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatch(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(System.String,Uri,Guid)
+  name: AddWordTabBatch(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatch(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch*
+  name: AddWordTabBatch
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatch
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatch
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  name: AddWordTabBatchAsync(Batch, String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatchAsync_PnP_Core_Services_Batch_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(PnP.Core.Services.Batch,System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(PnP.Core.Services.Batch, System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatchAsync(Batch, String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(System.String,Uri,Guid)
+  name: AddWordTabBatchAsync(String, Uri, Guid)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatchAsync_System_String_Uri_Guid_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(System.String,Uri,Guid)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync(System.String, Uri, Guid)
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatchAsync(String, Uri, Guid)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync*
+  name: AddWordTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWordTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWordTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddWordTabBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTabConfiguration
   name: ITeamChannelTabConfiguration
   href: api/PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html
