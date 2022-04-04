@@ -233,6 +233,37 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetLibraryFolderViaItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("GetLibraryFolderViaItemTest");
+                IList list = null;
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    var folderItem = await list.AddListFolderAsync("Test");
+
+                    // Load folder directly from list item 
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+                        var listItem = await list2.Items.GetByIdAsync(folderItem.Id);
+                        var folder = await listItem.Folder.GetAsync(f => f.ServerRelativeUrl, f => f.Name, f => f.TimeLastModified);
+
+                        Assert.IsTrue(folder != null);
+                        Assert.IsTrue(folder.Name == "Test");
+                    }
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task BulkAddListItemsWithBadFieldNameTest()
         {
             //TestCommon.Instance.Mocking = false;
