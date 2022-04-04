@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Support option to load Folder from ListItem #810 [FelgeIO - Reinhard Felgenhauer]
+- Page transformation testing: reliabilty improvements #807 [pkbullock - Paul Bullock]
 
 ## [1.6.0]
 
