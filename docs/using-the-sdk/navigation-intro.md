@@ -49,7 +49,7 @@ await context.Web.Navigation.TopNavigationBar.DeleteAllNodesAsync();
 
 ### Adding navigation nodes
 
-Adding lists comes down to adding a new list to the Navigations's [INavigationNodeCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigation.html#PnP_Core_Model_SharePoint_INavigation_QuickLaunch) using the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigationNodeCollection.html#PnP_Core_Model_SharePoint_INavigationNodeCollection_AddAsync_PnP_Core_Model_SharePoint_NavigationNodeOptions_). 
+Adding navigation nodes comes down to adding a new navigation node to the Navigations's [INavigationNodeCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigation.html#PnP_Core_Model_SharePoint_INavigation_QuickLaunch) using the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigationNodeCollection.html#PnP_Core_Model_SharePoint_INavigationNodeCollection_AddAsync_PnP_Core_Model_SharePoint_NavigationNodeOptions_). 
 
 We will have the posibility to set the following options:
 - Title (Required)
