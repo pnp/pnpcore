@@ -547,6 +547,11 @@ namespace PnP.Core.Model.SharePoint
         public IRoleDefinitionCollection RoleDefinitions { get; }
 
         /// <summary>
+        /// Navigation on the Web
+        /// </summary>
+        public INavigation Navigation { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
@@ -1165,11 +1170,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IMultilingualSettings MultilingualSettings { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public INavigation Navigation { get; }
 
         ///// <summary>
         ///// To update...

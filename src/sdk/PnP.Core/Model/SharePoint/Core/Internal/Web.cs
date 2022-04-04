@@ -316,6 +316,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IRoleDefinitionCollection RoleDefinitions { get => GetModelCollectionValue<IRoleDefinitionCollection>(); }
 
+        public INavigation Navigation { get => GetModelValue<INavigation>(); }
+
         public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
