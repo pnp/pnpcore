@@ -23,14 +23,22 @@ namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
                     return DateTime.MinValue;
                 }
 
-                result = new DateTime(
-                    Convert.ToInt32(constructorValues[0]),
-                    Convert.ToInt32(constructorValues[1]),
-                    Convert.ToInt32(constructorValues[2]),
-                    Convert.ToInt32(constructorValues[3]),
-                    Convert.ToInt32(constructorValues[4]),
-                    Convert.ToInt32(constructorValues[5]),
-                    Convert.ToInt32(constructorValues[6]));
+                try
+                {
+                    result = new DateTime(
+                        Convert.ToInt32(constructorValues[0]),
+                        Convert.ToInt32(constructorValues[1]),
+                        Convert.ToInt32(constructorValues[2]),
+                        Convert.ToInt32(constructorValues[3]),
+                        Convert.ToInt32(constructorValues[4]),
+                        Convert.ToInt32(constructorValues[5]),
+                        Convert.ToInt32(constructorValues[6]));
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+                    // Additional safety measure as CSOM sometimes throws invalid datatime information, see #803
+                    return DateTime.MinValue;
+                }
             }
             return result;
         }
