@@ -47,15 +47,15 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
   
 - The library internally uses [dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1) and you can consume it via dependency injection in your applications
 
-### What's the relationship with the existing PnP Framework library
-
-The [PnP Framework](https://github.com/pnp/pnpframework) library is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, a modern page API, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean replacement for PnP Framework with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort we plan to gradually move things over from PnP Framework to the PnP Core SDK. Going forward [PnP Framework](https://github.com/pnp/pnpframework) features will move to the PnP Core SDK in a phased approach.
-
 ### What underlying APIs are used
 
 The SDK provides an object model that's API agnostic, when you as a developer for example load a model (List, Team, Web,...) the SDK will use the best possible API for loading that model being for the most part Microsoft Graph v1.0 and SharePoint REST. Depending on the needs the SDK will use Microsoft Graph Beta calls and in some cases the CSOM endpoint (client.svc) is called. But the good thing is that all of this is transparent for you as developer! You'll have a consistent development experience regardless of the underlying APIs being called.
 
 As [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) is our recommended API to work with Microsoft 365, the SDK will favor Microsoft Graph whenever it makes sense, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data or consistency.
+
+### What's the relationship with the existing PnP Framework library
+
+The [PnP Framework](https://github.com/pnp/pnpframework) library is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean replacement for PnP Framework with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort, we plan to gradually move things over from PnP Framework to the PnP Core SDK. Going forward [PnP Framework](https://github.com/pnp/pnpframework) features will move to the PnP Core SDK in a phased approach.
 
 **Community rocks, sharing is caring!**
 
