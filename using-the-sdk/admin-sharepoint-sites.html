@@ -329,6 +329,10 @@ foreach(var site in recycledSites)
 <p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
 </div>
 
+<div class="NOTE">
+<h5>Note</h5>
+<p>When the site collection being restored has an associated Microsoft 365 group then this group is also restored. This requires the <code>Group.ReadWrite.All</code> delegated or application permission.</p>
+</div>
 <p>A recycled site collection can be restored as long it still sits in the site collection recycle bin. To do so use the <code>RestoreSiteCollection</code> methods:</p>
 <pre><code class="lang-csharp">var recycledSites = await context.GetSiteCollectionManager().GetRecycledSiteCollectionsAsync();
 foreach(var site in recycledSites)
