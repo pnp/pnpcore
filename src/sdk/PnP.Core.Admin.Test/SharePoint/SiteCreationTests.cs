@@ -662,9 +662,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                         {
                             siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
                             Dictionary<string, string> properties = new Dictionary<string, string>
-                        {
-                            { "SiteUrl", siteUrl.ToString() }
-                        };
+                            {
+                                { "SiteUrl", siteUrl.ToString() }
+                            };
                             TestManager.SaveProperties(context, properties);
                         }
                         else
@@ -751,6 +751,121 @@ namespace PnP.Core.Admin.Test.SharePoint
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateRestoreDeleteGroupConnectedSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    using (var adminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        string alias;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "Alias", alias }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            alias = TestManager.GetProperties(context)["Alias"];
+                        }
+
+                        teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                        {
+                            Description = "This is a test site collection",
+                            Language = Language.English,
+                            IsPublic = true,
+                        };
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = adminContext.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                        {
+                            createdSiteCollection = newSiteContext.Uri;
+
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                        }
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Recycle the site collection
+                        adminContext.GetSiteCollectionManager().RecycleSiteCollection(createdSiteCollection);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Verify the site collection is returned as recycled site
+                        var recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
+                        var recycledTeamSite = recycledSites.FirstOrDefault(c => c.Url == createdSiteCollection);
+                        Assert.IsNotNull(recycledTeamSite);
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledTeamSite.Name));
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledTeamSite.CreatedBy));
+                        // Not populate for deleted group connected site!
+                        //Assert.IsTrue(!string.IsNullOrEmpty(recycledTeamSite.DeletedBy));
+                        Assert.IsTrue(recycledTeamSite.TimeCreated > DateTime.MinValue);
+                        Assert.IsTrue(recycledTeamSite.TimeDeleted > DateTime.MinValue);
+                        Assert.IsTrue(recycledTeamSite.StorageQuota > 0);
+                        Assert.IsTrue(recycledTeamSite.StorageUsed > 0);
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledTeamSite.TemplateName));
+
+
+                        // Restore the recycled site collection again
+                        adminContext.GetSiteCollectionManager().RestoreSiteCollection(createdSiteCollection);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Verify the site collection is not returned as recycled site
+                        recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
+                        recycledTeamSite = recycledSites.FirstOrDefault(c => c.Url == createdSiteCollection);
+                        Assert.IsNull(recycledTeamSite);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                // Clean up the created site collection
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
                 }
 
             }

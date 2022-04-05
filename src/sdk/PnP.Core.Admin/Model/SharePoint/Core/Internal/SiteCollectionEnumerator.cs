@@ -343,6 +343,78 @@ namespace PnP.Core.Admin.Model.SharePoint
             return loadedSites;
         }
 
+        internal async static Task<IRecycledSiteCollection> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url)
+        {
+            // Removed query part to avoid running into list view threshold errors
+            string sitesListAllQuery = @"<View>
+                                            <Query>
+                                                <Where>
+                                                    <And>
+                                                        <IsNotNull>
+                                                            <FieldRef Name='TimeDeleted'/>
+                                                        </IsNotNull>
+                                                        <Eq>
+                                                            <FieldRef Name='SiteUrl' /><Value Type='Text'>%URL%</Value>
+                                                        </Eq>
+                                                    </And>
+                                                </Where>
+                                            </Query>
+                                            <ViewFields>
+                                                <FieldRef Name='SiteUrl' />
+                                                <FieldRef Name='Title' />
+                                                <FieldRef Name='SiteId' />
+                                                <FieldRef Name='GroupId' />
+                                                <FieldRef Name='CreatedBy' />
+                                                <FieldRef Name='DeletedBy' />
+                                                <FieldRef Name='TimeCreated' />
+                                                <FieldRef Name='TimeDeleted' />
+                                                <FieldRef Name='ShareByEmailEnabled' />
+                                                <FieldRef Name='ShareByLinkEnabled' />
+                                                <FieldRef Name='SiteOwnerName' />
+                                                <FieldRef Name='SiteOwnerEmail' />
+                                                <FieldRef Name='StorageQuota' />
+                                                <FieldRef Name='StorageUsed' />
+                                                <FieldRef Name='TemplateId' />
+                                                <FieldRef Name='TemplateName' />
+                                            </ViewFields>
+                                            <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+                                        </View>";
+
+            List<IRecycledSiteCollection> loadedSites = new List<IRecycledSiteCollection>();
+
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.AbsoluteUri), (IEnumerable<IListItem> listItems) =>
+            {
+                foreach (var listItem in listItems)
+                {
+                    Uri url = new Uri(listItem["SiteUrl"].ToString());
+                    Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                    Guid groupId = Guid.Parse(listItem["GroupId"].ToString());
+
+                    if (loadedSites.FirstOrDefault(p => p.Id == siteId) == null)
+                    {
+                        loadedSites.Add(new RecycledSiteCollection()
+                        {
+                            Url = new Uri(listItem["SiteUrl"].ToString()),
+                            Id = siteId,
+                            GroupId = groupId,
+                            Name = listItem["Title"]?.ToString(),
+                            CreatedBy = listItem["CreatedBy"]?.ToString(),
+                            DeletedBy = listItem["DeletedBy"]?.ToString(),
+                            TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                            TimeDeleted = listItem["TimeDeleted"] != null ? (DateTime)listItem["TimeDeleted"] : DateTime.MinValue,
+                            SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                            SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                            StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                            StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                            TemplateName = listItem["TemplateName"]?.ToString(),
+                        });
+                    }
+                }
+            }, false, 1).ConfigureAwait(false);
+
+            return loadedSites.FirstOrDefault();
+        }
+
         /// <summary>
         /// Enumerating site collections using Graph Sites endpoint. Only works when using application permissions with Sites.Read.All or higher!
         /// </summary>

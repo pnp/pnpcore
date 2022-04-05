@@ -68,6 +68,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
+                // Get information about the site collection to restore from the SharePoint recycle bin
+                var deletedSiteCollection = await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, siteToRecycle).ConfigureAwait(false);
+
+                if (deletedSiteCollection == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreAdminResources.Exception_SiteRestore_NotFound, siteToRecycle));
+                }
+
+                if (deletedSiteCollection.GroupId != Guid.Empty)
+                {
+                    // First restore the associated Microsoft 365 group (if it was recycled)
+                    await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"/directory/deletedItems/{deletedSiteCollection.GroupId}/restore", ApiType.Graph), HttpMethod.Post).ConfigureAwait(false);
+                }
+
+                // Use the "classic CSOM based approach to restore the SharePoint site and wait for it to complete
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
                     new RestoreDeletedSiteRequest(siteToRecycle)

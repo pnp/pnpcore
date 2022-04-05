@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support option to load Folder from ListItem #810 [FelgeIO - Reinhard Felgenhauer]
 - Page transformation testing: reliabilty improvements #807 [pkbullock - Paul Bullock]
 - Fix for invalid datatime value being returned by CSOM tenant information call #803 [jansenbe - Bert Jansen]
+- Admin library: also try to restore the associated Microsoft 365 group when a group connected site is restored #801 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

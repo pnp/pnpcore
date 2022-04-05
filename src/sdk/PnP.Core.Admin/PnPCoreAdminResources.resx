@@ -135,6 +135,9 @@
   <data name="Exception_SiteCreationStatusCheck" xml:space="preserve">
     <value>Checking for the status of site creation for site {0} did fail. Last returned siteStatus = {1}</value>
   </data>
+  <data name="Exception_SiteRestore_NotFound" xml:space="preserve">
+    <value>Site to restore ({0}) not found</value>
+  </data>
   <data name="Exception_TeamCreation" xml:space="preserve">
     <value>The Team creation for group {0} did not succeed. Check the inner exception for details.</value>
   </data>

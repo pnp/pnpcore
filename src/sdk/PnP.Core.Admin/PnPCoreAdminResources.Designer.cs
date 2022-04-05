@@ -115,6 +115,15 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Site to restore ({0}) not found.
+        /// </summary>
+        internal static string Exception_SiteRestore_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_SiteRestore_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Team creation for group {0} did not succeed. Check the inner exception for details..
         /// </summary>
         internal static string Exception_TeamCreation {
