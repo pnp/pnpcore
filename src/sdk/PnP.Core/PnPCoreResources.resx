@@ -144,6 +144,9 @@
   <data name="Exception_CreatePnPContext_GroupId" xml:space="preserve">
     <value>Please provide the id (Guid) of a the Microsoft 365 group you want to create a PnPContext for</value>
   </data>
+  <data name="Exception_CSOM_MalformedDateTime" xml:space="preserve">
+    <value>Provided CSOM datetime ({0}) is malformed</value>
+  </data>
   <data name="Exception_Feature_AlreadyActivated" xml:space="preserve">
     <value>Feature was already activated</value>
   </data>

@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Utils
             Assert.AreEqual("Dev", response.Title);
             Assert.AreEqual(Guid.Parse("a5355253-94a1-48f1-ada4-da51338c3a5b"), response.Id);
 
-            DateTime expectedDate = new DateTime(2019, 11, 5, 17, 7, 26, 0);
+            DateTime expectedDate = new DateTime(2019, 12, 5, 17, 7, 26, 0);
             Assert.AreEqual(expectedDate, response.Created);
 
             DateTime expectedLastItemModifiedDate = new DateTime(2021, 2, 5, 14, 11, 59, 0);

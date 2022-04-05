@@ -7,8 +7,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
     {
         internal List<IDateConversionStrategy> AvailableConverters { get; set; } = new List<IDateConversionStrategy>()
         {
-            new DateConstuctorStrategy(),
-            new FromMilisecondsConversionStrategy()
+            new FromDateTimeStrategy()
         };
 
         public DateTime? ConverDate(string dateValue)

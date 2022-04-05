@@ -142,6 +142,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provided CSOM datetime ({0}) is malformed.
+        /// </summary>
+        internal static string Exception_CSOM_MalformedDateTime {
+            get {
+                return ResourceManager.GetString("Exception_CSOM_MalformedDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature was already activated.
         /// </summary>
         internal static string Exception_Feature_AlreadyActivated {
