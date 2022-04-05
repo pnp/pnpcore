@@ -195,6 +195,9 @@ foreach(var site in recycledSites)
 
 [!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
+> [!Note]
+> When the site collection being restored has an associated Microsoft 365 group then this group is also restored. This requires the `Group.ReadWrite.All` delegated or application permission.
+
 A recycled site collection can be restored as long it still sits in the site collection recycle bin. To do so use the `RestoreSiteCollection` methods:
 
 ```csharp
