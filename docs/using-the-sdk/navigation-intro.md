@@ -11,7 +11,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-### Getting all the navigation nodes for a specific navigation type
+## Getting all the navigation nodes for a specific navigation type
 
 As discussed before, the navigation nodes can be obtained for two types.
 
@@ -23,21 +23,21 @@ var nodes = await context.Web.Navigation.LoadAsync(n => n.QuickLaunch);
 var nodes = await context.Web.Navigation.LoadAsync(n => n.TopNavigationBar);
 ```
 
-### Getting a specific navigation node by id
+## Getting a specific navigation node by id
 
-We can obtain a navigation node by his unique property 'id'
+We can obtain a navigation node by his unique property `id`:
 
 ```csharp
 // Get Quick Launch node by id
-var node = await context.Web.Navigation.QuickLaunch.GetById(1);
+var node = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
 
 // Get Top Navigation node by id
-var node = await context.Web.Navigation.TopNavigationBar.GetById(1);
+var node = await context.Web.Navigation.TopNavigationBar.GetByIdAsync(1);
 ```
 
-### Deleting all navigation nodes
+## Deleting all navigation nodes
 
-There is a posibility to clear all the nodes of a specific navigation type.
+There is an option to clear all the nodes of a specific navigation type.
 
 ```csharp
 // Delete all the quick launch navigation nodes
@@ -47,11 +47,12 @@ await context.Web.Navigation.QuickLaunch.DeleteAllNodesAsync();
 await context.Web.Navigation.TopNavigationBar.DeleteAllNodesAsync();
 ```
 
-### Adding navigation nodes
+## Adding navigation nodes
 
-Adding navigation nodes comes down to adding a new navigation node to the Navigations's [INavigationNodeCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigation.html#PnP_Core_Model_SharePoint_INavigation_QuickLaunch) using the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigationNodeCollection.html#PnP_Core_Model_SharePoint_INavigationNodeCollection_AddAsync_PnP_Core_Model_SharePoint_NavigationNodeOptions_). 
+Adding navigation nodes comes down to adding a new navigation node to the Navigations's [INavigationNodeCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigation.html#PnP_Core_Model_SharePoint_INavigation_QuickLaunch) using the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigationNodeCollection.html#PnP_Core_Model_SharePoint_INavigationNodeCollection_AddAsync_PnP_Core_Model_SharePoint_NavigationNodeOptions_).
 
-We will have the posibility to set the following options:
+You can set the following options:
+
 - Title (Required)
 - Url (Required)
 - ParentNode (Optional)
@@ -59,31 +60,32 @@ We will have the posibility to set the following options:
 ```csharp
 // Add a new Quick Launch Navigation Node
 var newNode = await context.Web.Navigation.QuickLaunch.AddAsync(new NavigationNodeOptions
-  {
-      Title = $"Node",
-      Url = context.Uri.AbsoluteUri
-  });
+{
+    Title = $"Node",
+    Url = context.Uri.AbsoluteUri
+});
 
 // Add a new child node under a Quick Launch navigation node
-var parentNode = context.Web.Navigation.QuickLaunch.GetById(1);
+var parentNode = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
 var childNode = await context.Web.Navigation.QuickLaunch.AddAsync(new NavigationNodeOptions
-  {
-      Title = $"Child node",
-      Url = context.Uri.AbsoluteUri,
-      ParentNode = parentNode
-  });
+{
+    Title = $"Child node",
+    Url = context.Uri.AbsoluteUri,
+    ParentNode = parentNode
+});
 ```
 
-### Updating navigation nodes
+## Updating navigation nodes
 
 A navigation node has three two properties who can be updated. These are the following:
+
 - Title (string)
 - Url (string)
 - IsVisible (boolean)
 
 ```csharp
 // Get the navigation node to update
-var nodeToUpdate = await context.Web.Navigation.QuickLaunch.GetById(1);
+var nodeToUpdate = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
 
 // Update the properties
 nodeToUpdate.Title = "New title";
@@ -94,28 +96,28 @@ nodeToUpdate.IsVisible = true;
 await nodeToUpdate.UpdateAsync();
 ```
 
-### Deleting navigation nodes
+## Deleting navigation nodes
 
-We can delete a navigation node by first getting it by it's ID and then calling the DeleteAsync() method.
+We can delete a navigation node by first getting it by it's ID and then calling one of the `Delete` methods.
 
 ```csharp
 // Get the node to delete
-var nodeToDelete = await context.Web.Navigation.QuickLaunch.GetById(1);
+var nodeToDelete = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
 
 // Delete the node
 await nodeToDelete.DeleteAsync();
 ```
 
-### Moving a navigation node after a specific node
+## Moving a navigation node after a specific node
 
-We can move navigation nodes around. This can be done by calling the MoveNodeAfter method. We will have to pass the current node to move and the node after which the node has to be placed.
+We can move navigation nodes around. This can be done by using one of the `MoveNodeAfter` methods. We will have to pass the current node to move and the node after which the node has to be placed.
 
 ```csharp
 // Get the node to move
-var nodeToMove = await context.Web.Navigation.QuickLaunch.GetById(1);
+var nodeToMove = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
 
 // Get the node to move the node after
-var nodeToMoveAfter = await context.Web.Navigation.QuickLaunch.GetById(2);
+var nodeToMoveAfter = await context.Web.Navigation.QuickLaunch.GetByIdAsync(2);
 
 // move the nodes
 await context.Web.Navigation.QuickLaunch.MoveNodeAfterAsync(nodeToMove, nodeToMoveAfter);
