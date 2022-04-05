@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with navigation | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with navigation | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/navigation-intro.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-navigation">Working with navigation</h1>
+
+<p>The navigation will live inside an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>. The possible navigation options are Quick Launch and Top Navigation. These navigation objects will have navigation nodes. Those navigation nodes can then have child nodes.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with navigation
+}
+</code></pre>
+<h2 id="getting-all-the-navigation-nodes-for-a-specific-navigation-type">Getting all the navigation nodes for a specific navigation type</h2>
+<p>As discussed before, the navigation nodes can be obtained for two types.</p>
+<pre><code class="lang-csharp">// Get Quick Launch navigation nodes
+var nodes = await context.Web.Navigation.LoadAsync(n =&gt; n.QuickLaunch);
+
+// Get Top Navigation navigation nodes
+var nodes = await context.Web.Navigation.LoadAsync(n =&gt; n.TopNavigationBar);
+</code></pre>
+<h2 id="getting-a-specific-navigation-node-by-id">Getting a specific navigation node by id</h2>
+<p>We can obtain a navigation node by his unique property <code>id</code>:</p>
+<pre><code class="lang-csharp">// Get Quick Launch node by id
+var node = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
+
+// Get Top Navigation node by id
+var node = await context.Web.Navigation.TopNavigationBar.GetByIdAsync(1);
+</code></pre>
+<h2 id="deleting-all-navigation-nodes">Deleting all navigation nodes</h2>
+<p>There is an option to clear all the nodes of a specific navigation type.</p>
+<pre><code class="lang-csharp">// Delete all the quick launch navigation nodes
+await context.Web.Navigation.QuickLaunch.DeleteAllNodesAsync();
+
+// Delete all the top navigation navigation nodes
+await context.Web.Navigation.TopNavigationBar.DeleteAllNodesAsync();
+</code></pre>
+<h2 id="adding-navigation-nodes">Adding navigation nodes</h2>
+<p>Adding navigation nodes comes down to adding a new navigation node to the Navigations's <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigation.html#PnP_Core_Model_SharePoint_INavigation_QuickLaunch">INavigationNodeCollection</a> using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.INavigationNodeCollection.html#PnP_Core_Model_SharePoint_INavigationNodeCollection_AddAsync_PnP_Core_Model_SharePoint_NavigationNodeOptions_">AddAsync method</a>.</p>
+<p>You can set the following options:</p>
+<ul>
+<li>Title (Required)</li>
+<li>Url (Required)</li>
+<li>ParentNode (Optional)</li>
+</ul>
+<pre><code class="lang-csharp">// Add a new Quick Launch Navigation Node
+var newNode = await context.Web.Navigation.QuickLaunch.AddAsync(new NavigationNodeOptions
+{
+    Title = $&quot;Node&quot;,
+    Url = context.Uri.AbsoluteUri
+});
+
+// Add a new child node under a Quick Launch navigation node
+var parentNode = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
+var childNode = await context.Web.Navigation.QuickLaunch.AddAsync(new NavigationNodeOptions
+{
+    Title = $&quot;Child node&quot;,
+    Url = context.Uri.AbsoluteUri,
+    ParentNode = parentNode
+});
+</code></pre>
+<h2 id="updating-navigation-nodes">Updating navigation nodes</h2>
+<p>A navigation node has three two properties who can be updated. These are the following:</p>
+<ul>
+<li>Title (string)</li>
+<li>Url (string)</li>
+<li>IsVisible (boolean)</li>
+</ul>
+<pre><code class="lang-csharp">// Get the navigation node to update
+var nodeToUpdate = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
+
+// Update the properties
+nodeToUpdate.Title = &quot;New title&quot;;
+nodeToUpdate.Url = &quot;https://pnp.github.io/pnpcore/&quot;;
+nodeToUpdate.IsVisible = true;
+
+// Send update to the server
+await nodeToUpdate.UpdateAsync();
+</code></pre>
+<h2 id="deleting-navigation-nodes">Deleting navigation nodes</h2>
+<p>We can delete a navigation node by first getting it by it's ID and then calling one of the <code>Delete</code> methods.</p>
+<pre><code class="lang-csharp">// Get the node to delete
+var nodeToDelete = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
+
+// Delete the node
+await nodeToDelete.DeleteAsync();
+</code></pre>
+<h2 id="moving-a-navigation-node-after-a-specific-node">Moving a navigation node after a specific node</h2>
+<p>We can move navigation nodes around. This can be done by using one of the <code>MoveNodeAfter</code> methods. We will have to pass the current node to move and the node after which the node has to be placed.</p>
+<pre><code class="lang-csharp">// Get the node to move
+var nodeToMove = await context.Web.Navigation.QuickLaunch.GetByIdAsync(1);
+
+// Get the node to move the node after
+var nodeToMoveAfter = await context.Web.Navigation.QuickLaunch.GetByIdAsync(2);
+
+// move the nodes
+await context.Web.Navigation.QuickLaunch.MoveNodeAfterAsync(nodeToMove, nodeToMoveAfter);
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

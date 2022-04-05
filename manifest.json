@@ -7653,6 +7653,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/navigation-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/navigation-intro.html",
+          "hash": "7Stuq+KXkyp5XQZ0OFXRSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/pages-header.md",
       "output": {
         ".html": {
@@ -7933,7 +7945,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "WA6xwF3KKwABSFPoTfI2KQ=="
+          "hash": "lS/oIMIBkZDy5HPtQtXXWg=="
         }
       },
       "is_incremental": false,
@@ -8002,7 +8014,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 100,
+          "total_file_count": 101,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
