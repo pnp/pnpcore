@@ -15574,6 +15574,129 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ValidationMessage
   nameWithType: CommonFieldOptions.ValidationMessage
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions
+  name: CopyMigrationOptions
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.CopyMigrationOptions
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions
+  nameWithType: CopyMigrationOptions
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch
+  name: AllowSchemaMismatch
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_AllowSchemaMismatch
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch
+  nameWithType: CopyMigrationOptions.AllowSchemaMismatch
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch*
+  name: AllowSchemaMismatch
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_AllowSchemaMismatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSchemaMismatch
+  nameWithType: CopyMigrationOptions.AllowSchemaMismatch
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+  name: AllowSmallerVersionLimitOnDestination
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_AllowSmallerVersionLimitOnDestination
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+  nameWithType: CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination*
+  name: AllowSmallerVersionLimitOnDestination
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_AllowSmallerVersionLimitOnDestination_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+  nameWithType: CopyMigrationOptions.AllowSmallerVersionLimitOnDestination
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock
+  name: BypassSharedLock
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_BypassSharedLock
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock
+  nameWithType: CopyMigrationOptions.BypassSharedLock
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock*
+  name: BypassSharedLock
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_BypassSharedLock_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.BypassSharedLock
+  nameWithType: CopyMigrationOptions.BypassSharedLock
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags
+  name: ClientEtags
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_ClientEtags
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags
+  nameWithType: CopyMigrationOptions.ClientEtags
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags*
+  name: ClientEtags
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_ClientEtags_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.ClientEtags
+  nameWithType: CopyMigrationOptions.ClientEtags
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren
+  name: ExcludeChildren
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_ExcludeChildren
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren
+  nameWithType: CopyMigrationOptions.ExcludeChildren
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren*
+  name: ExcludeChildren
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_ExcludeChildren_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.ExcludeChildren
+  nameWithType: CopyMigrationOptions.ExcludeChildren
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory
+  name: IgnoreVersionHistory
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_IgnoreVersionHistory
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory
+  nameWithType: CopyMigrationOptions.IgnoreVersionHistory
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory*
+  name: IgnoreVersionHistory
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_IgnoreVersionHistory_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.IgnoreVersionHistory
+  nameWithType: CopyMigrationOptions.IgnoreVersionHistory
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode
+  name: IsMoveMode
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_IsMoveMode
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode
+  nameWithType: CopyMigrationOptions.IsMoveMode
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode*
+  name: IsMoveMode
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_IsMoveMode_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.IsMoveMode
+  nameWithType: CopyMigrationOptions.IsMoveMode
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource
+  name: MoveButKeepSource
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_MoveButKeepSource
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource
+  nameWithType: CopyMigrationOptions.MoveButKeepSource
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource*
+  name: MoveButKeepSource
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_MoveButKeepSource_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.MoveButKeepSource
+  nameWithType: CopyMigrationOptions.MoveButKeepSource
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior
+  name: NameConflictBehavior
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_NameConflictBehavior
+  commentId: P:PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior
+  nameWithType: CopyMigrationOptions.NameConflictBehavior
+- uid: PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior*
+  name: NameConflictBehavior
+  href: api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html#PnP_Core_Model_SharePoint_CopyMigrationOptions_NameConflictBehavior_
+  commentId: Overload:PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CopyMigrationOptions.NameConflictBehavior
+  nameWithType: CopyMigrationOptions.NameConflictBehavior
 - uid: PnP.Core.Model.SharePoint.CustomImageSettings
   name: CustomImageSettings
   href: api/PnP.Core.Model.SharePoint.CustomImageSettings.html
@@ -20218,6 +20341,96 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IContentTypeIdCollection
   fullName: PnP.Core.Model.SharePoint.IContentTypeIdCollection
   nameWithType: IContentTypeIdCollection
+- uid: PnP.Core.Model.SharePoint.ICopyJobProgress
+  name: ICopyJobProgress
+  href: api/PnP.Core.Model.SharePoint.ICopyJobProgress.html
+  commentId: T:PnP.Core.Model.SharePoint.ICopyJobProgress
+  fullName: PnP.Core.Model.SharePoint.ICopyJobProgress
+  nameWithType: ICopyJobProgress
+- uid: PnP.Core.Model.SharePoint.ICopyJobProgress.JobState
+  name: JobState
+  href: api/PnP.Core.Model.SharePoint.ICopyJobProgress.html#PnP_Core_Model_SharePoint_ICopyJobProgress_JobState
+  commentId: P:PnP.Core.Model.SharePoint.ICopyJobProgress.JobState
+  fullName: PnP.Core.Model.SharePoint.ICopyJobProgress.JobState
+  nameWithType: ICopyJobProgress.JobState
+- uid: PnP.Core.Model.SharePoint.ICopyJobProgress.JobState*
+  name: JobState
+  href: api/PnP.Core.Model.SharePoint.ICopyJobProgress.html#PnP_Core_Model_SharePoint_ICopyJobProgress_JobState_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyJobProgress.JobState
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyJobProgress.JobState
+  nameWithType: ICopyJobProgress.JobState
+- uid: PnP.Core.Model.SharePoint.ICopyJobProgress.Logs
+  name: Logs
+  href: api/PnP.Core.Model.SharePoint.ICopyJobProgress.html#PnP_Core_Model_SharePoint_ICopyJobProgress_Logs
+  commentId: P:PnP.Core.Model.SharePoint.ICopyJobProgress.Logs
+  fullName: PnP.Core.Model.SharePoint.ICopyJobProgress.Logs
+  nameWithType: ICopyJobProgress.Logs
+- uid: PnP.Core.Model.SharePoint.ICopyJobProgress.Logs*
+  name: Logs
+  href: api/PnP.Core.Model.SharePoint.ICopyJobProgress.html#PnP_Core_Model_SharePoint_ICopyJobProgress_Logs_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyJobProgress.Logs
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyJobProgress.Logs
+  nameWithType: ICopyJobProgress.Logs
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo
+  name: ICopyMigrationInfo
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html
+  commentId: T:PnP.Core.Model.SharePoint.ICopyMigrationInfo
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo
+  nameWithType: ICopyMigrationInfo
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey
+  name: EncryptionKey
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_EncryptionKey
+  commentId: P:PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey
+  nameWithType: ICopyMigrationInfo.EncryptionKey
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey*
+  name: EncryptionKey
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_EncryptionKey_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.EncryptionKey
+  nameWithType: ICopyMigrationInfo.EncryptionKey
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId
+  name: JobId
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_JobId
+  commentId: P:PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId
+  nameWithType: ICopyMigrationInfo.JobId
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId*
+  name: JobId
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_JobId_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobId
+  nameWithType: ICopyMigrationInfo.JobId
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri
+  name: JobQueueUri
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_JobQueueUri
+  commentId: P:PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri
+  nameWithType: ICopyMigrationInfo.JobQueueUri
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri*
+  name: JobQueueUri
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_JobQueueUri_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.JobQueueUri
+  nameWithType: ICopyMigrationInfo.JobQueueUri
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds
+  name: SourceListItemUniqueIds
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_SourceListItemUniqueIds
+  commentId: P:PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds
+  nameWithType: ICopyMigrationInfo.SourceListItemUniqueIds
+- uid: PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds*
+  name: SourceListItemUniqueIds
+  href: api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html#PnP_Core_Model_SharePoint_ICopyMigrationInfo_SourceListItemUniqueIds_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICopyMigrationInfo.SourceListItemUniqueIds
+  nameWithType: ICopyMigrationInfo.SourceListItemUniqueIds
 - uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings
   name: IEffectiveInformationRightsManagementSettings
   href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html
@@ -34199,6 +34412,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.CommentsOnSitePagesDisabled
   nameWithType: ISite.CommentsOnSitePagesDisabled
+- uid: PnP.Core.Model.SharePoint.ISite.CreateCopyJobs(System.String[],System.String,PnP.Core.Model.SharePoint.CopyMigrationOptions,System.Boolean,System.Int32)
+  name: CreateCopyJobs(String[], String, CopyMigrationOptions, Boolean, Int32)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CreateCopyJobs_System_String___System_String_PnP_Core_Model_SharePoint_CopyMigrationOptions_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.CreateCopyJobs(System.String[],System.String,PnP.Core.Model.SharePoint.CopyMigrationOptions,System.Boolean,System.Int32)
+  name.vb: CreateCopyJobs(String(), String, CopyMigrationOptions, Boolean, Int32)
+  fullName: PnP.Core.Model.SharePoint.ISite.CreateCopyJobs(System.String[], System.String, PnP.Core.Model.SharePoint.CopyMigrationOptions, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.CreateCopyJobs(System.String(), System.String, PnP.Core.Model.SharePoint.CopyMigrationOptions, System.Boolean, System.Int32)
+  nameWithType: ISite.CreateCopyJobs(String[], String, CopyMigrationOptions, Boolean, Int32)
+  nameWithType.vb: ISite.CreateCopyJobs(String(), String, CopyMigrationOptions, Boolean, Int32)
+- uid: PnP.Core.Model.SharePoint.ISite.CreateCopyJobs*
+  name: CreateCopyJobs
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CreateCopyJobs_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.CreateCopyJobs
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.CreateCopyJobs
+  nameWithType: ISite.CreateCopyJobs
+- uid: PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync(System.String[],System.String,PnP.Core.Model.SharePoint.CopyMigrationOptions,System.Boolean,System.Int32)
+  name: CreateCopyJobsAsync(String[], String, CopyMigrationOptions, Boolean, Int32)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CreateCopyJobsAsync_System_String___System_String_PnP_Core_Model_SharePoint_CopyMigrationOptions_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync(System.String[],System.String,PnP.Core.Model.SharePoint.CopyMigrationOptions,System.Boolean,System.Int32)
+  name.vb: CreateCopyJobsAsync(String(), String, CopyMigrationOptions, Boolean, Int32)
+  fullName: PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync(System.String[], System.String, PnP.Core.Model.SharePoint.CopyMigrationOptions, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync(System.String(), System.String, PnP.Core.Model.SharePoint.CopyMigrationOptions, System.Boolean, System.Int32)
+  nameWithType: ISite.CreateCopyJobsAsync(String[], String, CopyMigrationOptions, Boolean, Int32)
+  nameWithType.vb: ISite.CreateCopyJobsAsync(String(), String, CopyMigrationOptions, Boolean, Int32)
+- uid: PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync*
+  name: CreateCopyJobsAsync
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CreateCopyJobsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.CreateCopyJobsAsync
+  nameWithType: ISite.CreateCopyJobsAsync
 - uid: PnP.Core.Model.SharePoint.ISite.DisableAppViews
   name: DisableAppViews
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_DisableAppViews
@@ -34238,6 +34483,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.DisableFlows
   nameWithType: ISite.DisableFlows
+- uid: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished(PnP.Core.Model.SharePoint.IList{PnP.Core.Model.SharePoint.ICopyMigrationInfo},System.Int32)
+  name: EnsureCopyJobHasFinished(IList<ICopyMigrationInfo>, Int32)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_EnsureCopyJobHasFinished_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_ICopyMigrationInfo__System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished(PnP.Core.Model.SharePoint.IList{PnP.Core.Model.SharePoint.ICopyMigrationInfo},System.Int32)
+  name.vb: EnsureCopyJobHasFinished(IList(Of ICopyMigrationInfo), Int32)
+  fullName: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished(PnP.Core.Model.SharePoint.IList<PnP.Core.Model.SharePoint.ICopyMigrationInfo>, System.Int32)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished(PnP.Core.Model.SharePoint.IList(Of PnP.Core.Model.SharePoint.ICopyMigrationInfo), System.Int32)
+  nameWithType: ISite.EnsureCopyJobHasFinished(IList<ICopyMigrationInfo>, Int32)
+  nameWithType.vb: ISite.EnsureCopyJobHasFinished(IList(Of ICopyMigrationInfo), Int32)
+- uid: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished*
+  name: EnsureCopyJobHasFinished
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_EnsureCopyJobHasFinished_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinished
+  nameWithType: ISite.EnsureCopyJobHasFinished
+- uid: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync(PnP.Core.Model.SharePoint.IList{PnP.Core.Model.SharePoint.ICopyMigrationInfo},System.Int32)
+  name: EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo>, Int32)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_EnsureCopyJobHasFinishedAsync_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_ICopyMigrationInfo__System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync(PnP.Core.Model.SharePoint.IList{PnP.Core.Model.SharePoint.ICopyMigrationInfo},System.Int32)
+  name.vb: EnsureCopyJobHasFinishedAsync(IList(Of ICopyMigrationInfo), Int32)
+  fullName: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync(PnP.Core.Model.SharePoint.IList<PnP.Core.Model.SharePoint.ICopyMigrationInfo>, System.Int32)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync(PnP.Core.Model.SharePoint.IList(Of PnP.Core.Model.SharePoint.ICopyMigrationInfo), System.Int32)
+  nameWithType: ISite.EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo>, Int32)
+  nameWithType.vb: ISite.EnsureCopyJobHasFinishedAsync(IList(Of ICopyMigrationInfo), Int32)
+- uid: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync*
+  name: EnsureCopyJobHasFinishedAsync
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_EnsureCopyJobHasFinishedAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.EnsureCopyJobHasFinishedAsync
+  nameWithType: ISite.EnsureCopyJobHasFinishedAsync
 - uid: PnP.Core.Model.SharePoint.ISite.ExternalSharingTipsEnabled
   name: ExternalSharingTipsEnabled
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ExternalSharingTipsEnabled
@@ -34316,6 +34593,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
   nameWithType: ISite.GetAvailableComplianceTagsAsync
+- uid: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  name: GetCopyJobProgress(ICopyMigrationInfo)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetCopyJobProgress_PnP_Core_Model_SharePoint_ICopyMigrationInfo_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  fullName: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  nameWithType: ISite.GetCopyJobProgress(ICopyMigrationInfo)
+- uid: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress*
+  name: GetCopyJobProgress
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetCopyJobProgress_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgress
+  nameWithType: ISite.GetCopyJobProgress
+- uid: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  name: GetCopyJobProgressAsync(ICopyMigrationInfo)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetCopyJobProgressAsync_PnP_Core_Model_SharePoint_ICopyMigrationInfo_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  fullName: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync(PnP.Core.Model.SharePoint.ICopyMigrationInfo)
+  nameWithType: ISite.GetCopyJobProgressAsync(ICopyMigrationInfo)
+- uid: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync*
+  name: GetCopyJobProgressAsync
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetCopyJobProgressAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.GetCopyJobProgressAsync
+  nameWithType: ISite.GetCopyJobProgressAsync
 - uid: PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable{Guid})
   name: GetHubSiteData(Nullable<Guid>)
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetHubSiteData_System_Nullable_Guid__
@@ -41737,6 +42040,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NoNewView
   fullName: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NoNewView
   nameWithType: MachineLearningPublicationViewOption.NoNewView
+- uid: PnP.Core.Model.SharePoint.MigrationJobState
+  name: MigrationJobState
+  href: api/PnP.Core.Model.SharePoint.MigrationJobState.html
+  commentId: T:PnP.Core.Model.SharePoint.MigrationJobState
+  fullName: PnP.Core.Model.SharePoint.MigrationJobState
+  nameWithType: MigrationJobState
+- uid: PnP.Core.Model.SharePoint.MigrationJobState.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.MigrationJobState.html#PnP_Core_Model_SharePoint_MigrationJobState_None
+  commentId: F:PnP.Core.Model.SharePoint.MigrationJobState.None
+  fullName: PnP.Core.Model.SharePoint.MigrationJobState.None
+  nameWithType: MigrationJobState.None
+- uid: PnP.Core.Model.SharePoint.MigrationJobState.Processing
+  name: Processing
+  href: api/PnP.Core.Model.SharePoint.MigrationJobState.html#PnP_Core_Model_SharePoint_MigrationJobState_Processing
+  commentId: F:PnP.Core.Model.SharePoint.MigrationJobState.Processing
+  fullName: PnP.Core.Model.SharePoint.MigrationJobState.Processing
+  nameWithType: MigrationJobState.Processing
+- uid: PnP.Core.Model.SharePoint.MigrationJobState.Queued
+  name: Queued
+  href: api/PnP.Core.Model.SharePoint.MigrationJobState.html#PnP_Core_Model_SharePoint_MigrationJobState_Queued
+  commentId: F:PnP.Core.Model.SharePoint.MigrationJobState.Queued
+  fullName: PnP.Core.Model.SharePoint.MigrationJobState.Queued
+  nameWithType: MigrationJobState.Queued
 - uid: PnP.Core.Model.SharePoint.MoveCopyOptions
   name: MoveCopyOptions
   href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html
@@ -43760,6 +44087,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
+- uid: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior
+  name: SPMigrationNameConflictBehavior
+  href: api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.html
+  commentId: T:PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior
+  fullName: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior
+  nameWithType: SPMigrationNameConflictBehavior
+- uid: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Fail
+  name: Fail
+  href: api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.html#PnP_Core_Model_SharePoint_SPMigrationNameConflictBehavior_Fail
+  commentId: F:PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Fail
+  fullName: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Fail
+  nameWithType: SPMigrationNameConflictBehavior.Fail
+- uid: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.KeepBoth
+  name: KeepBoth
+  href: api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.html#PnP_Core_Model_SharePoint_SPMigrationNameConflictBehavior_KeepBoth
+  commentId: F:PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.KeepBoth
+  fullName: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.KeepBoth
+  nameWithType: SPMigrationNameConflictBehavior.KeepBoth
+- uid: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Replace
+  name: Replace
+  href: api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.html#PnP_Core_Model_SharePoint_SPMigrationNameConflictBehavior_Replace
+  commentId: F:PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Replace
+  fullName: PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.Replace
+  nameWithType: SPMigrationNameConflictBehavior.Replace
 - uid: PnP.Core.Model.SharePoint.SyntexModelPublishOptions
   name: SyntexModelPublishOptions
   href: api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html

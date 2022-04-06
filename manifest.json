@@ -2366,6 +2366,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.CopyMigrationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html",
+          "hash": "BI/yLXEanNIqtZVii3efSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.CustomImageSettings.yml",
       "output": {
         ".html": {
@@ -3110,6 +3122,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICopyJobProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICopyJobProgress.html",
+          "hash": "foWeaWaGcvLsSzL27zf9pg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICopyMigrationInfo.html",
+          "hash": "lq+mePnqiVVdfLlcaL5ARw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.yml",
       "output": {
         ".html": {
@@ -3822,7 +3858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "UO0OKNmerS+22xqlCTGTTA=="
+          "hash": "cQbkdaMQ+fVzXKxWQ46a1Q=="
         }
       },
       "is_incremental": false,
@@ -4382,6 +4418,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.MigrationJobState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.MigrationJobState.html",
+          "hash": "VwhIayzYCNw7M32tnEdt7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.MoveCopyOptions.yml",
       "output": {
         ".html": {
@@ -4663,6 +4711,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html",
           "hash": "8EcojYwLaqB4ZwI42CYYRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.SPMigrationNameConflictBehavior.html",
+          "hash": "DZAwQeJ9IYwECD4TzlpmzA=="
         }
       },
       "is_incremental": false,
@@ -5058,7 +5118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "njC5pw2IVRx8G2AVxilC2A=="
+          "hash": "JBGzZlQbX5LTFlba71fufw=="
         }
       },
       "is_incremental": false,
@@ -6282,7 +6342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "4k3XE1XIfn5xQYkO1VH8zA=="
+          "hash": "EyUFFf84qr/nj0sybwPS7w=="
         }
       },
       "is_incremental": false,
@@ -8020,7 +8080,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 521,
+          "total_file_count": 526,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
