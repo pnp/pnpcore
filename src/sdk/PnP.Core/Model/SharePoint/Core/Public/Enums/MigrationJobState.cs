@@ -9,10 +9,12 @@
         /// Finished
         /// </summary>
         None = 0,
+
         /// <summary>
         /// In progress
         /// </summary>
         Processing = 4,
+        
         /// <summary>
         /// In queue to being processed
         /// </summary>

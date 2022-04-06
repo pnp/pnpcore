@@ -382,14 +382,13 @@ namespace PnP.Core.Model.SharePoint
 
         #region Copy / Move Jobs
 
-        public async Task<IList<ICopyMigrationInfo>> CreateCopyJobsAsync(string[] exportObjectUris, string destinationUri, ICopyMigrationOptions options, bool waitUntilFinished = false)
+        public async Task<IList<ICopyMigrationInfo>> CreateCopyJobsAsync(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1)
         {
             var apiCall = CreateCopyJobCall(exportObjectUris, destinationUri, options);
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-
                 var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
                 if (json.TryGetProperty("value", out JsonElement copyJobs))
@@ -400,10 +399,12 @@ namespace PnP.Core.Model.SharePoint
                     {
                         returnJobs.Add(copyJob);
                     }
+
                     if (waitUntilFinished)
                     {
-                        await EnsureCopyJobHasFinishedAsync(returnJobs).ConfigureAwait(false);
+                        await EnsureCopyJobHasFinishedAsync(returnJobs, waitAfterStatusCheck).ConfigureAwait(false);
                     }
+                    
                     return returnJobs;
                 }
 
@@ -412,17 +413,16 @@ namespace PnP.Core.Model.SharePoint
             return null;
         }
 
-        public IList<ICopyMigrationInfo> CreateCopyJobs(string[] exportObjectUris, string destinationUri, ICopyMigrationOptions options, bool waitUntilFinished = false)
+        public IList<ICopyMigrationInfo> CreateCopyJobs(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1)
         {
-            return CreateCopyJobsAsync(exportObjectUris, destinationUri, options, waitUntilFinished).GetAwaiter().GetResult();
+            return CreateCopyJobsAsync(exportObjectUris, destinationUri, options, waitUntilFinished, waitAfterStatusCheck).GetAwaiter().GetResult();
         }
 
         public async Task<ICopyJobProgress> GetCopyJobProgressAsync(ICopyMigrationInfo copyMigrationInfo)
         {
             var apiCall = GetCopyJobProgressCall(copyMigrationInfo);
             var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-            CopyJobProgress progress = JsonSerializer.Deserialize<CopyJobProgress>(result.Json);
-            return progress;
+            return JsonSerializer.Deserialize<CopyJobProgress>(result.Json);
         }
 
         public ICopyJobProgress GetCopyJobProgress(ICopyMigrationInfo copyMigrationInfo)
@@ -430,51 +430,54 @@ namespace PnP.Core.Model.SharePoint
             return GetCopyJobProgressAsync(copyMigrationInfo).GetAwaiter().GetResult();
         }
 
-        private ApiCall CreateCopyJobCall(string[] exportObjectUris, string destinationUri, ICopyMigrationOptions options)
+        private static ApiCall CreateCopyJobCall(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options)
         {
             var requestBody = new
             {
-                exportObjectUris = exportObjectUris,  
-                destinationUri = destinationUri,
-                options = options
+                exportObjectUris,
+                destinationUri,
+                options
             }.AsExpando();
+
             return new ApiCall("_api/site/CreateCopyJobs", ApiType.SPORest, jsonBody: JsonSerializer.Serialize(requestBody, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues));
         }
 
-        private ApiCall GetCopyJobProgressCall(ICopyMigrationInfo copyMigrationInfo)
+        private static ApiCall GetCopyJobProgressCall(ICopyMigrationInfo copyMigrationInfo)
         {
             var requestBody = new
             {
                 copyJobInfo = new 
                 {
-                    EncryptionKey = copyMigrationInfo.EncryptionKey,
-                    JobId = copyMigrationInfo.JobId,
-                    JobQueueUri = copyMigrationInfo.JobQueueUri,
+                    copyMigrationInfo.EncryptionKey,
+                    copyMigrationInfo.JobId,
+                    copyMigrationInfo.JobQueueUri,
                 }
             }.AsExpando();
+
             return new ApiCall("_api/site/GetCopyJobProgress", ApiType.SPORest, jsonBody: JsonSerializer.Serialize(requestBody, typeof(ExpandoObject)));
         }
 
-        public async Task EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo> copyMigrationInfos, int sleep = 500)
+        public async Task EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1)
         {
             while (copyMigrationInfos.Count > 0)
             {
-                Thread.Sleep(sleep);
+                await Task.Delay(TimeSpan.FromSeconds(waitAfterStatusCheck)).ConfigureAwait(false);
+
                 foreach (var copyMigrationInfo in copyMigrationInfos.ToList())
                 {
                     var progress = await GetCopyJobProgressAsync(copyMigrationInfo).ConfigureAwait(false);
                     if (progress.JobState == MigrationJobState.None)
+                    {
                         copyMigrationInfos.Remove(copyMigrationInfo);
+                    }
                 }
             }
         }
 
-        public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int sleep = 500)
+        public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1)
         {
-            EnsureCopyJobHasFinishedAsync(copyMigrationInfos, sleep).GetAwaiter().GetResult();
+            EnsureCopyJobHasFinishedAsync(copyMigrationInfos, waitAfterStatusCheck).GetAwaiter().GetResult();
         }
-
-
 
         #endregion
 

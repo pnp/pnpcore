@@ -12,14 +12,17 @@ namespace PnP.Core.Model.SharePoint
         /// AES256CBC encryption key used to decrypt messages from job/manifest queue
         /// </summary>
         public byte[] EncryptionKey { get; }
+        
         /// <summary>
         /// Return a unique Job ID associated with this asynchronous read
         /// </summary>
         public Guid JobId { get; }
+        
         /// <summary>
         /// URL for accessing Azure queue used for returning notification of copy and move process
         /// </summary>
         public Uri JobQueueUri { get; }
+        
         /// <summary>
         /// Return the source
         /// </summary>

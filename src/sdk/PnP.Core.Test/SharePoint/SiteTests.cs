@@ -239,6 +239,7 @@ namespace PnP.Core.Test.SharePoint
                     IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
                     var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+
                     var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
                     {
                         AllowSchemaMismatch = true,
@@ -250,7 +251,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     // Check if file has been moved
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
@@ -292,7 +300,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     // Check for copied files on target library
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
@@ -337,7 +352,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    context.Site.EnsureCopyJobHasFinished(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    context.Site.EnsureCopyJobHasFinished(copyJob, delay);
 
                     // Check if file has been moved
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
@@ -378,7 +400,14 @@ namespace PnP.Core.Test.SharePoint
                     NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                 });
 
-                context.Site.EnsureCopyJobHasFinished(copyJob);
+                int delay = 1;
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    delay = 0;
+                }
+
+                context.Site.EnsureCopyJobHasFinished(copyJob, delay);
 
                 // Check if file has been copied.
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -418,7 +447,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
                     IFolder movedFolder = await secondCtx.Web.GetFolderByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{folderToCopy.Name}");
@@ -467,7 +503,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     // Check if file has been moved
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
@@ -510,7 +553,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     // Check if file exists on moved ctx
                     // Check for moved files on target library
@@ -549,6 +599,14 @@ namespace PnP.Core.Test.SharePoint
                     IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
                     var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
                     var copyJob = context.Site.CreateCopyJobs(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
                     {
                         AllowSchemaMismatch = true,
@@ -558,12 +616,9 @@ namespace PnP.Core.Test.SharePoint
                         BypassSharedLock = true,
                         ExcludeChildren = true,
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
-                    });
-
-                    context.Site.EnsureCopyJobHasFinished(copyJob);
+                    }, waitUntilFinished: true, waitAfterStatusCheck: delay);
 
                     // Check for moved files on target library
-
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
                     IFile movedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
 
@@ -587,7 +642,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task CreateMoveJobInSameSiteCollection()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
@@ -608,19 +663,30 @@ namespace PnP.Core.Test.SharePoint
                     NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                 });
 
-                context.Site.EnsureCopyJobHasFinished(copyJob);
+                int delay = 1;
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    delay = 0;
+                }
+
+                context.Site.EnsureCopyJobHasFinished(copyJob, delay);
 
                 // Check if file has been copied.
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = null;
+                try
+                {
+                    // Doc was moved, so should not be available anymore
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                }
+                catch { }
                 IFile testDocumentCopied = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace("Shared Documents", "TestLibrary"));
 
-                Assert.IsNotNull(testDocument);
-                Assert.IsNotNull(testDocumentCopied);
-                Assert.AreEqual(testDocument.Name, testDocumentCopied.Name);
+                Assert.IsNull(testDocument);
+                Assert.IsNotNull(testDocumentCopied);                
 
                 await documentLibrary.DeleteAsync();
-            }
-            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.TestSite);
+            }            
         }
 
         [TestMethod]
@@ -637,6 +703,14 @@ namespace PnP.Core.Test.SharePoint
                 {
                     string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
                     var jobUris = new List<string> { context.Uri + "/Shared Documents/" + firstDocumentName, context.Uri + "/Shared Documents/" + secondDocumentName };
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
                     var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
                     {
                         AllowSchemaMismatch = true,
@@ -646,7 +720,7 @@ namespace PnP.Core.Test.SharePoint
                         BypassSharedLock = true,
                         ExcludeChildren = true,
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
-                    }, waitUntilFinished: true);
+                    }, waitUntilFinished: true, waitAfterStatusCheck: delay);
 
                     // Check for moved files on target library
 
@@ -707,7 +781,14 @@ namespace PnP.Core.Test.SharePoint
                         NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
                     });
 
-                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
 
                     // Check for copied files on target library
                     await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);

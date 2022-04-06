@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Support for configuring top and quicklaunch navigation #805 and #813 [MathijsVerbeeck - Mathijs Verbeeck]
 - Extended the team channel tabs to following tabs: Word (Configurable), Ppt (Configurable), Excel (Configurable), Pdf (Configurable), Stream, Planner, Forms, OneNote, PowerBi, SharePoint Page or List #808 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added support for asynchronous file & listitem copy/move functionality on the ISite interface using the SPO CopyJobs API #814 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

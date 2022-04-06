@@ -9,10 +9,12 @@
         /// Returns an error
         /// </summary>
         Fail = 0,
+        
         /// <summary>
         /// Replaces the file if conflict occurs
         /// </summary>
         Replace = 1,
+        
         /// <summary>
         /// Keeps both the files (will append a character / number to the filename)
         /// </summary>

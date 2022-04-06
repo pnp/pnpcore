@@ -85,6 +85,7 @@ namespace PnP.Core.Test.Utilities
         /// <param name="documentMetadata">The metadata of the document</param>
         /// <param name="contextConfig">The name of the context config. Default is the value of TestCommon.TestSite</param>
         /// <param name="sourceFilePath">The path of the source mock file in case of offline test</param>
+        /// <param name="parentFolder">Add the mock file into the a given folder path</param>
         /// <returns>A tuple containing the name of the library and the name and the server relative URL of the created document</returns>
         internal static async Task<Tuple<string, string, string>> CreateTestDocumentAsync(int contextId = default,
             string parentLibraryName = "Documents",
