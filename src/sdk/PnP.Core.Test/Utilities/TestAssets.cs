@@ -95,7 +95,8 @@ namespace PnP.Core.Test.Utilities
               bool parentLibraryApprove = false,
               Dictionary<string, object> documentMetadata = null,
               string contextConfig = null,
-              [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+              [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null,
+              IFolder parentFolder = null)
         {
             contextConfig ??= TestCommon.TestSite;
 
@@ -108,6 +109,12 @@ namespace PnP.Core.Test.Utilities
 
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName, sourceFilePath))
             {
+                if (parentFolder != null)
+                {
+                    IFile test = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                    return new Tuple<string, string, string>(parentFolder.Name, test.Name, test.ServerRelativeUrl);
+                }
+
                 IFolder folder;
                 if (!IsDefaultSharePointLibraryName(parentLibraryName))
                 {

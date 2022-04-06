@@ -359,5 +359,53 @@ namespace PnP.Core.Model.SharePoint
         /// Checks if current site is a HomeSite
         /// </summary>
         public bool IsHomeSite();
+
+        /// <summary>
+        /// Creates a new migration job
+        /// <param name="exportObjectUris">Array of the objects to migrate (absolute url to the file / folder)</param>
+        /// <param name="destinationUri">Destination URI to where the objects have to be migrated</param>
+        /// <param name="options">Migration options</param>
+        /// <param name="waitUntilFinished">Defines if we have to wait until all the migrations have finished</param>
+        /// <returns>List of all the jobs being created (one for every exportObjectUri)</returns>
+        /// </summary>
+        public Task<IList<ICopyMigrationInfo>> CreateCopyJobsAsync(string[] exportObjectUris, string destinationUri, ICopyMigrationOptions options, bool waitUntilFinished = false);
+
+        /// <summary>
+        /// Creates a new migration job
+        /// <param name="exportObjectUris">Array of the objects to migrate (absolute url to the file / folder)</param>
+        /// <param name="destinationUri">Destination URI to where the objects have to be migrated</param>
+        /// <param name="options">Migration options</param>
+        /// <param name="waitUntilFinished">Defines if we have to wait until all the migrations have finished</param>
+        /// <returns>List of all the jobs being created (one for every exportObjectUri)</returns>
+        /// </summary>
+        public IList<ICopyMigrationInfo> CreateCopyJobs(string[] exportObjectUris, string destinationUri, ICopyMigrationOptions options, bool waitUntilFinished = false);
+
+        /// <summary>
+        /// Gets the progress of an existing migration info object
+        /// <param name="copyMigrationInfo">Migration job to get the progress of</param>
+        /// <returns>Progress of the copy job</returns>
+        /// </summary>
+        public Task<ICopyJobProgress> GetCopyJobProgressAsync(ICopyMigrationInfo copyMigrationInfo);
+
+        /// <summary>
+        /// Gets the progress of an existing migration info object
+        /// <param name="copyMigrationInfo">Migration job to get the progress of</param>
+        /// <returns>Progress of the copy job</returns>
+        /// </summary>
+        public ICopyJobProgress GetCopyJobProgress(ICopyMigrationInfo copyMigrationInfo);
+
+        /// <summary>
+        /// Ensures that a migration job has completely run
+        /// <param name="copyMigrationInfos">List of migration jobs to check the process of</param>
+        /// <param name="sleep">Duration between every GetProcess call</param>
+        /// </summary>
+        public Task EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo> copyMigrationInfos, int sleep = 500);
+
+        /// <summary>
+        /// Ensures that a migration job has completely run
+        /// <param name="copyMigrationInfos">List of migration jobs to check the process of</param>
+        /// <param name="sleep">Duration between every GetProcess call</param>
+        /// </summary>
+        public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int sleep = 500);
     }
 }
