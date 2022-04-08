@@ -131,6 +131,43 @@ namespace PnP.Core.Test.Me
                 Assert.AreEqual(chat.ChatType, ChatTypeConstants.Group);
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task AddChatMeetingExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var chatMemberOptions = new List<ChatMemberOptions>
+                {
+                    new ChatMemberOptions()
+                    {
+                        Roles = new List<string> { "owner" },
+                        UserId = UserId1
+                    }
+                };
+                var chat = context.Me.Chats.Add(new ChatOptions
+                {
+                    ChatType = ChatType.Meeting,
+                    Members = chatMemberOptions,
+                });
+            }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task AddChatNoMembersExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var chat = context.Me.Chats.Add(new ChatOptions
+                {
+                    ChatType = ChatType.Meeting,
+                    Members = null,
+                });
+            }
+        }
     }
 
 

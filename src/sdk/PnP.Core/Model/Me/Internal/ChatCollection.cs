@@ -25,13 +25,13 @@ namespace PnP.Core.Model.Me
         #region Methods
         public async Task<IChat> AddAsync(ChatOptions chatOptions)
         {
-            if (chatOptions.Members.Count == 0)
+            if (chatOptions.Members == null || chatOptions.Members.Count == 0)
             {
                 throw new ArgumentNullException(nameof(chatOptions.Members));
             }
-            if (chatOptions.Members.Count == 0)
+            if (chatOptions.ChatType == ChatType.Meeting)
             {
-                throw new ArgumentNullException(nameof(chatOptions.Members));
+                throw new InvalidOperationException("Meeting chat cannot be created");
             }
 
             var newChat = CreateNewAndAdd() as Chat;
