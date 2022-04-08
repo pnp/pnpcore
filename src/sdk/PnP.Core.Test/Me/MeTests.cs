@@ -26,6 +26,9 @@ namespace PnP.Core.Test.Me
             {
                 var me = await context.Me.GetAsync();
                 Assert.IsNotNull(me.Id);
+                Assert.IsNotNull(me.BusinessPhones);
+                Assert.IsNotNull(me.DisplayName);
+                Assert.IsNotNull(me.UserPrincipalName);
             }
         }
     }
