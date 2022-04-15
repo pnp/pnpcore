@@ -60,7 +60,7 @@ namespace PnP.Core.Model
                         await gettableParent.LoadBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
 
                         // Make the actual request
-                        await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
+                        await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(false);
                     }
                 }
             }
