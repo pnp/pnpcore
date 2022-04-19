@@ -131,7 +131,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 throw new ArgumentNullException(nameof(site));
             }
 
-            return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true).ConfigureAwait(true);
+            return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true).ConfigureAwait(false);
         }
 
         public ISiteCollectionProperties GetSiteCollectionProperties(Uri site)
@@ -146,7 +146,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 throw new ArgumentNullException(nameof(siteGroupConnectOptions));
             }
 
-            await SiteCollectionCreator.ConnectGroupToSiteAsync(context, siteGroupConnectOptions, creationOptions).ConfigureAwait(true);
+            await SiteCollectionCreator.ConnectGroupToSiteAsync(context, siteGroupConnectOptions, creationOptions).ConfigureAwait(false);
         }
 
         public void ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null)
@@ -161,7 +161,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 throw new ArgumentNullException(nameof(site));
             }
 
-            return await SiteCollectionManagement.GetSiteCollectionAdminsAsync(context, site).ConfigureAwait(true);
+            return await SiteCollectionManagement.GetSiteCollectionAdminsAsync(context, site).ConfigureAwait(false);
         }
 
         public List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site)
