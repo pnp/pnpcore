@@ -62,7 +62,7 @@ namespace PnP.Core.Services
                     // Ensure the parent object
                     if (parent != null)
                     {
-                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(false);
                     }
 
                     if (parent is IMetadataExtensible p)
@@ -94,7 +94,7 @@ namespace PnP.Core.Services
                     // Ensure the parent object
                     if (parent != null)
                     {
-                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(false);
                     }
 
                     if (parent is IMetadataExtensible p)
