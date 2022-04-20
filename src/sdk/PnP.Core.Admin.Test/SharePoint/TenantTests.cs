@@ -137,6 +137,28 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTenantAdminCenterContextVanity()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TenantAdminCenterSite))
+            {
+                var vanityUrls = new VanityUrlOptions
+                {
+                    AdminCenterUri = context.Uri
+                };
+
+                using (var tenantContext = context.GetSharePointAdmin().GetTenantAdminCenterContext(vanityUrls))
+                {
+                    var url = context.GetSharePointAdmin().GetTenantAdminCenterUri(vanityUrls);
+                    Assert.IsTrue(tenantContext != null);
+                    Assert.IsTrue(tenantContext.Web.Requested);
+                    Assert.IsTrue(tenantContext.Web.IsPropertyAvailable(p => p.Id));
+                    Assert.IsTrue(tenantContext.Uri == url);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task GetTenantAdmins()
         {
             //TestCommon.Instance.Mocking = false;

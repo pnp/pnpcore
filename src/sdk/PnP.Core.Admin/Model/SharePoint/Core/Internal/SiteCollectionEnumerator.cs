@@ -14,22 +14,22 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class SiteCollectionEnumerator
     {
 
-        internal async static Task<List<ISiteCollection>> GetAsync(PnPContext context, bool ignoreUserIsTenantAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
+        internal async static Task<List<ISiteCollection>> GetAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, bool ignoreUserIsTenantAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
             if (!await context.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
             {
                 if (!ignoreUserIsTenantAdmin && await context.GetSharePointAdmin().IsCurrentUserTenantAdminAsync().ConfigureAwait(false))
                 {
-                    return await GetViaTenantAdminHiddenListAsync(context, filter).ConfigureAwait(false);
+                    return await GetViaTenantAdminHiddenListAsync(context, vanityUrlOptions, filter).ConfigureAwait(false);
                 }
                 else
                 {
-                    return await GetViaGraphSearchApiAsync(context, filter).ConfigureAwait(false);
+                    return await GetViaGraphSearchApiAsync(context, vanityUrlOptions, filter).ConfigureAwait(false);
                 }
             }
             else
             {
-                return await GetViaGraphSitesApiAsync(context, filter).ConfigureAwait(false);
+                return await GetViaGraphSitesApiAsync(context, vanityUrlOptions, filter).ConfigureAwait(false);
             }
         }
 
@@ -38,7 +38,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -56,7 +56,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
             // Get the my site host url
-            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync(vanityUrlOptions).ConfigureAwait(false);
 
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
@@ -81,17 +81,17 @@ namespace PnP.Core.Admin.Model.SharePoint
                                   webId,
                                   listItem["Title"]?.ToString());
                 }
-            }, true, pageSize).ConfigureAwait(false);
+            }, vanityUrlOptions, true, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }
 
-        private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, bool allSites = true, int pageSize = 500)
+        private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, VanityUrlOptions vanityUrlOptions, bool allSites = true, int pageSize = 500)
         {
             string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
             string sitesInformationListUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO";
 
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 string listToQuery;
                 if (allSites)
@@ -146,7 +146,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, int pageSize = 500)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -176,7 +176,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
-            }, true, pageSize).ConfigureAwait(false);
+            }, vanityUrlOptions, true, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }
@@ -218,7 +218,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal async static Task<ISiteCollectionWithDetails> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url)
+        internal async static Task<ISiteCollectionWithDetails> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url, VanityUrlOptions vanityUrlOptions)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -254,7 +254,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.AbsoluteUri), (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
-            }, true, 500).ConfigureAwait(false);
+            }, vanityUrlOptions, true, 500).ConfigureAwait(false);
 
             if (loadedSites.Count > 0)
             {
@@ -264,7 +264,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return null;
         }
 
-        internal async static Task<List<IRecycledSiteCollection>> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 100)
+        internal async static Task<List<IRecycledSiteCollection>> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, int pageSize = 100)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View>
@@ -338,12 +338,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                         });
                     }
                 }
-            }, false, pageSize).ConfigureAwait(false);
+            }, vanityUrlOptions, false, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }
 
-        internal async static Task<IRecycledSiteCollection> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url)
+        internal async static Task<IRecycledSiteCollection> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url, VanityUrlOptions vanityUrlOptions)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View>
@@ -410,7 +410,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         });
                     }
                 }
-            }, false, 1).ConfigureAwait(false);
+            }, vanityUrlOptions, false, 1).ConfigureAwait(false);
 
             return loadedSites.FirstOrDefault();
         }
@@ -418,12 +418,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Sites endpoint. Only works when using application permissions with Sites.Read.All or higher!
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
             // Get the my site host url
-            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync(vanityUrlOptions).ConfigureAwait(false);
 
             ApiCall sitesEnumerationApiCall = new ApiCall("sites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
 
@@ -517,14 +517,14 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Search endpoint. Only works when using delegated permissions!
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
         {
             string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to%, \"fields\": [ \"webUrl\", \"id\", \"name\" ] }]}";
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
             // Get the my site host url
-            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync(vanityUrlOptions).ConfigureAwait(false);
 
             bool paging = true;
             int from = 0;

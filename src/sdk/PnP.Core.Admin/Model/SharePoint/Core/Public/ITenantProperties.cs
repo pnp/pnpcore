@@ -761,7 +761,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets whether 2013 workflows are configured and enabled for the tenant
         /// </summary>
         Workflows2013State Workflows2013State { get; }
-        
+
         #endregion
 
         #region Methods
@@ -769,14 +769,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Updates the properties of this site collection
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task UpdateAsync();
+        Task UpdateAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Updates the properties of this site collection
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void Update();
+        void Update(VanityUrlOptions vanityUrlOptions = null);
 
         #endregion
     }
