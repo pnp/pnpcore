@@ -2143,12 +2143,12 @@ references:
   commentId: T:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin
   nameWithType: ISharePointAdmin
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext
-  name: GetTenantAdminCenterContext()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext()
-  nameWithType: ISharePointAdmin.GetTenantAdminCenterContext()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdminCenterContext(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdminCenterContext(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext*
   name: GetTenantAdminCenterContext
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_
@@ -2156,12 +2156,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext
   nameWithType: ISharePointAdmin.GetTenantAdminCenterContext
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync
-  name: GetTenantAdminCenterContextAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync()
-  nameWithType: ISharePointAdmin.GetTenantAdminCenterContextAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdminCenterContextAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdminCenterContextAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync*
   name: GetTenantAdminCenterContextAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_
@@ -2169,12 +2169,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync
   nameWithType: ISharePointAdmin.GetTenantAdminCenterContextAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri
-  name: GetTenantAdminCenterUri()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri()
-  nameWithType: ISharePointAdmin.GetTenantAdminCenterUri()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdminCenterUri(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdminCenterUri(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri*
   name: GetTenantAdminCenterUri
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_
@@ -2182,12 +2182,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri
   nameWithType: ISharePointAdmin.GetTenantAdminCenterUri
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync
-  name: GetTenantAdminCenterUriAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync()
-  nameWithType: ISharePointAdmin.GetTenantAdminCenterUriAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdminCenterUriAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdminCenterUriAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync*
   name: GetTenantAdminCenterUriAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_
@@ -2195,12 +2195,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync
   nameWithType: ISharePointAdmin.GetTenantAdminCenterUriAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins
-  name: GetTenantAdmins()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins()
-  nameWithType: ISharePointAdmin.GetTenantAdmins()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdmins(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdmins(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins*
   name: GetTenantAdmins
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_
@@ -2208,12 +2208,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins
   nameWithType: ISharePointAdmin.GetTenantAdmins
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync
-  name: GetTenantAdminsAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync()
-  nameWithType: ISharePointAdmin.GetTenantAdminsAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantAdminsAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantAdminsAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync*
   name: GetTenantAdminsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_
@@ -2221,12 +2221,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync
   nameWithType: ISharePointAdmin.GetTenantAdminsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri
-  name: GetTenantMySiteHostUri()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri()
-  nameWithType: ISharePointAdmin.GetTenantMySiteHostUri()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantMySiteHostUri(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantMySiteHostUri(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri*
   name: GetTenantMySiteHostUri
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_
@@ -2234,12 +2234,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri
   nameWithType: ISharePointAdmin.GetTenantMySiteHostUri
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync
-  name: GetTenantMySiteHostUriAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync()
-  nameWithType: ISharePointAdmin.GetTenantMySiteHostUriAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantMySiteHostUriAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantMySiteHostUriAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync*
   name: GetTenantMySiteHostUriAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_
@@ -2247,12 +2247,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync
   nameWithType: ISharePointAdmin.GetTenantMySiteHostUriAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri
-  name: GetTenantPortalUri()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri()
-  nameWithType: ISharePointAdmin.GetTenantPortalUri()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantPortalUri(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantPortalUri(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri*
   name: GetTenantPortalUri
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_
@@ -2260,12 +2260,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri
   nameWithType: ISharePointAdmin.GetTenantPortalUri
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync
-  name: GetTenantPortalUriAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync()
-  nameWithType: ISharePointAdmin.GetTenantPortalUriAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantPortalUriAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantPortalUriAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync*
   name: GetTenantPortalUriAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_
@@ -2273,12 +2273,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync
   nameWithType: ISharePointAdmin.GetTenantPortalUriAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties
-  name: GetTenantProperties()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties()
-  nameWithType: ISharePointAdmin.GetTenantProperties()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantProperties(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantProperties(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties*
   name: GetTenantProperties
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_
@@ -2286,12 +2286,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties
   nameWithType: ISharePointAdmin.GetTenantProperties
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync
-  name: GetTenantPropertiesAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync()
-  nameWithType: ISharePointAdmin.GetTenantPropertiesAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetTenantPropertiesAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISharePointAdmin.GetTenantPropertiesAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync*
   name: GetTenantPropertiesAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_
@@ -2537,12 +2537,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync
   nameWithType: ISiteCollectionManager.ConnectSiteCollectionToGroupAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  name: CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  nameWithType: ISiteCollectionManager.CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: CreateSiteCollection(CommonSiteOptions, SiteCreationOptions, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.CreateSiteCollection(CommonSiteOptions, SiteCreationOptions, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection*
   name: CreateSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_
@@ -2550,12 +2550,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection
   nameWithType: ISiteCollectionManager.CreateSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  name: CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollectionAsync_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollectionAsync_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync*
   name: CreateSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollectionAsync_
@@ -2563,12 +2563,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync
   nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
-  name: DeleteSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
-  nameWithType: ISiteCollectionManager.DeleteSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: DeleteSiteCollection(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollection(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection*
   name: DeleteSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_
@@ -2576,12 +2576,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection
   nameWithType: ISiteCollectionManager.DeleteSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
-  name: DeleteSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
-  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: DeleteSiteCollectionAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync*
   name: DeleteSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_
@@ -2627,12 +2627,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync
   nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
-  name: GetRecycledSiteCollections()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections()
-  nameWithType: ISiteCollectionManager.GetRecycledSiteCollections()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetRecycledSiteCollections(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollections(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections*
   name: GetRecycledSiteCollections
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections_
@@ -2640,12 +2640,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
   nameWithType: ISiteCollectionManager.GetRecycledSiteCollections
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
-  name: GetRecycledSiteCollectionsAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollectionsAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync()
-  nameWithType: ISiteCollectionManager.GetRecycledSiteCollectionsAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetRecycledSiteCollectionsAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollectionsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollectionsAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync*
   name: GetRecycledSiteCollectionsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollectionsAsync_
@@ -2653,12 +2653,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
   nameWithType: ISiteCollectionManager.GetRecycledSiteCollectionsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri)
-  name: GetSiteCollectionAdmins(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdmins_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionAdmins(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionAdmins(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdmins_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionAdmins(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins*
   name: GetSiteCollectionAdmins
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdmins_
@@ -2666,12 +2666,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdmins
   nameWithType: ISiteCollectionManager.GetSiteCollectionAdmins
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri)
-  name: GetSiteCollectionAdminsAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdminsAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionAdminsAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdminsAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionAdminsAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync*
   name: GetSiteCollectionAdminsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionAdminsAsync_
@@ -2679,12 +2679,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionAdminsAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionAdminsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri)
-  name: GetSiteCollectionProperties(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionProperties_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionProperties(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionProperties(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionProperties_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionProperties(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties*
   name: GetSiteCollectionProperties
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionProperties_
@@ -2692,12 +2692,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionProperties
   nameWithType: ISiteCollectionManager.GetSiteCollectionProperties
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri)
-  name: GetSiteCollectionPropertiesAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionPropertiesAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionPropertiesAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionPropertiesAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionPropertiesAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync*
   name: GetSiteCollectionPropertiesAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionPropertiesAsync_
@@ -2705,12 +2705,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionPropertiesAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionPropertiesAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  name: GetSiteCollections(Boolean, SiteCollectionFilter)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollections_System_Boolean_PnP_Core_Admin_Model_SharePoint_SiteCollectionFilter_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean, PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  nameWithType: ISiteCollectionManager.GetSiteCollections(Boolean, SiteCollectionFilter)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollections(Boolean, SiteCollectionFilter, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollections_System_Boolean_PnP_Core_Admin_Model_SharePoint_SiteCollectionFilter_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean, PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollections(Boolean, SiteCollectionFilter, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections*
   name: GetSiteCollections
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollections_
@@ -2718,12 +2718,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections
   nameWithType: ISiteCollectionManager.GetSiteCollections
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  name: GetSiteCollectionsAsync(Boolean, SiteCollectionFilter)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_SiteCollectionFilter_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean, PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionsAsync(Boolean, SiteCollectionFilter)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionsAsync(Boolean, SiteCollectionFilter, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_SiteCollectionFilter_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean,PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean, PnP.Core.Admin.Model.SharePoint.SiteCollectionFilter, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsAsync(Boolean, SiteCollectionFilter, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync*
   name: GetSiteCollectionsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsAsync_
@@ -2731,12 +2731,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
-  name: GetSiteCollectionsWithDetails()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetails
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails()
-  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetails()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionsWithDetails(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetails_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetails(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails*
   name: GetSiteCollectionsWithDetails
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetails_
@@ -2744,12 +2744,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
   nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetails
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
-  name: GetSiteCollectionsWithDetailsAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetailsAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync()
-  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionsWithDetailsAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetailsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync*
   name: GetSiteCollectionsWithDetailsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetailsAsync_
@@ -2783,12 +2783,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWebsWithDetailsAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionWebsWithDetailsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri)
-  name: GetSiteCollectionWithDetails(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetails_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetails(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionWithDetails(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetails_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetails(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails*
   name: GetSiteCollectionWithDetails
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetails_
@@ -2796,12 +2796,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetails
   nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetails
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri)
-  name: GetSiteCollectionWithDetailsAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetailsAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri)
-  nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: GetSiteCollectionWithDetailsAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetailsAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetailsAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync*
   name: GetSiteCollectionWithDetailsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionWithDetailsAsync_
@@ -2861,12 +2861,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync
   nameWithType: ISiteCollectionManager.IsAddTeamsPromptHiddenAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
-  name: RecycleSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
-  nameWithType: ISiteCollectionManager.RecycleSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: RecycleSiteCollection(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollection(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection*
   name: RecycleSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_
@@ -2874,12 +2874,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection
   nameWithType: ISiteCollectionManager.RecycleSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
-  name: RecycleSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
-  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: RecycleSiteCollectionAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync*
   name: RecycleSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_
@@ -2887,12 +2887,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync
   nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
-  name: RestoreSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
-  nameWithType: ISiteCollectionManager.RestoreSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: RestoreSiteCollection(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollection_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.RestoreSiteCollection(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection*
   name: RestoreSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollection_
@@ -2900,12 +2900,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection
   nameWithType: ISiteCollectionManager.RestoreSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
-  name: RestoreSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
-  nameWithType: ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: RestoreSiteCollectionAsync(Uri, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollectionAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.RestoreSiteCollectionAsync(Uri, VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync*
   name: RestoreSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollectionAsync_
@@ -2913,15 +2913,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync
   nameWithType: ISiteCollectionManager.RestoreSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri,List{System.String},List{Guid})
-  name: SetSiteCollectionAdmins(Uri, List<String>, List<Guid>)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdmins_Uri_List_System_String__List_Guid__
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri,List{System.String},List{Guid})
-  name.vb: SetSiteCollectionAdmins(Uri, List(Of String), List(Of Guid))
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List<System.String>, List<Guid>)
-  fullName.vb: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List(Of System.String), List(Of Guid))
-  nameWithType: ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List<String>, List<Guid>)
-  nameWithType.vb: ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List(Of String), List(Of Guid))
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri,List{System.String},List{Guid},PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: SetSiteCollectionAdmins(Uri, List<String>, List<Guid>, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdmins_Uri_List_System_String__List_Guid__PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri,List{System.String},List{Guid},PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name.vb: SetSiteCollectionAdmins(Uri, List(Of String), List(Of Guid), VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List<System.String>, List<Guid>, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName.vb: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List(Of System.String), List(Of Guid), PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List<String>, List<Guid>, VanityUrlOptions)
+  nameWithType.vb: ISiteCollectionManager.SetSiteCollectionAdmins(Uri, List(Of String), List(Of Guid), VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins*
   name: SetSiteCollectionAdmins
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdmins_
@@ -2929,15 +2929,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdmins
   nameWithType: ISiteCollectionManager.SetSiteCollectionAdmins
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri,List{System.String},List{Guid})
-  name: SetSiteCollectionAdminsAsync(Uri, List<String>, List<Guid>)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdminsAsync_Uri_List_System_String__List_Guid__
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri,List{System.String},List{Guid})
-  name.vb: SetSiteCollectionAdminsAsync(Uri, List(Of String), List(Of Guid))
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List<System.String>, List<Guid>)
-  fullName.vb: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List(Of System.String), List(Of Guid))
-  nameWithType: ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List<String>, List<Guid>)
-  nameWithType.vb: ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List(Of String), List(Of Guid))
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri,List{System.String},List{Guid},PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: SetSiteCollectionAdminsAsync(Uri, List<String>, List<Guid>, VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdminsAsync_Uri_List_System_String__List_Guid__PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri,List{System.String},List{Guid},PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name.vb: SetSiteCollectionAdminsAsync(Uri, List(Of String), List(Of Guid), VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List<System.String>, List<Guid>, PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName.vb: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List(Of System.String), List(Of Guid), PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List<String>, List<Guid>, VanityUrlOptions)
+  nameWithType.vb: ISiteCollectionManager.SetSiteCollectionAdminsAsync(Uri, List(Of String), List(Of Guid), VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync*
   name: SetSiteCollectionAdminsAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SetSiteCollectionAdminsAsync_
@@ -3822,12 +3822,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Title
   nameWithType: ISiteCollectionProperties.Title
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update
-  name: Update()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_Update
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update()
-  nameWithType: ISiteCollectionProperties.Update()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: Update(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_Update_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionProperties.Update(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update*
   name: Update
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_Update_
@@ -3835,12 +3835,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.Update
   nameWithType: ISiteCollectionProperties.Update
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync
-  name: UpdateAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_UpdateAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync()
-  nameWithType: ISiteCollectionProperties.UpdateAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: UpdateAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_UpdateAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ISiteCollectionProperties.UpdateAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.UpdateAsync*
   name: UpdateAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionProperties_UpdateAsync_
@@ -6041,12 +6041,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.SyncPrivacyProfileProperties
   nameWithType: ITenantProperties.SyncPrivacyProfileProperties
-- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update
-  name: Update()
-  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_Update
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update
-  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update()
-  nameWithType: ITenantProperties.Update()
+- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: Update(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_Update_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ITenantProperties.Update(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update*
   name: Update
   href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_Update_
@@ -6054,12 +6054,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.Update
   nameWithType: ITenantProperties.Update
-- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync
-  name: UpdateAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_UpdateAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync()
-  nameWithType: ITenantProperties.UpdateAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  name: UpdateAsync(VanityUrlOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_UpdateAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)
+  nameWithType: ITenantProperties.UpdateAsync(VanityUrlOptions)
 - uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.UpdateAsync*
   name: UpdateAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_UpdateAsync_
@@ -7720,6 +7720,51 @@ references:
   commentId: F:PnP.Core.Admin.Model.SharePoint.TimeZone.UTCPLUS1300_NUKU_ALOFA
   fullName: PnP.Core.Admin.Model.SharePoint.TimeZone.UTCPLUS1300_NUKU_ALOFA
   nameWithType: TimeZone.UTCPLUS1300_NUKU_ALOFA
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions
+  name: VanityUrlOptions
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions
+  nameWithType: VanityUrlOptions
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri
+  name: AdminCenterUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_AdminCenterUri
+  commentId: P:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri
+  nameWithType: VanityUrlOptions.AdminCenterUri
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri*
+  name: AdminCenterUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_AdminCenterUri_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.AdminCenterUri
+  nameWithType: VanityUrlOptions.AdminCenterUri
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri
+  name: MySiteHostUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_MySiteHostUri
+  commentId: P:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri
+  nameWithType: VanityUrlOptions.MySiteHostUri
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri*
+  name: MySiteHostUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_MySiteHostUri_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.MySiteHostUri
+  nameWithType: VanityUrlOptions.MySiteHostUri
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri
+  name: PortalUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_PortalUri
+  commentId: P:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri
+  nameWithType: VanityUrlOptions.PortalUri
+- uid: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri*
+  name: PortalUri
+  href: api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html#PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_PortalUri_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.PortalUri
+  nameWithType: VanityUrlOptions.PortalUri
 - uid: PnP.Core.Admin.Model.SharePoint.Workflows2013State
   name: Workflows2013State
   href: api/PnP.Core.Admin.Model.SharePoint.Workflows2013State.html

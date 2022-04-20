@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html",
-          "hash": "DGp7nKVq8Ajzn4bCcrjJtQ=="
+          "hash": "H3jTspTgDchlKo/mnscLzg=="
         }
       },
       "is_incremental": false,
@@ -414,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "KkWelBIQpIFpm6CrCENH7A=="
+          "hash": "nl7dkRpAfBSrKkYKdSezEQ=="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html",
-          "hash": "XToodMjZVjEu4j2g3AYTOg=="
+          "hash": "GTJ5SNcP6MyOofIn3NdD5g=="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html",
-          "hash": "JqwI9EtrsipQCUA7AYM1eg=="
+          "hash": "7+G7g+vvLaGdXZMteyhOig=="
         }
       },
       "is_incremental": false,
@@ -758,6 +758,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html",
+          "hash": "8dc/KQYDGu5hpcSYJfLFkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.Workflows2013State.yml",
       "output": {
         ".html": {
@@ -774,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "QiB3y0mDE0k8+XbAg5EaHQ=="
+          "hash": "ks8pWCbBy2deldgUTRQrJw=="
         }
       },
       "is_incremental": false,
@@ -6342,7 +6354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "EyUFFf84qr/nj0sybwPS7w=="
+          "hash": "LzalMKhEeTRjueqRJW5kSQ=="
         }
       },
       "is_incremental": false,
@@ -8080,7 +8092,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 526,
+          "total_file_count": 527,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
