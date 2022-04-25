@@ -13,6 +13,10 @@
         /// <summary>
         /// SystemEventMessage type
         /// </summary>
-        SystemEventMessage
+        SystemEventMessage,
+        /// <summary>
+        /// unknownFutureValue type
+        /// </summary>
+        UnknownFutureValue
     }
 }
