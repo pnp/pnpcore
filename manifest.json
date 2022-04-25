@@ -1778,6 +1778,258 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.ChatMemberOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.ChatMemberOptions.html",
+          "hash": "4u1RvAev4YjtmLawkrcjTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.ChatOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.ChatOptions.html",
+          "hash": "nDEPG+6Lh+FZSgIRPmcXRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.ChatType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.ChatType.html",
+          "hash": "iXii+iCsFSDVf/3LM1jfUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IAadUserConversationMember.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IAadUserConversationMember.html",
+          "hash": "stlE8EMZnm/WzOMnbBEy5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IAadUserConversationMemberCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IAadUserConversationMemberCollection.html",
+          "hash": "ygvqtGRYb3Bw1nIc3t6oJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChat.html",
+          "hash": "oSPpY92VSssziF5CQGYk7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatCollection.html",
+          "hash": "CUxmrTbDwTmHekrvNETMkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatIdentitySet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatIdentitySet.html",
+          "hash": "lI9XP6Vmm05s/Wdgs/GLGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessage.html",
+          "hash": "XqvKpEkhMPbisNpeCExZGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageAttachment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageAttachment.html",
+          "hash": "R4JtrjsKJlzmF2J6TcmW3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageAttachmentCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageAttachmentCollection.html",
+          "hash": "IW76h77sxDtat3GYvTQGpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageCollection.html",
+          "hash": "pKhecK5bveqslsDb8QuC5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageContent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageContent.html",
+          "hash": "NV2L1GejPHuXgnSD3Bh/ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageHostedContent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageHostedContent.html",
+          "hash": "FG8E01GMlbUC3+KMV54F9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageHostedContentCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageHostedContentCollection.html",
+          "hash": "8VN+9Rpzn3UwHwjF0RSa+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageMention.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageMention.html",
+          "hash": "Rn0fYb1E84LL10Cd1nGIeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageMentionCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageMentionCollection.html",
+          "hash": "tIjiOFX2ki+KZ+iaO88p2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageReaction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageReaction.html",
+          "hash": "41aaOBxfSAMaDd0aYSwLrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IChatMessageReactionCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IChatMessageReactionCollection.html",
+          "hash": "n5WbY+yvxxp7MnI+bb7nAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.IMe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.IMe.html",
+          "hash": "hY94qJCYHIdjyVGtWJ4ycw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Me.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Me.html",
+          "hash": "tDHd0FSDZRFwPBy1UG1SOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.RequestModuleExtensions.yml",
       "output": {
         ".html": {
@@ -5214,7 +5466,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ChatMessageType.html",
-          "hash": "WIVV55uwg9bMX6ERhlHghw=="
+          "hash": "eGyfesbZNOvDIPblpZvgOA=="
         }
       },
       "is_incremental": false,
@@ -6186,7 +6438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "JunhCKWWy3q1JrZzM2XvUg=="
+          "hash": "K5m8eCxQFIAl8rgfzip9sQ=="
         }
       },
       "is_incremental": false,
@@ -6354,7 +6606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "LzalMKhEeTRjueqRJW5kSQ=="
+          "hash": "z2JoNkViMtgjmfQWTVaWMg=="
         }
       },
       "is_incremental": false,
@@ -8092,7 +8344,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 527,
+          "total_file_count": 548,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
