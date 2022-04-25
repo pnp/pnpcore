@@ -164,7 +164,6 @@ namespace PnP.Core.Model.Me
 
         #endregion
 
-
         #region Basic Messages Overloads
 
         /// <summary>
@@ -243,7 +242,6 @@ namespace PnP.Core.Model.Me
         }
 
         #endregion
-
 
         #region Advanced Message Overloads
 

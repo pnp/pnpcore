@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.Teams;
-using PnP.Core.QueryModel;
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -45,6 +44,7 @@ namespace PnP.Core.Model.Me
         }
 
         #endregion
+
         #region Properties
 
         public string Id { get => GetValue<string>(); set => SetValue(value); }

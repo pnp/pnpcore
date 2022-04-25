@@ -1,13 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Me;
-using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Me
@@ -16,13 +14,14 @@ namespace PnP.Core.Test.Me
     public class ChatTest
     {
         // Replace these values with Graph user ids in your own environment
-        private readonly string UserId1 = "a857e888-b602-4790-86d9-3dca2109449e";
-        private readonly string UserId2 = "8323f7fe-e8a4-46c4-b5ea-f4864887d160";
+        private readonly string UserId1 = "225f4ed7-524b-4a6d-8e37-51802e87b3ad";
+        private readonly string UserId2 = "7cffa5d0-513a-4f44-b40c-c3b0dba47e07";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]

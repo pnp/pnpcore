@@ -1,14 +1,10 @@
-﻿using PnP.Core.Model.Security;
-using PnP.Core.Model.Teams;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Model.Me
 {
     /// <summary>
-    /// 
+    /// Defines a chat
     /// </summary>
     [ConcreteType(typeof(Chat))]
     public interface IChat : IDataModel<IChat>, IDataModelGet<IChat>, IDataModelLoad<IChat>, IDataModelUpdate, IQueryableDataModel
@@ -24,12 +20,12 @@ namespace PnP.Core.Model.Me
         public string Topic { get; }
         
         /// <summary>
-        /// 
+        /// Teams Web url for the chat
         /// </summary>
         public string WebUrl { get; }
 
         /// <summary>
-        /// 
+        /// Azure AD Tenant id for the tenant hosting the chat
         /// </summary>
         public Guid TenantId { get; }
 

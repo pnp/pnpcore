@@ -1,10 +1,8 @@
-﻿using PnP.Core.Model.Security;
-using PnP.Core.QueryModel;
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Me
@@ -20,7 +18,6 @@ namespace PnP.Core.Model.Me
         }
 
         #endregion
-
 
         #region Methods
         public async Task<IChat> AddAsync(ChatOptions chatOptions)

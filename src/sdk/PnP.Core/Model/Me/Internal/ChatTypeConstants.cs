@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.Me
+﻿namespace PnP.Core.Model.Me
 {
     internal static class ChatTypeConstants
     {

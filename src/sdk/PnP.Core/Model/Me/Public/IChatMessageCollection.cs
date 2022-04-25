@@ -1,9 +1,7 @@
 ﻿using PnP.Core.Model.Teams;
 using PnP.Core.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Me

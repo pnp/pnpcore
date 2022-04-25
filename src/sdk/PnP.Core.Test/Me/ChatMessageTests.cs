@@ -21,7 +21,7 @@ namespace PnP.Core.Test.Me
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -2809,7 +2809,7 @@ namespace PnP.Core.Test.Me
         [TestMethod]
         public async Task AddChatMessageBatchMeetingAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var me = await context.Me.GetBatchAsync(o => o.Chats);

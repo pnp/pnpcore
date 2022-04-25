@@ -1,14 +1,11 @@
-﻿using PnP.Core.Model.Security;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Me
 {
     /// <summary>
-    /// 
+    /// A collection of chats
     /// </summary>
     [ConcreteType(typeof(ChatCollection))]
     public interface IChatCollection : IQueryable<IChat>, IAsyncEnumerable<IChat>, IDataModelCollection<IChat>, IDataModelCollectionLoad<IChat>, IDataModelCollectionDeleteByGuidId, ISupportModules<IChat>
