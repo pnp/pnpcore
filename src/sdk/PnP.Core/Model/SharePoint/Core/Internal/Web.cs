@@ -359,7 +359,7 @@ namespace PnP.Core.Model.SharePoint
         {
             return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
         }
-        
+
         public async Task<IVivaDashboard> GetVivaDashboardAsync()
         {
             IPage dashboardPage = (await Page.LoadPagesAsync(PnPContext, "Dashboard").ConfigureAwait(false)).FirstOrDefault();
@@ -1393,7 +1393,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (row.TryGetProperty("Entries", out JsonElement entries) && entries.ValueKind == JsonValueKind.Array)
             {
-                foreach(var entry in entries.EnumerateArray())
+                foreach (var entry in entries.EnumerateArray())
                 {
                     SearchRefinementResult result = new SearchRefinementResult()
                     {
@@ -1586,8 +1586,24 @@ namespace PnP.Core.Model.SharePoint
 
             return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
         }
+        #endregion
+
+        #region Files
+
+        public List<IFile> FindFiles(string match)
+        {
+            return Task.Run(() => FindFilesAsync(match)).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IFile>> FindFilesAsync(string match)
+        {
+
+            await this.LoadAsync(p => p.RootFolder).ConfigureAwait(false);
+            return await this.RootFolder.FindFilesAsync(match).ConfigureAwait(false);
+        }
 
         #endregion
+
         #endregion
     }
 }
