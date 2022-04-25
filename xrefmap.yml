@@ -26714,6 +26714,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.Files
   nameWithType: IFolder.Files
+- uid: PnP.Core.Model.SharePoint.IFolder.FindFiles(System.String)
+  name: FindFiles(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_FindFiles_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.FindFiles(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.FindFiles(System.String)
+  nameWithType: IFolder.FindFiles(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.FindFiles*
+  name: FindFiles
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_FindFiles_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.FindFiles
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.FindFiles
+  nameWithType: IFolder.FindFiles
+- uid: PnP.Core.Model.SharePoint.IFolder.FindFilesAsync(System.String)
+  name: FindFilesAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_FindFilesAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.FindFilesAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.FindFilesAsync(System.String)
+  nameWithType: IFolder.FindFilesAsync(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.FindFilesAsync*
+  name: FindFilesAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_FindFilesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.FindFilesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.FindFilesAsync
+  nameWithType: IFolder.FindFilesAsync
 - uid: PnP.Core.Model.SharePoint.IFolder.Folders
   name: Folders
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Folders
@@ -28785,6 +28811,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.Fields
   nameWithType: IList.Fields
+- uid: PnP.Core.Model.SharePoint.IList.FindFiles(System.String)
+  name: FindFiles(String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.FindFiles(System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.FindFiles(System.String)
+  nameWithType: IList.FindFiles(String)
+- uid: PnP.Core.Model.SharePoint.IList.FindFiles*
+  name: FindFiles
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.FindFiles
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.FindFiles
+  nameWithType: IList.FindFiles
+- uid: PnP.Core.Model.SharePoint.IList.FindFilesAsync(System.String)
+  name: FindFilesAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFilesAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.FindFilesAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.FindFilesAsync(System.String)
+  nameWithType: IList.FindFilesAsync(String)
+- uid: PnP.Core.Model.SharePoint.IList.FindFilesAsync*
+  name: FindFilesAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFilesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.FindFilesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.FindFilesAsync
+  nameWithType: IList.FindFilesAsync
 - uid: PnP.Core.Model.SharePoint.IList.ForceCheckout
   name: ForceCheckout
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ForceCheckout

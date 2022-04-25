@@ -3678,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "5Ec+M3kL1NyMZrZMwOUM4g=="
+          "hash": "busK10IBjJH3QVyWr4H3ag=="
         }
       },
       "is_incremental": false,
@@ -3798,7 +3798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "nuq0rR95m8I8AUDX7Mlz8w=="
+          "hash": "ngZ/mFzstGnWe1/ZTapNpg=="
         }
       },
       "is_incremental": false,
