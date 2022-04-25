@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for asynchronous file & listitem copy/move functionality on the ISite interface using the SPO CopyJobs API #814 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for vanity URLs in the admin library [jansenbe - Bert Jansen]
 - Teams Chat support #657 [MathijsVerbeeck - Mathijs Verbeeck]
+- Support for finding files in lists and folders using enumeration and wild card pattern matching #818 [dennisvanniel - Dennis van Niel]
 
 ### Changed
 

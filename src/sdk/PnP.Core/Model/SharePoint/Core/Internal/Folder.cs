@@ -427,7 +427,7 @@ namespace PnP.Core.Model.SharePoint
 
         public List<IFile> FindFiles(string match)
         {
-            return Task.Run(() => FindFilesAsync(match)).GetAwaiter().GetResult();
+            return FindFilesAsync(match).GetAwaiter().GetResult();
         }
 
         private async Task<List<IFile>> ParseFiles(IFolder folder, string match)

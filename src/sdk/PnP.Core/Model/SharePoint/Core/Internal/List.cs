@@ -1362,7 +1362,7 @@ namespace PnP.Core.Model.SharePoint
 
         public List<IFile> FindFiles(string match)
         {
-            return Task.Run(() => FindFilesAsync(match)).GetAwaiter().GetResult();
+            return FindFilesAsync(match).GetAwaiter().GetResult();
         }
 
         public async Task<List<IFile>> FindFilesAsync(string match)

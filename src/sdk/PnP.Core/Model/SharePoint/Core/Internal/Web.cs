@@ -1587,23 +1587,7 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
         }
         #endregion
-
-        #region Files
-
-        public List<IFile> FindFiles(string match)
-        {
-            return Task.Run(() => FindFilesAsync(match)).GetAwaiter().GetResult();
-        }
-
-        public async Task<List<IFile>> FindFilesAsync(string match)
-        {
-
-            await this.LoadAsync(p => p.RootFolder).ConfigureAwait(false);
-            return await this.RootFolder.FindFilesAsync(match).ConfigureAwait(false);
-        }
-
-        #endregion
-
+        
         #endregion
     }
 }
