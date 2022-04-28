@@ -4493,6 +4493,55 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ListItemAttachmentsSpecialCharTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemAttachmentsSpecialCharTest");
+                IList list = null;
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Attach files to me" } });
+
+                    // load the item with attachments again
+                    var itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 0);
+
+                    string fileContent = "PnP Rocks !!!";
+                    var contentStream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
+                    string fileName = "I'm special.txt";
+                    var addedAttachment = itemLoaded.AttachmentFiles.Add(fileName, contentStream);
+
+                    // load the item with attachments again
+                    itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 1);
+
+                    // Get the content from the attachment
+                    Stream downloadedContentStream = itemLoaded.AttachmentFiles.AsRequested().First().GetContent();
+                    downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                    // Get string from the content stream
+                    string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                    Assert.AreEqual(fileContent, downloadedContent);
+
+                    // remove the added attachment again
+                    itemLoaded.AttachmentFiles.AsRequested().First().Delete();
+
+                    itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 0);
+
+                }
+                finally
+                {
+                    // Cleanup the created list
+                    await list.DeleteAsync();
+                }
+            }
+        }
         #endregion
 
         #region Compliance
