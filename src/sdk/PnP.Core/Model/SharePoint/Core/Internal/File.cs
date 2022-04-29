@@ -16,6 +16,8 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
     [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
     [SharePointType("SP.File", Target = typeof(ListItem), Uri = "_api/Web/lists(guid'{List.Id}')/items({Parent.Id})/file")]
+
+    [GraphType(Uri = "sites/{Site.Id}/drive/items/{GraphId}")]
     internal sealed class File : BaseDataModel<IFile>, IFile
     {
         internal const string AddFileContentAdditionalInformationKey = "Content";
@@ -76,6 +78,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string UIVersionLabel { get => GetValue<string>(); set => SetValue(value); }
 
+        [GraphProperty("id")]
         public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string VroomDriveID { get => GetValue<string>(); set => SetValue(value); }
@@ -93,6 +96,9 @@ namespace PnP.Core.Model.SharePoint
         public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
 
         public IFileVersionEventCollection VersionEvents { get => GetModelCollectionValue<IFileVersionEventCollection>(); }
+
+        [GraphProperty("permissions", Get = "sites/{Site.Id}/drive/items/{GraphId}/permissions", ExpandByDefault = false, Expandable = false)]
+        public IGraphPermissionCollection GraphPermissions { get => GetModelCollectionValue<IGraphPermissionCollection>(); }
 
         public IFileVersionCollection Versions { get => GetModelCollectionValue<IFileVersionCollection>(); }
 
