@@ -57,7 +57,7 @@ In general the recommendation is to use the async methods because:
 Internally in the PnP Core SDK everything always happens async, the sync methods you see are wrappers over their async counterparts with a `GetAwaiter().GetResult()` to force the code to wait for the outcome.
 
 > [!Important]
-> Using the async methods is strongly recommended. Use the sync methods if you're using the PnP Core SDK in an already sync code base, if not use async.
+> Using the async methods is strongly recommended. Use the sync methods only if you're using the PnP Core SDK in an already sync code base and async is not an option, if not use async. Using the sync methods can possibly lead to deadlocks when combined with applications using a `SynchronizationContext` like ASP.NET. If you see encounter deadlocks then wrapping the impacted code block in a `Task.Run(() => your code )` block should avoid the deadlock.
 
 If you want to learn more about async programming checkout these resources:
 
