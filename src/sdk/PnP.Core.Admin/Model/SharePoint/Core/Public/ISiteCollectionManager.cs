@@ -20,8 +20,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
         /// <param name="filter">Optional filter to scope the returned site collections</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections</returns>
-        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default);
+        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the list of site collections. When using application permissions or a delegated permissions 
@@ -33,56 +34,65 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
         /// <param name="filter">Optional filter to scope the returned site collections</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections</returns>
-        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default);
+        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of the site collections in the current tenant including details about the site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections with details</returns>
-        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync();
+        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of the site collections in the current tenant including details about the site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections with details</returns>
-        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
+        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns details about the requested site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="url">Uri of the site collection to get details for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>Site collection details, null if the passed site was not found</returns>
-        Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url);
+        Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns details about the requested site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="url">Uri of the site collection to get details for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>Site collection details, null if the passed site was not found</returns>
-        ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url);
+        ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of the recycled site collections in the current tenant including details about the site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections with details</returns>
-        Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync();
+        Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of the recycled site collections in the current tenant including details about the site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A list of site collections with details</returns>
-        List<IRecycledSiteCollection> GetRecycledSiteCollections();
+        List<IRecycledSiteCollection> GetRecycledSiteCollections(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of all sub sites for the passed in site collection
@@ -108,8 +118,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="siteToCreate">Information about the site collection to create. 
         /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
         /// <param name="creationOptions"></param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
-        Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null);
+        Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Creates a site collection and returns a <see cref="PnPContext"/> to start using the created site collection
@@ -117,68 +128,77 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="siteToCreate">Information about the site collection to create. 
         /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
         /// <param name="creationOptions"></param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
-        PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null);
+        PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection
         /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task RecycleSiteCollectionAsync(Uri siteToDelete);
+        Task RecycleSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection
         /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void RecycleSiteCollection(Uri siteToDelete);
+        void RecycleSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Restores a site collection from the recycle bin. When the site collection
         /// has a connected group then also that group is automatically restored
         /// </summary>
         /// <param name="siteToRestore">Site collection to restore</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task RestoreSiteCollectionAsync(Uri siteToRestore);
+        Task RestoreSiteCollectionAsync(Uri siteToRestore, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Restores a site collection from the recycle bin. When the site collection
         /// has a connected group then also that group is automatically restored
         /// </summary>
         /// <param name="siteToRestore">Site collection to restore</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void RestoreSiteCollection(Uri siteToRestore);
+        void RestoreSiteCollection(Uri siteToRestore, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task DeleteSiteCollectionAsync(Uri siteToDelete);
+        Task DeleteSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void DeleteSiteCollection(Uri siteToDelete);
+        void DeleteSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the properties of a site collection
         /// </summary>
         /// <param name="site">Site collection to get the properties for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>The site collection properties</returns>
-        Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site);
+        Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the properties of a site collection
         /// </summary>
         /// <param name="site">Site collection to get the properties for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>The site collection properties</returns>
-        ISiteCollectionProperties GetSiteCollectionProperties(Uri site);
+        ISiteCollectionProperties GetSiteCollectionProperties(Uri site, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Connects an existing site collection to a new Microsoft 365 group
@@ -198,15 +218,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets the administrators of the site collection
         /// </summary>
         /// <param name="site">Url of the site collection to get the administrators for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>The list of site collection administrators</returns>
-        Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site);
+        Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Gets the administrators of the site collection
         /// </summary>
         /// <param name="site">Url of the site collection to get the administrators for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>The list of site collection administrators</returns>
-        List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site);
+        List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
@@ -216,8 +238,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
         /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null);
+        Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
@@ -227,8 +250,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
         /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null);
+        void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null);
 
         #region Modernization
 

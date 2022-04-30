@@ -14,44 +14,44 @@ namespace PnP.Core.Admin.Model.SharePoint
             context = pnpContext;
         }
 
-        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
+        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default, VanityUrlOptions vanityUrlOptions = null)
         {
-            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin, filter).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetAsync(context, vanityUrlOptions, ignoreUserIsSharePointAdmin, filter).ConfigureAwait(false);
         }
 
-        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
+        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin, filter).GetAwaiter().GetResult();
+            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin, filter, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
+        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, vanityUrlOptions: vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails()
+        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
+            return GetSiteCollectionsWithDetailsAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url)
+        public async Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url, VanityUrlOptions vanityUrlOptions = null)
         {
-            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, url).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, url, vanityUrlOptions: vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url)
+        public ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetSiteCollectionWithDetailsAsync(url).GetAwaiter().GetResult();
+            return GetSiteCollectionWithDetailsAsync(url, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
+        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, vanityUrlOptions: vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public List<IRecycledSiteCollection> GetRecycledSiteCollections()
+        public List<IRecycledSiteCollection> GetRecycledSiteCollections(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
+            return GetRecycledSiteCollectionsAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         public async Task<List<IWebWithDetails>> GetSiteCollectionWebsWithDetailsAsync(Uri url = null, bool skipAppWebs = true)
@@ -64,79 +64,79 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionWebsWithDetailsAsync(url, skipAppWebs).GetAwaiter().GetResult();
         }
 
-        public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null)
         {
             if (siteToCreate == null)
             {
                 throw new ArgumentNullException(nameof(siteToCreate));
             }
 
-            return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
+            return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        public PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null)
         {
-            return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
+            return CreateSiteCollectionAsync(siteToCreate, creationOptions, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task RecycleSiteCollectionAsync(Uri siteToDelete)
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
         {
             if (siteToDelete == null)
             {
                 throw new ArgumentNullException(nameof(siteToDelete));
             }
             
-            await SiteCollectionManagement.RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            await SiteCollectionManagement.RecycleSiteCollectionAsync(context, siteToDelete, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public void RecycleSiteCollection(Uri siteToDelete)
+        public void RecycleSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
         {
-            RecycleSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            RecycleSiteCollectionAsync(siteToDelete, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public void RestoreSiteCollection(Uri siteToRestore)
+        public void RestoreSiteCollection(Uri siteToRestore, VanityUrlOptions vanityUrlOptions = null)
         {
-            RestoreSiteCollectionAsync(siteToRestore).GetAwaiter().GetResult();
+            RestoreSiteCollectionAsync(siteToRestore, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
+        public async Task RestoreSiteCollectionAsync(Uri siteToRestore, VanityUrlOptions vanityUrlOptions = null)
         {
             if (siteToRestore == null)
             {
                 throw new ArgumentNullException(nameof(siteToRestore));
             }
 
-            await SiteCollectionManagement.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
+            await SiteCollectionManagement.RestoreSiteCollectionAsync(context, siteToRestore, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public async Task DeleteSiteCollectionAsync(Uri siteToDelete)
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
         {
             if (siteToDelete == null)
             {
                 throw new ArgumentNullException(nameof(siteToDelete));
             }
 
-            await SiteCollectionManagement.DeleteSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            await SiteCollectionManagement.DeleteSiteCollectionAsync(context, siteToDelete, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public void DeleteSiteCollection(Uri siteToDelete)
+        public void DeleteSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
         {
-            DeleteSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            DeleteSiteCollectionAsync(siteToDelete, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site)
+        public async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site, VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
                 throw new ArgumentNullException(nameof(site));
             }
 
-            return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true).ConfigureAwait(false);
+            return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public ISiteCollectionProperties GetSiteCollectionProperties(Uri site)
+        public ISiteCollectionProperties GetSiteCollectionProperties(Uri site, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetSiteCollectionPropertiesAsync(site).GetAwaiter().GetResult();
+            return GetSiteCollectionPropertiesAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         public async Task ConnectSiteCollectionToGroupAsync(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null)
@@ -154,34 +154,34 @@ namespace PnP.Core.Admin.Model.SharePoint
             ConnectSiteCollectionToGroupAsync(siteGroupConnectOptions, creationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site)
+        public async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site, VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
                 throw new ArgumentNullException(nameof(site));
             }
 
-            return await SiteCollectionManagement.GetSiteCollectionAdminsAsync(context, site).ConfigureAwait(false);
+            return await SiteCollectionManagement.GetSiteCollectionAdminsAsync(context, site, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site)
+        public List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetSiteCollectionAdminsAsync(site).GetAwaiter().GetResult();
+            return GetSiteCollectionAdminsAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null)
+        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
                 throw new ArgumentNullException(nameof(site));
             }
 
-            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).ConfigureAwait(false);
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null)
+        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
         {
-            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).GetAwaiter().GetResult();
+            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         #region Modernization

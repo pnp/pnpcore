@@ -129,6 +129,9 @@
   <data name="Exception_AppManager_NotResolved" xml:space="preserve">
     <value>Unable to resolve the AppManager for the type: {0}</value>
   </data>
+  <data name="Exception_MissingVanityUrlDetails" xml:space="preserve">
+    <value>Your tenant is using vanity URLs and therefore you have to specify a filled VanityUrlOptions instance in all methods that accept that optional parameter</value>
+  </data>
   <data name="Exception_SiteCreation" xml:space="preserve">
     <value>The site creation for site {0} did not succeed. Returned siteStatus = {1}</value>
   </data>

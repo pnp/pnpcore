@@ -157,14 +157,14 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         #region Methods
 
-        public async Task UpdateAsync()
+        public async Task UpdateAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            await SiteCollectionManagement.UpdateSiteCollectionPropertiesAsync(PnPContext, this).ConfigureAwait(false);
+            await SiteCollectionManagement.UpdateSiteCollectionPropertiesAsync(PnPContext, this, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public void Update()
+        public void Update(VanityUrlOptions vanityUrlOptions = null)
         {
-            UpdateAsync().GetAwaiter().GetResult();
+            UpdateAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }        
         #endregion
     }

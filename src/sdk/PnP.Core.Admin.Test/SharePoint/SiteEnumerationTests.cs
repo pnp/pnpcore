@@ -32,7 +32,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = true;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-                    var sites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context);
+                    var sites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, null);
 
                     VerifySite(sites, context);
                 }
@@ -52,11 +52,11 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = true;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-                    var personalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.OnlyPersonalSites);
+                    var personalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, null, SiteCollectionFilter.OnlyPersonalSites);
 
                     VerifyPersonalSite(personalSites, context);
 
-                    var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+                    var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, null, SiteCollectionFilter.ExcludePersonalSites);
 
                     foreach(var personalSite in personalSites)
                     {
@@ -80,7 +80,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var sites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context);
+                var sites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context, null);
 
                 VerifySite(sites, context);
 
@@ -94,11 +94,11 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var personalSites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context, SiteCollectionFilter.OnlyPersonalSites);
+                var personalSites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context, null, SiteCollectionFilter.OnlyPersonalSites);
 
                 VerifyPersonalSite(personalSites, context);
 
-                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, null,  SiteCollectionFilter.ExcludePersonalSites);
 
                 foreach (var personalSite in personalSites)
                 {
@@ -117,7 +117,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var sites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context);
+                var sites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context, null);
 
                 VerifySite(sites, context);
             }
@@ -130,11 +130,11 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var personalSites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context);
+                var personalSites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context, null);
 
                 VerifyPersonalSite(personalSites, context);
 
-                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, null,  SiteCollectionFilter.ExcludePersonalSites);
 
                 foreach (var personalSite in personalSites)
                 {
@@ -167,7 +167,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context);
+                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, null);
 
                 Assert.IsTrue(sites.Count > 0);
                 var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);

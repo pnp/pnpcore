@@ -25,14 +25,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             GroupSiteManagerCreateGroupForSite,
         }
 
-        internal static async Task<PnPContext> CreateSiteCollectionAsync(PnPContext context, CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        internal static async Task<PnPContext> CreateSiteCollectionAsync(PnPContext context, CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions, VanityUrlOptions vanityUrlOptions)
         {
             // Provide default creation options as input
             creationOptions = await EnsureSiteCreationOptionsAsync(context, creationOptions).ConfigureAwait(false);
 
             if (siteToCreate is ClassicSiteOptions classicSite)
             {
-                return await CreateClassicSiteAsync(context, classicSite, creationOptions).ConfigureAwait(false);
+                return await CreateClassicSiteAsync(context, classicSite, creationOptions, vanityUrlOptions).ConfigureAwait(false);
             }
             else if (siteToCreate is TeamSiteOptions teamSite)
             {
@@ -253,9 +253,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 string owner = siteToCreate.Owner;
                 var splitOwner = owner.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);

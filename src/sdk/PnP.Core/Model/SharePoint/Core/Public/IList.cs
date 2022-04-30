@@ -724,6 +724,21 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>Ordered list of content type id's, returns null when the list is not enabled to use content types</returns>
         List<string> GetContentTypeOrder();
+
+        /// <summary>
+        /// Find files in the list, can be slow as it iterates over all the files in the list. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        List<IFile> FindFiles(string match);
+
+        /// <summary>
+        /// Find files in the list, can be slow as it iterates over all the files in the list. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        Task<List<IFile>> FindFilesAsync(string match);
+
         #endregion
     }
 }

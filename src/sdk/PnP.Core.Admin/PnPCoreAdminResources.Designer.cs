@@ -97,6 +97,15 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your tenant is using vanity URLs and therefore you have to specify a filled VanityUrlOptions instance in all methods that accept that optional parameter.
+        /// </summary>
+        internal static string Exception_MissingVanityUrlDetails {
+            get {
+                return ResourceManager.GetString("Exception_MissingVanityUrlDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The site creation for site {0} did not succeed. Returned siteStatus = {1}.
         /// </summary>
         internal static string Exception_SiteCreation {

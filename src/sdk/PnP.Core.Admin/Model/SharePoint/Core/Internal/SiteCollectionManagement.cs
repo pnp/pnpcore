@@ -15,9 +15,9 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class SiteCollectionManagement
     {
 
-        internal static async Task<bool> RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle)
+        internal static async Task<bool> RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // When recycling a group connected site then use the groupsitemanager endpoint. This will also recycle the connected Microsoft 365 group
                 if (await HasGroupAsync(context, siteToRecycle).ConfigureAwait(false))
@@ -40,12 +40,12 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete)
+        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // first recycle the site collection
-                bool siteHasGroup = await RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+                bool siteHasGroup = await RecycleSiteCollectionAsync(context, siteToDelete, vanityUrlOptions).ConfigureAwait(false);
 
                 // Only supporting permanent delete of non group connected sites. For group connected sites permanently deleting the group will
                 // trigger the deletion of the linked resources (like the SharePoint site).  
@@ -64,12 +64,12 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle)
+        internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Get information about the site collection to restore from the SharePoint recycle bin
-                var deletedSiteCollection = await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, siteToRecycle).ConfigureAwait(false);
+                var deletedSiteCollection = await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, siteToRecycle, vanityUrlOptions).ConfigureAwait(false);
 
                 if (deletedSiteCollection == null)
                 {
@@ -143,9 +143,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed)
+        internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed,VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
@@ -159,9 +159,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task UpdateSiteCollectionPropertiesAsync(PnPContext context, SiteCollectionProperties properties)
+        internal static async Task UpdateSiteCollectionPropertiesAsync(PnPContext context, SiteCollectionProperties properties, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
@@ -173,14 +173,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl)
+        internal static async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<ISiteCollectionAdmin> admins = new List<ISiteCollectionAdmin>();
 
                 // Load the site collection properties first as that will tell who is the primary admin (= owner)
-                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl).ConfigureAwait(false);
+                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
                 var adminUser = new SiteCollectionAdmin()
                 {
                     IsSecondaryAdmin = false,
@@ -332,7 +332,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds)
+        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds, VanityUrlOptions vanityUrlOptions)
         {
             if ((sharePointAdminLoginNames == null || sharePointAdminLoginNames.Count == 0) && (ownerGroupAzureAdUserIds == null || ownerGroupAzureAdUserIds.Count == 0))
             {
@@ -340,10 +340,10 @@ namespace PnP.Core.Admin.Model.SharePoint
                 return;
             }
 
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Load the site collection props
-                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl).ConfigureAwait(false);
+                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
 
                 if (siteProperties.GroupId != Guid.Empty && ownerGroupAzureAdUserIds != null && ownerGroupAzureAdUserIds.Count > 0)
                 {
@@ -371,7 +371,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         siteProperties.Owner = sharePointAdminLoginNames[0];
                         siteProperties.SetOwnerWithoutUpdatingSecondaryAdmin = true;
-                        await siteProperties.UpdateAsync().ConfigureAwait(false);
+                        await siteProperties.UpdateAsync(vanityUrlOptions).ConfigureAwait(false);
                     }
 
                     // add the other users as secondary SharePoint admins

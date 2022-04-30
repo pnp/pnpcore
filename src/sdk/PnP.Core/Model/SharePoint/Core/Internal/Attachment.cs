@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Attachment class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Attachment", Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles/getbyfilename('{Id}')", LinqGet = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles")]
+    [SharePointType("SP.Attachment", Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles/getbyfilenameaspath(decodedUrl='{IdAsPath}')", LinqGet = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles")]
     internal sealed class Attachment : BaseDataModel<IAttachment>, IAttachment
     {
         #region Construction
@@ -34,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("*")]
         public object All { get => null; }
         #endregion
-
+        
         #region GetContent
         public async Task<Stream> GetContentAsync(bool streamContent = false)
         {

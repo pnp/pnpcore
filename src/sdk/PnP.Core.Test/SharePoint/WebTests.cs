@@ -1089,12 +1089,12 @@ namespace PnP.Core.Test.SharePoint
                 var currentRoleDefinitions = addedUser.GetRoleDefinitions();
 
                 Assert.IsNotNull(currentRoleDefinitions.AsRequested().FirstOrDefault(p => p.Name == "Full Control"));
-                
+
                 addedUser.RemoveRoleDefinitions(new string[] { "Full Control" });
 
                 currentRoleDefinitions = addedUser.GetRoleDefinitions();
 
-                Assert.IsTrue(currentRoleDefinitions == null);                
+                Assert.IsTrue(currentRoleDefinitions == null);
             }
         }
 
@@ -1535,7 +1535,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
-                foreach(var row in searchResult.Rows)
+                foreach (var row in searchResult.Rows)
                 {
                     Assert.IsTrue(row.ContainsKey("Path"));
                 }
@@ -1633,10 +1633,10 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
                 Assert.IsTrue(searchResult.Refinements.Count > 0);
-                foreach(var refiner in searchResult.Refinements)
+                foreach (var refiner in searchResult.Refinements)
                 {
                     Assert.IsTrue(!string.IsNullOrEmpty(refiner.Key));
-                    foreach(var refinementResult in refiner.Value)
+                    foreach (var refinementResult in refiner.Value)
                     {
                         Assert.IsTrue(refinementResult.Count > 0);
                         Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Value));
@@ -1644,8 +1644,9 @@ namespace PnP.Core.Test.SharePoint
                         Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Name));
                     }
                 }
-                
+
             }
         }
+
     }
 }

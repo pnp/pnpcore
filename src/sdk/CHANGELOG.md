@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for configuring top and quicklaunch navigation #805 and #813 [MathijsVerbeeck - Mathijs Verbeeck]
 - Extended the team channel tabs to following tabs: Word (Configurable), Ppt (Configurable), Excel (Configurable), Pdf (Configurable), Stream, Planner, Forms, OneNote, PowerBi, SharePoint Page or List #808 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for asynchronous file & listitem copy/move functionality on the ISite interface using the SPO CopyJobs API #814 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added support for vanity URLs in the admin library [jansenbe - Bert Jansen]
+- Teams Chat support #657 [MathijsVerbeeck - Mathijs Verbeeck]
+- Support for finding files in lists and folders using enumeration and wild card pattern matching #818 [dennisvanniel - Dennis van Niel]
 
 ### Changed
 
@@ -21,6 +24,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix for invalid datatime value being returned by CSOM tenant information call #803 [jansenbe - Bert Jansen]
 - Admin library: also try to restore the associated Microsoft 365 group when a group connected site is restored #801 [jansenbe - Bert Jansen]
 - Fixed wrong ConfigureAwait usage. #824 [s-KaiNet - Sergei Sergeev]
+- Allow custom Accept header with ApiRequest #829 [koenzomers - Koen Zomers]
+- Fix to enable deleting an attachment with special characters in the file name #830 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

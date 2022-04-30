@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model.Me;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
@@ -56,6 +57,11 @@ namespace PnP.Core.Services
         private readonly Lazy<ISocial> social = new Lazy<ISocial>(() =>
         {
             return new Social();
+        }, true);
+
+        private readonly Lazy<IMe> me= new Lazy<IMe>(() =>
+        {
+            return new Me();
         }, true);
 
         #endregion
@@ -378,6 +384,18 @@ namespace PnP.Core.Services
             {
                 social.Value.PnPContext = this;
                 return social.Value;
+            }
+        }
+
+        /// <summary>
+        /// Entry point for the Me object
+        /// </summary>
+        public IMe Me
+        {
+            get
+            {
+                (me.Value as Me).PnPContext = this;
+                return me.Value;
             }
         }
         #endregion

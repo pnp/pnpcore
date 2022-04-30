@@ -312,9 +312,9 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         #region Methods
 
-        public async Task UpdateAsync()
+        public async Task UpdateAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            using (var tenantAdminContext = await PnPContext.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminContext = await PnPContext.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
@@ -325,9 +325,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        public void Update()
+        public void Update(VanityUrlOptions vanityUrlOptions = null)
         {
-            UpdateAsync().GetAwaiter().GetResult();
+            UpdateAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
         #endregion
 

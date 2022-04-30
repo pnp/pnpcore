@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -275,6 +276,23 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>Information about the created classify and extract requests</returns>
         ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
+
+        #endregion
+
+        #region Files
+        /// <summary>
+        /// Find files in the folder, can be slow as it iterates over all the files in the folder and it's sub folders. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        public Task<List<IFile>> FindFilesAsync(string match);
+
+        /// <summary>
+        /// Find files in the folder, can be slow as it iterates over all the files in the folder and it's sub folders. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        public List<IFile> FindFiles(string match);
 
         #endregion
     }
