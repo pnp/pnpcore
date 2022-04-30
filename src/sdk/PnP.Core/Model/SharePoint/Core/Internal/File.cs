@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -122,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<List<IGraphPermission>> GetShareLinksAsync()
         {
             EnsureProperties(y => y.SiteId, y => y.UniqueId);
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/permissions?$filter=Link ne null and grantedToIdentitiesV2/$count eq 0", ApiType.Graph);
+            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/permissions?$filter=Link ne null", ApiType.GraphBeta);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(response.Json))
@@ -136,25 +137,6 @@ namespace PnP.Core.Model.SharePoint
         public List<IGraphPermission> GetShareLinks()
         {
             return GetShareLinksAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<List<IGraphPermission>> GetShareInvitesAsync()
-        {
-            EnsureProperties(y => y.SiteId, y => y.UniqueId);
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/permissions?$filter=Link ne null and grantedToIdentitiesV2/$count gt 0", ApiType.Graph);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
-            if (string.IsNullOrEmpty(response.Json))
-            {
-                throw new Exception("No values found");
-            }
-            return DeserializeGraphPermissionsResponse(response.Json, this.PnPContext, this);
-        }
-
-
-        public List<IGraphPermission> GetShareInvites()
-        {
-            return GetShareInvitesAsync().GetAwaiter().GetResult();
         }
 
         public async Task DeleteShareLinksAsync()
@@ -171,33 +153,57 @@ namespace PnP.Core.Model.SharePoint
             DeleteShareLinksAsync().GetAwaiter().GetResult();
         }
 
-        public async Task DeleteShareInvitesAsync()
+        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(IOrganizationalLinkOptions organizationalLinkOptions)
         {
-            var shareInvites = await GetShareInvitesAsync().ConfigureAwait(false);
-            foreach (var shareInvite in shareInvites)
+            if (organizationalLinkOptions.Type == ShareType.CreateOnly)
             {
-                await shareInvite.DeletePermissionAsync().ConfigureAwait(false);
+                throw new ArgumentException("An organizational link of type 'CreateOnly' can only be created on Folder level");
             }
-        }
 
-        public void DeleteShareInvites()
-        {
-            DeleteShareInvitesAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<IGraphPermission> CreateSharingLinkAsync(IShareLinkRequestOptions shareRequestOptions)
-        {
             EnsureProperties(y => y.SiteId, y => y.UniqueId);
             dynamic body = new ExpandoObject();
-            body.scope = shareRequestOptions.Scope.ToString();
-            body.type = shareRequestOptions.Type.ToString();
+            body.scope = ShareScope.Organization;
+            body.type = organizationalLinkOptions.Type;
 
-            if (shareRequestOptions.ExpirationDateTime != DateTime.MinValue)
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+            
+        }
+
+        public IGraphPermission CreateOrganizationalSharingLink(IOrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(IAnonymousLinkOptions anonymousLinkOptions)
+        {
+            if (anonymousLinkOptions.Type == ShareType.CreateOnly)
             {
-                body.expirationDateTime = shareRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                throw new ArgumentException("An anonymous link of type 'CreateOnly' can only be created on Folder level");
             }
 
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/createLink", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse));
+            EnsureProperties(y => y.SiteId, y => y.UniqueId);
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Anonymous;
+            body.type = anonymousLinkOptions.Type;
+            body.password = anonymousLinkOptions.Password;
+
+            if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(IAnonymousLinkOptions anonymousLinkOptions)
+        {
+            return CreateAnonymousSharingLinkAsync(anonymousLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IGraphPermission> CreateSharingLinkAsync(dynamic body)
+        {
+            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
@@ -211,28 +217,59 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public IGraphPermission CreateSharingLink(IShareLinkRequestOptions shareRequestOptions)
+        public IGraphPermission CreateAnonymousSharingLink(IOrganizationalLinkOptions organizationalLinkOptions)
         {
-            return CreateSharingLinkAsync(shareRequestOptions).GetAwaiter().GetResult();
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IGraphPermission> CreateSharingInviteAsync(IShareInviteRequestOptions shareRequestOptions)
+        public async Task<IGraphPermission> CreateUserSharingLinkAsync(IUserLinkOptions userLinkOptions)
         {
-            if (!shareRequestOptions.RequireSignIn && !shareRequestOptions.SendInvitation)
+            if (userLinkOptions.Type == ShareType.CreateOnly)
             {
-                throw new InvalidOperationException("RequireSignIn and SendInvitation cannot both be false");
+                throw new ArgumentException("A user link of type 'CreateOnly' can only be created on Folder level");
+            }
+
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
+            {
+                throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
+            }
+
+            EnsureProperties(y => y.SiteId, y => y.UniqueId);
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Users;
+            body.type = userLinkOptions.Type;
+            body.recipients = userLinkOptions.Recipients;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateUserSharingLink(IUserLinkOptions userLinkOptions)
+        {
+            return CreateUserSharingLinkAsync(userLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateSharingInviteAsync(IInviteOptions inviteOptions)
+        {
+            if (!inviteOptions.RequireSignIn && !inviteOptions.SendInvitation)
+            {
+                throw new ArgumentException("RequireSignIn and SendInvitation cannot both be false");
             }
 
             EnsureProperties(y => y.SiteId, y => y.UniqueId, y => y.VroomItemID);
             dynamic body = new ExpandoObject();
-            body.requireSignIn = shareRequestOptions.RequireSignIn;
-            body.sendInvitation = shareRequestOptions.SendInvitation;
-            body.roles = shareRequestOptions.Roles.Select(y => y.ToString()).ToList();
-            body.recipients = shareRequestOptions.Recipients;
-            body.message = shareRequestOptions.Message;
+            body.requireSignIn = inviteOptions.RequireSignIn;
+            body.sendInvitation = inviteOptions.SendInvitation;
+            body.roles = inviteOptions.Roles.Select(y => y.ToString()).ToList();
+            body.recipients = inviteOptions.Recipients;
+            body.message = inviteOptions.Message;
 
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{VroomItemID}/invite", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+            if (inviteOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = inviteOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
 
+            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
@@ -244,8 +281,9 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (dataRows.GetArrayLength() == 1)
                     {
-                        return DeserializeGraphPermission(dataRows.EnumerateArray().First(), PnPContext, this);
+                        return DeserializeGraphPermission(dataRows.EnumerateArray().FirstOrDefault(), PnPContext, this);
                     }
+                    
                 }
                 throw new Exception("Issue on creation");
             }
@@ -255,9 +293,9 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public IGraphPermission CreateSharingInvite(IShareInviteRequestOptions shareRequestOptions)
+        public IGraphPermission CreateSharingInvite(IInviteOptions inviteOptions)
         {
-            return CreateSharingInviteAsync(shareRequestOptions).GetAwaiter().GetResult();
+            return CreateSharingInviteAsync(inviteOptions).GetAwaiter().GetResult();
         }
 
 
@@ -983,7 +1021,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (row.TryGetProperty("expirationDateTime", out JsonElement expirationDateTime))
             {
-                returnPermission.ExpirationDateTime = expirationDateTime.GetDateTimeOffset();
+                returnPermission.ExpirationDateTime = expirationDateTime.GetDateTime();
             }
 
             if (row.TryGetProperty("grantedToV2", out JsonElement grantedToV2))
@@ -1058,13 +1096,13 @@ namespace PnP.Core.Model.SharePoint
         {
             var sharingLink = new SharingLink();
 
-            if (link.TryGetProperty("scope", out JsonElement scope))
+            if (link.TryGetProperty("scope", out JsonElement scope) && Enum.TryParse(scope.GetString(), true, out ShareScope shareScope))
             {
-                sharingLink.Scope = scope.GetString();
+                sharingLink.Scope = shareScope;
             }
-            if (link.TryGetProperty("type", out JsonElement type))
+            if (link.TryGetProperty("type", out JsonElement type) && Enum.TryParse(type.GetString(), true, out ShareType shareType))
             {
-                sharingLink.Type = type.GetString();
+                sharingLink.Type = shareType;
             }
             if (link.TryGetProperty("webUrl", out JsonElement webUrl))
             {
@@ -1133,6 +1171,10 @@ namespace PnP.Core.Model.SharePoint
             if (row.TryGetProperty("loginName", out JsonElement loginName))
             {
                 sharePointIdentity.LoginName = loginName.GetString();
+            }
+            if (row.TryGetProperty("email", out JsonElement email))
+            {
+                sharePointIdentity.Email= email.GetString();
             }
             return sharePointIdentity;
         }

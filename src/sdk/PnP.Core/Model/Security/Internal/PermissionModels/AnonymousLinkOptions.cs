@@ -4,10 +4,10 @@ using System.Text;
 
 namespace PnP.Core.Model.Security
 {
-    internal class ShareLinkRequestOptions : IShareLinkRequestOptions
+    internal class AnonymousLinkOptions : IAnonymousLinkOptions
     {
         public ShareType Type { get; set; }
+        public string Password { get; set; }
         public DateTime ExpirationDateTime { get; set; }
-        public ShareScope Scope { get; set; }
     }
 }

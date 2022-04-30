@@ -2,8 +2,11 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -35,7 +38,7 @@ namespace PnP.Core.Model.Security
 
         public string ShareId { get; set; }
 
-        public DateTimeOffset ExpirationDateTime { get; set; }
+        public DateTime ExpirationDateTime { get; set; }
 
         public bool HasPassword { get; set; }
 
@@ -48,12 +51,17 @@ namespace PnP.Core.Model.Security
         public async Task DeletePermissionAsync()
         {
             var parent = (IFile)Parent;
-            var apiCall = new ApiCall($"sites/{parent.SiteId}/drive/items/{parent.UniqueId}/permissions/{Id}", ApiType.Graph);
+            var apiCall = new ApiCall($"sites/{parent.SiteId}/drive/items/{parent.UniqueId}/permissions/{Id}", ApiType.GraphBeta);
             var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
             if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
             {
                 throw new Exception("Error occured");
             }
+        }
+
+        public void DeletePermission()
+        {
+            DeletePermissionAsync().GetAwaiter().GetResult();
         }
 
         #endregion

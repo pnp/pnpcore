@@ -20,6 +20,7 @@ namespace PnP.Core.Model.Security
         /// <summary>
         /// 
         /// </summary>
-        User
+        [EnumMember(Value = "users")]
+        Users
     }
 }
