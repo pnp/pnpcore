@@ -1,6 +1,7 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -189,14 +190,6 @@ namespace PnP.Core.Model.SharePoint
         public IFileVersionCollection Versions { get; }
 
         /// <summary>
-        /// Gets a value that returns a collection of file version objects that represent the versions of the file.
-        /// Implements <see cref="IQueryable{T}"/>. <br />
-        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
-        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
-        /// </summary>
-        public IGraphPermissionCollection GraphPermissions { get; }
-
-        /// <summary>
         /// Gets a value that specifies the user who added the file.
         /// </summary>
         public ISharePointUser Author { get; }
@@ -220,6 +213,82 @@ namespace PnP.Core.Model.SharePoint
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
+
+        #endregion
+
+        #region GraphPermissions
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<IGraphPermission>> GetShareLinksAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        List<IGraphPermission> GetShareLinks();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<IGraphPermission>> GetShareInvitesAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        List<IGraphPermission> GetShareInvites();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Task DeleteShareLinksAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void DeleteShareLinks();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Task DeleteShareInvitesAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void DeleteShareInvites();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shareRequestOptions"></param>
+        /// <returns></returns>
+        Task<IGraphPermission> CreateSharingLinkAsync(IShareLinkRequestOptions shareRequestOptions);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shareRequestOptions"></param>
+        /// <returns></returns>
+        IGraphPermission CreateSharingLink(IShareLinkRequestOptions shareRequestOptions);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shareRequestOptions"></param>
+        /// <returns></returns>
+        Task<IGraphPermission> CreateSharingInviteAsync(IShareInviteRequestOptions shareRequestOptions);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shareRequestOptions"></param>
+        /// <returns></returns>
+        IGraphPermission CreateSharingInvite(IShareInviteRequestOptions shareRequestOptions);
 
         #endregion
 
