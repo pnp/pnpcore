@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace PnP.Core.Model.Security
 {
-
     /// <summary>
     /// Properties that can be set when creating a new Organizational Link
     /// </summary>
-    [ConcreteType(typeof(OrganizationalLinkOptions))]
-    public interface IOrganizationalLinkOptions
+    public class OrganizationalLinkOptions 
     {
+
         /// <summary>
         /// The type of sharing link to create.
         /// </summary>

@@ -9,16 +9,16 @@
         /// <summary>
         /// The email address provided for the recipient of the sharing invitation. Read-only.
         /// </summary>
-        public string Email { get; set; }
+        public string Email { get; }
 
         /// <summary>
         /// Provides information about who sent the invitation that created this permission, if that information is available. Read-only.
         /// </summary>
-        public IIdentitySet InvitedBy { get; set; }
+        public IIdentitySet InvitedBy { get; }
 
         /// <summary>
         /// If true the recipient of the invitation needs to sign in in order to access the shared item. Read-only.
         /// </summary>
-        public bool SignInRequired { get; set; }
+        public bool SignInRequired { get; }
     }
 }

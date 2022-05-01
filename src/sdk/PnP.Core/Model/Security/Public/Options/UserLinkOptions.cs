@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace PnP.Core.Model.Security
 {
-
     /// <summary>
-    /// Properties that can be set when creating a new Anonymous Link
+    /// Properties that can be set when creating a new User Link
     /// </summary>
-    [ConcreteType(typeof(UserLinkOptions))]
-    public interface IUserLinkOptions
+    public class UserLinkOptions
     {
         /// <summary>
         /// The type of sharing link to create.

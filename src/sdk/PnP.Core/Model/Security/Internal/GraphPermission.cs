@@ -24,23 +24,23 @@ namespace PnP.Core.Model.Security
 
         #region Properties
 
-        public string Id { get; set; }
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
 
-        public ISharePointIdentitySet GrantedToV2 { get; set; }
+        public ISharePointIdentitySet GrantedToV2 { get => GetModelValue<ISharePointIdentitySet>(); set => SetModelValue(value); }
 
-        public List<ISharePointIdentitySet> GrantedToIdentitiesV2 { get; set; }
+        public List<ISharePointIdentitySet> GrantedToIdentitiesV2 { get => GetValue<List<ISharePointIdentitySet>>(); set => SetModelValue(value); }
 
-        public ISharingInvitation Invitation { get; set; }
+        public ISharingInvitation Invitation { get => GetModelValue<ISharingInvitation>(); set => SetModelValue(value); }
 
-        public ISharingLink Link { get; set; }
+        public ISharingLink Link { get => GetModelValue<ISharingLink>(); set => SetModelValue(value); }
 
-        public List<PermissionRole> Roles { get; set; }
+        public List<PermissionRole> Roles { get => GetValue<List<PermissionRole>>(); set => SetModelValue(value); }
 
-        public string ShareId { get; set; }
+        public string ShareId { get => GetValue<string>(); set => SetValue(value); }
 
-        public DateTime ExpirationDateTime { get; set; }
+        public DateTime ExpirationDateTime { get => GetValue<DateTime>(); set => SetValue(value); }
 
-        public bool HasPassword { get; set; }
+        public bool HasPassword { get => GetValue<bool>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }

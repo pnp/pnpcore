@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Model.Security
 {
-
     /// <summary>
     /// Properties that can be set when creating a new Anonymous Link
     /// </summary>
-    [ConcreteType(typeof(AnonymousLinkOptions))]
-    public interface IAnonymousLinkOptions
+    public class AnonymousLinkOptions
     {
         /// <summary>
         /// The type of sharing link to create.
@@ -21,7 +18,7 @@ namespace PnP.Core.Model.Security
         public string Password { get; set; }
 
         /// <summary>
-        /// Indicates the expiration time of the permission.
+        /// Indicates the expiration datetime of the permission.
         /// </summary>
         public DateTime ExpirationDateTime { get; set; }
     }

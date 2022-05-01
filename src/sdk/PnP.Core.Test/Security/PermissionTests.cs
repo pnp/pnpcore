@@ -15,7 +15,7 @@ namespace PnP.Core.Test.Security
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;            
+            TestCommon.Instance.Mocking = false;            
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace PnP.Core.Test.Security
                 file.DeleteShareLinks();
 
                 var permissions = file.GetShareLinks();
-                Assert.AreEqual(0, permissions.Count);
+                Assert.AreEqual(0, permissions.Count());
             }
             await TestAssets.CleanupTestDocumentAsync(2);
         }
@@ -79,7 +79,7 @@ namespace PnP.Core.Test.Security
 
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -115,7 +115,7 @@ namespace PnP.Core.Test.Security
 
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -143,7 +143,6 @@ namespace PnP.Core.Test.Security
 
                 Assert.IsNotNull(permission.Id);
                 Assert.IsNotNull(permission.Link.WebUrl);
-                Assert.AreEqual(permission.ExpirationDateTime, DateTime.MinValue);
                 Assert.AreEqual(permission.Link.Type, ShareType.View);
                 Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
                 Assert.AreEqual(permission.HasPassword, false);
@@ -151,7 +150,7 @@ namespace PnP.Core.Test.Security
 
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -188,7 +187,7 @@ namespace PnP.Core.Test.Security
                 Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"));
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -224,7 +223,7 @@ namespace PnP.Core.Test.Security
 
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -242,18 +241,20 @@ namespace PnP.Core.Test.Security
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
                 var originalSharingLinks = await file.GetShareLinksAsync();
+                var driveRecipients = new List<IDriveRecipient>()
+                {
+                    new DriveRecipient
+                    {
+                        Email = context.Web.SiteUsers.FirstOrDefault().Mail
+                    }
+                };
 
                 var shareLinkRequestOptions = new UserLinkOptions()
                 {
                     Type = ShareType.BlocksDownload,
-                    Recipients = new List<IDriveRecipient>
-                    {
-                        new DriveRecipient
-                        {
-                            Email = context.Web.SiteUsers.FirstOrDefault().Mail
-                        }
-                    },
+                    Recipients = driveRecipients
                 };
+
                 var permission = file.CreateUserSharingLink(shareLinkRequestOptions);
 
                 Assert.IsNotNull(permission.Id);
@@ -266,7 +267,7 @@ namespace PnP.Core.Test.Security
                 Assert.AreEqual(permission.GrantedToIdentitiesV2.FirstOrDefault().SiteUser.Email, shareLinkRequestOptions.Recipients.First().Email);
                 var newSharingLinks = await file.GetShareLinksAsync();
 
-                Assert.AreEqual(newSharingLinks.Count, originalSharingLinks.Count + 1);
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -282,19 +283,21 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-                var user = context.Web.SiteUsers.FirstOrDefault();
+
+                var driveRecipients = new List<IDriveRecipient>()
+                {
+                    new DriveRecipient
+                    {
+                        Email = context.Web.SiteUsers.FirstOrDefault().Mail
+                    }
+                };
+
                 var shareRequestOptions = new InviteOptions()
                 {
                     Message = "I'd like to share this file with you",
                     RequireSignIn = true,
                     SendInvitation = true,
-                    Recipients = new List<IDriveRecipient>
-                    {
-                        new DriveRecipient
-                        {
-                            Email = context.Web.SiteUsers.FirstOrDefault().Mail
-                        }
-                    },
+                    Recipients = driveRecipients,
                     Roles = new List<PermissionRole> { PermissionRole.Read }
                 };
 

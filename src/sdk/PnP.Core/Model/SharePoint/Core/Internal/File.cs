@@ -120,7 +120,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Graph Permissions
 
-        public async Task<List<IGraphPermission>> GetShareLinksAsync()
+        public async Task<IGraphPermissionCollection> GetShareLinksAsync()
         {
             EnsureProperties(y => y.SiteId, y => y.UniqueId);
             var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/permissions?$filter=Link ne null", ApiType.GraphBeta);
@@ -130,11 +130,14 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new Exception("No values found");
             }
-            return DeserializeGraphPermissionsResponse(response.Json, this.PnPContext, this);
+
+            var graphPermissions = DeserializeGraphPermissionsResponse(response.Json, PnPContext, this);
+
+            return graphPermissions;
         }
 
 
-        public List<IGraphPermission> GetShareLinks()
+        public IGraphPermissionCollection GetShareLinks()
         {
             return GetShareLinksAsync().GetAwaiter().GetResult();
         }
@@ -153,7 +156,7 @@ namespace PnP.Core.Model.SharePoint
             DeleteShareLinksAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(IOrganizationalLinkOptions organizationalLinkOptions)
+        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions)
         {
             if (organizationalLinkOptions.Type == ShareType.CreateOnly)
             {
@@ -169,12 +172,12 @@ namespace PnP.Core.Model.SharePoint
             
         }
 
-        public IGraphPermission CreateOrganizationalSharingLink(IOrganizationalLinkOptions organizationalLinkOptions)
+        public IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
         {
             return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(IAnonymousLinkOptions anonymousLinkOptions)
+        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions)
         {
             if (anonymousLinkOptions.Type == ShareType.CreateOnly)
             {
@@ -196,7 +199,7 @@ namespace PnP.Core.Model.SharePoint
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
         }
 
-        public IGraphPermission CreateAnonymousSharingLink(IAnonymousLinkOptions anonymousLinkOptions)
+        public IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions)
         {
             return CreateAnonymousSharingLinkAsync(anonymousLinkOptions).GetAwaiter().GetResult();
         }
@@ -217,19 +220,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public IGraphPermission CreateAnonymousSharingLink(IOrganizationalLinkOptions organizationalLinkOptions)
+        public IGraphPermission CreateAnonymousSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
         {
             return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IGraphPermission> CreateUserSharingLinkAsync(IUserLinkOptions userLinkOptions)
+        public async Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions)
         {
             if (userLinkOptions.Type == ShareType.CreateOnly)
             {
                 throw new ArgumentException("A user link of type 'CreateOnly' can only be created on Folder level");
             }
 
-            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count() == 0)
             {
                 throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
             }
@@ -244,12 +247,12 @@ namespace PnP.Core.Model.SharePoint
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
         }
 
-        public IGraphPermission CreateUserSharingLink(IUserLinkOptions userLinkOptions)
+        public IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions)
         {
             return CreateUserSharingLinkAsync(userLinkOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IGraphPermission> CreateSharingInviteAsync(IInviteOptions inviteOptions)
+        public async Task<IGraphPermission> CreateSharingInviteAsync(InviteOptions inviteOptions)
         {
             if (!inviteOptions.RequireSignIn && !inviteOptions.SendInvitation)
             {
@@ -293,7 +296,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public IGraphPermission CreateSharingInvite(IInviteOptions inviteOptions)
+        public IGraphPermission CreateSharingInvite(InviteOptions inviteOptions)
         {
             return CreateSharingInviteAsync(inviteOptions).GetAwaiter().GetResult();
         }
@@ -974,9 +977,9 @@ namespace PnP.Core.Model.SharePoint
             }
         }
         #region Graph Permissions Deserialization Helper
-        internal static List<IGraphPermission> DeserializeGraphPermissionsResponse(string responseJson, PnPContext context, File file)
+        private IGraphPermissionCollection DeserializeGraphPermissionsResponse(string responseJson, PnPContext context, File file)
         {
-            var returnPermissions = new List<IGraphPermission>();
+            var graphPermissions = new GraphPermissionCollection(context, file);
 
             var json = JsonSerializer.Deserialize<JsonElement>(responseJson);
 
@@ -984,18 +987,18 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (dataRows.GetArrayLength() == 0)
                 {
-                    return returnPermissions;
+                    return graphPermissions;
                 }
 
                 foreach (var row in dataRows.EnumerateArray())
                 {
-                    returnPermissions.Add(DeserializeGraphPermission(row, context, file));
+                    graphPermissions.Add(DeserializeGraphPermission(row, context, file));
                 }
             }
-            return returnPermissions;
+            return graphPermissions;
         }
 
-        private static IGraphPermission DeserializeGraphPermission(JsonElement row, PnPContext context, File file)
+        private IGraphPermission DeserializeGraphPermission(JsonElement row, PnPContext context, File file)
         {
             var returnPermission = new GraphPermission(context, file);
 
@@ -1036,11 +1039,13 @@ namespace PnP.Core.Model.SharePoint
 
             if (row.TryGetProperty("grantedToIdentitiesV2", out JsonElement grantedToIdentitiesV2))
             {
-                returnPermission.GrantedToIdentitiesV2 = new List<ISharePointIdentitySet>();
+                var identitySets = new List<ISharePointIdentitySet>();
+                
                 foreach (var grantedToIdentitiesV2Object in grantedToIdentitiesV2.EnumerateArray())
                 {
-                    returnPermission.GrantedToIdentitiesV2.Add(DeserializeGrantedToV2(grantedToIdentitiesV2Object));
+                    identitySets.Add(DeserializeGrantedToV2(grantedToIdentitiesV2Object));
                 }
+                returnPermission.GrantedToIdentitiesV2 = identitySets;
             }
 
             if (row.TryGetProperty("link", out JsonElement link))

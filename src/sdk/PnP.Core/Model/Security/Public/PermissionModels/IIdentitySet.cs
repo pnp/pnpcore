@@ -9,16 +9,16 @@
         /// <summary>
         /// The application associated with this action.
         /// </summary>
-        public IIdentity Application { get; set; }
+        public IIdentity Application { get; }
 
         /// <summary>
         /// The device associated with this action.
         /// </summary>
-        public IIdentity Device { get; set; }
+        public IIdentity Device { get; }
 
         /// <summary>
         /// The user associated with this action.
         /// </summary>
-        public IIdentity User { get; set; }
+        public IIdentity User { get; }
     }
 }

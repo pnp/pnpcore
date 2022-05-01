@@ -222,13 +222,13 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the share links on the file item
         /// </summary>
         /// <returns>Collection of share links existing on the file</returns>
-        Task<List<IGraphPermission>> GetShareLinksAsync();
+        Task<IGraphPermissionCollection> GetShareLinksAsync();
 
         /// <summary>
         /// Gets the share links on the file item
         /// </summary>
         /// <returns>Collection of share links existing on the file</returns>
-        List<IGraphPermission> GetShareLinks();
+        IGraphPermissionCollection GetShareLinks();
 
         /// <summary>
         /// Deletes the share links on the file item
@@ -245,56 +245,56 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="anonymousLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        Task<IGraphPermission> CreateAnonymousSharingLinkAsync(IAnonymousLinkOptions anonymousLinkOptions);
+        Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions);
 
         /// <summary>
         /// Creates an anonymous sharing link for a file
         /// </summary>
         /// <param name="anonymousLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        IGraphPermission CreateAnonymousSharingLink(IAnonymousLinkOptions anonymousLinkOptions);
+        IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions);
 
         /// <summary>
         /// Creates an organization sharing link for a file
         /// </summary>
         /// <param name="organizationalLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(IOrganizationalLinkOptions organizationalLinkOptions);
+        Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions);
 
         /// <summary>
         /// Creates an organization sharing link for a file
         /// </summary>
         /// <param name="organizationalLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        IGraphPermission CreateOrganizationalSharingLink(IOrganizationalLinkOptions organizationalLinkOptions);
+        IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions);
 
         /// <summary>
         /// Creates a user sharing link for a file
         /// </summary>
         /// <param name="userLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        Task<IGraphPermission> CreateUserSharingLinkAsync(IUserLinkOptions userLinkOptions);
+        Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions);
 
         /// <summary>
         /// Creates a user sharing link for a file
         /// </summary>
         /// <param name="userLinkOptions"></param>
         /// <returns>Permission that has been created</returns>
-        IGraphPermission CreateUserSharingLink(IUserLinkOptions userLinkOptions);
+        IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions);
 
         /// <summary>
         /// Creates a sharing invite to a specific user
         /// </summary>
         /// <param name="inviteOptions"></param>
         /// <returns>Permission that has been created</returns>
-        Task<IGraphPermission> CreateSharingInviteAsync(IInviteOptions inviteOptions);
+        Task<IGraphPermission> CreateSharingInviteAsync(InviteOptions inviteOptions);
 
         /// <summary>
         /// Creates a sharing invite to a specific user
         /// </summary>
         /// <param name="inviteOptions"></param>
         /// <returns>Permission that has been created</returns>
-        IGraphPermission CreateSharingInvite(IInviteOptions inviteOptions);
+        IGraphPermission CreateSharingInvite(InviteOptions inviteOptions);
 
         #endregion
 
