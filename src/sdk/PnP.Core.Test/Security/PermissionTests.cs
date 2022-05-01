@@ -282,6 +282,7 @@ namespace PnP.Core.Test.Security
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
+
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
                 var driveRecipients = new List<IDriveRecipient>()

@@ -122,8 +122,8 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IGraphPermissionCollection> GetShareLinksAsync()
         {
-            EnsureProperties(y => y.SiteId, y => y.UniqueId);
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/permissions?$filter=Link ne null", ApiType.GraphBeta);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(response.Json))
@@ -163,7 +163,6 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException("An organizational link of type 'CreateOnly' can only be created on Folder level");
             }
 
-            EnsureProperties(y => y.SiteId, y => y.UniqueId);
             dynamic body = new ExpandoObject();
             body.scope = ShareScope.Organization;
             body.type = organizationalLinkOptions.Type;
@@ -184,7 +183,6 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException("An anonymous link of type 'CreateOnly' can only be created on Folder level");
             }
 
-            EnsureProperties(y => y.SiteId, y => y.UniqueId);
             dynamic body = new ExpandoObject();
 
             body.scope = ShareScope.Anonymous;
@@ -206,7 +204,9 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<IGraphPermission> CreateSharingLinkAsync(dynamic body)
         {
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{UniqueId}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
@@ -237,7 +237,6 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
             }
 
-            EnsureProperties(y => y.SiteId, y => y.UniqueId);
             dynamic body = new ExpandoObject();
 
             body.scope = ShareScope.Users;
@@ -259,7 +258,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException("RequireSignIn and SendInvitation cannot both be false");
             }
 
-            EnsureProperties(y => y.SiteId, y => y.UniqueId, y => y.VroomItemID);
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
             dynamic body = new ExpandoObject();
             body.requireSignIn = inviteOptions.RequireSignIn;
             body.sendInvitation = inviteOptions.SendInvitation;
@@ -272,7 +271,7 @@ namespace PnP.Core.Model.SharePoint
                 body.expirationDateTime = inviteOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
             }
 
-            var apiCall = new ApiCall($"sites/{SiteId}/drive/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
