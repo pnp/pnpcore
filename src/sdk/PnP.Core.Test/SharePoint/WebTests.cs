@@ -1648,5 +1648,82 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetWebTemplatesTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = context.Web.GetWebTemplates();
+
+                Assert.IsNotNull(webTemplates);
+                Assert.IsTrue(webTemplates.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplatesSpecificLanguageTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = context.Web.GetWebTemplates(1043);
+
+                Assert.IsNotNull(webTemplates);
+                Assert.AreEqual(webTemplates.FirstOrDefault().Lcid, 1043);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplatesBatchTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = await context.Web.GetWebTemplatesBatchAsync();
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(webTemplates);
+                Assert.IsTrue(webTemplates.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplateByNameTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameAsync("sts");
+
+                Assert.IsNotNull(webTemplate);
+                Assert.IsTrue(webTemplate.Name.ToLower().Contains("sts"));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplateByNameBatchTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameBatchAsync("STS");
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(webTemplate.Result);
+                Assert.IsTrue(webTemplate.Result.Name.ToLower().Contains("sts"));
+            }
+        }
+
+        [ExpectedException(typeof(Exception))]
+        [TestMethod]
+        public async Task GetWebTemplateByNameTestNoResultException()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameAsync("PnP Rocks!");
+            }
+        }
     }
 }

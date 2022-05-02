@@ -1587,7 +1587,167 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
         }
         #endregion
-        
+
+        #region Web Templates
+
+        public async Task<List<IWebTemplate>> GetWebTemplatesAsync(int lcid, bool includeCrossLanguage)
+        {
+            var webTemplates = new List<IWebTemplate>();
+
+            var apiCall = BuildWebTemplatesApiCall(lcid, includeCrossLanguage);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                ProcessWebTemplates(response.Json, webTemplates);
+            }
+
+            return webTemplates;
+        }
+
+        public List<IWebTemplate> GetWebTemplates(int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesAsync(lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(int lcid, bool includeCrossLanguage)
+        {
+            return await GetWebTemplatesBatchAsync(PnPContext.CurrentBatch, lcid, includeCrossLanguage).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesBatchAsync(lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(Batch batch, int lcid, bool includeCrossLanguage)
+        {
+            var apiCall = BuildWebTemplatesApiCall(lcid, includeCrossLanguage);
+
+            apiCall.RawEnumerableResult = new List<IWebTemplate>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessWebTemplates(json, (List<IWebTemplate>)apiCall.RawEnumerableResult);
+            };
+
+            // Add the request to the batch
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchEnumerableBatchResult<IWebTemplate>(batch, batchRequest.Id, (IReadOnlyList<IWebTemplate>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(Batch batch, int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesBatchAsync(batch, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IWebTemplate> GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            var apiCall = BuildWebTemplatesNameApiCall(lcid, includeCrossLanguage, name: name);
+            try
+            {
+                var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+                return ProcessWebTemplate(response.Json);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                if (error.ServerErrorCode == -2147024809)
+                {
+                    throw new Exception($"A site template with the name {name} could not be found.");
+                }
+            }
+            return null;
+        }
+
+        public IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameAsync(name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return await GetWebTemplateByNameBatchAsync(PnPContext.CurrentBatch, name, lcid, includeCrossLanguage).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameBatchAsync(PnPContext.CurrentBatch, name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            var apiCall = BuildWebTemplatesNameApiCall(lcid, includeCrossLanguage, name);
+
+            apiCall.RawSingleResult = new WebTemplate();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var webTemplate = JsonSerializer.Deserialize<WebTemplate>(json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                (apiCall.RawSingleResult as WebTemplate).Lcid = webTemplate.Lcid;
+                (apiCall.RawSingleResult as WebTemplate).IsHidden = webTemplate.IsHidden;
+                (apiCall.RawSingleResult as WebTemplate).Description = webTemplate.Description;
+                (apiCall.RawSingleResult as WebTemplate).Name = webTemplate.Name;
+                (apiCall.RawSingleResult as WebTemplate).DisplayCategory = webTemplate.DisplayCategory;
+                (apiCall.RawSingleResult as WebTemplate).IsSubWebOnly = webTemplate.IsSubWebOnly;
+                (apiCall.RawSingleResult as WebTemplate).IsRootWebOnly = webTemplate.IsRootWebOnly;
+                (apiCall.RawSingleResult as WebTemplate).Title = webTemplate.Title;
+                (apiCall.RawSingleResult as WebTemplate).Id = webTemplate.Id;
+                (apiCall.RawSingleResult as WebTemplate).ImageUrl = webTemplate.ImageUrl;
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return new BatchSingleResult<WebTemplate>(batch, batchRequest.Id, apiCall.RawSingleResult as WebTemplate);
+
+        }
+
+        public IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameBatchAsync(batch, name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildWebTemplatesApiCall(int lcid, bool includeCrossLanguage = false)
+        {
+            // Have to do includeCrossLanguage ToLower() or error occurs ("The expression \"web/GetAvailableWebTemplates(lcid=1033,doincludecrosslanguage=True)\" is not valid.")
+            var baseUrl = $"_api/Web/GetAvailableWebTemplates(lcid={lcid},doincludecrosslanguage={includeCrossLanguage.ToString().ToLower()})";
+
+            return new ApiCall(baseUrl, ApiType.SPORest);
+        }
+
+        private static ApiCall BuildWebTemplatesNameApiCall(int lcid, bool includeCrossLanguage, string name)
+        {
+            // Have to do includeCrossLanguage ToLower() or error occurs ("The expression \"web/GetAvailableWebTemplates(lcid=1033,doincludecrosslanguage=True)\" is not valid.")
+            var baseUrl = $"_api/Web/GetAvailableWebTemplates(lcid={lcid},doincludecrosslanguage={includeCrossLanguage.ToString().ToLower()})/GetByName('{name}')";
+
+            return new ApiCall(baseUrl, ApiType.SPORest);
+        }
+
+        private static void ProcessWebTemplates(string responseJson, List<IWebTemplate> webTemplatesResult)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(responseJson);
+
+            if (json.TryGetProperty("value", out JsonElement getAvailableWebTemplates))
+            {
+                var webTemplates = JsonSerializer.Deserialize<IEnumerable<WebTemplate>>(getAvailableWebTemplates.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                foreach (var webTemplate in webTemplates)
+                {
+                    webTemplatesResult.Add(webTemplate);
+                }
+            }
+        }
+
+        private static IWebTemplate ProcessWebTemplate(string responseJson)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(responseJson);
+
+            return JsonSerializer.Deserialize<WebTemplate>(json.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+        }
+
+        #endregion
+
         #endregion
     }
 }

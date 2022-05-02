@@ -1105,6 +1105,116 @@ namespace PnP.Core.Model.SharePoint
         IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query);
         #endregion
 
+        #region Web Templates
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<List<IWebTemplate>> GetWebTemplatesAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        List<IWebTemplate> GetWebTemplates(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IWebTemplate> GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lcid"></param>
+        /// <param name="includeCrossLanguage"></param>
+        /// <param name="name"></param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
