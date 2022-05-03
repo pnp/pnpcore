@@ -426,6 +426,9 @@
   <data name="Exception_Unsupported_WebDeleteIsInteractive" xml:space="preserve">
     <value>You can't delete webs in batch, use the DeleteAsync() or Delete() methods</value>
   </data>
+  <data name="Exception_WebTemplate_NotFound" xml:space="preserve">
+    <value>A site template with the name {0} could not be found</value>
+  </data>
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
   </data>

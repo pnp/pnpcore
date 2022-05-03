@@ -1657,7 +1657,7 @@ namespace PnP.Core.Model.SharePoint
                 var error = ex.Error as SharePointRestError;
                 if (error.ServerErrorCode == -2147024809)
                 {
-                    throw new Exception($"A site template with the name {name} could not be found.");
+                    throw new ClientException(ErrorType.SharePointRestServiceError, string.Format(PnPCoreResources.Exception_WebTemplate_NotFound, name));
                 }
             }
             return null;

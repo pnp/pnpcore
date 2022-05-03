@@ -988,6 +988,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A site template with the name {0} could not be found.
+        /// </summary>
+        internal static string Exception_WebTemplate_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_WebTemplate_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid character in Xml String. Chr {0} is illegal.
         /// </summary>
         internal static string Exception_Xml_InvalidXmlCharacter {

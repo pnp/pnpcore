@@ -1651,7 +1651,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebTemplatesTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplates = context.Web.GetWebTemplates();
@@ -1664,7 +1664,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebTemplatesSpecificLanguageTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplates = context.Web.GetWebTemplates(1043);
@@ -1677,7 +1677,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebTemplatesBatchTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplates = await context.Web.GetWebTemplatesBatchAsync();
@@ -1691,7 +1691,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebTemplateByNameTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplate = await context.Web.GetWebTemplateByNameAsync("sts");
@@ -1704,7 +1704,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebTemplateByNameBatchTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplate = await context.Web.GetWebTemplateByNameBatchAsync("STS");
@@ -1715,11 +1715,11 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ClientException))]
         [TestMethod]
         public async Task GetWebTemplateByNameTestNoResultException()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var webTemplate = await context.Web.GetWebTemplateByNameAsync("PnP Rocks!");
