@@ -184,7 +184,7 @@ namespace PnP.Core
             Converters = { new JsonStringEnumConverter() },
             WriteIndented = false,
             // For some reason the naming policy is not applied on ExpandoObjects
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         /// <summary>
