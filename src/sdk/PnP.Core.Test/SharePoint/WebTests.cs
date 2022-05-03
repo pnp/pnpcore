@@ -1731,7 +1731,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebEventReceiversAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.LoadAsync(p => p.EventReceivers);
@@ -1744,7 +1744,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
@@ -1771,7 +1771,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebEventReceiversBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.LoadBatchAsync(p => p.EventReceivers);
@@ -1785,7 +1785,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
@@ -1813,7 +1813,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverAsyncNoEventTypeExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
@@ -1828,7 +1828,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverAsyncNoEventReceiverNameExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
@@ -1843,7 +1843,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverAsyncNoEventReceiverUrlExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
@@ -1859,7 +1859,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddWebEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var eventReceiverOptions = new EventReceiverOptions
