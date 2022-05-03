@@ -1105,6 +1105,116 @@ namespace PnP.Core.Model.SharePoint
         IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query);
         #endregion
 
+        #region Web Templates
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<List<IWebTemplate>> GetWebTemplatesAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        List<IWebTemplate> GetWebTemplates(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        Task<IWebTemplate> GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The template with the specified name, if available</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
