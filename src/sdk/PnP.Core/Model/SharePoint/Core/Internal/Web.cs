@@ -31,7 +31,7 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public Web()
         {
-            // Handler to construct the Add request for this list
+            // Handler to construct the Add request for this web
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -319,6 +319,8 @@ namespace PnP.Core.Model.SharePoint
         public INavigation Navigation { get => GetModelValue<INavigation>(); }
 
         public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IEventReceiverDefinitionCollection EventReceivers { get => GetModelCollectionValue<IEventReceiverDefinitionCollection>(); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
