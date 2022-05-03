@@ -41553,6 +41553,134 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetVivaDashboardAsync
   nameWithType: IWeb.GetVivaDashboardAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName(System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByName(String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName(System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName(System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByName(String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName*
+  name: GetWebTemplateByName
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName
+  nameWithType: IWeb.GetWebTemplateByName
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync(System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByNameAsync(String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync(System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync(System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByNameAsync(String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync*
+  name: GetWebTemplateByNameAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync
+  nameWithType: IWeb.GetWebTemplateByNameAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByNameBatch(Batch, String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(PnP.Core.Services.Batch, System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByNameBatch(Batch, String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByNameBatch(String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByNameBatch(String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch*
+  name: GetWebTemplateByNameBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch
+  nameWithType: IWeb.GetWebTemplateByNameBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByNameBatchAsync(Batch, String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(PnP.Core.Services.Batch, System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByNameBatchAsync(Batch, String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(System.String,System.Int32,System.Boolean)
+  name: GetWebTemplateByNameBatchAsync(String, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_System_String_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(System.String,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(System.String, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplateByNameBatchAsync(String, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync*
+  name: GetWebTemplateByNameBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync
+  nameWithType: IWeb.GetWebTemplateByNameBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplates(System.Int32,System.Boolean)
+  name: GetWebTemplates(Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplates(System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplates(System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplates(Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplates*
+  name: GetWebTemplates
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplates
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplates
+  nameWithType: IWeb.GetWebTemplates
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync(System.Int32,System.Boolean)
+  name: GetWebTemplatesAsync(Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync(System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync(System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplatesAsync(Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync*
+  name: GetWebTemplatesAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync
+  nameWithType: IWeb.GetWebTemplatesAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(PnP.Core.Services.Batch,System.Int32,System.Boolean)
+  name: GetWebTemplatesBatch(Batch, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_PnP_Core_Services_Batch_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(PnP.Core.Services.Batch,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(PnP.Core.Services.Batch, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplatesBatch(Batch, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(System.Int32,System.Boolean)
+  name: GetWebTemplatesBatch(Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplatesBatch(Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch*
+  name: GetWebTemplatesBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch
+  nameWithType: IWeb.GetWebTemplatesBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(PnP.Core.Services.Batch,System.Int32,System.Boolean)
+  name: GetWebTemplatesBatchAsync(Batch, Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_PnP_Core_Services_Batch_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(PnP.Core.Services.Batch,System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(PnP.Core.Services.Batch, System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplatesBatchAsync(Batch, Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(System.Int32,System.Boolean)
+  name: GetWebTemplatesBatchAsync(Int32, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_System_Int32_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(System.Int32,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(System.Int32, System.Boolean)
+  nameWithType: IWeb.GetWebTemplatesBatchAsync(Int32, Boolean)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync*
+  name: GetWebTemplatesBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync
+  nameWithType: IWeb.GetWebTemplatesBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures
   name: HasCommunicationSiteFeatures()
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeatures
@@ -42636,6 +42764,142 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync
   nameWithType: IWebCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWebTemplate
+  name: IWebTemplate
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html
+  commentId: T:PnP.Core.Model.SharePoint.IWebTemplate
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate
+  nameWithType: IWebTemplate
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Description
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.Description
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Description
+  nameWithType: IWebTemplate.Description
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Description
+  nameWithType: IWebTemplate.Description
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory
+  name: DisplayCategory
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_DisplayCategory
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory
+  nameWithType: IWebTemplate.DisplayCategory
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory*
+  name: DisplayCategory
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_DisplayCategory_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.DisplayCategory
+  nameWithType: IWebTemplate.DisplayCategory
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Id
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.Id
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Id
+  nameWithType: IWebTemplate.Id
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Id
+  nameWithType: IWebTemplate.Id
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl
+  name: ImageUrl
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_ImageUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl
+  nameWithType: IWebTemplate.ImageUrl
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl*
+  name: ImageUrl
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_ImageUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.ImageUrl
+  nameWithType: IWebTemplate.ImageUrl
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsHidden
+  name: IsHidden
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsHidden
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.IsHidden
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsHidden
+  nameWithType: IWebTemplate.IsHidden
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsHidden*
+  name: IsHidden
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsHidden_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.IsHidden
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsHidden
+  nameWithType: IWebTemplate.IsHidden
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly
+  name: IsRootWebOnly
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsRootWebOnly
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly
+  nameWithType: IWebTemplate.IsRootWebOnly
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly*
+  name: IsRootWebOnly
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsRootWebOnly_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsRootWebOnly
+  nameWithType: IWebTemplate.IsRootWebOnly
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly
+  name: IsSubWebOnly
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsSubWebOnly
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly
+  nameWithType: IWebTemplate.IsSubWebOnly
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly*
+  name: IsSubWebOnly
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_IsSubWebOnly_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.IsSubWebOnly
+  nameWithType: IWebTemplate.IsSubWebOnly
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Lcid
+  name: Lcid
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Lcid
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.Lcid
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Lcid
+  nameWithType: IWebTemplate.Lcid
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Lcid*
+  name: Lcid
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Lcid_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.Lcid
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Lcid
+  nameWithType: IWebTemplate.Lcid
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Name
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.Name
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Name
+  nameWithType: IWebTemplate.Name
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Name
+  nameWithType: IWebTemplate.Name
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Title
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Title
+  commentId: P:PnP.Core.Model.SharePoint.IWebTemplate.Title
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Title
+  nameWithType: IWebTemplate.Title
+- uid: PnP.Core.Model.SharePoint.IWebTemplate.Title*
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.IWebTemplate.html#PnP_Core_Model_SharePoint_IWebTemplate_Title_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebTemplate.Title
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebTemplate.Title
+  nameWithType: IWebTemplate.Title
 - uid: PnP.Core.Model.SharePoint.ListExperience
   name: ListExperience
   href: api/PnP.Core.Model.SharePoint.ListExperience.html

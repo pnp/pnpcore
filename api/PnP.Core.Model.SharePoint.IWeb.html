@@ -7564,6 +7564,854 @@ If there is no dashboard configured, returns null</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName(System.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1176" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByName(System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByName(String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByName_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>
+        <p><p>The template with the specified name, if available</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync(System.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1167" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameAsync(System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByNameAsync(String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameAsync_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IWebTemplate&gt; GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The template with the specified name, if available</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1214" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByNameBatch(Batch, String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;IWebTemplate&gt; GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The template with the specified name, if available</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(System.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1194" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatch(System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByNameBatch(String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatch_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;IWebTemplate&gt; GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The template with the specified name, if available</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1204" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(PnP.Core.Services.Batch,System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByNameBatchAsync(Batch, String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;IWebTemplate&gt;&gt; GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;&gt;
+        <p><p>The template with the specified name, if available</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(System.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1185" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_System_String_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplateByNameBatchAsync(System.String,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_System_String_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplateByNameBatchAsync(String, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplateByNameBatchAsync_System_String_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Return a specific web template based by a name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;IWebTemplate&gt;&gt; GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the template to retrieve</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplates(System.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1124" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplates*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplates(System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplates(Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplates_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IWebTemplate&gt; GetWebTemplates(int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">PnP.Core.Model.SharePoint.List</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync(System.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1116" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesAsync(System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplatesAsync(Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesAsync_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IWebTemplate&gt;&gt; GetWebTemplatesAsync(int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">PnP.Core.Model.SharePoint.List</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_PnP_Core_Services_Batch_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(PnP.Core.Services.Batch%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1158" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_PnP_Core_Services_Batch_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(PnP.Core.Services.Batch,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_PnP_Core_Services_Batch_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplatesBatch(Batch, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_PnP_Core_Services_Batch_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerableBatchResult&lt;IWebTemplate&gt; GetWebTemplatesBatch(Batch batch, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(System.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1140" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatch(System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplatesBatch(Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatch_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerableBatchResult&lt;IWebTemplate&gt; GetWebTemplatesBatch(int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_PnP_Core_Services_Batch_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1149" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_PnP_Core_Services_Batch_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(PnP.Core.Services.Batch,System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_PnP_Core_Services_Batch_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplatesBatchAsync(Batch, Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_PnP_Core_Services_Batch_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEnumerableBatchResult&lt;IWebTemplate&gt;&gt; GetWebTemplatesBatchAsync(Batch batch, int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(System.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1132" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_System_Int32_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetWebTemplatesBatchAsync(System.Int32,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_System_Int32_System_Boolean_" class="expander" data-toggle="collapse">GetWebTemplatesBatchAsync(Int32, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetWebTemplatesBatchAsync_System_Int32_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns a collection of site templates available for the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEnumerableBatchResult&lt;IWebTemplate&gt;&gt; GetWebTemplatesBatchAsync(int lcid = 1033, bool includeCrossLanguage = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">lcid</span>
+        <p><p>Specifies the LCID of the site templates to be retrieved.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">includeCrossLanguage</span>
+        <p><p>Specifies whether to include language-neutral site templates.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IWebTemplate.html">IWebTemplate</a>&gt;&gt;
+        <p><p>The list of webtemplates available on the current web</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeatures.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
