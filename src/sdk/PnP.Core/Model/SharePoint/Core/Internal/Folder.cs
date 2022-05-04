@@ -1,4 +1,5 @@
 using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -66,6 +67,19 @@ namespace PnP.Core.Model.SharePoint
         public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
+
+        internal string DriveItemId 
+        { 
+            get
+            {
+                if (PnPContext.Web.IsPropertyAvailable(p=>p.Id) && PnPContext.Site.IsPropertyAvailable(p=>p.Id) && !UniqueId.Equals(Guid.Empty))
+                {
+                    return DriveHelper.EncodeId(PnPContext.Site.Id, PnPContext.Web.Id, UniqueId);
+                }
+
+                return null;
+            }
+        }
 
         public IContentTypeIdCollection ContentTypeOrder { get => GetModelCollectionValue<IContentTypeIdCollection>(); }
 
