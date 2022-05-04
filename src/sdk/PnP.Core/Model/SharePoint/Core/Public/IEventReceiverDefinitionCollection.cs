@@ -60,6 +60,5 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-
     }
 }

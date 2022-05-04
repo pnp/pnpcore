@@ -9,18 +9,22 @@
         /// Type of event receiver to create.
         /// </summary>
         public EventReceiverType EventType { get; set; } = EventReceiverType.InvalidReceiver;
+
         /// <summary>
         /// Name of the event receiver.
         /// </summary>
         public string ReceiverName { get; set; }
+
         /// <summary>
         /// Url of the event receiver.
         /// </summary>
         public string ReceiverUrl { get; set; }
+
         /// <summary>
         /// Sequence number in which the event receiver will be executed.
         /// </summary>
         public int SequenceNumber { get; set; }
+
         /// <summary>
         /// The synchronization state for the event receiver.
         /// </summary>

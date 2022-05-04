@@ -1,12 +1,7 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
-using PnP.Core.Services.Core.CSOM;
-using PnP.Core.Services.Core.CSOM.Requests.Fields;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -72,23 +67,25 @@ namespace PnP.Core.Model.SharePoint
             return await newEventReceiver.AddBatchAsync(batch, additionalInfo).ConfigureAwait(false) as EventReceiverDefinition;
         }
 
-        private void VerifyEventReceiverOptions(EventReceiverOptions eventReceiverOptions)
+        private static void VerifyEventReceiverOptions(EventReceiverOptions eventReceiverOptions)
         {
             if (eventReceiverOptions.EventType == EventReceiverType.InvalidReceiver)
             {
-                throw new ArgumentNullException(nameof(eventReceiverOptions.EventType));
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
+                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.EventType)}");
             }
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverName))
             {
-                throw new ArgumentNullException(nameof(eventReceiverOptions.ReceiverName));
+                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverName)}");
             }
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverUrl))
             {
-                throw new ArgumentNullException(nameof(eventReceiverOptions.ReceiverUrl));
+                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverUrl)}");
             }
             if (eventReceiverOptions.SequenceNumber < 1)
             {
-                throw new ArgumentNullException(nameof(eventReceiverOptions.SequenceNumber));
+                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.SequenceNumber)}");
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
             }
         }
 

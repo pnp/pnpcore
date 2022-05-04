@@ -1749,7 +1749,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetListEventReceiversAsyncTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1763,7 +1763,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverAsyncTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1793,7 +1793,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetListEventReceiversBatchAsyncTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1810,7 +1810,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverBatchAsyncTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1841,7 +1841,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverAsyncNoEventTypeExceptionTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1860,7 +1860,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverAsyncNoEventReceiverNameExceptionTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1879,7 +1879,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverAsyncNoEventReceiverUrlExceptionTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
@@ -1899,7 +1899,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");

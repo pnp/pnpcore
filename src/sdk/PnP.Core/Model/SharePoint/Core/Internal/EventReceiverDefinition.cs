@@ -23,11 +23,11 @@ namespace PnP.Core.Model.SharePoint
                 // Build body
                 var eventReceiverCreationInformation = new
                 {
-                    EventType = eventReceiverOptions.EventType,
-                    ReceiverName = eventReceiverOptions.ReceiverName,
-                    ReceiverUrl = eventReceiverOptions.ReceiverUrl,
-                    SequenceNumber = eventReceiverOptions.SequenceNumber,
-                    Synchronization = eventReceiverOptions.Synchronization,
+                    eventReceiverOptions.EventType,
+                    eventReceiverOptions.ReceiverName,
+                    eventReceiverOptions.ReceiverUrl,
+                    eventReceiverOptions.SequenceNumber,
+                    eventReceiverOptions.Synchronization,
                     ReceiverAssembly = (string)null,
                     ReceiverClass = (string)null
                 }.AsExpando();
@@ -36,11 +36,13 @@ namespace PnP.Core.Model.SharePoint
                 EntityInfo entity = EntityManager.GetClassInfo(typeof(EventReceiverDefinition), this);
 
                 string endpointUrl = $"{entity.SharePointGet}";
-                var apiCall = new ApiCall(endpointUrl, ApiType.SPORest, body);
-                apiCall.Headers = new System.Collections.Generic.Dictionary<string, string>
+                var apiCall = new ApiCall(endpointUrl, ApiType.SPORest, body)
                 {
-                    { "Content-Type", "application/json; charset=utf-8" },
-                    { "Accept", "application/json" }
+                    Headers = new System.Collections.Generic.Dictionary<string, string>
+                    {
+                        { "Content-Type", "application/json; charset=utf-8" },
+                        { "Accept", "application/json" }
+                    }
                 };
                 return apiCall;
             };
