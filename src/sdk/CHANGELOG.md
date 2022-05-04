@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Teams Chat support #657 [MathijsVerbeeck - Mathijs Verbeeck]
 - Support for finding files in lists and folders using enumeration and wild card pattern matching #818 [dennisvanniel - Dennis van Niel]
 - Added capability to retrieve webtemplates (all) or by name #835 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added sharing capabilities (enumerate + add/delete) for files #834 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

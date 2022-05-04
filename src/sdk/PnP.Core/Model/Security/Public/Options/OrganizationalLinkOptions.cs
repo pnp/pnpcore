@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.Security
+﻿namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// Properties that can be set when creating a new Organizational Link

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace PnP.Core.Test.Security
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            TestCommon.Instance.Mocking = false;            
+            //TestCommon.Instance.Mocking = false;            
         }
 
         [TestMethod]
@@ -27,6 +28,15 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                var originalSharingLinks = await file.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                {
+                    Type = ShareType.Edit
+                };
+                
+                file.CreateOrganizationalSharingLink(shareLinkRequestOptions);
 
                 var permissions = file.GetShareLinks();
 
@@ -46,6 +56,15 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                var originalSharingLinks = await file.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                {
+                    Type = ShareType.Edit
+                };
+
+                file.CreateOrganizationalSharingLink(shareLinkRequestOptions);
 
                 file.DeleteShareLinks();
 
@@ -169,12 +188,30 @@ namespace PnP.Core.Test.Security
 
                 var originalSharingLinks = await file.GetShareLinksAsync();
 
+                // Schedule the page publishing
+                DateTime expirationDate = DateTime.MinValue;
+                if (!TestCommon.Instance.Mocking)
+                {
+                    expirationDate = DateTime.Now.AddDays(5);
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Ticks", expirationDate.Ticks.ToString() },
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+                else
+                {
+                    var properties = TestManager.GetProperties(context);
+                    expirationDate = new DateTime(long.Parse(properties["Ticks"]));
+                }
+
                 var shareLinkRequestOptions = new AnonymousLinkOptions()
                 {
                     Type = ShareType.View,
                     Password = "PnP Rocks!",
-                    ExpirationDateTime = DateTime.Now.AddDays(5)
-                };
+                    ExpirationDateTime = expirationDate
+                };                
+
                 var permission = file.CreateAnonymousSharingLink(shareLinkRequestOptions);
 
                 Assert.IsNotNull(permission.Id);
@@ -241,11 +278,14 @@ namespace PnP.Core.Test.Security
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
                 var originalSharingLinks = await file.GetShareLinksAsync();
+
+                var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
                 var driveRecipients = new List<IDriveRecipient>()
                 {
                     new DriveRecipient
                     {
-                        Email = context.Web.SiteUsers.FirstOrDefault().Mail
+                        Email = testUser.Mail
                     }
                 };
 
@@ -285,11 +325,13 @@ namespace PnP.Core.Test.Security
 
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
+                var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
                 var driveRecipients = new List<IDriveRecipient>()
                 {
                     new DriveRecipient
                     {
-                        Email = context.Web.SiteUsers.FirstOrDefault().Mail
+                        Email = testUser.Mail
                     }
                 };
 

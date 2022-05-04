@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -9,7 +8,8 @@ namespace PnP.Core.Model.Security
     /// The permission resource provides information about a sharing permission granted for a driveItem resource.
     /// Sharing permissions have a number of different forms. The permission resource represents these different forms through facets on the resource.
     /// Note: OneDrive for Business and SharePoint document libraries do not return the inheritedFrom property.
-    /// OneDrive for Business and SharePoint document libraries do not return the inheritedFrom property.grantedTo and grantedToIdentities will be deprecated going forward and the response will be migrated to grantedToV2 and grantedToIdentitiesV2 respectively under appropriate property names.
+    ///       grantedTo and grantedToIdentities will be deprecated going forward and the response will be migrated to grantedToV2 and grantedToIdentitiesV2 respectively under 
+    ///       appropriate property names.
     /// </summary>
     [ConcreteType(typeof(GraphPermission))]
     public interface IGraphPermission : IDataModel<IGraphPermission>

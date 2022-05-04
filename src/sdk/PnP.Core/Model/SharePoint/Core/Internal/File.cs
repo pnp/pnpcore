@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -20,7 +19,6 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
     [SharePointType("SP.File", Target = typeof(ListItem), Uri = "_api/Web/lists(guid'{List.Id}')/items({Parent.Id})/file")]
 
-    [GraphType(Uri = "sites/{Site.Id}/drive/items/{GraphId}")]
     internal sealed class File : BaseDataModel<IFile>, IFile
     {
         internal const string AddFileContentAdditionalInformationKey = "Content";
@@ -80,7 +78,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string UIVersionLabel { get => GetValue<string>(); set => SetValue(value); }
 
-        [GraphProperty("id")]
         public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string VroomDriveID { get => GetValue<string>(); set => SetValue(value); }
@@ -232,7 +229,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException("A user link of type 'CreateOnly' can only be created on Folder level");
             }
 
-            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count() == 0)
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
             {
                 throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
             }
