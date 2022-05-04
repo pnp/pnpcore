@@ -2042,11 +2042,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.AnonymousLinkOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.AnonymousLinkOptions.html",
+          "hash": "HLEvPl7C6IiDHLuvbmfqrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.GroupVisibility.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.GroupVisibility.html",
           "hash": "HnkhlsLnsBqMsPf/LTJ2KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IDriveRecipient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IDriveRecipient.html",
+          "hash": "PxpbgbAFROKInS0iGv837Q=="
         }
       },
       "is_incremental": false,
@@ -2071,6 +2095,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IGraphGroupCollection.html",
           "hash": "HPJh3h9LYxZ0s2vgsXs0Ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphPermission.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphPermission.html",
+          "hash": "3BBW5REQrnwe5ylf+0w7Yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphPermissionCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphPermissionCollection.html",
+          "hash": "qvzRgpd9BmxghiAcl76tDQ=="
         }
       },
       "is_incremental": false,
@@ -2119,6 +2167,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IIdentity.html",
           "hash": "d0mNfFxxD+XRe8J8NKZ0+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IIdentitySet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IIdentitySet.html",
+          "hash": "z0/yVhZQHauPJHxYaGusFg=="
         }
       },
       "is_incremental": false,
@@ -2198,6 +2258,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointIdentity.html",
+          "hash": "wMtoKdBI/3OGdWrbDnp/hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointIdentitySet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointIdentitySet.html",
+          "hash": "LnZs+4i8PO48E8aDeiBwwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.ISharePointPrincipal.yml",
       "output": {
         ".html": {
@@ -2246,6 +2330,66 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharingInvitation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharingInvitation.html",
+          "hash": "hYLO8GtGWMNSw3mMo/2ktQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharingLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharingLink.html",
+          "hash": "h9nGuEKzsNc+CwLf3GQEUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.InviteOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.InviteOptions.html",
+          "hash": "ZLncs8wXBPv31AzBTzYYKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.OrganizationalLinkOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.OrganizationalLinkOptions.html",
+          "hash": "8FOACNNkkGGGLN/3pgKDfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.PermissionRole.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.PermissionRole.html",
+          "hash": "/Dfmrlf8ql3FQRLre3+jxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.PrincipalType.yml",
       "output": {
         ".html": {
@@ -2258,11 +2402,47 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ShareScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ShareScope.html",
+          "hash": "UqvYMav+PMQl4X5OK4nXvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ShareType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ShareType.html",
+          "hash": "Af09NAD1Hbn/tUwFmkxcjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.UserLinkOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.UserLinkOptions.html",
+          "hash": "n0hp3bHu1wSd1Eujo5UuyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.html",
-          "hash": "zkOODC5tMfaTkp79iq4stw=="
+          "hash": "UyyPc0YqejPFH5kFn01+zQ=="
         }
       },
       "is_incremental": false,
@@ -3594,7 +3774,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "ejbYDwR7II6WQx0yGvvgDA=="
+          "hash": "mjIY0csDIK+woTCjkzeKew=="
         }
       },
       "is_incremental": false,
@@ -6618,7 +6798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "OMlye3SrsigctjTtQXSEeA=="
+          "hash": "mVGbX3jWEEjTgq1dHLVHHw=="
         }
       },
       "is_incremental": false,
@@ -8356,7 +8536,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 549,
+          "total_file_count": 564,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

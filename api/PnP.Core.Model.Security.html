@@ -86,9 +86,48 @@
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+    <table>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.AnonymousLinkOptions.html">AnonymousLinkOptions</a></p>
+          <p><p>Properties that can be set when creating a new Anonymous Link</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.InviteOptions.html">InviteOptions</a></p>
+          <p><p>Options that can be set when inviting users to an item</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.OrganizationalLinkOptions.html">OrganizationalLinkOptions</a></p>
+          <p><p>Properties that can be set when creating a new Organizational Link</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.UserLinkOptions.html">UserLinkOptions</a></p>
+          <p><p>Properties that can be set when creating a new User Link</p>
+</p>
+        </td>
+      </tr>
+    </table>
     <h3 id="interfaces">Interfaces
   </h3>
     <table>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a></p>
+          <p><p>Represents a person, group, or other recipient to share a drive item with using the invite action.</p>
+</p>
+        </td>
+      </tr>
       <tr>
         <td>
           <p><a class="xref" href="PnP.Core.Model.Security.IGraphGroup.html">IGraphGroup</a></p>
@@ -101,6 +140,23 @@
           <p><a class="xref" href="PnP.Core.Model.Security.IGraphGroupCollection.html">IGraphGroupCollection</a></p>
           <p><p>Public interface to define a collection of Microsoft 365 Groups</p>
 </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a></p>
+          <p><p>The permission resource provides information about a sharing permission granted for a driveItem resource.
+Sharing permissions have a number of different forms. The permission resource represents these different forms through facets on the resource.
+Note: OneDrive for Business and SharePoint document libraries do not return the inheritedFrom property.
+grantedTo and grantedToIdentities will be deprecated going forward and the response will be migrated to grantedToV2 and grantedToIdentitiesV2 respectively under
+appropriate property names.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.IGraphPermissionCollection.html">IGraphPermissionCollection</a></p>
+          <p>
         </td>
       </tr>
       <tr>
@@ -128,6 +184,13 @@
         <td>
           <p><a class="xref" href="PnP.Core.Model.Security.IIdentity.html">IIdentity</a></p>
           <p><p>The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.IIdentitySet.html">IIdentitySet</a></p>
+          <p><p>The identitySet resource is a keyed collection of identity resources.</p>
 </p>
         </td>
       </tr>
@@ -175,6 +238,20 @@
       </tr>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentity.html">ISharePointIdentity</a></p>
+          <p><p>This resource extends from the identity resource to provide the ability to expose SharePoint-specific information; for example, loginName or SharePoint IDs.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentitySet.html">ISharePointIdentitySet</a></p>
+          <p><p>Represents a keyed collection of sharePointIdentity resources. This resource extends from the identitySet resource to provide the ability to expose SharePoint-specific information to the user.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.Security.ISharePointPrincipal.html">ISharePointPrincipal</a></p>
           <p><p>Represents a SharePoint user or group that can be assigned permissions to control security.</p>
 </p>
@@ -201,6 +278,20 @@
 </p>
         </td>
       </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ISharingInvitation.html">ISharingInvitation</a></p>
+          <p><p>The SharingInvitation resource groups invitation-related data items into a single structure.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ISharingLink.html">ISharingLink</a></p>
+          <p><p>The sharingLink resource groups link-related data items into a single structure.</p>
+</p>
+        </td>
+      </tr>
     </table>
     <h3 id="enums">Enums
   </h3>
@@ -214,9 +305,28 @@
       </tr>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.PermissionRole.html">PermissionRole</a></p>
+          <p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.Security.PrincipalType.html">PrincipalType</a></p>
           <p><p>Specifies the type of a principal.
 This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ShareScope.html">ShareScope</a></p>
+          <p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.Security.ShareType.html">ShareType</a></p>
+          <p><p>Link types</p>
 </p>
         </td>
       </tr>
