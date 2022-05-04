@@ -552,6 +552,14 @@ namespace PnP.Core.Model.SharePoint
         public INavigation Navigation { get; }
 
         /// <summary>
+        /// Event Receivers defined in this web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
+        /// </summary>
+        public IEventReceiverDefinitionCollection EventReceivers { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
@@ -1260,11 +1268,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IUserResource DescriptionResource { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IEventReceiverDefinitionCollection EventReceivers { get; }
 
         ///// <summary>
         ///// To update...

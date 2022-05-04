@@ -1743,5 +1743,180 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
+
+        #region Event Receivers
+
+        [TestMethod]
+        public async Task GetListEventReceiversAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                Assert.IsNotNull(list.EventReceivers);
+                Assert.AreEqual(list.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await list.EventReceivers.AddAsync(eventReceiverOptions);
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.ItemAdding);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task GetListEventReceiversBatchAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                await context.Web.LoadBatchAsync(p => p.EventReceivers);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(list.EventReceivers);
+                Assert.AreEqual(list.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListEventReceiverBatchAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await list.EventReceivers.AddBatchAsync(eventReceiverOptions);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.ItemAdding);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventTypeExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverNameExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverUrlExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverName = "PnP Event Receiver Test"
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverName = "PnP Event Receiver Test",
+                    ReceiverUrl = "https://pnp.github.io",
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        #endregion
     }
 }

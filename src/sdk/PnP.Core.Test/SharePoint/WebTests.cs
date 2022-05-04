@@ -1725,5 +1725,154 @@ namespace PnP.Core.Test.SharePoint
                 var webTemplate = await context.Web.GetWebTemplateByNameAsync("PnP Rocks!");
             }
         }
+
+        #region Event Receivers
+
+        [TestMethod]
+        public async Task GetWebEventReceiversAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(p => p.EventReceivers);
+
+                Assert.IsNotNull(context.Web.EventReceivers);
+                Assert.AreEqual(context.Web.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.WebMoving);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task GetWebEventReceiversBatchAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadBatchAsync(p => p.EventReceivers);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(context.Web.EventReceivers);
+                Assert.AreEqual(context.Web.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebEventReceiverBatchAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Web.EventReceivers.AddBatchAsync(eventReceiverOptions);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.WebMoving);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventTypeExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverNameExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverUrlExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverName = "PnP Event Receiver Test"
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverName = "PnP Event Receiver Test",
+                    ReceiverUrl = "https://pnp.github.io",
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        #endregion
     }
 }
