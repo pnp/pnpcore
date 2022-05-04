@@ -8065,7 +8065,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/files-intro.html",
-          "hash": "oVH9PfLGgZlgkoyg6F92Bg=="
+          "hash": "2hSYfA8F7ib1alwe8XpRQA=="
         }
       },
       "is_incremental": false,
@@ -8089,7 +8089,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/folders-intro.html",
-          "hash": "kFlYp8uqUpycDGN2HXAADg=="
+          "hash": "0B/1/QlKS6g+tYVa3Gi1hQ=="
         }
       },
       "is_incremental": false,
@@ -8373,6 +8373,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/sites-copymovecontent.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/sites-copymovecontent.html",
+          "hash": "Woecn3nvAGs14Dd6gIXd9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/sites-hubsites.md",
       "output": {
         ".html": {
@@ -8521,7 +8533,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "lS/oIMIBkZDy5HPtQtXXWg=="
+          "hash": "oEgpc+sbLn6/Yc1MfKRNUQ=="
         }
       },
       "is_incremental": false,
@@ -8590,7 +8602,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 101,
+          "total_file_count": 102,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

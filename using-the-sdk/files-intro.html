@@ -319,6 +319,10 @@ await testDocument.CopyToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/doc
 // Move the file, overwrite if needed
 await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/document.docx&quot;, MoveOperations.Overwrite);
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You can also opt for an asynchronous bulk file/folder copy/move via the <code>CreateCopyJobs</code> methods on <code>ISite</code>. See <a href="sites-copymovecontent.html">here</a> for more details.</p>
+</div>
 <h2 id="getting-file-versions">Getting file versions</h2>
 <p>When versioning on a file is enabled a file can have multiple versions and PnP Core SDK can be used to work with the older file versions. Each file version is represented via an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a> in an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersionCollection.html">IFileVersionCollection</a>. Loading file versions can be done by requesting the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions">Versions property</a> of the file. Once you've an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a> you can also download that specific version of the file by using one of the GetContent methods as shown in the example.</p>
 <div class="NOTE">

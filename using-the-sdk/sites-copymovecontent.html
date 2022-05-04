@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Copying and moving files | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Copying and moving files | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/sites-copymovecontent.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="copying-and-moving-files">Copying and moving files</h1>
+
+<p>When you want to copy or move files between libraries then you synchronously copy or move file by file but that's not convenient for bulk transfers. If you need to move multiple files or folders then using the asynchronous copy/move functionality is strongly recommended.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with sites
+}
+</code></pre>
+<h2 id="copyingmoving-multiple-files">Copying/moving multiple files</h2>
+<p>To copy or move one or more files between libraries (libraries can live in different site collections) you need to use one of the <code>CreateCopyJobs</code> methods on <code>ISite</code>. You specify the copy/move operation via creating a <code>CopyMigrationOptions</code> instance: to move files you need to set <code>IsMoveMode</code> to <code>true</code>, otherwise a copy will be performed. As this copy/move feature works asynchronously in SharePoint Online using the <code>CreateCopyJobs</code> method will add the copy/move job to a queue and control is returned to your code. If you want to wait for a copy/move job to finish you do have two options: using one of the <code>EnsureCopyJobHasFinished</code> will make your code wait until the passed in job is done, alternatively you can also specify you want to wait for the job via the <code>waitUntilFinished</code> optional parameter of the <code>CreateCopyJobs</code> methods. Sometimes waiting for a job is not ideal as it's a blocking operation, for those cases you can use one of the <code>GetCopyJobProgress</code> methods to retrieve the status of individual copy/move requests from an earlier submitted copy/move job.</p>
+<pre><code class="lang-csharp">// Launch a job that will copy 2 documents to a new library
+string destinationAbsoluteUrl = $&quot;{context.Uri}/Target Library&quot;;
+var jobUris = new List&lt;string&gt; { context.Uri + &quot;/Shared Documents/document1.docx&quot;, context.Uri + &quot;/Shared Documents/document2.docx&quot; };
+var copyJobs = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+{
+    AllowSchemaMismatch = true,
+    AllowSmallerVersionLimitOnDestination = true,
+    IgnoreVersionHistory = true,
+    // Note: set IsMoveMode = true to move the file(s)
+    IsMoveMode = false,
+    BypassSharedLock = true,
+    ExcludeChildren = true,
+    NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+});
+
+// Option A: Wait for the async copy to be finished
+await context.Site.EnsureCopyJobHasFinishedAsync(copyJob);
+
+// Option B: check for the status of the copy/move job
+// The output from CreateCopyJobsAsync is a list of ICopyMigrationInfo, so when checking progress you might 
+// want to check all jobs
+foreach(var copyJob in copyJobs)
+{
+    var progress = await GetCopyJobProgressAsync(copyJob);
+    if (progress.JobState == MigrationJobState.None)
+    {
+        // The job is done!
+    }
+    else if (progress.JobState == MigrationJobState.Processing)
+    {
+        // The job is running
+    }
+    else 
+    {
+        // The job is queued
+    }
+}
+</code></pre>
+<h2 id="copyingmoving-folders">Copying/moving folders</h2>
+<p>Just like you can copy/move files you can also copy/move folders and the files living inside those folders. Instead of file names you simply specify folder names.</p>
+<h2 id="limitations">Limitations</h2>
+<p>The underlying used API is described <a href="https://docs.microsoft.com/en-us/sharepoint/dev/apis/spod-copy-move-api">here</a>, key limitations to be aware of are:</p>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File size</td>
+<td>A file must be less than 2 GB.</td>
+</tr>
+<tr>
+<td>Number of items</td>
+<td>No more than 30,000 items in a job.</td>
+</tr>
+<tr>
+<td>Total size of job</td>
+<td>Job size not to exceed 100 GB.</td>
+</tr>
+</tbody>
+</table>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Also do note that when using delegated permissions your account must have permissions on both target and source location. When using application permissions you need <code>Sites.FullControl.All</code> to enable all target locations. When using <code>Sites.Manage.All</code> you'll not be able to copy across site collections.</p>
+</div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
