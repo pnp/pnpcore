@@ -48,6 +48,8 @@
   items:
   - name: Overview
     href: sites-intro.md
+  - name: Copy/Move content
+    href: sites-copymovecontent.md
   - name: Hub Site
     href: sites-hubsites.md
     

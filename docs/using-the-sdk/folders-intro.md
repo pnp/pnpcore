@@ -115,3 +115,7 @@ await subFolder.DeleteAsync();
 ## Getting changes for a folder
 
 You can use the `GetChanges` methods on an `IFolder` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
+
+## Copying or moving folders
+
+To copy or move a folder you can use an asynchronous bulk file/folder copy/move via the `CreateCopyJobs` methods on `ISite`. See [here](sites-copymovecontent.md) for more details.
