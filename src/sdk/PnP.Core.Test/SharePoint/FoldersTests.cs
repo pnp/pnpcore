@@ -1083,6 +1083,47 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetGraphIdsFromFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get folder from web
+                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                Assert.IsNotNull(folder);
+
+                (string driveId, string driveItemId) = await (folder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Get folder from web with properties loaded
+                await folder.LoadAsync(p => p.Properties);
+
+                (driveId, driveItemId) = await (folder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Get folder from list
+                var list = await context.Web.Lists.GetByTitleAsync("Site Assets", p => p.RootFolder);
+
+                (driveId, driveItemId) = await (list.RootFolder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Sub folder from list root folder
+                await list.RootFolder.LoadAsync(p => p.Folders);
+
+                (driveId, driveItemId) = await (list.RootFolder.Folders.AsRequested().First() as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+            }
+        }
+
         #region Mock folder
         private async Task<string> AddMockFolderToSharedDocuments(int contextId, string folderName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {

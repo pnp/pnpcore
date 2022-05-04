@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (PnPContext.Web.IsPropertyAvailable(p=>p.Id) && PnPContext.Site.IsPropertyAvailable(p=>p.Id) && !UniqueId.Equals(Guid.Empty))
                 {
-                    return DriveHelper.EncodeId(PnPContext.Site.Id, PnPContext.Web.Id, UniqueId);
+                    return DriveHelper.EncodeDriveItemId(PnPContext.Site.Id, PnPContext.Web.Id, UniqueId);
                 }
 
                 return null;
@@ -470,6 +470,114 @@ namespace PnP.Core.Model.SharePoint
             return "^" + Regex.Escape(pattern).
                                Replace(@"\*", ".*").
                                Replace(@"\?", ".") + "$";
+        }
+
+        #endregion
+
+        #region Graph interop
+        internal async Task<(string driveId, string driveItemId)> GetGraphIdsAsync()
+        {
+            string driveId = null;
+            string driveItemId = null;
+
+            // DriveId
+            if (PnPContext.Web.IsPropertyAvailable(p => p.Id) && PnPContext.Site.IsPropertyAvailable(p => p.Id))
+            {
+                // We need to the id of the list hosting this folder, which can be obtained using different strategies
+
+                // Option A: try walking the parent tree to see if there's an IList
+                Guid docLibId = GetListIdFromFolder(this);
+
+                if (docLibId == Guid.Empty)
+                {
+                    // Option B: check if the ListItemAllFields property is loaded with the parent list property
+                    if (IsPropertyAvailable(p=>p.ListItemAllFields) && ListItemAllFields.IsPropertyAvailable(p=>p.ParentList))
+                    {
+                        docLibId = ListItemAllFields.ParentList.Id;
+                    }
+                }
+
+                if (docLibId == Guid.Empty)
+                {
+                    // Option C: get id from property bag
+                    if (IsPropertyAvailable(p => p.Properties))
+                    {
+                        docLibId = Folder.DiscoverDocLibId(Properties);
+                    }
+                }
+
+                if (docLibId == Guid.Empty)
+                {
+                    // Option D: load the needed information - requires server roundtrip
+                    var tempFolder = await GetAsync(p => p.Properties).ConfigureAwait(false);
+
+                    if (tempFolder.IsPropertyAvailable(p => p.Properties))
+                    {
+                        docLibId = Folder.DiscoverDocLibId(tempFolder.Properties);
+                    }
+                }
+
+                if (docLibId != Guid.Empty)
+                {
+                    driveId = DriveHelper.EncodeDriveId(PnPContext.Site.Id, PnPContext.Web.Id, docLibId);
+                }
+            }
+
+            // DriveItemId
+            if (!string.IsNullOrEmpty(driveId) && PnPContext.Web.IsPropertyAvailable(p => p.Id) && PnPContext.Site.IsPropertyAvailable(p => p.Id) && !UniqueId.Equals(Guid.Empty))
+            {
+                driveItemId = DriveHelper.EncodeDriveItemId(PnPContext.Site.Id, PnPContext.Web.Id, UniqueId);
+            }
+
+
+            return (driveId, driveItemId);
+        }
+
+        private static Guid DiscoverDocLibId(IPropertyValues properties)
+        {
+            string propertyToParse = null;
+            if (properties.Values.ContainsKey("vti_listid") && !string.IsNullOrEmpty(properties["vti_listid"].ToString()))
+            {
+                propertyToParse = properties["vti_listid"].ToString();
+            }
+            else if (properties.Values.ContainsKey("vti_listname") && !string.IsNullOrEmpty(properties["vti_listname"].ToString()))
+            {
+                propertyToParse = properties["vti_listname"].ToString();
+            }
+
+            if (!string.IsNullOrEmpty(propertyToParse))
+            {
+                if (Guid.TryParse(propertyToParse, out Guid listGuid))
+                {
+                    return listGuid;
+                }
+            }
+
+            return Guid.Empty;
+        }
+
+        private Guid GetListIdFromFolder(IDataModelParent folder)
+        {
+            if (folder != null)
+            {
+                if (folder.Parent != null && folder.Parent is List)
+                {
+                    return (folder.Parent as List).Id;
+                }
+                else
+                {
+                    if (folder.Parent == null)
+                    {
+                        return Guid.Empty;
+                    }
+                    else
+                    {
+                        return GetListIdFromFolder(folder.Parent);
+                    }
+                }
+            }
+
+            return Guid.Empty;
         }
 
         #endregion
