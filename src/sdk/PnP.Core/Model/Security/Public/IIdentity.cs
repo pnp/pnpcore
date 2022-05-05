@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Model.Security
+﻿using PnP.Core.Model.Teams;
+
+namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.
@@ -26,6 +28,6 @@
         /// <summary>
         /// In case the identity is a user this property contains the user type of the user
         /// </summary>
-        public string UserIdentityType { get; set; }
+        public TeamUserIdentityType UserIdentityType { get; set; }
     }
 }
