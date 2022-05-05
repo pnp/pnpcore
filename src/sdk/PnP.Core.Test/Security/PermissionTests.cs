@@ -446,7 +446,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task GetFolderShareLinksTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -466,7 +466,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task DeleteFolderShareLinksTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -496,7 +496,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkOrganizationTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -527,7 +527,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkAnonymousWithEditPermissionsAndPasswordTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -564,7 +564,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkAnonymousWithReadPermissionsAndPreventingDownloadExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -592,7 +592,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkAnonymousWithReadPermissionsAndAllowingDownloadIncludingPasswordTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -648,7 +648,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkAnonymousWithEditPermissionsAndReviewCapabilitiesExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -676,7 +676,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingLinkUsersReadPermissionsDownloadingBlockedTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -716,7 +716,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUsingInvitationTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -755,7 +755,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ShareFolderUserLinkNoRecipientsExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
