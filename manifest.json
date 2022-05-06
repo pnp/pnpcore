@@ -2118,7 +2118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IGraphPermissionCollection.html",
-          "hash": "qvzRgpd9BmxghiAcl76tDQ=="
+          "hash": "fthHp3pfoT9A4YYX6nuAqA=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.html",
-          "hash": "UyyPc0YqejPFH5kFn01+zQ=="
+          "hash": "VmUwJqieIBEfUMbKkVHQKA=="
         }
       },
       "is_incremental": false,
@@ -3918,7 +3918,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "busK10IBjJH3QVyWr4H3ag=="
+          "hash": "x38TGUJUY1HYWmYuKEIWBA=="
         }
       },
       "is_incremental": false,
