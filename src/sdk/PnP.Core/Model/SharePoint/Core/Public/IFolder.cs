@@ -297,14 +297,6 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        #region Graph interop 
-        /// <summary>
-        /// Obtains the driveid and driveitem id from a folder
-        /// </summary>
-        /// <returns>drive id + driveitemid</returns>
-        Task<(string driveId, string driveItemId)> GetGraphIdsAsync();
-        #endregion
-
         #region GraphPermissions
 
         /// <summary>

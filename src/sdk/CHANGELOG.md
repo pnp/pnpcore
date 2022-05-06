@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added capability to retrieve webtemplates (all) or by name #835 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added sharing capabilities (enumerate + add/delete) for files #834 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for Event Receivers (enumerate, add or delete) #835 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added sharing capabilities (enumerate + add/delete) for folders #841 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

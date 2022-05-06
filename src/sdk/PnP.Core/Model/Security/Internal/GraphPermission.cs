@@ -59,7 +59,7 @@ namespace PnP.Core.Model.Security
             else if (Parent.GetType() == typeof(Folder))
             {
                 var parent = (IFolder)Parent;
-                var (driveId, driveItemId) = await parent.GetGraphIdsAsync().ConfigureAwait(false);
+                var (driveId, driveItemId) = await (parent as Folder).GetGraphIdsAsync().ConfigureAwait(false);
 
                 var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);

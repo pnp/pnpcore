@@ -69,19 +69,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
-        internal string DriveItemId 
-        { 
-            get
-            {
-                if (PnPContext.Web.IsPropertyAvailable(p=>p.Id) && PnPContext.Site.IsPropertyAvailable(p=>p.Id) && !UniqueId.Equals(Guid.Empty))
-                {
-                    return DriveHelper.EncodeDriveItemId(PnPContext.Site.Id, PnPContext.Web.Id, UniqueId);
-                }
-
-                return null;
-            }
-        }
-
         public IContentTypeIdCollection ContentTypeOrder { get => GetModelCollectionValue<IContentTypeIdCollection>(); }
 
         public IContentTypeIdCollection UniqueContentTypeOrder { get => GetModelCollectionValue<IContentTypeIdCollection>(); }
@@ -476,7 +463,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Graph interop
-        public async Task<(string driveId, string driveItemId)> GetGraphIdsAsync()
+        internal async Task<(string driveId, string driveItemId)> GetGraphIdsAsync()
         {
             string driveId = null;
             string driveItemId = null;
@@ -503,7 +490,7 @@ namespace PnP.Core.Model.SharePoint
                     // Option C: get id from property bag
                     if (IsPropertyAvailable(p => p.Properties))
                     {
-                        docLibId = Folder.DiscoverDocLibId(Properties);
+                        docLibId = DiscoverDocLibId(Properties);
                     }
                 }
 
@@ -514,7 +501,7 @@ namespace PnP.Core.Model.SharePoint
 
                     if (tempFolder.IsPropertyAvailable(p => p.Properties))
                     {
-                        docLibId = Folder.DiscoverDocLibId(tempFolder.Properties);
+                        docLibId = DiscoverDocLibId(tempFolder.Properties);
                     }
                 }
 
