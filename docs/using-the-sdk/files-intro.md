@@ -81,7 +81,7 @@ Find files in a list:
 // Get a reference to a list
 IList documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
 
-// Get files from the list whose name contain "foo"
+// Get files from the list whose name contains "foo"
 List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
 ```
 
@@ -90,7 +90,7 @@ Find files in a folder:
 // Get a reference to a folder
 IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
 
-// Get files from folder whose name contain "bar"
+// Get files from folder whose name contains "bar"
 List<IFile> foundFiles = await documentsFolder.FindFilesAsync("bar");
 ```
 
