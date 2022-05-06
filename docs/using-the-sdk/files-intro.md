@@ -76,12 +76,22 @@ The FindFiles method accepts a string value which is matched to any part of the 
 >[!Note]
 > This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
 
-```csharp
-// Get files from list whose name contain "foo"
-List<IFile> foundFiles = await list.FindFilesAsync("foo");
+Find files in a list:
+```cshar
+// Get a reference to a list
+var documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
+
+// Get files from the list whose name contain "foo"
+List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
+```
+
+Find files in a folder:
+```cshar
+// Get a reference to a folder
+IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
 
 // Get files from folder whose name contain "bar"
-List<IFile> foundFiles = await folder.FindFilesAsync("bar");
+List<IFile> foundFiles = await documentsFolder.FindFilesAsync("bar");
 ```
 
 ## Getting file properties
