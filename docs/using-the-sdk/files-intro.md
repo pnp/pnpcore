@@ -67,24 +67,6 @@ foreach(var file in folder.Files.AsRequested())
 }
 ```
 
-### Finding files
-
-If you do not know the exact name and location of a file and need to find a file on any part of the filename, you can also perform a FindFiles operation. This operation can be perfomed on an [IFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_System_String_) or an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_System_String_)
-
-The FindFiles method accepts a string value which is matched to any part of the filename and returns all found matches.
-
->[!Note]
-> This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
-
-```csharp
-// Get files from list whose name contain "foo"
-var foundFiles = await list.FindFilesAsync("foo");
-
-// Get files from folder whose name contain "bar"
-var foundFiles = await folder.FindFilesAsync("bar");
-```
-
-
 ## Getting file properties
 
 A file in SharePoint has properties which can be requested by loading them on the [IFile](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html). Below snippet shows some ways on how to load file properties.
@@ -347,5 +329,3 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 
 var fileAccessExpirationTimeInDays = testDocument.InformationRightsManagementSettings.DocumentAccessExpireDays;
 ```
-
-## Getting file IRM settings
