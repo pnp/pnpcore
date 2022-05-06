@@ -49284,6 +49284,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannel.Email
   nameWithType: ITeamChannel.Email
+- uid: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder(Expression{Func{PnP.Core.Model.SharePoint.IFolder,System.Object}}[])
+  name: GetFilesFolder(Expression<Func<IFolder, Object>>[])
+  href: api/PnP.Core.Model.Teams.ITeamChannel.html#PnP_Core_Model_Teams_ITeamChannel_GetFilesFolder_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____
+  commentId: M:PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder(Expression{Func{PnP.Core.Model.SharePoint.IFolder,System.Object}}[])
+  name.vb: GetFilesFolder(Expression(Of Func(Of IFolder, Object))())
+  fullName: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder(Expression<Func<PnP.Core.Model.SharePoint.IFolder, System.Object>>[])
+  fullName.vb: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder(Expression(Of Func(Of PnP.Core.Model.SharePoint.IFolder, System.Object))())
+  nameWithType: ITeamChannel.GetFilesFolder(Expression<Func<IFolder, Object>>[])
+  nameWithType.vb: ITeamChannel.GetFilesFolder(Expression(Of Func(Of IFolder, Object))())
+- uid: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder*
+  name: GetFilesFolder
+  href: api/PnP.Core.Model.Teams.ITeamChannel.html#PnP_Core_Model_Teams_ITeamChannel_GetFilesFolder_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolder
+  nameWithType: ITeamChannel.GetFilesFolder
+- uid: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync(Expression{Func{PnP.Core.Model.SharePoint.IFolder,System.Object}}[])
+  name: GetFilesFolderAsync(Expression<Func<IFolder, Object>>[])
+  href: api/PnP.Core.Model.Teams.ITeamChannel.html#PnP_Core_Model_Teams_ITeamChannel_GetFilesFolderAsync_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____
+  commentId: M:PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync(Expression{Func{PnP.Core.Model.SharePoint.IFolder,System.Object}}[])
+  name.vb: GetFilesFolderAsync(Expression(Of Func(Of IFolder, Object))())
+  fullName: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync(Expression<Func<PnP.Core.Model.SharePoint.IFolder, System.Object>>[])
+  fullName.vb: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync(Expression(Of Func(Of PnP.Core.Model.SharePoint.IFolder, System.Object))())
+  nameWithType: ITeamChannel.GetFilesFolderAsync(Expression<Func<IFolder, Object>>[])
+  nameWithType.vb: ITeamChannel.GetFilesFolderAsync(Expression(Of Func(Of IFolder, Object))())
+- uid: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync*
+  name: GetFilesFolderAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannel.html#PnP_Core_Model_Teams_ITeamChannel_GetFilesFolderAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannel.GetFilesFolderAsync
+  nameWithType: ITeamChannel.GetFilesFolderAsync
 - uid: PnP.Core.Model.Teams.ITeamChannel.Id
   name: Id
   href: api/PnP.Core.Model.Teams.ITeamChannel.html#PnP_Core_Model_Teams_ITeamChannel_Id
