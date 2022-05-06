@@ -1,7 +1,12 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
 using System.Dynamic;
+using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
@@ -97,5 +102,30 @@ namespace PnP.Core.Model.Teams
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (string)value; }
         #endregion
+
+        #region Methods
+        public async Task<IFolder> GetFilesFolderAsync(params Expression<Func<IFolder, object>>[] expressions)
+        {
+            var apiCall = new ApiCall("teams/{Site.GroupId}/channels/{GraphId}/filesfolder", ApiType.Graph);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+            if (json.TryGetProperty("id", out JsonElement driveItemId))
+            {
+                var folderUniqueId = DriveHelper.DecodeDriveItemId(driveItemId.GetString());
+
+                return await PnPContext.Web.GetFolderByIdAsync(folderUniqueId, expressions).ConfigureAwait(false);
+            }
+
+            return null;
+        }
+
+        public IFolder GetFilesFolder(params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return GetFilesFolderAsync(expressions).GetAwaiter().GetResult();
+        }
+        #endregion
+
     }
 }

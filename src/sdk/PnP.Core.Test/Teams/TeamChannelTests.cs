@@ -4,6 +4,7 @@ using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -149,6 +150,21 @@ namespace PnP.Core.Test.Teams
 
                 var channel = team.Channels.AddBatch("");
 
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var folder = team.Channels.AsRequested().First().GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
             }
         }
     }

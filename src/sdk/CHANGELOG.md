@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed wrong ConfigureAwait usage. #824 [s-KaiNet - Sergei Sergeev]
 - Allow custom Accept header with ApiRequest #829 [koenzomers - Koen Zomers]
 - Fix to enable deleting an attachment with special characters in the file name #830 [jansenbe - Bert Jansen]
+- Added `GetFilesFolder` methods on `ITeamChannel` to provide an easy access point to the SharePoint File capabilities starting from a Team channel #843 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

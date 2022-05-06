@@ -1,5 +1,8 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
@@ -59,5 +62,19 @@ namespace PnP.Core.Model.Teams
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITeamChatMessageCollection Messages { get; }
+
+        /// <summary>
+        /// Gets the <see cref="IFolder"/> hosting the files of this channel
+        /// </summary>
+        /// <param name="expressions">Properties of the folder to load</param>
+        /// <returns>Folder hosting the files of this channel</returns>
+        public Task<IFolder> GetFilesFolderAsync(params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Gets the <see cref="IFolder"/> hosting the files of this channel
+        /// </summary>
+        /// <param name="expressions">Properties of the folder to load</param>
+        /// <returns>Folder hosting the files of this channel</returns>
+        public IFolder GetFilesFolder(params Expression<Func<IFolder, object>>[] expressions);
     }
 }
