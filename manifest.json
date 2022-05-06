@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IIdentity.html",
-          "hash": "d0mNfFxxD+XRe8J8NKZ0+Q=="
+          "hash": "NuB0BVBYzcCRHc6FsvEGxA=="
         }
       },
       "is_incremental": false,
@@ -5690,11 +5690,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageMentionOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ChatMessageMentionOptions.html",
+          "hash": "2qEg66LRk65SF0hF1Lx81g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ChatMessageOptions.html",
-          "hash": "OPaTcqsiMTiHXPagBHv67w=="
+          "hash": "R5U9ngjbplrNr9Paj9yllg=="
         }
       },
       "is_incremental": false,
@@ -5730,7 +5742,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "fJvt8ISmULozmbwQgrWUgA=="
+          "hash": "GzxI3+T4GwgMDy5wids/Nw=="
         }
       },
       "is_incremental": false,
@@ -5922,7 +5934,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageMention.html",
-          "hash": "Vi5Mls4axmDG/6KhE2gnUw=="
+          "hash": "XDvq8n+7Ok/jAZVgBOcPfg=="
         }
       },
       "is_incremental": false,
@@ -5935,6 +5947,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageMentionCollection.html",
           "hash": "rKU1EtmrHSIPMFGtB85GkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageMentionedIdentitySet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageMentionedIdentitySet.html",
+          "hash": "LD57g0DauN2JGXMivl9knA=="
         }
       },
       "is_incremental": false,
@@ -5971,6 +5995,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamClassSettings.html",
           "hash": "oGibrYN1tiT1d2vd9O+8bg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamConversationIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamConversationIdentity.html",
+          "hash": "2tl0sOB5BZaysD5u/KAHhA=="
         }
       },
       "is_incremental": false,
@@ -6050,11 +6086,83 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamTag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamTag.html",
+          "hash": "YmXvnfZ7zJRKFNFktqYs5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamTagCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamTagCollection.html",
+          "hash": "mhqcBtJsdeYEXTgpz6dTOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamTagIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamTagIdentity.html",
+          "hash": "cJhrZg8muEV9w9XVY8Zosw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamTagMember.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamTagMember.html",
+          "hash": "BCxWcxPb/kBXFKa5Af1NKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamTagMemberCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamTagMemberCollection.html",
+          "hash": "nJhNqMIr/n0YR4xMC7cpBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.html",
           "hash": "u81bZnA1iyoNPBbkg9T94g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamConversationIdentityType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamConversationIdentityType.html",
+          "hash": "gGzoWz/Ova0uWyO0oFGiSA=="
         }
       },
       "is_incremental": false,
@@ -6079,6 +6187,54 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.TeamSpecialization.html",
           "hash": "gvsA0xOhb1UnM3UlshoIkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamTagOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamTagOptions.html",
+          "hash": "e4edyXyI8GWG2BLhu98WqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamTagType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamTagType.html",
+          "hash": "KG+bK56ntCMD4Hjen/A3dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamTagUserOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamTagUserOptions.html",
+          "hash": "8EsJJqrap9bxg+WkdVNs6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamUserIdentityType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamUserIdentityType.html",
+          "hash": "Z5v8gNjfcfPr7SrIfTtBkg=="
         }
       },
       "is_incremental": false,
@@ -6114,7 +6270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "68PR/UMQNYzxb9rs6qrR6Q=="
+          "hash": "4ucTJvwSLd4aBN5XnsTCSA=="
         }
       },
       "is_incremental": false,
@@ -6858,7 +7014,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "hyIVhoaIaPq+eocfqJNCAw=="
+          "hash": "AFoSaLxjVa3dFw4G/G0+2w=="
         }
       },
       "is_incremental": false,
@@ -8608,7 +8764,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 569,
+          "total_file_count": 582,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
