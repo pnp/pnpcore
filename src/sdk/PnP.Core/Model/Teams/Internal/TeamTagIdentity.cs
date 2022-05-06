@@ -1,6 +1,4 @@
-﻿using PnP.Core.Model.Security;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
     internal sealed class TeamTagIdentity : BaseDataModel<ITeamTagIdentity>, ITeamTagIdentity

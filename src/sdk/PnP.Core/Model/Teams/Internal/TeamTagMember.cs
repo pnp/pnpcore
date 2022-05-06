@@ -1,9 +1,4 @@
-﻿using PnP.Core.Model.Security;
-using PnP.Core.Services;
-using System.Dynamic;
-using System.Text.Json;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = tagUri, LinqGet = baseUri, Beta = true)]
     internal sealed class TeamTagMember : BaseDataModel<ITeamTagMember>, ITeamTagMember

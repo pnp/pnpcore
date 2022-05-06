@@ -1093,7 +1093,7 @@ namespace PnP.Core.Test.Teams
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.LoadAsync(y => y.SiteUsers);
-                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await userToMention.AsGraphUserAsync();
 
                 var team = await context.Team.GetAsync(o => o.PrimaryChannel);
@@ -1164,9 +1164,9 @@ namespace PnP.Core.Test.Teams
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.LoadAsync(y => y.SiteUsers);
-                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await userToMention.AsGraphUserAsync();
-                var userToMention2 = context.Web.SiteUsers.AsRequested().Skip(1).FirstOrDefault();
+                var userToMention2 = context.Web.SiteUsers.AsRequested().Skip(1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
                 var graphUser2 = await userToMention2.AsGraphUserAsync();
 
                 var team = await context.Team.GetAsync(o => o.PrimaryChannel);
@@ -1386,7 +1386,7 @@ namespace PnP.Core.Test.Teams
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.LoadAsync(y => y.SiteUsers);
-                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await userToMention.AsGraphUserAsync();
 
                 var team = await context.Team.GetAsync(o => o.PrimaryChannel);

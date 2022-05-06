@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
-    /// 
+    /// Chat message mention options
     /// </summary>
     public class ChatMessageMentionOptions
     {
