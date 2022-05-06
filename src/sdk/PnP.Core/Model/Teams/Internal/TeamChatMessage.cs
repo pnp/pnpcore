@@ -60,18 +60,76 @@ namespace PnP.Core.Model.Teams
                     body.hostedContents = hostedContentList;
                 }
 
+                if (Mentions.Length > 0)
+                {
+                    dynamic mentionList = new List<dynamic>();
+                    foreach (var mention in Mentions)
+                    {
+                        dynamic ment = new ExpandoObject();
+                        ment.id = mention.Id;
+                        ment.mentionText = mention.MentionText;
+                        ment.mentioned = CreateMentionedObject(mention.Mentioned);
+                        mentionList.Add(ment);
+                    }
+                    body.mentions = mentionList;
+                }
+
                 if (!string.IsNullOrEmpty(Subject))
                 {
                     body.subject = Subject;
                 }
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
+        }
+
+        private dynamic CreateMentionedObject(ITeamChatMessageMentionedIdentitySet mentioned)
+        {
+            dynamic mentionedObj = new ExpandoObject();
+
+            if (mentioned.User.HasValue(PnPConstants.MetaDataId))
+            {
+                dynamic user = new ExpandoObject();
+                user.id = mentioned.User.Id;
+                user.displayName = mentioned.User.DisplayName;
+                user.userIdentityType = mentioned.User.UserIdentityType.ToString();
+                mentionedObj.user = user;
+            }
+
+            if (mentioned.Application.HasValue(PnPConstants.MetaDataId))
+            {
+                dynamic application = new ExpandoObject();
+                application.id = mentioned.Application.Id;
+                application.displayName = mentioned.Application.DisplayName;
+                mentionedObj.application = application;
+            }
+
+            if (mentioned.Conversation.HasValue(PnPConstants.MetaDataId))
+            {
+                dynamic conversation = new ExpandoObject();
+                conversation.id = mentioned.Conversation.Id;
+                if (mentioned.Conversation.HasValue("DisplayName"))
+                {
+                    conversation.displayName = mentioned.Conversation.DisplayName;
+                }
+                conversation.conversationIdentityType = mentioned.Conversation.ConversationIdentityType.ToString();
+                mentionedObj.conversation = conversation;
+            }
+
+            if (mentioned.Tag.HasValue(PnPConstants.MetaDataId))
+            {
+                dynamic tag = new ExpandoObject();
+                tag.id = mentioned.Tag.Id;
+                tag.displayName = mentioned.Tag.DisplayName;
+                mentionedObj.tag = tag;
+            }
+
+            return mentionedObj;
         }
         #endregion
 
@@ -106,7 +164,7 @@ namespace PnP.Core.Model.Teams
 
         public ITeamChatMessageReactionCollection Reactions { get => GetModelCollectionValue<ITeamChatMessageReactionCollection>(); }
 
-        public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); }
+        public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); set => SetModelValue(value); }
 
         public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); set => SetModelValue(value); }
 

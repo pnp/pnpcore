@@ -31,5 +31,10 @@ namespace PnP.Core.Model.Teams
         /// Message hosted content options
         /// </summary>
         public List<ChatMessageHostedContentOptions> HostedContents { get; private set; } = new List<ChatMessageHostedContentOptions>();
+
+        /// <summary>
+        /// Mention options
+        /// </summary>
+        public List<ChatMessageMentionOptions> Mentions { get; private set; } = new List<ChatMessageMentionOptions>();
     }
 }

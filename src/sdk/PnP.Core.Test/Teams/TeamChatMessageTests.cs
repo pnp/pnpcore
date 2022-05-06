@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
+using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -1083,6 +1085,482 @@ namespace PnP.Core.Test.Teams
 
             }
         }
+
+        [TestMethod]
+        public async Task AddChatMessageWithUserMentionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(y => y.SiteUsers);
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var graphUser = await userToMention.AsGraphUserAsync();
+
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks!<br/>This is a user mention test<br/>Mention 1: <at id=\"0\">User 1</at>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                    {
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 0,
+                            MentionText = "User 1",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                User = new Identity
+                                {
+                                    DisplayName = userToMention.Title,
+                                    Id = graphUser.Id,
+                                    UserIdentityType = TeamUserIdentityType.aadUser
+                                }
+                            }
+                        }
+                    }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() > 0);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageWithMultipleUserMentionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(y => y.SiteUsers);
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var graphUser = await userToMention.AsGraphUserAsync();
+                var userToMention2 = context.Web.SiteUsers.AsRequested().Skip(1).FirstOrDefault();
+                var graphUser2 = await userToMention2.AsGraphUserAsync();
+
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks! <br/>This is a multiple user mention test<br/>Mention 1: <at id=\"0\">User 1</at><br/>Mention 2: <at id=\"1\">User 2</at>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                    {
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 0,
+                            MentionText = "User 1",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                User = new Identity
+                                {
+                                    DisplayName = userToMention.Title,
+                                    Id = graphUser.Id,
+                                    UserIdentityType = TeamUserIdentityType.aadUser
+                                }
+                            }
+                        },
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 1,
+                            MentionText = "User 2",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                User = new Identity
+                                {
+                                    DisplayName = userToMention2.Title,
+                                    Id = graphUser2.Id,
+                                    UserIdentityType = TeamUserIdentityType.aadUser
+                                }
+                            }
+                        }
+                    }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() == 2);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageWithChannelMentionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks! <br/>This is a channel mention test <br/>Mention 1: <at id=\"0\">Channel</at>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                    {
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 0,
+                            MentionText = "Channel",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                Conversation = new TeamConversationIdentity
+                                {
+                                    ConversationIdentityType = TeamConversationIdentityType.Channel,
+                                    Id = channel.Id
+                                }
+                            }
+                        }
+                    }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() > 0);
+                Assert.IsTrue(message.Mentions.FirstOrDefault().Mentioned.Conversation.Id == channel.Id);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddChatMessageWithTeamMentionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks! <br/>This is a Bot mention test <br/>Mention 1: <at id=\"0\">Bot</at>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                {
+                    new ChatMessageMentionOptions
+                    {
+                        Id = 0,
+                        MentionText = "Bot",
+                        Mentioned = new TeamChatMessageMentionedIdentitySet
+                        {
+                            Conversation = new TeamConversationIdentity
+                            {
+                                ConversationIdentityType = TeamConversationIdentityType.Team,
+                                Id = team.Id.ToString()
+                            }
+                        }
+                    }
+                }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() > 0);
+                Assert.IsTrue(message.Mentions.FirstOrDefault().Mentioned.Conversation.Id == team.Id.ToString());
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageWithChannelAndUserMentionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(y => y.SiteUsers);
+                var userToMention = context.Web.SiteUsers.AsRequested().FirstOrDefault();
+                var graphUser = await userToMention.AsGraphUserAsync();
+
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks! <br/>This is a channel and user mention test <br/>Mention 1: <at id=\"0\">Channel</at><br/>Mention 2: <at id=\"1\">User</a>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                    {
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 0,
+                            MentionText = "Channel",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                Conversation = new TeamConversationIdentity
+                                {
+                                    ConversationIdentityType = TeamConversationIdentityType.Channel,
+                                    Id = channel.Id
+                                }
+                            }
+                        },
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 1,
+                            MentionText = "User",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                User = new Identity
+                                {
+                                    DisplayName = userToMention.Title,
+                                    Id = graphUser.Id,
+                                    UserIdentityType = TeamUserIdentityType.aadUser
+                                }
+                            }
+                        }
+                    }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() > 0);
+                Assert.IsTrue(message.Mentions.FirstOrDefault().Mentioned.Conversation.Id == channel.Id);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageWithTagMentionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                //Before executing this test, make sure that a tag is available on the team
+                
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel, o => o.Tags);
+                bool hasToDelete = false;
+                ITeamTag tag = null;
+                if (team.Tags.Count() == 0)
+                {
+                    await team.LoadAsync(y => y.Members);
+                    var userId = team.Members.AsRequested().First().Id;
+
+                    var teamTagOptions = new TeamTagOptions
+                    {
+                        DisplayName = "PnP Tag",
+                        Members = new List<TeamTagUserOptions>
+                        {
+                            new TeamTagUserOptions
+                            {
+                                UserId = userId
+                            }
+                        }
+                    };
+
+                    tag = await team.Tags.AddAsync(teamTagOptions);
+                    hasToDelete = true;
+                }
+                else
+                {
+                    tag = team.Tags.FirstOrDefault();
+                }
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                var body = $"Hello, PnP Rocks!<br/>This is a Tag mention test<br/>Mention 1: <at id=\"0\">Tag 1</at>";
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Mentions =
+                    {
+                        new ChatMessageMentionOptions
+                        {
+                            Id = 0,
+                            MentionText = "Tag 1",
+                            Mentioned = new TeamChatMessageMentionedIdentitySet
+                            {
+                                Tag = new TeamTagIdentity
+                                {
+                                    Id = tag.Id,
+                                    DisplayName = tag.DisplayName
+                                }
+                            }
+                        }
+                    }
+                };
+
+                var chatMessage = await chatMessages.AddAsync(messageOptions);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().Where(y => y.Id == chatMessage.Id).FirstOrDefault();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+                Assert.IsNotNull(message.Mentions);
+                Assert.IsTrue(message.Mentions.Count() > 0);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+                if (hasToDelete)
+                    await tag.DeleteAsync();
+            }
+        }
+
 
         //TODO: There is no option to add reactions within a chat message in the SDK therefore cannot automate the testing for this at this time.
         //[TestMethod]
