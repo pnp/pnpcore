@@ -167,5 +167,35 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(folder.Requested);
             }
         }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromPrivateChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var folder = team.Channels.AsRequested().First(p=>p.MembershipType == TeamChannelMembershipType.Private).GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromSharedChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var folder = team.Channels.AsRequested().First(p => p.MembershipType == TeamChannelMembershipType.Private).GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
+            }
+        }
     }
 }

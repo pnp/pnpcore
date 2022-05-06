@@ -16,6 +16,11 @@
         Private,
 
         /// <summary>
+        /// Shared channel membership
+        /// </summary>
+        Shared,
+
+        /// <summary>
         /// Reserved for future use
         /// </summary>
         UnknownFutureValue,

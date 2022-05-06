@@ -115,7 +115,37 @@ namespace PnP.Core.Model.Teams
             {
                 var folderUniqueId = DriveHelper.DecodeDriveItemId(driveItemId.GetString());
 
-                return await PnPContext.Web.GetFolderByIdAsync(folderUniqueId, expressions).ConfigureAwait(false);
+                if (json.TryGetProperty("parentReference", out JsonElement parentReference) && parentReference.TryGetProperty("driveId", out JsonElement driveId))
+                {
+                    (Guid siteId, Guid webId, _) = DriveHelper.DecodeDriveId(driveId.GetString());
+
+                    if (PnPContext.Site.Id == siteId && PnPContext.Web.Id == webId)
+                    {
+                        return await PnPContext.Web.GetFolderByIdAsync(folderUniqueId, expressions).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        // The files live in another site collection because channel is a private or shared one
+                        if (json.TryGetProperty("webUrl", out JsonElement webUrl))
+                        {
+                            // drop the library and folder names to get the web url:
+                            // https://microsoft.sharepoint.com/teams/ExtensibilityandFundamentals/Shared%20Documents/Documentation%20Planning means
+                            // https://microsoft.sharepoint.com/teams/ExtensibilityandFundamentals
+
+                            string contextUrl = "";
+
+                            var webUrlSplit = webUrl.ToString().Split(new char[] { '/' }, StringSplitOptions.None);
+
+                            for (int i = 0; i < webUrlSplit.Length - 2; i++)
+                            {
+                                contextUrl = contextUrl + webUrlSplit[i] + "/";
+                            }
+
+                            var newContext = await PnPContext.CloneAsync(new Uri(contextUrl)).ConfigureAwait(false);
+                            return await newContext.Web.GetFolderByIdAsync(folderUniqueId, expressions).ConfigureAwait(false);
+                        }
+                    }
+                }
             }
 
             return null;
