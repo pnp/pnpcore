@@ -2577,7 +2577,7 @@
   "api/PnP.Core.Model.Teams.TeamChannelMembershipType.html": {
     "href": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.html",
     "title": "Enum TeamChannelMembershipType | PnP Core SDK",
-    "keywords": "Enum TeamChannelMembershipType Defines the Membership Type for a Team Channel Namespace : PnP.Core.Model.Teams Assembly : PnP.Core.dll Syntax public enum TeamChannelMembershipType : int Private Private channel membership Standard Standard channel membership UnknownFutureValue Reserved for future use"
+    "keywords": "Enum TeamChannelMembershipType Defines the Membership Type for a Team Channel Namespace : PnP.Core.Model.Teams Assembly : PnP.Core.dll Syntax public enum TeamChannelMembershipType : int Private Private channel membership Shared Shared channel membership Standard Standard channel membership UnknownFutureValue Reserved for future use"
   },
   "api/PnP.Core.Model.Teams.TeamConversationIdentityType.html": {
     "href": "api/PnP.Core.Model.Teams.TeamConversationIdentityType.html",

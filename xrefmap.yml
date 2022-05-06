@@ -51843,6 +51843,12 @@ references:
   commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.Private
   fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.Private
   nameWithType: TeamChannelMembershipType.Private
+- uid: PnP.Core.Model.Teams.TeamChannelMembershipType.Shared
+  name: Shared
+  href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html#PnP_Core_Model_Teams_TeamChannelMembershipType_Shared
+  commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.Shared
+  fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.Shared
+  nameWithType: TeamChannelMembershipType.Shared
 - uid: PnP.Core.Model.Teams.TeamChannelMembershipType.Standard
   name: Standard
   href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html#PnP_Core_Model_Teams_TeamChannelMembershipType_Standard
