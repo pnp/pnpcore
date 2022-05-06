@@ -443,6 +443,338 @@ namespace PnP.Core.Test.Security
             await TestAssets.CleanupTestDocumentAsync(2);
         }
 
+        [TestMethod]
+        public async Task GetFolderShareLinksTest()
+        {
+            //TestCommon.Instance.Mocking = false;
 
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+                
+                var folder = await list.RootFolder.AddFolderAsync("GetFolderShareLinksTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                Assert.IsNotNull(originalSharingLinks);
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteFolderShareLinksTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("DeleteFolderShareLinksTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                {
+                    Type = ShareType.Edit
+                };
+
+                folder.CreateOrganizationalSharingLink(shareLinkRequestOptions);
+
+                folder.DeleteShareLinks();
+
+                var permissions = folder.GetShareLinks();
+                Assert.AreEqual(0, permissions.Count());
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkOrganizationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkOrganizationTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                {
+                    Type = ShareType.Edit
+                };
+                var permission = folder.CreateOrganizationalSharingLink(shareLinkRequestOptions);
+
+                Assert.IsNotNull(permission.Id);
+                Assert.AreEqual(permission.Link.Scope, ShareScope.Organization);
+
+                var newSharingLinks = await folder.GetShareLinksAsync();
+
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkAnonymousWithEditPermissionsAndPasswordTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkAnonymousWithEditPermissionsAndPasswordTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new AnonymousLinkOptions()
+                {
+                    Type = ShareType.Edit,
+                    Password = "PnP Rocks!"
+                };
+                var permission = folder.CreateAnonymousSharingLink(shareLinkRequestOptions);
+
+                Assert.IsNotNull(permission.Id);
+                Assert.IsNotNull(permission.Link.WebUrl);
+
+                Assert.AreEqual(permission.Link.Type, ShareType.Edit);
+                Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
+                Assert.AreEqual(permission.Link.PreventsDownload, false);
+                Assert.AreEqual(permission.HasPassword, true);
+
+                var newSharingLinks = await folder.GetShareLinksAsync();
+
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkAnonymousWithReadPermissionsAndPreventingDownloadExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkAnonymousWithReadPermissionsAndPreventingDownloadExceptionTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new AnonymousLinkOptions()
+                {
+                    Type = ShareType.BlocksDownload
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+                {
+                    await folder.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
+                });
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkAnonymousWithReadPermissionsAndAllowingDownloadIncludingPasswordTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkAnonymousWithReadPermissionsAndAllowingDownloadIncludingPasswordTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                // Schedule the page publishing
+                DateTime expirationDate = DateTime.MinValue;
+                if (!TestCommon.Instance.Mocking)
+                {
+                    expirationDate = DateTime.Now.AddDays(5);
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                    {
+                        { "Ticks", expirationDate.Ticks.ToString() },
+                    };
+                    TestManager.SaveProperties(context, properties);
+                }
+                else
+                {
+                    var properties = TestManager.GetProperties(context);
+                    expirationDate = new DateTime(long.Parse(properties["Ticks"]));
+                }
+
+                var shareLinkRequestOptions = new AnonymousLinkOptions()
+                {
+                    Type = ShareType.View,
+                    Password = "PnP Rocks!",
+                    ExpirationDateTime = expirationDate
+                };
+
+                var permission = folder.CreateAnonymousSharingLink(shareLinkRequestOptions);
+
+                Assert.IsNotNull(permission.Id);
+                Assert.IsNotNull(permission.Link.WebUrl);
+
+                Assert.AreEqual(permission.Link.Type, ShareType.View);
+                Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
+                Assert.AreEqual(permission.Link.PreventsDownload, false);
+                Assert.AreEqual(permission.HasPassword, true);
+                Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                var newSharingLinks = await folder.GetShareLinksAsync();
+
+                Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkAnonymousWithEditPermissionsAndReviewCapabilitiesExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkAnonymousWithEditPermissionsAndReviewCapabilitiesExceptionTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var shareLinkRequestOptions = new AnonymousLinkOptions()
+                {
+                    Type = ShareType.Review
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+                {
+                    await folder.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
+                });
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingLinkUsersReadPermissionsDownloadingBlockedTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkUsersReadPermissionsDownloadingBlockedTest");
+
+                var originalSharingLinks = await folder.GetShareLinksAsync();
+
+                var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                var driveRecipients = new List<IDriveRecipient>()
+                {
+                    new DriveRecipient
+                    {
+                        Email = testUser.Mail
+                    }
+                };
+
+                var shareLinkRequestOptions = new UserLinkOptions()
+                {
+                    Type = ShareType.BlocksDownload,
+                    Recipients = driveRecipients
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+                {
+                    await folder.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+                });
+
+                await folder.DeleteAsync();
+            }
+
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUsingInvitationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingInvitationTest");
+
+                var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                var driveRecipients = new List<IDriveRecipient>()
+                {
+                    new DriveRecipient
+                    {
+                        Email = testUser.Mail
+                    }
+                };
+
+                var shareRequestOptions = new InviteOptions()
+                {
+                    Message = "I'd like to share this folder with you",
+                    RequireSignIn = true,
+                    SendInvitation = true,
+                    Recipients = driveRecipients,
+                    Roles = new List<PermissionRole> { PermissionRole.Read }
+                };
+
+                var permission = folder.CreateSharingInvite(shareRequestOptions);
+                Assert.IsNotNull(permission.Id);
+                Assert.IsTrue(permission.Roles.Contains(PermissionRole.Read));
+
+                await folder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ShareFolderUserLinkNoRecipientsExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUserLinkNoRecipientsExceptionTest");
+
+                var shareLinkRequestOptions = new UserLinkOptions()
+                {
+                    Type = ShareType.View
+                };
+                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+                {
+                    await folder.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+                });
+
+                await folder.DeleteAsync();
+            }
+        }
     }
 }

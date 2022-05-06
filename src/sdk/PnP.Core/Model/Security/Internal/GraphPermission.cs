@@ -46,13 +46,29 @@ namespace PnP.Core.Model.Security
 
         public async Task DeletePermissionAsync()
         {
-            var parent = (IFile)Parent;
-            var apiCall = new ApiCall($"sites/{parent.SiteId}/drive/items/{parent.UniqueId}/permissions/{Id}", ApiType.GraphBeta);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
-            if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+            if (Parent.GetType() == typeof(File))
             {
-                throw new Exception("Error occured");
+                var parent = (IFile)Parent;
+                var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{parent.VroomDriveID}/items/{parent.VroomItemID}/permissions/{Id}", ApiType.GraphBeta);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    throw new Exception("Error occured");
+                }
             }
+            else if (Parent.GetType() == typeof(Folder))
+            {
+                var parent = (IFolder)Parent;
+                var (driveId, driveItemId) = await parent.GetGraphIdsAsync().ConfigureAwait(false);
+
+                var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    throw new Exception("Error occured");
+                }
+            }
+            
         }
 
         public void DeletePermission()
