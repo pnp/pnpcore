@@ -154,7 +154,7 @@ string viewXml = @"<View>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'><![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
@@ -181,6 +181,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+> - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
 
 #### Using paging with LoadItemsByCamlQuery
 
@@ -330,7 +331,7 @@ string viewXml = @"<View>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
@@ -359,6 +360,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+> - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
 
 #### Using paging with ListDataAsStream
 
@@ -380,7 +382,7 @@ string viewXml = @"<View>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
