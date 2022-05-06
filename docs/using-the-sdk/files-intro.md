@@ -79,7 +79,7 @@ The FindFiles method accepts a string value which is matched to any part of the 
 Find files in a list:
 ```cshar
 // Get a reference to a list
-var documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
+IList documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
 
 // Get files from the list whose name contain "foo"
 List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
