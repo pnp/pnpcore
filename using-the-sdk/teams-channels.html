@@ -120,6 +120,18 @@ var team = await context.Team.GetAsync(o =&gt; o.PrimaryChannel);
 // Get the primary channel
 var primaryChannel = await team.PrimaryChannel;
 </code></pre>
+<h2 id="getting-access-to-the-channels-files">Getting access to the Channel's files</h2>
+<p>The files of a Team channel are hosted in the connected SharePoint site. Using the <code>GetFilesFolder</code> methods you can get the <code>IFolder</code> that's hosting the files of this channel and once you've the <code>IFolder</code> you can use all of SharePoint's advanced file capabilities to manage (e.g. enumerate, upload, download, share, publish, recycle, delete,...) the files in this Teams channel.</p>
+<pre><code class="lang-csharp">// Get the Team primary channel
+var team = await context.Team.GetAsync(o =&gt; o.PrimaryChannel);
+
+var folder = await team.PrimaryChannel.GetFilesFolderAsync(p =&gt; p.Files);
+
+foreach(var file in folder.Files.AsRequested())
+{
+    // Do something with the file
+}
+</code></pre>
 <h2 id="creating-channels">Creating Channels</h2>
 <p>To add a new channel, call the Add method, specifying a name and optionally a description.</p>
 <pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Channels);
