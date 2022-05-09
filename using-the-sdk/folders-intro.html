@@ -166,6 +166,8 @@ var subFolder = await folder.Folders.AddAsync(&quot;My folder&quot;);
 // Delete the folder again
 await subFolder.DeleteAsync();
 </code></pre>
+<h2 id="sharing-folders">Sharing folders</h2>
+<p>A folder can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the <a href="sharing-intro.html">PnP Core SDK Sharing APIs</a> to learn more on how you can share a folder.</p>
 <h2 id="getting-changes-for-a-folder">Getting changes for a folder</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IFolder</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
 <h2 id="copying-or-moving-folders">Copying or moving folders</h2>

@@ -244,6 +244,8 @@ await testDocument.RecycleAsync();
 // Delete the file
 await testDocument.DeleteAsync();
 </code></pre>
+<h2 id="sharing-files">Sharing files</h2>
+<p>A file can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the <a href="sharing-intro.html">PnP Core SDK Sharing APIs</a> to learn more on how you can share a file.</p>
 <h2 id="adding-files-uploading">Adding files (=uploading)</h2>
 <p>Adding a file comes down to create a file reference and uploading the file's bytes and this can be done via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileCollection.html#PnP_Core_Model_SharePoint_IFileCollection_AddAsync_System_String_Stream_System_Boolean_">AddAsync method on a Files collection</a>. This method takes a stream of bytes as input for the file contents.</p>
 <div class="NOTE">

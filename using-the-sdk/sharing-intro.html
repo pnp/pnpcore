@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sharing files and folders | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Sharing files and folders | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/sharing-intro.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="sharing-files-and-folders">Sharing files and folders</h1>
+
+<p>Files in SharePoint live inside libraries and possibly inside a folder structure inside the library. When you want to share a file, folder or library with other users you can use the PnP Core SDK Sharing support.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+</code></pre>
+<h2 id="scoping-the-share">Scoping the &quot;share&quot;</h2>
+<p>When you share content you often just want to share what's really needed, oversharing content is never a good idea. When using the share features in PnP Core SDK you can either share:</p>
+<ul>
+<li>A single file (<code>IFile</code>)</li>
+<li>A single folder and all the contents inside that folder (<code>IFolder</code>). Note that to share the contents of a complete library you can use the <code>IList.RootFolder</code> property as sharing target</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>In the remainder of the chapter the samples will show sharing of a <code>IFile</code>, but sharing of an <code>IFolder</code> works identically the same.</p>
+</div>
+<p>After selecting what to share the next step is providing information about with whom you're sharing and how the sharing will be configured. To what extend you can configure all of this depends on the external sharing settings configured for your tenant. Navigate to your <strong>SharePoint admin center</strong>, click <strong>Policies</strong> in the left navigation and select <strong>Sharing</strong> to see the tenant sharing configuration. In order to for example share a file with a new guest user the external sharing for SharePoint/OneDrive must be set to the &quot;New and existing guests&quot; level or higher.</p>
+<p>Next to the sharing configuration and tenant level there are also sharing settings at site collection level as certain site collections can be configured with more restrictive sharing policies versus the tenant. If you're using the PnP Core SDK sharing API and you're running into issues then ensure the site collection sharing settings are set correctly. Navigate to your <strong>SharePoint admin center</strong>, click <strong>Sites</strong> in the left navigation and select <strong>Active sites</strong>. In the list of site collections find the one you want to share and verify, select it and the click on the <strong>...</strong> and pick <strong>Sharing</strong> to open the site collection sharing settings.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You can also programmatically verify and alter site collection sharing settings via the <a href="https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-sites.html#getting-and-setting-site-collection-properties">PnP Core SDK Admin component</a>.</p>
+</div>
+<h2 id="get-current-shares-for-a-folder-or-file">Get current shares for a folder or file</h2>
+<p>To list the shares defined on a folder or file you can use one of the <code>GetShareLinks</code> methods. These methods return an <code>IGraphPermissionCollection</code> containing one <code>IGraphPermission</code> row per configured share.</p>
+<pre><code class="lang-csharp">// Assume this file has some shared defined
+var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+var sharingLinks = await file.GetShareLinksAsync();
+foreach(var share in sharingLinks)
+{
+    // Do something with the share
+}
+</code></pre>
+<h2 id="sharing-content-with-your-organization">Sharing content with your organization</h2>
+<p>To share content within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the content?</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+var shareLinkRequestOptions = new OrganizationalLinkOptions()
+{
+    Type = ShareType.Edit
+};
+
+// Grant everyone in the organization edit permissions on the file                
+var share = await file.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
+</code></pre>
+<h2 id="share-content-with-certain-users">Share content with certain users</h2>
+<p>If you want to selectively share content with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share. Below example shows this:</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// List of users to share the file/folder with
+var driveRecipients = new List&lt;IDriveRecipient&gt;()
+{
+    new DriveRecipient
+    {
+        Email = &quot;linda@contoso.onmicrosoft.com&quot;
+    },
+    new DriveRecipient
+    {
+        Email = &quot;joe@contoso.onmicrosoft.com&quot;
+    }
+};
+
+var shareLinkRequestOptions = new UserLinkOptions()
+{
+    // Users can see and edit the file online, but not download it
+    Type = ShareType.BlocksDownload,
+    Recipients = driveRecipients
+};
+
+var share = await file.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+</code></pre>
+<h2 id="share-content-with-everyone-anonymous-sharing">Share content with everyone (anonymous sharing)</h2>
+<p>If your tenant and site settings allow it you can also share content anonymously so that everyone having the link can access the content. Doing so requires using one of the <code>CreateAnonymousSharingLink</code> methods together with a configured <code>AnonymousLinkOptions</code> instance. Key properties to set are the <code>Type</code> of share, a <code>Password</code> for consuming the sharing link and <code>ExpirationDateTime</code> defining how long the anonymous share will stay valid. Below example shows this:</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+var shareLinkRequestOptions = new AnonymousLinkOptions()
+{
+    Type = ShareType.View,
+    Password = &quot;PnP Rocks!&quot;,
+    ExpirationDateTime = DateTime.Now.AddDays(5)
+};                
+
+var share = await file.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
+</code></pre>
+<h2 id="share-content-via-an-invite">Share content via an invite</h2>
+<p>While above share methods do directly share the content with the user(s), there's also an option to share via inviting users to a file or folder. This can be done using one of the <code>CreateSharingInvite</code> methods in combination with an <code>InviteOptions</code> instance.</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+var driveRecipients = new List&lt;IDriveRecipient&gt;()
+{
+    new DriveRecipient
+    {
+        Email = &quot;linda@contoso.onmicrosoft.com&quot;
+    }
+};
+
+var shareRequestOptions = new InviteOptions()
+{
+    Message = &quot;I'd like to share this file with you&quot;,
+    RequireSignIn = true,
+    SendInvitation = true,
+    Recipients = driveRecipients,
+    Roles = new List&lt;PermissionRole&gt; { PermissionRole.Read },
+    ExpirationDateTime = DateTime.Now.AddDays(5)
+};
+
+var share = await file.CreateSharingInviteAsync(shareRequestOptions);
+</code></pre>
+<h2 id="deleting-file-shares">Deleting file shares</h2>
+<p>There are two options to delete sharing links for a file or folder: you can either delete all sharing links for a given file/folder or you can enumerate the current sharing links and delete a specific one. To delete all sharing links you can use one of the <code>DeleteShareLinks</code> methods, to delete an individual sharing link you first need to load the sharing links via one of the <code>GetShareLinks</code> methods followed by using one of the <code>DeletePermission</code> links on the returned <code>IGraphPermission</code> instance. Below code sample shows both approaches.</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Option A: delete all shares of the file/folder
+await file.DeleteShareLinksAsync();
+
+// Option B: delete specific shares of the file/folder
+var sharingLinks = await file.GetShareLinksAsync();
+foreach(var share in sharingLinks)
+{
+    // Let's imagine we're deleting all shares that are secured via password
+    if (share.HasPassword)
+    {
+        await share.DeletePermissionAsync();
+    }
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
