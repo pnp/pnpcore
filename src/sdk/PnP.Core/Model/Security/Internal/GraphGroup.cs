@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Security
     internal sealed class GraphGroup : BaseDataModel<IGraphGroup>, IGraphGroup
     {
         #region Construction
-        internal GraphGroup()
+        public GraphGroup()
         {
         }
         #endregion
