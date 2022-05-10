@@ -106,5 +106,47 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>Properties of the tenant</returns>
         ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Check if site exists by alias async
+        /// </summary>
+        /// <param name="alias">Alias from url</param>
+        /// <returns>Bool with if the site exists</returns>
+        Task<bool> SiteExistsAliasAsync(string alias);
+
+        /// <summary>
+        /// Check if site exists by alias 
+        /// </summary>
+        /// <param name="alias">Alias from url</param>
+        /// <returns>Bool with if the site exists</returns>
+        bool SiteExistsAlias(string alias);
+
+        /// <summary>
+        /// Check if site exists by full url async
+        /// </summary>
+        /// <param name="fullUrl">Site url</param>
+        /// <returns>Bool with if the site exists</returns>
+        Task<bool> SiteExistsFullUrlAsync(string fullUrl);
+
+        /// <summary>
+        /// Check if site by full url exists
+        /// </summary>
+        /// <param name="fullUrl">Site url</param>
+        /// <returns>Bool with if the site exists</returns>
+        bool SiteExistsFullUrl(string fullUrl);
+
+        /// <summary>
+        /// Check if site exists by full url async
+        /// </summary>
+        /// <param name="fullUrl">Site url</param>
+        /// <returns>Bool with if the site exists</returns>
+        Task<bool> SiteExistsFullUrlAsync(Uri fullUrl);
+
+        /// <summary>
+        /// Check if site by full url exists
+        /// </summary>
+        /// <param name="fullUrl">Site url</param>
+        /// <returns>Bool with if the site exists</returns>
+        bool SiteExistsFullUrl(Uri fullUrl);
     }
 }
