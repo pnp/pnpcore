@@ -446,9 +446,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
                 html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
-                html.Append($@"<div {WebPartComponentIdAttribute}="""">");
-                html.Append(WebPartId);
-                html.Append("</div>");
+                html.Append($@"<div {WebPartComponentIdAttribute}=""{WebPartId}""></div>");
                 html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
                 RenderHtmlProperties(ref html);
                 html.Append("</div>");
