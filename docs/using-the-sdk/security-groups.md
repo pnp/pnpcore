@@ -136,4 +136,19 @@ await addedGroup.RemoveUserAsync(currentUser.Id);
 
 ## Microsoft 365 groups
 
+> [!Note]
+> This only works for Teams site with group. Otherwise it will return an exception.
+
 When a site is connected to a Microsoft 365 group then the Microsoft 365 group's owners are also site collection administrators and are part of the site's default "Owners" SharePoint group. The Microsoft's 365 group members will be automatically part of the site's default "Members" SharePoint group. Important to understand is that the Microsoft 365 group's owners and members complement the existing SharePoint security model, meaning it's perfectly possible to define add a SharePoint group with members in a Microsoft 365 group connected site (e.g. a team site). Important to understand is the permissions set of the SharePoint site via SharePoint groups do not apply to the Microsoft 365 group and it's other connected resources (e.g. a mailbox, Yammer group etc). Go [here](https://docs.microsoft.com/en-us/sharepoint/dev/transform/modernize-connect-to-office365-group) to learn more.
+
+### Getting the group
+
+To get the group on a context you query the `Group` property which return a model of `IGraphGroup` instances.
+
+```csharp
+// To get all properties
+var group = await context.Group.GetAsync();
+
+// To only return the Id property
+var group = await context.Group.GetAsync(x => x.Id);
+```

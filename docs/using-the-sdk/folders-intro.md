@@ -112,6 +112,10 @@ var subFolder = await folder.Folders.AddAsync("My folder");
 await subFolder.DeleteAsync();
 ```
 
+## Sharing folders
+
+A folder can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](sharing-intro.md) to learn more on how you can share a folder.
+
 ## Getting changes for a folder
 
 You can use the `GetChanges` methods on an `IFolder` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
