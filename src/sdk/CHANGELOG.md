@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for Event Receivers (enumerate, add or delete) #835 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added sharing capabilities (enumerate + add/delete) for folders #841 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added possibility to mention user, application, team tag and conversation in a chat message #840 [MathijsVerbeeck - Mathijs Verbeeck]
+- Allow to enumerate / add / update / delete team events #848 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

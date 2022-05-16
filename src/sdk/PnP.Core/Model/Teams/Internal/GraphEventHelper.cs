@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// This class contains helpers for creating new graph events and setting properties
     /// </summary>
-    public static class GraphEventHelper
+    internal static class GraphEventHelper
     {
         /// <summary>
         ///  Checks for the create options
@@ -20,7 +20,9 @@ namespace PnP.Core.Model.Teams
         {
             if (string.IsNullOrEmpty(options.Subject))
             {
-                throw new ArgumentNullException(nameof(options.Subject));
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
+                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.Subject)}");
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
             }
 
             #region Recurrence pattern check
@@ -113,7 +115,9 @@ namespace PnP.Core.Model.Teams
             {
                 if (options.Recurrence.Range.StartDate == DateTime.MinValue)
                 {
-                    throw new ArgumentNullException(nameof(options.Recurrence.Range.StartDate));
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
+                    throw new ArgumentNullException("options.Recurrence.Range.StartDate");
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
                 }
 
                 if (options.Recurrence.Range.Type == EventRecurrenceRangeType.EndDate)
@@ -150,7 +154,7 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="value">timezone to retrieve</param>
         /// <returns>enum member value</returns>
-        public static string GetEnumMemberValue(EventTimeZone value)
+        internal static string GetEnumMemberValue(EventTimeZone value)
         {
             return typeof(EventTimeZone)
                 .GetTypeInfo()

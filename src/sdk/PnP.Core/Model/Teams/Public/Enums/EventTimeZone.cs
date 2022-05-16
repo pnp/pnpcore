@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Teams
 {
     /// <summary>
-    /// 
+    /// Event time zones
     /// </summary>
     public enum EventTimeZone
     {

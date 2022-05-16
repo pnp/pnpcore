@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Options that can be set for the recurrence

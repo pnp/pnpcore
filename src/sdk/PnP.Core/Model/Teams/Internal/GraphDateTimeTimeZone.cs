@@ -12,6 +12,7 @@
         #region Properties
 
         public string DateTime { get => GetValue<string>(); set => SetValue(value); }
+
         public string TimeZone { get => GetValue<string>(); set => SetValue(value); }
 
         #endregion
