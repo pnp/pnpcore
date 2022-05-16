@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class TeamTagUserOptions
+    <title>Interface IGraphRecipientCollection
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class TeamTagUserOptions
+    <meta name="title" content="Interface IGraphRecipientCollection
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
@@ -78,84 +78,58 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Teams.TeamTagUserOptions">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Teams.IGraphRecipientCollection">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/Options/TeamTagUserOptions.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_TeamTagUserOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.TeamTagUserOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/IGraphRecipientCollection.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_IGraphRecipientCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.IGraphRecipientCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Model_Teams_TeamTagUserOptions" data-uid="PnP.Core.Model.Teams.TeamTagUserOptions">Class TeamTagUserOptions
+                      <h1 id="PnP_Core_Model_Teams_IGraphRecipientCollection" data-uid="PnP.Core.Model.Teams.IGraphRecipientCollection">Interface IGraphRecipientCollection
   </h1>
-  <div class="markdown level0 summary"><p>Options for the team tag members</p>
+  <div class="markdown level0 summary"><p>Public interface to define a collection of recipients for an event</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">TeamTagUserOptions</span></div>
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Requested">IRequestableCollection.Requested</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Length">IRequestableCollection.Length</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_RequestedItems">IRequestableCollection.RequestedItems</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear">IRequestableCollection.Clear()</a>
+    </div>
   </div>
-  
-  
   
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.Teams.html">PnP.Core.Model.Teams</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
-  <h5 id="PnP_Core_Model_Teams_TeamTagUserOptions_syntax">Syntax</h5>
+  <h5 id="PnP_Core_Model_Teams_IGraphRecipientCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TeamTagUserOptions : object</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IGraphRecipientCollection : IDataModelCollection&lt;IGraphRecipient&gt;, IEnumerable&lt;IGraphRecipient&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection</code></pre>
   </div>
 
   
   
   
   
-  <h3 id="properties">Properties
-  </h3>
   
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_TeamTagUserOptions_UserId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.TeamTagUserOptions.UserId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/Options/TeamTagUserOptions.cs/#L12" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_Teams_TeamTagUserOptions_UserId_" data-uid="PnP.Core.Model.Teams.TeamTagUserOptions.UserId*"></a>
-  
-  <h4 id="PnP_Core_Model_Teams_TeamTagUserOptions_UserId" data-uid="PnP.Core.Model.Teams.TeamTagUserOptions.UserId"><a href="#collapsible-PnP_Core_Model_Teams_TeamTagUserOptions_UserId" class="expander" data-toggle="collapse">UserId</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_Teams_TeamTagUserOptions_UserId" class="collapse in">
-  <div class="markdown level1 summary"><p>UserId to add to the tag</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string UserId { get; set; }</code></pre>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsRequested__1_PnP_Core_Model_IDataModelCollection___0__">QueryableExtensions.AsRequested&lt;TSource&gt;(IDataModelCollection&lt;TSource&gt;)</a>
   </div>
-
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
   
 </article>
           </div>

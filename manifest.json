@@ -5738,11 +5738,551 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventAddressOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventAddressOptions.html",
+          "hash": "a5RfzQB0S1JurWE6B6POdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventAttendeeOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventAttendeeOptions.html",
+          "hash": "9bbdOR+1hryRXT6JXYDPAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventAttendeeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventAttendeeType.html",
+          "hash": "rhAIerhryCSEUHpWrMBn/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventBodyType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventBodyType.html",
+          "hash": "6Zs5N/hv8yAZkUxc+jsoJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventCoordinateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventCoordinateOptions.html",
+          "hash": "KMj7Onx2SxKk70HA9u5bLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventCreateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventCreateOptions.html",
+          "hash": "JSEDGnSh9pWVxoKMwMfRHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventImportance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventImportance.html",
+          "hash": "DWoAoGsKM9K7HobvS5M47Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventLocationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventLocationOptions.html",
+          "hash": "XEMaMEJXi+EUs1LQWVLWSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventLocationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventLocationType.html",
+          "hash": "3Db+GG/Q6Nybny+CsSqjRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventOnlineMeetingProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventOnlineMeetingProvider.html",
+          "hash": "WX69bkLRBAb+gQx9kjiwLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventPhoneType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventPhoneType.html",
+          "hash": "R7PrUVTyiThQ/pcfbh2tHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecipientOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecipientOptions.html",
+          "hash": "EpaOgPV//hC34qfzyWq6jA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceOptions.html",
+          "hash": "OQlPcrr/AXwp0aNR0flSPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecurrencePatternOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecurrencePatternOptions.html",
+          "hash": "Zr1ucpAKCVwP3pLnQAsk5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceRangeOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceRangeOptions.html",
+          "hash": "2jiAsVCDMH4Ox/uZtZuJKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceRangeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceRangeType.html",
+          "hash": "52taAbKl9PCKxX22lD4f1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventRecurrenceType.html",
+          "hash": "T+rlU2YYf73ZSYXilD2nUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventResponse.html",
+          "hash": "GtEhly9ObRmhmFpwKJtDuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventSensitivity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventSensitivity.html",
+          "hash": "Lmkw8Liac0Int3sOkwgXbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventShowAs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventShowAs.html",
+          "hash": "/c4lKC/bkPArVNC192j5lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventTimeZone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventTimeZone.html",
+          "hash": "qVZcYo4WhrSZUR1jiTuBDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventType.html",
+          "hash": "dQScVKC+L7nXBxdF/bgzpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventUpdateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventUpdateOptions.html",
+          "hash": "xjYVGHfmSkqXM5Tp/D+AvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.EventWeekIndex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.EventWeekIndex.html",
+          "hash": "H3sy4la8Cn5YnOgEHRFZRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphDateTimeTimeZone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphDateTimeTimeZone.html",
+          "hash": "RJLKCC+bOamGUEf7gRFNOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEmailAddress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEmailAddress.html",
+          "hash": "Bshj/7AYOm4EWosvrLnt+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEvent.html",
+          "hash": "tnD6wdpHGoUCdf9Lg1m63w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEventAttendee.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEventAttendee.html",
+          "hash": "1gWC3QTRSz5mR1mKu6ww4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEventAttendeeCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEventAttendeeCollection.html",
+          "hash": "6lyu26QfpzNf/hdwFKUQEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEventCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEventCollection.html",
+          "hash": "AvF3JaHx1C9ey/jP/Hs8Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphEventResponseStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphEventResponseStatus.html",
+          "hash": "OXkdikAnIVkHmLmi6o+wyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphItemBody.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphItemBody.html",
+          "hash": "NmBv1Z2I1lBo4YS/1sV/Qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphLocation.html",
+          "hash": "xIyyi0H7EUTtL9NrLiIauQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphLocationCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphLocationCollection.html",
+          "hash": "GFXDBCozoFoFP2N6TWuRuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphOnlineMeetingInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphOnlineMeetingInfo.html",
+          "hash": "uomek6mG/Ug5LryQYywgtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphOutlookGeoCoordinates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphOutlookGeoCoordinates.html",
+          "hash": "BSUq67wHl4tJXng9+EzaEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphPatternedRecurrence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphPatternedRecurrence.html",
+          "hash": "l3UBAX3AeMmyhWACjRq7/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphPhone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphPhone.html",
+          "hash": "RPUx562ghNSBla+JbQqFUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphPhoneCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphPhoneCollection.html",
+          "hash": "EMDr9yIRV782MU2DmhUsLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphPhysicalAddress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphPhysicalAddress.html",
+          "hash": "CNkr6W5C6L7qQkNHzKoR6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphRecipient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphRecipient.html",
+          "hash": "a2QBf4Ov57oHJdLt+2i38A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphRecipientCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphRecipientCollection.html",
+          "hash": "ni/8fx+BQGIQsDfITYm95Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphRecurrencePattern.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphRecurrencePattern.html",
+          "hash": "S6Uhsnhl5NfLOin0db1KSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphRecurrenceRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphRecurrenceRange.html",
+          "hash": "j3TzwaC/gGsbbNCWWzSf5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.IGraphTimeSlot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.IGraphTimeSlot.html",
+          "hash": "EvM/+TEKNbEsodYEiFEURw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.ITeam.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "GzxI3+T4GwgMDy5wids/Nw=="
+          "hash": "Id54k7o2iD+0JgQcJnGWRQ=="
         }
       },
       "is_incremental": false,
@@ -6222,7 +6762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.TeamTagUserOptions.html",
-          "hash": "8EsJJqrap9bxg+WkdVNs6Q=="
+          "hash": "JBoR3KJCW2OZGiALusMd8Q=="
         }
       },
       "is_incremental": false,
@@ -6270,7 +6810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "4ucTJvwSLd4aBN5XnsTCSA=="
+          "hash": "7bvzDXpdetYQakzdZ5S8qg=="
         }
       },
       "is_incremental": false,
@@ -7014,7 +7554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "AFoSaLxjVa3dFw4G/G0+2w=="
+          "hash": "piiMtjih2aqW3kqYI4UuBg=="
         }
       },
       "is_incremental": false,
@@ -8776,7 +9316,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 582,
+          "total_file_count": 627,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
