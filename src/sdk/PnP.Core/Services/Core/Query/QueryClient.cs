@@ -619,6 +619,13 @@ namespace PnP.Core.Services
 
                             var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(model, graphGet).ConfigureAwait(false);
                             ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
+
+                            if (model.GetApiCallNonExpandableCollectionOverrideHandler != null)
+                            {
+                                var extraApiCallRequest = await model.GetApiCallNonExpandableCollectionOverrideHandler.Invoke(new ApiCallRequest(extraApiCall)).ConfigureAwait(false);
+                                extraApiCall = extraApiCallRequest.ApiCall;
+                            }
+
                             batch.Add(model, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson, "GetBatch");
                         }
                     }

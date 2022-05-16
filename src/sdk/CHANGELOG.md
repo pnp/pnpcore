@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `GetFilesFolder` methods on `ITeamChannel` to provide an easy access point to the SharePoint File capabilities starting from a Team channel #843 [jansenbe - Bert Jansen]
 - Changed GraphGroup constructor from Internal to Public #845 [danielpastoor - Daniel Pastoor]
 - Improved page HTML rendering to avoid webpart ids showing up in search #846 [jansenbe - Bert Jansen]
+- Fixed issue in term loading now using $expand for performance reasons + enabled loading of child of child terms #850 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 
