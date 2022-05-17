@@ -1,7 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
@@ -25,7 +24,6 @@ namespace PnP.Core.Model.Teams
         public async Task<ITeamChatMessage> AddAsync(ChatMessageOptions options)
         {
             var newChannelChatMessage = CreateChatMessageObject(options);
-
             return await newChannelChatMessage.AddAsync().ConfigureAwait(false) as TeamChatMessage;
         }
 
@@ -57,79 +55,7 @@ namespace PnP.Core.Model.Teams
 
             var newChatMessage = CreateNewAndAdd() as TeamChatMessage;
 
-            // Assign field values
-            newChatMessage.Body = new TeamChatMessageContent
-            {
-                PnPContext = newChatMessage.PnPContext,
-                Parent = newChatMessage,
-                Content = options.Content,
-                ContentType = options.ContentType,
-            };
-
-            if (options.Attachments != null && options.Attachments.Count > 0)
-            {
-                var attachments = new TeamChatMessageAttachmentCollection();
-
-                foreach (var optionAttachment in options.Attachments)
-                {
-                    attachments.Add(new TeamChatMessageAttachment()
-                    {
-                        Id = optionAttachment.Id,
-                        Content = optionAttachment.Content,
-                        ContentType = optionAttachment.ContentType,
-                        Name = optionAttachment.Name,
-                        ContentUrl = optionAttachment.ContentUrl,
-                        ThumbnailUrl = optionAttachment.ThumbnailUrl
-                    });
-                }
-
-                newChatMessage.Attachments = attachments;
-            }
-
-            if (options.HostedContents != null && options.HostedContents.Count > 0)
-            {
-                var hostedContents = new TeamChatMessageHostedContentCollection();
-
-                foreach (var hostedContentOption in options.HostedContents)
-                {
-                    hostedContents.Add(new TeamChatMessageHostedContent()
-                    {
-                        Id = hostedContentOption.Id,
-                        ContentBytes = hostedContentOption.ContentBytes,
-                        ContentType = hostedContentOption.ContentType
-                    });
-                }
-
-                newChatMessage.HostedContents = hostedContents;
-            }
-
-
-            if (options.Mentions != null && options.Mentions.Count > 0)
-            {
-                var mentions = new TeamChatMessageMentionCollection();
-
-                foreach (var mention in options.Mentions)
-                {
-                    var mentionedIdSet = new TeamChatMessageMentionedIdentitySet
-                    {
-                        User = mention.Mentioned.User,
-                        Application = mention.Mentioned.Application,
-                        Conversation = mention.Mentioned.Conversation,
-                        Tag = mention.Mentioned.Tag
-                    };
-
-                    mentions.Add(new TeamChatMessageMention()
-                    {
-                        Id = mention.Id,
-                        MentionText = mention.MentionText,
-                        Mentioned = mentionedIdSet
-                    });
-                }
-
-                newChatMessage.Mentions = mentions;
-            }
-
-            newChatMessage.Subject = options.Subject;
+            TeamChatMessageHelper.AddChatMessageOptions(options, newChatMessage);
 
             return newChatMessage;
         }

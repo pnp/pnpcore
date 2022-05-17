@@ -7,24 +7,41 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = chatMessageUri, Beta = true, LinqGet = baseUri)]
-    internal sealed class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
+    [GraphType(Uri = chatReplyUri, Beta = true, LinqGet = baseUri)]
+    internal sealed class TeamChatMessageReply : BaseDataModel<ITeamChatMessageReply>, ITeamChatMessageReply
     {
-        private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
-        private const string chatMessageUri = baseUri + "/{GraphId}";
+        private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.ChannelIdentity.ChannelId}/messages/{Parent.GraphId}/replies";
+        private const string chatReplyUri = baseUri + "/{GraphId}";
 
         #region Construction
-        public TeamChatMessage()
+        public TeamChatMessageReply()
         {
             // Handler to construct the Add request for this channel
             AddApiCallHandler = async (keyValuePairs) =>
             {
-                var bodyContent = TeamChatMessageHelper.GenerateMessageBody(this);
+                var bodyContent = TeamChatMessageHelper.GenerateReplyBody(this);
 
-                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
+                var parent = Parent as TeamChatMessage;
+
+                var callUri = baseUri.Replace("{Parent.ChannelIdentity.ChannelId}", parent.ChannelIdentity.ChannelId);
+
+                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, callUri).ConfigureAwait(false);
 
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
+            #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+                var parent = Parent.Parent.Parent as TeamChannel;
+
+                var callUri = baseUri.Replace("{Parent.ChannelIdentity.ChannelId}", parent.Id);
+
+                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, callUri).ConfigureAwait(false);
+
+                api.ApiCall = new ApiCall(parsedApiCall, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                return api;
+            };
+            #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
 
         #endregion
@@ -73,12 +90,11 @@ namespace PnP.Core.Model.Teams
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }
-
         #endregion
 
         #region Methods
 
-        public async Task<ITeamChatMessageReply> AddReplyAsync(ChatMessageOptions options)
+        public async Task AddReplyAsync(ChatMessageOptions options)
         {
             if (options == default)
             {
@@ -91,32 +107,31 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(options), "parameter must include message content");
             }
 
-            var message = new TeamChatMessageReply
+            var message = new TeamChatMessage
             {
                 Parent = this,
                 PnPContext = PnPContext
             };
 
             TeamChatMessageHelper.AddChatMessageOptions(options, message);
-            
+
             await message.AddAsync().ConfigureAwait(false);
 
-            return message;
         }
 
-        public ITeamChatMessageReply AddReply(ChatMessageOptions options)
+        public void AddReply(ChatMessageOptions options)
         {
-            return AddReplyAsync(options).GetAwaiter().GetResult();
+            AddReplyAsync(options).GetAwaiter().GetResult();
         }
 
-        public async Task<ITeamChatMessageReply> AddReplyAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        public async Task AddReplyAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
         {
-            return await AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+            await AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
         }
 
-        public ITeamChatMessageReply AddReply(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        public void AddReply(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
         {
-            return AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+            AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
         }
 
 

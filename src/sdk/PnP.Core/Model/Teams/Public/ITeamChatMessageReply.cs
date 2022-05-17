@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Teams
 {
     /// <summary>
-    /// Represents an individual chat message within a channel or chat. The chat message can be a root chat message or 
-    /// part of a reply thread that is defined by the replyToId property in the chat message.
+    /// Represents an individual Reply on a chat message.
     /// </summary>
-    [ConcreteType(typeof(TeamChatMessage))]
-    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>, IDataModelGet<ITeamChatMessage>, IDataModelLoad<ITeamChatMessage>, IQueryableDataModel
+    [ConcreteType(typeof(TeamChatMessageReply))]
+    public interface ITeamChatMessageReply : IDataModel<ITeamChatMessageReply>, IDataModelGet<ITeamChatMessageReply>, IDataModelLoad<ITeamChatMessageReply>, IQueryableDataModel
     {
 
         /// <summary>
@@ -108,53 +107,5 @@ namespace PnP.Core.Model.Teams
         /// Hosted Content tiles
         /// </summary>
         public ITeamChatMessageHostedContentCollection HostedContents { get; }
-
-        /// <summary>
-        /// Collection of replies for a message
-        /// Implements <see cref="IQueryable{T}"/>. <br />
-        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
-        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
-        /// </summary>
-        public ITeamChatMessageReplyCollection Replies { get; }
-
-        #region Methods
-
-        /// <summary>
-        /// Adds a reply to an existing message
-        /// </summary>
-        /// <param name="options">Options for the chat message to create</param>
-        /// <returns>The newly created chat message</returns>
-        public Task<ITeamChatMessageReply> AddReplyAsync(ChatMessageOptions options);
-
-        /// <summary>
-        /// Adds a reply to an existing message
-        /// </summary>
-        /// <param name="options">Options for the chat message to create</param>
-        /// <returns>The newly created chat message</returns>
-        public ITeamChatMessageReply AddReply(ChatMessageOptions options);
-
-        /// <summary>
-        /// Adds a reply to an existing message
-        /// </summary>
-        /// <param name="content">Content of the message</param>
-        /// <param name="contentType">Message content type e.g. Text, Html</param>
-        /// <param name="subject">Message Subject</param>
-        /// <returns></returns>
-        public Task<ITeamChatMessageReply> AddReplyAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
-
-
-
-        /// <summary>
-        /// Adds a reply to an existing message
-        /// </summary>
-        /// <param name="content">Content of the message</param>
-        /// <param name="contentType">Message content type e.g. Text, Html</param>
-        /// <param name="subject">Message Subject</param>
-        /// <returns></returns>
-        public ITeamChatMessageReply AddReply(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
-
-        
-        #endregion
-
     }
 }
