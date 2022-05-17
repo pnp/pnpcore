@@ -25,6 +25,13 @@ namespace PnP.Core.Model
     internal delegate Task<ApiCallRequest> GetApiCallOverride(ApiCallRequest input);
 
     /// <summary>
+    /// Delegate for overriding the default API call in case of a GET request for a non expandable collection
+    /// </summary>
+    /// <param name="input">Generated API call</param>
+    /// <returns>Changed API call</returns>
+    internal delegate Task<ApiCallRequest> GetApiCallNonExpandableCollectionOverride(ApiCallRequest input);
+
+    /// <summary>
     /// Delegate for overriding the default API call in case of a UPDATE request
     /// </summary>
     /// <param name="input">Generated API call</param>
@@ -520,6 +527,12 @@ namespace PnP.Core.Model
         /// </summary>
         [SystemProperty]
         internal GetApiCallOverride GetApiCallOverrideHandler { get; set; } = null;
+
+        /// <summary>
+        /// API call override handler for get requests for non expandable collections
+        /// </summary>
+        [SystemProperty]
+        internal GetApiCallNonExpandableCollectionOverride GetApiCallNonExpandableCollectionOverrideHandler { get; set; } = null;
 
         /// <summary>
         /// Handler that will fire when a property mapping does cannot be done automatically
