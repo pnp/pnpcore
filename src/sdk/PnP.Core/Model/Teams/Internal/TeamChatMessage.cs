@@ -119,6 +119,67 @@ namespace PnP.Core.Model.Teams
             return AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
         }
 
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, ChatMessageOptions options)
+        {
+            if (options == default)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            //Minimum for a message
+            if (string.IsNullOrEmpty(options.Content))
+            {
+                throw new ArgumentNullException(nameof(options), "parameter must include message content");
+            }
+
+            var message = new TeamChatMessageReply
+            {
+                Parent = this,
+                PnPContext = PnPContext
+            };
+
+            TeamChatMessageHelper.AddChatMessageOptions(options, message);
+
+            await message.AddBatchAsync(batch).ConfigureAwait(false);
+
+            return message;
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, ChatMessageOptions options)
+        {
+            return AddReplyBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(ChatMessageOptions options)
+        {
+            return await AddReplyBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(ChatMessageOptions options)
+        {
+            return AddReplyBatchAsync(PnPContext.CurrentBatch, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return await AddReplyBatchAsync(batch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return AddReplyBatchAsync(batch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return await AddReplyBatchAsync(PnPContext.CurrentBatch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return AddReplyBatchAsync(PnPContext.CurrentBatch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+        }
+
 
 
         #endregion

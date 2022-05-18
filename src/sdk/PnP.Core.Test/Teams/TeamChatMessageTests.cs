@@ -1960,6 +1960,202 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        [TestMethod]
+        public async Task AddChatMessageReplyBatchAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetBatchAsync(o => o.Channels);
+                await context.ExecuteAsync();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = await channelQuery.GetBatchAsync(o => o.Messages);
+                await context.ExecuteAsync();
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageReplyBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
+                
+                var batch = context.NewBatch();
+                var newMessage = await chatMessages.AddBatchAsync(body);
+                await context.ExecuteAsync();
+
+                channel = channelQuery.GetBatch(o => o.Messages);
+                await context.ExecuteAsync();
+                var updateMessages = channel.Result.Messages;
+
+                var message = updateMessages.AsRequested().FirstOrDefault(o => o.Id == newMessage.Id);
+
+                var replyContent = "This is a reply to a Channel message";
+
+                batch = context.NewBatch();
+                var reply = message.AddReplyBatch(replyContent);
+                await context.ExecuteAsync();
+
+                await message.LoadBatchAsync(y => y.Replies);
+                await context.ExecuteAsync();
+                
+                var firstReply = message.Replies.FirstOrDefault();
+
+                Assert.IsNotNull(message.Replies);
+                Assert.IsNotNull(firstReply);
+
+                Assert.AreEqual(message.Replies.Length, 1);
+                Assert.AreEqual(firstReply.Body.Content, replyContent);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddChatMessageReplyWithOptionsBatchAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetBatchAsync(o => o.Channels);
+                await context.ExecuteAsync();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = await channelQuery.GetBatchAsync(o => o.Messages);
+                await context.ExecuteAsync();
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageReplyWithOptionsBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
+
+                var batch = context.NewBatch();
+                var newMessage = await chatMessages.AddBatchAsync(body);
+                await context.ExecuteAsync();
+
+                channel = channelQuery.GetBatch(o => o.Messages);
+                await context.ExecuteAsync();
+                var updateMessages = channel.Result.Messages;
+
+                var message = updateMessages.AsRequested().FirstOrDefault(o => o.Id == newMessage.Id);
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = "This is a body of a reply for the function (AddChatMessageReplyWithOptionsBatchAsyncTest)",
+                    ContentType = ChatMessageContentType.Html,
+                    Subject = "Subject for AddChatMessageReplyWithOptionsBatchAsyncTest"
+                };
+
+                batch = context.NewBatch();
+                var reply = message.AddReplyBatch(messageOptions);
+                await context.ExecuteAsync();
+
+                await message.LoadBatchAsync(y => y.Replies);
+                await context.ExecuteAsync();
+
+                var firstReply = message.Replies.FirstOrDefault();
+
+                Assert.IsNotNull(message.Replies);
+                Assert.IsNotNull(firstReply);
+
+                Assert.AreEqual(message.Replies.Length, 1);
+                Assert.AreEqual(firstReply.Body.Content, messageOptions.Content);
+                Assert.AreEqual(firstReply.Subject, messageOptions.Subject);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageReplyWithAttachmentsBatchAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetBatchAsync(o => o.Channels);
+                await context.ExecuteAsync();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = await channelQuery.GetBatchAsync(o => o.Messages);
+                await context.ExecuteAsync();
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                if (existingFile == default)
+                {
+                    existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                }
+
+                Assert.IsNotNull(existingFile);
+                Assert.AreEqual("test_added.docx", existingFile.Name);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageReplyWithAttachmentsBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
+
+                var batch = context.NewBatch();
+                var newMessage = await chatMessages.AddBatchAsync(body);
+                await context.ExecuteAsync();
+
+                channel = channelQuery.GetBatch(o => o.Messages);
+                await context.ExecuteAsync();
+                var updateMessages = channel.Result.Messages;
+
+                var message = updateMessages.AsRequested().FirstOrDefault(o => o.Id == newMessage.Id);
+
+                var attachmentId = existingFile.ETag.AsGraphEtag(); // Needs to be the documents eTag - just the GUID part
+
+                var bodyReply = $"<h1>Hello</h1><br />This is a unit test reply with a file attachment (AddChatMessageReplyWithAttachmentsBatchAsyncTest) posting a message - <attachment id=\"{attachmentId}\"></attachment>";
+
+                var fileUri = new Uri(existingFile.LinkingUrl);
+
+                var messageOptions = new ChatMessageOptions
+                {
+                    Content = bodyReply,
+                    ContentType = ChatMessageContentType.Html,
+                    Attachments = {
+                        new ChatMessageAttachmentOptions
+                        {
+                            Id = attachmentId,
+                            ContentType = "reference",
+                            // Cannot have the extension with a query graph doesnt recognise and think its part of file extension - include in docs.
+                            ContentUrl = new Uri(fileUri.ToString().Replace(fileUri.Query, "")),
+                            Name = $"{existingFile.Name}",
+                            ThumbnailUrl = null,
+                            Content = null
+                        }
+                    }
+                };
+
+                batch = context.NewBatch();
+                var reply = message.AddReplyBatch(messageOptions);
+                await context.ExecuteAsync();
+
+                await message.LoadBatchAsync(y => y.Replies);
+                await context.ExecuteAsync();
+
+                var firstReply = message.Replies.FirstOrDefault();
+
+                Assert.IsNotNull(message.Replies);
+                Assert.IsNotNull(firstReply);
+
+                Assert.AreEqual(message.Replies.Length, 1);
+                Assert.AreEqual(firstReply.Attachments.Length, messageOptions.Attachments.Count);
+                Assert.AreEqual(firstReply.Attachments.FirstOrDefault().Name, messageOptions.Attachments.FirstOrDefault().Name);
+            }
+        }
+
         //TODO: There is no option to add reactions within a chat message in the SDK therefore cannot automate the testing for this at this time.
         //[TestMethod]
         //public void AddChatMessageReactionTest()
