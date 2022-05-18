@@ -28,5 +28,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// The ID of the Site Design to apply, if any
         /// </summary>
         public Guid? SiteDesignId { get; set; }
+
+        /// <summary>
+        /// Bool if you wan't to create a team
+        /// </summary>
+        public bool CreateTeam { get; set; }
     }
 }

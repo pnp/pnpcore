@@ -1,9 +1,12 @@
-﻿using PnP.Core.Admin.Model.SharePoint;
+﻿using PnP.Core.Admin.Model.Microsoft365.Public.Options;
+using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Teams;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -193,6 +196,145 @@ namespace PnP.Core.Admin.Model.Microsoft365
         {
             return GetMultiGeoLocationsAsync().GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Team Site create support
+
+        public async Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, bool createTeam = false)
+        {
+            // Prepare the group resource object
+            if (graphGroupOptions.Owners != null && graphGroupOptions.Owners.Length > 0)
+            {
+                graphGroupOptions.Owners = (await GetUsers(graphGroupOptions.Owners).ConfigureAwait(false)).ToArray();
+            }
+
+            // Check if group already exists
+            if (!string.IsNullOrEmpty(graphGroupOptions.MailNickname) && GroupExists(graphGroupOptions.MailNickname))
+                return context.Clone(new Uri(new Uri(context.Uri.AbsoluteUri), $"sites/{graphGroupOptions.MailNickname}"));
+
+            PnPContext? responseContext = null;
+
+            if (graphGroupOptions != null)
+            {
+                try
+                {
+                    var bodyContent = JsonSerializer.Serialize(graphGroupOptions, typeof(GraphGroupOptions), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
+                    var response = await (context.Web as Web).RawRequestAsync(new ApiCall("groups", ApiType.Graph, bodyContent), HttpMethod.Post).ConfigureAwait(false);
+
+                    if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+                    {
+                        var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                        if (json.TryGetProperty("id", out JsonElement idElement))
+                            if (idElement.TryGetGuid(out Guid groupId))
+                            {
+                                if (groupId != Guid.Empty)
+                                {
+                                    int driveRetryCount = 10;
+
+                                    while (driveRetryCount > 0 && responseContext == null)
+                                    {
+                                        try
+                                        {
+                                            var tmpResponseContext = context.Clone(groupId);
+
+                                            if (tmpResponseContext != null)
+                                                responseContext = tmpResponseContext;
+                                        }
+                                        catch
+                                        {
+                                            // Skip any exception and simply retry
+                                        }
+
+                                        // In case of failure retry up to 10 times, with 500ms delay in between
+                                        if (responseContext == null)
+                                        {
+                                            await Task.Delay(500 * (10 - driveRetryCount)).ConfigureAwait(false);
+                                            driveRetryCount--;
+                                        }
+                                    }
+
+                                    if (responseContext != null && createTeam)
+                                        responseContext = await responseContext.GetTeamManager().CreateTeamAsync(new TeamForGroupOptions(groupId)).ConfigureAwait(false);
+                                }
+                            }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
+            return responseContext;
+        }
+
+        public async Task<bool> GroupExistsAsync(string mailNickName)
+        {
+            if (string.IsNullOrEmpty(mailNickName))
+                throw new ArgumentNullException(nameof(mailNickName));
+
+            try
+            {
+                ApiCallResponse response = await (context.Web as Web).RawRequestAsync(new ApiCall($"groups?$filter=mailNickname eq '{mailNickName}'", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                    var value = json.GetProperty("value");
+
+                    if (value.ValueKind == JsonValueKind.Array && value.GetArrayLength() > 0)
+                        return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool GroupExists(string mailNickName)
+        {
+            return GroupExistsAsync(mailNickName).GetAwaiter().GetResult();
+        }
+
+        private async Task<List<string>> GetUsers(string[] groupUsers)
+        {
+            if (groupUsers == null || groupUsers.Length == 0)
+            {
+                return new List<string>();
+            }
+
+            var usersResult = new List<string>();
+
+            foreach (string groupUser in groupUsers)
+            {
+                try
+                {
+                    ApiCallResponse response = await (context.Web as Web).RawRequestAsync(new ApiCall($"users/{groupUser}?$select=id", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                        if (json.TryGetProperty("id", out JsonElement idElement))
+                            if (idElement.TryGetGuid(out Guid userId))
+                                if (userId != Guid.Empty)
+                                    usersResult.Add($"https://graph.microsoft.com/v1.0/users('{userId}')");
+                    }
+                }
+                catch (ServiceException)
+                {
+                    // skip, group provisioning shouldnt stop because of error in user object
+                }
+            }
+
+            return usersResult;
+        }
+
         #endregion
 
         #region Access token related extensions

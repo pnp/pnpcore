@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Admin.Model.Microsoft365.Public.Options;
+using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Microsoft365
@@ -8,6 +10,26 @@ namespace PnP.Core.Admin.Model.Microsoft365
     /// </summary>
     public interface IMicrosoft365Admin
     {
+        #region Team Site create support
+        /// <summary>
+        /// Create a Microsoft Group
+        /// </summary>
+        /// <returns>PnPContext of the new group</returns>
+        Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, bool createTeam = false);
+
+        /// <summary>
+        /// Check if a group exists async
+        /// </summary>
+        /// <returns>Bool with if it exists</returns>
+        Task<bool> GroupExistsAsync(string mailNickName);
+
+        /// <summary>
+        /// Check if a group
+        /// </summary>
+        /// <returns>Bool with if it exists</returns>
+        bool GroupExists(string mailNickName);
+        #endregion
+
         #region Multi-geo support
         /// <summary>
         /// Checks if this tenant is a multi-geo tenant
