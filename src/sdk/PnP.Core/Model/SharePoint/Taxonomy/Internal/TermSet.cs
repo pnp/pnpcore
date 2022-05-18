@@ -84,7 +84,7 @@ namespace PnP.Core.Model.SharePoint
 
         public DateTimeOffset CreatedDateTime { get => GetValue<DateTimeOffset>(); set => SetValue(value); }
 
-        [GraphProperty("children", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{GraphId}/children")]
+        [GraphProperty("children", Expandable = true)]
         public ITermCollection Terms { get => GetModelCollectionValue<ITermCollection>(); }
 
         [GraphProperty("parentGroup", Expandable = true)]

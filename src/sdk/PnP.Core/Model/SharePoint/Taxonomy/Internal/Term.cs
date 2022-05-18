@@ -109,14 +109,25 @@ namespace PnP.Core.Model.SharePoint
 
             // Override update and delete calls to handle the flexible parent issue 
             // (term of a term has a term as parent.parent, while term of termset has the termset as parent.parent)
+
+            GetApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+            {
+                return await OverrideGetApiCall(apiCallRequest).ConfigureAwait(false);
+            };
+
+            GetApiCallNonExpandableCollectionOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+            {
+                return await OverrideGetApiCall(apiCallRequest).ConfigureAwait(false);
+            };
+
             UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
             {
-                return await OverrideApiCall(apiCallRequest).ConfigureAwait(false);
+                return await OverrideUpdateOrDeleteApiCall(apiCallRequest).ConfigureAwait(false);
             };
 
             DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
             {
-                return await OverrideApiCall(apiCallRequest).ConfigureAwait(false);
+                return await OverrideUpdateOrDeleteApiCall(apiCallRequest).ConfigureAwait(false);
             };
         }
         #endregion
@@ -147,32 +158,11 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 return GetModelValue<ITermSet>();
-
-                //if (!NavigationPropertyInstantiated())
-                //{
-                //    var termSet = new TermSet
-                //    {
-                //        PnPContext = this.PnPContext,
-                //        Parent = this,
-                //    };
-                //    SetValue(termSet);
-                //    InstantiateNavigationProperty();
-                //}
-                //return GetValue<ITermSet>();
             }
-            //set
-            //{
-            //    // Only set if there was no proper parent 
-            //    if (GetParentByType(typeof(TermSet)) == null)
-            //    {
-            //        InstantiateNavigationProperty();
-            //        SetValue(value);
-            //    }
-            //}
         }
 
 
-        [GraphProperty("children", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms/{GraphId}/children")]
+        [GraphProperty("children", Expandable = true)]
         public ITermCollection Terms { get => GetModelCollectionValue<ITermCollection>(); }
 
         public ITermPropertyCollection Properties { get => GetModelCollectionValue<ITermPropertyCollection>(); }
@@ -186,11 +176,38 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Extension methods
-        private async Task<ApiCallRequest> OverrideApiCall(ApiCallRequest apiCallRequest)
+        private async Task<ApiCallRequest> OverrideUpdateOrDeleteApiCall(ApiCallRequest apiCallRequest)
         {
             var request = await ApiHelper.ParseApiRequestAsync(this, $"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{Set.Id}/terms/{{GraphId}}").ConfigureAwait(false);
+
             var apiCall = new ApiCall(request, ApiType.Graph, apiCallRequest.ApiCall.JsonBody);
             return new ApiCallRequest(apiCall);
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        private async Task<ApiCallRequest> OverrideGetApiCall(ApiCallRequest apiCallRequest)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            // The termset ID that was replaced by default is wrong whenever we're getting information for a child of a child term
+            var index1 = apiCallRequest.ApiCall.Request.IndexOf("/termstore/sets/");
+            var index2 = apiCallRequest.ApiCall.Request.IndexOf("/terms/");
+
+            string request = null;
+            if (index1 > 0 && index2 > 0 && index2 > index1)
+            {
+                request = $"{apiCallRequest.ApiCall.Request.Substring(0, index1 + 16)}{Set.Id}{apiCallRequest.ApiCall.Request.Substring(index2)}";
+            }
+
+            if (request != null)
+            {
+                var apiCall = new ApiCall(request, ApiType.Graph, apiCallRequest.ApiCall.JsonBody, apiCallRequest.ApiCall.ReceivingProperty);
+                return new ApiCallRequest(apiCall);
+            }
+            else
+            {
+                // Just return what we got
+                return apiCallRequest;
+            }
         }
 
         public void AddProperty(string key, string value)
