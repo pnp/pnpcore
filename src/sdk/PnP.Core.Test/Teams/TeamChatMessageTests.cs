@@ -1733,7 +1733,9 @@ namespace PnP.Core.Test.Teams
                 Assert.AreEqual(firstReply.Mentions.Length, 1);
 
                 if (hasToDelete)
+                {
                     await tag.DeleteAsync();
+                }
             }
         }
 
@@ -1963,7 +1965,7 @@ namespace PnP.Core.Test.Teams
         [TestMethod]
         public async Task AddChatMessageReplyBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var team = await context.Team.GetBatchAsync(o => o.Channels);
@@ -1983,11 +1985,10 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageReplyBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
                 
-                var batch = context.NewBatch();
                 var newMessage = await chatMessages.AddBatchAsync(body);
                 await context.ExecuteAsync();
 
-                channel = channelQuery.GetBatch(o => o.Messages);
+                channel = await channelQuery.GetBatchAsync(o => o.Messages);
                 await context.ExecuteAsync();
                 var updateMessages = channel.Result.Messages;
 
@@ -1995,14 +1996,13 @@ namespace PnP.Core.Test.Teams
 
                 var replyContent = "This is a reply to a Channel message";
 
-                batch = context.NewBatch();
                 var reply = message.AddReplyBatch(replyContent);
                 await context.ExecuteAsync();
 
                 await message.LoadBatchAsync(y => y.Replies);
                 await context.ExecuteAsync();
                 
-                var firstReply = message.Replies.FirstOrDefault();
+                var firstReply = message.Replies.AsRequested().FirstOrDefault();
 
                 Assert.IsNotNull(message.Replies);
                 Assert.IsNotNull(firstReply);
@@ -2016,7 +2016,7 @@ namespace PnP.Core.Test.Teams
         [TestMethod]
         public async Task AddChatMessageReplyWithOptionsBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var team = await context.Team.GetBatchAsync(o => o.Channels);
@@ -2040,7 +2040,7 @@ namespace PnP.Core.Test.Teams
                 var newMessage = await chatMessages.AddBatchAsync(body);
                 await context.ExecuteAsync();
 
-                channel = channelQuery.GetBatch(o => o.Messages);
+                channel = await channelQuery.GetBatchAsync(o => o.Messages);
                 await context.ExecuteAsync();
                 var updateMessages = channel.Result.Messages;
 
@@ -2053,14 +2053,13 @@ namespace PnP.Core.Test.Teams
                     Subject = "Subject for AddChatMessageReplyWithOptionsBatchAsyncTest"
                 };
 
-                batch = context.NewBatch();
                 var reply = message.AddReplyBatch(messageOptions);
-                await context.ExecuteAsync();
+                context.Execute();
 
                 await message.LoadBatchAsync(y => y.Replies);
                 await context.ExecuteAsync();
 
-                var firstReply = message.Replies.FirstOrDefault();
+                var firstReply = message.Replies.AsRequested().FirstOrDefault();
 
                 Assert.IsNotNull(message.Replies);
                 Assert.IsNotNull(firstReply);
@@ -2074,7 +2073,7 @@ namespace PnP.Core.Test.Teams
         [TestMethod]
         public async Task AddChatMessageReplyWithAttachmentsBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var team = await context.Team.GetBatchAsync(o => o.Channels);
@@ -2104,11 +2103,10 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageReplyWithAttachmentsBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
 
-                var batch = context.NewBatch();
                 var newMessage = await chatMessages.AddBatchAsync(body);
                 await context.ExecuteAsync();
 
-                channel = channelQuery.GetBatch(o => o.Messages);
+                channel = await channelQuery.GetBatchAsync(o => o.Messages);
                 await context.ExecuteAsync();
                 var updateMessages = channel.Result.Messages;
 
@@ -2138,14 +2136,13 @@ namespace PnP.Core.Test.Teams
                     }
                 };
 
-                batch = context.NewBatch();
                 var reply = message.AddReplyBatch(messageOptions);
-                await context.ExecuteAsync();
+                context.Execute();
 
                 await message.LoadBatchAsync(y => y.Replies);
                 await context.ExecuteAsync();
 
-                var firstReply = message.Replies.FirstOrDefault();
+                var firstReply = message.Replies.AsRequested().FirstOrDefault();
 
                 Assert.IsNotNull(message.Replies);
                 Assert.IsNotNull(firstReply);

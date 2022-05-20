@@ -1,8 +1,5 @@
 ﻿using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
@@ -29,7 +26,7 @@ namespace PnP.Core.Model.Teams
 
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
-            #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
                 var parent = Parent.Parent.Parent as TeamChannel;
@@ -41,7 +38,6 @@ namespace PnP.Core.Model.Teams
                 api.ApiCall = new ApiCall(parsedApiCall, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 return api;
             };
-            #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
 
         #endregion
@@ -133,8 +129,6 @@ namespace PnP.Core.Model.Teams
         {
             AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
         }
-
-
 
         #endregion
     }

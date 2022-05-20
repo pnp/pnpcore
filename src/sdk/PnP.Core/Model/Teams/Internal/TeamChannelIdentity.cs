@@ -1,9 +1,4 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Dynamic;
-using System.Text.Json;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
     internal sealed class TeamChannelIdentity : BaseDataModel<ITeamChannelIdentity>, ITeamChannelIdentity
