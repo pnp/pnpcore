@@ -6,7 +6,7 @@ Within Teams, you have one or more channels. This page will show you how you can
 
 ## Getting Channels
 
-Channels is a collection part of the ITeam interface, so when you get a team, you can include the channels on the request. 
+Channels is a collection part of the ITeam interface, so when you get a team, you can include the channels on the request.
 
 ```csharp
 // Get the Team
@@ -71,9 +71,9 @@ foreach(var file in folder.Files.AsRequested())
 To add a new channel, call the Add method, specifying a name and optionally a description.
 
 ```csharp
+// Get the Team
 var team = await context.Team.GetAsync(p => p.Channels);
 
-// Get the Team
 string channelName = $"My Cool New Channel";
 
 // Check if the channel exists
@@ -105,8 +105,8 @@ string channelName = $"My Cool New Channel";
 // Get the channel you wish to update
 var channelToUpdate = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
 
-if(channelToUpdate != default){
-
+if(channelToUpdate != default
+{
     string newChannelDescription = $"This cool channel is being updated!";
     channelToUpdate.Description = newChannelDescription;
     
@@ -127,8 +127,8 @@ string channelName = $"My Cool New Channel";
 // Get the channel you wish to delete
 var channelToDelete = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
 
-if(channelToDelete != default){
-    
+if(channelToDelete != default)
+{    
     // Perform the delete operation
     await channelToUpdate.DeleteAsync();
 }
