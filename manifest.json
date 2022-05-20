@@ -6350,6 +6350,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamChannelIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamChannelIdentity.html",
+          "hash": "bphkk/w567OUhwPbCjROxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.ITeamChannelTab.yml",
       "output": {
         ".html": {
@@ -6390,7 +6402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessage.html",
-          "hash": "3Vu3bE3t9sx+w/9H20CkKw=="
+          "hash": "q97YEgfjW6ilpaRcY/IEeA=="
         }
       },
       "is_incremental": false,
@@ -6523,6 +6535,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReactionCollection.html",
           "hash": "6AWYai3jaH3JIjyPn1tdLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReply.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReply.html",
+          "hash": "ikaTiiITwJ8jDl9zQ4vW3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReplyCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReplyCollection.html",
+          "hash": "Dk7wNzHrPhLp9XhoT1ZBbw=="
         }
       },
       "is_incremental": false,
@@ -6810,7 +6846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "7bvzDXpdetYQakzdZ5S8qg=="
+          "hash": "3zKytE6JF5Bkn4v6wDFTwQ=="
         }
       },
       "is_incremental": false,
@@ -7554,7 +7590,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "piiMtjih2aqW3kqYI4UuBg=="
+          "hash": "gJc6mn7+cyARHO3qxldFcA=="
         }
       },
       "is_incremental": false,
@@ -9316,7 +9352,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 627,
+          "total_file_count": 630,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

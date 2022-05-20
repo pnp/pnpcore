@@ -54064,6 +54064,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync
   nameWithType: ITeamChannelCollection.GetByDisplayNameAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelIdentity
+  name: ITeamChannelIdentity
+  href: api/PnP.Core.Model.Teams.ITeamChannelIdentity.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChannelIdentity
+  fullName: PnP.Core.Model.Teams.ITeamChannelIdentity
+  nameWithType: ITeamChannelIdentity
+- uid: PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId
+  name: ChannelId
+  href: api/PnP.Core.Model.Teams.ITeamChannelIdentity.html#PnP_Core_Model_Teams_ITeamChannelIdentity_ChannelId
+  commentId: P:PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId
+  fullName: PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId
+  nameWithType: ITeamChannelIdentity.ChannelId
+- uid: PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId*
+  name: ChannelId
+  href: api/PnP.Core.Model.Teams.ITeamChannelIdentity.html#PnP_Core_Model_Teams_ITeamChannelIdentity_ChannelId_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelIdentity.ChannelId
+  nameWithType: ITeamChannelIdentity.ChannelId
+- uid: PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId
+  name: TeamId
+  href: api/PnP.Core.Model.Teams.ITeamChannelIdentity.html#PnP_Core_Model_Teams_ITeamChannelIdentity_TeamId
+  commentId: P:PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId
+  fullName: PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId
+  nameWithType: ITeamChannelIdentity.TeamId
+- uid: PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId*
+  name: TeamId
+  href: api/PnP.Core.Model.Teams.ITeamChannelIdentity.html#PnP_Core_Model_Teams_ITeamChannelIdentity_TeamId_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelIdentity.TeamId
+  nameWithType: ITeamChannelIdentity.TeamId
 - uid: PnP.Core.Model.Teams.ITeamChannelTab
   name: ITeamChannelTab
   href: api/PnP.Core.Model.Teams.ITeamChannelTab.html
@@ -55089,6 +55121,106 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChatMessage
   fullName: PnP.Core.Model.Teams.ITeamChatMessage
   nameWithType: ITeamChatMessage
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReply(PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReply(ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReply_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReply(PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReply(PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReply(ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReply(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReply(String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReply_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReply(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReply(System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReply(String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReply*
+  name: AddReply
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReply_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.AddReply
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReply
+  nameWithType: ITeamChatMessage.AddReply
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReplyAsync(ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyAsync_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReplyAsync(ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReplyAsync(String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync(System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReplyAsync(String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync*
+  name: AddReplyAsync
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyAsync
+  nameWithType: ITeamChatMessage.AddReplyAsync
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReplyBatch(ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatch_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReplyBatch(ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReplyBatch(Batch, ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatch_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch, PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReplyBatch(Batch, ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReplyBatch(Batch, String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReplyBatch(Batch, String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReplyBatch(String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch(System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReplyBatch(String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch*
+  name: AddReplyBatch
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatch_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatch
+  nameWithType: ITeamChatMessage.AddReplyBatch
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReplyBatchAsync(ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatchAsync_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReplyBatchAsync(ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)
+  name: AddReplyBatchAsync(Batch, ChatMessageOptions)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.Teams.ChatMessageOptions)
+  nameWithType: ITeamChatMessage.AddReplyBatchAsync(Batch, ChatMessageOptions)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReplyBatchAsync(Batch, String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReplyBatchAsync(Batch, String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  name: AddReplyBatchAsync(String, ChatMessageContentType, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync(System.String, PnP.Core.Model.Teams.ChatMessageContentType, System.String)
+  nameWithType: ITeamChatMessage.AddReplyBatchAsync(String, ChatMessageContentType, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync*
+  name: AddReplyBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_AddReplyBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.AddReplyBatchAsync
+  nameWithType: ITeamChatMessage.AddReplyBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChatMessage.Attachments
   name: Attachments
   href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_Attachments
@@ -55115,6 +55247,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessage.Body
   nameWithType: ITeamChatMessage.Body
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity
+  name: ChannelIdentity
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_ChannelIdentity
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity
+  nameWithType: ITeamChatMessage.ChannelIdentity
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity*
+  name: ChannelIdentity
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_ChannelIdentity_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.ChannelIdentity
+  nameWithType: ITeamChatMessage.ChannelIdentity
 - uid: PnP.Core.Model.Teams.ITeamChatMessage.CreatedDateTime
   name: CreatedDateTime
   href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_CreatedDateTime
@@ -55271,6 +55416,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessage.Reactions
   nameWithType: ITeamChatMessage.Reactions
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.Replies
+  name: Replies
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_Replies
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessage.Replies
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.Replies
+  nameWithType: ITeamChatMessage.Replies
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.Replies*
+  name: Replies
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_Replies_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.Replies
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.Replies
+  nameWithType: ITeamChatMessage.Replies
 - uid: PnP.Core.Model.Teams.ITeamChatMessage.ReplyToId
   name: ReplyToId
   href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_ReplyToId
@@ -55762,6 +55920,265 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChatMessageReactionCollection
   fullName: PnP.Core.Model.Teams.ITeamChatMessageReactionCollection
   nameWithType: ITeamChatMessageReactionCollection
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply
+  name: ITeamChatMessageReply
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageReply
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply
+  nameWithType: ITeamChatMessageReply
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments
+  name: Attachments
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Attachments
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments
+  nameWithType: ITeamChatMessageReply.Attachments
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments*
+  name: Attachments
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Attachments_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Attachments
+  nameWithType: ITeamChatMessageReply.Attachments
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Body
+  name: Body
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Body
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Body
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Body
+  nameWithType: ITeamChatMessageReply.Body
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Body*
+  name: Body
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Body_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Body
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Body
+  nameWithType: ITeamChatMessageReply.Body
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity
+  name: ChannelIdentity
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_ChannelIdentity
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity
+  nameWithType: ITeamChatMessageReply.ChannelIdentity
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity*
+  name: ChannelIdentity
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_ChannelIdentity_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.ChannelIdentity
+  nameWithType: ITeamChatMessageReply.ChannelIdentity
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_CreatedDateTime
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime
+  nameWithType: ITeamChatMessageReply.CreatedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime*
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_CreatedDateTime_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.CreatedDateTime
+  nameWithType: ITeamChatMessageReply.CreatedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime
+  name: DeletedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_DeletedDateTime
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime
+  nameWithType: ITeamChatMessageReply.DeletedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime*
+  name: DeletedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_DeletedDateTime_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.DeletedDateTime
+  nameWithType: ITeamChatMessageReply.DeletedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Etag
+  name: Etag
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Etag
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Etag
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Etag
+  nameWithType: ITeamChatMessageReply.Etag
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Etag*
+  name: Etag
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Etag_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Etag
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Etag
+  nameWithType: ITeamChatMessageReply.Etag
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.From
+  name: From
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_From
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.From
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.From
+  nameWithType: ITeamChatMessageReply.From
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.From*
+  name: From
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_From_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.From
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.From
+  nameWithType: ITeamChatMessageReply.From
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents
+  name: HostedContents
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_HostedContents
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents
+  nameWithType: ITeamChatMessageReply.HostedContents
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents*
+  name: HostedContents
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_HostedContents_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.HostedContents
+  nameWithType: ITeamChatMessageReply.HostedContents
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Id
+  name: Id
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Id
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Id
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Id
+  nameWithType: ITeamChatMessageReply.Id
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Id*
+  name: Id
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Id_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Id
+  nameWithType: ITeamChatMessageReply.Id
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Importance
+  name: Importance
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Importance
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Importance
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Importance
+  nameWithType: ITeamChatMessageReply.Importance
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Importance*
+  name: Importance
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Importance_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Importance
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Importance
+  nameWithType: ITeamChatMessageReply.Importance
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime
+  name: LastModifiedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_LastModifiedDateTime
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime
+  nameWithType: ITeamChatMessageReply.LastModifiedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime*
+  name: LastModifiedDateTime
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_LastModifiedDateTime_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.LastModifiedDateTime
+  nameWithType: ITeamChatMessageReply.LastModifiedDateTime
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Locale
+  name: Locale
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Locale
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Locale
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Locale
+  nameWithType: ITeamChatMessageReply.Locale
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Locale*
+  name: Locale
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Locale_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Locale
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Locale
+  nameWithType: ITeamChatMessageReply.Locale
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions
+  name: Mentions
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Mentions
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions
+  nameWithType: ITeamChatMessageReply.Mentions
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions*
+  name: Mentions
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Mentions_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Mentions
+  nameWithType: ITeamChatMessageReply.Mentions
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType
+  name: MessageType
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_MessageType
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType
+  nameWithType: ITeamChatMessageReply.MessageType
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType*
+  name: MessageType
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_MessageType_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.MessageType
+  nameWithType: ITeamChatMessageReply.MessageType
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions
+  name: Reactions
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Reactions
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions
+  nameWithType: ITeamChatMessageReply.Reactions
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions*
+  name: Reactions
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Reactions_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Reactions
+  nameWithType: ITeamChatMessageReply.Reactions
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId
+  name: ReplyToId
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_ReplyToId
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId
+  nameWithType: ITeamChatMessageReply.ReplyToId
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId*
+  name: ReplyToId
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_ReplyToId_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.ReplyToId
+  nameWithType: ITeamChatMessageReply.ReplyToId
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Subject
+  name: Subject
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Subject
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Subject
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Subject
+  nameWithType: ITeamChatMessageReply.Subject
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Subject*
+  name: Subject
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Subject_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Subject
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Subject
+  nameWithType: ITeamChatMessageReply.Subject
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Summary
+  name: Summary
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Summary
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.Summary
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Summary
+  nameWithType: ITeamChatMessageReply.Summary
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.Summary*
+  name: Summary
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_Summary_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.Summary
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.Summary
+  nameWithType: ITeamChatMessageReply.Summary
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl
+  name: WebUrl
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_WebUrl
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl
+  nameWithType: ITeamChatMessageReply.WebUrl
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl*
+  name: WebUrl
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReply.html#PnP_Core_Model_Teams_ITeamChatMessageReply_WebUrl_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReply.WebUrl
+  nameWithType: ITeamChatMessageReply.WebUrl
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReplyCollection
+  name: ITeamChatMessageReplyCollection
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReplyCollection.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageReplyCollection
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReplyCollection
+  nameWithType: ITeamChatMessageReplyCollection
 - uid: PnP.Core.Model.Teams.ITeamClassSettings
   name: ITeamClassSettings
   href: api/PnP.Core.Model.Teams.ITeamClassSettings.html
