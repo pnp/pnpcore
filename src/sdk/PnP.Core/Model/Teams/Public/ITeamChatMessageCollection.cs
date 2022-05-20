@@ -28,7 +28,7 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="content">Content of the message</param>
         /// <param name="contentType">Message content type e.g. Text, Html</param>
-        /// /// <param name="subject">Message Subject</param>
+        /// <param name="subject">Message Subject</param>
         /// <returns></returns>
         public ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
 
