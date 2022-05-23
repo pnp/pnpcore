@@ -274,7 +274,7 @@ await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions
 
 ```
 
-In this example, a reply will be created which will tag an entire team and a team tag. For more information regarding the usage of team tags in the PnP Core SDK, please refer to [Team tags](teams-tags)
+In this example, a reply will be created which will tag an entire team and a team tag. For more information regarding the usage of team tags in the PnP Core SDK, please refer to [Team tags](teams-tags.md)
 
 ```csharp
 

@@ -14,18 +14,16 @@ Tags is a collection part of the ITeam interface, so when you get a team, you ca
 
 // Get the Tags
  var tags = team.Tags;
- 
-```
+ ```
 
 ## Creating Tags
 
 To add a new tab, call the Add method, specifying a display name and the users to be associated with the tags.
 
-> [!Note]:
+> [!Note]
 > The user to be associated with the tag has to be a member of the team.
 
 ```csharp
-
 // Get the Team
 var team = await context.Team.GetAsync(x => x.Tags, x => x.Members);
 
@@ -44,7 +42,6 @@ await team.Tags.AddAsync(new TeamTagOptions
         }
     }
 });
-
 ```
 
 ## Updating Tags
@@ -52,7 +49,6 @@ await team.Tags.AddAsync(new TeamTagOptions
 You can update the tag by changing the properties you wish update and call the update method:
 
 ```csharp
-
 // Get the Team
 var team = await context.Team.GetAsync(p => p.Tags);
 
@@ -68,7 +64,6 @@ if(tagToUpdate != default)
     // Perform the update to the tag
     await tagToUpdate.UpdateAsync();
 }
-
 ```
 
 ## Deleting Tags
@@ -76,7 +71,6 @@ if(tagToUpdate != default)
 You can delete the tag with the following example:
 
 ```csharp
-
 /// Get the Team
 var team = await context.Team.GetAsync(p => p.Tags);
 
@@ -90,5 +84,4 @@ if(tagToDelete != default)
     // Perform the delete operation
     await tagToDelete.DeleteAsync();
 }
-
 ```
