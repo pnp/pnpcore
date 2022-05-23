@@ -133,20 +133,20 @@
   items:
   - name: Overview
     href: teams-intro.md
-  - name: Channels
-    href: teams-channels.md
-  - name: Tabs
-    href: teams-channel-tabs.md
+  - name: Archiving
+    href: teams-archiving.md
   - name: Chat
     href: teams-channel-chat.md
   - name: Chat replies
     href: teams-channel-chat-reply.md
+  - name: Channels
+    href: teams-channels.md
   - name: Events
     href: teams-events.md
+  - name: Tabs
+    href: teams-channel-tabs.md
   - name: Tags
     href: teams-tags.md
-  - name: Archiving
-    href: teams-archiving.md
 - name: Taxonomy
   items:
   - name: Overview

@@ -20,9 +20,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added sharing capabilities (enumerate + add/delete) for files #834 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for Event Receivers (enumerate, add or delete) #835 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added sharing capabilities (enumerate + add/delete) for folders #841 [MathijsVerbeeck - Mathijs Verbeeck]
-- Added possibility to mention user, application, team tag and conversation in a chat message #840 [MathijsVerbeeck - Mathijs Verbeeck]
-- Allow to enumerate / add / update / delete team events #848 [MathijsVerbeeck - Mathijs Verbeeck]
-- Added functionalities to list replies of a teams chat message and add new replies #853 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added possibility to mention user, application, team tag and conversation in a chat message #840 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Allow to enumerate / add / update / delete team events #848 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added functionalities to list replies of a teams chat message and add new replies #853 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 
