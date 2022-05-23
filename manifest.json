@@ -9225,11 +9225,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-channel-chat-reply.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-channel-chat-reply.html",
+          "hash": "P7Swz7/7OqZHz7J/7qekBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/teams-channel-chat.md",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/teams-channel-chat.html",
-          "hash": "e3X7lzHtu/lIQvwnV97OSQ=="
+          "hash": "djm7sXP38odeTmR1ALdNCg=="
         }
       },
       "is_incremental": false,
@@ -9253,7 +9265,19 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/teams-channels.html",
-          "hash": "dxhKiOvDCeiDxS6XktSr8A=="
+          "hash": "lus3f7Z2vdOhO5EnHoVFfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-events.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-events.html",
+          "hash": "qmYAtYie7Yjr7UbWusT/EQ=="
         }
       },
       "is_incremental": false,
@@ -9272,12 +9296,24 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-tags.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-tags.html",
+          "hash": "k9I52y1Y3V5qggRmOHTcMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "using-the-sdk/toc.yml",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "oEgpc+sbLn6/Yc1MfKRNUQ=="
+          "hash": "e3YuikQ3StQfAtA25+55BQ=="
         }
       },
       "is_incremental": false,
@@ -9346,7 +9382,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 103,
+          "total_file_count": 106,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

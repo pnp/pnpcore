@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with Teams: Events | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with Teams: Events | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/teams-events.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-teams-events">Working with Teams: Events</h1>
+
+<p>Within Teams, you can have team events (meetings). This page will show you how you can Get, Create, Update and Delete events.</p>
+<h2 id="creating-context">Creating Context</h2>
+<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with Teams
+}
+</code></pre>
+<h2 id="getting-events">Getting Events</h2>
+<p>Events is a collection part of the ITeam interface, so when you get a team, you can include the events on the request.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(o =&gt; o.Events);
+
+// Get the Events
+var events = team.Events;
+</code></pre>
+<h2 id="creating-events">Creating Events</h2>
+<p>To add a new event, call the Add method, specifying atleast a subject.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+string eventSubject = $&quot;Test event - PnP Rocks!&quot;;
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = eventSubject
+});
+</code></pre>
+<h2 id="adding-an-event-with-multiple-attendees-and-a-start-time-and-end-time">Adding an event with multiple attendees and a start time and end time</h2>
+<p>We can create an event using the PnP Core SDK and add multiple attendees to the event. These attendees can either be set <em>required</em>, <em>optional</em> or <em>resource</em>.</p>
+<p>We can also choose to hide the attendees of an event. This can be done by setting the property <em>HideAttendees</em> to true. It defaults to <em>false</em>.</p>
+<p>Next, we will add a start and end time for the event with a timezone.</p>
+<p>The code below will create an event which will last for one hour and will have two attendees. The attendees will be hidden.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+// Get the users to add to the event
+await context.Web.GetAsync(y =&gt; y.SiteUsers);
+
+var firstUser = context.Web.SiteUsers.Where(y =&gt; y.PrincipalType == Model.Security.PrincipalType.User).First();
+var secondUser = context.Web.SiteUsers.Where(y =&gt; y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = &quot;Test event - PnP Rocks!&quot;,
+    Attendees = new List&lt;EventAttendeeOptions&gt;
+    {
+        new EventAttendeeOptions
+        {
+            EmailAddress = firstUser.Mail,
+            Name = firstUser.Title,
+            Type = EventAttendeeType.Optional
+        },
+        new EventAttendeeOptions
+        {
+            EmailAddress = secondUser.Mail,
+            Name = secondUser.Title,
+            Type = EventAttendeeType.Required
+        }
+    },
+    HideAttendees = true,
+    Start = new DateTime(2022, 5, 12, 14, 0, 0),
+    StartTimeZone = EventTimeZone.PacificStandardTime,
+    End = new DateTime(2022, 5, 12, 15, 0, 0),
+    EndTimeZone = EventTimeZone.PacificStandardTime,
+});
+</code></pre>
+<h2 id="adding-an-event-that-lasts-all-day">Adding an event that lasts all day</h2>
+<p>Using the PnP Core SDK, we can add an event that will last all day.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = &quot;CreateTeamEventThatLastsAllDayAsync&quot;,
+    IsAllDay = true,
+    Start = DateTime.Now,
+    End = DateTime.Now.AddDays(1)
+});
+</code></pre>
+<h2 id="adding-an-event-with-a-location">Adding an event with a location</h2>
+<p>We can create an event using the PnP Core SDK and add a location to the event.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = &quot;Test event - PnP Rocks!&quot;,
+    Location = new EventLocationOptions
+    {
+        Type = EventLocationType.Default,
+        DisplayName = &quot;PnP Test location&quot;,
+        Address = new EventAddressOptions
+        { 
+            City = &quot;Brussels&quot;,
+            State = &quot;Bussels&quot;,
+            PostalCode = &quot;1000&quot;,
+            CountryOrRegion = &quot;BE&quot;,
+            Street = &quot;Wetstraat&quot;
+        },
+        Coordinates = new EventCoordinateOptions
+        {
+            Latitude = 20.00,
+            Longitude = 30.00,
+            Accuracy = 5,
+            Altitude = 20,
+            AltitudeAccuracy = 2.00
+        }
+    }
+});
+</code></pre>
+<h2 id="adding-a-recurring-event">Adding a recurring event</h2>
+<p>Using the PnP Core SDK, we can create a recurring event. Below, we will create a recurring event that will occur weekly, on every monday. This event will recur for exactly one year, starting today.</p>
+<pre><code class="lang-csharp">
+// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = &quot;Test event - PnP Rocks!&quot;,
+    Recurrence = new EventRecurrenceOptions
+    {
+        Pattern = new EventRecurrencePatternOptions
+        {
+            Type = EventRecurrenceType.Weekly,
+            Interval = 1,
+            DaysOfWeek = new List&lt;DayOfWeek&gt;
+            {
+                DayOfWeek.Monday
+            }
+        },
+        Range = new EventRecurrenceRangeOptions
+        {
+            Type = EventRecurrenceRangeType.EndDate,
+            EndDate = DateTime.Now.AddYears(1),
+            StartDate = DateTime.Now
+        }
+    }
+};)
+
+</code></pre>
+<p>For more information regarding the creation of recurring events, please have a look at the following Graph documentation page: <a href="https://docs.microsoft.com/en-us/graph/api/resources/patternedrecurrence?view=graph-rest-1.0">Recurrence Pattern documentation</a>. This page will list which combinations are possible and which properties are required when e.g. creating a recurrence with a recurrencerange of type 'EndDate'</p>
+<p>You also can always check the tests that have been written starting from line 329 to 447 for more smaples: <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Test/Teams/TeamEventTests.cs#L329-L447">Link to tests</a></p>
+<h2 id="adding-an-online-event-with-some-more-properties-being-set">Adding an online event with some more properties being set</h2>
+<p>In the following example we will create a Teams meeting. There will also be other properties being set such as the priority, the sensitivity of the event and the status on how the presence of the user attending the meeting will be shown.</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+await events.AddAsync(new EventCreateOptions
+{
+    Subject = &quot;Test event - PnP Rocks&quot;,
+    AllowNewTimeProposals = true,
+    IsOnlineMeeting = true,
+    OnlineMeetingProvider = EventOnlineMeetingProvider.TeamsForBusiness,
+    Sensitivity = EventSensitivity.Personal,
+    ShowAs = EventShowAs.Busy,
+    Importance = EventImportance.High
+});
+
+</code></pre>
+<p>For all the possible properties that can be set on creating an event, please refer to following page: <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.Teams.EventCreateOptions.html">Event Create Options</a>.</p>
+<h2 id="updating-events">Updating events</h2>
+<p>You can update the events by changing the properties you wish update and call the update method. The events have to be a part of the class <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.Teams.EventUpdateOptions.html">EventUpdateOptions</a>.</p>
+<p>The following sample will update the attendees and the subject of an event.</p>
+<pre><code class="lang-csharp">
+// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+// Get the events
+var events = team.Events;
+
+// Create an event to update
+
+var firstUser = context.Web.SiteUsers.Where(y =&gt; y.PrincipalType == Model.Security.PrincipalType.User).First();
+
+var eventOptions = new EventCreateOptions
+{
+    Subject = &quot;Test event - PnP Rocks&quot;,
+    Attendees = new List&lt;EventAttendeeOptions&gt;
+    {
+        new EventAttendeeOptions
+        {
+            EmailAddress = firstUser.Mail,
+            Name = firstUser.Title,
+            Type = EventAttendeeType.Optional
+        }
+    }
+};
+
+// Add the event (which we will update)
+var newEvent = await context.Team.Events.AddAsync(eventOptions);
+
+// Update the event
+await newEvent.UpdateAsync(new EventUpdateOptions
+{
+    Subject = &quot;Test event - PnP Rocks - Updated&quot;,
+    Attendees = new List&lt;EventAttendeeOptions&gt;
+    {
+        new EventAttendeeOptions
+        {
+            EmailAddress = firstUser.Mail,
+            Name = firstUser.Title,
+            Type = EventAttendeeType.Optional
+        },
+        new EventAttendeeOptions
+        {
+            EmailAddress = secondUser.Mail,
+            Name = secondUser.Title,
+            Type = EventAttendeeType.Required
+        }
+    }
+});
+
+</code></pre>
+<h2 id="deleting-events">Deleting Events</h2>
+<p>You can delete the event with the following example:</p>
+<pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Events);
+
+var event = await team.Events;
+
+string eventSubject = $&quot;Test event - PnP Rocks&quot;;
+
+// Get the event you wish to delete
+var eventToDelete = team.Events.Where(p =&gt; p.DisplayName == eventSubject).FirstOrDefault();
+
+if(eventToDelete != default)
+{    
+    // Perform the delete operation
+    await eventToDelete.DeleteAsync();
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

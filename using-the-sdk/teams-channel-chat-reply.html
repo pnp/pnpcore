@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Working with a Team Channel Chat messages | PnP Core SDK </title>
+    <title>Working with a Team Channel Chat message reply | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Working with a Team Channel Chat messages | PnP Core SDK ">
+    <meta name="title" content="Working with a Team Channel Chat message reply | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,11 +78,11 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/teams-channel-chat.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/teams-channel-chat-reply.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="working-with-a-team-channel-chat-messages">Working with a Team Channel Chat messages</h1>
+                    <h1 id="working-with-a-team-channel-chat-message-reply">Working with a Team Channel Chat message reply</h1>
 
-<p>The Core SDK provides support for working with chat messages within a Teams Channel allowing you to post messages.</p>
+<p>The Core SDK provides support for working with chat messages within a Teams Channel allowing you to post messages. It is possible using the PnP Core SDK to then reply on these messages.</p>
 <h2 id="creating-context">Creating Context</h2>
 <p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
@@ -90,8 +90,8 @@
     // See next chapter on how to use the PnPContext for working with Teams
 }
 </code></pre>
-<h2 id="getting-chat-messages">Getting Chat Messages</h2>
-<p>The following example will show you how to retrieve all the messages within a channel chat:</p>
+<h2 id="getting-chat-message-replies">Getting Chat Message replies</h2>
+<p>The following example will show you how to retrieve all the replies of a message within a channel chat:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
@@ -99,11 +99,17 @@ var team = await context.Team.GetAsync(o =&gt; o.Channels);
 var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
-var chatMessages = channel.Messages;
+var chatMessage = channel.Messages.AsRequested().FirstOrDefault();
+
+// Load the replies
+chatMessage = await chatMessage.GetAsync(o =&gt; o.Replies);
+
+// Get the replies
+var replies = chatMessage.Replies;
 
 </code></pre>
-<h2 id="adding-chat-messages">Adding Chat Messages</h2>
-<p>You can post messages to the chat within a channel, the following code demonstrates how this can be done:</p>
+<h2 id="adding-chat-message-replies">Adding Chat Message Replies</h2>
+<p>You can post replies to a message within a channel, the following code demonstrates how this can be done:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
@@ -113,14 +119,18 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
-var body = &quot;Hello, I'm posting a message - PnP Rocks!&quot;;
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
+// Define the body of the reply
+var body = &quot;Hello, I'm posting a reply - PnP Rocks!&quot;;
 
 // Perform the add operation
-await chatMessages.AddAsync(body);
+await chatMessageToAddReply.AddReplyAsync(body);
 
 </code></pre>
-<h2 id="add-chat-messages-with-html">Add Chat Messages with HTML</h2>
-<p>You can add chat messages that contain a HTML body, the following code sample will demonstrate how to do this:</p>
+<h2 id="add-chat-message-replies-with-html">Add Chat Message Replies with HTML</h2>
+<p>You can add chat replies that contain a HTML body, the following code sample will demonstrate how to do this:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
@@ -130,14 +140,18 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
+// Define the body of the reply
 var body = $&quot;&lt;h1&gt;Hello&lt;/h1&gt;&lt;br /&gt;Example posting a HTML message - &lt;strong&gt;PnP Rocks!&lt;/strong&gt;&quot;;
 
 // Perform the add operation
-await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+await chatMessageToAddReply.AddReplyAsync(body, ChatMessageContentType.Html);
                 
 </code></pre>
 <h2 id="adding-chat-messages-with-attachments">Adding Chat Messages with Attachments</h2>
-<p>Chat messages can support file attachments.</p>
+<p>Chat message replies can support file attachments.</p>
 <p>The following code shows an example of how an attachment is done:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
@@ -147,6 +161,9 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
+
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
 
 // Upload File to SharePoint Library
 IFolder folder = await context.Web.Lists.GetByTitle(&quot;Documents&quot;).RootFolder.GetAsync();
@@ -163,7 +180,7 @@ var body = $&quot;&lt;h1&gt;Hello&lt;/h1&gt;&lt;br /&gt;Example posting a messag
 
 var fileUri = new Uri(existingFile.LinkingUrl);
 
-await chatMessages.AddAsync(new ChatMessageOptions{
+await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions{
     Content = body,
     ContentType = ChatMessageContentType.Html,
     Attachments = {
@@ -179,9 +196,8 @@ await chatMessages.AddAsync(new ChatMessageOptions{
         }
     }
 });
+
 </code></pre>
-<p>For advanced information about the specific area of the Graph that handles sending messages with attachments visit:
-<a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-4-file-attachments">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-4-file-attachments</a></p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>There two areas you should be aware about this feature related to how the Graph works:</p>
@@ -190,8 +206,8 @@ await chatMessages.AddAsync(new ChatMessageOptions{
 <li>File used to upload, must not have a query string parameter, this will not be recognised and the Graph treats this as part of the extension and thus will fail if the Name extension is different.</li>
 </ul>
 </div>
-<h2 id="adding-chat-messages-with-cards">Adding Chat Messages with Cards</h2>
-<p>Adding a chat message can be done using a Card, see below adaptive card example:</p>
+<h2 id="adding-chat-message-reply-with-cards">Adding Chat Message reply with Cards</h2>
+<p>Adding a chat message reply can be done using a Card, see below adaptive card example:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
@@ -201,11 +217,14 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
 // Attachment ID must be unique, but the same in both body and content properties
 var attachmentId = &quot;74d20c7f34aa4a7fb74e2b30004247c5&quot;;
 var body = $&quot;&lt;attachment id=\&quot;{attachmentId}\&quot;&gt;&lt;/attachment&gt;&quot;;
 
-await chatMessages.AddAsync(new ChatMessageOptions
+await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions
 {
     Content = body,
     ContentType = ChatMessageContentType.Html,
@@ -224,12 +243,8 @@ await chatMessages.AddAsync(new ChatMessageOptions
 });
 
 </code></pre>
-<p>For advanced information about the specific area of the Graph that handles sending messages with cards visit:
-<a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-3-cards">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-3-cards</a></p>
-<p>Additionally, there are different types of cards, such as Adaptive Cards and Thumbnail - these have been tested with unit tests but not all types have yet.
-For information about the different types of cards, visit: <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference">https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference</a></p>
-<h2 id="adding-chat-messages-with-inline-images">Adding Chat Messages with Inline Images</h2>
-<p>Chat messages can also include inline images. The following example demonstrates this option:</p>
+<h2 id="adding-chat-message-reply-with-inline-images">Adding Chat Message reply with Inline Images</h2>
+<p>Chat message replies can also include inline images. The following example demonstrates this option:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
@@ -239,9 +254,12 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
 var body = $&quot;&lt;div&gt;&lt;div&gt;&lt;h1&gt;Hello&lt;/h1&gt;&lt;p&gt;Example posting a message with inline image&lt;/p&gt;&lt;div&gt;&lt;span&gt;&lt;img height=\&quot;392\&quot; src=\&quot;../hostedContents/1/$value\&quot; width=\&quot;300\&quot; style=\&quot;vertical-align:bottom; width:300px; height:392px\&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&quot;;
                                 
-await chatMessages.AddAsync(new ChatMessageOptions
+await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions
 {
     Content = body,
     ContentType = ChatMessageContentType.Html,
@@ -255,11 +273,10 @@ await chatMessages.AddAsync(new ChatMessageOptions
         }
     }
 });
+
 </code></pre>
-<p>For advanced information about the specific area of the Graph that handles sending messages with inline images visit:
-<a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-5-sending-inline-images-along-with-the-message">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-5-sending-inline-images-along-with-the-message</a></p>
-<h2 id="adding-chat-messages-with-mentions">Adding chat messages with mentions</h2>
-<p>We can use mentions when creating a chat message. We can use the following options when mentioning:</p>
+<h2 id="adding-chat-message-reply-with-mentions">Adding chat message reply with mentions</h2>
+<p>We can use mentions when creating a chat message reply. We can use the following options when mentioning:</p>
 <ul>
 <li>User</li>
 <li>Conversation (e.g. a team, a channel, ...)</li>
@@ -275,9 +292,12 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
 var body = $&quot;Hello, PnP Rocks! &lt;br/&gt;This is a channel and user mention test &lt;br/&gt;Mention 1: &lt;at id=\&quot;0\&quot;&gt;Channel&lt;/at&gt;&lt;br/&gt;Mention 2: &lt;at id=\&quot;1\&quot;&gt;User&lt;/a&gt;&quot;;
 
-await chatMessages.AddAsync(new ChatMessageOptions
+await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions
 {
     Content = body,
     ContentType = ChatMessageContentType.Html,
@@ -314,7 +334,7 @@ await chatMessages.AddAsync(new ChatMessageOptions
 });
 
 </code></pre>
-<p>In this example, a message will be created which will tag a team and a team tag. For more information regarding the usage of team tags in the PnP Core SDK, please refer to {insert link here}</p>
+<p>In this example, a reply will be created which will tag an entire team and a team tag. For more information regarding the usage of team tags in the PnP Core SDK, please refer to <a href="teams-tags.html">Team tags</a></p>
 <pre><code class="lang-csharp">
 // Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels, o =&gt; o.Tags);
@@ -325,9 +345,12 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName =
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
 
+// Get the chat message to add a reply to
+var chatMessageToAddReply = chatMessages.AsRequested().FirstOrDefault();
+
 var body = $&quot;Hello, PnP Rocks! &lt;br/&gt;This is a team and tag mention test &lt;br/&gt;Mention 1: &lt;at id=\&quot;0\&quot;&gt;Team&lt;/at&gt;&lt;br/&gt;Mention 2: &lt;at id=\&quot;1\&quot;&gt;Tag&lt;/at&gt;&quot;;
 
-await chatMessages.AddAsync(new ChatMessageOptions
+await chatMessageToAddReply.AddReplyAsync(new ChatMessageOptions
 {
     Content = body,
     ContentType = ChatMessageContentType.Html,
@@ -363,7 +386,6 @@ await chatMessages.AddAsync(new ChatMessageOptions
 });
 
 </code></pre>
-<p>For advanced information about the specific area of the Graph that handles sending messages with mentions, visit: <a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#examples">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#examples</a></p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
