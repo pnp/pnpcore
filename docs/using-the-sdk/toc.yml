@@ -139,6 +139,12 @@
     href: teams-channel-tabs.md
   - name: Chat
     href: teams-channel-chat.md
+  - name: Chat replies
+    href: teams-channel-chat-reply.md
+  - name: Events
+    href: teams-events.md
+  - name: Tags
+    href: teams-tags.md
   - name: Archiving
     href: teams-archiving.md
 - name: Taxonomy
