@@ -17789,6 +17789,51 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.CustomizedPageStatus.Uncustomized
   fullName: PnP.Core.Model.SharePoint.CustomizedPageStatus.Uncustomized
   nameWithType: CustomizedPageStatus.Uncustomized
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions
+  name: CustomThumbnailOptions
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.CustomThumbnailOptions
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions
+  nameWithType: CustomThumbnailOptions
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped
+  name: Cropped
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Cropped
+  commentId: P:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped
+  nameWithType: CustomThumbnailOptions.Cropped
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped*
+  name: Cropped
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Cropped_
+  commentId: Overload:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Cropped
+  nameWithType: CustomThumbnailOptions.Cropped
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Height
+  commentId: P:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height
+  nameWithType: CustomThumbnailOptions.Height
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height*
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Height_
+  commentId: Overload:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Height
+  nameWithType: CustomThumbnailOptions.Height
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Width
+  commentId: P:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width
+  nameWithType: CustomThumbnailOptions.Width
+- uid: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width*
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html#PnP_Core_Model_SharePoint_CustomThumbnailOptions_Width_
+  commentId: Overload:PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CustomThumbnailOptions.Width
+  nameWithType: CustomThumbnailOptions.Width
 - uid: PnP.Core.Model.SharePoint.DateTimeFieldFormatType
   name: DateTimeFieldFormatType
   href: api/PnP.Core.Model.SharePoint.DateTimeFieldFormatType.html
@@ -27045,6 +27090,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.GetShareLinksAsync
   nameWithType: IFile.GetShareLinksAsync
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnails(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnails(ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnails_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnails(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnails(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnails(ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnails*
+  name: GetThumbnails
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnails_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetThumbnails
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnails
+  nameWithType: IFile.GetThumbnails
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnailsAsync(ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsAsync_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnailsAsync(ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync*
+  name: GetThumbnailsAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsAsync
+  nameWithType: IFile.GetThumbnailsAsync
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnailsBatch(ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatch_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnailsBatch(ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnailsBatch(Batch, ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnailsBatch(Batch, ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch*
+  name: GetThumbnailsBatch
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatch
+  nameWithType: IFile.GetThumbnailsBatch
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnailsBatchAsync(ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatchAsync_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnailsBatchAsync(ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ThumbnailOptions)
+  name: GetThumbnailsBatchAsync(Batch, ThumbnailOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ThumbnailOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ThumbnailOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ThumbnailOptions)
+  nameWithType: IFile.GetThumbnailsBatchAsync(Batch, ThumbnailOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync*
+  name: GetThumbnailsBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetThumbnailsBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetThumbnailsBatchAsync
+  nameWithType: IFile.GetThumbnailsBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
   name: HasAlternateContentStreams
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_HasAlternateContentStreams
@@ -40634,6 +40743,77 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITheme.ThemeJson
   nameWithType: ITheme.ThemeJson
+- uid: PnP.Core.Model.SharePoint.IThumbnail
+  name: IThumbnail
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html
+  commentId: T:PnP.Core.Model.SharePoint.IThumbnail
+  fullName: PnP.Core.Model.SharePoint.IThumbnail
+  nameWithType: IThumbnail
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Height
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Height
+  commentId: P:PnP.Core.Model.SharePoint.IThumbnail.Height
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Height
+  nameWithType: IThumbnail.Height
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Height*
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Height_
+  commentId: Overload:PnP.Core.Model.SharePoint.IThumbnail.Height
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Height
+  nameWithType: IThumbnail.Height
+- uid: PnP.Core.Model.SharePoint.IThumbnail.SetId
+  name: SetId
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_SetId
+  commentId: P:PnP.Core.Model.SharePoint.IThumbnail.SetId
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.SetId
+  nameWithType: IThumbnail.SetId
+- uid: PnP.Core.Model.SharePoint.IThumbnail.SetId*
+  name: SetId
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_SetId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IThumbnail.SetId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.SetId
+  nameWithType: IThumbnail.SetId
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Size
+  name: Size
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Size
+  commentId: P:PnP.Core.Model.SharePoint.IThumbnail.Size
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Size
+  nameWithType: IThumbnail.Size
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Size*
+  name: Size
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Size_
+  commentId: Overload:PnP.Core.Model.SharePoint.IThumbnail.Size
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Size
+  nameWithType: IThumbnail.Size
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Url
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Url
+  commentId: P:PnP.Core.Model.SharePoint.IThumbnail.Url
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Url
+  nameWithType: IThumbnail.Url
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Url*
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Url_
+  commentId: Overload:PnP.Core.Model.SharePoint.IThumbnail.Url
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Url
+  nameWithType: IThumbnail.Url
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Width
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Width
+  commentId: P:PnP.Core.Model.SharePoint.IThumbnail.Width
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Width
+  nameWithType: IThumbnail.Width
+- uid: PnP.Core.Model.SharePoint.IThumbnail.Width*
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.IThumbnail.html#PnP_Core_Model_SharePoint_IThumbnail_Width_
+  commentId: Overload:PnP.Core.Model.SharePoint.IThumbnail.Width
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IThumbnail.Width
+  nameWithType: IThumbnail.Width
 - uid: PnP.Core.Model.SharePoint.ITimeZone
   name: ITimeZone
   href: api/PnP.Core.Model.SharePoint.ITimeZone.html
@@ -47886,6 +48066,62 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.TermRelationType.Reuse
   fullName: PnP.Core.Model.SharePoint.TermRelationType.Reuse
   nameWithType: TermRelationType.Reuse
+- uid: PnP.Core.Model.SharePoint.ThumbnailOptions
+  name: ThumbnailOptions
+  href: api/PnP.Core.Model.SharePoint.ThumbnailOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.ThumbnailOptions
+  fullName: PnP.Core.Model.SharePoint.ThumbnailOptions
+  nameWithType: ThumbnailOptions
+- uid: PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes
+  name: CustomSizes
+  href: api/PnP.Core.Model.SharePoint.ThumbnailOptions.html#PnP_Core_Model_SharePoint_ThumbnailOptions_CustomSizes
+  commentId: P:PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes
+  fullName: PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes
+  nameWithType: ThumbnailOptions.CustomSizes
+- uid: PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes*
+  name: CustomSizes
+  href: api/PnP.Core.Model.SharePoint.ThumbnailOptions.html#PnP_Core_Model_SharePoint_ThumbnailOptions_CustomSizes_
+  commentId: Overload:PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ThumbnailOptions.CustomSizes
+  nameWithType: ThumbnailOptions.CustomSizes
+- uid: PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes
+  name: StandardSizes
+  href: api/PnP.Core.Model.SharePoint.ThumbnailOptions.html#PnP_Core_Model_SharePoint_ThumbnailOptions_StandardSizes
+  commentId: P:PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes
+  fullName: PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes
+  nameWithType: ThumbnailOptions.StandardSizes
+- uid: PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes*
+  name: StandardSizes
+  href: api/PnP.Core.Model.SharePoint.ThumbnailOptions.html#PnP_Core_Model_SharePoint_ThumbnailOptions_StandardSizes_
+  commentId: Overload:PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ThumbnailOptions.StandardSizes
+  nameWithType: ThumbnailOptions.StandardSizes
+- uid: PnP.Core.Model.SharePoint.ThumbnailSize
+  name: ThumbnailSize
+  href: api/PnP.Core.Model.SharePoint.ThumbnailSize.html
+  commentId: T:PnP.Core.Model.SharePoint.ThumbnailSize
+  fullName: PnP.Core.Model.SharePoint.ThumbnailSize
+  nameWithType: ThumbnailSize
+- uid: PnP.Core.Model.SharePoint.ThumbnailSize.Large
+  name: Large
+  href: api/PnP.Core.Model.SharePoint.ThumbnailSize.html#PnP_Core_Model_SharePoint_ThumbnailSize_Large
+  commentId: F:PnP.Core.Model.SharePoint.ThumbnailSize.Large
+  fullName: PnP.Core.Model.SharePoint.ThumbnailSize.Large
+  nameWithType: ThumbnailSize.Large
+- uid: PnP.Core.Model.SharePoint.ThumbnailSize.Medium
+  name: Medium
+  href: api/PnP.Core.Model.SharePoint.ThumbnailSize.html#PnP_Core_Model_SharePoint_ThumbnailSize_Medium
+  commentId: F:PnP.Core.Model.SharePoint.ThumbnailSize.Medium
+  fullName: PnP.Core.Model.SharePoint.ThumbnailSize.Medium
+  nameWithType: ThumbnailSize.Medium
+- uid: PnP.Core.Model.SharePoint.ThumbnailSize.Small
+  name: Small
+  href: api/PnP.Core.Model.SharePoint.ThumbnailSize.html#PnP_Core_Model_SharePoint_ThumbnailSize_Small
+  commentId: F:PnP.Core.Model.SharePoint.ThumbnailSize.Small
+  fullName: PnP.Core.Model.SharePoint.ThumbnailSize.Small
+  nameWithType: ThumbnailSize.Small
 - uid: PnP.Core.Model.SharePoint.UrlFieldFormatType
   name: UrlFieldFormatType
   href: api/PnP.Core.Model.SharePoint.UrlFieldFormatType.html

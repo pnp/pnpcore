@@ -363,6 +363,52 @@ foreach(var fileVersion in testDocument.Versions)
     Stream fileVersionContent = await fileVersion.GetContentAsync();
 }
 </code></pre>
+<h2 id="getting-thumbnails-for-a-file">Getting thumbnails for a file</h2>
+<p>If you need to present a SharePoint file using a thumbnail and some basic file information (like <code>Title</code>) you can use one of the <code>GetThumbnail</code> methods. These methods optionally use an <code>ThumbnailOptions</code> class allowing you to specify one or more standard or custom thumbnail sizes. Once the call has ended you get a collection of <code>IThumbnail</code> instances each having a thumbnail URL completed with the thumbnail size.</p>
+<pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
+
+// Get a reference to the file, also request the Graph identifiers (VroomItemId and VroomDriveId) to 
+// avoid an extra server roundtrip in the GetThumbnailsAsync call
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f =&gt; f.VroomItemID, f =&gt; f.VroomDriveID);
+
+// Define the thumbnails to generate
+ThumbnailOptions options = new()
+{
+    // Standard sized thumbnails
+    StandardSizes = new List&lt;ThumbnailSize&gt;
+    {
+        ThumbnailSize.Medium,
+        ThumbnailSize.Large
+    },
+
+    // Custom sized thumbnails
+    CustomSizes = new List&lt;CustomThumbnailOptions&gt;
+    {
+        new CustomThumbnailOptions
+        {
+            Width = 200,
+            Height = 300,                                
+        },
+        new CustomThumbnailOptions
+        {
+            Width = 400,
+            Height = 500,
+            Cropped = true,
+        },
+    }
+};
+
+var thumbnails = await testDocument.GetThumbnailsAsync(options);
+
+foreach(var thumbnail in thumbnails)
+{
+    // use thumbnail.Url 
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Thumbnails can only be retrieved for files living in a document library. For pages in a pages library this will not work.</p>
+</div>
 <h2 id="getting-file-irm-settings">Getting file IRM settings</h2>
 <p>A SharePoint document library can be configured with an <a href="https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-irm-in-sp-admin-center?view=o365-worldwide">Information Rights Management (IRM) policy</a> which then stamps an IRM policy on the documents obtained from that library. Use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings">InformationRightsManagementSettings</a> property to read the file's IRM settings.</p>
 <div class="NOTE">
