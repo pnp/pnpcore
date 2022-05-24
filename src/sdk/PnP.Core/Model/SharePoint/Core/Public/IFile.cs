@@ -745,5 +745,51 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Information about the classify and extract request</returns>
         IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch();
         #endregion
+
+        #region Thumbnails
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<List<IThumbnail>> GetThumbnailsAsync(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        List<IThumbnail> GetThumbnails(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(Batch batch, ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null);
+        #endregion
     }
 }

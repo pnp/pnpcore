@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added possibility to mention user, application, team tag and conversation in a chat message #840 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
 - Allow to enumerate / add / update / delete team events #848 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added functionalities to list replies of a teams chat message and add new replies #853 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added Thumbnail retrieval options for an `IFile` [jansenbe - Bert Jansen]
 
 ### Changed
 
