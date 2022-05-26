@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -8,6 +9,9 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(ContentType))]
     public interface IContentType : IDataModel<IContentType>, IDataModelGet<IContentType>, IDataModelLoad<IContentType>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+
+        #region Properties
+
         /// <summary>
         /// The unique ID of the Content Type as string
         /// </summary>
@@ -170,6 +174,24 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IWorkflowAssociationCollection WorkflowAssociations { get; }
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        Task<IDocumentSet> AsDocumentSetAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        IDocumentSet AsDocumentSet();
+
         #endregion
     }
 }

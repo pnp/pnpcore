@@ -129,5 +129,19 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
+
+        #region Document Set
+
+        public async Task<IDocumentSet> AddDocumentSetAsync(DocumentSetOptions options)
+        {
+            return null;
+        }
+
+        public IDocumentSet AddDocumentSet(DocumentSetOptions options)
+        {
+            return AddDocumentSetAsync(options).GetAwaiter().GetResult();
+        }
+
+        #endregion
     }
 }

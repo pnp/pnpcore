@@ -2,6 +2,7 @@
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
@@ -128,6 +129,184 @@ namespace PnP.Core.Model.SharePoint
         public object All { get => null; }
         #endregion
 
+        #region Methods
+
+        public async Task<IDocumentSet> AsDocumentSetAsync()
+        {
+            if (!Id.StartsWith("0x0120D520"))
+            {
+                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'");
+            }
+
+            var apiCall = GetDocumentSetApiCall();
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new ClientException("Error occured on obtaining the content type");
+            }
+
+            var documentSet = new DocumentSet
+            {
+                PnPContext = PnPContext,
+                Parent = this,
+                ContentTypeId = Id,
+            };
+
+            var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+            DeserializeDocumentSet(json, documentSet);
+            
+            return documentSet;
+        }
+
+        public IDocumentSet AsDocumentSet()
+        {
+            return AsDocumentSetAsync().GetAwaiter().GetResult();
+        }
+
+        private ApiCall GetDocumentSetApiCall()
+        {
+            // implement web / list ct later 
+            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}";
+
+            return new ApiCall(requestUrl, ApiType.Graph);
+        }
+
+        #region Deserialization of document set
+
+        private void DeserializeDocumentSet(JsonElement json, DocumentSet documentSet)
+        {
+            if (json.TryGetProperty("documentSet", out JsonElement documentSetJson))
+            {
+                if (documentSetJson.TryGetProperty("shouldPrefixNameToFile", out JsonElement shouldPrefix))
+                {
+                    documentSet.ShouldPrefixNameToFile = shouldPrefix.GetBoolean();
+                }
+                if (documentSetJson.TryGetProperty("welcomePageUrl", out JsonElement welcomePageUrl))
+                {
+                    documentSet.WelcomePageUrl = welcomePageUrl.GetString();
+                }
+                if (documentSetJson.TryGetProperty("allowedContentTypes", out JsonElement allowedContentTypes))
+                {
+                    var allowedContentTypesList = new List<IContentTypeInfo>();
+
+                    foreach (var allowedContentType in allowedContentTypes.EnumerateArray())
+                    {
+                        allowedContentTypesList.Add(DeserializeContentType(allowedContentType));
+                    }
+
+                    documentSet.AllowedContentTypes = allowedContentTypesList;
+                }
+                if (documentSetJson.TryGetProperty("defaultContents", out JsonElement defaultContents))
+                {
+                    var defaultContentsList = new List<IDocumentSetContent>();
+
+                    foreach (var defaultContent in defaultContents.EnumerateArray())
+                    {
+                        defaultContentsList.Add(DeseralizeDefaultContent(defaultContent));
+                    }
+
+                    documentSet.DefaultContents = defaultContentsList;
+                }
+                if (documentSetJson.TryGetProperty("sharedColumns", out JsonElement sharedColumns))
+                {
+                    var sharedColumnsList = new List<IField>();
+
+                    foreach (var sharedColumn in sharedColumns.EnumerateArray())
+                    {
+                        sharedColumnsList.Add(DeseralizeField(sharedColumn));
+                    }
+
+                    documentSet.SharedColumns = sharedColumnsList;
+                }
+                if (documentSetJson.TryGetProperty("welcomePageColumns", out JsonElement welcomePageColumns))
+                {
+                    var welcomePageColumnsList = new List<IField>();
+
+                    foreach (var welcomePageColumn in welcomePageColumns.EnumerateArray())
+                    {
+                        welcomePageColumnsList.Add(DeseralizeField(welcomePageColumn));
+                    }
+
+                    documentSet.WelcomePageColumns = welcomePageColumnsList;
+                }
+
+            }
+        }
+
+        private IField DeseralizeField(JsonElement sharedColumn)
+        {
+            var field = new Field();
+
+            if (sharedColumn.TryGetProperty("name", out JsonElement name))
+            {
+                field.Title = name.GetString();
+            }
+
+            if (sharedColumn.TryGetProperty("id", out JsonElement id))
+            {
+                field.Id = id.GetGuid();
+            }
+
+            return field;
+        }
+
+        private IDocumentSetContent DeseralizeDefaultContent(JsonElement defaultContent)
+        {
+            var documentSetContent = new DocumentSetContent();
+
+            if (defaultContent.TryGetProperty("fileName", out JsonElement fileName))
+            {
+                documentSetContent.FileName = fileName.GetString();
+            }
+
+            if (defaultContent.TryGetProperty("folderName", out JsonElement folderName))
+            {
+                documentSetContent.FolderName = folderName.GetString();
+            }
+
+            if (defaultContent.TryGetProperty("contentType", out JsonElement contentType))
+            {
+                var contentTypeInfo = new ContentTypeInfo();
+
+                if (contentType.TryGetProperty("id", out JsonElement ctId))
+                {
+                    contentTypeInfo.Id = ctId.GetString();
+                }
+
+                if (contentType.TryGetProperty("name", out JsonElement ctName))
+                {
+                    contentTypeInfo.Name = ctName.GetString();
+                }
+
+                documentSetContent.ContentType = contentTypeInfo;
+            }
+
+            return documentSetContent;
+        }
+
+        private IContentTypeInfo DeserializeContentType(JsonElement allowedContentType)
+        {
+            var contentTypeInfo = new ContentTypeInfo();
+
+            if (allowedContentType.TryGetProperty("id", out JsonElement id))
+            {
+                contentTypeInfo.Id = id.GetString();
+            }
+
+            if (allowedContentType.TryGetProperty("name", out JsonElement name))
+            {
+                contentTypeInfo.Name = name.GetString();
+            }
+
+            return contentTypeInfo;
+        }
+
+        #endregion
+
+        #endregion
+
         #region Extension methods
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
@@ -157,6 +336,7 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
+
         #endregion
         #endregion
     }

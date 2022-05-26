@@ -218,7 +218,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task ContentTypesAddTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
@@ -789,6 +789,34 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        #region Document Sets
+
+        [TestMethod]
+        public async Task GetContentTypeAsDocumentSet()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = (from ct in context.Web.ContentTypes
+                                            where ct.StringId == "0x0120D520"
+                                            select ct)
+                            .QueryProperties(ct => ct.StringId, ct => ct.Id)
+                            .FirstOrDefault();
+
+                Assert.IsNotNull(contentType);
+                // Test Id property
+                Assert.AreEqual(contentType.Id, "0x0120D520");
+
+                var documentSet = contentType.AsDocumentSet();
+
+                
+
+                Assert.AreEqual(documentSet.ContentTypeId, contentType.Id);
+            }
+        }
+
+        #endregion
 
     }
 }

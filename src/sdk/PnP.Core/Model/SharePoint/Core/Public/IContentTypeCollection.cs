@@ -138,6 +138,24 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Document Sets
+
+        /// <summary>
+        /// Creates a document set
+        /// </summary>
+        /// <param name="options">Options for creating the document set</param>
+        /// <returns>Newly created document set</returns>
+        Task<IDocumentSet> AddDocumentSetAsync(DocumentSetOptions options);
+
+        /// <summary>
+        /// Creates a document set
+        /// </summary>
+        /// <param name="options">Options for creating the document set</param>
+        /// <returns>Newly created document set</returns>
+        IDocumentSet AddDocumentSet(DocumentSetOptions options);
+
+        #endregion
+
         #endregion
     }
 }
