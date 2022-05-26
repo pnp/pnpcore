@@ -138,7 +138,7 @@ foreach(var admin in admins)
 <li>For the other site collections the returned users all have the <code>LoginName</code> property set, the <code>Id</code> property is not set. Also one of the admins is marked as <code>IsSecondaryAdmin == false</code>, that one administrator is the primary site collection administrator</li>
 </ul>
 <pre><code class="lang-csharp">// Get the site collection admins
-var admins = await context.GetSharePointAdmin().GetSiteCollectionAdminsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/somesite&quot;));
+var admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/somesite&quot;));
 
 foreach(var admin in admins)
 {
