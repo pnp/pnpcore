@@ -241,7 +241,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
                                             if (tmpResponseContext != null)
                                                 responseContext = tmpResponseContext;
                                         }
-                                        catch
+                                        catch(Exception)
                                         {
                                             // Skip any exception and simply retry
                                         }
