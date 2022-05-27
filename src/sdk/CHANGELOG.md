@@ -20,7 +20,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added sharing capabilities (enumerate + add/delete) for files #834 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for Event Receivers (enumerate, add or delete) #835 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added sharing capabilities (enumerate + add/delete) for folders #841 [MathijsVerbeeck - Mathijs Verbeeck]
-- Added possibility to mention user, application, team tag and conversation in a chat message #840 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added possibility to mention user, application, team tag and conversation in a chat message #840 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Allow to enumerate / add / update / delete team events #848 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added functionalities to list replies of a teams chat message and add new replies #853 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added Thumbnail retrieval options for an `IFile` [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -32,6 +35,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Allow custom Accept header with ApiRequest #829 [koenzomers - Koen Zomers]
 - Fix to enable deleting an attachment with special characters in the file name #830 [jansenbe - Bert Jansen]
 - Added `GetFilesFolder` methods on `ITeamChannel` to provide an easy access point to the SharePoint File capabilities starting from a Team channel #843 [jansenbe - Bert Jansen]
+- Changed GraphGroup constructor from Internal to Public #845 [danielpastoor - Daniel Pastoor]
+- Improved page HTML rendering to avoid webpart ids showing up in search #846 [jansenbe - Bert Jansen]
+- Fixed issue in term loading now using $expand for performance reasons + enabled loading of child of child terms #850 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

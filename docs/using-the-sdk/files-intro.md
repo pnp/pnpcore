@@ -347,6 +347,55 @@ foreach(var fileVersion in testDocument.Versions)
 }
 ```
 
+## Getting thumbnails for a file
+
+If you need to present a SharePoint file using a thumbnail and some basic file information (like `Title`) you can use one of the `GetThumbnail` methods. These methods optionally use an `ThumbnailOptions` class allowing you to specify one or more standard or custom thumbnail sizes. Once the call has ended you get a collection of `IThumbnail` instances each having a thumbnail URL completed with the thumbnail size.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file, also request the Graph identifiers (VroomItemId and VroomDriveId) to 
+// avoid an extra server roundtrip in the GetThumbnailsAsync call
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.VroomItemID, f => f.VroomDriveID);
+
+// Define the thumbnails to generate
+ThumbnailOptions options = new()
+{
+    // Standard sized thumbnails
+    StandardSizes = new List<ThumbnailSize>
+    {
+        ThumbnailSize.Medium,
+        ThumbnailSize.Large
+    },
+
+    // Custom sized thumbnails
+    CustomSizes = new List<CustomThumbnailOptions>
+    {
+        new CustomThumbnailOptions
+        {
+            Width = 200,
+            Height = 300,                                
+        },
+        new CustomThumbnailOptions
+        {
+            Width = 400,
+            Height = 500,
+            Cropped = true,
+        },
+    }
+};
+
+var thumbnails = await testDocument.GetThumbnailsAsync(options);
+
+foreach(var thumbnail in thumbnails)
+{
+    // use thumbnail.Url 
+}
+```
+
+> [!Note]
+> Thumbnails can only be retrieved for files living in a document library. For pages in a pages library this will not work.
+
 ## Getting file IRM settings
 
 A SharePoint document library can be configured with an [Information Rights Management (IRM) policy](https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-irm-in-sp-admin-center?view=o365-worldwide) which then stamps an IRM policy on the documents obtained from that library. Use the [InformationRightsManagementSettings](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings) property to read the file's IRM settings.

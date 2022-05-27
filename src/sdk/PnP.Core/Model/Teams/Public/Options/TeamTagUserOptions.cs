@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Options for the team tag members

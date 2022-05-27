@@ -78,6 +78,9 @@ namespace PnP.Core.Model.Teams
         [GraphProperty("tags", Get = "teams/{Site.GroupId}/tags", Beta = true)]
         public ITeamTagCollection Tags { get => GetModelCollectionValue<ITeamTagCollection>(); }
 
+        [GraphProperty("events", Get = "groups/{Site.GroupId}/events")]
+        public IGraphEventCollection Events { get => GetModelCollectionValue<IGraphEventCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion

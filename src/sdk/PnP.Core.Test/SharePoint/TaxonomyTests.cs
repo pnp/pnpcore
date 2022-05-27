@@ -687,7 +687,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
         [TestMethod]
         public async Task GetTermsAsync()
         {
@@ -838,6 +837,95 @@ namespace PnP.Core.Test.SharePoint
                         }
                     }
                 }
+
+                // delete term
+                newChildTerm.Delete();
+
+                // delete term 
+                newTerm.Delete();
+
+                // Delete term set 
+                termSet.Delete();
+
+                // Delete the group again
+                group.Delete();
+
+            }
+        }
+
+        [TestMethod]
+        public void GetNestedTerms()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = termSet.Terms.Add("T1", "Description in English");
+
+                // add child term
+                var newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
+
+                // add child of child term
+                var newChildChildTerm = newChildTerm.Terms.Add("T1.1.1", "English T1.1.1");
+
+                // Retrieve the created terms
+                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                {
+                    // Use linq provider to get a group by name
+                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    if (group2 != null)
+                    {
+                        var groupWithSets = group2.Get(p => p.Sets);
+
+                        var termSet2 = groupWithSets.Sets.AsRequested().FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        if (termSet2 != null)
+                        {
+                            // Load terms and parent group
+                            termSet2.Load(p => p.Terms);
+                            Assert.IsTrue(termSet2.Terms.Length > 0);
+
+                            // Group is automatically assigned if the group was loaded before
+                            Assert.IsTrue(termSet2.Group != null);
+
+                            foreach (var term in termSet2.Terms.AsRequested())
+                            {
+                                // Term set is automatically assigned if the termset was loaded before
+                                Assert.IsTrue(term.Set != null);
+
+                                // Load the children of this term and set
+                                term.Load(p => p.Terms);
+
+                                foreach (var child in term.Terms.AsRequested())
+                                {
+                                    Assert.IsTrue(child.Requested);
+                                    Assert.IsTrue((child.Labels as TermLocalizedLabelCollection).Count > 0);
+
+                                    Assert.IsTrue(child.Set != null);
+
+                                    child.Load(p => p.Terms);
+                                    foreach(var childchild in child.Terms.AsRequested())
+                                    {
+                                        Assert.IsTrue(childchild.Requested);
+                                        Assert.IsTrue((childchild.Labels as TermLocalizedLabelCollection).Count > 0);
+
+                                        Assert.IsTrue(childchild.Set != null);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // delete term
+                newChildChildTerm.Delete();
 
                 // delete term
                 newChildTerm.Delete();

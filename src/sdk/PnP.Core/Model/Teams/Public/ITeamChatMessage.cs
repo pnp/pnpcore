@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
@@ -62,6 +65,11 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessageContent Body { get; }
 
         /// <summary>
+        /// Channel identity reference
+        /// </summary>
+        public ITeamChannelIdentity ChannelIdentity { get; }
+
+        /// <summary>
         /// Summary text of the chat message that could be used for push notifications and summary views or fall back views. 
         /// Only applies to channel chat messages, not chat messages in a chat.
         /// </summary>
@@ -101,6 +109,118 @@ namespace PnP.Core.Model.Teams
         /// Hosted Content tiles
         /// </summary>
         public ITeamChatMessageHostedContentCollection HostedContents { get; }
+
+        /// <summary>
+        /// Collection of replies for a message
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
+        /// </summary>
+        public ITeamChatMessageReplyCollection Replies { get; }
+
+        #region Methods
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyAsync(ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReply(ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="batch">Batch the reply is associated with</param>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="batch">Batch the reply is associated with</param>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyBatchAsync(ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="options">Options for the reply to create</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReplyBatch(ChatMessageOptions options);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="subject">Message Subject</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="content">Content of the reply</param>
+        /// <param name="contentType">Reply content type e.g. Text, Html</param>
+        /// <param name="subject">Reply Subject</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReply(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="batch">Batch the reply is associated with</param>
+        /// <param name="content">Content of the reply</param>
+        /// <param name="contentType">Reply content type e.g. Text, Html</param>
+        /// <param name="subject">Reply Subject</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="batch">Batch the reply is associated with</param>
+        /// <param name="content">Content of the reply</param>
+        /// <param name="contentType">Reply content type e.g. Text, Html</param>
+        /// <param name="subject">Reply Subject</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="content">Content of the Reply</param>
+        /// <param name="contentType">Reply content type e.g. Text, Html</param>
+        /// <param name="subject">Reply Subject</param>
+        /// <returns>Newly added reply</returns>
+        public Task<ITeamChatMessageReply> AddReplyBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        /// <summary>
+        /// Adds a reply to an existing message
+        /// </summary>
+        /// <param name="content">Content of the Reply</param>
+        /// <param name="contentType">Reply content type e.g. Text, Html</param>
+        /// <param name="subject">Reply Subject</param>
+        /// <returns>Newly added reply</returns>
+        public ITeamChatMessageReply AddReplyBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
+
+        #endregion
 
     }
 }

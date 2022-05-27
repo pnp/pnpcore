@@ -7,6 +7,9 @@ and can be used to create any custom data source for reading content pages from 
 
 You can use the PnP Transformation Framework either via [PnP PowerShell](https://github.com/pnp/powershell) or in your own .NET code as a referenced library.
 
+> [!Important]
+> The transformation framework is not 100% baked and still not officially released.
+
 ## Transforming SharePoint pages via PnP PowerShell
 
 In order to use the PnP Transformation Framework in PnP PowerShell, you need to [install](https://pnp.github.io/powershell/#getting-up-and-running) the latest build of the PowerShell library. 

@@ -146,13 +146,9 @@ When a site is connected to a Microsoft 365 group then the Microsoft 365 group's
 To get the group on a context you query the `Group` property which return a model of `IGraphGroup` instances.
 
 ```csharp
-using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
-{
-    // To get all properties
-    var group = await context.Group.GetAsync();
-    // To get as example the Id
-    var group = await context.Group.GetAsync(x => x.Id);
+// To get all properties
+var group = await context.Group.GetAsync();
 
-    Console.WriteLine(group.Id);
-}
+// To only return the Id property
+var group = await context.Group.GetAsync(x => x.Id);
 ```
