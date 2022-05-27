@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     public static class TeamChannelTabConstants
     {
@@ -24,6 +20,7 @@ namespace PnP.Core.Model.Teams
         public const string OneNoteAppId = "0d820ecd-def2-4297-adad-78056cde7c78";
         public const string PowerBiAppId = "com.microsoft.teamspace.tab.powerbi";
         public const string SharePointPageOrListAppId = "2a527703-1f6f-4559-a332-d8a7d288cd88";
+        public const string WhiteBoardAppId = "95de633a-083e-42f5-b444-a4295d8e9314";
         #endregion
     }
 }
