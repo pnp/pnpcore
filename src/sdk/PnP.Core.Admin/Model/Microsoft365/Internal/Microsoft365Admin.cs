@@ -1,6 +1,4 @@
-﻿using PnP.Core.Admin.Model.Microsoft365.Public.Options;
-using PnP.Core.Admin.Model.SharePoint;
-using PnP.Core.Admin.Model.Teams;
+﻿using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
@@ -198,102 +196,124 @@ namespace PnP.Core.Admin.Model.Microsoft365
         }
         #endregion
 
-        #region Team Site create support
+        #region Microsoft 365 Group creation support
 
-        public async Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, bool createTeam = false)
+        public async Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, CreationOptions groupCreationOptions)
         {
-            // Prepare the group resource object
-            if (graphGroupOptions.Owners != null && graphGroupOptions.Owners.Length > 0)
+            if (graphGroupOptions == null)
             {
-                graphGroupOptions.Owners = (await GetUsers(graphGroupOptions.Owners).ConfigureAwait(false)).ToArray();
+                throw new ArgumentNullException(nameof(graphGroupOptions));
+            }
+
+            if (string.IsNullOrEmpty(graphGroupOptions.MailNickname))
+            {
+                throw new ArgumentException($"{nameof(graphGroupOptions)}.{nameof(graphGroupOptions.MailNickname)}");
+            }
+
+            if (groupCreationOptions == null)
+            {
+                groupCreationOptions = new CreationOptions();
+            }
+
+            if (!groupCreationOptions.MaxStatusChecks.HasValue)
+            {
+                groupCreationOptions.MaxStatusChecks = 10;
+            }
+
+            if (!groupCreationOptions.WaitAfterStatusCheck.HasValue)
+            {
+                groupCreationOptions.WaitAfterStatusCheck = 1;
             }
 
             // Check if group already exists
             if (!string.IsNullOrEmpty(graphGroupOptions.MailNickname) && GroupExists(graphGroupOptions.MailNickname))
-                return context.Clone(new Uri(new Uri(context.Uri.AbsoluteUri), $"sites/{graphGroupOptions.MailNickname}"));
-
-            PnPContext? responseContext = null;
-
-            if (graphGroupOptions != null)
             {
-                try
-                {
-                    var bodyContent = JsonSerializer.Serialize(graphGroupOptions, typeof(GraphGroupOptions), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
-                    var response = await (context.Web as Web).RawRequestAsync(new ApiCall("groups", ApiType.Graph, bodyContent), HttpMethod.Post).ConfigureAwait(false);
+                return context.Clone(new Uri(new Uri(context.Uri.AbsoluteUri), $"sites/{graphGroupOptions.MailNickname}"));
+            }
 
-                    if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            // We only can create Microsoft 365 groups as we're returning a context for the linked SharePoint site
+            graphGroupOptions.GroupTypes = new List<string> { "Unified" };            
+
+            // Prepare the group resource object
+            if (graphGroupOptions.Owners != null && graphGroupOptions.Owners.Length > 0)
+            {
+                graphGroupOptions.Owners = (await ResolveUsersAsync(graphGroupOptions.Owners).ConfigureAwait(false)).ToArray();
+            }
+
+            if (graphGroupOptions.Members != null && graphGroupOptions.Members.Length > 0)
+            {
+                graphGroupOptions.Members = (await ResolveUsersAsync(graphGroupOptions.Members).ConfigureAwait(false)).ToArray();
+            }
+
+            PnPContext responseContext = null;
+
+            var bodyContent = JsonSerializer.Serialize(graphGroupOptions, typeof(GraphGroupOptions), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
+            var response = await (context.Web as Web).RawRequestAsync(new ApiCall("groups", ApiType.Graph, bodyContent), HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("id", out JsonElement idElement) && idElement.TryGetGuid(out Guid groupId) && groupId != Guid.Empty)
+                {
+                    int driveRetryCount = groupCreationOptions.MaxStatusChecks.Value;
+
+                    while (driveRetryCount > 0 && responseContext == null)
                     {
-                        var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                        try
+                        {
+                            var tmpResponseContext = context.Clone(groupId);
 
-                        if (json.TryGetProperty("id", out JsonElement idElement))
-                            if (idElement.TryGetGuid(out Guid groupId))
+                            if (tmpResponseContext != null)
                             {
-                                if (groupId != Guid.Empty)
-                                {
-                                    int driveRetryCount = 10;
-
-                                    while (driveRetryCount > 0 && responseContext == null)
-                                    {
-                                        try
-                                        {
-                                            var tmpResponseContext = context.Clone(groupId);
-
-                                            if (tmpResponseContext != null)
-                                                responseContext = tmpResponseContext;
-                                        }
-                                        catch(Exception)
-                                        {
-                                            // Skip any exception and simply retry
-                                        }
-
-                                        // In case of failure retry up to 10 times, with 500ms delay in between
-                                        if (responseContext == null)
-                                        {
-                                            await Task.Delay(500 * (10 - driveRetryCount)).ConfigureAwait(false);
-                                            driveRetryCount--;
-                                        }
-                                    }
-
-                                    if (responseContext != null && createTeam)
-                                        responseContext = await responseContext.GetTeamManager().CreateTeamAsync(new TeamForGroupOptions(groupId)).ConfigureAwait(false);
-                                }
+                                responseContext = tmpResponseContext;
                             }
+                        }
+                        catch (Exception)
+                        {
+                            // Skip any exception and simply retry
+                        }
+
+                        // In case of failure retry according to the specified retry settings
+                        if (responseContext == null)
+                        {
+                            await Task.Delay(groupCreationOptions.WaitAfterStatusCheck.Value * 1000 * (groupCreationOptions.MaxStatusChecks.Value - driveRetryCount)).ConfigureAwait(false);
+                            driveRetryCount--;
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
                 }
             }
 
             return responseContext;
         }
 
+        public PnPContext CreateGroup(GraphGroupOptions graphGroupOptions, CreationOptions groupCreationOptions)
+        {
+            return CreateGroupAsync(graphGroupOptions, groupCreationOptions).GetAwaiter().GetResult();
+        }
+
         public async Task<bool> GroupExistsAsync(string mailNickName)
         {
             if (string.IsNullOrEmpty(mailNickName))
+            {
                 throw new ArgumentNullException(nameof(mailNickName));
+            }
 
-            try
+            ApiCallResponse response = await (context.Web as Web).RawRequestAsync(new ApiCall($"groups?$filter=mailNickname eq '{mailNickName}'", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                ApiCallResponse response = await (context.Web as Web).RawRequestAsync(new ApiCall($"groups?$filter=mailNickname eq '{mailNickName}'", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-                if (response.StatusCode == HttpStatusCode.OK)
+                var value = json.GetProperty("value");
+
+                if (value.ValueKind == JsonValueKind.Array && value.GetArrayLength() > 0)
                 {
-                    var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
-
-                    var value = json.GetProperty("value");
-
-                    if (value.ValueKind == JsonValueKind.Array && value.GetArrayLength() > 0)
-                        return true;
+                    return true;
                 }
+            }
 
-                return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool GroupExists(string mailNickName)
@@ -301,7 +321,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return GroupExistsAsync(mailNickName).GetAwaiter().GetResult();
         }
 
-        private async Task<List<string>> GetUsers(string[] groupUsers)
+        private async Task<List<string>> ResolveUsersAsync(string[] groupUsers)
         {
             if (groupUsers == null || groupUsers.Length == 0)
             {
@@ -310,6 +330,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
             var usersResult = new List<string>();
 
+            // TODO: rewrite as batched to optimize performance
             foreach (string groupUser in groupUsers)
             {
                 try
@@ -320,15 +341,15 @@ namespace PnP.Core.Admin.Model.Microsoft365
                     {
                         var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-                        if (json.TryGetProperty("id", out JsonElement idElement))
-                            if (idElement.TryGetGuid(out Guid userId))
-                                if (userId != Guid.Empty)
-                                    usersResult.Add($"https://graph.microsoft.com/v1.0/users('{userId}')");
+                        if (json.TryGetProperty("id", out JsonElement idElement) && idElement.TryGetGuid(out Guid userId) && userId != Guid.Empty)
+                        {
+                            usersResult.Add($"https://graph.microsoft.com/v1.0/users('{userId}')");
+                        }
                     }
                 }
                 catch (ServiceException)
                 {
-                    // skip, group provisioning shouldnt stop because of error in user object
+                    // skip, group provisioning shouldn't stop because of error in user object
                 }
             }
 

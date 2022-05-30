@@ -1,5 +1,4 @@
-﻿using PnP.Core.Admin.Extensions;
-using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
@@ -244,48 +243,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetTenantPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
-
-        public async Task<bool> SiteExistsAliasAsync(string alias)
-        {
-            Uri siteUrl = new Uri(GetTenantPortalUri(), $"sites/{alias}");
-
-            return await SiteExistsFullUrlAsync(siteUrl).ConfigureAwait(false);
-        }
-
-        public async Task<bool> SiteExistsFullUrlAsync(string fullUrl)
-        {
-            return await SiteExistsFullUrlAsync(new Uri(fullUrl)).ConfigureAwait(false);
-        }
-
-        public async Task<bool> SiteExistsFullUrlAsync(Uri fullUrl)
-        {
-            try
-            {
-                using (PnPContext cloneContext = await context.CloneAsync(fullUrl).ConfigureAwait(false))
-                    return true;
-            }
-            catch (SharePointRestServiceException ex)
-            {
-                if (ex.IsUnableToAccessSiteException() || ex.IsCannotGetSiteException())
-                    return true;
-
-                return false;
-            }
-        }
-
-        public bool SiteExistsAlias(string alias)
-        {
-            return SiteExistsAliasAsync(alias).GetAwaiter().GetResult();
-        }
-
-        public bool SiteExistsFullUrl(string fullUrl)
-        {
-            return SiteExistsFullUrlAsync(fullUrl).GetAwaiter().GetResult();
-        }
-
-        public bool SiteExistsFullUrl(Uri fullUrl)
-        {
-            return SiteExistsFullUrlAsync(fullUrl).GetAwaiter().GetResult();
-        }
+        
     }
 }

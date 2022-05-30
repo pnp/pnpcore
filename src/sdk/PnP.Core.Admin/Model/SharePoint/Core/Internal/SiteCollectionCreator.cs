@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PnP.Core.Admin.Model.Microsoft365.Public.Options;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Admin.Utilities;
 using PnP.Core.Model.Security;
@@ -187,22 +187,31 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var newGroup = new GraphGroupOptions
                 {
                     DisplayName = siteToCreate.DisplayName,
-                    Description = string.IsNullOrEmpty(siteToCreate.Description) ? String.Empty : siteToCreate.Description,
+                    Description = string.IsNullOrEmpty(siteToCreate.Description) ? string.Empty : siteToCreate.Description,
                     MailNickname = siteToCreate.Alias,
                     MailEnabled = true,
                     Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
                     GroupTypes = new List<string> { "Unified" },
                     Owners = siteToCreate.Owners,
-                    SecurityEnabled = false,
                 };
 
                 if (siteToCreate.PreferredDataLocation.HasValue)
+                {
                     newGroup.PreferredDataLocation = siteToCreate.PreferredDataLocation.Value.ToString();
+                }
 
                 if (!string.IsNullOrEmpty(siteToCreate.Classification))
+                {
                     newGroup.Classification = siteToCreate.Classification;
+                }
 
-                return await context.GetMicrosoft365Admin().CreateGroupAsync(newGroup, siteToCreate.CreateTeam).ConfigureAwait(false);
+                Microsoft365.CreationOptions groupCreationOptions = new Microsoft365.CreationOptions
+                {
+                    MaxStatusChecks = creationOptions.MaxStatusChecks,
+                    WaitAfterStatusCheck = creationOptions.WaitAfterStatusCheck,
+                };
+
+                return await context.GetMicrosoft365Admin().CreateGroupAsync(newGroup, groupCreationOptions).ConfigureAwait(false);
             }
             else
             {
@@ -265,7 +274,6 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
 
                 payload.Add("optionalParams", optionalParams);
-
 
                 // Delegated permissions can use the SharePoint endpoints for site collection creation
                 return await CreateSiteUsingSpoRestImplementationAsync(context, SiteCreationModel.GroupSiteManagerCreateGroupEx, payload, creationOptions).ConfigureAwait(false);

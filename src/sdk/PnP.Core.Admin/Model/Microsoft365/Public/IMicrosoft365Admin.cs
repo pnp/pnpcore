@@ -1,5 +1,4 @@
-﻿using PnP.Core.Admin.Model.Microsoft365.Public.Options;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,23 +9,35 @@ namespace PnP.Core.Admin.Model.Microsoft365
     /// </summary>
     public interface IMicrosoft365Admin
     {
-        #region Team Site create support
+        #region Microsoft 365 Group creation support
         /// <summary>
-        /// Create a Microsoft Group
+        /// Create a Microsoft 365 Group
         /// </summary>
-        /// <returns>PnPContext of the new group</returns>
-        Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, bool createTeam = false);
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
 
         /// <summary>
-        /// Check if a group exists async
+        /// Create a Microsoft 365 Group
         /// </summary>
-        /// <returns>Bool with if it exists</returns>
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        PnPContext CreateGroup(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Check if a Microsoft 365 group exists
+        /// </summary>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
         Task<bool> GroupExistsAsync(string mailNickName);
 
         /// <summary>
-        /// Check if a group
+        /// Check if a Microsoft 365 group exists
         /// </summary>
-        /// <returns>Bool with if it exists</returns>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
         bool GroupExists(string mailNickName);
         #endregion
 

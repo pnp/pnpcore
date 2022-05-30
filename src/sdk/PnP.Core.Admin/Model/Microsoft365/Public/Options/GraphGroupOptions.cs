@@ -1,9 +1,8 @@
-﻿using PnP.Core.Model.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace PnP.Core.Admin.Model.Microsoft365.Public.Options
+namespace PnP.Core.Admin.Model.Microsoft365
 {
     /// <summary>
     /// Contains the available options for creating a group with Graph Api
@@ -19,11 +18,6 @@ namespace PnP.Core.Admin.Model.Microsoft365.Public.Options
         /// Description of the Microsoft 365 Group
         /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// Url of the SharePoint site connected to this Microsoft 365 group
-        /// </summary>
-        public Uri WebUrl { get; }
 
         /// <summary>
         /// Is this group mail enabled
@@ -48,25 +42,19 @@ namespace PnP.Core.Admin.Model.Microsoft365.Public.Options
         /// <summary>
         /// Group types
         /// </summary>
-        public List<string> GroupTypes { get; set; }
+        public List<string> GroupTypes { get; internal set; }
 
         /// <summary>
-        /// Additional data
+        /// Owners data, list of UPN's of the users who need to be added as owner
         /// </summary>
-        public Dictionary<string, object> AdditionalData { get; set; }
-
         [JsonPropertyName("owners@odata.bind")]
-        /// <summary>
-        /// Owners data
-        /// </summary>
         public string[] Owners { get; set; }
 
-        [JsonPropertyName("members@odata.bind")]
         /// <summary>
-        /// Members data
+        /// Members data, list of UPN's of the users who need to be added as owner
         /// </summary>
+        [JsonPropertyName("members@odata.bind")]
         public string[] Members { get; set; }
-
 
         /// <summary>
         /// Preferred data location
@@ -76,6 +64,6 @@ namespace PnP.Core.Admin.Model.Microsoft365.Public.Options
         /// <summary>
         /// If it is a security enabled group
         /// </summary>
-        public bool SecurityEnabled { get; set; }
+        public bool SecurityEnabled { get; } = false;
     }
 }
