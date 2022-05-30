@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Admin.Model.Microsoft365.Public.Options;
 using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Admin.Utilities;
+using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -47,7 +49,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         internal static async Task<PnPContext> ConnectGroupToSiteAsync(PnPContext contextIn, ConnectSiteToGroupOptions siteToGroupify, CreationOptions creationOptions)
-        {            
+        {
             using (var context = await GetContextForGroupConnectAsync(contextIn, siteToGroupify.Url).ConfigureAwait(false))
             {
                 // Provide default creation options as input
@@ -179,12 +181,28 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private static async Task<PnPContext> CreateTeamSiteAsync(PnPContext context, TeamSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
-
             // If we're using application permissions we use Microsoft Graph to create the site
             if (creationOptions.UsingApplicationPermissions.Value)
             {
-                //TODO: implement group creation functionality under Microsoft365 and use it here
-                throw new NotSupportedException("Creating Team sites using application permissions is not yet supported in this preview version");
+                var newGroup = new GraphGroupOptions
+                {
+                    DisplayName = siteToCreate.DisplayName,
+                    Description = string.IsNullOrEmpty(siteToCreate.Description) ? String.Empty : siteToCreate.Description,
+                    MailNickname = siteToCreate.Alias,
+                    MailEnabled = true,
+                    Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
+                    GroupTypes = new List<string> { "Unified" },
+                    Owners = siteToCreate.Owners,
+                    SecurityEnabled = false,
+                };
+
+                if (siteToCreate.PreferredDataLocation.HasValue)
+                    newGroup.PreferredDataLocation = siteToCreate.PreferredDataLocation.Value.ToString();
+
+                if (!string.IsNullOrEmpty(siteToCreate.Classification))
+                    newGroup.Classification = siteToCreate.Classification;
+
+                return await context.GetMicrosoft365Admin().CreateGroupAsync(newGroup, siteToCreate.CreateTeam).ConfigureAwait(false);
             }
             else
             {
@@ -247,6 +265,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
 
                 payload.Add("optionalParams", optionalParams);
+
 
                 // Delegated permissions can use the SharePoint endpoints for site collection creation
                 return await CreateSiteUsingSpoRestImplementationAsync(context, SiteCreationModel.GroupSiteManagerCreateGroupEx, payload, creationOptions).ConfigureAwait(false);
