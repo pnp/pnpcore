@@ -435,13 +435,6 @@ namespace PnP.Core.Services
         {
             List<Batch> batches = new List<Batch>();
 
-            // Only split if we have more than 20 requests in a single batch
-            if (batch.Requests.Count <= MaxRequestsInGraphBatch)
-            {
-                batches.Add(batch);
-                return batches;
-            }
-
             int counter = 0;
             int order = 0;
             Batch currentBatch = new Batch()
@@ -515,6 +508,9 @@ namespace PnP.Core.Services
                             success = await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false);
                             if (success)
                             {
+                                // Copy the results collection to the upper batch
+                                batch.Results.AddRange(graphBatch.Results);
+
                                 break;
                             }
                         }
@@ -526,11 +522,17 @@ namespace PnP.Core.Services
                                 string.Format(PnPCoreResources.Exception_ServiceException_BatchMaxRetries, retryCount));
                         }
                     }
+                    else
+                    {
+                        // Copy the results collection to the upper batch
+                        batch.Results.AddRange(graphBatch.Results);
+                    }
                 }
             }
 
             // set the original batch to executed
             batch.Executed = true;
+            
         }
 
         private static Task Delay(int retryCount, int delay, bool incrementalDelay)
@@ -1215,13 +1217,6 @@ namespace PnP.Core.Services
         private static List<SPORestBatch> SharePointRestBatchSplittingBySize(SPORestBatch batch)
         {
             List<SPORestBatch> batches = new List<SPORestBatch>();
-
-            // No need to split
-            if (batch.Batch.Requests.Count < MaxRequestsInSharePointRestBatch)
-            {
-                batches.Add(batch);
-                return batches;
-            }
 
             // Split in multiple batches
             int counter = 0;
