@@ -75,6 +75,38 @@ references:
   commentId: N:PnP.Core.Admin.Model.Microsoft365
   fullName: PnP.Core.Admin.Model.Microsoft365
   nameWithType: PnP.Core.Admin.Model.Microsoft365
+- uid: PnP.Core.Admin.Model.Microsoft365.CreationOptions
+  name: CreationOptions
+  href: api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html
+  commentId: T:PnP.Core.Admin.Model.Microsoft365.CreationOptions
+  fullName: PnP.Core.Admin.Model.Microsoft365.CreationOptions
+  nameWithType: CreationOptions
+- uid: PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html#PnP_Core_Admin_Model_Microsoft365_CreationOptions_MaxStatusChecks
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks
+  fullName: PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks
+  nameWithType: CreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks*
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html#PnP_Core_Admin_Model_Microsoft365_CreationOptions_MaxStatusChecks_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.CreationOptions.MaxStatusChecks
+  nameWithType: CreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html#PnP_Core_Admin_Model_Microsoft365_CreationOptions_WaitAfterStatusCheck
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck
+  fullName: PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck
+  nameWithType: CreationOptions.WaitAfterStatusCheck
+- uid: PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck*
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html#PnP_Core_Admin_Model_Microsoft365_CreationOptions_WaitAfterStatusCheck_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.CreationOptions.WaitAfterStatusCheck
+  nameWithType: CreationOptions.WaitAfterStatusCheck
 - uid: PnP.Core.Admin.Model.Microsoft365.GeoLocation
   name: GeoLocation
   href: api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.html
@@ -177,6 +209,155 @@ references:
   commentId: F:PnP.Core.Admin.Model.Microsoft365.GeoLocation.ZAF
   fullName: PnP.Core.Admin.Model.Microsoft365.GeoLocation.ZAF
   nameWithType: GeoLocation.ZAF
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions
+  name: GraphGroupOptions
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html
+  commentId: T:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions
+  nameWithType: GraphGroupOptions
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification
+  name: Classification
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Classification
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification
+  nameWithType: GraphGroupOptions.Classification
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification*
+  name: Classification
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Classification_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Classification
+  nameWithType: GraphGroupOptions.Classification
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description
+  name: Description
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Description
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description
+  nameWithType: GraphGroupOptions.Description
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description*
+  name: Description
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Description_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Description
+  nameWithType: GraphGroupOptions.Description
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_DisplayName
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName
+  nameWithType: GraphGroupOptions.DisplayName
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_DisplayName_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.DisplayName
+  nameWithType: GraphGroupOptions.DisplayName
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes
+  name: GroupTypes
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_GroupTypes
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes
+  nameWithType: GraphGroupOptions.GroupTypes
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes*
+  name: GroupTypes
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_GroupTypes_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.GroupTypes
+  nameWithType: GraphGroupOptions.GroupTypes
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled
+  name: MailEnabled
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_MailEnabled
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled
+  nameWithType: GraphGroupOptions.MailEnabled
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled*
+  name: MailEnabled
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_MailEnabled_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailEnabled
+  nameWithType: GraphGroupOptions.MailEnabled
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname
+  name: MailNickname
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_MailNickname
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname
+  nameWithType: GraphGroupOptions.MailNickname
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname*
+  name: MailNickname
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_MailNickname_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.MailNickname
+  nameWithType: GraphGroupOptions.MailNickname
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members
+  name: Members
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Members
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members
+  nameWithType: GraphGroupOptions.Members
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members*
+  name: Members
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Members_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Members
+  nameWithType: GraphGroupOptions.Members
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners
+  name: Owners
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Owners
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners
+  nameWithType: GraphGroupOptions.Owners
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners*
+  name: Owners
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Owners_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Owners
+  nameWithType: GraphGroupOptions.Owners
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation
+  name: PreferredDataLocation
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_PreferredDataLocation
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation
+  nameWithType: GraphGroupOptions.PreferredDataLocation
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation*
+  name: PreferredDataLocation
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_PreferredDataLocation_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.PreferredDataLocation
+  nameWithType: GraphGroupOptions.PreferredDataLocation
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled
+  name: SecurityEnabled
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_SecurityEnabled
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled
+  nameWithType: GraphGroupOptions.SecurityEnabled
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled*
+  name: SecurityEnabled
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_SecurityEnabled_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.SecurityEnabled
+  nameWithType: GraphGroupOptions.SecurityEnabled
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility
+  name: Visibility
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Visibility
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility
+  nameWithType: GraphGroupOptions.Visibility
+- uid: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility*
+  name: Visibility
+  href: api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html#PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_Visibility_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.Visibility
+  nameWithType: GraphGroupOptions.Visibility
 - uid: PnP.Core.Admin.Model.Microsoft365.IGeoLocationInformation
   name: IGeoLocationInformation
   href: api/PnP.Core.Admin.Model.Microsoft365.IGeoLocationInformation.html
@@ -337,6 +518,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.AccessTokenUsesApplicationPermissionsAsync
   nameWithType: IMicrosoft365Admin.AccessTokenUsesApplicationPermissionsAsync
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions,PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  name: CreateGroup(GraphGroupOptions, CreationOptions)
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_CreateGroup_PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_PnP_Core_Admin_Model_Microsoft365_CreationOptions_
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions,PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions, PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  nameWithType: IMicrosoft365Admin.CreateGroup(GraphGroupOptions, CreationOptions)
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup*
+  name: CreateGroup
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_CreateGroup_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroup
+  nameWithType: IMicrosoft365Admin.CreateGroup
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions,PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  name: CreateGroupAsync(GraphGroupOptions, CreationOptions)
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_CreateGroupAsync_PnP_Core_Admin_Model_Microsoft365_GraphGroupOptions_PnP_Core_Admin_Model_Microsoft365_CreationOptions_
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions,PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync(PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions, PnP.Core.Admin.Model.Microsoft365.CreationOptions)
+  nameWithType: IMicrosoft365Admin.CreateGroupAsync(GraphGroupOptions, CreationOptions)
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync*
+  name: CreateGroupAsync
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_CreateGroupAsync_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.CreateGroupAsync
+  nameWithType: IMicrosoft365Admin.CreateGroupAsync
 - uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetMultiGeoLocations
   name: GetMultiGeoLocations()
   href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GetMultiGeoLocations
@@ -389,6 +596,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync
   nameWithType: IMicrosoft365Admin.GetSensitivityLabelsAsync
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists(System.String)
+  name: GroupExists(String)
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GroupExists_System_String_
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists(System.String)
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists(System.String)
+  nameWithType: IMicrosoft365Admin.GroupExists(String)
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists*
+  name: GroupExists
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GroupExists_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExists
+  nameWithType: IMicrosoft365Admin.GroupExists
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync(System.String)
+  name: GroupExistsAsync(String)
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GroupExistsAsync_System_String_
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync(System.String)
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync(System.String)
+  nameWithType: IMicrosoft365Admin.GroupExistsAsync(String)
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync*
+  name: GroupExistsAsync
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GroupExistsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GroupExistsAsync
+  nameWithType: IMicrosoft365Admin.GroupExistsAsync
 - uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.IsMultiGeoTenant
   name: IsMultiGeoTenant()
   href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_IsMultiGeoTenant
@@ -2945,6 +3178,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SetSiteCollectionAdminsAsync
   nameWithType: ISiteCollectionManager.SetSiteCollectionAdminsAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists(Uri)
+  name: SiteExists(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SiteExists_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists(Uri)
+  nameWithType: ISiteCollectionManager.SiteExists(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists*
+  name: SiteExists
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SiteExists_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExists
+  nameWithType: ISiteCollectionManager.SiteExists
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync(Uri)
+  name: SiteExistsAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SiteExistsAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync(Uri)
+  nameWithType: ISiteCollectionManager.SiteExistsAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync*
+  name: SiteExistsAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_SiteExistsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.SiteExistsAsync
+  nameWithType: ISiteCollectionManager.SiteExistsAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties
   name: ISiteCollectionProperties
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html
@@ -57082,6 +57341,102 @@ references:
   commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.UnknownFutureValue
   fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.UnknownFutureValue
   nameWithType: TeamChannelMembershipType.UnknownFutureValue
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants
+  name: TeamChannelTabConstants
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html
+  commentId: T:PnP.Core.Model.Teams.TeamChannelTabConstants
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants
+  nameWithType: TeamChannelTabConstants
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.DocumentLibraryAppId
+  name: DocumentLibraryAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_DocumentLibraryAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.DocumentLibraryAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.DocumentLibraryAppId
+  nameWithType: TeamChannelTabConstants.DocumentLibraryAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.ExcelAppId
+  name: ExcelAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_ExcelAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.ExcelAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.ExcelAppId
+  nameWithType: TeamChannelTabConstants.ExcelAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.FormsAppId
+  name: FormsAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_FormsAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.FormsAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.FormsAppId
+  nameWithType: TeamChannelTabConstants.FormsAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.OneNoteAppId
+  name: OneNoteAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_OneNoteAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.OneNoteAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.OneNoteAppId
+  nameWithType: TeamChannelTabConstants.OneNoteAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.PdfAppId
+  name: PdfAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_PdfAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.PdfAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.PdfAppId
+  nameWithType: TeamChannelTabConstants.PdfAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.PlannerAppId
+  name: PlannerAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_PlannerAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.PlannerAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.PlannerAppId
+  nameWithType: TeamChannelTabConstants.PlannerAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.PowerBiAppId
+  name: PowerBiAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_PowerBiAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.PowerBiAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.PowerBiAppId
+  nameWithType: TeamChannelTabConstants.PowerBiAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.PptAppId
+  name: PptAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_PptAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.PptAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.PptAppId
+  nameWithType: TeamChannelTabConstants.PptAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.SharePointPageOrListAppId
+  name: SharePointPageOrListAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_SharePointPageOrListAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.SharePointPageOrListAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.SharePointPageOrListAppId
+  nameWithType: TeamChannelTabConstants.SharePointPageOrListAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.StreamsAppId
+  name: StreamsAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_StreamsAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.StreamsAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.StreamsAppId
+  nameWithType: TeamChannelTabConstants.StreamsAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.TeamsAppId
+  name: TeamsAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_TeamsAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.TeamsAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.TeamsAppId
+  nameWithType: TeamChannelTabConstants.TeamsAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.WebAppId
+  name: WebAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_WebAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.WebAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.WebAppId
+  nameWithType: TeamChannelTabConstants.WebAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.WhiteBoardAppId
+  name: WhiteBoardAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_WhiteBoardAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.WhiteBoardAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.WhiteBoardAppId
+  nameWithType: TeamChannelTabConstants.WhiteBoardAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.WikiAppId
+  name: WikiAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_WikiAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.WikiAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.WikiAppId
+  nameWithType: TeamChannelTabConstants.WikiAppId
+- uid: PnP.Core.Model.Teams.TeamChannelTabConstants.WordAppId
+  name: WordAppId
+  href: api/PnP.Core.Model.Teams.TeamChannelTabConstants.html#PnP_Core_Model_Teams_TeamChannelTabConstants_WordAppId
+  commentId: F:PnP.Core.Model.Teams.TeamChannelTabConstants.WordAppId
+  fullName: PnP.Core.Model.Teams.TeamChannelTabConstants.WordAppId
+  nameWithType: TeamChannelTabConstants.WordAppId
 - uid: PnP.Core.Model.Teams.TeamConversationIdentityType
   name: TeamConversationIdentityType
   href: api/PnP.Core.Model.Teams.TeamConversationIdentityType.html

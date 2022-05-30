@@ -50,11 +50,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.CreationOptions.html",
+          "hash": "1lMDblhN4Z4Jnritb+3Kbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.html",
           "hash": "M7QkUiX/9yojNqCdrcdFnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html",
+          "hash": "1gGYxQD8YrVmC8Zp+7SLTw=="
         }
       },
       "is_incremental": false,
@@ -78,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html",
-          "hash": "OJhevst6FlxumhoEdlDvJA=="
+          "hash": "qjznJN0liJDCldjF8mVLlQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.html",
-          "hash": "3n4Zwjhy/8JIhPntGb2ykw=="
+          "hash": "wbZ/T8RBBBGGENOTLc0AOQ=="
         }
       },
       "is_incremental": false,
@@ -174,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonGroupSiteOptions.html",
-          "hash": "JXMIfQAZBUAOKIqwMwwg4Q=="
+          "hash": "DxBw5nFASF8VdZL4pg4vUQ=="
         }
       },
       "is_incremental": false,
@@ -414,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "nl7dkRpAfBSrKkYKdSezEQ=="
+          "hash": "S915djt6vFiMJD49plqU1g=="
         }
       },
       "is_incremental": false,
@@ -702,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamSiteOptions.html",
-          "hash": "PVNIoEVw4Iatl47wsLQwPg=="
+          "hash": "fk+zssqsdaGQiGyYEc2oOw=="
         }
       },
       "is_incremental": false,
@@ -6782,6 +6806,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelTabConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamChannelTabConstants.html",
+          "hash": "hux+BfO19H2EDK6nOIh5PA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.TeamConversationIdentityType.yml",
       "output": {
         ".html": {
@@ -6894,7 +6930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "3zKytE6JF5Bkn4v6wDFTwQ=="
+          "hash": "As6fh1xxUvHHNUb73Wy6Lg=="
         }
       },
       "is_incremental": false,
@@ -7638,7 +7674,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "evXmFhaimGEyb6Qhnzy9jg=="
+          "hash": "Ak0cCUjHQkXngRMfHmRXqw=="
         }
       },
       "is_incremental": false,
@@ -9436,7 +9472,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 634,
+          "total_file_count": 637,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
