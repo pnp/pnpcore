@@ -263,6 +263,7 @@ namespace PnP.Core.Model
                 RawRequest = true,
                 Headers = request.Headers,
                 RawSingleResult = new BatchResultValue<string>(null),
+                AddedViaBatchMethod = true,
                 RawResultsHandler = (json, apiCall) =>
                 {
                     (apiCall.RawSingleResult as BatchResultValue<string>).Value = json;
@@ -699,6 +700,9 @@ namespace PnP.Core.Model
             // Ensure token replacement is done
             postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
 
+            // This is batch triggered request
+            postApiCall.AddedViaBatchMethod = true;
+
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
@@ -792,7 +796,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo, true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -814,7 +818,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo, false).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -850,7 +854,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo, true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -873,7 +877,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo, false).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -916,6 +920,9 @@ namespace PnP.Core.Model
 
             // Ensure token replacement is done
             apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
+
+            // This is batch triggered request
+            apiCall.AddedViaBatchMethod = true;
 
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
@@ -980,6 +987,9 @@ namespace PnP.Core.Model
 
                 // Prefix API request with context url if needed
                 apiCall = PrefixApiCall(apiCall, entityInfo);
+
+                // This is batch triggered request
+                apiCall.AddedViaBatchMethod = true;
 
                 // Ensure there's no Graph beta endpoint being used when that was not allowed
                 if (!CanUseGraphBetaForRequest(apiCall, entityInfo))

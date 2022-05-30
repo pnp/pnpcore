@@ -490,8 +490,7 @@ namespace PnP.Core.Services
             foreach (var graphBatch in graphBatches)
             {
                 // If the code explicitely used a batch method than honor that as otherwise we would have breaking changes
-                if (graphBatch.Requests.Count == 1 && graphBatch.Requests.First().Value.ApiCall.RawSingleResult == null
-                                                   && graphBatch.Requests.First().Value.ApiCall.RawEnumerableResult == null)
+                if (graphBatch.Requests.Count == 1 && graphBatch.Requests.First().Value.ApiCall.AddedViaBatchMethod == false)
                 {
                     await ExecuteMicrosoftGraphInteractiveAsync(graphBatch).ConfigureAwait(false);
                 }
@@ -1282,9 +1281,9 @@ namespace PnP.Core.Services
                 // If there's only one request in the batch then we don't need to use batching to execute the request. 
                 // Non batched executions can use network payload compression, hence we skip batching for single requests.
                 
-                // If the code explicitely used a batch method than honor that as otherwise we would have breaking changes
-                if (restBatch.Batch.Requests.Count == 1 && restBatch.Batch.Requests.First().Value.ApiCall.RawSingleResult == null 
-                                                        && restBatch.Batch.Requests.First().Value.ApiCall.RawEnumerableResult == null)
+                // If the code explicitely used a batch method than honor that as otherwise we would have breaking changes.
+                // We detect being in batch via a flag set on the ApiCall to execute
+                if (restBatch.Batch.Requests.Count == 1 && restBatch.Batch.Requests.First().Value.ApiCall.AddedViaBatchMethod == false)
                 {
                     await ExecuteSharePointRestInteractiveAsync(restBatch.Batch).ConfigureAwait(false);
                 }
