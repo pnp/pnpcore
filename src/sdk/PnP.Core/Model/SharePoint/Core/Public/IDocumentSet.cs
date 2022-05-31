@@ -27,11 +27,6 @@ namespace PnP.Core.Model.SharePoint
         public IList<IDocumentSetContent> DefaultContents { get; set; }
 
         /// <summary>
-        /// Specifies whether to push welcome page changes to inherited content types.
-        /// </summary>
-        public bool PropagateWelcomePageChanges { get; set; }
-
-        /// <summary>
         /// Indicates whether to add the name of the document set to each file name.
         /// </summary>
         public bool ShouldPrefixNameToFile { get; set; }
@@ -60,12 +55,12 @@ namespace PnP.Core.Model.SharePoint
         /// Updates the document set
         /// </summary>
         /// <returns></returns>
-        Task UpdateAsync(DocumentSetOptions options);
+        Task<IDocumentSet> UpdateAsync(DocumentSetOptions options);
 
         /// <summary>
         /// Updates the document set
         /// </summary>
-        void Update(DocumentSetOptions options);
+        IDocumentSet Update(DocumentSetOptions options);
 
         #endregion
     }

@@ -6,12 +6,15 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.SharePoint
 {
     [TestClass]
     public class ContentTypeTests
     {
+        private const string docSetId = "0x0120D520002E5AAE78D8DB1947903FC99D0979E4A5";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -218,7 +221,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task ContentTypesAddTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
@@ -795,7 +798,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetContentTypeAsDocumentSet()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType contentType = (from ct in context.Web.ContentTypes
@@ -810,9 +813,183 @@ namespace PnP.Core.Test.SharePoint
 
                 var documentSet = contentType.AsDocumentSet();
 
-                
-
                 Assert.AreEqual(documentSet.ContentTypeId, contentType.Id);
+                Assert.IsNotNull(documentSet.DefaultContents);
+                Assert.IsNotNull(documentSet.SharedColumns);
+                Assert.IsNotNull(documentSet.WelcomePageColumns);
+                Assert.IsNotNull(documentSet.AllowedContentTypes);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddContentTypeAsDocumentSet()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
+                var rootFolder = await list.RootFolder.GetAsync();
+
+                (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(1, parentFolder: rootFolder);
+
+                var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
+                var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document");
+                var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form");
+
+                var documentSetOptions = new DocumentSetOptions
+                {
+                    AllowedContentTypes = new List<IContentType>
+                    {
+                        documentCt,
+                        formCt
+                    },
+                    ShouldPrefixNameToFile = true,
+                    PropagateWelcomePageChanges = true,
+                    SharedColumns = new List<IField>
+                    {
+                        managersField,
+                        categoriesField
+                    },
+                    WelcomePageColumns = new List<IField>
+                    {
+                        managersField,
+                        categoriesField
+                    },
+                    DefaultContents = new List<DocumentSetContentOptions>
+                    {
+                        new DocumentSetContentOptions
+                        {
+                            FileName = "Test.docx",
+                            FolderName = "FolderName",
+                            File = file,
+                            ContentTypeId = documentCt.StringId
+                        }
+                    }
+                };
+
+                IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document set name", "TESTING", "TESTING", documentSetOptions);
+                IContentType newContentType = newDocumentSet.Parent as IContentType;
+                // Test the created object
+                Assert.IsNotNull(newContentType);
+                Assert.IsNotNull(newDocumentSet);
+
+                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
+                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
+                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
+                Assert.AreEqual(newDocumentSet.AllowedContentTypes.Count, documentSetOptions.AllowedContentTypes.Count);
+                Assert.AreEqual(newDocumentSet.ShouldPrefixNameToFile, documentSetOptions.ShouldPrefixNameToFile);
+
+                await newContentType.DeleteAsync();
+                await file.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task UpdateContentTypeAsDocumentSet()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
+                var rootFolder = await list.RootFolder.GetAsync();
+
+                (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(parentFolder: rootFolder);
+
+                var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
+                var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document");
+
+                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                var documentSetOptions = new DocumentSetOptions
+                {
+                    SharedColumns = new List<IField>
+                    {
+                        categoriesField
+                    },
+                    WelcomePageColumns = new List<IField>
+                    {
+                        categoriesField
+                    },
+                    DefaultContents = new List<DocumentSetContentOptions>
+                    {
+                        new DocumentSetContentOptions
+                        {
+                            FileName = "Test.docx",
+                            FolderName = "FolderName",
+                            File = file,
+                            ContentTypeId = documentCt.StringId
+                        }
+                    }
+                };
+
+                IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document Set Name", "TESTING", "TESTING", documentSetOptions);
+
+                Assert.IsNotNull(newDocumentSet);
+                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
+                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
+                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
+
+                var documentSetOptionsUpdate = new DocumentSetOptions
+                {
+                    SharedColumns = new List<IField>
+                    {
+                        managersField
+                    },
+                    WelcomePageColumns = new List<IField>
+                    {
+                        managersField
+                    },
+                    DefaultContents = new List<DocumentSetContentOptions>
+                    {
+                        new DocumentSetContentOptions
+                        {
+                            FileName = "Test2.docx",
+                            FolderName = "FolderName2",
+                            File = file,
+                            ContentTypeId = documentCt.StringId
+                        }
+                    }
+                };
+                newDocumentSet = await newDocumentSet.UpdateAsync(documentSetOptionsUpdate);
+                IContentType newContentType = newDocumentSet.Parent as IContentType;
+
+                Assert.IsNotNull(newDocumentSet);
+                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptionsUpdate.SharedColumns.Count + documentSetOptions.SharedColumns.Count);
+                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptionsUpdate.WelcomePageColumns.Count + documentSetOptions.WelcomePageColumns.Count);
+                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptionsUpdate.DefaultContents.Count + documentSetOptions.DefaultContents.Count);
+
+                await newContentType.DeleteAsync();
+                await file.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task AddContentTypeAsDocumentSetExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync("0x0101mlalalala", "Document set name");
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task GetContentTypeAsDocumentSetExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = (from ct in context.Web.ContentTypes
+                                            where ct.StringId == "0x0101"
+                                            select ct)
+                            .QueryProperties(ct => ct.StringId, ct => ct.Id)
+                            .FirstOrDefault();
+                var documentSet = contentType.AsDocumentSet();
             }
         }
 

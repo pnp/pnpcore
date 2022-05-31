@@ -143,16 +143,24 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Creates a document set
         /// </summary>
+        /// <param name="id">Id of the document set</param>
+        /// <param name="name">Name of the document set</param>
+        /// <param name="description">Description of the document set</param>
+        /// <param name="group">Group of the document set</param>
         /// <param name="options">Options for creating the document set</param>
-        /// <returns>Newly created document set</returns>
-        Task<IDocumentSet> AddDocumentSetAsync(DocumentSetOptions options);
+        /// <returns>The newly added document set</returns>
+        Task<IDocumentSet> AddDocumentSetAsync(string id, string name, string description = null, string group = null, DocumentSetOptions options = null);
 
         /// <summary>
         /// Creates a document set
         /// </summary>
+        /// <param name="id">Id of the document set</param>
+        /// <param name="name">Name of the document set</param>
+        /// <param name="description">Description of the document set</param>
+        /// <param name="group">Group of the document set</param>
         /// <param name="options">Options for creating the document set</param>
-        /// <returns>Newly created document set</returns>
-        IDocumentSet AddDocumentSet(DocumentSetOptions options);
+        /// <returns>The newly added document set</returns>
+        IDocumentSet AddDocumentSet(string id, string name, string description = null, string group = null, DocumentSetOptions options = null);
 
         #endregion
 

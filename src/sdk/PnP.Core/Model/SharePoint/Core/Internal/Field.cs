@@ -12,6 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Field class, write your custom code here
     /// </summary>
+    [SharePointType("SP.Field", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/Field('{Id}')", LinqGet = "_api/web/ContentTypes('{Parent.Id}')/Fields")]
     [SharePointType("SP.Field", Target = typeof(Web), Uri = "_api/Web/Fields('{Id}')", Get = "_api/Web/Fields", LinqGet = "_api/Web/Fields")]
     [SharePointType("SP.Field", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/Fields('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/Fields", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Fields")]
     internal sealed class Field : BaseDataModel<IField>, IField

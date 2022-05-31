@@ -1,10 +1,12 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -27,6 +29,7 @@ namespace PnP.Core.Model.SharePoint
                     // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
                     // So here, populate the Rest Id metadata field to enable actions upon 
                     // this content type without having to read it again from the server
+                    Id = StringId;
                     AddMetadata(PnPConstants.MetaDataRestId, StringId);
                     AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
                     Requested = true;
@@ -135,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!Id.StartsWith("0x0120D520"))
             {
-                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'");
+                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'. Impossible to return this as Document Set");
             }
 
             var apiCall = GetDocumentSetApiCall();
@@ -168,9 +171,37 @@ namespace PnP.Core.Model.SharePoint
         private ApiCall GetDocumentSetApiCall()
         {
             // implement web / list ct later 
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}";
+            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}?$expand=DocumentSet/SharedColumns,DocumentSet/WelcomePageColumns&$select=documentSet";
 
             return new ApiCall(requestUrl, ApiType.Graph);
+        }
+
+        internal async Task AddFileToDefaultContentLocationAsync(string listId, string listItemId, string destinationName)
+        {
+            var apiCall = AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
+        {
+            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/copyToDefaultContentLocation";
+
+            dynamic body = new ExpandoObject();
+            body.destinationFileName = destinationName;
+
+            dynamic sourceFile = new ExpandoObject();
+            dynamic sharePointIds = new ExpandoObject();
+
+            sharePointIds.listId = listId;
+            sharePointIds.listItemId = listItemId;
+
+            sourceFile.sharepointIds = sharePointIds;
+
+            body.sourceFile = sourceFile;
+
+            var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
+
+            return new ApiCall(requestUrl, ApiType.Graph, bodyContent);
         }
 
         #region Deserialization of document set
@@ -183,10 +214,12 @@ namespace PnP.Core.Model.SharePoint
                 {
                     documentSet.ShouldPrefixNameToFile = shouldPrefix.GetBoolean();
                 }
+
                 if (documentSetJson.TryGetProperty("welcomePageUrl", out JsonElement welcomePageUrl))
                 {
                     documentSet.WelcomePageUrl = welcomePageUrl.GetString();
                 }
+
                 if (documentSetJson.TryGetProperty("allowedContentTypes", out JsonElement allowedContentTypes))
                 {
                     var allowedContentTypesList = new List<IContentTypeInfo>();
@@ -208,6 +241,10 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     documentSet.DefaultContents = defaultContentsList;
+                } 
+                else
+                {
+                    documentSet.DefaultContents = new List<IDocumentSetContent>();
                 }
                 if (documentSetJson.TryGetProperty("sharedColumns", out JsonElement sharedColumns))
                 {
@@ -220,6 +257,10 @@ namespace PnP.Core.Model.SharePoint
 
                     documentSet.SharedColumns = sharedColumnsList;
                 }
+                else
+                {
+                    documentSet.SharedColumns = new List<IField>();
+                }
                 if (documentSetJson.TryGetProperty("welcomePageColumns", out JsonElement welcomePageColumns))
                 {
                     var welcomePageColumnsList = new List<IField>();
@@ -231,7 +272,10 @@ namespace PnP.Core.Model.SharePoint
 
                     documentSet.WelcomePageColumns = welcomePageColumnsList;
                 }
-
+                else
+                {
+                    documentSet.WelcomePageColumns = new List<IField>();
+                }
             }
         }
 
@@ -241,7 +285,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (sharedColumn.TryGetProperty("name", out JsonElement name))
             {
-                field.Title = name.GetString();
+                field.InternalName = name.GetString();
             }
 
             if (sharedColumn.TryGetProperty("id", out JsonElement id))
@@ -308,6 +352,42 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Extension methods
+
+        #region Add Fields
+
+        public async Task AddFieldAsync(IField field)
+        {
+            await LoadAsync(y => y.Fields).ConfigureAwait(false);
+
+            if (Fields.AsRequested().FirstOrDefault(p => p.Id.Equals(field.Id)) != null)
+            {
+                throw new Exception("Field already exists on content-type, we can't add the field...");
+            }
+
+            var apiCall = GetFieldAddApiCall(field);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void AddField(IField field)
+        {
+            AddFieldAsync(field).GetAwaiter().GetResult();
+        }
+
+        private ApiCall GetFieldAddApiCall(IField field)
+        {
+            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/columns";
+
+            dynamic body = new ExpandoObject();
+
+            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{PnPContext.Site.Id}/columns/{field.Id}";
+
+
+            return new ApiCall(requestUrl, ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+        }
+
+        #endregion
+
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
         {
@@ -336,7 +416,6 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
-
         #endregion
         #endregion
     }

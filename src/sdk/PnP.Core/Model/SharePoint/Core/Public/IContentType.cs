@@ -192,6 +192,18 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The content type as a document set</returns>
         IDocumentSet AsDocumentSet();
 
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <returns></returns>
+        Task AddFieldAsync(IField field);
+
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <returns></returns>
+        void AddField(IField field);
+
         #endregion
     }
 }
