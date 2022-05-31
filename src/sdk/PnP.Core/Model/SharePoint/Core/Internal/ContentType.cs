@@ -138,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!Id.StartsWith("0x0120D520"))
             {
-                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'. Impossible to return this as Document Set");
+                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'. Impossible to return this as C");
             }
 
             var apiCall = GetDocumentSetApiCall();

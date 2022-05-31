@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using PnP.Core.Services;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -181,13 +182,13 @@ namespace PnP.Core.Model.SharePoint
         #region Methods
 
         /// <summary>
-        /// 
+        /// Returns the content type as a document set
         /// </summary>
         /// <returns>The content type as a document set</returns>
         Task<IDocumentSet> AsDocumentSetAsync();
 
         /// <summary>
-        /// 
+        /// Returns the content type as a document set
         /// </summary>
         /// <returns>The content type as a document set</returns>
         IDocumentSet AsDocumentSet();

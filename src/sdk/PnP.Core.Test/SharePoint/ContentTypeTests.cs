@@ -834,9 +834,9 @@ namespace PnP.Core.Test.SharePoint
 
                 var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
                 var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document");
-                var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form");
+                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl).ConfigureAwait(false);
+                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
+                var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form").ConfigureAwait(false);
 
                 var documentSetOptions = new DocumentSetOptions
                 {
@@ -899,7 +899,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
                 var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document");
+                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
 
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
