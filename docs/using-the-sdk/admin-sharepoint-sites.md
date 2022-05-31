@@ -90,7 +90,7 @@ It's highly recommended to use one of the "modern" site collections as these off
 Category | Delegated permissions | Application permissions
 ---------|-----------------------|------------------------
 Modern, no group | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions` | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions`. The `Owner` property must be set.
-Modern, with group | Use `TeamSiteOptions` | coming soon
+Modern, with group | Use `TeamSiteOptions` | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
 Classic site | Use `ClassicSiteOptions` | Use `ClassicSiteOptions`
 
 All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.
@@ -106,6 +106,7 @@ All provisioning flows will only return once the site collection is done, for th
 The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:
 
 ```csharp
+// Create communication site
 var communicationSiteToCreate = new CommunicationSiteOptions(new Uri("https://contoso.sharepoint.com/sites/sitename"), "My communication site")
 {
     Description = "My site description",
@@ -115,7 +116,26 @@ var communicationSiteToCreate = new CommunicationSiteOptions(new Uri("https://co
 using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate))
 {
     // Do work on the created site collection via the newSiteContext
-}
+};
+
+// Create group connected team site, using application permissions
+var teamSiteToCreate = new TeamSiteOptions("mynewsite", "My new site")
+{
+    Description = "My site description",
+    Language = Language.English,
+    IsPublic = true,
+    Owners = new string[] { "ann@contoso.onmicrosoft.com" }
+};
+
+SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+{
+    UsingApplicationPermissions = true
+};
+
+using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(teamSiteToCreate, siteCreationOptions))
+{
+    // Do work on the created site collection via the newSiteContext
+};
 ```
 
 So depending on what `Options` object you pass into the `CreateSiteCollection` method a different type of site collection will be created. The constructors of the respective `Options` classes will ensure you're providing the minimally needed information needed to create the site collection, additional input can always be provided via the other `Options` class attributes.
@@ -162,6 +182,21 @@ By default only new team sites are connected to a Microsoft 365 group, but what 
 ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"), "sitealias", "Site title");
 await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
 ```
+
+## Checking if a site collection exists
+
+To verify if a site collection exists you enumerate the site collections or try to get the site collection properties as described above, however these methods require you to have admin privileges. Using the `SiteExists` methods you can verify the existence of a site based upon simply trying to create a `PnPContext` for the site.
+
+```csharp
+var exists = await context.GetSiteCollectionManager().SiteExistsAsync(new Uri("https://contoso.sharepoint.com/sites/doiexist"));
+if (exists)
+{
+    // do something
+}
+```
+
+> [!Note]
+> Sites living in the recycle bin are listed as "non existing" via this method.
 
 ## Recycling site collections
 
