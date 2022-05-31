@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Microsoft365
@@ -8,6 +9,38 @@ namespace PnP.Core.Admin.Model.Microsoft365
     /// </summary>
     public interface IMicrosoft365Admin
     {
+        #region Microsoft 365 Group creation support
+        /// <summary>
+        /// Create a Microsoft 365 Group
+        /// </summary>
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Create a Microsoft 365 Group
+        /// </summary>
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        PnPContext CreateGroup(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Check if a Microsoft 365 group exists
+        /// </summary>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
+        Task<bool> GroupExistsAsync(string mailNickName);
+
+        /// <summary>
+        /// Check if a Microsoft 365 group exists
+        /// </summary>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
+        bool GroupExists(string mailNickName);
+        #endregion
+
         #region Multi-geo support
         /// <summary>
         /// Checks if this tenant is a multi-geo tenant

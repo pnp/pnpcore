@@ -106,5 +106,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>Properties of the tenant</returns>
         ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null);
+
     }
 }

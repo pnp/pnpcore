@@ -957,6 +957,43 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Thumbnails
+        public async Task<List<IThumbnail>> GetThumbnailsAsync(ThumbnailOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            return await UnfurlHandler.GetThumbnailsAsync(PnPContext, VroomDriveID, VroomItemID, options).ConfigureAwait(false);
+        }
+
+        public List<IThumbnail> GetThumbnails(ThumbnailOptions options = null)
+        {
+            return GetThumbnailsAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(ThumbnailOptions options = null)
+        {
+            return await GetThumbnailsBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(ThumbnailOptions options = null)
+        {
+            return GetThumbnailsBatchAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(Batch batch, ThumbnailOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            return await UnfurlHandler.GetThumbnailsBatchAsync(batch, PnPContext, VroomDriveID, VroomItemID, options).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null)
+        {
+            return GetThumbnailsBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+
         #endregion
 
         #region Helper methods
@@ -972,6 +1009,7 @@ namespace PnP.Core.Model.SharePoint
                 return false;
             }
         }
+
         #region Graph Permissions Deserialization Helper
         private IGraphPermissionCollection DeserializeGraphPermissionsResponse(string responseJson, PnPContext context, File file)
         {

@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added possibility to mention user, application, team tag and conversation in a chat message #840 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
 - Allow to enumerate / add / update / delete team events #848 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added functionalities to list replies of a teams chat message and add new replies #853 + docs #854 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added Thumbnail retrieval options for an `IFile` [jansenbe - Bert Jansen]
+- Admin library: support for creating group connected sites using application permissions (= creation of groups via Graph) #859 [danielpastoor - Daniel Pastoor]
+- Admin library: Checking if a given site exists via it's site URL #859 [danielpastoor - Daniel Pastoor]
 
 ### Changed
 
@@ -37,6 +40,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Changed GraphGroup constructor from Internal to Public #845 [danielpastoor - Daniel Pastoor]
 - Improved page HTML rendering to avoid webpart ids showing up in search #846 [jansenbe - Bert Jansen]
 - Fixed issue in term loading now using $expand for performance reasons + enabled loading of child of child terms #850 [jansenbe - Bert Jansen]
+- Sometimes calls added via Batch methods were executed interactively #858 [jansenbe - Bert Jansen]
+- When not throwing errors on batch request failures the batch failure collection was duplicated whenever the batch was smaller then the max batch size #858 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

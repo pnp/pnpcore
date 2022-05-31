@@ -5,6 +5,8 @@ The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transpa
 
 ## I want to configure my own Azure AD application (recommended)
 
+When configuring your Azure AD application you'll need to also defined which delegated and/or application permissions your application needs. **It's recommended to use the minimal permissions needed for the application at hand**, for example if your app is not using the managed metadata features of the SDK, then there's no need to request TermStore permissions. In below setup instructions we assume your app wants to use the main features of PnP Core SDK, but the list of shown permissions can be to narrow or to wide depending on your actual application needs. When you want to experiment with the needed permissions then this will be the easiest on a tenant you're admin of, for example a [free Microsoft 365 developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program) is ideal for developing and testing.
+
 ### Delegated Permissions (acting in the name of the user)
 
 In this section you can learn how to register an application in Azure Active Directory and how to use it in your .NET code, in order to use the PnP Core SDK with interactive login in a Console application, running your requests in the name of the authenticated user.
@@ -40,6 +42,9 @@ Follow below steps to configure an application in Azure AD:
 If you want to configure support for interactive login you should also configure the _Platform_ and the _redirect URI_ in the **Authentication** panel. You can read [further details here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri).
 
 13. Click on **Authentication** and then click on **Add a platform**, choose **Mobile and desktop applications** and provide http://localhost as the **Redirect URI**
+
+> [!Note]
+> It's recommended to align the actually required permissions with the needs of your application.
 
 #### Configuring PnP Core SDK to use the configured application
 
@@ -98,6 +103,9 @@ With SharePoint PnP PowerShell Online cmdlets version 3.29.2101.0 and higher.
 ```powershell
 $app = Register-PnPAzureADApp -Interactive -ApplicationName "PnP.Core.SDK.Consumer" -Tenant contoso.onmicrosoft.com -OutPath d:\temp -CertificatePassword (ConvertTo-SecureString -String "password" -AsPlainText -Force) -GraphApplicationPermissions "Group.ReadWrite.All, User.ReadWrite.All" -SharePointApplicationPermissions "Sites.FullControl.All, TermStore.ReadWrite.All, User.ReadWrite.All" -Store CurrentUser
 ```
+
+> [!Note]
+> It's recommended to align the actually required permissions with the needs of your application.
 
 The above command will register for you in Azure Active Directory an app with name `PnP.Core.SDK.Consumer`, with a self-signed certificate that will be also saved on your filesystem under the `c:\temp` folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of `password` (you should provide your own strong password, indeed). Remember to replace `contoso.onmicrosoft.com` with your Azure AD tenant name, which typically is `company.onmicrosoft.com`. The permissions granted to the app will be:
 

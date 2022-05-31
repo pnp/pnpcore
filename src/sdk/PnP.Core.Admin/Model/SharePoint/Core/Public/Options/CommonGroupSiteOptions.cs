@@ -55,17 +55,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string Classification { get; set; }
 
         /// <summary>
-        /// The Guid of the hub site to be used. If specified will associate the modern team site to the hub site.
+        /// The Guid of the hub site to be used. If specified will associate the modern team site to the hub site. (not applicable when application permissions are used)
         /// </summary>
         public Guid HubSiteId { get; set; }
 
         /// <summary>
-        /// The Sensitivity label to use. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
+        /// The Sensitivity label to use. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information. (not applicable when application permissions are used)
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
 
         /// <summary>
-        /// SiteAlias of the underlying Office 365 Group, i.e. the site part of the url: https://contoso.sharepoint.com/sites/&lt;SiteAlias&gt;
+        /// SiteAlias of the underlying Office 365 Group, i.e. the site part of the url: https://contoso.sharepoint.com/sites/&lt;SiteAlias&gt; (not applicable when application permissions are used)
         /// </summary>
         public string SiteAlias { get; set; }
 

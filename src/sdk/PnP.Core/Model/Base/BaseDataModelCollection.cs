@@ -298,7 +298,7 @@ namespace PnP.Core.Model
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(intId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(false, intId: id).ConfigureAwait(false);
 
             await DeleteById(query, model).ConfigureAwait(false);
         }
@@ -325,7 +325,7 @@ namespace PnP.Core.Model
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(intId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(true, intId: id).ConfigureAwait(false);
 
             await DeleteById(batch, query, model).ConfigureAwait(false);
         }
@@ -342,7 +342,7 @@ namespace PnP.Core.Model
                 throw new ArgumentNullException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(stringId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(false, stringId: id).ConfigureAwait(false);
 
             await DeleteById(query, model).ConfigureAwait(false);
         }
@@ -369,7 +369,7 @@ namespace PnP.Core.Model
                 throw new ArgumentNullException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(stringId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(true, stringId: id).ConfigureAwait(false);
 
             await DeleteById(batch, query, model).ConfigureAwait(false);
         }
@@ -386,7 +386,7 @@ namespace PnP.Core.Model
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(guidId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(false, guidId: id).ConfigureAwait(false);
 
             await DeleteById(query, model).ConfigureAwait(false);
         }
@@ -413,7 +413,7 @@ namespace PnP.Core.Model
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            (var query, var model) = await DeleteByIdImplementationAsync(guidId: id).ConfigureAwait(false);
+            (var query, var model) = await DeleteByIdImplementationAsync(true, guidId: id).ConfigureAwait(false);
 
             await DeleteById(batch, query, model).ConfigureAwait(false);
         }
@@ -446,7 +446,7 @@ namespace PnP.Core.Model
             }
         }
 
-        private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(int intId = 0, string stringId = null, Guid guidId = default)
+        private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(bool viaBatchMethod, int intId = 0, string stringId = null, Guid guidId = default)
         {
             // First check if we've a model instance loaded with the given key, if so let's use that to do the delete 
             // as then the model instance will also automatically be removed from the collection
@@ -500,7 +500,7 @@ namespace PnP.Core.Model
             var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>);
 
             // Build the delete call
-            var query = await QueryClient.BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo).ConfigureAwait(false);
+            var query = await QueryClient.BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, viaBatchMethod).ConfigureAwait(false);
 
             return new Tuple<ApiCallRequest, BaseDataModel<TModel>>(query, concreteEntity as BaseDataModel<TModel>);
         }
