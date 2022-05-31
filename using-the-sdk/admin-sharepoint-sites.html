@@ -186,7 +186,7 @@ await siteProperties.UpdateAsync();
 <tr>
 <td>Modern, with group</td>
 <td>Use <code>TeamSiteOptions</code></td>
-<td>coming soon</td>
+<td>Use <code>TeamSiteOptions</code>.  The <code>Owners</code> property must be set, properties <code>SiteDesignId</code>, <code>HubSiteId</code>, <code>SensitivityLabelId</code> and <code>SiteAlias</code> are not applicable here.</td>
 </tr>
 <tr>
 <td>Classic site</td>
@@ -206,7 +206,8 @@ await siteProperties.UpdateAsync();
 <p><strong>When creating classic sites</strong> you need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
 </div>
 <p>The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:</p>
-<pre><code class="lang-csharp">var communicationSiteToCreate = new CommunicationSiteOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), &quot;My communication site&quot;)
+<pre><code class="lang-csharp">// Create communication site
+var communicationSiteToCreate = new CommunicationSiteOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), &quot;My communication site&quot;)
 {
     Description = &quot;My site description&quot;,
     Language = Language.English,
@@ -215,7 +216,26 @@ await siteProperties.UpdateAsync();
 using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate))
 {
     // Do work on the created site collection via the newSiteContext
-}
+};
+
+// Create group connected team site, using application permissions
+var teamSiteToCreate = new TeamSiteOptions(&quot;mynewsite&quot;, &quot;My new site&quot;)
+{
+    Description = &quot;My site description&quot;,
+    Language = Language.English,
+    IsPublic = true,
+    Owners = new string[] { &quot;ann@contoso.onmicrosoft.com&quot; }
+};
+
+SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+{
+    UsingApplicationPermissions = true
+};
+
+using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(teamSiteToCreate, siteCreationOptions))
+{
+    // Do work on the created site collection via the newSiteContext
+};
 </code></pre>
 <p>So depending on what <code>Options</code> object you pass into the <code>CreateSiteCollection</code> method a different type of site collection will be created. The constructors of the respective <code>Options</code> classes will ensure you're providing the minimally needed information needed to create the site collection, additional input can always be provided via the other <code>Options</code> class attributes.</p>
 <h3 id="controlling-the-site-collection-creation-behavior">Controlling the site collection creation behavior</h3>
@@ -296,6 +316,18 @@ using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteC
 <pre><code class="lang-csharp">ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetogroupconnect&quot;), &quot;sitealias&quot;, &quot;Site title&quot;);
 await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
 </code></pre>
+<h2 id="checking-if-a-site-collection-exists">Checking if a site collection exists</h2>
+<p>To verify if a site collection exists you enumerate the site collections or try to get the site collection properties as described above, however these methods require you to have admin privileges. Using the <code>SiteExists</code> methods you can verify the existence of a site based upon simply trying to create a <code>PnPContext</code> for the site.</p>
+<pre><code class="lang-csharp">var exists = await context.GetSiteCollectionManager().SiteExistsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/doiexist&quot;));
+if (exists)
+{
+    // do something
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Sites living in the recycle bin are listed as &quot;non existing&quot; via this method.</p>
+</div>
 <h2 id="recycling-site-collections">Recycling site collections</h2>
 <div class="IMPORTANT">
 <h5>Important</h5>

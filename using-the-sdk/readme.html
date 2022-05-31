@@ -90,6 +90,8 @@
 <li>Examples of how to use the PnP Core SDK in the <code>samples</code> folder</li>
 <li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
 </ul>
+<h2 id="i-dont-have-access-to-a-microsoft-365-tenant">I don't have access to a Microsoft 365 tenant</h2>
+<p>If you don't have a Microsoft 365 tenant you can, for developer purposes, always request <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">a free developer tenant</a> and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">free developer tenant</a>.</p>
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
 <p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
 Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.</p>
