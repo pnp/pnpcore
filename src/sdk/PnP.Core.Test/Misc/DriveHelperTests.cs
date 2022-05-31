@@ -49,5 +49,11 @@ namespace PnP.Core.Test.Misc
             Assert.AreEqual(docLibId, new Guid("e6dada45-c106-47f6-8729-0824213e62c0"));
         }
 
+        [TestMethod()]
+        public void EncodeSharingUrlTest()
+        {
+            Assert.AreEqual("u!aHR0cHM6Ly9iZXJ0b25saW5lLnNoYXJlcG9pbnQuY29tLzp3Oi9zL3Byb3YtMS9FZDdhU0Zrc1gzRkZwaGE1UUV2Ry1QZ0JiZkdCX0tJOU8wNFNhaFVtOWNDcHB3P2U9Q0hOeUdZ",
+                             DriveHelper.EncodeSharingUrl("https://bertonline.sharepoint.com/:w:/s/prov-1/Ed7aSFksX3FFpha5QEvG-PgBbfGB_KI9O04SahUm9cCppw?e=CHNyGY"));
+        }
     }
 }

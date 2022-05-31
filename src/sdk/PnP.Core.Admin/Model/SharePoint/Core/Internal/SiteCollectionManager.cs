@@ -79,6 +79,31 @@ namespace PnP.Core.Admin.Model.SharePoint
             return CreateSiteCollectionAsync(siteToCreate, creationOptions, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
+        public async Task<bool> SiteExistsAsync(Uri url)
+        {
+            try
+            {
+                using (PnPContext cloneContext = await context.CloneAsync(url).ConfigureAwait(false))
+                {
+                    return true;
+                }
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                if (ex.IsUnableToAccessSiteException() || ex.IsCannotGetSiteException())
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public bool SiteExists(Uri url)
+        {
+            return SiteExistsAsync(url).GetAwaiter().GetResult();
+        }
+
         public async Task RecycleSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
         {
             if (siteToDelete == null)

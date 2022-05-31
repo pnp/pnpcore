@@ -76,6 +76,19 @@ namespace PnP.Core.Utilities
             return (siteId, webId, docLibId);
         }
 
+        /// <summary>
+        /// Translates a URL to a SharePoint item to id value that can be used with the /shares endpoint (GET /shares/{shareIdOrEncodedSharingUrl})
+        /// </summary>
+        /// <param name="url">Url to item in SharePoint</param>
+        /// <returns>Encoded sharing url</returns>
+        internal static string EncodeSharingUrl(string url)
+        {
+            // See https://docs.microsoft.com/en-us/graph/api/shares-get?view=graph-rest-1.0&tabs=http#encoding-sharing-urls
+            string base64Value = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(url));
+            string encodedUrl = "u!" + base64Value.TrimEnd('=').Replace('/', '_').Replace('+', '-');
+            return encodedUrl;
+        }
+
         #endregion
 
         private static string Base64UrlEncode(byte[] value)

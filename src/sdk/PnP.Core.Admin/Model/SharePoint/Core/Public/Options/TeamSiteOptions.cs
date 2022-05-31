@@ -20,12 +20,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Set the owners of the team site. Specify the UPN values in a string array.
         /// </summary>
-#pragma warning disable CA1819 // Properties should not return arrays
         public string[] Owners { get; set; }
-#pragma warning restore CA1819 // Properties should not return arrays
 
         /// <summary>
-        /// The ID of the Site Design to apply, if any
+        /// The ID of the Site Design to apply, if any (not applicable when application permissions are used)
         /// </summary>
         public Guid? SiteDesignId { get; set; }
     }

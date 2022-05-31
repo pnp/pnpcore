@@ -117,7 +117,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="siteToCreate">Information about the site collection to create. 
         /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
-        /// <param name="creationOptions"></param>
+        /// <param name="creationOptions">Options that control the site creation process</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
         Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null);
@@ -127,10 +127,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="siteToCreate">Information about the site collection to create. 
         /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
-        /// <param name="creationOptions"></param>
+        /// <param name="creationOptions">Options that control the site creation process</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
         PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Check if site exists
+        /// </summary>
+        /// <param name="url">Site url</param>
+        /// <returns>True if the site exists, false otherwise</returns>
+        Task<bool> SiteExistsAsync(Uri url);
+
+        /// <summary>
+        /// Check if site exists
+        /// </summary>
+        /// <param name="url">Site url</param>
+        /// <returns>True if the site exists, false otherwise</returns>
+        bool SiteExists(Uri url);
 
         /// <summary>
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection

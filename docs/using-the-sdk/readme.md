@@ -10,6 +10,10 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 - Examples of how to use the PnP Core SDK in the `samples` folder
 - The source of the documentation you are reading right now in the `docs` folder
 
+## I don't have access to a Microsoft 365 tenant
+
+If you don't have a Microsoft 365 tenant you can, for developer purposes, always request [a free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program) and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the [free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+
 ## Referencing the PnP Core SDK in your project
 
 The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.

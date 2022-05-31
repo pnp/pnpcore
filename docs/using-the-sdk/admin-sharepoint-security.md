@@ -47,7 +47,7 @@ To get the administrators of a given site collection use the `GetSiteCollectionA
 
 ```csharp
 // Get the site collection admins
-var admins = await context.GetSharePointAdmin().GetSiteCollectionAdminsAsync(new Uri("https://contoso.sharepoint.com/sites/somesite"));
+var admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(new Uri("https://contoso.sharepoint.com/sites/somesite"));
 
 foreach(var admin in admins)
 {

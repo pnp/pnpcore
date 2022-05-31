@@ -595,6 +595,32 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task SiteCollectionExistsTrue()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var exists = context.GetSiteCollectionManager().SiteExists(context.Uri);
+
+                Assert.IsTrue(exists);
+            }
+        }
+
+        [TestMethod]
+        public async Task SiteCollectionExistsFalse()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var exists = context.GetSiteCollectionManager().SiteExists(new Uri($"https://{context.Uri.DnsSafeHost}/sites/idonotexist12345"));
+
+                Assert.IsFalse(exists);
+            }
+        }
+
 
         #region Handle input exceptions
         [TestMethod]

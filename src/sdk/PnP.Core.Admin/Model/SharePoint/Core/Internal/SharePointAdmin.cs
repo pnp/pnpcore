@@ -243,5 +243,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetTenantPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
+        
     }
 }
