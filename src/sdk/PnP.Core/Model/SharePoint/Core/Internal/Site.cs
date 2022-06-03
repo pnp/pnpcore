@@ -139,6 +139,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointGroup HubSiteSynchronizableVisitorGroup { get => GetModelValue<ISharePointGroup>(); set => SetModelValue(value); }
 
+        public IEventReceiverDefinitionCollection EventReceivers { get => GetModelCollectionValue<IEventReceiverDefinitionCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
