@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IContentTypeCollection
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="generator" content="docfx 2.59.2.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -124,7 +124,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IContentTypeCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IContentTypeCollection : IQueryable&lt;IContentType&gt;, IAsyncEnumerable&lt;IContentType&gt;, IDataModelCollection&lt;IContentType&gt;, IEnumerable&lt;IContentType&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IContentType&gt;, ISupportModules&lt;IContentTypeCollection&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IContentTypeCollection : IDataModelCollection&lt;IContentType&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IContentType&gt;, ISupportModules&lt;IContentTypeCollection&gt;</code></pre>
   </div>
 
   
@@ -978,6 +978,182 @@ Check the documentation for a well formed Content Type Id:
       <td>
         <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IContentType.html">IContentType</a>&gt;
         <p><p>The newly added content type</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSet_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSet(System.String%2CSystem.String%2CSystem.String%2CSystem.String%2CPnP.Core.Model.SharePoint.DocumentSetOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IContentTypeCollection.cs/#L163" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSet_" data-uid="PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSet*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSet_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" data-uid="PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSet(System.String,System.String,System.String,System.String,PnP.Core.Model.SharePoint.DocumentSetOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSet_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" class="expander" data-toggle="collapse">AddDocumentSet(String, String, String, String, DocumentSetOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSet_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a document set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDocumentSet AddDocumentSet(string id, string name, string description = null, string group = null, DocumentSetOptions options = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">id</span>
+        <p><p>Id of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">description</span>
+        <p><p>Description of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">group</span>
+        <p><p>Group of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.DocumentSetOptions.html">DocumentSetOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options for creating the document set</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IDocumentSet.html">IDocumentSet</a>
+        <p><p>The newly added document set</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSetAsync_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSetAsync(System.String%2CSystem.String%2CSystem.String%2CSystem.String%2CPnP.Core.Model.SharePoint.DocumentSetOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IContentTypeCollection.cs/#L152" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSetAsync_" data-uid="PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSetAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSetAsync_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" data-uid="PnP.Core.Model.SharePoint.IContentTypeCollection.AddDocumentSetAsync(System.String,System.String,System.String,System.String,PnP.Core.Model.SharePoint.DocumentSetOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSetAsync_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" class="expander" data-toggle="collapse">AddDocumentSetAsync(String, String, String, String, DocumentSetOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IContentTypeCollection_AddDocumentSetAsync_System_String_System_String_System_String_System_String_PnP_Core_Model_SharePoint_DocumentSetOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a document set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IDocumentSet&gt; AddDocumentSetAsync(string id, string name, string description = null, string group = null, DocumentSetOptions options = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">id</span>
+        <p><p>Id of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">name</span>
+        <p><p>Name of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">description</span>
+        <p><p>Description of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">group</span>
+        <p><p>Group of the document set</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.DocumentSetOptions.html">DocumentSetOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options for creating the document set</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IDocumentSet.html">IDocumentSet</a>&gt;
+        <p><p>The newly added document set</p>
 </p>
       </td>
     </tr>

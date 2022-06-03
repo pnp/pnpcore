@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseDataModelExtensions
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="generator" content="docfx 2.59.2.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -131,7 +131,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;TOut&gt; AndThen&lt;TIn, TOut&gt;(this Task&lt;TIn&gt; inputTask, Func&lt;TIn, Task&lt;TOut&gt;&gt; mapping)</code></pre>
+    <pre><code class="lang-csharp hljs">public static async Task&lt;TOut&gt; AndThen&lt;TIn, TOut&gt;(this Task&lt;TIn&gt; inputTask, Func&lt;TIn, Task&lt;TOut&gt;&gt; mapping)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
