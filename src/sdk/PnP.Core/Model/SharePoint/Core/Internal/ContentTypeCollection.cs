@@ -129,5 +129,33 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
+
+        #region Document Set
+
+        public async Task<IDocumentSet> AddDocumentSetAsync(string id, string name, string description = null, string group = null, DocumentSetOptions options = null)
+        {
+            if (!id.StartsWith("0x0120D520"))
+            {
+                throw new ArgumentException("The specified content type is not of type 'Document Set'. Start your ID with 0x0120D520");
+            }
+
+            var contentType = await AddAsync(id, name, description, group).ConfigureAwait(false) as ContentType;
+
+            var documentSet = await contentType.AsDocumentSetAsync().ConfigureAwait(false);
+
+            if (options != null)
+            {
+                return await documentSet.UpdateAsync(options).ConfigureAwait(false);
+            }
+
+            return documentSet;
+        }
+
+        public IDocumentSet AddDocumentSet(string id, string name, string description = null, string group = null, DocumentSetOptions options = null)
+        {
+            return AddDocumentSetAsync(id, name, description, group, options).GetAwaiter().GetResult();
+        }
+
+        #endregion
     }
 }
