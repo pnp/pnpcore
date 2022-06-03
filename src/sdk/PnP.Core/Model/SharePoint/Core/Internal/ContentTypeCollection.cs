@@ -136,7 +136,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!id.StartsWith("0x0120D520"))
             {
-                throw new ArgumentException("The specified content type is not of type 'Document Set'. Start your ID with 0x0120D520");
+                throw new ArgumentException(PnPCoreResources.Exception_ContentType_WrongDocumentSetId);
             }
 
             var contentType = await AddAsync(id, name, description, group).ConfigureAwait(false) as ContentType;

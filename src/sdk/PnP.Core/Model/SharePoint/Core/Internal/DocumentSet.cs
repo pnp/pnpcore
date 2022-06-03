@@ -88,9 +88,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (options.SharedColumns != null && options.SharedColumns.Count > 0)
             {
+
+                await parentCt.LoadAsync(p => p.Fields).ConfigureAwait(false);
+
                 foreach (var field in options.SharedColumns)
                 {
-                    if (await parentCt.Fields.FirstOrDefaultAsync(y => y.Id == field.Id).ConfigureAwait(false) == null)
+                    if (parentCt.Fields.AsRequested().FirstOrDefault(y => y.Id == field.Id) == null)
                     {
                         await parentCt.AddFieldAsync(field).ConfigureAwait(false);
                     }
@@ -126,10 +129,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (options.WelcomePageColumns != null && options.WelcomePageColumns.Count > 0)
             {
+                await parentCt.LoadAsync(p => p.Fields).ConfigureAwait(false);
+                
                 foreach (var field in options.WelcomePageColumns)
                 {
                     // Check if field exists on CT, if not, add it. Otherwise --> Error
-                    if (await parentCt.Fields.FirstOrDefaultAsync(y => y.Id == field.Id).ConfigureAwait(false) == null)
+                    if (parentCt.Fields.AsRequested().FirstOrDefault(y => y.Id == field.Id) == null)
                     {
                         await parentCt.AddFieldAsync(field).ConfigureAwait(false);
                     }

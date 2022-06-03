@@ -1,5 +1,4 @@
-﻿using PnP.Core.Services;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -196,12 +195,14 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a field to the content type
         /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
         /// <returns></returns>
         Task AddFieldAsync(IField field);
 
         /// <summary>
         /// Adds a field to the content type
         /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
         /// <returns></returns>
         void AddField(IField field);
 

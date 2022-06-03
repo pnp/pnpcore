@@ -795,6 +795,8 @@ namespace PnP.Core.Test.SharePoint
 
         #region Document Sets
 
+        // Ensure the document set site collection feature is enabled before running test tests live
+
         [TestMethod]
         public async Task GetContentTypeAsDocumentSet()
         {
@@ -827,62 +829,95 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
-                var rootFolder = await list.RootFolder.GetAsync();
 
-                (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(1, parentFolder: rootFolder);
+                IList list = null;
 
-                var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
-                var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl).ConfigureAwait(false);
-                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
-                var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form").ConfigureAwait(false);
+                // Create a new list
+                await context.Web.LoadAsync(p => p.Lists);
 
-                var documentSetOptions = new DocumentSetOptions
+                var web = context.Web;
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AddContentTypeAsDocumentSet");
+                list = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                try
                 {
-                    AllowedContentTypes = new List<IContentType>
+                    if (TestCommon.Instance.Mocking && list != null)
                     {
-                        documentCt,
-                        formCt
-                    },
-                    ShouldPrefixNameToFile = true,
-                    PropagateWelcomePageChanges = true,
-                    SharedColumns = new List<IField>
-                    {
-                        managersField,
-                        categoriesField
-                    },
-                    WelcomePageColumns = new List<IField>
-                    {
-                        managersField,
-                        categoriesField
-                    },
-                    DefaultContents = new List<DocumentSetContentOptions>
-                    {
-                        new DocumentSetContentOptions
-                        {
-                            FileName = "Test.docx",
-                            FolderName = "FolderName",
-                            File = file,
-                            ContentTypeId = documentCt.StringId
-                        }
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
                     }
-                };
 
-                IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document set name", "TESTING", "TESTING", documentSetOptions);
-                IContentType newContentType = newDocumentSet.Parent as IContentType;
-                // Test the created object
-                Assert.IsNotNull(newContentType);
-                Assert.IsNotNull(newDocumentSet);
+                    if (list == null)
+                    {
+                        list = await web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
 
-                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
-                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
-                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
-                Assert.AreEqual(newDocumentSet.AllowedContentTypes.Count, documentSetOptions.AllowedContentTypes.Count);
-                Assert.AreEqual(newDocumentSet.ShouldPrefixNameToFile, documentSetOptions.ShouldPrefixNameToFile);
+                    // Ensure content type are enabled for the list
+                    list.ContentTypesEnabled = true;
+                    await list.UpdateAsync();
 
-                await newContentType.DeleteAsync();
-                await file.DeleteAsync();
+
+                    //var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
+                    var rootFolder = await list.RootFolder.GetAsync();
+
+                    (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(1, parentFolder: rootFolder);
+
+                    var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
+                    var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                    var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl).ConfigureAwait(false);
+                    var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
+                    var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form").ConfigureAwait(false);
+
+                    var documentSetOptions = new DocumentSetOptions
+                    {
+                        AllowedContentTypes = new List<IContentType>
+                        {
+                            documentCt,
+                            formCt
+                        },
+                        ShouldPrefixNameToFile = true,
+                        PropagateWelcomePageChanges = true,
+                        SharedColumns = new List<IField>
+                        {
+                            managersField,
+                            categoriesField
+                        },
+                        WelcomePageColumns = new List<IField>
+                        {
+                            managersField,
+                            categoriesField
+                        },
+                        DefaultContents = new List<DocumentSetContentOptions>
+                        {
+                            new DocumentSetContentOptions
+                            {
+                                FileName = "Test.docx",
+                                FolderName = "FolderName",
+                                File = file,
+                                ContentTypeId = documentCt.StringId
+                            }
+                        }
+                    };
+
+                    IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document set name", "TESTING", "TESTING", documentSetOptions);
+                    IContentType newContentType = newDocumentSet.Parent as IContentType;
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.IsNotNull(newDocumentSet);
+
+                    Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
+                    Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
+                    Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
+                    Assert.AreEqual(newDocumentSet.AllowedContentTypes.Count, documentSetOptions.AllowedContentTypes.Count);
+                    Assert.AreEqual(newDocumentSet.ShouldPrefixNameToFile, documentSetOptions.ShouldPrefixNameToFile);
+
+                    await newContentType.DeleteAsync();
+                    await file.DeleteAsync();
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
             }
         }
 

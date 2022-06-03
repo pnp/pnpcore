@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added Thumbnail retrieval options for an `IFile` [jansenbe - Bert Jansen]
 - Admin library: support for creating group connected sites using application permissions (= creation of groups via Graph) #859 [danielpastoor - Daniel Pastoor]
 - Admin library: Checking if a given site exists via it's site URL #859 [danielpastoor - Daniel Pastoor]
+- Added support for creating and configuring Document Sets #866 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

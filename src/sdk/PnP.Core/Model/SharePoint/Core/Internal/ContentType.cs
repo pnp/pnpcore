@@ -138,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!Id.StartsWith("0x0120D520"))
             {
-                throw new ClientException(ErrorType.Unsupported, "The specified content type is not of type 'Document Set'. Impossible to return this as C");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ContentType_NoDocumentSet);
             }
 
             var apiCall = GetDocumentSetApiCall();
@@ -147,7 +147,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                throw new ClientException("Error occured on obtaining the content type");
+                throw new ClientException(PnPCoreResources.Exception_ContentType_ErrorObtaining);
             }
 
             var documentSet = new DocumentSet
@@ -206,7 +206,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Deserialization of document set
 
-        private void DeserializeDocumentSet(JsonElement json, DocumentSet documentSet)
+        private static void DeserializeDocumentSet(JsonElement json, DocumentSet documentSet)
         {
             if (json.TryGetProperty("documentSet", out JsonElement documentSetJson))
             {
@@ -279,7 +279,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private IField DeseralizeField(JsonElement sharedColumn)
+        private static IField DeseralizeField(JsonElement sharedColumn)
         {
             var field = new Field();
 
@@ -296,7 +296,7 @@ namespace PnP.Core.Model.SharePoint
             return field;
         }
 
-        private IDocumentSetContent DeseralizeDefaultContent(JsonElement defaultContent)
+        private static IDocumentSetContent DeseralizeDefaultContent(JsonElement defaultContent)
         {
             var documentSetContent = new DocumentSetContent();
 
@@ -330,7 +330,7 @@ namespace PnP.Core.Model.SharePoint
             return documentSetContent;
         }
 
-        private IContentTypeInfo DeserializeContentType(JsonElement allowedContentType)
+        private static IContentTypeInfo DeserializeContentType(JsonElement allowedContentType)
         {
             var contentTypeInfo = new ContentTypeInfo();
 
@@ -357,13 +357,6 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddFieldAsync(IField field)
         {
-            await LoadAsync(y => y.Fields).ConfigureAwait(false);
-
-            if (Fields.AsRequested().FirstOrDefault(p => p.Id.Equals(field.Id)) != null)
-            {
-                throw new Exception("Field already exists on content-type, we can't add the field...");
-            }
-
             var apiCall = GetFieldAddApiCall(field);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
