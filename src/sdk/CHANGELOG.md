@@ -44,6 +44,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed issue in term loading now using $expand for performance reasons + enabled loading of child of child terms #850 [jansenbe - Bert Jansen]
 - Sometimes calls added via Batch methods were executed interactively #858 [jansenbe - Bert Jansen]
 - When not throwing errors on batch request failures the batch failure collection was duplicated whenever the batch was smaller then the max batch size #858 [jansenbe - Bert Jansen]
+- List item paging got stuck in an infinite loop when the list contained the same amount items as the requested page size #872 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 
