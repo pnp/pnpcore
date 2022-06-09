@@ -122,7 +122,7 @@ if (customTheme != null)
 
 // for sites with communication site features enabled the returned chrome options 
 // will contain header, navigation and footer objects. Other sites will only have
-// the header object loaded.
+// the header and navigation objects loaded.
 </code></pre>
 <h2 id="set-the-sites-chrome-options">Set the site's chrome options</h2>
 <p>To set the chrome options for a site you first need to load the existing chrome options using one of the <code>GetChromeOptions</code> methods, update the resulting <code>IChromeOptions</code> instance and finally use one of the <code>SetChromeOptions</code> to persist the new chrome options.</p>
