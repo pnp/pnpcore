@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -750,8 +751,15 @@ namespace PnP.Core.Model
         {
             if (!string.IsNullOrEmpty(entityInfo.SharePointType))
             {
-                // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+                if (entityInfo.SharePointTarget == typeof(ContentTypeHub))
+                {
+                    postApiCall.Request = PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                }
+                else
+                {
+                    // Prefix API request with context url
+                    postApiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+                }
             }
 
             return postApiCall;

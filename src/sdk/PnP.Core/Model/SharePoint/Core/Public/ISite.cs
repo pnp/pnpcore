@@ -278,11 +278,6 @@ namespace PnP.Core.Model.SharePoint
         ///// </summary>
         //public IAudit Audit { get; }
 
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IEventReceiverDefinitionCollection EventReceivers { get; }
-
         /// <summary>
         /// Retrieves the available compliance tags / retention labels for this site
         /// </summary>
