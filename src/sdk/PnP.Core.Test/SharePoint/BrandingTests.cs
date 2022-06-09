@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
-using System;
 using System.IO;
 using System.Linq;
 
@@ -116,7 +115,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome != null);                
                 Assert.IsNotNull(chrome.Header);
                 Assert.IsNull(chrome.Footer);
-                Assert.IsNull(chrome.Navigation);
+                Assert.IsNotNull(chrome.Navigation);
             }
         }
 
@@ -196,6 +195,9 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
                 chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Middle;
 
+                chrome.Navigation.HorizontalQuickLaunch = true;
+                chrome.Navigation.MegaMenuEnabled = true;
+
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
 
                 chrome = context.Web.GetBrandingManager().GetChromeOptions();
@@ -205,6 +207,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Header.HideTitle == true);
                 Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
                 Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+
+                Assert.IsTrue(chrome.Navigation.HorizontalQuickLaunch == true);
+                Assert.IsTrue(chrome.Navigation.MegaMenuEnabled = true);
 
                 // Also verify the respective web properties are updated
                 Assert.IsTrue(context.Web.HeaderEmphasis == Model.SharePoint.VariantThemeType.Strong);
@@ -217,6 +222,8 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Header.HideTitle = false;
                 chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.None;
                 chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Left;
+                chrome.Navigation.HorizontalQuickLaunch = false;
+                chrome.Navigation.MegaMenuEnabled = false;
 
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
             }
@@ -238,6 +245,9 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
                 chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Middle;
 
+                chrome.Navigation.HorizontalQuickLaunch = true;
+                chrome.Navigation.MegaMenuEnabled = true;
+
                 context.Web.GetBrandingManager().SetChromeOptionsBatch(chrome);
 
                 context.Execute();
@@ -256,11 +266,16 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
                 Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
 
+                Assert.IsTrue(chrome.Navigation.HorizontalQuickLaunch == true);
+                Assert.IsTrue(chrome.Navigation.MegaMenuEnabled = true);
+
                 // Reset chrome options again
                 chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
                 chrome.Header.HideTitle = false;
                 chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.None;
                 chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Left;
+                chrome.Navigation.HorizontalQuickLaunch = false;
+                chrome.Navigation.MegaMenuEnabled = false;
 
                 context.Web.GetBrandingManager().SetChromeOptionsBatch(chrome);
 
