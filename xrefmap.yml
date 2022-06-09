@@ -34626,6 +34626,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.INavigationOptions
   fullName: PnP.Core.Model.SharePoint.INavigationOptions
   nameWithType: INavigationOptions
+- uid: PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch
+  name: HorizontalQuickLaunch
+  href: api/PnP.Core.Model.SharePoint.INavigationOptions.html#PnP_Core_Model_SharePoint_INavigationOptions_HorizontalQuickLaunch
+  commentId: P:PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch
+  fullName: PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch
+  nameWithType: INavigationOptions.HorizontalQuickLaunch
+- uid: PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch*
+  name: HorizontalQuickLaunch
+  href: api/PnP.Core.Model.SharePoint.INavigationOptions.html#PnP_Core_Model_SharePoint_INavigationOptions_HorizontalQuickLaunch_
+  commentId: Overload:PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.INavigationOptions.HorizontalQuickLaunch
+  nameWithType: INavigationOptions.HorizontalQuickLaunch
 - uid: PnP.Core.Model.SharePoint.INavigationOptions.MegaMenuEnabled
   name: MegaMenuEnabled
   href: api/PnP.Core.Model.SharePoint.INavigationOptions.html#PnP_Core_Model_SharePoint_INavigationOptions_MegaMenuEnabled
