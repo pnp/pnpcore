@@ -477,6 +477,7 @@ namespace PnP.Core.Model.SharePoint
                                                 p => p.LogoAlignment,
                                                 p => p.MegaMenuEnabled,
                                                 p => p.QuickLaunchEnabled,
+                                                p => p.HorizontalQuickLaunch,
                                                 // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                                 p => p.WebTemplate,
                                                 p => p.Features).ConfigureAwait(false);

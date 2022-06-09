@@ -153,7 +153,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Result != null);
                 Assert.IsNotNull(chrome.Result.Header);
                 Assert.IsNull(chrome.Result.Footer);
-                Assert.IsNull(chrome.Result.Navigation);
+                Assert.IsNotNull(chrome.Result.Navigation);
             }
         }
 
