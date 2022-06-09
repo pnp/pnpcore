@@ -56,7 +56,7 @@ var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
 
 // for sites with communication site features enabled the returned chrome options 
 // will contain header, navigation and footer objects. Other sites will only have
-// the header object loaded.
+// the header and navigation objects loaded.
 ```
 
 ## Set the site's chrome options
