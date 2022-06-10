@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Working with Hub Sites | PnP Core SDK </title>
+    <title>Unfurling links | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Working with Hub Sites | PnP Core SDK ">
+    <meta name="title" content="Unfurling links | PnP Core SDK ">
     <meta name="generator" content="docfx 2.59.2.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,101 +78,141 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/sites-hubsites.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/unfurl-intro.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="working-with-hub-sites">Working with Hub Sites</h1>
+                    <h1 id="unfurling-links">Unfurling links</h1>
 
-<p>In SharePoint, site collections support hub sites, that allow you to create logical groupings of multiple sites with a hub site.</p>
-<p>When using the PnP Core SDK, the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite interface</a> has methods to register, join, unjoin and unregister hub sites.</p>
-<h2 id="creating-context">Creating Context</h2>
-<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<p>SharePoint supports many different types of links, you have direct links to lists, libraries and files, but there's also sharing links that user's have created for resources in SharePoint. Whenever your application needs to understand more about a given link we call that unfurling. A common scenario is where you allow your users to paste a link and your application gets the needed information to present the content behind the link (e.g. when you past a link in Teams you'll you'll see the file name, thumbnail and more). In PnP Core SDK there's support for link unfurling.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // See next chapter on how to use the PnPContext for working with Teams
+    // See next chapter on how to use the PnPContext for working with lists
 }
 </code></pre>
+<h2 id="unfurling-a-link">Unfurling a link</h2>
+<p>To unfurl a received link you simply call one of the <code>UnfurlLink</code> methods on <code>IWeb</code> and you'll get back a populated <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IUnfurledResource.html">IUnfurledResource</a> instance:</p>
+<pre><code class="lang-csharp">var unfurledResource = await context.Web.UnfurlLinkAsync($&quot;https://contoso.sharepoint.com/:li:/s/mysitename/Ey-0-TrWIcxChNFTqyeIm7EB_ktJbcLFxa-EIkZedafGYQ?e=PhOfF5&quot;);
 
-<p>A <code>PnPContext</code> always has a reference to the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite</a> of the underlying site collection. Using the site object the following operations can be called when working with hub sites:</p>
-<h2 id="get-hub-site-data">Get Hub Site Data</h2>
-<p>Firstly, you will need a connection to a site, then you can either call a method to get the current Site Hub data OR specify an Id for another HubSite ID, to get the details. This is shown in the example below:</p>
-<pre><code class="lang-csharp">
-var hubResult = await context.Site.GetHubSiteData(site.HubSiteId);
-var title = hubResult.Title;
-var siteUrl = hubResult.SiteUrl;
-
-</code></pre>
-<h2 id="register-a-hub-site">Register a hub site</h2>
-<p>This registers a site as the primary hub site, using this code to apply this to a site:</p>
-<pre><code class="lang-csharp">
-ISite site = await context.Site.GetAsync(
-        p =&gt; p.HubSiteId,
-        p =&gt; p.IsHubSite);
-
-if(!site.IsHubSite){
-    var result = await site.RegisterHubSiteAsync();
-}
-    
-</code></pre>
-<h2 id="join-a-hub-site">Join a hub site</h2>
-<p>This associates the site to an existing hub site, using this code to apply this to a site:</p>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>Joining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.</p>
-</div>
-<pre><code class="lang-csharp">using (var contextPrimaryHub = await pnpContextFactory.CreateAsync(&quot;PrimaryHubSite&quot;))
+if (unfurledResource.LinkType == UnfurlLinkType.File)
 {
-    // Get the primary hub site details
-    ISite primarySite = await contextPrimaryHub.Site.GetAsync(
-        p =&gt; p.HubSiteId,
-        p =&gt; p.IsHubSite);
-
-    // Associate group site to the hub
-    using (var context = await pnpContextFactory.CreateAsync(&quot;AnyExistingSite&quot;))
+    // E.g. Present the resource using the returned thumbnails
+}
+else
+{
+  // Present the resource in a different manner
+}
+</code></pre>
+<h2 id="unfurling-a-link-with-options">Unfurling a link with options</h2>
+<p>When you're unfurling a link you can also specify options by passing in an <code>UnfurlOptions</code> instance. Key use case for the <code>UnfurlOptions</code> is to allow you to detail the thumbnails you need:</p>
+<pre><code class="lang-csharp">UnfurlOptions unfurlOptions = new()
+{
+    ThumbnailOptions = new()
     {
-        ISite assocSite = await context.Site.GetAsync(
-            p =&gt; p.HubSiteId,
-            p =&gt; p.IsHubSite);
-
-        if(assocSite.HubSiteId == Guid.Empty){
-
-            var resultJoin = await assocSite.JoinHubSiteAsync(primarySite.HubSiteId);
-
+        StandardSizes = new List&lt;ThumbnailSize&gt;
+        {
+            ThumbnailSize.Medium,
+            ThumbnailSize.Large
+        },
+        CustomSizes = new List&lt;CustomThumbnailOptions&gt;
+        {
+            new CustomThumbnailOptions
+            {
+                Width = 200,
+                Height = 300,
+            },
+            new CustomThumbnailOptions
+            {
+                Width = 400,
+                Height = 500,
+                Cropped = true,
+            },
         }
     }
+};
+
+var unfurledResource = await context.Web.UnfurlLinkAsync($&quot;https://contoso.sharepoint.com/:li:/s/mysitename/Ey-0-TrWIcxChNFTqyeIm7EB_ktJbcLFxa-EIkZedafGYQ?e=PhOfF5&quot;, unfurlOptions);
+
+if (unfurledResource.LinkType == UnfurlLinkType.File)
+{
+    // E.g. Present the resource using the returned thumbnails
 }
-
-</code></pre>
-<h2 id="unjoin-a-hub-site">Unjoin a hub site</h2>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>Unjoining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.</p>
-</div>
-<p>This removes the association on the site to an existing hub site, using this code to apply this to a site:</p>
-<pre><code class="lang-csharp">
-ISite site = await context.Site.GetAsync(
-        p =&gt; p.HubSiteId,
-        p =&gt; p.IsHubSite);
-
-if(assocSite.HubSiteId != Guid.Empty){
-    var result = await site.UnJoinHubSiteAsync();
-}
-
-</code></pre>
-<h2 id="unregister-a-hub-site">Unregister a hub site</h2>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>Unregistering a hub site does require delegated permissions to work.</p>
-</div>
-<p>This unregisters a site as the primary hub site, using this code to apply this to a site:</p>
-<pre><code class="lang-csharp">
-ISite site = await context.Site.GetAsync(
-        p =&gt; p.HubSiteId,
-        p =&gt; p.IsHubSite);
-
-if(site.IsHubSite){
-    var result = await site.UnregisterHubSiteAsync();
+else
+{
+  // Present the resource in a different manner
 }
 </code></pre>
+<h2 id="what-resources-can-be-unfurled">What resources can be unfurled?</h2>
+<p>Not every possible SharePoint URL will result in a populated unfurling data, below table will help you get a better understanding.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>UnfurlLinkType</th>
+<th>List information</th>
+<th>List Item information</th>
+<th>File information</th>
+<th>Thumbnails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Site</td>
+<td>Unknown</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>List</td>
+<td>List</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Document Library</td>
+<td>Library</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Pages Library</td>
+<td>SitePagesLibrary</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>List item</td>
+<td>ListItem</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>File</td>
+<td>File</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>Site Page</td>
+<td>SitePage</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
