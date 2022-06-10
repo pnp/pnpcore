@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: Checking if a given site exists via it's site URL #859 [danielpastoor - Daniel Pastoor]
 - Added support for creating and configuring Document Sets #866 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for Event Receivers (enumerate, add or delete) on `ISite` #871 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added link unfurling: throw any SharePoint (sharing) link in and you will get back detailed information about the SharePoint resource, including thumbnails #847 [jansenbe - Bert Jansen]
 
 ### Changed
 
