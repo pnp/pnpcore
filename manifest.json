@@ -4838,6 +4838,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IUnfurledResource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IUnfurledResource.html",
+          "hash": "zWvO0kK8MCCh7nZUPc/BBQ+m1a5qu3ciqCwdFTsrzzE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IUserCustomAction.yml",
       "output": {
         ".html": {
@@ -4926,7 +4938,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "XKV41jrvB+YM6/6MdHGvOeEnXOo0kSu35Q8x8a3W9NU="
+          "hash": "OZ5lUvz1G3Lk3tgPk0B7S4AtMGZmOLTVu9kK421ph84="
         }
       },
       "is_incremental": false,
@@ -5642,6 +5654,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.UnfurlLinkType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.UnfurlLinkType.html",
+          "hash": "KXY/mBLJmKBANVyG566AI718L20KtRyAPVIwqgXqoFU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.UnfurlOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.UnfurlOptions.html",
+          "hash": "vwD99jqodszAaTsStQbA0C96Fy0n3tvLwjQ8mYZYQE4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.UrlFieldFormatType.yml",
       "output": {
         ".html": {
@@ -5766,7 +5802,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "16lvPcsVSu+/HjW0MjFXdB8RZtlwazM8zPMt+MSP4AA="
+          "hash": "tGZL1ZbtNHdVwS5EUk08kH4PAHy4P7brNnVkPOSEFDk="
         }
       },
       "is_incremental": false,
@@ -7734,7 +7770,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "TPx9saCqJqNWmDpF7qt9x3/jpcyHW7cz0fQ2m+yoi20="
+          "hash": "y6BiU7Uel2zbEWPj/an0BgF0Ddv0JdpkkPymxh5ja38="
         }
       },
       "is_incremental": false,
@@ -9544,7 +9580,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 642,
+          "total_file_count": 645,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
