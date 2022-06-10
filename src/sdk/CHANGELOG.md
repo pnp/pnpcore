@@ -48,6 +48,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - List item paging got stuck in an infinite loop when the list contained the same amount items as the requested page size #872 [jansenbe - Bert Jansen]
 - Made additional `IView` properties settable #874 [jansenbe - Bert Jansen]
 - Added support to set the navigation orientation and menu style for non communication sites #875 [jansenbe - Bert Jansen]
+- More resilient parsing of CSOM GUID's #877 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 
