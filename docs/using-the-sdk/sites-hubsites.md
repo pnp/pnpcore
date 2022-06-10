@@ -41,7 +41,7 @@ if(!site.IsHubSite){
 This associates the site to an existing hub site, using this code to apply this to a site:
 
 > [!Important]
-> Joining a hub site does require delegated permissions to work.
+> Joining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
 
 ```csharp
 using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSite"))
@@ -71,7 +71,7 @@ using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSi
 ## Unjoin a hub site
 
 > [!Important]
-> Unjoining a hub site does require delegated permissions to work.
+> Unjoining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
 
 This removes the association on the site to an existing hub site, using this code to apply this to a site:
 
@@ -88,6 +88,9 @@ if(assocSite.HubSiteId != Guid.Empty){
 ```
 
 ## Unregister a hub site
+
+> [!Important]
+> Unregistering a hub site does require delegated permissions to work.
 
 This unregisters a site as the primary hub site, using this code to apply this to a site:
 
