@@ -133,7 +133,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(unfurledResource.SiteId != Guid.Empty);
                 Assert.IsTrue(unfurledResource.Resource != null);
                 Assert.IsTrue(unfurledResource.ListId != Guid.Empty);
-                Assert.IsTrue(unfurledResource.LastModified < DateTime.Now);
+                Assert.IsTrue(unfurledResource.LastModified < DateTime.Now.AddDays(1));
                 Assert.IsTrue(!string.IsNullOrEmpty(unfurledResource.LastModifiedBy));
                 Assert.IsTrue(unfurledResource.ListDisplayName == "sharingtestdonotchange");
                 Assert.IsTrue(unfurledResource.ListUrl != null);
