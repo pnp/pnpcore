@@ -3,7 +3,6 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +15,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            TestCommon.Instance.Mocking = false;            
+            // TestCommon.Instance.Mocking = false;            
         }
 
         [TestMethod]
@@ -39,12 +38,12 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
+                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
 
                 // Test the created object
                 Assert.IsNotNull(newContentType);
-                Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", newContentType.StringId);
-                Assert.AreEqual("TEST ADD", newContentType.Name);
+                Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
+                Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
                 Assert.AreEqual("TESTING", newContentType.Description);
                 Assert.AreEqual("TESTING", newContentType.Group);
 
@@ -65,7 +64,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968B", "TEST ADD", "TESTING", "TESTING");
+                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5953D", "PublishContentTypeAsync", "TESTING", "TESTING");
 
                 var isPublished = await newContentType.IsPublishedAsync();
 
@@ -115,7 +114,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968C", "TEST ADD IsPublished", "TESTING", "TESTING");
+                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5962D", "TEST ADD IsPublished", "TESTING", "TESTING");
 
                 var isPublished = await newContentType.IsPublishedAsync();
 
@@ -128,6 +127,31 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(isPublished);
 
                 await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateContentTypeAndAddFieldTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5961A", "CreateContentTypeC", "TESTING", "TESTING");
+
+                IField newField = await context.ContentTypeHub.Fields.AddBooleanAsync("TestField", new FieldBooleanOptions {});
+
+                await newContentType.AddFieldAsync(newField);
+                await newContentType.LoadAsync(y => y.Fields);
+
+                // Check if field is created on ct
+                var matchingField = newContentType.Fields.AsRequested().FirstOrDefault(y => y.Id == newField.Id);
+
+                Assert.IsNotNull(matchingField);
+
+                // Clean up
+                await newContentType.DeleteAsync();
+                await newField.DeleteAsync();
             }
         }
 

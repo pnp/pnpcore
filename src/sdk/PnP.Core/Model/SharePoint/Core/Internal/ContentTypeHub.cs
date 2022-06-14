@@ -30,7 +30,8 @@ namespace PnP.Core.Model.SharePoint
 
         #region Properties
 
-        [SharePointProperty("ContentTypes")]
+        public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
+
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
         internal string SiteId { get; set; }

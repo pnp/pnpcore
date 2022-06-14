@@ -176,6 +176,8 @@ namespace PnP.Core.Model.SharePoint
         //public IWorkflowAssociationCollection WorkflowAssociations { get; }
         #endregion
 
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -210,7 +212,6 @@ namespace PnP.Core.Model.SharePoint
         /// Publishes a content type from the hub to the sites in the SharePoint environment
         /// </summary>
         bool IsPublished();
-
 
         /// <summary>
         /// Returns the content type as a document set

@@ -399,7 +399,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddFieldAsync(IField field)
         {
-            var apiCall = GetFieldAddApiCall(field);
+            var apiCall = await GetFieldAddApiCall(field);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
@@ -409,14 +409,19 @@ namespace PnP.Core.Model.SharePoint
             AddFieldAsync(field).GetAwaiter().GetResult();
         }
 
-        private ApiCall GetFieldAddApiCall(IField field)
+        private async Task<ApiCall> GetFieldAddApiCall(IField field)
         {
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/columns";
+            var siteId = PnPContext.Site.Id.ToString();
+
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            {
+                siteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+            }
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}/columns";
 
             dynamic body = new ExpandoObject();
 
-            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{PnPContext.Site.Id}/columns/{field.Id}";
-
+            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{siteId}/columns/{field.Id}";
 
             return new ApiCall(requestUrl, ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
         }
