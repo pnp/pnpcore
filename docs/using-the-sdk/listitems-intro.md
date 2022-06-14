@@ -597,6 +597,10 @@ foreach (var listItem in myList.Items.AsRequested())
 await context.ExecuteAsync();
 ```
 
+## Sharing a list item
+
+A list can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](./sharing-listitems.md) to learn more on how you can share a list item.
+
 ## Getting changes for a list item
 
 You can use the `GetChanges` methods on an `IListItem` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.

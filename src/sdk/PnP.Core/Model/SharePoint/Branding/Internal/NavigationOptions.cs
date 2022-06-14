@@ -4,6 +4,8 @@
     {
         public bool MegaMenuEnabled { get; set; }
 
+        public bool HorizontalQuickLaunch { get; set; }
+
         public bool Visible { get; set; }
     }
 }

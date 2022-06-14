@@ -15,6 +15,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 When you share content you often just want to share what's really needed, oversharing content is never a good idea. When using the share features in PnP Core SDK you can either share:
 
+- A single list item (`IListItem`) (see [here](./sharing-listitems.md) for more details)
 - A single file (`IFile`)
 - A single folder and all the contents inside that folder (`IFolder`). Note that to share the contents of a complete library you can use the `IList.RootFolder` property as sharing target
 

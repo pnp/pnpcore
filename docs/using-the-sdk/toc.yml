@@ -72,6 +72,8 @@
   items:
   - name: Overview
     href: contenttypes-intro.md
+  - name: Document Sets
+    href: contenttypes-documentsets.md
 - name: Fields
   items:
   - name: Overview
@@ -88,6 +90,10 @@
   items:
   - name: Overview
     href: folders-intro.md
+- name: Link unfurling
+  items:
+  - name: Overview
+    href: unfurl-intro.md
 - name: Lists
   items:
   - name: Overview
@@ -138,6 +144,8 @@
     href: security-intro.md
   - name: Groups
     href: security-groups.md
+  - name: Sharing files and folders
+    href: sharing-intro.md
   - name: Users
     href: security-users.md
 - name: Sites

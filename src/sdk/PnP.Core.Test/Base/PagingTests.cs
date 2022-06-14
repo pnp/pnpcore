@@ -336,6 +336,201 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task RESTListItemOnePagePaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemOnePagePaging";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title))
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 100);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListItemOnePagePagingAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemOnePagePagingAsync";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            await foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title).AsAsyncEnumerable())
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 100);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListItemAsyncNoPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemAsyncNoPaging";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 12; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            await foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title).AsAsyncEnumerable())
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 12);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task CamlListItemGetPagedAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;

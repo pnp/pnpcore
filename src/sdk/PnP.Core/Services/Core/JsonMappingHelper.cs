@@ -354,23 +354,6 @@ namespace PnP.Core.Services
             // Try populate the PnP Object metadata from the mapped info
             await TryPopuplatePnPObjectMetadataFromRest(contextAwareObject, metadataBasedObject, entity, idFieldValue).ConfigureAwait(false);
 
-            // Store __next link for paging in case we detected a $top in the issued query
-            if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var parent = (pnpObject as IDataModelParent).Parent;
-
-                // Go to next page if previous one contains any item
-                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
-                {
-                    // SharePoint REST paging using provided link with a skiptoken should be kept
-                    if (!((parent as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.SharePointRestListItemNextLink) &&
-                        (parent as IMetadataExtensible).Metadata[PnPConstants.SharePointRestListItemNextLink].Contains("skiptoken", StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        TrackAndUpdateMetaData(parent as IMetadataExtensible, PnPConstants.SharePointRestListItemNextLink, BuildNextPageRestUrl(apiResponse.ApiCall.Request));
-                    }
-                }
-            }
-
             return requested;
         }
 

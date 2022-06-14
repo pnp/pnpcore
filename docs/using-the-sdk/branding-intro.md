@@ -49,14 +49,14 @@ if (customTheme != null)
 
 ## Get the site's chrome options
 
-Each site has a site chrome consisting out of [site header, navigation and footer branding options](https://support.microsoft.com/en-us/office/change-the-look-of-your-sharepoint-site-06bbadc3-6b04-4a60-9d14-894f6a170818). The latter two are only available for sites that have communication site features enabled, the header options are available for any type of site. To list the current site chrome options you can use one of the `GetChromeOptions` methods.
+Each site has a site chrome consisting out of [site header, navigation and footer branding options](https://support.microsoft.com/en-us/office/change-the-look-of-your-sharepoint-site-06bbadc3-6b04-4a60-9d14-894f6a170818). The latter is only available for sites that have communication site features enabled, the header and navigation options are available for any type of site. To list the current site chrome options you can use one of the `GetChromeOptions` methods.
 
 ```csharp
 var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
 
 // for sites with communication site features enabled the returned chrome options 
 // will contain header, navigation and footer objects. Other sites will only have
-// the header object loaded.
+// the header and navigation objects loaded.
 ```
 
 ## Set the site's chrome options
@@ -71,6 +71,9 @@ chrome.Header.Emphasis = VariantThemeType.Strong;
 chrome.Header.HideTitle = true;
 chrome.Header.Layout = HeaderLayoutType.Extended;
 chrome.Header.LogoAlignment = LogoAlignment.Middle;
+chrome.Navigation.HorizontalQuickLaunch = true;
+chrome.Navigation.MegaMenuEnabled = true;
+chrome.Navigation.Visible = true;
 
 await context.Web.GetBrandingManager().SetChromeOptionsAsync(chrome);
 

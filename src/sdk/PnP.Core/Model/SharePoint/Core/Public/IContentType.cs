@@ -9,6 +9,9 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(ContentType))]
     public interface IContentType : IDataModel<IContentType>, IDataModelGet<IContentType>, IDataModelLoad<IContentType>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+
+        #region Properties
+
         /// <summary>
         /// The unique ID of the Content Type as string
         /// </summary>
@@ -207,6 +210,33 @@ namespace PnP.Core.Model.SharePoint
         /// Publishes a content type from the hub to the sites in the SharePoint environment
         /// </summary>
         bool IsPublished();
+
+
+        /// <summary>
+        /// Returns the content type as a document set
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        Task<IDocumentSet> AsDocumentSetAsync();
+
+        /// <summary>
+        /// Returns the content type as a document set
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        IDocumentSet AsDocumentSet();
+
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
+        /// <returns></returns>
+        Task AddFieldAsync(IField field);
+
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
+        /// <returns></returns>
+        void AddField(IField field);
 
         #endregion
     }

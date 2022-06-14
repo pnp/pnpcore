@@ -1750,6 +1750,23 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Link unfurling        
+        public async Task<IUnfurledResource> UnfurlLinkAsync(string link, UnfurlOptions unfurlOptions = null)
+        {
+            if (string.IsNullOrWhiteSpace(link))
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+
+            return await UnfurlHandler.UnfurlAsync(PnPContext, link, unfurlOptions).ConfigureAwait(false);
+        }
+        
+        public IUnfurledResource UnfurlLink(string link, UnfurlOptions unfurlOptions = null)
+        {
+            return UnfurlLinkAsync(link, unfurlOptions).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

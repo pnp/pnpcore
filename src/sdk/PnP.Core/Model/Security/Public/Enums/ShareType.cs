@@ -19,10 +19,16 @@ namespace PnP.Core.Model.Security
         [EnumMember(Value= "review")]
         Review,
         /// <summary>
-        /// Creates an read-write link to the driveItem.
+        /// Creates an read-write link to the driveItem. 
+        /// Note: This option is only available for files in OneDrive for Business and SharePoint.
         /// </summary>
         [EnumMember(Value = "edit")] 
         Edit,
+        /// <summary>
+        /// Creates an embeddable link to the item.
+        /// </summary>
+        [EnumMember(Value = "embed")]
+        Embed,
         /// <summary>
         /// Creates a read-only link that blocks download to the driveItem. 
         /// Note: This option is only available for files in OneDrive for Business and SharePoint.

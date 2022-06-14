@@ -26,6 +26,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added Thumbnail retrieval options for an `IFile` [jansenbe - Bert Jansen]
 - Admin library: support for creating group connected sites using application permissions (= creation of groups via Graph) #859 [danielpastoor - Daniel Pastoor]
 - Admin library: Checking if a given site exists via it's site URL #859 [danielpastoor - Daniel Pastoor]
+- Added support for creating and configuring Document Sets #866 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added support for Event Receivers (enumerate, add or delete) on `ISite` #871 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added link unfurling: throw any SharePoint (sharing) link in and you will get back detailed information about the SharePoint resource, including thumbnails #847 [jansenbe - Bert Jansen]
+- Added sharing capabilities (add) for list items #879 [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -42,6 +46,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed issue in term loading now using $expand for performance reasons + enabled loading of child of child terms #850 [jansenbe - Bert Jansen]
 - Sometimes calls added via Batch methods were executed interactively #858 [jansenbe - Bert Jansen]
 - When not throwing errors on batch request failures the batch failure collection was duplicated whenever the batch was smaller then the max batch size #858 [jansenbe - Bert Jansen]
+- List item paging got stuck in an infinite loop when the list contained the same amount items as the requested page size #872 [jansenbe - Bert Jansen]
+- Made additional `IView` properties settable #874 [jansenbe - Bert Jansen]
+- Added support to set the navigation orientation and menu style for non communication sites #875 [jansenbe - Bert Jansen]
+- More resilient parsing of CSOM GUID's #877 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

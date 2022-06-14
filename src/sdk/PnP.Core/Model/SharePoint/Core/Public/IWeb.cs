@@ -1223,6 +1223,26 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Link unfurling
+
+        /// <summary>
+        /// Takes in a sharing or regular SharePoint link and tries to provide relavant information about the resource behind the passed in link
+        /// </summary>
+        /// <param name="link">Link to resource to get information for</param>
+        /// <param name="unfurlOptions">Options to control the unfurling data gathering</param>
+        /// <returns>Data about the unfurled resource</returns>
+        Task<IUnfurledResource> UnfurlLinkAsync(string link, UnfurlOptions unfurlOptions = null);
+
+        /// <summary>
+        /// Takes in a sharing or regular SharePoint link and tries to provide relavant information about the resource behind the passed in link
+        /// </summary>
+        /// <param name="link">Link to resource to get information for</param>
+        /// <param name="unfurlOptions">Options to control the unfurling data gathering</param>
+        /// <returns>Data about the unfurled resource</returns>
+        IUnfurledResource UnfurlLink(string link, UnfurlOptions unfurlOptions = null);
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

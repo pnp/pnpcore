@@ -202,6 +202,9 @@ var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyCo
 await contentType.DeleteAsync();
 ```
 
+> [!Note]
+> If a content type is in use you cannot delete it.
+
 ### Removing a site content type field
 
 To remove a field added to a content type one can remove its field link:

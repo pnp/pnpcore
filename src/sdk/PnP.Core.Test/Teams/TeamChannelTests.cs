@@ -191,6 +191,7 @@ namespace PnP.Core.Test.Teams
             {
                 var team = await context.Team.GetAsync(o => o.Channels);
 
+                // TODO: update once shared channels APIs come out of beta, currently shared channels are not returned
                 var folder = team.Channels.AsRequested().First(p => p.MembershipType == TeamChannelMembershipType.Private).GetFilesFolder(p => p.Files);
 
                 Assert.IsNotNull(folder);

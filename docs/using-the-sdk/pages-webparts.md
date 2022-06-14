@@ -75,7 +75,12 @@ page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 var textPart = page.NewTextPart();
 
 // Prepare inline image for inserting
-var inlineImage = await page.GetInlineImageAsync(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left});
+var inlineImage = await page.GetInlineImageAsync(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() 
+{ 
+    Alignment = PageImageAlignment.Left,
+    Width = 200,
+    Height = 200
+});
 
 // Insert the inline image in the text part text
 textPart.Text = $"<H1>My header</H1>{inlineImage}<p>Text after image</p>";
@@ -86,6 +91,9 @@ page.AddControl(textPart, page.Sections[0].Columns[0]);
 // Save the page
 await page.SaveAsync("MyPage.aspx");
 ```
+
+> [!Note]
+> It's recommended to provide the image size to ensure the image resize handles are correctly showing up when you edit the created page later on.
 
 ## Working with web parts
 
@@ -180,7 +188,12 @@ var page = await context.Web.NewPageAsync();
 page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
 // configure an image web part for a given site relative url
-var image = await GetImageWebPartAsync("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
+var image = await GetImageWebPartAsync("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions
+{ 
+    Alignment = PageImageAlignment.Left,
+    Width = 200,
+    Height = 200
+});
 
 // add the web part to the first column of the first section
 page.AddControl(image, page.Sections[0].Columns[0]);
@@ -188,3 +201,6 @@ page.AddControl(image, page.Sections[0].Columns[0]);
 // Save the page
 await page.SaveAsync("MyPage.aspx");
 ```
+
+> [!Note]
+> It's recommended to provide the image size to ensure the image resize handles are correctly showing up when you edit the created page later on.
