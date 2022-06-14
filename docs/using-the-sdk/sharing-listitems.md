@@ -26,9 +26,9 @@ Next to the sharing configuration and tenant level there are also sharing settin
 > [!Note]
 > You can also programmatically verify and alter site collection sharing settings via the [PnP Core SDK Admin component](https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-sites.html#getting-and-setting-site-collection-properties).
 
-## Sharing content with your organization
+## Sharing list items with your organization
 
-To share content within your tenant (your organization) you need to use one of the `CreateOrganizationalSharingLink` methods in combination with a configured `OrganizationalLinkOptions` instance. The only property to set here is the `Type` of share: do you want to enable people in your organization to view the shared content or also edit the content?
+To share list items within your tenant (your organization) you need to use one of the `CreateOrganizationalSharingLink` methods in combination with a configured `OrganizationalLinkOptions` instance. The only property to set here is the `Type` of share: do you want to enable people in your organization to view the shared content or also edit the list item?
 
 ```csharp
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
@@ -48,7 +48,10 @@ var shareLinkRequestOptions = new OrganizationalLinkOptions()
 var share = await listItem.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
 ```
 
-## Share content with certain users
+> [!Note]
+> The supported share types for a list item are `View`, `Edit` and `Embed`
+
+## Share list items with certain users
 
 If you want to selectively share a list item with one or more users you can use one of the `CreateUserSharingLink` methods in combination with a configured `UserLinkOptions` instance. Key properties to set are the `Recipients` (people you're sharing to) and `Type` of share. Below example shows this:
 
@@ -84,7 +87,10 @@ var shareLinkRequestOptions = new UserLinkOptions()
 var share = await listItem.CreateUserSharingLinkAsync(shareLinkRequestOptions);
 ```
 
-## Share content with everyone (anonymous sharing)
+> [!Note]
+> The supported share types for a list item are `View`, `Edit` and `Embed`
+
+## Share list items with everyone (anonymous sharing)
 
 If your tenant and site settings allow it you can also share list items anonymously so that everyone having the link can access the content. Doing so requires using one of the `CreateAnonymousSharingLink` methods together with a configured `AnonymousLinkOptions` instance. Key properties to set are the `Type` of share, a `Password` for consuming the sharing link and `ExpirationDateTime` defining how long the anonymous share will stay valid. Below example shows this:
 
@@ -106,3 +112,6 @@ var shareLinkRequestOptions = new AnonymousLinkOptions()
 
 var share = await listItem.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
 ```
+
+> [!Note]
+> The supported share types for a list item are `View`, `Edit` and `Embed`
