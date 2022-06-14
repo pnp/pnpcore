@@ -679,6 +679,8 @@ foreach (var listItem in myList.Items.AsRequested())
 // Execute the batch
 await context.ExecuteAsync();
 </code></pre>
+<h2 id="sharing-a-list-item">Sharing a list item</h2>
+<p>A list can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the <a href="sharing-listitems.html">PnP Core SDK Sharing APIs</a> to learn more on how you can share a list item.</p>
 <h2 id="getting-changes-for-a-list-item">Getting changes for a list item</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IListItem</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
 <h2 id="getting-list-item-versions">Getting list item versions</h2>

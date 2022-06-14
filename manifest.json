@@ -9097,7 +9097,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
-          "hash": "3L/iyu9yEMg5DkTWrX6BGzowKsVmsjXrEVYxslUO8mg="
+          "hash": "SzsxQfLa4xtP/2jxw3pRT3fgl1UmU4mx11bz1tBeiy0="
         }
       },
       "is_incremental": false,
@@ -9301,7 +9301,19 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/sharing-intro.html",
-          "hash": "2X0kYU/XTciyRk3lgnbdl7focjSy/V5EXBmAII3UEUw="
+          "hash": "l5BzQivyETghGQEQGRLoc34nCNpHb6+vN8Se42yizXc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/sharing-listitems.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/sharing-listitems.html",
+          "hash": "uE5g5uizwjapRxQh05etlL14A43ZsC04o/9Htq2FYuA="
         }
       },
       "is_incremental": false,
@@ -9586,7 +9598,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 108,
+          "total_file_count": 109,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
