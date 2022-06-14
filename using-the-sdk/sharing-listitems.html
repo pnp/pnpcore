@@ -102,8 +102,8 @@
 <h5>Note</h5>
 <p>You can also programmatically verify and alter site collection sharing settings via the <a href="https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-sites.html#getting-and-setting-site-collection-properties">PnP Core SDK Admin component</a>.</p>
 </div>
-<h2 id="sharing-content-with-your-organization">Sharing content with your organization</h2>
-<p>To share content within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the content?</p>
+<h2 id="sharing-list-items-with-your-organization">Sharing list items with your organization</h2>
+<p>To share list items within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the list item?</p>
 <pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
                                                                                    p =&gt; p.FieldTypeKind, 
@@ -120,7 +120,11 @@ var shareLinkRequestOptions = new OrganizationalLinkOptions()
 // Grant everyone in the organization edit permissions on the list item                
 var share = await listItem.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
 </code></pre>
-<h2 id="share-content-with-certain-users">Share content with certain users</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The supported share types for a list item are <code>View</code>, <code>Edit</code> and <code>Embed</code></p>
+</div>
+<h2 id="share-list-items-with-certain-users">Share list items with certain users</h2>
 <p>If you want to selectively share a list item with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share. Below example shows this:</p>
 <pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
@@ -152,7 +156,11 @@ var shareLinkRequestOptions = new UserLinkOptions()
 
 var share = await listItem.CreateUserSharingLinkAsync(shareLinkRequestOptions);
 </code></pre>
-<h2 id="share-content-with-everyone-anonymous-sharing">Share content with everyone (anonymous sharing)</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The supported share types for a list item are <code>View</code>, <code>Edit</code> and <code>Embed</code></p>
+</div>
+<h2 id="share-list-items-with-everyone-anonymous-sharing">Share list items with everyone (anonymous sharing)</h2>
 <p>If your tenant and site settings allow it you can also share list items anonymously so that everyone having the link can access the content. Doing so requires using one of the <code>CreateAnonymousSharingLink</code> methods together with a configured <code>AnonymousLinkOptions</code> instance. Key properties to set are the <code>Type</code> of share, a <code>Password</code> for consuming the sharing link and <code>ExpirationDateTime</code> defining how long the anonymous share will stay valid. Below example shows this:</p>
 <pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
@@ -171,6 +179,10 @@ var shareLinkRequestOptions = new AnonymousLinkOptions()
 
 var share = await listItem.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The supported share types for a list item are <code>View</code>, <code>Edit</code> and <code>Embed</code></p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
