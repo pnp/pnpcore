@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
+    [SharePointType("SP.EventReceiver", Target = typeof(Site), Uri = "_api/Site/EventReceivers(guid'{Id}')", Get = "_api/Site/EventReceivers", LinqGet = "_api/Site/EventReceivers")]
     [SharePointType("SP.EventReceiver", Target = typeof(Web), Uri = "_api/Web/EventReceivers(guid'{Id}')", Get = "_api/Web/EventReceivers", LinqGet = "_api/Web/EventReceivers")]
     [SharePointType("SP.EventReceiver", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/EventReceivers(guid'{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/EventReceivers", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/EventReceivers")]
     internal sealed class EventReceiverDefinition : BaseDataModel<IEventReceiverDefinition>, IEventReceiverDefinition

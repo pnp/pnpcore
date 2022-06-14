@@ -398,6 +398,7 @@ namespace PnP.Core.Model.SharePoint
                                         p => p.LogoAlignment,
                                         p => p.MegaMenuEnabled,
                                         p => p.QuickLaunchEnabled,
+                                        p => p.HorizontalQuickLaunch,
                                         // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                         p => p.WebTemplate,
                                         p => p.Features).ConfigureAwait(false);
@@ -426,14 +427,15 @@ namespace PnP.Core.Model.SharePoint
                 Emphasis = web.HeaderEmphasis
             };
 
+            chromeOptions.Navigation = new NavigationOptions
+            {
+                MegaMenuEnabled = web.MegaMenuEnabled,
+                Visible = web.QuickLaunchEnabled,
+                HorizontalQuickLaunch = hasCommunicationSiteFeatures ? true : web.HorizontalQuickLaunch
+            };
+
             if (hasCommunicationSiteFeatures)
             {
-                chromeOptions.Navigation = new NavigationOptions
-                {
-                    MegaMenuEnabled = web.MegaMenuEnabled,
-                    Visible = web.QuickLaunchEnabled
-                };
-
                 chromeOptions.Footer = new FooterOptions(context)
                 {
                     Layout = web.FooterLayout,
@@ -475,6 +477,7 @@ namespace PnP.Core.Model.SharePoint
                                                 p => p.LogoAlignment,
                                                 p => p.MegaMenuEnabled,
                                                 p => p.QuickLaunchEnabled,
+                                                p => p.HorizontalQuickLaunch,
                                                 // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                                 p => p.WebTemplate,
                                                 p => p.Features).ConfigureAwait(false);
@@ -537,9 +540,12 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Update the navigation visibility
                 await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
-            
+
                 // Update the footer displayName
-                await BuildAndAddSaveMenuStateRequestAsync(chromeOptions.Footer as FooterOptions, null, batch).ConfigureAwait(false);
+                if (chromeOptions.Footer != null)
+                {
+                    await BuildAndAddSaveMenuStateRequestAsync(chromeOptions.Footer as FooterOptions, null, batch).ConfigureAwait(false);
+                }
             }
 
             // Get notified when the batch is processed so that 
@@ -566,6 +572,7 @@ namespace PnP.Core.Model.SharePoint
                 hideTitleInHeader = chromeOptions.Header.HideTitle,
                 logoAlignment = chromeOptions.Header.LogoAlignment,
                 megaMenuEnabled = chromeOptions.Navigation != null ? chromeOptions.Navigation.MegaMenuEnabled : false,
+                horizontalQuickLaunch = chromeOptions.Navigation != null ? chromeOptions.Navigation.HorizontalQuickLaunch : false,
                 footerEnabled = chromeOptions.Footer != null ? chromeOptions.Footer.Enabled : false,
                 footerLayout = chromeOptions.Footer != null ? chromeOptions.Footer.Layout : FooterLayoutType.Simple,
                 footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong

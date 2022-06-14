@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -18,6 +20,8 @@ namespace PnP.Core.Test.Security
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;            
         }
+
+        #region File sharing tests
 
         [TestMethod]
         public async Task GetShareLinksTest()
@@ -443,6 +447,10 @@ namespace PnP.Core.Test.Security
             await TestAssets.CleanupTestDocumentAsync(2);
         }
 
+        #endregion
+
+        #region Folder sharing tests
+
         [TestMethod]
         public async Task GetFolderShareLinksTest()
         {
@@ -776,5 +784,297 @@ namespace PnP.Core.Test.Security
                 await folder.DeleteAsync();
             }
         }
+
+        #endregion
+
+        #region List item sharing tests
+
+        [TestMethod]
+        public async Task GetListItemShareLinksTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IList myList = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                try
+                {
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListItemShareLinksTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // load the list items again
+                    await myList.LoadAsync(p => p.Items);
+
+                    var listItem = myList.Items.AsRequested().First();
+
+                    var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                    {
+                        Type = ShareType.Edit
+                    };
+
+                    var createdShare = listItem.CreateOrganizationalSharingLink(shareLinkRequestOptions);
+                    Assert.IsNotNull(createdShare);
+
+                    Assert.IsTrue(!string.IsNullOrEmpty(createdShare.Link.WebUrl));
+                    Assert.IsTrue(createdShare.Link.Type == ShareType.Edit);
+                    Assert.IsTrue(createdShare.Link.Scope == ShareScope.Organization);
+
+                    // Does not (yet) work via Graph
+                    //var permissions = listItem.GetShareLinks();
+
+                    // Does not (yet) work via Graph
+                    // delete share again
+                    //createdShare.DeletePermission();
+
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateListItemAnonymousSharingLinksTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IList myList = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                try
+                {
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("CreateListItemAnonymousSharingLinksTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // load the list items again
+                    await myList.LoadAsync(p => p.Items);
+
+                    var listItem = myList.Items.AsRequested().First();
+
+                    var shareLinkRequestOptions = new AnonymousLinkOptions()
+                    {
+                        Type = ShareType.Edit,
+                        Password = "PnP Rocks!"
+                    };
+
+                    var permission = listItem.CreateAnonymousSharingLink(shareLinkRequestOptions);
+
+                    Assert.IsNotNull(permission.Id);
+                    Assert.IsNotNull(permission.Link.WebUrl);
+
+                    Assert.AreEqual(permission.Link.Type, ShareType.Edit);
+                    Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
+                    Assert.AreEqual(permission.Link.PreventsDownload, false);
+                    Assert.AreEqual(permission.HasPassword, true);
+
+                    // Does not (yet) work via Graph
+                    //var permissions = listItem.GetShareLinks();
+
+                    // Does not (yet) work via Graph
+                    // delete share again
+                    //createdShare.DeletePermission();
+
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateListItemUserSharingLinksTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IList myList = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                try
+                {
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("CreateListItemUserSharingLinksTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // load the list items again
+                    await myList.LoadAsync(p => p.Items);
+
+                    var listItem = myList.Items.AsRequested().First();
+
+                    var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                    var driveRecipients = new List<IDriveRecipient>()
+                    {
+                        new DriveRecipient
+                        {
+                            Email = testUser.Mail
+                        }
+                    };
+
+                    var shareLinkRequestOptions = new UserLinkOptions()
+                    {
+                        Type = ShareType.Edit,
+                        Recipients = driveRecipients
+                    };
+
+                    var permission = listItem.CreateUserSharingLink(shareLinkRequestOptions);
+
+                    Assert.IsNotNull(permission.Id);
+                    Assert.IsNotNull(permission.Link.WebUrl);
+
+                    Assert.AreEqual(permission.Link.Type, ShareType.Edit);
+                    Assert.AreEqual(permission.Link.Scope, ShareScope.Users);
+                    Assert.AreEqual(permission.Link.PreventsDownload, false);
+                    Assert.AreEqual(permission.HasPassword, false);
+                    Assert.AreEqual(permission.GrantedToIdentitiesV2.FirstOrDefault().SiteUser.Email, shareLinkRequestOptions.Recipients.First().Email);
+
+                    // Does not (yet) work via Graph
+                    //var permissions = listItem.GetShareLinks();
+
+                    // Does not (yet) work via Graph
+                    // delete share again
+                    //createdShare.DeletePermission();
+
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateListItemShareLinksExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IList myList = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                try
+                {
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("CreateListItemShareLinksExceptionTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // load the list items again
+                    await myList.LoadAsync(p => p.Items);
+
+                    var listItem = myList.Items.AsRequested().First();
+
+                    var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                    {
+                        Type = ShareType.BlocksDownload
+                    };
+
+                    await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+                    {
+                        await listItem.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
+                    });
+
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        #endregion
     }
 }

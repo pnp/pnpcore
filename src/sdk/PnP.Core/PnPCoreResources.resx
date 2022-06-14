@@ -138,6 +138,15 @@
   <data name="Exception_ConfigurationError_InvalidPnPContextConfigurationName" xml:space="preserve">
     <value>Invalid configuration name '{0}' for PnPContext creation</value>
   </data>
+  <data name="Exception_ContentType_ErrorObtaining" xml:space="preserve">
+    <value>Error occured on obtaining the content type</value>
+  </data>
+  <data name="Exception_ContentType_NoDocumentSet" xml:space="preserve">
+    <value>The specified content type is not of type 'Document Set'. Impossible to return this as 'Document Set'</value>
+  </data>
+  <data name="Exception_ContentType_WrongDocumentSetId" xml:space="preserve">
+    <value>The specified content type is not of type 'Document Set'. Start your ID with 0x0120D520</value>
+  </data>
   <data name="Exception_CreatePnPContext_AuthenticationProvider" xml:space="preserve">
     <value>There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details</value>
   </data>

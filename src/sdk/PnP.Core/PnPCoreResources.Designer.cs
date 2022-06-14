@@ -124,6 +124,33 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on obtaining the content type.
+        /// </summary>
+        internal static string Exception_ContentType_ErrorObtaining {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_ErrorObtaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified content type is not of type &apos;Document Set&apos;. Impossible to return this as &apos;Document Set&apos;.
+        /// </summary>
+        internal static string Exception_ContentType_NoDocumentSet {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_NoDocumentSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified content type is not of type &apos;Document Set&apos;. Start your ID with 0x0120D520.
+        /// </summary>
+        internal static string Exception_ContentType_WrongDocumentSetId {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_WrongDocumentSetId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details.
         /// </summary>
         internal static string Exception_CreatePnPContext_AuthenticationProvider {

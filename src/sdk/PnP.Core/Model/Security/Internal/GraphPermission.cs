@@ -68,7 +68,22 @@ namespace PnP.Core.Model.Security
                     throw new Exception("Error occured");
                 }
             }
-            
+            else if (Parent.GetType() == typeof(ListItem))
+            {
+                throw new ClientException(ErrorType.Unsupported, "Deleting list item permissions is not supported");
+
+                // For now this is not yet supported via Graph APIs
+                //var parent = (IListItem)Parent;
+                //var listId = await (parent as ListItem).GetListIdAsync().ConfigureAwait(false);
+
+                //var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{(parent as ListItem).Id}/permissions/{Id}", ApiType.GraphBeta);
+                //var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
+                //if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                //{
+                //    throw new Exception("Error occured");
+                //}
+            }
+
         }
 
         public void DeletePermission()
