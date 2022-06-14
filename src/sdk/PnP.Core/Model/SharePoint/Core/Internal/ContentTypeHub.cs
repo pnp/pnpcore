@@ -1,12 +1,8 @@
-﻿using PnP.Core.Model.Security;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -37,7 +33,46 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("ContentTypes")]
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
+        internal string SiteId { get; set; }
+
         #endregion
 
+        #region Methods
+
+        public async Task<string> GetSiteIdAsync()
+        {
+            if (SiteId != null)
+            {
+                return SiteId;
+            }
+            var apiCall = SiteIdApiCall();
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Error occured on retrieving the site id from the content type hub");
+            }
+
+            var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+            if (json.TryGetProperty("id", out JsonElement id))
+            {
+                SiteId = id.GetString();
+            }
+
+            return SiteId;
+        }
+
+        private ApiCall SiteIdApiCall()
+        {
+            return new ApiCall($"sites/{PnPContext.Uri.Host}:/sites/contenttypehub?$select=id", ApiType.Graph);
+        }
+
+        public string GetSiteId()
+        {
+            return GetSiteIdAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
     }
 }

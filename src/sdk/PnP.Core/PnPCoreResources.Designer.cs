@@ -628,6 +628,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot add a content type to a list on the Content Type Hub.
+        /// </summary>
+        internal static string Exception_Unsupported_AddingContentTypesToListOnContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_AddingContentTypesToListOnContentTypeHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type.
         /// </summary>
         internal static string Exception_Unsupported_AddingContentTypeToList {
@@ -894,6 +903,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_Projection {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_Projection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This function can only be called on the content type hub.
+        /// </summary>
+        internal static string Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub", resourceCulture);
             }
         }
         

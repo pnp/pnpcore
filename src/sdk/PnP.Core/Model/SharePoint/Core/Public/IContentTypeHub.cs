@@ -23,5 +23,22 @@ namespace PnP.Core.Model.SharePoint
         public IContentTypeCollection ContentTypes { get; }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the site id of the content type hub
+        /// </summary>
+        /// <returns>Site id of the ct hub</returns>
+        public Task<string> GetSiteIdAsync();
+
+
+        /// <summary>
+        /// Gets the site id of the content type hub
+        /// </summary>
+        /// <returns>Site id of the ct hub</returns>
+        public string GetSiteId();
+
+        #endregion
     }
 }

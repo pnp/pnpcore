@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -170,6 +171,43 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IWorkflowAssociationCollection WorkflowAssociations { get; }
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task PublishAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Publish();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task UnpublishAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Unpublish();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> IsPublishedAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        bool IsPublished();
+
         #endregion
     }
 }

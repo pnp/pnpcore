@@ -2,8 +2,10 @@
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -65,6 +67,46 @@ namespace PnP.Core.Model.SharePoint
 
                 return new ApiCall(new List<IRequest<object>>() { request });
             };
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            DeleteApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+                return api;
+            };
+
         }
         #endregion
 
@@ -133,6 +175,11 @@ namespace PnP.Core.Model.SharePoint
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
         {
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            {
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_AddingContentTypesToListOnContentTypeHub);
+            }
+
             dynamic body = new ExpandoObject();
             body.contentTypeId = id;
 
@@ -158,7 +205,99 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
+
         #endregion
+
+        #region Publish
+
+        public async Task PublishAsync()
+        {
+            CheckTarget();
+
+            var apiCall = await GetApiCall("publish").ConfigureAwait(false);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Publish()
+        {
+            PublishAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Unpublish
+
+        public async Task UnpublishAsync()
+        {
+            CheckTarget();
+
+            if (!await IsPublishedAsync().ConfigureAwait(false))
+            {
+                throw new Exception("An unpublish of a content type can only be done on already published content-types");
+            }
+
+            var apiCall = await GetApiCall("unpublish").ConfigureAwait(false);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Unpublish()
+        {
+            UnpublishAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region IsPublished
+
+        public async Task<bool> IsPublishedAsync()
+        {
+            CheckTarget();
+
+            var apiCall = await GetApiCall("ispublished").ConfigureAwait(false);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Error occured on executing the request");
+            }
+
+            var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+            var isPublished = false;
+
+            if (json.TryGetProperty("value", out JsonElement value))
+            {
+                isPublished = value.GetBoolean();
+            }
+
+            return isPublished;
+        }
+
+        public bool IsPublished()
+        {
+            return IsPublishedAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task<ApiCall> GetApiCall(string urlToCall)
+        {
+            var contentTypeHubSiteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+
+            return new ApiCall($"sites/{contentTypeHubSiteId}/contentTypes/{StringId}/{urlToCall}", ApiType.Graph);
+        }
+
+        #endregion
+
+        internal void CheckTarget()
+        {
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget != typeof(ContentTypeHub))
+            { 
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub);
+            }
+        }
+
         #endregion
     }
 }
