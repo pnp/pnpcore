@@ -11,6 +11,7 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -1263,6 +1264,207 @@ namespace PnP.Core.Model.SharePoint
         private ApiCall BuildRemoveRoleDefinitionApiCall(int principalId, IRoleDefinition roleDefinition)
         {
             return new ApiCall($"{GetItemUri()}/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+
+        #endregion
+
+        #region Graph Permissions
+
+        // Currently these are not supported using Microsoft Graph
+
+        //public async Task<IGraphPermissionCollection> GetShareLinksAsync()
+        //{
+        //    var listId = await GetListIdAsync().ConfigureAwait(false);
+
+        //    var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+        //    var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+        //    if (string.IsNullOrEmpty(response.Json))
+        //    {
+        //        throw new Exception("No values found");
+        //    }
+
+        //    var graphPermissions = SharingManager.DeserializeGraphPermissionsResponse(response.Json, PnPContext, this);
+
+        //    return graphPermissions;
+        //}
+
+
+        //public IGraphPermissionCollection GetShareLinks()
+        //{
+        //    return GetShareLinksAsync().GetAwaiter().GetResult();
+        //}
+
+        //public async Task DeleteShareLinksAsync()
+        //{
+        //    var shareLinks = await GetShareLinksAsync().ConfigureAwait(false);
+        //    foreach (var shareLink in shareLinks)
+        //    {
+        //        await shareLink.DeletePermissionAsync().ConfigureAwait(false);
+        //    }
+        //}
+
+        //public void DeleteShareLinks()
+        //{
+        //    DeleteShareLinksAsync().GetAwaiter().GetResult();
+        //}
+
+        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(organizationalLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            dynamic body = new ExpandoObject();
+            body.scope = ShareScope.Organization;
+            body.type = organizationalLinkOptions.Type;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+
+        }
+
+        public IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(anonymousLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Anonymous;
+            body.type = anonymousLinkOptions.Type;
+            body.password = anonymousLinkOptions.Password;
+
+            if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            return CreateAnonymousSharingLinkAsync(anonymousLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IGraphPermission> CreateSharingLinkAsync(dynamic body)
+        {
+            var listId = await GetListIdAsync().ConfigureAwait(false);
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                return SharingManager.DeserializeGraphPermission(json, PnPContext, this);
+            }
+            else
+            {
+                throw new Exception("Error occured during creation");
+            }
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(userLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
+            {
+                throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Users;
+            body.type = userLinkOptions.Type;
+            body.recipients = userLinkOptions.Recipients;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions)
+        {
+            return CreateUserSharingLinkAsync(userLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private static bool IsValidShareTypeForListItem(ShareType shareType)
+        {
+            if (shareType == ShareType.View || shareType == ShareType.Edit || shareType == ShareType.Embed)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        internal async Task<Guid> GetListIdAsync()
+        {
+            // Option A: Use the loaded parent list property
+            if (IsPropertyAvailable(p => p.ParentList) && ParentList.IsPropertyAvailable(p => p.Id))
+            {
+                return ParentList.Id;
+            }
+
+            var listId = Guid.Empty;
+
+            //Option B: walk the parent tree
+            listId = GetListIdFromParent(this);
+
+            if (listId != Guid.Empty)
+            {
+                return listId;
+            }
+
+            // Option C: load parent list (requires server roundtrip)
+            await LoadAsync(p => p.ParentList).ConfigureAwait(false);
+            if (IsPropertyAvailable(p => p.ParentList) && ParentList.IsPropertyAvailable(p => p.Id))
+            {
+                return ParentList.Id;
+            }
+
+            // We should never get here...
+            return Guid.Empty;
+        }
+
+        private static Guid GetListIdFromParent(IDataModelParent listItem)
+        {
+            if (listItem != null)
+            {
+                if (listItem.Parent != null && listItem.Parent is List)
+                {
+                    return (listItem.Parent as List).Id;
+                }
+                else
+                {
+                    if (listItem.Parent == null)
+                    {
+                        return Guid.Empty;
+                    }
+                    else
+                    {
+                        return GetListIdFromParent(listItem.Parent);
+                    }
+                }
+            }
+
+            return Guid.Empty;
         }
 
         #endregion
