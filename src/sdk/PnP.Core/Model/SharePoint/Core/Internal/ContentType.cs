@@ -399,7 +399,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddFieldAsync(IField field)
         {
-            var apiCall = await GetFieldAddApiCall(field);
+            var apiCall = await GetFieldAddApiCall(field).ConfigureAwait(false);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
