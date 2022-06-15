@@ -6,6 +6,7 @@ using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Net;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
+    [SharePointType("SP.ContentType", Target = typeof(ContentTypeHub), Uri = "_api/Web/ContentTypes('{Id}')", LinqGet = "_api/web/ContentTypes")]
     [SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", LinqGet = "_api/web/ContentTypes")]
     [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
     internal sealed class ContentType : BaseDataModel<IContentType>, IContentType
@@ -68,6 +70,46 @@ namespace PnP.Core.Model.SharePoint
 
                 return new ApiCall(new List<IRequest<object>>() { request });
             };
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            DeleteApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+                return api;
+            };
+
         }
         #endregion
 
@@ -141,11 +183,11 @@ namespace PnP.Core.Model.SharePoint
                 throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ContentType_NoDocumentSet);
             }
 
-            var apiCall = GetDocumentSetApiCall();
+            var apiCall = await GetDocumentSetApiCall().ConfigureAwait(false);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new ClientException(PnPCoreResources.Exception_ContentType_ErrorObtaining);
             }
@@ -168,23 +210,26 @@ namespace PnP.Core.Model.SharePoint
             return AsDocumentSetAsync().GetAwaiter().GetResult();
         }
 
-        private ApiCall GetDocumentSetApiCall()
+        private async Task<ApiCall> GetDocumentSetApiCall()
         {
-            // implement web / list ct later 
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}?$expand=DocumentSet/SharedColumns,DocumentSet/WelcomePageColumns&$select=documentSet";
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
+
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}?$expand=DocumentSet/SharedColumns,DocumentSet/WelcomePageColumns&$select=documentSet";
 
             return new ApiCall(requestUrl, ApiType.Graph);
         }
 
         internal async Task AddFileToDefaultContentLocationAsync(string listId, string listItemId, string destinationName)
         {
-            var apiCall = AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName);
+            var apiCall = await AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName).ConfigureAwait(false);
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        private ApiCall AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
+        private async Task<ApiCall> AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
         {
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/copyToDefaultContentLocation";
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
+
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}/copyToDefaultContentLocation";
 
             dynamic body = new ExpandoObject();
             body.destinationFileName = destinationName;
@@ -357,7 +402,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddFieldAsync(IField field)
         {
-            var apiCall = GetFieldAddApiCall(field);
+            var apiCall = await GetFieldAddApiCall(field).ConfigureAwait(false);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
@@ -367,14 +412,15 @@ namespace PnP.Core.Model.SharePoint
             AddFieldAsync(field).GetAwaiter().GetResult();
         }
 
-        private ApiCall GetFieldAddApiCall(IField field)
+        private async Task<ApiCall> GetFieldAddApiCall(IField field)
         {
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/columns";
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
+
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}/columns";
 
             dynamic body = new ExpandoObject();
 
-            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{PnPContext.Site.Id}/columns/{field.Id}";
-
+            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{siteId}/columns/{field.Id}";
 
             return new ApiCall(requestUrl, ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
         }
@@ -384,6 +430,11 @@ namespace PnP.Core.Model.SharePoint
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
         {
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            {
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_AddingContentTypesToListOnContentTypeHub);
+            }
+
             dynamic body = new ExpandoObject();
             body.contentTypeId = id;
 
@@ -409,7 +460,111 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
+
         #endregion
+
+        #region Publish
+
+        public async Task PublishAsync()
+        {
+            CheckTarget();
+
+            var apiCall = await GetApiCall("publish").ConfigureAwait(false);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Publish()
+        {
+            PublishAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Unpublish
+
+        public async Task UnpublishAsync()
+        {
+            CheckTarget();
+
+            if (!await IsPublishedAsync().ConfigureAwait(false))
+            {
+                throw new Exception("An unpublish of a content type can only be done on already published content-types");
+            }
+
+            var apiCall = await GetApiCall("unpublish").ConfigureAwait(false);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Unpublish()
+        {
+            UnpublishAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region IsPublished
+
+        public async Task<bool> IsPublishedAsync()
+        {
+            CheckTarget();
+
+            var apiCall = await GetApiCall("ispublished").ConfigureAwait(false);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Error occured on executing the request");
+            }
+
+            var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+            var isPublished = false;
+
+            if (json.TryGetProperty("value", out JsonElement value))
+            {
+                isPublished = value.GetBoolean();
+            }
+
+            return isPublished;
+        }
+
+        public bool IsPublished()
+        {
+            return IsPublishedAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task<ApiCall> GetApiCall(string urlToCall)
+        {
+            var contentTypeHubSiteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+
+            return new ApiCall($"sites/{contentTypeHubSiteId}/contentTypes/{StringId}/{urlToCall}", ApiType.Graph);
+        }
+
+        #endregion
+
+        internal void CheckTarget()
+        {
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget != typeof(ContentTypeHub))
+            { 
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub);
+            }
+        }
+
+        internal async Task<string> GetSiteIdAsync()
+        {
+            var siteId = PnPContext.Site.Id.ToString();
+
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            {
+                siteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+            }
+
+            return siteId;
+        }
+
         #endregion
     }
 }

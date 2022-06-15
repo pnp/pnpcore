@@ -12,7 +12,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Field class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Field", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/Field('{Id}')", LinqGet = "_api/web/ContentTypes('{Parent.Id}')/Fields")]
+    [SharePointType("SP.Field", Target = typeof(ContentTypeHub), Uri = "_api/Web/Fields('{Id}')", Get = "_api/Web/Fields", LinqGet = "_api/Web/Fields")]
+    [SharePointType("SP.Field", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/Fields('{Id}')", LinqGet = "_api/web/ContentTypes('{Parent.Id}')/Fields")]
     [SharePointType("SP.Field", Target = typeof(Web), Uri = "_api/Web/Fields('{Id}')", Get = "_api/Web/Fields", LinqGet = "_api/Web/Fields")]
     [SharePointType("SP.Field", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/Fields('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/Fields", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Fields")]
     internal sealed class Field : BaseDataModel<IField>, IField
@@ -22,6 +23,75 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public Field()
         {
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                {
+                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    {
+                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                    }
+                }
+
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                {
+                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    {
+                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                    }
+                }
+
+                
+                return api;
+            };
+
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            DeleteApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+
+                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                {
+                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    {
+                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                    }
+                }
+
+                return api;
+            };
         }
         #endregion
 
@@ -206,11 +276,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task<IField> AddAsXmlBatchAsync(Batch batch, string schemaXml, AddFieldOptionsFlags options)
         {
-            // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
-            string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+            var endpointUrl = GetEndpointUrl();
 
             var body = new
             {
@@ -231,11 +297,8 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task<IField> AddAsXmlAsync(string schemaXml, AddFieldOptionsFlags options)
         {
-            // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
-            string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+
+            var endpointUrl = GetEndpointUrl();
 
             var body = new
             {
@@ -252,6 +315,22 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             return this;
+        }
+
+        private string GetEndpointUrl()
+        {
+            // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
+            // automatically provide the correct 'parent'
+            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
+            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
+            string endPointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+
+            if (entity.SharePointTarget == typeof(ContentTypeHub))
+            {
+                endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}/");
+            }
+
+            return endPointUrl;
         }
 
         #region FieldValue object creation

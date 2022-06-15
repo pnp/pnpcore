@@ -181,6 +181,39 @@ namespace PnP.Core.Model.SharePoint
         #region Methods
 
         /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task PublishAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Publish();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task UnpublishAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Unpublish();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> IsPublishedAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        bool IsPublished();
+
+        /// <summary>
         /// Returns the content type as a document set
         /// </summary>
         /// <returns>The content type as a document set</returns>

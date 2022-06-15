@@ -441,6 +441,12 @@
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
   </data>
+  <data name="Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub" xml:space="preserve">
+    <value>This function can only be called on the content type hub</value>
+  </data>
+  <data name="Exception_Unsupported_AddingContentTypesToListOnContentTypeHub" xml:space="preserve">
+    <value>You cannot add a content type to a list on the Content Type Hub</value>
+  </data>
   <data name="Log_Debug_JsonCannotMapField" xml:space="preserve">
     <value>Field {0} could not be mapped when converting from JSON</value>
   </data>

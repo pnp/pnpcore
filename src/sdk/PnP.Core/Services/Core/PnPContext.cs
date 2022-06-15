@@ -64,6 +64,11 @@ namespace PnP.Core.Services
             return new Me();
         }, true);
 
+        private readonly Lazy<IContentTypeHub> contentTypeHub = new Lazy<IContentTypeHub>(() =>
+        {
+            return new ContentTypeHub();
+        }, true);
+
         #endregion
 
         #region Internal properties
@@ -398,6 +403,19 @@ namespace PnP.Core.Services
                 return me.Value;
             }
         }
+
+        /// <summary>
+        /// Entry point for the ContentTypeHub object
+        /// </summary>
+        public IContentTypeHub ContentTypeHub
+        {
+            get
+            {
+                (contentTypeHub.Value as ContentTypeHub).PnPContext = this;
+                return contentTypeHub.Value;
+            }
+        }
+
         #endregion
 
         #region Public Methods   
