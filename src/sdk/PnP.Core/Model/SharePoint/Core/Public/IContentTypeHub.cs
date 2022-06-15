@@ -1,7 +1,4 @@
-﻿using PnP.Core.Model.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -15,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
         #region Properties
 
         /// <summary>
-        /// Collection of content types in the current Web object
+        /// Collection of fields in the current content type hub
         /// Implements <see cref="IQueryable{T}"/>. <br />
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
@@ -23,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
         public IFieldCollection Fields { get; }
 
         /// <summary>
-        /// Collection of content types in the current Web object
+        /// Collection of content types in the content type hub
         /// Implements <see cref="IQueryable{T}"/>. <br />
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.

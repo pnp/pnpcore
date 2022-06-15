@@ -1,5 +1,4 @@
-﻿using PnP.Core.QueryModel;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -68,14 +66,24 @@ namespace PnP.Core.Model.SharePoint
                     Name = Name
                 });
 
-                return new ApiCall(new List<IRequest<object>>() { request });
+
+                string requestUrl = PnPContext.Uri.ToString();
+                if (IsContentTypeHub())
+                {
+                    requestUrl = requestUrl.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                }
+
+                return new ApiCall(new List<IRequest<object>>() { request })
+                {
+                    Request = requestUrl
+                };
             };
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -89,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
             UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -102,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
             DeleteApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -183,7 +191,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ContentType_NoDocumentSet);
             }
 
-            var apiCall = await GetDocumentSetApiCall().ConfigureAwait(false);
+            var apiCall = await GetDocumentSetApiCallAsync().ConfigureAwait(false);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
@@ -210,7 +218,7 @@ namespace PnP.Core.Model.SharePoint
             return AsDocumentSetAsync().GetAwaiter().GetResult();
         }
 
-        private async Task<ApiCall> GetDocumentSetApiCall()
+        private async Task<ApiCall> GetDocumentSetApiCallAsync()
         {
             var siteId = await GetSiteIdAsync().ConfigureAwait(false);
 
@@ -221,11 +229,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task AddFileToDefaultContentLocationAsync(string listId, string listItemId, string destinationName)
         {
-            var apiCall = await AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName).ConfigureAwait(false);
+            var apiCall = await AddFileToDefaultContentLocationApiCallAsync(listId, listItemId, destinationName).ConfigureAwait(false);
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        private async Task<ApiCall> AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
+        private async Task<ApiCall> AddFileToDefaultContentLocationApiCallAsync(string listId, string listItemId, string destinationName)
         {
             var siteId = await GetSiteIdAsync().ConfigureAwait(false);
 
@@ -402,7 +410,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddFieldAsync(IField field)
         {
-            var apiCall = await GetFieldAddApiCall(field).ConfigureAwait(false);
+            var apiCall = await GetFieldAddApiCallAsync(field).ConfigureAwait(false);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
@@ -412,7 +420,7 @@ namespace PnP.Core.Model.SharePoint
             AddFieldAsync(field).GetAwaiter().GetResult();
         }
 
-        private async Task<ApiCall> GetFieldAddApiCall(IField field)
+        private async Task<ApiCall> GetFieldAddApiCallAsync(IField field)
         {
             var siteId = await GetSiteIdAsync().ConfigureAwait(false);
 
@@ -430,7 +438,7 @@ namespace PnP.Core.Model.SharePoint
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
         {
-            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            if (IsContentTypeHub())
             {
                 throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_AddingContentTypesToListOnContentTypeHub);
             }
@@ -469,7 +477,7 @@ namespace PnP.Core.Model.SharePoint
         {
             CheckTarget();
 
-            var apiCall = await GetApiCall("publish").ConfigureAwait(false);
+            var apiCall = await GetApiCallAsync("publish").ConfigureAwait(false);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
@@ -492,7 +500,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new Exception("An unpublish of a content type can only be done on already published content-types");
             }
 
-            var apiCall = await GetApiCall("unpublish").ConfigureAwait(false);
+            var apiCall = await GetApiCallAsync("unpublish").ConfigureAwait(false);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
@@ -510,7 +518,7 @@ namespace PnP.Core.Model.SharePoint
         {
             CheckTarget();
 
-            var apiCall = await GetApiCall("ispublished").ConfigureAwait(false);
+            var apiCall = await GetApiCallAsync("ispublished").ConfigureAwait(false);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
@@ -536,7 +544,7 @@ namespace PnP.Core.Model.SharePoint
             return IsPublishedAsync().GetAwaiter().GetResult();
         }
 
-        private async Task<ApiCall> GetApiCall(string urlToCall)
+        private async Task<ApiCall> GetApiCallAsync(string urlToCall)
         {
             var contentTypeHubSiteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
 
@@ -545,9 +553,9 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        internal void CheckTarget()
+        private void CheckTarget()
         {
-            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget != typeof(ContentTypeHub))
+            if (!IsContentTypeHub())
             { 
                 throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub);
             }
@@ -557,7 +565,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var siteId = PnPContext.Site.Id.ToString();
 
-            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            if (IsContentTypeHub())
             {
                 siteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
             }
@@ -565,6 +573,13 @@ namespace PnP.Core.Model.SharePoint
             return siteId;
         }
 
+        #endregion
+
+        #region Helper methods
+        private bool IsContentTypeHub()
+        {
+            return EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub);
+        }
         #endregion
     }
 }

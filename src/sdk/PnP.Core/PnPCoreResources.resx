@@ -465,4 +465,7 @@
   <data name="Log_Information_OperationNotReady" xml:space="preserve">
     <value>Operation {0} not ready yet. Status = {1}. Waiting for {2} seconds, attempt number {3}</value>
   </data>
+  <data name="Exception_RetrievingContentTypeHubSiteId" xml:space="preserve">
+    <value>Error occured on retrieving the site id from the content type hub</value>
+  </data>
 </root>

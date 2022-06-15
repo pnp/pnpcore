@@ -583,6 +583,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on retrieving the site id from the content type hub.
+        /// </summary>
+        internal static string Exception_RetrievingContentTypeHubSiteId {
+            get {
+                return ResourceManager.GetString("Exception_RetrievingContentTypeHubSiteId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
         /// </summary>
         internal static string Exception_RoleDefinition_NotFound {

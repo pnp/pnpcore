@@ -1,5 +1,4 @@
 ﻿using PnP.Core.Services;
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -46,12 +45,13 @@ namespace PnP.Core.Model.SharePoint
             {
                 return SiteId;
             }
-            var apiCall = SiteIdApiCall();
+
+            var apiCall = BuildSiteIdApiCall();
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Error occured on retrieving the site id from the content type hub");
+                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_RetrievingContentTypeHubSiteId);
             }
 
             var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
@@ -64,7 +64,7 @@ namespace PnP.Core.Model.SharePoint
             return SiteId;
         }
 
-        private ApiCall SiteIdApiCall()
+        private ApiCall BuildSiteIdApiCall()
         {
             return new ApiCall($"sites/{PnPContext.Uri.Host}:/sites/contenttypehub?$select=id", ApiType.Graph);
         }

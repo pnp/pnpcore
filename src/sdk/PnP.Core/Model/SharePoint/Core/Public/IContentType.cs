@@ -192,24 +192,24 @@ namespace PnP.Core.Model.SharePoint
         void Publish();
 
         /// <summary>
-        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// Unpublishes a content type from the hub to the sites in the SharePoint environment
         /// </summary>
         /// <returns></returns>
         Task UnpublishAsync();
 
         /// <summary>
-        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// Unublishes a content type from the hub to the sites in the SharePoint environment
         /// </summary>
         void Unpublish();
 
         /// <summary>
-        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// Checks if a content type is published from the hub to the sites in the SharePoint environment
         /// </summary>
         /// <returns></returns>
         Task<bool> IsPublishedAsync();
 
         /// <summary>
-        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// Checks if a content type is published from the hub to the sites in the SharePoint environment
         /// </summary>
         bool IsPublished();
 

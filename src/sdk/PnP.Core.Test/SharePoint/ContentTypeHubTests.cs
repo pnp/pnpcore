@@ -30,7 +30,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 await context.ContentTypeHub.LoadAsync(y => y.ContentTypes);
 
-                Assert.IsNotNull(context.ContentTypeHub.ContentTypes);
+                Assert.IsNotNull(context.ContentTypeHub.ContentTypes.AsRequested());
+                Assert.IsTrue(context.ContentTypeHub.ContentTypes.AsRequested().Count() > 0);
             }
         }
 
@@ -41,22 +42,32 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
+                IContentType newContentType = null;
 
-                // Test the created object
-                Assert.IsNotNull(newContentType);
-                Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
-                Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
-                Assert.AreEqual("TESTING", newContentType.Description);
-                Assert.AreEqual("TESTING", newContentType.Group);
+                try
+                {
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
 
-                await context.ContentTypeHub.LoadAsync(y => y.ContentTypes);
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
+                    Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
 
-                var matchingCt = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(y => y.Id == newContentType.StringId);
+                    await context.ContentTypeHub.LoadAsync(y => y.ContentTypes);
 
-                Assert.IsNotNull(matchingCt);
+                    var matchingCt = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(y => y.Id == newContentType.StringId);
 
-                await newContentType.DeleteAsync();
+                    Assert.IsNotNull(matchingCt);
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -67,19 +78,30 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5959D", "IsContentTypePublished", "TESTING", "TESTING");
+                IContentType newContentType = null;
 
-                var isPublished = await newContentType.IsPublishedAsync();
+                try
+                {
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5959D", "IsContentTypePublished", "TESTING", "TESTING");
 
-                Assert.IsFalse(isPublished);
+                    var isPublished = await newContentType.IsPublishedAsync();
 
-                await newContentType.PublishAsync();
+                    Assert.IsFalse(isPublished);
 
-                isPublished = await newContentType.IsPublishedAsync();
+                    await newContentType.PublishAsync();
 
-                Assert.IsTrue(isPublished);
+                    isPublished = await newContentType.IsPublishedAsync();
 
-                await newContentType.DeleteAsync();
+                    Assert.IsTrue(isPublished);
+
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -90,46 +112,34 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Unpublish", "TESTING", "TESTING");
+                IContentType newContentType = null;
 
-                // First we have to publish the content type
+                try
+                {
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Unpublish", "TESTING", "TESTING");
 
-                await newContentType.PublishAsync();
+                    // First we have to publish the content type
 
-                var isPublished = await newContentType.IsPublishedAsync();
+                    await newContentType.PublishAsync();
 
-                Assert.IsTrue(isPublished);
+                    var isPublished = await newContentType.IsPublishedAsync();
 
-                await newContentType.UnpublishAsync();
+                    Assert.IsTrue(isPublished);
 
-                isPublished = await newContentType.IsPublishedAsync();
+                    await newContentType.UnpublishAsync();
 
-                Assert.IsFalse(isPublished);
+                    isPublished = await newContentType.IsPublishedAsync();
 
-                await newContentType.DeleteAsync();
-            }
-        }
+                    Assert.IsFalse(isPublished);
 
-        [TestMethod]
-        public async Task CheckIfContentTypeIsPublishedAsyncTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD IsPublished", "TESTING", "TESTING");
-
-                var isPublished = await newContentType.IsPublishedAsync();
-
-                Assert.IsFalse(isPublished);
-
-                await newContentType.PublishAsync();
-
-                isPublished = await newContentType.IsPublishedAsync();
-
-                Assert.IsTrue(isPublished);
-
-                await newContentType.DeleteAsync();
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -140,21 +150,36 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5961A", "CreateContentTypeC", "TESTING", "TESTING");
+                IContentType newContentType = null;
+                IField newField = null;
 
-                IField newField = await context.ContentTypeHub.Fields.AddBooleanAsync("TestField", new FieldBooleanOptions {});
+                try
+                {
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5961A", "CreateContentTypeC", "TESTING", "TESTING");
 
-                await newContentType.AddFieldAsync(newField);
-                await newContentType.LoadAsync(y => y.Fields);
+                    newField = await context.ContentTypeHub.Fields.AddBooleanAsync("TestField", new FieldBooleanOptions { });
 
-                // Check if field is created on ct
-                var matchingField = newContentType.Fields.AsRequested().FirstOrDefault(y => y.Id == newField.Id);
+                    await newContentType.AddFieldAsync(newField);
+                    await newContentType.LoadAsync(y => y.Fields);
 
-                Assert.IsNotNull(matchingField);
+                    // Check if field is created on ct
+                    var matchingField = newContentType.Fields.AsRequested().FirstOrDefault(y => y.Id == newField.Id);
 
-                // Clean up
-                await newContentType.DeleteAsync();
-                await newField.DeleteAsync();
+                    Assert.IsNotNull(matchingField);
+                }
+                finally
+                {
+                    // Clean up
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+
+                    if (newField != null)
+                    {
+                        await newField.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -165,14 +190,25 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Unpublish", "TESTING", "TESTING");
+                IContentType newContentType = null;
 
-                await Assert.ThrowsExceptionAsync<Exception>(async () =>
+                try
                 {
-                    await newContentType.UnpublishAsync();
-                });
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Unpublish", "TESTING", "TESTING");
 
-                await newContentType.DeleteAsync();
+                    await Assert.ThrowsExceptionAsync<Exception>(async () =>
+                    {
+                        await newContentType.UnpublishAsync();
+                    });
+
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -183,20 +219,31 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Publish", "TESTING", "TESTING");
+                IContentType newContentType = null;
 
-                await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+                try
                 {
-                    await newContentType.PublishAsync();
-                });
+                    newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD Publish", "TESTING", "TESTING");
 
-                await newContentType.DeleteAsync();
+                    await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+                    {
+                        await newContentType.PublishAsync();
+                    });
+
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
         #region Document Sets
 
-        // Ensure the document set site collection feature is enabled before running test tests live
+        // Ensure the document set site collection feature is enabled before running test tests live (should be active by default on the content type hub site)
 
         [TestMethod]
         public async Task AddContentTypeAsDocumentSet()
@@ -232,98 +279,124 @@ namespace PnP.Core.Test.SharePoint
                     }
                 };
 
-                IDocumentSet newDocumentSet = await context.ContentTypeHub.ContentTypes.AddDocumentSetAsync(docSetId, "Document set name", "TESTING", "TESTING", documentSetOptions);
-                IContentType newContentType = newDocumentSet.Parent as IContentType;
-                // Test the created object
-                Assert.IsNotNull(newContentType);
-                Assert.IsNotNull(newDocumentSet);
+                IContentType newContentType = null;
 
-                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
-                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
-                Assert.AreEqual(newDocumentSet.AllowedContentTypes.Count, documentSetOptions.AllowedContentTypes.Count);
-                Assert.AreEqual(newDocumentSet.ShouldPrefixNameToFile, documentSetOptions.ShouldPrefixNameToFile);
+                try
+                {
+                    IDocumentSet newDocumentSet = await context.ContentTypeHub.ContentTypes.AddDocumentSetAsync(docSetId, "Document set name", "TESTING", "TESTING", documentSetOptions);
+                    newContentType = newDocumentSet.Parent as IContentType;
+                    
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.IsNotNull(newDocumentSet);
 
-                await newContentType.DeleteAsync();
+                    Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
+                    Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
+                    Assert.AreEqual(newDocumentSet.AllowedContentTypes.Count, documentSetOptions.AllowedContentTypes.Count);
+                    Assert.AreEqual(newDocumentSet.ShouldPrefixNameToFile, documentSetOptions.ShouldPrefixNameToFile);
+                }
+                finally
+                {
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
             }
         }
 
         [TestMethod]
         public async Task UpdateContentTypeAsDocumentSet()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
-                var rootFolder = await list.RootFolder.GetAsync();
-
-                (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(parentFolder: rootFolder);
-
-                var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
-                var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
-
-                var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
-                var documentSetOptions = new DocumentSetOptions
+                IContentType newContentType = null;
+                IFile file = null; 
+                try
                 {
-                    SharedColumns = new List<IField>
+                    var list = await context.Web.Lists.GetByTitle("Documents").GetAsync();
+                    var rootFolder = await list.RootFolder.GetAsync();
+
+                    (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(parentFolder: rootFolder);
+
+                    var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
+                    var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                    var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
+
+                    file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    var documentSetOptions = new DocumentSetOptions
                     {
-                        categoriesField
-                    },
-                    WelcomePageColumns = new List<IField>
-                    {
-                        categoriesField
-                    },
-                    DefaultContents = new List<DocumentSetContentOptions>
-                    {
-                        new DocumentSetContentOptions
+                        SharedColumns = new List<IField>
                         {
-                            FileName = "Test.docx",
-                            FolderName = "FolderName",
-                            File = file,
-                            ContentTypeId = documentCt.StringId
+                            categoriesField
+                        },
+                        WelcomePageColumns = new List<IField>
+                        {
+                            categoriesField
+                        },
+                        DefaultContents = new List<DocumentSetContentOptions>
+                        {
+                            new DocumentSetContentOptions
+                            {
+                                FileName = "Test.docx",
+                                FolderName = "FolderName",
+                                File = file,
+                                ContentTypeId = documentCt.StringId
+                            }
                         }
-                    }
-                };
+                    };
 
-                IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document Set Name", "TESTING", "TESTING", documentSetOptions);
+                    IDocumentSet newDocumentSet = await context.Web.ContentTypes.AddDocumentSetAsync(docSetId, "Document Set Name", "TESTING", "TESTING", documentSetOptions);
 
-                Assert.IsNotNull(newDocumentSet);
-                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
-                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
-                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
+                    Assert.IsNotNull(newDocumentSet);
+                    Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptions.SharedColumns.Count);
+                    Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptions.WelcomePageColumns.Count);
+                    Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptions.DefaultContents.Count);
 
-                var documentSetOptionsUpdate = new DocumentSetOptions
+                    var documentSetOptionsUpdate = new DocumentSetOptions
+                    {
+                        SharedColumns = new List<IField>
+                        {
+                            managersField
+                        },
+                        WelcomePageColumns = new List<IField>
+                        {
+                            managersField
+                        },
+                        DefaultContents = new List<DocumentSetContentOptions>
+                        {
+                            new DocumentSetContentOptions
+                            {
+                                FileName = "Test2.docx",
+                                FolderName = "FolderName2",
+                                File = file,
+                                ContentTypeId = documentCt.StringId
+                            }
+                        }
+                    };
+                    newDocumentSet = await newDocumentSet.UpdateAsync(documentSetOptionsUpdate);
+                    newContentType = newDocumentSet.Parent as IContentType;
+
+                    Assert.IsNotNull(newDocumentSet);
+                    Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptionsUpdate.SharedColumns.Count + documentSetOptions.SharedColumns.Count);
+                    Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptionsUpdate.WelcomePageColumns.Count + documentSetOptions.WelcomePageColumns.Count);
+                    Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptionsUpdate.DefaultContents.Count + documentSetOptions.DefaultContents.Count);
+                }
+                finally
                 {
-                    SharedColumns = new List<IField>
+                    if (newContentType != null)
                     {
-                        managersField
-                    },
-                    WelcomePageColumns = new List<IField>
-                    {
-                        managersField
-                    },
-                    DefaultContents = new List<DocumentSetContentOptions>
-                    {
-                        new DocumentSetContentOptions
-                        {
-                            FileName = "Test2.docx",
-                            FolderName = "FolderName2",
-                            File = file,
-                            ContentTypeId = documentCt.StringId
-                        }
+                        await newContentType.DeleteAsync();
                     }
-                };
-                newDocumentSet = await newDocumentSet.UpdateAsync(documentSetOptionsUpdate);
-                IContentType newContentType = newDocumentSet.Parent as IContentType;
 
-                Assert.IsNotNull(newDocumentSet);
-                Assert.AreEqual(newDocumentSet.SharedColumns.Count, documentSetOptionsUpdate.SharedColumns.Count + documentSetOptions.SharedColumns.Count);
-                Assert.AreEqual(newDocumentSet.WelcomePageColumns.Count, documentSetOptionsUpdate.WelcomePageColumns.Count + documentSetOptions.WelcomePageColumns.Count);
-                Assert.AreEqual(newDocumentSet.DefaultContents.Count, documentSetOptionsUpdate.DefaultContents.Count + documentSetOptions.DefaultContents.Count);
-
-                await newContentType.DeleteAsync();
-                await file.DeleteAsync();
+                    if (file != null)
+                    {
+                        await file.DeleteAsync();
+                    }
+                }
             }
         }
 

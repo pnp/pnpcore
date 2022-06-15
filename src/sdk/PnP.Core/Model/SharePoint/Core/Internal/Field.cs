@@ -28,15 +28,14 @@ namespace PnP.Core.Model.SharePoint
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
-
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
-                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    if (IsContentTypeHubFromParent())
                     {
                         var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -51,15 +50,14 @@ namespace PnP.Core.Model.SharePoint
             UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
-                }
-
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                } 
+                else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
-                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    if (IsContentTypeHubFromParent())
                     {
                         var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -75,15 +73,14 @@ namespace PnP.Core.Model.SharePoint
             DeleteApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+                if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
-
-                if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
+                else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
-                    if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                    if (IsContentTypeHubFromParent())
                     {
                         var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
@@ -442,6 +439,26 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #endregion
+
+        #region Helper methods
+        private bool IsContentTypeHub()
+        {
+            return EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub);
+        }
+
+        private bool IsContentTypeHubFromParent()
+        {
+            if (Parent != null && Parent.Parent != null && Parent.Parent.Parent != null && Parent.Parent.Parent.Parent != null)
+            {
+                if (Parent.Parent.Parent.Parent.GetType() == typeof(ContentTypeHub))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         #endregion
     }
 }
