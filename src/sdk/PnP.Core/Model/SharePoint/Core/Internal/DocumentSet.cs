@@ -214,8 +214,10 @@ namespace PnP.Core.Model.SharePoint
             }
 
             body.documentSet = documentSet;
-            
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/contenttypes/{ContentTypeId}", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+
+            var siteId = await parentCt.GetSiteIdAsync().ConfigureAwait(false);
+
+            var apiCall = new ApiCall($"sites/{siteId}/contenttypes/{ContentTypeId}", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
             var response = await RawRequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)

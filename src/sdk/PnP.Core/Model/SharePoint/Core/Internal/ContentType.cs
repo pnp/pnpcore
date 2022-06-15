@@ -183,11 +183,11 @@ namespace PnP.Core.Model.SharePoint
                 throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ContentType_NoDocumentSet);
             }
 
-            var apiCall = GetDocumentSetApiCall();
+            var apiCall = await GetDocumentSetApiCall().ConfigureAwait(false);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new ClientException(PnPCoreResources.Exception_ContentType_ErrorObtaining);
             }
@@ -210,23 +210,26 @@ namespace PnP.Core.Model.SharePoint
             return AsDocumentSetAsync().GetAwaiter().GetResult();
         }
 
-        private ApiCall GetDocumentSetApiCall()
+        private async Task<ApiCall> GetDocumentSetApiCall()
         {
-            // implement web / list ct later 
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}?$expand=DocumentSet/SharedColumns,DocumentSet/WelcomePageColumns&$select=documentSet";
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
+
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}?$expand=DocumentSet/SharedColumns,DocumentSet/WelcomePageColumns&$select=documentSet";
 
             return new ApiCall(requestUrl, ApiType.Graph);
         }
 
         internal async Task AddFileToDefaultContentLocationAsync(string listId, string listItemId, string destinationName)
         {
-            var apiCall = AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName);
+            var apiCall = await AddFileToDefaultContentLocationApiCall(listId, listItemId, destinationName).ConfigureAwait(false);
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        private ApiCall AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
+        private async Task<ApiCall> AddFileToDefaultContentLocationApiCall(string listId, string listItemId, string destinationName)
         {
-            var requestUrl = $"sites/{PnPContext.Site.Id}/contentTypes/{Id}/copyToDefaultContentLocation";
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
+
+            var requestUrl = $"sites/{siteId}/contentTypes/{Id}/copyToDefaultContentLocation";
 
             dynamic body = new ExpandoObject();
             body.destinationFileName = destinationName;
@@ -411,12 +414,8 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<ApiCall> GetFieldAddApiCall(IField field)
         {
-            var siteId = PnPContext.Site.Id.ToString();
+            var siteId = await GetSiteIdAsync().ConfigureAwait(false);
 
-            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
-            {
-                siteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
-            }
             var requestUrl = $"sites/{siteId}/contentTypes/{Id}/columns";
 
             dynamic body = new ExpandoObject();
@@ -552,6 +551,18 @@ namespace PnP.Core.Model.SharePoint
             { 
                 throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub);
             }
+        }
+
+        internal async Task<string> GetSiteIdAsync()
+        {
+            var siteId = PnPContext.Site.Id.ToString();
+
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentTypeHub))
+            {
+                siteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+            }
+
+            return siteId;
         }
 
         #endregion
