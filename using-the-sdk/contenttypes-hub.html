@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with the content type hub | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with the content type hub | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/contenttypes-hub.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-the-content-type-hub">Working with the content type hub</h1>
+
+<p>Each SharePoint site uses <a href="https://support.microsoft.com/en-us/office/documents-and-libraries-in-sharepoint-8284da52-9092-4b45-90e1-1b7de6311c38?ui=en-US&amp;rs=en-US&amp;ad=US#id0eaabaaa=content_types&amp;ID0EAACAAA=Content_types">content types</a>, a site comes pre-populated with a set of content types and a set of lists and libraries that use these content types. You can also create your own content types, either being a site content type or list content type, but you can also consume content types from a central location: the <a href="https://support.microsoft.com/en-us/office/what-s-changed-in-content-type-publishing-609399c7-5c42-4e25-aff0-b59d4aa1867f">content type hub</a>.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with content types
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The code snippets in this article show a regular content type but the exact same applies to <a href="contenttypes-documentsets.html">Document Sets</a> as Document Sets actually are content types as well.</p>
+</div>
+<h2 id="your-tenants-content-type-hub">Your tenant's content type hub</h2>
+<p>When a tenant is created it already contains a site collection that will act as the content type hub. The server relative URL for this site collection is <code>/sites/contenttypehub</code>. When working with PnP Core SDK you don't have to specify this, you can use the <code>ContentTypeHub</code> property on <code>PnPContext</code> to perform operations on your content type hub.</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(y =&gt; y.ContentTypes);
+
+foreach(var contentType in context.ContentTypeHub.ContentTypes.AsRequested())
+{
+    // Do something
+}
+</code></pre>
+<h2 id="adding-updating-and-deleting-content-types-in-the-content-type-hub">Adding, updating and deleting content types in the content type hub</h2>
+<p>You can create and maintain your content types in the content type hub just like you'd do in any other site collection, the difference here is that you use the <code>PnPContext</code> <code>ContentTypeHub</code> property to access the hub. Content types in the content type hub can be published and made available for all site collections in your tenant.</p>
+<p>Adding a content type to the hub:</p>
+<pre><code class="lang-csharp">var contentType = await context.ContentTypeHub.ContentTypes.AddAsync(&quot;0x0100302EF0D1F1DB4C4EBF58251BCCF5968F&quot;, &quot;MyContentType&quot;);
+</code></pre>
+<p>Updating an existing content type in the hub:</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                       p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type to update
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Update the content type
+contentType.Description = &quot;PnP Rocks!&quot;;
+await contentType.UpdateAsync();
+
+// Adding a new field to the existing content type, mark it as required
+await contentType.FieldLinks.AddAsync(&quot;MyRequiredField&quot;, required: true);
+</code></pre>
+<p>Deleting a content type from the hub:</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                            p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type to update
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Delete the content type
+await contentType.DeleteAsync();
+</code></pre>
+<h2 id="publishing-a-content-type-from-the-content-type-hub">Publishing a content type from the content type hub</h2>
+<p>Once a content type has been added to the hub is can be published, after publishing it's available for all site collections in your tenant. If you then later on update a published content type in the hub you all the sites consuming it will see the updates after you've published the updated version again. To publish a content type you need to use one of the <code>Publish</code> methods on <code>IContentType</code>.</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                            p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type to publish
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Publish the content type
+await contentType.PublishAsync();
+</code></pre>
+<h2 id="unpublishing-a-content-type-from-the-content-type-hub">Unpublishing a content type from the content type hub</h2>
+<p>Once a content type has been published to the hub it can be used by all site collections. If you want to prevent using a published content type you'll need to unpublish it. To unpublish a content type you need to use one of the <code>Unpublish</code> methods on <code>IContentType</code>.</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                            p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type to unpublish
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Publish the content type
+await contentType.UnpublishAsync();
+</code></pre>
+<h2 id="checking-if-a-content-type-is-published">Checking if a content type is published</h2>
+<p>If you want to verify if a given content type hub content type is published you can call one of the <code>IsPublished</code> methods on <code>IContentType</code>.</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                            p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type from the hub
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Is the content type already published or not?
+bool isPublished = await contentType.IsPublishedAsync();
+
+if (!isPublished)
+{
+    // Publish the content type
+    await contentType.PublishAsync();
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

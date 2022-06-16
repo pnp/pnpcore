@@ -8949,6 +8949,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/contenttypes-hub.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/contenttypes-hub.html",
+          "hash": "jXGKlisNzHIRmcW0znqEbZnbPPBDQO8ow3Nw2Iu25As="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/contenttypes-intro.md",
       "output": {
         ".html": {
@@ -9529,7 +9541,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "y2ekMT7pdCgo69WMgy+ytmfs6Vs87cGI37tUM4TK36I="
+          "hash": "OlbUDHIorsW7ezkO4NL+ASGezSlWnF8s4EfraAj8vQY="
         }
       },
       "is_incremental": false,
@@ -9610,7 +9622,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 109,
+          "total_file_count": 110,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
