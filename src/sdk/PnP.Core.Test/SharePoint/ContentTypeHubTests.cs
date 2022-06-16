@@ -241,6 +241,153 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddContentTypeToHubAndConsumeInSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType newContentType = null;
+                IContentType matchingContentType = null;
+                try
+                {
+
+                    // Add content type to the hub
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
+
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
+                    Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
+
+                    // Ensure the content type is published in the hub
+                    await newContentType.PublishAsync();
+
+                    // Add content type from hub to list
+                    var added = context.Web.ContentTypes.AddAvailableContentTypeFromHub(newContentType.StringId, new AddContentTypeFromHubOptions { WaitForCompletion = true });
+
+                    //Assert.IsTrue(added);
+
+                    // Load the list content types
+
+                    await context.Web.LoadAsync(y => y.ContentTypes);
+
+                    matchingContentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(y => y.Id.StartsWith(newContentType.StringId));
+
+                    Assert.IsNotNull(matchingContentType);
+                }
+                finally
+                {
+                    // Delete from site, first set it to updatable
+                    if (matchingContentType != null)
+                    {
+                        // First remove the readonly flag
+                        matchingContentType.ReadOnly = false;
+                        await matchingContentType.UpdateAsync();
+
+                        await matchingContentType.DeleteAsync();
+                    }
+
+                    if (newContentType != null)
+                    {
+                        // Delete from content type hub
+                        await newContentType.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task LongRunningOperationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string location = "https://graph.microsoft.com/v1.0/sites/f92f9e40-1110-43ef-aa0e-0822e13fb7ba,2c99a486-d6c9-4a4b-8d6f-a9faa364c92c/operations/contentTypeCopy,0x0100302EF0D1F1DB4C4EBF58251BCCF5966F";
+
+                LongRunningOperation l = new LongRunningOperation(location, context);
+
+                l.WaitForCompletion();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddContentTypeToHubAndConsumeInListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType newContentType = null;
+                IList myList = null;
+
+                try
+                {
+                    // Add new list
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("AddContentTypeToHubAndConsumeInListTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    myList.ContentTypesEnabled = true;
+                    await myList.UpdateAsync();
+
+                    // Add content type to the hub
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
+
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
+                    Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
+
+                    // Ensure the content type is published in the hub
+                    await newContentType.PublishAsync();
+
+                    // Add content type from hub to list
+                    var added = myList.ContentTypes.AddAvailableContentTypeFromHub(newContentType.StringId);
+
+                    //Assert.IsTrue(added);
+
+                    // Load the list content types
+
+                    await myList.LoadAsync(y => y.ContentTypes);
+
+                    var matchingCt = myList.ContentTypes.AsRequested().FirstOrDefault(y => y.Id.StartsWith(newContentType.StringId));
+
+                    Assert.IsNotNull(matchingCt);
+                }
+                finally
+                {
+                    if (myList != null)
+                    {
+                        await myList.DeleteAsync();
+                    }
+
+                    if (newContentType != null)
+                    {
+                        await newContentType.DeleteAsync();
+                    }
+                }
+            }
+        }
+
         #region Document Sets
 
         // Ensure the document set site collection feature is enabled before running test tests live (should be active by default on the content type hub site)

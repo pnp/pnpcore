@@ -468,4 +468,7 @@
   <data name="Exception_RetrievingContentTypeHubSiteId" xml:space="preserve">
     <value>Error occured on retrieving the site id from the content type hub</value>
   </data>
+  <data name="Exception_AsyncOperationError_MaxRetries" xml:space="preserve">
+    <value>Max retries of {0} reached while waiting for operation {1}</value>
+  </data>
 </root>

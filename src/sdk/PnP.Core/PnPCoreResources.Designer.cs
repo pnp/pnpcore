@@ -70,6 +70,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max retries of {0} reached while waiting for operation {1}.
+        /// </summary>
+        internal static string Exception_AsyncOperationError_MaxRetries {
+            get {
+                return ResourceManager.GetString("Exception_AsyncOperationError_MaxRetries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batchrequest {0} was not found in one of the current batches.
         /// </summary>
         internal static string Exception_BatchClient_BatchRequestIdNotFound {

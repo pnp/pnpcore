@@ -471,6 +471,99 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region AddAvailableContentTypeFromHub
+        private ApiCall AddAvailableContentTypeFromHubApiCall(string id)
+        {
+            if (IsContentTypeHub())
+            {
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_AddingContentTypesToListOnContentTypeHub);
+            }
+
+            dynamic body = new ExpandoObject();
+            body.contentTypeId = id;
+
+            var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
+
+            // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
+            // automatically provide the correct 'parent'
+            if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(Web))
+            {
+                return new ApiCall($"/sites/{PnPContext.Site.Id}/contentTypes/addCopyFromContentTypeHub", ApiType.Graph, bodyContent);
+            }
+            else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(List))
+            {
+                Guid listId = GetListIdFromParent(this);
+
+                return new ApiCall($"/sites/{PnPContext.Site.Id}/lists/{listId}/contentTypes/addCopyFromContentTypeHub", ApiType.Graph, bodyContent);
+            }
+
+            throw new ClientException(ErrorType.Unsupported, "You can only add content types from the content type hub to sites and lists");
+        }
+
+        internal async Task<ILongRunningOperation> AddAvailableContentTypeFromHubAsync(string id, AddContentTypeFromHubOptions options)
+        {
+            var apiCall = AddAvailableContentTypeFromHubApiCall(id);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return null;
+            }
+            else if (response.StatusCode == HttpStatusCode.Accepted && response.Headers != null && response.Headers.ContainsKey("Location"))
+            {
+                options = EnsureAddContentTypeFromHubOptions(options);
+
+                LongRunningOperation operation = new LongRunningOperation(response.Headers["Location"], PnPContext);
+
+                if (options.WaitForCompletion)
+                {
+                    await operation.WaitForCompletionAsync(options.LongRunningOperationOptions).ConfigureAwait(false);
+                }
+                else
+                {
+                    return operation;
+                }
+            }
+
+            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);
+        }
+
+        private static AddContentTypeFromHubOptions EnsureAddContentTypeFromHubOptions(AddContentTypeFromHubOptions options)
+        {
+            if (options == null)
+            {
+                return new AddContentTypeFromHubOptions();
+            }
+
+            return options;
+        }
+
+        private static Guid GetListIdFromParent(IDataModelParent contentType)
+        {
+            if (contentType != null)
+            {
+                if (contentType.Parent != null && contentType.Parent is List)
+                {
+                    return (contentType.Parent as List).Id;
+                }
+                else
+                {
+                    if (contentType.Parent == null)
+                    {
+                        return Guid.Empty;
+                    }
+                    else
+                    {
+                        return GetListIdFromParent(contentType.Parent);
+                    }
+                }
+            }
+
+            return Guid.Empty;
+        }
+
+        #endregion
+
         #region Publish
 
         public async Task PublishAsync()

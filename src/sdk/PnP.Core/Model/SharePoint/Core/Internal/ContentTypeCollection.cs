@@ -130,6 +130,29 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region AddAvailableContentTypeFromHub
+
+        public async Task<ILongRunningOperation> AddAvailableContentTypeFromHubAsync(string id, AddContentTypeFromHubOptions options = null)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var newContentType = CreateNewAndAdd() as ContentType;
+            newContentType.StringId = id;
+
+            return await newContentType.AddAvailableContentTypeFromHubAsync(id, options).ConfigureAwait(false);
+        }
+
+        public ILongRunningOperation AddAvailableContentTypeFromHub(string id, AddContentTypeFromHubOptions options = null)
+        {
+            return AddAvailableContentTypeFromHubAsync(id, options).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+
         #region Document Set
 
         public async Task<IDocumentSet> AddDocumentSetAsync(string id, string name, string description = null, string group = null, DocumentSetOptions options = null)
