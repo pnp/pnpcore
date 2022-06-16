@@ -170,6 +170,26 @@ if (!isPublished)
     await contentType.PublishAsync();
 }
 </code></pre>
+<h2 id="making-a-content-type-from-the-hub-available-in-a-site-or-list">Making a content type from the hub available in a site or list</h2>
+<p>Once a content type has been published in the content type hub you can consume it any site collection. This works via a pull mechanism, the first time you use the content type from the UI it's copied over to the site or list content types. If you programmatically want to use a content type hub content type you first need to pull the content type from the hub via calling one of the <code>AddAvailableContentTypeFromHub</code> methods.</p>
+<pre><code class="lang-csharp">await context.ContentTypeHub.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                            p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
+
+// Get the content type you want to add
+var contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+
+// Add content type from hub to site
+await context.Web.ContentTypes.AddAvailableContentTypeFromHubAsync(contentType.StringId, new AddContentTypeFromHubOptions { WaitForCompletion = true });
+
+// Add content type from hub to list
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;Demo&quot;);
+
+// Ensure the list is content types enabled
+myList.ContentTypesEnabled = true;
+await myList.UpdateAsync();
+
+await myList.ContentTypes.AddAvailableContentTypeFromHubAsync(contentType.StringId);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
