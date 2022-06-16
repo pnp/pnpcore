@@ -72,6 +72,8 @@
   items:
   - name: Overview
     href: contenttypes-intro.md
+  - name: Content type hub
+    href: contenttypes-hub.md
   - name: Document Sets
     href: contenttypes-documentsets.md
 - name: Fields
