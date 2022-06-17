@@ -483,6 +483,18 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Get Site Analytics
+        public async Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null)
+        {
+            return await ActivityHandler.GetAnalyticsAsync(this, options).ConfigureAwait(false);
+        }
+
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null)
+        {
+            return GetAnalyticsAsync(options).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

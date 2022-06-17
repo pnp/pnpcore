@@ -412,5 +412,19 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="waitAfterStatusCheck">Duration between every GetCopyJobProgress call in seconds. Defaults to 1.</param>
         /// </summary>
         public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1);
+
+        /// <summary>
+        /// Gets site analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets site analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
     }
 }

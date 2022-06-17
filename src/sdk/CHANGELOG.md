@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added sharing capabilities (add) for list items #879 [jansenbe - Bert Jansen]
 - Added support for adding, publishing and unpublishing content types and document sets from the tenant's content type hub #881 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for consuming content types from the content type hub [jansenbe - Bert Jansen]
+- Support for getting site (`ISite`) and file (`IFile`) analytics [jansenbe - Bert Jansen]
 
 ### Changed
 

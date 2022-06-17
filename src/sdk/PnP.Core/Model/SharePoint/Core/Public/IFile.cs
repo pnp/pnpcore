@@ -791,5 +791,23 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The requested thumbnails</returns>
         IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null);
         #endregion
+
+        #region Analytics
+
+        /// <summary>
+        /// Gets file analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets file analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
+
+        #endregion
     }
 }
