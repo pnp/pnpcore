@@ -102,8 +102,33 @@ await context.Web.LoadAsync(p =&gt; p.RootFolder);
 var site = await context.Site.GetAsync(p =&gt; p.HubSiteId);
 Console.WriteLine(site.HubSiteId);
 </code></pre>
-<h2 id="getting-changes-for-a-site">Getting changes for a site</h2>
+<h2 id="getting-changes">Getting changes</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>ISite</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
+<h2 id="getting-analytics">Getting analytics</h2>
+<p>Using one of the <code>GetAnalytics</code> methods on <code>ISite</code> gives you back the site analytics for all time, the last seven days or for a custom interval of your choice. The returned <code>List&lt;IActivityStat&gt;</code> contains one row for the all time and seven days statistic requests, if you've requested a custom interval you also choose an aggregation interval (day, week, month) and depending on the interval and aggregation you'll get one or more rows with statistics.</p>
+<pre><code class="lang-csharp">// Get analytics for all time
+var analytics = await context.Site.GetAnalyticsAsync();
+
+// Get analytics for the last 7 days
+var analytics = await context.Site.GetAnalyticsAsync(new AnalyticsOptions { Interval = AnalyticsInterval.LastSevenDays });
+
+// Get analytics for a custom interval for 11 days --&gt; you'll see 11 rows with statistic data, one per day
+DateTime startDate = DateTime.Now - new TimeSpan(20, 0, 0, 0);
+DateTime endDate = DateTime.Now - new TimeSpan(10, 0, 0, 0);
+
+var analytics = await context.Site.GetAnalyticsAsync(
+                new AnalyticsOptions
+                {
+                    Interval = AnalyticsInterval.Custom,
+                    CustomStartDate = startDate,
+                    CustomEndDate = endDate,
+                    CustomAggregationInterval = AnalyticsAggregationInterval.Day
+                });
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The value of the <code>CustomStartDate</code> and <code>CustomEndDate</code> parameters must represent a time range of less than 90 days.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

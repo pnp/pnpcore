@@ -409,6 +409,37 @@ foreach(var thumbnail in thumbnails)
 <h5>Note</h5>
 <p>Thumbnails can only be retrieved for files living in a document library. For pages in a pages library this will not work.</p>
 </div>
+<h2 id="getting-analytics">Getting analytics</h2>
+<p>Using one of the <code>GetAnalytics</code> methods on <code>IFile</code> gives you back the file analytics for all time, the last seven days or for a custom interval of your choice. The returned <code>List&lt;IActivityStat&gt;</code> contains one row for the all time and seven days statistic requests, if you've requested a custom interval you also choose an aggregation interval (day, week, month) and depending on the interval and aggregation you'll get one or more rows with statistics.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Loading the <code>VroomDriveID</code> and  <code>VroomItemID</code> when you load the file to get statistics for optimizes performance, these properties will be fetched if not present.</p>
+</div>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync($&quot;{context.Uri.AbsolutePath}/sitepages/home.aspx&quot;, p =&gt; p.VroomItemID, p =&gt; p.VroomDriveID);
+
+// Get analytics for all time
+var analytics = await file.GetAnalyticsAsync();
+
+// Get analytics for the last 7 days
+var analytics = await file.GetAnalyticsAsync(new AnalyticsOptions { Interval = AnalyticsInterval.LastSevenDays });
+
+// Get analytics for a custom interval for 11 days --&gt; you'll see 11 rows with statistic data, one per day
+DateTime startDate = DateTime.Now - new TimeSpan(20, 0, 0, 0);
+DateTime endDate = DateTime.Now - new TimeSpan(10, 0, 0, 0);
+
+var analytics = await file.GetAnalyticsAsync(
+                new AnalyticsOptions
+                {
+                    Interval = AnalyticsInterval.Custom,
+                    CustomStartDate = startDate,
+                    CustomEndDate = endDate,
+                    CustomAggregationInterval = AnalyticsAggregationInterval.Day
+                });
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The value of the <code>CustomStartDate</code> and <code>CustomEndDate</code> parameters must represent a time range of less than 90 days.</p>
+</div>
 <h2 id="getting-file-irm-settings">Getting file IRM settings</h2>
 <p>A SharePoint document library can be configured with an <a href="https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-irm-in-sp-admin-center?view=o365-worldwide">Information Rights Management (IRM) policy</a> which then stamps an IRM policy on the documents obtained from that library. Use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings">InformationRightsManagementSettings</a> property to read the file's IRM settings.</p>
 <div class="NOTE">
