@@ -815,13 +815,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Converts the file to PDF
         /// </summary>
-        /// <returns>string with the location of the converted file</returns>
+        /// <returns>Stream of the converted file</returns>
         Task<Stream> ConvertToPdfAsync();
 
         /// <summary>
         /// Converts the file to PDF
         /// </summary>
-        /// <returns>string with the location of the converted file</returns>
+        /// <returns>Stream of the converted file</returns>
         Stream ConvertToPdf();
 
         #endregion
