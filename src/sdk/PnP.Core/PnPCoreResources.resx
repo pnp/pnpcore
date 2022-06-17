@@ -360,6 +360,9 @@
   <data name="Exception_Unsupported_ExpressionType" xml:space="preserve">
     <value>Expression type {0} is not supported inside filtering expressions</value>
   </data>
+  <data name="Exception_Unsupported_Extension_Converting_File" xml:space="preserve">
+    <value>It is not allowed to convert a file with the extension {extension}. Supported extensions are: csv, doc, docx, odp, ods, odt, pot, potm, potx, pps, ppsx, ppsxm, ppt, pptm, pptx, rtf, xls, xlsx</value>
+  </data>
   <data name="Exception_Unsupported_ExtraGet" xml:space="preserve">
     <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods</value>
   </data>

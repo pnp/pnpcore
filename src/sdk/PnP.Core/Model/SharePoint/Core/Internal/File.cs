@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -991,6 +992,45 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetThumbnailsBatchAsync(batch, options).GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Convert
+
+        public async Task<Stream> ConvertToPdfAsync()
+        {
+            // Check file extension before converting
+
+            CheckExtension();
+
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            var convertEndpointUrl = $"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/content?format=pdf";
+
+            var apiCall = new ApiCall(convertEndpointUrl, ApiType.Graph)
+            {
+                StreamResponse = false,
+                ExpectBinaryResponse = true
+            };
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return response.BinaryContent;
+        }
+
+        private void CheckExtension()
+        {
+            var extension = Name.Split('.').Last().ToLower();
+            if (!Enum.IsDefined(typeof(AllowedConvertExtensions), extension))
+            {
+                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_Unsupported_Extension_Converting_File);
+            }
+        }
+
+        public Stream ConvertToPdf()
+        {
+            return ConvertToPdfAsync().GetAwaiter().GetResult();
+        }
+
         #endregion
 
 

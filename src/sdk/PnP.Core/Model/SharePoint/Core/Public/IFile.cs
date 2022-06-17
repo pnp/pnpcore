@@ -791,5 +791,21 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The requested thumbnails</returns>
         IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null);
         #endregion
+
+        #region Convert
+
+        /// <summary>
+        /// Converts the file to PDF
+        /// </summary>
+        /// <returns>string with the location of the converted file</returns>
+        Task<Stream> ConvertToPdfAsync();
+
+        /// <summary>
+        /// Converts the file to PDF
+        /// </summary>
+        /// <returns>string with the location of the converted file</returns>
+        Stream ConvertToPdf();
+
+        #endregion
     }
 }

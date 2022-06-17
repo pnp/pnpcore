@@ -790,6 +790,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It is not allowed to convert a file with the extension {extension}. Supported extensions are: csv, doc, docx, odp, ods, odt, pot, potm, potx, pps, ppsx, ppsxm, ppt, pptm, pptx, rtf, xls, xlsx.
+        /// </summary>
+        internal static string Exception_Unsupported_Extension_Converting_File {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_Extension_Converting_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods.
         /// </summary>
         internal static string Exception_Unsupported_ExtraGet {
