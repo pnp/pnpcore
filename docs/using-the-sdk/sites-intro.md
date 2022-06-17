@@ -31,6 +31,34 @@ var site = await context.Site.GetAsync(p => p.HubSiteId);
 Console.WriteLine(site.HubSiteId);
 ```
 
-## Getting changes for a site
+## Getting changes
 
 You can use the `GetChanges` methods on an `ISite` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
+
+## Getting analytics
+
+Using one of the `GetAnalytics` methods on `ISite` gives you back the site analytics for all time, the last seven days or for a custom interval of your choice. The returned `List<IActivityStat>` contains one row for the all time and seven days statistic requests, if you've requested a custom interval you also choose an aggregation interval (day, week, month) and depending on the interval and aggregation you'll get one or more rows with statistics.
+
+```csharp
+// Get analytics for all time
+var analytics = await context.Site.GetAnalyticsAsync();
+
+// Get analytics for the last 7 days
+var analytics = await context.Site.GetAnalyticsAsync(new AnalyticsOptions { Interval = AnalyticsInterval.LastSevenDays });
+
+// Get analytics for a custom interval for 11 days --> you'll see 11 rows with statistic data, one per day
+DateTime startDate = DateTime.Now - new TimeSpan(20, 0, 0, 0);
+DateTime endDate = DateTime.Now - new TimeSpan(10, 0, 0, 0);
+
+var analytics = await context.Site.GetAnalyticsAsync(
+                new AnalyticsOptions
+                {
+                    Interval = AnalyticsInterval.Custom,
+                    CustomStartDate = startDate,
+                    CustomEndDate = endDate,
+                    CustomAggregationInterval = AnalyticsAggregationInterval.Day
+                });
+```
+
+> [!Note]
+> The value of the `CustomStartDate` and `CustomEndDate` parameters must represent a time range of less than 90 days.
