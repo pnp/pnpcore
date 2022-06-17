@@ -453,7 +453,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
         #region Sensitivity labels
         public async Task<List<ISensitivityLabel>> GetSensitivityLabelsAsync()
         {
-            return await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context).ConfigureAwait(false);
+            return await SensitivityLabelManager.GetLabelsAsync(context).ConfigureAwait(false);
         }
 
         public List<ISensitivityLabel> GetSensitivityLabels()

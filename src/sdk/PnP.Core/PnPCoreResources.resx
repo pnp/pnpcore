@@ -444,6 +444,12 @@
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
   </data>
+  <data name="Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub" xml:space="preserve">
+    <value>This function can only be called on the content type hub</value>
+  </data>
+  <data name="Exception_Unsupported_AddingContentTypesToListOnContentTypeHub" xml:space="preserve">
+    <value>You cannot add a content type to a list on the Content Type Hub</value>
+  </data>
   <data name="Log_Debug_JsonCannotMapField" xml:space="preserve">
     <value>Field {0} could not be mapped when converting from JSON</value>
   </data>
@@ -461,5 +467,11 @@
   </data>
   <data name="Log_Information_OperationNotReady" xml:space="preserve">
     <value>Operation {0} not ready yet. Status = {1}. Waiting for {2} seconds, attempt number {3}</value>
+  </data>
+  <data name="Exception_RetrievingContentTypeHubSiteId" xml:space="preserve">
+    <value>Error occured on retrieving the site id from the content type hub</value>
+  </data>
+  <data name="Exception_AsyncOperationError_MaxRetries" xml:space="preserve">
+    <value>Max retries of {0} reached while waiting for operation {1}</value>
   </data>
 </root>

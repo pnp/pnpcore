@@ -122,6 +122,12 @@ namespace PnP.Core
         /// </summary>
         internal const string XSPServerStateHeader = "X-SP-SERVERSTATE";
 
+        /// <summary>
+        /// The string absolute path of the Content Type Hub
+        /// </summary>
+        internal const string ContentTypeHubUrl = "/sites/contenttypehub";
+
+
         #region Json serializers options
 
         /// <summary>

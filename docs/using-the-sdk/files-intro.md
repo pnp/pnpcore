@@ -396,6 +396,39 @@ foreach(var thumbnail in thumbnails)
 > [!Note]
 > Thumbnails can only be retrieved for files living in a document library. For pages in a pages library this will not work.
 
+## Getting analytics
+
+Using one of the `GetAnalytics` methods on `IFile` gives you back the file analytics for all time, the last seven days or for a custom interval of your choice. The returned `List<IActivityStat>` contains one row for the all time and seven days statistic requests, if you've requested a custom interval you also choose an aggregation interval (day, week, month) and depending on the interval and aggregation you'll get one or more rows with statistics.
+
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to get statistics for optimizes performance, these properties will be fetched if not present.
+
+```csharp
+var file = await context.Web.GetFileByServerRelativeUrlAsync($"{context.Uri.AbsolutePath}/sitepages/home.aspx", p => p.VroomItemID, p => p.VroomDriveID);
+
+// Get analytics for all time
+var analytics = await file.GetAnalyticsAsync();
+
+// Get analytics for the last 7 days
+var analytics = await file.GetAnalyticsAsync(new AnalyticsOptions { Interval = AnalyticsInterval.LastSevenDays });
+
+// Get analytics for a custom interval for 11 days --> you'll see 11 rows with statistic data, one per day
+DateTime startDate = DateTime.Now - new TimeSpan(20, 0, 0, 0);
+DateTime endDate = DateTime.Now - new TimeSpan(10, 0, 0, 0);
+
+var analytics = await file.GetAnalyticsAsync(
+                new AnalyticsOptions
+                {
+                    Interval = AnalyticsInterval.Custom,
+                    CustomStartDate = startDate,
+                    CustomEndDate = endDate,
+                    CustomAggregationInterval = AnalyticsAggregationInterval.Day
+                });
+```
+
+> [!Note]
+> The value of the `CustomStartDate` and `CustomEndDate` parameters must represent a time range of less than 90 days.
+
 ## Getting file IRM settings
 
 A SharePoint document library can be configured with an [Information Rights Management (IRM) policy](https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-irm-in-sp-admin-center?view=o365-worldwide) which then stamps an IRM policy on the documents obtained from that library. Use the [InformationRightsManagementSettings](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings) property to read the file's IRM settings.

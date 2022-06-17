@@ -695,7 +695,7 @@ namespace PnP.Core.Model
             var entityInfo = GetClassInfo();
 
             // Prefix API request with context url if needed
-            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+            postApiCall = PrefixApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
             postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
@@ -727,7 +727,7 @@ namespace PnP.Core.Model
             var entityInfo = GetClassInfo();
 
             // Prefix API request with context url if needed
-            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+            postApiCall = PrefixApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
             postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
@@ -744,17 +744,6 @@ namespace PnP.Core.Model
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "Add");
             PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
-        }
-
-        private ApiCall PrefixAddApiCall(ApiCall postApiCall, EntityInfo entityInfo)
-        {
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
-            {
-                // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
-            }
-
-            return postApiCall;
         }
 
         private bool CanUseGraphBetaForAdd(ApiCall postApiCall, EntityInfo entityInfo)

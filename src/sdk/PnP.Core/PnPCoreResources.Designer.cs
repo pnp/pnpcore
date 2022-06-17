@@ -70,6 +70,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max retries of {0} reached while waiting for operation {1}.
+        /// </summary>
+        internal static string Exception_AsyncOperationError_MaxRetries {
+            get {
+                return ResourceManager.GetString("Exception_AsyncOperationError_MaxRetries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batchrequest {0} was not found in one of the current batches.
         /// </summary>
         internal static string Exception_BatchClient_BatchRequestIdNotFound {
@@ -583,6 +592,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on retrieving the site id from the content type hub.
+        /// </summary>
+        internal static string Exception_RetrievingContentTypeHubSiteId {
+            get {
+                return ResourceManager.GetString("Exception_RetrievingContentTypeHubSiteId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
         /// </summary>
         internal static string Exception_RoleDefinition_NotFound {
@@ -651,6 +669,15 @@ namespace PnP.Core {
         internal static string Exception_UnresolvedTokens {
             get {
                 return ResourceManager.GetString("Exception_UnresolvedTokens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot add a content type to a list on the Content Type Hub.
+        /// </summary>
+        internal static string Exception_Unsupported_AddingContentTypesToListOnContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_AddingContentTypesToListOnContentTypeHub", resourceCulture);
             }
         }
         
@@ -930,6 +957,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_Projection {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_Projection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This function can only be called on the content type hub.
+        /// </summary>
+        internal static string Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub", resourceCulture);
             }
         }
         

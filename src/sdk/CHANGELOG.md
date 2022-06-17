@@ -30,6 +30,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for Event Receivers (enumerate, add or delete) on `ISite` #871 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added link unfurling: throw any SharePoint (sharing) link in and you will get back detailed information about the SharePoint resource, including thumbnails #847 [jansenbe - Bert Jansen]
 - Added sharing capabilities (add) for list items #879 [jansenbe - Bert Jansen]
+- Added support for adding, publishing and unpublishing content types and document sets from the tenant's content type hub #881 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added support for consuming content types from the content type hub [jansenbe - Bert Jansen]
+- Support for getting site (`ISite`) and file (`IFile`) analytics [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -50,6 +53,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Made additional `IView` properties settable #874 [jansenbe - Bert Jansen]
 - Added support to set the navigation orientation and menu style for non communication sites #875 [jansenbe - Bert Jansen]
 - More resilient parsing of CSOM GUID's #877 [jansenbe - Bert Jansen]
+- Ensure labels can be retrieved using application permissions #882 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 
