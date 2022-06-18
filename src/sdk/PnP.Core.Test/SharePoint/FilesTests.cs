@@ -3107,5 +3107,56 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Convert tests
+
+        [TestMethod]
+        public async Task ConvertFileAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                var pdfContent = await testDocument.ConvertToPdfAsync();
+
+                Assert.IsNotNull(pdfContent);
+                
+                var targetFileName = documentName.Replace(".docx", ".pdf");
+                
+                await folder.Files.AddAsync(targetFileName, pdfContent, true);
+
+                IFile pdfFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".docx", ".pdf"));
+                
+                Assert.IsNotNull(pdfFile);
+
+                await pdfFile.DeleteAsync();
+                
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+        }
+
+        [ExpectedException(typeof(MicrosoftGraphServiceException))]
+        [TestMethod]
+        public async Task ConvertFileAsyncExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Replace Server relative url with a non-supported file type, e.g. a PDF file when running the test
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync("/sites/pnpcoresdktestgroup/Shared Documents/3b7b104f-abe4-4247-85a5-a0204e9cf8c3.pdf");
+                
+                var pdfContent = await testDocument.ConvertToPdfAsync();
+            }
+        }
+
+        #endregion
     }
 }

@@ -809,5 +809,21 @@ namespace PnP.Core.Model.SharePoint
         public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
 
         #endregion
+
+        #region Convert
+
+        /// <summary>
+        /// Converts the file to PDF
+        /// </summary>
+        /// <returns>Stream of the converted file</returns>
+        Task<Stream> ConvertToPdfAsync();
+
+        /// <summary>
+        /// Converts the file to PDF
+        /// </summary>
+        /// <returns>Stream of the converted file</returns>
+        Stream ConvertToPdf();
+
+        #endregion
     }
 }
