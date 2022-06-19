@@ -601,6 +601,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on retrieving preview from File.
+        /// </summary>
+        internal static string Exception_RetrievingPreview_Failed {
+            get {
+                return ResourceManager.GetString("Exception_RetrievingPreview_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
         /// </summary>
         internal static string Exception_RoleDefinition_NotFound {

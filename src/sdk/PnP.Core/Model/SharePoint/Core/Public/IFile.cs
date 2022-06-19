@@ -809,5 +809,27 @@ namespace PnP.Core.Model.SharePoint
         public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
 
         #endregion
+
+        #region Preview
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="page">Optional. Page number of document to start at, if applicable. Specified as string for future use cases around file types such as ZIP.</param>
+        /// <param name="zoom">Optional. Zoom level to start at, if applicable.</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        Task<IFilePreview> GetPreviewAsync(string page = "", int zoom = 0);
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="page">Optional. Page number of document to start at, if applicable. Specified as string for future use cases around file types such as ZIP.</param>
+        /// <param name="zoom">Optional. Zoom level to start at, if applicable.</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        IFilePreview GetPreview(string page = "", int zoom = 0);
+
+        #endregion
     }
 }

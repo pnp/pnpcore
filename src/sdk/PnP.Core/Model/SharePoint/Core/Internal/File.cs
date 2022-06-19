@@ -1005,6 +1005,67 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Preview
+
+        public async Task<IFilePreview> GetPreviewAsync(string page = "", int zoom = 0)
+        {
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            dynamic body = new ExpandoObject();
+
+            if (page != string.Empty)
+            {
+                body.page = page;
+            }
+
+            if (zoom != 0)
+            {
+                body.zoom = zoom;
+            }
+
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/preview", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_RetrievingPreview_Failed);
+            }
+
+            return GetPreviewFromResponse(response.Json);
+        }
+
+        public IFilePreview GetPreview(string page = "", int zoom = 0)
+        {
+            return GetPreviewAsync(page, zoom).GetAwaiter().GetResult();
+        }
+
+        private static IFilePreview GetPreviewFromResponse(string json)
+        {
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+
+            var filePreview = new FilePreview();
+
+            if (jsonElement.TryGetProperty("getUrl", out JsonElement getUrl))
+            {
+                filePreview.GetUrl = getUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postUrl", out JsonElement postUrl))
+            {
+                filePreview.PostUrl = postUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postParameters", out JsonElement postParameters))
+            {
+                filePreview.PostParameters = postParameters.GetString();
+            }
+
+            return filePreview;
+        }
+
+        #endregion
+
         #endregion
 
         #region Helper methods

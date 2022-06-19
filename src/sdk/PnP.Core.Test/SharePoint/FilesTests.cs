@@ -3107,5 +3107,51 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Preview
+
+        [TestMethod]
+        public async Task GetFilePreviewAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                Assert.IsNotNull(file);
+
+                var filePreview = await file.GetPreviewAsync();
+
+                Assert.IsNotNull(filePreview);
+                Assert.IsNotNull(filePreview.GetUrl);
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetFilePreviewIncludingPageAndZoomAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                Assert.IsNotNull(file);
+
+                var filePreview = await file.GetPreviewAsync("2", 5);
+
+                Assert.IsNotNull(filePreview);
+                Assert.IsNotNull(filePreview.GetUrl);
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        #endregion
     }
 }

@@ -471,4 +471,7 @@
   <data name="Exception_AsyncOperationError_MaxRetries" xml:space="preserve">
     <value>Max retries of {0} reached while waiting for operation {1}</value>
   </data>
+  <data name="Exception_RetrievingPreview_Failed" xml:space="preserve">
+    <value>Error occured on retrieving preview from File</value>
+  </data>
 </root>
