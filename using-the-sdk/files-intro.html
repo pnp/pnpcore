@@ -348,10 +348,14 @@ await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/doc
 </div>
 <h2 id="converting-files">Converting files</h2>
 <p>Some files can be transformed into another format by calling one of the <code>ConvertTo</code> methods.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Loading the <code>VroomDriveID</code> and  <code>VroomItemID</code> when you load the file to convert optimizes performance, these properties will be fetched if not present.</p>
+</div>
 <pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
 
 // Get a reference to the file
-IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p =&gt; p.VroomItemID, p =&gt; p.VroomDriveID);
 
 // Convert the Word document to PDF, this returns a stream
 var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
@@ -490,10 +494,14 @@ var analytics = await file.GetAnalyticsAsync(
 </div>
 <h2 id="getting-an-embeddable-preview-url">Getting an embeddable preview url</h2>
 <p>Using on of the <code>GetPreview</code> methods allows you to obtain a short-lived embeddable URL for a file in order to render a temporary preview.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Loading the <code>VroomDriveID</code> and  <code>VroomItemID</code> when you load the file to get an embeddable URL optimizes performance, these properties will be fetched if not present.</p>
+</div>
 <pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
 
 // Get a reference to the file, also request the Versions property
-IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f =&gt; f.InformationRightsManagementSettings);
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p =&gt; p.VroomItemID, p =&gt; p.VroomDriveID);
 
 // Get Preview URL
 var filePreview = await testDocument.GetPreviewAsync(new PreviewOptions { Page = &quot;2&quot; });
