@@ -346,6 +346,54 @@ await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/doc
 <h5>Note</h5>
 <p>You can also opt for an asynchronous bulk file/folder copy/move via the <code>CreateCopyJobs</code> methods on <code>ISite</code>. See <a href="sites-copymovecontent.html">here</a> for more details.</p>
 </div>
+<h2 id="converting-files">Converting files</h2>
+<p>Some files can be transformed into another format by calling one of the <code>ConvertTo</code> methods.</p>
+<pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+// Convert the Word document to PDF, this returns a stream
+var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
+
+// Get a reference to a folder to upload the PDF
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;SiteAssets&quot;).FirstOrDefaultAsync();
+
+// Upload content
+await siteAssetsFolder.Files.AddAsync(&quot;document.pdf&quot;, pdfContent, true);
+</code></pre>
+<p>The following values are valid transformation targets and their supported source extensions:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Target</th>
+<th style="text-align: left;">Description</th>
+<th>Supported source extensions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">glb</td>
+<td style="text-align: left;">Converts the item into GLB format</td>
+<td>cool, fbx, obj, ply, stl, 3mf</td>
+</tr>
+<tr>
+<td style="text-align: left;">html</td>
+<td style="text-align: left;">Converts the item into HTML format</td>
+<td>eml, md, msg</td>
+</tr>
+<tr>
+<td style="text-align: left;">jpg</td>
+<td style="text-align: left;">Converts the item into JPG format</td>
+<td>3g2, 3gp, 3gp2, 3gpp, 3mf, ai, arw, asf, avi, bas, bash, bat, bmp, c, cbl, cmd, cool, cpp, cr2, crw, cs, css, csv, cur, dcm, dcm30, dic, dicm, dicom, dng, doc, docx, dwg, eml, epi, eps, epsf, epsi, epub, erf, fbx, fppx, gif, glb, h, hcp, heic, heif, htm, html, ico, icon, java, jfif, jpeg, jpg, js, json, key, log, m2ts, m4a, m4v, markdown, md, mef, mov, movie, mp3, mp4, mp4v, mrw, msg, mts, nef, nrw, numbers, obj, odp, odt, ogg, orf, pages, pano, pdf, pef, php, pict, pl, ply, png, pot, potm, potx, pps, ppsx, ppsxm, ppt, pptm, pptx, ps, ps1, psb, psd, py, raw, rb, rtf, rw1, rw2, sh, sketch, sql, sr2, stl, tif, tiff, ts, txt, vb, webm, wma, wmv, xaml, xbm, xcf, xd, xml, xpm, yaml, yml</td>
+</tr>
+<tr>
+<td style="text-align: left;">pdf</td>
+<td style="text-align: left;">Converts the item into PDF format</td>
+<td>doc, docx, epub, eml, htm, html, md, msg, odp, ods, odt, pps, ppsx, ppt, pptx, rtf, tif, tiff, xls, xlsm, xlsx</td>
+</tr>
+</tbody>
+</table>
 <h2 id="getting-file-versions">Getting file versions</h2>
 <p>When versioning on a file is enabled a file can have multiple versions and PnP Core SDK can be used to work with the older file versions. Each file version is represented via an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a> in an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersionCollection.html">IFileVersionCollection</a>. Loading file versions can be done by requesting the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions">Versions property</a> of the file. Once you've an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a> you can also download that specific version of the file by using one of the GetContent methods as shown in the example.</p>
 <div class="NOTE">
