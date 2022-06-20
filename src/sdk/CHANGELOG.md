@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for adding, publishing and unpublishing content types and document sets from the tenant's content type hub #881 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added support for consuming content types from the content type hub [jansenbe - Bert Jansen]
 - Support for getting site (`ISite`) and file (`IFile`) analytics [jansenbe - Bert Jansen]
+- Option to convert an `IFile` into another format (PDF, JPG, Html or GLB) and process the returned stream (e.g. download/upload as file) #849 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

@@ -3116,44 +3116,115 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
 
             (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
-            
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            IFile pdfFile = null;
+
+            try
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-                
-                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
-                var pdfContent = await testDocument.ConvertToPdfAsync();
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
 
-                Assert.IsNotNull(pdfContent);
-                
-                var targetFileName = documentName.Replace(".docx", ".pdf");
-                
-                await folder.Files.AddAsync(targetFileName, pdfContent, true);
+                    var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
 
-                IFile pdfFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".docx", ".pdf"));
-                
-                Assert.IsNotNull(pdfFile);
+                    Assert.IsNotNull(pdfContent);
 
-                await pdfFile.DeleteAsync();
-                
+                    var targetFileName = documentName.Replace(".docx", ".pdf");
+
+                    await folder.Files.AddAsync(targetFileName, pdfContent, true);
+
+                    pdfFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".docx", ".pdf"));
+
+                    Assert.IsNotNull(pdfFile);
+                }
             }
-
-            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+                if (pdfFile != null)
+                {
+                    await pdfFile.DeleteAsync();
+                }
+            }
         }
 
-        [ExpectedException(typeof(MicrosoftGraphServiceException))]
+        [TestMethod]
+        public async Task ConvertImageFileAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IFile jpgFile = null;
+            IFile testDocument = null;
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Upload image file
+                    string documentName = TestCommon.GetPnPSdkTestAssetName("ConvertImageFileAsyncTest.png");
+                    var parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                    testDocument = await parentFolder.Files.AddAsync(documentName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                    string documentUrl = testDocument.ServerRelativeUrl;
+
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                    var jpgContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Jpg, JpgFormatHeight = 100, JpgFormatWidth = 100 });
+
+                    Assert.IsNotNull(jpgContent);
+
+                    var targetFileName = documentName.Replace(".png", ".jpg");
+
+                    await folder.Files.AddAsync(targetFileName, jpgContent, true);
+
+                    jpgFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".png", ".jpg"));
+
+                    Assert.IsNotNull(jpgFile);
+                }
+            }
+            finally
+            {
+                if (testDocument != null)
+                {
+                    await testDocument.DeleteAsync();
+                }
+                
+                if (jpgFile != null)
+                {
+                    await jpgFile.DeleteAsync();
+                }
+            }
+        }
+
+        [ExpectedException(typeof(ClientException))]
         [TestMethod]
         public async Task ConvertFileAsyncExceptionTest()
         {
             //TestCommon.Instance.Mocking = false;
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            IFile testDocument = null;
+            try
             {
-                // Replace Server relative url with a non-supported file type, e.g. a PDF file when running the test
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync("/sites/pnpcoresdktestgroup/Shared Documents/3b7b104f-abe4-4247-85a5-a0204e9cf8c3.pdf");
-                
-                var pdfContent = await testDocument.ConvertToPdfAsync();
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Upload image file
+                    string documentName = TestCommon.GetPnPSdkTestAssetName("ConvertImageFileAsyncTest.png");
+                    var parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                    testDocument = await parentFolder.Files.AddAsync(documentName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                    string documentUrl = testDocument.ServerRelativeUrl;
+
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                    // Try convert image to PDF...not supported
+                    var jpgContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
+                }
+            }
+            finally
+            {
+                if (testDocument != null)
+                {
+                    await testDocument.DeleteAsync();
+                }
             }
         }
 

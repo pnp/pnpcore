@@ -303,6 +303,10 @@ namespace PnP.Core.Services
                     {
                         await ExecuteSharePointRestInteractiveAsync(batch).ConfigureAwait(false);
                     }
+                    else if (batch.Requests.First().Value.ApiCall.Type == ApiType.Graph || batch.Requests.First().Value.ApiCall.Type == ApiType.GraphBeta)
+                    {
+                        await ExecuteMicrosoftGraphInteractiveAsync(batch).ConfigureAwait(false);
+                    }
                 }
                 else
                 {
@@ -954,6 +958,22 @@ namespace PnP.Core.Services
 
                 Dictionary<string, string> headers = new Dictionary<string, string>();
 
+                if (graphRequest.ApiCall.Headers != null && graphRequest.ApiCall.Headers.Count > 0)
+                {
+                    foreach (var key in graphRequest.ApiCall.Headers.Keys)
+                    {
+                        string existingKey = headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                        if (string.IsNullOrWhiteSpace(existingKey))
+                        {
+                            headers.Add(key, graphRequest.ApiCall.Headers[key]);
+                        }
+                        else
+                        {
+                            headers[existingKey] = graphRequest.ApiCall.Headers[key];
+                        }
+                    }
+                }
+
                 // Run request modules if they're connected
                 if (graphRequest.RequestModules != null && graphRequest.RequestModules.Count > 0)
                 {
@@ -1024,10 +1044,17 @@ namespace PnP.Core.Services
                             graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
                         }
 
+                        // Do we need a streaming download?
+                        HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseHeadersRead;
+                        if (graphRequest.ApiCall.Interactive && !graphRequest.ApiCall.StreamResponse)
+                        {                            
+                            httpCompletionOption = HttpCompletionOption.ResponseContentRead;
+                        }
+
                         await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
 
                         // Send the request
-                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
+                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, httpCompletionOption, PnPContext.CancellationToken).ConfigureAwait(false);
 
                         // Process the request response
                         if (response.IsSuccessStatusCode)
@@ -1121,7 +1148,7 @@ namespace PnP.Core.Services
         {
             // If a binary response content is expected
             if (graphRequest.ApiCall.ExpectBinaryResponse)
-            {
+            {                
                 // Add it to the request and stop processing the response
                 graphRequest.AddResponse(responseContent, statusCode);
                 return;

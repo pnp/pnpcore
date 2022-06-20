@@ -813,16 +813,18 @@ namespace PnP.Core.Model.SharePoint
         #region Convert
 
         /// <summary>
-        /// Converts the file to PDF
+        /// Converts the file to PDF, JPG, Html or Glb
         /// </summary>
+        /// <param name="options">Defines the file conversion options</param>
         /// <returns>Stream of the converted file</returns>
-        Task<Stream> ConvertToPdfAsync();
+        Task<Stream> ConvertToAsync(ConvertToOptions options);
 
         /// <summary>
-        /// Converts the file to PDF
+        /// Converts the file to PDF, JPG, Html or Glb
         /// </summary>
+        /// <param name="options">Defines the file conversion options</param>
         /// <returns>Stream of the converted file</returns>
-        Stream ConvertToPdf();
+        Stream ConvertTo(ConvertToOptions options);
 
         #endregion
     }

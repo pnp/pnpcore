@@ -817,7 +817,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not allowed to convert a file with the extension {extension}. Supported extensions are: csv, doc, docx, odp, ods, odt, pot, potm, potx, pps, ppsx, ppsxm, ppt, pptm, pptx, rtf, xls, xlsx.
+        ///   Looks up a localized string similar to It is not allowed to convert a file with the extension {0} to {1}. Supported extensions are: {2}..
         /// </summary>
         internal static string Exception_Unsupported_Extension_Converting_File {
             get {

@@ -996,39 +996,66 @@ namespace PnP.Core.Model.SharePoint
 
         #region Convert
 
-        public async Task<Stream> ConvertToPdfAsync()
+        private static readonly Dictionary<string, string[]> supportedSourceFormats = new Dictionary<string, string[]>
+        {
+            { "pdf",  new string[] { "doc", "docx", "epub", "eml", "htm", "html", "md", "msg", "odp", "ods", "odt", "pps", "ppsx", "ppt", "pptx", "rtf", "tif", "tiff", "xls", "xlsm", "xlsx" } },
+            { "html", new string[] { "eml", "md", "msg" } },
+            { "glb",  new string[] { "cool", "fbx", "obj", "ply", "stl", "3mf" } },
+            { "jpg",  new string[] { "3g2", "3gp", "3gp2", "3gpp", "3mf", "ai", "arw", "asf", "avi", "bas", "bash", "bat", "bmp", "c", "cbl", "cmd", "cool", "cpp", "cr2", "crw", "cs", "css", "csv", "cur", "dcm", "dcm30", "dic", "dicm", "dicom", "dng", "doc", "docx", "dwg", "eml", "epi", "eps", "epsf", "epsi", "epub", "erf", "fbx", "fppx", "gif", "glb", "h", "hcp", "heic", "heif", "htm", "html", "ico", "icon", "java", "jfif", "jpeg", "jpg", "js", "json", "key", "log", "m2ts", "m4a", "m4v", "markdown", "md", "mef", "mov", "movie", "mp3", "mp4", "mp4v", "mrw", "msg", "mts", "nef", "nrw", "numbers", "obj", "odp", "odt", "ogg", "orf", "pages", "pano", "pdf", "pef", "php", "pict", "pl", "ply", "png", "pot", "potm", "potx", "pps", "ppsx", "ppsxm", "ppt", "pptm", "pptx", "ps", "ps1", "psb", "psd", "py", "raw", "rb", "rtf", "rw1", "rw2", "sh", "sketch", "sql", "sr2", "stl", "tif", "tiff", "ts", "txt", "vb", "webm", "wma", "wmv", "xaml", "xbm", "xcf", "xd", "xml", "xpm", "yaml", "yml" } },
+        };
+         
+
+        public async Task<Stream> ConvertToAsync(ConvertToOptions options)
         {
             // Check file extension before converting
+            CheckExtension(options.Format);
 
-            CheckExtension();
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
 
-            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
-
-            var convertEndpointUrl = $"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/content?format=pdf";
-
-            var apiCall = new ApiCall(convertEndpointUrl, ApiType.Graph)
+            string jpgOptions = "";
+            if (options.Format == ConvertToFormat.Jpg)
             {
-                StreamResponse = false,
-                ExpectBinaryResponse = true
+                jpgOptions = $"&width={options.JpgFormatWidth}&height={options.JpgFormatHeight}";
+            }
+
+            var convertEndpointUrl = $"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/content?format={options.Format.ToString().ToLowerInvariant()}{jpgOptions}";
+
+            ApiType typeToUse = ApiType.GraphBeta;
+            if (options.Format == ConvertToFormat.Pdf)
+            {
+                typeToUse = ApiType.Graph;
+            }
+
+            var apiCall = new ApiCall(convertEndpointUrl, typeToUse)
+            {
+                Interactive = true,
+                StreamResponse = options.StreamContent,
+                ExpectBinaryResponse = true,
+                Headers = new Dictionary<string, string>()
+                {
+                    { "Accept", "*/*" }
+                }
             };
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
+            
             return response.BinaryContent;
         }
 
-        private void CheckExtension()
+        public Stream ConvertTo(ConvertToOptions options)
         {
-            var extension = Name.Split('.').Last().ToLower();
-            if (!Enum.IsDefined(typeof(AllowedConvertExtensions), extension))
-            {
-                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_Unsupported_Extension_Converting_File);
-            }
+            return ConvertToAsync(options).GetAwaiter().GetResult();
         }
 
-        public Stream ConvertToPdf()
+        private void CheckExtension(ConvertToFormat format)
         {
-            return ConvertToPdfAsync().GetAwaiter().GetResult();
+            var sourceExtension = Name.Split('.').Last().ToLower();
+            var targetExtension = format.ToString().ToLowerInvariant();
+
+            if (!supportedSourceFormats[targetExtension].Contains(sourceExtension))
+            {
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_Extension_Converting_File, sourceExtension, targetExtension, supportedSourceFormats[targetExtension].ToList()));
+            }
         }
 
         #endregion

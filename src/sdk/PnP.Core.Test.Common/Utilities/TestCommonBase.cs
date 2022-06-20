@@ -449,5 +449,9 @@ namespace PnP.Core.Test.Common.Utilities
             return name.StartsWith(PnPCoreSDKTestPrefix) ? name : $"{PnPCoreSDKTestPrefix}{name}";
         }
 
+        internal static string GetTempFileName(string extension = "tmp")
+        {
+            return $"{Path.Combine(Path.GetTempPath(), Path.GetRandomFileName().Split(".")[0])}.{extension}";
+        }
     }
 }
