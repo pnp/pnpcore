@@ -115,7 +115,15 @@ This enumeration has a FlagsAttribute attribute that allows a bitwise combinatio
       <h4 id="PnP_Core_Model_SharePoint_MoveOperations_BypassApprovePermission"><a href="#collapsible-PnP_Core_Model_SharePoint_MoveOperations_BypassApprovePermission" class="expander" data-toggle="collapse">BypassApprovePermission</a></h4>
   
       <div id="collapsible-PnP_Core_Model_SharePoint_MoveOperations_BypassApprovePermission" class="collapse in">
-        <p>
+        <p><p>Do not require approval permissions for move if there are no published versions for the document</p>
+</p>
+      </div>
+      <h4 id="PnP_Core_Model_SharePoint_MoveOperations_BypassSharedLock"><a href="#collapsible-PnP_Core_Model_SharePoint_MoveOperations_BypassSharedLock" class="expander" data-toggle="collapse">BypassSharedLock</a></h4>
+  
+      <div id="collapsible-PnP_Core_Model_SharePoint_MoveOperations_BypassSharedLock" class="collapse in">
+        <p><p>Ignore Shared Lock constraints when moving this file. If one or more users have a valid Shared Lock,
+bypass the lock check during the move operation.</p>
+</p>
       </div>
       <h4 id="PnP_Core_Model_SharePoint_MoveOperations_None"><a href="#collapsible-PnP_Core_Model_SharePoint_MoveOperations_None" class="expander" data-toggle="collapse">None</a></h4>
   
@@ -127,6 +135,12 @@ This enumeration has a FlagsAttribute attribute that allows a bitwise combinatio
   
       <div id="collapsible-PnP_Core_Model_SharePoint_MoveOperations_Overwrite" class="collapse in">
         <p><p>Overwrite a file with the same name if it exists. The value = 1.</p>
+</p>
+      </div>
+      <h4 id="PnP_Core_Model_SharePoint_MoveOperations_RetainEditorAndModifiedOnMove"><a href="#collapsible-PnP_Core_Model_SharePoint_MoveOperations_RetainEditorAndModifiedOnMove" class="expander" data-toggle="collapse">RetainEditorAndModifiedOnMove</a></h4>
+  
+      <div id="collapsible-PnP_Core_Model_SharePoint_MoveOperations_RetainEditorAndModifiedOnMove" class="collapse in">
+        <p><p>Boolean specifying whether to retain the source of the move's editor and modified by datetime.</p>
 </p>
       </div>
   
