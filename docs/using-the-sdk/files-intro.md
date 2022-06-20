@@ -458,6 +458,22 @@ var analytics = await file.GetAnalyticsAsync(
 > [!Note]
 > The value of the `CustomStartDate` and `CustomEndDate` parameters must represent a time range of less than 90 days.
 
+## Getting an embeddable preview url
+
+Using on of the `GetPreview` methods allows you to obtain a short-lived embeddable URL for a file in order to render a temporary preview.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file, also request the Versions property
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.InformationRightsManagementSettings);
+
+// Get Preview URL
+var filePreview = await testDocument.GetPreviewAsync(new PreviewOptions { Page = "2" });
+
+// Use outcome, e.g. use filePreview.GetUrl in an IFRAME to show the file preview
+```
+
 ## Getting file IRM settings
 
 A SharePoint document library can be configured with an [Information Rights Management (IRM) policy](https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-irm-in-sp-admin-center?view=o365-worldwide) which then stamps an IRM policy on the documents obtained from that library. Use the [InformationRightsManagementSettings](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings) property to read the file's IRM settings.
