@@ -331,11 +331,14 @@ await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document
 
 Some files can be transformed into another format by calling one of the `ConvertTo` methods.
 
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to convert optimizes performance, these properties will be fetched if not present.
+
 ```csharp
 string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
 
 // Get a reference to the file
-IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p => p.VroomItemID, p => p.VroomDriveID);
 
 // Convert the Word document to PDF, this returns a stream
 var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
@@ -462,11 +465,14 @@ var analytics = await file.GetAnalyticsAsync(
 
 Using on of the `GetPreview` methods allows you to obtain a short-lived embeddable URL for a file in order to render a temporary preview.
 
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to get an embeddable URL optimizes performance, these properties will be fetched if not present.
+
 ```csharp
 string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
 
 // Get a reference to the file, also request the Versions property
-IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.InformationRightsManagementSettings);
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p => p.VroomItemID, p => p.VroomDriveID);
 
 // Get Preview URL
 var filePreview = await testDocument.GetPreviewAsync(new PreviewOptions { Page = "2" });
