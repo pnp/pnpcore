@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -1070,6 +1069,72 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetAnalyticsAsync(options).GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Preview
+
+        public async Task<IFilePreview> GetPreviewAsync(PreviewOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            if (options == null)
+            {
+                options = new PreviewOptions();
+            }
+
+            dynamic body = new ExpandoObject();
+
+            if (options.Page != string.Empty)
+            {
+                body.page = options.Page;
+            }
+
+            if (options.Zoom != 0)
+            {
+                body.zoom = options.Zoom;
+            }
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/preview", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);
+            }
+
+            return GetPreviewFromResponse(response.Json);
+        }
+
+        public IFilePreview GetPreview(PreviewOptions options = null)
+        {
+            return GetPreviewAsync(options).GetAwaiter().GetResult();
+        }
+
+        private static IFilePreview GetPreviewFromResponse(string json)
+        {
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+
+            var filePreview = new FilePreview();
+
+            if (jsonElement.TryGetProperty("getUrl", out JsonElement getUrl))
+            {
+                filePreview.GetUrl = getUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postUrl", out JsonElement postUrl))
+            {
+                filePreview.PostUrl = postUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postParameters", out JsonElement postParameters))
+            {
+                filePreview.PostParameters = postParameters.GetString();
+            }
+
+            return filePreview;
+        }
+
         #endregion
 
         #endregion

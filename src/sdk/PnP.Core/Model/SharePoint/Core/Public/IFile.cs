@@ -827,5 +827,25 @@ namespace PnP.Core.Model.SharePoint
         Stream ConvertTo(ConvertToOptions options);
 
         #endregion
+
+        #region Preview
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="options">Options for configuring the created preview URL</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        Task<IFilePreview> GetPreviewAsync(PreviewOptions options = null);
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="options">Options for configuring the created preview URL</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        IFilePreview GetPreview(PreviewOptions options = null);
+
+        #endregion
     }
 }
