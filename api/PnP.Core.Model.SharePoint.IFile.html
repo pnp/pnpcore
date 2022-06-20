@@ -4523,6 +4523,120 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_GetPreview_PnP_Core_Model_SharePoint_PreviewOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.GetPreview(PnP.Core.Model.SharePoint.PreviewOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L847" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_GetPreview_" data-uid="PnP.Core.Model.SharePoint.IFile.GetPreview*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_GetPreview_PnP_Core_Model_SharePoint_PreviewOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.GetPreview(PnP.Core.Model.SharePoint.PreviewOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_GetPreview_PnP_Core_Model_SharePoint_PreviewOptions_" class="expander" data-toggle="collapse">GetPreview(PreviewOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_GetPreview_PnP_Core_Model_SharePoint_PreviewOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFilePreview GetPreview(PreviewOptions options = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.PreviewOptions.html">PreviewOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options for configuring the created preview URL</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IFilePreview.html">IFilePreview</a>
+        <p><p>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_GetPreviewAsync_PnP_Core_Model_SharePoint_PreviewOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.GetPreviewAsync(PnP.Core.Model.SharePoint.PreviewOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L839" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_GetPreviewAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.GetPreviewAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_GetPreviewAsync_PnP_Core_Model_SharePoint_PreviewOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.GetPreviewAsync(PnP.Core.Model.SharePoint.PreviewOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_GetPreviewAsync_PnP_Core_Model_SharePoint_PreviewOptions_" class="expander" data-toggle="collapse">GetPreviewAsync(PreviewOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_GetPreviewAsync_PnP_Core_Model_SharePoint_PreviewOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IFilePreview&gt; GetPreviewAsync(PreviewOptions options = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.PreviewOptions.html">PreviewOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options for configuring the created preview URL</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFilePreview.html">IFilePreview</a>&gt;
+        <p><p>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_GetShareLinks.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.GetShareLinks%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">

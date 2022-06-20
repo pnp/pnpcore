@@ -4050,7 +4050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "yvwnqnRlHdWWtllB5ppdBND/PlgskQK4IaHHJUMN2P4="
+          "hash": "IEDuJLn9RAlrHwis7N/IOdP12KstERFSz0Rje6rEmDQ="
         }
       },
       "is_incremental": false,
@@ -4063,6 +4063,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFileCollection.html",
           "hash": "K6WdO7QO/zjqfpfcpOivuGk6C8zECJc5MLZFxuOuIGk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFilePreview.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFilePreview.html",
+          "hash": "miA0d7LIoETlCY8tbn7R1wDtsq94F37TwDBO9iyWIc8="
         }
       },
       "is_incremental": false,
@@ -5354,6 +5366,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.PreviewOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.PreviewOptions.html",
+          "hash": "OxnyiBLLQXMod2Lm309mRMJ+Nuz/Z8uSmYqpKhWYkbs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.PromotedState.yml",
       "output": {
         ".html": {
@@ -5946,7 +5970,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "vLoH5tkcjru5EAKxc1lnbOVb9Iny4gTy1oPY+FS6A2s="
+          "hash": "3vTD+R/nseEJXKB8HRorlg2SP3S+qpW65FuNAGSh8xs="
         }
       },
       "is_incremental": false,
@@ -7914,7 +7938,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "ZdGAYsHEFN57dbzVmDZtU35IockXzz6TFtiWlTRW3wc="
+          "hash": "wOXHtRx2McKC7tDbUVc7DhtuXR7ygiT6pZn9Jpc/8wY="
         }
       },
       "is_incremental": false,
@@ -9760,7 +9784,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 657,
+          "total_file_count": 659,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

@@ -449,6 +449,13 @@
       </tr>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.PreviewOptions.html">PreviewOptions</a></p>
+          <p><p>Options that define how the preview URL must be constructed</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.SharePoint.QuickView.html">QuickView</a></p>
           <p><p>Representation of ACE QuickView</p>
 </p>
@@ -980,6 +987,18 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
         <td>
           <p><a class="xref" href="PnP.Core.Model.SharePoint.IFileCollection.html">IFileCollection</a></p>
           <p><p>Public interface to define a collection of File objects</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.IFilePreview.html">IFilePreview</a></p>
+          <p><p>Response object from a Graph Preview call on an IFile object
+Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.
+postParameters is a string formatted as application/x-www-form-urlencoded, and if performing a POST to the postUrl the content-type should be set accordingly. For example:
+POST <a href="https://www.onedrive.com/embed_by_post">https://www.onedrive.com/embed_by_post</a>
+Content-Type: application/x-www-form-urlencoded
+param1=value&amp;param2=another%20value</p>
 </p>
         </td>
       </tr>
