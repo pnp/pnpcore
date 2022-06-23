@@ -56,6 +56,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support to set the navigation orientation and menu style for non communication sites #875 [jansenbe - Bert Jansen]
 - More resilient parsing of CSOM GUID's #877 [jansenbe - Bert Jansen]
 - Ensure labels can be retrieved using application permissions #882 [jansenbe - Bert Jansen]
+- Don't retry when a `SocketException` occurs due to an unknown host [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

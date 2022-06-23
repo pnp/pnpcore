@@ -96,6 +96,12 @@ namespace PnP.Core.Services
                         throw;
                     }
 
+                    // Hostname unknown error code 11001 should not be retried
+                    if ((innermostEx as SocketException).ErrorCode == 11001)
+                    {
+                        throw;
+                    }
+
                     if (retryCount >= MaxRetries)
                     {
                         throw;
