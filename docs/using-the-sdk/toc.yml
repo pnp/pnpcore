@@ -136,6 +136,10 @@
     href: pages-promote.md
   - name: Working with web parts and text parts
     href: pages-webparts.md
+- name: Recycle Bin
+  items:
+  - name: Overview
+    href: recyclebin-intro.md
 - name: Search
   items:
   - name: Overview
