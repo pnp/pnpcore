@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -106,6 +107,38 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>Properties of the tenant</returns>
         ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null);
+
+        #region Get Search Configuration
+
+        /// <summary>
+        /// Gets the search configuration of the Tenant
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets the search configuration of the Tenant
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Search configuration XML</returns>
+        string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of the Tenant
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of the Tenant
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null);
+
+        #endregion
 
     }
 }

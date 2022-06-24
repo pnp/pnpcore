@@ -5,6 +5,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -243,6 +244,37 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetTenantPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
-        
+
+        #region Get Search Configuration
+
+        public async Task<string> GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription) });
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+                return result.ApiCall.CSOMRequests[0].Result.ToString();
+            }
+        }
+
+        public string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantSearchConfigurationXmlAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)
+        {
+            var searchConfiguration = await GetTenantSearchConfigurationXmlAsync(vanityUrlOptions).ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantSearchConfigurationManagedPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+        #endregion
     }
 }
