@@ -32,7 +32,6 @@ namespace PnP.Core.Test.SharePoint
                 // Load the recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
 
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
                 IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.IsNotNull(recycleBinItem);
@@ -96,6 +95,68 @@ namespace PnP.Core.Test.SharePoint
 
             await CleanupSiteRecycleBinItem(2, recycleBinItemId);
         }
+
+        #region GetRecycleBinItemsByQueryAsync
+        [TestMethod]
+        public async Task GetWebRecycleBinItemsByQueryAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (Guid recycleBinItemId, string fileName) = await AddMockRecycledDocument(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var recyleBinItems = context.Web.GetRecycleBinItemsByQuery(new RecycleBinQueryOptions 
+                    { 
+                        ItemState = RecycleBinItemState.FirstStageRecycleBin, 
+                        IsAscending = true 
+                    });
+
+                    Assert.IsTrue(recyleBinItems != null);
+                    Assert.IsTrue(recyleBinItems.AsRequested().Count() > 0);
+                }
+            }
+            finally
+            {
+                await CleanupWebRecycleBinItem(2, recycleBinItemId);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebRecycleBinItemsByQueryBatchAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (Guid recycleBinItemId, string fileName) = await AddMockRecycledDocument(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var recyleBinItems = context.Web.GetRecycleBinItemsByQueryBatch(new RecycleBinQueryOptions
+                    {
+                        ItemState = RecycleBinItemState.FirstStageRecycleBin,
+                        IsAscending = true
+                    });
+
+                    Assert.IsTrue(recyleBinItems != null);
+                    Assert.IsFalse(recyleBinItems.Requested);
+                    Assert.IsTrue(recyleBinItems.AsRequested().Count() == 0);
+
+                    context.Execute();
+
+                    Assert.IsTrue(recyleBinItems.Requested);
+                    Assert.IsTrue(recyleBinItems.AsRequested().Count() > 0);
+                }
+            }
+            finally
+            {
+                await CleanupWebRecycleBinItem(2, recycleBinItemId);
+            }
+        }
+        #endregion
 
         #region Restore()
         [TestMethod]

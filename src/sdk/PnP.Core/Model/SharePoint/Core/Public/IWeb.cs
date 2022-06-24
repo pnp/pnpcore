@@ -1243,6 +1243,53 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Recycle bin
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options);
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
@@ -1343,16 +1390,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IWebInformationCollection WebInfos { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowAssociationCollection WorkflowAssociations { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowTemplateCollection WorkflowTemplates { get; }
 
         #endregion
     }

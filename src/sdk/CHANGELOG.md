@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for getting site (`ISite`) and file (`IFile`) analytics [jansenbe - Bert Jansen]
 - Option to convert an `IFile` into another format (PDF, JPG, Html or GLB) and process the returned stream (e.g. download/upload as file) #849 [MathijsVerbeeck - Mathijs Verbeeck]
 - Get preview from `IFile` for embedding #885 [MathijsVerbeeck - Mathijs Verbeeck]
+- Support for querying the `IWeb` recycle bin #894 [jansenbe - Bert Jansen]
 
 ### Changed
 

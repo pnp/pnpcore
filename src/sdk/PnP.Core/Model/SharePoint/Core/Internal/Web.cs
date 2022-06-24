@@ -1767,6 +1767,82 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Recycle bin
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options)
+        {
+            return await GetRecycleBinItemsByQueryBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildRecyleBinQueryApiCall(RecycleBinQueryOptions options)
+        {
+            var baseUrl = $"_api/Web/GetRecycleBinItemsByQueryInfo";
+
+            string queryString = $"?rowLimit=%27{options.RowLimit}%27&isAscending={options.IsAscending.ToString().ToLowerInvariant()}&itemState={(int)options.ItemState}&orderBy={(int)options.OrderBy}&showOnlyMyItems={options.ShowOnlyMyItems.ToString().ToLowerInvariant()}";
+            if (!string.IsNullOrEmpty(options.PagingInfo))
+            {
+                queryString += $"&pagingInfo={options.PagingInfo}";
+            }
+
+            return new ApiCall($"{baseUrl}{queryString}", ApiType.SPORest, receivingProperty: nameof(RecycleBin));
+        }
+        #endregion
+
         #endregion
     }
 }
