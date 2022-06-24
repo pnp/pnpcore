@@ -9453,6 +9453,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/recyclebin-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/recyclebin-intro.html",
+          "hash": "OSQ8o6wf0UOxBIypCoz/tz/ZpVSmjyaMhI8er7jsnaU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/search-intro.md",
       "output": {
         ".html": {
@@ -9721,7 +9733,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "OlbUDHIorsW7ezkO4NL+ASGezSlWnF8s4EfraAj8vQY="
+          "hash": "44GC2TDFPM3/fWYkISqo5vm6dWCf/ZlqbqGTEfYki6w="
         }
       },
       "is_incremental": false,
@@ -9802,7 +9814,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 110,
+          "total_file_count": 111,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

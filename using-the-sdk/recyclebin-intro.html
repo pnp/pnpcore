@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with the recycle bin | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with the recycle bin | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/recyclebin-intro.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-the-recycle-bin">Working with the recycle bin</h1>
+
+<p>Deleted lists, libraries, documents or list items are not immediately deleted in SharePoint Online, they first end up in a recycle bin. After they've been deleted from the recycle bin they move to the a site collection recycle bin, deleting from there will permanently delete the item. See <a href="https://support.microsoft.com/en-us/office/restore-items-in-the-recycle-bin-that-were-deleted-from-sharepoint-or-teams-6df466b6-55f2-4898-8d6e-c0dff851a0be">Restore items in the recycle bin that were deleted from SharePoint or Teams</a> and <a href="https://support.microsoft.com/en-us/office/restore-deleted-items-from-the-site-collection-recycle-bin-5fa924ee-16d7-487b-9a0a-021b9062d14b">Restore deleted items from the site collection recycle bin</a> to learn more.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with files
+}
+</code></pre>
+<h2 id="deleting-an-item-so-that-it-ends-up-in-the-recycle-bin">Deleting an item so that it ends up in the recycle bin</h2>
+<p>When using the delete methods in the SharePoint APIs and such also in PnP Core SDK the actual deleted items is always permanently deleted. For most applications this is the desired behavior, if you want to soft delete an item and move it to the recycle bin you need to use one of the <code>Recycle</code> methods which are available on <code>IList</code>, <code>IListItem</code>, <code>IFile</code> and <code>IAttachment</code>.</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+</code></pre>
+<h2 id="listing-the-deleted-items-from-the-recycle-bin">Listing the deleted items from the recycle bin</h2>
+<p>There are multiple approaches to enumerate the recycle bin: first is by loading the <code>IWeb</code> <code>RecycleBin</code> property, this gives you the items in the web's recycle bin. Using <code>RecycleBin</code> property on <code>ISite</code> allows you to query the items in the site collection recycle bin (also known as the second stage recycle bin). An alternative approach via using one of the <code>IWeb</code> <code>GetRecycleBinItemsByQuery</code> methods offers some more control and also allows you to enumerate items from both recycle bins, allows to set order and do paging and more.</p>
+<pre><code class="lang-csharp">// Option A: load the web recycle bin using default options
+await context.Web.LoadAsync(w =&gt; w.RecycleBin);
+
+foreach(var deletedItem in context.Web.RecycleBin.AsRequested())
+{
+    // Do something with the deleted item
+}
+
+// Option A: load the web recycle bin using default options
+await context.Site.LoadAsync(w =&gt; w.RecycleBin);
+
+foreach(var deletedItem in context.Site.RecycleBin.AsRequested())
+{
+    // Do something with the deleted item
+}
+
+// Option C: query the web recycle bin
+var recyleBinItems = await context.Web.GetRecycleBinItemsByQueryAsync(
+    new RecycleBinQueryOptions 
+    { 
+        ItemState = RecycleBinItemState.FirstStageRecycleBin, 
+        IsAscending = true,
+        OrderBy = RecycleBinOrderBy.DeletedDate
+    });
+
+foreach(var deletedItem in recyleBinItems.AsRequested())
+{
+    // Do something with the deleted item
+}
+</code></pre>
+<p>Whenever you delete an item, list or file using a <code>Recycle</code> method you get back a GUID id of the deleted item, using that id you can retrieve a specific deleted item:</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+
+// Get the recycled document from the recycle bin
+IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r =&gt; r.LeafName);
+</code></pre>
+<h2 id="restore-a-deleted-item">Restore a deleted item</h2>
+<p>Restoring deleted items is possible using one of the <code>Restore</code> methods for a specific item or by using the <code>RestoreAll</code> method to restore all deleted items</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+
+// Get the recycled document from the recycle bin
+IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r =&gt; r.LeafName);
+
+// Option A: Restore the document again
+await recycleBinItem.RestoreAsync();
+
+// Option B: Restore all deleted items
+await context.Web.RecycleBin.RestoreAllAsync();
+</code></pre>
+<h2 id="move-a-deleted-item-from-the-recycle-bin-to-the-site-collection-recycle-bin">Move a deleted item from the recycle bin to the site collection recycle bin</h2>
+<p>To move a deleted item to the site collection recycle bin (only site collection admins can restore from there) you can use the <code>MoveToSecondStage</code> methods or <code>MoveAllToSecondStage</code> methods to move all deleted items to the site collection recycle bin.</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+
+// Get the recycled document from the recycle bin
+IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r =&gt; r.LeafName);
+
+// Option A: Move to the site collection recycle bin
+await recycleBinItem.MoveToSecondStageAsync();
+
+// Option B: Move all to the site collection recycle bin
+context.Web.RecycleBin.MoveAllToSecondStageAsync();
+</code></pre>
+<h2 id="delete-items-from-the-recycle-bin">Delete items from the recycle bin</h2>
+<p>To delete items from the recycle bin you can either delete items one by one via the <code>Delete</code> methods on <code>IRecycleBinItem</code> or alternatively delete all items via the <code>DeleteAll</code> methods on <code>IRecycleBinItemCollection</code>.</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+
+// Get the recycled document from the recycle bin
+IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r =&gt; r.LeafName);
+
+// Option A: Delete the item from the recycle bin
+await recycleBinItem.DeleteAsync();
+
+// Option B: Delete all items from the recycle bin
+await context.Web.RecycleBin.DeleteAllAsync();
+</code></pre>
+<h2 id="delete-items-from-the-site-collection-recycle-bin">Delete items from the site collection recycle bin</h2>
+<p>To delete items from the site collection recycle bin you can either delete items one by one via the <code>Delete</code> methods on <code>IRecycleBinItem</code> or alternatively delete all items via the <code>DeleteAll</code> methods on <code>IRecycleBinItemCollection</code>.</p>
+<pre><code class="lang-csharp">var doc = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Recycle a document
+Guid recycleBinItemId = await doc.RecycleAsync();
+
+// Get the recycled document from the recycle bin
+IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r =&gt; r.LeafName);
+
+// Option A: Delete the item from the site collection recycle bin
+await recycleBinItem.DeleteAsync();
+
+// Option B: Delete all items from the site collection recycle bin
+await context.Web.RecycleBin.DeleteAllSecondStageItemsAsync();
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
