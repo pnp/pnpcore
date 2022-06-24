@@ -7167,6 +7167,358 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQuery_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQuery(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1260" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQuery_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQuery*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQuery_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQuery(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQuery_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQuery(RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQuery_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryAsync(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1253" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryAsync(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRecycleBinItemCollection&gt; GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>&gt;
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1274" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1290" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQueryBatch(Batch, RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1267" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync(PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRecycleBinItemCollection&gt; GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>&gt;
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.RecycleBinQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L1282" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetRecycleBinItemsByQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RecycleBinQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="expander" data-toggle="collapse">GetRecycleBinItemsByQueryBatchAsync(Batch, RecycleBinQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetRecycleBinItemsByQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RecycleBinQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Searches the recyclebin returning items based upon the passed search criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRecycleBinItemCollection&gt; GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html">RecycleBinQueryOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Recycle bin search criteria</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html">IRecycleBinItemCollection</a>&gt;
+        <p><p>A list containing zero or more recycle bin items</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetUserById_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetUserById(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">

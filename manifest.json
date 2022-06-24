@@ -5082,7 +5082,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "OZ5lUvz1G3Lk3tgPk0B7S4AtMGZmOLTVu9kK421ph84="
+          "hash": "6m/nz6DeO3bc/e72pZpsTZ2TLZAdp60H8uBGGd/sXQo="
         }
       },
       "is_incremental": false,
@@ -5455,6 +5455,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinItemType.html",
           "hash": "mSNOZA3q0QGKpaw1VPN717QuYZ/5VnbrkQvmIRDO+HY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinOrderBy.html",
+          "hash": "vfpkl7/x/46ps7T82dD4LyhGA1GlffZObbVKn5z/XBs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinQueryOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html",
+          "hash": "e0xAWqA+rOPz018iz/sA4TcSB2pAJieq8my/5+LxKXE="
         }
       },
       "is_incremental": false,
@@ -5970,7 +5994,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "3vTD+R/nseEJXKB8HRorlg2SP3S+qpW65FuNAGSh8xs="
+          "hash": "5MVDDtlxmX8p5dGoj0mITdiy+7VRhBU+mEubqmscGXg="
         }
       },
       "is_incremental": false,
@@ -7938,7 +7962,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "wOXHtRx2McKC7tDbUVc7DhtuXR7ygiT6pZn9Jpc/8wY="
+          "hash": "nXX+P13DnVAJjknBiZBbyTPuOde/+VDW6d52ZlNkOdI="
         }
       },
       "is_incremental": false,
@@ -9784,7 +9808,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 659,
+          "total_file_count": 661,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
