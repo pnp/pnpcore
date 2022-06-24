@@ -426,5 +426,29 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="options">Defines which analytics are needed</param>
         /// <returns>The requested analytics data</returns>
         public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetSearchConfigurationXmlAsync();
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        string GetSearchConfigurationXml();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this site
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this site
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetSearchConfigurationManagedProperties();
     }
 }

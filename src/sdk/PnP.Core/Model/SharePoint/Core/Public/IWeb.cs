@@ -1290,6 +1290,34 @@ namespace PnP.Core.Model.SharePoint
         IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options);
         #endregion
 
+        #region Get Search Configuration
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetSearchConfigurationXmlAsync();
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        string GetSearchConfigurationXml();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetSearchConfigurationManagedProperties();
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

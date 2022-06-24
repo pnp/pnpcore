@@ -1874,5 +1874,33 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Get Search configuration
+
+        [TestMethod]
+        public async Task GetWebSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Web.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebSearchManagedPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var mps = context.Web.GetSearchConfigurationManagedProperties();
+
+                Assert.IsNotNull(mps);                
+            }
+        }
+        #endregion
     }
 }

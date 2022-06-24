@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -492,6 +494,35 @@ namespace PnP.Core.Model.SharePoint
         public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null)
         {
             return GetAnalyticsAsync(options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Get Search Configuration
+
+        public async Task<string> GetSearchConfigurationXmlAsync()
+        {
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPSite) });
+
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return result.ApiCall.CSOMRequests[0].Result.ToString();
+        }
+
+        public string GetSearchConfigurationXml()
+        {
+            return GetSearchConfigurationXmlAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync()
+        {
+            var searchConfiguration = await GetSearchConfigurationXmlAsync().ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetSearchConfigurationManagedProperties()
+        {
+            return GetSearchConfigurationManagedPropertiesAsync().GetAwaiter().GetResult();
         }
         #endregion
 
