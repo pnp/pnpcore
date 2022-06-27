@@ -181,7 +181,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddAndDeployStoreApp_System_String_System_String_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddAndDeployStoreApp(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L82" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddAndDeployStoreApp_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddAndDeployStoreApp*"></a>
@@ -260,7 +260,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddAndDeployStoreAppAsync_System_String_System_String_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddAndDeployStoreAppAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L133" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddAndDeployStoreAppAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddAndDeployStoreAppAsync*"></a>
@@ -336,10 +336,127 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalog(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalog_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalog*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalog(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">AddSiteCollectionAppCatalog(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Add a site collection app catalogs to the site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AddSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to add the app catalog to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalogAsync(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalogAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalogAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.AddSiteCollectionAppCatalogAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">AddSiteCollectionAppCatalogAsync(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_AddSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Add a site collection app catalogs to the site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task AddSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to add the app catalog to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolution_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolution(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L141" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L183" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolution_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolution*"></a>
@@ -395,7 +512,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolution_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolution(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L126" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L168" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolution_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolution*"></a>
@@ -451,7 +568,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolutionAsync_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolutionAsync(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L148" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L190" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolutionAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolutionAsync*"></a>
@@ -507,7 +624,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolutionAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolutionAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L134" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L176" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_DownloadTeamsSolutionAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.DownloadTeamsSolutionAsync*"></a>
@@ -543,6 +660,123 @@
         <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;
         <p><p><see cref="!:Stream"></see> with the MS Teams binary package.</p>
 </p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalog(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L103" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalog_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalog*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalog(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">EnsureSiteCollectionAppCatalog(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures a site collection app catalogs exists for provided site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void EnsureSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to ensure the app catalog exists for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalogAsync(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalogAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalogAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.EnsureSiteCollectionAppCatalogAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">EnsureSiteCollectionAppCatalogAsync(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_EnsureSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures a site collection app catalogs exists for provided site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task EnsureSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to ensure the app catalog exists for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
       </td>
     </tr>
   </table>
@@ -743,7 +977,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_GetStoreApps.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.GetStoreApps%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L109" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_GetStoreApps_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.GetStoreApps*"></a>
@@ -788,7 +1022,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_GetStoreAppsAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.GetStoreAppsAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L115" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_GetStoreAppsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.GetStoreAppsAsync*"></a>
@@ -921,7 +1155,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailable_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailable(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L154" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailable_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailable*"></a>
@@ -977,7 +1211,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailable_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailable(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L98" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L140" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailable_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailable*"></a>
@@ -1033,7 +1267,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailableAsync_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailableAsync(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L161" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailableAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailableAsync*"></a>
@@ -1089,7 +1323,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailableAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailableAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L105" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_IsAppUpgradeAvailableAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.IsAppUpgradeAvailableAsync*"></a>
@@ -1125,6 +1359,123 @@
         <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
         <p><p><em>true</em> if update is available.</p>
 </p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalog(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L89" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalog_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalog*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalog(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">RemoveSiteCollectionAppCatalog(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalog_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Removes a site collection app catalog from a site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to remove the app catalog for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalogAsync(Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ITenantAppManager.cs/#L82" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalogAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalogAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ITenantAppManager.RemoveSiteCollectionAppCatalogAsync(Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">RemoveSiteCollectionAppCatalogAsync(Uri, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ITenantAppManager_RemoveSiteCollectionAppCatalogAsync_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Removes a site collection app catalog from a site collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RemoveSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">siteCollectionAbsoluteUri</span>
+        <p><p>Fully qualified url of the site collection to remove the app catalog for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
       </td>
     </tr>
   </table>
