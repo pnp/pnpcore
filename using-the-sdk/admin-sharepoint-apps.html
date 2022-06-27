@@ -223,6 +223,22 @@ else
 }
 </code></pre>
 <p>Note that you have to use the <code>GetTenantAppCatalogUri</code> to get the actual app catalog site url, even when there was no app catalog site and it was created by calling <code>EnsureTenantAppCatalog</code> it's still recommended to get the actual url.</p>
+<h3 id="list-all-site-collection-app-catalogs">List all site collection app catalogs</h3>
+<p>Using the <code>GetSiteCollectionAppCatalogs</code> you can get all site collection app catalogs from the whole tenant:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var siteAppCatalogList = await tenantAppManager.GetSiteCollectionAppCatalogsAsync();
+</code></pre>
+<p>The result includes site collection app catalog metadata like absolute url and unique id.</p>
+<h3 id="ensuring-theres-a-site-collection-app-catalog">Ensuring there's a site collection app catalog</h3>
+<p>To ensure a site collection app catalog does exist you can use the <code>EnsureSiteCollectionAppCatalog</code> methods, they check if there's an app catalog and if not one is created by calling the <code>AddSiteCollectionAppCatalog</code> methods.</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+await tenantAppManager.EnsureSiteCollectionAppCatalogAsync(&quot;https://contoso.sharepoint.com/sites/sitethatneedsacatalog&quot;);
+</code></pre>
+<h3 id="removing-a-site-collection-app-catalog">Removing a site collection app catalog</h3>
+<p>If the app catalog of a site is not needed anymore then it can be removed using the <code>RemoveSiteCollectionAppCatalog</code> methods:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+await tenantAppManager.RemoveSiteCollectionAppCatalogAsync(&quot;https://contoso.sharepoint.com/sites/sitethatneedsacatalog&quot;);
+</code></pre>
 <h3 id="check-whether-the-solution-contains-ms-teams-component">Check whether the solution contains MS Teams component</h3>
 <p>SharePoint Framework solutions might extend MS Teams as well. You can check, whether a particular SPFx app extends MS Teams or not:</p>
 <pre><code class="lang-csharp">// get tenant app manager 
@@ -235,12 +251,6 @@ var app = await tenantAppManager.GetAvailableAsync(&quot;My App Title&quot;);
 var containsTeams = await tenantAppManager.SolutionContainsTeamsComponentAsync(app.Id);
 </code></pre>
 <p>For example, If your SPFx solution lists any webpart with <code>TeamsPersonalApp</code> or <code>TeamsTab</code> as supported hosts, the method above will return <em>true</em>.</p>
-<h3 id="list-all-site-collection-app-catalogs">List all site collection app catalogs</h3>
-<p>Using the <code>GetSiteCollectionAppCatalogs</code> you can get all site collection app catalogs from the whole tenant:</p>
-<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
-var siteAppCatalogList = await tenantAppManager.GetSiteCollectionAppCatalogsAsync();
-</code></pre>
-<p>The result includes site collection app catalog metadata like absolute url and unique id.</p>
 <h3 id="get-all-apps-acquired-from-sharepoint-store">Get all apps, acquired from SharePoint Store</h3>
 <p>Your tenant app catalog hosts not only custom apps, but also apps installed from the SharePoint store. To easily get all third-party apps from the SharePoint Store, use the method below:</p>
 <pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
