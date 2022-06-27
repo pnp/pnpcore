@@ -1901,6 +1901,21 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(mps);                
             }
         }
+
+        [TestMethod]
+        public async Task SetWebSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Web.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+
+                context.Web.SetSearchConfigurationXml(searchConfigXml);
+            }
+        }
         #endregion
     }
 }

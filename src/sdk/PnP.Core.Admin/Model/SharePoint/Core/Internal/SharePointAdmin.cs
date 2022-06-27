@@ -275,6 +275,26 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetTenantSearchConfigurationManagedPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
+
+        public async Task SetTenantSearchConfigurationXmlAsync(string configuration, VanityUrlOptions vanityUrlOptions = null)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription, configuration) });
+
+                await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+        }
+
+        public void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null)
+        {
+            SetTenantSearchConfigurationXmlAsync(configuration, vanityUrlOptions).GetAwaiter().GetResult();
+        }
         #endregion
     }
 }

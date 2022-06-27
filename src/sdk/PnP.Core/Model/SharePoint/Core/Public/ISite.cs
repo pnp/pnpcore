@@ -450,5 +450,18 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>List of managed properties</returns>
         List<IManagedProperty> GetSearchConfigurationManagedProperties();
+
+        /// <summary>
+        /// Sets the search configuration for the site
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        Task SetSearchConfigurationXmlAsync(string configuration);
+
+        /// <summary>
+        /// Sets the search configuration for the site
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        void SetSearchConfigurationXml(string configuration);
+
     }
 }

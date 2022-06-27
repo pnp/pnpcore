@@ -524,6 +524,23 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetSearchConfigurationManagedPropertiesAsync().GetAwaiter().GetResult();
         }
+
+        public async Task SetSearchConfigurationXmlAsync(string configuration)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSite, configuration) });
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetSearchConfigurationXml(string configuration)
+        {
+            SetSearchConfigurationXmlAsync(configuration).GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

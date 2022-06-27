@@ -42,6 +42,21 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(mps.Count > 0);
             }
         }
+
+        [TestMethod]
+        public async Task SetTenantSearchManagedPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.GetSharePointAdmin().GetTenantSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+
+                context.GetSharePointAdmin().SetTenantSearchConfigurationXml(searchConfigXml);
+            }
+        }
         #endregion
     }
 }
