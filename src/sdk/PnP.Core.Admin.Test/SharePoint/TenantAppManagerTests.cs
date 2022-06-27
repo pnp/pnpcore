@@ -455,6 +455,62 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddRemoveSiteCollectionAppCatalogTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var tenantAppManager = context.GetTenantAppManager();
+
+                tenantAppManager.AddSiteCollectionAppCatalog(context.Uri);
+
+                var result = tenantAppManager.GetSiteCollectionAppCatalogs();
+
+                Assert.IsTrue(result != null && result.Count > 0);
+                Assert.IsTrue(result.FirstOrDefault(p => p.AbsoluteUrl == context.Uri.ToString()) != null);
+
+                tenantAppManager.RemoveSiteCollectionAppCatalog(context.Uri);
+
+                var result2 = tenantAppManager.GetSiteCollectionAppCatalogs();
+
+                Assert.IsTrue(result2 != null && result2.Count > 0);
+                Assert.IsTrue(result2.FirstOrDefault(p => p.AbsoluteUrl == context.Uri.ToString()) == null);
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureSiteCollectionAppCatalogTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var tenantAppManager = context.GetTenantAppManager();
+                try
+                {
+                    // We start from the assumption there's no app catalog for this site
+                    var result2 = tenantAppManager.GetSiteCollectionAppCatalogs();
+
+                    Assert.IsTrue(result2 != null && result2.Count > 0);
+                    Assert.IsTrue(result2.FirstOrDefault(p => p.AbsoluteUrl == context.Uri.ToString()) == null);
+
+                    // Ensure the app catalog    
+                    tenantAppManager.EnsureSiteCollectionAppCatalog(context.Uri);
+
+                    // Verify there now is
+                    var result = tenantAppManager.GetSiteCollectionAppCatalogs();
+
+                    Assert.IsTrue(result != null && result.Count > 0);
+                    Assert.IsTrue(result.FirstOrDefault(p => p.AbsoluteUrl == context.Uri.ToString()) != null);
+                }
+                finally
+                {
+                    // Drop the created 
+                    tenantAppManager.RemoveSiteCollectionAppCatalog(context.Uri);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task GetStoreAppsTest()
         {
             //TestCommon.Instance.Mocking = false;

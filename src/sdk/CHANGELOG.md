@@ -37,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Get preview from `IFile` for embedding #885 [MathijsVerbeeck - Mathijs Verbeeck]
 - Support for querying the `IWeb` recycle bin #894 [jansenbe - Bert Jansen]
 - Support for exporting and importing the search configuration at web, site and tenant level #887 [jansenbe - Bert Jansen]
+- Admin library: create/remove/ensure a site collection app catalog #898 [jansenbe - Bert Jansen]
 
 ### Changed
 
