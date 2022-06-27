@@ -182,6 +182,35 @@ else
 
 Note that you have to use the `GetTenantAppCatalogUri` to get the actual app catalog site url, even when there was no app catalog site and it was created by calling `EnsureTenantAppCatalog` it's still recommended to get the actual url.
 
+### List all site collection app catalogs
+
+Using the `GetSiteCollectionAppCatalogs` you can get all site collection app catalogs from the whole tenant:
+
+```csharp
+var tenantAppManager = context.GetTenantAppManager();
+var siteAppCatalogList = await tenantAppManager.GetSiteCollectionAppCatalogsAsync();
+```
+
+The result includes site collection app catalog metadata like absolute url and unique id.
+
+### Ensuring there's a site collection app catalog
+
+To ensure a site collection app catalog does exist you can use the `EnsureSiteCollectionAppCatalog` methods, they check if there's an app catalog and if not one is created by calling the `AddSiteCollectionAppCatalog` methods.
+
+```csharp
+var tenantAppManager = context.GetTenantAppManager();
+await tenantAppManager.EnsureSiteCollectionAppCatalogAsync("https://contoso.sharepoint.com/sites/sitethatneedsacatalog");
+```
+
+### Removing a site collection app catalog
+
+If the app catalog of a site is not needed anymore then it can be removed using the `RemoveSiteCollectionAppCatalog` methods:
+
+```csharp
+var tenantAppManager = context.GetTenantAppManager();
+await tenantAppManager.RemoveSiteCollectionAppCatalogAsync("https://contoso.sharepoint.com/sites/sitethatneedsacatalog");
+```
+
 ### Check whether the solution contains MS Teams component
 
 SharePoint Framework solutions might extend MS Teams as well. You can check, whether a particular SPFx app extends MS Teams or not:
@@ -198,17 +227,6 @@ var containsTeams = await tenantAppManager.SolutionContainsTeamsComponentAsync(a
 ```
 
 For example, If your SPFx solution lists any webpart with `TeamsPersonalApp` or `TeamsTab` as supported hosts, the method above will return *true*.
-
-### List all site collection app catalogs
-
-Using the `GetSiteCollectionAppCatalogs` you can get all site collection app catalogs from the whole tenant:
-
-```csharp
-var tenantAppManager = context.GetTenantAppManager();
-var siteAppCatalogList = await tenantAppManager.GetSiteCollectionAppCatalogsAsync();
-```
-
-The result includes site collection app catalog metadata like absolute url and unique id.
 
 ### Get all apps, acquired from SharePoint Store
 
