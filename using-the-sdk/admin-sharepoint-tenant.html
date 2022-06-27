@@ -159,6 +159,24 @@ if (tenantProperties.BlockMacSync)
     // do work with the SharePoint Tenant Admin Center site
 }
 </code></pre>
+<h2 id="exporting-the-tenant-search-schema">Exporting the tenant search schema</h2>
+<p>The search schema can be exported and imported via an XML file, exporting is done using one of the <code>GetSearchConfigurationXml</code> methods:</p>
+<pre><code class="lang-csharp">// Get the tenant search configuration XML
+var searchConfigXml = await context.GetSharePointAdmin().GetTenantSearchConfigurationXmlAsync();
+</code></pre>
+<p>If you're only interested in understanding which managed properties were added for the tenant then you can also use one of the <code>GetSearchConfigurationManagedProperties</code> methods. These methods get the needed search configuration XML first and then parses it to return a collection of managed properties:</p>
+<pre><code class="lang-csharp">// Get tenant search configuration managed properties
+var managedProperties = await context.GetSharePointAdmin().GetTenantSearchConfigurationManagedPropertiesAsync();
+foreach(var mp in managedProperties)
+{
+    // Do something
+}
+</code></pre>
+<h2 id="importing-the-tenant-search-schema">Importing the tenant search schema</h2>
+<p>Just like the search schema can be exported it's also possible to import it again via calling the <code>SetSearchConfigurationXml</code> methods:</p>
+<pre><code class="lang-csharp">// Set tenant search configuration XML
+await context.GetSharePointAdmin().SetSearchConfigurationXmlAsync(searchConfigXml);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

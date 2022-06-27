@@ -8881,7 +8881,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-tenant.html",
-          "hash": "8L0M9MM2mx5B1GDFstD9X8wq9bq0Jk3i2lrXJxP3B7c="
+          "hash": "VtGWKP4SmKvw2BQ0cv6kVNqe7lOBV0rBVgz1VdifCuE="
         }
       },
       "is_incremental": false,
@@ -9477,6 +9477,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/search-configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/search-configuration.html",
+          "hash": "S5kdo5lRKKApGcNwj8AaWn5bbLCMITHiY/TgkXGW9jI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/search-intro.md",
       "output": {
         ".html": {
@@ -9745,7 +9757,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "44GC2TDFPM3/fWYkISqo5vm6dWCf/ZlqbqGTEfYki6w="
+          "hash": "aTfHdhSvVrQSrvrmgInxNHXZ59pTnNMMBTDE2X11C2c="
         }
       },
       "is_incremental": false,
@@ -9826,7 +9838,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 111,
+          "total_file_count": 112,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
