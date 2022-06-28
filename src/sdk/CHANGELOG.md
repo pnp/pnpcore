@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for updating site fields and pushing down the changes to the lists using the field #889 [jansenbe - Bert Jansen]
 - Taxonomy: added GetTermSetById and GetSetById methods on `ITermStore` to enable loading a termset or term without knowing the termset group #892 [jansenbe - Bert Jansen]
 - Taxonomy: added GetWssIdForTerm methods on `IWeb` #892 [jansenbe - Bert Jansen]
+- Added `FilesFolderWebUrl` graph beta property for `ITeamChannel` #902 [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -63,6 +64,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - More resilient parsing of CSOM GUID's #877 [jansenbe - Bert Jansen]
 - Ensure labels can be retrieved using application permissions #882 [jansenbe - Bert Jansen]
 - Don't retry when a `SocketException` occurs due to an unknown host [jansenbe - Bert Jansen]
+- Removed beta label from `ITeamChannel` property `IsFavoriteByDefault` and updated beta test to use the `FilesFolderWebUrl` property [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 
