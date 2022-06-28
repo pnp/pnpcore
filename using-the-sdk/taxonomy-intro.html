@@ -138,7 +138,7 @@ await myNewGroup.UpdateAsync();
 <pre><code class="lang-csharp">await myNewGroup.DeleteAsync();
 </code></pre>
 <h2 id="working-with-term-sets">Working with term sets</h2>
-<p>Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you always have to go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:</p>
+<p>Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you typically go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:</p>
 <pre><code class="lang-csharp">// Get the term group hosting the needed term set 
 var myTermGroup = await context.TermStore.Groups.GetByIdAsync(&quot;0e8f395e-ff58-4d45-9ff7-e331ab728beb&quot;);
 
@@ -154,6 +154,9 @@ var termSet = await myTermGroup.Sets.Where(p =&gt; p.Id == &quot;2374aacb-8c25-4
 
 // Get a term set by id, identical to above LINQ approach
 var termSet = await myTermGroup.Sets.GetByIdAsync(&quot;2374aacb-8c25-4991-aa94-7585bcedf38d&quot;);
+</code></pre>
+<p>When you know the term set id you an directly get the term set via the <code>GetTermSetById</code> methods on the <code>ITermStore</code>:</p>
+<pre><code class="lang-csharp">var termSet = await context.TermStore.GetTermSetByIdAsync(&quot;2374aacb-8c25-4991-aa94-7585bcedf38d&quot;, p =&gt; p.Description, p =&gt; p.Group);
 </code></pre>
 <p>Adding a term set to a term group is done using the <code>Add</code> methods on the <code>ITermSetCollection</code>:</p>
 <pre><code class="lang-csharp">var termSet = await myTermGroup.Sets.AddAsync(&quot;MyTermSet&quot;, &quot;Optional set description&quot;);
@@ -194,6 +197,9 @@ var term = await termSet.Terms.GetByIdAsync(&quot;6b39335d-1975-4fd7-9696-b40d57
 
 // Get a term by id from another term
 var childTerm = await term.Terms.GetByIdAsync(&quot;2dd726ce-1f14-4113-be57-5e0bc2d28914&quot;);
+</code></pre>
+<p>When you know the term set id and term id you an directly get the term via the <code>GetTermById</code> methods on the <code>ITermStore</code>:</p>
+<pre><code class="lang-csharp">var term = await context.TermStore.GetTermByIdAsync(&quot;2374aacb-8c25-4991-aa94-7585bcedf38d&quot;, &quot;6b39335d-1975-4fd7-9696-b40d57c9bde7&quot;, p =&gt; p.Descriptions, p =&gt; p.Set);
 </code></pre>
 <p>Adding a term to a term set or another term is done using the <code>Add</code> methods on the <code>ITermCollection</code>:</p>
 <pre><code class="lang-csharp">// Add term at term set level, the default term store language will be assumed for the language of the name/description
