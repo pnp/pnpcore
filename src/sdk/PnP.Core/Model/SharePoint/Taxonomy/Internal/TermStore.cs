@@ -86,6 +86,66 @@ namespace PnP.Core.Model.SharePoint
         {
             return new ApiCall($"sites/{PnPContext.Site.Id}/termstore/sets/{termSetId}", ApiType.Graph);
         }
+
+        public async Task<ITerm> GetTermByIdAsync(string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            var term = new Term()
+            {
+                PnPContext = PnPContext
+            };
+
+            var apiCall = BuildGetTermByIdApiCall(termSetId, termId);
+
+            var entityInfo = EntityManager.GetClassInfo(term.GetType(), term, expressions: selectors);
+            var query = await QueryClient.BuildGetAPICallAsync(term, entityInfo, apiCall).ConfigureAwait(false);
+
+            await term.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            return term;
+        }
+
+        public ITerm GetTermById(string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            return GetTermByIdAsync(termSetId, termId, selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITerm> GetTermByIdBatchAsync(string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            return await GetTermByIdBatchAsync(PnPContext.CurrentBatch, termSetId, termId, selectors).ConfigureAwait(false);
+        }
+
+        public ITerm GetTermByIdBatch(string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            return GetTermByIdBatchAsync(termSetId, termId, selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITerm> GetTermByIdBatchAsync(Batch batch, string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            var term = new Term()
+            {
+                PnPContext = PnPContext
+            };
+
+            var apiCall = BuildGetTermByIdApiCall(termSetId, termId);
+
+            var entityInfo = EntityManager.GetClassInfo(term.GetType(), term, expressions: selectors);
+            var query = await QueryClient.BuildGetAPICallAsync(term, entityInfo, apiCall).ConfigureAwait(false);
+
+            await term.RequestBatchAsync(batch, new ApiCall(query.ApiCall.Request, ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            return term;
+        }
+
+        public ITerm GetTermByIdBatch(Batch batch, string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
+        {
+            return GetTermByIdBatchAsync(batch, termSetId, termId, selectors).GetAwaiter().GetResult();
+        }
+
+        private ApiCall BuildGetTermByIdApiCall(string termSetId, string termId)
+        {
+            return new ApiCall($"sites/{PnPContext.Site.Id}/termstore/sets/{termSetId}/terms/{termId}", ApiType.Graph);
+        }
+
         #endregion
     }
 }
