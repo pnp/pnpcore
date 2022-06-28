@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for exporting and importing the search configuration at web, site and tenant level #887 [jansenbe - Bert Jansen]
 - Admin library: create/remove/ensure a site collection app catalog #898 [jansenbe - Bert Jansen]
 - Support for updating site fields and pushing down the changes to the lists using the field #889 [jansenbe - Bert Jansen]
+- Taxonomy: added GetTermSetById methods on `ITermStore` to enable loading a termset without knowing the termset group #892 [jansenbe - Bert Jansen]
 
 ### Changed
 

@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Services;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -31,5 +35,55 @@ namespace PnP.Core.Model.SharePoint
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITermGroupCollection Groups { get; }
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        Task<ITermSet> GetTermSetByIdAsync(string id, params Expression<Func<ITermSet, object>>[] selectors);
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        ITermSet GetTermSetById(string id, params Expression<Func<ITermSet, object>>[] selectors);
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        Task<ITermSet> GetTermSetByIdBatchAsync(string id, params Expression<Func<ITermSet, object>>[] selectors);
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        ITermSet GetTermSetByIdBatch(string id, params Expression<Func<ITermSet, object>>[] selectors);
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="batch">Batch to add this reques to</param>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        Task<ITermSet> GetTermSetByIdBatchAsync(Batch batch, string id, params Expression<Func<ITermSet, object>>[] selectors);
+
+        /// <summary>
+        /// Gets a termset from this termstore via it's id
+        /// </summary>
+        /// <param name="batch">Batch to add this reques to</param>
+        /// <param name="id">Termset id to retrieve</param>
+        /// <param name="selectors">Properties to load for the termset</param>
+        /// <returns>The loaded termset</returns>
+        ITermSet GetTermSetByIdBatch(Batch batch, string id, params Expression<Func<ITermSet, object>>[] selectors);
     }
 }
