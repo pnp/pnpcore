@@ -215,6 +215,10 @@ var fieldLink = await contentType.FieldLinks.AsRequested().First(p =&gt; p.Name 
 fieldLink.ReadOnly = true;
 await fieldLink.UpdateAsync();
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When you update a site content type field the changes are automatically pushed down the content types inheriting from the current content type.</p>
+</div>
 <h3 id="updating-a-list-content-type-field">Updating a list content type field</h3>
 <p>To update the settings of a field added to a content type one can update its field link:</p>
 <pre><code class="lang-csharp">// Add a list content type, start with getting a reference to the list
