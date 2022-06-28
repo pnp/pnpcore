@@ -203,7 +203,7 @@ await contentType.FieldLinks.AddAsync(&quot;MyRequiredField&quot;, required: tru
 <p>To update the settings of a field added to a content type one can update its field link:</p>
 <pre><code class="lang-csharp">// Get site content types, also load the content types field links in one go
 await context.Web.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
-                                   p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name, p =&gt; p.ReadOnly)));
+                                    p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name, p =&gt; p.ReadOnly)));
 
 // Get the content type to update
 var contentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
