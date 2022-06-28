@@ -151,7 +151,7 @@ To update the settings of a field added to a content type one can update its fie
 ```csharp
 // Get site content types, also load the content types field links in one go
 await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
-                                    p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)));
+                                   p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)));
 
 // Get the content type to update
 var contentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
