@@ -1329,6 +1329,23 @@ namespace PnP.Core.Model.SharePoint
         void SetSearchConfigurationXml(string configuration);
         #endregion
 
+        #region Get WSS Id for term
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        Task<int> GetWssIdForTermAsync(string termId);
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        int GetWssIdForTerm(string termId);
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

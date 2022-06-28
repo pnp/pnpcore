@@ -40,6 +40,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: create/remove/ensure a site collection app catalog #898 [jansenbe - Bert Jansen]
 - Support for updating site fields and pushing down the changes to the lists using the field #889 [jansenbe - Bert Jansen]
 - Taxonomy: added GetTermSetById and GetSetById methods on `ITermStore` to enable loading a termset or term without knowing the termset group #892 [jansenbe - Bert Jansen]
+- Taxonomy: added GetWssIdForTerm methods on `IWeb` #892 [jansenbe - Bert Jansen]
 
 ### Changed
 

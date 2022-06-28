@@ -329,6 +329,8 @@ namespace PnP.Core.Model.SharePoint
 
         [SharePointProperty("*")]
         public object All { get => null; }
+
+        internal IList TaxonomyHiddenList { get; set; }
         #endregion
 
         #region Extension methods        
@@ -1889,6 +1891,42 @@ namespace PnP.Core.Model.SharePoint
         {
             SetSearchConfigurationXmlAsync(configuration).GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Get WSS Id for term
+        
+        public async Task<int> GetWssIdForTermAsync(string termId)
+        {
+            if (TaxonomyHiddenList == null)
+            {
+                await PnPContext.Site.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+                TaxonomyHiddenList = await PnPContext.Site.RootWeb.Lists.GetByServerRelativeUrlAsync($"{PnPContext.Site.ServerRelativeUrl}/Lists/TaxonomyHiddenList").ConfigureAwait(false);
+            }
+
+            var camlQuery = new CamlQueryOptions()
+            {
+                ViewXml = $@"<View><Query><Where><Eq><FieldRef Name='IdForTerm' /><Value Type='Text'>{termId}</Value></Eq></Where></Query></View>",
+                DatesInUtc = true,
+            };
+
+            await TaxonomyHiddenList.LoadItemsByCamlQueryAsync(camlQuery).ConfigureAwait(false);
+            var items = TaxonomyHiddenList.Items.AsRequested();
+
+            if (items.Any())
+            {
+                return items.First().Id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int GetWssIdForTerm(string termId)
+        {
+            return GetWssIdForTermAsync(termId).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #endregion

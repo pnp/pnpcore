@@ -5,6 +5,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -1914,6 +1915,75 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
 
                 context.Web.SetSearchConfigurationXml(searchConfigXml);
+            }
+        }
+        #endregion
+
+        #region GetWssIdForTerm 
+        [TestMethod]
+        public async Task GetWssIdForTermTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
+                Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
+                Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
+                Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");
+                string label1 = "Dutch";
+
+                IList myList = null;
+
+                try
+                {
+                    // Create a new list
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("GetWssIdForTermTest");
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add taxonomy fields
+                    string fldTaxonomy1 = "TaxonomyField1";
+                    IField addedTaxonomyField1 = await myList.Fields.AddTaxonomyAsync(fldTaxonomy1, new FieldTaxonomyOptions()
+                    {
+                        Group = "TEST GROUP",
+                        AddToDefaultView = true,
+                        TermStoreId = termStore,
+                        TermSetId = termSet
+                    });
+
+                    // Add a list item
+                    Dictionary<string, object> item = new Dictionary<string, object>()
+                    {
+                        { "Title", "Item1" },
+                        { fldTaxonomy1, addedTaxonomyField1.NewFieldTaxonomyValue(term1, label1)}
+                    };
+
+                    // Add the configured list item
+                    await myList.Items.AddAsync(item);
+
+                    var wssId = context.Web.GetWssIdForTerm(term1.ToString());
+
+                    Assert.IsTrue(wssId > 0);
+
+                    // Get again, now the cache path should be followed
+                    wssId = context.Web.GetWssIdForTerm(term1.ToString());
+
+                    Assert.IsTrue(wssId > 0);
+                }
+                finally
+                {
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
         #endregion
