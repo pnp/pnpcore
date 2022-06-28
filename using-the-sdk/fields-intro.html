@@ -159,6 +159,17 @@ if (field != null)
     await field.UpdateAsync();
 }
 </code></pre>
+<p>If you want to update a site field and push the field updates to the lists using that field then you'd need to use one of the <code>UpdateAndPushChanges</code> methods:</p>
+<pre><code class="lang-csharp">// Find a field with a given id
+Guid titleFieldId = new Guid(&quot;fa564e0f-0c70-4ab9-b863-0177e6ddd247&quot;);
+IField field = await context.Web.Fields.Where(f =&gt; f.Id == titleFieldId).FirstOrDefaultAsync();
+
+if (field != null)
+{
+    field.Hidden = true;
+    await field.UpdateAndPushChangesAsync();
+}
+</code></pre>
 <h2 id="deleting-site-and-list-fields">Deleting site and list fields</h2>
 <p>Deleting a field can be done using the Delete or DeleteAsync methods:</p>
 <pre><code class="lang-csharp">// Find a field with a given id
