@@ -99,6 +99,20 @@ if (field != null)
 }
 ```
 
+If you want to update a site field and push the field updates to the lists using that field then you'd need to use one of the `UpdateAndPushChanges` methods:
+
+```csharp
+// Find a field with a given id
+Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
+IField field = await context.Web.Fields.Where(f => f.Id == titleFieldId).FirstOrDefaultAsync();
+
+if (field != null)
+{
+    field.Hidden = true;
+    await field.UpdateAndPushChangesAsync();
+}
+```
+
 ## Deleting site and list fields
 
 Deleting a field can be done using the Delete or DeleteAsync methods:
