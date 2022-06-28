@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.Fields;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -27,7 +29,6 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
                     var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
@@ -44,6 +45,7 @@ namespace PnP.Core.Model.SharePoint
 
                 return api;
             };
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -437,6 +439,89 @@ namespace PnP.Core.Model.SharePoint
 
             return fieldValueCollection;
         }
+        #endregion
+
+        #region UpdateAndPushChanges
+
+        public async Task UpdateAndPushChangesAsync()
+        {
+            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
+
+            if (entity.SharePointTarget == typeof(Web) || entity.SharePointTarget == typeof(ContentTypeHub))
+            {
+                Guid siteId = PnPContext.Site.Id;
+                Guid webId = PnPContext.Web.Id;
+
+                if (entity.SharePointTarget == typeof(ContentTypeHub))
+                {
+                    var contentTypeHubSiteId = await PnPContext.ContentTypeHub.GetSiteIdAsync().ConfigureAwait(false);
+                    GetSiteAndWebId(contentTypeHubSiteId, out siteId, out webId);
+                }
+
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new UpdateAndPushChangesRequest(siteId, webId, this) });
+
+                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                // fall back to the regular update as 
+                await UpdateAsync().ConfigureAwait(false);
+            }
+        }
+
+        public void UpdateAndPushChanges()
+        {
+            UpdateAndPushChangesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task UpdateAndPushChangesBatchAsync()
+        {
+            await UpdateAndPushChangesBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public void UpdateAndPushChangesBatch()
+        {
+            UpdateAndPushChangesBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task UpdateAndPushChangesBatchAsync(Batch batch)
+        {
+            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
+
+            if (entity.SharePointTarget == typeof(Web))
+            {
+                Guid siteId = PnPContext.Site.Id;
+                Guid webId = PnPContext.Web.Id;
+
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new UpdateAndPushChangesRequest(siteId, webId, this) });
+
+                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else if (entity.SharePointTarget == typeof(ContentTypeHub))
+            {
+                // Unsupported via the content type hub path, one can always create a PnPContext for the content type hub and get things done that way
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub);
+            }
+            else
+            {
+                // fall back to the regular update as 
+                await UpdateBatchAsync(batch).ConfigureAwait(false);
+            }
+        }
+
+        public void UpdateAndPushChangesBatch(Batch batch)
+        {
+            UpdateAndPushChangesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static void GetSiteAndWebId(string graphId, out Guid siteId, out Guid webId)
+        {
+            string[] split = graphId.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            siteId = Guid.Parse(split[1]);
+            webId = Guid.Parse(split[2]);
+        }
+
         #endregion
 
         #endregion

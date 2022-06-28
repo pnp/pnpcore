@@ -760,5 +760,121 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task AddWebFieldAndPropagateChanges()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = null;
+                IList addedList = null;
+
+                try
+                {
+                    // Create field
+                    addedField = await context.Web.Fields.AddTextAsync("PropagateFieldChanges", new FieldTextOptions());
+
+                    // Create list and add field
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("AddWebFieldAndPropagateChanges");
+                    addedList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && addedList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (addedList == null)
+                    {
+                        addedList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add field
+                    var listField = addedList.Fields.AddFieldAsXml(addedField.SchemaXml);
+
+                    // Set default value
+                    addedField.DefaultValue = "B";
+
+                    // Push update of added field, will also trigger update of the list field
+                    addedField.UpdateAndPushChanges();
+
+                    // Load the list field again
+                    var listFieldReloaded = addedList.Fields.QueryProperties(p => p.DefaultValue).FirstOrDefault(p => p.Id == addedField.Id);
+
+                    // Check if the default value has been updated on the field in the list
+                    Assert.IsTrue(listFieldReloaded.DefaultValue.ToString() == "B");
+
+                }
+                finally
+                {
+                    if (addedList != null)
+                    {
+                        await addedList.DeleteAsync();
+                    }
+
+                    await addedField.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebFieldAndPropagateChangesBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = null;
+                IList addedList = null;
+
+                try
+                {
+                    // Create field
+                    addedField = await context.Web.Fields.AddTextAsync("PropagateChangesBatch", new FieldTextOptions());
+
+                    // Create list and add field
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("AddWebFieldAndPropagateChangesBatch");
+                    addedList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && addedList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (addedList == null)
+                    {
+                        addedList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add field
+                    var listField = addedList.Fields.AddFieldAsXml(addedField.SchemaXml);
+
+                    // Set default value
+                    addedField.DefaultValue = "B";
+
+                    // Push update of added field, will also trigger update of the list field
+                    addedField.UpdateAndPushChangesBatch();
+
+                    // Execute the batch
+                    context.Execute();
+
+                    // Load the list field again
+                    var listFieldReloaded = addedList.Fields.QueryProperties(p => p.DefaultValue).FirstOrDefault(p => p.Id == addedField.Id);
+
+                    // Check if the default value has been updated on the field in the list
+                    Assert.IsTrue(listFieldReloaded.DefaultValue.ToString() == "B");
+
+                }
+                finally
+                {
+                    if (addedList != null)
+                    {
+                        await addedList.DeleteAsync();
+                    }
+
+                    await addedField.DeleteAsync();
+                }
+            }
+        }
+
     }
 }

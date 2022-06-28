@@ -388,6 +388,32 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddContentTypeHubFieldAndPropagateChanges()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = null;
+
+                try
+                {
+                    // Create field
+                    addedField = await context.ContentTypeHub.Fields.AddTextAsync("PropagateFieldChanges", new FieldTextOptions());
+
+                    // Set default value
+                    addedField.DefaultValue = "B";
+
+                    // Push update of added field, will also trigger update of the list field
+                    addedField.UpdateAndPushChanges();
+                }
+                finally
+                {
+                    await addedField.DeleteAsync();
+                }
+            }
+        }
+
         #region Document Sets
 
         // Ensure the document set site collection feature is enabled before running test tests live (should be active by default on the content type hub site)
