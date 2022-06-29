@@ -2,6 +2,9 @@
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using PnP.Core.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -98,5 +101,154 @@ namespace PnP.Core.Test.Security
                 Assert.IsTrue(sharePointUser.UserPrincipalName == graphUser.UserPrincipalName);
             }
         }
+
+        #region Mails
+
+        [TestMethod]
+        public async Task SendMailAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                var graphUser = await testUser.AsGraphUserAsync();
+                
+                var toUser = await context.Web.SiteUsers.Skip(1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                var ccUser = await context.Web.SiteUsers.Skip(2).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                var bccUser = await context.Web.SiteUsers.Skip(3).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+
+                await graphUser.SendMailAsync(
+                    new MailOptions
+                    {
+                        Message = new MessageOptions
+                        {
+                            Subject = "Mail subject - PnP Rocks",
+                            Body = "This is a mail body - PnP Rocks",
+                            ToRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = toUser.Mail
+                                }
+                            },
+                            CcRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = ccUser.Mail
+                                }
+                            },
+                            BccRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = bccUser.Mail
+                                }
+                            },
+                            Importance = MessageImportance.High
+                        }
+                    });
+            }
+        }
+
+        [TestMethod]
+        public async Task SendMailWithAttachmentsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                    var graphUser = await testUser.AsGraphUserAsync();
+                    
+                    var toUser = await context.Web.SiteUsers.Skip(1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+
+                    var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    var fileStream = await file.GetContentBytesAsync();
+
+                    MimeTypeMap.TryGetMimeType(documentName, out string mimeType);
+
+                    await graphUser.SendMailAsync(
+                        new MailOptions
+                        {
+                            Message = new MessageOptions
+                            {
+                                Subject = "Mail subject - PnP Rocks",
+                                Body = "This is a mail body including a file attachment - PnP Rocks",
+                                ToRecipients = new List<RecipientOptions>
+                                {
+                                    new RecipientOptions
+                                    {
+                                        EmailAddress = toUser.Mail
+                                    }
+                                },
+                                Attachments = new List<MessageAttachmentOptions>
+                                {
+                                    new MessageAttachmentOptions
+                                    {
+                                        Name = documentName,
+                                        ContentBytes = Convert.ToBase64String(fileStream),
+                                        ContentType = mimeType
+                                    }
+                                }
+                            }
+                        });
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task SendMailExceptionTestAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                var graphUser = await testUser.AsGraphUserAsync();
+                
+                MailOptions mailOptions = null;
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await graphUser.SendMailAsync(mailOptions);
+                });
+
+                mailOptions = new MailOptions
+                {
+                    Message = null
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await graphUser.SendMailAsync(mailOptions);
+                });
+
+                mailOptions.Message = new MessageOptions();
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await graphUser.SendMailAsync(mailOptions);
+                });
+
+                mailOptions.Message.Body = "This is a mail body";
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await graphUser.SendMailAsync(mailOptions);
+                });
+            }
+        }
+
+        #endregion
     }
 }

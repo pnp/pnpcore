@@ -1,5 +1,11 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Me
 {
@@ -39,6 +45,25 @@ namespace PnP.Core.Model.Me
         [GraphProperty("chats", Get = "me/chats")]
         public IChatCollection Chats { get => GetModelCollectionValue<IChatCollection>(); }
 
+        #endregion
+
+        #region
+
+        public async Task SendMailAsync(MailOptions mailOptions)
+        {
+            MailHandler.CheckErrors(mailOptions);
+
+            var body = MailHandler.GetMailBody(mailOptions);
+
+            var apiCall = new ApiCall($"me/sendMail", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SendMail(MailOptions mailOptions)
+        {
+            SendMailAsync(mailOptions).GetAwaiter().GetResult();
+        }
 
         #endregion
     }

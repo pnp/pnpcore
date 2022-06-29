@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.Security;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +14,12 @@ namespace PnP.Core.Test.Me
     [TestClass]
     public class MeTest
     {
+        
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -30,6 +34,146 @@ namespace PnP.Core.Test.Me
                 Assert.IsNotNull(me.UserPrincipalName);
             }
         }
+
+        #region Mails
+
+        [TestMethod]
+        public async Task SendMailAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var toUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                var ccUser = await context.Web.SiteUsers.Skip(1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                var bccUser = await context.Web.SiteUsers.Skip(2).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+
+                await context.Me.SendMailAsync(
+                    new MailOptions
+                    {
+                        Message = new MessageOptions
+                        {
+                            Subject = "Mail subject - PnP Rocks",
+                            Body = "This is a mail body - PnP Rocks",
+                            ToRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = toUser.Mail
+                                }
+                            },
+                            CcRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = ccUser.Mail
+                                }
+                            },
+                            BccRecipients = new List<RecipientOptions>
+                            {
+                                new RecipientOptions
+                                {
+                                    EmailAddress = bccUser.Mail
+                                }
+                            }
+                        },
+                        SaveToSentItems = false
+                    });
+            }
+        }
+
+        [TestMethod]
+        public async Task SendMailWithAttachmentsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var toUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+
+                    var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    var fileStream = await file.GetContentBytesAsync();
+                    
+                    MimeTypeMap.TryGetMimeType(documentName, out string mimeType);
+
+                    await context.Me.SendMailAsync(
+                        new MailOptions
+                        {
+                            Message = new MessageOptions
+                            {
+                                Subject = "Mail subject - PnP Rocks",
+                                Body = "This is a mail body including a file attachment - PnP Rocks",
+                                ToRecipients = new List<RecipientOptions>
+                                {
+                                    new RecipientOptions
+                                    {
+                                        EmailAddress = toUser.Mail
+                                    }
+                                },
+                                Attachments = new List<MessageAttachmentOptions>
+                                {
+                                    new MessageAttachmentOptions
+                                    {
+                                        Name = documentName,
+                                        ContentBytes = Convert.ToBase64String(fileStream),
+                                        ContentType = mimeType
+                                    }
+                                }
+                            }
+                        });
+                }
+            }
+            finally 
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task SendMailExceptionTestAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                MailOptions mailOptions = null;
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Me.SendMailAsync(mailOptions);
+                });
+
+                mailOptions = new MailOptions
+                {
+                    Message = null
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Me.SendMailAsync(mailOptions);
+                });
+
+                mailOptions.Message = new MessageOptions();
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Me.SendMailAsync(mailOptions);
+                });
+
+                mailOptions.Message.Body = "This is a mail body";
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Me.SendMailAsync(mailOptions);
+                });
+            }
+        }
+
+        #endregion
     }
 
 

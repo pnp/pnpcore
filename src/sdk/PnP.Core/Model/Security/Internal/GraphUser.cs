@@ -1,4 +1,6 @@
 ﻿using PnP.Core.Services;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -50,6 +52,22 @@ namespace PnP.Core.Model.Security
         public ISharePointUser AsSharePointUser()
         {
             return AsSharePointUserAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SendMailAsync(MailOptions mailOptions)
+        {
+            MailHandler.CheckErrors(mailOptions);
+
+            var body = MailHandler.GetMailBody(mailOptions);
+
+            var apiCall = new ApiCall($"users/{Id}/sendMail", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SendMail(MailOptions mailOptions)
+        {
+            SendMailAsync(mailOptions).GetAwaiter().GetResult();
         }
         #endregion
     }

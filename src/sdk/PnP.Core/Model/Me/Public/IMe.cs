@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Me
 {
@@ -10,6 +12,8 @@ namespace PnP.Core.Model.Me
     [ConcreteType(typeof(Me))]
     public interface IMe : IDataModel<IMe>, IDataModelGet<IMe>, IDataModelLoad<IMe>, IDataModelUpdate
     {
+        #region Properties
+
         /// <summary>
         /// The Unique ID of the User/Group
         /// </summary>
@@ -73,6 +77,22 @@ namespace PnP.Core.Model.Me
         /// </summary>
         public IChatCollection Chats { get; }
 
-        
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Sends an email under the current user context
+        /// </summary>
+        /// <returns></returns>
+        Task SendMailAsync(MailOptions mailOptions);
+
+        /// <summary>
+        /// Sends an email under the current user context
+        /// </summary>
+        void SendMail(MailOptions mailOptions);
+
+        #endregion
+
     }
 }

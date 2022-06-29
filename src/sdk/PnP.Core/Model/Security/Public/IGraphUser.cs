@@ -34,5 +34,16 @@ namespace PnP.Core.Model.Security
         /// </summary>
         /// <returns></returns>
         public ISharePointUser AsSharePointUser();
+
+        /// <summary>
+        /// Sends an email under a specific user context
+        /// </summary>
+        /// <returns></returns>
+        Task SendMailAsync(MailOptions mailOptions);
+
+        /// <summary>
+        /// Sends an email under a specific user context
+        /// </summary>
+        void SendMail(MailOptions mailOptions);
     }
 }
