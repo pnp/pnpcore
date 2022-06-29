@@ -1,6 +1,8 @@
-﻿using PnP.Core.Model.SharePoint;
+﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -102,6 +104,60 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var response = await (pnpContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
                 return GetModelListFromJson<IAppCatalogSite>(response.Json);
             }).ConfigureAwait(false);
+        }
+
+        public void EnsureSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            EnsureSiteCollectionAppCatalogAsync(siteCollectionAbsoluteUri, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task EnsureSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var existingSiteCollectionAppCatalogs = await GetSiteCollectionAppCatalogsAsync().ConfigureAwait(false);
+            if(existingSiteCollectionAppCatalogs.FirstOrDefault(p=>p.AbsoluteUrl.Equals(siteCollectionAbsoluteUri.ToString(), StringComparison.InvariantCultureIgnoreCase)) == null)
+            {
+                // no site collection app catalog yet, so create one
+                await AddSiteCollectionAppCatalogAsync(siteCollectionAbsoluteUri, vanityUrlOptions).ConfigureAwait(false);
+            }
+        }
+
+        public void RemoveSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            RemoveSiteCollectionAppCatalogAsync(siteCollectionAbsoluteUri, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            if (siteCollectionAbsoluteUri == null)
+            {
+                throw new ArgumentNullException(nameof(siteCollectionAbsoluteUri));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new RemoveSiteCollectionAppCatalogRequest(siteCollectionAbsoluteUri) });
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+        }
+
+        public void AddSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            AddSiteCollectionAppCatalogAsync(siteCollectionAbsoluteUri, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task AddSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null)
+        {
+            if (siteCollectionAbsoluteUri == null)
+            {
+                throw new ArgumentNullException(nameof(siteCollectionAbsoluteUri));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new AddSiteCollectionAppCatalogRequest(siteCollectionAbsoluteUri) });
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+
+                await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
         }
 
         public IList<ITenantApp> GetStoreApps()

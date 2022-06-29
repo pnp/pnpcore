@@ -700,6 +700,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Using the UpdateAndPushChangesBatch methods on ContentTypeHub fields is not supported. If you happen to need push updated fields to lists inside the content type hub then directly connect to the content type hub.
+        /// </summary>
+        internal static string Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch could not be added to list of batches.
         /// </summary>
         internal static string Exception_Unsupported_CannotAddBatch {

@@ -193,7 +193,7 @@ namespace PnP.Core.Model.SharePoint
             var index2 = apiCallRequest.ApiCall.Request.IndexOf("/terms/");
 
             string request = null;
-            if (index1 > 0 && index2 > 0 && index2 > index1)
+            if (index1 > 0 && index2 > 0 && index2 > index1 && Set.IsPropertyAvailable(p => p.Id))
             {
                 request = $"{apiCallRequest.ApiCall.Request.Substring(0, index1 + 16)}{Set.Id}{apiCallRequest.ApiCall.Request.Substring(index2)}";
             }

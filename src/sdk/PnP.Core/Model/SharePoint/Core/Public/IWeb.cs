@@ -1243,6 +1243,109 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Recycle bin
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options);
+        #endregion
+
+        #region Get Search Configuration
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetSearchConfigurationXmlAsync();
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        string GetSearchConfigurationXml();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetSearchConfigurationManagedProperties();
+
+        /// <summary>
+        /// Sets the search configuration for the web
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        Task SetSearchConfigurationXmlAsync(string configuration);
+
+        /// <summary>
+        /// Sets the search configuration for the web
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        void SetSearchConfigurationXml(string configuration);
+        #endregion
+
+        #region Get WSS Id for term
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        Task<int> GetWssIdForTermAsync(string termId);
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        int GetWssIdForTerm(string termId);
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
@@ -1343,16 +1446,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IWebInformationCollection WebInfos { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowAssociationCollection WorkflowAssociations { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowTemplateCollection WorkflowTemplates { get; }
 
         #endregion
     }

@@ -198,5 +198,31 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(folder.Requested);
             }
         }
+
+        [TestMethod]
+        public async Task GetFilesFolderWebUrlChannelLoad()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var batch = context.NewBatch();
+                foreach(var channel in team.Channels.AsRequested())
+                {
+                    await channel.LoadBatchAsync(batch, p => p.FilesFolderWebUrl);
+                }
+                var errors = await context.ExecuteAsync(batch, false);
+
+                foreach(var channel in team.Channels.AsRequested())
+                {
+                    if (channel.IsPropertyAvailable(p=>p.FilesFolderWebUrl))
+                    {
+                        Assert.IsTrue(!string.IsNullOrEmpty(channel.FilesFolderWebUrl.ToString()));
+                    }
+                }
+
+            }
+        }
     }
 }

@@ -145,6 +145,231 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTermSetsFromTermStoreWithoutKnowingTheGroup()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                if (group != null)
+                {
+                    // Add some term sets in batch
+                    var pnpSet1 = await group.Sets.AddBatchAsync("PnPSet1", "Set description");
+                    await context.ExecuteAsync();
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var pnpSet1Direct = context2.TermStore.GetTermSetById(pnpSet1.Id, p => p.Description, p => p.Group);
+
+                        Assert.IsTrue(pnpSet1Direct != null);
+                        Assert.IsTrue(pnpSet1Direct.Id == pnpSet1.Id);
+                        Assert.IsTrue(pnpSet1Direct.IsPropertyAvailable(p => p.Description));
+
+                        await context2.TermStore.LoadAsync(p => p.Groups);
+                        var group2 = context2.TermStore.Groups.AsRequested().FirstOrDefault(p => p.Name == newGroupName);
+
+                        await group2.LoadAsync(p => p.Sets);
+
+                        Assert.IsTrue(group2.Sets.Requested);
+                        Assert.IsTrue(group2.Sets.Length == 1);
+
+                        // Delete termsets and term group in batch
+                        foreach (var set in group2.Sets.AsRequested())
+                        {
+                            await set.DeleteBatchAsync();
+                        }
+                        await context2.ExecuteAsync();
+
+                        // Note: deleting termsets and group together in a single batch is not guaranteed to work as 
+                        // the order in which graph batch requests are executed in not guaranteed
+                        await group2.DeleteBatchAsync();
+                        await context2.ExecuteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermSetsFromTermStoreWithoutKnowingTheGroupBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                if (group != null)
+                {
+                    // Add some term sets in batch
+                    var pnpSet1 = await group.Sets.AddBatchAsync("PnPSet1", "Set description");
+                    await context.ExecuteAsync();
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var pnpSet1Direct = context2.TermStore.GetTermSetByIdBatch(pnpSet1.Id, p => p.Description, p => p.Group);
+
+                        context2.Execute();
+
+                        Assert.IsTrue(pnpSet1Direct != null);
+                        Assert.IsTrue(pnpSet1Direct.Id == pnpSet1.Id);
+                        Assert.IsTrue(pnpSet1Direct.IsPropertyAvailable(p => p.Description));
+
+                        await context2.TermStore.LoadAsync(p => p.Groups);
+                        var group2 = context2.TermStore.Groups.AsRequested().FirstOrDefault(p => p.Name == newGroupName);
+
+                        await group2.LoadAsync(p => p.Sets);
+
+                        Assert.IsTrue(group2.Sets.Requested);
+                        Assert.IsTrue(group2.Sets.Length == 1);
+
+                        // Delete termsets and term group in batch
+                        foreach (var set in group2.Sets.AsRequested())
+                        {
+                            await set.DeleteBatchAsync();
+                        }
+                        await context2.ExecuteAsync();
+
+                        // Note: deleting termsets and group together in a single batch is not guaranteed to work as 
+                        // the order in which graph batch requests are executed in not guaranteed
+                        await group2.DeleteBatchAsync();
+                        await context2.ExecuteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermFromTermStoreWithoutKnowingTheGroup()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                if (group != null)
+                {
+                    // Add some term sets in batch
+                    var pnpSet1 = await group.Sets.AddBatchAsync("PnPSet1", "Set description");
+                    await context.ExecuteAsync();
+
+                    // Add some terms
+                    var term1 = await pnpSet1.Terms.AddBatchAsync("One");
+                    var term2 = await pnpSet1.Terms.AddBatchAsync("Two");
+                    await context.ExecuteAsync();
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        try
+                        {
+                            var pnpTerm1Direct = context2.TermStore.GetTermById(pnpSet1.Id, term1.Id, p => p.Descriptions, p => p.Set);
+
+                            Assert.IsTrue(pnpTerm1Direct != null);
+                            Assert.IsTrue(pnpTerm1Direct.Id == term1.Id);
+                            Assert.IsTrue(pnpTerm1Direct.IsPropertyAvailable(p => p.Set));
+                        }
+                        finally
+                        {
+                            await context2.TermStore.LoadAsync(p => p.Groups);
+                            var group2 = context2.TermStore.Groups.AsRequested().FirstOrDefault(p => p.Name == newGroupName);
+
+                            await group2.LoadAsync(p => p.Sets);
+
+                            Assert.IsTrue(group2.Sets.Requested);
+                            Assert.IsTrue(group2.Sets.Length == 1);
+
+                            // Delete termsets and term group in batch
+                            foreach (var set in group2.Sets.AsRequested())
+                            {
+                                await set.DeleteBatchAsync();
+                            }
+                            await context2.ExecuteAsync();
+
+                            // Note: deleting termsets and group together in a single batch is not guaranteed to work as 
+                            // the order in which graph batch requests are executed in not guaranteed
+                            await group2.DeleteBatchAsync();
+                            await context2.ExecuteAsync();
+                        }
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermFromTermStoreWithoutKnowingTheGroupBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                if (group != null)
+                {
+                    // Add some term sets in batch
+                    var pnpSet1 = await group.Sets.AddBatchAsync("PnPSet1", "Set description");
+                    await context.ExecuteAsync();
+
+                    // Add some terms
+                    var term1 = await pnpSet1.Terms.AddBatchAsync("One");
+                    var term2 = await pnpSet1.Terms.AddBatchAsync("Two");
+                    await context.ExecuteAsync();
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        try
+                        {
+                            var pnpTerm1Direct = context2.TermStore.GetTermByIdBatch(pnpSet1.Id, term1.Id, p => p.Descriptions, p => p.Set);
+                            var pnpTerm2Direct = context2.TermStore.GetTermByIdBatch(pnpSet1.Id, term2.Id, p => p.Descriptions, p => p.Set);
+
+                            context2.Execute();
+
+                            Assert.IsTrue(pnpTerm1Direct != null);
+                            Assert.IsTrue(pnpTerm1Direct.Id == term1.Id);
+                            Assert.IsTrue(pnpTerm1Direct.IsPropertyAvailable(p => p.Set));
+
+                            Assert.IsTrue(pnpTerm2Direct != null);
+                            Assert.IsTrue(pnpTerm2Direct.Id == term2.Id);
+                            Assert.IsTrue(pnpTerm2Direct.IsPropertyAvailable(p => p.Set));
+                        }
+                        finally
+                        {
+                            await context2.TermStore.LoadAsync(p => p.Groups);
+                            var group2 = context2.TermStore.Groups.AsRequested().FirstOrDefault(p => p.Name == newGroupName);
+
+                            await group2.LoadAsync(p => p.Sets);
+
+                            Assert.IsTrue(group2.Sets.Requested);
+                            Assert.IsTrue(group2.Sets.Length == 1);
+
+                            // Delete termsets and term group in batch
+                            foreach (var set in group2.Sets.AsRequested())
+                            {
+                                await set.DeleteBatchAsync();
+                            }
+                            await context2.ExecuteAsync();
+
+                            // Note: deleting termsets and group together in a single batch is not guaranteed to work as 
+                            // the order in which graph batch requests are executed in not guaranteed
+                            await group2.DeleteBatchAsync();
+                            await context2.ExecuteAsync();
+                        }
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task AddTermGroups()
         {
             //TestCommon.Instance.Mocking = false;            

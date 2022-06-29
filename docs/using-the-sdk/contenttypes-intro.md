@@ -164,6 +164,9 @@ fieldLink.ReadOnly = true;
 await fieldLink.UpdateAsync();
 ```
 
+> [!Note]
+> When you update a site content type field the changes are automatically pushed down the content types inheriting from the current content type.
+
 ### Updating a list content type field
 
 To update the settings of a field added to a content type one can update its field link:

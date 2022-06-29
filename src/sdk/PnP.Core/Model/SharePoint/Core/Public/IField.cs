@@ -1,6 +1,8 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -538,5 +540,42 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <returns></returns>
+        Task UpdateAndPushChangesAsync();
+
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <returns></returns>
+        void UpdateAndPushChanges();
+
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <returns></returns>
+        Task UpdateAndPushChangesBatchAsync();
+
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <returns></returns>
+        void UpdateAndPushChangesBatch();
+
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns></returns>
+        Task UpdateAndPushChangesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Updates the field and pushes changes down to lists consuming this field
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns></returns>
+        void UpdateAndPushChangesBatch(Batch batch);
     }
 }

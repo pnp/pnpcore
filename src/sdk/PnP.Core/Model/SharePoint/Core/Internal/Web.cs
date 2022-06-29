@@ -1,6 +1,8 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -327,6 +329,8 @@ namespace PnP.Core.Model.SharePoint
 
         [SharePointProperty("*")]
         public object All { get => null; }
+
+        internal IList TaxonomyHiddenList { get; set; }
         #endregion
 
         #region Extension methods        
@@ -1765,6 +1769,164 @@ namespace PnP.Core.Model.SharePoint
         {
             return UnfurlLinkAsync(link, unfurlOptions).GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Recycle bin
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options)
+        {
+            return await GetRecycleBinItemsByQueryBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildRecyleBinQueryApiCall(RecycleBinQueryOptions options)
+        {
+            var baseUrl = $"_api/Web/GetRecycleBinItemsByQueryInfo";
+
+            string queryString = $"?rowLimit=%27{options.RowLimit}%27&isAscending={options.IsAscending.ToString().ToLowerInvariant()}&itemState={(int)options.ItemState}&orderBy={(int)options.OrderBy}&showOnlyMyItems={options.ShowOnlyMyItems.ToString().ToLowerInvariant()}";
+            if (!string.IsNullOrEmpty(options.PagingInfo))
+            {
+                queryString += $"&pagingInfo={options.PagingInfo}";
+            }
+
+            return new ApiCall($"{baseUrl}{queryString}", ApiType.SPORest, receivingProperty: nameof(RecycleBin));
+        }
+        #endregion
+
+        #region Get Search Configuration
+
+        public async Task<string> GetSearchConfigurationXmlAsync()
+        {
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPWeb) });
+
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return result.ApiCall.CSOMRequests[0].Result.ToString();
+        }
+
+        public string GetSearchConfigurationXml()
+        {
+            return GetSearchConfigurationXmlAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync()
+        {
+            var searchConfiguration = await GetSearchConfigurationXmlAsync().ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetSearchConfigurationManagedProperties()
+        {
+            return GetSearchConfigurationManagedPropertiesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SetSearchConfigurationXmlAsync(string configuration)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPWeb, configuration) });
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetSearchConfigurationXml(string configuration)
+        {
+            SetSearchConfigurationXmlAsync(configuration).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Get WSS Id for term
+        
+        public async Task<int> GetWssIdForTermAsync(string termId)
+        {
+            if (TaxonomyHiddenList == null)
+            {
+                await PnPContext.Site.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+                TaxonomyHiddenList = await PnPContext.Site.RootWeb.Lists.GetByServerRelativeUrlAsync($"{PnPContext.Site.ServerRelativeUrl}/Lists/TaxonomyHiddenList").ConfigureAwait(false);
+            }
+
+            var camlQuery = new CamlQueryOptions()
+            {
+                ViewXml = $@"<View><Query><Where><Eq><FieldRef Name='IdForTerm' /><Value Type='Text'>{termId}</Value></Eq></Where></Query></View>",
+                DatesInUtc = true,
+            };
+
+            await TaxonomyHiddenList.LoadItemsByCamlQueryAsync(camlQuery).ConfigureAwait(false);
+            var items = TaxonomyHiddenList.Items.AsRequested();
+
+            if (items.Any())
+            {
+                return items.First().Id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int GetWssIdForTerm(string termId)
+        {
+            return GetWssIdForTermAsync(termId).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #endregion

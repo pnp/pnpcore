@@ -61,6 +61,48 @@ namespace PnP.Core.Admin.Model.SharePoint
         Task<IList<IAppCatalogSite>> GetSiteCollectionAppCatalogsAsync();
 
         /// <summary>
+        /// Add a site collection app catalogs to the site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to add the app catalog to</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        Task AddSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Add a site collection app catalogs to the site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to add the app catalog to</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        void AddSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Removes a site collection app catalog from a site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to remove the app catalog for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        Task RemoveSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Removes a site collection app catalog from a site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to remove the app catalog for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        void RemoveSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Ensures a site collection app catalogs exists for provided site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to ensure the app catalog exists for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        Task EnsureSiteCollectionAppCatalogAsync(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Ensures a site collection app catalogs exists for provided site collection.
+        /// </summary>
+        /// <param name="siteCollectionAbsoluteUri">Fully qualified url of the site collection to ensure the app catalog exists for</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        void EnsureSiteCollectionAppCatalog(Uri siteCollectionAbsoluteUri, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
         /// A list of apps, added to the tenant from the SharePoint Store.
         /// </summary>
         /// <returns>A list of <see cref="ITenantApp"/></returns>

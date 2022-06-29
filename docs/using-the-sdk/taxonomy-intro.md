@@ -84,7 +84,7 @@ await myNewGroup.DeleteAsync();
 
 ## Working with term sets
 
-Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you always have to go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:
+Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you typically go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:
 
 ```csharp
 // Get the term group hosting the needed term set 
@@ -102,6 +102,12 @@ var termSet = await myTermGroup.Sets.Where(p => p.Id == "2374aacb-8c25-4991-aa94
 
 // Get a term set by id, identical to above LINQ approach
 var termSet = await myTermGroup.Sets.GetByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d");
+```
+
+When you know the term set id you an directly get the term set via the `GetTermSetById` methods on the `ITermStore`:
+
+```csharp
+var termSet = await context.TermStore.GetTermSetByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d", p => p.Description, p => p.Group);
 ```
 
 Adding a term set to a term group is done using the `Add` methods on the `ITermSetCollection`:
@@ -155,6 +161,12 @@ var term = await termSet.Terms.GetByIdAsync("6b39335d-1975-4fd7-9696-b40d57c9bde
 
 // Get a term by id from another term
 var childTerm = await term.Terms.GetByIdAsync("2dd726ce-1f14-4113-be57-5e0bc2d28914");
+```
+
+When you know the term set id and term id you an directly get the term via the `GetTermById` methods on the `ITermStore`:
+
+```csharp
+var term = await context.TermStore.GetTermByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d", "6b39335d-1975-4fd7-9696-b40d57c9bde7", p => p.Descriptions, p => p.Set);
 ```
 
 Adding a term to a term set or another term is done using the `Add` methods on the `ITermCollection`:

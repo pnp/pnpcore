@@ -84,7 +84,6 @@ namespace PnP.Core.Model.Teams
 
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 
-        [GraphProperty("isFavoriteByDefault", Beta = true)]
         public bool IsFavoriteByDefault { get => GetValue<bool>(); set => SetValue(value); }
 
         public string Email { get => GetValue<string>(); set => SetValue(value); }
@@ -92,6 +91,9 @@ namespace PnP.Core.Model.Teams
         public TeamChannelMembershipType MembershipType { get => GetValue<TeamChannelMembershipType>(); set => SetValue(value); }
 
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
+
+        [GraphProperty("filesFolderWebUrl", Beta = true)]
+        public Uri FilesFolderWebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
         [GraphProperty("tabs", Get = "teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp")]
         public ITeamChannelTabCollection Tabs { get => GetModelCollectionValue<ITeamChannelTabCollection>(); }
