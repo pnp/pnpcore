@@ -56,6 +56,11 @@ namespace PnP.Core.Model.Security
 
         public async Task SendMailAsync(MailOptions mailOptions)
         {
+            if (!await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+            {
+                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+            }
+
             MailHandler.CheckErrors(mailOptions);
 
             var body = MailHandler.GetMailBody(mailOptions);

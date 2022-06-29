@@ -619,6 +619,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sending a mail through the &apos;GraphUser&apos; interface is only valid with the application permission authentication flow.
+        /// </summary>
+        internal static string Exception_SendMailDelegated {
+            get {
+                return ResourceManager.GetString("Exception_SendMailDelegated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending a mail through &apos;Me&apos; is only valid with delegated authentication flow.
+        /// </summary>
+        internal static string Exception_SendMailMe {
+            get {
+                return ResourceManager.GetString("Exception_SendMailMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests inside a batch reached their max retry count of {0}.
         /// </summary>
         internal static string Exception_ServiceException_BatchMaxRetries {

@@ -17,7 +17,7 @@ namespace PnP.Core.Test.Security
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -247,6 +247,23 @@ namespace PnP.Core.Test.Security
                 await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
                 {
                     await graphUser.SendMailAsync(mailOptions);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task SendMailDelegatedExceptionTestAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                var graphUser = await testUser.AsGraphUserAsync();
+
+                await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
+                {
+                    await graphUser.SendMailAsync(null);
                 });
             }
         }
