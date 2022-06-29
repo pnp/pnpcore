@@ -229,6 +229,41 @@ namespace PnP.Core.Model.Security
             }
             return result;
         }
+        
+        public async Task SetUserAsOwnerAsync(int userId)
+        {
+            await RawRequestAsync(GetSetUserAsOwnerApiCall(userId), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetUserAsOwner(int userId)
+        {
+            SetUserAsOwnerAsync(userId).GetAwaiter().GetResult();
+        }
+
+        public void SetUserAsOwnerBatch(int userId)
+        {
+            SetUserAsOwnerBatchAsync(PnPContext.CurrentBatch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetUserAsOwnerBatchAsync(int userId)
+        {
+            await SetUserAsOwnerBatchAsync(PnPContext.CurrentBatch, userId).ConfigureAwait(false);
+        }
+
+        public void SetUserAsOwnerBatch(Batch batch, int userId)
+        {
+            SetUserAsOwnerBatchAsync(batch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetUserAsOwnerBatchAsync(Batch batch, int userId)
+        {
+            await RawRequestBatchAsync(batch, GetSetUserAsOwnerApiCall(userId), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall GetSetUserAsOwnerApiCall(int userId)
+        {
+            return new ApiCall($"_api/web/sitegroups({Id})/setuserasowner({userId})", ApiType.SPORest);
+        }
 
         #endregion
     }

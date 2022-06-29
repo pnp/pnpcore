@@ -170,5 +170,43 @@ namespace PnP.Core.Model.Security
         /// <param name="names"></param>
         /// <returns></returns>
         public Task<bool> RemoveRoleDefinitionsAsync(params string[] names);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwner(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerAsync(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwnerBatch(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerBatchAsync(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="batch">Batch on which to execute the request</param>
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwnerBatch(Batch batch, int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="batch">Batch on which to execute the request</param>
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerBatchAsync(Batch batch, int userId);
     }
 }
