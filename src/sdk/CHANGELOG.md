@@ -43,6 +43,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Taxonomy: added GetWssIdForTerm methods on `IWeb` #892 [jansenbe - Bert Jansen]
 - Added `FilesFolderWebUrl` graph beta property for `ITeamChannel` #902 [jansenbe - Bert Jansen]
 - Added `SendMail` methods for `IGraphUser` and `IMe` #905 [MathijsVerbeeck - Mathijs Verbeeck]
+- Added `SetUserAsOwner` to `ISharePointGroup` #907 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

@@ -27,7 +27,7 @@ namespace PnP.Core.Test.Misc
         }
 
         [TestMethod()]
-        [DataRow("image.exe")]
+        [DataRow("image.abc")]
         public void GetMimeMapNoMatch(string fileName)
         {
             MimeTypeMap.TryGetMimeType(fileName, out string mimeMap);

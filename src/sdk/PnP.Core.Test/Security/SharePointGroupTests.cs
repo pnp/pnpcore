@@ -426,7 +426,7 @@ namespace PnP.Core.Test.Security
                 try
                 {
                     siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync();
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
 
                     await siteGroup.SetUserAsOwnerAsync(siteUser.Id);
 
@@ -457,7 +457,7 @@ namespace PnP.Core.Test.Security
                 try
                 {
                     siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync();
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
 
                     await siteGroup.SetUserAsOwnerBatchAsync(siteUser.Id);
                     await context.ExecuteAsync();
