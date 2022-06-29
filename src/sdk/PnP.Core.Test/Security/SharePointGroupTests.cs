@@ -412,6 +412,70 @@ namespace PnP.Core.Test.Security
                     }
                 }
             }
-        }        
+        }
+
+        [TestMethod]
+        public async Task SetSharePointGroupOwner()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroup");
+                ISharePointGroup siteGroup = null;
+
+                try
+                {
+                    siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync();
+
+                    await siteGroup.SetUserAsOwnerAsync(siteUser.Id);
+
+                    await siteGroup.LoadAsync(y => y.OwnerTitle);
+
+                    Assert.AreEqual(siteGroup.OwnerTitle, siteUser.Title);
+
+                }
+                finally
+                {
+                    if (siteGroup != null)
+                    {
+                        await siteGroup.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSharePointGroupOwnerBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroup");
+                ISharePointGroup siteGroup = null;
+
+                try
+                {
+                    siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync();
+
+                    await siteGroup.SetUserAsOwnerBatchAsync(siteUser.Id);
+                    await context.ExecuteAsync();
+
+
+                    await siteGroup.LoadAsync(y => y.OwnerTitle);
+
+                    Assert.AreEqual(siteGroup.OwnerTitle, siteUser.Title);
+
+                }
+                finally
+                {
+                    if (siteGroup != null)
+                    {
+                        await siteGroup.DeleteAsync();
+                    }
+                }
+            }
+        }
     }
 }
