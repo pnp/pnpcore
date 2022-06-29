@@ -104,6 +104,8 @@ namespace PnP.Core.Test.Security
 
         #region Mails
 
+        // Requires Mail.Send and Mail.ReadWrite delegated permission
+
         [TestMethod]
         public async Task SendMailAsyncTest()
         {
@@ -242,7 +244,7 @@ namespace PnP.Core.Test.Security
 
                 mailOptions.Message.Body = "This is a mail body";
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
                 {
                     await graphUser.SendMailAsync(mailOptions);
                 });

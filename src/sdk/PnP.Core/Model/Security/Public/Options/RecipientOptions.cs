@@ -6,7 +6,7 @@
     public class RecipientOptions
     {
         /// <summary>
-        /// Mailaddress of the recipient
+        /// Mail address of the recipient
         /// </summary>
         public string EmailAddress { get; set; }
     }

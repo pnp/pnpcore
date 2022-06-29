@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Text;
 
 namespace PnP.Core.Model.Security
 {
-    internal class MailHandler
+    internal static class MailHandler
     {
         internal static void CheckErrors(MailOptions options)
         {
             if (options == null)
             {
-                throw new ArgumentNullException("Options are required");
+                throw new ArgumentNullException(nameof(options));
             }
 
             if (options.Message == null)
             {
-                throw new ArgumentNullException("Message property is required");
+                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.Message)}");
             }
 
             if (string.IsNullOrEmpty(options.Message.Body))
             {
-                throw new ArgumentNullException("Empty mail body cannot be sent");
+                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.Message)}.{nameof(options.Message.Body)}");
             }
 
             if (options.Message.ToRecipients == null || options.Message.ToRecipients.Count == 0)
             {
-                throw new ArgumentNullException("We need atleast one recipient");
+                throw new ArgumentException(PnPCoreResources.Exception_MailHandler_NoRecipient);
             }
         }
 

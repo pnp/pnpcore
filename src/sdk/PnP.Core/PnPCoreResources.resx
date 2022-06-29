@@ -477,4 +477,7 @@
   <data name="Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub" xml:space="preserve">
     <value>Using the UpdateAndPushChangesBatch methods on ContentTypeHub fields is not supported. If you happen to need push updated fields to lists inside the content type hub then directly connect to the content type hub</value>
   </data>
+  <data name="Exception_MailHandler_NoRecipient" xml:space="preserve">
+    <value>At least one recipient is needed before a mail can be send</value>
+  </data>
 </root>

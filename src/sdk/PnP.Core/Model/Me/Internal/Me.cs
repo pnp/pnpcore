@@ -47,7 +47,7 @@ namespace PnP.Core.Model.Me
 
         #endregion
 
-        #region
+        #region Mail
 
         public async Task SendMailAsync(MailOptions mailOptions)
         {

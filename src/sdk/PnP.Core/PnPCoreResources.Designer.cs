@@ -376,6 +376,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to At least one recipient is needed before a mail can be send.
+        /// </summary>
+        internal static string Exception_MailHandler_NoRecipient {
+            get {
+                return ResourceManager.GetString("Exception_MailHandler_NoRecipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall.
         /// </summary>
         internal static string Exception_MissingAddApiHandler {

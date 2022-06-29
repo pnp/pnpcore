@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PnP.Core.Model.Security
+﻿namespace PnP.Core.Model.Security
 {
 
     /// <summary>

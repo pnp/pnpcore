@@ -9,10 +9,12 @@
         /// Low importance
         /// </summary>
         Low,
+
         /// <summary>
         /// Normal importance
         /// </summary>
         Normal,
+
         /// <summary>
         /// High importance
         /// </summary>
