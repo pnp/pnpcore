@@ -2034,7 +2034,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Me.IMe.html",
-          "hash": "CKsgkzMr+ww8xZQAkM31a19rL46Jp24lZqlNL/S1s5Q="
+          "hash": "YbJTVaOjDG+OP6LiMdlqfkAqs3vXrz1upEycaR8b3UE="
         }
       },
       "is_incremental": false,
@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IGraphUser.html",
-          "hash": "4maMt335gqQY/oiXy8ZqmNTFPrmczYOeWBJbDS44xic="
+          "hash": "wVXD8fetm8JLi/uprhE3+d3uLnSme+QhIIDT6NEN18E="
         }
       },
       "is_incremental": false,
@@ -2390,6 +2390,66 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.MailOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.MailOptions.html",
+          "hash": "UT9S+WZtkZHX8eSQoCMyiYMfQ0uVZg/4PKcRX8FJcXg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.MessageAttachmentOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.MessageAttachmentOptions.html",
+          "hash": "CTs6ChkB0ZxiekydGW162gRahqY/i73lEu9OXYpKwFE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.MessageBodyContentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.MessageBodyContentType.html",
+          "hash": "Iqr7QqaBP/1Ed4/ob67zg3Cgmm+xIm4sT8TJxvxgptc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.MessageImportance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.MessageImportance.html",
+          "hash": "oHK/QdzG73FSz3zimaB+mqvrM4I9t13/lMEx30bmyu4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.MessageOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.MessageOptions.html",
+          "hash": "erBwMhvQchHiOG/+OBIrw/3tHBQROadP9joJAlTuLdo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.OrganizationalLinkOptions.yml",
       "output": {
         ".html": {
@@ -2419,6 +2479,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.PrincipalType.html",
           "hash": "4dZE0NKLUkquLk7bk2WUW+mvYuUEM69rpvvlXh9Q4ww="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.RecipientOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.RecipientOptions.html",
+          "hash": "oicbU/X6AGLAm5waKt1r7MiicheLu7lRsSOh43CEIWg="
         }
       },
       "is_incremental": false,
@@ -2466,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.html",
-          "hash": "DHRkl5SCxAIawzibjxe32dkyn3YKXI0ZZxAaljPaoec="
+          "hash": "VPiNoCM6PmvmZbkeUvUD7ggrkYKZc2Yt5yjMLOU+aAA="
         }
       },
       "is_incremental": false,
@@ -7974,7 +8046,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "tfutLc69jhAioYTWloAmXjVtx1OU3g39XuNjQmNTRZM="
+          "hash": "vu8JV93eWF77eT0HhvY01Fn37au4mVbHNrn2OH9cZX4="
         }
       },
       "is_incremental": false,
@@ -9844,7 +9916,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 662,
+          "total_file_count": 668,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
