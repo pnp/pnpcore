@@ -183,6 +183,17 @@ await addedGroup.Users.AsRequested().FirstOrDefault(p =&gt; p.LoginName == curre
 // Remove the user: Option B
 await addedGroup.RemoveUserAsync(currentUser.Id);
 </code></pre>
+<h3 id="setting-the-owner-of-a-group">Setting the owner of a group</h3>
+<p>If you provision groups you might want to set a user as owner of the group. For that you can use one of the `` methods:</p>
+<pre><code class="lang-csharp">// First get the group to set the owner for
+var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+
+// Get a user to set as owner, here we just take the first user defined in the site
+var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p =&gt; p.PrincipalType == PrincipalType.User);
+
+// Set the group owner
+await siteGroup.SetUserAsOwnerAsync(siteUser.Id);
+</code></pre>
 <h2 id="microsoft-365-groups">Microsoft 365 groups</h2>
 <div class="NOTE">
 <h5>Note</h5>
