@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// Options that can be set when inviting users to an item
     /// </summary>
-    public class InviteOptions
+    public class InviteOptions : InviteOptionsBase
     {
         /// <summary>
         /// Specifies where the recipient of the invitation is required to sign-in to view the shared item

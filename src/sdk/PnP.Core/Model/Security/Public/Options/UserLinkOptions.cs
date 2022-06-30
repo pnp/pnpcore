@@ -5,7 +5,7 @@ namespace PnP.Core.Model.Security
     /// <summary>
     /// Properties that can be set when creating a new User Link
     /// </summary>
-    public class UserLinkOptions
+    public class UserLinkOptions : InviteOptionsBase
     {
         /// <summary>
         /// The type of sharing link to create.

@@ -67,6 +67,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Ensure labels can be retrieved using application permissions #882 [jansenbe - Bert Jansen]
 - Don't retry when a `SocketException` occurs due to an unknown host [jansenbe - Bert Jansen]
 - Removed beta label from `ITeamChannel` property `IsFavoriteByDefault` and updated beta test to use the `FilesFolderWebUrl` property [jansenbe - Bert Jansen]
+- Added `CreateDriveRecipient` on sharing options classes to allow the creation of an `IDriveRecipient` #909 [jansenbe - Bert Jansen]
 
 ## [1.6.0]
 

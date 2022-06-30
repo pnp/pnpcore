@@ -287,10 +287,7 @@ namespace PnP.Core.Test.Security
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
-                    new DriveRecipient
-                    {
-                        Email = testUser.Mail
-                    }
+                    UserLinkOptions.CreateDriveRecipient(testUser.Mail)
                 };
 
                 var shareLinkRequestOptions = new UserLinkOptions()
@@ -333,10 +330,7 @@ namespace PnP.Core.Test.Security
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
-                    new DriveRecipient
-                    {
-                        Email = testUser.Mail
-                    }
+                    UserLinkOptions.CreateDriveRecipient(testUser.Mail)                    
                 };
 
                 var shareRequestOptions = new InviteOptions()
@@ -699,10 +693,7 @@ namespace PnP.Core.Test.Security
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
-                    new DriveRecipient
-                    {
-                        Email = testUser.Mail
-                    }
+                    UserLinkOptions.CreateDriveRecipient(testUser.Mail)
                 };
 
                 var shareLinkRequestOptions = new UserLinkOptions()
@@ -737,10 +728,7 @@ namespace PnP.Core.Test.Security
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
-                    new DriveRecipient
-                    {
-                        Email = testUser.Mail
-                    }
+                    UserLinkOptions.CreateDriveRecipient(testUser.Mail)
                 };
 
                 var shareRequestOptions = new InviteOptions()
@@ -977,10 +965,7 @@ namespace PnP.Core.Test.Security
 
                     var driveRecipients = new List<IDriveRecipient>()
                     {
-                        new DriveRecipient
-                        {
-                            Email = testUser.Mail
-                        }
+                        UserLinkOptions.CreateDriveRecipient(testUser.Mail)
                     };
 
                     var shareLinkRequestOptions = new UserLinkOptions()
