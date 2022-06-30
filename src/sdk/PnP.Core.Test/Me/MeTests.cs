@@ -81,7 +81,8 @@ namespace PnP.Core.Test.Me
                                 }
                             }
                         },
-                        SaveToSentItems = false
+                        SaveToSentItems = false,
+                        UsingApplicationPermissions = false
                     });
             }
         }
@@ -129,7 +130,8 @@ namespace PnP.Core.Test.Me
                                         ContentType = mimeType
                                     }
                                 }
-                            }
+                            },
+                            UsingApplicationPermissions= false
                         });
                 }
             }
@@ -156,7 +158,8 @@ namespace PnP.Core.Test.Me
 
                 mailOptions = new MailOptions
                 {
-                    Message = null
+                    Message = null,
+                    UsingApplicationPermissions = false
                 };
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
@@ -210,9 +213,15 @@ namespace PnP.Core.Test.Me
 
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
+                    MailOptions mailOptions = new()
+                    {
+                        Message = null,
+                        UsingApplicationPermissions = true
+                    };
+
                     await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
                     {
-                        await context.Me.SendMailAsync(null);
+                        await context.Me.SendMailAsync(mailOptions);
                     });
                 }
             }

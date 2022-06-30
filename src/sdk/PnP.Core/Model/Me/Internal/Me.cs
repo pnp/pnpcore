@@ -51,10 +51,30 @@ namespace PnP.Core.Model.Me
 
         public async Task SendMailAsync(MailOptions mailOptions)
         {
+#if DEBUG
+            if (mailOptions != null)
+            {
+                if (mailOptions.UsingApplicationPermissions.HasValue)
+                {
+                    if (mailOptions.UsingApplicationPermissions.Value)
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailMe);
+                    }
+                }
+                else
+                {
+                    if (await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailMe);
+                    }
+                }
+            }
+#else
             if (await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
             {
                 throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailMe);
             }
+#endif
 
             MailHandler.CheckErrors(mailOptions);
 
@@ -70,6 +90,6 @@ namespace PnP.Core.Model.Me
             SendMailAsync(mailOptions).GetAwaiter().GetResult();
         }
 
-        #endregion
+#endregion
     }
 }

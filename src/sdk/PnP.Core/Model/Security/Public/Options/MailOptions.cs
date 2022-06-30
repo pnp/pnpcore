@@ -14,5 +14,13 @@
         /// Indicates whether to save the message in Sent Items. Specify it only if the parameter is false; default is true. Optional.
         /// </summary>
         public bool SaveToSentItems { get; set; } = true;
+
+#if DEBUG
+        /// <summary>
+        /// The provisioning code will work differently if Application permissions are used. Defaults to live checking of the 
+        /// current access token if not set.
+        /// </summary>
+        internal bool? UsingApplicationPermissions { get; set; }
+#endif
     }
 }

@@ -151,7 +151,8 @@ namespace PnP.Core.Test.Security
                                 }
                                 },
                                 Importance = MessageImportance.High
-                            }
+                            },
+                            UsingApplicationPermissions = true
                         });
                 }
             }
@@ -210,7 +211,8 @@ namespace PnP.Core.Test.Security
                                         ContentType = mimeType
                                     }
                                     }
-                                }
+                                },
+                                UsingApplicationPermissions = true
                             });
                     }
                 }
@@ -248,7 +250,8 @@ namespace PnP.Core.Test.Security
 
                     mailOptions = new MailOptions
                     {
-                        Message = null
+                        Message = null,
+                        UsingApplicationPermissions = true
                     };
 
                     await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
@@ -289,9 +292,15 @@ namespace PnP.Core.Test.Security
                 var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await testUser.AsGraphUserAsync();
 
+                MailOptions mailOptions = new()
+                {
+                    Message = null,
+                    UsingApplicationPermissions = false
+                };
+
                 await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
                 {
-                    await graphUser.SendMailAsync(null);
+                    await graphUser.SendMailAsync(mailOptions);
                 });
             }
         }

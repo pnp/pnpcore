@@ -56,10 +56,30 @@ namespace PnP.Core.Model.Security
 
         public async Task SendMailAsync(MailOptions mailOptions)
         {
+#if DEBUG
+            if (mailOptions != null)
+            {
+                if (mailOptions.UsingApplicationPermissions.HasValue)
+                {
+                    if (!mailOptions.UsingApplicationPermissions.Value)
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+                    }
+                }
+                else
+                {
+                    if (!await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+                    }
+                }
+            }
+#else
             if (!await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
             {
                 throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
             }
+#endif
 
             MailHandler.CheckErrors(mailOptions);
 
