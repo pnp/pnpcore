@@ -6,7 +6,6 @@ using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Me
@@ -26,6 +25,8 @@ namespace PnP.Core.Test.Me
         public async Task GetMeTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var me = await context.Me.GetAsync();
@@ -43,6 +44,8 @@ namespace PnP.Core.Test.Me
         public async Task SendMailAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var toUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
@@ -87,6 +90,7 @@ namespace PnP.Core.Test.Me
         public async Task SendMailWithAttachmentsAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
 
             (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
@@ -139,6 +143,7 @@ namespace PnP.Core.Test.Me
         public async Task SendMailExceptionTestAsync()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -179,6 +184,8 @@ namespace PnP.Core.Test.Me
         public async Task SendMailApplicationPermissionsExceptionTestAsync()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 TestCommon.Instance.UseApplicationPermissions = true;
@@ -193,6 +200,27 @@ namespace PnP.Core.Test.Me
             }
         }
 
+        [TestMethod]
+        public async Task SendMailApplicationExceptionTestAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                TestCommon.Instance.UseApplicationPermissions = true;
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
+                    {
+                        await context.Me.SendMailAsync(null);
+                    });
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
         #endregion
     }
 
