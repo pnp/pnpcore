@@ -480,4 +480,10 @@
   <data name="Exception_MailHandler_NoRecipient" xml:space="preserve">
     <value>At least one recipient is needed before a mail can be send</value>
   </data>
+  <data name="Exception_SendMailDelegated" xml:space="preserve">
+    <value>Sending a mail through the 'GraphUser' interface is only valid with the application permission authentication flow</value>
+  </data>
+  <data name="Exception_SendMailMe" xml:space="preserve">
+    <value>Sending a mail through 'Me' is only valid with delegated authentication flow</value>
+  </data>
 </root>

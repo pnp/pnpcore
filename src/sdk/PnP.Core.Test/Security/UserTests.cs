@@ -251,6 +251,23 @@ namespace PnP.Core.Test.Security
             }
         }
 
+        [TestMethod]
+        public async Task SendMailDelegatedExceptionTestAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                var graphUser = await testUser.AsGraphUserAsync();
+
+                await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
+                {
+                    await graphUser.SendMailAsync(null);
+                });
+            }
+        }
+
         #endregion
     }
 }
