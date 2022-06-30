@@ -68,14 +68,8 @@ var file = await context.Web.GetFileByServerRelativeUrlAsync("/sites/demo/docs/f
 // List of users to share the file/folder with
 var driveRecipients = new List<IDriveRecipient>()
 {
-    new DriveRecipient
-    {
-        Email = "linda@contoso.onmicrosoft.com"
-    },
-    new DriveRecipient
-    {
-        Email = "joe@contoso.onmicrosoft.com"
-    }
+    UserLinkOptions.CreateDriveRecipient("linda@contoso.onmicrosoft.com"),
+    UserLinkOptions.CreateDriveRecipient("joe@contoso.onmicrosoft.com")    
 };
 
 var shareLinkRequestOptions = new UserLinkOptions()
@@ -107,17 +101,14 @@ var share = await file.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
 
 ## Share content via an invite
 
-While above share methods do directly share the content with the user(s), there's also an option to share via inviting users to a file or folder. This can be done using one of the `CreateSharingInvite` methods in combination with an `InviteOptions` instance. 
+While above share methods do directly share the content with the user(s), there's also an option to share via inviting users to a file or folder. This can be done using one of the `CreateSharingInvite` methods in combination with an `InviteOptions` instance.
 
 ```csharp
 var file = await context.Web.GetFileByServerRelativeUrlAsync("/sites/demo/docs/fileA.docx");
 
 var driveRecipients = new List<IDriveRecipient>()
 {
-    new DriveRecipient
-    {
-        Email = "linda@contoso.onmicrosoft.com"
-    }
+    InviteOptions.CreateDriveRecipient("linda@contoso.onmicrosoft.com")
 };
 
 var shareRequestOptions = new InviteOptions()
