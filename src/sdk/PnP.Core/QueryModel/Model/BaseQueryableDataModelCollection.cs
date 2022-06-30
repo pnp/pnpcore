@@ -83,7 +83,7 @@ namespace PnP.Core.QueryModel
 
         public IAsyncEnumerator<TModel> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (provider != null & Expression != null)
+            if (provider != null && Expression != null)
             {
                 return provider.ExecuteAsync<IAsyncEnumerable<TModel>>(Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
             }
