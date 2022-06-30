@@ -196,9 +196,15 @@ namespace PnP.Core.Test.Me
                 var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await testUser.AsGraphUserAsync();
 
+                MailOptions mailOptions = new()
+                {
+                    Message = null,
+                    UsingApplicationPermissions = false
+                };
+
                 await Assert.ThrowsExceptionAsync<MicrosoftGraphServiceException>(async () =>
                 {
-                    await graphUser.SendMailAsync(null);
+                    await graphUser.SendMailAsync(mailOptions);
                 });
             }
         }
