@@ -134,14 +134,8 @@ var share = await file.CreateOrganizationalSharingLinkAsync(shareLinkRequestOpti
 // List of users to share the file/folder with
 var driveRecipients = new List&lt;IDriveRecipient&gt;()
 {
-    new DriveRecipient
-    {
-        Email = &quot;linda@contoso.onmicrosoft.com&quot;
-    },
-    new DriveRecipient
-    {
-        Email = &quot;joe@contoso.onmicrosoft.com&quot;
-    }
+    UserLinkOptions.CreateDriveRecipient(&quot;linda@contoso.onmicrosoft.com&quot;),
+    UserLinkOptions.CreateDriveRecipient(&quot;joe@contoso.onmicrosoft.com&quot;)    
 };
 
 var shareLinkRequestOptions = new UserLinkOptions()
@@ -172,10 +166,7 @@ var share = await file.CreateAnonymousSharingLinkAsync(shareLinkRequestOptions);
 
 var driveRecipients = new List&lt;IDriveRecipient&gt;()
 {
-    new DriveRecipient
-    {
-        Email = &quot;linda@contoso.onmicrosoft.com&quot;
-    }
+    InviteOptions.CreateDriveRecipient(&quot;linda@contoso.onmicrosoft.com&quot;)
 };
 
 var shareRequestOptions = new InviteOptions()
