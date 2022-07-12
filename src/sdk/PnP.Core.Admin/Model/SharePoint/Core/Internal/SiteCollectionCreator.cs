@@ -256,7 +256,12 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 if (siteToCreate.Owners != null && siteToCreate.Owners.Length > 0)
                 {
-                    optionalParams.Add("Owners", siteToCreate.Owners);
+                    var ownersBody = new
+                    {
+                        __metadata = new { type = "Collection(Edm.String)" },
+                        results = siteToCreate.Owners
+                    }.AsExpando();
+                    optionalParams.Add("Owners", ownersBody);
                 }
                 if (siteToCreate.PreferredDataLocation.HasValue)
                 {
