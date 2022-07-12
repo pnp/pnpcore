@@ -169,6 +169,36 @@ When you know the term set id and term id you an directly get the term via the `
 var term = await context.TermStore.GetTermByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d", "6b39335d-1975-4fd7-9696-b40d57c9bde7", p => p.Descriptions, p => p.Set);
 ```
 
+If you want to enumerate all terms in a hierarchical termset, then below code snippet shows how to combine batching and recursive code to load all the terms in the most efficient manner:
+
+```csharp
+var termset = context.TermStore.GetTermSetById("4b000117-03c4-4b2b-81f4-21e2ab26d6be", p => p.Description, p => p.Terms);
+
+// recursively load the terms in the termset
+await LoadTermsAsync(termset.Terms);
+
+private async Task LoadTermsAsync(ITermCollection terms)
+{
+    var batch = terms.PnPContext.NewBatch();
+
+    foreach (var term in terms.AsRequested())
+    {
+        await term.LoadBatchAsync(batch, p => p.Labels, p => p.Terms);
+    }
+
+    await terms.PnPContext.ExecuteAsync(batch);
+
+    foreach (var term in terms.AsRequested())
+    {
+        if (term.Terms.AsRequested().Count() > 0)
+        {
+            // Load the possible child terms
+            await LoadTermsAsync(term.Terms);
+        }
+    }
+}
+```
+
 Adding a term to a term set or another term is done using the `Add` methods on the `ITermCollection`:
 
 ```csharp
