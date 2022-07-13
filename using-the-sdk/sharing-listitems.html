@@ -104,11 +104,12 @@
 </div>
 <h2 id="sharing-list-items-with-your-organization">Sharing list items with your organization</h2>
 <p>To share list items within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the list item?</p>
-<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
-                                                     p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
-                                                                                   p =&gt; p.FieldTypeKind, 
-                                                                                   p =&gt; p.TypeAsString, 
-                                                                                   p =&gt; p.Title));
+<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, 
+                                          p =&gt; p.Title, p =&gt; p.Items, 
+                                          p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
+                                                                        p =&gt; p.FieldTypeKind, 
+                                                                        p =&gt; p.TypeAsString, 
+                                                                        p =&gt; p.Title));
 // Get the item with title &quot;Item1&quot;
 var listItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
@@ -126,11 +127,12 @@ var share = await listItem.CreateOrganizationalSharingLinkAsync(shareLinkRequest
 </div>
 <h2 id="share-list-items-with-certain-users">Share list items with certain users</h2>
 <p>If you want to selectively share a list item with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share. Below example shows this:</p>
-<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
-                                                     p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
-                                                                                   p =&gt; p.FieldTypeKind, 
-                                                                                   p =&gt; p.TypeAsString, 
-                                                                                   p =&gt; p.Title));
+<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, 
+                                          p =&gt; p.Title, p =&gt; p.Items, 
+                                          p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
+                                                                        p =&gt; p.FieldTypeKind, 
+                                                                        p =&gt; p.TypeAsString, 
+                                                                        p =&gt; p.Title));
 // Get the item with title &quot;Item1&quot;
 var listItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
@@ -162,11 +164,12 @@ var share = await listItem.CreateUserSharingLinkAsync(shareLinkRequestOptions);
 </div>
 <h2 id="share-list-items-with-everyone-anonymous-sharing">Share list items with everyone (anonymous sharing)</h2>
 <p>If your tenant and site settings allow it you can also share list items anonymously so that everyone having the link can access the content. Doing so requires using one of the <code>CreateAnonymousSharingLink</code> methods together with a configured <code>AnonymousLinkOptions</code> instance. Key properties to set are the <code>Type</code> of share, a <code>Password</code> for consuming the sharing link and <code>ExpirationDateTime</code> defining how long the anonymous share will stay valid. Below example shows this:</p>
-<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
-                                                     p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
-                                                                                   p =&gt; p.FieldTypeKind, 
-                                                                                   p =&gt; p.TypeAsString, 
-                                                                                   p =&gt; p.Title));
+<pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, 
+                                          p =&gt; p.Title, p =&gt; p.Items, 
+                                          p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
+                                                                        p =&gt; p.FieldTypeKind, 
+                                                                        p =&gt; p.TypeAsString, 
+                                                                        p =&gt; p.Title));
 // Get the item with title &quot;Item1&quot;
 var listItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
