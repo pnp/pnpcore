@@ -63,6 +63,11 @@ namespace PnP.Core.Model.SharePoint
         public List<string> RefineProperties { get; set; } = new List<string>();
 
         /// <summary>
+        /// The set of refinement filters used when issuing a refinement query
+        /// </summary>
+        public List<string> RefinementFilters { get; set; } = new List<string>();
+
+        /// <summary>
         /// Client type used for the search query (defaults to ContentSearchRegular)
         /// </summary>
         public string ClientType { get; set; } = "ContentSearchRegular";

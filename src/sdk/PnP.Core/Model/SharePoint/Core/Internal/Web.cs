@@ -1339,7 +1339,7 @@ namespace PnP.Core.Model.SharePoint
                 ProcessSearchResults(apiCall.RawSingleResult as SearchResult, json);
             };
 
-            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
             return new BatchSingleResult<ISearchResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISearchResult);
         }
 
@@ -1355,7 +1355,10 @@ namespace PnP.Core.Model.SharePoint
                 var parsedSearchResult = JsonSerializer.Deserialize<JsonElement>(json);
                 if (parsedSearchResult.ValueKind != JsonValueKind.Null)
                 {
-                    searchResult.ElapsedTime = parsedSearchResult.GetProperty("ElapsedTime").GetInt32();
+                    if (parsedSearchResult.TryGetProperty("ElapsedTime", out JsonElement elapsedTime))
+                    {
+                        searchResult.ElapsedTime = parsedSearchResult.GetProperty("ElapsedTime").GetInt32();
+                    }
 
                     // Process the result rows
                     if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult) &&
@@ -1534,65 +1537,88 @@ namespace PnP.Core.Model.SharePoint
 
         private ApiCall BuildSearchApiCall(SearchOptions query)
         {
-            StringBuilder uriBuilder = new StringBuilder();
+            var endpointUri = $"_api/search/postquery";
 
-            uriBuilder.AppendFormat("_api/search/query?querytext='{0}'", HttpUtility.UrlEncode(query.Query?.Replace("'", "''")));
+            dynamic request = new
+            {
+                Querytext = query.Query,
+                EnableQueryRules = false,
+                SourceId = query.ResultSourceId,
+            }.AsExpando();
 
-            if (query.TrimDuplicates == true)
+            // The default is true
+            if (!query.TrimDuplicates)
             {
-                uriBuilder.Append("&trimduplicates=true");
-            }
-            else
-            {
-                uriBuilder.Append("&trimduplicates=false");
+                request.TrimDuplicates = false;
             }
 
             if (query.StartRow.HasValue && query.StartRow.Value > 0)
             {
-                uriBuilder.AppendFormat("&startrow={0}", query.StartRow.Value);
+                request.StartRow = query.StartRow.Value;
             }
 
             if (query.RowsPerPage.HasValue)
             {
-                uriBuilder.AppendFormat("&rowsperpage={0}", query.RowsPerPage.Value);
+                request.RowsPerPage = query.RowsPerPage.Value;
             }
 
             if (query.RowLimit.HasValue && query.RowLimit.Value > 0)
             {
-                uriBuilder.AppendFormat("&rowlimit={0}", query.RowLimit.Value);
+                request.RowLimit = query.RowLimit.Value;
             }
             else if (query.RowsPerPage.HasValue)
             {
-                uriBuilder.AppendFormat("&rowlimit={0}", query.RowsPerPage.Value);
+                request.RowLimit = query.RowsPerPage.Value;
             }
 
             if (query.SelectProperties.Count > 0)
             {
-                uriBuilder.AppendFormat("&selectproperties='{0}'", HttpUtility.UrlEncode(string.Join(",", query.SelectProperties)));
+                request.SelectProperties = new
+                {
+                    results = query.SelectProperties.ToArray(),
+                };
             }
 
             if (query.SortProperties.Count > 0)
             {
-                uriBuilder.AppendFormat("&sortlist='{0}'", HttpUtility.UrlEncode(string.Join(",", query.SortProperties)));
+                request.SortList = new
+                {
+                    results = query.SortProperties.Select(o => new
+                    {
+                        Property = o.Property,
+                        Direction = (int)o.Sort,
+                    }).ToArray()
+                };
             }
 
             if (query.RefineProperties.Count > 0)
             {
-                uriBuilder.AppendFormat("&refiners='{0}'", HttpUtility.UrlEncode(string.Join(",", query.RefineProperties)));
+                request.Refiners = string.Join(",", query.RefineProperties);
+            }
+
+            if (query.RefinementFilters.Count > 0)
+            {
+                request.RefinementFilters = new
+                {
+                    results = query.RefinementFilters.ToArray()
+                };
             }
 
             if (!string.IsNullOrEmpty(query.ClientType))
             {
-                uriBuilder.AppendFormat("&clienttype='{0}'", query.ClientType);
+                request.ClientType = query.ClientType;
             }
 
-            uriBuilder.Append("&enablequeryrules=false");
+            var body = new
+            {
+                request
+            };
 
-            uriBuilder.AppendFormat("&sourceid='{0}'", HttpUtility.UrlEncode(query.ResultSourceId));
-
-            return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
+            var jsonBody = JsonSerializer.Serialize(body);
+            return new ApiCall(endpointUri, ApiType.SPORest, jsonBody);
         }
-        #endregion
+
+        #endregion Search
 
         #region Web Templates
 
@@ -1764,7 +1790,7 @@ namespace PnP.Core.Model.SharePoint
 
             return await UnfurlHandler.UnfurlAsync(PnPContext, link, unfurlOptions).ConfigureAwait(false);
         }
-        
+
         public IUnfurledResource UnfurlLink(string link, UnfurlOptions unfurlOptions = null)
         {
             return UnfurlLinkAsync(link, unfurlOptions).GetAwaiter().GetResult();
@@ -1894,7 +1920,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Get WSS Id for term
-        
+
         public async Task<int> GetWssIdForTermAsync(string termId)
         {
             if (TaxonomyHiddenList == null)

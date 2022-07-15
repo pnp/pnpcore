@@ -1532,7 +1532,7 @@ namespace PnP.Core.Test.SharePoint
                 var searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                ///Assert.IsTrue(searchResult.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1566,7 +1566,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult.IsAvailable);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.Result.ElapsedTime > 0);
+                ///Assert.IsTrue(searchResult.Result.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.Result.TotalRows > 0);
                 Assert.IsTrue(searchResult.Result.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Result.Rows.Count == 10);
@@ -1592,7 +1592,7 @@ namespace PnP.Core.Test.SharePoint
                 var searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                ///Assert.IsTrue(searchResult.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1602,7 +1602,7 @@ namespace PnP.Core.Test.SharePoint
                 searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                ///Assert.IsTrue(searchResult.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1612,7 +1612,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public void SearchRefinerTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            ///TestCommon.Instance.Mocking = false;
 
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
@@ -1621,17 +1621,17 @@ namespace PnP.Core.Test.SharePoint
                 {
                     RowsPerPage = 10,
                     TrimDuplicates = false,
-                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId", "ContentTypeId" },
                     SortProperties = new System.Collections.Generic.List<SortOption>() { new SortOption("DocId") },
-                    RefineProperties = new System.Collections.Generic.List<string>() { "ContentTypeId" }
+                    RefineProperties = new System.Collections.Generic.List<string>() { "ContentTypeId" },
                 };
 
                 var searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                ///Assert.IsTrue(searchResult.ElapsedTime > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
                 Assert.IsTrue(searchResult.Refinements.Count > 0);
                 foreach (var refiner in searchResult.Refinements)
@@ -1646,6 +1646,20 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
+                var refinementOption = searchResult.Refinements.First();
+                Assert.IsTrue(refinementOption.Key == "ContentTypeId");
+
+                var refinementData = refinementOption.Value.First();
+
+                var refinedOptions = new SearchOptions(searchOptions.Query);
+                refinedOptions.RefinementFilters.Add($"{refinementOption.Key}:{refinementData.Token}");
+
+                searchResult = context.Web.Search(refinedOptions);
+
+                Assert.IsTrue(searchResult.TotalRows == refinementData.Count);
+                var firstRow = searchResult.Rows.First();
+
+                Assert.IsTrue(Convert.ToString(firstRow["ContentTypeId"]) == refinementData.Value);
             }
         }
 
@@ -1819,7 +1833,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var eventReceiverOptions = new EventReceiverOptions
                 {
-                    
+
                 };
                 await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
             }
@@ -1899,7 +1913,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var mps = context.Web.GetSearchConfigurationManagedProperties();
 
-                Assert.IsNotNull(mps);                
+                Assert.IsNotNull(mps);
             }
         }
 
