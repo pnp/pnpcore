@@ -747,6 +747,19 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
         Task<List<IFile>> FindFilesAsync(string match);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userPrincipalName"></param>
+        void GetUserEffectivePermissions(string userPrincipalName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userPrincipalName"></param>
+        /// <returns></returns>
+        Task GetUserEffectivePermissionsAsync(string userPrincipalName);
+
         #endregion
     }
 }

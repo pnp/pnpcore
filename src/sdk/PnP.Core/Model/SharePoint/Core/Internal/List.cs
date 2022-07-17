@@ -1374,6 +1374,27 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region User effective permissions
+
+        public void GetUserEffectivePermissions(string userPrincipalName)
+        {
+            GetUserEffectivePermissionsAsync(userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task GetUserEffectivePermissionsAsync(string userPrincipalName)
+        {
+            var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+        }
+
+        private ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
+        {
+            return new ApiCall($"_api/web/lists(guid'{Id}')/getusereffectivepermissions(\"i:0#.f|membership|{userPrincipalName}\")", ApiType.SPORest);
+        }
+
+        #endregion
+
         #endregion
     }
 }

@@ -1918,5 +1918,23 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Effective user permissions
+
+        [TestMethod]
+        public async Task GetEffectiveUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                await list.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+            }
+        }
+
+        #endregion
     }
 }
