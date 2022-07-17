@@ -1308,7 +1308,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<ISearchResult> SearchAsync(SearchOptions query)
         {
             var apiCall = BuildSearchApiCall(query);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             SearchResult searchResult = new SearchResult();
             ProcessSearchResults(searchResult, response.Json);
