@@ -18,7 +18,7 @@ Let's start with making a simple search request by using one of the `Search` met
 The returned search result rows are in form of a `Dictionary<string, object>` with the search result property name as key and the search result property value as value.
 
 ```csharp
-// Let's search for all lists using a particular content type and 
+// Let's search for all lists using a particular content type and
 // for the found rows return the listed "select" properties
 SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
 {
@@ -46,12 +46,12 @@ SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
 {
     TrimDuplicates = false,
     SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
-    // Define the properties to use for sorting the results, sorting on DocId a best practice 
+    // Define the properties to use for sorting the results, sorting on DocId a best practice
     // to increase search query performance
-    SortProperties = new System.Collections.Generic.List<SortOption>() 
-    { 
-        new SortOption("DocId"), 
-        new SortOption("ModifiedBy", SortDirection.Ascending) 
+    SortProperties = new System.Collections.Generic.List<SortOption>()
+    {
+        new SortOption("DocId"),
+        new SortOption("ModifiedBy", SortDirection.Ascending)
     },
 };
 
@@ -83,14 +83,33 @@ foreach (var result in searchResult.Rows)
 }
 
 // Process the refiner results
-foreach(var refiner in searchResult.Refinements)
+foreach (var refiner in searchResult.Refinements)
 {
-    foreach(var refinementResult in refiner.Value)
+    foreach (var refinementResult in refiner.Value)
     {
         // refinementResult.Value is a possible refinement value
         // refinementResult.Count will provide the number of counts for the refinement value
     }
 }
+```
+
+## Refining search results using refinement filters
+
+The following example shows how to create a search request by passing the first refinement option obtained from the previous example search result. Set the `RefinementFilters` property to a list of KQL queries, which can be built up using the `Token` from previous refinement results.
+
+```csharp
+// Retrieve the refinement
+var refinementResults = searchResult.Refinements["ContentTypeId"];
+var refinementToken = refinementResults[0].Token;
+
+SearchOptions searchOptions = new SearchOptions("contentclass:STS_ListItem_DocumentLibrary")
+{
+    RefinementFilters = new System.Collections.Generic.List<string>() { $"ContentTypeId:{refinementToken}" }
+};
+
+// Issue the search query
+var searchResult = await context.Web.SearchAsync(searchOptions);
+
 ```
 
 ## Paging the search results
@@ -110,10 +129,10 @@ while (paging)
         StartRow = startRow,
         TrimDuplicates = false,
         SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
-        SortProperties = new System.Collections.Generic.List<SortOption>() 
-        { 
-            new SortOption("DocId"), 
-            new SortOption("ModifiedBy", SortDirection.Ascending) 
+        SortProperties = new System.Collections.Generic.List<SortOption>()
+        {
+            new SortOption("DocId"),
+            new SortOption("ModifiedBy", SortDirection.Ascending)
         },
     };
 
@@ -121,7 +140,7 @@ while (paging)
     var searchResult = await context.Web.SearchAsync(searchOptions);
 
     // Add the returned page of results to our search results list
-    searchResults.AddRange(searchResult.Rows);                    
+    searchResults.AddRange(searchResult.Rows);
 
     // If we're not done yet update the start row and issue a query to retrieve the next page
     if (searchResults.Count < searchResult.TotalRows)
@@ -151,15 +170,15 @@ PnP Core SDK also allows you to batch multiple search queries and send them in o
 
 ```csharp
 var batch = context.NewBatch();
-Dictionary<Guid, IBatchSingleResult<ISearchResult>> batchResults = 
+Dictionary<Guid, IBatchSingleResult<ISearchResult>> batchResults =
     new Dictionary<Guid, IBatchSingleResult<ISearchResult>>();
 
 List<Guid> uniqueListIds = new List<Guid>();
 // Imagine the uniqueListIds contains a series of list id's that you want to issue a search query for
-            
+
 foreach (var listId in uniqueListIds)
 {
-    // Issue a search query with a refinement on `contenttypeid`, we don't need the 
+    // Issue a search query with a refinement on `contenttypeid`, we don't need the
     // result rows, so `RowLimit` is set to 0
     var request = await context.Web.SearchBatchAsync(batch, new SearchOptions($"listid:{listId}")
     {
@@ -174,14 +193,14 @@ foreach (var listId in uniqueListIds)
 // Execute the batch
 await context.ExecuteAsync(batch);
 
-// Process the search results 
+// Process the search results
 foreach (var batchResult in batchResults)
 {
     // Check the IsAvailable attribute to ensure the search request was executed
     if (batchResult.Value.IsAvailable)
     {
         // The Result property is of type ISearchResult and can be used to process the search results
-        if (batchResult.Value.Result.Refinements.Count > 0 && 
+        if (batchResult.Value.Result.Refinements.Count > 0 &&
             batchResult.Value.Result.Refinements.ContainsKey("contenttypeid"))
         {
             foreach (var refinementResult in batchResult.Value.Result.Refinements["contenttypeid"])
