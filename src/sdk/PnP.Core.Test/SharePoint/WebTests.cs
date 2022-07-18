@@ -1532,7 +1532,7 @@ namespace PnP.Core.Test.SharePoint
                 var searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1566,7 +1566,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult.IsAvailable);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.Result.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.Result.ElapsedTime >= 0);
                 Assert.IsTrue(searchResult.Result.TotalRows > 0);
                 Assert.IsTrue(searchResult.Result.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Result.Rows.Count == 10);
@@ -1592,7 +1592,7 @@ namespace PnP.Core.Test.SharePoint
                 var searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1602,7 +1602,7 @@ namespace PnP.Core.Test.SharePoint
                 searchResult = context.Web.Search(searchOptions);
 
                 Assert.IsTrue(searchResult != null);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
@@ -1612,7 +1612,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public void SearchRefinerTest()
         {
-            ///TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
@@ -1631,7 +1631,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult != null);
                 Assert.IsTrue(searchResult.TotalRows > 0);
                 Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
-                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
                 Assert.IsTrue(searchResult.Rows.Count == 10);
                 Assert.IsTrue(searchResult.Refinements.Count > 0);
                 foreach (var refiner in searchResult.Refinements)
