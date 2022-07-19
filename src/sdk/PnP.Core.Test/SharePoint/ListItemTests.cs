@@ -2612,6 +2612,399 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SpecialFieldRestUpdateAlternativeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Step 0: Data needed for the test run
+                // Get current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                // Get the principal representing two claims which are always available
+                var userTwo = await context.Web.EnsureUserAsync("Everyone except external users");
+                // Site pages library for lookup of the home page
+                IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
+                Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
+                Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
+                Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");
+                string label1 = "Dutch";
+                Guid term2 = new Guid("8246e3c1-19ea-4b22-8ae3-df9cbc150a74");
+                string label2 = "English";
+                Guid term3 = new Guid("3f773e87-24c3-4d0d-a07f-96eb0c1e905e");
+                string label3 = "French";
+
+                //==========================================================
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("SpecialFieldRestUpdateAlternativeTest");
+
+                IList myList = null;
+                try
+                {
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    //==========================================================
+                    // Step 2: Add special fields
+                    string fieldGroup = "TEST GROUP";
+
+                    // URL field 1
+                    string fldUrl1 = "URLField1";
+                    IField addedUrlField1 = await myList.Fields.AddUrlAsync(fldUrl1, new FieldUrlOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        DisplayFormat = UrlFieldFormatType.Hyperlink
+                    });
+
+                    // URL field 2
+                    string fldUrl2 = "URLField2";
+                    IField addedUrlField2 = await myList.Fields.AddUrlAsync(fldUrl2, new FieldUrlOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        DisplayFormat = UrlFieldFormatType.Hyperlink
+                    });
+
+                    // User Single field 1
+                    string fldUserSingle1 = "UserSingleField1";
+                    IField addedUserSingleField1 = await myList.Fields.AddUserAsync(fldUserSingle1, new FieldUserOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                    });
+
+                    // User Multi field 1
+                    string fldUserMulti1 = "UserMultiField1";
+                    IField addedUserMultiField1 = await myList.Fields.AddUserMultiAsync(fldUserMulti1, new FieldUserOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                    });
+
+                    // Taxonomy field 1
+                    string fldTaxonomy1 = "TaxonomyField1";
+                    IField addedTaxonomyField1 = await myList.Fields.AddTaxonomyAsync(fldTaxonomy1, new FieldTaxonomyOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        TermStoreId = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c"),
+                        TermSetId = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5")
+                    });
+
+                    // Taxonomy Multi field 1
+                    string fldTaxonomyMulti1 = "TaxonomyMultiField1";
+                    IField addedTaxonomyMultiField1 = await myList.Fields.AddTaxonomyMultiAsync(fldTaxonomyMulti1, new FieldTaxonomyOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        TermStoreId = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c"),
+                        TermSetId = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5")
+                    });
+
+                    // Choice single field 1
+                    string fldChoiceSingle1 = "ChoiceSingle1";
+                    IField addChoiceSingleField1 = await myList.Fields.AddChoiceAsync(fldChoiceSingle1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = (new List<string>() { "Option A", "Option B", "Option C" }).ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    // Choice multi field 1
+                    string fldChoiceMulti1 = "ChoiceMulti1";
+                    IField addChoiceMultiField1 = await myList.Fields.AddChoiceMultiAsync(fldChoiceMulti1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = (new List<string>() { "Option A", "Option B", "Option C", "Option D", "Option E" }).ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    // Lookup single field 1
+                    string fldLookupSingle1 = "LookupSingleField1";
+                    IField addedLookupSingleField1 = await myList.Fields.AddLookupAsync(fldLookupSingle1, new FieldLookupOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        LookupListId = sitePages.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    string fldLookupMulti1 = "LookupMultiField1";
+                    IField addedLookupMultiField1 = await myList.Fields.AddLookupMultiAsync(fldLookupMulti1, new FieldLookupOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        LookupListId = sitePages.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    //==========================================================
+                    // Step 3: Add a list item
+                    Dictionary<string, object> item = new Dictionary<string, object>()
+                    {
+                        { "Title", "Item1" }
+                    };
+
+                    Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
+                    {
+                        // URL field 1
+                        { fldUrl1, new FieldData("URL") },
+                        // URL field 2
+                        { fldUrl2, new FieldData("URL") },
+                        // User single field 1
+                        { fldUserSingle1, new FieldData("UserSingle") },
+                        // User multi field 1
+                        { fldUserMulti1, new FieldData("UserMulti") },
+                        // Taxonomy single field 1
+                        { fldTaxonomy1, new FieldData("TaxonomySingle") },
+                        // Taxonomy multi field 1
+                        { fldTaxonomyMulti1, new FieldData("TaxonomyMulti") },
+                        // Lookup single field 1
+                        { fldLookupSingle1, new FieldData("LookupSingle") },
+                        // Lookup multi field 1
+                        { fldLookupMulti1, new FieldData("LookupMulti") },
+                    };
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties.Add("Url", "https://pnp.com");
+                    fieldData[fldUrl1].Properties.Add("Description", "PnP Rocks");
+                    item.Add(fldUrl1, new FieldUrlValue(fieldData[fldUrl1].Properties["Url"].ToString(), fieldData[fldUrl1].Properties["Description"].ToString()));
+
+                    // URL field 2 -  no description value set on create
+                    fieldData[fldUrl2].Properties.Add("Url", "https://pnp.com");
+                    // set the expected data equal to the url field as that's what we expect
+                    fieldData[fldUrl2].Properties.Add("Description", fieldData[fldUrl2].Properties["Url"]);
+                    item.Add(fldUrl2, new FieldUrlValue(fieldData[fldUrl2].Properties["Url"].ToString()));
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties.Add("Principal", currentUser);
+                    item.Add(fldUserSingle1, new FieldUserValue(currentUser));
+
+                    // User multi field 1
+                    var userCollection = new FieldValueCollection();
+                    userCollection.Values.Add(new FieldUserValue(currentUser));
+                    fieldData[fldUserMulti1].Properties.Add("Collection", userCollection);
+                    item.Add(fldUserMulti1, userCollection);
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties.Add("TermStore", termStore);
+                    fieldData[fldTaxonomy1].Properties.Add("TermSet", termSet);
+                    fieldData[fldTaxonomy1].Properties.Add("Term1", term1);
+                    fieldData[fldTaxonomy1].Properties.Add("Label1", label1);
+                    item.Add(fldTaxonomy1, new FieldTaxonomyValue((Guid)fieldData[fldTaxonomy1].Properties["Term1"], fieldData[fldTaxonomy1].Properties["Label1"].ToString()));
+
+                    // Taxonomy multi field 1
+                    fieldData[fldTaxonomyMulti1].Properties.Add("TermStore", termStore);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("TermSet", termSet);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term1", term1);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label1", label1);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term2", term2);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
+
+                    // Use the option to specify a list of values in the constructor
+                    List<IFieldTaxonomyValue> taxonomyValues = new List<IFieldTaxonomyValue>
+                    {
+                        new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                        new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                    };
+                    var termCollection = new FieldValueCollection(taxonomyValues);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
+                    item.Add(fldTaxonomyMulti1, termCollection);
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties.Add("LookupId", 1);
+                    item.Add(fldLookupSingle1, new FieldLookupValue((int)fieldData[fldLookupSingle1].Properties["LookupId"]));
+
+                    // Lookup multi field 1
+                    fieldData[fldLookupMulti1].Properties.Add("LookupId", 1);
+                    var lookupCollection = new FieldValueCollection();
+                    lookupCollection.Values.Add(new FieldLookupValue((int)fieldData[fldLookupMulti1].Properties["LookupId"]));
+                    fieldData[fldLookupMulti1].Properties.Add("Collection", lookupCollection);
+                    item.Add(fldLookupMulti1, lookupCollection);
+
+                    // Add the configured list item
+                    var addedItem = await myList.Items.AddAsync(item);
+
+                    //==========================================================
+                    // Step 4: validate returned list item
+                    Assert.IsTrue(addedItem.Requested);
+                    Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                    // URL field 1
+                    Assert.IsTrue(addedItem[fldUrl1] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Url == fieldData[fldUrl1].Properties["Url"].ToString());
+                    Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Description == fieldData[fldUrl1].Properties["Description"].ToString());
+
+                    // URL field 2
+                    Assert.IsTrue(addedItem[fldUrl2] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Url == fieldData[fldUrl2].Properties["Url"].ToString());
+                    Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Description == fieldData[fldUrl2].Properties["Description"].ToString());
+
+                    // User single field 1
+                    Assert.IsTrue(addedItem[fldUserSingle1] is IFieldUserValue);
+                    Assert.IsTrue((addedItem[fldUserSingle1] as IFieldUserValue).LookupId == (fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal).Id);
+
+                    // User multi field 1
+                    Assert.IsTrue(addedItem[fldUserMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldUserMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+
+                    // Taxonomy single field 1
+                    Assert.IsTrue(addedItem[fldTaxonomy1] is IFieldTaxonomyValue);
+                    Assert.IsTrue((addedItem[fldTaxonomy1] as IFieldTaxonomyValue).TermId == (Guid)fieldData[fldTaxonomy1].Properties["Term1"]);
+                    Assert.IsTrue((addedItem[fldTaxonomy1] as IFieldTaxonomyValue).Label == fieldData[fldTaxonomy1].Properties["Label1"].ToString());
+
+                    // Taxonomy multi field 1
+                    Assert.IsTrue(addedItem[fldTaxonomyMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldTaxonomyMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+                    Assert.IsTrue((addedItem[fldTaxonomyMulti1] as IFieldValueCollection).Values[1] == (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values[1]);
+
+                    // Lookup single field 1
+                    Assert.IsTrue(addedItem[fldLookupSingle1] is IFieldLookupValue);
+                    Assert.IsTrue((addedItem[fldLookupSingle1] as IFieldLookupValue).LookupId == (int)fieldData[fldLookupSingle1].Properties["LookupId"]);
+
+                    // Lookup multi field 1
+                    Assert.IsTrue(addedItem[fldLookupMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldLookupMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+
+                    //==========================================================
+                    // Step 5: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(2, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 7: Update item using REST update 
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties["Url"] = $"{fieldData[fldUrl1].Properties["Url"]}/rocks";
+                    fieldData[fldUrl1].Properties["Description"] = $"{fieldData[fldUrl1].Properties["Description"]}A";
+                    (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                    (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                    // URL field 2
+                    fieldData[fldUrl2].Properties["Url"] = $"{fieldData[fldUrl2].Properties["Url"]}/rocks";
+                    (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                    (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties["Principal"] = userTwo;
+                    (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                    // User multi field2
+                    (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldUserValue(userTwo));
+                    addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties["Term1"] = term2;
+                    fieldData[fldTaxonomy1].Properties["Labe1"] = label2;
+                    (addedItem[fldTaxonomy1] as IFieldTaxonomyValue).TermId = (Guid)fieldData[fldTaxonomy1].Properties["Term1"];
+                    (addedItem[fldTaxonomy1] as IFieldTaxonomyValue).Label = fieldData[fldTaxonomy1].Properties["Label1"].ToString();
+
+                    // Taxonomy multi field 1
+                    (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term3"], fieldData[fldTaxonomyMulti1].Properties["Label3"].ToString()));
+                    addedItem[fldTaxonomyMulti1] = fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties["LookupId"] = 1;
+                    (addedItem[fldLookupSingle1] as IFieldLookupValue).LookupId = (int)fieldData[fldLookupSingle1].Properties["LookupId"];
+
+                    // Lookup multi field 1
+                    (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldLookupValue(1));
+                    addedItem[fldLookupMulti1] = fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Update list item
+                    await addedItem.UpdateAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(4, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 10: Blank item using REST update
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties["Url"] = "";
+                    fieldData[fldUrl1].Properties["Description"] = "";
+                    (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                    (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                    // URL field 2
+                    fieldData[fldUrl2].Properties["Url"] = "";
+                    fieldData[fldUrl2].Properties["Description"] = "";
+                    (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                    (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties["Principal"] = null;
+                    (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                    // User multi field2
+                    (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties["Term1"] = Guid.Empty;
+                    addedItem[fldTaxonomy1] = null;
+
+                    // Taxonomy multi field 1
+                    (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldTaxonomyMulti1] = fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties["LookupId"] = null;
+                    addedItem[fldLookupSingle1] = null;
+
+                    // Lookup multi field 1
+                    (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldLookupMulti1] = fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Update list item
+                    await addedItem.UpdateAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(6, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
+
+                }
+                finally
+                {
+                    if (myList != null)
+                    {
+                        // Cleanup the created list
+                        await myList.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task SpecialFieldCsomTest()
         {
             //TestCommon.Instance.Mocking = false;

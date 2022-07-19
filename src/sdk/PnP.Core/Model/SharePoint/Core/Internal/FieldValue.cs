@@ -6,12 +6,18 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal abstract class FieldValue : IFieldValue, ICSOMField
+    /// <summary>
+    /// Base class for all field value classes
+    /// </summary>
+    public abstract class FieldValue : IFieldValue, ICSOMField
     {
         private readonly Dictionary<string, object> current = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         private readonly HashSet<string> changes = new HashSet<string>();
-
-        internal FieldValue()
+        
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public FieldValue()
         {
             // Mark newly created FieldValue as changed to ensure it's picked up
             MarkAsChanged();
@@ -25,6 +31,9 @@ namespace PnP.Core.Model.SharePoint
 
         internal bool IsArray { get; set; }
 
+        /// <summary>
+        /// Field linked to this field value
+        /// </summary>
         public IField Field { get; set; }
 
         Guid ICSOMField.CsomType => CsomType;
