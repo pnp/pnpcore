@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Added support for using RefinementFilters via the `IWeb.Search` methods #924 [lroos - Llewellyn Roos]
+- Adds Getusereffectivepermissions for IWeb, IList and IListItem #926 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 
