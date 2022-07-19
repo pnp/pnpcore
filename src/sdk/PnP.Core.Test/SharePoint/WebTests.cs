@@ -1988,8 +1988,6 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
-        #region Effective User Permissions
-
         #region Effective user permissions
 
         [TestMethod]
@@ -2031,8 +2029,6 @@ namespace PnP.Core.Test.SharePoint
                 var hasPermissions = await context.Web.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
             }
         }
-
-        #endregion
 
         #endregion
     }
