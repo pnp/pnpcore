@@ -10,10 +10,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support for using RefinementFilters via the `IWeb.Search` methods #924 [lroos - Llewellyn Roos]
+
 ### Changed
 
 - Fix: Wrong if condition combination & instead of && in `BaseQueryableDataModelCollection` method `GetAsyncEnumerator` #911 [jansenbe - Bert Jansen]
 - Fix: Using multiple owners when creating modern team site using delegated permissions failed [jansenbe - Bert Jansen]
+- Simplified model for working url, user, lookup, and taxonomy fields #915 [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
