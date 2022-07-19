@@ -10,18 +10,48 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Base class for reading and writing of "special" field types like a lookup, user, url...
     /// </summary>
-    internal sealed class FieldUrlValue : FieldValue, IFieldUrlValue
+    public sealed class FieldUrlValue : FieldValue, IFieldUrlValue
     {
         internal FieldUrlValue() : base()
         {
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="url">Url to set</param>
+        public FieldUrlValue(string url) : this(url, null)
+        {            
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="url">Url to set</param>
+        /// <param name="description">Url description to use</param>
+        public FieldUrlValue(string url, string description): this()
+        {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+            
+            Url = url;
+            Description = description ?? url;
+        }
+        
         internal override string SharePointRestType { get => "SP.FieldUrlValue"; }
 
         internal override Guid CsomType { get => Guid.Parse("fa8b44af-7b43-43f2-904a-bd319497011e"); }
 
+        /// <summary>
+        /// Url
+        /// </summary>
         public string Url { get => GetValue<string>(); set => SetValue(value); }
 
+        /// <summary>
+        /// Description of the Url
+        /// </summary>
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)

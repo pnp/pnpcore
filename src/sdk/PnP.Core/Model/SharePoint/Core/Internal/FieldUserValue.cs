@@ -7,16 +7,50 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal sealed class FieldUserValue : FieldLookupValue, IFieldUserValue
+    /// <summary>
+    /// Represents a user field value
+    /// </summary>
+    public sealed class FieldUserValue : FieldLookupValue, IFieldUserValue
     {
         internal FieldUserValue() : base()
         {
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="principal">Principal describing the user or group</param>
+        public FieldUserValue(ISharePointPrincipal principal) : this()
+        {
+            if (principal == null)
+            {
+                throw new ArgumentNullException(nameof(principal));
+            }
+            
+            Principal = principal;
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        public FieldUserValue(int userId) : this()
+        {
+            if (userId < -1)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+            
+            LookupId = userId;
         }
 
         internal override string SharePointRestType { get => "SP.FieldUserValue"; }
 
         internal override Guid CsomType { get => Guid.Parse("c956ab54-16bd-4c18-89d2-996f57282a6f"); }
 
+        /// <summary>
+        /// Principal describing the user or group
+        /// </summary>
         public ISharePointPrincipal Principal
         {
             get
@@ -38,13 +72,25 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public string Sip { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// SIP address of the user
+        /// </summary>
+        public string Sip { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string Email { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Email of the user
+        /// </summary>
+        public string Email { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string Title { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Title/name of the user
+        /// </summary>
+        public string Title { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string Picture { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Profile picture url for the user
+        /// </summary>
+        public string Picture { get => GetValue<string>(); internal set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)
         {
