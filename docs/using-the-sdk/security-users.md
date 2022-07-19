@@ -83,6 +83,21 @@ if (currentRoleDefinitions.AsRequested().FirstOrDefault(p => p.Name == "Full Con
 user.RemoveRoleDefinitions(new string[] { "Full Control" });
 ```
 
+## Verifying the permissions of a user at `IWeb`, `IList` or `IListItem` level
+
+If you want to get the permissions of a user granted at `IWeb`, `IList` or `IListItem` level or verify if a user has a certain `PermissionKind` then you can use the `GetUserEffectivePermissions` and `CheckIfUserHasPermissions` methods:
+
+```csharp
+// Get the permissions of a user
+var basePermissions = await context.Web.GetUserEffectivePermissionsAsync("joe@contoso.sharepoint.com");
+
+// Verify if a user has a permission
+if (await context.Web.CheckIfUserHasPermissionsAsync("joe@contoso.sharepoint.com", PermissionKind.AddListItems))
+{
+    // Do something
+}
+```
+
 ## Microsoft 365 users
 
 When working with SharePoint sites you use a SharePoint user, but when you for example want to add a user to a Microsoft 365 group's owners you need to use a Microsoft Graph user object. When you either have a SharePoint user or Microsoft Graph user you can translate that user via `AsGraphUser` and `AsSharePointUser` methods. Below example shows how a user granted access to a Microsoft Teams team can be translated into a SharePoint user.
