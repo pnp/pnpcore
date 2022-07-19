@@ -4,9 +4,15 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal sealed class FieldLocationValue : FieldValue, IFieldLocationValue
+    /// <summary>
+    /// Represents a location field value
+    /// </summary>
+    public sealed class FieldLocationValue : FieldValue, IFieldLocationValue
     {
-        internal FieldLocationValue() : base()
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public FieldLocationValue() : base()
         {
         }
 
@@ -14,23 +20,50 @@ namespace PnP.Core.Model.SharePoint
 
         internal override Guid CsomType => Guid.Parse("97650aff-7e7b-44be-ac6e-d559f7f897a2");
 
-        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Name identifiying this location
+        /// </summary>
+        public string DisplayName { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string LocationUri { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Uri identifying this location
+        /// </summary>
+        public string LocationUri { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string Street { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Streetname
+        /// </summary>
+        public string Street { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string City { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// City
+        /// </summary>
+        public string City { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string State { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// State
+        /// </summary>
+        public string State { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string CountryOrRegion { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Country of region
+        /// </summary>
+        public string CountryOrRegion { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public string PostalCode { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Postal/zip code
+        /// </summary>
+        public string PostalCode { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public double Latitude { get => GetValue<double>(); set => SetValue(value); }
+        /// <summary>
+        /// Latitude of the location
+        /// </summary>
+        public double Latitude { get => GetValue<double>(); internal set => SetValue(value); }
 
-        public double Longitude { get => GetValue<double>(); set => SetValue(value); }
+        /// <summary>
+        /// Longitude of the location
+        /// </summary>
+        public double Longitude { get => GetValue<double>(); internal set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)
         {

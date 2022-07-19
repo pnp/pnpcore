@@ -486,17 +486,43 @@ namespace PnP.Core.Model.SharePoint
                 // Only process if there were changes in the field value collection
                 if (fieldValueCollection.HasChanges)
                 {
-                    if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                    if (fieldValueCollection.Field != null)
                     {
-                        field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                        if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                        }
+                        else if (fieldValueCollection.Field.TypeAsString == "TaxonomyFieldTypeMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
+                        }
+                        else if (fieldValueCollection.Field.TypeAsString == "LookupMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                        }
                     }
-                    else if (fieldValueCollection.Field.TypeAsString == "TaxonomyFieldTypeMulti")
+                    else
                     {
-                        field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
-                    }
-                    else if (fieldValueCollection.Field.TypeAsString == "LookupMulti")
-                    {
-                        field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                        if (fieldValueCollection.Values.Count == 0)
+                        {
+                            field.FieldValue = "";
+                        }
+                        else
+                        {
+                            var first = fieldValueCollection.Values.First();
+                            if (first is IFieldUserValue)
+                            {
+                                field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                            }
+                            else if (first is IFieldLookupValue)
+                            {
+                                field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                            }
+                            else if (first is IFieldTaxonomyValue)
+                            {
+                                field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
+                            }
+                        }
                     }
                 }
                 else
@@ -606,7 +632,7 @@ namespace PnP.Core.Model.SharePoint
         internal async Task PrepareUpdateCall(UpdateListItemRequest request)
         {
             string listId = "";
-            if ((this as IDataModelParent).Parent is IFile file)
+            if (this.Parent is IFile file)
             {
                 // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
                 // will point to the File id while we need to list Id here
@@ -614,9 +640,9 @@ namespace PnP.Core.Model.SharePoint
                 listId = file.ListId.ToString();
             }
 
-            if ((this as IDataModelParent).Parent.Parent is IList)
+            if (this.Parent.Parent is IList)
             {
-                listId = ((this as IDataModelParent).Parent.Parent as IList).Id.ToString();
+                listId = (this.Parent.Parent as IList).Id.ToString();
             }
 
             request.ListId = listId;
