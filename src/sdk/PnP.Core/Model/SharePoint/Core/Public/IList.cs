@@ -748,17 +748,34 @@ namespace PnP.Core.Model.SharePoint
         Task<List<IFile>> FindFilesAsync(string match);
 
         /// <summary>
-        /// 
+        /// Gets the user effective permissions of a user for a list
         /// </summary>
-        /// <param name="userPrincipalName"></param>
-        void GetUserEffectivePermissions(string userPrincipalName);
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        IBasePermissions GetUserEffectivePermissions(string userPrincipalName);
 
         /// <summary>
-        /// 
+        /// Gets the user effective permissions of a user for a list
         /// </summary>
-        /// <param name="userPrincipalName"></param>
-        /// <returns></returns>
-        Task GetUserEffectivePermissionsAsync(string userPrincipalName);
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a list
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a list
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind);
 
         #endregion
     }

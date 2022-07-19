@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 
 namespace PnP.Core.Model.SharePoint
@@ -1376,21 +1377,44 @@ namespace PnP.Core.Model.SharePoint
 
         #region User effective permissions
 
-        public void GetUserEffectivePermissions(string userPrincipalName)
+        public IBasePermissions GetUserEffectivePermissions(string userPrincipalName)
         {
-            GetUserEffectivePermissionsAsync(userPrincipalName).GetAwaiter().GetResult();
+            return GetUserEffectivePermissionsAsync(userPrincipalName).GetAwaiter().GetResult();
         }
 
-        public async Task GetUserEffectivePermissionsAsync(string userPrincipalName)
+        public async Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName)
         {
+            if (string.IsNullOrEmpty(userPrincipalName))
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_UserPrincipalNameEmpty);
+            }
+
             var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(response.Json))
+            {
+                throw new Exception(PnPCoreResources.Exception_EffectivePermissionsNotFound);
+            }
+
+            return EffectivePermissionsHandler.ParseGetUserEffectivePermissionsResponse(response.Json);
         }
 
         private ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
         {
-            return new ApiCall($"_api/web/lists(guid'{Id}')/getusereffectivepermissions(\"i:0#.f|membership|{userPrincipalName}\")", ApiType.SPORest);
+            return new ApiCall($"_api/web/lists(guid'{Id}')/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
+        }
+
+        public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
+        {
+            return CheckIfUserHasPermissionsAsync(userPrincipalName, permissionKind).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind)
+        {
+            var basePermissions = await GetUserEffectivePermissionsAsync(userPrincipalName).ConfigureAwait(false);
+            return basePermissions.Has(permissionKind);
         }
 
         #endregion

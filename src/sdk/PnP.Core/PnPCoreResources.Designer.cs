@@ -187,6 +187,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permissions for the user could not be found.
+        /// </summary>
+        internal static string Exception_EffectivePermissionsNotFound {
+            get {
+                return ResourceManager.GetString("Exception_EffectivePermissionsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature was already activated.
         /// </summary>
         internal static string Exception_Feature_AlreadyActivated {
@@ -1092,6 +1101,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_WebDeleteIsInteractive {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_WebDeleteIsInteractive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user principal name can not be empty when obtaining user permissions.
+        /// </summary>
+        internal static string Exception_UserPrincipalNameEmpty {
+            get {
+                return ResourceManager.GetString("Exception_UserPrincipalNameEmpty", resourceCulture);
             }
         }
         

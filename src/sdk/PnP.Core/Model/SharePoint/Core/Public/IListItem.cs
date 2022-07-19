@@ -530,6 +530,41 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Effective user permissions
+
+        /// <summary>
+        /// Gets the user effective permissions of a user for a listitem
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        IBasePermissions GetUserEffectivePermissions(string userPrincipalName);
+
+        /// <summary>
+        /// Gets the user effective permissions of a user for a listitem
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a listitem
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a listitem
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind);
+
+
+        #endregion
+
         #endregion
 
     }

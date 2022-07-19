@@ -486,4 +486,10 @@
   <data name="Exception_SendMailMe" xml:space="preserve">
     <value>Sending a mail through 'Me' is only valid with delegated authentication flow</value>
   </data>
+  <data name="Exception_EffectivePermissionsNotFound" xml:space="preserve">
+    <value>Permissions for the user could not be found</value>
+  </data>
+  <data name="Exception_UserPrincipalNameEmpty" xml:space="preserve">
+    <value>The user principal name can not be empty when obtaining user permissions</value>
+  </data>
 </root>

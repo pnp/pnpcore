@@ -1931,7 +1931,39 @@ namespace PnP.Core.Test.SharePoint
 
                 var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
 
-                await list.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+                var basePermissions = await list.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+
+                Assert.IsNotNull(basePermissions);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                var hasPermissions = await list.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
+
+                Assert.IsNotNull(hasPermissions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var hasPermissions = await list.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
             }
         }
 

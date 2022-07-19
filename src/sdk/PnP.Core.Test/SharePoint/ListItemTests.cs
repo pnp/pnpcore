@@ -4653,5 +4653,89 @@ namespace PnP.Core.Test.SharePoint
             }
         }
         #endregion
+
+        #region Effective user permissions
+
+        [TestMethod]
+        public async Task GetEffectiveUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("GetEffectiveUserPermissionsAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                    var basePermissions = await item.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+
+                    Assert.IsNotNull(basePermissions);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CheckIfUserHasPermissionsAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                    var hasPermissions = await item.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
+
+                    Assert.IsNotNull(hasPermissions);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CheckIfUserHasPermissionsExceptionAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var hasPermissions = await item.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        #endregion
     }
 }
