@@ -97,10 +97,10 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title ==
 var currentUser = await context.Web.GetCurrentUserAsync();
 
 // Add the user: Option A
-await addedGroup.Users.AddAsync(currentUser.LoginName)
+await siteGroup.Users.AddAsync(currentUser.LoginName)
 
 // Add the user: Option B
-await addedGroup.AddUserAsync(currentUser.LoginName);
+await siteGroup.AddUserAsync(currentUser.LoginName);
 ```
 
 ### Listing the users in a group
@@ -128,10 +128,10 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title ==
 var currentUser = await context.Web.GetCurrentUserAsync();
 
 // Remove the user: Option A
-await addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName).DeleteAsync();
+await siteGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName).DeleteAsync();
 
 // Remove the user: Option B
-await addedGroup.RemoveUserAsync(currentUser.Id);
+await siteGroup.RemoveUserAsync(currentUser.Id);
 ```
 
 ### Setting the owner of a group
