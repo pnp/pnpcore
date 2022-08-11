@@ -6,13 +6,13 @@
     public enum SortDirection
     {
         /// <summary>
-        /// Sort descending
-        /// </summary>
-        Descending,
-
-        /// <summary>
         /// Sort ascending
         /// </summary>
-        Ascending
+        Ascending = 0,
+
+        /// <summary>
+        /// Sort descending
+        /// </summary>
+        Descending = 1
     }
 }
