@@ -21,6 +21,7 @@
 		<Deterministic>true</Deterministic>
 		<Configurations>Debug;Release</Configurations>
 		<PackageIcon>nugeticon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
@@ -84,6 +85,10 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
 	</ItemGroup>
 
 	<ItemGroup>
