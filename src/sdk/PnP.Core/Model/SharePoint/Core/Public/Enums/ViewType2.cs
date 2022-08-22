@@ -23,6 +23,11 @@
         /// <summary>
         /// Kanban Mode
         /// </summary>
-        KANBAN
+        KANBAN,
+
+        /// <summary>
+        /// Modern Calendar Mode
+        /// </summary>
+        MODERNCALENDAR
     }
 }
