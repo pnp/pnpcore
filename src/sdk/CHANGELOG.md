@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix: Using multiple owners when creating modern team site using delegated permissions failed [jansenbe - Bert Jansen]
 - Simplified model for working url, user, lookup, and taxonomy fields #915 [jansenbe - Bert Jansen]
 - Add KANBAN to the ViewType2 enum #930 [martinlingstuyl - Martin Lingstuyl]
+- Add MODERNCALENDAR  to the ViewType2 enum #939 [martinlingstuyl - Martin Lingstuyl]
 
 ## [1.7.0]
 
