@@ -1586,7 +1586,7 @@ namespace PnP.Core.Model.SharePoint
                     results = query.SortProperties.Select(o => new
                     {
                         Property = o.Property,
-                        Direction = (int)o.Sort,
+                        Direction = o.Sort,
                     }).ToArray()
                 };
             }
