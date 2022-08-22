@@ -49,5 +49,17 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public void ContextMock()
+        {
+            var context = PnPContext.NewPnPContextMock(new Uri("https://contoso.sharepoint.com/sites/site"), null, null, null, null, null, null);
+            Assert.IsNotNull(context);
+            Assert.IsNotNull(context.Web);
+
+            context = PnPContext.NewPnPContextMock(new Uri("https://contoso.sharepoint.com/sites/site"));
+            Assert.IsNotNull(context);
+            Assert.IsNotNull(context.Web);
+        }
+
     }
 }

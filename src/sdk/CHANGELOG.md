@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Adds Getusereffectivepermissions for IWeb, IList and IListItem #926 [MathijsVerbeeck - Mathijs Verbeeck]
 - Added license information in the generated Nuget packages #945 [clurdish - Landon Petzoldt]
 - `Author` property for `IWeb` #947 [jansenbe - Bert Jansen]
+- Static method to create a PnPContext mock for use in testing #948 [jansenbe - Bert Jansen]
 
 ### Changed
 
