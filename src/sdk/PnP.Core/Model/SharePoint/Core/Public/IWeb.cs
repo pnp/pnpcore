@@ -406,9 +406,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the current user in the current context
         /// </summary>
-#pragma warning disable CA1721 // Property names should not match get methods
         public ISharePointUser CurrentUser { get; }
-#pragma warning restore CA1721 // Property names should not match get methods
+
+        /// <summary>
+        /// Gets the web's author
+        /// </summary>
+        public ISharePointUser Author { get; }
 
         /// <summary>
         /// Collection of lists in the current Web object.

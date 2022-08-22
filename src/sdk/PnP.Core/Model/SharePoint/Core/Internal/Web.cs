@@ -298,6 +298,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointUser CurrentUser { get => GetModelValue<ISharePointUser>(); }
 
+        public ISharePointUser Author { get => GetModelValue<ISharePointUser>(); }
+
         public ISharePointUserCollection SiteUsers { get => GetModelCollectionValue<ISharePointUserCollection>(); }
 
         public ISharePointGroupCollection SiteGroups { get => GetModelCollectionValue<ISharePointGroupCollection>(); }
