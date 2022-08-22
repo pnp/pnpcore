@@ -2572,7 +2572,7 @@
   "api/PnP.Core.Model.SharePoint.ViewType2.html": {
     "href": "api/PnP.Core.Model.SharePoint.ViewType2.html",
     "title": "Enum ViewType2 | PnP Core SDK",
-    "keywords": "Enum ViewType2 Modern List View Types Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public enum ViewType2 : int COMPACTLIST Compact List Mode KANBAN Kanban Mode NONE Empty Value TILES Tiles Mode"
+    "keywords": "Enum ViewType2 Modern List View Types Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public enum ViewType2 : int COMPACTLIST Compact List Mode KANBAN Kanban Mode MODERNCALENDAR Modern Calendar Mode NONE Empty Value TILES Tiles Mode"
   },
   "api/PnP.Core.Model.SharePoint.ViewTypeKind.html": {
     "href": "api/PnP.Core.Model.SharePoint.ViewTypeKind.html",
