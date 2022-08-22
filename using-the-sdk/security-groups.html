@@ -155,10 +155,10 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title
 var currentUser = await context.Web.GetCurrentUserAsync();
 
 // Add the user: Option A
-await addedGroup.Users.AddAsync(currentUser.LoginName)
+await siteGroup.Users.AddAsync(currentUser.LoginName)
 
 // Add the user: Option B
-await addedGroup.AddUserAsync(currentUser.LoginName);
+await siteGroup.AddUserAsync(currentUser.LoginName);
 </code></pre>
 <h3 id="listing-the-users-in-a-group">Listing the users in a group</h3>
 <p>To query the users in a group you need to load/get the <code>Users</code> property of the group.</p>
@@ -178,10 +178,10 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title
 var currentUser = await context.Web.GetCurrentUserAsync();
 
 // Remove the user: Option A
-await addedGroup.Users.AsRequested().FirstOrDefault(p =&gt; p.LoginName == currentUser.LoginName).DeleteAsync();
+await siteGroup.Users.AsRequested().FirstOrDefault(p =&gt; p.LoginName == currentUser.LoginName).DeleteAsync();
 
 // Remove the user: Option B
-await addedGroup.RemoveUserAsync(currentUser.Id);
+await siteGroup.RemoveUserAsync(currentUser.Id);
 </code></pre>
 <h3 id="setting-the-owner-of-a-group">Setting the owner of a group</h3>
 <p>If you provision groups you might want to set a user as owner of the group. For that you can use one of the `` methods:</p>
