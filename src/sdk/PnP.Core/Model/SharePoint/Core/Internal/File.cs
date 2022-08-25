@@ -1006,10 +1006,10 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<Stream> ConvertToAsync(ConvertToOptions options)
         {
+            await EnsurePropertiesAsync(y => y.Name, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
             // Check file extension before converting
             CheckExtension(options.Format);
-
-            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
 
             string jpgOptions = "";
             if (options.Format == ConvertToFormat.Jpg)

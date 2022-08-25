@@ -1,17 +1,20 @@
-﻿using PnP.Core.Model.Security;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -1417,6 +1420,213 @@ namespace PnP.Core.Model.SharePoint
             return basePermissions.Has(permissionKind);
         }
 
+        #endregion
+
+        #region Default column values
+
+        private const string defaultValuesFileName = "client_LocationBasedDefaults.html";
+
+        public async Task<List<DefaultColumnValueOptions>> GetDefaultColumnValuesAsync()
+        {
+            List<DefaultColumnValueOptions> results = new List<DefaultColumnValueOptions>();
+
+            var listInfo = await GetAsync(p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl)).ConfigureAwait(false);
+
+            string defaultValuesFile = $"{listInfo.RootFolder.ServerRelativeUrl}/Forms/{defaultValuesFileName}";
+
+            try
+            {
+                var defaultValueFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync(defaultValuesFile).ConfigureAwait(false);
+
+                // Download the file contents
+                var fileContentsStream = await defaultValueFile.GetContentAsync().ConfigureAwait(false);
+
+                // Parse the file contents
+                XDocument document = XDocument.Load(fileContentsStream);
+                var values = from a in document.Descendants("a") select a;
+
+                foreach (var value in values)
+                {
+                    var href = value.Attribute("href").Value;
+                    href = Uri.UnescapeDataString(href);
+                    href = href.Replace(listInfo.RootFolder.ServerRelativeUrl, "/").Replace("//", "/");
+
+                    var defaultValues = from d in value.Descendants("DefaultValue") select d;
+                    foreach (var defaultValue in defaultValues)
+                    {
+                        var fieldName = defaultValue.Attribute("FieldName").Value;
+                        var textValue = defaultValue.Value;
+
+                        results.Add(new DefaultColumnValueOptions
+                        {
+                            DefaultValue = textValue,
+                            FieldInternalName = fieldName,
+                            FolderRelativePath = href
+                        });
+
+                    }
+                }
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+
+                if (File.ErrorIndicatesFileDoesNotExists(error))
+                {
+                    PnPContext.Logger.LogInformation($"Provided {defaultValuesFileName} file does not exist...no default values are set");
+                    return results;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return results;
+        }
+
+        public async Task SetDefaultColumnValuesAsync(List<DefaultColumnValueOptions> defaultColumnValues)
+        {
+
+            if (defaultColumnValues == null || !defaultColumnValues.Any())
+            {
+                // Setting nothing means clearing the existing values
+                await ClearDefaultColumnValuesAsync().ConfigureAwait(false);
+                return;
+            }
+
+            var listInfo = await GetAsync(p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl), p => p.EventReceivers).ConfigureAwait(false);
+
+            // Prep the defaults file
+            var xMetadataDefaults = new XElement("MetadataDefaults");
+            var values = defaultColumnValues.ToList();
+
+            while (values.Any())
+            {
+                // Get the first entry 
+                DefaultColumnValueOptions defaultColumnValue = values.First();
+                var path = defaultColumnValue.FolderRelativePath;
+                if (string.IsNullOrEmpty(path))
+                {
+                    // Assume root folder
+                    path = "/";
+                }
+                path = path.Equals("/") ? listInfo.RootFolder.ServerRelativeUrl : UrlUtility.CombineAsString(listInfo.RootFolder.ServerRelativeUrl, path);
+
+                // Find all in the same path:
+                var defaultColumnValuesInSamePath = defaultColumnValues.Where(x => x.FolderRelativePath == defaultColumnValue.FolderRelativePath);
+
+                // Only URL encode the spaces. Other special characters should stay as they are or it will not work.
+                path = path.Replace(" ", "%20");
+
+                var xATag = new XElement("a", new XAttribute("href", path));
+
+                foreach (var defaultColumnValueInSamePath in defaultColumnValuesInSamePath)
+                {
+                    var fieldName = defaultColumnValueInSamePath.FieldInternalName;
+                    var xDefaultValue = new XElement("DefaultValue", new XAttribute("FieldName", fieldName));
+                    xDefaultValue.SetValue(defaultColumnValueInSamePath.DefaultValue);
+                    xATag.Add(xDefaultValue);
+
+                    values.Remove(defaultColumnValueInSamePath);
+                }
+                xMetadataDefaults.Add(xATag);
+            }
+
+            var xmlSb = new StringBuilder();
+            XmlWriterSettings xmlSettings = new XmlWriterSettings
+            {
+                OmitXmlDeclaration = true,
+                NewLineHandling = NewLineHandling.None,
+                Indent = false
+            };
+
+            using (var xmlWriter = XmlWriter.Create(xmlSb, xmlSettings))
+            {
+                xMetadataDefaults.Save(xmlWriter);
+            }
+
+            // Get the folder to add the defaults file to
+            var formsFolder = await PnPContext.Web.GetFolderByServerRelativeUrlAsync($"{listInfo.RootFolder.ServerRelativeUrl}/Forms", p => p.Files).ConfigureAwait(false);
+
+            // Add defaults file
+            using (var stream = GenerateStreamFromString(xmlSb.ToString()))
+            {
+                await formsFolder.Files.AddAsync(defaultValuesFileName, stream, true).ConfigureAwait(false);
+            }
+
+            // Verify the needed event receiver has been configured
+            var locationBasedMetadataDefaultsReceiver = listInfo.EventReceivers.AsRequested()
+                                                                      .FirstOrDefault(p => p.ReceiverName == "LocationBasedMetadataDefaultsReceiver ItemAdded" && 
+                                                                                      p.EventType == EventReceiverType.ItemAdded);
+            if (locationBasedMetadataDefaultsReceiver == null)
+            {
+                await listInfo.EventReceivers.AddAsync(new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdded,
+                    Synchronization = EventReceiverSynchronization.Synchronous,
+                    SequenceNumber = 1000,
+                    ReceiverName = "LocationBasedMetadataDefaultsReceiver ItemAdded",
+                    ReceiverAssembly = "Microsoft.Office.DocumentManagement, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c",
+                    ReceiverClass = "Microsoft.Office.DocumentManagement.LocationBasedMetadataDefaultsReceiver"
+                }).ConfigureAwait(false);
+            }
+
+        }
+
+        public void SetDefaultColumnValues(List<DefaultColumnValueOptions> defaultColumnValues)
+        {
+            SetDefaultColumnValuesAsync(defaultColumnValues).GetAwaiter().GetResult();
+        }
+
+        public List<DefaultColumnValueOptions> GetDefaultColumnValues()
+        {
+            return GetDefaultColumnValuesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ClearDefaultColumnValuesAsync()
+        {
+            var listInfo = await GetAsync(p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl)).ConfigureAwait(false);
+
+            string defaultValuesFile = $"{listInfo.RootFolder.ServerRelativeUrl}/Forms/{defaultValuesFileName}";
+
+            try
+            {
+                // Get the default values file
+                var defaultValueFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync(defaultValuesFile).ConfigureAwait(false);
+
+                // Reset file contents
+                await defaultValueFile.DeleteAsync().ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+
+                if (File.ErrorIndicatesFileDoesNotExists(error))
+                {
+                    PnPContext.Logger.LogInformation($"Provided {defaultValuesFileName} file does not exist...no default values to reset");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void ClearDefaultColumnValues()
+        {
+            ClearDefaultColumnValuesAsync().GetAwaiter().GetResult();
+        }
+
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
         #endregion
 
         #endregion

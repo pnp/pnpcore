@@ -74,14 +74,20 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning disable CA2208 // Instantiate argument exceptions correctly
                 throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.EventType)}");
             }
+
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverName))
             {
                 throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverName)}");
             }
+
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverUrl))
             {
-                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverUrl)}");
+                if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverAssembly) || string.IsNullOrEmpty(eventReceiverOptions.ReceiverClass))
+                {
+                    throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverUrl)}");
+                }
             }
+
             if (eventReceiverOptions.SequenceNumber < 1)
             {
                 throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.SequenceNumber)}");
