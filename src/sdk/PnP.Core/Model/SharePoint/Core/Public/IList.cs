@@ -777,6 +777,43 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Boolean that says if the user has permissions or not</returns>
         Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind);
 
+        /// <summary>
+        /// Gets a list of default column values set (at folder level) for this library
+        /// </summary>
+        /// <returns>List of default column values</returns>
+        Task<List<DefaultColumnValueOptions>> GetDefaultColumnValuesAsync();
+
+        /// <summary>
+        /// Gets a list of default column values set (at folder level) for this library 
+        /// </summary>
+        /// <returns>List of default column values</returns>
+        List<DefaultColumnValueOptions> GetDefaultColumnValues();
+
+        /// <summary>
+        /// Clears the default column values set (at folder level) for this library
+        /// </summary>
+        /// <returns></returns>
+        Task ClearDefaultColumnValuesAsync();
+
+        /// <summary>
+        /// Clears the default column values set (at folder level) for this library
+        /// </summary>
+        /// <returns></returns>
+        void ClearDefaultColumnValues();
+
+        /// <summary>
+        /// Sets the default column value settings (at folder level) for this library
+        /// </summary>
+        /// <param name="defaultColumnValues">List with default column values to set</param>
+        /// <returns></returns>
+        Task SetDefaultColumnValuesAsync(List<DefaultColumnValueOptions> defaultColumnValues);
+
+        /// <summary>
+        /// Sets the default column value settings (at folder level) for this library
+        /// </summary>
+        /// <param name="defaultColumnValues">List with default column values to set</param>
+        /// <returns></returns>
+        void SetDefaultColumnValues(List<DefaultColumnValueOptions> defaultColumnValues);
         #endregion
     }
 }

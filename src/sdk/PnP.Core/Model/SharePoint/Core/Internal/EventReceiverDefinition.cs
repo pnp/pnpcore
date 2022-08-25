@@ -29,8 +29,8 @@ namespace PnP.Core.Model.SharePoint
                     eventReceiverOptions.ReceiverUrl,
                     eventReceiverOptions.SequenceNumber,
                     eventReceiverOptions.Synchronization,
-                    ReceiverAssembly = (string)null,
-                    ReceiverClass = (string)null
+                    eventReceiverOptions.ReceiverAssembly,
+                    eventReceiverOptions.ReceiverClass
                 }.AsExpando();
 
                 string body = JsonSerializer.Serialize(eventReceiverCreationInformation, typeof(ExpandoObject));

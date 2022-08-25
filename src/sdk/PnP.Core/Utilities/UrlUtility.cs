@@ -56,6 +56,17 @@ namespace PnP.Core
             return new Uri(CombineInternal(path, relative));
         }
 
+        /// <summary>
+        /// Combines a path and a relative path.
+        /// </summary>
+        /// <param name="path">A SharePoint URL</param>
+        /// <param name="relative">SharePoint relative URL</param>
+        /// <returns>Returns combined path with a relative path</returns>
+        internal static string CombineAsString(string path, string relative)
+        {
+            return CombineInternal(path, relative);
+        }
+
         private static string CombineInternal(string path, string relative)
         {
             if (relative == null)

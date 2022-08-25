@@ -16,6 +16,16 @@
         public string ReceiverName { get; set; }
 
         /// <summary>
+        /// Assembly holding the event receiver code
+        /// </summary>
+        public string ReceiverAssembly { get; set; }
+
+        /// <summary>
+        /// Class containing the event receiver code
+        /// </summary>
+        public string ReceiverClass { get; set; }
+
+        /// <summary>
         /// Url of the event receiver.
         /// </summary>
         public string ReceiverUrl { get; set; }
