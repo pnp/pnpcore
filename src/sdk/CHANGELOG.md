@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add KANBAN to the ViewType2 enum #930 [martinlingstuyl - Martin Lingstuyl]
 - Add MODERNCALENDAR  to the ViewType2 enum #939 [martinlingstuyl - Martin Lingstuyl]
 - Fix search sort direction with new POST approach #937 [lroos - Llewellyn Roos]
+- Ensure the Name property is loaded #955 [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
