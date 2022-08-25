@@ -3074,6 +3074,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.DefaultColumnValueOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.DefaultColumnValueOptions.html",
+          "hash": "0T7jJtM7uAzfqWZJI73f8URur/GGjMh+emE92jKayjo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.DefaultWebPart.yml",
       "output": {
         ".html": {
@@ -3114,7 +3126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.EventReceiverOptions.html",
-          "hash": "B6WBonrQ5wn251fzubCKv+yU3rIMipX5GqNiDQa8bMg="
+          "hash": "PPnKOYU7WtqqE1/FhSGQAUprT9XxVvTB39cBgaB+C/M="
         }
       },
       "is_incremental": false,
@@ -4434,7 +4446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "LECvD36Je6bVQFG/OtOBmPorgA8Fxcl2rO67rdcdLuQ="
+          "hash": "7tHNY+uzdmt9H+9aE8Am04mXetpGDpCHUNzPfk82lNA="
         }
       },
       "is_incremental": false,
@@ -6174,7 +6186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "1DKFadQz1d6/hOSdsrZil9omBAR78i9atpanuVO38xk="
+          "hash": "blHgPick2ne9BmI4vN4j0aSJ++5O3HfQjkuwdEtSvDY="
         }
       },
       "is_incremental": false,
@@ -8142,7 +8154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "WniI8vQXyM9ob+xFcILjmzd24yiA+b7mrB5ENxhDR0M="
+          "hash": "YgOYqdsIeHVDJK2qxEfn/KE848NjdifML59+rigTeJY="
         }
       },
       "is_incremental": false,
@@ -10012,7 +10024,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 676,
+          "total_file_count": 677,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
