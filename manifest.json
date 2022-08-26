@@ -4326,7 +4326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "kktwuVdffqFFh1lUalJlygdo7L8WuVgLN2PXtwR02f8="
+          "hash": "gVu2IAn7wSBmkiZJNB/FgqdR4sEkUyZdFIfkD0/dFCs="
         }
       },
       "is_incremental": false,
@@ -4446,7 +4446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "7tHNY+uzdmt9H+9aE8Am04mXetpGDpCHUNzPfk82lNA="
+          "hash": "VtIdT/ROq3wRnBS8856n70+E/+glwHqsNAQeFrgiRAE="
         }
       },
       "is_incremental": false,
@@ -5274,7 +5274,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "7Kw5Sua8fHOCjqbKw5wBBeX0zLb3SQ+96QQQEwHYqDc="
+          "hash": "7hnKNwdMcP+I06hqKqyVeu6LCRbLbxPNxBaeuxg/sZc="
         }
       },
       "is_incremental": false,
