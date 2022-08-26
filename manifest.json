@@ -7946,6 +7946,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.IPnPContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.IPnPContext.html",
+          "hash": "4gwuN4XX3VOmXEx6mGSkac2tSMSZjBTb6UbPAjXmggk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.IPnPContextFactory.yml",
       "output": {
         ".html": {
@@ -7986,7 +7998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "ZpBygHmeyCA2t36IWWviPPjC/AQx4QC4pF+4yajOFMc="
+          "hash": "PzK3ZEysZJOhnIiBrWfEYRYQpThedcveVgPRJrNo58Q="
         }
       },
       "is_incremental": false,
@@ -8094,7 +8106,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "qDv40Fjr2Lii22dZweBV2WRkctJNJf+frGcG8Md6jt8="
+          "hash": "/cXvWejp0cLz4TROO4YDA+X3xsBUG/xEK4CexwBOvFI="
         }
       },
       "is_incremental": false,
@@ -8154,7 +8166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "YgOYqdsIeHVDJK2qxEfn/KE848NjdifML59+rigTeJY="
+          "hash": "2Y8QfGQgatnTCEUs9Km6D8wAho83pq848u9id8drPBU="
         }
       },
       "is_incremental": false,
@@ -10024,7 +10036,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 677,
+          "total_file_count": 678,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
