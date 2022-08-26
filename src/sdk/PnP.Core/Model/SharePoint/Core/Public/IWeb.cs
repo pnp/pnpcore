@@ -1383,6 +1383,21 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Reindex web
+        /// <summary>
+        /// Reindexes this web
+        /// </summary>
+        /// <returns></returns>
+        Task ReIndexAsync();
+
+        /// <summary>
+        /// Reindexes this web
+        /// </summary>
+        /// <returns></returns>
+        void ReIndex();
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

@@ -1,4 +1,5 @@
-﻿using PnP.Core.Model.Security;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -1999,6 +2000,65 @@ namespace PnP.Core.Model.SharePoint
             return basePermissions.Has(permissionKind);
         }
 
+        #endregion
+
+        #region Reindex web
+        public async Task ReIndexAsync()
+        {
+            var webInfo = await GetAsync(p => p.EffectiveBasePermissions, 
+                                         p => p.AllProperties, 
+                                         p => p.Lists.QueryProperties(p => p.Title,
+                                                                      p => p.NoCrawl, 
+                                                                      p => p.RootFolder.QueryProperties(p => p.Properties))).ConfigureAwait(false);
+
+            const string reIndexKey = "vti_searchversion";
+
+            // Definition of no-script is not having the AddAndCustomizePages permission
+            if (!webInfo.EffectiveBasePermissions.Has(PermissionKind.AddAndCustomizePages))
+            {
+                // NoScript site, reindex each list separately
+                foreach (var list in webInfo.Lists.AsRequested())
+                {
+                    if (list.NoCrawl)
+                    {
+                        PnPContext.Logger.LogInformation($"List {list.Title} is configured as NoCrawl, reindex request will be skipped.");
+                    }
+                    else
+                    {
+                        int searchVersion = 0;
+
+                        if (list.RootFolder.Properties.Values.ContainsKey(reIndexKey))
+                        {
+                            searchVersion = list.RootFolder.Properties.GetInteger(reIndexKey, 0);
+                        }
+
+                        list.RootFolder.Properties.Values[reIndexKey] = searchVersion + 1;
+
+                        await list.RootFolder.Properties.UpdateAsync().ConfigureAwait(false);
+                    }
+                }
+            }
+            else
+            {
+                // Regular site, we can reindex the site in one go
+
+                int searchVersion = 0;
+
+                if (webInfo.AllProperties.Values.ContainsKey(reIndexKey))
+                {
+                    searchVersion = webInfo.AllProperties.GetInteger(reIndexKey, 0);
+                }
+
+                webInfo.AllProperties.Values[reIndexKey] = searchVersion + 1;
+
+                await webInfo.AllProperties.UpdateAsync().ConfigureAwait(false);
+            }
+        }
+
+        public void ReIndex()
+        {
+            ReIndexAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

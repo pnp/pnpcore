@@ -2043,5 +2043,28 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Reindex tests
+        
+        [TestMethod]
+        public async Task ReIndexNoScriptSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.ReIndex();
+            }
+        }
+
+        [TestMethod]
+        public async Task ReIndexRegularSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                context.Web.ReIndex();
+            }
+        }
+        #endregion
     }
 }

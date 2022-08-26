@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -2047,6 +2048,49 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #endregion
+
+        #region reindex tests
+        [TestMethod]
+        public async Task ReIndexListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ReIndexListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    // Reindex the list 
+                    myList.ReIndex();
+
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        Thread.Sleep(2000); 
+                    }
+
+                    // Reindex again
+                    myList.ReIndex();
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
         #endregion
     }
 }

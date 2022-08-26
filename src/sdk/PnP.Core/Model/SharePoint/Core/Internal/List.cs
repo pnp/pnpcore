@@ -1629,6 +1629,40 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Reindex list
+        public async Task ReIndexAsync()
+        {
+            var listInfo = await GetAsync(p => p.Title, p => p.NoCrawl, p => p.RootFolder).ConfigureAwait(false);
+
+            if (listInfo.NoCrawl)
+            {
+                // bail out
+                PnPContext.Logger.LogInformation($"List {listInfo.Title} is configured as NoCrawl, reindex request will be skipped.");
+                return;
+            }
+
+            // Load the properties
+            await listInfo.RootFolder.EnsurePropertiesAsync(p => p.Properties).ConfigureAwait(false);
+
+            const string reIndexKey = "vti_searchversion";
+            int searchVersion = 0;
+
+            if (listInfo.RootFolder.Properties.Values.ContainsKey(reIndexKey))
+            {
+                searchVersion = listInfo.RootFolder.Properties.GetInteger(reIndexKey, 0);
+            }
+
+            listInfo.RootFolder.Properties.Values[reIndexKey] = searchVersion + 1;
+
+            await listInfo.RootFolder.Properties.UpdateAsync().ConfigureAwait(false);
+        }
+
+        public void ReIndex()
+        {
+            ReIndexAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

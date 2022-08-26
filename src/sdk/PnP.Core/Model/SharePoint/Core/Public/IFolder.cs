@@ -84,7 +84,7 @@ namespace PnP.Core.Model.SharePoint
         public IFolder ParentFolder { get; }
 
         /// <summary>
-        /// Gets the collection of all files contained in the folder.
+        /// Gets the collection of all properties defined for this folder.
         /// </summary>
         public IPropertyValues Properties { get; }
 

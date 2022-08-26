@@ -814,6 +814,18 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="defaultColumnValues">List with default column values to set</param>
         /// <returns></returns>
         void SetDefaultColumnValues(List<DefaultColumnValueOptions> defaultColumnValues);
+
+        /// <summary>
+        /// Reindexes this list
+        /// </summary>
+        /// <returns></returns>
+        Task ReIndexAsync();
+
+        /// <summary>
+        /// Reindexes this list
+        /// </summary>
+        /// <returns></returns>
+        void ReIndex();
         #endregion
     }
 }
