@@ -18,7 +18,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// PnP Context class...the glue between the model and the data stores
     /// </summary>
-    public class PnPContext : IDisposable
+    public class PnPContext : IDisposable, IPnPContext
     {
         #region Private fields
 
@@ -416,54 +416,6 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
-
-        #region Mocking support
-        /// <summary>
-        /// Returns a <see cref="PnPContext"/> instance mock that can be used for testing
-        /// </summary>
-        /// <param name="uri">Uri of the site to mock the context for</param>
-        /// <returns>Mocked <see cref="PnPContext"/></returns>
-        public static PnPContext NewPnPContextMock(Uri uri)
-        {
-            return PnPContext.NewPnPContextMock(uri, null, null, null, null, null, null);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="PnPContext"/> instance mock that can be used for testing
-        /// </summary>
-        /// <param name="uri">Uri of the site to mock the context for</param>
-        /// <param name="logger">Connected <see cref="ILogger"/></param>
-        /// <param name="authenticationProvider">Connected <see cref="IAuthenticationProvider"/></param>
-        /// <param name="sharePointRestClient">Connected <see cref="SharePointRestClient"/></param>
-        /// <param name="microsoftGraphClient">Connected <see cref="MicrosoftGraphClient"/></param>
-        /// <param name="contextOptions">Context factory options</param>
-        /// <param name="globalOptions">Global options</param>
-        /// <returns>Mocked <see cref="PnPContext"/></returns>
-        public static PnPContext NewPnPContextMock(Uri uri,
-                                                   ILogger logger,
-                                                   IAuthenticationProvider authenticationProvider,
-                                                   SharePointRestClient sharePointRestClient,
-                                                   MicrosoftGraphClient microsoftGraphClient,
-                                                   PnPContextFactoryOptions contextOptions,
-                                                   PnPGlobalSettingsOptions globalOptions)
-        {
-
-            if (contextOptions == null)
-            {
-                contextOptions = new PnPContextFactoryOptions();
-            }
-
-            if (globalOptions == null)
-            {
-                globalOptions = new PnPGlobalSettingsOptions();
-            }
-
-            return new PnPContext(logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, null)
-            {
-                Uri = uri
-            };
-        }
         #endregion
 
         #region Public Methods   
