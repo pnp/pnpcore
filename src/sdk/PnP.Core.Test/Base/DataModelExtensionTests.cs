@@ -154,6 +154,28 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task EnsurePropertiesModelWithInclude()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.Title);
+
+                Assert.IsFalse(list.IsPropertyAvailable(p => p.RootFolder));
+
+                // Load the RootFolder property with an include
+                await list.EnsurePropertiesAsync(p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl));
+
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.RootFolder));
+                Assert.IsTrue(list.RootFolder.IsPropertyAvailable(p => p.ServerRelativeUrl));
+
+                // Are other properties still not available
+                Assert.IsFalse(list.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsFalse(list.RootFolder.IsPropertyAvailable(p => p.IsWOPIEnabled));
+            }
+        }
+
+        [TestMethod]
         public async Task EnsurePropertiesCollectionWithIncludePartiallyLoaded()
         {
             //TestCommon.Instance.Mocking = false;
@@ -178,6 +200,29 @@ namespace PnP.Core.Test.Base
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.AsRequested().First().IsPropertyAvailable(p => p.TemplateFeatureId));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsurePropertiesModelWithIncludePartiallyLoaded()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.Title, p => p.RootFolder);
+
+                Assert.IsTrue(list.RootFolder.IsPropertyAvailable(p => p.ServerRelativeUrl));
+                Assert.IsFalse(list.RootFolder.IsPropertyAvailable(p => p.Properties));
+
+                // Load the RootFolder property with an include
+                await list.EnsurePropertiesAsync(p => p.RootFolder.QueryProperties(p => p.Properties));
+
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.RootFolder));
+                Assert.IsTrue(list.RootFolder.IsPropertyAvailable(p => p.ServerRelativeUrl));
+                Assert.IsTrue(list.RootFolder.IsPropertyAvailable(p => p.Properties));
+
+                // Are other properties still not available
+                Assert.IsFalse(list.IsPropertyAvailable(p => p.TemplateType));
             }
         }
 

@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add MODERNCALENDAR  to the ViewType2 enum #939 [martinlingstuyl - Martin Lingstuyl]
 - Fix search sort direction with new POST approach #937 [lroos - Llewellyn Roos]
 - Ensure the Name property is loaded #955 [jansenbe - Bert Jansen]
+- VerifyProperties fails to detect other model types loaded via `QueryProperties` as dirty #961 [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
