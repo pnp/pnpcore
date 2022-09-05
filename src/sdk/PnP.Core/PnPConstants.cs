@@ -85,7 +85,7 @@ namespace PnP.Core
         /// <summary>
         /// Next link in SharePoint REST
         /// </summary>
-        internal const string SharePointRestListItemNextLink = "__next";
+        internal const string SharePointRestListItemNextLink = "odata.nextLink";
 
         /// <summary>
         /// Metadata property in SharePoint REST
@@ -93,18 +93,67 @@ namespace PnP.Core
         internal const string SharePointRestMetadata = "__metadata";
 
         /// <summary>
+        /// Id of the generic request module
+        /// </summary>
+        internal static Guid GenericRequestModuleId = Guid.Parse("{711CA09B-92E7-4A45-BB4C-E6422632E7F0}");
+
+        /// <summary>
+        /// Id of the custom header request module
+        /// </summary>
+        internal static Guid CustomHeadersModuleId = Guid.Parse("{46307280-190E-4365-8AA1-085C451E7799}");
+
+        /// <summary>
+        /// SPRequestGuid SharePoint REST response header
+        /// </summary>
+        internal const string SPRequestGuidHeader = "SPRequestGuid";
+
+        /// <summary>
+        /// SPClientServiceRequestDuration SharePoint REST response header
+        /// </summary>
+        internal const string SPClientServiceRequestDurationHeader = "SPClientServiceRequestDuration";
+
+        /// <summary>
+        /// X-SharePointHealthScore SharePoint REST response header
+        /// </summary>
+        internal const string XSharePointHealthScoreHeader = "X-SharePointHealthScore";
+
+        /// <summary>
+        /// X-SP-SERVERSTATE SharePoint REST response header
+        /// </summary>
+        internal const string XSPServerStateHeader = "X-SP-SERVERSTATE";
+
+        /// <summary>
+        /// The string absolute path of the Content Type Hub
+        /// </summary>
+        internal const string ContentTypeHubUrl = "/sites/contenttypehub";
+
+
+        #region Json serializers options
+
+        /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true
         /// See https://github.com/dotnet/runtime/issues/38982 and https://www.meziantou.net/avoid-performance-issue-with-jsonserializer-by-reusing-the-same-instance-of-json.htm
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues = new JsonSerializerOptions() { IgnoreNullValues = true };
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues = new JsonSerializerOptions
+        {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+#else
+            IgnoreNullValues = true
+#endif
+        };
 
         /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true and PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions() 
-        { 
-            IgnoreNullValues = true, 
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase 
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions()
+        {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
+            IgnoreNullValues = true,
+#endif
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         /// <summary>
@@ -120,13 +169,17 @@ namespace PnP.Core
         /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true with JsonStringEnumConverter
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions() 
-        { 
-            IgnoreNullValues = true, 
-            Converters = 
-            { 
-                new JsonStringEnumConverter() 
-            } 
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions()
+        {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
+            IgnoreNullValues = true,
+#endif
+            Converters =
+            {
+                new JsonStringEnumConverter()
+            }
         };
 
         /// <summary>
@@ -137,7 +190,7 @@ namespace PnP.Core
             Converters = { new JsonStringEnumConverter() },
             WriteIndented = false,
             // For some reason the naming policy is not applied on ExpandoObjects
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         /// <summary>
@@ -167,12 +220,18 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_SharePointRestCollectionJsonConverter_JsonStringEnumConverter = new JsonSerializerOptions()
         {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
             IgnoreNullValues = true,
+#endif
             Converters =
             {
                 new SharePointRestCollectionJsonConverter<string>(),
                 new JsonStringEnumConverter(allowIntegerValues:false)
             }
         };
+
+#endregion
     }
 }

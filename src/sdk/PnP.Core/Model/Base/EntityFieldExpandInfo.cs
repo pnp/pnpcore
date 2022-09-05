@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Holds information that describes how a fields is expanded. Is populated when .QueryProperties() is used 
     /// </summary>
-    internal class EntityFieldExpandInfo
+    internal sealed class EntityFieldExpandInfo
     {
         public string Name { get; set; }
         public Type Type { get; set; }

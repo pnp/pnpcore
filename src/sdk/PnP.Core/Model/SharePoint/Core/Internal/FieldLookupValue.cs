@@ -6,17 +6,38 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldLookupValue : FieldValue, IFieldLookupValue
+    /// <summary>
+    /// Represents a lookup field value
+    /// </summary>
+    public class FieldLookupValue : FieldValue, IFieldLookupValue
     {
         internal FieldLookupValue() : base()
         {
         }
 
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="lookupId">Id of the looked-up item</param>
+        public FieldLookupValue(int lookupId) : this()
+        {
+            if (lookupId < -1)
+            {
+                throw new ArgumentNullException(nameof(lookupId));
+            }
+            
+            LookupId = lookupId;
+        }
+        
         internal override string SharePointRestType => "";
 
         internal override Guid CsomType => Guid.Parse("f1d34cc0-9b50-4a78-be78-d5facfcccfb7");
 
-        public int LookupId 
+        /// <summary>
+        /// Id of the looked-up item
+        /// </summary>
+        public int LookupId
         {
             get
             {
@@ -27,51 +48,59 @@ namespace PnP.Core.Model.SharePoint
 
                 return GetValue<int>();
             }
-            
-            set => SetValue(value); 
+
+            set => SetValue(value);
         }
 
-        public string LookupValue { get => GetValue<string>(); set => SetValue(value); }
+        /// <summary>
+        /// Value of the key property of the looked-up item
+        /// </summary>
+        public string LookupValue { get => GetValue<string>(); internal set => SetValue(value); }
 
-        public bool IsSecretFieldValue { get => GetValue<bool>(); set => SetValue(value); }
+        /// <summary>
+        /// Is the value a secret value?
+        /// </summary>
+        public bool IsSecretFieldValue { get => GetValue<bool>(); internal set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)
         {
             if (json.ValueKind == JsonValueKind.Number)
             {
                 LookupId = json.GetInt32();
-
-                // Clear changes
-                Commit();
-
-                return this;
             }
             else
             {
-                return null;
+                LookupId = -1;
             }
+
+            // Clear changes
+            Commit();
+
+            return this;
         }
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
             if (!properties.ContainsKey("lookupId"))
             {
-                return null;
+                LookupId = -1;
             }
-
-            if (properties.ContainsKey("lookupId"))
+            else
             {
-                LookupId = int.Parse(properties["lookupId"]);
-            }
+                if (properties.ContainsKey("lookupId"))
+                {
+                    LookupId = int.Parse(properties["lookupId"]);
+                }
 
-            if (properties.ContainsKey("lookupValue"))
-            {
-                LookupValue = properties["lookupValue"];
-            }
+                if (properties.ContainsKey("lookupValue"))
+                {
+                    LookupValue = properties["lookupValue"];
+                }
 
-            if (properties.ContainsKey("isSecretFieldValue"))
-            {
-                IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
+                if (properties.ContainsKey("isSecretFieldValue"))
+                {
+                    IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
+                }
             }
 
             // Clear changes

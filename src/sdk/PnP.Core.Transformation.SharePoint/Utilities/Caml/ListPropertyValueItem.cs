@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents an item to be used by ListProperty value.
     /// </summary>
-    public class ListPropertyValueItem
+    internal class ListPropertyValueItem
     {
         /// <summary>
         /// True to surround text with anchor tags if the text appears like a

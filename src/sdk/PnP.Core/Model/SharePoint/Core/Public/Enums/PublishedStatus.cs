@@ -9,7 +9,7 @@
         /// File is published
         /// </summary>
         Published = 1,
-    
+
         /// <summary>
         /// File is in draft
         /// </summary>

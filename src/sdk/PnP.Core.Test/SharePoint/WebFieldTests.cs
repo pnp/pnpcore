@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -604,5 +605,276 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNull(fieldToFind);
             }
         }
+
+        [TestMethod]
+        public async Task TaxonomyFieldPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                await group.LoadAsync(g => g.Sets);
+                var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+                var fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                await context.Web.Fields.AddTaxonomyAsync(fieldTitle, new FieldTaxonomyOptions
+                {
+                    TermSetId = new Guid(termSet.Id),
+                    TermStoreId = new Guid(termStore.Id),
+                });
+
+                // request it again, since not all properties are mapped on the initail creation request
+                var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                Assert.IsTrue(newField.IsTermSetValid);
+
+                var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+
+                foreach (var field in fieldsToDelete)
+                {
+                    field.Delete();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddTaxonomyFieldWithDefaultsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {                
+
+                try
+                {
+                    var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                    var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                    await group.LoadAsync(g => g.Sets);
+                    var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+                    await termSet.LoadAsync(p => p.Terms);
+
+                    ITerm term1 = termSet.Terms.AsRequested().First();
+                    ITerm term2 = termSet.Terms.AsRequested().Last();
+
+                    var fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                    await context.Web.Fields.AddTaxonomyAsync(fieldTitle, new FieldTaxonomyOptions
+                    {
+                        TermSetId = new Guid(termSet.Id),
+                        TermStoreId = new Guid(termStore.Id),  
+                        DefaultValue = term1
+                    });
+
+                    // request it again, since not all properties are mapped on the initail creation request
+                    var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term1.Id}"));
+
+                    // Update the default value
+                    newField.DefaultValue = $"-1;#{term2.Labels.First(p => p.IsDefault == true).Name}|{term2.Id}";
+                    await newField.UpdateAsync();
+
+                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term2.Id}"));
+
+                    fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                    await context.Web.Fields.AddTaxonomyMultiAsync(fieldTitle, new FieldTaxonomyOptions
+                    {
+                        TermSetId = new Guid(termSet.Id),
+                        TermStoreId = new Guid(termStore.Id),
+                        DefaultValues = new System.Collections.Generic.List<ITerm>() { term1, term2 }
+                    });
+
+                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term1.Id}"));
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term2.Id}"));
+
+                }
+                finally
+                {
+                    var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+
+                    foreach (var field in fieldsToDelete)
+                    {
+                        field.Delete();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddOpenTaxonomyFieldTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                try
+                {
+                    var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                    var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                    await group.LoadAsync(g => g.Sets);
+                    var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+                    await termSet.LoadAsync(p => p.Terms);
+
+                    ITerm term1 = termSet.Terms.AsRequested().First();
+                    ITerm term2 = termSet.Terms.AsRequested().Last();
+
+                    var fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                    await context.Web.Fields.AddTaxonomyAsync(fieldTitle, new FieldTaxonomyOptions
+                    {
+                        TermSetId = new Guid(termSet.Id),
+                        TermStoreId = new Guid(termStore.Id),
+                        OpenTermSet = true
+                    });
+
+                    // request it again, since not all properties are mapped on the initail creation request
+                    var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.Open);
+                }
+                finally
+                {
+                    var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+
+                    foreach (var field in fieldsToDelete)
+                    {
+                        field.Delete();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebFieldAndPropagateChanges()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = null;
+                IList addedList = null;
+
+                try
+                {
+                    // Create field
+                    addedField = await context.Web.Fields.AddTextAsync("PropagateFieldChanges", new FieldTextOptions());
+
+                    // Create list and add field
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("AddWebFieldAndPropagateChanges");
+                    addedList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && addedList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (addedList == null)
+                    {
+                        addedList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add field
+                    var listField = addedList.Fields.AddFieldAsXml(addedField.SchemaXml);
+
+                    // Set default value
+                    addedField.DefaultValue = "B";
+
+                    // Push update of added field, will also trigger update of the list field
+                    addedField.UpdateAndPushChanges();
+
+                    // Load the list field again
+                    var listFieldReloaded = addedList.Fields.QueryProperties(p => p.DefaultValue).FirstOrDefault(p => p.Id == addedField.Id);
+
+                    // Check if the default value has been updated on the field in the list
+                    Assert.IsTrue(listFieldReloaded.DefaultValue.ToString() == "B");
+
+                }
+                finally
+                {
+                    if (addedList != null)
+                    {
+                        await addedList.DeleteAsync();
+                    }
+
+                    await addedField.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebFieldAndPropagateChangesBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = null;
+                IList addedList = null;
+
+                try
+                {
+                    // Create field
+                    addedField = await context.Web.Fields.AddTextAsync("PropagateChangesBatch", new FieldTextOptions());
+
+                    // Create list and add field
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("AddWebFieldAndPropagateChangesBatch");
+                    addedList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && addedList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (addedList == null)
+                    {
+                        addedList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add field
+                    var listField = addedList.Fields.AddFieldAsXml(addedField.SchemaXml);
+
+                    // Set default value
+                    addedField.DefaultValue = "B";
+
+                    // Push update of added field, will also trigger update of the list field
+                    addedField.UpdateAndPushChangesBatch();
+
+                    // Execute the batch
+                    context.Execute();
+
+                    // Load the list field again
+                    var listFieldReloaded = addedList.Fields.QueryProperties(p => p.DefaultValue).FirstOrDefault(p => p.Id == addedField.Id);
+
+                    // Check if the default value has been updated on the field in the list
+                    Assert.IsTrue(listFieldReloaded.DefaultValue.ToString() == "B");
+
+                }
+                finally
+                {
+                    if (addedList != null)
+                    {
+                        await addedList.DeleteAsync();
+                    }
+
+                    await addedField.DeleteAsync();
+                }
+            }
+        }
+
     }
 }

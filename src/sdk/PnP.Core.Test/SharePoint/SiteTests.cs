@@ -1,6 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -12,7 +16,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -122,11 +126,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(site);
                 Assert.AreEqual(SearchBoxInNavBar.Inherit, site.SearchBoxInNavBar);
                 Assert.IsNull(site.SearchBoxPlaceholderText);
-                Assert.IsNull(site.SensitivityLabelId);
-                Assert.AreEqual(default, site.SensitivityLabel);
+                Assert.IsTrue(site.SensitivityLabelId == Guid.Empty);
+                Assert.IsTrue(site.SensitivityLabel == "");
                 Assert.AreNotEqual("", site.ServerRelativeUrl);
-                Assert.IsFalse(site.ShareByEmailEnabled);
-                Assert.IsFalse(site.ShareByLinkEnabled);
+                // outcome depends on tenant level settings...just hit the properties
+                Assert.IsTrue(site.ShareByEmailEnabled == true || site.ShareByEmailEnabled == false);
+                Assert.IsTrue(site.ShareByLinkEnabled == true || site.ShareByLinkEnabled == false);
                 Assert.IsFalse(site.ShowPeoplePickerSuggestionsForGuestUsers);
                 Assert.IsFalse(site.SocialBarOnSitePagesDisabled);
                 Assert.IsNull(site.StatusBarLink);
@@ -167,7 +172,831 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var changesBatch = context.Site.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+
+                context.Execute();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+
+                Assert.IsTrue(changesBatch.Count > 0);
+
             }
         }
+
+        [TestMethod]
+        public async Task ComplianceTagTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Check if the compliance tag is also visible at site level
+                var complianceTags = context.Site.GetAvailableComplianceTags();
+
+                Assert.IsTrue(complianceTags != null);
+                Assert.IsTrue(complianceTags.Any() == true);
+            }
+        }
+
+        [TestMethod]
+        public async Task CheckHomeSite_Positive()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.HomeTestSite))
+            {
+                Assert.IsTrue(context.Site.IsHomeSite());
+            }
+        }
+
+        [TestMethod]
+        public async Task CheckHomeSite_Negative()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Site.IsHomeSite());
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJobAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = false,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    // Check if file has been moved
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile movedFile = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
+
+                    Assert.IsNotNull(movedFile);
+                    Assert.AreEqual(documentName, movedFile.Name);
+
+                    // Clean up
+                    await movedFile.DeleteAsync();
+                }
+
+            }
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.TestSite);
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJobMultipleDocumentsAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string firstDocumentName, string firstDocumentUrl) = await TestAssets.CreateTestDocumentAsync(0, fileName: "FirstFile.docx");
+            (_, string secondDocumentName, string secondDocumentUrl) = await TestAssets.CreateTestDocumentAsync(1, fileName: "SecondFile.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                {
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + firstDocumentName, context.Uri + "/Shared Documents/" + secondDocumentName };
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = false,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    // Check for copied files on target library
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile firstMovedFile = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{firstDocumentName}");
+                    IFile secondMovedFile = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{secondDocumentName}");
+                    Assert.IsNotNull(firstMovedFile);
+                    Assert.IsNotNull(secondMovedFile);
+                    Assert.AreEqual(firstMovedFile.Name, firstDocumentName);
+                    Assert.AreEqual(secondMovedFile.Name, secondDocumentName);
+
+                    // Clean up
+                    await firstMovedFile.DeleteAsync();
+                    await secondMovedFile.DeleteAsync();
+                }
+            }
+            await TestAssets.CleanupTestDocumentAsync(4, fileName: firstDocumentName, contextConfig: TestCommon.TestSite);
+            await TestAssets.CleanupTestDocumentAsync(5, fileName: secondDocumentName, contextConfig: TestCommon.TestSite);
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJob()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+                    var copyJob = context.Site.CreateCopyJobs(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = false,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    context.Site.EnsureCopyJobHasFinished(copyJob, delay);
+
+                    // Check if file has been moved
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile movedFile = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
+
+                    Assert.IsNotNull(movedFile);
+                    Assert.AreEqual(documentName, movedFile.Name);
+
+                    // Clean up
+                    await movedFile.DeleteAsync();
+                }
+
+            }
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.TestSite);
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJobInSameSiteCollection()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IList documentLibrary = await context.Web.Lists.AddAsync("TestLibrary", ListTemplateType.DocumentLibrary);
+
+                string destinationAbsoluteUrl = $"{context.Uri}/TestLibrary";
+                var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+                var copyJob = context.Site.CreateCopyJobs(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                {
+                    AllowSchemaMismatch = true,
+                    AllowSmallerVersionLimitOnDestination = true,
+                    IgnoreVersionHistory = true,
+                    IsMoveMode = false,
+                    BypassSharedLock = true,
+                    ExcludeChildren = true,
+                    NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                });
+
+                int delay = 1;
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    delay = 0;
+                }
+
+                context.Site.EnsureCopyJobHasFinished(copyJob, delay);
+
+                // Check if file has been copied.
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocumentCopied = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace("Shared Documents", "TestLibrary"));
+
+                Assert.IsNotNull(testDocument);
+                Assert.IsNotNull(testDocumentCopied);
+                Assert.AreEqual(testDocument.Name, testDocumentCopied.Name);
+
+                await documentLibrary.DeleteAsync();
+            }
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.TestSite);
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJobFolderAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 0))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 1))
+                {
+                    IFolder folderToCopy = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddFolderAsync("Test folder");
+                    (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(2, parentFolder: folderToCopy);
+                    
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + folderToCopy.Name };
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = false,
+                        BypassSharedLock = true,
+                        ExcludeChildren = false,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFolder movedFolder = await secondCtx.Web.GetFolderByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{folderToCopy.Name}");
+                    await movedFolder.LoadAsync(f => f.Files);
+                    Assert.IsNotNull(movedFolder);
+                    Assert.AreEqual(movedFolder.Files.Length, 1);
+                    Assert.AreEqual(movedFolder.Files.FirstOrDefault().Name, documentName);
+
+                    // Clean up
+                    await movedFolder.DeleteAsync();
+                    await folderToCopy.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateCopyJobIncludingVersionsAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    // Generate some versions
+                    var listItem = testDocument.ListItemAllFields;
+                    for (var i = 1; i <= 5; i++)
+                    {
+                        listItem["Title"] = Guid.NewGuid().ToString();
+                        await listItem.UpdateAsync();
+                    }
+
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = false,
+                        IsMoveMode = false,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    // Check if file has been moved
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile movedFile = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
+                    await movedFile.LoadAsync(f => f.Versions);
+                    Assert.IsNotNull(movedFile);
+                    Assert.AreEqual(documentName, movedFile.Name);
+                    Assert.AreEqual(movedFile.Versions.Length, 5);
+
+                    // Clean up
+                    await movedFile.DeleteAsync();
+                }
+
+            }
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.TestSite);
+        }
+
+        [TestMethod]
+        public async Task CreateMoveJobAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = true,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    // Check if file exists on moved ctx
+                    // Check for moved files on target library
+
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile movedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
+                    
+                    Assert.IsNotNull(movedDocument);
+                    Assert.AreEqual(movedDocument.Name, documentName);
+
+                    // Clean up moved file
+                    await movedDocument.DeleteAsync();
+                    
+                    // Check for moved files still existing on source library (should not exist!!)
+
+                    await context.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFolder rootFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}/Shared Documents");
+                    await rootFolder.LoadAsync(y => y.Files);
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == documentName));
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateMoveJob()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    var copyJob = context.Site.CreateCopyJobs(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = true,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    }, waitUntilFinished: true, waitAfterStatusCheck: delay);
+
+                    // Check for moved files on target library
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile movedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{documentName}");
+
+                    Assert.IsNotNull(movedDocument);
+                    Assert.AreEqual(movedDocument.Name, documentName);
+
+                    // Clean up moved file
+                    await movedDocument.DeleteAsync();
+
+                    // Check for moved files still existing on source library (should not exist!!)
+
+                    await context.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFolder rootFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}/Shared Documents");
+                    await rootFolder.LoadAsync(y => y.Files);
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == documentName));
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateMoveJobInSameSiteCollection()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IList documentLibrary = await context.Web.Lists.AddAsync("TestLibrary", ListTemplateType.DocumentLibrary);
+
+                string destinationAbsoluteUrl = $"{context.Uri}/TestLibrary";
+                var jobUris = new List<string> { context.Uri + "/Shared Documents/" + documentName };
+                var copyJob = context.Site.CreateCopyJobs(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                {
+                    AllowSchemaMismatch = true,
+                    AllowSmallerVersionLimitOnDestination = true,
+                    IgnoreVersionHistory = true,
+                    IsMoveMode = true,
+                    BypassSharedLock = true,
+                    ExcludeChildren = true,
+                    NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                });
+
+                int delay = 1;
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    delay = 0;
+                }
+
+                context.Site.EnsureCopyJobHasFinished(copyJob, delay);
+
+                // Check if file has been copied.
+                IFile testDocument = null;
+                try
+                {
+                    // Doc was moved, so should not be available anymore
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                }
+                catch { }
+                IFile testDocumentCopied = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace("Shared Documents", "TestLibrary"));
+
+                Assert.IsNull(testDocument);
+                Assert.IsNotNull(testDocumentCopied);                
+
+                await documentLibrary.DeleteAsync();
+            }            
+        }
+
+        [TestMethod]
+        public async Task CreateMoveJobMultipleDocumentsAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string firstDocumentName, string firstDocumentUrl) = await TestAssets.CreateTestDocumentAsync(0, fileName: "FirstFile.docx");
+            (_, string secondDocumentName, string secondDocumentUrl) = await TestAssets.CreateTestDocumentAsync(1, fileName: "SecondFile.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                {
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string> { context.Uri + "/Shared Documents/" + firstDocumentName, context.Uri + "/Shared Documents/" + secondDocumentName };
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = true,
+                        BypassSharedLock = true,
+                        ExcludeChildren = true,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    }, waitUntilFinished: true, waitAfterStatusCheck: delay);
+
+                    // Check for moved files on target library
+
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile firstMovedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{firstDocumentName}");
+                    IFile secondMovedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{secondDocumentName}");
+
+                    Assert.IsNotNull(firstMovedDocument);
+                    Assert.IsNotNull(secondMovedDocument);
+                    Assert.AreEqual(firstMovedDocument.Name, firstDocumentName);
+                    Assert.AreEqual(secondMovedDocument.Name, secondDocumentName);
+
+                    // Clean up
+                    await firstMovedDocument.DeleteAsync();
+                    await secondMovedDocument.DeleteAsync();
+
+                    // Check for moved files still existing on source library (should not exist!!)
+
+                    await context.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFolder rootFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}/Shared Documents");
+                    await rootFolder.LoadAsync(y => y.Files);
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == firstDocumentName));
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == secondDocumentName));
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateMoveJobMultipleDocumentsAndFolderAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string firstDocumentName, string firstDocumentUrl) = await TestAssets.CreateTestDocumentAsync(0, fileName: "FirstFile.docx");
+            (_, string secondDocumentName, string secondDocumentUrl) = await TestAssets.CreateTestDocumentAsync(1, fileName: "SecondFile.docx");
+            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                var testFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddFolderAsync("TestFolder 1");
+                (_, string thirdDocumentName, string thirdDocumentUrl) = await TestAssets.CreateTestDocumentAsync(3, fileName: "ThirdFile.docx", parentFolder: testFolder);
+
+                using (var secondCtx = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 4))
+                {
+                    string destinationAbsoluteUrl = $"{secondCtx.Uri}/Shared Documents";
+                    var jobUris = new List<string>
+                    {
+                        context.Uri + "/Shared Documents/" + firstDocumentName,
+                        context.Uri + "/Shared Documents/" + secondDocumentName,
+                        context.Uri + "/Shared Documents/" + testFolder.Name,
+                    };
+                    var copyJob = await context.Site.CreateCopyJobsAsync(jobUris.ToArray(), destinationAbsoluteUrl, new CopyMigrationOptions
+                    {
+                        AllowSchemaMismatch = true,
+                        AllowSmallerVersionLimitOnDestination = true,
+                        IgnoreVersionHistory = true,
+                        IsMoveMode = true,
+                        BypassSharedLock = true,
+                        ExcludeChildren = false,
+                        NameConflictBehavior = SPMigrationNameConflictBehavior.Replace
+                    });
+
+                    int delay = 1;
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        delay = 0;
+                    }
+
+                    await context.Site.EnsureCopyJobHasFinishedAsync(copyJob, delay);
+
+                    // Check for copied files on target library
+                    await secondCtx.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFile firstMovedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{firstDocumentName}");
+                    IFile secondMovedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{secondDocumentName}");
+                    IFile thirdMovedDocument = await secondCtx.Web.GetFileByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{testFolder.Name}/{thirdDocumentName}");
+                    IFolder movedFolder = await secondCtx.Web.GetFolderByServerRelativeUrlAsync($"{secondCtx.Web.ServerRelativeUrl}/Shared Documents/{testFolder.Name}");
+
+                    Assert.IsNotNull(firstMovedDocument);
+                    Assert.IsNotNull(secondMovedDocument);
+                    Assert.IsNotNull(thirdMovedDocument);
+                    Assert.IsNotNull(movedFolder);
+                    Assert.AreEqual(firstMovedDocument.Name, firstDocumentName);
+                    Assert.AreEqual(secondMovedDocument.Name, secondDocumentName);
+                    Assert.AreEqual(thirdMovedDocument.Name, thirdDocumentName);
+                    Assert.AreEqual(movedFolder.Name, testFolder.Name);
+
+                    // Clean up
+                    await firstMovedDocument.DeleteAsync();
+                    await secondMovedDocument.DeleteAsync();
+                    await movedFolder.DeleteAsync();
+
+                    await context.Web.LoadAsync(y => y.ServerRelativeUrl);
+                    IFolder rootFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}/Shared Documents");
+                    await rootFolder.LoadAsync(y => y.Folders, y => y.Files);
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == firstDocumentName));
+                    Assert.IsNull(rootFolder.Files.FirstOrDefault(y => y.Name == secondDocumentName));
+                    Assert.IsNull(rootFolder.Folders.FirstOrDefault(y => y.Name == testFolder.Name));
+                }
+            }
+        }
+
+        #region Event Receivers
+
+        [TestMethod]
+        public async Task GetSiteEventReceiversAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Site.LoadAsync(p => p.EventReceivers);
+
+                Assert.IsNotNull(context.Site.EventReceivers);
+                Assert.AreEqual(context.Site.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddSiteEventReceiverAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.SiteDeleting,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Site.EventReceivers.AddAsync(eventReceiverOptions);
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.SiteDeleting);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddSiteEventReceiverBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.SiteDeleting,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Site.EventReceivers.AddBatchAsync(eventReceiverOptions);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.SiteDeleting);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddSiteEventReceiverAsyncNoEventTypeExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+
+                };
+                await context.Site.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddSiteEventReceiverAsyncNoEventReceiverNameExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.SiteDeleting
+                };
+                await context.Site.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddSiteEventReceiverAsyncNoEventReceiverUrlExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.SiteDeleting,
+                    ReceiverName = "PnP Event Receiver Test"
+                };
+                await context.Site.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddSiteEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.SiteDeleting,
+                    ReceiverName = "PnP Event Receiver Test",
+                    ReceiverUrl = "https://pnp.github.io",
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+                await context.Site.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        #endregion
+
+        #region Get Search configuration
+
+        [TestMethod]
+        public async Task GetSiteSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Site.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetSiteSearchManagedPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var mps = context.Site.GetSearchConfigurationManagedProperties();
+
+                Assert.IsNotNull(mps);
+            }
+        }
+
+        [TestMethod]
+        public async Task SetWebSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Site.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+
+                context.Site.SetSearchConfigurationXml(searchConfigXml);
+            }
+        }
+        #endregion
     }
 }
+

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
@@ -44,13 +48,38 @@ namespace PnP.Core.Model.Teams
         public Uri WebUrl { get; }
 
         /// <summary>
+        /// The fully qualified url for the SharePoint folder hosting this channel's files (uses Graph Beta)
+        /// </summary>
+        public Uri FilesFolderWebUrl { get; }
+
+        /// <summary>
         /// Tabs in this Channel
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITeamChannelTabCollection Tabs { get; }
 
         /// <summary>
         /// Messages in this Team Channel
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITeamChatMessageCollection Messages { get; }
+
+        /// <summary>
+        /// Gets the <see cref="IFolder"/> hosting the files of this channel
+        /// </summary>
+        /// <param name="expressions">Properties of the folder to load</param>
+        /// <returns>Folder hosting the files of this channel</returns>
+        public Task<IFolder> GetFilesFolderAsync(params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Gets the <see cref="IFolder"/> hosting the files of this channel
+        /// </summary>
+        /// <param name="expressions">Properties of the folder to load</param>
+        /// <returns>Folder hosting the files of this channel</returns>
+        public IFolder GetFilesFolder(params Expression<Func<IFolder, object>>[] expressions);
     }
 }

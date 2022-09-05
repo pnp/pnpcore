@@ -67,6 +67,16 @@ namespace PnP.Core.Test.Common.Utilities
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
 
         /// <summary>
+        /// Name of the site collection app catalog site
+        /// </summary>
+        internal static string SiteCollectionAppCatalogSite { get { return "SiteCollectionAppCatalogSite"; } }
+
+        /// <summary>
+        /// Name of the site collection app catalog site
+        /// </summary>
+        internal static string HomeTestSite { get { return "HomeTestSite"; } }
+
+        /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
         public bool Mocking { get; set; } = true;
@@ -116,7 +126,7 @@ namespace PnP.Core.Test.Common.Utilities
         private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
         {
             if (Mocking &&
-                configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == VivaTopicCenterTestSite)
+                configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == VivaTopicCenterTestSite || configurationName == HomeTestSite)
             {
                 var configuration = GetConfigurationSettings();
                 if (configurationName == SyntexContentCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
@@ -128,6 +138,10 @@ namespace PnP.Core.Test.Common.Utilities
                     configurationName = TestSite;
                 }
                 else if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
+                {
+                    configurationName = TestSite;
+                }
+                else if (configurationName == HomeTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:HomeTestSite:SiteUrl")))
                 {
                     configurationName = TestSite;
                 }
@@ -213,7 +227,7 @@ namespace PnP.Core.Test.Common.Utilities
 
             var pwd = new NetworkCredential(null, pnpCoreSDKTestUserPassword).SecurePassword;
 
-            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd));
+            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd)).ConfigureAwait(false);
 
             return context;
         }
@@ -239,17 +253,17 @@ namespace PnP.Core.Test.Common.Utilities
 
         public async Task<PnPContext> CloneAsync(PnPContext source, int id)
         {
-            return await source.CloneForTestingAsync(source, null, null, id);
+            return await source.CloneForTestingAsync(source, null, null, id).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> CloneAsync(PnPContext source, Uri uri, int id)
         {
-            return await source.CloneForTestingAsync(source, uri, null, id);
+            return await source.CloneForTestingAsync(source, uri, null, id).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> CloneAsync(PnPContext source, string configuration, int id)
         {
-            return await source.CloneForTestingAsync(source, null, configuration, id);
+            return await source.CloneForTestingAsync(source, null, configuration, id).ConfigureAwait(false);
         }
 
         public static IConfigurationRoot GetConfigurationSettings()
@@ -297,6 +311,7 @@ namespace PnP.Core.Test.Common.Utilities
                 string tenantAdminCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TenantAdminCenterSite:SiteUrl");
                 string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
                 string vivaTopicCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl");
+                string homeSiteUrl = configuration.GetValue<string>("PnPCore:Sites:HomeTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
@@ -306,6 +321,7 @@ namespace PnP.Core.Test.Common.Utilities
                     classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
                     tenantAdminCenterSiteUrl = "https://bertonline-admin.sharepoint.com";
                     syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
+                    homeSiteUrl = "https://bertonline.sharepoint.com";
                 }
 
                 var serviceProvider = new ServiceCollection()
@@ -353,6 +369,11 @@ namespace PnP.Core.Test.Common.Utilities
                     TestUris.Add("VivaTopicCenterTestSite", new Uri(vivaTopicCenterSiteUrl));
                 }
 
+                if (!string.IsNullOrEmpty(homeSiteUrl))
+                {
+                    TestUris.Add("HomeTestSite", new Uri(homeSiteUrl));
+                }
+
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
 
                 if (pnpContextFactoryCache == null)
@@ -395,7 +416,7 @@ namespace PnP.Core.Test.Common.Utilities
             }
             else
             {
-                string testEnvironmentFile = "..\\..\\..\\env.txt";
+                var testEnvironmentFile = Path.Combine("..", "..", "..", "env.txt");
                 if (File.Exists(testEnvironmentFile))
                 {
                     string content = File.ReadAllText(testEnvironmentFile);
@@ -428,5 +449,9 @@ namespace PnP.Core.Test.Common.Utilities
             return name.StartsWith(PnPCoreSDKTestPrefix) ? name : $"{PnPCoreSDKTestPrefix}{name}";
         }
 
+        internal static string GetTempFileName(string extension = "tmp")
+        {
+            return $"{Path.Combine(Path.GetTempPath(), Path.GetRandomFileName().Split(".")[0])}.{extension}";
+        }
     }
 }

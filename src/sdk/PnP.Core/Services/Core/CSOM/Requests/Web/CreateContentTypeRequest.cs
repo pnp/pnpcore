@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Web
 {
-    internal class CreateContentTypeRequest : IRequest<object>
+    internal sealed class CreateContentTypeRequest : IRequest<object>
     {
         internal ContentTypeCreationInfo ContentTypeCreationInfo { get; set; }
 

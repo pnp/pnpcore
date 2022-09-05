@@ -1,17 +1,19 @@
 ﻿using AngleSharp;
+using AngleSharp.Css.Dom;
 using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using AngleSharp.Io;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Logging;
-using AngleSharp.Io;
-using AngleSharp.Html.Dom;
 using System.Linq;
-using AngleSharp.Css.Dom;
 
 namespace PnP.Core.Transformation.SharePoint.Services
 {
+    /// <summary>
+    /// Class that translates classic SharePoint HTML into html that works on a modern page
+    /// </summary>
     public class HtmlTransformator
     {
         private ILogger<HtmlTransformator> logger;
@@ -176,6 +178,10 @@ namespace PnP.Core.Transformation.SharePoint.Services
             return false;
         }
 
+        /// <summary>
+        /// Cleans the HTML (HR tag becomes BR)
+        /// </summary>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void CleanHtmlNodes(IHtmlDocument document)
         {
             // HR tag --> replace by BR
@@ -191,6 +197,10 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Cleans up the style attributes
+        /// </summary>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void CleanStyles(IHtmlDocument document)
         {
             foreach (var element in document.All.Where(p => p.HasAttribute("style")))
@@ -245,9 +255,13 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Transforms the html tables into tables that work on SharePoint pages
+        /// </summary>
+        /// <param name="tables">Colletion of tables to process</param>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void TransformTables(IHtmlCollection<IElement> tables, IHtmlDocument document)
         {
-
             List<Tuple<IElement, IElement, IElement>> tableReplaceList = new List<Tuple<IElement, IElement, IElement>>();
 
             foreach (var table in tables)
@@ -261,8 +275,9 @@ namespace PnP.Core.Transformation.SharePoint.Services
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized, ex.Message));
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized,
+                        ex.Message);
                 }
 
                 // If we could not normalize this table then let's skip it
@@ -425,6 +440,10 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Inserts placeholders for img and iframe tags (images and videos)
+        /// </summary>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void ImageIFramePlaceHolders(IHtmlDocument document)
         {
             var images = document.QuerySelectorAll("img");
@@ -463,6 +482,11 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Transforms blockquotes into compliant html
+        /// </summary>
+        /// <param name="blockQuotes">Collection of blockquote blocks to transform</param>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void TransformBlockQuotes(IHtmlCollection<IElement> blockQuotes, IHtmlDocument document)
         {
             int level = 1;
@@ -614,6 +638,10 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Drops the BR from the html
+        /// </summary>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void DropBRs(IHtmlDocument document)
         {
             var brNodes = document.QuerySelectorAll($"BR");
@@ -626,6 +654,12 @@ namespace PnP.Core.Transformation.SharePoint.Services
         }
 
 #pragma warning disable CA1716
+        /// <summary>
+        /// Transforms the used headers into compliant headers
+        /// </summary>
+        /// <param name="document">Html doc to operate on</param>
+        /// <param name="from">Source header level</param>
+        /// <param name="to">Target header level</param>
         protected virtual void TransformHeadings(IHtmlDocument document, int from, int to)
 #pragma warning restore CA1716
         {
@@ -656,6 +690,11 @@ namespace PnP.Core.Transformation.SharePoint.Services
             }
         }
 
+        /// <summary>
+        /// Rewrites html styles to be compliant
+        /// </summary>
+        /// <param name="elementsToTransform">Html elements to process</param>
+        /// <param name="document">Html doc to operate on</param>
         protected virtual void TransformElements(IHtmlCollection<IElement> elementsToTransform, IHtmlDocument document)
         {
             foreach (var element in elementsToTransform)

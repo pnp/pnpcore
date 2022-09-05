@@ -2,120 +2,207 @@
   items:
   - name: Getting started
     href: readme.md
-  - name: Get data
-    href: basics-getdata.md
-  - name: Get data using paging
-    href: basics-getdata-paging.md
   - name: Adding, updating and deleting data
     href: basics-addupdatedelete.md
   - name: Advanced PnPContext use
     href: basics-context.md
-  - name: Batching requests
-    href: basics-batching.md
-  - name: Async or not
-    href: basics-async.md
-  - name: Error handling
-    href: basics-errorhandling.md
-  - name: Custom API requests
-    href: basics-customapirequests.md
-  - name: PnP Framework interop
-    href: basics-pnpframework.md
-  - name: Microsoft Graph SDK interop
-    href: basics-graphsdk.md
-  - name: Debugging
-    href: basics-debug.md
-  - name: General configuration
-    href: basics-settings.md
   - name: API configuration
     href: basics-apis.md
+  - name: Async or not
+    href: basics-async.md
+  - name: Batching requests
+    href: basics-batching.md
+  - name: Custom API requests
+    href: basics-customapirequests.md
+  - name: Debugging
+    href: basics-debug.md
+  - name: Error handling
+    href: basics-errorhandling.md
+  - name: Event hub
+    href: basics-eventhub.md
+  - name: General configuration
+    href: basics-settings.md
+  - name: Get data
+    href: basics-getdata.md
+  - name: Get data using paging
+    href: basics-getdata-paging.md
+  - name: IQueryable performance considerations
+    href: basics-iqueryable.md
+  - name: Microsoft Graph SDK interop
+    href: basics-graphsdk.md
+  - name: Multi-Threading
+    href: basics-threading.md
+  - name: PnP Framework interop
+    href: basics-pnpframework.md
+  - name: SharePoint CSOM vs PnP Core SDK
+    href: basics-csom-vs-pnp.md
   - name: Upgrade to beta3 or later
     href: upgrade-to-beta3.md
+- name: "Admin: Microsoft 365"
+  items:
+  - name: Information Protection
+    href: admin-m365-informationprotection.md
+  - name: Multi-geo
+    href: admin-m365-multigeo.md
+  - name: Security
+    href: admin-m365-security.md
+- name: "Admin: SharePoint"
+  items:
+  - name: Apps
+    href: admin-sharepoint-apps.md
+  - name: Modernize sites
+    href: admin-sharepoint-modernize.md
+  - name: Security
+    href: admin-sharepoint-security.md
+  - name: Site Collections
+    href: admin-sharepoint-sites.md
+  - name: Tenant
+    href: admin-sharepoint-tenant.md
 - name: Authentication  
   items:
   - name: Configuration
     href: configuring%20authentication.md
   - name: Custom Authentication Providers
     href: custom-authentication-provider.md
-- name: Sites
+- name: Branding
   items:
   - name: Overview
-    href: sites-intro.md
-  - name: Hub Site
-    href: sites-hubsites.md
-    
-- name: Webs
+    href: branding-intro.md
+- name: Content types
   items:
   - name: Overview
-    href: webs-intro.md
-- name: Lists
-  items:
-  - name: Overview
-    href: lists-intro.md
-  - name: Working with views
-    href: lists-views.md
+    href: contenttypes-intro.md
+  - name: Content type hub
+    href: contenttypes-hub.md
+  - name: Document Sets
+    href: contenttypes-documentsets.md
 - name: Fields
   items:
   - name: Overview
     href: fields-intro.md
   - name: Adding fields
     href: fields-add.md
-- name: Content types
-  items:
-  - name: Overview
-    href: contenttypes-intro.md
-- name: List Items
-  items:
-  - name: Overview
-    href: listitems-intro.md
-  - name: Field handling
-    href: listitems-fields.md
-  - name: Commenting and liking
-    href: listitems-social.md
-  - name: Attachments
-    href: listitems-attachments.md
 - name: Files
   items:
   - name: Overview
     href: files-intro.md
   - name: Large files
     href: files-large.md
-- name: Pages
-  items:
-  - name: Overview
-    href: pages-intro.md
-  - name: Configuring the page header
-    href: pages-header.md
-  - name: Working with web parts and text parts
-    href: pages-webparts.md
-  - name: Publishing and promoting pages as news
-    href: pages-promote.md
-  - name: Multilingual pages
-    href: pages-multilingual.md
-  - name: Commenting and liking
-    href: pages-social.md
 - name: Folders
   items:
   - name: Overview
     href: folders-intro.md
-- name: Teams
+- name: Link unfurling
   items:
   - name: Overview
-    href: teams-intro.md
-  - name: Channels
-    href: teams-channels.md
-  - name: Tabs
-    href: teams-channel-tabs.md
-  - name: Chat
-    href: teams-channel-chat.md
-  - name: Archiving
-    href: teams-archiving.md
+    href: unfurl-intro.md
+- name: Lists
+  items:
+  - name: Overview
+    href: lists-intro.md
+  - name: Webhooks
+    href: lists-webhooks.md
+  - name: Working with views
+    href: lists-views.md
+- name: List Items
+  items:
+  - name: Overview
+    href: listitems-intro.md
+  - name: Attachments
+    href: listitems-attachments.md
+  - name: Commenting and liking
+    href: listitems-social.md
+  - name: Field handling
+    href: listitems-fields.md
+- name: Microsoft Viva Connections
+  items:
+  - name: Overview
+    href: vivaconnections-intro.md
+- name: Navigation
+  items:
+  - name: Overview
+    href: navigation-intro.md
+- name: Pages
+  items:
+  - name: Overview
+    href: pages-intro.md
+  - name: Commenting and liking
+    href: pages-social.md
+  - name: Configuring the page header
+    href: pages-header.md
+  - name: Multilingual pages
+    href: pages-multilingual.md
+  - name: Publishing and promoting pages as news
+    href: pages-promote.md
+  - name: Working with web parts and text parts
+    href: pages-webparts.md
+- name: Recycle Bin
+  items:
+  - name: Overview
+    href: recyclebin-intro.md
+- name: Search
+  items:
+  - name: Overview
+    href: search-intro.md
+  - name: Configuration
+    href: search-configuration.md
+- name: Security
+  items:
+  - name: Overview
+    href: security-intro.md
+  - name: Groups
+    href: security-groups.md
+  - name: Sharing files and folders
+    href: sharing-intro.md
+  - name: Users
+    href: security-users.md
+- name: Sites
+  items:
+  - name: Overview
+    href: sites-intro.md
+  - name: Copy/Move content
+    href: sites-copymovecontent.md
+  - name: Hub Site
+    href: sites-hubsites.md
+- name: SharePoint Syntex
+  items:
+  - name: Overview
+    href: syntex-intro.md
+- name: Social
+  items:
+  - name: Content following
+    href: social-following.md
+  - name: User profiles
+    href: social-user-profiles.md
 - name: Taxonomy
   items:
   - name: Overview
     href: taxonomy-intro.md
   - name: Advanced
     href: taxonomy-advanced.md
-- name: SharePoint Syntex
+- name: Teams
   items:
   - name: Overview
-    href: syntex-intro.md
+    href: teams-intro.md
+  - name: Archiving
+    href: teams-archiving.md
+  - name: Channels
+    href: teams-channels.md
+  - name: Chat
+    href: teams-channel-chat.md
+  - name: Chat replies
+    href: teams-channel-chat-reply.md
+  - name: Events
+    href: teams-events.md
+  - name: Tabs
+    href: teams-channel-tabs.md
+  - name: Tags
+    href: teams-tags.md
+- name: "Transformation Framework"
+  items:
+  - name: Getting started
+    href: transformation-getting-started.md
+- name: Webs
+  items:
+  - name: Overview
+    href: webs-intro.md

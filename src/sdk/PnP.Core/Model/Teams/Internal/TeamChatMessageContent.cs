@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamChatMessageContent : BaseDataModel<ITeamChatMessageContent>, ITeamChatMessageContent
+    internal sealed class TeamChatMessageContent : BaseDataModel<ITeamChatMessageContent>, ITeamChatMessageContent
     {
         #region Construction
         public TeamChatMessageContent()

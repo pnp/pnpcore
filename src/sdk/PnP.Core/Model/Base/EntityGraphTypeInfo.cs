@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model
 {
-    internal class EntityGraphTypeInfo
+    internal sealed class EntityGraphTypeInfo
     {
         /// <summary>
         /// The actual target type for which this attribute is valid

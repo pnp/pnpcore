@@ -67,17 +67,15 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
 
-                // !! MembershipType and IsFavoriteByDefault are now GA !!
-
                 // Are other properties still not available: IsFavoriteByDefault is a beta property on a teamchannel, so it should not be available at this point
-                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
+                Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.FilesFolderWebUrl));
 
-                // get the primary channel again, but now explicitely request the beta properties MembershipType and IsFavoriteByDefault
-                await team.PrimaryChannel.LoadAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
+                // get the primary channel again, but now explicitely request the beta property FilesFolderWebUrl
+                await team.PrimaryChannel.LoadAsync(p => p.DisplayName, p => p.FilesFolderWebUrl);
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.MembershipType));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.DisplayName));
-                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.FilesFolderWebUrl));
             }
         }
 

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class ArrayParameter : Parameter
+    internal sealed class ArrayParameter : Parameter
     {
         IFieldValueCollection FieldValueCollection { get; set; }
 

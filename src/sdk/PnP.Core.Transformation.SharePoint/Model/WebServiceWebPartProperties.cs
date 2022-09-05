@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Model
 {
     /// <summary>
     /// Entity to describe a web part on a wiki or webpart page called from web services
     /// </summary>
-    public class WebServiceWebPartProperties
+    internal class WebServiceWebPartProperties
     {
         /// <summary>
         /// Default constructor

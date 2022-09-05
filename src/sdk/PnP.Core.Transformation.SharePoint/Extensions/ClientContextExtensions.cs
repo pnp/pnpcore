@@ -1,35 +1,25 @@
-using PnP.Core.Transformation.SharePoint;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Model;
-using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml;
-using Microsoft.Extensions.Logging;
 
-namespace Microsoft.SharePoint.Client
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
     /// <summary>
     /// Class that deals with cloning client context object, getting access token and validates server version
     /// </summary>
-    public static partial class ClientContextExtensions
+    internal static partial class ClientContextExtensions
     {
         private const string PnPSettingsKey = "SharePointPnP$Settings$ContextCloning";
 
-        private static ILoggerFactory loggerFactory;
-        private static ILogger log;
+        //private static ILoggerFactory loggerFactory;
+        //private static ILogger log;
         private static readonly string userAgentFromConfig;
 
 #pragma warning disable CS0169
@@ -41,7 +31,6 @@ namespace Microsoft.SharePoint.Client
         /// <summary>
         /// Static constructor, only executed once per class load
         /// </summary>
-#pragma warning disable CA1810
         static ClientContextExtensions()
         {
             try
@@ -57,11 +46,15 @@ namespace Microsoft.SharePoint.Client
                 ClientContextExtensions.userAgentFromConfig = Environment.GetEnvironmentVariable("SharePointPnPUserAgent", EnvironmentVariableTarget.Process);
             }
 
-            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-            log = new Logger<ClientContext>(loggerFactory);
+            //#if NET5_0_OR_GREATER
+            //            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            //#else
+            //            var serviceCollection = new ServiceCollection();
+            //            serviceCollection.AddLogging(builder => builder.AddConsole());
+            //            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+            //#endif
+            //            log = new Logger<ClientContext>(loggerFactory);
         }
-#pragma warning restore CA1810
-
         /// <summary>
         /// Executes the current set of data retrieval queries and method invocations and retries it if needed using the Task Library.
         /// </summary>
@@ -87,8 +80,6 @@ namespace Microsoft.SharePoint.Client
 
         private static async Task ExecuteQueryImplementation(ClientRuntimeContext clientContext, int retryCount = 10, string userAgent = null)
         {
-            // Temporarly remove the SynchronizationContext
-            await new SynchronizationContextRemover();
 
             // Set the TLS preference. Needed on some server os's to work when Office 365 removes support for TLS 1.0
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -121,13 +112,13 @@ namespace Microsoft.SharePoint.Client
                     // DO NOT CHANGE THIS TO EXECUTEQUERYRETRY
                     if (!retry)
                     {
-                        await clientContext.ExecuteQueryAsync();
+                        await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
                     }
                     else
                     {
                         if (wrapper != null && wrapper.Value != null)
                         {
-                            await clientContext.RetryQueryAsync(wrapper.Value);
+                            await clientContext.RetryQueryAsync(wrapper.Value).ConfigureAwait(false);
                         }
                     }
 
@@ -168,14 +159,14 @@ namespace Microsoft.SharePoint.Client
 
                         if (wex.Status == WebExceptionStatus.Timeout)
                         {
-                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestTimeout, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestTimeout, retryAttempts + 1, retryAfterInterval));
                         }
                         else
                         {
-                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
                         }
 
-                        await Task.Delay(retryAfterInterval);
+                        await Task.Delay(retryAfterInterval).ConfigureAwait(false);
 
                         //Add to retry count and increase delay.
                         retryAttempts++;
@@ -198,7 +189,7 @@ namespace Microsoft.SharePoint.Client
                             errorSb.AppendLine($"SocketErrorCode: {socketEx.SocketErrorCode}"); //ConnectionReset
                             errorSb.AppendLine($"Message: {socketEx.Message}"); //An existing connection was forcibly closed by the remote host
 
-                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                            //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                             //retry
                             wrapper = (ClientRequestWrapper)wex.Data["ClientRequest"];
@@ -219,9 +210,9 @@ namespace Microsoft.SharePoint.Client
                                 backoffInterval *= 2;
                             }
 
-                            log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
 
-                            await Task.Delay(retryAfterInterval);
+                            await Task.Delay(retryAfterInterval).ConfigureAwait(false);
 
                             //Add to retry count and increase delay.
                             retryAttempts++;
@@ -238,7 +229,7 @@ namespace Microsoft.SharePoint.Client
                                 }
                             }
 
-                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                            //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
                             throw;
                         }
                     }
@@ -254,7 +245,7 @@ namespace Microsoft.SharePoint.Client
                     errorSb.AppendLine($"ServerErrorValue: {serverEx.ServerErrorValue}");
                     errorSb.AppendLine($"ServerErrorDetails: {serverEx.ServerErrorDetails}");
 
-                    log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                    //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                     throw;
                 }

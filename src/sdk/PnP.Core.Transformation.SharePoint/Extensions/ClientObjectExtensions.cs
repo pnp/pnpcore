@@ -1,15 +1,15 @@
-﻿using PnP.Core.Transformation.SharePoint.Utilities;
+﻿using Microsoft.SharePoint.Client;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Microsoft.SharePoint.Client
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
     /// <summary>
     /// Class for client object extension methods
     /// </summary>
-    public static class ClientObjectExtensions
+    internal static class ClientObjectExtensions
     {
         /// <summary>
         /// Checks if the ClientObject is null
@@ -79,8 +79,7 @@ namespace Microsoft.SharePoint.Client
         /// <returns>Property value</returns>
         public static async Task<TResult> EnsurePropertyAsync<T, TResult>(this T clientObject, Expression<Func<T, TResult>> propertySelector) where T : ClientObject
         {
-            await new SynchronizationContextRemover();
-            return await EnsurePropertyImplementation(clientObject, propertySelector);
+            return await EnsurePropertyImplementation(clientObject, propertySelector).ConfigureAwait(false);
         }
 
         private async static Task<TResult> EnsurePropertyImplementation<T, TResult>(T clientObject, Expression<Func<T, TResult>> propertySelector) where T : ClientObject
@@ -98,7 +97,7 @@ namespace Microsoft.SharePoint.Client
                     }
 
                     clientObject.Context.Load(clientObject, propertySelector.ToUntypedStaticMethodCallExpression());
-                    await clientObject.Context.ExecuteQueryRetryAsync();
+                    await clientObject.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
 
                     var arg = (MemberExpression)(body.Arguments[0]);
                     var prop = (PropertyInfo)(Expression.Property(Expression.Constant(clientObject), arg.Member.Name).Member);
@@ -112,13 +111,13 @@ namespace Microsoft.SharePoint.Client
             if (!clientObject.IsPropertyAvailable(untypedExpresssion) && !clientObject.IsObjectPropertyInstantiated(untypedExpresssion))
             {
                 clientObject.Context.Load(clientObject, untypedExpresssion);
-                await clientObject.Context.ExecuteQueryRetryAsync();
+                await clientObject.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
             }
             else if (clientObject.IsObjectPropertyInstantiated(untypedExpresssion))
             {
                 if (EnsureCollectionLoaded(clientObject, untypedExpresssion))
                 {
-                    await clientObject.Context.ExecuteQueryRetryAsync();
+                    await clientObject.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
                 }
             }
 
@@ -146,8 +145,7 @@ namespace Microsoft.SharePoint.Client
         /// <returns>Property value</returns>
         public static async Task EnsurePropertiesAsync<T>(this T clientObject, params Expression<Func<T, object>>[] propertySelector) where T : ClientObject
         {
-            await new SynchronizationContextRemover();
-            await EnsurePropertiesImplementation(clientObject, propertySelector);
+            await EnsurePropertiesImplementation(clientObject, propertySelector).ConfigureAwait(false);
         }
         internal static async Task EnsurePropertiesImplementation<T>(this T clientObject, params Expression<Func<T, object>>[] propertySelector) where T : ClientObject
         {
@@ -190,7 +188,7 @@ namespace Microsoft.SharePoint.Client
 
             if (dirty)
             {
-                await clientObject.Context.ExecuteQueryRetryAsync();
+                await clientObject.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
             }
         }
 

@@ -8,7 +8,10 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldValueCollection : IFieldValueCollection
+    /// <summary>
+    /// Collection of 'special' field values
+    /// </summary>
+    public sealed class FieldValueCollection : IFieldValueCollection
     {
         private bool hasChangedDueToDeleteOrAdd;
 
@@ -22,12 +25,38 @@ namespace PnP.Core.Model.SharePoint
             Values.CollectionChanged += Values_CollectionChanged;
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public FieldValueCollection()
+        {
+            TypeAsString = "";
+            
+            // Track events on the observable collection
+            Values.CollectionChanged += Values_CollectionChanged;
+        }
+
+        /// <summary>
+        /// Default constructor taking in a collection of <see cref="IFieldValue"/> objects
+        /// </summary>
+        /// <param name="fieldValues">Collection of <see cref="IFieldValue"/> objects</param>
+        public FieldValueCollection(IEnumerable<IFieldValue> fieldValues) : this()
+        {
+            foreach (var value in fieldValues)
+            {
+                Values.Add(value);
+            }
+        }        
+
         internal string PropertyName { get; set; }
 
         internal string TypeAsString { get; set; }
 
         internal IField Field { get; set; }
 
+        /// <summary>
+        /// Values in the collection
+        /// </summary>
         public ObservableCollection<IFieldValue> Values { get; } = new ObservableCollection<IFieldValue>();
 
         internal bool HasChanges => GetChangedValues() != null;
@@ -67,7 +96,7 @@ namespace PnP.Core.Model.SharePoint
         internal void Commit()
         {
             hasChangedDueToDeleteOrAdd = false;
-            foreach(var fieldValue in Values)
+            foreach (var fieldValue in Values)
             {
                 if (fieldValue != null && fieldValue is FieldValue)
                 {
@@ -113,13 +142,16 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var item in Values)
             {
-                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#");
+                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#;#");
             }
 
             return sb.ToString();
         }
 
-
+        /// <summary>
+        /// Removes <see cref="IFieldLookupValue"/> from the collection if found
+        /// </summary>
+        /// <param name="lookupId">Id of the <see cref="IFieldLookupValue"/> to remove</param>
         public void RemoveLookupValue(int lookupId)
         {
             foreach (var valueToRemove in Values.Cast<IFieldLookupValue>().Where(p => p.LookupId == lookupId).ToList())
@@ -128,15 +160,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        /// <summary>
+        /// Removes <see cref="IFieldTaxonomyValue"/> from the collection if found
+        /// </summary>
+        /// <param name="termId">Id of the <see cref="IFieldTaxonomyValue"/> to remove</param>
         public void RemoveTaxonomyFieldValue(Guid termId)
-        {            
-            foreach(var valueToRemove in Values.Cast<IFieldTaxonomyValue>().Where(p => p.TermId == termId).ToList())
+        {
+            foreach (var valueToRemove in Values.Cast<IFieldTaxonomyValue>().Where(p => p.TermId == termId).ToList())
             {
                 Values.Remove(valueToRemove);
             }
         }
 
-        public static object StringArrayToJson(List<string> choices)
+        internal static object StringArrayToJson(List<string> choices)
         {
             var updateMessage = new
             {
@@ -147,7 +183,7 @@ namespace PnP.Core.Model.SharePoint
             return updateMessage;
         }
 
-        public static object IntArrayToJson(List<int> choices)
+        internal static object IntArrayToJson(List<int> choices)
         {
             var updateMessage = new
             {

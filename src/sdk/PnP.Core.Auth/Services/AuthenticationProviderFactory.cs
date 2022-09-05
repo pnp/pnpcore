@@ -75,6 +75,16 @@ namespace PnP.Core.Auth.Services
                     string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         PnPCoreAuthResources.InvalidConfigurationName, name));
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(this.options.Environment))
+                {
+                    if (Enum.TryParse(this.options.Environment, out Microsoft365Environment environment))
+                    {
+                        options.Environment = environment;
+                    }
+                }
+            }
 
             Type providerType = ResolveAuthenticationProviderType(options);
 
@@ -132,6 +142,7 @@ namespace PnP.Core.Auth.Services
             return providerType;
         }
 
+/*
         /// <summary>
         /// Initializes the configuration options for the target Authentication Provider
         /// </summary>
@@ -181,5 +192,6 @@ namespace PnP.Core.Auth.Services
                     break;
             }
         }
+*/
     }
 }

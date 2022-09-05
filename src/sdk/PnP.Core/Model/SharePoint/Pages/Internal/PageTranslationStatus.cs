@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Translation status for a page
     /// </summary>
-    internal class PageTranslationStatus : IPageTranslationStatus
+    internal sealed class PageTranslationStatus : IPageTranslationStatus
     {
         /// <summary>
         /// The culture of this translation

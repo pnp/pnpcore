@@ -207,10 +207,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("type")));
                 Assert.IsTrue(webImplementation.GetMetadata("type") == "SP.Web");
 
-                Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("uri")));
+                //Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("uri")));
                 //Assert.IsTrue(new Uri($"{context.Uri.ToString()}/_api/Web") == new Uri(webImplementation.GetMetadata("uri")));
 
-                Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("id")));
+                //Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("id")));
                 //Assert.IsTrue(new Uri($"{context.Uri.ToString()}/_api/Web") == new Uri(webImplementation.GetMetadata("id")));
 
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("restId")));
@@ -677,7 +677,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(context.Web.Lists.Requested);
-                
+
                 var firstList = context.Web.Lists.AsRequested().First();
                 Assert.AreEqual(firstList.Id, foundList.Id);
                 Assert.IsTrue(foundList.Requested);
@@ -690,7 +690,7 @@ namespace PnP.Core.Test.Base
                 var firstContentType = foundList.ContentTypes.AsRequested().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                
+
                 var firstFieldLink = firstContentType.FieldLinks.AsRequested().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
@@ -1039,7 +1039,7 @@ namespace PnP.Core.Test.Base
                 // Expand for a property that is implemented using it's own graph query which has url parameters defined and which uses a JsonPath
                 // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
                 team = await context.Team.GetAsync(p => p.InstalledApps.QueryProperties(p => p.DistributionMethod));
-                
+
                 foreach (var installedApp in team.InstalledApps.AsRequested())
                 {
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
@@ -1165,6 +1165,23 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(response.ApiRequest == apiRequest);
                 Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
                 Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+        }
+
+        [TestMethod]
+        public async Task ExecuteGraphSingleBatchRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var batch = context.NewBatch();
+                var drivesResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "drives"));
+                Assert.IsTrue(drivesResponse.IsAvailable == false);
+                await context.ExecuteAsync(batch);
+
+                Assert.IsTrue(drivesResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(drivesResponse.Result.Value));
             }
         }
 

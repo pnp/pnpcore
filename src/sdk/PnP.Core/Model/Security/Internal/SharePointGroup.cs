@@ -1,5 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -9,8 +10,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
+    internal sealed class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
     {
         #region Construction
         public SharePointGroup()
@@ -30,6 +30,14 @@ namespace PnP.Core.Model.Security
                     return new ApiCall(endPointUri, ApiType.SPORest, jsonBody);
 
                 }).ConfigureAwait(false);
+            };
+
+            ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =>
+            {
+                if (propertyUpdateRequest.PropertyName == nameof(Description))
+                {
+                    propertyUpdateRequest.Value = HtmlToText.ConvertSimpleHtmlToText(propertyUpdateRequest.Value.ToString(), 511);
+                }
             };
         }
         #endregion
@@ -63,7 +71,7 @@ namespace PnP.Core.Model.Security
 
         public string OwnerTitle { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool RequestToJoinLeaveEmailSetting { get => GetValue<bool>(); set => SetValue(value); }
+        public string RequestToJoinLeaveEmailSetting { get => GetValue<string>(); set => SetValue(value); }
 
         public ISharePointUserCollection Users { get => GetModelCollectionValue<ISharePointUserCollection>(); }
 
@@ -84,8 +92,7 @@ namespace PnP.Core.Model.Security
 
         public async Task AddUserAsync(string loginName)
         {
-            var apiCall = GetAddUserApiCall(loginName);
-            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await Users.AddAsync(loginName).ConfigureAwait(false);
         }
 
         public void AddUserBatch(string loginName)
@@ -105,26 +112,7 @@ namespace PnP.Core.Model.Security
 
         public async Task AddUserBatchAsync(Batch batch, string loginName)
         {
-            var apiCall = GetAddUserApiCall(loginName);
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-        }
-
-        private ApiCall GetAddUserApiCall(string loginName)
-        {
-            // Given this method can apply to multiple parents we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/web/sitegroups(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(SharePointGroup), this);
-            string endpointUrl = $"{entity.SharePointGet}/Users";
-
-            var parameters = new
-            {
-                __metadata = new { type = "SP.User" },
-                LoginName = loginName
-            };
-
-            string json = JsonSerializer.Serialize(parameters);
-            return new ApiCall(endpointUrl, ApiType.SPORest, json);
+            await Users.AddBatchAsync(batch, loginName).ConfigureAwait(false);
         }
 
         public void RemoveUser(int userId)
@@ -134,8 +122,17 @@ namespace PnP.Core.Model.Security
 
         public async Task RemoveUserAsync(int userId)
         {
-            var apiCall = GetRemoveUserApiCall(userId);
-            await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.Users).ConfigureAwait(false);
+
+            var userToDelete = Users.AsRequested().FirstOrDefault(p=>p.Id == userId);
+            if (userToDelete != null)
+            {
+                await userToDelete.DeleteAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.InvalidParameters, $"User with id {userId} does not exist in this group");
+            }
         }
 
         public void RemoveUserBatch(int userId)
@@ -155,18 +152,17 @@ namespace PnP.Core.Model.Security
 
         public async Task RemoveUserBatchAsync(Batch batch, int userId)
         {
-            var apiCall = GetRemoveUserApiCall(userId);
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Delete).ConfigureAwait(false);
-        }
+            await EnsurePropertiesAsync(p => p.Users).ConfigureAwait(false);
 
-        private ApiCall GetRemoveUserApiCall(int userId)
-        {
-            // Given this method can apply to multiple parents we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/web/sitegroups(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(SharePointGroup), this);
-            string endpointUrl = $"{entity.SharePointGet}/Users/GetById({userId})";
-            return new ApiCall(endpointUrl, ApiType.SPORest);
+            var userToDelete = Users.AsRequested().FirstOrDefault(p => p.Id == userId);
+            if (userToDelete != null)
+            {
+                await userToDelete.DeleteBatchAsync(batch).ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.InvalidParameters, $"User with id {userId} does not exist in this group");
+            }
         }
 
         public IRoleDefinitionCollection GetRoleDefinitions()
@@ -232,6 +228,41 @@ namespace PnP.Core.Model.Security
                 }
             }
             return result;
+        }
+        
+        public async Task SetUserAsOwnerAsync(int userId)
+        {
+            await RawRequestAsync(GetSetUserAsOwnerApiCall(userId), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetUserAsOwner(int userId)
+        {
+            SetUserAsOwnerAsync(userId).GetAwaiter().GetResult();
+        }
+
+        public void SetUserAsOwnerBatch(int userId)
+        {
+            SetUserAsOwnerBatchAsync(PnPContext.CurrentBatch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetUserAsOwnerBatchAsync(int userId)
+        {
+            await SetUserAsOwnerBatchAsync(PnPContext.CurrentBatch, userId).ConfigureAwait(false);
+        }
+
+        public void SetUserAsOwnerBatch(Batch batch, int userId)
+        {
+            SetUserAsOwnerBatchAsync(batch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetUserAsOwnerBatchAsync(Batch batch, int userId)
+        {
+            await RawRequestBatchAsync(batch, GetSetUserAsOwnerApiCall(userId), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall GetSetUserAsOwnerApiCall(int userId)
+        {
+            return new ApiCall($"_api/web/sitegroups({Id})/setuserasowner({userId})", ApiType.SPORest);
         }
 
         #endregion

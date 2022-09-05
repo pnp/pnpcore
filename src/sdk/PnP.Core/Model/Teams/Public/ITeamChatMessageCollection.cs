@@ -9,7 +9,7 @@ namespace PnP.Core.Model.Teams
     /// A chat is a collection of chatMessages between one or more participants. Participants can be users or apps.
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageCollection))]
-    public interface ITeamChatMessageCollection : IQueryable<ITeamChatMessage>, IAsyncEnumerable<ITeamChatMessage>, IDataModelCollectionLoad<ITeamChatMessage>, IDataModelCollection<ITeamChatMessage>
+    public interface ITeamChatMessageCollection : IQueryable<ITeamChatMessage>, IAsyncEnumerable<ITeamChatMessage>, IDataModelCollectionLoad<ITeamChatMessage>, IDataModelCollection<ITeamChatMessage>, ISupportModules<ITeamChatMessageCollection>
     {
 
         #region Basic Messages
@@ -28,7 +28,7 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="content">Content of the message</param>
         /// <param name="contentType">Message content type e.g. Text, Html</param>
-        /// /// <param name="subject">Message Subject</param>
+        /// <param name="subject">Message Subject</param>
         /// <returns></returns>
         public ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null);
 

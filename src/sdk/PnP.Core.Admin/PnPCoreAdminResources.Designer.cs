@@ -19,7 +19,7 @@ namespace PnP.Core.Admin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreAdminResources {
@@ -61,6 +61,114 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant app catalog site is not found. Create it either manually or using the corresponding method from the App Manager class..
+        /// </summary>
+        internal static string Exception_AppManager_AppCatalogNotFound {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_AppCatalogNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        internal static string Exception_AppManager_FileNotFound {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout occurred while trying to get the App metadata from the server.
+        /// </summary>
+        internal static string Exception_AppManager_GetAppTimeout {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_GetAppTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve the AppManager for the type: {0}.
+        /// </summary>
+        internal static string Exception_AppManager_NotResolved {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_NotResolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your tenant is using vanity URLs and therefore you have to specify a filled VanityUrlOptions instance in all methods that accept that optional parameter.
+        /// </summary>
+        internal static string Exception_MissingVanityUrlDetails {
+            get {
+                return ResourceManager.GetString("Exception_MissingVanityUrlDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The site creation for site {0} did not succeed. Returned siteStatus = {1}.
+        /// </summary>
+        internal static string Exception_SiteCreation {
+            get {
+                return ResourceManager.GetString("Exception_SiteCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for the status of site creation for site {0} did fail. Last returned siteStatus = {1}.
+        /// </summary>
+        internal static string Exception_SiteCreationStatusCheck {
+            get {
+                return ResourceManager.GetString("Exception_SiteCreationStatusCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site to restore ({0}) not found.
+        /// </summary>
+        internal static string Exception_SiteRestore_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_SiteRestore_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Team creation for group {0} did not succeed. Check the inner exception for details..
+        /// </summary>
+        internal static string Exception_TeamCreation {
+            get {
+                return ResourceManager.GetString("Exception_TeamCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected JSON.
+        /// </summary>
+        internal static string Exception_UnexpectedJson {
+            get {
+                return ResourceManager.GetString("Exception_UnexpectedJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a valid design package id: 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank).
+        /// </summary>
+        internal static string Exception_Unsupported_InvalidDesignPackageId {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_InvalidDesignPackageId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The site collection has to be connected to a Microsoft 365 group.
+        /// </summary>
+        internal static string Exception_Unsupported_SiteHasToBeGroupConnected {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SiteHasToBeGroupConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vanity urls are currently not handled..
         /// </summary>
         internal static string Exception_VanityUrl {
@@ -75,6 +183,24 @@ namespace PnP.Core.Admin {
         internal static string Log_Information_ExceptionWhileGettingSharePointAdmins {
             get {
                 return ResourceManager.GetString("Log_Information_ExceptionWhileGettingSharePointAdmins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following exception was eaten while creating a Team for group {0} : {1}.
+        /// </summary>
+        internal static string Log_Warning_ExceptionWhileCreatingTeamForGroup {
+            get {
+                return ResourceManager.GetString("Log_Warning_ExceptionWhileCreatingTeamForGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following exception was eaten while getting the status of the site creation of {0} : {1}.
+        /// </summary>
+        internal static string Log_Warning_ExceptionWhileGettingSiteStatus {
+            get {
+                return ResourceManager.GetString("Log_Warning_ExceptionWhileGettingSiteStatus", resourceCulture);
             }
         }
     }

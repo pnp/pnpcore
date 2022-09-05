@@ -1,14 +1,12 @@
 ﻿using Microsoft.SharePoint.Client;
-using PnP.Core.Transformation.SharePoint;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace PnP.Core.Transformation.Extensions
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
-    public static class ListExtensions
+    internal static class ListExtensions
     {
         /// <summary>
         /// Get list by using Title
@@ -73,6 +71,52 @@ namespace PnP.Core.Transformation.Extensions
             web.Context.ExecuteQueryRetry();
 
             return lists.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get list by using Url
+        /// </summary>
+        /// <param name="web">Web (site) to be processed</param>
+        /// <param name="webRelativeUrl">Url of list relative to the web (site), e.g. lists/testlist</param>
+        /// <param name="expressions">Additional list of lambda expressions of properties to load alike l => l.BaseType</param>
+        /// <returns>Returns list if found, null if no list is found.</returns>
+        public static List GetListByUrl(this Web web, string webRelativeUrl, params Expression<Func<List, object>>[] expressions)
+        {
+            var baseExpressions = new List<Expression<Func<List, object>>> { l => l.DefaultViewUrl, l => l.Id, l => l.BaseTemplate, l => l.OnQuickLaunch, l => l.DefaultViewUrl, l => l.Title, l => l.Hidden, l => l.RootFolder };
+
+            if (expressions != null && expressions.Any())
+            {
+                baseExpressions.AddRange(expressions);
+            }
+            if (string.IsNullOrEmpty(webRelativeUrl))
+                throw new ArgumentNullException(nameof(webRelativeUrl));
+
+            if (!web.IsObjectPropertyInstantiated("ServerRelativeUrl"))
+            {
+                web.Context.Load(web, w => w.ServerRelativeUrl);
+                web.Context.ExecuteQueryRetry();
+            }
+            var listServerRelativeUrl = UrlUtility.Combine(web.ServerRelativeUrl, webRelativeUrl);
+
+            var foundList = web.GetList(listServerRelativeUrl.ToString());
+            web.Context.Load(foundList, baseExpressions.ToArray());
+            try
+            {
+                web.Context.ExecuteQueryRetry();
+            }
+            catch (ServerException se)
+            {
+                if (se.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                {
+                    foundList = null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return foundList;
         }
     }
 }

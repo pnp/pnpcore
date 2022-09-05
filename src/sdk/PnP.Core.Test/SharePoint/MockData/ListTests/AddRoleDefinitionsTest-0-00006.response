@@ -1,9 +1,0 @@
---batchresponse_cfce6668-25c0-40a9-b7b4-0778c272a029
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741961)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741961)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741961,"Name":"PNP_SDK_TEST_AddRoleDefinitionsTest","Order":0,"RoleTypeKind":0}]}}
---batchresponse_cfce6668-25c0-40a9-b7b4-0778c272a029--

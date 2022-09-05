@@ -1,7 +1,26 @@
 @page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-<RemoteAuthenticatorView Action="@Action" />
+@using System.Web
+@using Microsoft.AspNetCore.WebUtilities;
+
+<RemoteAuthenticatorView Action="@Action" >
+    <LogInFailed>
+        <p>There was an error logging you in: @_errorMessage</p>
+    </LogInFailed>
+</RemoteAuthenticatorView>
 
 @code{
     [Parameter] public string Action { get; set; }
+    [Inject] NavigationManager _navigationManager { get; set; }
+    string _errorMessage;
+
+    protected override void OnParametersSet()
+    {
+        Uri uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("message", out var errorMessage))
+        {
+            _errorMessage = errorMessage;
+        }
+    }
+
 }

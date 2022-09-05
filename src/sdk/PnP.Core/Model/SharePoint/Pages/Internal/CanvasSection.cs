@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Represents a section on the canvas
     /// </summary>
-    internal class CanvasSection : ICanvasSection
+    internal sealed class CanvasSection : ICanvasSection
     {
 
         #region variables
@@ -194,7 +194,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// DisplayName of the collapsible section
         /// </summary>
-        public string DisplayName { get; set; }        
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// Sets the alignment of the collaps icon, left/right or not configured

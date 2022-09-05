@@ -9,24 +9,23 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class Page : IPage
+    internal sealed class Page : IPage
     {
-        private bool isDefaultDescription;
+        private const string inlineImageHtml = "<div tabindex=\"-1\" data-cke-widget-wrapper=\"1\" data-cke-filter=\"off\" class=\"cke_widget_wrapper cke_widget_block cke_widget_inlineimage cke_widget_wrapper_webPartInRteInlineImage cke_widget_wrapper_{ImageAlignment} cke_widget_wrapper_webPartInRte\" data-cke-display-name=\"div\" data-cke-widget-id=\"0\" role=\"region\" aria-label=\"Inline image in RTE. Use Alt + F11 to go to toolbar. Use Alt + P to open the property pane.\"><div data-webpart-id=\"image\" class=\"webPartInRte {ImageAlignment} webPartInRteInlineImage cke_widget_element\" data-cke-widget-data=\"%7B%22classes%22%3A%7B%22webPartInRteInlineImage%22%3A1%2C%22{ImageAlignment}%22%3A1%2C%22webPartInRte%22%3A1%7D%7D\" data-cke-widget-upcasted=\"1\" data-cke-widget-keep-attr=\"0\" data-widget=\"inlineimage\" data-instance-id=\"{TextEditorInstanceId}\" title=\"\"></div></div>";
+        private const string inlineImageTextControl = "{TextEditorInstanceId}";
+        private const string inlineImageAlignment = "{ImageAlignment}";
+
+        private bool isDefaultDescription = true;
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder.QueryProperties(p => p.Properties, p => p.ServerRelativeUrl), p => p.ListItemEntityTypeFullName, p => p.Fields };
-#pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-        private static readonly MD5 md5 = MD5.Create();
-#pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-
         #region Construction
 
         internal Page(PnPContext context, IList pagesLibrary, IListItem pageListItem, PageLayoutType pageLayoutType = PageLayoutType.Article)
@@ -74,12 +73,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Collection of sections that exist on this client side page
         /// </summary>
-        private readonly List<CanvasSection> sections = new List<CanvasSection>(1);
+        private readonly List<ICanvasSection> sections = new List<ICanvasSection>(1);
         public List<ICanvasSection> Sections
         {
             get
             {
-                return sections.Cast<ICanvasSection>().ToList();
+                return sections;
             }
         }
 
@@ -171,8 +170,8 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public DateTime? ScheduledPublishDate 
-        { 
+        public DateTime? ScheduledPublishDate
+        {
             get
             {
                 if (PageListItem != null && PageListItem.Values.ContainsKey(PageConstants._PublishStartDate) && PageListItem[PageConstants._PublishStartDate] != null)
@@ -367,7 +366,7 @@ namespace PnP.Core.Model.SharePoint
                 </View>";
 
             string extraPropertiesToLoad = $"";
-            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p=>p.InternalName == PageConstants._PublishStartDate) != null)
+            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._PublishStartDate) != null)
             {
                 extraPropertiesToLoad = "<FieldRef Name='{PageConstants._PublishStartDate}' />";
             }
@@ -709,6 +708,8 @@ namespace PnP.Core.Model.SharePoint
                 (control as CanvasControl).column = DefaultSection.DefaultColumn;
             }
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -735,6 +736,8 @@ namespace PnP.Core.Model.SharePoint
             }
             control.Order = order;
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -756,6 +759,8 @@ namespace PnP.Core.Model.SharePoint
 
             (control as CanvasControl).section = section;
             (control as CanvasControl).column = section.DefaultColumn;
+
+            ProcessPageTextInlineControls(control);
 
             Controls.Add(control);
         }
@@ -781,6 +786,8 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).column = section.DefaultColumn;
             control.Order = order;
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -802,6 +809,8 @@ namespace PnP.Core.Model.SharePoint
 
             (control as CanvasControl).section = column.Section;
             (control as CanvasControl).column = column;
+
+            ProcessPageTextInlineControls(control);
 
             Controls.Add(control);
         }
@@ -931,7 +940,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var section in sections.OrderBy(p => p.Order))
             {
-                html.Append(section.ToHtml());
+                html.Append((section as CanvasSection).ToHtml());
 
             }
             // Thumbnail
@@ -1148,7 +1157,7 @@ namespace PnP.Core.Model.SharePoint
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
                         {
-                            currentSection = sections.FirstOrDefault(p => p.Order == sectionData.Position.ZoneIndex);
+                            currentSection = sections.Cast<CanvasSection>().FirstOrDefault(p => p.Order == sectionData.Position.ZoneIndex);
                         }
 
                         if (currentSection == null)
@@ -1156,7 +1165,7 @@ namespace PnP.Core.Model.SharePoint
                             if (sectionData.Position != null)
                             {
                                 AddSection(new CanvasSection(this) { ZoneEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0 }, sectionData.Position.ZoneIndex);
-                                currentSection = sections.First(p => p.Order == sectionData.Position.ZoneIndex);
+                                currentSection = sections.Cast<CanvasSection>().First(p => p.Order == sectionData.Position.ZoneIndex);
                             }
                         }
 
@@ -1245,7 +1254,7 @@ namespace PnP.Core.Model.SharePoint
                     if (topSection != null)
                     {
                         // Add the "standalone" vertical section column to this section
-                        topSection.MergeVerticalSectionColumn(verticalSectionColumn.Columns[0] as CanvasColumn);
+                        (topSection as CanvasSection).MergeVerticalSectionColumn(verticalSectionColumn.Columns[0] as CanvasColumn);
 
                         // Move the controls to the new section/column
                         var controlsToMove = Controls.Where(p => p.Section == verticalSectionColumn);
@@ -1390,13 +1399,13 @@ namespace PnP.Core.Model.SharePoint
                     AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
                     currentSection = sections.FirstOrDefault();
                 }
-                
-                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
+
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection as CanvasSection);
 
                 var currentColumn = currentSection.Columns.FirstOrDefault();
                 if (currentColumn == null)
                 {
-                    currentSection.AddColumn(new CanvasColumn(currentSection));
+                    (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection));
                     currentColumn = currentSection.Columns.FirstOrDefault();
                 }
 
@@ -1412,7 +1421,7 @@ namespace PnP.Core.Model.SharePoint
                     currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
                 }
 
-                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection as CanvasSection);
 
                 var currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == position.SectionIndex);
 
@@ -1426,7 +1435,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (position.LayoutIndex.HasValue)
                     {
-                        currentSection.AddColumn(new CanvasColumn(currentSection, position.SectionIndex, position.SectionFactor, position.LayoutIndex.Value));
+                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, position.SectionIndex, position.SectionFactor, position.LayoutIndex.Value));
                         currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value).First();
 
                         // ZoneEmphasis on a vertical section column needs to be retained as that "overrides" the zone emphasis set on the section
@@ -1437,7 +1446,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else
                     {
-                        currentSection.AddColumn(new CanvasColumn(currentSection, position.SectionIndex, position.SectionFactor));
+                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, position.SectionIndex, position.SectionFactor));
                         currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).First();
                     }
                 }
@@ -1451,7 +1460,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (zoneGroupMetadata != null)
             {
-                currentSection.Collapsible = true;
+                currentSection.Collapsible = zoneGroupMetadata.IconAlignment != null ? true : false;
                 currentSection.SectionType = zoneGroupMetadata.Type;
                 currentSection.DisplayName = zoneGroupMetadata.DisplayName;
                 currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
@@ -1858,7 +1867,13 @@ namespace PnP.Core.Model.SharePoint
                 pageName += ".aspx";
             }
 
-            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
+            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}",
+                    p => p.ListItemAllFields.QueryProperties(p => p.All, 
+                        p => p.ParentList.QueryProperties(
+                            p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title)
+                        )
+                    ), 
+                    p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
         }
 
         private async Task EnsurePageListItemAsync(string pageName)
@@ -1927,8 +1942,13 @@ namespace PnP.Core.Model.SharePoint
             }
             if (hasOneColumnFullWidthSection)
             {
-                await PnPContext.Web.EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(true);
-                if (!PnPContext.Web.WebTemplate.Equals("SITEPAGEPUBLISHING", StringComparison.InvariantCultureIgnoreCase))
+                await PnPContext.Web.EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+                if (!PnPContext.Web.WebTemplate.Equals("SITEPAGEPUBLISHING", StringComparison.InvariantCultureIgnoreCase) &&
+                    // we allow enabling communication site features on STS and EHS sites, so don't block adding full width sections on those sites
+                    !PnPContext.Web.WebTemplate.Equals("STS", StringComparison.InvariantCultureIgnoreCase) &&
+                    !PnPContext.Web.WebTemplate.Equals("EHS", StringComparison.InvariantCultureIgnoreCase) &&
+                    // SharePoint Syntex Content Center sites can also have full width sections
+                    !PnPContext.Web.WebTemplate.Equals("CONTENTCTR", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_CantUseFullWidthSection, PnPContext.Web.WebTemplate));
                 }
@@ -1970,17 +1990,17 @@ namespace PnP.Core.Model.SharePoint
                 TranslatedLanguages = new List<IPageTranslationStatus>()
             };
 
-            var root = JsonSerializer.Deserialize<JsonElement>(response).GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(response);
 
             // Process untranslated languages
-            var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
+            var untranslatedLanguages = root.GetProperty("UntranslatedLanguages");
             foreach (var untranslatedLanguage in untranslatedLanguages.EnumerateArray())
             {
                 translationStatus.UntranslatedLanguages.Add(untranslatedLanguage.GetString());
             }
 
             // Process translationstatus 
-            var translationStatusCollection = root.GetProperty("Items").GetProperty("results");
+            var translationStatusCollection = root.GetProperty("Items");
             foreach (var status in translationStatusCollection.EnumerateArray())
             {
                 translationStatus.TranslatedLanguages.Add(new PageTranslationStatus()
@@ -2228,7 +2248,7 @@ namespace PnP.Core.Model.SharePoint
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
         }
-        
+
         public void RemoveSchedulePublish()
         {
             RemoveSchedulePublishAsync().GetAwaiter().GetResult();
@@ -2423,7 +2443,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
+                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
 
                 var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 
@@ -2581,7 +2601,7 @@ namespace PnP.Core.Model.SharePoint
                 DefaultWebPart.SpacesModelViewer => "e19cef07-c1ad-42ea-a3d8-a536d6415476",
                 DefaultWebPart.SpacesImageThreeSixty => "8bcd4369-10e6-46a9-b718-fa47db2864ca",
                 DefaultWebPart.SpacesVideoThreeSixty => "4bdfb4be-6e39-4b1d-af8b-addbd3a582ff",
-                DefaultWebPart.SpacesText2D => "e30ff702-e1a4-4e02-8c11-3cce0139727a", 
+                DefaultWebPart.SpacesText2D => "e30ff702-e1a4-4e02-8c11-3cce0139727a",
                 DefaultWebPart.SpacesVideoPlayer => "8902cf6d-22e5-4615-b036-57c613b8db6b",
                 DefaultWebPart.SpacesPeople => "102f1fc1-3369-4372-8e44-f27dd11a9377",
                 _ => "",
@@ -2604,12 +2624,24 @@ namespace PnP.Core.Model.SharePoint
 
         private static string GenerateUrlHash(string value)
         {
+#if NET5_0_OR_GREATER
+            if (System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                // https://docs.microsoft.com/en-us/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
+                return "";
+            }
+            else
+            {
+                return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
+            }
+#else
             return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
+#endif
         }
 
         private static byte[] MD5Hash(string stringToHash)
         {
-            return md5.ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
+            return System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
         }
 
         private static string Base64Encode(byte[] input)
@@ -2617,6 +2649,148 @@ namespace PnP.Core.Model.SharePoint
             string str = Convert.ToBase64String(input).Split(new char[] { '=' })[0];
             return str.Replace('+', '-').Replace('/', '_');
         }
+        #endregion
+
+        #region Image handling, including inline
+        public async Task<string> GetInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            if (textEditorInstance == null)
+            {
+                throw new ArgumentNullException(nameof(textEditorInstance));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (imageOptions == null)
+            {
+                imageOptions = new PageImageOptions
+                {
+                    IsInlineImage = true,
+                };
+            }
+            else
+            {
+                imageOptions.IsInlineImage = true;
+            }
+
+            var inlineImageWebPart = await GetImageWebPartAsync(serverRelativeUrl, imageOptions).ConfigureAwait(false);
+            (inlineImageWebPart as PageWebPart).RichTextEditorInstanceId = textEditorInstance.InstanceId.ToString();
+
+            // Add the image web part to collection of inline web parts
+            (textEditorInstance as PageText).InlineWebParts.Add(inlineImageWebPart as PageWebPart);
+
+            // Prepare the text snippet to insert
+            string alignmentValue = "webPartInRteAlignLeft";
+            if (imageOptions != null)                 
+            {
+                if (imageOptions.Alignment == PageImageAlignment.Center)
+                {
+                    alignmentValue = "webPartInRteAlignCenter";
+                }
+                else if(imageOptions.Alignment == PageImageAlignment.Right)
+                {
+                    alignmentValue = "webPartInRteAlignRight";
+                }
+            }
+
+            return inlineImageHtml.Replace(inlineImageTextControl, inlineImageWebPart.InstanceId.ToString())
+                                  .Replace(inlineImageAlignment, alignmentValue);
+        }
+
+        public string GetInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            return GetInlineImageAsync(textEditorInstance, serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageWebPart> GetImageWebPartAsync(string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            // Find the server relative image
+            var image = await PnPContext.Web.GetFileByServerRelativeUrlAsync(serverRelativeUrl, p => p.UniqueId, p => p.ListId).ConfigureAwait(false);
+
+            if (imageOptions == null)
+            {
+                imageOptions = new PageImageOptions();
+            }
+
+            // Set defaults in case height and width are not set
+            if (!imageOptions.Height.HasValue)
+            {
+                imageOptions.Height = -1;
+            }
+
+            if (!imageOptions.Width.HasValue)
+            {
+                imageOptions.Width = -1;
+            }
+
+            if (imageOptions.Link == null)
+            {
+                imageOptions.Link = "";
+            }
+
+            if (imageOptions.Caption == null)
+            {
+                imageOptions.Caption = "";
+            }
+
+            if (imageOptions.AlternativeText == null)
+            {
+                imageOptions.AlternativeText = "";
+            }
+
+            // Prepare configuration for the image web part
+            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{\"captionText\":\"{Caption}\"},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{\"linkUrl\":\"{Link}\"},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"altText\":\"{AltText}\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":{Width},\"imgHeight\":{Height},\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false,\"isInlineImage\":{IsInlineImage}}}}";
+            inlineImageWebPart = inlineImageWebPart
+                                   .Replace("{FullyQualifiedImageUrl}", $"https://{PnPContext.Uri.DnsSafeHost}{serverRelativeUrl}")
+                                   .Replace("{IsInlineImage}", imageOptions.IsInlineImage.ToString().ToLower())
+                                   .Replace("{Alignment}", imageOptions.Alignment.ToString())
+                                   .Replace("{Height}", imageOptions.Height.Value.ToString())
+                                   .Replace("{Width}", imageOptions.Width.Value.ToString())
+                                   .Replace("{Link}", imageOptions.Link)
+                                   .Replace("{Caption}", imageOptions.Caption)
+                                   .Replace("{AltText}", imageOptions.AlternativeText)
+                                   .Replace("{SiteId}", PnPContext.Site.Id.ToString())
+                                   .Replace("{WebId}", PnPContext.Web.Id.ToString())
+                                   .Replace("{ListId}", image.ListId.ToString())
+                                   .Replace("{UniqueId}", image.UniqueId.ToString());
+            
+            // Create the web part
+            var webPart = NewWebPart();
+            (webPart as PageWebPart).WebPartId = WebPartEnumToId(DefaultWebPart.Image);            
+            webPart.PropertiesJson = inlineImageWebPart;
+
+            return webPart;
+        }
+
+        public IPageWebPart GetImageWebPart(string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            return GetImageWebPartAsync(serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
+        }
+
+        private void ProcessPageTextInlineControls(ICanvasControl control)
+        {
+            if (control is PageText pageText)
+            {
+                if (pageText.InlineWebParts.Any())
+                {
+                    foreach (var webPart in pageText.InlineWebParts)
+                    {
+                        webPart.section = control.Section;
+                        webPart.column = control.Column;
+                        Controls.Add(webPart);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #endregion

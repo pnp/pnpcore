@@ -6,13 +6,11 @@ The PnP Core SDK uses a default configuration and as such you're not required to
 
 Below snippet shows the settings which are used by the PnP Core SDK, you can simply include this snippet in your application settings file next to your custom settings.
 
-> [!Important]
-> The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.
-
 ```json
 {
   "PnPCore": {
     "DisableTelemetry": "false",
+    "Environment": "Production",
     "HttpRequests": {
       "UserAgent": "ISV|Contoso|ProductX",
       "Timeout": "100",
@@ -20,7 +18,8 @@ Below snippet shows the settings which are used by the PnP Core SDK, you can sim
         "UseRetryAfterHeader": "false",
         "MaxRetries": "10",
         "DelayInSeconds": "3",
-        "UseIncrementalDelay": "true"
+        "UseIncrementalDelay": "true",
+        "DefaultPageSize": 100
       },
       "MicrosoftGraph": {
         "UseRetryAfterHeader": "true",
@@ -70,10 +69,12 @@ PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-afte
 PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.
 PnPCore:HttpRequests:SharePointRest:DelayInSeconds | 3 | Delay in seconds between SharePoint Rest request retries.
 PnPCore:HttpRequests:SharePointRest:IncrementalDelay | true | Delays get incrementally longer with each retry.
+PnPCore:HttpRequests:SharePointRest:DefaultPageSize | 100 | Page size using when paging is automatically applied during data querying via the PnP Core SDK LINQ support.
 PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader | true | Use retry-after http header when calculating the wait time in seconds for Microsoft Graph request retry.
 PnPCore:HttpRequests:MicrosoftGraph:MaxRetries | 10 | Maximum number of retries before retrying a Microsoft Graph request throws an exception.
 PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds | 3 | Delay in seconds between Microsoft Graph request retries.
 PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay | true | Delays get incrementally longer with each retry.
+PnPCore:Environment | Production | Use this setting if you are using a cloud environment **different** from the standard production cloud: possible values are `Production`, `PreProduction`, `USGovernment` (a.k.a GCC), `USGovernmentHigh` (a.k.a GCC High), `USGovernmentDoD` (a.k.a DoD), `China` and `Germany`. **Important:** use the correct casing when using these values.
 PnPCore:DisableTelemetry | false | Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.
 PnPCore:Credentials | | This section defines the settings for the Authentication Providers and it will be updated in the near future.
 PnPCore:Sites | | This section defines the site collections to consume using the PnP Core SDK. Every single item of the array has a name, which can then be used with the PnPContextFactory to retrieve an instance of PnPContext for that specific site, a _SiteUrl_ and the _AuthenticationProviderName_ that maps to the corresponding Authentication Provider to use for accessing the target site.

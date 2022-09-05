@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListItemCollection : QueryableDataModelCollection<IListItem>, IListItemCollection
+    internal sealed class ListItemCollection : QueryableDataModelCollection<IListItem>, IListItemCollection
     {
         public ListItemCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -127,13 +127,10 @@ namespace PnP.Core.Model.SharePoint
             if (!string.IsNullOrEmpty(response.Json))
             {
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                if (document.TryGetProperty("d", out JsonElement root))
+                if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
                 {
-                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                    {
-                        // return the recyclebin item id
-                        return recycleBinItemId.GetGuid();
-                    }
+                    // return the recyclebin item id
+                    return recycleBinItemId.GetGuid();
                 }
             }
 
@@ -190,7 +187,7 @@ namespace PnP.Core.Model.SharePoint
                 RemoveFromModel = removeFromModel
             };
         }
-        
+
         #endregion
 
     }

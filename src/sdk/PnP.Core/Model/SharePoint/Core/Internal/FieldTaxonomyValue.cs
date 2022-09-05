@@ -6,9 +6,44 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldTaxonomyValue : FieldValue, IFieldTaxonomyValue
+    /// <summary>
+    /// Represents a taxonomy field value
+    /// </summary>
+    public sealed class FieldTaxonomyValue : FieldValue, IFieldTaxonomyValue
     {
         internal FieldTaxonomyValue() : base()
+        {
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="label">Taxonomy label</param>
+        /// <param name="termId">Taxonomy term id</param>
+        /// <param name="wssId">Optionally provide the wssId value</param>
+        public FieldTaxonomyValue(Guid termId, string label, int wssId) : this()
+        {
+            if (termId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(termId));
+            }
+
+            if (label == null)
+            {
+                throw new ArgumentNullException(nameof(label));
+            }
+            
+            TermId = termId;
+            Label = label;
+            WssId = wssId;
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="label">Taxonomy label</param>
+        /// <param name="termId">Taxonomy term id</param>
+        public FieldTaxonomyValue(Guid termId, string label) : this(termId, label, -1)
         {
         }
 
@@ -16,11 +51,17 @@ namespace PnP.Core.Model.SharePoint
 
         internal override Guid CsomType => Guid.Parse("19e70ed0-4177-456b-8156-015e4d163ff8");
 
+        /// <summary>
+        /// Taxonomy label
+        /// </summary>
         public string Label { get => GetValue<string>(); set => SetValue(value); }
 
+        /// <summary>
+        /// Taxonomy term id
+        /// </summary>
         public Guid TermId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public int WssId { get => GetValue<int>(); set => SetValue(value); }
+        internal int WssId { get => GetValue<int>(); set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)
         {
@@ -53,10 +94,15 @@ namespace PnP.Core.Model.SharePoint
                         WssId = wssId.GetInt32();
                     }
                 }
-
-                // Clear changes
-                Commit();
             }
+            else if (json.ValueKind == JsonValueKind.Undefined || json.ValueKind == JsonValueKind.Null)
+            {
+                TermId = Guid.Empty;
+                Label = null;
+            }
+
+            // Clear changes
+            Commit();
 
             return this;
         }
@@ -65,20 +111,23 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!properties.ContainsKey("TermID"))
             {
-                return null;
+                TermId = Guid.Empty;
+                Label = null;
             }
-            
-            if (properties.ContainsKey("Label"))
+            else
             {
-                Label = properties["Label"];
-            }
+                if (properties.ContainsKey("Label"))
+                {
+                    Label = properties["Label"];
+                }
 
-            if (properties.ContainsKey("TermID"))
-            {
-                TermId = Guid.Parse(properties["TermID"]);
-            }
+                if (properties.ContainsKey("TermID"))
+                {
+                    TermId = Guid.Parse(properties["TermID"]);
+                }
 
-            WssId = -1;
+                WssId = -1;
+            }
 
             // Clear changes
             Commit();

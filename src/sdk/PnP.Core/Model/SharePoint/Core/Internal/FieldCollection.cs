@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldCollection : QueryableDataModelCollection<IField>, IFieldCollection
+    internal sealed class FieldCollection : QueryableDataModelCollection<IField>, IFieldCollection
     {
         internal const string FIELD_XML_FORMAT = @"<Field Type=""{0}"" Name=""{1}"" DisplayName=""{2}"" ID=""{3}"" Group=""{4}"" Required=""{5}"" {6}/>";
         internal const string FIELD_XML_FORMAT_WITH_CHILD_NODES = @"<Field Type=""{0}"" Name=""{1}"" DisplayName=""{2}"" ID=""{3}"" Group=""{4}"" Required=""{5}"" {6}>{7}</Field>";
@@ -567,7 +567,8 @@ namespace PnP.Core.Model.SharePoint
                 field.Id.ToString(),
                 parentId,
                 options.TermStoreId,
-                options.TermSetId);
+                options.TermSetId,
+                options.Open);
 
             ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
             {
@@ -589,7 +590,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 MultiValue = false,
                 TermStoreId = options.TermStoreId,
-                TermSetId = options.TermSetId
+                TermSetId = options.TermSetId,
+                DefaultValue = options.DefaultValue,
+                Open = options.OpenTermSet
             };
             creationOptions.ImportFromCommonFieldOptions(title, options);
 
@@ -619,7 +622,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 MultiValue = true,
                 TermStoreId = options.TermStoreId,
-                TermSetId = options.TermSetId
+                TermSetId = options.TermSetId,
+                DefaultValues = options.DefaultValues,
+                Open = options.OpenTermSet
             };
             creationOptions.ImportFromCommonFieldOptions(title, options);
 

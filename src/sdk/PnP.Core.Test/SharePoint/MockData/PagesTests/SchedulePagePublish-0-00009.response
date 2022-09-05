@@ -1,9 +1,0 @@
---batchresponse_d7a3f026-8b80-4f1a-8adb-d4f137d49235
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"SchedulePublish":"4"}}
---batchresponse_d7a3f026-8b80-4f1a-8adb-d4f137d49235--

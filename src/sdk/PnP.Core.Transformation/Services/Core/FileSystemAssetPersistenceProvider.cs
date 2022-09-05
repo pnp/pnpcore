@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.Builder.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core

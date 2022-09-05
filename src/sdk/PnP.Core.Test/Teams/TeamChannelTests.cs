@@ -4,6 +4,7 @@ using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace PnP.Core.Test.Teams
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-                
+
         [TestMethod]
         public async Task GetChannelsAsyncTest()
         {
@@ -148,6 +149,78 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.Channels.Length > 0);
 
                 var channel = team.Channels.AddBatch("");
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var folder = team.Channels.AsRequested().First().GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromPrivateChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var folder = team.Channels.AsRequested().First(p=>p.MembershipType == TeamChannelMembershipType.Private).GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderFromSharedChannel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                // TODO: update once shared channels APIs come out of beta, currently shared channels are not returned
+                var folder = team.Channels.AsRequested().First(p => p.MembershipType == TeamChannelMembershipType.Private).GetFilesFolder(p => p.Files);
+
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Requested);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilesFolderWebUrlChannelLoad()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+
+                var batch = context.NewBatch();
+                foreach(var channel in team.Channels.AsRequested())
+                {
+                    await channel.LoadBatchAsync(batch, p => p.FilesFolderWebUrl);
+                }
+                var errors = await context.ExecuteAsync(batch, false);
+
+                foreach(var channel in team.Channels.AsRequested())
+                {
+                    if (channel.IsPropertyAvailable(p=>p.FilesFolderWebUrl))
+                    {
+                        Assert.IsTrue(!string.IsNullOrEmpty(channel.FilesFolderWebUrl.ToString()));
+                    }
+                }
 
             }
         }

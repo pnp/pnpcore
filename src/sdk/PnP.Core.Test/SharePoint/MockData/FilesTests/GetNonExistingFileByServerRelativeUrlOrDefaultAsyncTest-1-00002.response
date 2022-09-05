@@ -1,9 +1,0 @@
---batchresponse_7cd04c5f-c0e4-4176-aac9-9896804aeb60
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 404 Not Found
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/Prov-1/Shared%20Documents/IdontExist.pdf does not exist."}}}
---batchresponse_7cd04c5f-c0e4-4176-aac9-9896804aeb60--

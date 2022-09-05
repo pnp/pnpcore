@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -48,13 +49,19 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Collection of sub-webs in the current Site object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IWebCollection AllWebs { get; }
 
         /// <summary>
         /// Collection of features enabled for the site
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
-        public IFeatureCollection Features { get; }
+        public IFeatureCollection Features { get; }        
 
         /// <summary>
         /// Gets or sets a value that specifies whether the creation of declarative workflows is allowed on this site collection.
@@ -161,12 +168,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the Information Protection Label Id for an individual site collection.
         /// </summary>
-        public string SensitivityLabelId { get; set; }
+        public Guid SensitivityLabelId { get; set; }
 
         /// <summary>
         /// Information Protection Label Id for an individual site collection
         /// </summary>
-        public Guid SensitivityLabel { get; }
+        public string SensitivityLabel { get; }
 
         /// <summary>
         /// Returns whether or not this site is a HubSite. Hub sites can be associated with one or more sites.
@@ -197,6 +204,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of Recycle Bin items for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRecycleBinItemCollection RecycleBin { get; }
 
@@ -247,6 +257,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
@@ -254,6 +267,14 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the synchronizable visitor group for a hub site
         /// </summary>
         public ISharePointGroup HubSiteSynchronizableVisitorGroup { get; }
+
+        /// <summary>
+        /// Event Receivers defined in this web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
+        /// </summary>
+        public IEventReceiverDefinitionCollection EventReceivers { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
@@ -264,11 +285,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IAudit Audit { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IEventReceiverDefinitionCollection EventReceivers { get; }
 
         /// <summary>
         /// Retrieves the available compliance tags / retention labels for this site
@@ -287,14 +303,29 @@ namespace PnP.Core.Model.SharePoint
         public Task<IHubSite> RegisterHubSiteAsync();
 
         /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public IHubSite RegisterHubSite();
+
+        /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
         public Task<bool> UnregisterHubSiteAsync();
 
         /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public bool UnregisterHubSite();
+
+        /// <summary>
         /// Associates the current site to a primary hub site
         /// </summary>
         public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public bool JoinHubSite(Guid hubSiteId);
 
         /// <summary>
         /// Disassociates current site from primary hub site
@@ -303,11 +334,134 @@ namespace PnP.Core.Model.SharePoint
         public Task<bool> UnJoinHubSiteAsync();
 
         /// <summary>
+        /// Disassociates current site from primary hub site
+        /// </summary>
+        /// <returns></returns>
+        public bool UnJoinHubSite();
+
+        /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public Task<IHubSite> GetHubSiteData(Guid? Id);
+        public Task<IHubSite> GetHubSiteDataAsync(Guid? id);
+
+        /// <summary>
+        /// Gets hubsite data from the current site OR another specified hub site ID
+        /// </summary>
+        /// <param name="id">Hub Site Guid</param>
+        /// <returns></returns>
+        public IHubSite GetHubSiteData(Guid? id);
+
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public Task<bool> IsHomeSiteAsync();
+
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public bool IsHomeSite();
+
+        /// <summary>
+        /// Creates a new migration job
+        /// <param name="exportObjectUris">Array of the objects to migrate (absolute url to the file / folder)</param>
+        /// <param name="destinationUri">Destination URI to where the objects have to be migrated</param>
+        /// <param name="options">Migration options</param>
+        /// <param name="waitUntilFinished">Defines if we have to wait until all the migrations have finished</param>
+        /// <param name="waitAfterStatusCheck">Duration between every GetCopyJobProgress call in seconds. Defaults to 1.</param>
+        /// <returns>List of all the jobs being created (one for every exportObjectUri)</returns>
+        /// </summary>
+        public Task<IList<ICopyMigrationInfo>> CreateCopyJobsAsync(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1);
+
+        /// <summary>
+        /// Creates a new migration job
+        /// <param name="exportObjectUris">Array of the objects to migrate (absolute url to the file / folder)</param>
+        /// <param name="destinationUri">Destination URI to where the objects have to be migrated</param>
+        /// <param name="options">Migration options</param>
+        /// <param name="waitUntilFinished">Defines if we have to wait until all the migrations have finished</param>
+        /// <param name="waitAfterStatusCheck">Duration between every GetCopyJobProgress call in seconds. Defaults to 1.</param>
+        /// <returns>List of all the jobs being created (one for every exportObjectUri)</returns>
+        /// </summary>
+        public IList<ICopyMigrationInfo> CreateCopyJobs(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1);
+
+        /// <summary>
+        /// Gets the progress of an existing migration info object
+        /// <param name="copyMigrationInfo">Migration job to get the progress of</param>
+        /// <returns>Progress of the copy job</returns>
+        /// </summary>
+        public Task<ICopyJobProgress> GetCopyJobProgressAsync(ICopyMigrationInfo copyMigrationInfo);
+
+        /// <summary>
+        /// Gets the progress of an existing migration info object
+        /// <param name="copyMigrationInfo">Migration job to get the progress of</param>
+        /// <returns>Progress of the copy job</returns>
+        /// </summary>
+        public ICopyJobProgress GetCopyJobProgress(ICopyMigrationInfo copyMigrationInfo);
+
+        /// <summary>
+        /// Ensures that a migration job has completely run
+        /// <param name="copyMigrationInfos">List of migration jobs to check the process of</param>
+        /// <param name="waitAfterStatusCheck">Duration between every GetCopyJobProgress call in seconds. Defaults to 1.</param>
+        /// </summary>
+        public Task EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1);
+
+        /// <summary>
+        /// Ensures that a migration job has completely run
+        /// <param name="copyMigrationInfos">List of migration jobs to check the process of</param>
+        /// <param name="waitAfterStatusCheck">Duration between every GetCopyJobProgress call in seconds. Defaults to 1.</param>
+        /// </summary>
+        public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1);
+
+        /// <summary>
+        /// Gets site analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets site analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetSearchConfigurationXmlAsync();
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        string GetSearchConfigurationXml();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this site
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this site
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetSearchConfigurationManagedProperties();
+
+        /// <summary>
+        /// Sets the search configuration for the site
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        Task SetSearchConfigurationXmlAsync(string configuration);
+
+        /// <summary>
+        /// Sets the search configuration for the site
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        void SetSearchConfigurationXml(string configuration);
 
     }
 }

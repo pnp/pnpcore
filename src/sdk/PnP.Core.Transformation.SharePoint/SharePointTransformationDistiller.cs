@@ -1,11 +1,10 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using PnP.Core.Transformation.Services.Core;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Services;
-using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint
 {

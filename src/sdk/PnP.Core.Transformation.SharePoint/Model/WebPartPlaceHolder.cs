@@ -1,8 +1,5 @@
 ﻿using Microsoft.SharePoint.Client;
 using Microsoft.SharePoint.Client.WebParts;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Model
 {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SyntexModel : ISyntexModel
+    internal sealed class SyntexModel : ISyntexModel
     {
         #region Properties
 
@@ -151,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static void ProcessGetModelPublicationsResponse(string json, List<ISyntexModelPublication> results)
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("value");
             if (root.ValueKind == JsonValueKind.Array)
             {
                 foreach (var publicationResultJson in root.EnumerateArray())
@@ -444,7 +444,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static List<SyntexModelPublicationResult> ParseModelPublishResponse(string json)
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("Details").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("Details");
             var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
             return modelPublicationResults;
         }
@@ -747,7 +747,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<IEnumerableBatchResult<ISyntexModelPublicationResult>> UnPublishModelBatchAsync(Batch batch, List<SyntexModelUnPublishOptions> unPublicationOptions)
         {
             List<SyntexModelPublication> modelUnPublications = BuildModelUnPublishList(unPublicationOptions);
-            
+
             var unPublishInfo = new
             {
                 publications = modelUnPublications

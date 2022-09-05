@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -42,7 +40,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public Task<MetadataMappingProviderOutput> MapMetadataFieldAsync(MetadataMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapMetadataFieldAsync");
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapMetadataFieldAsync"
+                .CorrelateString(input.Context.Task.Id));
             return Task.FromResult(new MetadataMappingProviderOutput());
         }
     }

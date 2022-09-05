@@ -209,6 +209,38 @@ IField myField = await myList.Fields.AddTaxonomyAsync("My Field", new FieldTaxon
 });
 ```
 
+When creating taxonomy fields you might also want to set default term, which can be done via the `DefaultValue` property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the `OpenTermSet` property. Setting a termset as open only is possible if the respective termset has an open submission policy.
+
+```csharp
+// Load the first termset under the System group
+var termStore = await context.TermStore.GetAsync(t => t.Groups);
+var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+await group.LoadAsync(g => g.Sets);
+var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+// Load the terms in this termset
+await termSet.LoadAsync(p => p.Terms);
+ITerm term1 = termSet.Terms.AsRequested().First();
+
+// Create the taxonomy field as open with a default value
+IField myField = await myList.Fields.AddTaxonomyAsync("My Field", new FieldTaxonomyOptions()
+{
+    Group = "Custom Fields",
+    AddToDefaultView = true,
+    TermStoreId = new Guid(termStore.Id),
+    TermSetId = new Guid(termSet.Id),
+    DefaultValue = term1,
+    OpenTermSet = true
+});
+```
+
+If you want to update the default value of an existing taxonomy field then you need to create the default value string according to below sample:
+
+```csharp
+myField.DefaultValue = $"-1;#{term1.Labels.First(p => p.IsDefault == true).Name}|{term1.Id}";
+await myField.UpdateAsync();
+```
+
 ## Multi taxonomy
 
 If you want to be able to select multiple taxonomy values to fill your field you need a multi taxonomy field, configuration wise this is the same as for the single value Taxonomy field but now you'd use the [AddTaxonomyMultiAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldCollection.html#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyMulti_System_String_PnP_Core_Model_SharePoint_FieldTaxonomyOptions_).
@@ -221,6 +253,39 @@ IField myField = await myList.Fields.AddTaxonomyMultiAsync("My Field", new Field
     TermStoreId = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c"),
     TermSetId = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5")
 });
+```
+
+When creating taxonomy fields you might also want to set default terms, which can be done via the `DefaultValues` property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the `OpenTermSet` property. Setting a termset as open only is possible is the respective termset is created as open termset.
+
+```csharp
+// Load the first termset under the System group
+var termStore = await context.TermStore.GetAsync(t => t.Groups);
+var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+await group.LoadAsync(g => g.Sets);
+var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+// Load the terms in this termset
+await termSet.LoadAsync(p => p.Terms);
+ITerm term1 = termSet.Terms.AsRequested().First();
+ITerm term2 = termSet.Terms.AsRequested().Last();
+
+// Create the taxonomy field as open with a default values
+IField myField = await myList.Fields.AddTaxonomyMultiAsync("My Field", new FieldTaxonomyOptions()
+{
+    Group = "Custom Fields",
+    AddToDefaultView = true,
+    TermStoreId = new Guid(termStore.Id),
+    TermSetId = new Guid(termSet.Id),
+    DefaultValues = new System.Collections.Generic.List<ITerm>() { term1, term2 },
+    OpenTermSet = true
+});
+```
+
+If you want to update the default value of an existing taxonomy field then you need to create the default value string according to below sample:
+
+```csharp
+myField.DefaultValue = $"-1;#{term1.Labels.First(p => p.IsDefault == true).Name}|{term1.Id};#-1;#{term3.Labels.First(p => p.IsDefault == true).Name}|{term3.Id}";
+await myField.UpdateAsync();
 ```
 
 ## Add field via field XML

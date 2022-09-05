@@ -85,6 +85,7 @@ namespace PnP.Core.Test.Utilities
         /// <param name="documentMetadata">The metadata of the document</param>
         /// <param name="contextConfig">The name of the context config. Default is the value of TestCommon.TestSite</param>
         /// <param name="sourceFilePath">The path of the source mock file in case of offline test</param>
+        /// <param name="parentFolder">Add the mock file into the a given folder path</param>
         /// <returns>A tuple containing the name of the library and the name and the server relative URL of the created document</returns>
         internal static async Task<Tuple<string, string, string>> CreateTestDocumentAsync(int contextId = default,
             string parentLibraryName = "Documents",
@@ -95,7 +96,8 @@ namespace PnP.Core.Test.Utilities
               bool parentLibraryApprove = false,
               Dictionary<string, object> documentMetadata = null,
               string contextConfig = null,
-              [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+              [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null,
+              IFolder parentFolder = null)
         {
             contextConfig ??= TestCommon.TestSite;
 
@@ -108,6 +110,12 @@ namespace PnP.Core.Test.Utilities
 
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName, sourceFilePath))
             {
+                if (parentFolder != null)
+                {
+                    IFile test = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                    return new Tuple<string, string, string>(parentFolder.Name, test.Name, test.ServerRelativeUrl);
+                }
+
                 IFolder folder;
                 if (!IsDefaultSharePointLibraryName(parentLibraryName))
                 {
@@ -309,8 +317,8 @@ namespace PnP.Core.Test.Utilities
                     // Just to show a different syntex doing the same
                     var web = await context.Web.GetAsync(w => w.UserCustomActions);
                     var query = from uca in web.UserCustomActions
-                            where uca.Name == customActionName
-                            select uca;
+                                where uca.Name == customActionName
+                                select uca;
                     IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
                     await foundUserCustomAction.DeleteAsync();
                 }

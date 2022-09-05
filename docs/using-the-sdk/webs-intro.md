@@ -36,11 +36,14 @@ var web = await context.Web.GetAsync(p => p.Title,
 
 A web can have zero or more sub webs and to load these you use the [Webs property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Webs) and enumerate over the sub webs of the current web:
 
+> [!Important]
+> When you want to work with the sub web you need to create a new `PnPContext` for the sub web as shown in below sample
+
 ```csharp
 // Load the sub webs
-await context.Web.GetAsync(p => p.Webs);
+await context.Web.LoadAsync(p => p.Webs);
 
-foreach (var subWeb in context.Web.Webs)
+foreach (var subWeb in context.Web.Webs.AsRequested())
 {
     using (var contextSubWeb = await pnpContextFactory.CreateAsync(subWeb.Url))
     {

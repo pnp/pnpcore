@@ -49,6 +49,10 @@ var apiRequest = new ApiRequest(ApiRequestType.SPORest, "https://contoso.sharepo
 var response = await context.Web.ExecuteRequestAsync(apiRequest);
 ```
 
+> [!Note]
+>
+> When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the `JsonSerializerSettings.StringEscapeHandling` property of the `JsonSerializerSettings` class.
+
 ## Making a custom Microsoft Graph request
 
 Below sample shows how to make a custom Microsoft Graph request:
@@ -61,6 +65,10 @@ var response = context.Team.ExecuteRequest(apiRequest);
 
 // Parse the json response returned via response.Response
 ```
+
+> [!Note]
+>
+> When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the `JsonSerializerSettings.StringEscapeHandling` property of the `JsonSerializerSettings` class.
 
 ## Batching custom API requests
 
@@ -159,4 +167,18 @@ var result2 = await context.Web.Lists
 
 // Execute the batch
 await context.ExecuteAsync(batch);
+```
+
+## I want to specify custom request headers or read the response headers
+
+To specify request headers you can use the `WithHeaders` extension method from the `PnP.Core.Model` namespace: using a `Dictionary<string,string>` you provide input headers and using a delegate your code get notified of the resulting response headers. Below are some sample:
+
+```csharp
+Dictionary<string, string> extraHeaders = new Dictionary<string, string>() { { "myheader", "myheadervalue" } };
+
+// Use WithHeaders on custom API request, process the returned response headers
+var meResponse = await context.Web.WithHeaders(extraHeaders, (responseHeaders) => { /* process the response headers */ }).ExecuteRequestBatchAsync(batch, new ApiRequest(ApiRequestType.Graph, "me"));
+
+// Use WithHeaders on OOB API request, ignore the response headers
+context.Web.WithHeaders(extraHeaders).Load(p => p.All);
 ```

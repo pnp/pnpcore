@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Beta = true)]
-    internal partial class TeamChatMessageAttachment : BaseDataModel<ITeamChatMessageAttachment>, ITeamChatMessageAttachment
+    internal sealed class TeamChatMessageAttachment : BaseDataModel<ITeamChatMessageAttachment>, ITeamChatMessageAttachment
     {
 
         #region Properties

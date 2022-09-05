@@ -358,6 +358,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publishing transformation layout mapping can maximum use 3 columns.
+        /// </summary>
+        internal static string Error_Maximum3ColumnsAllowed {
+            get {
+                return ResourceManager.GetString("Error_Maximum3ColumnsAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The media web part configuration could not be read, skipping this web part from the transformation.
         /// </summary>
         internal static string Error_MediaWebpartConfiguration {
@@ -525,6 +534,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Info_AnalyserNoLayoutsFound {
             get {
                 return ResourceManager.GetString("Info_AnalyserNoLayoutsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No web parts were found on page.
+        /// </summary>
+        internal static string Info_AnalysingNoWebPartsFound {
+            get {
+                return ResourceManager.GetString("Info_AnalysingNoWebPartsFound", resourceCulture);
             }
         }
         
@@ -772,6 +790,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not retrieve field value from mapping, the contents were empty.
+        /// </summary>
+        internal static string Warning_CannotRetrieveFieldValue {
+            get {
+                return ResourceManager.GetString("Warning_CannotRetrieveFieldValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Web Part Mapping not found.
         /// </summary>
         internal static string Warning_ContentWebPartMappingNotFound {
@@ -822,6 +849,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Warning_PageLayoutsCannotBeDetermined {
             get {
                 return ResourceManager.GetString("Warning_PageLayoutsCannotBeDetermined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target web part {0} is not added for field {1} because the field value was empty and the RemoveEmptySectionsAndColumns flag was set.
+        /// </summary>
+        internal static string Warning_SkippedWebPartDueToEmptyInSourcee {
+            get {
+                return ResourceManager.GetString("Warning_SkippedWebPartDueToEmptyInSourcee", resourceCulture);
             }
         }
         

@@ -3,7 +3,7 @@
     /// <summary>
     /// Client side webpart object (retrieved via the _api/web/GetClientSideWebParts REST call)
     /// </summary>
-    internal class PageComponent : IPageComponent
+    internal sealed class PageComponent : IPageComponent
     {
         /// <summary>
         /// Component type for client side webpart object

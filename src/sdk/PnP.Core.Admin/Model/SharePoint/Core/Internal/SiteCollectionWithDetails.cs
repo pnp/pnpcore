@@ -2,11 +2,9 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SiteCollectionWithDetails : SiteCollection, ISiteCollectionWithDetails
+    internal sealed class SiteCollectionWithDetails : SiteCollection, ISiteCollectionWithDetails
     {
         public DateTime TimeCreated { get; set; }
-
-        public DateTime TimeDeleted { get; set; }
 
         public string CreatedBy { get; set; }
 

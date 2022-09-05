@@ -1,9 +1,0 @@
---batchresponse_bed56b77-bf79-47ea-b79c-96d1c5756068
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_bed56b77-bf79-47ea-b79c-96d1c5756068--

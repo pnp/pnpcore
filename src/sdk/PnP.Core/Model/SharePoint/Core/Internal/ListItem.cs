@@ -11,10 +11,12 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -25,7 +27,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ListItem", Target = typeof(File), Uri = "_api/web/getFileById('{Parent.Id}')/listitemallfields")]
     [SharePointType("SP.ListItem", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Parent.Id}')/listitemallfields")]
     //[GraphType(OverflowProperty = "fields")]
-    internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
+    internal sealed class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
         internal const string FolderPath = "folderPath";
         internal const string UnderlyingObjectType = "underlyingObjectType";
@@ -36,11 +38,11 @@ namespace PnP.Core.Model.SharePoint
             MappingHandler = (FromJson input) =>
             {
                 // The AddValidateUpdateItemUsingPath call returns the id of the added list item
-                if (input.FieldName == "AddValidateUpdateItemUsingPath")
+                if (input.FieldName == "value")
                 {
-                    if (input.JsonElement.TryGetProperty("results", out JsonElement resultsProperty))
+                    if (input.JsonElement.ValueKind == JsonValueKind.Array)
                     {
-                        foreach (var field in resultsProperty.EnumerateArray())
+                        foreach (var field in input.JsonElement.EnumerateArray())
                         {
                             var fieldName = field.GetProperty("FieldName").GetString();
                             var fieldValue = field.GetProperty("FieldValue").GetString();
@@ -49,7 +51,25 @@ namespace PnP.Core.Model.SharePoint
                             // not be added which is indicated via the HasException property on the field. If so then throw an error.
                             if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
                             {
-                                throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                                bool handled = false;
+                                if (!input.ApiResponse.Equals(default) && input.ApiResponse.BatchRequestId != Guid.Empty)
+                                {
+                                    var actualBatch = PnPContext.BatchClient.GetBatchByBatchRequestId(input.ApiResponse.BatchRequestId);
+                                    if (!actualBatch.ThrowOnError)
+                                    {
+                                        // Add error to used batch
+                                        actualBatch.AddBatchResult(actualBatch.GetRequest(input.ApiResponse.BatchRequestId),
+                                                                 System.Net.HttpStatusCode.OK,
+                                                                 input.JsonElement.ToString(),
+                                                                 new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
+                                        handled = true;     
+                                    }
+                                }
+
+                                if (!handled)
+                                {
+                                    throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                                }
                             }
 
                             if (fieldName == "Id")
@@ -97,7 +117,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
-                var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
+                var parentListUri = $"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{parentList.Id}')";
 
                 // sample parent list entity type name: DemolistList (skip last 4 chars)
                 // Sample parent library type name: MyDocs
@@ -231,6 +251,8 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
 
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
+
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
         // Not in public interface as Comments is not an expandable property in REST
@@ -277,9 +299,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+                if (json.TryGetProperty("value", out JsonElement displayName))
                 {
                     return displayName.GetString();
                 }
@@ -407,13 +429,19 @@ namespace PnP.Core.Model.SharePoint
                 typeof(ExpandoObject),
                 PnPConstants.JsonSerializer_WriteIndentedTrue);
 
-            var itemUri = GetMetadata(PnPConstants.MetaDataUri);
-
-            // If this list we're adding items to was not fetched from the server than throw an error
-            if (string.IsNullOrEmpty(itemUri))
+            var entityInfo = EntityManager.Instance.GetStaticClassInfo(this.GetType());
+            
+            if (Parent is IManageableCollection)
             {
-                throw new ClientException(ErrorType.PropertyNotLoaded, PnPCoreResources.Exception_PropertyNotLoaded_List);
+                // Parent is a collection, so jump one level up
+                entityInfo.Target = Parent.Parent.GetType();
             }
+            else
+            {
+                entityInfo.Target = Parent.GetType();
+            }
+            
+            var itemUri = $"{PnPContext.Uri}/{entityInfo.SharePointUri}";
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{itemUri}/ValidateUpdateListItem").ConfigureAwait(false);
@@ -459,17 +487,43 @@ namespace PnP.Core.Model.SharePoint
                 // Only process if there were changes in the field value collection
                 if (fieldValueCollection.HasChanges)
                 {
-                    if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                    if (fieldValueCollection.Field != null)
                     {
-                        field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                        if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                        }
+                        else if (fieldValueCollection.Field.TypeAsString == "TaxonomyFieldTypeMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
+                        }
+                        else if (fieldValueCollection.Field.TypeAsString == "LookupMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                        }
                     }
-                    else if (fieldValueCollection.Field.TypeAsString == "TaxonomyFieldTypeMulti")
+                    else
                     {
-                        field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
-                    }
-                    else if (fieldValueCollection.Field.TypeAsString == "LookupMulti")
-                    {
-                        field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                        if (fieldValueCollection.Values.Count == 0)
+                        {
+                            field.FieldValue = "";
+                        }
+                        else
+                        {
+                            var first = fieldValueCollection.Values.First();
+                            if (first is IFieldUserValue)
+                            {
+                                field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                            }
+                            else if (first is IFieldLookupValue)
+                            {
+                                field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                            }
+                            else if (first is IFieldTaxonomyValue)
+                            {
+                                field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
+                            }
+                        }
                     }
                 }
                 else
@@ -517,7 +571,7 @@ namespace PnP.Core.Model.SharePoint
             DateTime localDateTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(inputInUTC);
 
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (localDateTime).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+            return (localDateTime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)
@@ -576,10 +630,10 @@ namespace PnP.Core.Model.SharePoint
             UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
         }
 
-        protected async Task PrepareUpdateCall(UpdateListItemRequest request)
+        internal async Task PrepareUpdateCall(UpdateListItemRequest request)
         {
             string listId = "";
-            if ((this as IDataModelParent).Parent is IFile file)
+            if (this.Parent is IFile file)
             {
                 // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
                 // will point to the File id while we need to list Id here
@@ -587,9 +641,9 @@ namespace PnP.Core.Model.SharePoint
                 listId = file.ListId.ToString();
             }
 
-            if ((this as IDataModelParent).Parent.Parent is IList)
+            if (this.Parent.Parent is IList)
             {
-                listId = ((this as IDataModelParent).Parent.Parent as IList).Id.ToString();
+                listId = (this.Parent.Parent as IList).Id.ToString();
             }
 
             request.ListId = listId;
@@ -699,11 +753,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+                if (json.TryGetProperty("value", out JsonElement commentsDisabled))
                 {
                     return commentsDisabled.GetBoolean();
                 }
@@ -807,13 +859,10 @@ namespace PnP.Core.Model.SharePoint
         private static Guid ProcessRecyleResponse(string json)
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("d", out JsonElement root))
+            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
             {
-                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                {
-                    // return the recyclebin item id
-                    return recycleBinItemId.GetGuid();
-                }
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
             }
 
             return Guid.Empty;
@@ -1112,20 +1161,29 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = roleDefinitions.FirstOrDefault(d => d.Name == name);
                 if (roleDefinition != null)
                 {
-                    await AddRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         private ApiCall BuildAddRoleDefinitionsApiCall(int principalId, IRoleDefinition roleDefinition)
@@ -1172,22 +1230,30 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
-
                 var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
-                    await RemoveRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         public async Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
@@ -1229,6 +1295,207 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Graph Permissions
+
+        // Currently these are not supported using Microsoft Graph
+
+        //public async Task<IGraphPermissionCollection> GetShareLinksAsync()
+        //{
+        //    var listId = await GetListIdAsync().ConfigureAwait(false);
+
+        //    var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+        //    var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+        //    if (string.IsNullOrEmpty(response.Json))
+        //    {
+        //        throw new Exception("No values found");
+        //    }
+
+        //    var graphPermissions = SharingManager.DeserializeGraphPermissionsResponse(response.Json, PnPContext, this);
+
+        //    return graphPermissions;
+        //}
+
+
+        //public IGraphPermissionCollection GetShareLinks()
+        //{
+        //    return GetShareLinksAsync().GetAwaiter().GetResult();
+        //}
+
+        //public async Task DeleteShareLinksAsync()
+        //{
+        //    var shareLinks = await GetShareLinksAsync().ConfigureAwait(false);
+        //    foreach (var shareLink in shareLinks)
+        //    {
+        //        await shareLink.DeletePermissionAsync().ConfigureAwait(false);
+        //    }
+        //}
+
+        //public void DeleteShareLinks()
+        //{
+        //    DeleteShareLinksAsync().GetAwaiter().GetResult();
+        //}
+
+        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(organizationalLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            dynamic body = new ExpandoObject();
+            body.scope = ShareScope.Organization;
+            body.type = organizationalLinkOptions.Type;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+
+        }
+
+        public IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(anonymousLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Anonymous;
+            body.type = anonymousLinkOptions.Type;
+            body.password = anonymousLinkOptions.Password;
+
+            if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            return CreateAnonymousSharingLinkAsync(anonymousLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IGraphPermission> CreateSharingLinkAsync(dynamic body)
+        {
+            var listId = await GetListIdAsync().ConfigureAwait(false);
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                return SharingManager.DeserializeGraphPermission(json, PnPContext, this);
+            }
+            else
+            {
+                throw new Exception("Error occured during creation");
+            }
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions)
+        {
+            if (!IsValidShareTypeForListItem(userLinkOptions.Type))
+            {
+                throw new ArgumentException("List item sharing only supports the types: View, Review and Embed");
+            }
+
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
+            {
+                throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Users;
+            body.type = userLinkOptions.Type;
+            body.recipients = userLinkOptions.Recipients;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions)
+        {
+            return CreateUserSharingLinkAsync(userLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private static bool IsValidShareTypeForListItem(ShareType shareType)
+        {
+            if (shareType == ShareType.View || shareType == ShareType.Edit || shareType == ShareType.Embed)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        internal async Task<Guid> GetListIdAsync()
+        {
+            // Option A: Use the loaded parent list property
+            if (IsPropertyAvailable(p => p.ParentList) && ParentList.IsPropertyAvailable(p => p.Id))
+            {
+                return ParentList.Id;
+            }
+
+            var listId = Guid.Empty;
+
+            //Option B: walk the parent tree
+            listId = GetListIdFromParent(this);
+
+            if (listId != Guid.Empty)
+            {
+                return listId;
+            }
+
+            // Option C: load parent list (requires server roundtrip)
+            await LoadAsync(p => p.ParentList).ConfigureAwait(false);
+            if (IsPropertyAvailable(p => p.ParentList) && ParentList.IsPropertyAvailable(p => p.Id))
+            {
+                return ParentList.Id;
+            }
+
+            // We should never get here...
+            return Guid.Empty;
+        }
+
+        private static Guid GetListIdFromParent(IDataModelParent listItem)
+        {
+            if (listItem != null)
+            {
+                if (listItem.Parent != null && listItem.Parent is List)
+                {
+                    return (listItem.Parent as List).Id;
+                }
+                else
+                {
+                    if (listItem.Parent == null)
+                    {
+                        return Guid.Empty;
+                    }
+                    else
+                    {
+                        return GetListIdFromParent(listItem.Parent);
+                    }
+                }
+            }
+
+            return Guid.Empty;
+        }
+
+        #endregion
+
         #region Get Changes
 
         public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
@@ -1241,6 +1508,37 @@ namespace PnP.Core.Model.SharePoint
         public IList<IChange> GetChanges(ChangeQueryOptions query)
         {
             return GetChangesAsync(query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(Batch batch, ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            apiCall.RawEnumerableResult = new List<IChange>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var batchFirstRequest = batch.Requests.First().Value;
+                ApiCallResponse response = new ApiCallResponse(apiCall, json, System.Net.HttpStatusCode.OK, batchFirstRequest.Id, batchFirstRequest.ResponseHeaders);
+                ((List<IChange>)apiCall.RawEnumerableResult).AddRange(ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList());
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchEnumerableBatchResult<IChange>(batch, batchRequest.Id, (IReadOnlyList<IChange>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(Batch batch, ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(ChangeQueryOptions query)
+        {
+            return await GetChangesBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(query).GetAwaiter().GetResult();
         }
 
         #endregion
@@ -1341,6 +1639,52 @@ namespace PnP.Core.Model.SharePoint
             {
                 await RequestAsync(new ApiCall($"{baseApiCall}/unlike", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
             }
+        }
+
+        #endregion
+
+        #region User effective permissions
+
+        public IBasePermissions GetUserEffectivePermissions(string userPrincipalName)
+        {
+            return GetUserEffectivePermissionsAsync(userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName)
+        {
+            if (string.IsNullOrEmpty(userPrincipalName))
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_UserPrincipalNameEmpty);
+            }
+
+            var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(response.Json))
+            {
+                throw new Exception(PnPCoreResources.Exception_EffectivePermissionsNotFound);
+            }
+
+            return EffectivePermissionsHandler.ParseGetUserEffectivePermissionsResponse(response.Json);
+        }
+
+        private ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
+        {
+            var parentList = Parent.Parent as List;
+
+            return new ApiCall($"_api/web/lists(guid'{parentList.Id}')/items({Id})/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
+        }
+
+        public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
+        {
+            return CheckIfUserHasPermissionsAsync(userPrincipalName, permissionKind).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind)
+        {
+            var basePermissions = await GetUserEffectivePermissionsAsync(userPrincipalName).ConfigureAwait(false);
+            return basePermissions.Has(permissionKind);
         }
 
         #endregion

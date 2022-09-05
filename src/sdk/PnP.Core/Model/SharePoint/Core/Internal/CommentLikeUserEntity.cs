@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// userEntity class, write your custom code here
     /// </summary>
     [SharePointType("Microsoft.SharePoint.Likes.userEntity")]
-    internal partial class CommentLikeUserEntity : BaseDataModel<ICommentLikeUserEntity>, ICommentLikeUserEntity
+    internal sealed class CommentLikeUserEntity : BaseDataModel<ICommentLikeUserEntity>, ICommentLikeUserEntity
     {
         #region Construction
         public CommentLikeUserEntity()

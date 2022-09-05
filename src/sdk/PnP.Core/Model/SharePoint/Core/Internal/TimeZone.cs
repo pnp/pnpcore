@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// TimeZone class, write your custom code here
     /// </summary>
     [SharePointType("SP.TimeZone", Uri = "_api/web/regionalsettings/timezone", LinqGet = "_api/web/regionalsettings/timezone")]
-    internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
+    internal sealed class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
         #region Construction
         public TimeZone()
@@ -217,7 +217,7 @@ namespace PnP.Core.Model.SharePoint
                 "(UTC+10:00)" => TZConvert.GetTimeZoneInfo("AUS Eastern Standard Time"),
                 "(UTC+11:00)" => TZConvert.GetTimeZoneInfo("Central Pacific Standard Time"),
                 "(UTC+12:00)" => TZConvert.GetTimeZoneInfo("New Zealand Standard Time"),
-                "(UTC+13:00)" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),                
+                "(UTC+13:00)" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),
                 _ => throw new ArgumentException("Unknown timezone mapping"),
             };
 

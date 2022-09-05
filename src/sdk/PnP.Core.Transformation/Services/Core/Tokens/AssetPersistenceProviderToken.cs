@@ -1,8 +1,6 @@
 ﻿using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core.Tokens
@@ -34,6 +32,13 @@ namespace PnP.Core.Transformation.Services.Core.Tokens
             var persistedFilePath = arguments[0];
             var assetSiteRelativeUrl = arguments[1];
             var targetFilePath = assetSiteRelativeUrl.Substring(0, assetSiteRelativeUrl.LastIndexOf('/'));
+
+            // In case the file comes from a publishing portal
+            // we need to replace PublishingImages with SiteAssets
+            if (targetFilePath.Equals("/PublishingImages", StringComparison.InvariantCultureIgnoreCase))
+            {
+                targetFilePath = "/SiteAssets";
+            }
             var targetFileName = assetSiteRelativeUrl.Substring(assetSiteRelativeUrl.LastIndexOf('/') + 1);
 
             Task.Run(async () => {

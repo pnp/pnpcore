@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamChannelTabConfiguration : BaseDataModel<ITeamChannelTabConfiguration>, ITeamChannelTabConfiguration
+    internal sealed class TeamChannelTabConfiguration : BaseDataModel<ITeamChannelTabConfiguration>, ITeamChannelTabConfiguration
     {
         #region Properties
         public string EntityId { get => GetValue<string>(); set => SetValue(value); }

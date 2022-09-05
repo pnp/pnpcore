@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = "teams/{Site.GroupId}", LinqGet = "teams")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class Team : BaseDataModel<ITeam>, ITeam
+    internal sealed class Team : BaseDataModel<ITeam>, ITeam
     {
         #region Construction
         public Team()
@@ -75,6 +74,12 @@ namespace PnP.Core.Model.Teams
 
         [GraphProperty("members", Get = "groups/{Site.GroupId}/members")]
         public IGraphUserCollection Members { get => GetModelCollectionValue<IGraphUserCollection>(); }
+
+        [GraphProperty("tags", Get = "teams/{Site.GroupId}/tags", Beta = true)]
+        public ITeamTagCollection Tags { get => GetModelCollectionValue<ITeamTagCollection>(); }
+
+        [GraphProperty("events", Get = "groups/{Site.GroupId}/events")]
+        public IGraphEventCollection Events { get => GetModelCollectionValue<IGraphEventCollection>(); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }

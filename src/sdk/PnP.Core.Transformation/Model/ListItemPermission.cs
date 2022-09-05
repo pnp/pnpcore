@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Transformation.Model
 {
@@ -8,7 +6,7 @@ namespace PnP.Core.Transformation.Model
     /// Class used to temporarily hold list item level permissions that need to be re-applied
     /// </summary>
     public class ListItemPermission
-    {    
+    {
         /// <summary>
         /// List of members with role assignments
         /// </summary>

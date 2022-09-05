@@ -1,11 +1,15 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.ContentTypes;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldLinkCollection : QueryableDataModelCollection<IFieldLink>, IFieldLinkCollection
+    internal sealed class FieldLinkCollection : QueryableDataModelCollection<IFieldLink>, IFieldLinkCollection
     {
         public FieldLinkCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -14,62 +18,69 @@ namespace PnP.Core.Model.SharePoint
             Parent = parent;
         }
 
-        public async Task<IFieldLink> AddBatchAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public async Task AddBatchAsync(Batch batch, IField field)
         {
-            return await AddBatchAsync(PnPContext.CurrentBatch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).ConfigureAwait(false);
+            ApiCall apiCall = BuildAddApiCall(field);
+            await (Parent as ContentType).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public IFieldLink AddBatch(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public void AddBatch(Batch batch, IField field)
         {
-            return AddBatchAsync(fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
+            AddBatchAsync(batch, field).GetAwaiter().GetResult();
         }
 
-        public async Task<IFieldLink> AddBatchAsync(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public async Task AddBatchAsync(IField field)
         {
-            if (string.IsNullOrEmpty(fieldInternalName))
+            await AddBatchAsync(PnPContext.CurrentBatch, field).ConfigureAwait(false);
+        }
+
+        public void AddBatch(IField field)
+        {
+            AddBatchAsync(field).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFieldLink> AddAsync(IField field, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        {
+            ApiCall apiCall = BuildAddApiCall(field);
+
+            var result = await (Parent as ContentType).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            Guid addedFieldLinkId = (Guid)result.ApiCall.CSOMRequests[0].Result;
+
+            // Get the added field
+            var addedFieldLink = await this.QueryProperties(p => p.All, p => p.ReadOnly, p => p.ShowInDisplayForm, p => p.DisplayName).FirstOrDefaultAsync(p => p.Id == addedFieldLinkId).ConfigureAwait(false);
+
+            if (addedFieldLink != null)
             {
-                throw new ArgumentNullException(nameof(fieldInternalName));
+                // Update the field if needed
+                if (!string.IsNullOrEmpty(displayName))
+                {
+                    addedFieldLink.DisplayName = displayName;
+                }
+                addedFieldLink.Hidden = hidden;
+                addedFieldLink.Required = required;
+                addedFieldLink.ReadOnly = readOnly;
+                addedFieldLink.ShowInDisplayForm = showInDisplayForm;
+
+                if ((addedFieldLink as FieldLink).HasChanges)
+                {
+                    await addedFieldLink.UpdateAsync().ConfigureAwait(false);
+                }
             }
 
-            var newFieldLink = CreateNewAndAdd() as FieldLink;
-
-            newFieldLink.FieldInternalName = fieldInternalName;
-            newFieldLink.DisplayName = displayName;
-            newFieldLink.Hidden = hidden;
-            newFieldLink.Required = required;
-            newFieldLink.ReadOnly = readOnly;
-            newFieldLink.ShowInDisplayForm = showInDisplayForm;
-
-            return await newFieldLink.AddBatchAsync(batch).ConfigureAwait(false) as FieldLink;
+            return addedFieldLink;
         }
 
-        public IFieldLink AddBatch(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        private ApiCall BuildAddApiCall(IField field)
         {
-            return AddBatchAsync(batch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
-        }
-
-        public async Task<IFieldLink> AddAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
-        {
-            if (string.IsNullOrEmpty(fieldInternalName))
+            return new ApiCall(new List<IRequest<object>>
             {
-                throw new ArgumentNullException(nameof(fieldInternalName));
-            }
-
-            var newFieldLink = CreateNewAndAdd() as FieldLink;
-
-            newFieldLink.FieldInternalName = fieldInternalName;
-            newFieldLink.DisplayName = displayName;
-            newFieldLink.Hidden = hidden;
-            newFieldLink.Required = required;
-            newFieldLink.ReadOnly = readOnly;
-            newFieldLink.ShowInDisplayForm = showInDisplayForm;
-
-            return await newFieldLink.AddAsync().ConfigureAwait(false) as FieldLink;
+                new AddFieldLinkRequest(Parent as IContentType, field, true)
+            });
         }
 
-        public IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public IFieldLink Add(IField field, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
-            return AddAsync(fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
+            return AddAsync(field, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
         }
 
     }

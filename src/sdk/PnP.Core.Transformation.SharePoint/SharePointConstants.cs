@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint
 {
-    public static class SharePointConstants
+    /// <summary>
+    /// SharePoint constants
+    /// </summary>
+    internal static class SharePointConstants
     {
         // Client tag and user agent
         public const string TransformationClientTag = "SPDev:PageTransformator";

@@ -60,7 +60,7 @@ namespace PnP.Core.Model
                         await gettableParent.LoadBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
 
                         // Make the actual request
-                        await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
+                        await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(false);
                     }
                 }
             }
@@ -90,6 +90,6 @@ namespace PnP.Core.Model
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
             (model as TransientObject).SetSystemValue(value, body.Member.Name);
-        }        
+        }
     }
 }

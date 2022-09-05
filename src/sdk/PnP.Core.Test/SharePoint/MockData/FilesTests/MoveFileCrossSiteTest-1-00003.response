@@ -1,9 +1,0 @@
---batchresponse_9c7f3119-5bb5-42b7-bf0b-dcd10d734cc1
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"MoveFileByPath":null}}
---batchresponse_9c7f3119-5bb5-42b7-bf0b-dcd10d734cc1--

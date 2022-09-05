@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Class that implements the page header
     /// </summary>
-    internal class PageHeader : IPageHeader
+    internal sealed class PageHeader : IPageHeader
     {
         private const string NoPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;NoImage&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;&#125;&#125;\"></div></div>";
         private const string DefaultPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;@@layouttype@@&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;,&quot;authorByline&quot;&#58;[@@authorbyline@@],&quot;authors&quot;&#58;[@@authors@@]&#125;&#125;\"></div></div>";
@@ -106,7 +106,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return uniqueId;    
+                return uniqueId;
             }
         }
 
@@ -278,48 +278,54 @@ namespace PnP.Core.Model.SharePoint
 
                                 if (properties.TryGetProperty("translateX", out JsonElement translateXElement))
                                 {
-                                    var translateXEN = translateXElement.GetDecimal().ToString();
+                                    if (translateXElement.ValueKind == JsonValueKind.Number)
+                                    {
+                                        var translateXEN = translateXElement.GetDecimal().ToString();
 
-                                    System.Globalization.CultureInfo cultureToUse;
-                                    if (translateXEN.Contains("."))
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
-                                    else if (translateXEN.Contains(","))
-                                    {
-                                        cultureToUse = europeanCulture;
-                                    }
-                                    else
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
+                                        System.Globalization.CultureInfo cultureToUse;
+                                        if (translateXEN.Contains("."))
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
+                                        else if (translateXEN.Contains(","))
+                                        {
+                                            cultureToUse = europeanCulture;
+                                        }
+                                        else
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
 
-                                    double.TryParse(translateXEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateX);
-                                    TranslateX = translateX;
+                                        double.TryParse(translateXEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateX);
+                                        TranslateX = translateX;
+                                    }
                                 }
 
                                 if (properties.TryGetProperty("translateY", out JsonElement translateYElement))
                                 {
-                                    var translateYEN = translateYElement.GetDecimal().ToString();
+                                    if (translateYElement.ValueKind == JsonValueKind.Number)
+                                    {
+                                        var translateYEN = translateYElement.GetDecimal().ToString();
 
-                                    System.Globalization.CultureInfo cultureToUse;
-                                    if (translateYEN.Contains("."))
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
-                                    else if (translateYEN.Contains(","))
-                                    {
-                                        cultureToUse = europeanCulture;
-                                    }
-                                    else
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
+                                        System.Globalization.CultureInfo cultureToUse;
+                                        if (translateYEN.Contains("."))
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
+                                        else if (translateYEN.Contains(","))
+                                        {
+                                            cultureToUse = europeanCulture;
+                                        }
+                                        else
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
 
-                                    double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
-                                    TranslateY = translateY;
+                                        double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
+                                        TranslateY = translateY;
+                                    }
                                 }
-                                
+
                                 if (properties.TryGetProperty("altText", out JsonElement altText))
                                 {
                                     AlternativeText = altText.GetString();
@@ -462,7 +468,7 @@ namespace PnP.Core.Model.SharePoint
 
                 headerImageResolved = true;
             }
-            catch(SharePointRestServiceException ex)
+            catch (SharePointRestServiceException ex)
             {
                 var error = ex.Error as SharePointRestError;
 

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace PnP.Core
 {
-    internal class Tracer : IDisposable
+    internal sealed class Tracer : IDisposable
     {
         private readonly ILogger logger;
         internal string MethodName { get; set; }

@@ -44,6 +44,18 @@ namespace PnP.Core.Services
             {
                 useGraph = apiOverride.Type == ApiType.Graph;
             }
+            else if (useGraph && useLinqGet)
+            {
+                // LINQ Get will based upon the defined LinqGet query + query arguments determined via entity and oDataQuery.
+                // e.g. _api/web/lists or _api/web/webs
+                // When there are no query arguments and when the model supports Graph (e.g. Web) then useGraph = true while
+                // the queried collections (e.g. webs, lists) might not be decorated with a GraphType attribute
+
+                if (string.IsNullOrEmpty(entity.GraphLinqGet) && !string.IsNullOrEmpty(entity.SharePointLinqGet))
+                {
+                    useGraph= false;
+                }
+            }
 
             if (useGraph)
             {
@@ -190,6 +202,7 @@ namespace PnP.Core.Services
                     {
                         AddExpandableExpandRest(sb, field, expandableField, path);
                     }
+                    path = "";
                 }
             }
         }
@@ -224,6 +237,7 @@ namespace PnP.Core.Services
                     {
                         path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
                         AddExpandableSelectRest(sb, field, expandableField, path);
+                        path = "";
                     }
                 }
             }
@@ -605,6 +619,13 @@ namespace PnP.Core.Services
 
                             var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(model, graphGet).ConfigureAwait(false);
                             ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
+
+                            if (model.GetApiCallNonExpandableCollectionOverrideHandler != null)
+                            {
+                                var extraApiCallRequest = await model.GetApiCallNonExpandableCollectionOverrideHandler.Invoke(new ApiCallRequest(extraApiCall)).ConfigureAwait(false);
+                                extraApiCall = extraApiCallRequest.ApiCall;
+                            }
+
                             batch.Add(model, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson, "GetBatch");
                         }
                     }
@@ -693,7 +714,7 @@ namespace PnP.Core.Services
         #endregion
 
         #region UPDATE
-        internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             bool useGraph = false;
 
@@ -705,15 +726,15 @@ namespace PnP.Core.Services
 
             if (useGraph)
             {
-                return await BuildUpdateAPICallGraphAsync(model, entity).ConfigureAwait(false);
+                return await BuildUpdateAPICallGraphAsync(model, entity, viaBatchMethod).ConfigureAwait(false);
             }
             else
             {
-                return await BuildUpdateAPICallRestAsync(model, entity).ConfigureAwait(false);
+                return await BuildUpdateAPICallRestAsync(model, entity, viaBatchMethod).ConfigureAwait(false);
             }
         }
 
-        private static async Task<ApiCallRequest> BuildUpdateAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        private static async Task<ApiCallRequest> BuildUpdateAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -820,7 +841,8 @@ namespace PnP.Core.Services
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage)
             {
-                Commit = true
+                Commit = true,
+                AddedViaBatchMethod = viaBatchMethod
             });
             if (model.UpdateApiCallOverrideHandler != null)
             {
@@ -841,7 +863,7 @@ namespace PnP.Core.Services
             return call;
         }
 
-        private static async Task<ApiCallRequest> BuildUpdateAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        private static async Task<ApiCallRequest> BuildUpdateAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
@@ -922,7 +944,8 @@ namespace PnP.Core.Services
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
             {
-                Commit = true
+                Commit = true,
+                AddedViaBatchMethod = viaBatchMethod
             });
 
             if (model.UpdateApiCallOverrideHandler != null)
@@ -948,7 +971,7 @@ namespace PnP.Core.Services
         #endregion
 
         #region DELETE
-        internal static async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        internal static async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             bool useGraph = false;
 
@@ -960,15 +983,15 @@ namespace PnP.Core.Services
 
             if (useGraph)
             {
-                return await BuildDeleteAPICallGraphAsync(model, entity).ConfigureAwait(false);
+                return await BuildDeleteAPICallGraphAsync(model, entity, viaBatchMethod).ConfigureAwait(false);
             }
             else
             {
-                return await BuildDeleteAPICallRestAsync(model, entity).ConfigureAwait(false);
+                return await BuildDeleteAPICallRestAsync(model, entity, viaBatchMethod).ConfigureAwait(false);
             }
         }
 
-        private static async Task<ApiCallRequest> BuildDeleteAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        private static async Task<ApiCallRequest> BuildDeleteAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -991,7 +1014,10 @@ namespace PnP.Core.Services
             var deleteUrl = await ApiHelper.ParseApiCallAsync(model, entity.GraphDelete).ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
+            var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType)
+            {
+                AddedViaBatchMethod = viaBatchMethod
+            });
             if (model.DeleteApiCallOverrideHandler != null)
             {
                 call = await model.DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
@@ -1000,13 +1026,16 @@ namespace PnP.Core.Services
             return call;
         }
 
-        private static async Task<ApiCallRequest> BuildDeleteAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
+        private static async Task<ApiCallRequest> BuildDeleteAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, bool viaBatchMethod)
         {
             // Prepare the variable to contain the target URL for the delete operation
             var deleteUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
+            var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest)
+            {
+                AddedViaBatchMethod = viaBatchMethod
+            });
             if (model.DeleteApiCallOverrideHandler != null)
             {
                 call = await model.DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);

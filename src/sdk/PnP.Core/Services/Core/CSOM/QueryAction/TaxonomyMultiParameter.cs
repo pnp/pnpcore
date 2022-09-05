@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class TaxonomyMultiParameter : Parameter
+    internal sealed class TaxonomyMultiParameter : Parameter
     {
         IFieldValueCollection FieldValueCollection { get; set; }
 

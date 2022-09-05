@@ -219,7 +219,7 @@ if (addedItem["MyField"] != null)
 
 ## Url fields
 
-Url fields can be used to display a hyperlink with description or show an image from a hyperlink. Working with Url fields involves working with the [IFieldUrlValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUrlValue.html) for field setting and the [NewFieldUrlValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUrlValue_System_String_System_String_) or [NewFieldUrlValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldUrlValue_PnP_Core_Model_SharePoint_IField_System_String_System_String_) methods to instantiate a FieldUrlValue class.
+Url fields can be used to display a hyperlink with description or show an image from a hyperlink. Working with Url fields involves either directly instantiating an `FieldUrlValue` instance or working with the [IFieldUrlValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUrlValue.html) for field setting and the [NewFieldUrlValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUrlValue_System_String_System_String_) or [NewFieldUrlValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldUrlValue_PnP_Core_Model_SharePoint_IField_System_String_System_String_) methods to instantiate a FieldUrlValue class.
 
 ```csharp
 // Add a url field
@@ -235,7 +235,10 @@ Dictionary<string, object> values = new Dictionary<string, object>()
     { "Title", "Item1" },
 };
 
-// Add a url field
+// Option A: instantiate a FieldUrlValue instance
+values.Add("MyField", new FieldUrlValue("https://aka.ms/m365pnp", "PnP Rocks!"));
+
+// Option B: Add a url field: using NewFieldUrlValue
 values.Add("MyField", myField.NewFieldUrlValue("https://aka.ms/m365pnp", "PnP Rocks!"));
 
 // Persist the item
@@ -259,7 +262,7 @@ if (addedItem["MyField"] != null)
 
 ## User fields
 
-User fields hold a value to a user or group. Working with user fields involves working with the [IFieldUserValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUserValue.html) for field setting and the [NewFieldUserValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_) or [NewFieldUserValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#collapsible-PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_) methods to instantiate a FieldUserValue class.
+User fields hold a value to a user or group. Working with user fields involves either directly instantiating an `FieldUserValue` instance or working with the [IFieldUserValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUserValue.html) for field setting and the [NewFieldUserValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_) or [NewFieldUserValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#collapsible-PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_) methods to instantiate a FieldUserValue class.
 
 ```csharp
 // Add a user field
@@ -278,7 +281,10 @@ Dictionary<string, object> values = new Dictionary<string, object>()
 // Ensure a user can be used on a site
 var myUser = await context.Web.EnsureUserAsync("ann@contoso.onmicrosoft.com");
 
-// Add a user field
+// Option A: instantiate a FieldUserValue instance
+values.Add("MyField", new FieldUserValue(myUser));
+
+// Option B: Add a url field: using NewFieldUserValue
 values.Add("MyField", myField.NewFieldUserValue(myUser));
 
 // Persist the item
@@ -302,10 +308,10 @@ if (addedItem["MyField"] != null)
 
 ## Multi user fields
 
-Working with multi user fields builds on top of working with user fields, you still use the [IFieldUserValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUserValue.html) for field setting and the [NewFieldUserValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_) or [NewFieldUserValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#collapsible-PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_) methods, but since you need to store multiple users you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
+Working with multi user fields builds on top of working with user fields, you still directly instantiating `FieldUserValue` instances or use the [IFieldUserValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUserValue.html) for field setting and the [NewFieldUserValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_) or [NewFieldUserValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#collapsible-PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_) methods, but since you need to store multiple users you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
 
 > [!Note]
-> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()` or via `new FieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
 
 ```csharp
 // Add a multi user field
@@ -326,6 +332,13 @@ var myUser1 = await context.Web.EnsureUserAsync("ann@contoso.onmicrosoft.com");
 var myUser2 = await context.Web.EnsureUserAsync("pat@contoso.onmicrosoft.com");
 
 // Add a multi user field
+
+// Option A: instantiate a FieldValueCollection
+var userCollection = new FieldValueCollection();
+userCollection.Values.Add(new FieldUserValue(myUser1));
+userCollection.Values.Add(new FieldUserValue(myUser2));
+
+// Option B: use the NewFieldValueCollection method
 var userCollection = myField.NewFieldValueCollection();
 userCollection.Values.Add(myField.NewFieldUserValue(myUser1));
 userCollection.Values.Add(myField.NewFieldUserValue(myUser2));
@@ -357,7 +370,7 @@ if (addedItem["MyField"] != null)
 
 ## Lookup fields
 
-Lookup fields point to another list item in another list. Working with lookup fields involves working with the [IFieldLookupValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html) for field setting and the [NewFieldLookupValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_) or [NewFieldLookupValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_) methods to instantiate a FieldLookupValue class.
+Lookup fields point to another list item in another list. Working with lookup fields involves either directly instantiating an `FieldLookupValue` instance or working with the [IFieldLookupValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html) for field setting and the [NewFieldLookupValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_) or [NewFieldLookupValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_) methods to instantiate a FieldLookupValue class.
 
 ```csharp
 IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
@@ -377,7 +390,11 @@ Dictionary<string, object> values = new Dictionary<string, object>()
     { "Title", "Item1" },
 };
 
-// Add a lookup field to an item in the connected lookup list with id 4
+
+// Option A: instantiate a FieldLookupValue instance to add a lookup field to an item in the connected lookup list with id 4
+values.Add("MyField", new FieldLookupValue(4));
+
+// Option B: Add a lookup field using NewFieldLookupValue to add a lookup field to an item in the connected lookup list with id 4
 values.Add("MyField", myField.NewFieldLookupValue(4));
 
 // Persist the item
@@ -401,10 +418,10 @@ if (addedItem["MyField"] != null)
 
 ## Multi lookup fields
 
-Working with multi lookup fields builds on top of working with lookup fields, you still use the [IFieldLookupValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html) for field setting and the [NewFieldLookupValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_) or [NewFieldLookupValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_) methods, but since you need to store multiple lookups you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
+Working with multi lookup fields builds on top of working with lookup fields, you still can directly instantiate `FieldLookupValue` instances or use the [IFieldLookupValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html) for field setting and the [NewFieldLookupValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_) or [NewFieldLookupValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_) methods, but since you need to store multiple lookups you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
 
 > [!Note]
-> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()` or via `new FieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
 
 ```csharp
 IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
@@ -424,7 +441,14 @@ Dictionary<string, object> values = new Dictionary<string, object>()
     { "Title", "Item1" },
 };
 
-// Add a multi user field
+// Add a multi lookup field
+
+// Option A: instantiate a FieldValueCollection
+var lookupCollection = new FieldValueCollection();
+lookupCollection.Values.Add(new FieldLookupValue(4));
+lookupCollection.Values.Add(new FieldLookupValue(8));
+
+// Option B: use the NewFieldValueCollection method
 var lookupCollection = myField.NewFieldValueCollection();
 lookupCollection.Values.Add(myField.NewFieldLookupValue(4));
 lookupCollection.Values.Add(myField.NewFieldLookupValue(8));
@@ -455,7 +479,7 @@ if (addedItem["MyField"] != null)
 
 ## Taxonomy fields
 
-Taxonomy fields make it possible to select a value from a term set in your tenants managed metadata system. This involves working with the [IFieldTaxonomyValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html) for field setting and the [NewFieldTaxonomyValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_) or [NewFieldTaxonomyValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_) methods to instantiate a FieldTaxonomyValue class.
+Taxonomy fields make it possible to select a value from a term set in your tenants managed metadata system. This involves either directly instantiating an `FieldTaxonomyValue` instance or working with the [IFieldTaxonomyValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html) for field setting and the [NewFieldTaxonomyValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_) or [NewFieldTaxonomyValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_) methods to instantiate a FieldTaxonomyValue class.
 
 ```csharp
 // Add a taxonomy field
@@ -473,7 +497,10 @@ Dictionary<string, object> values = new Dictionary<string, object>()
     { "Title", "Item1" },
 };
 
-// Add a taxonomy field to a term with the given id and label "Dutch"
+// Option A: Add a taxonomy field to a term with the given id and label "Dutch" by directly instantiating a FieldTaxonomyValue class
+values.Add("MyField", new FieldTaxonomyValue(new Guid("108b34b1-87af-452d-be13-881a29477965", "Dutch")));
+
+// Option B: Add a taxonomy field to a term with the given id and label "Dutch" using the NewFieldTaxonomyValue method
 values.Add("MyField", myField.NewFieldTaxonomyValue(new Guid("108b34b1-87af-452d-be13-881a29477965", "Dutch")));
 
 // Persist the item
@@ -498,10 +525,10 @@ if (addedItem["MyField"] != null)
 
 ## Multi taxonomy fields
 
-Working with multi taxonomy fields builds on top of working with taxonomy fields, you still use the [IFieldTaxonomyValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html) for field setting and the [NewFieldTaxonomyValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_) or [NewFieldTaxonomyValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_) methods, but since you need to store multiple taxonomy fields you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
+Working with multi taxonomy fields builds on top of working with taxonomy fields, you still can directly instantiate `FieldTaxonomyValue` instances or use the [IFieldTaxonomyValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html) for field setting and the [NewFieldTaxonomyValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_) or [NewFieldTaxonomyValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_) methods, but since you need to store multiple taxonomy fields you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
 
 > [!Note]
-> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()` or via `new FieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
 
 ```csharp
 // Add a multi taxonomy field
@@ -522,6 +549,12 @@ Dictionary<string, object> values = new Dictionary<string, object>()
 // Add a taxonomy field to a term with the given id and label "Dutch"
 values.Add("MyField", myField.NewFieldTaxonomyValue(new Guid("108b34b1-87af-452d-be13-881a29477965", "Dutch")));
 
+// Option A: instantiate a FieldValueCollection
+var taxonomyCollection = new FieldValueCollection();
+taxonomyCollection.Values.Add(new FieldTaxonomyValue(new Guid("108b34b1-87af-452d-be13-881a29477965", "Dutch")));
+taxonomyCollection.Values.Add(new FieldTaxonomyValue(new Guid("8246e3c1-19ea-4b22-8ae3-df9cbc150a74", "English")));
+
+// Option B: use the NewFieldValueCollection method
 var taxonomyCollection = myField.NewFieldValueCollection();
 taxonomyCollection.Values.Add(myField.NewFieldTaxonomyValue(new Guid("108b34b1-87af-452d-be13-881a29477965", "Dutch")));
 taxonomyCollection.Values.Add(myField.NewFieldTaxonomyValue(new Guid("8246e3c1-19ea-4b22-8ae3-df9cbc150a74", "English")));

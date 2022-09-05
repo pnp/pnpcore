@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -51,6 +52,18 @@ namespace PnP.Core.Services
                         result = result.Replace("{Id}", model.Metadata[PnPConstants.MetaDataRestId]);
                     }
                 }
+                // Replace {IdAsPath}
+                else if (match.Value.Equals("{IdAsPath}"))
+                {
+                    var model = pnpObject;
+
+                    if (model.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                    {
+                        // Encode the ID value to enable it to be used in methods using DecodedUrl input. Typically these methods end on Path
+                        var idAsPathValue = WebUtility.UrlEncode(model.Metadata[PnPConstants.MetaDataRestId].Replace("'", "''")).Replace("+", "%20");
+                        result = result.Replace("{IdAsPath}", idAsPathValue);
+                    }
+                }
                 // Replace {Parent.Id}
                 else if (match.Value.Equals("{Parent.Id}"))
                 {
@@ -62,7 +75,7 @@ namespace PnP.Core.Services
                     // Ensure the parent object
                     if (parent != null)
                     {
-                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(false);
                     }
 
                     if (parent is IMetadataExtensible p)
@@ -94,7 +107,7 @@ namespace PnP.Core.Services
                     // Ensure the parent object
                     if (parent != null)
                     {
-                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(false);
                     }
 
                     if (parent is IMetadataExtensible p)
@@ -218,6 +231,11 @@ namespace PnP.Core.Services
                                         listItem = GetParentDataModel(file as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.SharePoint.IFolder folder)
+                                    {
+                                        listItem = GetParentDataModel(folder as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                     else if (pnpObject is Model.SharePoint.IFileVersion fileVersion)
                                     {
                                         if (fileVersion.Parent is Model.SharePoint.IFile)
@@ -233,8 +251,8 @@ namespace PnP.Core.Services
                                         else
                                         {
                                             listItem = null;
-                                        } 
-                                            
+                                        }
+
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
                                     else if (pnpObject is Model.SharePoint.IListItemVersion listItemVersion)

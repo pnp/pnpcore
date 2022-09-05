@@ -1,9 +1,0 @@
---batchresponse_ba64ff69-5ecf-4d12-b193-1ec7525c828e
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField1","FieldValue":"https://pnp.com/rocks, PnP RocksA","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField2","FieldValue":"https://pnp.com/rocks, https://pnp.com","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserSingleField1","FieldValue":"[{\"Key\":\"c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9\"}]","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserMultiField1","FieldValue":"[{\"Key\":\"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com\"},{\"Key\":\"c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9\"}]","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyField1","FieldValue":"Dutch|8246e3c1-19ea-4b22-8ae3-df9cbc150a74;","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyMultiField1","FieldValue":"Dutch|108b34b1-87af-452d-be13-881a29477965;English|8246e3c1-19ea-4b22-8ae3-df9cbc150a74;French|3f773e87-24c3-4d0d-a07f-96eb0c1e905e;","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"LookupMultiField1","FieldValue":"1;#1;#","HasException":false,"ItemId":1}]}}}
---batchresponse_ba64ff69-5ecf-4d12-b193-1ec7525c828e--

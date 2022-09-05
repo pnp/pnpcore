@@ -27,9 +27,18 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
             {
                 if (Value is List<string>)
                 {
-                    //Multi-choice specific
                     string multiValue = string.Join("", (Value as List<string>).Select(value => $"<Object Type=\"String\">{TypeSpecificHandling(value, Type)}</Object>"));
                     return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
+                }
+                else if (Value is List<Guid>)
+                {
+                    string multiValue = string.Join("", (Value as List<Guid>).Select(value => $"<Object Type=\"Guid\">{TypeSpecificHandling(value.ToString(), Type)}</Object>"));
+                    return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
+                }
+                else if (Value is List<NamedProperty>)
+                {
+                    string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{properties}</{ParameterTagName}>";
                 }
                 else if (Value is DateTime valueAsDateTime)
                 {
@@ -54,8 +63,21 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
 
                 return $"<{ParameterTagName} Type=\"{type}\">{stringValue}</{ParameterTagName}>";
             }
+            else
+            {
+                if (Value is List<NamedProperty>)
+                {
+                    string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{properties}</{ParameterTagName}>";
+                }
+                else if (Value is IdentityProperty identityProperty)
+                {
+                    var property = identityProperty.ToString();
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{property}</{ParameterTagName}>";
+                }
 
-            return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{stringValue}</{ParameterTagName}>";
+                return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{stringValue}</{ParameterTagName}>";
+            }
         }
 
         internal virtual string SerializeValue()
@@ -74,7 +96,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ObjectReferenceParameter : Parameter 
+    internal class ObjectReferenceParameter : Parameter
     {
         internal int ObjectPathId { get; set; }
 

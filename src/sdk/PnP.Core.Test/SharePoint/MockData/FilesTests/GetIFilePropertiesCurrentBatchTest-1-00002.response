@@ -1,9 +1,0 @@
---batchresponse_0f4507ff-238f-41f8-be3f-a002919434c3
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetIFilePropertiesCurrentBatchTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetIFilePropertiesCurrentBatchTest.docx')","type":"SP.File"},"HasAlternateContentStreams":false,"Length":"18046","ServerRedirectedUrl":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7BFBD54892-2EFC-4A13-8968-A48AD6D3F4F0%7D&file=PNP_SDK_TEST_GetIFilePropertiesCurrentBatchTest.docx&action=default&mobileredirect=true","UniqueId":"fbd54892-2efc-4a13-8968-a48ad6d3f4f0","VroomDriveID":"b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H","VroomItemID":"01TEEVMCESJDK7X7BOCNFIS2FERLLNH5HQ"}}
---batchresponse_0f4507ff-238f-41f8-be3f-a002919434c3--

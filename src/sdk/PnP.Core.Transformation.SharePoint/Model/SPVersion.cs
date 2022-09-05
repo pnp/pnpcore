@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Model
+﻿namespace PnP.Core.Transformation.SharePoint.Model
 {
     /// <summary>
     /// Enum listing the SharePoint versions as used by the transformation engine
     /// </summary>
-    public enum SPVersion
+    internal enum SPVersion
     {
         /// <summary>
         /// SharePoint Online

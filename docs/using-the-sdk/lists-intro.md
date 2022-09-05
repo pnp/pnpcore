@@ -18,6 +18,7 @@ Scenario | List property/method | Documentation
 List schema: fields | [Fields](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Fields) | [Fields documentation](fields-intro.md)
 List schema: views | [Views](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Views) | [List view documentation](lists-views.md)
 List schema: content types | [ContentTypes](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes) | [Content types documentation](contenttypes-intro.md)
+List schema: webhooks | [Webhooks](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Webhooks) | [Webhooks documentation](lists-webhooks.md)
 Content: items | [Items](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) | [List item documentation](listitems-intro.md)
 Content: files | [Items](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) | [Files documentation](files-intro.md)
 Content: pages | [Items](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) | [Pages documentation](pages-intro.md)
@@ -136,6 +137,10 @@ await myList.DeleteAsync();
 // Recycle the list
 await myList.RecycleAsync();
 ```
+
+## Sharing libraries
+
+A document library can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](sharing-intro.md) to learn more on how you can share a document library via sharing it's `RootFolder`.
 
 ## Getting changes for a list
 

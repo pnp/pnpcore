@@ -103,8 +103,8 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(batch.Executed);
                 Assert.IsTrue(batch.Requests.Count == 1);
 
-                var web = context.Web.GetBatch(batch, p => p.MasterUrl, p => p.CustomMasterUrl);                
-                
+                var web = context.Web.GetBatch(batch, p => p.MasterUrl, p => p.CustomMasterUrl);
+
                 Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 1);
                 Assert.IsTrue(batch.Requests.Count == 2);
 
@@ -470,7 +470,7 @@ namespace PnP.Core.Test.Base
                         var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
                         Assert.IsTrue(list2.Items.Length == 105);
 
-                        foreach(var item in list2.Items.AsRequested())
+                        foreach (var item in list2.Items.AsRequested())
                         {
                             item.Title = "Updated";
                             // System update uses CSOM call
@@ -550,7 +550,7 @@ namespace PnP.Core.Test.Base
                 await myList.DeleteAsync();
             }
         }
-        
+
 
         [TestMethod]
         public async Task UnresolvedToken()

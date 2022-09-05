@@ -10,7 +10,6 @@ using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Services
 {
@@ -100,7 +99,11 @@ namespace PnP.Core.Transformation.SharePoint.Services
                     }
 
                     // Run the same selector as we're running from the default mapping file
-                    var selectorResult = this.sharePointFunctionsService.ContentEmbedSelectorContentLink((wp.Properties.ContainsKey("ContentLink") ? wp.Properties["ContentLink"] : null), (wp.Properties.ContainsKey("Content") ? wp.Properties["Content"] : null), fileContents, options.Value.MappingProperties[SharePointConstants.UseCommunityScriptEditorMappingProperty]);
+                    var selectorResult = this.sharePointFunctionsService.ContentEmbedSelectorContentLink(
+                                            (wp.Properties.ContainsKey("ContentLink") ? wp.Properties["ContentLink"] : null), 
+                                            (wp.Properties.ContainsKey("Content") ? wp.Properties["Content"] : null), 
+                                            fileContents, 
+                                            (options.Value.MappingProperties?[SharePointConstants.UseCommunityScriptEditorMappingProperty]));
 
                     if (selectorResult.Equals("NonASPXLinkNoScript", StringComparison.InvariantCultureIgnoreCase) ||
                         selectorResult.Equals("ContentNoScript", StringComparison.InvariantCultureIgnoreCase))
@@ -111,7 +114,7 @@ namespace PnP.Core.Transformation.SharePoint.Services
                         }
                         else
                         {
-                            htmlToParse = wp.Properties["Content"];
+                            htmlToParse = (wp.Properties.ContainsKey("Content") ? wp.Properties["Content"] : null);
                         }
 
                         // Is there a need to add the web part title as content?

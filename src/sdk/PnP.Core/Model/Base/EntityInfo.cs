@@ -7,7 +7,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Class describing the underlying data store, used to map data store to model. This class contains the dynamic and the static part
     /// </summary>
-    internal class EntityInfo
+    internal sealed class EntityInfo
     {
         /// <summary>
         /// Default constructor        

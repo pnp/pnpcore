@@ -11,7 +11,7 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a collection of Team Channels
     /// </summary>
     [ConcreteType(typeof(TeamChannelCollection))]
-    public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IAsyncEnumerable<ITeamChannel>, IDataModelCollection<ITeamChannel>, IDataModelCollectionLoad<ITeamChannel>, IDataModelCollectionDeleteByStringId
+    public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IAsyncEnumerable<ITeamChannel>, IDataModelCollection<ITeamChannel>, IDataModelCollectionLoad<ITeamChannel>, IDataModelCollectionDeleteByStringId, ISupportModules<ITeamChannelCollection>
     {
         #region Add methods
 

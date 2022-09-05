@@ -1,24 +1,30 @@
-﻿using PnP.Core.Model.Security;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Web class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webinfos")]
+    [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webs")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    internal partial class Web : BaseDataModel<IWeb>, IWeb
+    internal sealed class Web : BaseDataModel<IWeb>, IWeb
     {
         private const string V = "_api/web";
         private static readonly Guid MultilingualPagesFeature = new Guid("24611c05-ee19-45da-955f-6602264abaf8");
@@ -28,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public Web()
         {
-            // Handler to construct the Add request for this list
+            // Handler to construct the Add request for this web
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -293,6 +299,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointUser CurrentUser { get => GetModelValue<ISharePointUser>(); }
 
+        public ISharePointUser Author { get => GetModelValue<ISharePointUser>(); }
+
         public ISharePointUserCollection SiteUsers { get => GetModelCollectionValue<ISharePointUserCollection>(); }
 
         public ISharePointGroupCollection SiteGroups { get => GetModelCollectionValue<ISharePointGroupCollection>(); }
@@ -310,13 +318,22 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointGroup AssociatedVisitorGroup { get => GetModelValue<ISharePointGroup>(); }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
         public IRoleDefinitionCollection RoleDefinitions { get => GetModelCollectionValue<IRoleDefinitionCollection>(); }
+
+        public INavigation Navigation { get => GetModelValue<INavigation>(); }
+
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IEventReceiverDefinitionCollection EventReceivers { get => GetModelCollectionValue<IEventReceiverDefinitionCollection>(); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
         [SharePointProperty("*")]
         public object All { get => null; }
+
+        internal IList TaxonomyHiddenList { get; set; }
         #endregion
 
         #region Extension methods        
@@ -350,6 +367,22 @@ namespace PnP.Core.Model.SharePoint
         public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article)
         {
             return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
+        }
+
+        public async Task<IVivaDashboard> GetVivaDashboardAsync()
+        {
+            IPage dashboardPage = (await Page.LoadPagesAsync(PnPContext, "Dashboard").ConfigureAwait(false)).FirstOrDefault();
+            if (dashboardPage == null)
+            {
+                return null;
+            }
+
+            return new VivaDashboard(dashboardPage);
+        }
+
+        public IVivaDashboard GetVivaDashboard()
+        {
+            return GetVivaDashboardAsync().GetAwaiter().GetResult();
         }
         #endregion
 
@@ -583,7 +616,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -612,7 +646,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -685,7 +720,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -714,7 +750,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -738,7 +775,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -767,7 +805,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -829,10 +868,45 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Syntex support
+
+        public async Task<bool> IsSyntexEnabledAsync()
+        {
+            ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/MachineLearningCaptureEnabled", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
+
+            return machineLearningCaptureEnabled.GetBoolean();
+        }
+
+        public bool IsSyntexEnabled()
+        {
+            return IsSyntexEnabledAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> IsSyntexEnabledForCurrentUserAsync()
+        {
+            ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/UserSyntexEnabled", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
+
+            return machineLearningCaptureEnabled.GetBoolean();
+        }
+
+        public bool IsSyntexEnabledForCurrentUser()
+        {
+            return IsSyntexEnabledForCurrentUserAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<bool> IsSyntexContentCenterAsync()
         {
             await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+            return IsSyntexContentCenterCheck();
+        }
 
+        private bool IsSyntexContentCenterCheck()
+        {
             // Syntex Content Center sites use a specific template
             if (WebTemplate == "CONTENTCTR")
             {
@@ -886,7 +960,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<bool> IsSubSiteAsync()
         {
             await PnPContext.Site.EnsurePropertiesAsync(p => p.RootWeb).ConfigureAwait(false);
-            
+
             // If the id's differ this implies the current web is a sub site
             return PnPContext.Site.RootWeb.Id != Id;
         }
@@ -916,7 +990,7 @@ namespace PnP.Core.Model.SharePoint
                 await Features.EnableAsync(PageSchedulingFeature).ConfigureAwait(false);
             }
         }
-        
+
         public void EnsurePageScheduling()
         {
             EnsurePageSchedulingAsync().GetAwaiter().GetResult();
@@ -938,6 +1012,1053 @@ namespace PnP.Core.Model.SharePoint
             return GetChangesAsync(query).GetAwaiter().GetResult();
         }
 
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(Batch batch, ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            apiCall.RawEnumerableResult = new List<IChange>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var batchFirstRequest = batch.Requests.First().Value;
+                ApiCallResponse response = new ApiCallResponse(apiCall, json, System.Net.HttpStatusCode.OK, batchFirstRequest.Id, batchFirstRequest.ResponseHeaders);
+                ((List<IChange>)apiCall.RawEnumerableResult).AddRange(ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList());
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchEnumerableBatchResult<IChange>(batch, batchRequest.Id, (IReadOnlyList<IChange>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(Batch batch, ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(ChangeQueryOptions query)
+        {
+            return await GetChangesBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(query).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Security
+
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            ApiCall apiCall = BuildBreakRoleInheritanceApiCall(copyRoleAssignments, clearSubscopes);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildBreakRoleInheritanceApiCall(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            return new ApiCall($"_api/Web/breakroleinheritance(copyRoleAssignments={copyRoleAssignments.ToString().ToLower()},clearSubscopes={clearSubscopes.ToString().ToLower()})", ApiType.SPORest);
+        }
+
+        public void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceBatchAsync(batch, copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes)
+        {
+            ApiCall apiCall = BuildBreakRoleInheritanceApiCall(copyRoleAssignments, clearSubscopes);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceBatchAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            await BreakRoleInheritanceBatchAsync(PnPContext.CurrentBatch, copyRoleAssignments, clearSubscopes).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritance()
+        {
+            ResetRoleInheritanceAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceAsync()
+        {
+            ApiCall apiCall = BuildResetRoleInheritanceApiCall();
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildResetRoleInheritanceApiCall()
+        {
+            return new ApiCall($"_api/Web/resetroleinheritance", ApiType.SPORest);
+        }
+
+        public void ResetRoleInheritanceBatch(Batch batch)
+        {
+            ResetRoleInheritanceBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildResetRoleInheritanceApiCall();
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritanceBatch()
+        {
+            ResetRoleInheritanceBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceBatchAsync()
+        {
+            await ResetRoleInheritanceBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId)
+        {
+            return GetRoleDefinitionsAsync(principalId).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
+        {
+            await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
+            var roleAssignment = await RoleAssignments
+                .QueryProperties(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == principalId)
+                .ConfigureAwait(false);
+            return roleAssignment?.RoleDefinitions;
+        }
+
+        public bool AddRoleDefinitions(int principalId, params string[] names)
+        {
+            return AddRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
+            foreach (var name in names)
+            {
+                var roleDefinition = roleDefinitions.FirstOrDefault(d => d.Name == name);
+                if (roleDefinition != null)
+                {
+                    await AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
+                }
+            }
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
+        }
+
+        private ApiCall BuildAddRoleDefinitionsApiCall(int principalId, IRoleDefinition roleDefinition)
+        {
+            return new ApiCall($"_api/web/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+
+        public async Task AddRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildAddRoleDefinitionsApiCall(principalId, roleDefinition);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void AddRoleDefinition(int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public void AddRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task AddRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildAddRoleDefinitionsApiCall(principalId, roleDefinition);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void AddRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionBatchAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task AddRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            await AddRoleDefinitionBatchAsync(PnPContext.CurrentBatch, principalId, roleDefinition).ConfigureAwait(false);
+        }
+
+        public bool RemoveRoleDefinitions(int principalId, params string[] names)
+        {
+            return RemoveRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
+            foreach (var name in names)
+            {
+                var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
+                if (roleDefinition != null)
+                {
+                    await RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
+                }
+            }
+
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
+        }
+
+        public async Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildRemoveRoleDefinitionApiCall(principalId, roleDefinition);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void RemoveRoleDefinition(int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public void RemoveRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionBatchAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            await RemoveRoleDefinitionBatchAsync(PnPContext.CurrentBatch, principalId, roleDefinition).ConfigureAwait(false);
+        }
+
+        public void RemoveRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildRemoveRoleDefinitionApiCall(principalId, roleDefinition);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall BuildRemoveRoleDefinitionApiCall(int principalId, IRoleDefinition roleDefinition)
+        {
+            return new ApiCall($"_api/web/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+        #endregion
+
+        #region Has Communication Site features
+        public async Task<bool> HasCommunicationSiteFeaturesAsync()
+        {
+            await EnsurePropertiesAsync(p => p.WebTemplate, p => p.Features).ConfigureAwait(false);
+
+            // Syntex Content Center did enable communication site features in a different manner
+            if (IsSyntexContentCenterCheck())
+            {
+                return true;
+            }
+
+            // Was the communication site feature enabled?
+            var communicationSiteFeature = Guid.Parse("f39dad74-ea79-46ef-9ef7-fe2370754f6f");
+            var feature = Features.AsRequested().FirstOrDefault(p => p.DefinitionId == communicationSiteFeature);
+            return feature != null;
+        }
+
+        public bool HasCommunicationSiteFeatures()
+        {
+            return HasCommunicationSiteFeaturesAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Branding
+        public IBrandingManager GetBrandingManager()
+        {
+            return new BrandingManager(PnPContext);
+        }
+        #endregion
+
+        #region Search
+
+        public async Task<ISearchResult> SearchAsync(SearchOptions query)
+        {
+            var apiCall = BuildSearchApiCall(query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            SearchResult searchResult = new SearchResult();
+            ProcessSearchResults(searchResult, response.Json);
+            return searchResult;
+        }
+
+        public ISearchResult Search(SearchOptions query)
+        {
+            return SearchAsync(query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(SearchOptions query)
+        {
+            return await SearchBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<ISearchResult> SearchBatch(SearchOptions query)
+        {
+            return SearchBatchAsync(query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(Batch batch, SearchOptions query)
+        {
+            var apiCall = BuildSearchApiCall(query);
+            apiCall.RawSingleResult = new SearchResult();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessSearchResults(apiCall.RawSingleResult as SearchResult, json);
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return new BatchSingleResult<ISearchResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISearchResult);
+        }
+
+        public IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query)
+        {
+            return SearchBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        private void ProcessSearchResults(SearchResult searchResult, string json)
+        {
+            if (!string.IsNullOrEmpty(json))
+            {
+                var parsedSearchResult = JsonSerializer.Deserialize<JsonElement>(json);
+                if (parsedSearchResult.ValueKind != JsonValueKind.Null)
+                {
+                    if (parsedSearchResult.TryGetProperty("ElapsedTime", out JsonElement elapsedTime))
+                    {
+                        searchResult.ElapsedTime = parsedSearchResult.GetProperty("ElapsedTime").GetInt32();
+                    }
+
+                    // Process the result rows
+                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult) &&
+                        primaryQueryResult.TryGetProperty("RelevantResults", out JsonElement relevantResults))
+                    {
+                        searchResult.TotalRows = relevantResults.GetProperty("TotalRows").GetInt64();
+                        searchResult.TotalRowsIncludingDuplicates = relevantResults.GetProperty("TotalRowsIncludingDuplicates").GetInt64();
+
+                        if (relevantResults.TryGetProperty("Table", out JsonElement table) && table.TryGetProperty("Rows", out JsonElement rows) && rows.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (var row in rows.EnumerateArray())
+                            {
+                                var processedRow = ProcessSearchResultRow(row);
+                                if (processedRow != null)
+                                {
+                                    searchResult.Rows.Add(processedRow);
+                                }
+                            }
+                        }
+                    }
+
+                    // Process the refinement rows
+                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult2) &&
+                        primaryQueryResult2.TryGetProperty("RefinementResults", out JsonElement refinementResults) && refinementResults.ValueKind != JsonValueKind.Null &&
+                        refinementResults.TryGetProperty("Refiners", out JsonElement refiners) && refiners.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var refiner in refiners.EnumerateArray())
+                        {
+                            (string usedRefiner, List<ISearchRefinementResult> refinementResultsList) = ProcessSearchRefinementRow(refiner);
+                            searchResult.Refinements.Add(usedRefiner, refinementResultsList);
+                        }
+                    }
+                }
+            }
+        }
+
+        private (string, List<ISearchRefinementResult>) ProcessSearchRefinementRow(JsonElement row)
+        {
+            List<ISearchRefinementResult> results = new List<ISearchRefinementResult>();
+            string refiner = row.GetProperty("Name").GetString();
+
+            if (row.TryGetProperty("Entries", out JsonElement entries) && entries.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var entry in entries.EnumerateArray())
+                {
+                    SearchRefinementResult result = new SearchRefinementResult()
+                    {
+                        Count = long.Parse(entry.GetProperty("RefinementCount").GetString()),
+                        Name = entry.GetProperty("RefinementName").GetString(),
+                        Token = entry.GetProperty("RefinementToken").GetString(),
+                        Value = entry.GetProperty("RefinementValue").GetString(),
+                    };
+                    results.Add(result);
+                }
+            }
+
+            return (refiner, results);
+        }
+
+        private Dictionary<string, object> ProcessSearchResultRow(JsonElement row)
+        {
+            if (row.TryGetProperty("Cells", out JsonElement cells) && cells.ValueKind == JsonValueKind.Array)
+            {
+                Dictionary<string, object> result = new Dictionary<string, object>();
+
+                foreach (var cell in cells.EnumerateArray())
+                {
+                    (string key, object value) = ProcessSearchResultCell(cell);
+                    result.Add(key, value);
+                }
+
+                return result;
+            }
+
+            return null;
+        }
+
+        private (string, object) ProcessSearchResultCell(JsonElement cell)
+        {
+            string valueType = cell.GetProperty("ValueType").GetString();
+            string key = cell.GetProperty("Key").GetString();
+            string value = cell.GetProperty("Value").GetString();
+
+            switch (valueType)
+            {
+                case "Null":
+                    {
+                        return (key, null);
+                    };
+                case "Edm.Double":
+                    {
+                        if (double.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Decimal":
+                    {
+                        if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out decimal result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Float":
+                    {
+                        if (float.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out float result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int16":
+                    {
+                        if (short.TryParse(value, out short result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int32":
+                    {
+                        if (int.TryParse(value, out int result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int64":
+                    {
+                        if (long.TryParse(value, out long result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Guid":
+                    {
+                        if (Guid.TryParse(value, out Guid result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Boolean":
+                    {
+                        if (bool.TryParse(value, out bool result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.DateTime":
+                    {
+                        if (DateTime.TryParse(value, out DateTime result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.DateTimeOffSet":
+                    {
+                        if (DateTimeOffset.TryParse(value, out DateTimeOffset result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                default:
+                    {
+                        return (key, value);
+                    }
+            }
+        }
+
+        private ApiCall BuildSearchApiCall(SearchOptions query)
+        {
+            var endpointUri = $"_api/search/postquery";
+
+            dynamic request = new
+            {
+                Querytext = query.Query,
+                EnableQueryRules = false,
+                SourceId = query.ResultSourceId,
+            }.AsExpando();
+
+            // The default is true
+            if (!query.TrimDuplicates)
+            {
+                request.TrimDuplicates = false;
+            }
+
+            if (query.StartRow.HasValue && query.StartRow.Value > 0)
+            {
+                request.StartRow = query.StartRow.Value;
+            }
+
+            if (query.RowsPerPage.HasValue)
+            {
+                request.RowsPerPage = query.RowsPerPage.Value;
+            }
+
+            if (query.RowLimit.HasValue && query.RowLimit.Value > 0)
+            {
+                request.RowLimit = query.RowLimit.Value;
+            }
+            else if (query.RowsPerPage.HasValue)
+            {
+                request.RowLimit = query.RowsPerPage.Value;
+            }
+
+            if (query.SelectProperties.Count > 0)
+            {
+                request.SelectProperties = new
+                {
+                    results = query.SelectProperties.ToArray(),
+                };
+            }
+
+            if (query.SortProperties.Count > 0)
+            {
+                request.SortList = new
+                {
+                    results = query.SortProperties.Select(o => new
+                    {
+                        Property = o.Property,
+                        Direction = o.Sort,
+                    }).ToArray()
+                };
+            }
+
+            if (query.RefineProperties.Count > 0)
+            {
+                request.Refiners = string.Join(",", query.RefineProperties);
+            }
+
+            if (query.RefinementFilters.Count > 0)
+            {
+                request.RefinementFilters = new
+                {
+                    results = query.RefinementFilters.ToArray()
+                };
+            }
+
+            if (!string.IsNullOrEmpty(query.ClientType))
+            {
+                request.ClientType = query.ClientType;
+            }
+
+            var body = new
+            {
+                request
+            };
+
+            var jsonBody = JsonSerializer.Serialize(body);
+            return new ApiCall(endpointUri, ApiType.SPORest, jsonBody);
+        }
+
+        #endregion Search
+
+        #region Web Templates
+
+        public async Task<List<IWebTemplate>> GetWebTemplatesAsync(int lcid, bool includeCrossLanguage)
+        {
+            var webTemplates = new List<IWebTemplate>();
+
+            var apiCall = BuildWebTemplatesApiCall(lcid, includeCrossLanguage);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                ProcessWebTemplates(response.Json, webTemplates);
+            }
+
+            return webTemplates;
+        }
+
+        public List<IWebTemplate> GetWebTemplates(int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesAsync(lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(int lcid, bool includeCrossLanguage)
+        {
+            return await GetWebTemplatesBatchAsync(PnPContext.CurrentBatch, lcid, includeCrossLanguage).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesBatchAsync(lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(Batch batch, int lcid, bool includeCrossLanguage)
+        {
+            var apiCall = BuildWebTemplatesApiCall(lcid, includeCrossLanguage);
+
+            apiCall.RawEnumerableResult = new List<IWebTemplate>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessWebTemplates(json, (List<IWebTemplate>)apiCall.RawEnumerableResult);
+            };
+
+            // Add the request to the batch
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchEnumerableBatchResult<IWebTemplate>(batch, batchRequest.Id, (IReadOnlyList<IWebTemplate>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(Batch batch, int lcid, bool includeCrossLanguage)
+        {
+            return GetWebTemplatesBatchAsync(batch, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IWebTemplate> GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            var apiCall = BuildWebTemplatesNameApiCall(lcid, includeCrossLanguage, name: name);
+            try
+            {
+                var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+                return ProcessWebTemplate(response.Json);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                if (error.ServerErrorCode == -2147024809)
+                {
+                    throw new ClientException(ErrorType.SharePointRestServiceError, string.Format(PnPCoreResources.Exception_WebTemplate_NotFound, name));
+                }
+            }
+            return null;
+        }
+
+        public IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameAsync(name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return await GetWebTemplateByNameBatchAsync(PnPContext.CurrentBatch, name, lcid, includeCrossLanguage).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameBatchAsync(PnPContext.CurrentBatch, name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            var apiCall = BuildWebTemplatesNameApiCall(lcid, includeCrossLanguage, name);
+
+            apiCall.RawSingleResult = new WebTemplate();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var webTemplate = JsonSerializer.Deserialize<WebTemplate>(json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                (apiCall.RawSingleResult as WebTemplate).Lcid = webTemplate.Lcid;
+                (apiCall.RawSingleResult as WebTemplate).IsHidden = webTemplate.IsHidden;
+                (apiCall.RawSingleResult as WebTemplate).Description = webTemplate.Description;
+                (apiCall.RawSingleResult as WebTemplate).Name = webTemplate.Name;
+                (apiCall.RawSingleResult as WebTemplate).DisplayCategory = webTemplate.DisplayCategory;
+                (apiCall.RawSingleResult as WebTemplate).IsSubWebOnly = webTemplate.IsSubWebOnly;
+                (apiCall.RawSingleResult as WebTemplate).IsRootWebOnly = webTemplate.IsRootWebOnly;
+                (apiCall.RawSingleResult as WebTemplate).Title = webTemplate.Title;
+                (apiCall.RawSingleResult as WebTemplate).Id = webTemplate.Id;
+                (apiCall.RawSingleResult as WebTemplate).ImageUrl = webTemplate.ImageUrl;
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return new BatchSingleResult<WebTemplate>(batch, batchRequest.Id, apiCall.RawSingleResult as WebTemplate);
+
+        }
+
+        public IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false)
+        {
+            return GetWebTemplateByNameBatchAsync(batch, name, lcid, includeCrossLanguage).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildWebTemplatesApiCall(int lcid, bool includeCrossLanguage = false)
+        {
+            // Have to do includeCrossLanguage ToLower() or error occurs ("The expression \"web/GetAvailableWebTemplates(lcid=1033,doincludecrosslanguage=True)\" is not valid.")
+            var baseUrl = $"_api/Web/GetAvailableWebTemplates(lcid={lcid},doincludecrosslanguage={includeCrossLanguage.ToString().ToLower()})";
+
+            return new ApiCall(baseUrl, ApiType.SPORest);
+        }
+
+        private static ApiCall BuildWebTemplatesNameApiCall(int lcid, bool includeCrossLanguage, string name)
+        {
+            // Have to do includeCrossLanguage ToLower() or error occurs ("The expression \"web/GetAvailableWebTemplates(lcid=1033,doincludecrosslanguage=True)\" is not valid.")
+            var baseUrl = $"_api/Web/GetAvailableWebTemplates(lcid={lcid},doincludecrosslanguage={includeCrossLanguage.ToString().ToLower()})/GetByName('{name}')";
+
+            return new ApiCall(baseUrl, ApiType.SPORest);
+        }
+
+        private static void ProcessWebTemplates(string responseJson, List<IWebTemplate> webTemplatesResult)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(responseJson);
+
+            if (json.TryGetProperty("value", out JsonElement getAvailableWebTemplates))
+            {
+                var webTemplates = JsonSerializer.Deserialize<IEnumerable<WebTemplate>>(getAvailableWebTemplates.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                foreach (var webTemplate in webTemplates)
+                {
+                    webTemplatesResult.Add(webTemplate);
+                }
+            }
+        }
+
+        private static IWebTemplate ProcessWebTemplate(string responseJson)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(responseJson);
+
+            return JsonSerializer.Deserialize<WebTemplate>(json.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+        }
+
+        #endregion
+
+        #region Link unfurling        
+        public async Task<IUnfurledResource> UnfurlLinkAsync(string link, UnfurlOptions unfurlOptions = null)
+        {
+            if (string.IsNullOrWhiteSpace(link))
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+
+            return await UnfurlHandler.UnfurlAsync(PnPContext, link, unfurlOptions).ConfigureAwait(false);
+        }
+
+        public IUnfurledResource UnfurlLink(string link, UnfurlOptions unfurlOptions = null)
+        {
+            return UnfurlLinkAsync(link, unfurlOptions).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Recycle bin
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options)
+        {
+            return await GetRecycleBinItemsByQueryBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var apiCall = BuildRecyleBinQueryApiCall(options);
+
+            Web newWeb = new Web
+            {
+                PnPContext = PnPContext,
+                Parent = Parent
+            };
+
+            await newWeb.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return newWeb.RecycleBin;
+        }
+
+        public IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options)
+        {
+            return GetRecycleBinItemsByQueryBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildRecyleBinQueryApiCall(RecycleBinQueryOptions options)
+        {
+            var baseUrl = $"_api/Web/GetRecycleBinItemsByQueryInfo";
+
+            string queryString = $"?rowLimit=%27{options.RowLimit}%27&isAscending={options.IsAscending.ToString().ToLowerInvariant()}&itemState={(int)options.ItemState}&orderBy={(int)options.OrderBy}&showOnlyMyItems={options.ShowOnlyMyItems.ToString().ToLowerInvariant()}";
+            if (!string.IsNullOrEmpty(options.PagingInfo))
+            {
+                queryString += $"&pagingInfo={options.PagingInfo}";
+            }
+
+            return new ApiCall($"{baseUrl}{queryString}", ApiType.SPORest, receivingProperty: nameof(RecycleBin));
+        }
+        #endregion
+
+        #region Get Search Configuration
+
+        public async Task<string> GetSearchConfigurationXmlAsync()
+        {
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPWeb) });
+
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return result.ApiCall.CSOMRequests[0].Result.ToString();
+        }
+
+        public string GetSearchConfigurationXml()
+        {
+            return GetSearchConfigurationXmlAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync()
+        {
+            var searchConfiguration = await GetSearchConfigurationXmlAsync().ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetSearchConfigurationManagedProperties()
+        {
+            return GetSearchConfigurationManagedPropertiesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SetSearchConfigurationXmlAsync(string configuration)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPWeb, configuration) });
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetSearchConfigurationXml(string configuration)
+        {
+            SetSearchConfigurationXmlAsync(configuration).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Get WSS Id for term
+
+        public async Task<int> GetWssIdForTermAsync(string termId)
+        {
+            if (TaxonomyHiddenList == null)
+            {
+                await PnPContext.Site.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+                TaxonomyHiddenList = await PnPContext.Site.RootWeb.Lists.GetByServerRelativeUrlAsync($"{PnPContext.Site.ServerRelativeUrl}/Lists/TaxonomyHiddenList").ConfigureAwait(false);
+            }
+
+            var camlQuery = new CamlQueryOptions()
+            {
+                ViewXml = $@"<View><Query><Where><Eq><FieldRef Name='IdForTerm' /><Value Type='Text'>{termId}</Value></Eq></Where></Query></View>",
+                DatesInUtc = true,
+            };
+
+            await TaxonomyHiddenList.LoadItemsByCamlQueryAsync(camlQuery).ConfigureAwait(false);
+            var items = TaxonomyHiddenList.Items.AsRequested();
+
+            if (items.Any())
+            {
+                return items.First().Id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int GetWssIdForTerm(string termId)
+        {
+            return GetWssIdForTermAsync(termId).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region User effective permissions
+
+        public IBasePermissions GetUserEffectivePermissions(string userPrincipalName)
+        {
+            return GetUserEffectivePermissionsAsync(userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName)
+        {
+            if (string.IsNullOrEmpty(userPrincipalName))
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_UserPrincipalNameEmpty);
+            }
+
+            var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(response.Json))
+            {
+                throw new Exception(PnPCoreResources.Exception_EffectivePermissionsNotFound);
+            }
+
+            return EffectivePermissionsHandler.ParseGetUserEffectivePermissionsResponse(response.Json);
+        }
+
+        private static ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
+        {
+            return new ApiCall($"_api/web/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
+        }
+
+        public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
+        {
+            return CheckIfUserHasPermissionsAsync(userPrincipalName, permissionKind).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind)
+        {
+            var basePermissions = await GetUserEffectivePermissionsAsync(userPrincipalName).ConfigureAwait(false);
+            return basePermissions.Has(permissionKind);
+        }
+
+        #endregion
+
+        #region Reindex web
+        public async Task ReIndexAsync()
+        {
+            var webInfo = await GetAsync(p => p.EffectiveBasePermissions, 
+                                         p => p.AllProperties, 
+                                         p => p.Lists.QueryProperties(p => p.Title,
+                                                                      p => p.NoCrawl, 
+                                                                      p => p.RootFolder.QueryProperties(p => p.Properties))).ConfigureAwait(false);
+
+            const string reIndexKey = "vti_searchversion";
+
+            // Definition of no-script is not having the AddAndCustomizePages permission
+            if (!webInfo.EffectiveBasePermissions.Has(PermissionKind.AddAndCustomizePages))
+            {
+                // NoScript site, reindex each list separately
+                foreach (var list in webInfo.Lists.AsRequested())
+                {
+                    if (list.NoCrawl)
+                    {
+                        PnPContext.Logger.LogInformation($"List {list.Title} is configured as NoCrawl, reindex request will be skipped.");
+                    }
+                    else
+                    {
+                        int searchVersion = 0;
+
+                        if (list.RootFolder.Properties.Values.ContainsKey(reIndexKey))
+                        {
+                            searchVersion = list.RootFolder.Properties.GetInteger(reIndexKey, 0);
+                        }
+
+                        list.RootFolder.Properties.Values[reIndexKey] = searchVersion + 1;
+
+                        await list.RootFolder.Properties.UpdateAsync().ConfigureAwait(false);
+                    }
+                }
+            }
+            else
+            {
+                // Regular site, we can reindex the site in one go
+
+                int searchVersion = 0;
+
+                if (webInfo.AllProperties.Values.ContainsKey(reIndexKey))
+                {
+                    searchVersion = webInfo.AllProperties.GetInteger(reIndexKey, 0);
+                }
+
+                webInfo.AllProperties.Values[reIndexKey] = searchVersion + 1;
+
+                await webInfo.AllProperties.UpdateAsync().ConfigureAwait(false);
+            }
+        }
+
+        public void ReIndex()
+        {
+            ReIndexAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

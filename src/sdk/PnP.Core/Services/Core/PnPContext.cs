@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model.Me;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
@@ -8,6 +9,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -15,7 +18,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// PnP Context class...the glue between the model and the data stores
     /// </summary>
-    public class PnPContext : IDisposable
+    public class PnPContext : IDisposable, IPnPContext
     {
         #region Private fields
 
@@ -50,12 +53,28 @@ namespace PnP.Core.Services
         {
             return new TermStore();
         }, true);
+
+        private readonly Lazy<ISocial> social = new Lazy<ISocial>(() =>
+        {
+            return new Social();
+        }, true);
+
+        private readonly Lazy<IMe> me= new Lazy<IMe>(() =>
+        {
+            return new Me();
+        }, true);
+
+        private readonly Lazy<IContentTypeHub> contentTypeHub = new Lazy<IContentTypeHub>(() =>
+        {
+            return new ContentTypeHub();
+        }, true);
+
         #endregion
 
         #region Internal properties
 
         internal readonly PnPGlobalSettingsOptions GlobalOptions;
-        internal readonly PnPContextFactoryOptions ContextOptions;        
+        internal readonly PnPContextFactoryOptions ContextOptions;
 
         #endregion
 
@@ -112,6 +131,13 @@ namespace PnP.Core.Services
                 GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             }
 
+            if (globalOptions != null && globalOptions.Environment.HasValue)
+            {
+                Environment = globalOptions.Environment.Value;
+                // Ensure the Microsoft Graph URL is set depending on the used cloud environment
+                GraphClient.UpdateBaseAddress(CloudManager.GetMicrosoftGraphAuthority(Environment.Value));
+            }
+
             BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
         }
         #endregion
@@ -144,6 +170,16 @@ namespace PnP.Core.Services
         public MicrosoftGraphClient GraphClient { get; }
 
         /// <summary>
+        /// Returns the used Microsoft 365 cloud environment
+        /// </summary>
+        public Microsoft365Environment? Environment { get; internal set; }
+
+        /// <summary>
+        /// Collection for custom properties that you want to attach to a <see cref="PnPContext"/>
+        /// </summary>
+        public IDictionary<string, object> Properties { get; internal set; } = new Dictionary<string, object>();
+
+        /// <summary>
         /// Connected batch client
         /// </summary>
         internal BatchClient BatchClient { get; }
@@ -157,6 +193,16 @@ namespace PnP.Core.Services
         /// Optional options specified during context creation, needed for context cloning
         /// </summary>
         internal PnPContextOptions LocalContextOptions { get; set; }
+
+        /// <summary>
+        /// Modules to be added to the next request's execution pipeline
+        /// </summary>
+        internal List<IRequestModule> RequestModules { get; set; }
+
+        /// <summary>
+        /// The cancellation token to cancel operation
+        /// </summary>
+        internal CancellationToken CancellationToken { get; set; }
 
 #if DEBUG
 
@@ -191,6 +237,10 @@ namespace PnP.Core.Services
         /// </summary>
         internal Dictionary<string, Uri> TestUris { get; set; }
 
+        /// <summary>
+        /// Number of clones created from this context
+        /// </summary>
+        internal int CloneCount { get; set; } = 0;
         #endregion
 
 #endif
@@ -329,6 +379,43 @@ namespace PnP.Core.Services
                 return termStore.Value;
             }
         }
+
+        /// <summary>
+        /// Entry point for the social-related APIs
+        /// </summary>
+        public ISocial Social
+        {
+            get
+            {
+                social.Value.PnPContext = this;
+                return social.Value;
+            }
+        }
+
+        /// <summary>
+        /// Entry point for the Me object
+        /// </summary>
+        public IMe Me
+        {
+            get
+            {
+                (me.Value as Me).PnPContext = this;
+                return me.Value;
+            }
+        }
+
+        /// <summary>
+        /// Entry point for the ContentTypeHub object
+        /// </summary>
+        public IContentTypeHub ContentTypeHub
+        {
+            get
+            {
+                (contentTypeHub.Value as ContentTypeHub).PnPContext = this;
+                return contentTypeHub.Value;
+            }
+        }
+
         #endregion
 
         #region Public Methods   
@@ -397,9 +484,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone()
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync().GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -418,9 +503,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/> for the request config</returns>
         public PnPContext Clone(string name)
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync(name).GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -451,9 +534,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Uri uri)
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync(uri).GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -468,7 +549,8 @@ namespace PnP.Core.Services
 #if DEBUG
             if (Mode != TestMode.Default)
             {
-                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + 100).ConfigureAwait(false);
+                CloneCount++;
+                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + (100 * CloneCount)).ConfigureAwait(false);
             }
             else
             {
@@ -476,6 +558,45 @@ namespace PnP.Core.Services
             }
 #else
             await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+#endif
+            return clonedContext;
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="groupId">Id of the other Microsoft 365 group to create a <see cref="PnPContext"/> for</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public PnPContext Clone(Guid groupId)
+        { 
+            return CloneAsync(groupId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="groupId">Id of the other Microsoft 365 group to create a <see cref="PnPContext"/> for</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public async Task<PnPContext> CloneAsync(Guid groupId)
+        {
+            if (groupId == Guid.Empty)
+            {
+                throw new ArgumentException(nameof(groupId));
+            }
+
+            PnPContext clonedContext = PrepareClonedContext();
+#if DEBUG
+            if (Mode != TestMode.Default)
+            {
+                CloneCount++;
+                clonedContext = await CloneForTestingAsync(this, groupId, TestId + (100 * CloneCount)).ConfigureAwait(false);
+            }
+            else
+            {
+                await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
+            }
+#else
+            await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
 #endif
             return clonedContext;
         }
@@ -492,6 +613,21 @@ namespace PnP.Core.Services
             }
         }
 
+        private async Task InitializeClonedContextAsync(Guid groupId, PnPContext clonedContext)
+        {
+            if (!groupId.Equals(Site.GroupId))
+            {
+                await PnPContextFactory.ConfigureForGroup(clonedContext, groupId).ConfigureAwait(false);
+                await PnPContextFactory.InitializeContextAsync(clonedContext, LocalContextOptions).ConfigureAwait(false);
+            }
+            else
+            {
+                // Ensure the context has an Url set
+                clonedContext.Uri = Uri;
+                await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
+            }
+        }
+
         private PnPContext CreateClonedContext(Uri uri)
         {
             if (uri == null)
@@ -499,21 +635,28 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(uri));
             }
 
+            PnPContext clonedContext = PrepareClonedContext();
+            clonedContext.Uri = uri;
+
+            return clonedContext;
+        }
+
+        private PnPContext PrepareClonedContext()
+        {
             PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
                 GraphFirst = GraphFirst,
-                // Set the Uri for which this context was cloned
-                Uri = uri
+                Environment = Environment,
+                Properties = Properties,
             };
             return clonedContext;
         }
+        #endregion
 
-#endregion
-
-#region Internal methods
+        #region Internal methods
 
         internal async Task<bool> AccessTokenHasRoleAsync(string role)
         {
@@ -585,11 +728,11 @@ namespace PnP.Core.Services
             return false;
         }
 
-#endregion
+        #endregion
 
 #if DEBUG
 
-#region Internal methods to support unit testing
+        #region Internal methods to support unit testing
 
         internal async Task<PnPContext> CloneForTestingAsync(PnPContext source, Uri uri, string name, int id)
         {
@@ -597,11 +740,6 @@ namespace PnP.Core.Services
             {
                 if (!string.IsNullOrEmpty(name))
                 {
-                    if (string.IsNullOrEmpty(name))
-                    {
-                        throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
-                    }
-
                     var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
                     if (configuration == null)
                     {
@@ -615,7 +753,8 @@ namespace PnP.Core.Services
                 }
             }
 
-            PnPContext clonedContext = CreateClonedContext(uri);            
+            PnPContext clonedContext = CreateClonedContext(uri);
+            clonedContext.CloneCount = source.CloneCount + 13;
 
             if (source.Mode == TestMode.Mock)
             {
@@ -627,6 +766,26 @@ namespace PnP.Core.Services
             }
 
             await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+
+            return clonedContext;
+        }
+
+        internal async Task<PnPContext> CloneForTestingAsync(PnPContext source, Guid groupId, int id)
+        {
+
+            PnPContext clonedContext = PrepareClonedContext();
+            clonedContext.CloneCount = source.CloneCount + 13;
+
+            if (source.Mode == TestMode.Mock)
+            {
+                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+            else
+            {
+                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+
+            await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
 
             return clonedContext;
         }
@@ -652,11 +811,11 @@ namespace PnP.Core.Services
             TestUris = testUris;
         }
 
-#endregion
+        #endregion
 
 #endif
 
-#region IDisposable implementation
+        #region IDisposable implementation
 
         private bool disposed;
 
@@ -687,40 +846,93 @@ namespace PnP.Core.Services
             disposed = true;
         }
 
-#endregion
+        #endregion
 
-#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
         /// </summary>
-        internal async Task SetAADTenantId()
+        internal async Task SetAADTenantId(bool useOpenIdConfiguration = false)
         {
             if (GlobalOptions.AADTenantId == Guid.Empty && Uri != null)
             {
-                using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
+                if (useOpenIdConfiguration)
                 {
-                    request.Headers.Add("Authorization", "Bearer");
-                    HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+                    // This approach is used when running from Blazor WASM as the other approach results in an OPTIONS call with a redirect,
+                    // which is not allowed. Returned error: "Response to preflight request doesn't pass access control check: Redirect
+                    // is not allowed for a preflight request"
 
-                    // Grab the tenant id from the wwwauthenticate header. 
-                    var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
-                    const string bearer = "Bearer realm=\"";
-                    var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
-
-                    var realmIndex = bearerIndex + bearer.Length;
-
-                    if (bearerResponseHeader.Length >= realmIndex + 36)
+                    string loginEndpoint = "login.microsoftonline.com";
+                    if (Environment.HasValue)
                     {
-                        var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
+                        loginEndpoint = CloudManager.GetAzureADLoginAuthority(Environment.Value);
+                    }
 
-                        if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                    // Approach might not always work given the tenant name parsing, but at least works for 99%+ of the tenants
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, $"https://{loginEndpoint}/{GetTenantNameFromUrl(Uri.ToString())}.onmicrosoft.com/.well-known/openid-configuration"))
+                    {
+                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+                        var jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                        var json = JsonSerializer.Deserialize<JsonElement>(jsonResponse);
+                        if (json.TryGetProperty("token_endpoint", out JsonElement tokenEndpoint))
                         {
-                            GlobalOptions.AADTenantId = realmGuid;
+                            string targetRealm = GetSubstringFromMiddle(tokenEndpoint.GetString(), $"https://{loginEndpoint}/", "/oauth2/");
+                            if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                            {
+                                GlobalOptions.AADTenantId = realmGuid;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Default approach for non Blazor WASM usage us
+
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
+                    {
+                        request.Headers.Add("Authorization", "Bearer");
+                        request.Headers.Add("Access-Control-Allow-Origin", "*");
+                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+                        // Grab the tenant id from the wwwauthenticate header. 
+                        var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
+                        const string bearer = "Bearer realm=\"";
+                        var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
+
+                        var realmIndex = bearerIndex + bearer.Length;
+
+                        if (bearerResponseHeader.Length >= realmIndex + 36)
+                        {
+                            var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
+
+                            if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                            {
+                                GlobalOptions.AADTenantId = realmGuid;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private static string GetTenantNameFromUrl(string tenantUrl)
+        {
+            if (tenantUrl.ToLower().Contains("-admin.sharepoint."))
+            {
+                return GetSubstringFromMiddle(tenantUrl, "https://", "-admin.sharepoint.");
+            }
+            else
+            {
+                return GetSubstringFromMiddle(tenantUrl, "https://", ".sharepoint.");
+            }
+        }
+
+        private static string GetSubstringFromMiddle(string originalString, string prefix, string suffix)
+        {
+            var index = originalString.IndexOf(suffix, StringComparison.OrdinalIgnoreCase);
+            return index != -1 ? originalString.Substring(prefix.Length, index - prefix.Length) : null;
         }
 
         /// <summary>
@@ -740,6 +952,6 @@ namespace PnP.Core.Services
             return false;
         }
 
-#endregion
+        #endregion
     }
 }

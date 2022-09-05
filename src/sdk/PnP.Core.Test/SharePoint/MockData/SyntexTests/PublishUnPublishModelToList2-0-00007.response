@@ -1,9 +1,0 @@
---batchresponse_f22a92e4-2317-4665-9798-d99fb00d47d5
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/Web","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/Web","type":"SP.Web"},"Id":"bf9c5c94-907a-41ed-9593-9fb9c716a5a0","ServerRelativeUrl":"/sites/ContentCenter"}}
---batchresponse_f22a92e4-2317-4665-9798-d99fb00d47d5--

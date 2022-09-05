@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Control data for controls of type 4 (= text control)
     /// </summary>
-    internal class TextControlData : CanvasControlData
+    internal sealed class TextControlData : CanvasControlData
     {
         /// <summary>
         /// Gets or sets JsonProperty "editorType"

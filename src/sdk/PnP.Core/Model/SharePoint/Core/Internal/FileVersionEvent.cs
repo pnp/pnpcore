@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// FileVersionEvent class, write your custom code here
     /// </summary>
     [SharePointType("SP.FileVersionEvent")]
-    internal partial class FileVersionEvent : BaseDataModel<IFileVersionEvent>, IFileVersionEvent
+    internal sealed class FileVersionEvent : BaseDataModel<IFileVersionEvent>, IFileVersionEvent
     {
         #region Properties
         public int EventType { get => GetValue<int>(); set => SetValue(value); }

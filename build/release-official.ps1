@@ -14,6 +14,8 @@ Write-Host "Building PnP.Core version $version..."
 dotnet build $PSScriptRoot\..\src\sdk\PnP.Core\PnP.Core.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
 Write-Host "Building PnP.Core.Auth version $version..."
 dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
+Write-Host "Building PnP.Core.Admin version $version..."
+dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
 
 # Sign the binaries
 Write-Host "Signing the binaries..."
@@ -24,11 +26,13 @@ Write-Host "Packinging PnP.Core version $version..."
 dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core\PnP.Core.csproj --configuration Release --no-build /p:PackageVersion=$version
 Write-Host "Packinging PnP.Core.Auth version $version..."
 dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --configuration Release --no-build /p:PackageVersion=$version
+Write-Host "Packinging PnP.Core.Admin version $version..."
+dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --configuration Release --no-build /p:PackageVersion=$version
 
 # Sign the nuget package is not needed as Nuget signs the package automatically
 
 # Publish
-Write-host "Verify the created NuGet packages in folder \src\sdk\PnP.Core\bin\release and \src\sdk\PnP.Core.Auth\bin\release. If OK enter the nuget API key to publish the package, press enter to cancel." -ForegroundColor Yellow 
+Write-host "Verify the created NuGet packages in folders \src\sdk\PnP.Core\bin\release, \src\sdk\PnP.Core.Auth\bin\release and \src\sdk\PnP.Core.Admin\bin\release. If OK enter the nuget API key to publish the package, press enter to cancel." -ForegroundColor Yellow 
 $apiKey = Read-Host "NuGet API key" 
 
 if ($apiKey.Length -gt 0)
@@ -36,6 +40,7 @@ if ($apiKey.Length -gt 0)
     # Push the actual packages and the symbol packages
     nuget push d:\github\pnpcore\src\sdk\PnP.Core\bin\release\PnP.Core.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
     nuget push d:\github\pnpcore\src\sdk\PnP.Core.Auth\bin\release\PnP.Core.Auth.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
+    nuget push d:\github\pnpcore\src\sdk\PnP.Core.Admin\bin\release\PnP.Core.Admin.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
 
     # Persist last used version
     Write-Host "Writing $version to git"

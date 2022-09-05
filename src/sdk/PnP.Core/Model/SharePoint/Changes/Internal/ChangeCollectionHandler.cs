@@ -12,7 +12,16 @@ namespace PnP.Core.Model.SharePoint
     {
         internal static ApiCall GetApiCall<TModel>(IDataModel<TModel> parent, ChangeQueryOptions query)
         {
-            return new ApiCall(GetApiCallUrl(parent), ApiType.SPORest, GetChangeQueryBody(query));
+            return new ApiCall(GetApiCallUrl(parent), ApiType.SPORest, GetChangeQueryBody(query))
+            {
+                // We force this request to return verbose metadata as we need that information to determine the returned change token
+                Headers = new Dictionary<string, string>
+                {
+                    ["Accept"] = "application/json;odata=verbose"
+                },
+                // Do need to clear the collections on the current model as we're returning results outside of the model classes
+                SkipCollectionClearing = true,
+            };
         }
 
         internal static string GetApiCallUrl<TModel>(IDataModel<TModel> parent)
@@ -163,11 +172,11 @@ namespace PnP.Core.Model.SharePoint
                         concreteInstance.Requested = true;
 
                         entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
-                    }                    
+                    }
                     else // Simple property mapping
                     {
                         // Set the object property value taken from the JSON payload
-                        entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name,
+                        entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name, default,
                             property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, null));
                     }
                 }

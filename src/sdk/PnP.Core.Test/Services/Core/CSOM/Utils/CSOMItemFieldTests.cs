@@ -160,15 +160,15 @@ namespace PnP.Core.Test.Services.Core.CSOM.Utils
             string parameterValue = parameters[1].SerializeParameter();
 
             Assert.AreEqual("<Parameter Type=\"String\">SomeTestField</Parameter>", parameterDeclaration);
-            Assert.AreEqual($"<Parameter Type=\"Array\">"+
-               "<Object TypeId=\"{f1d34cc0-9b50-4a78-be78-d5facfcccfb7}\">"+
+            Assert.AreEqual($"<Parameter Type=\"Array\">" +
+               "<Object TypeId=\"{f1d34cc0-9b50-4a78-be78-d5facfcccfb7}\">" +
                   "<Property Name=\"LookupId\" Type=\"Int32\">2</Property>" +
                   "<Property Name=\"LookupValue\" Type=\"Null\" />" +
-               "</Object>"+
+               "</Object>" +
                "<Object TypeId=\"{f1d34cc0-9b50-4a78-be78-d5facfcccfb7}\">" +
                   "<Property Name=\"LookupId\" Type=\"Int32\">3</Property>" +
                   "<Property Name=\"LookupValue\" Type=\"Null\" />" +
-               "</Object>"+
+               "</Object>" +
             "</Parameter>", parameterValue);
         }
         [TestMethod]

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldLink object
     /// </summary>
     [ConcreteType(typeof(FieldLink))]
-    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelGet<IFieldLink>, IDataModelLoad<IFieldLink>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelGet<IFieldLink>, IDataModelLoad<IFieldLink>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets or sets the display name of the field in the field link.
@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the field internal name specified in the field link.
         /// </summary>
-        public string FieldInternalName { get; set; }
+        public string FieldInternalName { get; }
 
         /// <summary>
         /// Gets or sets a Boolean value that specifies whether the field is displayed in forms that can be edited.

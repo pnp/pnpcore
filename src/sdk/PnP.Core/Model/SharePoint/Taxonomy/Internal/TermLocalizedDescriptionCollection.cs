@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermLocalizedDescriptionCollection : BaseDataModelCollection<ITermLocalizedDescription>, ITermLocalizedDescriptionCollection
+    internal sealed class TermLocalizedDescriptionCollection : BaseDataModelCollection<ITermLocalizedDescription>, ITermLocalizedDescriptionCollection
     {
     }
 }

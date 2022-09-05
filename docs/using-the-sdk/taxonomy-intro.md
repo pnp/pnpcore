@@ -11,9 +11,6 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-> [!Note]
-> The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the ["Graph V1 versus Graph Beta" section](basics-apis.md) to learn more.
-
 ## Working the term store
 
 All taxonomy objects like term groups, term sets and terms live in a term store. This term store can be access via the `TermStore` property of the `PnPContext` you're using:
@@ -87,7 +84,7 @@ await myNewGroup.DeleteAsync();
 
 ## Working with term sets
 
-Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you always have to go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:
+Term sets are the container for the terms and term sets themselves always are part of a term group. So to work with term sets you typically go via the term group. You can opt to load all term sets in a term group, write a LINQ query or get a term set by id:
 
 ```csharp
 // Get the term group hosting the needed term set 
@@ -105,6 +102,12 @@ var termSet = await myTermGroup.Sets.Where(p => p.Id == "2374aacb-8c25-4991-aa94
 
 // Get a term set by id, identical to above LINQ approach
 var termSet = await myTermGroup.Sets.GetByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d");
+```
+
+When you know the term set id you an directly get the term set via the `GetTermSetById` methods on the `ITermStore`:
+
+```csharp
+var termSet = await context.TermStore.GetTermSetByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d", p => p.Description, p => p.Group);
 ```
 
 Adding a term set to a term group is done using the `Add` methods on the `ITermSetCollection`:
@@ -158,6 +161,42 @@ var term = await termSet.Terms.GetByIdAsync("6b39335d-1975-4fd7-9696-b40d57c9bde
 
 // Get a term by id from another term
 var childTerm = await term.Terms.GetByIdAsync("2dd726ce-1f14-4113-be57-5e0bc2d28914");
+```
+
+When you know the term set id and term id you an directly get the term via the `GetTermById` methods on the `ITermStore`:
+
+```csharp
+var term = await context.TermStore.GetTermByIdAsync("2374aacb-8c25-4991-aa94-7585bcedf38d", "6b39335d-1975-4fd7-9696-b40d57c9bde7", p => p.Descriptions, p => p.Set);
+```
+
+If you want to enumerate all terms in a hierarchical termset, then below code snippet shows how to combine batching and recursive code to load all the terms in the most efficient manner:
+
+```csharp
+var termset = context.TermStore.GetTermSetById("4b000117-03c4-4b2b-81f4-21e2ab26d6be", p => p.Description, p => p.Terms);
+
+// recursively load the terms in the termset
+await LoadTermsAsync(termset.Terms);
+
+private async Task LoadTermsAsync(ITermCollection terms)
+{
+    var batch = terms.PnPContext.NewBatch();
+
+    foreach (var term in terms.AsRequested())
+    {
+        await term.LoadBatchAsync(batch, p => p.Labels, p => p.Terms);
+    }
+
+    await terms.PnPContext.ExecuteAsync(batch);
+
+    foreach (var term in terms.AsRequested())
+    {
+        if (term.Terms.AsRequested().Count() > 0)
+        {
+            // Load the possible child terms
+            await LoadTermsAsync(term.Terms);
+        }
+    }
+}
 ```
 
 Adding a term to a term set or another term is done using the `Add` methods on the `ITermCollection`:

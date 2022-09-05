@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class UserCustomActionCollection : QueryableDataModelCollection<IUserCustomAction>, IUserCustomActionCollection
+    internal sealed class UserCustomActionCollection : QueryableDataModelCollection<IUserCustomAction>, IUserCustomActionCollection
     {
         public UserCustomActionCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
         {

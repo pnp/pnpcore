@@ -1,14 +1,11 @@
 ﻿using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = chatMessageUri, Beta = true, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
+    internal sealed class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
         private const string chatMessageUri = baseUri + "/{GraphId}";
@@ -19,61 +16,14 @@ namespace PnP.Core.Model.Teams
             // Handler to construct the Add request for this channel
             AddApiCallHandler = async (keyValuePairs) =>
             {
-                // Define the JSON body of the update request based on the actual changes
-                dynamic body = new ExpandoObject();
-                body.body = new ExpandoObject();
-                body.body.content = Body.Content;
-                body.body.contentType = Body.ContentType.ToString();
-
-                if(Attachments.Length > 0)
-                {
-                    dynamic attachmentList = new List<dynamic>();
-                    foreach(var attachment in Attachments)
-                    {
-                        dynamic attach = new ExpandoObject();
-                        attach.id = attachment.Id;                        
-                        attach.content = attachment.Content;
-                        attach.contentUrl = attachment.ContentUrl;
-                        attach.contentType = attachment.ContentType;
-                        attach.name = attachment.Name;
-                        attach.thumbnailUrl = attachment.ThumbnailUrl;
-                        attachmentList.Add(attach);
-                    }
-
-                    body.attachments = attachmentList;
-                }
-
-                if(HostedContents.Length > 0)
-                {
-                    dynamic hostedContentList = new List<dynamic>();
-                    foreach (var hostedContent in HostedContents)
-                    {
-                        dynamic hContent = new ExpandoObject();
-                        hContent.contentBytes = hostedContent.ContentBytes;
-                        hContent.contentType = hostedContent.ContentType;
-
-                        //Complex named parameter
-                        ((IDictionary<string, object>)hContent).Add("@microsoft.graph.temporaryId", hostedContent.Id);
-                        
-                        hostedContentList.Add(hContent);
-                    }
-
-                    body.hostedContents = hostedContentList;
-                }
-
-                if (!string.IsNullOrEmpty(Subject))
-                {
-                    body.subject = Subject;
-                }
-
-                // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
+                var bodyContent = TeamChatMessageHelper.GenerateMessageBody(this);
 
                 var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
         }
+
         #endregion
 
         #region Properties
@@ -97,6 +47,8 @@ namespace PnP.Core.Model.Teams
 
         public ITeamChatMessageContent Body { get => GetModelValue<ITeamChatMessageContent>(); set => SetModelValue(value); }
 
+        public ITeamChannelIdentity ChannelIdentity { get => GetModelValue<ITeamChannelIdentity>(); set => SetModelValue(value); }
+
         public string Summary { get => GetValue<string>(); set => SetValue(value); }
 
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
@@ -107,14 +59,126 @@ namespace PnP.Core.Model.Teams
 
         public ITeamChatMessageReactionCollection Reactions { get => GetModelCollectionValue<ITeamChatMessageReactionCollection>(); }
 
-        public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); }
+        public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); set => SetModelValue(value); }
 
         public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); set => SetModelValue(value); }
 
         public ITeamChatMessageHostedContentCollection HostedContents { get => GetModelCollectionValue<ITeamChatMessageHostedContentCollection>(); set => SetModelValue(value); }
 
+        [GraphProperty("replies", Get = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages/{GraphId}/replies")]
+        public ITeamChatMessageReplyCollection Replies { get => GetModelCollectionValue<ITeamChatMessageReplyCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }
+
+        #endregion
+
+        #region Methods
+
+        public async Task<ITeamChatMessageReply> AddReplyAsync(ChatMessageOptions options)
+        {
+            if (options == default)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            //Minimum for a message
+            if (string.IsNullOrEmpty(options.Content))
+            {
+                throw new ArgumentNullException(nameof(options), "parameter must include message content");
+            }
+
+            var message = new TeamChatMessageReply
+            {
+                Parent = this,
+                PnPContext = PnPContext
+            };
+
+            TeamChatMessageHelper.AddChatMessageOptions(options, message);
+            
+            await message.AddAsync().ConfigureAwait(false);
+
+            return message;
+        }
+
+        public ITeamChatMessageReply AddReply(ChatMessageOptions options)
+        {
+            return AddReplyAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return await AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReply(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return AddReplyAsync(new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, ChatMessageOptions options)
+        {
+            if (options == default)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            //Minimum for a message
+            if (string.IsNullOrEmpty(options.Content))
+            {
+                throw new ArgumentNullException(nameof(options), "parameter must include message content");
+            }
+
+            var message = new TeamChatMessageReply
+            {
+                Parent = this,
+                PnPContext = PnPContext
+            };
+
+            TeamChatMessageHelper.AddChatMessageOptions(options, message);
+
+            await message.AddBatchAsync(batch).ConfigureAwait(false);
+
+            return message;
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, ChatMessageOptions options)
+        {
+            return AddReplyBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(ChatMessageOptions options)
+        {
+            return await AddReplyBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(ChatMessageOptions options)
+        {
+            return AddReplyBatchAsync(PnPContext.CurrentBatch, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return await AddReplyBatchAsync(batch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return AddReplyBatchAsync(batch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChatMessageReply> AddReplyBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return await AddReplyBatchAsync(PnPContext.CurrentBatch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).ConfigureAwait(false);
+        }
+
+        public ITeamChatMessageReply AddReplyBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)
+        {
+            return AddReplyBatchAsync(PnPContext.CurrentBatch, new ChatMessageOptions() { Content = content, ContentType = contentType, Subject = subject }).GetAwaiter().GetResult();
+        }
+
+
+
         #endregion
     }
 }

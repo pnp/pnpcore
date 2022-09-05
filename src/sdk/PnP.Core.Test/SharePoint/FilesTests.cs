@@ -1925,16 +1925,16 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
-                
+
                 const string fileContent1 = "PnP Rocks !!!";
                 const string fileContent2 = "BlahBlahBlah???";
-                
+
                 var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
                 var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
 
                 string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
                 IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
-                
+
                 // Create 2 additional minor versions
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
@@ -1945,15 +1945,15 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
                 await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
-                
+
                 // Create another major version
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
-                
-                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl, 
+
+                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
                     f => f.Versions,
                     f => f.CheckInComment,
-                    f => f.MajorVersion, 
+                    f => f.MajorVersion,
                     f => f.MinorVersion,
                     f => f.UIVersionLabel);
 
@@ -1963,14 +1963,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
 
                 // The versions history contains 2 versions
                 Assert.AreEqual(4, versions.Count);
-                
+
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
-                
+
                 Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
                 Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
@@ -1986,7 +1986,7 @@ namespace PnP.Core.Test.SharePoint
                 downloadedContentStream.Seek(0, SeekOrigin.Begin);
                 // Get string from the content stream
                 string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
-                
+
                 Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
                 Assert.AreEqual(fileContent1, downloadedContent);
                 Assert.AreNotEqual(fileContent2, downloadedContent);
@@ -2864,7 +2864,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
 
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
-                
+
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, versions.Count);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
@@ -2895,9 +2895,9 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
-                
+
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, versions.Count);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
@@ -2928,7 +2928,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
 
                 // The versions history contains 2 versions
@@ -3103,6 +3103,195 @@ namespace PnP.Core.Test.SharePoint
                 IFolder folder = await documentLibrary.RootFolder.GetAsync();
                 IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
                 return new Tuple<string, string, string>(libraryName, mockDocument.Name, mockDocument.ServerRelativeUrl);
+            }
+        }
+
+        #endregion
+
+        #region Convert tests
+
+        [TestMethod]
+        public async Task ConvertFileAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+            IFile pdfFile = null;
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                    var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
+
+                    Assert.IsNotNull(pdfContent);
+
+                    var targetFileName = documentName.Replace(".docx", ".pdf");
+
+                    await folder.Files.AddAsync(targetFileName, pdfContent, true);
+
+                    pdfFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".docx", ".pdf"));
+
+                    Assert.IsNotNull(pdfFile);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+                if (pdfFile != null)
+                {
+                    await pdfFile.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ConvertImageFileAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IFile jpgFile = null;
+            IFile testDocument = null;
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Upload image file
+                    string documentName = TestCommon.GetPnPSdkTestAssetName("ConvertImageFileAsyncTest.png");
+                    var parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                    testDocument = await parentFolder.Files.AddAsync(documentName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                    string documentUrl = testDocument.ServerRelativeUrl;
+
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                    var jpgContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Jpg, JpgFormatHeight = 100, JpgFormatWidth = 100 });
+
+                    Assert.IsNotNull(jpgContent);
+
+                    var targetFileName = documentName.Replace(".png", ".jpg");
+
+                    await folder.Files.AddAsync(targetFileName, jpgContent, true);
+
+                    jpgFile = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl.Replace(".png", ".jpg"));
+
+                    Assert.IsNotNull(jpgFile);
+                }
+            }
+            finally
+            {
+                if (testDocument != null)
+                {
+                    await testDocument.DeleteAsync();
+                }
+                
+                if (jpgFile != null)
+                {
+                    await jpgFile.DeleteAsync();
+                }
+            }
+        }
+
+        [ExpectedException(typeof(ClientException))]
+        [TestMethod]
+        public async Task ConvertFileAsyncExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IFile testDocument = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Upload image file
+                    string documentName = TestCommon.GetPnPSdkTestAssetName("ConvertImageFileAsyncTest.png");
+                    var parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                    testDocument = await parentFolder.Files.AddAsync(documentName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                    string documentUrl = testDocument.ServerRelativeUrl;
+
+                    IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(documentUrl.Replace($"/{documentName}", string.Empty));
+
+                    // Try convert image to PDF...not supported
+                    var jpgContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
+                }
+            }
+            finally
+            {
+                if (testDocument != null)
+                {
+                    await testDocument.DeleteAsync();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Preview
+
+        [TestMethod]
+        public async Task GetFilePreviewAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string documentUrl = null;
+            try
+            {
+                (_, _, documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    Assert.IsNotNull(file);
+
+                    var filePreview = await file.GetPreviewAsync();
+
+                    Assert.IsNotNull(filePreview);
+                    Assert.IsNotNull(filePreview.GetUrl);
+                }
+            }
+            finally
+            {
+                if (documentUrl != null)
+                {
+                    await TestAssets.CleanupTestDocumentAsync(2);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFilePreviewIncludingPageAndZoomAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string documentUrl = null;
+            try
+            {
+                (_, _, documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    Assert.IsNotNull(file);
+
+                    var filePreview = await file.GetPreviewAsync(new PreviewOptions { Page = "2", Zoom = 5 });
+
+                    Assert.IsNotNull(filePreview);
+                    Assert.IsNotNull(filePreview.GetUrl);
+                }
+
+            }
+            finally
+            {
+                if (documentUrl != null)
+                {
+                    await TestAssets.CleanupTestDocumentAsync(2);
+                }
             }
         }
 

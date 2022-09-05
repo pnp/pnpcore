@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of List objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ListCollection))]
-    public interface IListCollection : IQueryable<IList>, IAsyncEnumerable<IList>, IDataModelCollection<IList>, IDataModelCollectionLoad<IList>, IDataModelCollectionDeleteByGuidId
+    public interface IListCollection : IQueryable<IList>, IAsyncEnumerable<IList>, IDataModelCollection<IList>, IDataModelCollectionLoad<IList>, IDataModelCollectionDeleteByGuidId, ISupportModules<IListCollection>
     {
         #region Add Methods
         /// <summary>
@@ -81,6 +81,40 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list instance, if any</returns>
         public Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByTitleBatchAsync(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByTitleBatch(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByTitleBatchAsync(Batch batch, string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByTitleBatch(Batch batch, string title, params Expression<Func<IList, object>>[] selectors);
         #endregion
 
         #region GetById methods
@@ -99,6 +133,40 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list instance, if any</returns>
         public Task<IList> GetByIdAsync(Guid id, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByIdBatch(Guid id, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByIdBatchAsync(Guid id, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByIdBatch(Batch batch, Guid id, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByIdBatchAsync(Batch batch, Guid id, params Expression<Func<IList, object>>[] selectors);
         #endregion
 
         #region GetByServerRelativeUrl implementation
@@ -117,6 +185,86 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list instance, if any</returns>
         public Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+        #endregion
+
+        #region EnsureSiteAssetsLibrary
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        Task<IList> EnsureSiteAssetsLibraryAsync(params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        IList EnsureSiteAssetsLibrary(params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        Task<IList> EnsureSiteAssetsLibraryBatchAsync(params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        IList EnsureSiteAssetsLibraryBatch(params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        Task<IList> EnsureSiteAssetsLibraryBatchAsync(Batch batch, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The asset library</returns>
+        IList EnsureSiteAssetsLibraryBatch(Batch batch, params Expression<Func<IList, object>>[] selectors);
         #endregion
 
     }

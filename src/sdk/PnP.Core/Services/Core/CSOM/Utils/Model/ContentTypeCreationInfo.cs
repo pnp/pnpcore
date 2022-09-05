@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
-    internal class ContentTypeCreationInfo
+    internal sealed class ContentTypeCreationInfo
     {
         public string Id { get; set; }
         public string Name { get; set; }

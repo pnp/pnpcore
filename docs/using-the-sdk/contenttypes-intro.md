@@ -1,6 +1,6 @@
 # Working with content types
 
-Each SharePoint site uses [content types](https://support.microsoft.com/en-us/office/documents-and-libraries-in-sharepoint-8284da52-9092-4b45-90e1-1b7de6311c38?ui=en-US&rs=en-US&ad=US#id0eaabaaa=content_types&ID0EAACAAA=Content_types), a site comes pre-populated with a set of content types and a set of lists and libraries that use these content types. You can also create your own content types, either being a site content type or list content type. A site content type can be reused across multiple lists in the site collection and this is the preferred model, adding a list content type however is possible as well. Creating site and list content types is from a developer point of view quite similar so both options are discussed together in this article.
+Each SharePoint site uses [content types](https://support.microsoft.com/en-us/office/documents-and-libraries-in-sharepoint-8284da52-9092-4b45-90e1-1b7de6311c38?ui=en-US&rs=en-US&ad=US#id0eaabaaa=content_types&ID0EAACAAA=Content_types), a site comes pre-populated with a set of content types and a set of lists and libraries that use these content types. You can also create your own content types, either being a site content type or list content type. A site content type can be reused across multiple lists in the site collection and this is the preferred model.
 
 In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
@@ -52,21 +52,76 @@ await list.UpdateAsync();
 await list.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "MyContentType");
 ```
 
-### Adding fields to the content type
+### Adding site fields to a site content type
 
-Once the content type is added you typically also want to add fields to it, this is done by adding the needed fields in the [content type's IFieldLinkCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IContentType.html#collapsible-PnP_Core_Model_SharePoint_IContentType_FieldLinks) via the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_).
+Once the content type is added you typically also want to add fields to it, this is done by adding the needed field links in the [content type's IFieldLinkCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IContentType.html#collapsible-PnP_Core_Model_SharePoint_IContentType_FieldLinks) via the `AddAsync` methods.
 
 ```csharp
 // Get site content types, also load the content types field links in one go
-await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+await context.Web.LoadAsync(p => p.Fields, p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
                                     p => p.FieldLinks.QueryProperties(p => p.Name)));
-var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+var contentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
 
-// Add existing field with internal name "MyField" to the content type's field link collection
-await contentType.FieldLinks.AddAsync("MyField");
+// Get the field to add to the content type
+var field = context.Web.Fields.AsRequested().First(p => p.InternalName == "myField");
+
+// Add existing field with internal name "MyField" to the content type's field link collection as a required field
+await contentType.FieldLinks.AddAsync(field, required: true);
+```
+
+### Adding fields to a list content type
+
+Once a content type has been added to a list you can also add list fields to that content type, the flow is similar to adding site fields but this time the list field collection is queried.
+
+```csharp
+// Add a list content type, start with getting a reference to the list
+var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes, p => p.Fields);
+
+// Get the content type to update
+var contentType = list.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+
+// Get the field to add to the content type
+var field = list.Fields.AsRequested().First(p => p.InternalName == "myField");
+
+// Add existing field with internal name "MyField" to the content type's field link collection as a required field
+await contentType.FieldLinks.AddAsync(field, required: true);
+```
+
+### Getting and setting the content type order in the list "New" menu
+
+When you add content types to a list they're added as last content type in the "New" menu of the list. Sometimes you however want to have your custom content type(s) be the first ones and that can be done by getting the current content type order via one of the `GetContentTypeOrder` methods on `IList`. You'll get a list containing the content type id's in the current order, after reordering this list you can update the content type order via using the `ReorderContentTypes` methods on `IList`. 
+
+```csharp
+// Ensure content type are enabled for the list
+var myList = await context.Web.Lists.GetByTitleAsync("MyList");
+myList.ContentTypesEnabled = true;
+await myList.UpdateAsync();
+
+// Add existing content type (contact)
+var addedContentType = await myList.ContentTypes.AddAvailableContentTypeAsync("0x0106");
+
+// Now we should have two content types added to the list, let's check their order
+var contentTypeOrder = await myList.GetContentTypeOrderAsync();
+
+// turn around the order
+List<string> newContentTypeOrder = new List<string>();
+
+// First add the currently last content type
+newContentTypeOrder.Add(contentTypeOrder.Last());
+
+// Add the remaining content types
+foreach(var contentTypeId in contentTypeOrder)
+{
+    if (!newContentTypeOrder.Contains(contentTypeId))
+    {
+        newContentTypeOrder.Add(contentTypeId);
+    }
+}
+
+// Update the content type order of this list
+await myList.ReorderContentTypesAsync(newContentTypeOrder);
 ```
 
 ## Updating content types
@@ -89,6 +144,51 @@ await contentType.UpdateAsync();
 await contentType.FieldLinks.AddAsync("MyRequiredField", required: true);
 ```
 
+### Updating site content type field
+
+To update the settings of a field added to a content type one can update its field link:
+
+```csharp
+// Get site content types, also load the content types field links in one go
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)));
+
+// Get the content type to update
+var contentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+
+// Get the content type field link to update
+var fieldLink = await contentType.FieldLinks.AsRequested().First(p => p.Name == "myField");
+
+// Set the field in the content type to be readonly
+fieldLink.ReadOnly = true;
+await fieldLink.UpdateAsync();
+```
+
+> [!Note]
+> When you update a site content type field the changes are automatically pushed down the content types inheriting from the current content type.
+
+### Updating a list content type field
+
+To update the settings of a field added to a content type one can update its field link:
+
+```csharp
+// Add a list content type, start with getting a reference to the list
+var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.QueryProperties(
+                                    p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)), 
+                                    p => p.Fields);
+
+// Get the content type to update
+var contentType = list.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+
+// Get the content type field link to update
+var fieldLink = await contentType.FieldLinks.AsRequested().First(p => p.Name == "myField");
+
+// Set the field in the content type to be readonly
+fieldLink.ReadOnly = true;
+await fieldLink.UpdateAsync();
+```
+
 ## Deleting content types
 
 To delete a content type you need to get a reference to the content type to delete followed by calling one of the Delete methods.
@@ -103,4 +203,47 @@ var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyCo
 
 // Delete the content type
 await contentType.DeleteAsync();
+```
+
+> [!Note]
+> If a content type is in use you cannot delete it.
+
+### Removing a site content type field
+
+To remove a field added to a content type one can remove its field link:
+
+```csharp
+// Get site content types, also load the content types field links in one go
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)));
+
+// Get the content type to update
+var contentType = context.Web.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+
+// Get the content type field link to remove
+var fieldLink = await contentType.FieldLinks.AsRequested().First(p => p.Name == "myField");
+
+// Delete the field from the content type
+await fieldLink.DeleteAsync();
+```
+
+### Removing a list content type field
+
+To remove a field added to a content type one can remove its field link:
+
+```csharp
+// Add a list content type, start with getting a reference to the list
+var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.QueryProperties(
+                                    p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name, p => p.ReadOnly)), 
+                                    p => p.Fields);
+
+// Get the content type to update
+var contentType = list.ContentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
+
+// Get the content type field link to delete
+var fieldLink = await contentType.FieldLinks.AsRequested().First(p => p.Name == "myField");
+
+// Delete the field from the content type
+await fieldLink.DeleteAsync();
 ```

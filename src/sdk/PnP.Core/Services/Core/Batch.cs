@@ -37,7 +37,7 @@ namespace PnP.Core.Services
         public SortedList<int, BatchRequest> Requests { get; internal set; } = new SortedList<int, BatchRequest>();
 
         /// <summary>
-        /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set
+        /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set to false
         /// </summary>
         internal List<BatchResult> Results { get; private set; } = new List<BatchResult>();
 
@@ -51,6 +51,22 @@ namespace PnP.Core.Services
         /// Was this <see cref="Batch"/> executed?
         /// </summary>
         public bool Executed { get; internal set; }
+
+        /// <summary>
+        /// Event handler triggered when batch execution is done
+        /// </summary>
+        internal Action BatchExecuted { get; set; }
+
+        /// <summary>
+        /// Returns true if this batch had errors and throw on error was turned off
+        /// </summary>
+        internal bool HasErrors
+        {
+            get
+            {
+                return !ThrowOnError && Results.Count > 0;
+            }
+        }
 
         /// <summary>
         /// Only use Graph batching when all requests in the batch are targeting Graph
@@ -128,8 +144,10 @@ namespace PnP.Core.Services
         /// <param name="fromJsonCasting">Delegate for json type parsing</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        /// <param name="requestModules">List with request modules to execute</param>
         /// <returns>The id to created batch request</returns>
-        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName)
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall,
+            ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName, List<IRequestModule> requestModules)
         {
             var lastAddedRequest = GetLastRequest();
             int order = 0;
@@ -139,10 +157,36 @@ namespace PnP.Core.Services
             }
 
             var batchRequest = new BatchRequest(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, operationName, order);
+            batchRequest.RequestModules = requestModules;
 
             Requests.Add(order, batchRequest);
 
             return batchRequest.Id;
+        }
+
+        /// <summary>
+        /// Add a new request to this <see cref="Batch"/>
+        /// </summary>
+        /// <param name="model">Entity object on for which this request was meant</param>
+        /// <param name="entityInfo">Info about the entity object</param>
+        /// <param name="method">Type of http method (GET/PATCH/POST/...)</param>
+        /// <param name="apiCall">Rest/Graph call</param>
+        /// <param name="backupApiCall">Backup rest api call, will be used in case we encounter a mixed batch</param>
+        /// <param name="fromJsonCasting">Delegate for json type parsing</param>
+        /// <param name="postMappingJson">Delegate for post mapping</param>
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        /// <returns>The id to created batch request</returns>
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName)
+        {
+            // Copy the request modules list as it will get cleared at context level
+            List<IRequestModule> requestModulesToUse = null;
+            var requestModules = (model as IDataModelWithContext).PnPContext.RequestModules;
+            if (requestModules != null)
+            {
+                requestModulesToUse = new List<IRequestModule>(requestModules);
+            }
+
+            return Add(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, operationName, requestModulesToUse);
         }
 
         /// <summary>
@@ -165,6 +209,17 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Verifies if this batch contains the given batch request
+        /// </summary>
+        /// <param name="id">If of the batch request to check for</param>
+        /// <returns>True if the batch contains the request, false otherwise</returns>
+        internal bool ContainsRequest(Guid id)
+        {
+            var request = Requests.FirstOrDefault(r => r.Value.Id == id);
+            return request.Value != null;
+        }
+
+        /// <summary>
         /// Promotes a backup rest call to be the actual api call
         /// </summary>
         internal void MakeSPORestOnlyBatch()
@@ -184,7 +239,39 @@ namespace PnP.Core.Services
                 request.ApiCall.Type.ToString(),
                 request.ApiCall.Request,
                 request.Method,
-                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : "")); 
+                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : ""));
+        }
+
+        internal Guid PrepareLastAddedRequestForBatchProcessing<T>(Action<string, ApiCall> rawResultsHandler, T resultObject)
+        {
+            var lastBatchRequest = Requests.Last().Value;
+            var key = Requests.Last().Key;
+            var sourceApiCall = lastBatchRequest.ApiCall;
+
+            lastBatchRequest.ApiCall = new ApiCall()
+            {
+                BinaryBody = sourceApiCall.BinaryBody,
+                Commit = sourceApiCall.Commit,
+                CSOMRequests = sourceApiCall.CSOMRequests,
+                ExecuteRequestApiCall = sourceApiCall.ExecuteRequestApiCall,
+                ExpectBinaryResponse = sourceApiCall.ExpectBinaryResponse,
+                Headers = sourceApiCall.Headers,
+                Interactive = sourceApiCall.Interactive,
+                JsonBody = sourceApiCall.JsonBody,
+                LoadPages = sourceApiCall.LoadPages,
+                RawResultsHandler = rawResultsHandler,
+                RawSingleResult = resultObject,
+                ReceivingProperty = sourceApiCall.ReceivingProperty,
+                RemoveFromModel = sourceApiCall.RemoveFromModel,
+                Request = sourceApiCall.Request,
+                SkipCollectionClearing = sourceApiCall.SkipCollectionClearing,
+                StreamResponse = sourceApiCall.StreamResponse,
+                Type = sourceApiCall.Type
+            };
+
+            Requests[key] = lastBatchRequest;
+
+            return lastBatchRequest.Id;
         }
 
         /// <summary>

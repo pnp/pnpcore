@@ -2,6 +2,7 @@ using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, ISecurableObject, IQueryableDataModel
     {
         #region Properties
         /// <summary>
@@ -223,6 +224,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the recycle bin of the website.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRecycleBinItemCollection RecycleBin { get; }
 
@@ -402,37 +406,58 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the current user in the current context
         /// </summary>
-#pragma warning disable CA1721 // Property names should not match get methods
         public ISharePointUser CurrentUser { get; }
-#pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
-        /// Collection of lists in the current Web object
+        /// Gets the web's author
+        /// </summary>
+        public ISharePointUser Author { get; }
+
+        /// <summary>
+        /// Collection of lists in the current Web object.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IListCollection Lists { get; }
 
         /// <summary>
         /// Collection of content types in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IContentTypeCollection ContentTypes { get; }
 
         /// <summary>
         /// Collection of fields in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection Fields { get; }
 
         /// <summary>
         /// Collection of webs in this current web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IWebCollection Webs { get; }
 
         /// <summary>
         /// Collection of features enabled for the web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFeatureCollection Features { get; }
 
         /// <summary>
         /// Collection of folders in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFolderCollection Folders { get; }
 
@@ -443,11 +468,17 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of all content types that apply to the current scope, including those of the current Web site, as well as any parent Web sites.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IContentTypeCollection AvailableContentTypes { get; }
 
         /// <summary>
         /// Gets a value that specifies the collection of all fields available for the current scope, including those of the current site, as well as any parent sites.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection AvailableFields { get; }
 
@@ -463,16 +494,25 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of all users that belong to the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ISharePointUserCollection SiteUsers { get; }
 
         /// <summary>
         /// Gets the collection of all groups that belong to the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ISharePointGroupCollection SiteGroups { get; }
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
@@ -503,13 +543,24 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Role Definitions defined in this web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRoleDefinitionCollection RoleDefinitions { get; }
 
         /// <summary>
-        /// Role Assignments defined in this web
+        /// Navigation on the Web
         /// </summary>
-        public IRoleAssignmentCollection RoleAssignments { get; }
+        public INavigation Navigation { get; }
+
+        /// <summary>
+        /// Event Receivers defined in this web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
+        /// </summary>
+        public IEventReceiverDefinitionCollection EventReceivers { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
@@ -535,6 +586,20 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="pageName">Page name to filter on, uses a "starts with" filter</param>
         /// <returns>One of more modern pages</returns>
         public List<IPage> GetPages(string pageName = null);
+
+        /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public Task<IVivaDashboard> GetVivaDashboardAsync();
+
+        /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public IVivaDashboard GetVivaDashboard();
 
         /// <summary>
         /// Creates a new modern page
@@ -893,6 +958,30 @@ namespace PnP.Core.Model.SharePoint
 
         #region Syntex support
         /// <summary>
+        /// Is the tenant enabled for SharePoint Syntex
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
+        Task<bool> IsSyntexEnabledAsync();
+
+        /// <summary>
+        /// Is the tenant enabled for SharePoint Syntex
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
+        bool IsSyntexEnabled();
+
+        /// <summary>
+        /// Is SharePoint Syntex enabled for the current user
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
+        Task<bool> IsSyntexEnabledForCurrentUserAsync();
+
+        /// <summary>
+        /// Is SharePoint Syntex enabled for the current user
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
+        bool IsSyntexEnabledForCurrentUser();
+
+        /// <summary>
         /// Is this web a Syntex Content Center
         /// </summary>
         /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
@@ -958,6 +1047,357 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Has Communication Site features
+        /// <summary>
+        /// Does this web have the communication site features enabled?
+        /// </summary>
+        /// <returns>True if enabled, false otherwise</returns>
+        Task<bool> HasCommunicationSiteFeaturesAsync();
+
+        /// <summary>
+        /// Does this web have the communication site features enabled?
+        /// </summary>
+        /// <returns>True if enabled, false otherwise</returns>
+        bool HasCommunicationSiteFeatures();
+        #endregion
+
+        #region Branding
+        /// <summary>
+        /// Returns the branding manager which can be used to change the look of the web
+        /// </summary>
+        /// <returns>An <see cref="IBrandingManager"/> instance</returns>
+        IBrandingManager GetBrandingManager();
+        #endregion
+
+        #region Search
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        Task<ISearchResult> SearchAsync(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        ISearchResult Search(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        IBatchSingleResult<ISearchResult> SearchBatch(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The results of the search query</returns>
+        Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(Batch batch, SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The results of the search query</returns>
+        IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query);
+        #endregion
+
+        #region Web Templates
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<List<IWebTemplate>> GetWebTemplatesAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        List<IWebTemplate> GetWebTemplates(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IEnumerableBatchResult<IWebTemplate>> GetWebTemplatesBatchAsync(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Returns a collection of site templates available for the site.
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        IEnumerableBatchResult<IWebTemplate> GetWebTemplatesBatch(Batch batch, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        Task<IWebTemplate> GetWebTemplateByNameAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IWebTemplate GetWebTemplateByName(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The list of webtemplates available on the current web</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The template with the specified name, if available</returns>
+        Task<IBatchSingleResult<IWebTemplate>> GetWebTemplateByNameBatchAsync(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        /// <summary>
+        /// Return a specific web template based by a name
+        /// </summary>
+        /// <param name="lcid">Specifies the LCID of the site templates to be retrieved.</param>
+        /// <param name="includeCrossLanguage">Specifies whether to include language-neutral site templates.</param>
+        /// <param name="name">Name of the template to retrieve</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The template with the specified name, if available</returns>
+        IBatchSingleResult<IWebTemplate> GetWebTemplateByNameBatch(Batch batch, string name, int lcid = 1033, bool includeCrossLanguage = false);
+
+        #endregion
+
+        #region Link unfurling
+
+        /// <summary>
+        /// Takes in a sharing or regular SharePoint link and tries to provide relavant information about the resource behind the passed in link
+        /// </summary>
+        /// <param name="link">Link to resource to get information for</param>
+        /// <param name="unfurlOptions">Options to control the unfurling data gathering</param>
+        /// <returns>Data about the unfurled resource</returns>
+        Task<IUnfurledResource> UnfurlLinkAsync(string link, UnfurlOptions unfurlOptions = null);
+
+        /// <summary>
+        /// Takes in a sharing or regular SharePoint link and tries to provide relavant information about the resource behind the passed in link
+        /// </summary>
+        /// <param name="link">Link to resource to get information for</param>
+        /// <param name="unfurlOptions">Options to control the unfurling data gathering</param>
+        /// <returns>Data about the unfurled resource</returns>
+        IUnfurledResource UnfurlLink(string link, UnfurlOptions unfurlOptions = null);
+
+        #endregion
+
+        #region Recycle bin
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQuery(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        Task<IRecycleBinItemCollection> GetRecycleBinItemsByQueryBatchAsync(Batch batch, RecycleBinQueryOptions options);
+
+        /// <summary>
+        /// Searches the recyclebin returning items based upon the passed search criteria
+        /// </summary>
+        /// <param name="options">Recycle bin search criteria</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>A list containing zero or more recycle bin items</returns>
+        IRecycleBinItemCollection GetRecycleBinItemsByQueryBatch(Batch batch, RecycleBinQueryOptions options);
+        #endregion
+
+        #region Get Search Configuration
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetSearchConfigurationXmlAsync();
+
+        /// <summary>
+        /// Gets the search configuration of the web
+        /// </summary>
+        /// <returns>Search configuration XML</returns>
+        string GetSearchConfigurationXml();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync();
+
+        /// <summary>
+        /// Gets the managed properties from the search configuration of this web
+        /// </summary>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetSearchConfigurationManagedProperties();
+
+        /// <summary>
+        /// Sets the search configuration for the web
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        Task SetSearchConfigurationXmlAsync(string configuration);
+
+        /// <summary>
+        /// Sets the search configuration for the web
+        /// </summary>
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetSearchConfigurationXml"/> to apply</param>
+        void SetSearchConfigurationXml(string configuration);
+        #endregion
+
+        #region Get WSS Id for term
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        Task<int> GetWssIdForTermAsync(string termId);
+
+        /// <summary>
+        /// Returns the Id for a term if present in the TaxonomyHiddenList. Otherwise returns -1;
+        /// </summary>
+        /// <param name="termId">Id of the term to lookup</param>
+        /// <returns>Id of the term in the taxonomy hidden list, otherwise -1</returns>
+        int GetWssIdForTerm(string termId);
+        #endregion
+
+        #region Effective user permissions
+
+        /// <summary>
+        /// Gets the user effective permissions of a user for a web
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        IBasePermissions GetUserEffectivePermissions(string userPrincipalName);
+
+        /// <summary>
+        /// Gets the user effective permissions of a user for a web
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to retrieve the permissions of</param>
+        /// <returns>Base permissions object that contains the High and the Low permissions</returns>
+        Task<IBasePermissions> GetUserEffectivePermissionsAsync(string userPrincipalName);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a web
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind);
+
+        /// <summary>
+        /// Checks if a user has a specific kind of permissions to a web
+        /// </summary>
+        /// <param name="userPrincipalName">Login name of the user you wish to check if he has a specific permission</param>
+        /// <param name="permissionKind">Permission kind to check</param>
+        /// <returns>Boolean that says if the user has permissions or not</returns>
+        Task<bool> CheckIfUserHasPermissionsAsync(string userPrincipalName, PermissionKind permissionKind);
+
+        #endregion
+
+        #region Reindex web
+        /// <summary>
+        /// Reindexes this web
+        /// </summary>
+        /// <returns></returns>
+        Task ReIndexAsync();
+
+        /// <summary>
+        /// Reindexes this web
+        /// </summary>
+        /// <returns></returns>
+        void ReIndex();
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
@@ -1007,11 +1447,6 @@ namespace PnP.Core.Model.SharePoint
         ///// <summary>
         ///// To update...
         ///// </summary>
-        //public IEventReceiverDefinitionCollection EventReceivers { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
         //public IHostedAppsManager HostedApps { get; }
 
         ///// <summary>
@@ -1023,11 +1458,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IMultilingualSettings MultilingualSettings { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public INavigation Navigation { get; }
 
         ///// <summary>
         ///// To update...
@@ -1068,16 +1498,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IWebInformationCollection WebInfos { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowAssociationCollection WorkflowAssociations { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IWorkflowTemplateCollection WorkflowTemplates { get; }
 
         #endregion
     }

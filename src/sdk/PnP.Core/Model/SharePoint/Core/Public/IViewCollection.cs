@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of View objects
     /// </summary>
     [ConcreteType(typeof(ViewCollection))]
-    public interface IViewCollection : IQueryable<IView>, IAsyncEnumerable<IView>, IDataModelCollection<IView>, IDataModelCollectionLoad<IView>, IDataModelCollectionDeleteByGuidId
+    public interface IViewCollection : IQueryable<IView>, IAsyncEnumerable<IView>, IDataModelCollection<IView>, IDataModelCollectionLoad<IView>, IDataModelCollectionDeleteByGuidId, ISupportModules<IViewCollection>
     {
         /// <summary>
         /// Asynchronously adds a new view

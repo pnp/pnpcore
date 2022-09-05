@@ -3,7 +3,7 @@
     /// <summary>
     /// Class that will be passed along during API overrides
     /// </summary>
-    internal class ApiCallRequest
+    internal sealed class ApiCallRequest
     {
         internal ApiCallRequest(ApiCall api)
         {

@@ -6,7 +6,7 @@ namespace AngleSharp.Dom
     /// <summary>
     /// Extension methods for AngleSharp
     /// </summary>
-    public static partial class AngleSharpExtensions
+    internal static partial class AngleSharpExtensions
     {
         /// <summary>
         /// Performs a partial match on a list of tokens (e.g. classes on an element)

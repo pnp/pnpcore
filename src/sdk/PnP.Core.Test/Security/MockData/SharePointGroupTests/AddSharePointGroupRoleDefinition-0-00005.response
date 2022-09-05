@@ -1,9 +1,0 @@
---batchresponse_290c1ffc-68cf-4950-86ff-76597d08854d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddRoleAssignment":null}}
---batchresponse_290c1ffc-68cf-4950-86ff-76597d08854d--

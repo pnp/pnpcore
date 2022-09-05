@@ -1,4 +1,7 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using System.Linq;
+using System.Threading.Tasks;
+
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Public interface to define a Content Type object of SharePoint Online
@@ -6,6 +9,9 @@
     [ConcreteType(typeof(ContentType))]
     public interface IContentType : IDataModel<IContentType>, IDataModelGet<IContentType>, IDataModelLoad<IContentType>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+
+        #region Properties
+
         /// <summary>
         /// The unique ID of the Content Type as string
         /// </summary>
@@ -100,7 +106,7 @@
         /// Gets or Sets the New Form URL of the Content Type
         /// </summary>
         public string NewFormUrl { get; set; }
-        
+
         /// <summary>
         /// Gets or Sets whether the Content Type is read only
         /// </summary>
@@ -129,11 +135,17 @@
 
         /// <summary>
         /// Gets the collection of field links of the Content Type.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldLinkCollection FieldLinks { get; }
 
         /// <summary>
         /// Gets the collection of fields of the Content Type.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection Fields { get; }
 
@@ -162,6 +174,71 @@
         ///// To update...
         ///// </summary>
         //public IWorkflowAssociationCollection WorkflowAssociations { get; }
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task PublishAsync();
+
+        /// <summary>
+        /// Publishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Publish();
+
+        /// <summary>
+        /// Unpublishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task UnpublishAsync();
+
+        /// <summary>
+        /// Unublishes a content type from the hub to the sites in the SharePoint environment
+        /// </summary>
+        void Unpublish();
+
+        /// <summary>
+        /// Checks if a content type is published from the hub to the sites in the SharePoint environment
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> IsPublishedAsync();
+
+        /// <summary>
+        /// Checks if a content type is published from the hub to the sites in the SharePoint environment
+        /// </summary>
+        bool IsPublished();
+
+        /// <summary>
+        /// Returns the content type as a document set
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        Task<IDocumentSet> AsDocumentSetAsync();
+
+        /// <summary>
+        /// Returns the content type as a document set
+        /// </summary>
+        /// <returns>The content type as a document set</returns>
+        IDocumentSet AsDocumentSet();
+
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
+        /// <returns></returns>
+        Task AddFieldAsync(IField field);
+
+        /// <summary>
+        /// Adds a field to the content type
+        /// </summary>
+        /// <param name="field"><see cref="IField"/> to add to this content type</param>
+        /// <returns></returns>
+        void AddField(IField field);
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Microsoft365
@@ -8,6 +9,38 @@ namespace PnP.Core.Admin.Model.Microsoft365
     /// </summary>
     public interface IMicrosoft365Admin
     {
+        #region Microsoft 365 Group creation support
+        /// <summary>
+        /// Create a Microsoft 365 Group
+        /// </summary>
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        Task<PnPContext> CreateGroupAsync(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Create a Microsoft 365 Group
+        /// </summary>
+        /// <param name="graphGroupOptions">Options that define the Microsoft 365 Group to create</param>
+        /// <param name="creationOptions">Options that control the group creation process</param>
+        /// <returns>PnPContext for the SharePoint site linked the new group</returns>
+        PnPContext CreateGroup(GraphGroupOptions graphGroupOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Check if a Microsoft 365 group exists
+        /// </summary>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
+        Task<bool> GroupExistsAsync(string mailNickName);
+
+        /// <summary>
+        /// Check if a Microsoft 365 group exists
+        /// </summary>
+        /// <param name="mailNickName">Microsoft 365 group alias to check for</param>
+        /// <returns>True if the group exists, false otherwise</returns>
+        bool GroupExists(string mailNickName);
+        #endregion
+
         #region Multi-geo support
         /// <summary>
         /// Checks if this tenant is a multi-geo tenant
@@ -25,13 +58,13 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// Returns a list of multi-geo locations for this tenant
         /// </summary>
         /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
-        Task<List<IGeoLocation>> GetMultiGeoLocationsAsync();
+        Task<List<IGeoLocationInformation>> GetMultiGeoLocationsAsync();
 
         /// <summary>
         /// Returns a list of multi-geo locations for this tenant
         /// </summary>
         /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
-        List<IGeoLocation> GetMultiGeoLocations();
+        List<IGeoLocationInformation> GetMultiGeoLocations();
         #endregion
 
         #region Access token analysis
@@ -97,6 +130,20 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// <param name="accessToken">Accesstoken to inspect</param>
         /// <returns>True if using application permissions, false otherwise</returns>
         bool AccessTokenUsesApplicationPermissions(string accessToken);
+        #endregion
+
+        #region Sensitivity labels
+        /// <summary>
+        /// Get the available sensitivity labels for the calling user or application
+        /// </summary>
+        /// <returns>List of sensitivity labels</returns>
+        Task<List<ISensitivityLabel>> GetSensitivityLabelsAsync();
+
+        /// <summary>
+        /// Get the available sensitivity labels for the calling user or application
+        /// </summary>
+        /// <returns>List of sensitivity labels</returns>
+        List<ISensitivityLabel> GetSensitivityLabels();
         #endregion
     }
 }

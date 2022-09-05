@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.ChangeToken")]
-    internal partial class ChangeToken : TransientObject, IChangeToken, IMetadataExtensible
+    internal sealed class ChangeToken : TransientObject, IChangeToken, IMetadataExtensible
     {
         public ChangeToken()
         {

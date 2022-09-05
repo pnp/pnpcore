@@ -5,7 +5,9 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -77,11 +79,52 @@ namespace PnP.Core.Test.SharePoint
                         Assert.IsTrue(result.ContainsKey("LastRow"));
                         Assert.IsTrue(result.ContainsKey("RowLimit"));
                         Assert.IsTrue((int)result["RowLimit"] == 5);
-                    }
-                }
 
-                // Cleanup the created list
-                await myList.DeleteAsync();
+                        list3.Items.Clear();
+
+                        var batch = context3.NewBatch();
+                        var resultBatch = await list3.LoadListDataAsStreamBatchAsync(batch, new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData }); ;
+
+                        Assert.IsFalse(resultBatch.IsAvailable);
+
+                        // Execute the batch
+                        await context3.ExecuteAsync(batch);
+
+                        Assert.IsTrue(resultBatch.IsAvailable);
+
+                        Assert.IsTrue(list3.Items.Length == 5);
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("FirstRow"));
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("LastRow"));
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("RowLimit"));
+                        Assert.IsTrue((int)resultBatch.Result["RowLimit"] == 5);
+                    }
+
+                    using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                    {
+                        var list4 = context4.Web.Lists.GetByTitle(listTitle);
+                        if (list4 != null)
+                        {
+                            var resultBatch = list4.LoadListDataAsStreamBatch(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData }); ;
+
+                            Assert.IsFalse(resultBatch.IsAvailable);
+
+                            // Execute the batch
+                            await context4.ExecuteAsync();
+
+                            Assert.IsTrue(resultBatch.IsAvailable);
+
+                            Assert.IsTrue(list4.Items.Length == 5);
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("FirstRow"));
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("LastRow"));
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("RowLimit"));
+                            Assert.IsTrue((int)resultBatch.Result["RowLimit"] == 5);
+
+                        }
+                    }
+
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
 
@@ -200,6 +243,41 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ListGetBatchMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var documentLibrary = context.Web.Lists.GetByTitleBatch("Documents", p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+                var documentLibrary2 = context.Web.Lists.GetByServerRelativeUrlBatch($"{context.Uri.LocalPath}/siteassets", p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+
+                Assert.IsFalse(documentLibrary.Requested);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(documentLibrary.Requested);
+                Assert.IsTrue(documentLibrary.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(documentLibrary2.Requested);
+                Assert.IsTrue(documentLibrary2.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary2.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary2.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+
+                var documentLibrary3 = context.Web.Lists.GetByIdBatch(documentLibrary.Id, p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(documentLibrary3.Requested);
+                Assert.IsTrue(documentLibrary3.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary3.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary3.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+
+            }
+        }
+
+        [TestMethod]
         public async Task ListLinqGetExceptionMethods()
         {
             //TestCommon.Instance.Mocking = false;
@@ -311,6 +389,10 @@ namespace PnP.Core.Test.SharePoint
                 }
                 await context.ExecuteAsync();
 
+                // Check the item count in the list
+                await myList.LoadAsync(p => p.ItemCount);
+                Assert.IsTrue(myList.ItemCount == 10);
+
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
@@ -360,6 +442,112 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public void RewriteQueryStringTest()
+        {
+            // there are fieldrefs | no * provided in $select
+            var rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId,*,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are fieldrefs | * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,RoleAssignments/PrincipalId,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are fieldrefs | * + a fieldref value provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,Title,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,Title,RoleAssignments/PrincipalId,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are duplicate fieldrefs | no * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId,*,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there no fieldrefs | no * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+        }
+
+        [TestMethod]
+        public async Task GetItemsByCAMLQueryWithSelectors()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "GetItemsByCAMLQueryWithSelectors";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 10; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                // Check the item count in the list
+                await myList.LoadAsync(p => p.ItemCount);
+                Assert.IsTrue(myList.ItemCount == 10);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
+                            list2.LoadItemsByCamlQuery(queryOptions: null);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
+                            list2.LoadItemsByCamlQuery(query: null);
+                        });
+
+                        list2.LoadItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                            p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions));
+                        Assert.IsTrue(list2.Items.Length == 5);
+                        var first = list2.Items.AsRequested().First();
+                        Assert.IsTrue(first["FileRef"] != null && !string.IsNullOrEmpty(first["FileRef"].ToString()));
+                        Assert.IsTrue(first.RoleAssignments.Requested);
+                        var firstRoleAssignment = first.RoleAssignments.AsRequested().First();
+                        Assert.IsTrue(firstRoleAssignment.Requested);
+                        Assert.IsTrue(firstRoleAssignment.IsPropertyAvailable(p => p.PrincipalId));
+                        Assert.IsTrue(firstRoleAssignment.RoleDefinitions.Requested);
+                        Assert.IsTrue(firstRoleAssignment.RoleDefinitions.AsRequested().First().IsPropertyAvailable(p => p.Id));
+
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
 
         [TestMethod]
         public async Task GetItemsByCAMLQuerySimpleNonAsyncTest()
@@ -875,6 +1063,41 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task VerifyIsProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/shared%20documents", p => p.IsApplicationList,
+                    p => p.IsCatalog, p => p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList,
+                    p => p.Created, p => p.LastItemDeletedDate, p => p.LastItemModifiedDate, p => p.LastItemUserModifiedDate);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.IsApplicationList, false);
+                Assert.AreEqual(list.IsCatalog, false);
+                Assert.AreEqual(list.IsDefaultDocumentLibrary, true);
+                Assert.AreEqual(list.IsPrivate, false);
+                Assert.AreEqual(list.IsSiteAssetsLibrary, false);
+                Assert.AreEqual(list.IsSystemList, false);
+                Assert.IsTrue(list.Created > DateTime.MinValue && list.Created < DateTime.Now);
+                Assert.IsTrue(list.LastItemDeletedDate > DateTime.MinValue && list.LastItemDeletedDate < DateTime.Now);
+                Assert.IsTrue(list.LastItemModifiedDate > DateTime.MinValue && list.LastItemModifiedDate < DateTime.Now);
+                Assert.IsTrue(list.LastItemUserModifiedDate > DateTime.MinValue && list.LastItemUserModifiedDate < DateTime.Now);
+
+                list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/_catalogs/masterpage", p => p.IsApplicationList,
+                    p => p.IsCatalog, p => p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.IsApplicationList, true);
+                Assert.AreEqual(list.IsCatalog, true);
+                Assert.AreEqual(list.IsDefaultDocumentLibrary, false);
+                Assert.AreEqual(list.IsPrivate, false);
+                Assert.AreEqual(list.IsSiteAssetsLibrary, false);
+                Assert.AreEqual(list.IsSystemList, true);
+            }
+        }
+
+        [TestMethod]
         public async Task GetListByIdFollowedByAdd()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1168,6 +1391,29 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var list2 = await context.Web.Lists.GetByTitleAsync("Site Assets", p => p.Id);
+
+                var changesBatch = list.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+                var changes2Batch = list2.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+                Assert.IsFalse(changes2Batch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+                Assert.IsTrue(changes2Batch.IsAvailable);
+
+                Assert.IsTrue(changesBatch.Count > 0);
+                Assert.IsTrue(changes2Batch.Count > 0);
+
             }
         }
 
@@ -1214,7 +1460,7 @@ namespace PnP.Core.Test.SharePoint
                 // Make a change
                 myList.ContentTypesEnabled = true;
                 await myList.UpdateAsync();
-                
+
                 var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
                 {
                     FetchLimit = 5,
@@ -1262,7 +1508,7 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // Add an item
-                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });                             
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
 
                 var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
                 {
@@ -1293,5 +1539,558 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task EnsureAssetLibraryTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var assetLibrary = context.Web.Lists.EnsureSiteAssetsLibrary();
+
+                Assert.IsNotNull(assetLibrary);
+                Assert.IsTrue(assetLibrary.Id != Guid.Empty);
+
+
+                var assetLibrary2 = context.Web.Lists.EnsureSiteAssetsLibrary(p => p.RootFolder.QueryProperties(p => p.Files));
+                Assert.IsNotNull(assetLibrary2);
+                Assert.IsTrue(assetLibrary2.Id != Guid.Empty);
+                Assert.IsTrue(assetLibrary2.IsPropertyAvailable(p => p.RootFolder));
+
+                var assetLibrary3 = context.Web.Lists.EnsureSiteAssetsLibraryBatch(p => p.RootFolder.QueryProperties(p => p.Files));
+
+                Assert.IsFalse(assetLibrary3.Requested);
+
+                await context.ExecuteAsync();
+                Assert.IsTrue(assetLibrary3.Requested);
+                Assert.IsNotNull(assetLibrary3);
+                Assert.IsTrue(assetLibrary3.Id != Guid.Empty);
+                Assert.IsTrue(assetLibrary3.IsPropertyAvailable(p => p.RootFolder));
+            }
+        }
+
+        [TestMethod]
+        public async Task ComplianceTagTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ComplianceTagTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add an item
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                // Add a compliance tag
+                // Ensure a retentionlabel is created first: https://compliance.microsoft.com/informationgovernance?viewid=labels
+                myList.SetComplianceTag("Retain1Year", false, false, false);
+
+                // Read the compliance tag again
+                var complianceTag = myList.GetComplianceTag();
+
+                Assert.IsTrue(complianceTag != null);
+
+                var complianceTagViaBatch = myList.GetComplianceTagBatch();
+                Assert.IsFalse(complianceTagViaBatch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(complianceTagViaBatch.IsAvailable);
+                Assert.IsTrue(complianceTagViaBatch.Result.TagName == "Retain1Year");
+
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task FindFilesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("FindFilesAsyncTest_LIST");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                }
+
+                // Add files to the list
+                using (MemoryStream ms = new())
+                {
+                    var sw = new StreamWriter(ms, System.Text.Encoding.Unicode);
+                    try
+                    {
+                        sw.Write("[Your name here]");
+                        sw.Flush();
+                        ms.Seek(0, SeekOrigin.Begin);
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            myList.RootFolder.Files.Add($"367664-472-E-T0{i} - Artichoke.txt", ms);
+                        }
+
+                        var subfolder = myList.RootFolder.AddFolder("subfolder");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            subfolder.Files.Add($"99887-543-F-R0{i} - Courgette.txt", ms);
+                        }
+
+                        var subsubfolder = subfolder.AddFolder("subsubfolder");
+                        for (int i = 0; i < 2; i++)
+                        {
+                            subsubfolder.Files.Add($"872374-522-G-X0{i} - Cucumber.txt", ms);
+                        }
+                    }
+                    finally
+                    {
+                        sw.Dispose();
+                    }
+                }
+
+                var result1 = await myList.FindFilesAsync("367664-472-E-T00*");
+                Assert.IsTrue(result1.Count == 1);
+
+                var result2 = await myList.FindFilesAsync("367664-472-E-*");
+                Assert.IsTrue(result2.Count == 5);
+
+                var result3 = await myList.FindFilesAsync("*T04*");
+                Assert.IsTrue(result3.Count == 1);
+
+                var result4 = await myList.FindFilesAsync("*- ArtiChoKE.txt");
+                Assert.IsTrue(result4.Count == 5);
+
+                var result5 = await myList.FindFilesAsync("*NODOCUMENTS*");
+                Assert.IsTrue(result5.Count == 0);
+
+                var result6 = await myList.FindFilesAsync("*");
+                Assert.IsTrue(result6.Count > 1); //just testing if the single asteriks works, should return more than one
+                                                  //also returns default sp file so count may vary per environment
+
+                var result7 = await myList.FindFilesAsync("*courgETte.txt");
+                Assert.IsTrue(result7.Count == 3);
+
+                var result8 = await myList.FindFilesAsync("*cucuMber.txT");
+                Assert.IsTrue(result8.Count == 2);
+
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task FindFilesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("FindFilesTest_LIST");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                }
+
+                // Add file to the list
+                using (MemoryStream ms = new())
+                {
+                    var sw = new StreamWriter(ms, System.Text.Encoding.Unicode);
+                    try
+                    {
+                        sw.Write("[Your name here]");
+                        sw.Flush();
+                        ms.Seek(0, SeekOrigin.Begin);
+
+                        myList.RootFolder.Files.Add($"367664-472-E-S01 - Artichoke.txt", ms);
+
+                    }
+                    finally
+                    {
+                        sw.Dispose();
+                    }
+                }
+
+                var result = myList.FindFiles("*E-s01*");
+                Assert.IsTrue(result.Count == 1);
+
+                await myList.DeleteAsync();
+            }
+        }
+
+        #region Event Receivers
+
+        [TestMethod]
+        public async Task GetListEventReceiversAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                Assert.IsNotNull(list.EventReceivers);
+                Assert.AreEqual(list.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await list.EventReceivers.AddAsync(eventReceiverOptions);
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.ItemAdding);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task GetListEventReceiversBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                await context.Web.LoadBatchAsync(p => p.EventReceivers);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(list.EventReceivers);
+                Assert.AreEqual(list.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListEventReceiverBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await list.EventReceivers.AddBatchAsync(eventReceiverOptions);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.ItemAdding);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventTypeExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverNameExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverUrlExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverName = "PnP Event Receiver Test"
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddListEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(l => l.EventReceivers);
+
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.ItemAdding,
+                    ReceiverName = "PnP Event Receiver Test",
+                    ReceiverUrl = "https://pnp.github.io",
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                await list.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        #endregion
+
+        #region Effective user permissions
+
+        [TestMethod]
+        public async Task GetEffectiveUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                var basePermissions = await list.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+
+                Assert.IsNotNull(basePermissions);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                var hasPermissions = await list.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
+
+                Assert.IsNotNull(hasPermissions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                var hasPermissions = await list.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
+            }
+        }
+
+        #endregion
+
+        #region Default column value tests
+
+        [TestMethod]
+        public async Task DefaultValueTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DefaultValueTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                        myList.Fields.AddText("MyField");
+                    }
+
+                    // Add some folders to put default values on
+                    var batch = context.NewBatch();
+                    myList.RootFolder.AddFolderBatch(batch, "Folder1");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder2");
+                    context.Execute(batch);
+
+                    // Set default values on these folders
+                    List<DefaultColumnValueOptions> defaultColumnValues = new()
+                    {
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder1",
+                            FieldInternalName = "MyField",
+                            DefaultValue = "F1"
+                        },
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder2",
+                            FieldInternalName = "MyField",
+                            DefaultValue = "F2"
+                        }
+                    };
+
+                    myList.SetDefaultColumnValues(defaultColumnValues);
+
+                    // Load the default values again
+                    var loadedDefaults = myList.GetDefaultColumnValues();
+
+                    // verify that each added value was actually added
+                    foreach(var addedValue in defaultColumnValues)
+                    {
+                        var foundValue = loadedDefaults.FirstOrDefault(p=>p.FolderRelativePath == addedValue.FolderRelativePath && 
+                                                                       p.DefaultValue == addedValue.DefaultValue && p.FieldInternalName == addedValue.FieldInternalName);
+                        Assert.IsTrue(foundValue != null);
+                    }
+
+                    // Clean the default values again
+                    myList.ClearDefaultColumnValues();
+
+                    // Load the default values again
+                    loadedDefaults = myList.GetDefaultColumnValues();
+
+                    Assert.IsFalse(loadedDefaults.Any());
+
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        #endregion
+
+        #region reindex tests
+        [TestMethod]
+        public async Task ReIndexListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ReIndexListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    // Reindex the list 
+                    myList.ReIndex();
+
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        Thread.Sleep(2000); 
+                    }
+
+                    // Reindex again
+                    myList.ReIndex();
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+        #endregion
     }
 }

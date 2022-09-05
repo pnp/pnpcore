@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.Change", Target = typeof(List), Get = "_api/web/lists/getbyid(guid'{Id}')/getchanges")]
     [SharePointType("SP.Change", Target = typeof(Folder), Get = "_api/web/getFolderById('{Id}')/getchanges")]
     [SharePointType("SP.Change", Target = typeof(ListItem), Get = "_api/web/lists/getbyid(guid'{List.Id}')/items({Id})/getchanges")]
-    internal partial class Change : TransientObject, IChange, IMetadataExtensible
+    internal class Change : TransientObject, IChange, IMetadataExtensible
     {
         public IChangeToken ChangeToken { get => GetValue<IChangeToken>(); set => SetValue(value); }
 

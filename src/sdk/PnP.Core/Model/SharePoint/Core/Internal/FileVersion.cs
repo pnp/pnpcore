@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.FileVersion", Target = typeof(File), Uri = "_api/Web/getFileById('{Parent.Id}')/versions/getById({Id})", LinqGet = "_api/Web/getFileById('{Parent.Id}')/versions")]
     [SharePointType("SP.FileVersion", Target = typeof(ListItemVersion), Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Item.Id})/versions/getbyid({Parent.Id})/fileversion")]
-    internal partial class FileVersion : BaseDataModel<IFileVersion>, IFileVersion
+    internal sealed class FileVersion : BaseDataModel<IFileVersion>, IFileVersion
     {
         #region Properties
         public string CheckInComment { get => GetValue<string>(); set => SetValue(value); }
@@ -23,7 +23,9 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IsCurrentVersion { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int Size { get => GetValue<int>(); set => SetValue(value); }
+        // We're using the Length property as that's Int64 while Size is Int32 resulting in errors whith 2GB plus files
+        [SharePointProperty("Length")]
+        public long Size { get => GetValue<long>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }
 

@@ -1,9 +1,0 @@
---batchresponse_535ce48d-fc9a-4c16-9e5a-16c06386b079
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CopyFileByPath":null}}
---batchresponse_535ce48d-fc9a-4c16-9e5a-16c06386b079--

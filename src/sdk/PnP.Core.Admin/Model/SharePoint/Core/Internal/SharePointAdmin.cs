@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SharePointAdmin : ISharePointAdmin
+    internal sealed class SharePointAdmin : ISharePointAdmin
     {
         private readonly PnPContext context;
 
@@ -22,7 +25,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<Uri> GetTenantAdminCenterUriAsync()
+        public async Task<Uri> GetTenantAdminCenterUriAsync(VanityUrlOptions vanityUrlOptions = null)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var uri = context.Web.Url;
@@ -36,8 +39,17 @@ namespace PnP.Core.Admin.Model.SharePoint
             else
             {
                 // Tenant is using vanity urls
-                // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                if (vanityUrlOptions == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                if (vanityUrlOptions.AdminCenterUri == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                return vanityUrlOptions.AdminCenterUri;
             }
         }
 
@@ -57,13 +69,13 @@ namespace PnP.Core.Admin.Model.SharePoint
             return new Uri($"https://{uriParts[0]}-admin.{string.Join(".", uriParts.Skip(1))}");
         }
 
-        public Uri GetTenantAdminCenterUri()
+        public Uri GetTenantAdminCenterUri(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantAdminCenterUriAsync().GetAwaiter().GetResult();
+            return GetTenantAdminCenterUriAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<Uri> GetTenantPortalUriAsync()
+        public async Task<Uri> GetTenantPortalUriAsync(VanityUrlOptions vanityUrlOptions = null)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var uri = context.Web.Url;
@@ -77,8 +89,17 @@ namespace PnP.Core.Admin.Model.SharePoint
             else
             {
                 // Tenant is using vanity urls
-                // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                if (vanityUrlOptions == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                if (vanityUrlOptions.PortalUri == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                return vanityUrlOptions.PortalUri;
             }
         }
 
@@ -98,13 +119,13 @@ namespace PnP.Core.Admin.Model.SharePoint
             return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
         }
 
-        public Uri GetTenantPortalUri()
+        public Uri GetTenantPortalUri(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantPortalUriAsync().GetAwaiter().GetResult();
+            return GetTenantPortalUriAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<Uri> GetTenantMySiteHostUriAsync()
+        public async Task<Uri> GetTenantMySiteHostUriAsync(VanityUrlOptions vanityUrlOptions = null)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var uri = context.Web.Url;
@@ -118,14 +139,23 @@ namespace PnP.Core.Admin.Model.SharePoint
             else
             {
                 // Tenant is using vanity urls
-                // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                if (vanityUrlOptions == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                if (vanityUrlOptions.MySiteHostUri == null)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_MissingVanityUrlDetails);
+                }
+
+                return vanityUrlOptions.MySiteHostUri;
             }
         }
 
-        public Uri GetTenantMySiteHostUri()
+        public Uri GetTenantMySiteHostUri(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantMySiteHostUriAsync().GetAwaiter().GetResult();
+            return GetTenantMySiteHostUriAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         internal static Uri GetTenantMySiteHostUriForStandardTenants(Uri uri)
@@ -144,10 +174,10 @@ namespace PnP.Core.Admin.Model.SharePoint
             return new Uri($"https://{uriParts[0]}-my.{string.Join(".", uriParts.Skip(1))}");
         }
 
-        public async Task<PnPContext> GetTenantAdminCenterContextAsync()
+        public async Task<PnPContext> GetTenantAdminCenterContextAsync(VanityUrlOptions vanityUrlOptions = null)
         {
             // We've already established a connection to the SharePoint Tenant admin center site
-            var tenantAdminCenterUri = await GetTenantAdminCenterUriAsync().ConfigureAwait(false);
+            var tenantAdminCenterUri = await GetTenantAdminCenterUriAsync(vanityUrlOptions).ConfigureAwait(false);
             if (context.Uri == tenantAdminCenterUri)
             {
                 return context;
@@ -156,42 +186,37 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await context.CloneAsync(tenantAdminCenterUri).ConfigureAwait(false);
         }
 
-        public PnPContext GetTenantAdminCenterContext()
+        public PnPContext GetTenantAdminCenterContext(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantAdminCenterContextAsync().GetAwaiter().GetResult();
+            return GetTenantAdminCenterContextAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISharePointUser>> GetTenantAdminsAsync()
+        public async Task<List<ISharePointUser>> GetTenantAdminsAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            using (var tenantAdminCenterContext = await GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            using (var tenantAdminCenterContext = await GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                return await tenantAdminCenterContext.Web.SiteUsers.Where(p => p.IsSiteAdmin == true).ToListAsync().ConfigureAwait(false);    
+                return await tenantAdminCenterContext.Web.SiteUsers.Where(p => p.IsSiteAdmin == true).ToListAsync().ConfigureAwait(false);
             }
         }
 
-        public List<ISharePointUser> GetTenantAdmins()
+        public List<ISharePointUser> GetTenantAdmins(VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantAdminsAsync().GetAwaiter().GetResult();
+            return GetTenantAdminsAsync(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         public async Task<bool> IsCurrentUserTenantAdminAsync()
         {
-            //TODO: consider replacing with IsCurrentUserTenantAdminViaGraph approach used in PnP Framework. Requires option to pass along custom http headers
+            var result = await (context.Web.WithHeaders(new Dictionary<string, string>() { { "ConsistencyLevel", "eventual" } }) as Web).RawRequestAsync(
+                new ApiCall("me/memberOf?$count=true&$search=\"displayName: Company Administrator\" OR \"displayName: Global Administrator\"", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
-            try
+            var json = JsonSerializer.Deserialize<JsonElement>(result.Json);
+
+            if (json.GetProperty("value").ValueKind != JsonValueKind.Undefined)
             {
-                // Get current tenant admin center admins...might throw an error if the current user does not have access to SharePoint Admin
-                var admins = await GetTenantAdminsAsync().ConfigureAwait(false);
-                // Get information about the current user
-                var currentUser = await context.Web.GetCurrentUserAsync().ConfigureAwait(false);
-                return admins.FirstOrDefault(p => p.LoginName.Equals(currentUser.LoginName)) != null;                
+                // "62e90394-69f5-4237-9190-012177145e10" = global tenant admin role template id
+                return json.GetProperty("value").EnumerateArray().Any(r => r.GetProperty("roleTemplateId").GetString() == "62e90394-69f5-4237-9190-012177145e10");
             }
-            catch(PnPException ex)
-            {
-                // When lacking permissions we'll end up here, eat the exceptions and assume user is not an admin
-                context.Logger?.LogInformation(PnPCoreAdminResources.Log_Information_ExceptionWhileGettingSharePointAdmins, ex.ToString());
-                return false;
-            }
+            return false;
         }
 
         public bool IsCurrentUserTenantAdmin()
@@ -199,55 +224,77 @@ namespace PnP.Core.Admin.Model.SharePoint
             return IsCurrentUserTenantAdminAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<Uri> GetTenantAppCatalogUriAsync()
+        public async Task<ITenantProperties> GetTenantPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SP_TenantSettings_Current", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
-
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("CorporateCatalogUrl");
-
-            if (root.ValueKind == JsonValueKind.String)
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                return new Uri(root.GetString());
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new GetTenantPropertiesRequest()
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                (result.ApiCall.CSOMRequests[0].Result as IDataModelWithContext).PnPContext = tenantAdminContext;
+
+                return result.ApiCall.CSOMRequests[0].Result as ITenantProperties;
+            }
+        }
+
+        public ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        #region Get Search Configuration
+
+        public async Task<string> GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription) });
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+                return result.ApiCall.CSOMRequests[0].Result.ToString();
+            }
+        }
+
+        public string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantSearchConfigurationXmlAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)
+        {
+            var searchConfiguration = await GetTenantSearchConfigurationXmlAsync(vanityUrlOptions).ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantSearchConfigurationManagedPropertiesAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task SetTenantSearchConfigurationXmlAsync(string configuration, VanityUrlOptions vanityUrlOptions = null)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
             }
 
-            return null;
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription, configuration) });
+
+                await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
         }
 
-        public Uri GetTenantAppCatalogUri()
+        public void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetTenantAppCatalogUriAsync().GetAwaiter().GetResult();
+            SetTenantSearchConfigurationXmlAsync(configuration, vanityUrlOptions).GetAwaiter().GetResult();
         }
-
-        public async Task<bool> EnsureTenantAppCatalogAsync()
-        {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/web/EnsureTenantAppCatalog(callerId='pnpcoresdk')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("EnsureTenantAppCatalog");
-            return root.GetBoolean();
-        }
-
-        public bool EnsureTenantAppCatalog()
-        {
-            return EnsureTenantAppCatalogAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false)
-        {
-            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin).ConfigureAwait(false);
-        }
-
-        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false)
-        {
-            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
-        }
-
-        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
-        {
-            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
-        }
-
-        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails()
-        {
-            return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
-        }
+        #endregion
     }
 }

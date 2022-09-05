@@ -1,9 +1,0 @@
---batchresponse_186aacf5-dd11-4749-995c-de8a8052cbe9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"69399214-4542-4f93-b658-328a712a834f"}}
---batchresponse_186aacf5-dd11-4749-995c-de8a8052cbe9--

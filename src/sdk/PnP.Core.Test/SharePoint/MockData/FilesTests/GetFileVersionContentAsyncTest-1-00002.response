@@ -1,9 +1,0 @@
---batchresponse_7aaa3e1f-30ca-49f0-85a4-77409cc23620
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a9966617-cf02-442b-b75e-4822c98b9200')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a9966617-cf02-442b-b75e-4822c98b9200')","etag":"\"2\"","type":"SP.List"},"RootFolder":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a9966617-cf02-442b-b75e-4822c98b9200')/RootFolder","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a9966617-cf02-442b-b75e-4822c98b9200')/RootFolder","type":"SP.Folder"},"ServerRelativeUrl":"/sites/prov-1/PNP_SDK_TEST_GetFileVersionContentAsyncTest","UniqueId":"af3b0f00-cec9-497f-a270-4c6c859bc766"},"Id":"a9966617-cf02-442b-b75e-4822c98b9200"}]}}
---batchresponse_7aaa3e1f-30ca-49f0-85a4-77409cc23620--

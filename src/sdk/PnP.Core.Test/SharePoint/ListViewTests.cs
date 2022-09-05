@@ -2,6 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -210,7 +211,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListViewSpecificBatch()
         {
-           //TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -257,7 +258,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.AsRequested().FirstOrDefault(o=>o.Title == viewTitle);
+                var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
                 Assert.IsNotNull(newView);
                 Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 
@@ -267,5 +268,21 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetViewByNewGuidTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByServerRelativeUrl($"{context.Uri.LocalPath}/Shared Documents", p => p.Views);
+                var requestedView = list.Views.AsRequested().First();
+
+                var idString = requestedView.Id.ToString();
+                var view = list.Views.FirstOrDefault(v => v.Id == new Guid(idString));
+
+                Assert.IsTrue(view != null);
+            }
+        }
     }
 }

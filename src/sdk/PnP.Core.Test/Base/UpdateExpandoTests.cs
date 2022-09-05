@@ -52,7 +52,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 if (myList != null)
-                { 
+                {
                     try
                     {
                         // get items from the list

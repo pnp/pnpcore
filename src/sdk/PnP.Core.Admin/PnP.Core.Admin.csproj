@@ -1,38 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-	  <LangVersion>8.0</LangVersion>
-	  <RootNamespace>PnP.Core.Admin</RootNamespace>
-	  <AssemblyName>PnP.Core.Admin</AssemblyName>
-	  <Version>0.1.0</Version>
-	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-	  <Copyright>PnP 2021</Copyright>
-	  <Company>PnP</Company>
-	  <Authors>PnP</Authors>
-	  <Description>This library adds admin related functionality to PnP Core SDK</Description>
-	  <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
-	  <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
-	  <RepositoryType>git</RepositoryType>
-	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
-	  <!-- Generate symbol packages (.snupkg) -->
-	  <!-- You must publish both packages, the package that contains the dll (.nupkg) and the one that contains the symbols (.snupkg) -->
-	  <IncludeSymbols>true</IncludeSymbols>
-	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	  <EmbedUntrackedSources>true</EmbedUntrackedSources>
-	  <Deterministic>true</Deterministic>
-	  <Configurations>Debug;Release</Configurations>
-	  <PackageIcon>nugeticon.png</PackageIcon>
-	  <SignAssembly>true</SignAssembly>
-	  <AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
-	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<DefineConstants>NETSTANDARD2_0</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<DefineConstants>NET5_0</DefineConstants>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
+		<LangVersion>8.0</LangVersion>
+		<RootNamespace>PnP.Core.Admin</RootNamespace>
+		<AssemblyName>PnP.Core.Admin</AssemblyName>
+		<Version>1.7.0</Version>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Copyright>PnP 2022</Copyright>
+		<Company>PnP</Company>
+		<Authors>PnP</Authors>
+		<Description>This library adds admin related functionality to PnP Core SDK</Description>
+		<PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- Generate symbol packages (.snupkg) -->
+		<!-- You must publish both packages, the package that contains the dll (.nupkg) and the one that contains the symbols (.snupkg) -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<Deterministic>true</Deterministic>
+		<Configurations>Debug;Release</Configurations>
+		<PackageIcon>nugeticon.png</PackageIcon>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -50,17 +43,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<None Include="nugeticon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
 
@@ -69,18 +66,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="PnPCoreAdminResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>PnPCoreAdminResources.resx</DependentUpon>
-	  </Compile>
+		<Compile Update="PnPCoreAdminResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>PnPCoreAdminResources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="PnPCoreAdminResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>PnPCoreAdminResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="PnPCoreAdminResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>PnPCoreAdminResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
-	
+
 </Project>

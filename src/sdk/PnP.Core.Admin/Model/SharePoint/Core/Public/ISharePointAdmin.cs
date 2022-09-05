@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -14,62 +15,72 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Returns the SharePoint tenant admin center url (e.g. https://contoso-admin.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant admin center url</returns>
-        Task<Uri> GetTenantAdminCenterUriAsync();
+        Task<Uri> GetTenantAdminCenterUriAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the SharePoint tenant admin center url (e.g. https://contoso-admin.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant admin center url</returns>
-        Uri GetTenantAdminCenterUri();
+        Uri GetTenantAdminCenterUri(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the SharePoint tenant portal url (e.g. https://contoso.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant portal url</returns>
-        Task<Uri> GetTenantPortalUriAsync();
+        Task<Uri> GetTenantPortalUriAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the SharePoint tenant portal url (e.g. https://contoso.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant portal url</returns>
-        Uri GetTenantPortalUri();
+        Uri GetTenantPortalUri(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the SharePoint tenant my site host url (e.g. https://contoso-my.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant my site host url</returns>
-        Task<Uri> GetTenantMySiteHostUriAsync();
+        Task<Uri> GetTenantMySiteHostUriAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns the SharePoint tenant my site host url (e.g. https://contoso-my.sharepoint.com)
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>SharePoint tenant my site host url</returns>
-        Uri GetTenantMySiteHostUri();
+        Uri GetTenantMySiteHostUri(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a <see cref="PnPContext"/> for the tenant's SharePoint admin center site
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns><see cref="PnPContext"/> for the tenant's SharePoint admin center</returns>
-        Task<PnPContext> GetTenantAdminCenterContextAsync();
+        Task<PnPContext> GetTenantAdminCenterContextAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a <see cref="PnPContext"/> for the tenant's SharePoint admin center site
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns><see cref="PnPContext"/> for the tenant's SharePoint admin center</returns>
-        PnPContext GetTenantAdminCenterContext();
+        PnPContext GetTenantAdminCenterContext(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of <see cref="ISharePointUser"/>s who are SharePoint Online Tenant admin
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>List of SharePoint Online Tenant admins</returns>
-        Task<List<ISharePointUser>> GetTenantAdminsAsync();
+        Task<List<ISharePointUser>> GetTenantAdminsAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Returns a list of <see cref="ISharePointUser"/>s who are SharePoint Online Tenant admin
         /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>List of SharePoint Online Tenant admins</returns>
-        List<ISharePointUser> GetTenantAdmins();
+        List<ISharePointUser> GetTenantAdmins(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Checks if the current user is SharePoint Online tenant admin
@@ -84,68 +95,64 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool IsCurrentUserTenantAdmin();
 
         /// <summary>
-        /// Returns the URI of the current tenant app catalog
+        /// Gets the properties of this tenant
         /// </summary>
-        /// <returns></returns>
-        Task<Uri> GetTenantAppCatalogUriAsync();
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Properties of the tenant</returns>
+        Task<ITenantProperties> GetTenantPropertiesAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Returns the URI of the current tenant app catalog
+        /// Gets the properties of this tenant
         /// </summary>
-        /// <returns></returns>
-        Uri GetTenantAppCatalogUri();
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Properties of the tenant</returns>
+        ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null);
+
+        #region Get Search Configuration
 
         /// <summary>
-        /// Ensures there's a tenant app catalog, if not present it will be created
+        /// Gets the search configuration of the tenant
         /// </summary>
-        /// <returns>True if the app catalog was created, false if the app catalog already existed</returns>
-        Task<bool> EnsureTenantAppCatalogAsync();
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Search configuration XML</returns>
+        Task<string> GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Ensures there's a tenant app catalog, if not present it will be created
+        /// Gets the search configuration of the tenant
         /// </summary>
-        /// <returns>True if the app catalog was created, false if the app catalog already existed</returns>
-        bool EnsureTenantAppCatalog();
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>Search configuration XML</returns>
+        string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Returns the list of site collections. When using application permissions or a delegated permissions 
-        /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
-        /// accessible by the requesting user are returned. Under the covers this method uses different approaches:
-        /// - Application permissions: using the Sites endpoint via Graph
-        /// - Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site
-        /// - Delegated permissions, non admin: using the Search endpoint via Graph
+        /// Gets the managed properties from the search configuration of the tenant
         /// </summary>
-        /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
-        /// <returns>A list of site collections</returns>
-        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false);
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>List of managed properties</returns>
+        Task<List<IManagedProperty>> GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Returns the list of site collections. When using application permissions or a delegated permissions 
-        /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
-        /// accessible by the requesting user are returned. Under the covers this method uses different approaches:
-        /// - Application permissions: using the Sites endpoint via Graph
-        /// - Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site
-        /// - Delegated permissions, non admin: using the Search endpoint via Graph
+        /// Gets the managed properties from the search configuration of the tenant
         /// </summary>
-        /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
-        /// <returns>A list of site collections</returns>
-        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false);
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>List of managed properties</returns>
+        List<IManagedProperty> GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Returns a list of the site collections in the current tenant including details about the site. This method
-        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
-        /// have the proper permissions
+        /// Sets the search configuration for the tenant
         /// </summary>
-        /// <returns>A list of site collections with details</returns>
-        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync();
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetTenantSearchConfigurationXml"/> to apply</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        Task SetTenantSearchConfigurationXmlAsync(string configuration, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
-        /// Returns a list of the site collections in the current tenant including details about the site. This method
-        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
-        /// have the proper permissions
+        /// Sets the search configuration for the tenant
         /// </summary>
-        /// <returns>A list of site collections with details</returns>
-        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
+        /// <param name="configuration">Search configuration, obtained via <see cref="GetTenantSearchConfigurationXml"/> to apply</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null);
+
+        #endregion
 
     }
 }

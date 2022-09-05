@@ -219,6 +219,40 @@ page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns
 await page.SaveAsync("MyPage.aspx");
 ```
 
+### Updating the page Author, Editor, Created and Modified system properties
+
+A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties of a page, which is allowed via the `UpdateOverWriteVersion` methods.
+
+> [!Note]
+> The Azure AD application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
+
+```csharp
+// Load the page you want to update
+var pages = await context.Web.GetPagesAsync("mypage.aspx");
+var myPage = pages.AsEnumerable().First();
+
+// Load the page file with it's associated list item
+var pageFile = await myPage.GetPageFileAsync(p => p.ListItemAllFields);
+
+// Load the Author and Editor fields                
+var author = myPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+var editor = myPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+// Load the user to set as Author/Editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+// Define the new date for Created/Modified
+var newDate = new DateTime(2020, 10, 20);
+
+// Update the properties
+pageFile.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+pageFile.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+pageFile.ListItemAllFields["Created"] = newDate;
+pageFile.ListItemAllFields["Modified"] = newDate;
+
+// Persist the changes
+await pageFile.ListItemAllFields.UpdateOverwriteVersionAsync();
+```
+
 ## Deleting a page
 
 You can delete pages via the [DeleteAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DeleteAsync):

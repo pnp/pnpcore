@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
 {
-    internal class TaxonomyFieldUpdateStrategy : IFieldUpdateStrategy
+    internal sealed class TaxonomyFieldUpdateStrategy : IFieldUpdateStrategy
     {
         internal IIdProvider IdProvider { get; private set; }
 
@@ -51,7 +51,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
                 Parameters = fld.GetRequestParameters(identity.Id)
             };
 
-            return new List<ActionObjectPath>(){ 
+            return new List<ActionObjectPath>(){
                 new ActionObjectPath()
                 {
                     Action = setFieldValueByValue,

@@ -14,17 +14,31 @@ namespace PnP.Core.Model.SharePoint
         /// No move operation specified. The value = 0.
         /// </summary>
         None = 0,
+        
         /// <summary>
         /// Overwrite a file with the same name if it exists. The value = 1.
         /// </summary>
         Overwrite = 1,
+        
         /// <summary>
         ///  Complete the move operation even if supporting files are separated from the file. The value = 8.
         /// </summary>
         AllowBrokenThickets = 8,
+
         /// <summary>
-        /// 
+        /// Do not require approval permissions for move if there are no published versions for the document
         /// </summary>
-        BypassApprovePermission
+        BypassApprovePermission = 64,
+
+        /// <summary>
+        /// Ignore Shared Lock constraints when moving this file. If one or more users have a valid Shared Lock,
+        /// bypass the lock check during the move operation.
+        /// </summary>
+        BypassSharedLock = 256,
+
+        /// <summary>
+        /// Boolean specifying whether to retain the source of the move's editor and modified by datetime.
+        /// </summary>
+        RetainEditorAndModifiedOnMove = 2048
     }
 }

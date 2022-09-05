@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -40,7 +41,7 @@ namespace PnP.Core.Model.Security
         public bool CanCurrentUserViewMembership { get; set; }
 
         /// <summary>
-        /// Group description
+        /// Group description. Note that HTML tags will be stripped and that the max length of the description will be limited to 511 characters
         /// </summary>
         public string Description { get; set; }
 
@@ -52,15 +53,18 @@ namespace PnP.Core.Model.Security
         /// <summary>
         /// Group owner title
         /// </summary>
-        public string OwnerTitle { get; set; }
+        public string OwnerTitle { get; }
 
         /// <summary>
         /// Email configuration for the group join or leave operations
         /// </summary>
-        public bool RequestToJoinLeaveEmailSetting { get; set; }
+        public string RequestToJoinLeaveEmailSetting { get; set; }
 
         /// <summary>
         /// Members of this group
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ISharePointUserCollection Users { get; }
 
@@ -166,5 +170,43 @@ namespace PnP.Core.Model.Security
         /// <param name="names"></param>
         /// <returns></returns>
         public Task<bool> RemoveRoleDefinitionsAsync(params string[] names);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwner(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerAsync(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwnerBatch(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerBatchAsync(int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="batch">Batch on which to execute the request</param>
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public void SetUserAsOwnerBatch(Batch batch, int userId);
+
+        /// <summary>
+        /// Sets a user as owner of the group.
+        /// <param name="batch">Batch on which to execute the request</param>
+        /// <param name="userId">Id of the user to set as owner</param>
+        /// </summary>
+        public Task SetUserAsOwnerBatchAsync(Batch batch, int userId);
     }
 }

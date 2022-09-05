@@ -33,7 +33,7 @@ namespace PnP.Core.Test.Base
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
                     PnPConstants.MicrosoftGraphBaseUri,
-                    new string[] { "Group.ReadWrite.All" }).ConfigureAwait(true);
+                    new string[] { "Group.ReadWrite.All" }).ConfigureAwait(false);
 
                 Assert.IsNotNull(accessToken);
             }
@@ -48,7 +48,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
-                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(true);
+                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(false);
 
                 Assert.IsNotNull(accessToken);
             }
@@ -62,7 +62,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetLiveContextAsync())
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
-                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(true);
+                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(false);
 
                 Assert.IsNotNull(accessToken);
             }
@@ -77,7 +77,7 @@ namespace PnP.Core.Test.Base
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
                     PnPConstants.MicrosoftGraphBaseUri,
-                    new string[] { "Group.ReadWrite.All" }).ConfigureAwait(true);
+                    new string[] { "Group.ReadWrite.All" }).ConfigureAwait(false);
 
                 Assert.IsNotNull(accessToken);
             }

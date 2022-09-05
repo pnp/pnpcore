@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Services.Core;
 
 namespace PnP.Core.Services
 {
     /// <summary>
     /// Retry handler for SharePoint REST requests
     /// </summary>
-    internal class SharePointRestRetryHandler : RetryHandlerBase
+    internal sealed class SharePointRestRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public SharePointRestRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)
+        public SharePointRestRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
         {
             Configure();
         }

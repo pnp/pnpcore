@@ -13,17 +13,34 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 ## Reading list items
 
-The PnP Core SDK supports multiple ways to read list items and what approach to use depends on your list size and your use case. For a large list you want to consider [using paging](basics-getdata-paging.md) and it's also recommended to write a query that only returns the items you really need versus loading all list items. When writing custom queries you also should consider only returning the list fields you need in your application, the lesser rows and fields to return the faster the response will come from the server.
+The PnP Core SDK supports multiple ways to read list items and what approach to use depends on your list size and your use case. For a large list you need to use a paged approach and it's also recommended to write a query that only returns the items you really need versus loading all list items. When writing custom queries you also should consider only returning the list fields you need in your application, the lesser rows and fields to return the faster the response will come from the server.
 
 > [!Important]
-> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
+> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
 
-### Getting all list items
+Use below information to help pick the best option for reading list items.
 
-If you simply want to load all list items and your list is not containing a lot of items you load the [Items property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) of your list.
+### No need to read 'system properties' like FileLeafRef, FileDirRef and you've no need to filter list items
+
+Requirements | Recommended approach
+-------------|---------------------
+List item count <= 100 | [Option A](#a-getting-list-items-max-100-items): expand the items via a `Get` or `Load` method
+List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limit): iterate over the list items using implicit paging
+
+### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields
+
+Requirements | Recommended approach
+-------------|---------------------
+You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
+You want to have more details on the list item properties (e.g. author name instead of only the author id) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
+
+### A. Getting list items (max 100 items)
+
+If you simply want to load all list items in a small list (< 100 items) you load the [Items property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) of your list.
 
 ```csharp
-// Assume the fields where not yet loaded, so loading them with the list
+// Assume the fields where not yet loaded, so loading them with the list.
+// Also expand the items when loading the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
@@ -43,16 +60,84 @@ foreach (var listItem in myList.Items.AsRequested())
 }
 ```
 
-> [!Note]
-> When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+If you'd like to load list item properties then this is possible via `QueryProperties`:
 
-### Getting list items via a CAML query
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+// Also expand the items when loading the list, including specific item properties
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+            p => p.Items.QueryProperties(p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+                                                                                p => p.RoleDefinitions)), 
+            p => p.Fields.QueryProperties(p => p.InternalName, 
+                                          p => p.FieldTypeKind, 
+                                          p => p.TypeAsString, 
+                                          p => p.Title));
+```
+
+> [!Note]
+>
+> - When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
+> - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
+
+### B. Getting list items via paging (no item limit)
+
+If your list contains more than 100 items and you don't have a need to specify a query to limit the returned list items then iterating over the list item collection is the recommended model as that will automatically page the list items using a configurable page size:
+
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+var myList = await context.Web.Lists.GetByTitleAsync("My List", p => p.Title,  
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
+// Do a paged retrieval of the list items
+await foreach(var listItem in myList.Items)
+{
+    // Do something with the list item
+    if (listItem["MyStatus"].ToString() == "Pending")
+    {
+      // take action
+    }
+}
+```
+
+If you'd like to load list item properties then this is possible via `QueryProperties`:
+
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
+// Do a paged retrieval (non async sample) of the list items with additional collection loads
+foreach(var listItem in myList.Items.QueryProperties(
+                                     p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+                                                                           p => p.RoleDefinitions))
+{
+    // Do something with the list item
+    if (listItem["MyStatus"].ToString() == "Pending")
+    {
+      // Do something with the list item and the per 
+      // item loaded RoleAssignments and RoleDefinitions
+    }
+}
+```
+
+> [!Note]
+>
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
+> - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
+
+### C. Getting list items via the LoadItemsByCamlQuery approach
 
 SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the [LoadItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_) on an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) for this purpose. When using this method you can either provide the CAML query directly or use the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class for more fine-grained control. If you use this class you typically would use the [ViewXml property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml), but also [FolderServerRelativeUrl](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl) is used a lot to scope the query to given folder in the list.
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
@@ -63,15 +148,17 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
 string viewXml = @"<View>
                     <ViewFields>
                       <FieldRef Name='Title' />
+                      <FieldRef Name='FileRef' />
                     </ViewFields>
                     <Query>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'><![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                    </View>";
 
 // Execute the query
@@ -79,72 +166,150 @@ await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true
-});
+}, p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions));
 
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
-    // Do something with the list item
+    // Do something with the list item and the per 
+    // item loaded RoleAssignments and RoleDefinitions
 }
 ```
 
-#### Using paging with CAML queries
+> [!Note]
+>
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
+> - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+> - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
 
-By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.
+#### Using paging with LoadItemsByCamlQuery
+
+By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class you can use CAML queries to load data in a paged manner. Below snippet loads all pages in memory and then iterates over the loaded items:
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
                                                                                    p => p.TypeAsString, 
                                                                                    p => p.Title));
 
-// Build a query that only returns the first 20 rows where the Title field starts with "Item1"
-string viewXml = @"<View>
-                    <ViewFields>
-                      <FieldRef Name='Title' />
-                    </ViewFields>
-                    <Query>
-                      <Where>
-                        <BeginsWith>
-                          <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
-                        </BeginsWith>
-                      </Where>
-                    </Query>
-                    <RowLimit>20</RowLimit>
-                   </View>";
+int pageSize = 500;
+// Filter on files and load 'system' properties like FileRef
+string viewXml = @$"<View>
+    <ViewFields>
+      <FieldRef Name='Title' />
+      <FieldRef Name='FileRef' />
+      <FieldRef Name='FileLeafRef' />
+      <FieldRef Name='FSObjType'/>
+      <FieldRef Name='File_x0020_Size' />
+    </ViewFields>
+    <Query>
+        <Where>
+        <Eq>
+            <FieldRef Name='FSObjType'/>
+            <Value Type='Integer'>0</Value>
+        </Eq>
+        </Where>
+    </Query>
+    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+    <RowLimit>{pageSize}</RowLimit>
+    </View>";
 
-// Execute the query loading the first 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+int pages = 0;
+while (paging)
 {
-    ViewXml = viewXml,
-    DatesInUtc = true
-});
+    // Execute the query
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections (e.g. RoleAssignments)
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+          p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p => p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p => p.HasUniqueRoleAssignments);
 
-// Execute the query loading the next 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
-{
-    ViewXml = viewXml,
-    DatesInUtc = true,
-    PagingInfo = $"Paged=TRUE&p_ID={myList.Items.Last().Id}"
-});
+    pages++;
 
-// Iterate over the retrieved list items
+    if (myList.Items.Length == pages * pageSize)
+    {
+        nextPage = $"Paged=TRUE&p_ID={myList.Items.AsRequested().Last().Id}";
+    }
+    else
+    {
+        paging = false;
+    }
+}
+
+// Iterate over ALL the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
-    // Do something with the list item
+    // Do something with the list item and the per 
+    // item loaded RoleAssignments and RoleDefinitions
+    var fileSize = listItem.FieldValuesAsText["File_x005f_x0020_x005f_Size"];
 }
 ```
 
 > [!Note]
 >
-> - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.Last().Id}&p_Title=${list2.Items.Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
-> - If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned when doing a CAML query using the `LoadItemsByCamlQuery` methods, the `LoadListDataAsStream` methods however do support a CAML query that specifies a system property in the `ViewFields`
+> - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.AsRequested().Last().Id}&p_Title=${list2.Items.AsRequested().Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
 
-### Using the ListDataAsStream approach
+Sometimes loading all pages in memory is not what you need (e.g. due to memory/performance constraints) and you'd rather want to read a page, process it and then read the next page. This can be done by clearing the loaded items collection while paging as shown in this sample:
+
+```csharp
+bool paging = true;
+string nextPage = null;
+int pages = 0;
+int totalItemsLoaded = 0;
+while (paging)
+{
+    // Clear the previous page (if any)
+    myList.Items.Clear();
+
+    // Execute the query, this populates a page of list items 
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections (e.g. RoleAssignments)
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+          p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p => p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p => p.HasUniqueRoleAssignments);
+
+    pages++;
+    totalItemsLoaded = totalItemsLoaded + myList.Items.Length;
+
+    if (totalItemsLoaded == pages * pageSize)
+    {
+        nextPage = $"Paged=TRUE&p_ID={myList.Items.AsRequested().Last().Id}";
+    }
+    else
+    {
+        paging = false;
+    }
+
+    // Iterate over the retrieved page of list items
+    foreach (var listItem in myList.Items.AsRequested())
+    {        
+    }
+}
+```
+
+### D. Using the ListDataAsStream approach
 
 Using the [LoadListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_) gives you the most control over how to query the list and what data to return. Using this method is similar to the above described [LoadItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_) as you typically specify a [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) query when using this method. To configure the input of this method you need to use the [RenderListDataOptions class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html). Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the [RenderOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions) property.
 
@@ -166,10 +331,11 @@ string viewXml = @"<View>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit>5</RowLimit>
                    </View>";
 
@@ -188,6 +354,13 @@ foreach (var listItem in myList.Items.AsRequested())
     // Do something with the list item
 }
 ```
+
+> [!Note]
+>
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
+> - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+> - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
 
 #### Using paging with ListDataAsStream
 
@@ -209,10 +382,11 @@ string viewXml = @"<View>
                       <Where>
                         <BeginsWith>
                           <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
+                          <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>20</RowLimit>
                    </View>";
 
@@ -242,6 +416,41 @@ while (paging)
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
+}
+```
+
+Sometimes loading all pages in memory is not what you need (e.g. due to memory/performance constraints) and you'd rather want to read a page, process it and then read the next page. This can be done by clearing the loaded items collection while paging as shown in this sample:
+
+```csharp
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+while (paging)
+{
+  // Clear the previous page (if any)
+    myList.Items.Clear();
+
+    // Execute the query, this populates a page of list items 
+    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    {
+        ViewXml = viewXml,
+        RenderOptions = RenderListDataOptionsFlags.ListData,
+        Paging = nextPage ?? null,
+    }).ConfigureAwait(false);
+
+    if (output.ContainsKey("NextHref"))
+    {
+        nextPage = output["NextHref"].ToString().Substring(1);
+    }
+    else
+    {
+        paging = false;
+    }
+
+    // Iterate over the retrieved page of list items
+    foreach (var listItem in myList.Items.AsRequested())
+    {
+    }
 }
 ```
 
@@ -286,6 +495,10 @@ for (int i = 0; i < 20; i++)
 await context.ExecuteAsync();
 ```
 
+> [!Note]
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+
 ## Updating list items
 
 Updating a list item comes down to updating the field values followed by calling an [IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html) Update method such as [UpdateAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync). Depending on how you want to do the update you do have alternative methods:
@@ -317,6 +530,51 @@ addedItem["Field A"] = 100;
 await addedItem.UpdateAsync();
 ```
 
+> [!Note]
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+
+### Updating the list item Author, Editor, Created and Modified system properties
+
+A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties, which is allowed via the `UpdateOverWriteVersion` methods.
+
+> [!Note]
+> The Azure AD application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
+
+```csharp
+// Load the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Items,
+                                                     p => p.Fields.QueryProperties(
+                                                       p => p.InternalName, 
+                                                       p => p.FieldTypeKind, 
+                                                       p => p.TypeAsString, 
+                                                       p => p.Title));
+
+// Grab first item
+var firstItem = myList.Items.AsRequested().FirstOrDefault();
+if (firstItem != null)
+{
+    // Load the Author and Editor fields
+    var author = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+    var editor = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+    // Load the user to set as Author/Editor
+    var currentUser = await context.Web.GetCurrentUserAsync();
+    // Define the new date for Created/Modified
+    var newDate = new DateTime(2020, 10, 20);
+
+    // Update the properties
+    firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
+    firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);
+    firstItem.Values["Created"] = newDate;
+    firstItem.Values["Modified"] = newDate;
+
+    // Persist the changes
+    await firstItem.UpdateOverwriteVersionAsync();
+}
+```
+
 ## Deleting list items
 
 Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one or more list items in a single server roundtrip. Batching is preferred if you need to delete multiple list items.
@@ -338,6 +596,10 @@ foreach (var listItem in myList.Items.AsRequested())
 // Execute the batch
 await context.ExecuteAsync();
 ```
+
+## Sharing a list item
+
+A list can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](./sharing-listitems.md) to learn more on how you can share a list item.
 
 ## Getting changes for a list item
 

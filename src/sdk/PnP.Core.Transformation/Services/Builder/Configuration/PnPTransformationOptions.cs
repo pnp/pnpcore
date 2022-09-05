@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PnP.Core.Transformation.Services.Builder.Configuration
+﻿namespace PnP.Core.Transformation.Services.Builder.Configuration
 {
     /// <summary>
     /// Options for configuring PnP Core SDK
@@ -17,6 +14,11 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         /// Defines the connection string for the configured persistence provider
         /// </summary>
         public string PersistenceProviderConnectionString { get; set; }
+
+        /// <summary>
+        /// Defines the path where to store logs, if any
+        /// </summary>
+        public string LogStoragePath { get; set; }
 
         // TODO: Here we can configure all the "generic" configuration settings for the engine
     }

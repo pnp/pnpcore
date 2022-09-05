@@ -215,38 +215,19 @@ namespace Consumer
 
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
-                    // We can retrieve items of a specific list 
-                    // eventually partitioning the results
-
-                    //TODO: Disabled pending issue with paging.
-
-                    //var itemsQuery = (from i in context.Web.Lists.GetByTitle("Site Assets").Items
-                    //                  select i).Take(2).Skip(1);
-
-                    //Console.ForegroundColor = ConsoleColor.Yellow;
-                    //Console.WriteLine("===LINQ: Retrieve specific list with partitioned items===");
-                    //foreach (var item in itemsQuery)
-                    //{
-                    //    Console.WriteLine($"Item with title '{item.Title}' has ID: {item.Id}");
-                    //}
-                    //Console.ResetColor();
-                }
-
-                using (var context = pnpContextFactory.Create("DemoSite"))
-                {
                     // Or we can retrieve a specific item
-                    // TODO: Issue with Cascading sychronous loads
-                    //var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
+                    var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
 
-                    //Console.ForegroundColor = ConsoleColor.Yellow;
-                    //Console.WriteLine("===LINQ: Retrieve list item by id===");
-                    //Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
-                    //Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("===LINQ: Retrieve list item by id===");
+                    Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
+                    Console.ResetColor();
                 }
 
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific document from a library
+                    // IMPORTANT: ensure you've choosen an existing library and have a document for which the title property is set correctly
                     var document = context.Web.Lists.GetByTitle("Site Assets").Items
                         .QueryProperties(i => i.Id, i => i.Title)
                         .Where(i => i.Title == "__siteIcon__.png")

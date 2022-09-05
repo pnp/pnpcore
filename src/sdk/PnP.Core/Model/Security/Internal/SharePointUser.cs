@@ -1,16 +1,37 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Services;
+using System;
+using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    [SharePointType("SP.User", Uri = "_api/Web/GetUserById({Id})", LinqGet = "_api/Web/SiteUsers")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class SharePointUser : BaseDataModel<ISharePointUser>, ISharePointUser
+    [SharePointType("SP.User", Target = typeof(SharePointGroup), Uri = "_api/Web/sitegroups/getbyid({Parent.Id})/users/getbyid({Id})", Get = "_api/Web/sitegroups/getbyid({Parent.Id})/users", LinqGet = "_api/Web/sitegroups/getbyid({Parent.Id})/users")]
+    [SharePointType("SP.User", Target = typeof(Web), Uri = "_api/Web/GetUserById({Id})", Get = "_api/Web/SiteUsers", LinqGet = "_api/Web/SiteUsers")]
+    internal sealed class SharePointUser : BaseDataModel<ISharePointUser>, ISharePointUser
     {
         #region Construction
         public SharePointUser()
         {
+            AddApiCallHandler = async (keyValuePairs) =>
+            {
+                return await Task.Run(() =>
+                {
+                    var entity = EntityManager.GetClassInfo(GetType(), this);
+
+                    var body = new
+                    {
+                        __metadata = new { type = "SP.User" },
+                        LoginName
+                    };
+                    var jsonBody = JsonSerializer.Serialize(body);
+                    return new ApiCall(entity.SharePointGet, ApiType.SPORest, jsonBody);
+
+                }).ConfigureAwait(false);
+            };
         }
         #endregion
 
@@ -97,6 +118,71 @@ namespace PnP.Core.Model.Security
         public IGraphUser AsGraphUser()
         {
             return AsGraphUserAsync().GetAwaiter().GetResult();
+        }
+
+        public IRoleDefinitionCollection GetRoleDefinitions()
+        {
+            return GetRoleDefinitionsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync()
+        {
+            var roleAssignment = await PnPContext.Web.RoleAssignments
+                .QueryProperties(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == Id).ConfigureAwait(false);
+            return roleAssignment?.RoleDefinitions;
+        }
+
+        public bool AddRoleDefinitions(params string[] names)
+        {
+            return AddRoleDefinitionsAsync(names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AddRoleDefinitionsAsync(params string[] names)
+        {
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/roleassignments/addroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found.");
+                }
+            }
+            return result;
+        }
+
+        public bool RemoveRoleDefinitions(params string[] names)
+        {
+            return RemoveRoleDefinitionsAsync(names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> RemoveRoleDefinitionsAsync(params string[] names)
+        {
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinitions = await GetRoleDefinitionsAsync().ConfigureAwait(false);
+
+                var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/roleassignments/removeroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found for this user.");
+                }
+            }
+            return result;
         }
         #endregion
     }

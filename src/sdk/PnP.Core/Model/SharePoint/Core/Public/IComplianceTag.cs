@@ -57,7 +57,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies whether this tag has retention action
         /// </summary>
-        bool HasRetentionAction { get;}
+        bool HasRetentionAction { get; }
 
         /// <summary>
         /// Specifies if this is an event tag

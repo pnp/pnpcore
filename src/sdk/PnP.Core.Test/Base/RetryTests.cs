@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Services;
+using PnP.Core.Services.Core;
 using PnP.Core.Test.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,7 +40,15 @@ namespace PnP.Core.Test.Base
         public async Task SharePointRestRetryTest(HttpStatusCode statusCode)
         {
             MockResponseHandler responseHandler = new MockResponseHandler();
-            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null)
+
+            bool retryEventSent = false;
+            EventHub events = new EventHub();
+            events.RequestRetry = (retryEvent) =>
+            {
+                retryEventSent = true;
+            };
+
+            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null, null, events)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case
@@ -82,6 +92,7 @@ namespace PnP.Core.Test.Base
                     }
                 }
                 Assert.IsTrue(exceptionThrown);
+                Assert.IsTrue(retryEventSent);
             }
         }
 
@@ -92,7 +103,14 @@ namespace PnP.Core.Test.Base
         public async Task MicrosoftGraphRetryTest(HttpStatusCode statusCode)
         {
             MockResponseHandler responseHandler = new MockResponseHandler();
-            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null)
+            bool retryEventSent = false;
+            EventHub events = new EventHub();
+            events.RequestRetry = (retryEvent) =>
+            {
+                retryEventSent = true;
+            };
+
+            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null, null, events)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case
@@ -149,6 +167,7 @@ namespace PnP.Core.Test.Base
                 Assert.AreEqual(response, secondResponse);
                 response.RequestMessage.Headers.TryGetValues(RETRY_ATTEMPT, out IEnumerable<string> values);
                 Assert.AreEqual(values.First(), "1");
+                Assert.IsTrue(retryEventSent);
             }
         }
 
@@ -183,7 +202,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -245,7 +264,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -307,7 +326,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -359,7 +378,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);

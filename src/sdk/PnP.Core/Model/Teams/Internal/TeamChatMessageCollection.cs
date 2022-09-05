@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
+    internal sealed class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
     {
         public TeamChatMessageCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -23,68 +23,7 @@ namespace PnP.Core.Model.Teams
         /// <returns></returns>
         public async Task<ITeamChatMessage> AddAsync(ChatMessageOptions options)
         {
-            if(options == default)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            //Minimum for a message
-            if (string.IsNullOrEmpty(options.Content))
-            {
-                throw new ArgumentNullException(nameof(options), "parameter must include message content");
-            }
-
-            var newChannelChatMessage = CreateNewAndAdd() as TeamChatMessage;
-
-            // Assign field values
-            newChannelChatMessage.Body = new TeamChatMessageContent
-            {
-                PnPContext = newChannelChatMessage.PnPContext,
-                Parent = newChannelChatMessage,
-                Content = options.Content,
-                ContentType = options.ContentType,
-            };
-
-            if(options.Attachments != null && options.Attachments.Count > 0)
-            {
-                var attachments = new TeamChatMessageAttachmentCollection();
-
-                foreach(var optionAttachment in options.Attachments)
-                {
-                    attachments.Add(new TeamChatMessageAttachment()
-                    {
-                        Id = optionAttachment.Id,
-                        Content = optionAttachment.Content,
-                        ContentType = optionAttachment.ContentType,
-                        Name = optionAttachment.Name,
-                        ContentUrl = optionAttachment.ContentUrl,
-                        ThumbnailUrl = optionAttachment.ThumbnailUrl
-                    });
-                }
-
-                newChannelChatMessage.Attachments = attachments;
-            }
-
-            if (options.HostedContents != null && options.HostedContents.Count > 0)
-            {
-
-                var hostedContents = new TeamChatMessageHostedContentCollection();
-
-                foreach (var hostedContentOption in options.HostedContents)
-                {
-                    hostedContents.Add(new TeamChatMessageHostedContent()
-                    {
-                        Id = hostedContentOption.Id,
-                        ContentBytes = hostedContentOption.ContentBytes,
-                        ContentType = hostedContentOption.ContentType
-                    });
-                }
-
-                newChannelChatMessage.HostedContents = hostedContents;
-            }
-
-            newChannelChatMessage.Subject = options.Subject;
-
+            var newChannelChatMessage = CreateChatMessageObject(options);
             return await newChannelChatMessage.AddAsync().ConfigureAwait(false) as TeamChatMessage;
         }
 
@@ -95,6 +34,13 @@ namespace PnP.Core.Model.Teams
         /// <param name="options">Full chat message options</param>
         /// <returns>Newly added channel chat message</returns>
         public async Task<ITeamChatMessage> AddBatchAsync(Batch batch, ChatMessageOptions options)
+        {
+            var newChannelChatMessage = CreateChatMessageObject(options);
+
+            return await newChannelChatMessage.AddBatchAsync(batch).ConfigureAwait(false) as TeamChatMessage;
+        }
+
+        private TeamChatMessage CreateChatMessageObject(ChatMessageOptions options)
         {
             if (options == default)
             {
@@ -107,58 +53,11 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(options), "parameter must include message content");
             }
 
-            var newChannelChatMessage = CreateNewAndAdd() as TeamChatMessage;
+            var newChatMessage = CreateNewAndAdd() as TeamChatMessage;
 
-            // Assign field values
-            newChannelChatMessage.Body = new TeamChatMessageContent
-            {
-                PnPContext = newChannelChatMessage.PnPContext,
-                Parent = newChannelChatMessage,
-                Content = options.Content,
-                ContentType = options.ContentType,
-            };
+            TeamChatMessageHelper.AddChatMessageOptions(options, newChatMessage);
 
-            if (options.Attachments != null && options.Attachments.Count > 0)
-            {
-                var attachments = new TeamChatMessageAttachmentCollection();
-
-                foreach (var optionAttachment in options.Attachments)
-                {
-                    attachments.Add(new TeamChatMessageAttachment()
-                    {
-                        Id = optionAttachment.Id,
-                        Content = optionAttachment.Content,
-                        ContentType = optionAttachment.ContentType,
-                        Name = optionAttachment.Name,
-                        ContentUrl = optionAttachment.ContentUrl,
-                        ThumbnailUrl = optionAttachment.ThumbnailUrl
-                    });
-                }
-
-                newChannelChatMessage.Attachments = attachments;
-            }
-
-            if (options.HostedContents != null && options.HostedContents.Count > 0)
-            {
-
-                var hostedContents = new TeamChatMessageHostedContentCollection();
-
-                foreach (var hostedContentOption in options.HostedContents)
-                {
-                    hostedContents.Add(new TeamChatMessageHostedContent()
-                    {
-                        Id = hostedContentOption.Id,
-                        ContentBytes = hostedContentOption.ContentBytes,
-                        ContentType = hostedContentOption.ContentType
-                    });
-                }
-
-                newChannelChatMessage.HostedContents = hostedContents;
-            }
-
-            newChannelChatMessage.Subject = options.Subject;
-
-            return await newChannelChatMessage.AddBatchAsync(batch).ConfigureAwait(false) as TeamChatMessage;
+            return newChatMessage;
         }
 
         #endregion

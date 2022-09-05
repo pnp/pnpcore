@@ -1,8 +1,10 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -13,14 +15,14 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// File class, write your custom code here
     /// </summary>
-    [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Files", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
+    [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
     [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
     [SharePointType("SP.File", Target = typeof(ListItem), Uri = "_api/Web/lists(guid'{List.Id}')/items({Parent.Id})/file")]
-    internal partial class File : BaseDataModel<IFile>, IFile
+
+    internal sealed class File : BaseDataModel<IFile>, IFile
     {
         internal const string AddFileContentAdditionalInformationKey = "Content";
         internal const string AddFileOverwriteAdditionalInformationKey = "Overwrite";
-
         #region Construction
         public File()
         {
@@ -113,10 +115,210 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
+        #region Graph Permissions
+
+        public async Task<IGraphPermissionCollection> GetShareLinksAsync()
+        {
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(response.Json))
+            {
+                throw new Exception("No values found");
+            }
+
+            var graphPermissions = SharingManager.DeserializeGraphPermissionsResponse(response.Json, PnPContext, this);
+
+            return graphPermissions;
+        }
+
+
+        public IGraphPermissionCollection GetShareLinks()
+        {
+            return GetShareLinksAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteShareLinksAsync()
+        {
+            var shareLinks = await GetShareLinksAsync().ConfigureAwait(false);
+            foreach (var shareLink in shareLinks)
+            {
+                await shareLink.DeletePermissionAsync().ConfigureAwait(false);
+            }
+        }
+
+        public void DeleteShareLinks()
+        {
+            DeleteShareLinksAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            if (organizationalLinkOptions.Type == ShareType.CreateOnly)
+            {
+                throw new ArgumentException("An organizational link of type 'CreateOnly' can only be created on Folder level");
+            }
+
+            dynamic body = new ExpandoObject();
+            body.scope = ShareScope.Organization;
+            body.type = organizationalLinkOptions.Type;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+            
+        }
+
+        public IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            if (anonymousLinkOptions.Type == ShareType.CreateOnly)
+            {
+                throw new ArgumentException("An anonymous link of type 'CreateOnly' can only be created on Folder level");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Anonymous;
+            body.type = anonymousLinkOptions.Type;
+            body.password = anonymousLinkOptions.Password;
+
+            if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions)
+        {
+            return CreateAnonymousSharingLinkAsync(anonymousLinkOptions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IGraphPermission> CreateSharingLinkAsync(dynamic body)
+        {
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                return SharingManager.DeserializeGraphPermission(json, PnPContext, this);
+            }
+            else
+            {
+                throw new Exception("Error occured during creation");
+            }
+        }
+
+        public IGraphPermission CreateAnonymousSharingLink(OrganizationalLinkOptions organizationalLinkOptions)
+        {
+            return CreateOrganizationalSharingLinkAsync(organizationalLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions)
+        {
+            if (userLinkOptions.Type == ShareType.CreateOnly)
+            {
+                throw new ArgumentException("A user link of type 'CreateOnly' can only be created on Folder level");
+            }
+
+            if (userLinkOptions.Recipients == null || userLinkOptions.Recipients.Count == 0)
+            {
+                throw new ArgumentException("We need to have atleast one recipient with whom we want to share the link");
+            }
+
+            dynamic body = new ExpandoObject();
+
+            body.scope = ShareScope.Users;
+            body.type = userLinkOptions.Type;
+            body.recipients = userLinkOptions.Recipients;
+
+            return await CreateSharingLinkAsync(body).ConfigureAwait(false);
+        }
+
+        public IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions)
+        {
+            return CreateUserSharingLinkAsync(userLinkOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IGraphPermission> CreateSharingInviteAsync(InviteOptions inviteOptions)
+        {
+            if (!inviteOptions.RequireSignIn && !inviteOptions.SendInvitation)
+            {
+                throw new ArgumentException("RequireSignIn and SendInvitation cannot both be false");
+            }
+
+            await EnsurePropertiesAsync(y => y.SiteId, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+            dynamic body = new ExpandoObject();
+            body.requireSignIn = inviteOptions.RequireSignIn;
+            body.sendInvitation = inviteOptions.SendInvitation;
+            body.roles = inviteOptions.Roles.Select(y => y.ToString()).ToList();
+            body.recipients = inviteOptions.Recipients;
+            body.message = inviteOptions.Message;
+
+            if (inviteOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = inviteOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            }
+
+            var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("value", out JsonElement dataRows))
+                {
+                    if (dataRows.GetArrayLength() == 1)
+                    {
+                        return SharingManager.DeserializeGraphPermission(dataRows.EnumerateArray().FirstOrDefault(), PnPContext, this);
+                    }
+                    
+                }
+                throw new Exception("Issue on creation");
+            }
+            else
+            {
+                throw new Exception("Error occured during creation");
+            }
+        }
+
+        public IGraphPermission CreateSharingInvite(InviteOptions inviteOptions)
+        {
+            return CreateSharingInviteAsync(inviteOptions).GetAwaiter().GetResult();
+        }
+
+
+        #endregion
+
         #region GetContent
         public async Task<Stream> GetContentAsync(bool streamContent = false)
         {
+
+#if NET5_0_OR_GREATER
+            string downloadUrl;
+            if (System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                // for WASM we use the browser's network stack and need to comply to CORS policies
+                // hence we're not using the download.aspx page approach here
+                downloadUrl = $"{PnPContext.Uri}/_api/Web/getFileById('{UniqueId}')/$value";
+            }
+            else
+            {
+                downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+            }
+#else
             string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+#endif
 
             var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)
             {
@@ -434,13 +636,10 @@ namespace PnP.Core.Model.SharePoint
         private static Guid ProcessRecycleResponse(string json)
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("d", out JsonElement root))
+            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
             {
-                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                {
-                    // return the recyclebin item id
-                    return recycleBinItemId.GetGuid();
-                }
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
             }
 
             return Guid.Empty;
@@ -724,7 +923,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json);
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),
@@ -756,6 +955,186 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;
         }
+        #endregion
+
+        #region Thumbnails
+        public async Task<List<IThumbnail>> GetThumbnailsAsync(ThumbnailOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            return await UnfurlHandler.GetThumbnailsAsync(PnPContext, VroomDriveID, VroomItemID, options).ConfigureAwait(false);
+        }
+
+        public List<IThumbnail> GetThumbnails(ThumbnailOptions options = null)
+        {
+            return GetThumbnailsAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(ThumbnailOptions options = null)
+        {
+            return await GetThumbnailsBatchAsync(PnPContext.CurrentBatch, options).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(ThumbnailOptions options = null)
+        {
+            return GetThumbnailsBatchAsync(options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(Batch batch, ThumbnailOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            return await UnfurlHandler.GetThumbnailsBatchAsync(batch, PnPContext, VroomDriveID, VroomItemID, options).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null)
+        {
+            return GetThumbnailsBatchAsync(batch, options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Convert
+
+        private static readonly Dictionary<string, string[]> supportedSourceFormats = new Dictionary<string, string[]>
+        {
+            { "pdf",  new string[] { "doc", "docx", "epub", "eml", "htm", "html", "md", "msg", "odp", "ods", "odt", "pps", "ppsx", "ppt", "pptx", "rtf", "tif", "tiff", "xls", "xlsm", "xlsx" } },
+            { "html", new string[] { "eml", "md", "msg" } },
+            { "glb",  new string[] { "cool", "fbx", "obj", "ply", "stl", "3mf" } },
+            { "jpg",  new string[] { "3g2", "3gp", "3gp2", "3gpp", "3mf", "ai", "arw", "asf", "avi", "bas", "bash", "bat", "bmp", "c", "cbl", "cmd", "cool", "cpp", "cr2", "crw", "cs", "css", "csv", "cur", "dcm", "dcm30", "dic", "dicm", "dicom", "dng", "doc", "docx", "dwg", "eml", "epi", "eps", "epsf", "epsi", "epub", "erf", "fbx", "fppx", "gif", "glb", "h", "hcp", "heic", "heif", "htm", "html", "ico", "icon", "java", "jfif", "jpeg", "jpg", "js", "json", "key", "log", "m2ts", "m4a", "m4v", "markdown", "md", "mef", "mov", "movie", "mp3", "mp4", "mp4v", "mrw", "msg", "mts", "nef", "nrw", "numbers", "obj", "odp", "odt", "ogg", "orf", "pages", "pano", "pdf", "pef", "php", "pict", "pl", "ply", "png", "pot", "potm", "potx", "pps", "ppsx", "ppsxm", "ppt", "pptm", "pptx", "ps", "ps1", "psb", "psd", "py", "raw", "rb", "rtf", "rw1", "rw2", "sh", "sketch", "sql", "sr2", "stl", "tif", "tiff", "ts", "txt", "vb", "webm", "wma", "wmv", "xaml", "xbm", "xcf", "xd", "xml", "xpm", "yaml", "yml" } },
+        };
+         
+
+        public async Task<Stream> ConvertToAsync(ConvertToOptions options)
+        {
+            await EnsurePropertiesAsync(y => y.Name, y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            // Check file extension before converting
+            CheckExtension(options.Format);
+
+            string jpgOptions = "";
+            if (options.Format == ConvertToFormat.Jpg)
+            {
+                jpgOptions = $"&width={options.JpgFormatWidth}&height={options.JpgFormatHeight}";
+            }
+
+            var convertEndpointUrl = $"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/content?format={options.Format.ToString().ToLowerInvariant()}{jpgOptions}";
+
+            ApiType typeToUse = ApiType.GraphBeta;
+            if (options.Format == ConvertToFormat.Pdf)
+            {
+                typeToUse = ApiType.Graph;
+            }
+
+            var apiCall = new ApiCall(convertEndpointUrl, typeToUse)
+            {
+                Interactive = true,
+                StreamResponse = options.StreamContent,
+                ExpectBinaryResponse = true,
+                Headers = new Dictionary<string, string>()
+                {
+                    { "Accept", "*/*" }
+                }
+            };
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            
+            return response.BinaryContent;
+        }
+
+        public Stream ConvertTo(ConvertToOptions options)
+        {
+            return ConvertToAsync(options).GetAwaiter().GetResult();
+        }
+
+        private void CheckExtension(ConvertToFormat format)
+        {
+            var sourceExtension = Name.Split('.').Last().ToLower();
+            var targetExtension = format.ToString().ToLowerInvariant();
+
+            if (!supportedSourceFormats[targetExtension].Contains(sourceExtension))
+            {
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_Extension_Converting_File, sourceExtension, targetExtension, supportedSourceFormats[targetExtension].ToList()));
+            }
+        }
+
+        #endregion
+
+        #region Get Analytics
+        public async Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null)
+        {
+            return await ActivityHandler.GetAnalyticsAsync(this, options).ConfigureAwait(false);
+        }
+
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null)
+        {
+            return GetAnalyticsAsync(options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Preview
+
+        public async Task<IFilePreview> GetPreviewAsync(PreviewOptions options = null)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            if (options == null)
+            {
+                options = new PreviewOptions();
+            }
+
+            dynamic body = new ExpandoObject();
+
+            if (options.Page != string.Empty)
+            {
+                body.page = options.Page;
+            }
+
+            if (options.Zoom != 0)
+            {
+                body.zoom = options.Zoom;
+            }
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/preview", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);
+            }
+
+            return GetPreviewFromResponse(response.Json);
+        }
+
+        public IFilePreview GetPreview(PreviewOptions options = null)
+        {
+            return GetPreviewAsync(options).GetAwaiter().GetResult();
+        }
+
+        private static IFilePreview GetPreviewFromResponse(string json)
+        {
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(json);
+
+            var filePreview = new FilePreview();
+
+            if (jsonElement.TryGetProperty("getUrl", out JsonElement getUrl))
+            {
+                filePreview.GetUrl = getUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postUrl", out JsonElement postUrl))
+            {
+                filePreview.PostUrl = postUrl.GetString();
+            }
+
+            if (jsonElement.TryGetProperty("postParameters", out JsonElement postParameters))
+            {
+                filePreview.PostParameters = postParameters.GetString();
+            }
+
+            return filePreview;
+        }
+
         #endregion
 
         #endregion

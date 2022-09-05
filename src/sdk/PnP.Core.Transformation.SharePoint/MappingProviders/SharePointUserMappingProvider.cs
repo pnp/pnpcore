@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -43,7 +41,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public async Task<UserMappingProviderOutput> MapUserAsync(UserMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUserAsync");
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUserAsync"
+                .CorrelateString(input.Context.Task.Id));
 
             // Should never happen, but just in case
             if (string.IsNullOrEmpty(input?.UserPrincipalName))
@@ -57,16 +57,18 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 return new UserMappingProviderOutput { UserPrincipalName = input?.UserPrincipalName };
             }
 
-            logger.LogDebug(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Debug_UserTransformPrincipalInput, 
-                input.UserPrincipalName.GetUserName()));
+            logger.LogDebug(
+                SharePointTransformationResources.Debug_UserTransformPrincipalInput
+                .CorrelateString(input.Context.Task.Id), 
+                input.UserPrincipalName.GetUserName());
 
             // In case we have a valid list of user mappings
             if (this.options.Value.UserMappings != null && this.options.Value.UserMappings.Count > 0)
             {
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_UserTransformDefaultMapping,
-                    input.UserPrincipalName.GetUserName()));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_UserTransformDefaultMapping
+                    .CorrelateString(input.Context.Task.Id),
+                    input.UserPrincipalName.GetUserName());
 
                 // Try to find user mapping
                 // We don't like mulitple matches, the first match wins
@@ -80,9 +82,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     result = userMapping.TargetUser;
 
                     // Log successfull user mapping
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_UserTransformSuccess,
-                        userNameToCheck, result));
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_UserTransformSuccess
+                        .CorrelateString(input.Context.Task.Id),
+                        userNameToCheck, result);
 
                     // Ensure user in the target site collection if not yet done
                     await input.Context.Task.TargetContext.Web.EnsureUserAsync(result).ConfigureAwait(false);
@@ -90,9 +93,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 else
                 {
                     // Log unsuccessfull user mapping
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_UserTransformMappingNotFound,
-                        userNameToCheck));
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_UserTransformMappingNotFound
+                        .CorrelateString(input.Context.Task.Id),
+                        userNameToCheck);
                 }
 
                 return new UserMappingProviderOutput { UserPrincipalName = result };

@@ -19,7 +19,7 @@ namespace PnP.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreResources {
@@ -70,6 +70,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max retries of {0} reached while waiting for operation {1}.
+        /// </summary>
+        internal static string Exception_AsyncOperationError_MaxRetries {
+            get {
+                return ResourceManager.GetString("Exception_AsyncOperationError_MaxRetries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batchrequest {0} was not found in one of the current batches.
+        /// </summary>
+        internal static string Exception_BatchClient_BatchRequestIdNotFound {
+            get {
+                return ResourceManager.GetString("Exception_BatchClient_BatchRequestIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot access the result since batch was not yet executed.
         /// </summary>
         internal static string Exception_BatchResult_BatchNotYetExecuted {
@@ -115,6 +133,69 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on obtaining the content type.
+        /// </summary>
+        internal static string Exception_ContentType_ErrorObtaining {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_ErrorObtaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified content type is not of type &apos;Document Set&apos;. Impossible to return this as &apos;Document Set&apos;.
+        /// </summary>
+        internal static string Exception_ContentType_NoDocumentSet {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_NoDocumentSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified content type is not of type &apos;Document Set&apos;. Start your ID with 0x0120D520.
+        /// </summary>
+        internal static string Exception_ContentType_WrongDocumentSetId {
+            get {
+                return ResourceManager.GetString("Exception_ContentType_WrongDocumentSetId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_AuthenticationProvider {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_AuthenticationProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the id (Guid) of a the Microsoft 365 group you want to create a PnPContext for.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_GroupId {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_GroupId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provided CSOM datetime ({0}) is malformed.
+        /// </summary>
+        internal static string Exception_CSOM_MalformedDateTime {
+            get {
+                return ResourceManager.GetString("Exception_CSOM_MalformedDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permissions for the user could not be found.
+        /// </summary>
+        internal static string Exception_EffectivePermissionsNotFound {
+            get {
+                return ResourceManager.GetString("Exception_EffectivePermissionsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature was already activated.
         /// </summary>
         internal static string Exception_Feature_AlreadyActivated {
@@ -156,6 +237,15 @@ namespace PnP.Core {
         internal static string Exception_InstanceWasDeleted {
             get {
                 return ResourceManager.GetString("Exception_InstanceWasDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified expiration date is invalid. Should be greater than today and within {0} months.
+        /// </summary>
+        internal static string Exception_Invalid_WebhookExpiration {
+            get {
+                return ResourceManager.GetString("Exception_Invalid_WebhookExpiration", resourceCulture);
             }
         }
         
@@ -250,6 +340,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpected JSON.
+        /// </summary>
+        internal static string Exception_Json_Unexpected {
+            get {
+                return ResourceManager.GetString("Exception_Json_Unexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing value for {0} in {1}.
         /// </summary>
         internal static string Exception_LinqError_MissingValue {
@@ -282,6 +381,15 @@ namespace PnP.Core {
         internal static string Exception_ListItemUpdate_NoTaxonomyNoteField {
             get {
                 return ResourceManager.GetString("Exception_ListItemUpdate_NoTaxonomyNoteField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one recipient is needed before a mail can be send.
+        /// </summary>
+        internal static string Exception_MailHandler_NoRecipient {
+            get {
+                return ResourceManager.GetString("Exception_MailHandler_NoRecipient", resourceCulture);
             }
         }
         
@@ -502,6 +610,42 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured on retrieving the site id from the content type hub.
+        /// </summary>
+        internal static string Exception_RetrievingContentTypeHubSiteId {
+            get {
+                return ResourceManager.GetString("Exception_RetrievingContentTypeHubSiteId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
+        /// </summary>
+        internal static string Exception_RoleDefinition_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_RoleDefinition_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending a mail through the &apos;GraphUser&apos; interface is only valid with the application permission authentication flow.
+        /// </summary>
+        internal static string Exception_SendMailDelegated {
+            get {
+                return ResourceManager.GetString("Exception_SendMailDelegated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending a mail through &apos;Me&apos; is only valid with delegated authentication flow.
+        /// </summary>
+        internal static string Exception_SendMailMe {
+            get {
+                return ResourceManager.GetString("Exception_SendMailMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests inside a batch reached their max retry count of {0}.
         /// </summary>
         internal static string Exception_ServiceException_BatchMaxRetries {
@@ -565,11 +709,38 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot add a content type to a list on the Content Type Hub.
+        /// </summary>
+        internal static string Exception_Unsupported_AddingContentTypesToListOnContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_AddingContentTypesToListOnContentTypeHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type.
         /// </summary>
         internal static string Exception_Unsupported_AddingContentTypeToList {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_AddingContentTypeToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only set the background image when the header layout is set to Extended..
+        /// </summary>
+        internal static string Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using the UpdateAndPushChangesBatch methods on ContentTypeHub fields is not supported. If you happen to need push updated fields to lists inside the content type hub then directly connect to the content type hub.
+        /// </summary>
+        internal static string Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_BatchFieldUpdateAndPushChangesForContentTypeHub", resourceCulture);
             }
         }
         
@@ -682,6 +853,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expression type {0} is not supported inside filtering expressions.
+        /// </summary>
+        internal static string Exception_Unsupported_ExpressionType {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_ExpressionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is not allowed to convert a file with the extension {0} to {1}. Supported extensions are: {2}..
+        /// </summary>
+        internal static string Exception_Unsupported_Extension_Converting_File {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_Extension_Converting_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods.
         /// </summary>
         internal static string Exception_Unsupported_ExtraGet {
@@ -705,6 +894,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_FileServerRelativeUrlNotLoaded {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_FileServerRelativeUrlNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Follow request is not supported.
+        /// </summary>
+        internal static string Exception_Unsupported_FollowRequest {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_FollowRequest", resourceCulture);
             }
         }
         
@@ -772,6 +970,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The used model ({0}) does not implement IQueryableDataModel.
+        /// </summary>
+        internal static string Exception_Unsupported_NoIQueryableDataModel {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_NoIQueryableDataModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image is not a supported mime type: image/png, image/jpeg, image/gif, image/bmp, image/tiff.
+        /// </summary>
+        internal static string Exception_Unsupported_NotAnImageMimeType {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_NotAnImageMimeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page publish scheduling only works on the pages library in the root web of a site collection.
         /// </summary>
         internal static string Exception_Unsupported_PagePublishingOnSubWeb {
@@ -790,11 +1006,29 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This function can only be called on the content type hub.
+        /// </summary>
+        internal static string Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PublishingContentTypeOutsideContentTypeHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This function can be called from a LINQ query only.
         /// </summary>
         internal static string Exception_Unsupported_QueryPropertiesUse {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_QueryPropertiesUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selector type is not supported.
+        /// </summary>
+        internal static string Exception_Unsupported_Selector {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_Selector", resourceCulture);
             }
         }
         
@@ -867,6 +1101,24 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_WebDeleteIsInteractive {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_WebDeleteIsInteractive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user principal name can not be empty when obtaining user permissions.
+        /// </summary>
+        internal static string Exception_UserPrincipalNameEmpty {
+            get {
+                return ResourceManager.GetString("Exception_UserPrincipalNameEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A site template with the name {0} could not be found.
+        /// </summary>
+        internal static string Exception_WebTemplate_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_WebTemplate_NotFound", resourceCulture);
             }
         }
         

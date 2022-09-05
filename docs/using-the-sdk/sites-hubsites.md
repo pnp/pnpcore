@@ -6,8 +6,6 @@ In SharePoint, site collections support hub sites, that allow you to create logi
 
 [!INCLUDE [Creating Context](fragments/creating-context.md)]
 
-
-
 A `PnPContext` always has a reference to the [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) of the underlying site collection. Using the site object the following operations can be called when working with hub sites:
 
 ## Get Hub Site Data
@@ -42,8 +40,8 @@ if(!site.IsHubSite){
 
 This associates the site to an existing hub site, using this code to apply this to a site:
 
-> [!Note]
-> Ignore the section "creating a context", this is included in the code below.
+> [!Important]
+> Joining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
 
 ```csharp
 using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSite"))
@@ -70,8 +68,10 @@ using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSi
 
 ```
 
-
 ## Unjoin a hub site
+
+> [!Important]
+> Unjoining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
 
 This removes the association on the site to an existing hub site, using this code to apply this to a site:
 
@@ -87,8 +87,10 @@ if(assocSite.HubSiteId != Guid.Empty){
 
 ```
 
-
 ## Unregister a hub site
+
+> [!Important]
+> Unregistering a hub site does require delegated permissions to work.
 
 This unregisters a site as the primary hub site, using this code to apply this to a site:
 
@@ -101,5 +103,4 @@ ISite site = await context.Site.GetAsync(
 if(site.IsHubSite){
     var result = await site.UnregisterHubSiteAsync();
 }
-
 ```

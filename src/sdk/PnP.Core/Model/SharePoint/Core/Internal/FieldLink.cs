@@ -1,7 +1,12 @@
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.ContentTypes;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -9,38 +14,33 @@ namespace PnP.Core.Model.SharePoint
     /// FieldLink class, write your custom code here
     /// </summary>
     [SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    // TODO A special target should be achieve to support List Content Types
-    //[SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    internal partial class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
+    internal sealed class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
     {
         #region Construction
         public FieldLink()
         {
-            // Handler to construct the Add request for this content type
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            AddApiCallHandler = async (keyValuePairs) =>
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            {
-                // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
-                // automatically provide the correct 'parent'
-                var entity = EntityManager.GetClassInfo(GetType(), this);
 
-                // The FieldLinkCollection Add REST endpoint has many limitations
-                // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-visio/jj245869%28v%3doffice.15%29#rest-resource-endpoint
-                // It ONLY works with Site Columns already present in the parent content content type or  with list columns if they are already added to the list
-                // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
-                var addParameters = new
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+                if (Parent != null && Parent.Parent != null && Parent.Parent.Parent != null)
                 {
-                    __metadata = new { type = entity.SharePointType },
-                    FieldInternalName,
-                    Hidden,
-                    Required,
-                    ReadOnly,
-                    ShowInDisplayForm,
-                    DisplayName = HasValue(nameof(DisplayName)) ? DisplayName : null
-                }.AsExpando(ignoreNullValues: true);
-                return new ApiCall(entity.SharePointGet, ApiType.SPORest, JsonSerializer.Serialize(addParameters, typeof(ExpandoObject)));
+                    var parentType = Parent.Parent.Parent.GetType();
+
+                    if (parentType == typeof(List))
+                    {
+                        var arguments = new Uri(api.ApiCall.Request).Query;
+                        if (arguments == null)
+                        {
+                            arguments = "";
+                        }
+
+                        api.ApiCall = new ApiCall($"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{(Parent.Parent.Parent as IList).Id}')/ContentTypes('{(Parent as IContentType).StringId}')/FieldLinks{arguments}", api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                    }                    
+                }
+                return api;
             };
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously           
         }
         #endregion
 
@@ -66,6 +66,58 @@ namespace PnP.Core.Model.SharePoint
 
         [SharePointProperty("*")]
         public object All { get => null; }
+        #endregion
+
+        #region Method overrides
+        internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildUpdateApiCall();
+
+            await RawRequestAsync(api, HttpMethod.Post, "Update").ConfigureAwait(false);
+        }
+
+        internal override async Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildUpdateApiCall();
+
+            // Add the request to the batch
+            await RawRequestBatchAsync(batch, api, HttpMethod.Post, "UpdateBatch").ConfigureAwait(false);
+        }
+
+        internal override async Task BaseDelete(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildDeleteApiCall();
+
+            await RawRequestAsync(api, HttpMethod.Post, "Delete").ConfigureAwait(false);
+        }
+
+        internal override async Task BaseDeleteBatchAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildDeleteApiCall();
+
+            // Add the request to the batch
+            await RawRequestBatchAsync(batch, api, HttpMethod.Post, "DeleteBatch").ConfigureAwait(false);
+        }
+
+        private ApiCall BuildUpdateApiCall()
+        {
+            List<IRequest<object>> csomRequests = new List<IRequest<object>>
+            {
+                new UpdateFieldLinkRequest(Parent.Parent as IContentType, this, true)
+            };
+
+            return new ApiCall(csomRequests);
+        }
+
+        private ApiCall BuildDeleteApiCall()
+        {
+            List<IRequest<object>> csomRequests = new List<IRequest<object>>
+            {
+                new DeleteFieldLinkRequest(Parent.Parent as IContentType, this)
+            };
+
+            return new ApiCall(csomRequests);
+        }
         #endregion
     }
 }

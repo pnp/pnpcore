@@ -1,0 +1,47 @@
+@page "/pageInfo"
+@attribute [Authorize]
+@using PnP.Core.Model.SharePoint;
+@using PnP.Core.Model;
+@using PnP.Core.QueryModel;
+@inject IMyPnPContextFactory pnpContextFactory
+
+<h1>SharePoint Page info</h1>
+
+@if (isLoading || pages == null)
+{
+    <p><em>Loading pages...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spPage in pages)
+            {
+                <tr>
+                    <td>@spPage.Name</td>
+                    <td>@spPage.LayoutType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<IPage> pages;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using (var ctx = await pnpContextFactory.GetContextAsync())
+        {
+            pages = await ctx.Web.GetPagesAsync();
+            isLoading = false;
+        }
+    }
+}

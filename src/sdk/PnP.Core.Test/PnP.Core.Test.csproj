@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 
 		<IsPackable>false</IsPackable>
 
@@ -11,17 +11,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.36.1" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-		<PackageReference Include="coverlet.collector" Version="3.0.2">
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+		<PackageReference Include="coverlet.collector" Version="3.1.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -40,9 +39,11 @@
 		<Folder Include="QueryModel\MockData\" />
 		<Folder Include="Security\MockData\ListItemSecurityTests\" />
 		<Folder Include="Security\MockData\UserTests\" />
+		<Folder Include="SharePoint\MockData\BrandingTests\" />
 		<Folder Include="SharePoint\MockData\FilesTests\" />
 		<Folder Include="SharePoint\MockData\SettingTests\" />
 		<Folder Include="SharePoint\MockData\UserCustomActionTests\" />
+		<Folder Include="SharePoint\MockData\VivaDashboardTests\" />
 		<Folder Include="Teams\MockData\TeamLifecycleTests\" />
 		<Folder Include="Teams\MockData\TeamSettingsTests\" />
 	</ItemGroup>
@@ -50,6 +51,9 @@
 	<ItemGroup>
 		<None Update="TestAssets\pageheader.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="TestAssets\parker-ms-300.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="TestAssets\test.docx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

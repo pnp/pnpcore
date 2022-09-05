@@ -1,9 +1,0 @@
---batchresponse_7c3655a4-abf1-43fd-8a9b-658d71466989
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')","type":"SP.Folder"},"StorageMetrics":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')/StorageMetrics","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')/StorageMetrics","type":"SP.StorageMetrics"},"LastModified":"2021-03-09T15:15:12Z","TotalFileCount":"0","TotalFileStreamSize":"0","TotalSize":"152"},"UniqueId":"db19f1fb-520f-45d9-908b-6e93c6cf8e56"}}
---batchresponse_7c3655a4-abf1-43fd-8a9b-658d71466989--

@@ -1,18 +1,16 @@
-﻿using PnP.Core.Transformation.Services;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Builder;
 using PnP.Core.Transformation.Services.Builder.Configuration;
-using System;
-using System.Reflection.Emit;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint;
-using PnP.Core.Transformation.SharePoint.Services.Builder;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Functions;
 using PnP.Core.Transformation.SharePoint.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Publishing;
-using PnP.Core.Transformation.SharePoint.Functions;
 using PnP.Core.Transformation.SharePoint.Services;
+using PnP.Core.Transformation.SharePoint.Services.Builder;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -103,14 +101,20 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the custom PageLayoutAnalyser type
             builder.Services.TryAddTransient<PageLayoutAnalyser, PageLayoutAnalyser>();
 
-            // Add the SharePoint functions service
+            // Add the SharePoint functions services
             builder.Services.TryAddTransient<FunctionProcessor, FunctionProcessor>();
             builder.Services.TryAddTransient<SharePointFunctionsService, SharePointFunctionsService>();
+            builder.Services.TryAddTransient<PublishingFunctionProcessor, PublishingFunctionProcessor>();
+            builder.Services.TryAddTransient<SharePointPublishingFunctionsService, SharePointPublishingFunctionsService>();
 
             // Add the HTML Transformator service
             builder.Services.TryAddTransient<HtmlTransformator, HtmlTransformator>();
 
+            // Add the Wiki HTML Transformator service
             builder.Services.TryAddTransient<WikiHtmlTransformator, WikiHtmlTransformator>();
+
+            // Add the Publishing Page Transformator service
+            builder.Services.TryAddTransient<PublishingLayoutTransformator, PublishingLayoutTransformator>();            
 
             return new PnPSharePointTransformationBuilder(builder.Services);
         }

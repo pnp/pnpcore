@@ -69,264 +69,203 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkAsyncTest()
+        public async Task ContentTypesAddFieldLinkFromWebFieldTest()
         {
-            // The FieldLinkCollection Add REST endpoint has many limitations
-            // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-visio/jj245869%28v%3doffice.15%29#rest-resource-endpoint
-            // It ONLY works with Site Columns already present in the parent content content type or  with list columns if they are already added to the list
-            // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
-
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new test content type
-                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD ASYNC", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
+                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
+                IField newField = null;
 
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = await newContentType.FieldLinks.AddAsync("Title", "My Title");
+                try
+                {
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", newContentType.StringId);
+                    Assert.AreEqual("TEST ADD", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
 
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
+                    // Add a new field
+                    newField = await context.Web.Fields.AddTextAsync("Demo1", new FieldTextOptions { Group = "Custom" });
 
-                await newContentType.DeleteAsync();
+                    // Add the field to the content type
+                    var fieldLink = newContentType.FieldLinks.Add(newField, displayName: "Demo1 link", hidden: false, required: true, readOnly: false, showInDisplayForm: true);
+
+                    // Load the field links again
+                    var fieldlinks = (await newContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    var addedFieldLink = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1 link");
+                    Assert.IsTrue(addedFieldLink.Required);
+                    Assert.IsFalse(addedFieldLink.Hidden);
+                    Assert.IsFalse(addedFieldLink.ReadOnly);
+                    Assert.IsTrue(addedFieldLink.ShowInDisplayForm);
+
+                    // Delete the added field link
+                    await addedFieldLink.DeleteAsync();
+
+                    fieldlinks = (await newContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    addedFieldLink = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1 link");
+
+                    Assert.IsTrue(addedFieldLink == null);
+                }
+                finally
+                {
+                    await newContentType.DeleteAsync();
+                    await newField.DeleteAsync();
+                }
             }
         }
 
         [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkAsyncExceptionTest()
+        public async Task ContentTypesAddFieldLinkFromWebFieldBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new test content type
-                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD ASYNC", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
+                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
+                IField newField1 = null;
+                IField newField2 = null;
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                try
                 {
-                    // Add a new field link between newContentType and Title
-                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddAsync(null, "My Title");
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", newContentType.StringId);
+                    Assert.AreEqual("TEST ADD", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
 
-                });
-
-                await newContentType.DeleteAsync();
-            }
-        }
-
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkBatchAsyncExceptionTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // Create a new test content type
-                IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD ASYNC", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
-
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
-                {
-                    // Add a new field link between newContentType and Title
-                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(string.Empty, "My Title");
+                    // Add a new field
+                    newField1 = await context.Web.Fields.AddTextBatchAsync("Demo1", new FieldTextOptions { Group = "Custom" });
+                    newField2 = await context.Web.Fields.AddTextBatchAsync("Demo2", new FieldTextOptions { Group = "Custom" });
 
                     await context.ExecuteAsync();
 
-                });
-            }
-        }
+                    // Add the field to the content type
+                    newContentType.FieldLinks.AddBatch(newField1);
+                    newContentType.FieldLinks.AddBatch(newField2);
 
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // Create a new test content type
-                IContentType newContentType = context.Web.ContentTypes.Add("0x0100302EF0D1F1DB4C4EBF58251BCCF5968B", "TEST ADD", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
+                    await context.ExecuteAsync();
 
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = newContentType.FieldLinks.Add("Title", "My Title");
+                    // Load the field links again
+                    var fieldlinks = (await newContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    var addedFieldLink1 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1");
+                    var addedFieldLink2 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo2");
 
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
+                    Assert.IsNotNull(addedFieldLink1);
+                    Assert.IsNotNull(addedFieldLink2);
 
-                await newContentType.DeleteAsync();
-            }
-        }
+                    // Update the added field links
+                    addedFieldLink1.Required = true;
+                    addedFieldLink2.Required = true;
 
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkBatchAsyncTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // Create a new test content type
-                IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968C", "TEST ADD BATCHASYNC", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
+                    addedFieldLink1.UpdateBatch();
+                    addedFieldLink2.UpdateBatch();
 
-                await context.ExecuteAsync(); // You cannot create and refer to the resource in the same batch. Execute seperately.
+                    await context.ExecuteAsync();
 
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync("Title", "My Title");
+                    fieldlinks = (await newContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    addedFieldLink1 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1");
+                    addedFieldLink2 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo2");
 
-                await context.ExecuteAsync();
+                    Assert.IsTrue(addedFieldLink1.Required);
+                    Assert.IsTrue(addedFieldLink2.Required);
 
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
+                    // Delete the added field link
+                    await addedFieldLink1.DeleteBatchAsync();
+                    await addedFieldLink2.DeleteBatchAsync();
 
-                await newContentType.DeleteAsync();
-            }
-        }
+                    await context.ExecuteAsync();
 
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkBatchTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // Create a new test content type
-                IContentType newContentType = context.Web.ContentTypes.AddBatch("0x0100302EF0D1F1DB4C4EBF58251BCCF5968D", "TEST ADD", "TESTING BATCH", "TESTING");
-                Assert.IsNotNull(newContentType);
+                    fieldlinks = (await newContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    addedFieldLink1 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1");
+                    addedFieldLink2 = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo2");
 
-                await context.ExecuteAsync(); // You cannot create and refer to the resource in the same batch. Execute seperately.
-
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = newContentType.FieldLinks.AddBatch("Title", "My Title");
-
-                await context.ExecuteAsync();
-
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
-
-                await newContentType.DeleteAsync();
-            }
-        }
-
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkSpecificBatchExeceptionAsyncTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                    Assert.IsNull(addedFieldLink1);
+                    Assert.IsNull(addedFieldLink2);
+                }
+                finally
                 {
-
-                    var newBatch = context.NewBatch();
-
-                    // Create a new test content type
-                    IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync(newBatch, "0x0100302EF0D1F1DB4C4EBF58251BCCF5968E", "TEST ADD SPEC BATCH ASYNC", "TESTING", "TESTING");
-                    Assert.IsNotNull(newContentType);
-
-                    // Add a new field link between newContentType and Title
-                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(newBatch, "Title", "My Title");
-                    await context.ExecuteAsync(newBatch);
-
-                    newBatch.Requests.Clear();
-
-                }, "You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch");
+                    await newContentType.DeleteAsync();
+                    await newField1.DeleteAsync();
+                    await newField2.DeleteAsync();
+                }
             }
         }
 
+
         [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkSpecificBatchAsyncTest()
+        public async Task ContentTypesOnListFieldLinkTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var newBatch = context.NewBatch();
+                // Create a new list
+                await context.Web.LoadAsync(p => p.Lists);
 
-                // Create a new test content type
-                IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync(newBatch, "0x0100302EF0D1F1DB4C4EBF58251BCCF5968E", "TEST ADD SPEC BATCH ASYNC", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
+                var web = context.Web;
 
-                await context.ExecuteAsync(newBatch); // You cannot create and refer to the resource in the same batch. Execute seperately.
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ContentTypesOnListFieldLinkTest");
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                IContentType newContentType = null;
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
 
-                var newBatch2 = context.NewBatch();
+                    if (myList == null)
+                    {
+                        myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
 
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(newBatch2, "Title", "My Title");
-                await context.ExecuteAsync(newBatch2);
+                    // Ensure content type are enabled for the list
+                    myList.ContentTypesEnabled = true;
+                    await myList.UpdateBatchAsync();
 
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
+                    // Add new content type
+                    newContentType = await context.Web.ContentTypes.AddBatchAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
+                    
+                    // Add field to list
+                    var demoField = await myList.Fields.AddTextBatchAsync("Demo");
 
-                await newContentType.DeleteAsync();
+                    // send list update batch to server
+                    await context.ExecuteAsync();
+
+                    // And add it to the list
+                    var addedContentType = await myList.ContentTypes.AddAvailableContentTypeAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F");
+
+                    // Add existing list field
+                    addedContentType.FieldLinks.Add(demoField, displayName: "Demo1 link", hidden: false, required: true, readOnly: false, showInDisplayForm: true);
+
+                    // Load the fieldlinks again
+                    var fieldlinks = (await addedContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+
+                    var addedFieldLink = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1 link");
+                    Assert.IsTrue(addedFieldLink.Required);
+                    Assert.IsFalse(addedFieldLink.Hidden);
+                    Assert.IsFalse(addedFieldLink.ReadOnly);
+                    Assert.IsTrue(addedFieldLink.ShowInDisplayForm);
+
+                    // Delete the added field link
+                    await addedFieldLink.DeleteAsync();
+
+                    fieldlinks = (await addedContentType.GetAsync(p => p.FieldLinks.QueryProperties(p => p.Required, p => p.Hidden, p => p.DisplayName, p => p.ReadOnly, p => p.ShowInDisplayForm))).FieldLinks;
+                    addedFieldLink = fieldlinks.AsRequested().FirstOrDefault(p => p.DisplayName == "Demo1 link");
+
+                    Assert.IsTrue(addedFieldLink == null);
+                }
+                finally
+                {
+                    // Delete list again
+                    await myList.DeleteAsync();
+
+                    // Delete the content type
+                    await newContentType.DeleteAsync();
+                }
             }
         }
 
-        [TestMethod]
-        public async Task AddSiteContentTypeFieldLinkSpecificBatchTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var newBatch = context.NewBatch();
-
-                // Create a new test content type
-                IContentType newContentType = context.Web.ContentTypes.AddBatch(newBatch, "0x0100302EF0D1F1DB4C4EBF58251BCCF5967F", "TEST ADD SPEC BATCH", "TESTING", "TESTING");
-                Assert.IsNotNull(newContentType);
-
-                await context.ExecuteAsync(newBatch); // You cannot create and refer to the resource in the same batch. Execute seperately.
-
-                var newBatch2 = context.NewBatch();
-
-                // Add a new field link between newContentType and Title
-                IFieldLink newFieldLink = newContentType.FieldLinks.AddBatch(newBatch2, "Title", "My Title");
-
-                await context.ExecuteAsync(newBatch2);
-
-                Assert.IsNotNull(newFieldLink);
-                Assert.AreEqual("Title", newFieldLink.Name);
-                Assert.AreEqual("My Title", newFieldLink.DisplayName);
-                Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
-
-                await newContentType.DeleteAsync();
-            }
-        }
-
-        // TODO Handle List Content Types as the FieldLinkParent => A review in the core should be done
-        //[TestMethod]
-        //public async Task AddListContentTypeFieldLinkTest()
-        //{
-        //    // The FieldLinkCollection Add REST endpoint has many limitations
-        //    // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-visio/jj245869%28v%3doffice.15%29#rest-resource-endpoint
-        //    // It ONLY works with Site Columns already present in the parent content content type or  with list columns if they are already added to the list
-        //    // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
-
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        // Create a new test content type
-        //        IContentType newSiteContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
-        //        IContentType newListContentType = await context.Web.Lists.GetByTitle("Documents").ContentTypes.AddAvailableContentTypeAsync(newSiteContentType.Id);
-        //        Assert.IsNotNull(newListContentType);
-
-        //        // Add a new field link between newContentType and Title
-        //        IFieldLink newFieldLink = await newListContentType.FieldLinks.AddAsync("Title", "My Title");
-
-        //        Assert.IsNotNull(newFieldLink);
-        //        Assert.AreEqual("Title", newFieldLink.Name);
-        //        Assert.AreEqual("My Title", newFieldLink.DisplayName);
-        //        Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
-
-        //        await newListContentType.DeleteAsync();
-        //        await newSiteContentType.DeleteAsync();
-        //    }
-        //}
-
-        // NOTE Delete and Update are no supported from regular REST endpoint
-        //{"error":{"code":"-1, Microsoft.SharePoint.Client.InvalidClientQueryException","message":{"lang":"en-US","value":"The type SP.FieldLinkCollection does not support HTTP DELETE method."}}}
-        //{"error":{"code":"-1, Microsoft.SharePoint.Client.InvalidClientQueryException","message":{"lang":"en-US","value":"The type SP.FieldLinkCollection does not support HTTP PATCH method."}}}
     }
 }

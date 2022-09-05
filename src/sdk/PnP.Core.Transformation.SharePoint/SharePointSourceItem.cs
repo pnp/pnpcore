@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.SharePoint.Client;
-using PnP.Core.Services;
+﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.Core;
+using System;
 
 namespace PnP.Core.Transformation.SharePoint
 {

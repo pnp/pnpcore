@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
-    internal class DataModelQueryService<TModel>
+    internal sealed class DataModelQueryService<TModel>
     {
         public PnPContext PnPContext { get; }
 
@@ -24,7 +24,7 @@ namespace PnP.Core.QueryModel
         /// Protected default constructor, to force creation using
         /// the PnPContext instance
         /// </summary>
-        protected DataModelQueryService()
+        internal DataModelQueryService()
         {
         }
 
@@ -87,6 +87,8 @@ namespace PnP.Core.QueryModel
                 "Linq"
                 );
 
+            PnPContext.RequestModules?.Clear();
+
             return batch.GetRequest(batchRequestId);
         }
 
@@ -140,10 +142,9 @@ namespace PnP.Core.QueryModel
                     }
                 }
             }
-            // For what is not supported, we return an empty collection
             else
             {
-                return Enumerable.Empty<TModel>();
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_NoIQueryableDataModel, typeof(TModel).ToString()));
             }
         }
 
@@ -183,11 +184,19 @@ namespace PnP.Core.QueryModel
                 // Check if collection supports pagination
                 var pageableCollection = collection as ISupportPaging;
                 var typedCollection = collection as BaseDataModelCollection<TModel>;
-                
-                if (pageableCollection == null || // If the result set is not pageable
-                    !pageableCollection.CanPage || // or if the result set is pageable, but there is no support for paging (no nextLink metadata)
-                    (typedCollection != null && originalBatchRequest.ApiCall.Type == ApiType.SPORest && pageableCollection.CanPage && !query.Top.HasValue && count < typedCollection.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize) || // or if the result set comes from SPO REST, is pageable, there is support for nextLink, there is no Top constraint and but the results are the whole result set
-                    (query.Top.HasValue && count >= query.Top)) // or there is Top constraint and the result set is bigger than the Top constraint
+
+                if (// If the result set is not pageable
+                    pageableCollection == null || 
+
+                    // or if the result set is pageable, but there is no support for paging (no nextLink metadata)
+                    !pageableCollection.CanPage || 
+                    
+                    // or if the result set comes from SPO REST, is pageable, there is support for nextLink, there is no Top constraint and but the results are the whole result set
+                    (typedCollection != null && originalBatchRequest.ApiCall.Type == ApiType.SPORest && 
+                     pageableCollection.CanPage && !query.Top.HasValue && count < typedCollection.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize) ||
+                    
+                    // or there is Top constraint and the result set is bigger than the Top constraint
+                    (query.Top.HasValue && count >= query.Top)) 
                 {
                     yield break;
                 }
@@ -220,6 +229,8 @@ namespace PnP.Core.QueryModel
 
                 // Clear collection, in order to not fill it
                 collection.Clear();
+
+                PnPContext.RequestModules?.Clear();
 
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);

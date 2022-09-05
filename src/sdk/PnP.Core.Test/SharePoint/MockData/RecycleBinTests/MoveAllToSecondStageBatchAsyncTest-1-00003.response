@@ -1,9 +1,0 @@
---batchresponse_033b9773-67c3-4330-aba4-81cb89e90f85
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"MoveAllToSecondStage":null}}
---batchresponse_033b9773-67c3-4330-aba4-81cb89e90f85--

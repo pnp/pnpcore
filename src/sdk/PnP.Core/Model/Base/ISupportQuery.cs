@@ -7,6 +7,6 @@
     public interface ISupportQuery<TResult>
 #pragma warning restore CA1040 // Avoid empty interfaces
     {
-       
+
     }
 }

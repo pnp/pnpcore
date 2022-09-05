@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PnP.Core.Services.Core;
 using System;
+using System.Net;
 using System.Net.Http;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
@@ -69,11 +71,13 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                 collection.AddHttpClient<SharePointRestClient>()
                     .AddHttpMessageHandler<SharePointRestRetryHandler>();
+                collection.AddHttpClient<MicrosoftGraphClient>()
+                    .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
             }
             else
             {
@@ -84,7 +88,14 @@ namespace PnP.Core.Services
                     // tell the http client to not use the default (empty) cookie container
                     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                     {
-                        UseCookies = false
+                        UseCookies = false,
+                        AutomaticDecompression = DecompressionMethods.All
+                    });
+                collection.AddHttpClient<MicrosoftGraphClient>()
+                    .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
+                    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                    {
+                        AutomaticDecompression = DecompressionMethods.All
                     });
             }
 #else
@@ -95,20 +106,24 @@ namespace PnP.Core.Services
                 // tell the http client to not use the default (empty) cookie container
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
-                    UseCookies = false
+                    UseCookies = false,
+                    AutomaticDecompression = DecompressionMethods.GZip
+                });
+            collection.AddHttpClient<MicrosoftGraphClient>()
+                .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip
                 });
 #endif
-
-            collection.AddHttpClient<MicrosoftGraphClient>()
-                .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
-
             return collection;
         }
 
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddTransient<IPnPContextFactory, PnPContextFactory>();
+                   .AddTransient<IPnPContextFactory, PnPContextFactory>()
+                   .AddSingleton<EventHub>();
         }
     }
 }

@@ -114,7 +114,7 @@ namespace PnP.Core.QueryModel
                     }
                 }
             }
-            
+
         }
 
         private void VisitOrderBy(MethodCallExpression m, bool ascending = true)
@@ -154,36 +154,7 @@ namespace PnP.Core.QueryModel
         private void VisitWhere(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
-            LambdaExpression lambda = (LambdaExpression)m.Arguments[1].StripQuotes();
-
-            switch (lambda.Body)
-            {
-                case BinaryExpression binary:
-                    AddFilter(binary);
-                    break;
-
-                case MethodCallExpression methodCall:
-                    if (methodCall.Type != typeof(bool))
-                    {
-                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionMustReturnBoolean, methodCall));
-                    }
-
-                    string methodField = GetFilterField(methodCall);
-                    // Should never happen
-                    if (methodField == null)
-                    {
-                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Expression, methodCall));
-                    }
-
-                    AddFilterToStack(new FilterItem
-                    {
-                        Field = methodField,
-                        Criteria = FilteringCriteria.Equal,
-                        Value = true
-                    });
-
-                    break;
-            }
+            ParseFilteringExpression(m);
         }
 
         private void VisitFirstOrDefault(MethodCallExpression m)
@@ -193,36 +164,7 @@ namespace PnP.Core.QueryModel
             // If the FirstOrDefault method includes a filtering expression
             if (m.Arguments.Count > 1)
             {
-                LambdaExpression lambda = (LambdaExpression)m.Arguments[1].StripQuotes();
-
-                switch (lambda.Body)
-                {
-                    case BinaryExpression binary:
-                        AddFilter(binary);
-                        break;
-
-                    case MethodCallExpression methodCall:
-                        if (methodCall.Type != typeof(bool))
-                        {
-                            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionMustReturnBoolean, methodCall));
-                        }
-
-                        string methodField = GetFilterField(methodCall);
-                        // Should never happen
-                        if (methodField == null)
-                        {
-                            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Expression, methodCall));
-                        }
-
-                        AddFilterToStack(new FilterItem
-                        {
-                            Field = methodField,
-                            Criteria = FilteringCriteria.Equal,
-                            Value = true
-                        });
-
-                        break;
-                }
+                ParseFilteringExpression(m);
             }
 
             // FirstOrDefault corresponds to $take=1
@@ -241,7 +183,24 @@ namespace PnP.Core.QueryModel
             query.Skip = GetConstantValue<int>(m.Arguments[1]);
         }
 
-        private void AddFilter(BinaryExpression expression)
+        private void ParseFilteringExpression(MethodCallExpression m)
+        {
+            var lambda = (LambdaExpression)m.Arguments[1].StripQuotes();
+
+            var expression = new ExpressionNormalizer(lambda.Body).Normalize();
+
+            // the return type should always be BinaryExpression
+            if (expression is BinaryExpression)
+            {
+                AddBinaryFilter(expression as BinaryExpression);
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionType, expression.GetType().Name));
+            }
+        }
+
+        private void AddBinaryFilter(BinaryExpression expression)
         {
             // Create a new group
             var filtersGroup = new FiltersGroup();
@@ -298,7 +257,7 @@ namespace PnP.Core.QueryModel
             switch (expression)
             {
                 case BinaryExpression binary:
-                    AddFilter(binary);
+                    AddBinaryFilter(binary);
                     return null;
                 case MemberExpression member:
 
@@ -415,7 +374,7 @@ namespace PnP.Core.QueryModel
             expression = expression.StripQuotes();
             if (expression is BinaryExpression binary)
             {
-                AddFilter(binary);
+                AddBinaryFilter(binary);
                 return null;
             }
 

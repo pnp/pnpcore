@@ -39,5 +39,10 @@
         /// Page is a topic page (Cortex)
         /// </summary>
         Topic = 6,
+
+        /// <summary>
+        /// Page is a Viva Dashboard page
+        /// </summary>
+        Dashboard = 7,
     }
 }

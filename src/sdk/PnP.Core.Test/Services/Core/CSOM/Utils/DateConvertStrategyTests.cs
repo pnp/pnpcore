@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Services.Core.CSOM.Utils.DateHelpers;
+using PnP.Core.Test.Utilities;
 using System;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Utils
@@ -7,69 +8,148 @@ namespace PnP.Core.Test.Services.Core.CSOM.Utils
     [TestClass]
     public class DateConvertStrategyTests
     {
+
         [TestMethod]
-        public void TestParsingDateFromConstructorLikeString()
+        public void TestParsingFromDateTimeStrategy1()
         {
-            DateConstuctorStrategy strategy = new DateConstuctorStrategy();
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
             string inputString = "/Date(2019,11,5,17,7,26,0)/";
 
-            DateTime expectedDate = new DateTime(2019, 11, 5, 17, 7, 26, 0);
+            DateTime expectedDate = new DateTime(2019, 12, 5, 17, 7, 26, 0);
             DateTime? actualDate = strategy.ConverDate(inputString);
 
             Assert.AreEqual(expectedDate, actualDate);
         }
+
         [TestMethod]
-        public void TestParsingDateFromConstructorLikeString_Negative()
+        public void TestParsingFromDateTimeStrategy2()
         {
-            DateConstuctorStrategy strategy = new DateConstuctorStrategy();
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(2022,0,5,17,7,26,0)/";
+
+            DateTime expectedDate = new DateTime(2022, 1, 5, 17, 7, 26, 0);
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            Assert.AreEqual(expectedDate, actualDate);
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy3()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(2022,2,29,9,40,58,397)/";
+
+            DateTime expectedDate = new DateTime(2022, 3, 29, 9, 40, 58, 397);
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            Assert.AreEqual(expectedDate, actualDate);
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy4()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
             string inputString = "/Date(1612534319000)/";
+
+            DateTime expectedDate = new DateTime(2021, 2, 5, 14, 11, 59, 0);
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            Assert.AreEqual(expectedDate, actualDate);
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy5()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(-50827680000)/";
+
+            DateTime expectedDate = new DateTime(1968, 5, 22, 17, 12, 0, 0);
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            Assert.AreEqual(expectedDate, actualDate);
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy6()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(1243037520000-0700)/";
+
+            DateTime expectedDate = new DateTime(2009, 5, 23, 0, 12, 0, 0, DateTimeKind.Utc).ToLocalTime();
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            Assert.AreEqual(expectedDate, actualDate);
+        }
+        
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy7()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(1243037520000+0300)/";
+
+            DateTime expectedDate = new DateTime(2009, 5, 23, 0, 12, 0, 0, DateTimeKind.Utc).ToLocalTime();
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            if (!TestCommon.RunningInGitHubWorkflow())
+            {
+                Assert.AreEqual(expectedDate, actualDate);
+            }
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategy8()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(1243037520000)/";
+
+            DateTime expectedDate = new DateTime(2009, 5, 23, 0, 12, 0, 0, DateTimeKind.Utc);
+            DateTime? actualDate = strategy.ConverDate(inputString);
+
+            if (!TestCommon.RunningInGitHubWorkflow())
+            {
+                Assert.AreEqual(expectedDate, actualDate);
+            }
+        }
+
+        [TestMethod]
+        public void TestParsingFromDateTimeStrategyNegative1()
+        {
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "";
 
             DateTime? actualDate = strategy.ConverDate(inputString);
 
             Assert.IsFalse(actualDate.HasValue);
         }
+
         [TestMethod]
-        public void TestParsingDateFromMiliseconds()
+        [ExpectedException(typeof(FormatException))]
+        public void TestParsingFromDateTimeStrategyNegative2()
         {
-            FromMilisecondsConversionStrategy strategy = new FromMilisecondsConversionStrategy();
-            string inputString = "/Date(1612534319000)/";
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(2019,11,A,17,7,26,0)/";
 
-            DateTime expectedDate = new DateTime(2021, 2, 5, 14, 11, 59, 0);
-            DateTime? actualDate = strategy.ConverDate(inputString);
-
-            Assert.AreEqual(expectedDate, actualDate);
+            strategy.ConverDate(inputString);
         }
+
         [TestMethod]
-        public void TestParsingDateFromMiliseconds_Negative()
+        [ExpectedException(typeof(FormatException))]
+        public void TestParsingFromDateTimeStrategyNegative3()
         {
-            FromMilisecondsConversionStrategy strategy = new FromMilisecondsConversionStrategy();
-            string inputString = "/Date(2019,11,5,17,7,26,0)/";
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(2019,11,5,17,7,26,0,888)/";
 
-            DateTime? actualDate = strategy.ConverDate(inputString);
-
-            Assert.IsFalse(actualDate.HasValue);
+            strategy.ConverDate(inputString);
         }
+
         [TestMethod]
-        public void CSOMDateConverter_Test_FromConstructor()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestParsingFromDateTimeStrategyNegative4()
         {
-            CSOMDateConverter converter = new CSOMDateConverter();
-            string inputString = "/Date(2019,11,5,17,7,26,0)/";
+            FromDateTimeStrategy strategy = new FromDateTimeStrategy();
+            string inputString = "/Date(2022,12,29,9,40,58,397)/";
 
-            DateTime expectedDate = new DateTime(2019, 11, 5, 17, 7, 26, 0);
-            DateTime? actualDate = converter.ConverDate(inputString);
-
-            Assert.AreEqual(expectedDate, actualDate);
-        }
-        [TestMethod]
-        public void CSOMDateConverter_Test_FromMiliseconds()
-        {
-            CSOMDateConverter converter = new CSOMDateConverter();
-            string inputString = "/Date(1612534319000)/";
-
-            DateTime expectedDate = new DateTime(2021, 2, 5, 14, 11, 59, 0);
-            DateTime? actualDate = converter.ConverDate(inputString);
-
-            Assert.AreEqual(expectedDate, actualDate);
+            strategy.ConverDate(inputString);
         }
     }
 }

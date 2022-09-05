@@ -1,9 +1,0 @@
---batchresponse_d9a38e15-eb24-4ae7-8936-a624bad90bbc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"DeleteAll":null}}
---batchresponse_d9a38e15-eb24-4ae7-8936-a624bad90bbc--

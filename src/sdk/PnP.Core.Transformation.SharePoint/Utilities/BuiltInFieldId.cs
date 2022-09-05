@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Utilities
 {
     /// <summary>
     /// Defines a list of IDs for built in fields
     /// </summary>
-    public static class BuiltInFieldIds
+    internal static class BuiltInFieldIds
     {
         /// <summary>
         /// Returns a GUID that represents the content type identifier of the specified Windows SharePoint Services object.

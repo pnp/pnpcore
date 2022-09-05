@@ -6,8 +6,7 @@ using System.Text.Json;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = tabUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
+    internal sealed class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/tabs";
         private const string tabUri = baseUri + "/{GraphId}";
@@ -22,12 +21,18 @@ namespace PnP.Core.Model.Teams
                 dynamic tab = new ExpandoObject();
                 tab.displayName = DisplayName;
 
-                string teamsAppId = keyValuePairs["teamsAppId"].ToString();
+                string teamsAppId = keyValuePairs[TeamChannelTabConstants.TeamsAppId].ToString();
                 tab.teamsAppId = teamsAppId;
 
                 switch (teamsAppId)
                 {
-                    case "com.microsoft.teamspace.tab.wiki": // Wiki, no configuration possible
+                    case TeamChannelTabConstants.WikiAppId:
+                    case TeamChannelTabConstants.SharePointPageOrListAppId:
+                    case TeamChannelTabConstants.PowerBiAppId:
+                    case TeamChannelTabConstants.FormsAppId:
+                    case TeamChannelTabConstants.OneNoteAppId:
+                    case TeamChannelTabConstants.StreamsAppId:
+                    case TeamChannelTabConstants.PlannerAppId:
                         break;
                     default:
                         {

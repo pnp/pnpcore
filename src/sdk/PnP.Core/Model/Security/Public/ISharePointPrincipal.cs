@@ -6,14 +6,14 @@
     public interface ISharePointPrincipal
     {
         /// <summary>
-        /// Gets a value that specifies the member identifier for the user or group.
+        /// Gets a value that specifies the member identifier for the principal (user/group).
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets a value that indicates whether this member should be hidden in the UI.
         /// </summary>
-        public bool IsHiddenInUI { get; }
+        public bool IsHiddenInUI { get; set; }
 
         /// <summary>
         /// Gets a value containing the type of the principal.
@@ -21,12 +21,12 @@
         public PrincipalType PrincipalType { get; }
 
         /// <summary>
-        /// Gets the login name of the user.
+        /// Gets the login name of the principal (user/group).
         /// </summary>
-        public string LoginName { get; set; }
+        public string LoginName { get; }
 
         /// <summary>
-        /// Name of the user
+        /// Name of the principal (user/group).
         /// </summary>
         public string Title { get; set; }
     }

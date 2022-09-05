@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {
-    class CSOMBodySerializer : IBodySerializer
+    internal sealed class CSOMBodySerializer : IBodySerializer
     {
         public string SerializeRequestBody(List<ActionObjectPath> requests)
         {

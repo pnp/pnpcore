@@ -13,17 +13,17 @@ namespace PnP.Core.Model.SharePoint
         /// Guid of the field
         /// </summary>
         public Guid Id { get; set; }
-        
+
         /// <summary>
         /// Field display name
         /// </summary>
         public string DisplayName { get; set; }
-        
+
         /// <summary>
         /// Field internal name
         /// </summary>
         public string InternalName { get; set; }
-        
+
         /// <summary>
         /// Adds fields to default view if value is true.
         /// </summary>
@@ -43,12 +43,12 @@ namespace PnP.Core.Model.SharePoint
         /// Type of the field
         /// </summary>
         public string FieldType { get; internal set; }
-        
+
         /// <summary>
         /// Group of the field
         /// </summary>
         public string Group { get; set; }
-       
+
         /// <summary>
         /// Specifies filds is required to enter vlaue or not.
         /// </summary>
@@ -58,7 +58,7 @@ namespace PnP.Core.Model.SharePoint
         /// Ignored currently for SP2016
         /// </summary>
         public Guid ClientSideComponentId { get; set; }
-        
+
         /// <summary>
         /// Ignored currently for SP2016
         /// </summary>
@@ -82,8 +82,8 @@ namespace PnP.Core.Model.SharePoint
         /// Constructor
         /// </summary>
         /// <param name="fieldType">Type of the field</param>
-        public FieldCreationOptions(FieldType fieldType): this(fieldType.ToString())
-        {            
+        public FieldCreationOptions(FieldType fieldType) : this(fieldType.ToString())
+        {
         }
 
         /// <summary>

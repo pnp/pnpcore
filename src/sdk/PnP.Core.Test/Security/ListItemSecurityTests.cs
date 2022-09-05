@@ -134,7 +134,7 @@ namespace PnP.Core.Test.Security
                 // Create a new list
                 string listName = TestCommon.GetPnPSdkTestAssetName("AddItemRoleAssignmentTest");
                 await InitializeTestListAsync(context, listName);
-                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items.QueryProperties(p => p.All, p => p.HasUniqueRoleAssignments));
 
                 // get first item and fetch the role assignments
                 var first = myList.Items.First();
@@ -155,12 +155,13 @@ namespace PnP.Core.Test.Security
                 // re-fetch the roleassignment collection
                 await first.LoadAsync(i => i.RoleAssignments);
 
-                // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
-                Assert.AreEqual(2, first.RoleAssignments.Length);
+                // Check role assignment. Should be 1 or more
+                Assert.IsTrue(first.RoleAssignments.Length > 0);
 
                 var last = myList.Items.AsRequested().Last();
                 await last.GetAsync(i => i.RoleAssignments);
-                
+                Assert.IsFalse(last.HasUniqueRoleAssignments);
+
                 // Get the current user
                 var currentUser = await context.Web.GetCurrentUserAsync();
 
@@ -175,10 +176,11 @@ namespace PnP.Core.Test.Security
                 await context.ExecuteAsync();
 
                 // re-fetch the roleassignment collection
-                await last.LoadAsync(i => i.RoleAssignments);
+                await last.LoadAsync(i => i.RoleAssignments, i => i.HasUniqueRoleAssignments);
 
                 // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
                 Assert.AreEqual(1, last.RoleAssignments.Length);
+                Assert.IsTrue(last.HasUniqueRoleAssignments);
 
                 // Delete the list
                 await myList.DeleteAsync();
@@ -190,7 +192,7 @@ namespace PnP.Core.Test.Security
         {
             //TestCommon.Instance.Mocking = false;
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
                 // Create a new list
                 string listName = TestCommon.GetPnPSdkTestAssetName("RemoveItemRoleAssignmentTest");
@@ -216,8 +218,7 @@ namespace PnP.Core.Test.Security
 
                 await first.LoadAsync(f => f.RoleAssignments);
 
-                // We should only have one role assignment left
-                Assert.AreEqual(1, first.RoleAssignments.Length);
+                Assert.AreEqual(0, first.RoleAssignments.Length);
 
                 // Delete the list
                 await myList.DeleteAsync();

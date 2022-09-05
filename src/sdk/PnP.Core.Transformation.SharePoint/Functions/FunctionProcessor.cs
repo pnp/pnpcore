@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using PnPCore = PnP.Core.Model.SharePoint;
 
 namespace PnP.Core.Transformation.SharePoint.Functions
 {
@@ -19,7 +18,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
     /// </summary>
     public class FunctionProcessor : BaseFunctionProcessor
     {
-        private WebPartMapping pageTransformation;
+        //private WebPartMapping pageTransformation;
         //private List<AddOnType> addOnTypes;
 
         private ILogger<FunctionProcessor> logger;
@@ -52,9 +51,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         /// </summary>
         /// <param name="pageTransformationContext">The current page transformation context</param>
         /// <param name="sourceContext">The CSOM source context</param>
-        public void Init(PageTransformationContext pageTransformationContext, ClientContext sourceContext
-            //, WebPartMapping pageTransformation
-            )
+        public void Init(PageTransformationContext pageTransformationContext, ClientContext sourceContext)
         {
             // Configure the SharePoint Function service instance
             this.sharePointFunctionsService.PageTransformationContext = pageTransformationContext;

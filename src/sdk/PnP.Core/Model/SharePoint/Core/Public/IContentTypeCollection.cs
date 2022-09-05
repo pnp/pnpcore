@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of ContentType objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ContentTypeCollection))]
-    public interface IContentTypeCollection : IQueryable<IContentType>, IAsyncEnumerable<IContentType>, IDataModelCollection<IContentType>, IDataModelCollectionLoad<IContentType>
+    public interface IContentTypeCollection : IQueryable<IContentType>, IAsyncEnumerable<IContentType>, IDataModelCollection<IContentType>, IDataModelCollectionLoad<IContentType>, ISupportModules<IContentTypeCollection>
     {
         #region Extension Methods
 
@@ -135,6 +135,52 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="id">Id of the content type</param>
         /// <returns>The newly added content type</returns>
         IContentType AddAvailableContentType(string id);
+
+        #endregion
+
+        #region AddAvailableContentTypeFromHub
+
+        /// <summary>
+        /// Add a content type from the content type hub
+        /// </summary>
+        /// <param name="id">Id of the content type</param>
+        /// <param name="options">Getting a content type from the hub might be async depending on current system load, optionnally provide options to control how if and how the waiting will happen</param>
+        /// <returns>Null if the add was actually done, a <see cref="ILongRunningOperation"/> instance otherwise (e.g. when async and you've not chosen to wait for completion)</returns>
+        Task<ILongRunningOperation> AddAvailableContentTypeFromHubAsync(string id, AddContentTypeFromHubOptions options = null);
+
+        /// <summary>
+        /// Add a content type from the content type hub
+        /// </summary>
+        /// <param name="id">Id of the content type</param>
+        /// <param name="options">Getting a content type from the hub might be async depending on current system load, optionnally provide options to control how if and how the waiting will happen</param>
+        /// <returns>Null if the add was actually done, a <see cref="ILongRunningOperation"/> instance otherwise (e.g. when async and you've not chosen to wait for completion)</returns>
+        ILongRunningOperation AddAvailableContentTypeFromHub(string id, AddContentTypeFromHubOptions options = null);
+
+        #endregion
+
+        #region Document Sets
+
+        /// <summary>
+        /// Creates a document set
+        /// </summary>
+        /// <param name="id">Id of the document set</param>
+        /// <param name="name">Name of the document set</param>
+        /// <param name="description">Description of the document set</param>
+        /// <param name="group">Group of the document set</param>
+        /// <param name="options">Options for creating the document set</param>
+        /// <returns>The newly added document set</returns>
+        Task<IDocumentSet> AddDocumentSetAsync(string id, string name, string description = null, string group = null, DocumentSetOptions options = null);
+
+        /// <summary>
+        /// Creates a document set
+        /// </summary>
+        /// <param name="id">Id of the document set</param>
+        /// <param name="name">Name of the document set</param>
+        /// <param name="description">Description of the document set</param>
+        /// <param name="group">Group of the document set</param>
+        /// <param name="options">Options for creating the document set</param>
+        /// <returns>The newly added document set</returns>
+        IDocumentSet AddDocumentSet(string id, string name, string description = null, string group = null, DocumentSetOptions options = null);
 
         #endregion
 

@@ -8,6 +8,6 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">The actual type of the Domain Model objects</typeparam>
     public interface IDataModelCollection<TModel> : IEnumerable<TModel>, IDataModelParent, IDataModelWithContext, IRequestableCollection
     {
-       
+
     }
 }

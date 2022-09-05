@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.SharePoint.Extensions;
 
 namespace PnP.Core.Transformation.SharePoint
 {
@@ -17,7 +17,11 @@ namespace PnP.Core.Transformation.SharePoint
     {
         private readonly PageTransformationOptions defaultPageTransformationOptions;
 
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="pageTransformationOptions">Page transformation options</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SharePointTargetPageUriResolver(IOptions<PageTransformationOptions> pageTransformationOptions)
         {
             this.defaultPageTransformationOptions = pageTransformationOptions?.Value ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
@@ -37,8 +41,14 @@ namespace PnP.Core.Transformation.SharePoint
             if (!(sourceItem is SharePointSourceItem spItem))
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported", nameof(sourceItem));
 
+            var sourceWeb = spItem.SourceContext.Web;
+            sourceWeb.EnsureProperties(w => w.Url);
+
+            var webUri = new Uri(sourceWeb.Url);
+            
             var itemSiteLocalUri = new StringBuilder();
-            foreach (var s in spItem.Id.Uri.Segments.Skip(3).Take(spItem.Id.Uri.Segments.Length - 4))
+            // Remove all the segements of the web URL.
+            foreach (var s in spItem.Id.Uri.Segments.Skip(webUri.Segments.Length).Take(spItem.Id.Uri.Segments.Length - 4))
             {
                 itemSiteLocalUri.Append(s);
             }
@@ -46,7 +56,12 @@ namespace PnP.Core.Transformation.SharePoint
             itemSiteLocalUri.Append(this.defaultPageTransformationOptions.TargetPagePrefix);
             itemSiteLocalUri.Append(spItem.Id.Uri.Segments[spItem.Id.Uri.Segments.Length - 1]);
 
-            var uri = new Uri(targetContext.Uri + "/" + itemSiteLocalUri.ToString());
+            // In case the source is a classi publishing portal
+            // we also need to replace "pages" with "sitepages"
+            var uri = new Uri((targetContext.Uri + "/" + 
+                itemSiteLocalUri.ToString())
+                .Replace("/pages/", "/sitepages/", StringComparison.InvariantCultureIgnoreCase));
+
             return Task.FromResult(uri);
         }
     }

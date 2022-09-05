@@ -14,17 +14,17 @@ namespace PnP.Core.Model
         /// <summary>
         /// Loads the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
-        /// <param name="expressions">The properties to select</param>
+        /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        Task LoadAsync(params Expression<Func<TModel, object>>[] expressions);
+        Task LoadAsync(params Expression<Func<TModel, object>>[] selectors);
 
 
         /// <summary>
         /// Batches the load of the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="batch">The batch to use</param>
-        /// <param name="expressions">The properties to select</param>
+        /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions);
+        Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] selectors);
     }
 }

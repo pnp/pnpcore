@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
+using PnP.Core.Transformation.SharePoint.Publishing;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using System.Linq;
-using PnP.Core.Transformation.SharePoint.Publishing;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -31,6 +29,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
+
+        private Guid taskId;
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -56,7 +56,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public async Task<PageLayoutMappingProviderOutput> MapPageLayoutAsync(PageLayoutMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync");
+            this.taskId = input.Context.Task.Id;
+
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync"
+                .CorrelateString(this.taskId));
 
             // Check that we have input data
             if (input == null) throw new ArgumentNullException(nameof(input));
@@ -114,9 +118,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 publishingPageTransformationModel = GeneratePageLayout(pageItem);
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_PageLayoutMappingGeneration, 
-                    pageFile.ServerRelativeUrl, input.PageLayout));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_PageLayoutMappingGeneration
+                    .CorrelateString(this.taskId), 
+                    pageFile.ServerRelativeUrl, input.PageLayout);
             }
 
             // Still no layout...can't continue...
@@ -124,13 +129,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                     SharePointTransformationResources.Error_NoPageLayoutTransformationModel, input.PageLayout, pageFile.ServerRelativeUrl);
-                logger.LogInformation(errorMessage);
+                logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                 throw new Exception(errorMessage);
             }
 
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed, 
-                pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed
+                .CorrelateString(this.taskId), 
+                pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name);
 
             return new SharePointPageLayoutMappingProviderOutput { PageLayout = publishingPageTransformationModel };
         }
@@ -141,7 +147,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             // Let's try to generate a 'basic' model and use that...not optimal, but better than bailing out.
             var pageLayoutAnalyzer = this.serviceProvider.GetService<PageLayoutAnalyser>();
-            var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(pageItem);
+            var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(pageItem, this.taskId);
 
             // Return to requestor
             return newPageLayoutMapping;
@@ -202,16 +208,15 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return result;
         }
 
-        private void ValidateSchema(Stream schema, FileStream stream)
+        private void ValidateSchema(Stream schema, Stream stream)
         {
             // Load the template into an XDocument
             XDocument xml = XDocument.Load(stream);
 
-            using (var schemaReader = new XmlTextReader(schema))
+            using (var schemaReader = XmlReader.Create(schema))
             {
                 // Prepare the XML Schema Set
                 XmlSchemaSet schemas = new XmlSchemaSet();
-                schema.Seek(0, SeekOrigin.Begin);
                 schemas.Add(SharePointConstants.PageLayoutMappingSchema, schemaReader);
 
                 // Set stream back to start
@@ -221,7 +226,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
-                    this.logger.LogError(e.Exception, errorMessage);
+                    this.logger.LogError(e.Exception, 
+                        errorMessage.CorrelateString(this.taskId));
                     throw new ApplicationException(errorMessage);
                 });
             }

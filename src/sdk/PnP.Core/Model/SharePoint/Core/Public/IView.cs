@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a View object
     /// </summary>
     [ConcreteType(typeof(View))]
-    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelLoad<IView>, IDataModelUpdate, IDataModelDelete
+    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelLoad<IView>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         #region Properties
 
@@ -59,7 +59,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a Boolean value that indicates whether the view was modified in an HTML editor
         /// </summary>
-        public bool EditorModified { get; }
+        public bool EditorModified { get; set; }
 
         /// <summary>
         /// Specifies the definitions for column and row formatting that are used in a datasheet view
@@ -79,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Html Schema Xml
         /// </summary>
-        public string HtmlSchemaXml { get;  }
+        public string HtmlSchemaXml { get; }
 
         /// <summary>
         /// Gets the Id
@@ -94,17 +94,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies if the Root Folder is included in the List View
         /// </summary>
-        public bool IncludeRootFolder { get; }
+        public bool IncludeRootFolder { get; set; }
 
         /// <summary>
         /// Specifies the list joins that will be used by the list view
         /// </summary>
-        public string ViewJoins { get; }
+        public string ViewJoins { get; set; }
 
         /// <summary>
         /// An attribute of the view, specifies the Javascript files used for the view.
         /// </summary>
-        public string JSLink { get; }
+        public string JSLink { get; set; }
 
         /// <summary>
         /// Gets or sets List View Xml
@@ -114,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies the view method for the list view
         /// </summary>
-        public string Method { get; }
+        public string Method { get; set; }
 
         /// <summary>
         /// Specifies whether the list view is the default for a mobile device
@@ -137,7 +137,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// An attribute of the view, indicates what documents/templates are visible in "New" menu of a document library
         /// </summary>
-        public string NewDocumentTemplates { get; }
+        public string NewDocumentTemplates { get; set; }
 
         /// <summary>
         /// Specifies whether users can reorder items through the user interface
@@ -162,7 +162,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies the projected fields that will be used by the list view
         /// </summary>
-        public string ViewProjectedFields { get; }
+        public string ViewProjectedFields { get; set; }
 
         /// <summary>
         /// Specifies the CAML query that will be used by the list view
@@ -187,7 +187,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies the recursive scope for the list view of a document library
         /// </summary>
-        public ViewScope Scope { get; }
+        public ViewScope Scope { get; set; }
 
         /// <summary>
         /// Specifies the server relative URL of the list view page
@@ -202,7 +202,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the TabularView attribute in the View Schema XML
         /// </summary>
-        public bool TabularView { get; }
+        public bool TabularView { get; set; }
 
         /// <summary>
         /// Gets a Boolean value that indicates whether the view is threaded
@@ -217,7 +217,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies the toolbar (CAML) for the list view
         /// </summary>
-        public string Toolbar { get; }
+        public string Toolbar { get; set; }
 
         /// <summary>
         /// Specifies the name of the toolbar template that is used for the list view toolbar
@@ -232,7 +232,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Specifies the view data for the list view 
         /// </summary>
-        public string ViewData { get; }
+        public string ViewData { get; set; }
 
         /// <summary>
         /// Gets or sets the ViewType2

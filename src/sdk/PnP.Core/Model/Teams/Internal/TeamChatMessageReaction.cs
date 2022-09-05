@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamChatMessageReaction : BaseDataModel<ITeamChatMessageReaction>, ITeamChatMessageReaction
+    internal sealed class TeamChatMessageReaction : BaseDataModel<ITeamChatMessageReaction>, ITeamChatMessageReaction
     {
         #region Construction
         public TeamChatMessageReaction()

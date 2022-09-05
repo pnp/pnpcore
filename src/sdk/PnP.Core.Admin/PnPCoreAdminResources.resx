@@ -117,10 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_AppManager_AppCatalogNotFound" xml:space="preserve">
+    <value>Tenant app catalog site is not found. Create it either manually or using the corresponding method from the App Manager class.</value>
+  </data>
+  <data name="Exception_AppManager_FileNotFound" xml:space="preserve">
+    <value>File not found</value>
+  </data>
+  <data name="Exception_AppManager_GetAppTimeout" xml:space="preserve">
+    <value>Timeout occurred while trying to get the App metadata from the server</value>
+  </data>
+  <data name="Exception_AppManager_NotResolved" xml:space="preserve">
+    <value>Unable to resolve the AppManager for the type: {0}</value>
+  </data>
+  <data name="Exception_MissingVanityUrlDetails" xml:space="preserve">
+    <value>Your tenant is using vanity URLs and therefore you have to specify a filled VanityUrlOptions instance in all methods that accept that optional parameter</value>
+  </data>
+  <data name="Exception_SiteCreation" xml:space="preserve">
+    <value>The site creation for site {0} did not succeed. Returned siteStatus = {1}</value>
+  </data>
+  <data name="Exception_SiteCreationStatusCheck" xml:space="preserve">
+    <value>Checking for the status of site creation for site {0} did fail. Last returned siteStatus = {1}</value>
+  </data>
+  <data name="Exception_SiteRestore_NotFound" xml:space="preserve">
+    <value>Site to restore ({0}) not found</value>
+  </data>
+  <data name="Exception_TeamCreation" xml:space="preserve">
+    <value>The Team creation for group {0} did not succeed. Check the inner exception for details.</value>
+  </data>
+  <data name="Exception_UnexpectedJson" xml:space="preserve">
+    <value>Unexpected JSON</value>
+  </data>
+  <data name="Exception_Unsupported_InvalidDesignPackageId" xml:space="preserve">
+    <value>Please specify a valid design package id: 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank)</value>
+  </data>
+  <data name="Exception_Unsupported_SiteHasToBeGroupConnected" xml:space="preserve">
+    <value>The site collection has to be connected to a Microsoft 365 group</value>
+  </data>
   <data name="Exception_VanityUrl" xml:space="preserve">
     <value>Vanity urls are currently not handled.</value>
   </data>
   <data name="Log_Information_ExceptionWhileGettingSharePointAdmins" xml:space="preserve">
     <value>Following exception was eaten while getting the tenant admins: {0}</value>
+  </data>
+  <data name="Log_Warning_ExceptionWhileCreatingTeamForGroup" xml:space="preserve">
+    <value>Following exception was eaten while creating a Team for group {0} : {1}</value>
+  </data>
+  <data name="Log_Warning_ExceptionWhileGettingSiteStatus" xml:space="preserve">
+    <value>Following exception was eaten while getting the status of the site creation of {0} : {1}</value>
   </data>
 </root>

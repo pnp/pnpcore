@@ -25,6 +25,13 @@ namespace PnP.Core.Model
     internal delegate Task<ApiCallRequest> GetApiCallOverride(ApiCallRequest input);
 
     /// <summary>
+    /// Delegate for overriding the default API call in case of a GET request for a non expandable collection
+    /// </summary>
+    /// <param name="input">Generated API call</param>
+    /// <returns>Changed API call</returns>
+    internal delegate Task<ApiCallRequest> GetApiCallNonExpandableCollectionOverride(ApiCallRequest input);
+
+    /// <summary>
     /// Delegate for overriding the default API call in case of a UPDATE request
     /// </summary>
     /// <param name="input">Generated API call</param>
@@ -186,12 +193,12 @@ namespace PnP.Core.Model
             ConfigureApiTypeAndRequest(request, out ApiType apiType, out string apiRequest);
 
             var apiResponse = await RawRequestAsync(new ApiCall(apiRequest, apiType, request.Body)
-                                {
-                                    ExecuteRequestApiCall = true,
-                                    SkipCollectionClearing = true,
-                                    RawRequest = true,
-                                    Headers = request.Headers
-                                } , request.HttpMethod).ConfigureAwait(false);
+            {
+                ExecuteRequestApiCall = true,
+                SkipCollectionClearing = true,
+                RawRequest = true,
+                Headers = request.Headers
+            }, request.HttpMethod).ConfigureAwait(false);
 
             return new ApiRequestResponse()
             {
@@ -209,7 +216,18 @@ namespace PnP.Core.Model
             switch (request.Type)
             {
                 case ApiRequestType.SPORest:
-                    {
+                    {                        
+                        if (request.Headers == null)
+                        {
+                            request.Headers = new Dictionary<string, string>();
+                        }
+
+                        // Ensure external API requests keep using odata=verbose for SharePoint REST requests unless an Accept header has explicitly been provided (see #655)
+                        if (!request.Headers.ContainsKey("Accept"))
+                        {
+                            request.Headers.Add("Accept", "application/json;odata=verbose");
+                        }
+
                         if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
                         {
                             apiRequest = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
@@ -245,6 +263,7 @@ namespace PnP.Core.Model
                 RawRequest = true,
                 Headers = request.Headers,
                 RawSingleResult = new BatchResultValue<string>(null),
+                AddedViaBatchMethod = true,
                 RawResultsHandler = (json, apiCall) =>
                 {
                     (apiCall.RawSingleResult as BatchResultValue<string>).Value = json;
@@ -511,6 +530,12 @@ namespace PnP.Core.Model
         internal GetApiCallOverride GetApiCallOverrideHandler { get; set; } = null;
 
         /// <summary>
+        /// API call override handler for get requests for non expandable collections
+        /// </summary>
+        [SystemProperty]
+        internal GetApiCallNonExpandableCollectionOverride GetApiCallNonExpandableCollectionOverrideHandler { get; set; } = null;
+
+        /// <summary>
         /// Handler that will fire when a property mapping does cannot be done automatically
         /// </summary>
         [SystemProperty]
@@ -552,6 +577,8 @@ namespace PnP.Core.Model
             {
                 await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
+
+            PnPContext.RequestModules?.Clear();
 
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
@@ -603,6 +630,8 @@ namespace PnP.Core.Model
             {
                 await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, selectors, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
+
+            PnPContext.RequestModules?.Clear();
 
             return new BatchSingleResult<TModel>(batch, batchRequestId);
         }
@@ -666,10 +695,13 @@ namespace PnP.Core.Model
             var entityInfo = GetClassInfo();
 
             // Prefix API request with context url if needed
-            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+            postApiCall = PrefixApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
             postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
+
+            // This is batch triggered request
+            postApiCall.AddedViaBatchMethod = true;
 
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
@@ -679,6 +711,8 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "AddBatch");
+
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -693,7 +727,7 @@ namespace PnP.Core.Model
             var entityInfo = GetClassInfo();
 
             // Prefix API request with context url if needed
-            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+            postApiCall = PrefixApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
             postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
@@ -708,18 +742,8 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "Add");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
-        }
-
-        private ApiCall PrefixAddApiCall(ApiCall postApiCall, EntityInfo entityInfo)
-        {
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
-            {
-                // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
-            }
-
-            return postApiCall;
         }
 
         private bool CanUseGraphBetaForAdd(ApiCall postApiCall, EntityInfo entityInfo)
@@ -761,7 +785,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo, true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -770,6 +794,7 @@ namespace PnP.Core.Model
             }
 
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "UpdateBatch");
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -782,7 +807,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo, false).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -793,6 +818,7 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "Update");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -817,7 +843,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo, true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -827,6 +853,7 @@ namespace PnP.Core.Model
 
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "DeleteBatch");
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -839,7 +866,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo, false).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -851,6 +878,7 @@ namespace PnP.Core.Model
             }
 
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "Delete");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -882,8 +910,12 @@ namespace PnP.Core.Model
             // Ensure token replacement is done
             apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
 
+            // This is batch triggered request
+            apiCall.AddedViaBatchMethod = true;
+
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -918,6 +950,7 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
             return batch;
         }
@@ -937,12 +970,15 @@ namespace PnP.Core.Model
             {
                 // Get entity information for the entity to update
                 entityInfo = GetClassInfo();
-                
+
                 // Mark request as raw
                 apiCall.RawRequest = true;
 
                 // Prefix API request with context url if needed
                 apiCall = PrefixApiCall(apiCall, entityInfo);
+
+                // This is batch triggered request
+                apiCall.AddedViaBatchMethod = true;
 
                 // Ensure there's no Graph beta endpoint being used when that was not allowed
                 if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
@@ -956,6 +992,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
             return batch.GetRequest(batchRequestId);
         }
 

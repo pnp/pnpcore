@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of comment objects.
     /// </summary>
     [ConcreteType(typeof(CommentCollection))]
-    public interface ICommentCollection : IQueryable<IComment>, IDataModelCollection<IComment>
+    public interface ICommentCollection : IQueryable<IComment>, IDataModelCollection<IComment>, ISupportModules<ICommentCollection>
     {
         #region Add Methods
 

@@ -1,9 +1,0 @@
---batchresponse_ab8e5e2f-5c39-4e03-996e-362035e23b95
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"DisplayName":"PNP_SDK_TEST_GetDisplayNameAsyncTest"}}
---batchresponse_ab8e5e2f-5c39-4e03-996e-362035e23b95--

@@ -10,8 +10,15 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 
         public override string ToString()
         {
-            string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
+            if (Parameters != null && Parameters.Properties != null && Parameters.Properties.Count > 0)
+            {
+                string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
+                return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
+            }
+            else
+            {
+                return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\" />";
+            }
         }
     }
 
@@ -25,18 +32,26 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
             return $"<StaticMethod Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></StaticMethod>";
         }
     }
-    internal class ConstructorPath : ObjectPathMethod
+    
+    internal sealed class ConstructorPath : ObjectPathMethod
     {
         internal string TypeId { get; set; }
 
         public override string ToString()
         {
-            string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>{parameters}</Parameters></Constructor>";
+            if (Parameters != null && Parameters.Properties != null && Parameters.Properties.Count > 0)
+            {
+                string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
+                return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>{parameters}</Parameters></Constructor>";
+            }
+            else
+            {
+                return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\" />";
+            }
         }
     }
 
-    internal class MethodParameter
+    internal sealed class MethodParameter
     {
         internal string TypeId { get; set; }
 

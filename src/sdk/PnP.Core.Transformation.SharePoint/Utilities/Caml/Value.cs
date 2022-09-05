@@ -8,7 +8,7 @@
     /// Defines a CAML value. This class has no constructors available.To instanciate a
     /// new value use public static methods.
     /// </summary>
-    public abstract class Value
+    internal abstract class Value
     {
         /// <summary>
         /// Specifies the data type for the value contained by this element.

@@ -1,15 +1,15 @@
 ﻿using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PnP.Core.Transformation.SharePoint.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Web;
 
 namespace PnP.Core.Transformation.SharePoint.Utilities
 {
     #region QuickLinks property model
-    public class QuickLinksWebPartProperties
+    internal class QuickLinksWebPartProperties
     {
         //IQuickLinksWebPartProps
         [JsonProperty(PropertyName = "items")] //The Quick Link items.
@@ -49,7 +49,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         }
     }
 
-    public class QuickLink
+    internal class QuickLink
     {
         /**
          * The info of the source item where does the quick link point to.
@@ -108,7 +108,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string AltText { get; set; }
     }
 
-    public class QuickLinkFabricReactIconInfo
+    internal class QuickLinkFabricReactIconInfo
     {
         /**
          * The name of the icon.
@@ -117,7 +117,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string IconName { get; set; }
     }
 
-    public class GuidSet
+    internal class GuidSet
     {
         [JsonProperty(PropertyName = "siteId")]
         public string SiteId { get; set; }
@@ -129,7 +129,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string UniqueId { get; set; }
     }
 
-    public class SourceItemInfo
+    internal class SourceItemInfo
     {
         /**
          * Original url of the quick link.
@@ -167,7 +167,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string ProgId { get; set; }
     }
 
-    public class QuickLinkCustomizedImageInfo
+    internal class QuickLinkCustomizedImageInfo
     {
         /**
          * The source url of the customized image of the quick link.
@@ -188,7 +188,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public GuidSet Guids { get; set; }
     }
 
-    public class WaffleLayoutOptions
+    internal class WaffleLayoutOptions
     {
         /**
          * The size of icon displayed on each card.
@@ -203,7 +203,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public bool OnlyShowThumbnail { get; set; }
     }
 
-    public class ListLayoutOptions
+    internal class ListLayoutOptions
     {
         /**
          * Whether show the link description text of all link items.
@@ -218,7 +218,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public bool ShowIcon { get; set; }
     }
 
-    public class ButtonLayoutOptions
+    internal class ButtonLayoutOptions
     {
         /**
          * Whether to have icon and the position of the icon if icon is used. (IconPositionType.NoIcon | IconPositionType.IconToLeft | IconPositionType.IconToTop)
@@ -259,7 +259,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public bool ShowDescription { get; set; }
     }
 
-    public enum ImageFit
+    internal enum ImageFit
     {
         /**
          * The image is not scaled. The image is centered and cropped within the content box.
@@ -293,7 +293,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         centerCover = 4
     }
 
-    public enum QuickLinkType
+    internal enum QuickLinkType
     {
         File = 0,
         Folder = 1,
@@ -303,7 +303,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         DocumentLibrary = 5
     }
 
-    public enum QuickLinkThumbnailSourceType
+    internal enum QuickLinkThumbnailSourceType
     {
         /**
          * A user customized image.
@@ -321,14 +321,14 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         AutoSelect = 3
     }
 
-    public enum ContentAlignment
+    internal enum ContentAlignment
     {
         Top = 1,
         Center = 2,
         Left = 3
     }
 
-    public enum LinesOfText
+    internal enum LinesOfText
     {
         /**
          * The space of rendering the text is fixed to be one line.
@@ -348,7 +348,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         TwoLinesAutoCollapse = 3
     }
 
-    public enum IconSize
+    internal enum IconSize
     {
         Small,
         Medium,
@@ -357,7 +357,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         Fill
     }
 
-    public enum IconPositionType
+    internal enum IconPositionType
     {
         /**
          * No icon is displayed in button card.
@@ -380,7 +380,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         IconOnly = 4
     }
 
-    public enum ButtonTreatment
+    internal enum ButtonTreatment
     {
         /**
          * No button treatment styles.
@@ -398,7 +398,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         FillColor = 3
     }
 
-    public enum QuickLinksLayout
+    internal enum QuickLinksLayout
     {
         /**
          * The compact card layout renderers CompactCard under GridLayout.
@@ -434,7 +434,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
     #endregion
 
     #region SummaryLinks model
-    public class SummaryLink
+    internal class SummaryLink
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -448,7 +448,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
     #endregion
 
     #region Result class
-    public class QuickLinksTransformatorResult
+    internal class QuickLinksTransformatorResult
     {
         public string Properties { get; set; }
         public string SearchablePlainTexts { get; set; }
@@ -460,7 +460,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
     /// <summary>
     /// Class used to generate quicklinks web part properties
     /// </summary>
-    public class QuickLinksTransformator
+    internal class QuickLinksTransformator
     {
         private QuickLinksWebPartProperties properties;
         private ClientContext clientContext;
@@ -727,7 +727,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Let's not fail transformation in this case but do log this
                     // TODO: Find a replacement

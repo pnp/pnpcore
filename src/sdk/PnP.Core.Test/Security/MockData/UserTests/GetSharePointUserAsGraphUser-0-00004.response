@@ -1,9 +1,0 @@
---batchresponse_3bddbbef-1b41-48ab-ada2-8a80875cd7eb
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(14)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(14)","type":"SP.User"},"Id":14,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|annal@bertonline.onmicrosoft.com","Title":"Anna Lidman","PrincipalType":1,"AadObjectId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"225f4ed7-524b-4a6d-8e37-51802e87b3ad","NameIdIssuer":"urn:federation:microsoftonline"},"Email":"AnnaL@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003bffd84ea5837","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"annal@bertonline.onmicrosoft.com"}}
---batchresponse_3bddbbef-1b41-48ab-ada2-8a80875cd7eb--

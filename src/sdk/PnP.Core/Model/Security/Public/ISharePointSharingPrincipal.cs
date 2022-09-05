@@ -10,7 +10,7 @@
         /// Gets a value that specifies the member identifier for the user or group.
         /// </summary>
         public int Id { get; }
-        
+
         /// <summary>
         /// Gets a value containing the type of the principal.
         /// </summary>
@@ -40,7 +40,7 @@
         /// <summary>
         /// Is this user still active?
         /// </summary>
-        public bool IsActive { get;  }
+        public bool IsActive { get; }
 
         /// <summary>
         /// Is this user an external user?

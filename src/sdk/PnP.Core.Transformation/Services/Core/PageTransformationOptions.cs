@@ -1,9 +1,4 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.Services.Core
+﻿namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
     /// Defines the options to transform a page into a SharePoint Online modern page
@@ -20,7 +15,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Defines whether to keep item level page permissions on target or not. Defaults to true.
         /// </summary>
-        public bool KeepPermissions { get; set; } = true;
+        public bool KeepPageSpecificPermissions { get; set; } = true;
 
         /// <summary>
         /// Set this property to true in case you want to retain the page's Author/Editor/Created/Modified fields. Note that a page publish will always set Editor/Modified. Defaults to false.
@@ -30,7 +25,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Defines whether the target page will be automatically published. Defaults to true.
         /// </summary>
-        public bool PublishPage { get; set; }
+        public bool PublishPage { get; set; } = true;
 
         /// <summary>
         /// Defines whether the target page will have page comments enabled or disabled. Defaults to false (i.e. comments enabled).
@@ -43,7 +38,7 @@ namespace PnP.Core.Transformation.Services.Core
         public bool PostAsNews { get; set; }
 
         /// <summary>
-        /// If the page to be transformed is the web's home page, then replace with stock modern home page instead of transforming it
+        /// If the page to be transformed is the web's home page, then replace with stock modern home page instead of transforming it. Defaults to false.
         /// </summary>
         public bool ReplaceHomePageWithDefaultHomePage { get; set; }
 
@@ -52,7 +47,7 @@ namespace PnP.Core.Transformation.Services.Core
         #region Other page transformation properties
 
         /// <summary>
-        /// Defines if the target page will get the name of the source page
+        /// Defines if the target page will get the name of the source page. Defaults to false.
         /// </summary>
         public bool TargetPageTakesSourcePageName { get; set; }
 

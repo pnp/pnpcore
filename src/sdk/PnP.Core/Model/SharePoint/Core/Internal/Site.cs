@@ -1,10 +1,14 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -14,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Site", Uri = "_api/Site")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    internal partial class Site : BaseDataModel<ISite>, ISite
+    internal sealed class Site : BaseDataModel<ISite>, ISite
     {
         #region Construction
         public Site()
@@ -34,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IWeb RootWeb { get => GetModelValue<IWeb>(); set => SetModelValue(value); }
 
-        private IWebCollection allWebs;
+        private IWebCollection allWebs;        
 
         // Note: AllWebs is no real property in SharePoint, so expand/select do not return a thing...
         // TODO: evaluate why we need this
@@ -53,7 +57,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 allWebs = value;
             }
-        }
+        }        
 
         public bool SocialBarOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -111,9 +115,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }
 
-        public string SensitivityLabelId { get => GetValue<string>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "Id")]
+        public Guid SensitivityLabelId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public Guid SensitivityLabel { get => GetValue<Guid>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "DisplayName")]
+        public string SensitivityLabel { get => GetValue<string>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -135,6 +141,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointGroup HubSiteSynchronizableVisitorGroup { get => GetModelValue<ISharePointGroup>(); set => SetModelValue(value); }
 
+        public IEventReceiverDefinitionCollection EventReceivers { get => GetModelCollectionValue<IEventReceiverDefinitionCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
@@ -153,33 +161,32 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IEnumerable<IComplianceTag>> GetAvailableComplianceTagsAsync()
         {
-            var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl='{Site.Url}')", ApiType.SPORest);
+            var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl=@a1)?@a1='{Site.Url}'", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
-                if (json.TryGetProperty("GetAvailableTagsForSite", out JsonElement getAvailableTagsForSite))
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("value", out JsonElement getAvailableTagsForSite))
                 {
-                    if (getAvailableTagsForSite.TryGetProperty("results", out JsonElement result))
+                    var returnTags = new List<IComplianceTag>();
+                    var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(getAvailableTagsForSite.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                    foreach (var tag in tags)
                     {
-                        var returnTags = new List<IComplianceTag>();
-                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
-                        foreach (var tag in tags)
-                        {
-                            returnTags.Add(tag);
-                        }
-                        return returnTags;
+                        returnTags.Add(tag);
                     }
+                    return returnTags;
                 }
+                
             }
 
             return new List<IComplianceTag>();
         }
 
         #endregion
-        
+
         #region Hub Site
 
         /// <summary>
@@ -208,6 +215,11 @@ namespace PnP.Core.Model.SharePoint
             return hubSite;
         }
 
+        public IHubSite RegisterHubSite()
+        {
+            return RegisterHubSiteAsync().GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
@@ -215,7 +227,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var result = false;
 
-            await EnsurePropertiesAsync(p=>p.IsHubSite).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
 
             if (IsHubSite)
             {
@@ -229,6 +241,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return result;
+        }
+
+        public bool UnregisterHubSite()
+        {
+            return UnregisterHubSiteAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -254,6 +271,10 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
+        public bool JoinHubSite(Guid hubSiteId)
+        {
+            return JoinHubSiteAsync(hubSiteId).GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Disassociates the current site to a primary hub site
@@ -263,18 +284,22 @@ namespace PnP.Core.Model.SharePoint
             return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
         }
 
+        public bool UnJoinHubSite()
+        {
+            return UnJoinHubSiteAsync().GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public async Task<IHubSite> GetHubSiteData(Guid? Id)
+        public async Task<IHubSite> GetHubSiteDataAsync(Guid? id)
         {
             IHubSite hubSite = new HubSite()
             {
                 PnPContext = PnPContext,
-                Id = Id ?? HubSiteId
+                Id = id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);
@@ -282,6 +307,10 @@ namespace PnP.Core.Model.SharePoint
             return hubResult;
         }
 
+        public IHubSite GetHubSiteData(Guid? id)
+        {
+            return GetHubSiteDataAsync(id).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Get Changes
@@ -298,6 +327,220 @@ namespace PnP.Core.Model.SharePoint
             return GetChangesAsync(query).GetAwaiter().GetResult();
         }
 
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(Batch batch, ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            apiCall.RawEnumerableResult = new List<IChange>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var batchFirstRequest = batch.Requests.First().Value;
+                ApiCallResponse response = new ApiCallResponse(apiCall, json, System.Net.HttpStatusCode.OK, batchFirstRequest.Id, batchFirstRequest.ResponseHeaders);
+                ((List<IChange>)apiCall.RawEnumerableResult).AddRange(ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList());
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchEnumerableBatchResult<IChange>(batch, batchRequest.Id, (IReadOnlyList<IChange>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(Batch batch, ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(ChangeQueryOptions query)
+        {
+            return await GetChangesBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(query).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Home site
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public async Task<bool> IsHomeSiteAsync()
+        {
+            var apiCall = new ApiCall($"_api/SP.SPHSite/Details", ApiType.SPORest);
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(result.Json))
+            {
+                HomeSiteReference siteReference = JsonSerializer.Deserialize<HomeSiteReference>(result.Json);
+                return siteReference.SiteId != null ? Guid.Parse(siteReference.SiteId) == Id : false;
+            }
+
+            return false;
+        }
+
+        public bool IsHomeSite()
+        {
+            return IsHomeSiteAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Copy / Move Jobs
+
+        public async Task<IList<ICopyMigrationInfo>> CreateCopyJobsAsync(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1)
+        {
+            var apiCall = CreateCopyJobCall(exportObjectUris, destinationUri, options);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("value", out JsonElement copyJobs))
+                {
+                    var returnJobs = new List<ICopyMigrationInfo>();
+                    var copyJobsEnumerable = JsonSerializer.Deserialize<IEnumerable<CopyMigrationInfo>>(copyJobs.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                    foreach (var copyJob in copyJobsEnumerable)
+                    {
+                        returnJobs.Add(copyJob);
+                    }
+
+                    if (waitUntilFinished)
+                    {
+                        await EnsureCopyJobHasFinishedAsync(returnJobs, waitAfterStatusCheck).ConfigureAwait(false);
+                    }
+                    
+                    return returnJobs;
+                }
+
+            }
+
+            return null;
+        }
+
+        public IList<ICopyMigrationInfo> CreateCopyJobs(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options, bool waitUntilFinished = false, int waitAfterStatusCheck = 1)
+        {
+            return CreateCopyJobsAsync(exportObjectUris, destinationUri, options, waitUntilFinished, waitAfterStatusCheck).GetAwaiter().GetResult();
+        }
+
+        public async Task<ICopyJobProgress> GetCopyJobProgressAsync(ICopyMigrationInfo copyMigrationInfo)
+        {
+            var apiCall = GetCopyJobProgressCall(copyMigrationInfo);
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return JsonSerializer.Deserialize<CopyJobProgress>(result.Json);
+        }
+
+        public ICopyJobProgress GetCopyJobProgress(ICopyMigrationInfo copyMigrationInfo)
+        {
+            return GetCopyJobProgressAsync(copyMigrationInfo).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall CreateCopyJobCall(string[] exportObjectUris, string destinationUri, CopyMigrationOptions options)
+        {
+            var requestBody = new
+            {
+                exportObjectUris,
+                destinationUri,
+                options
+            }.AsExpando();
+
+            return new ApiCall("_api/site/CreateCopyJobs", ApiType.SPORest, jsonBody: JsonSerializer.Serialize(requestBody, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues));
+        }
+
+        private static ApiCall GetCopyJobProgressCall(ICopyMigrationInfo copyMigrationInfo)
+        {
+            var requestBody = new
+            {
+                copyJobInfo = new 
+                {
+                    copyMigrationInfo.EncryptionKey,
+                    copyMigrationInfo.JobId,
+                    copyMigrationInfo.JobQueueUri,
+                }
+            }.AsExpando();
+
+            return new ApiCall("_api/site/GetCopyJobProgress", ApiType.SPORest, jsonBody: JsonSerializer.Serialize(requestBody, typeof(ExpandoObject)));
+        }
+
+        public async Task EnsureCopyJobHasFinishedAsync(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1)
+        {
+            while (copyMigrationInfos.Count > 0)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(waitAfterStatusCheck)).ConfigureAwait(false);
+
+                foreach (var copyMigrationInfo in copyMigrationInfos.ToList())
+                {
+                    var progress = await GetCopyJobProgressAsync(copyMigrationInfo).ConfigureAwait(false);
+                    if (progress.JobState == MigrationJobState.None)
+                    {
+                        copyMigrationInfos.Remove(copyMigrationInfo);
+                    }
+                }
+            }
+        }
+
+        public void EnsureCopyJobHasFinished(IList<ICopyMigrationInfo> copyMigrationInfos, int waitAfterStatusCheck = 1)
+        {
+            EnsureCopyJobHasFinishedAsync(copyMigrationInfos, waitAfterStatusCheck).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Get Site Analytics
+        public async Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null)
+        {
+            return await ActivityHandler.GetAnalyticsAsync(this, options).ConfigureAwait(false);
+        }
+
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null)
+        {
+            return GetAnalyticsAsync(options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Get Search Configuration
+
+        public async Task<string> GetSearchConfigurationXmlAsync()
+        {
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ExportSearchConfigurationRequest(SearchObjectLevel.SPSite) });
+
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return result.ApiCall.CSOMRequests[0].Result.ToString();
+        }
+
+        public string GetSearchConfigurationXml()
+        {
+            return GetSearchConfigurationXmlAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IManagedProperty>> GetSearchConfigurationManagedPropertiesAsync()
+        {
+            var searchConfiguration = await GetSearchConfigurationXmlAsync().ConfigureAwait(false);
+
+            return SearchConfigurationHandler.GetManagedPropertiesFromConfigurationXml(searchConfiguration);
+        }
+
+        public List<IManagedProperty> GetSearchConfigurationManagedProperties()
+        {
+            return GetSearchConfigurationManagedPropertiesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SetSearchConfigurationXmlAsync(string configuration)
+        {
+            if (string.IsNullOrEmpty(configuration))
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSite, configuration) });
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetSearchConfigurationXml(string configuration)
+        {
+            SetSearchConfigurationXmlAsync(configuration).GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

@@ -99,16 +99,18 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
     // Option C: we assume there's only one list with that title so we can use FirstOrDefaultAsync
-    var sitePagesList = await context.Web.Lists.Where(p => p.Title == "Site Pages").FirstOrDefaultAsync();
+    var sitePagesList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == "Site Pages");
 }
 ```
 
 Like with loading the model in the previous chapter you've two ways of using the data: query the data that was loaded in the context or query the data loaded into a variable:
 
-Below sample shows the various options for loading and using collections. 
+Below sample shows the various options for loading and using collections.
 
 > [!Note]
-> When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IEnumerable`.
+>
+> - When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IList`.
+> - `IQueryable` is an interface used by almost all collections (like `Lists`, `Fields`, etc.) in PnP Core SDK. It's very powerful, but should be used carefully to avoid some common performance pitfalls. Read [IQueryable performance considerations](basics-iqueryable.md) to learn more.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -126,7 +128,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // are not loaded into the context
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
-    foreach(var list in lists.AsRequested())
+    foreach(var list in lists)
     {
         // Use list
     }
@@ -190,7 +192,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     //     for each content type the field links are controlled loaded 
     //       with the name property
     var list = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.DocumentLibrary && 
-                                                  p.Hidden == true)
+                                                  p.Hidden)
                                       .QueryProperties(
                                         p => p.Title, p => p.TemplateType, 
                                         p => p.ContentTypes.QueryProperties(

@@ -1,7 +1,5 @@
 ﻿using PnP.Core.Model.SharePoint;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.Model
 {
@@ -29,5 +27,10 @@ namespace PnP.Core.Transformation.Model
         /// The emphasis for the zone
         /// </summary>
         public int ZoneEmphasis { get; set; }
+
+        /// <summary>
+        /// The emphasis for the vertical zone
+        /// </summary>
+        public int VerticalSectionZoneEmphasis { get; set; }
     }
 }

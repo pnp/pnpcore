@@ -7,7 +7,7 @@ namespace PnP.Core.Model
     /// Attribute used to decorate model classes that can be loaded via SharePoint REST
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    internal class SharePointTypeAttribute : Attribute
+    internal sealed class SharePointTypeAttribute : Attribute
     {
         /// <summary>
         /// Default constructor

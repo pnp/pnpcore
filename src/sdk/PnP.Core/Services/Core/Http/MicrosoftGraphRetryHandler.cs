@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Services.Core;
 
 namespace PnP.Core.Services
 {
     /// <summary>
     /// Retry handler for Microsoft Graph requests
     /// </summary>
-    internal class MicrosoftGraphRetryHandler : RetryHandlerBase
+    internal sealed class MicrosoftGraphRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)
+        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
         {
             Configure();
         }

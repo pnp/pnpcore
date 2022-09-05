@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -87,21 +89,19 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
-        //[TestMethod]
-        //public async Task GetWebAuthorTest()
-        //{
-        //    TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        IWeb webWithAuthor = await context.Web.GetAsync(p => p.Author);
+        [TestMethod]
+        public async Task GetWebAuthorTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb webWithAuthor = await context.Web.GetAsync(p => p.Author);
 
-        //        Assert.IsNotNull(webWithAuthor);
-        //        Assert.IsNotNull(webWithAuthor.Author);
-        //        Assert.AreNotEqual(0, webWithAuthor.Author.SharePointId);
-        //    }
-        //}
-
+                Assert.IsNotNull(webWithAuthor);
+                Assert.IsNotNull(webWithAuthor.Author);
+                Assert.AreNotEqual(0, webWithAuthor.Author.Id);
+            }
+        }
 
         [TestMethod]
         public async Task GetWebSimpleProperties_H_M_Test()
@@ -121,9 +121,10 @@ namespace PnP.Core.Test.SharePoint
                     p => p.LastItemUserModifiedDate,
                     p => p.LogoAlignment,
                     p => p.MasterUrl,
-                    p => p.MegaMenuEnabled
+                    p => p.MegaMenuEnabled,
+                    p => p.HasUniqueRoleAssignments
                     );
-                
+
                 var web = context.Web;
 
                 Assert.IsNotNull(web);
@@ -136,6 +137,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(LogoAlignment.Left, web.LogoAlignment);
                 Assert.AreNotEqual("", web.MasterUrl);
                 Assert.IsFalse(web.MegaMenuEnabled);
+                Assert.IsTrue(web.HasUniqueRoleAssignments);
             }
         }
 
@@ -177,7 +179,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.SaveSiteAsTemplateEnabled);
                 Assert.IsNull(web.SearchBoxPlaceholderText);
                 Assert.AreNotEqual("", web.ServerRelativeUrl);
-                Assert.AreEqual("", web.SiteLogoDescription);
+                Assert.IsTrue(string.IsNullOrEmpty(web.SiteLogoDescription));
                 Assert.AreNotEqual("", web.SiteLogoUrl);
             }
         }
@@ -567,7 +569,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
                 await context.Web.LoadAsync(p => p.RegionalSettings);
-                await context.Web.RegionalSettings.LoadAsync(p=>p.TimeZones);
+                await context.Web.RegionalSettings.LoadAsync(p => p.TimeZones);
 
                 var timeZones = context.Web.RegionalSettings.TimeZones;
 
@@ -592,13 +594,13 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                await context.Web.RegionalSettings.LoadAsync(p=>p.DecimalSeparator, p => p.TimeZone);
+                await context.Web.RegionalSettings.LoadAsync(p => p.DecimalSeparator, p => p.TimeZone);
 
                 Assert.IsTrue(context.Web.RegionalSettings.Requested);
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator));
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
                 Assert.IsTrue(context.Web.RegionalSettings.TimeZone.Requested);
-                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p=>p.Bias));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Bias));
             }
         }
 
@@ -893,9 +895,9 @@ namespace PnP.Core.Test.SharePoint
 
                 if (!string.IsNullOrEmpty(response.Response))
                 {
-                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
+                    var json = JsonDocument.Parse(response.Response).RootElement;
 
-                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
+                    if (json.TryGetProperty("value", out JsonElement utcToLocalTimeViaServerCall))
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
@@ -916,9 +918,9 @@ namespace PnP.Core.Test.SharePoint
 
                 if (!string.IsNullOrEmpty(response2.Response))
                 {
-                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
+                    var json = JsonDocument.Parse(response2.Response).RootElement;
 
-                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
+                    if (json.TryGetProperty("value", out JsonElement LocalTimeToUtcViaServerCall))
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
@@ -1071,6 +1073,31 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddUserToWebTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                // Is equivalent to EnsureUser
+                var addedUser = context.Web.SiteUsers.Add(currentUser.LoginName);
+
+                addedUser.AddRoleDefinitions("Full Control");
+
+                var currentRoleDefinitions = addedUser.GetRoleDefinitions();
+
+                Assert.IsNotNull(currentRoleDefinitions.AsRequested().FirstOrDefault(p => p.Name == "Full Control"));
+
+                addedUser.RemoveRoleDefinitions(new string[] { "Full Control" });
+
+                currentRoleDefinitions = addedUser.GetRoleDefinitions();
+
+                Assert.IsTrue(currentRoleDefinitions == null);
+            }
+        }
+
+        [TestMethod]
         public async Task AddWebWithDefaults()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1133,9 +1160,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string webTitle = "AddWebWithCustomOptions";
-                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions 
-                { 
-                    Title = webTitle, 
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions
+                {
+                    Title = webTitle,
                     Url = webTitle,
                     Description = "Description of the sub web",
                     Template = "STS#0",
@@ -1257,6 +1284,19 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var changesBatch = context.Web.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+
+                Assert.IsTrue(changesBatch.Count > 0);
             }
         }
 
@@ -1302,7 +1342,7 @@ namespace PnP.Core.Test.SharePoint
                     ChangeTokenStart = firstChangeToken,
                     ChangeTokenEnd = lastChangetoken
                 });
-               
+
                 Assert.IsTrue(changes2.Count == 9);
             }
         }
@@ -1317,35 +1357,54 @@ namespace PnP.Core.Test.SharePoint
                 // Add a new content type
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100554FB756A84E4A4899FB819522D2BF50", "ChangeTest", "TESTING", "TESTING");
 
-                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                try
                 {
-                    ContentType = true,
-                    FetchLimit = 5
-                });
+                    var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                    {
+                        ContentType = true,
+                        FetchLimit = 1000
+                    });
 
-                Assert.IsNotNull(changes);
-                Assert.IsTrue(changes.Count > 0);
-                Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
-                Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
+                    Assert.IsNotNull(changes);
+                    Assert.IsTrue(changes.Count > 0);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
 
-                Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
-                Assert.ThrowsException<ClientException>(() =>
+                    Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
+                    Assert.ThrowsException<ClientException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
+                    });
+                    Assert.ThrowsException<ArgumentNullException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(null);
+                    });
+
+                    // Load additional properties based upon the returned content type
+                    IChangeContentType contentTypeToValidate = null;
+                    foreach (var change in changes)
+                    {
+                        if (change is IChangeContentType changeContentType)
+                        {
+                            if (changeContentType.ContentTypeId.StringId == "0x0100554FB756A84E4A4899FB819522D2BF50")
+                            {
+                                contentTypeToValidate = changeContentType;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (contentTypeToValidate != null)
+                    {
+                        await contentTypeToValidate.ContentTypeId.LoadAsync(p => p.Group);
+                        Assert.IsTrue(contentTypeToValidate.ContentTypeId.IsPropertyAvailable(p => p.Group));
+                    }
+                }
+                finally
                 {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
-                });
-                Assert.ThrowsException<ArgumentNullException>(() =>
-                {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(null);
-                });
-
-                // Load additional properties based upon the returned content type
-                var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;
-                await changedContentType.LoadAsync(p => p.Group);
-
-                Assert.IsTrue(changedContentType.IsPropertyAvailable(p => p.Group));
-
-                // Delete the content type again
-                await newContentType.DeleteAsync();
+                    // Delete the content type again
+                    await newContentType.DeleteAsync();
+                }
             }
         }
 
@@ -1408,6 +1467,604 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetSubWebs()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.Load(w => w.Webs);
+                Assert.IsTrue(context.Web.Webs.Length > 0);
 
+                var webs = context.Web.Webs.ToList();
+                Assert.IsTrue(webs.Count == context.Web.Webs.Length);
+                Guid id = webs.First().Id;
+
+                var webs2 = context.Web.Webs.Where(p => p.Id == id).ToList();
+                Assert.IsTrue(webs2.Count == 1);
+                Assert.IsTrue(webs2.First().Id == webs.First().Id);
+            }
+        }
+
+        [TestMethod]
+        public void HasCommunicationSiteFeatures()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite, 1))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.SyntexContentCenterTestSite, 2))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.VivaTopicCenterTestSite, 3))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+        }
+
+        [TestMethod]
+        public void SearchBasicTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
+                {
+                    RowLimit = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" }
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+                foreach (var row in searchResult.Rows)
+                {
+                    Assert.IsTrue(row.ContainsKey("Path"));
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SearchBasicBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
+                {
+                    RowLimit = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" }
+                };
+
+                var searchResult = context.Web.SearchBatch(searchOptions);
+                Assert.IsFalse(searchResult.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(searchResult.IsAvailable);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.Result.ElapsedTime >= 0);
+                Assert.IsTrue(searchResult.Result.TotalRows > 0);
+                Assert.IsTrue(searchResult.Result.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Result.Rows.Count == 10);
+
+            }
+        }
+
+        [TestMethod]
+        public void SearchSortingPagingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
+                {
+                    RowsPerPage = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
+                    SortProperties = new System.Collections.Generic.List<SortOption>() { new SortOption("DocId"), new SortOption("ModifiedBy", SortDirection.Ascending) },
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+
+                // Load next page
+                searchOptions.StartRow = 10;
+                searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+            }
+        }
+
+        [TestMethod]
+        public void SearchRefinerTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contentclass:STS_ListItem_DocumentLibrary")
+                {
+                    RowsPerPage = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId", "ContentTypeId" },
+                    SortProperties = new System.Collections.Generic.List<SortOption>() { new SortOption("DocId") },
+                    RefineProperties = new System.Collections.Generic.List<string>() { "ContentTypeId" },
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.ElapsedTime >= 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+                Assert.IsTrue(searchResult.Refinements.Count > 0);
+                foreach (var refiner in searchResult.Refinements)
+                {
+                    Assert.IsTrue(!string.IsNullOrEmpty(refiner.Key));
+                    foreach (var refinementResult in refiner.Value)
+                    {
+                        Assert.IsTrue(refinementResult.Count > 0);
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Value));
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Token));
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Name));
+                    }
+                }
+
+                var refinementOption = searchResult.Refinements.First();
+                Assert.IsTrue(refinementOption.Key == "ContentTypeId");
+
+                var refinementData = refinementOption.Value.First();
+
+                var refinedOptions = new SearchOptions(searchOptions.Query);
+                refinedOptions.RefinementFilters.Add($"{refinementOption.Key}:{refinementData.Token}");
+
+                searchResult = context.Web.Search(refinedOptions);
+
+                Assert.IsTrue(searchResult.TotalRows == refinementData.Count);
+                var firstRow = searchResult.Rows.First();
+
+                Assert.IsTrue(Convert.ToString(firstRow["ContentTypeId"]) == refinementData.Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplatesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = context.Web.GetWebTemplates();
+
+                Assert.IsNotNull(webTemplates);
+                Assert.IsTrue(webTemplates.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplatesSpecificLanguageTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = context.Web.GetWebTemplates(1043);
+
+                Assert.IsNotNull(webTemplates);
+                Assert.AreEqual(webTemplates.FirstOrDefault().Lcid, 1043);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplatesBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplates = await context.Web.GetWebTemplatesBatchAsync();
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(webTemplates);
+                Assert.IsTrue(webTemplates.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplateByNameTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameAsync("sts");
+
+                Assert.IsNotNull(webTemplate);
+                Assert.IsTrue(webTemplate.Name.ToLower().Contains("sts"));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebTemplateByNameBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameBatchAsync("STS");
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(webTemplate.Result);
+                Assert.IsTrue(webTemplate.Result.Name.ToLower().Contains("sts"));
+            }
+        }
+
+        [ExpectedException(typeof(ClientException))]
+        [TestMethod]
+        public async Task GetWebTemplateByNameTestNoResultException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var webTemplate = await context.Web.GetWebTemplateByNameAsync("PnP Rocks!");
+            }
+        }
+
+        #region Event Receivers
+
+        [TestMethod]
+        public async Task GetWebEventReceiversAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(p => p.EventReceivers);
+
+                Assert.IsNotNull(context.Web.EventReceivers);
+                Assert.AreEqual(context.Web.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.WebMoving);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task GetWebEventReceiversBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadBatchAsync(p => p.EventReceivers);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(context.Web.EventReceivers);
+                Assert.AreEqual(context.Web.EventReceivers.Requested, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebEventReceiverBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    ReceiverName = "PnP Test Receiver",
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverUrl = "https://pnp.github.io",
+                    SequenceNumber = new Random().Next(1, 50000),
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+
+                var newReceiver = await context.Web.EventReceivers.AddBatchAsync(eventReceiverOptions);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(newReceiver);
+                Assert.AreEqual(newReceiver.Synchronization, EventReceiverSynchronization.Synchronous);
+                Assert.AreEqual(newReceiver.ReceiverName, "PnP Test Receiver");
+                Assert.AreEqual(newReceiver.EventType, EventReceiverType.WebMoving);
+
+                await newReceiver.DeleteAsync();
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventTypeExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverNameExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverUrlExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverName = "PnP Event Receiver Test"
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task AddWebEventReceiverAsyncNoEventReceiverSequenceNumberExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var eventReceiverOptions = new EventReceiverOptions
+                {
+                    EventType = EventReceiverType.WebMoving,
+                    ReceiverName = "PnP Event Receiver Test",
+                    ReceiverUrl = "https://pnp.github.io",
+                    Synchronization = EventReceiverSynchronization.Synchronous
+                };
+                await context.Web.EventReceivers.AddAsync(eventReceiverOptions);
+            }
+        }
+
+        #endregion
+
+        #region Get Search configuration
+
+        [TestMethod]
+        public async Task GetWebSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Web.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebSearchManagedPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var mps = context.Web.GetSearchConfigurationManagedProperties();
+
+                Assert.IsNotNull(mps);
+            }
+        }
+
+        [TestMethod]
+        public async Task SetWebSearchConfigurationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var searchConfigXml = context.Web.GetSearchConfigurationXml();
+
+                Assert.IsNotNull(searchConfigXml);
+                Assert.IsTrue(!string.IsNullOrEmpty(searchConfigXml));
+
+                context.Web.SetSearchConfigurationXml(searchConfigXml);
+            }
+        }
+        #endregion
+
+        #region GetWssIdForTerm 
+        [TestMethod]
+        public async Task GetWssIdForTermTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
+                Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
+                Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
+                Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");
+                string label1 = "Dutch";
+
+                IList myList = null;
+
+                try
+                {
+                    // Create a new list
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("GetWssIdForTermTest");
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add taxonomy fields
+                    string fldTaxonomy1 = "TaxonomyField1";
+                    IField addedTaxonomyField1 = await myList.Fields.AddTaxonomyAsync(fldTaxonomy1, new FieldTaxonomyOptions()
+                    {
+                        Group = "TEST GROUP",
+                        AddToDefaultView = true,
+                        TermStoreId = termStore,
+                        TermSetId = termSet
+                    });
+
+                    // Add a list item
+                    Dictionary<string, object> item = new Dictionary<string, object>()
+                    {
+                        { "Title", "Item1" },
+                        { fldTaxonomy1, addedTaxonomyField1.NewFieldTaxonomyValue(term1, label1)}
+                    };
+
+                    // Add the configured list item
+                    await myList.Items.AddAsync(item);
+
+                    var wssId = context.Web.GetWssIdForTerm(term1.ToString());
+
+                    Assert.IsTrue(wssId > 0);
+
+                    // Get again, now the cache path should be followed
+                    wssId = context.Web.GetWssIdForTerm(term1.ToString());
+
+                    Assert.IsTrue(wssId > 0);
+                }
+                finally
+                {
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+        #endregion
+
+        #region Effective user permissions
+
+        [TestMethod]
+        public async Task GetEffectiveUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                var basePermissions = await context.Web.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+
+                Assert.IsNotNull(basePermissions);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                var hasPermissions = await context.Web.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
+
+                Assert.IsNotNull(hasPermissions);
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var hasPermissions = await context.Web.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
+            }
+        }
+
+        #endregion
+
+        #region Reindex tests
+        
+        [TestMethod]
+        public async Task ReIndexNoScriptSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.ReIndex();
+            }
+        }
+
+        [TestMethod]
+        public async Task ReIndexRegularSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                context.Web.ReIndex();
+            }
+        }
+        #endregion
     }
 }

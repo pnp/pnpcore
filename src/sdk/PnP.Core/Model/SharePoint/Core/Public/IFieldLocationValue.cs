@@ -8,7 +8,7 @@
         /// <summary>
         /// Name identifiying this location
         /// </summary>
-        public string DisplayName { get;  }
+        public string DisplayName { get; }
 
         /// <summary>
         /// Uri identifying this location

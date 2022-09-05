@@ -28,149 +28,120 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // This rest requires beta APIs, so bail out if that's not enabled
-                if (!context.GraphCanUseBeta)
-                {
-                    Assert.Inconclusive("This test requires Graph beta to be allowed.");
-                }
 
-                // Create a new channel and add enough messages to it
-                string channelName = $"Paging test {new Random().Next()}";
-
-                if (TestCommon.Instance.Mocking)
+                string newGroupName;
+                if (!TestCommon.Instance.Mocking)
                 {
-                    var properties = TestManager.GetProperties(context);
-                    channelName = properties["ChannelName"];
-                }
-
-                var channelForPaging = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
-                if (channelForPaging == null)
-                {
-                    // Persist the created channel name as we need to have the same name when we run an offline test
-                    if (!TestCommon.Instance.Mocking)
+                    newGroupName = $"PnP-{Guid.NewGuid()}";
+                    Dictionary<string, string> properties = new()
                     {
-                        Dictionary<string, string> properties = new Dictionary<string, string>
-                        {
-                            { "ChannelName", channelName }
-                        };
-                        TestManager.SaveProperties(context, properties);
-                    }
-
-                    channelForPaging = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                        { "GroupName", newGroupName }
+                    };
+                    TestManager.SaveProperties(context, properties);
                 }
                 else
                 {
-                    Assert.Inconclusive("Test data set should be setup to not have the channel available.");
+                    var properties = TestManager.GetProperties(context);
+                    newGroupName = properties["GroupName"];
                 }
 
-                // Add messages, not using batching to ensure reliability
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term set
+                var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                // Add terms
                 for (int i = 1; i <= 45; i++)
                 {
-                    await channelForPaging.Messages.AddAsync($"Test message{i}");
+                    await termSet.Terms.AddBatchAsync($"T1-{i}", $"Term {i} description in English");
                 }
+                // Send the terms to the server for adding
+                context.Execute();
 
-                // Retrieve the already created channel
-                var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                termSet.Terms.Clear();
 
-                // Load the messages,
-                await channelForPaging2.LoadAsync(p => p.Messages);
+                // Load the terms again
+                await termSet.LoadAsync(p => p.Terms);
+                Assert.IsTrue(termSet.Terms.Length == 45);
 
-                // We should have the full amount of messages loaded
-                Assert.IsTrue(channelForPaging2.Messages.Length == 45);
+                // Load the messages into a new termset instance
+                var termSetForPaging = await termSet.GetAsync(p => p.Terms);
+                Assert.IsTrue(termSetForPaging.Terms.Length == 45);
 
-                // Load the messages into a new Channel instance
-                var channelForPaging3 = await channelForPaging.GetAsync(p => p.Messages);
+                var terms = await termSetForPaging.Terms.ToArrayAsync();
+                Assert.IsTrue(terms.Length == 45);
 
-                // We should have the full amount of messages loaded
-                Assert.IsTrue(channelForPaging3.Messages.Length == 45);
+                // Delete term set 
+                await termSet.DeleteAsync();
 
-                var messages = await channelForPaging.Messages.ToArrayAsync();
-                // We now should have the full amount of messages loaded
-                Assert.IsTrue(messages.Length == 45);
-
-                // Cleanup by deleting the channel
-                await channelForPaging.DeleteAsync();
+                // Delete the group again
+                await group.DeleteAsync();
             }
         }
 
         [TestMethod]
         public async Task GraphCollectionPages()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // This rest requires beta APIs, so bail out if that's not enabled
-                if (!context.GraphCanUseBeta)
-                {
-                    Assert.Inconclusive("This test requires Graph beta to be allowed.");
-                }
 
-                // Create a new channel and add enough messages to it
-                string channelName = $"Paging test {new Random().Next()}";
-
-                if (TestCommon.Instance.Mocking)
+                string newGroupName;
+                if (!TestCommon.Instance.Mocking)
                 {
-                    var properties = TestManager.GetProperties(context);
-                    channelName = properties["ChannelName"];
-                }
-
-                var channelForPaging = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
-                if (channelForPaging == null)
-                {
-                    // Persist the created channel name as we need to have the same name when we run an offline test
-                    if (!TestCommon.Instance.Mocking)
+                    newGroupName = $"PnP-{Guid.NewGuid()}";
+                    Dictionary<string, string> properties = new()
                     {
-                        Dictionary<string, string> properties = new Dictionary<string, string>
-                        {
-                            { "ChannelName", channelName }
-                        };
-                        TestManager.SaveProperties(context, properties);
-                    }
-
-                    channelForPaging = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                        { "GroupName", newGroupName }
+                    };
+                    TestManager.SaveProperties(context, properties);
                 }
                 else
                 {
-                    Assert.Inconclusive("Test data set should be setup to not have the channel available.");
+                    var properties = TestManager.GetProperties(context);
+                    newGroupName = properties["GroupName"];
                 }
 
-                // Add messages, not using batching to ensure reliability
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term set
+                var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                // Add terms
                 for (int i = 1; i <= 45; i++)
                 {
-                    await channelForPaging.Messages.AddAsync($"Test message{i}");
+                    await termSet.Terms.AddBatchAsync($"T1-{i}", $"Term {i} description in English");
                 }
+                // Send the terms to the server for adding
+                context.Execute();
 
-                // Manual paging with Skip and Take
-                int pageCount = 0;
+                termSet.Terms.Clear();
+
                 int pageSize = 10;
 
-                while (true)
-                {
-                    // Load page
-                    var page = context.Web.Lists.Skip(pageSize * pageCount).Take(pageSize).ToArray();
+                // Read pages of terms
+                var page = termSet.Terms.Take(pageSize).ToArray();
+                Assert.IsTrue(page.Length == pageSize);
 
-                    // Check number of items returned
-                    if (pageCount != 3)
-                    {
-                        Assert.AreEqual(pageSize, page.Length);
-                    }
-                    else
-                    {                  
-                        // The Teams Graph is not always consistently giving back messages...comment out this check for now.
-                        //Assert.AreEqual(5, page.Length);
-                    }
+                page = termSet.Terms.Take(pageSize * 2).ToArray();
+                Assert.IsTrue(page.Length == pageSize * 2);
 
-                    pageCount++;
+                page = termSet.Terms.Take(pageSize * 3).ToArray();
+                Assert.IsTrue(page.Length == pageSize * 3);
 
-                    if (page.Length < pageSize)
-                    {
-                        break;
-                    }
-                }
-                Assert.AreEqual(4, pageCount);
+                page = termSet.Terms.Take(pageSize * 4).ToArray();
+                Assert.IsTrue(page.Length == 40);
 
-                // Cleanup by deleting the channel
-                await channelForPaging.DeleteAsync();
+                page = termSet.Terms.Take(pageSize * 5).ToArray();
+                Assert.IsTrue(page.Length == 45);
+
+                // Delete term set 
+                await termSet.DeleteAsync();
+
+                // Delete the group again
+                await group.DeleteAsync();
             }
         }
 
@@ -181,7 +152,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task RESTListItemsNotSupported()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
@@ -283,7 +254,7 @@ namespace PnP.Core.Test.Base
 
                             // We should have loaded 1 list item
                             Assert.IsTrue(queryResult3.Count == 2);
-                        });                        
+                        });
 
                         await list3.Items.LoadAsync();
                         // Do we have all items?
@@ -298,6 +269,266 @@ namespace PnP.Core.Test.Base
             }
         }
 
+
+        [TestMethod]
+        public async Task RESTListItemAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemAsyncPaging";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 162; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            await foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title).AsAsyncEnumerable())
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 162);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListItemOnePagePaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemOnePagePaging";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title))
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 100);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListItemOnePagePagingAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemOnePagePagingAsync";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            await foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title).AsAsyncEnumerable())
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 100);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListItemAsyncNoPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemAsyncNoPaging";
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 12; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                            {
+                                { "Title", $"Item {i}" }
+                            };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        using (var context2 = await context.CloneAsync())
+                        {
+                            var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.Fields.QueryProperties(
+                                                                                        p => p.InternalName,
+                                                                                        p => p.FieldTypeKind,
+                                                                                        p => p.TypeAsString,
+                                                                                        p => p.Title));
+                            var result = new Dictionary<string, int>();
+                            await foreach (var item in list2.Items.QueryProperties(i => i.Id, i => i.Title).AsAsyncEnumerable())
+                            {
+                                result[item.Title] = item.Id;
+                            }
+
+                            Assert.IsTrue(result.Count == 12);
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
 
         [TestMethod]
         public async Task CamlListItemGetPagedAsyncPaging()

@@ -1,5 +1,8 @@
 ﻿using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Teams;
+using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Services
 {
@@ -20,6 +23,46 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Extends a <see cref="PnPContext"/> with site collection admin functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
+        public static ISiteCollectionManager GetSiteCollectionManager(this PnPContext context)
+        {
+            return new SiteCollectionManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with Teams admin functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
+        public static ITeamManager GetTeamManager(this PnPContext context)
+        {
+            return new TeamManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with tenant Application Lifecycle Management (ALM) functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ITenantAppManager"/> instance enabling tenant app catalog operations</returns>
+        public static ITenantAppManager GetTenantAppManager(this PnPContext context)
+        {
+            return new TenantAppManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with site collection Application Lifecycle Management (ALM) functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionAppManager"/> instance enabling site collection app catalog operations</returns>
+        public static ISiteCollectionAppManager GetSiteCollectionAppManager(this PnPContext context)
+        {
+            return new SiteCollectionAppManager(context);
+        }
+
+        /// <summary>
         /// Extends a <see cref="PnPContext"/> with Microsoft 365 admin functionality
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
@@ -31,5 +74,22 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region Utilities
+        internal static async Task WaitAsync(this PnPContext context, TimeSpan timeToWait)
+        {
+#if DEBUG
+            if (context.Mode == TestMode.Mock)
+            {
+                // No point in waiting when we're running the test as offline test
+            }
+            else
+            {
+                await Task.Delay(timeToWait).ConfigureAwait(false);
+            }
+#else
+            await Task.Delay(timeToWait).ConfigureAwait(false);
+#endif
+        }
+        #endregion
     }
 }

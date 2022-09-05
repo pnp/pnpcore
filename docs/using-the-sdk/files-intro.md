@@ -67,6 +67,35 @@ foreach(var file in folder.Files.AsRequested())
 }
 ```
 
+### Finding files
+
+If you do not know the exact name and location of on or more file and need to find on any part of the filename, you can also perform a FindFiles operation. This operation can be perfomed on an [IFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_System_String_) or an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_FindFiles_System_String_)
+
+The FindFiles method accepts a string value which is matched to any part of the filename using a case insensitive regular expression and returns all found matches.
+
+> [!Note]
+> This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
+
+Find files in a list:
+
+```csharp
+// Get a reference to a list
+IList documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
+
+// Get files from the list whose name contains "foo"
+List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
+```
+
+Find files in a folder:
+
+```csharp
+// Get a reference to a folder
+IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
+
+// Get files from folder whose name contains "bar"
+List<IFile> foundFiles = await documentsFolder.FindFilesAsync("bar");
+```
+
 ## Getting file properties
 
 A file in SharePoint has properties which can be requested by loading them on the [IFile](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html). Below snippet shows some ways on how to load file properties.
@@ -180,12 +209,17 @@ await testDocument.RecycleAsync();
 await testDocument.DeleteAsync();
 ```
 
+## Sharing files
+
+A file can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](sharing-intro.md) to learn more on how you can share a file.
+
 ## Adding files (=uploading)
 
 Adding a file comes down to create a file reference and uploading the file's bytes and this can be done via the [AddAsync method on a Files collection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileCollection.html#PnP_Core_Model_SharePoint_IFileCollection_AddAsync_System_String_Stream_System_Boolean_). This method takes a stream of bytes as input for the file contents.
 
 >[!Note]
-> See the [working with large files](files-large.md) page for some more complete file upload/download samples.
+> - See the [working with large files](files-large.md) page for some more complete file upload/download samples.
+> - Don't forget to load the `ListItemFields` property if you want to set the file properties after adding. This can be done in multiple ways `await addedFile.ListItemAllFields.LoadAsync()`, `await addedFile.LoadAsync(p => p.ListItemAllFields)` or `addedFile = await context.Web.GetFileByServerRelativeUrlAsync(addedFile.ServerRelativeUrl, p => p.ListItemAllFields)`.
 
 ```csharp
 // Get a reference to a folder
@@ -217,6 +251,40 @@ addedFile.ListItemAllFields["Field1"] = "Hi there";
 addedFile.ListItemAllFields["Field2"] = true;
 // Persist the ListItem changes
 await addedFile.ListItemAllFields.UpdateAsync();
+```
+
+## Updating the file Author, Editor, Created or Modified properties
+
+Each file has an `Author` property (the one who created the file), an `Editor` property (the one who last changed the file), a `Created` property (when was the file added) and a `Modified` property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the `UpdateOverwriteVersion` methods this however is possible as shown in below code snippet:
+
+```csharp
+// Load the default documents folder of the site
+var doc = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Fields);
+// Upload a file
+var file = await doc.RootFolder.Files.AddAsync("demo.docx", System.IO.File.OpenRead($".{System.IO.Path.DirectorySeparatorChar}demo.docx"), true);
+
+// Load the file metadata again to get the ListItemFields populated
+await file.LoadAsync(p => p.ListItemAllFields)
+
+// Get a user to use as author/editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// The new Created/Modified date to set
+var newDate = new DateTime(2020, 10, 20);
+
+// Get the earlier loaded Author and Editor fields
+var author = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+var editor = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+// Update file properties
+file.ListItemAllFields["Title"] = "new title";
+file.ListItemAllFields["Created"] = newDate;
+file.ListItemAllFields["Modified"] = newDate;
+file.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+file.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+
+// Persist the updated properties
+await file.ListItemAllFields.UpdateOverwriteVersionAsync();
 ```
 
 ## Downloading files
@@ -256,6 +324,41 @@ await testDocument.CopyToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document
 await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document.docx", MoveOperations.Overwrite);
 ```
 
+> [!Note]
+> You can also opt for an asynchronous bulk file/folder copy/move via the `CreateCopyJobs` methods on `ISite`. See [here](sites-copymovecontent.md) for more details.
+
+## Converting files
+
+Some files can be transformed into another format by calling one of the `ConvertTo` methods.
+
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to convert optimizes performance, these properties will be fetched if not present.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p => p.VroomItemID, p => p.VroomDriveID);
+
+// Convert the Word document to PDF, this returns a stream
+var pdfContent = await testDocument.ConvertToAsync(new ConvertToOptions { Format = ConvertToFormat.Pdf });
+
+// Get a reference to a folder to upload the PDF
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f => f.Name == "SiteAssets").FirstOrDefaultAsync();
+
+// Upload content
+await siteAssetsFolder.Files.AddAsync("document.pdf", pdfContent, true);
+```
+
+The following values are valid transformation targets and their supported source extensions:
+
+| Target | Description                        | Supported source extensions
+|:------|:-----------------------------------|---------------------------------
+| glb   | Converts the item into GLB format  | cool, fbx, obj, ply, stl, 3mf
+| html  | Converts the item into HTML format | eml, md, msg
+| jpg   | Converts the item into JPG format  | 3g2, 3gp, 3gp2, 3gpp, 3mf, ai, arw, asf, avi, bas, bash, bat, bmp, c, cbl, cmd, cool, cpp, cr2, crw, cs, css, csv, cur, dcm, dcm30, dic, dicm, dicom, dng, doc, docx, dwg, eml, epi, eps, epsf, epsi, epub, erf, fbx, fppx, gif, glb, h, hcp, heic, heif, htm, html, ico, icon, java, jfif, jpeg, jpg, js, json, key, log, m2ts, m4a, m4v, markdown, md, mef, mov, movie, mp3, mp4, mp4v, mrw, msg, mts, nef, nrw, numbers, obj, odp, odt, ogg, orf, pages, pano, pdf, pef, php, pict, pl, ply, png, pot, potm, potx, pps, ppsx, ppsxm, ppt, pptm, pptx, ps, ps1, psb, psd, py, raw, rb, rtf, rw1, rw2, sh, sketch, sql, sr2, stl, tif, tiff, ts, txt, vb, webm, wma, wmv, xaml, xbm, xcf, xd, xml, xpm, yaml, yml
+| pdf   | Converts the item into PDF format  | doc, docx, epub, eml, htm, html, md, msg, odp, ods, odt, pps, ppsx, ppt, pptx, rtf, tif, tiff, xls, xlsm, xlsx
+
 ## Getting file versions
 
 When versioning on a file is enabled a file can have multiple versions and PnP Core SDK can be used to work with the older file versions. Each file version is represented via an [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) in an [IFileVersionCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersionCollection.html). Loading file versions can be done by requesting the [Versions property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions) of the file. Once you've an [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) you can also download that specific version of the file by using one of the GetContent methods as shown in the example.
@@ -274,6 +377,107 @@ foreach(var fileVersion in testDocument.Versions)
     // Download the file version content as stream
     Stream fileVersionContent = await fileVersion.GetContentAsync();
 }
+```
+
+## Getting thumbnails for a file
+
+If you need to present a SharePoint file using a thumbnail and some basic file information (like `Title`) you can use one of the `GetThumbnail` methods. These methods optionally use an `ThumbnailOptions` class allowing you to specify one or more standard or custom thumbnail sizes. Once the call has ended you get a collection of `IThumbnail` instances each having a thumbnail URL completed with the thumbnail size.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file, also request the Graph identifiers (VroomItemId and VroomDriveId) to 
+// avoid an extra server roundtrip in the GetThumbnailsAsync call
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.VroomItemID, f => f.VroomDriveID);
+
+// Define the thumbnails to generate
+ThumbnailOptions options = new()
+{
+    // Standard sized thumbnails
+    StandardSizes = new List<ThumbnailSize>
+    {
+        ThumbnailSize.Medium,
+        ThumbnailSize.Large
+    },
+
+    // Custom sized thumbnails
+    CustomSizes = new List<CustomThumbnailOptions>
+    {
+        new CustomThumbnailOptions
+        {
+            Width = 200,
+            Height = 300,                                
+        },
+        new CustomThumbnailOptions
+        {
+            Width = 400,
+            Height = 500,
+            Cropped = true,
+        },
+    }
+};
+
+var thumbnails = await testDocument.GetThumbnailsAsync(options);
+
+foreach(var thumbnail in thumbnails)
+{
+    // use thumbnail.Url 
+}
+```
+
+> [!Note]
+> Thumbnails can only be retrieved for files living in a document library. For pages in a pages library this will not work.
+
+## Getting analytics
+
+Using one of the `GetAnalytics` methods on `IFile` gives you back the file analytics for all time, the last seven days or for a custom interval of your choice. The returned `List<IActivityStat>` contains one row for the all time and seven days statistic requests, if you've requested a custom interval you also choose an aggregation interval (day, week, month) and depending on the interval and aggregation you'll get one or more rows with statistics.
+
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to get statistics for optimizes performance, these properties will be fetched if not present.
+
+```csharp
+var file = await context.Web.GetFileByServerRelativeUrlAsync($"{context.Uri.AbsolutePath}/sitepages/home.aspx", p => p.VroomItemID, p => p.VroomDriveID);
+
+// Get analytics for all time
+var analytics = await file.GetAnalyticsAsync();
+
+// Get analytics for the last 7 days
+var analytics = await file.GetAnalyticsAsync(new AnalyticsOptions { Interval = AnalyticsInterval.LastSevenDays });
+
+// Get analytics for a custom interval for 11 days --> you'll see 11 rows with statistic data, one per day
+DateTime startDate = DateTime.Now - new TimeSpan(20, 0, 0, 0);
+DateTime endDate = DateTime.Now - new TimeSpan(10, 0, 0, 0);
+
+var analytics = await file.GetAnalyticsAsync(
+                new AnalyticsOptions
+                {
+                    Interval = AnalyticsInterval.Custom,
+                    CustomStartDate = startDate,
+                    CustomEndDate = endDate,
+                    CustomAggregationInterval = AnalyticsAggregationInterval.Day
+                });
+```
+
+> [!Note]
+> The value of the `CustomStartDate` and `CustomEndDate` parameters must represent a time range of less than 90 days.
+
+## Getting an embeddable preview url
+
+Using on of the `GetPreview` methods allows you to obtain a short-lived embeddable URL for a file in order to render a temporary preview.
+
+> [!Note]
+> Loading the `VroomDriveID` and  `VroomItemID` when you load the file to get an embeddable URL optimizes performance, these properties will be fetched if not present.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file, also request the Versions property
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p => p.VroomItemID, p => p.VroomDriveID);
+
+// Get Preview URL
+var filePreview = await testDocument.GetPreviewAsync(new PreviewOptions { Page = "2" });
+
+// Use outcome, e.g. use filePreview.GetUrl in an IFRAME to show the file preview
 ```
 
 ## Getting file IRM settings

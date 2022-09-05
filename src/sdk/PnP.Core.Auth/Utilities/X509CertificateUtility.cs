@@ -58,7 +58,11 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(certificate));
             }
 
+#if NET5_0_OR_GREATER
+            using (RSA provider = (RSA)certificate.GetRSAPublicKey())
+#else
             using (RSA provider = (RSA)certificate.PublicKey.Key)
+#endif
             {
                 // We use the publickey to encrypt.
                 return provider.Encrypt(plainData, RSAEncryptionPadding.OaepSHA1);
@@ -83,7 +87,11 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(certificate));
             }
 
+#if NET5_0_OR_GREATER
+            using (RSA provider = (RSA)certificate.GetRSAPrivateKey())
+#else
             using (RSA provider = (RSA)certificate.PrivateKey)
+#endif
             {
                 // We use the private key to decrypt.
                 return provider.Decrypt(encryptedData, RSAEncryptionPadding.OaepSHA1);

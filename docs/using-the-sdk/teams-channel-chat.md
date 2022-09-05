@@ -78,7 +78,7 @@ var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
 
- // Upload File to SharePoint Library
+// Upload File to SharePoint Library
 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
 IFile existingFile = await folder.Files.GetFirstOrDefaultAsync(o => o.Name == "test_added.docx");
 if(existingFile == default)
@@ -163,7 +163,6 @@ For advanced information about the specific area of the Graph that handles sendi
 Additionally, there are different types of cards, such as Adaptive Cards and Thumbnail - these have been tested with unit tests but not all types have yet.
 For information about the different types of cards, visit: [https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference)
 
-
 ## Adding Chat Messages with Inline Images
 
 Chat messages can also include inline images. The following example demonstrates this option:
@@ -195,5 +194,120 @@ await chatMessages.AddAsync(new ChatMessageOptions
     }
 });
 ```
+
 For advanced information about the specific area of the Graph that handles sending messages with inline images visit:
 [https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-5-sending-inline-images-along-with-the-message](https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-5-sending-inline-images-along-with-the-message)
+
+## Adding chat messages with mentions
+
+We can use mentions when creating a chat message. We can use the following options when mentioning:
+
+- User
+- Conversation (e.g. a team, a channel, ...)
+- Team tag
+
+In this example, a team message will be posted which will tag a channel and a user:
+
+```csharp
+// Get the Team
+var team = await context.Team.GetAsync(o => o.Channels);
+
+// Get the channel
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+
+channel = await channel.GetAsync(o => o.Messages);
+var chatMessages = channel.Messages;
+
+var body = $"Hello, PnP Rocks! <br/>This is a channel and user mention test <br/>Mention 1: <at id=\"0\">Channel</at><br/>Mention 2: <at id=\"1\">User</a>";
+
+await chatMessages.AddAsync(new ChatMessageOptions
+{
+    Content = body,
+    ContentType = ChatMessageContentType.Html,
+    Mentions =
+    {
+        new ChatMessageMentionOptions
+        {
+            Id = 0,
+            MentionText = "Channel",
+            Mentioned = new TeamChatMessageMentionedIdentitySet
+            {
+                Conversation = new TeamConversationIdentity
+                {
+                    ConversationIdentityType = TeamConversationIdentityType.Channel,
+                    Id = channel.Id
+                }
+            }
+        },
+        new ChatMessageMentionOptions
+        {
+            Id = 1,
+            MentionText = "User",
+            Mentioned = new TeamChatMessageMentionedIdentitySet
+            {
+                User = new Identity
+                {
+                    DisplayName = userToMention.Title,
+                    Id = graphUser.Id,
+                    UserIdentityType = TeamUserIdentityType.aadUser
+                }
+            }
+        }
+    }
+});
+
+```
+
+In this example, a message will be created which will tag a team and a team tag. For more information regarding the usage of team tags in the PnP Core SDK, please refer to {insert link here}
+
+```csharp
+
+// Get the Team
+var team = await context.Team.GetAsync(o => o.Channels, o => o.Tags);
+
+// Get the channel
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+
+channel = await channel.GetAsync(o => o.Messages);
+var chatMessages = channel.Messages;
+
+var body = $"Hello, PnP Rocks! <br/>This is a team and tag mention test <br/>Mention 1: <at id=\"0\">Team</at><br/>Mention 2: <at id=\"1\">Tag</at>";
+
+await chatMessages.AddAsync(new ChatMessageOptions
+{
+    Content = body,
+    ContentType = ChatMessageContentType.Html,
+    Mentions =
+    {
+        new ChatMessageMentionOptions
+        {
+            Id = 0,
+            MentionText = "Team",
+            Mentioned = new TeamChatMessageMentionedIdentitySet
+            {
+                Conversation = new TeamConversationIdentity
+                {
+                    ConversationIdentityType = TeamConversationIdentityType.Team,
+                    Id = team.Id.ToString()
+                }
+            }
+        },
+        new ChatMessageMentionOptions
+        {
+            Id = 1,
+            MentionText = "Tag",
+            Mentioned = new TeamChatMessageMentionedIdentitySet
+            {
+                Tag = new TeamTagIdentity
+                {
+                    DisplayName = team.Tag.First().DisplayName,
+                    Id = team.Tags.First().Id,
+                }
+            }
+        }
+    }
+});
+
+```
+
+For advanced information about the specific area of the Graph that handles sending messages with mentions, visit: [https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#examples](https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#examples)

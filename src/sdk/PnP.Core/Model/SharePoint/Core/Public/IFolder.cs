@@ -1,5 +1,8 @@
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -61,6 +64,16 @@ namespace PnP.Core.Model.SharePoint
         public string WelcomePage { get; set; }
 
         /// <summary>
+        /// Default ordered list of content types on a list, before adjustments
+        /// </summary>
+        public IContentTypeIdCollection ContentTypeOrder { get; }
+
+        /// <summary>
+        /// Ordered list of content types on a list: controls order of items in the "New" menu and "List Settings" page
+        /// </summary>
+        public IContentTypeIdCollection UniqueContentTypeOrder { get; }
+
+        /// <summary>
         /// Gets the list item field values for the list item corresponding to the file.
         /// </summary>
         public IListItem ListItemAllFields { get; }
@@ -71,7 +84,7 @@ namespace PnP.Core.Model.SharePoint
         public IFolder ParentFolder { get; }
 
         /// <summary>
-        /// Gets the collection of all files contained in the folder.
+        /// Gets the collection of all properties defined for this folder.
         /// </summary>
         public IPropertyValues Properties { get; }
 
@@ -82,6 +95,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of list folders contained in the list folder.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFolderCollection Folders { get; }
 
@@ -247,6 +263,120 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="folderRelativeUrl">a (hiarchy) of folders (e.g. folderA/folderB/FolderC) </param>
         /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
         public IFolder EnsureFolder(string folderRelativeUrl);
+        #endregion
+
+        #region Syntex support
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync();
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
+
+        #endregion
+
+        #region Files
+        /// <summary>
+        /// Find files in the folder, can be slow as it iterates over all the files in the folder and it's sub folders. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        public Task<List<IFile>> FindFilesAsync(string match);
+
+        /// <summary>
+        /// Find files in the folder, can be slow as it iterates over all the files in the folder and it's sub folders. If performance
+        /// is key, then try using a search based solution
+        /// </summary>
+        /// <returns>A <see cref="List{T}"/> of found files as type <see cref="IFile"/></returns>
+        public List<IFile> FindFiles(string match);
+
+        #endregion
+
+        #region GraphPermissions
+
+        /// <summary>
+        /// Gets the share links on the file item
+        /// </summary>
+        /// <returns>Collection of share links existing on the file</returns>
+        Task<IGraphPermissionCollection> GetShareLinksAsync();
+
+        /// <summary>
+        /// Gets the share links on the file item
+        /// </summary>
+        /// <returns>Collection of share links existing on the file</returns>
+        IGraphPermissionCollection GetShareLinks();
+
+        /// <summary>
+        /// Deletes the share links on the file item
+        /// </summary>
+        Task DeleteShareLinksAsync();
+
+        /// <summary>
+        /// Deletes the share links on the file item
+        /// </summary>
+        void DeleteShareLinks();
+
+        /// <summary>
+        /// Creates an anonymous sharing link for a file
+        /// </summary>
+        /// <param name="anonymousLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions);
+
+        /// <summary>
+        /// Creates an anonymous sharing link for a file
+        /// </summary>
+        /// <param name="anonymousLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions);
+
+        /// <summary>
+        /// Creates an organization sharing link for a file
+        /// </summary>
+        /// <param name="organizationalLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions);
+
+        /// <summary>
+        /// Creates an organization sharing link for a file
+        /// </summary>
+        /// <param name="organizationalLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions);
+
+        /// <summary>
+        /// Creates a user sharing link for a file
+        /// </summary>
+        /// <param name="userLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions);
+
+        /// <summary>
+        /// Creates a user sharing link for a file
+        /// </summary>
+        /// <param name="userLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions);
+
+        /// <summary>
+        /// Creates a sharing invite to a specific user
+        /// </summary>
+        /// <param name="inviteOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateSharingInviteAsync(InviteOptions inviteOptions);
+
+        /// <summary>
+        /// Creates a sharing invite to a specific user
+        /// </summary>
+        /// <param name="inviteOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateSharingInvite(InviteOptions inviteOptions);
+
         #endregion
     }
 }

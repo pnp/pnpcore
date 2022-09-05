@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of userEntity objects
     /// </summary>
     [ConcreteType(typeof(CommentLikeUserEntityCollection))]
-    public interface ICommentLikeUserEntityCollection : IQueryable<ICommentLikeUserEntity>, IDataModelCollection<ICommentLikeUserEntity>
+    public interface ICommentLikeUserEntityCollection : IQueryable<ICommentLikeUserEntity>, IDataModelCollection<ICommentLikeUserEntity>, ISupportModules<ICommentLikeUserEntity>
     {
     }
 }

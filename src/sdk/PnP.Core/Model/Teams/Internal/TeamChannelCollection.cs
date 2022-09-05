@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChannelCollection : QueryableDataModelCollection<ITeamChannel>, ITeamChannelCollection
+    internal sealed class TeamChannelCollection : QueryableDataModelCollection<ITeamChannel>, ITeamChannelCollection
     {
         public TeamChannelCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

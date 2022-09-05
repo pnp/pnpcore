@@ -28,10 +28,8 @@ namespace PnP.Core.Test.QueryModel
                 var query = context.Site.AllWebs
                             .QueryProperties(w => w.Id, w => w.Title, w => w.Description);
 
-                Assert.ThrowsException<ClientException>(() =>
-                {
-                    var queryResult = query.ToList();
-                });
+                var queryResult = query.ToList();
+                Assert.IsTrue(queryResult.Count > 0);
             }
         }
 

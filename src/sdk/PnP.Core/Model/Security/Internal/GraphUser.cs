@@ -1,11 +1,12 @@
 ﻿using PnP.Core.Services;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
     [GraphType(Get = "users/{GraphId}")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class GraphUser : BaseDataModel<IGraphUser>, IGraphUser
+    internal sealed class GraphUser : BaseDataModel<IGraphUser>, IGraphUser
     {
         #region Construction
         public GraphUser()
@@ -51,6 +52,47 @@ namespace PnP.Core.Model.Security
         public ISharePointUser AsSharePointUser()
         {
             return AsSharePointUserAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SendMailAsync(MailOptions mailOptions)
+        {
+#if DEBUG
+            if (mailOptions != null)
+            {
+                if (mailOptions.UsingApplicationPermissions.HasValue)
+                {
+                    if (!mailOptions.UsingApplicationPermissions.Value)
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+                    }
+                }
+                else
+                {
+                    if (!await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+                    {
+                        throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+                    }
+                }
+            }
+#else
+            if (!await PnPContext.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+            {
+                throw new MicrosoftGraphServiceException(PnPCoreResources.Exception_SendMailDelegated);
+            }
+#endif
+
+            MailHandler.CheckErrors(mailOptions);
+
+            var body = MailHandler.GetMailBody(mailOptions);
+
+            var apiCall = new ApiCall($"users/{Id}/sendMail", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SendMail(MailOptions mailOptions)
+        {
+            SendMailAsync(mailOptions).GetAwaiter().GetResult();
         }
         #endregion
     }

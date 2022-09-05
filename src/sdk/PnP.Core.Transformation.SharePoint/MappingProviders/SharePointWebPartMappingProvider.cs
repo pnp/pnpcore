@@ -1,8 +1,16 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Model;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Functions;
+using PnP.Core.Transformation.SharePoint.MappingFiles;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,18 +18,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using PnP.Core.Transformation.SharePoint.MappingFiles;
 using System.Xml.XPath;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.Model;
-using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Functions;
-using Newtonsoft.Json.Linq;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -32,9 +29,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private ILogger<SharePointWebPartMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> spOptions;
-        private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
         private readonly FunctionProcessor functionProcessor;
+        private readonly IServiceProvider serviceProvider;
+
+        private Guid taskId;
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -61,10 +60,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="input">The input for the mapping activity</param>
         /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping activity</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token = default)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             // Check that we have input data
             if (input == null) throw new ArgumentNullException(nameof(input));
+
+            this.taskId = input.Context.Task.Id;
 
             // Try to convert the mapping provider input into a typed version
             var specializedInput = input as SharePointWebPartMappingProviderInput;
@@ -79,15 +82,20 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Prepare the output object
             var result = new WebPartMappingProviderOutput();
 
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapWebPartAsync");
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Info_ContentWebPartBeingTransformed,
-                webPart.Title, webPart.TypeShort()));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapWebPartAsync"
+                .CorrelateString(this.taskId));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_ContentWebPartBeingTransformed
+                .CorrelateString(this.taskId),
+                webPart.Title, webPart.TypeShort());
 
             // Title bar will never be migrated
             if (input.WebPart.Type == WebParts.TitleBar)
             {
-                logger.LogInformation(SharePointTransformationResources.Info_NotTransformingTitleBar);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_NotTransformingTitleBar
+                    .CorrelateString(this.taskId));
                 return result;
             }
 
@@ -105,7 +113,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var defaultMapping = mappingFile.BaseWebPart.Mappings.Mapping.FirstOrDefault(p => p.Default == true);
             if (defaultMapping == null)
             {
-                logger.LogError(SharePointTransformationResources.Error_NoDefaultMappingFound);
+                logger.LogError(
+                    SharePointTransformationResources.Error_NoDefaultMappingFound
+                    .CorrelateString(this.taskId));
                 throw new Exception(SharePointTransformationResources.Error_NoDefaultMappingFound);
             }
 
@@ -120,12 +130,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 if (!webPartData.CrossSiteTransformationSupported)
                 {
-                    logger.LogWarning(SharePointTransformationResources.Warning_CrossSiteNotSupported);
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_CrossSiteNotSupported
+                        .CorrelateString(this.taskId));
                     return result;
                 }
             }
 
-            var globalTokens = PrepareGlobalTokens();
+            var globalTokens = PrepareGlobalTokens(this.spOptions.Value.MappingProperties); //TODO: Bug Here, the mappings are not included in the tokens.
 
             if (webPartData != null && webPartData.Mappings != null)
             {
@@ -137,7 +149,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     // The mapping can have a selector function defined, if so it will be executed.
                     // If a selector was executed the selectorResult will contain the name of the mapping to use
-                    logger.LogDebug(SharePointTransformationResources.Debug_ProcessingSelectorFunctions);
+                    logger.LogDebug(
+                        SharePointTransformationResources.Debug_ProcessingSelectorFunctions
+                        .CorrelateString(this.taskId));
                     selectorResult = this.functionProcessor.Process(ref webPartData, webPart);
                 }
                 catch (Exception ex)
@@ -145,15 +159,21 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // NotAvailableAtTargetException is used to "skip" a web part since it's not valid for the target site collection (only applies to cross site collection transfers)
                     if (ex.InnerException is NotAvailableAtTargetException)
                     {
-                        logger.LogError(SharePointTransformationResources.Error_NotValidForTargetSiteCollection);
+                        logger.LogError(
+                            SharePointTransformationResources.Error_NotValidForTargetSiteCollection
+                            .CorrelateString(this.taskId));
                     }
 
                     if (ex.InnerException is MediaWebpartConfigurationException)
                     {
-                        logger.LogError(SharePointTransformationResources.Error_MediaWebpartConfiguration);
+                        logger.LogError(
+                            SharePointTransformationResources.Error_MediaWebpartConfiguration
+                            .CorrelateString(this.taskId));
                     }
 
-                    logger.LogError($"{SharePointTransformationResources.Error_AnErrorOccurredFunctions} - {ex.Message}");
+                    logger.LogError(
+                        $"{SharePointTransformationResources.Error_AnErrorOccurredFunctions} - {ex.Message}"
+                        .CorrelateString(this.taskId));
                     throw;
                 }
 
@@ -185,7 +205,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogWarning($"{SharePointTransformationResources.Warning_ContentWebPartMappingNotFound}");
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_ContentWebPartMappingNotFound
+                        .CorrelateString(this.taskId));
                 }
 
                 // Process mapping specific functions (if any)
@@ -193,7 +215,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     try
                     {
-                        logger.LogInformation(SharePointTransformationResources.Info_ProcessingMappingFunctions);
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_ProcessingMappingFunctions
+                            .CorrelateString(this.taskId));
                         functionProcessor.ProcessMappingFunctions(ref webPartData, webPart, mapping);
                     }
                     catch (Exception ex)
@@ -201,10 +225,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         // NotAvailableAtTargetException is used to "skip" a web part since it's not valid for the target site collection (only applies to cross site collection transfers)
                         if (ex.InnerException is NotAvailableAtTargetException)
                         {
-                            logger.LogError(SharePointTransformationResources.Error_NotValidForTargetSiteCollection);
+                            logger.LogError(
+                                SharePointTransformationResources.Error_NotValidForTargetSiteCollection
+                                .CorrelateString(this.taskId));
                         }
 
-                        logger.LogError($"{SharePointTransformationResources.Error_AnErrorOccurredFunctions} - {ex.Message}");
+                        logger.LogError(
+                            $"{SharePointTransformationResources.Error_AnErrorOccurredFunctions} - {ex.Message}"
+                            .CorrelateString(this.taskId));
                         throw;
                     }
                 }
@@ -217,7 +245,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Prepares placeholders for global tokens
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> PrepareGlobalTokens()
+        private Dictionary<string, string> PrepareGlobalTokens(Dictionary<string,string> mappingProperties)
         {
             Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
 
@@ -227,6 +255,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             globalTokens.Add("SiteCollection", "{SiteCollection}");
             globalTokens.Add("WebId", "{WebId}");
             globalTokens.Add("SiteId", "{SiteId}");
+
+
+            if (mappingProperties != null)
+            {
+                // Add the properties provided via configuration
+                foreach (var property in mappingProperties)
+                {
+                    globalTokens.Add(property.Key, property.Value);
+                }
+            }
 
             return globalTokens;
         }
@@ -286,16 +324,15 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return result;
         }
 
-        private void ValidateSchema(Stream schema, FileStream stream)
+        private void ValidateSchema(Stream schema, Stream stream)
         {
             // Load the template into an XDocument
             XDocument xml = XDocument.Load(stream);
 
-            using (var schemaReader = new XmlTextReader(schema))
+            using (var schemaReader = XmlReader.Create(schema))
             {
                 // Prepare the XML Schema Set
                 XmlSchemaSet schemas = new XmlSchemaSet();
-                schema.Seek(0, SeekOrigin.Begin);
                 schemas.Add(SharePointConstants.PageTransformationSchema, schemaReader);
 
                 // Set stream back to start
@@ -305,7 +342,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
-                    this.logger.LogError(e.Exception, errorMessage);
+                    this.logger.LogError(e.Exception, errorMessage
+                        .CorrelateString(this.taskId));
                     throw new ApplicationException(errorMessage);
                 });
             }

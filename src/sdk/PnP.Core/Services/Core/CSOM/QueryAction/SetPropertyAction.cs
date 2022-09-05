@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class SetPropertyAction : BaseAction
+    internal sealed class SetPropertyAction : BaseAction
     {
         internal string Name { get; set; }
 

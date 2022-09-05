@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ViewCollection : QueryableDataModelCollection<IView>, IViewCollection
+    internal sealed class ViewCollection : QueryableDataModelCollection<IView>, IViewCollection
     {
 
         public ViewCollection(PnPContext context, IDataModelParent parent, string memberName = null)

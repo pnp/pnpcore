@@ -33,6 +33,6 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-        
+
     }
 }

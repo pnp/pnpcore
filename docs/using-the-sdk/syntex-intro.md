@@ -14,6 +14,36 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
+## Checking if SharePoint Syntex is enabled for the tenant
+
+SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately, so you can't assume every tenant can use SharePoint Syntex. To check for the SharePoint Syntex enabled you can use the `IsSyntexEnabled` methods:
+
+```csharp
+if (await context.Web.IsSyntexEnabledAsync())
+{
+    // Syntex is enabled
+}
+else
+{
+    // No Syntex :-(
+}
+```
+
+## Checking if SharePoint Syntex is enabled for the current user
+
+SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately and licensed to users, so you can't assume every tenant user can use SharePoint Syntex. To check for the SharePoint Syntex enabled for the current user you can use the `IsSyntexEnabledForCurrentUser` methods:
+
+```csharp
+if (await context.Web.IsSyntexEnabledForCurrentUserAsync())
+{
+    // SharePoint Syntex is enabled for the current user
+}
+else
+{
+    // No Syntex :-(
+}
+```
+
 ## Connecting to a Syntex Content Center site
 
 Connecting to a SharePoint Syntex Content Center site is an essential step when you're using the PnP Core SDK Syntex support. The SharePoint Syntex Content Center site is special type of site that contains content understanding models: via a content understanding model you teach SharePoint Syntex to read your content the way you would using machine teaching to build AI models with no code. SharePoint Syntex can automatically suggest or create metadata, invoke custom Power Automate workflows, and attach compliance labels to enforce retention or record management policies.
@@ -190,7 +220,10 @@ var classifyAndExtractResult = await testDocument.ClassifyAndExtractAsync();
 
 ### Classify and extract all files in a library
 
-When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the `ClassifyAndExtractAsync` method on the `IList`:
+When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the `ClassifyAndExtractAsync` method on the `IList`.
+
+> [!Note]
+> For libraries containing 5000 items or more it's strongly recommended to use the off peak SharePoint Syntex queue. See the `ClassifyAndExtractOffPeak` methods in the next chapter to learn how to use the off peak queue.
 
 ```csharp
 // Get a reference to the list to be classified and extracted
@@ -202,3 +235,19 @@ var classifyAndExtractResults = await invoices.ClassifyAndExtractAsync();
 
 > [!Note]
 > You can set the optional `ClassifyAndExtractAsync` method parameter `force` to true to have all files in the library (again) classified and extracted.
+
+### Classify and extract all files in a library or folder using the off-peak queue
+
+When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file or for all files by enumerating all files and submitting them. For very large libraries enumerating files is time consuming and using the option to classify and extract the library during off-peak hours is better
+
+```csharp
+// Get a reference to the list to be classified and extracted
+var invoices = await context.Web.Lists.GetByTitleAsync("Invoices", p => p.RootFolder);
+
+// Request classification and extraction for all files in the Invoices list that were never classified and extracted
+var classifyAndExtractResults = await invoices.ClassifyAndExtractOffPeakAsync();
+
+// Only request classification and extraction for all files in the folder named 2021/Q1/Jan
+var jan2021 = await invoices.RootFolder.EnsureFolderAsync("2021/Q1/Jan");
+var classifyAndExtractResultsForJan2021 = await jan2021.ClassifyAndExtractOffPeakAsync();
+```

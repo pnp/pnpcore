@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {
-    internal class CSOMResponseHelper
+    internal sealed class CSOMResponseHelper
     {
 #pragma warning disable CA1822 // Mark members as static
         internal T ProcessResponse<T>(string response, long propertyIdentifier)

@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     [GraphType(Beta = true)]
-    internal partial class TeamChatMessageHostedContent : BaseDataModel<ITeamChatMessageHostedContent>, ITeamChatMessageHostedContent
+    internal sealed class TeamChatMessageHostedContent : BaseDataModel<ITeamChatMessageHostedContent>, ITeamChatMessageHostedContent
     {
 
         #region Properties

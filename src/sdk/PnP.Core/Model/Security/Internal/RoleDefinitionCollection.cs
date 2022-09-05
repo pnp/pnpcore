@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    internal partial class RoleDefinitionCollection : QueryableDataModelCollection<IRoleDefinition>, IRoleDefinitionCollection
+    internal sealed class RoleDefinitionCollection : QueryableDataModelCollection<IRoleDefinition>, IRoleDefinitionCollection
     {
 
         public RoleDefinitionCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
@@ -37,20 +37,25 @@ namespace PnP.Core.Model.Security
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var newRoleDefinition = CreateNewAndAdd() as RoleDefinition;
+            BuildRoleDefinitionAdd(name, roleTypeKind, permissions, description, hidden, order, out RoleDefinition newRoleDefinition, out BasePermissions basePermissions);
+
+            return await newRoleDefinition.AddAsync(new System.Collections.Generic.Dictionary<string, object> { { "permissions", basePermissions } }).ConfigureAwait(false) as RoleDefinition;
+        }
+
+        private void BuildRoleDefinitionAdd(string name, RoleType roleTypeKind, PermissionKind[] permissions, string description, bool hidden, int order, out RoleDefinition newRoleDefinition, out BasePermissions basePermissions)
+        {
+            newRoleDefinition = CreateNewAndAdd() as RoleDefinition;
             newRoleDefinition.Name = name;
             newRoleDefinition.Description = description;
             newRoleDefinition.Hidden = hidden;
             newRoleDefinition.Order = order;
             newRoleDefinition.RoleTypeKind = roleTypeKind;
-            var basePermissions = new BasePermissions();
+            basePermissions = new BasePermissions();
             basePermissions.Set(PermissionKind.EmptyMask);
             foreach (var permission in permissions)
             {
                 basePermissions.Set(permission);
             }
-            //newRoleDefinition.BasePermissions = basePermissions;
-            return await newRoleDefinition.AddAsync(new System.Collections.Generic.Dictionary<string, object> { { "permissions", basePermissions } }).ConfigureAwait(false) as RoleDefinition;
         }
 
         public async Task<IRoleDefinition> AddBatchAsync(string name, RoleType roleTypeKind, PermissionKind[] permissions, string description = null, bool hidden = false, int order = 0)
@@ -65,20 +70,9 @@ namespace PnP.Core.Model.Security
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var newRoleDefinition = CreateNewAndAdd() as RoleDefinition;
-            newRoleDefinition.Name = name;
-            newRoleDefinition.Description = description;
-            newRoleDefinition.Hidden = hidden;
-            newRoleDefinition.Order = order;
-            newRoleDefinition.RoleTypeKind = roleTypeKind;
-            var basePermissions = new BasePermissions();
-            basePermissions.Set(PermissionKind.EmptyMask);
-            foreach (var permission in permissions)
-            {
-                basePermissions.Set(permission);
-            }
-            newRoleDefinition.BasePermissions = basePermissions;
-            return await newRoleDefinition.AddBatchAsync(batch).ConfigureAwait(false) as RoleDefinition;
+            BuildRoleDefinitionAdd(name, roleTypeKind, permissions, description, hidden, order, out RoleDefinition newRoleDefinition, out BasePermissions basePermissions);
+
+            return await newRoleDefinition.AddBatchAsync(batch, new System.Collections.Generic.Dictionary<string, object> { { "permissions", basePermissions } }).ConfigureAwait(false) as RoleDefinition;
         }
     }
 }

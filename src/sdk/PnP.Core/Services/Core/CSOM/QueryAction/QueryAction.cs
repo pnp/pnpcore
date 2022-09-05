@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class QueryAction : BaseAction
+    internal sealed class QueryAction : BaseAction
     {
         internal SelectQuery SelectQuery { get; set; }
         internal ChildItemQuery ChildItemQuery { get; set; }

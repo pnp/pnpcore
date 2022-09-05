@@ -30,6 +30,7 @@ namespace PnP.Core.Services
             SkipCollectionClearing = false;
             ExecuteRequestApiCall = false;
             Headers = null;
+            AddedViaBatchMethod = false;
         }
 
         internal ApiCall(List<Core.CSOM.Requests.IRequest<object>> csomRequests, string receivingProperty = null)
@@ -53,6 +54,7 @@ namespace PnP.Core.Services
             SkipCollectionClearing = false;
             ExecuteRequestApiCall = false;
             Headers = null;
+            AddedViaBatchMethod = false;
         }
 
         /// <summary>
@@ -152,6 +154,11 @@ namespace PnP.Core.Services
         /// <summary>
         /// Optional Http-Headers for Request to make
         /// </summary>
-        internal Dictionary<string, string> Headers { get; set; } 
+        internal Dictionary<string, string> Headers { get; set; }
+
+        /// <summary>
+        /// Was this API call requested via a batch method?
+        /// </summary>
+        internal bool AddedViaBatchMethod { get; set; }
     }
 }

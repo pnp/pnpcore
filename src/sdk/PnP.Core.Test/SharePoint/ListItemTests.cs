@@ -167,6 +167,16 @@ namespace PnP.Core.Test.SharePoint
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
 
+                var batchFolder1 = list.AddListFolderBatch("Folder1");
+                var batchFolder2 = list.AddListFolderBatch("Folder2");
+
+                await context.ExecuteAsync();
+
+                var newbatchFolder1 = await list.Items.GetByIdAsync(batchFolder1.Id);
+                var newbatchFolder2 = await list.Items.GetByIdAsync(batchFolder2.Id);
+                Assert.IsTrue(newbatchFolder1["ContentTypeId"].ToString().StartsWith("0x0120"));
+                Assert.IsTrue(newbatchFolder2["ContentTypeId"].ToString().StartsWith("0x0120"));
+
                 await list.DeleteAsync();
             }
         }
@@ -223,6 +233,37 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetLibraryFolderViaItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("GetLibraryFolderViaItemTest");
+                IList list = null;
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    var folderItem = await list.AddListFolderAsync("Test");
+
+                    // Load folder directly from list item 
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+                        var listItem = await list2.Items.GetByIdAsync(folderItem.Id);
+                        var folder = await listItem.Folder.GetAsync(f => f.ServerRelativeUrl, f => f.Name, f => f.TimeLastModified);
+
+                        Assert.IsTrue(folder != null);
+                        Assert.IsTrue(folder.Name == "Test");
+                    }
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task BulkAddListItemsWithBadFieldNameTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -230,7 +271,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTest");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                
+
                 IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
                 {
                     Group = "Custom Fields",
@@ -270,6 +311,110 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task BulkAddListItemsWithBadFieldNameTestDontThrowOnError()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTestDontThrowOnError");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                try
+                {
+                    IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                    {
+                        Group = "Custom Fields",
+                        AddToDefaultView = true,
+                    });
+
+                    Assert.IsTrue(myField.InternalName != "MetaInfo");
+
+                    List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
+
+                    var prop = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 1" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop);
+
+                    var prop2 = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 2" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop2);
+
+                    foreach (var propItem in propertiesToUpdate)
+                    {
+                        await list.Items.AddBatchAsync(propItem);
+                    }
+
+                    var errors = await context.ExecuteAsync(false);
+
+                    Assert.IsTrue(errors.Count == 2);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task BulkAddListItemsWithBadFieldNameTestDontThrowOnErrorNamedBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTestDontThrowOnErrorNamedBatch");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                try
+                {
+                    IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                    {
+                        Group = "Custom Fields",
+                        AddToDefaultView = true,
+                    });
+
+                    Assert.IsTrue(myField.InternalName != "MetaInfo");
+
+                    var batch = context.NewBatch();
+
+                    List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
+
+                    var prop = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 1" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop);
+
+                    var prop2 = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 2" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop2);
+
+                    foreach (var propItem in propertiesToUpdate)
+                    {
+                        await list.Items.AddBatchAsync(batch, propItem);
+                    }
+
+                    var errors = await context.ExecuteAsync(batch, false);
+
+                    Assert.IsTrue(errors.Count == 2);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task VerifyUserFieldsInRepetiveUpdates()
         {
             //TestCommon.Instance.Mocking = false;
@@ -281,7 +426,7 @@ namespace PnP.Core.Test.SharePoint
                 IField myUserField = await list.Fields.AddUserAsync("User1", new FieldUserOptions()
                 {
                     Group = "Custom Fields",
-                    AddToDefaultView = true,                    
+                    AddToDefaultView = true,
                 });
 
                 // load the current user
@@ -315,7 +460,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue((firstListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
 
                 firstListItem.Title = "updated title 2";
-                
+
                 // This update cleared out the user value, fixed now by ensuring a freshly loaded fieldvalue object has no pending changes
                 await firstListItem.UpdateAsync();
 
@@ -427,7 +572,7 @@ namespace PnP.Core.Test.SharePoint
                             var newDate = new DateTime(2020, 10, 20);
 
                             firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
-                            firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);                             
+                            firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);
                             firstItem.Values["Created"] = newDate;
                             firstItem.Values["Modified"] = newDate;
 
@@ -439,8 +584,10 @@ namespace PnP.Core.Test.SharePoint
 
                             if (!TestCommon.RunningInGitHubWorkflow())
                             {
-                                Assert.IsTrue(firstItem.Values["Created"].ToString() == newDate.ToString());
-                                Assert.IsTrue(firstItem.Values["Modified"].ToString() == newDate.ToString());
+                                Assert.IsTrue(((DateTime)firstItem.Values["Created"]).Year == newDate.Year);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Created"]).Month == newDate.Month);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Modified"]).Year == newDate.Year);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Modified"]).Month == newDate.Month);
                             }
                         }
                     }
@@ -1336,7 +1483,7 @@ namespace PnP.Core.Test.SharePoint
                     }
                     await context.ExecuteAsync();
 
-                    foreach(var item in myList.Items.AsRequested())
+                    foreach (var item in myList.Items.AsRequested())
                     {
                         item["MetaInfo"] = "{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues";
                         item["Title"] = "okido";
@@ -1351,7 +1498,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                    await myList2.LoadAsync(p => p.Items.QueryProperties(p=>p.Title, p=>p.FieldValuesAsText));
+                    await myList2.LoadAsync(p => p.Items.QueryProperties(p => p.Title, p => p.FieldValuesAsText));
 
                     foreach (var item2 in myList2.Items.AsRequested())
                     {
@@ -1680,268 +1827,273 @@ namespace PnP.Core.Test.SharePoint
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RegularFieldCsomTest");
                 var myList = await context.Web.Lists.GetByTitleAsync(listTitle);
 
-                if (TestCommon.Instance.Mocking && myList != null)
+                try
                 {
-                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    //==========================================================
+                    // Step 2: Add special fields
+                    string fieldGroup = "TEST GROUP";
+
+                    // Text field 1
+                    string fldText1 = "Text1";
+                    IField addedTextField1 = await myList.Fields.AddTextAsync(fldText1, new FieldTextOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // MultilineText field 1
+                    string fldMultilineText1 = "MultilineText1";
+                    IField addedMultilineTextField1 = await myList.Fields.AddMultilineTextAsync(fldMultilineText1, new FieldMultilineTextOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // Boolean field 1
+                    string fldBool1 = "Bool1";
+                    IField addedBoolField1 = await myList.Fields.AddBooleanAsync(fldBool1, new FieldBooleanOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // Number field 1
+                    string fldNumber1 = "Number1";
+                    IField addedNumberField1 = await myList.Fields.AddNumberAsync(fldNumber1, new FieldNumberOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // DateTime field 1
+                    string fldDateTime1 = "DateTime1";
+                    IField addedDateTimeField1 = await myList.Fields.AddDateTimeAsync(fldDateTime1, new FieldDateTimeOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // Currency field 1
+                    string fldCurrency1 = "Currency1";
+                    IField addedCurrencyField1 = await myList.Fields.AddCurrencyAsync(fldCurrency1, new FieldCurrencyOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    // Calculated field 1
+                    string fldCalculated1 = "Calculated1";
+                    IField addedCalculatedField1 = await myList.Fields.AddCalculatedAsync(fldCalculated1, new FieldCalculatedOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Formula = @"=1-0.5",
+                        OutputType = FieldType.Number,
+                        ShowAsPercentage = true,
+                    });
+
+                    // Choice single field 1
+                    string fldChoiceSingle1 = "ChoiceSingle1";
+                    IField addedChoiceSingleField1 = await myList.Fields.AddChoiceAsync(fldChoiceSingle1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = new List<string>() { "Option A", "Option B", "Option C" }.ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    // Choice multi field 1
+                    string fldChoiceMulti1 = "ChoiceMulti1";
+                    IField addChoiceMultiField1 = await myList.Fields.AddChoiceMultiAsync(fldChoiceMulti1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = new List<string>() { "Option A", "Option B", "Option C", "Option D", "Option E" }.ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    //==========================================================
+                    // Step 3: Add a list item
+                    Dictionary<string, object> item = new Dictionary<string, object>()
+                    {
+                        { "Title", "Item1" }
+                    };
+
+                    Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
+                    {
+                        { fldText1, new FieldData("Text") },
+                        { fldMultilineText1, new FieldData("MultilineText") },
+                        { fldNumber1, new FieldData("Number") },
+                        { fldBool1, new FieldData("Boolean") },
+                        { fldDateTime1, new FieldData("DateTime") },
+                        { fldCurrency1, new FieldData("Currency") },
+                        { fldCalculated1, new FieldData("Calculated") },
+                        { fldChoiceSingle1, new FieldData("Choice") },
+                        { fldChoiceMulti1, new FieldData("ChoiceMulti") },
+                    };
+
+                    fieldData[fldText1].Properties.Add("Text", "PnP Rocks");
+                    item.Add(fldText1, fieldData[fldText1].Properties["Text"]);
+
+                    fieldData[fldMultilineText1].Properties.Add("Text", "PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks");
+                    item.Add(fldMultilineText1, fieldData[fldMultilineText1].Properties["Text"]);
+
+                    fieldData[fldNumber1].Properties.Add("Number", 67687);
+                    item.Add(fldNumber1, fieldData[fldNumber1].Properties["Number"]);
+
+                    fieldData[fldBool1].Properties.Add("Boolean", true);
+                    item.Add(fldBool1, fieldData[fldBool1].Properties["Boolean"]);
+
+                    DateTime baseDate = new DateTime(2020, 12, 6, 8, 25, 47);
+                    fieldData[fldDateTime1].Properties.Add("DateTime", baseDate);
+                    item.Add(fldDateTime1, fieldData[fldDateTime1].Properties["DateTime"]);
+
+                    fieldData[fldCurrency1].Properties.Add("Currency", 67.67);
+                    item.Add(fldCurrency1, fieldData[fldCurrency1].Properties["Currency"]);
+
+                    fieldData[fldChoiceSingle1].Properties.Add("Choice", "Option A");
+                    item.Add(fldChoiceSingle1, fieldData[fldChoiceSingle1].Properties["Choice"]);
+
+                    fieldData[fldChoiceMulti1].Properties.Add("Choice1", "Option A");
+                    fieldData[fldChoiceMulti1].Properties.Add("Choice2", "Option B");
+                    var choices = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString() };
+                    fieldData[fldChoiceMulti1].Properties.Add("Choices", choices);
+                    item.Add(fldChoiceMulti1, choices);
+
+                    // Add the configured list item
+                    var addedItem = await myList.Items.AddAsync(item);
+
+                    //==========================================================
+                    // Step 4: validate returned list item
+                    Assert.IsTrue(addedItem.Requested);
+                    Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                    Assert.IsTrue(addedItem[fldText1] is string);
+                    Assert.IsTrue(addedItem[fldText1] == fieldData[fldText1].Properties["Text"]);
+
+                    Assert.IsTrue(addedItem[fldMultilineText1] is string);
+                    Assert.IsTrue(addedItem[fldMultilineText1] == fieldData[fldMultilineText1].Properties["Text"]);
+
+                    Assert.IsTrue(addedItem[fldNumber1] is int);
+                    Assert.IsTrue(addedItem[fldNumber1] == fieldData[fldNumber1].Properties["Number"]);
+
+                    Assert.IsTrue(addedItem[fldBool1] is bool);
+                    Assert.IsTrue(addedItem[fldBool1] == fieldData[fldBool1].Properties["Boolean"]);
+
+                    Assert.IsTrue(addedItem[fldDateTime1] is DateTime);
+                    Assert.IsTrue(addedItem[fldDateTime1] == fieldData[fldDateTime1].Properties["DateTime"]);
+
+                    Assert.IsTrue(addedItem[fldCurrency1] is double);
+                    Assert.IsTrue(addedItem[fldCurrency1] == fieldData[fldCurrency1].Properties["Currency"]);
+
+                    Assert.IsTrue(addedItem[fldChoiceSingle1] is string);
+                    Assert.IsTrue(addedItem[fldChoiceSingle1] == fieldData[fldChoiceSingle1].Properties["Choice"]);
+
+                    Assert.IsTrue(addedItem[fldChoiceMulti1] is List<string>);
+                    Assert.IsTrue(addedItem[fldChoiceMulti1] == fieldData[fldChoiceMulti1].Properties["Choices"]);
+
+                    //==========================================================
+                    // Step 5: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetAsync(2, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 7: Update item using CSOM UpdateOverwriteVersionAsync 
+
+                    fieldData[fldText1].Properties["Text"] = "22 PnP Rocks";
+                    addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
+
+                    fieldData[fldMultilineText1].Properties["Text"] = "2222 PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks";
+                    addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
+
+                    fieldData[fldNumber1].Properties["Number"] = 22222;
+                    addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
+
+                    fieldData[fldBool1].Properties["Boolean"] = false;
+                    addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
+
+                    fieldData[fldDateTime1].Properties["DateTime"] = baseDate.Subtract(new TimeSpan(10, 0, 0, 0));
+                    addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
+
+                    fieldData[fldCurrency1].Properties["Currency"] = 22.22;
+                    addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
+
+                    fieldData[fldChoiceSingle1].Properties["Choice"] = "Option B";
+                    addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
+
+                    fieldData[fldChoiceMulti1].Properties.Add("Choice3", "Option C");
+                    var choices2 = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice3"].ToString() };
+                    fieldData[fldChoiceMulti1].Properties["Choices"] = choices2;
+                    addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
+
+                    // Update list item
+                    await addedItem.UpdateOverwriteVersionAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetAsync(4, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 10: Blank item using CSOM UpdateOverwriteVersionAsync 
+
+                    fieldData[fldText1].Properties["Text"] = "";
+                    addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
+
+                    fieldData[fldMultilineText1].Properties["Text"] = "";
+                    addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
+
+                    fieldData[fldNumber1].Properties["Number"] = 0;
+                    addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
+
+                    fieldData[fldBool1].Properties["Boolean"] = false;
+                    addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
+
+                    fieldData[fldDateTime1].Properties["DateTime"] = null;
+                    addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
+
+                    fieldData[fldCurrency1].Properties["Currency"] = 0;
+                    addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
+
+                    fieldData[fldChoiceSingle1].Properties["Choice"] = "";
+                    addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
+
+                    var choices3 = new List<string>();
+                    fieldData[fldChoiceMulti1].Properties["Choices"] = choices3;
+                    addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
+
+                    // Update list item
+                    await addedItem.UpdateOverwriteVersionAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetAsync(6, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyRegularListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
                 }
-
-                if (myList == null)
+                finally
                 {
-                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
                 }
-
-                //==========================================================
-                // Step 2: Add special fields
-                string fieldGroup = "TEST GROUP";
-
-                // Text field 1
-                string fldText1 = "Text1";
-                IField addedTextField1 = await myList.Fields.AddTextAsync(fldText1, new FieldTextOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // MultilineText field 1
-                string fldMultilineText1 = "MultilineText1";
-                IField addedMultilineTextField1 = await myList.Fields.AddMultilineTextAsync(fldMultilineText1, new FieldMultilineTextOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // Boolean field 1
-                string fldBool1 = "Bool1";
-                IField addedBoolField1 = await myList.Fields.AddBooleanAsync(fldBool1, new FieldBooleanOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // Number field 1
-                string fldNumber1 = "Number1";
-                IField addedNumberField1 = await myList.Fields.AddNumberAsync(fldNumber1, new FieldNumberOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // DateTime field 1
-                string fldDateTime1 = "DateTime1";
-                IField addedDateTimeField1 = await myList.Fields.AddDateTimeAsync(fldDateTime1, new FieldDateTimeOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // Currency field 1
-                string fldCurrency1 = "Currency1";
-                IField addedCurrencyField1 = await myList.Fields.AddCurrencyAsync(fldCurrency1, new FieldCurrencyOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                });
-
-                // Calculated field 1
-                string fldCalculated1 = "Calculated1";
-                IField addedCalculatedField1 = await myList.Fields.AddCalculatedAsync(fldCalculated1, new FieldCalculatedOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                    Formula = @"=1-0.5",
-                    OutputType = FieldType.Number,
-                    ShowAsPercentage = true,
-                });
-
-                // Choice single field 1
-                string fldChoiceSingle1 = "ChoiceSingle1";
-                IField addedChoiceSingleField1 = await myList.Fields.AddChoiceAsync(fldChoiceSingle1, new FieldChoiceOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                    Choices = new List<string>() { "Option A", "Option B", "Option C" }.ToArray(),
-                    DefaultChoice = "Option B"
-                });
-
-                // Choice multi field 1
-                string fldChoiceMulti1 = "ChoiceMulti1";
-                IField addChoiceMultiField1 = await myList.Fields.AddChoiceMultiAsync(fldChoiceMulti1, new FieldChoiceOptions()
-                {
-                    Group = fieldGroup,
-                    AddToDefaultView = true,
-                    Choices = new List<string>() { "Option A", "Option B", "Option C", "Option D", "Option E" }.ToArray(),
-                    DefaultChoice = "Option B"
-                });
-
-                //==========================================================
-                // Step 3: Add a list item
-                Dictionary<string, object> item = new Dictionary<string, object>()
-                {
-                    { "Title", "Item1" }
-                };
-
-                Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
-                {
-                    { fldText1, new FieldData("Text") },
-                    { fldMultilineText1, new FieldData("MultilineText") },
-                    { fldNumber1, new FieldData("Number") },
-                    { fldBool1, new FieldData("Boolean") },
-                    { fldDateTime1, new FieldData("DateTime") },
-                    { fldCurrency1, new FieldData("Currency") },
-                    { fldCalculated1, new FieldData("Calculated") },
-                    { fldChoiceSingle1, new FieldData("Choice") },
-                    { fldChoiceMulti1, new FieldData("ChoiceMulti") },
-                };
-
-                fieldData[fldText1].Properties.Add("Text", "PnP Rocks");
-                item.Add(fldText1, fieldData[fldText1].Properties["Text"]);
-
-                fieldData[fldMultilineText1].Properties.Add("Text", "PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks");
-                item.Add(fldMultilineText1, fieldData[fldMultilineText1].Properties["Text"]);
-
-                fieldData[fldNumber1].Properties.Add("Number", 67687);
-                item.Add(fldNumber1, fieldData[fldNumber1].Properties["Number"]);
-
-                fieldData[fldBool1].Properties.Add("Boolean", true);
-                item.Add(fldBool1, fieldData[fldBool1].Properties["Boolean"]);
-
-                DateTime baseDate = new DateTime(2020, 12, 6, 8, 25, 47);
-                fieldData[fldDateTime1].Properties.Add("DateTime", baseDate);
-                item.Add(fldDateTime1, fieldData[fldDateTime1].Properties["DateTime"]);
-
-                fieldData[fldCurrency1].Properties.Add("Currency", 67.67);
-                item.Add(fldCurrency1, fieldData[fldCurrency1].Properties["Currency"]);
-
-                fieldData[fldChoiceSingle1].Properties.Add("Choice", "Option A");
-                item.Add(fldChoiceSingle1, fieldData[fldChoiceSingle1].Properties["Choice"]);
-
-                fieldData[fldChoiceMulti1].Properties.Add("Choice1", "Option A");
-                fieldData[fldChoiceMulti1].Properties.Add("Choice2", "Option B");
-                var choices = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString() };
-                fieldData[fldChoiceMulti1].Properties.Add("Choices", choices);
-                item.Add(fldChoiceMulti1, choices);
-
-                // Add the configured list item
-                var addedItem = await myList.Items.AddAsync(item);
-
-                //==========================================================
-                // Step 4: validate returned list item
-                Assert.IsTrue(addedItem.Requested);
-                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
-
-                Assert.IsTrue(addedItem[fldText1] is string);
-                Assert.IsTrue(addedItem[fldText1] == fieldData[fldText1].Properties["Text"]);
-
-                Assert.IsTrue(addedItem[fldMultilineText1] is string);
-                Assert.IsTrue(addedItem[fldMultilineText1] == fieldData[fldMultilineText1].Properties["Text"]);
-
-                Assert.IsTrue(addedItem[fldNumber1] is int);
-                Assert.IsTrue(addedItem[fldNumber1] == fieldData[fldNumber1].Properties["Number"]);
-
-                Assert.IsTrue(addedItem[fldBool1] is bool);
-                Assert.IsTrue(addedItem[fldBool1] == fieldData[fldBool1].Properties["Boolean"]);
-
-                Assert.IsTrue(addedItem[fldDateTime1] is DateTime);
-                Assert.IsTrue(addedItem[fldDateTime1] == fieldData[fldDateTime1].Properties["DateTime"]);
-
-                Assert.IsTrue(addedItem[fldCurrency1] is double);
-                Assert.IsTrue(addedItem[fldCurrency1] == fieldData[fldCurrency1].Properties["Currency"]);
-
-                Assert.IsTrue(addedItem[fldChoiceSingle1] is string);
-                Assert.IsTrue(addedItem[fldChoiceSingle1] == fieldData[fldChoiceSingle1].Properties["Choice"]);
-
-                Assert.IsTrue(addedItem[fldChoiceMulti1] is List<string>);
-                Assert.IsTrue(addedItem[fldChoiceMulti1] == fieldData[fldChoiceMulti1].Properties["Choices"]);
-
-                //==========================================================
-                // Step 5: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetAsync(2, listTitle, fieldData);
-
-                //==========================================================
-                // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
-
-                //==========================================================
-                // Step 7: Update item using CSOM UpdateOverwriteVersionAsync 
-
-                fieldData[fldText1].Properties["Text"] = "22 PnP Rocks";
-                addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
-
-                fieldData[fldMultilineText1].Properties["Text"] = "2222 PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks";
-                addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
-
-                fieldData[fldNumber1].Properties["Number"] = 22222;
-                addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
-
-                fieldData[fldBool1].Properties["Boolean"] = false;
-                addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
-
-                fieldData[fldDateTime1].Properties["DateTime"] = baseDate.Subtract(new TimeSpan(10, 0, 0, 0));
-                addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
-
-                fieldData[fldCurrency1].Properties["Currency"] = 22.22;
-                addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
-
-                fieldData[fldChoiceSingle1].Properties["Choice"] = "Option B";
-                addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
-
-                fieldData[fldChoiceMulti1].Properties.Add("Choice3", "Option C");
-                var choices2 = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice3"].ToString() };
-                fieldData[fldChoiceMulti1].Properties["Choices"] = choices2;
-                addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
-
-                // Update list item
-                await addedItem.UpdateOverwriteVersionAsync();
-
-                //==========================================================
-                // Step 8: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetAsync(4, listTitle, fieldData);
-
-                //==========================================================
-                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
-
-                //==========================================================
-                // Step 10: Blank item using CSOM UpdateOverwriteVersionAsync 
-
-                fieldData[fldText1].Properties["Text"] = "";
-                addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
-
-                fieldData[fldMultilineText1].Properties["Text"] = "";
-                addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
-
-                fieldData[fldNumber1].Properties["Number"] = 0;
-                addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
-
-                fieldData[fldBool1].Properties["Boolean"] = false;
-                addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
-
-                fieldData[fldDateTime1].Properties["DateTime"] = null;
-                addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
-
-                fieldData[fldCurrency1].Properties["Currency"] = 0;
-                addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
-
-                fieldData[fldChoiceSingle1].Properties["Choice"] = "";
-                addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
-
-                var choices3 = new List<string>();
-                fieldData[fldChoiceMulti1].Properties["Choices"] = choices3;
-                addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
-
-                // Update list item
-                await addedItem.UpdateOverwriteVersionAsync();
-
-                //==========================================================
-                // Step 8: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetAsync(6, listTitle, fieldData);
-
-                //==========================================================
-                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyRegularListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
-
-                // Cleanup the created list
-                await myList.DeleteAsync();
             }
         }
 
@@ -2034,7 +2186,8 @@ namespace PnP.Core.Test.SharePoint
                         DateTime expected = ((DateTime)field.Value.Properties["DateTime"]).ToUniversalTime();
                         Assert.IsTrue(server.Year == expected.Year);
                         Assert.IsTrue(server.Month == expected.Month);
-                        Assert.IsTrue(server.Day == expected.Day);
+                        // Don't check these as due to time zone settings of the use sites this may differ
+                        //Assert.IsTrue(server.Day == expected.Day);
                         //Assert.IsTrue(server.Hour == expected.Hour);
                         Assert.IsTrue(server.Minute == expected.Minute);
                         Assert.IsTrue(server.Second == expected.Second);
@@ -2459,6 +2612,399 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SpecialFieldRestUpdateAlternativeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Step 0: Data needed for the test run
+                // Get current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                // Get the principal representing two claims which are always available
+                var userTwo = await context.Web.EnsureUserAsync("Everyone except external users");
+                // Site pages library for lookup of the home page
+                IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
+                Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
+                Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
+                Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");
+                string label1 = "Dutch";
+                Guid term2 = new Guid("8246e3c1-19ea-4b22-8ae3-df9cbc150a74");
+                string label2 = "English";
+                Guid term3 = new Guid("3f773e87-24c3-4d0d-a07f-96eb0c1e905e");
+                string label3 = "French";
+
+                //==========================================================
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("SpecialFieldRestUpdateAlternativeTest");
+
+                IList myList = null;
+                try
+                {
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    //==========================================================
+                    // Step 2: Add special fields
+                    string fieldGroup = "TEST GROUP";
+
+                    // URL field 1
+                    string fldUrl1 = "URLField1";
+                    IField addedUrlField1 = await myList.Fields.AddUrlAsync(fldUrl1, new FieldUrlOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        DisplayFormat = UrlFieldFormatType.Hyperlink
+                    });
+
+                    // URL field 2
+                    string fldUrl2 = "URLField2";
+                    IField addedUrlField2 = await myList.Fields.AddUrlAsync(fldUrl2, new FieldUrlOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        DisplayFormat = UrlFieldFormatType.Hyperlink
+                    });
+
+                    // User Single field 1
+                    string fldUserSingle1 = "UserSingleField1";
+                    IField addedUserSingleField1 = await myList.Fields.AddUserAsync(fldUserSingle1, new FieldUserOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                    });
+
+                    // User Multi field 1
+                    string fldUserMulti1 = "UserMultiField1";
+                    IField addedUserMultiField1 = await myList.Fields.AddUserMultiAsync(fldUserMulti1, new FieldUserOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                    });
+
+                    // Taxonomy field 1
+                    string fldTaxonomy1 = "TaxonomyField1";
+                    IField addedTaxonomyField1 = await myList.Fields.AddTaxonomyAsync(fldTaxonomy1, new FieldTaxonomyOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        TermStoreId = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c"),
+                        TermSetId = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5")
+                    });
+
+                    // Taxonomy Multi field 1
+                    string fldTaxonomyMulti1 = "TaxonomyMultiField1";
+                    IField addedTaxonomyMultiField1 = await myList.Fields.AddTaxonomyMultiAsync(fldTaxonomyMulti1, new FieldTaxonomyOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        TermStoreId = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c"),
+                        TermSetId = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5")
+                    });
+
+                    // Choice single field 1
+                    string fldChoiceSingle1 = "ChoiceSingle1";
+                    IField addChoiceSingleField1 = await myList.Fields.AddChoiceAsync(fldChoiceSingle1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = (new List<string>() { "Option A", "Option B", "Option C" }).ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    // Choice multi field 1
+                    string fldChoiceMulti1 = "ChoiceMulti1";
+                    IField addChoiceMultiField1 = await myList.Fields.AddChoiceMultiAsync(fldChoiceMulti1, new FieldChoiceOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        Choices = (new List<string>() { "Option A", "Option B", "Option C", "Option D", "Option E" }).ToArray(),
+                        DefaultChoice = "Option B"
+                    });
+
+                    // Lookup single field 1
+                    string fldLookupSingle1 = "LookupSingleField1";
+                    IField addedLookupSingleField1 = await myList.Fields.AddLookupAsync(fldLookupSingle1, new FieldLookupOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        LookupListId = sitePages.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    string fldLookupMulti1 = "LookupMultiField1";
+                    IField addedLookupMultiField1 = await myList.Fields.AddLookupMultiAsync(fldLookupMulti1, new FieldLookupOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                        LookupListId = sitePages.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    //==========================================================
+                    // Step 3: Add a list item
+                    Dictionary<string, object> item = new Dictionary<string, object>()
+                    {
+                        { "Title", "Item1" }
+                    };
+
+                    Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
+                    {
+                        // URL field 1
+                        { fldUrl1, new FieldData("URL") },
+                        // URL field 2
+                        { fldUrl2, new FieldData("URL") },
+                        // User single field 1
+                        { fldUserSingle1, new FieldData("UserSingle") },
+                        // User multi field 1
+                        { fldUserMulti1, new FieldData("UserMulti") },
+                        // Taxonomy single field 1
+                        { fldTaxonomy1, new FieldData("TaxonomySingle") },
+                        // Taxonomy multi field 1
+                        { fldTaxonomyMulti1, new FieldData("TaxonomyMulti") },
+                        // Lookup single field 1
+                        { fldLookupSingle1, new FieldData("LookupSingle") },
+                        // Lookup multi field 1
+                        { fldLookupMulti1, new FieldData("LookupMulti") },
+                    };
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties.Add("Url", "https://pnp.com");
+                    fieldData[fldUrl1].Properties.Add("Description", "PnP Rocks");
+                    item.Add(fldUrl1, new FieldUrlValue(fieldData[fldUrl1].Properties["Url"].ToString(), fieldData[fldUrl1].Properties["Description"].ToString()));
+
+                    // URL field 2 -  no description value set on create
+                    fieldData[fldUrl2].Properties.Add("Url", "https://pnp.com");
+                    // set the expected data equal to the url field as that's what we expect
+                    fieldData[fldUrl2].Properties.Add("Description", fieldData[fldUrl2].Properties["Url"]);
+                    item.Add(fldUrl2, new FieldUrlValue(fieldData[fldUrl2].Properties["Url"].ToString()));
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties.Add("Principal", currentUser);
+                    item.Add(fldUserSingle1, new FieldUserValue(currentUser));
+
+                    // User multi field 1
+                    var userCollection = new FieldValueCollection();
+                    userCollection.Values.Add(new FieldUserValue(currentUser));
+                    fieldData[fldUserMulti1].Properties.Add("Collection", userCollection);
+                    item.Add(fldUserMulti1, userCollection);
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties.Add("TermStore", termStore);
+                    fieldData[fldTaxonomy1].Properties.Add("TermSet", termSet);
+                    fieldData[fldTaxonomy1].Properties.Add("Term1", term1);
+                    fieldData[fldTaxonomy1].Properties.Add("Label1", label1);
+                    item.Add(fldTaxonomy1, new FieldTaxonomyValue((Guid)fieldData[fldTaxonomy1].Properties["Term1"], fieldData[fldTaxonomy1].Properties["Label1"].ToString()));
+
+                    // Taxonomy multi field 1
+                    fieldData[fldTaxonomyMulti1].Properties.Add("TermStore", termStore);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("TermSet", termSet);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term1", term1);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label1", label1);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term2", term2);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
+
+                    // Use the option to specify a list of values in the constructor
+                    List<IFieldTaxonomyValue> taxonomyValues = new List<IFieldTaxonomyValue>
+                    {
+                        new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                        new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                    };
+                    var termCollection = new FieldValueCollection(taxonomyValues);
+                    fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
+                    item.Add(fldTaxonomyMulti1, termCollection);
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties.Add("LookupId", 1);
+                    item.Add(fldLookupSingle1, new FieldLookupValue((int)fieldData[fldLookupSingle1].Properties["LookupId"]));
+
+                    // Lookup multi field 1
+                    fieldData[fldLookupMulti1].Properties.Add("LookupId", 1);
+                    var lookupCollection = new FieldValueCollection();
+                    lookupCollection.Values.Add(new FieldLookupValue((int)fieldData[fldLookupMulti1].Properties["LookupId"]));
+                    fieldData[fldLookupMulti1].Properties.Add("Collection", lookupCollection);
+                    item.Add(fldLookupMulti1, lookupCollection);
+
+                    // Add the configured list item
+                    var addedItem = await myList.Items.AddAsync(item);
+
+                    //==========================================================
+                    // Step 4: validate returned list item
+                    Assert.IsTrue(addedItem.Requested);
+                    Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                    // URL field 1
+                    Assert.IsTrue(addedItem[fldUrl1] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Url == fieldData[fldUrl1].Properties["Url"].ToString());
+                    Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Description == fieldData[fldUrl1].Properties["Description"].ToString());
+
+                    // URL field 2
+                    Assert.IsTrue(addedItem[fldUrl2] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Url == fieldData[fldUrl2].Properties["Url"].ToString());
+                    Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Description == fieldData[fldUrl2].Properties["Description"].ToString());
+
+                    // User single field 1
+                    Assert.IsTrue(addedItem[fldUserSingle1] is IFieldUserValue);
+                    Assert.IsTrue((addedItem[fldUserSingle1] as IFieldUserValue).LookupId == (fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal).Id);
+
+                    // User multi field 1
+                    Assert.IsTrue(addedItem[fldUserMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldUserMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+
+                    // Taxonomy single field 1
+                    Assert.IsTrue(addedItem[fldTaxonomy1] is IFieldTaxonomyValue);
+                    Assert.IsTrue((addedItem[fldTaxonomy1] as IFieldTaxonomyValue).TermId == (Guid)fieldData[fldTaxonomy1].Properties["Term1"]);
+                    Assert.IsTrue((addedItem[fldTaxonomy1] as IFieldTaxonomyValue).Label == fieldData[fldTaxonomy1].Properties["Label1"].ToString());
+
+                    // Taxonomy multi field 1
+                    Assert.IsTrue(addedItem[fldTaxonomyMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldTaxonomyMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+                    Assert.IsTrue((addedItem[fldTaxonomyMulti1] as IFieldValueCollection).Values[1] == (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values[1]);
+
+                    // Lookup single field 1
+                    Assert.IsTrue(addedItem[fldLookupSingle1] is IFieldLookupValue);
+                    Assert.IsTrue((addedItem[fldLookupSingle1] as IFieldLookupValue).LookupId == (int)fieldData[fldLookupSingle1].Properties["LookupId"]);
+
+                    // Lookup multi field 1
+                    Assert.IsTrue(addedItem[fldLookupMulti1] is IFieldValueCollection);
+                    Assert.IsTrue((addedItem[fldLookupMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
+
+                    //==========================================================
+                    // Step 5: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(2, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 7: Update item using REST update 
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties["Url"] = $"{fieldData[fldUrl1].Properties["Url"]}/rocks";
+                    fieldData[fldUrl1].Properties["Description"] = $"{fieldData[fldUrl1].Properties["Description"]}A";
+                    (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                    (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                    // URL field 2
+                    fieldData[fldUrl2].Properties["Url"] = $"{fieldData[fldUrl2].Properties["Url"]}/rocks";
+                    (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                    (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties["Principal"] = userTwo;
+                    (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                    // User multi field2
+                    (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldUserValue(userTwo));
+                    addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties["Term1"] = term2;
+                    fieldData[fldTaxonomy1].Properties["Labe1"] = label2;
+                    (addedItem[fldTaxonomy1] as IFieldTaxonomyValue).TermId = (Guid)fieldData[fldTaxonomy1].Properties["Term1"];
+                    (addedItem[fldTaxonomy1] as IFieldTaxonomyValue).Label = fieldData[fldTaxonomy1].Properties["Label1"].ToString();
+
+                    // Taxonomy multi field 1
+                    (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term3"], fieldData[fldTaxonomyMulti1].Properties["Label3"].ToString()));
+                    addedItem[fldTaxonomyMulti1] = fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties["LookupId"] = 1;
+                    (addedItem[fldLookupSingle1] as IFieldLookupValue).LookupId = (int)fieldData[fldLookupSingle1].Properties["LookupId"];
+
+                    // Lookup multi field 1
+                    (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(new FieldLookupValue(1));
+                    addedItem[fldLookupMulti1] = fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Update list item
+                    await addedItem.UpdateAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(4, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 10: Blank item using REST update
+
+                    // URL field 1
+                    fieldData[fldUrl1].Properties["Url"] = "";
+                    fieldData[fldUrl1].Properties["Description"] = "";
+                    (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                    (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                    // URL field 2
+                    fieldData[fldUrl2].Properties["Url"] = "";
+                    fieldData[fldUrl2].Properties["Description"] = "";
+                    (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                    (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                    // User single field 1
+                    fieldData[fldUserSingle1].Properties["Principal"] = null;
+                    (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                    // User multi field2
+                    (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Taxonomy single field 1
+                    fieldData[fldTaxonomy1].Properties["Term1"] = Guid.Empty;
+                    addedItem[fldTaxonomy1] = null;
+
+                    // Taxonomy multi field 1
+                    (fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldTaxonomyMulti1] = fieldData[fldTaxonomyMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Lookup single field 1
+                    fieldData[fldLookupSingle1].Properties["LookupId"] = null;
+                    addedItem[fldLookupSingle1] = null;
+
+                    // Lookup multi field 1
+                    (fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                    addedItem[fldLookupMulti1] = fieldData[fldLookupMulti1].Properties["Collection"] as IFieldValueCollection;
+
+                    // Update list item
+                    await addedItem.UpdateAsync();
+
+                    //==========================================================
+                    // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetAsync(6, listTitle, fieldData);
+
+                    //==========================================================
+                    // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                    await VerifyListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
+
+                }
+                finally
+                {
+                    if (myList != null)
+                    {
+                        // Cleanup the created list
+                        await myList.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task SpecialFieldCsomTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -2854,7 +3400,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     if (field.Value.Properties["Url"].ToString() == "")
                     {
-                        Assert.IsTrue(addedItem[field.Key] == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Url == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Description == null);
                     }
                     else
                     {
@@ -2902,7 +3449,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     if ((Guid)field.Value.Properties["Term1"] == Guid.Empty)
                     {
-                        Assert.IsTrue(addedItem[field.Key] == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldTaxonomyValue).TermId == Guid.Empty);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldTaxonomyValue).Label == null);
                     }
                     else
                     {
@@ -2946,10 +3494,6 @@ namespace PnP.Core.Test.SharePoint
                     }
 
                     if (idToCheck == -1)
-                    {
-                        Assert.IsTrue(addedItem[field.Key] == null);
-                    }
-                    else
                     {
                         Assert.IsTrue(addedItem[field.Key] is IFieldLookupValue);
                         Assert.IsTrue((addedItem[field.Key] as IFieldLookupValue).LookupId == idToCheck);
@@ -3208,7 +3752,7 @@ namespace PnP.Core.Test.SharePoint
                 IField addedNumberField1 = await list.Fields.AddNumberBatchAsync("TestNumberField", new FieldNumberOptions()
                 {
                     Group = fieldGroup,
-                    AddToDefaultView = true,
+                    AddToDefaultView = true
                 });
                 await context.ExecuteAsync();
 
@@ -3259,7 +3803,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ContentType.Name));
                     Assert.IsFalse(listItem.ContentType.Sealed);
 
-                    Assert.AreEqual(10, listItem.Values["TestNumberField"]);
+                    Assert.AreEqual(10.0, listItem.Values["TestNumberField"]);
                     Assert.AreEqual(true, listItem.Values["TestBoolField"]);
                     Assert.AreEqual("This is my test", listItem.Values["TestStringField"]);
                 }
@@ -3451,7 +3995,7 @@ namespace PnP.Core.Test.SharePoint
 
                         // ListDataAsStream loading
                         list2.Items.Clear();
-                        
+
                         var output = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {
                             ViewXml = viewXml,
@@ -3459,7 +4003,7 @@ namespace PnP.Core.Test.SharePoint
                         }).ConfigureAwait(false);
 
                         listItem = list2.Items.AsRequested().FirstOrDefault();
-                        
+
                         Assert.AreEqual("Yes", listItem.Values["With_x0020_Space"]);
                         Assert.AreEqual("Yes", listItem.Values["With_Underscore"]);
                         Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
@@ -3820,6 +4364,18 @@ namespace PnP.Core.Test.SharePoint
                     });
 
                     Assert.IsNotNull(changes2);
+                    Assert.IsTrue(changes2.Count == 1);
+
+                    var changesBatch2 = listItem.GetChangesBatch(new ChangeQueryOptions(true, true)
+                    {
+                        FetchLimit = 5,
+                    });
+
+                    Assert.IsFalse(changesBatch2.IsAvailable);
+
+                    context.Execute();
+
+                    Assert.IsTrue(changesBatch2.IsAvailable);
                     Assert.IsTrue(changes2.Count == 1);
 
                 }
@@ -4261,7 +4817,7 @@ namespace PnP.Core.Test.SharePoint
 
                 comments = await item.GetCommentsAsync(p => p.Replies);
                 firstComment = comments.AsRequested().First();
-                
+
                 Assert.IsTrue(firstComment.Id == "1");
                 Assert.IsTrue(firstComment.Replies.Length == 0);
 
@@ -4327,6 +4883,249 @@ namespace PnP.Core.Test.SharePoint
 
                 // Cleanup the created list
                 await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemAttachmentsSpecialCharTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemAttachmentsSpecialCharTest");
+                IList list = null;
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Attach files to me" } });
+
+                    // load the item with attachments again
+                    var itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 0);
+
+                    string fileContent = "PnP Rocks !!!";
+                    var contentStream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
+                    string fileName = "I'm special.txt";
+                    var addedAttachment = itemLoaded.AttachmentFiles.Add(fileName, contentStream);
+
+                    // load the item with attachments again
+                    itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 1);
+
+                    // Get the content from the attachment
+                    Stream downloadedContentStream = itemLoaded.AttachmentFiles.AsRequested().First().GetContent();
+                    downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                    // Get string from the content stream
+                    string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                    Assert.AreEqual(fileContent, downloadedContent);
+
+                    // remove the added attachment again
+                    itemLoaded.AttachmentFiles.AsRequested().First().Delete();
+
+                    itemLoaded = await list.Items.GetByIdAsync(item.Id, p => p.AttachmentFiles);
+                    Assert.IsTrue(itemLoaded.AttachmentFiles.Length == 0);
+
+                }
+                finally
+                {
+                    // Cleanup the created list
+                    await list.DeleteAsync();
+                }
+            }
+        }
+        #endregion
+
+        #region Compliance
+        [TestMethod]
+        public async Task ComplianceTagTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemComplianceTagTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add an item
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                    // Add Compliance tag
+                    addedItem.SetComplianceTag("Retain1Year", false, false, false, false);
+
+                    // Read the set compliance tag
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                        if (list2 != null)
+                        {
+                            await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='_ComplianceTag' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                            Assert.IsTrue(list2.Items.Length == 1);
+                            var firstItem = list2.Items.AsRequested().First();
+
+                            Assert.IsTrue(firstItem.Values["_ComplianceTag"].ToString() == "Retain1Year");
+                        }
+                    }
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ComplianceTagBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemComplianceTagBatchTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add an item
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                    // Add Compliance tag
+                    addedItem.SetComplianceTagBatch("Retain1Year", false, false, false, false);
+                    // Add something else to force batch end point being used
+                    myList.ContentTypesEnabled = true;
+                    myList.UpdateBatch();
+
+                    // Execute batch
+                    await context.ExecuteAsync();
+
+                    // Read the set compliance tag
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                        if (list2 != null)
+                        {
+                            await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='_ComplianceTag' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                            Assert.IsTrue(list2.Items.Length == 1);
+                            var firstItem = list2.Items.AsRequested().First();
+
+                            Assert.IsTrue(firstItem.Values["_ComplianceTag"].ToString() == "Retain1Year");
+                        }
+                    }
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+        #endregion
+
+        #region Effective user permissions
+
+        [TestMethod]
+        public async Task GetEffectiveUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("GetEffectiveUserPermissionsAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                    var basePermissions = await item.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
+
+                    Assert.IsNotNull(basePermissions);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CheckIfUserHasPermissionsAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+
+                    var hasPermissions = await item.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
+
+                    Assert.IsNotNull(hasPermissions);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public async Task CheckIfUserHasPermissionsExceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CheckIfUserHasPermissionsExceptionAsyncTest");
+                IList list = null;
+
+                try
+                {
+                    list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
+
+                    var hasPermissions = await item.CheckIfUserHasPermissionsAsync(null, PermissionKind.AddListItems);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
             }
         }
 

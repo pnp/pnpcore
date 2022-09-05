@@ -1,7 +1,9 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -181,6 +183,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that returns a collection of file version objects that represent the versions of the file.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFileVersionCollection Versions { get; }
 
@@ -208,6 +213,88 @@ namespace PnP.Core.Model.SharePoint
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
+
+        #endregion
+
+        #region GraphPermissions
+
+        /// <summary>
+        /// Gets the share links on the file item
+        /// </summary>
+        /// <returns>Collection of share links existing on the file</returns>
+        Task<IGraphPermissionCollection> GetShareLinksAsync();
+
+        /// <summary>
+        /// Gets the share links on the file item
+        /// </summary>
+        /// <returns>Collection of share links existing on the file</returns>
+        IGraphPermissionCollection GetShareLinks();
+
+        /// <summary>
+        /// Deletes the share links on the file item
+        /// </summary>
+        Task DeleteShareLinksAsync();
+
+        /// <summary>
+        /// Deletes the share links on the file item
+        /// </summary>
+        void DeleteShareLinks();
+
+        /// <summary>
+        /// Creates an anonymous sharing link for a file
+        /// </summary>
+        /// <param name="anonymousLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateAnonymousSharingLinkAsync(AnonymousLinkOptions anonymousLinkOptions);
+
+        /// <summary>
+        /// Creates an anonymous sharing link for a file
+        /// </summary>
+        /// <param name="anonymousLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateAnonymousSharingLink(AnonymousLinkOptions anonymousLinkOptions);
+
+        /// <summary>
+        /// Creates an organization sharing link for a file
+        /// </summary>
+        /// <param name="organizationalLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateOrganizationalSharingLinkAsync(OrganizationalLinkOptions organizationalLinkOptions);
+
+        /// <summary>
+        /// Creates an organization sharing link for a file
+        /// </summary>
+        /// <param name="organizationalLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateOrganizationalSharingLink(OrganizationalLinkOptions organizationalLinkOptions);
+
+        /// <summary>
+        /// Creates a user sharing link for a file
+        /// </summary>
+        /// <param name="userLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateUserSharingLinkAsync(UserLinkOptions userLinkOptions);
+
+        /// <summary>
+        /// Creates a user sharing link for a file
+        /// </summary>
+        /// <param name="userLinkOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateUserSharingLink(UserLinkOptions userLinkOptions);
+
+        /// <summary>
+        /// Creates a sharing invite to a specific user
+        /// </summary>
+        /// <param name="inviteOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        Task<IGraphPermission> CreateSharingInviteAsync(InviteOptions inviteOptions);
+
+        /// <summary>
+        /// Creates a sharing invite to a specific user
+        /// </summary>
+        /// <param name="inviteOptions"></param>
+        /// <returns>Permission that has been created</returns>
+        IGraphPermission CreateSharingInvite(InviteOptions inviteOptions);
 
         #endregion
 
@@ -657,6 +744,108 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
         IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch();
+        #endregion
+
+        #region Thumbnails
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<List<IThumbnail>> GetThumbnailsAsync(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        List<IThumbnail> GetThumbnails(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        Task<IEnumerableBatchResult<IThumbnail>> GetThumbnailsBatchAsync(Batch batch, ThumbnailOptions options = null);
+
+        /// <summary>
+        /// Returns a list of thumbnails for this file
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="options">Optionally specify which thumbnails you need</param>
+        /// <returns>The requested thumbnails</returns>
+        IEnumerableBatchResult<IThumbnail> GetThumbnailsBatch(Batch batch, ThumbnailOptions options = null);
+        #endregion
+
+        #region Analytics
+
+        /// <summary>
+        /// Gets file analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public Task<List<IActivityStat>> GetAnalyticsAsync(AnalyticsOptions options = null);
+
+        /// <summary>
+        /// Gets file analytics
+        /// </summary>
+        /// <param name="options">Defines which analytics are needed</param>
+        /// <returns>The requested analytics data</returns>
+        public List<IActivityStat> GetAnalytics(AnalyticsOptions options = null);
+
+        #endregion
+
+        #region Convert
+
+        /// <summary>
+        /// Converts the file to PDF, JPG, Html or Glb
+        /// </summary>
+        /// <param name="options">Defines the file conversion options</param>
+        /// <returns>Stream of the converted file</returns>
+        Task<Stream> ConvertToAsync(ConvertToOptions options);
+
+        /// <summary>
+        /// Converts the file to PDF, JPG, Html or Glb
+        /// </summary>
+        /// <param name="options">Defines the file conversion options</param>
+        /// <returns>Stream of the converted file</returns>
+        Stream ConvertTo(ConvertToOptions options);
+
+        #endregion
+
+        #region Preview
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="options">Options for configuring the created preview URL</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        Task<IFilePreview> GetPreviewAsync(PreviewOptions options = null);
+
+        /// <summary>
+        /// This action allows you to obtain short-lived embeddable URLs for an item in order to render a temporary preview.
+        /// The 'page' and 'zoom' options may not be available for all preview apps, but will be applied if the preview app supports it.
+        /// </summary>
+        /// <param name="options">Options for configuring the created preview URL</param>
+        /// <returns>FilePreview object. Either getUrl, postUrl, or both might be returned depending on the current state of embed support for the specified options.</returns>
+        IFilePreview GetPreview(PreviewOptions options = null);
+
         #endregion
     }
 }

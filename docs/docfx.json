@@ -37,6 +37,8 @@
           "using-the-sdk/toc.yml",
           "contributing/**.md",
           "contributing/toc.yml",
+          "tutorials/**.md",
+          "tutorials/toc.yml",
           "toc.yml",
           "*.md"
         ]
@@ -55,7 +57,8 @@
       {
         "files": [
           "images/**",
-          "demos/**/*.png"
+          "demos/**/*.png",
+          "tutorials/images/**"
         ]
       }
     ],
@@ -80,7 +83,7 @@
     "xrefService": [
       "https://xref.docs.microsoft.com/query?uid={uid}"
     ],
-    "postProcessors": [],
+    "postProcessors": ["ExtractSearchIndex"],
     "markdownEngineName": "markdig",
     "noLangKeyword": false,
     "keepFileLink": false,

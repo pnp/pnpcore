@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
@@ -15,7 +16,8 @@ namespace PnP.Core
         /// <param name="type"><see cref="ErrorType"/> type of the error</param>
         /// <param name="httpResponseCode">Http response code of the service request that failed</param>
         /// <param name="response">Service request response content</param>
-        public SharePointRestError(ErrorType type, int httpResponseCode, string response) : base(type, httpResponseCode)
+        /// <param name="responseHeaders">Optional collection of request response headers</param>
+        public SharePointRestError(ErrorType type, int httpResponseCode, string response, Dictionary<string, string> responseHeaders = null) : base(type, httpResponseCode)
         {
             if (!string.IsNullOrEmpty(response))
             {
@@ -27,6 +29,21 @@ namespace PnP.Core
                 else
                 {
                     Message = response;
+                }
+            }
+
+            if (responseHeaders != null && responseHeaders.Count > 0)
+            {
+                foreach(var header in responseHeaders)
+                {
+                    if (header.Key == PnPConstants.SPRequestGuidHeader)
+                    {
+                        ClientRequestId = header.Value;
+                    }
+                    else
+                    {
+                        AddAdditionalData(header.Key, header.Value);
+                    }
                 }
             }
         }
@@ -62,7 +79,7 @@ namespace PnP.Core
 
         private void ParseError(JsonElement error)
         {
-            if (error.TryGetProperty("error", out JsonElement errorData))
+            if (error.TryGetProperty("odata.error", out JsonElement errorData))
             {
                 // enumerate the properties in the error 
                 foreach (var errorField in errorData.EnumerateObject())

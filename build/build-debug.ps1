@@ -12,11 +12,14 @@ dotnet build ..\src\sdk\PnP.Core\PnP.Core.csproj --no-incremental /p:Version=$ve
 Write-Host "Building PnP.Core.Auth versions $version"
 dotnet build ..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --no-incremental /p:Version=$version
 
-Write-Host "Packinging PnP.Core versions $version"
-dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --no-build /p:PackageVersion=$version
+Write-Host "Building PnP.Core.Admin versions $version"
+dotnet build ..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --no-incremental /p:Version=$version
 
-Write-Host "Packinging PnP.Core.Auth versions $version"
-dotnet pack ..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --no-build /p:PackageVersion=$version
+Write-Host "Building PnP.Core.Transformation versions $version"
+dotnet build ..\src\sdk\PnP.Core.Transformation\PnP.Core.Transformation.csproj --no-incremental /p:Version=$version
+
+Write-Host "Building PnP.Core.Transformation.SharePoint versions $version"
+dotnet build ..\src\sdk\PnP.Core.Transformation.SharePoint\PnP.Core.Transformation.SharePoint.csproj --no-incremental /p:Version=$version
 
 #Write-Host "Writing $version to git"
 #Set-Content -Path .\version.debug.increment -Value $versionIncrement

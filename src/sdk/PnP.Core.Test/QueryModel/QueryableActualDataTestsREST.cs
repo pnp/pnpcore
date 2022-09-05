@@ -441,5 +441,32 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsTrue(contentTypes.Count > 1);
             }
         }
+
+        [TestMethod]
+        public async Task TestComplexFirstOrDefault_REST()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var list = context.Web.Lists.FirstOrDefault(l => !l.Hidden && l.Title.StartsWith("Site"));
+                // Ensure that we have 1 content type in the lists of content types
+                Assert.IsTrue(list != null);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestHiddenLibraries_REST()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var list = context.Web.Lists.FirstOrDefault(p => p.TemplateType == ListTemplateType.DocumentLibrary && !p.Hidden);
+                Assert.IsTrue(list != null);
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of RecycleBinItem objects
     /// </summary>
     [ConcreteType(typeof(RecycleBinItemCollection))]
-    public interface IRecycleBinItemCollection : IQueryable<IRecycleBinItem>, IAsyncEnumerable<IRecycleBinItem>, IDataModelCollection<IRecycleBinItem>, IDataModelCollectionLoad<IRecycleBinItem>, IDataModelCollectionDeleteByGuidId
+    public interface IRecycleBinItemCollection : IQueryable<IRecycleBinItem>, IAsyncEnumerable<IRecycleBinItem>, IDataModelCollection<IRecycleBinItem>, IDataModelCollectionLoad<IRecycleBinItem>, IDataModelCollectionDeleteByGuidId, ISupportModules<IRecycleBinItemCollection>
     {
         #region Methods
 

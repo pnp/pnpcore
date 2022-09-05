@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FeatureCollection : QueryableDataModelCollection<IFeature>, IFeatureCollection
+    internal sealed class FeatureCollection : QueryableDataModelCollection<IFeature>, IFeatureCollection
     {
         public FeatureCollection(PnPContext context, IDataModelParent parent, string memberName = null)
            : base(context, parent, memberName)

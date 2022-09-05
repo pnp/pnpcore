@@ -153,7 +153,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/";
+                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
 
                 IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
 
@@ -286,7 +286,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p=>p.RootFolder)).RootFolder;
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
                 // Test the created object
@@ -1068,6 +1068,59 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var changesBatch = folder.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+
+                context.Execute();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+                Assert.IsTrue(changesBatch.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetGraphIdsFromFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get folder from web
+                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                Assert.IsNotNull(folder);
+
+                (string driveId, string driveItemId) = await (folder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Get folder from web with properties loaded
+                await folder.LoadAsync(p => p.Properties);
+
+                (driveId, driveItemId) = await (folder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Get folder from list
+                var list = await context.Web.Lists.GetByTitleAsync("Site Assets", p => p.RootFolder);
+
+                (driveId, driveItemId) = await (list.RootFolder as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
+
+                // Sub folder from list root folder
+                await list.RootFolder.LoadAsync(p => p.Folders);
+
+                (driveId, driveItemId) = await (list.RootFolder.Folders.AsRequested().First() as Folder).GetGraphIdsAsync();
+
+                Assert.IsFalse(string.IsNullOrEmpty(driveId));
+                Assert.IsFalse(string.IsNullOrEmpty(driveItemId));
             }
         }
 

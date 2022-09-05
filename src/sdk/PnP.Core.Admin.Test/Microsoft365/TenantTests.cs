@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Test.Common;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.Microsoft365
@@ -24,7 +26,6 @@ namespace PnP.Core.Admin.Test.Microsoft365
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var multiGeoTenant = context.GetMicrosoft365Admin().IsMultiGeoTenant();
-                Assert.IsFalse(multiGeoTenant);
             }
         }
 
@@ -34,8 +35,17 @@ namespace PnP.Core.Admin.Test.Microsoft365
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var multiGeoTenant = context.GetMicrosoft365Admin().IsMultiGeoTenant();
                 var locations = context.GetMicrosoft365Admin().GetMultiGeoLocations();
-                Assert.IsNull(locations);
+                if (multiGeoTenant)
+                {
+                    Assert.IsNotNull(locations);
+                    Assert.IsTrue(locations.Count > 0);
+                }
+                else
+                {
+                    Assert.IsNull(locations);
+                }
             }
         }
 
@@ -64,5 +74,42 @@ namespace PnP.Core.Admin.Test.Microsoft365
             }
         }
 
+        [TestMethod]
+        public async Task GetSensitivityLabelsUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
+                    Assert.IsTrue(labels.Any());
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
+        public async Task GetSensitivityLabelsUsingApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var labels = await SensitivityLabelManager.GetLabelsUsingApplicationPermissionsAsync(context);
+                    Assert.IsTrue(labels.Any());
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
     }
 }

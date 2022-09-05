@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamMembersSettings : BaseDataModel<ITeamMembersSettings>, ITeamMembersSettings
+    internal sealed class TeamMembersSettings : BaseDataModel<ITeamMembersSettings>, ITeamMembersSettings
     {
         #region Properties
         public bool AllowCreateUpdateChannels { get => GetValue<bool>(); set => SetValue(value); }

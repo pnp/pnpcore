@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// Principal describing the user or group
         /// </summary>
         public ISharePointPrincipal Principal { get; set; }
-        
+
         /// <summary>
         /// Email of the user
         /// </summary>
