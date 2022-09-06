@@ -174,6 +174,15 @@ await context.Web.DeleteAsync();
 </code></pre>
 <h2 id="getting-changes-for-a-web">Getting changes for a web</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IWeb</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
+<h2 id="re-indexing-a-web">Re-indexing a web</h2>
+<p>SharePoint will index the content added in a web automatically. Typically re-indexing is not needed, but whenever you <a href="https://docs.microsoft.com/en-us/sharepoint/crawl-site-content">make changes to the search schema (managed and crawled property settings) these will not be automatically picked up, thus requiring a re-indexing of the list or complete site</a>. Re-indexing of a web is done using the <code>ReIndex</code> methods:</p>
+<pre><code class="lang-csharp">// Reindex the web
+await context.Web.ReIndexAsync();
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When the web is configured for no-script, like is the case for all modern site types, then re-indexing of the web will happen by re-indexing each individual list.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

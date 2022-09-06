@@ -230,10 +230,61 @@ await myList.DeleteAsync();
 // Recycle the list
 await myList.RecycleAsync();
 </code></pre>
+<h2 id="configuring-default-values-for-a-list">Configuring default values for a list</h2>
+<h3 id="setting-default-values">Setting default values</h3>
+<p>A list contains fields and these fields can have a default value as part of the field definition. Another approach for setting default values is outlined below, using one of the <code>SetDefaultColumnValues</code> methods you can set a default value for one or more fields and this can be done per folder. In below sample you'll see that <code>Folder1</code> will get another default then <code>Folder2</code>:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
+
+// Set default values on these folders
+List&lt;DefaultColumnValueOptions&gt; defaultColumnValues = new()
+{
+    new DefaultColumnValueOptions
+    {
+        FolderRelativePath = &quot;/Folder1&quot;,
+        FieldInternalName = &quot;MyField&quot;,
+        DefaultValue = &quot;F1&quot;
+    },
+    new DefaultColumnValueOptions
+    {
+        FolderRelativePath = &quot;/Folder2&quot;,
+        FieldInternalName = &quot;MyField&quot;,
+        DefaultValue = &quot;F2&quot;
+    }
+};
+
+// Set the default values for a list
+await myList.SetDefaultColumnValuesAsync(defaultColumnValues);
+</code></pre>
+<h3 id="getting-the-set-default-values">Getting the set default values</h3>
+<p>To get the set default values you can use one of the <code>GetDefaultColumnValues</code> methods:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
+
+// Load the default values
+var loadedDefaults = await myList.GetDefaultColumnValuesAsync();
+
+foreach(var addedValue in defaultColumnValues)
+{
+    // Do something with the retrieved value
+}
+</code></pre>
+<h3 id="clearing-the-set-default-values">Clearing the set default values</h3>
+<p>Clearing all the set default values can be done using the <code>ClearDefaultColumnValues</code> methods:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
+
+// Clear the defaults
+await myList.ClearDefaultColumnValuesAsync();
+</code></pre>
 <h2 id="sharing-libraries">Sharing libraries</h2>
 <p>A document library can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the <a href="sharing-intro.html">PnP Core SDK Sharing APIs</a> to learn more on how you can share a document library via sharing it's <code>RootFolder</code>.</p>
 <h2 id="getting-changes-for-a-list">Getting changes for a list</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IList</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
+<h2 id="re-indexing-a-list">Re-indexing a list</h2>
+<p>SharePoint will index list content automatically, unless the list <code>NoCrawl</code> property is set to <code>true</code>. Typically re-indexing is not needed, but whenever you <a href="https://docs.microsoft.com/en-us/sharepoint/crawl-site-content">make changes to the search schema (managed and crawled property settings) these will not be automatically picked up, thus requiring a re-indexing of the list or complete site</a>. Re-indexing of a list is done using the <code>ReIndex</code> methods:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
+
+// Reindex the list 
+await myList.ReIndexAsync();
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
