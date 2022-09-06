@@ -138,6 +138,63 @@ await myList.DeleteAsync();
 await myList.RecycleAsync();
 ```
 
+## Configuring default values for a list
+
+### Setting default values
+
+A list contains fields and these fields can have a default value as part of the field definition. Another approach for setting default values is outlined below, using one of the `SetDefaultColumnValues` methods you can set a default value for one or more fields and this can be done per folder. In below sample you'll see that `Folder1` will get another default then `Folder2`:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("List to work with");
+
+// Set default values on these folders
+List<DefaultColumnValueOptions> defaultColumnValues = new()
+{
+    new DefaultColumnValueOptions
+    {
+        FolderRelativePath = "/Folder1",
+        FieldInternalName = "MyField",
+        DefaultValue = "F1"
+    },
+    new DefaultColumnValueOptions
+    {
+        FolderRelativePath = "/Folder2",
+        FieldInternalName = "MyField",
+        DefaultValue = "F2"
+    }
+};
+
+// Set the default values for a list
+await myList.SetDefaultColumnValuesAsync(defaultColumnValues);
+```
+
+### Getting the set default values
+
+To get the set default values you can use one of the `GetDefaultColumnValues` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("List to work with");
+
+// Load the default values
+var loadedDefaults = await myList.GetDefaultColumnValuesAsync();
+
+foreach(var addedValue in defaultColumnValues)
+{
+    // Do something with the retrieved value
+}
+```
+
+### Clearing the set default values
+
+Clearing all the set default values can be done using the `ClearDefaultColumnValues` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("List to work with");
+
+// Clear the defaults
+await myList.ClearDefaultColumnValuesAsync();
+```
+
 ## Sharing libraries
 
 A document library can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](sharing-intro.md) to learn more on how you can share a document library via sharing it's `RootFolder`.
@@ -145,3 +202,14 @@ A document library can be shared with your organization, with specific users or 
 ## Getting changes for a list
 
 You can use the `GetChanges` methods on an `IList` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
+
+## Re-indexing a list
+
+SharePoint will index list content automatically, unless the list `NoCrawl` property is set to `true`. Typically re-indexing is not needed, but whenever you [make changes to the search schema (managed and crawled property settings) these will not be automatically picked up, thus requiring a re-indexing of the list or complete site](https://docs.microsoft.com/en-us/sharepoint/crawl-site-content). Re-indexing of a list is done using the `ReIndex` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("List to work with");
+
+// Reindex the list 
+await myList.ReIndexAsync();
+```

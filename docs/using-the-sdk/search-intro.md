@@ -211,3 +211,7 @@ foreach (var batchResult in batchResults)
     }
 }
 ```
+
+## Re-indexing webs and lists
+
+When you make [changes to the search schema (e.g. updated managed properties)](https://docs.microsoft.com/en-us/sharepoint/crawl-site-content) then you'll need to re-index the relevant content, which can be done at [list level](lists-intro.md) or [web level](webs-intro.md).
