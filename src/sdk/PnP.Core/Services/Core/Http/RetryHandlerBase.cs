@@ -18,15 +18,17 @@ namespace PnP.Core.Services
     internal abstract class RetryHandlerBase : DelegatingHandler
     {
         private readonly EventHub eventHub;
+        private readonly RateLimiter rateLimiter;
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings, EventHub events)
+        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings, EventHub events, RateLimiter limiter)
         {
             GlobalSettings = globalSettings;
             eventHub = events;
+            rateLimiter = limiter;
 
             if (GlobalSettings != null && GlobalSettings.Logger == null)
             {
@@ -56,8 +58,19 @@ namespace PnP.Core.Services
                 try
                 {
                     innermostEx = null;
+
+                    if (rateLimiter != null)
+                    {
+                        // Depending on the stored request rate limit headers we'll briefly pause before executing the request
+                        // The purpose here is to prevent getting throttled and as such achieve a higher overall throughput
+                        await rateLimiter.WaitAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
+                    // If we received request rate limit headers then store them
+                    rateLimiter?.UpdateWindow(response);
+                    
                     if (!ShouldRetry(response.StatusCode))
                     {
                         return response;

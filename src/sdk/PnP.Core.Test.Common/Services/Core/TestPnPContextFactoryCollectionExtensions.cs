@@ -80,7 +80,8 @@ namespace PnP.Core.Test.Common.Services
         {
             return collection
                    .AddTransient<IPnPTestContextFactory, TestPnPContextFactory>()
-                   .AddSingleton<EventHub>();
+                   .AddSingleton<EventHub>()
+                   .AddSingleton<RateLimiter>();
         }
     }
 }
