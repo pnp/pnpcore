@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace PnP.Core.Services
 {
     /// <summary>
-    /// Rate limiter class
+    /// Rate limiter class, will delay outgoing requests based upon ratelimit headers received from previous requests. 
+    /// Goal of the delaying is to prevent getting throttled, resulting in a better overall throughput
     /// </summary>
     internal sealed class RateLimiter
     {
@@ -44,7 +45,7 @@ namespace PnP.Core.Services
         private int remaining;
 
         /// <summary>
-        /// Minimum % of requests left before the next request will get delayed until the current window is reset
+        /// Minimum % of requests left before the next request will get delayed until the current window is reset.
         /// </summary>
         private int minimumCapacityLeft = 20;
 
@@ -112,7 +113,7 @@ namespace PnP.Core.Services
             {
                 if (GlobalSettings != null && GlobalSettings.Logger != null)
                 {
-                    GlobalSettings.Logger.LogInformation($"Delaying request for {new TimeSpan(delayInTicks).Seconds} seconds because remaining request's for the current window is at {capacityLeft}%");
+                    GlobalSettings.Logger.LogInformation($"Delaying request for {new TimeSpan(delayInTicks).Seconds} seconds because remaining request capacity for the current window is at {capacityLeft}%, so below the {minimumCapacityLeft}% threshold.");
                 }
                 
                 await Task.Delay(new TimeSpan(delayInTicks), cancellationToken).ConfigureAwait(false);
@@ -135,21 +136,18 @@ namespace PnP.Core.Services
             {
                 if (response.Headers.TryGetValues(RATELIMIT_LIMIT, out IEnumerable<string> limitValues))
                 {
-                    // Can we use the provided retry-after header?
                     string rateString = limitValues.First();
                     _ = int.TryParse(rateString, out rateLimit);
                 }
 
                 if (response.Headers.TryGetValues(RATELIMIT_REMAINING, out IEnumerable<string> remainingValues))
                 {
-                    // Can we use the provided retry-after header?
                     string rateString = remainingValues.First();
                     _ = int.TryParse(rateString, out rateRemaining);
                 }
 
                 if (response.Headers.TryGetValues(RATELIMIT_RESET, out IEnumerable<string> resetValues))
                 {
-                    // Can we use the provided retry-after header?
                     string rateString = resetValues.First();
                     _ = int.TryParse(rateString, out rateReset);
                 }
@@ -163,7 +161,7 @@ namespace PnP.Core.Services
                     
                     if (rateReset > -1)
                     {
-                        // Store when the current window get's reset
+                        // Track when the current window get's reset
                         _ = Interlocked.Exchange(ref nextReset, DateTime.UtcNow.Ticks + TimeSpan.FromSeconds(rateReset).Ticks);
                     }                    
                 }
