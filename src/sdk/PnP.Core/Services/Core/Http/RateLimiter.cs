@@ -15,9 +15,9 @@ namespace PnP.Core.Services
     /// </summary>
     internal sealed class RateLimiter
     {
-        private const string RATELIMIT_LIMIT = "RateLimit-Limit";
-        private const string RATELIMIT_REMAINING = "RateLimit-Remaining";
-        private const string RATELIMIT_RESET = "RateLimit-Reset";        
+        internal const string RATELIMIT_LIMIT = "RateLimit-Limit";
+        internal const string RATELIMIT_REMAINING = "RateLimit-Remaining";
+        internal const string RATELIMIT_RESET = "RateLimit-Reset";        
 
         /// <summary>
         /// Lock for controlling Read/Write access to the variables.
@@ -47,7 +47,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Minimum % of requests left before the next request will get delayed until the current window is reset.
         /// </summary>
-        private int minimumCapacityLeft = 20;
+        private int minimumCapacityLeft = 10;
 
         internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
 

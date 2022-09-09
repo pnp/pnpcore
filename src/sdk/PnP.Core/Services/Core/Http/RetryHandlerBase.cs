@@ -59,17 +59,30 @@ namespace PnP.Core.Services
                 {
                     innermostEx = null;
 
-                    if (rateLimiter != null)
+                    // Depending on the stored request rate limit headers we'll briefly pause before executing the request
+                    // The purpose here is to prevent getting throttled and as such achieve a higher overall throughput
+                    if (eventHub.RequestRateLimitWaitAsync != null)
                     {
-                        // Depending on the stored request rate limit headers we'll briefly pause before executing the request
-                        // The purpose here is to prevent getting throttled and as such achieve a higher overall throughput
+                        // If using a custom event then that's overruling the native handler
+                        await eventHub.RequestRateLimitWaitAsync.Invoke(cancellationToken).ConfigureAwait(false);
+                    }
+                    else if (rateLimiter != null)
+                    {
                         await rateLimiter.WaitAsync(cancellationToken).ConfigureAwait(false);
                     }
 
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
                     // If we received request rate limit headers then store them
-                    rateLimiter?.UpdateWindow(response);
+                    if (eventHub.RequestRateLimitUpdate != null)
+                    {
+                        // If using a custom event then that's overruling the native handler
+                        eventHub.RequestRateLimitUpdate.Invoke(new RateLimitEvent(response));
+                    }
+                    else
+                    {
+                        rateLimiter?.UpdateWindow(response);
+                    }
                     
                     if (!ShouldRetry(response.StatusCode))
                     {
