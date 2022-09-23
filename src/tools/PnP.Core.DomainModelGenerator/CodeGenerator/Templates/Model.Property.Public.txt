@@ -1,4 +1,0 @@
-﻿        /// <summary>
-        /// To update...
-        /// </summary>
-        public %%PropertyType%% %%PropertyName%% { %%PropertyGetSet%% }

@@ -1,7 +1,0 @@
-{
-  "profiles": {
-    "PnP.Core.Test": {
-      "commandName": "Project"
-    }
-  }
-}

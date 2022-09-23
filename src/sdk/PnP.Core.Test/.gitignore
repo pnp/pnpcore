@@ -1,9 +1,0 @@
-# Ignore file that specifies which test environment to load
-**/env.txt
-
-# Ignore user specific appsettings 
-**/appsettings.*.json
-
-# Ignore user specific setup and cleanup scripts
-**/setuptestenv.*.ps1
-**/cleantestenv.*.ps1

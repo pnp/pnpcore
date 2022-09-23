@@ -1,2 +1,0 @@
-﻿%%PropertyAttributes%%
-        public I%%CollectionName%% %%PropertyName%% { get => GetModelCollectionValue<I%%CollectionName%%>(); }

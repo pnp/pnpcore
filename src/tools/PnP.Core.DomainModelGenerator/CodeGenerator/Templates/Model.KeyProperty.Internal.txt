@@ -1,3 +1,0 @@
-﻿
-        [KeyProperty(nameof(%%KeyPropertyName%%))]
-        public override object Key { get => %%KeyPropertyName%%; set => %%KeyPropertyName%% = %%KeyPropertyValue%%; }
