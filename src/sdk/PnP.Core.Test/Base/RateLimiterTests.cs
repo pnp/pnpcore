@@ -58,7 +58,8 @@ namespace PnP.Core.Test.Base
                 timer.Stop();
 
                 // We should have at least waited 1 second because the remaining requests were below the minimum capacity limit
-                Assert.IsTrue(timer.ElapsedMilliseconds >= 1000);
+                // sometimes timer resulting results in slightly less than 1000 milliseconds, so we'll use 900 as the minimum
+                Assert.IsTrue(timer.ElapsedMilliseconds >= 900);
 
                 // Request with rate limit headers
                 firstResponse = new HttpResponseMessage(HttpStatusCode.OK);
