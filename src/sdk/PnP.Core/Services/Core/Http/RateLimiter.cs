@@ -48,9 +48,15 @@ namespace PnP.Core.Services
         /// Minimum % of requests left before the next request will get delayed until the current window is reset. Defaults to 0, 
         /// use configuration RateLimiterMinimumCapacityLeft to activate
         /// </summary>
-        private readonly int minimumCapacityLeft = 0;
+        //private readonly int minimumCapacityLeft = 0;
 
         internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
+
+        /// <summary>
+        /// Minimum % of requests left before the next request will get delayed until the current window is reset. Defaults to 0, 
+        /// use configuration RateLimiterMinimumCapacityLeft to activate
+        /// </summary>
+        internal int MinimumCapacityLeft { get; set; } = 0;
 
         /// <summary>
         /// Default constructor
@@ -65,7 +71,7 @@ namespace PnP.Core.Services
             
             if (GlobalSettings != null)
             {
-                minimumCapacityLeft = GlobalSettings.HttpRateLimiterMinimumCapacityLeft;
+                MinimumCapacityLeft = GlobalSettings.HttpRateLimiterMinimumCapacityLeft;
             }
 
             readerWriterLock.EnterWriteLock();
@@ -87,7 +93,7 @@ namespace PnP.Core.Services
             cancellationToken.ThrowIfCancellationRequested();
 
             // We're not using the rate limiter
-            if (minimumCapacityLeft == 0)
+            if (MinimumCapacityLeft == 0)
             {
                 return;
             }
@@ -104,7 +110,7 @@ namespace PnP.Core.Services
                     capacityLeft = (float)remaining / limit * 100;
 
                     // If getting below the minimum required capacity then lets wait until the current window is reset
-                    if (capacityLeft <= minimumCapacityLeft)
+                    if (capacityLeft <= MinimumCapacityLeft)
                     {
                         delayInTicks = nextReset - DateTime.UtcNow.Ticks;
                     }
@@ -119,7 +125,7 @@ namespace PnP.Core.Services
             {
                 if (GlobalSettings != null && GlobalSettings.Logger != null)
                 {
-                    GlobalSettings.Logger.LogInformation($"Delaying request for {new TimeSpan(delayInTicks).Seconds} seconds because remaining request capacity for the current window is at {capacityLeft}%, so below the {minimumCapacityLeft}% threshold.");
+                    GlobalSettings.Logger.LogInformation($"Delaying request for {new TimeSpan(delayInTicks).Seconds} seconds because remaining request capacity for the current window is at {capacityLeft}%, so below the {MinimumCapacityLeft}% threshold.");
                 }
                 
                 await Task.Delay(new TimeSpan(delayInTicks), cancellationToken).ConfigureAwait(false);
@@ -133,7 +139,7 @@ namespace PnP.Core.Services
             int rateReset = -1;
 
             // We're not using the rate limiter
-            if (minimumCapacityLeft == 0)
+            if (MinimumCapacityLeft == 0)
             {
                 return;
             }

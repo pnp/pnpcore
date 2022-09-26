@@ -21,7 +21,10 @@ namespace PnP.Core.Test.Base
         {            
             MockResponseHandler responseHandler = new MockResponseHandler();
 
-            RateLimiter rateLimiter = new RateLimiter(null, null);
+            RateLimiter rateLimiter = new RateLimiter(null, null)
+            {
+                MinimumCapacityLeft = 10
+            };
 
             SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null, null, null, rateLimiter)
             {
