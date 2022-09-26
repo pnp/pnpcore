@@ -278,7 +278,7 @@ namespace PnP.Core.Model.SharePoint
                 pageName = pageName.ToLowerInvariant();
                 if (pageName.EndsWith(".aspx"))
                 {
-                    pageName = pageName.Replace(".aspx", "");
+                    pageName = pageName.Substring(0, pageName.Length - 5);
                 }
             }
 
