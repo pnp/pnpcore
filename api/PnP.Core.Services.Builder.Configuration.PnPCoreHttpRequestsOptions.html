@@ -91,7 +91,7 @@
 
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">PnPCoreHttpRequestsOptions</span></div>
   </div>
   
@@ -117,7 +117,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_AzureActiveDirectory.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L82" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_AzureActiveDirectory_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory*"></a>
@@ -161,7 +161,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_MicrosoftGraph.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_MicrosoftGraph_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph*"></a>
@@ -202,10 +202,56 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_RateLimiterMinimumCapacityLeft.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.RateLimiterMinimumCapacityLeft%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_RateLimiterMinimumCapacityLeft_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.RateLimiterMinimumCapacityLeft*"></a>
+  
+  <h4 id="PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_RateLimiterMinimumCapacityLeft" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.RateLimiterMinimumCapacityLeft"><a href="#collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_RateLimiterMinimumCapacityLeft" class="expander" data-toggle="collapse">RateLimiterMinimumCapacityLeft</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_RateLimiterMinimumCapacityLeft" class="collapse in">
+  <div class="markdown level1 summary"><p>When set (e.g. to 10%) then RateLimit response headers coming from SharePoint and Graph are used: if there's less
+then the set value (e.g. 10%) capacity left before getting throttled the pending request will be delayed until
+the 1 minute window is reset. Defaults to 0 (disabled).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int RateLimiterMinimumCapacityLeft { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_SharePointRest.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L65" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_SharePointRest_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest*"></a>
@@ -274,7 +320,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a>
         <p>
       </td>
     </tr>
@@ -318,7 +364,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>
         <p>
       </td>
     </tr>
