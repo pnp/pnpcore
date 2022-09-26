@@ -120,6 +120,12 @@ namespace PnP.Core.Services
         /// </summary>
         public bool HttpAzureActiveDirectoryUseIncrementalDelay { get; set; } = true;
 
+        /// <summary>
+        /// When set (e.g. to 10%) then RateLimit response headers coming from SharePoint and Graph are used: if there's less 
+        /// then the set value (e.g. 10%) capacity left before getting throttled the pending request will be delayed until
+        /// the 1 minute window is reset. Defaults to 0 (disabled).
+        /// </summary>
+        public int HttpRateLimiterMinimumCapacityLeft { get; set; } = 0;
         #endregion
 
         #region Internal only settings (supporting, they cannot be assigned from configuration)

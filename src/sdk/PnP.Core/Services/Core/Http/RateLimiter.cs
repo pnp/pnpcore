@@ -45,9 +45,10 @@ namespace PnP.Core.Services
         private int remaining;
 
         /// <summary>
-        /// Minimum % of requests left before the next request will get delayed until the current window is reset.
+        /// Minimum % of requests left before the next request will get delayed until the current window is reset. Defaults to 0, 
+        /// use configuration RateLimiterMinimumCapacityLeft to activate
         /// </summary>
-        private int minimumCapacityLeft = 10;
+        private readonly int minimumCapacityLeft = 0;
 
         internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
 
@@ -62,6 +63,11 @@ namespace PnP.Core.Services
                 GlobalSettings.Logger = log;
             }
             
+            if (GlobalSettings != null)
+            {
+                minimumCapacityLeft = GlobalSettings.HttpRateLimiterMinimumCapacityLeft;
+            }
+
             readerWriterLock.EnterWriteLock();
             try
             {
@@ -95,7 +101,7 @@ namespace PnP.Core.Services
                 if (limit > 0 && remaining > 0)
                 {
                     // Calculate percentage requests left in the current window
-                    capacityLeft = ((float)remaining / limit) * 100;
+                    capacityLeft = (float)remaining / limit * 100;
 
                     // If getting below the minimum required capacity then lets wait until the current window is reset
                     if (capacityLeft <= minimumCapacityLeft)
