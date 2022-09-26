@@ -3,7 +3,6 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -1650,37 +1649,6 @@ namespace PnP.Core.Services
                     target.Metadata.Add(propertyName, foundProperty.GetString());
                 }
             }
-        }
-
-        internal static string BuildNextPageRestUrl(string url)
-        {
-            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
-            {
-                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
-                if (queryString["$top"] != null && queryString["$skip"] != null)
-                {
-                    // Build a url for a second, third, fourth etc page
-                    if (int.TryParse(queryString["$top"], out int top) &&
-                        int.TryParse(queryString["$skip"], out int skip))
-                    {
-                        int nextPage = (skip / top) + 1;
-                        queryString["$skip"] = (nextPage * top).ToString(CultureInfo.CurrentCulture);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                else if (queryString["$top"] != null)
-                {
-                    // Build the url for the first page after the initial load
-                    queryString.Add("$skip", queryString["$top"]);
-                }
-
-                return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString.ToEncodedString()}";
-            }
-
-            return null;
         }
     }
 }
