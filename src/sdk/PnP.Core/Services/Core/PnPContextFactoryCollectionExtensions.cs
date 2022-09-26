@@ -123,7 +123,8 @@ namespace PnP.Core.Services
         {
             return collection
                    .AddTransient<IPnPContextFactory, PnPContextFactory>()
-                   .AddSingleton<EventHub>();
+                   .AddSingleton<EventHub>()
+                   .AddSingleton<RateLimiter>(); 
         }
     }
 }

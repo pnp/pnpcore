@@ -60,6 +60,13 @@ namespace PnP.Core.Services.Builder.Configuration
         public int Timeout { get; set; } = 100;
 
         /// <summary>
+        /// When set (e.g. to 10%) then RateLimit response headers coming from SharePoint and Graph are used: if there's less 
+        /// then the set value (e.g. 10%) capacity left before getting throttled the pending request will be delayed until
+        /// the 1 minute window is reset. Defaults to 0 (disabled).
+        /// </summary>
+        public int RateLimiterMinimumCapacityLeft { get; set; } = 0;
+
+        /// <summary>
         /// SharePoint Online REST options
         /// </summary>
         public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; } = new PnPCoreHttpRequestsSharePointRestOptions();

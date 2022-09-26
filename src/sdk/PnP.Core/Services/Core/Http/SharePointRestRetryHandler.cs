@@ -10,7 +10,7 @@ namespace PnP.Core.Services
     internal sealed class SharePointRestRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public SharePointRestRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
+        public SharePointRestRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub, RateLimiter limiter) : base(log, globalSettings?.Value, eventHub, limiter)
         {
             Configure();
         }

@@ -10,7 +10,7 @@ namespace PnP.Core.Services
     internal sealed class MicrosoftGraphRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
+        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub, RateLimiter limiter) : base(log, globalSettings?.Value, eventHub, limiter)
         {
             Configure();
         }
