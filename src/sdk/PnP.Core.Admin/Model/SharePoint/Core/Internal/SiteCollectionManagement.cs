@@ -64,6 +64,21 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
+        internal static async Task DeleteRecycledSiteCollectionAsync(PnPContext context, Uri siteToDelete, VanityUrlOptions vanityUrlOptions)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new RemoveDeletedSiteRequest(siteToDelete)
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+            }
+        }
+
         internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle, VanityUrlOptions vanityUrlOptions)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))

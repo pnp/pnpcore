@@ -543,9 +543,9 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                     SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
                     {
-                        UsingApplicationPermissions = true,                        
+                        UsingApplicationPermissions = true,
                     };
-                    
+
                     using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         createdSiteCollection = newSiteContext.Uri;
@@ -945,6 +945,111 @@ namespace PnP.Core.Admin.Test.SharePoint
                     context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
                 }
 
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateRecycleDeleteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    using (var adminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        Uri siteUrl;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        }
+
+                        communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                        {
+                            Description = "This is a test site collection",
+                            Language = Language.English,
+                        };
+
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = adminContext.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                        {
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                            Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
+                            Assert.IsTrue(web.Title == communicationSiteToCreate.Title);
+                            Assert.IsTrue(web.Description == communicationSiteToCreate.Description);
+                            Assert.IsTrue(web.Language == (int)communicationSiteToCreate.Language);
+                        }
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Recycle the site collection
+                        adminContext.GetSiteCollectionManager().RecycleSiteCollection(communicationSiteToCreate.Url);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Verify the site collection is returned as recycled site
+                        var recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
+                        var recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
+                        Assert.IsNotNull(recycledCommunicationSite);
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.Name));
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.CreatedBy));
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.DeletedBy));
+                        Assert.IsTrue(recycledCommunicationSite.TimeCreated > DateTime.MinValue);
+                        Assert.IsTrue(recycledCommunicationSite.TimeDeleted > DateTime.MinValue);
+                        Assert.IsTrue(recycledCommunicationSite.StorageQuota > 0);
+                        Assert.IsTrue(recycledCommunicationSite.StorageUsed > 0);
+                        Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.TemplateName));
+
+
+                        // Delete the recycled site collection again
+                        adminContext.GetSiteCollectionManager().DeleteRecycledSiteCollection(communicationSiteToCreate.Url);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
+                        // Verify the site collection is not returned as recycled site
+                        recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
+                        recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
+                        Assert.IsNull(recycledCommunicationSite);
+
+                    }
+                }
+            }
+            finally
+            {
+                // Clean up the created site collection
+                TestCommon.Instance.UseApplicationPermissions = false;
             }
         }
 
