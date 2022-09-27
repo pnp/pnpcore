@@ -244,11 +244,32 @@ foreach(var site in recycledSites)
 }
 ```
 
+## Deleting a recycled site collection
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
+> [!Note]
+> When the site collection being deleted from the recycle bin has an associated Microsoft 365 group it's recommended to not use this approach but rather permanently delete the Microsoft 365 group which will then delete all the resources linked to the Microsoft 365 group.
+
+A recycled site collection can be permanently deleted using the `DeleteRecycledSiteCollection` methods:
+
+```csharp
+var recycledSites = await context.GetSiteCollectionManager().GetRecycledSiteCollectionsAsync();
+foreach(var site in recycledSites)
+{
+    // delete all non group connected recycled site collections
+    if (site.GroupId == Guid.Empty)
+    {
+        await context.GetSiteCollectionManager().DeleteRecycledSiteCollectionAsync(site.Url);
+    }
+}
+```
+
 ## Deleting site collections
 
 [!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
-A site collection can also deleted via one of the `DeleteSiteCollection` methods.
+A site collection can also be permanently deleted via one of the `DeleteSiteCollection` methods. This method first moves the site collection to the recycled bin and then immediately purges the site collection from the recycle bin.
 
 > [!Note]
 > A group connected site will not be permanently deleted, calling the `DeleteSiteCollection` methods will recycle the site collection and group.
