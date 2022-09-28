@@ -70,6 +70,6 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// Allows defining the resource behavior options for the group
         /// See https://learn.microsoft.com/en-us/graph/group-set-options#configure-groups
         /// </summary>
-        public GraphGroupResourceBehaviorOptions ResourceBehaviorOptions { get; set; }
+        public List<string> ResourceBehaviorOptions { get; set; }
     }
 }
