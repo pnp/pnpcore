@@ -60,6 +60,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// If true, welcome emails are not sent to new members.
         /// </summary>
-        public bool? WelcomeEmailDisabled { get; internal set; }
+        public bool? WelcomeEmailDisabled { get; set; }
     }
 }
