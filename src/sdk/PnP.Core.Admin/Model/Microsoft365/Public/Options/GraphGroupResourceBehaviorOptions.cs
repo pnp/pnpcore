@@ -39,6 +39,6 @@
         /// <summary>
         /// If true, welcome emails are not sent to new members.
         /// </summary>
-        public bool WelcomeEmailDisabled { get; internal set; } = false;
+        public bool WelcomeEmailDisabled { get; set; } = false;
     }
 }
