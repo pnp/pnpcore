@@ -28,37 +28,37 @@ namespace PnP.Core.Admin.Model.SharePoint
         public Guid? SiteDesignId { get; set; }
 
         /// <summary>
-        /// If true, only group members can post conversations to the group.
+        /// If true, only group members can post conversations to the group. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? AllowOnlyMembersToPost { get; set; }
 
         /// <summary>
-        /// If true, members can view the group calendar in Outlook but cannot make changes.
+        /// If true, members can view the group calendar in Outlook but cannot make changes. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? CalendarMemberReadOnly { get; set; }
 
         /// <summary>
-        /// If true, changes made to the group in Exchange Online are not synced back to on-premises Active Directory.
+        /// If true, changes made to the group in Exchange Online are not synced back to on-premises Active Directory. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? ConnectorsDisabled { get; set; }
 
         /// <summary>
-        /// If true, this group is hidden in Outlook experiences.
+        /// If true, this group is hidden in Outlook experiences. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? HideGroupInOutlook { get; set; }
 
         /// <summary>
-        /// If true, members are not subscribed to the group's calendar events in Outlook.
+        /// If true, members are not subscribed to the group's calendar events in Outlook. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? SubscribeMembersToCalendarEventsDisabled { get; set; }
 
         /// <summary>
-        /// If true, group members are subscribed to receive group conversations.
+        /// If true, group members are subscribed to receive group conversations. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? SubscribeNewGroupMembers { get; set; }
 
         /// <summary>
-        /// If true, welcome emails are not sent to new members.
+        /// If true, welcome emails are not sent to new members. Only applies when using application permissions to create the site.
         /// </summary>
         public bool? WelcomeEmailDisabled { get; set; }
     }
