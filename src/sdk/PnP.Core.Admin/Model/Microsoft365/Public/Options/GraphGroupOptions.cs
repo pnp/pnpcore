@@ -65,5 +65,11 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// If it is a security enabled group
         /// </summary>
         public bool SecurityEnabled { get; } = false;
+
+        /// <summary>
+        /// Allows defining the resource behavior options for the group
+        /// See https://learn.microsoft.com/en-us/graph/group-set-options#configure-groups
+        /// </summary>
+        public List<string> ResourceBehaviorOptions { get; set; }
     }
 }
