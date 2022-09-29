@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Requesting re-indexing of a web or list #950 [jansenbe - Bert Jansen]
 - RateLimit header processing capability, turned off by default [jansenbe - Bert Jansen]
 - Added `DeleteRecycledSiteCollection` methods to delete site collections from the recycle bin [jansenbe - Bert Jansen]
-- Admin library: ability to specify ResourceBehaviorOptions when creating a Group #978 [koenzomers - Koen Zomers]
+- Admin library: ability to specify ResourceBehaviorOptions when creating a Group using application permissions #978 [koenzomers - Koen Zomers]
 
 ### Changed
 
