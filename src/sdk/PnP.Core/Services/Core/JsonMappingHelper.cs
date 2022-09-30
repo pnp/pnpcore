@@ -1107,6 +1107,13 @@ namespace PnP.Core.Services
             {
                 // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
                 entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
+
+                // Checking on ValueKind as it's possible there's a regular field (e.g. column named Comments in a list item) that can have the same name
+                // as an expandable collection (e.g. Comments collection on IListItem)
+                if (entityField != null && IsModelCollection(entityField.DataType) && property.Value.ValueKind != JsonValueKind.Array && apiResponse.ApiCall.Type == ApiType.SPORest)
+                {
+                    return null;
+                }
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
