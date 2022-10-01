@@ -193,6 +193,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
                     GroupTypes = new List<string> { "Unified" },
                     Owners = siteToCreate.Owners,
+                    Members = siteToCreate.Members,
                     ResourceBehaviorOptions = new List<string>()
                 };
 
