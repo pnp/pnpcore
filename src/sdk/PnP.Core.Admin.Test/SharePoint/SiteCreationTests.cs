@@ -579,7 +579,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task CreateTeamSiteWithMembersUsingApplicationPermissions()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             TeamSiteOptions teamSiteToCreate = null;
@@ -597,6 +597,10 @@ namespace PnP.Core.Admin.Test.SharePoint
                     // Determine the user to set as testMember
                     await context.Web.LoadAsync(p => p.AssociatedMemberGroup.QueryProperties(p => p.Users));
                     var testMember = context.Web.AssociatedMemberGroup.Users.Where(u => u.PrincipalType == Core.Model.Security.PrincipalType.User).FirstOrDefault();
+                    if(testMember == null)
+                    {
+                        testMember = testOwner;
+                    }
 
                     // Persist the used site url as we need to have the same url when we run an offline test
                     string alias;
@@ -620,7 +624,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Language = Language.English,
                         IsPublic = true,
                         Owners = new string[] { testOwner.UserPrincipalName },
-                        Members = testMember != null ? new string[] { testMember.UserPrincipalName } : new string[] { testOwner.UserPrincipalName }
+                        Members = new string[] { testMember.UserPrincipalName }
                     };
 
 
