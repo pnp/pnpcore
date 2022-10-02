@@ -579,7 +579,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task CreateTeamSiteWithMembersUsingApplicationPermissions()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             TeamSiteOptions teamSiteToCreate = null;
