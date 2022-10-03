@@ -277,7 +277,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
                         // In case of failure retry according to the specified retry settings
                         if (responseContext == null)
                         {
-                            await Task.Delay(groupCreationOptions.WaitAfterStatusCheck.Value * 1000 * (groupCreationOptions.MaxStatusChecks.Value - driveRetryCount)).ConfigureAwait(false);
+                            await context.WaitAsync(TimeSpan.FromMilliseconds(groupCreationOptions.WaitAfterStatusCheck.Value * 1000 * (groupCreationOptions.MaxStatusChecks.Value - driveRetryCount))).ConfigureAwait(false);
                             driveRetryCount--;
                         }
                     }

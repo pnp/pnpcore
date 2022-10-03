@@ -290,7 +290,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     if (ex.Error is SharePointRestError && ((SharePointRestError)ex.Error).HttpResponseCode == (int)HttpStatusCode.NotFound)
                     {
-                        await Task.Delay(1000 * waitSeconds).ConfigureAwait(false);
+                        await context.WaitAsync(TimeSpan.FromMilliseconds(1000 * waitSeconds)).ConfigureAwait(false);
                     }
                     else
                     {
