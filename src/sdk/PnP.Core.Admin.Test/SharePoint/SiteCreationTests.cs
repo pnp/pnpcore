@@ -10,6 +10,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.SharePoint
@@ -555,6 +556,122 @@ namespace PnP.Core.Admin.Test.SharePoint
                         var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Description == teamSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateTeamSiteWithMembersUsingApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as testOwner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var testOwner = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Determine the user to set as testMember
+                    await context.Web.LoadAsync(p => p.AssociatedMemberGroup.QueryProperties(p => p.Users));
+                    var testMember = context.Web.AssociatedMemberGroup.Users.Where(u => u.PrincipalType == Core.Model.Security.PrincipalType.User).FirstOrDefault();
+                    if(testMember == null)
+                    {
+                        testMember = testOwner;
+                    }
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        IsPublic = true,
+                        Owners = new string[] { testOwner.UserPrincipalName },
+                        Members = new string[] { testMember.UserPrincipalName }
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true,
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
+                        Assert.IsTrue(web.Description == teamSiteToCreate.Description);
+                        Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+
+                        // check for correct owners on the connected group
+                        var responseOwners = await newSiteContext.Site.ExecuteRequestAsync(
+                            new ApiRequest(ApiRequestType.Graph, $"groups/{newSiteContext.Site.GroupId}/owners"));                       
+                        if (responseOwners.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var responseJson = JsonSerializer.Deserialize<JsonElement>(responseOwners.Response);
+                            var owners = responseJson.GetProperty("value");
+                            Assert.IsTrue(owners.ValueKind == JsonValueKind.Array);
+                            Assert.IsTrue(owners.GetArrayLength() == 1);
+                            var ownerUPN = owners[0].GetProperty("userPrincipalName").GetString();
+                            Assert.IsTrue(
+                                testOwner.UserPrincipalName.ToLower()
+                                .Equals(ownerUPN.ToLower()));
+                        }
+
+                        // check for correct members on the connected group
+                        var responseMembers = await newSiteContext.Site.ExecuteRequestAsync(
+                            new ApiRequest(ApiRequestType.Graph, $"groups/{newSiteContext.Site.GroupId}/members"));
+                        if (responseMembers.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var responseJson = JsonSerializer.Deserialize<JsonElement>(responseMembers.Response);
+                            var members = responseJson.GetProperty("value");
+                            Assert.IsTrue(members.ValueKind == JsonValueKind.Array);
+                            Assert.IsTrue(members.GetArrayLength() == 1);
+                            var memberUPN = members[0].GetProperty("userPrincipalName").GetString();
+                            Assert.IsTrue(
+                                testMember.UserPrincipalName.ToLower()
+                                .Equals(memberUPN.ToLower()));
+                        }
                     }
 
                     if (context.Mode == TestMode.Record)

@@ -18,9 +18,15 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         /// <summary>
-        /// Set the owners of the team site. Specify the UPN values in a string array.
+        /// Set the owners of the team site connected group. Specify the UPN values in a string array.
         /// </summary>
         public string[] Owners { get; set; }
+
+        /// <summary>
+        /// Set the members of the team site connected group. Specify the UPN values in a string array.
+        /// Note: Only applicable when application permissions are used.
+        /// </summary>
+        public string[] Members { get; set; }
 
         /// <summary>
         /// The ID of the Site Design to apply, if any (not applicable when application permissions are used)
