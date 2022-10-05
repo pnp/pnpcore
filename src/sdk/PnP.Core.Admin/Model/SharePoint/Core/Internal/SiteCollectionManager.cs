@@ -14,6 +14,11 @@ namespace PnP.Core.Admin.Model.SharePoint
             context = pnpContext;
         }
 
+        public PnPContext GetContext()
+        {
+            return context;
+        }
+
         public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default, VanityUrlOptions vanityUrlOptions = null)
         {
             return await SiteCollectionEnumerator.GetAsync(context, vanityUrlOptions, ignoreUserIsSharePointAdmin, filter).ConfigureAwait(false);

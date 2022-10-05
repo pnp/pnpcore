@@ -363,5 +363,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         void EnableCommunicationSiteFeatures(Uri site, Guid designPackageId);
 
         #endregion
+
+        /// <summary>
+        /// Get the current context
+        /// </summary>
+        /// <returns></returns>
+        PnPContext GetContext();
     }
 }
