@@ -90,7 +90,7 @@ It's highly recommended to use one of the "modern" site collections as these off
 Category | Delegated permissions | Application permissions
 ---------|-----------------------|------------------------
 Modern, no group | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions` | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions`. The `Owner` property must be set.
-Modern, with group | Use `TeamSiteOptions`. The `AllowOnlyMembersToPost`, `CalendarMemberReadOnly`, `ConnectorsDisabled`, `HideGroupInOutlook`, `SubscribeMembersToCalendarEventsDisabled`, `SubscribeNewGroupMembers`, `WelcomeEmailDisabled` and `Members` properties are not applicable here. | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
+Modern, with group | Use `TeamSiteOptions`. The `AllowOnlyMembersToPost`, `CalendarMemberReadOnly`, `ConnectorsDisabled`, `HideGroupInOutlook`, `SubscribeMembersToCalendarEventsDisabled`, `SubscribeNewGroupMembers`, `WelcomeEmailDisabled` and `Members` properties are not applicable here. | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `Language`, `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
 Classic site | Use `ClassicSiteOptions` | Use `ClassicSiteOptions`
 
 All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.
@@ -122,7 +122,6 @@ using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteC
 var teamSiteToCreate = new TeamSiteOptions("mynewsite", "My new site")
 {
     Description = "My site description",
-    Language = Language.English,
     IsPublic = true,
     Owners = new string[] { "ann@contoso.onmicrosoft.com" }
 };
