@@ -1162,7 +1162,7 @@
   "api/PnP.Core.Model.SharePoint.ButtonAction.html": {
     "href": "api/PnP.Core.Model.SharePoint.ButtonAction.html",
     "title": "Class ButtonAction | PnP Core SDK",
-    "keywords": "Class ButtonAction ACE card button action Inheritance Object ButtonAction Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public class ButtonAction : object Properties Action Action to execute Declaration public AdaptiveCardAction Action { get; set; } Property Value AdaptiveCardAction Style Supported values: positive or defailt Declaration public string Style { get; set; } Property Value String Title Button title Declaration public string Title { get; set; } Property Value String"
+    "keywords": "Class ButtonAction ACE card button action Inheritance Object ButtonAction Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public class ButtonAction : object Properties Action Action to execute Declaration public AdaptiveCardAction Action { get; set; } Property Value AdaptiveCardAction IsVisible Is the button visible Declaration public bool? IsVisible { get; set; } Property Value Nullable < Boolean > Style Supported values: positive or default Declaration public string Style { get; set; } Property Value String Title Button title Declaration public string Title { get; set; } Property Value String"
   },
   "api/PnP.Core.Model.SharePoint.CalendarType.html": {
     "href": "api/PnP.Core.Model.SharePoint.CalendarType.html",

@@ -2598,7 +2598,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.AdaptiveCardAction-1.html",
-          "hash": "GDi0eYSHhP6d4+w475C+Ali/abF1sviIFSN0pU5F7cc="
+          "hash": "G+SDE4/j5+jgc4jZePUJFAjAPjBtAsZzkRAI+cyyuzI="
         }
       },
       "is_incremental": false,
@@ -2610,7 +2610,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.AdaptiveCardAction.html",
-          "hash": "vA57ITkBzIpqFCeRZidcyznj+cJKcm9eSyW+41hCzLE="
+          "hash": "26+5wOBL4fDQGKV3GwJJU+u4+6/aoD0wAvti5JWY3NE="
         }
       },
       "is_incremental": false,
@@ -2766,7 +2766,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ButtonAction.html",
-          "hash": "De6rK1iaMgjuu9aCLVDW/rOxg66POOWXJlkwhjPQ1SE="
+          "hash": "UDpHeSGoS0U9r3krRyQ3HcxprjY9MhrrgbAI0FpCd/w="
         }
       },
       "is_incremental": false,
@@ -3162,7 +3162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ExternalLinkAction.html",
-          "hash": "8UBg0CqJ0+8SIWI9JEIv9EZLCN8SMIulNs0Gh+teuF4="
+          "hash": "9/jCxHb1XujIMIOOtjGJq3f7aqKWzTO0gE70wCgTZXA="
         }
       },
       "is_incremental": false,
@@ -3174,7 +3174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ExternalLinkActionParameter.html",
-          "hash": "AhXY+mCbTLkKmvguzLvPgUaOZwqpgfwIMY4R20B96/M="
+          "hash": "5iZiLo5kKHKpuOgNCVKyhdb5n+LB4XTsnb6iohjgGMI="
         }
       },
       "is_incremental": false,
@@ -5610,7 +5610,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.QuickViewAction.html",
-          "hash": "zCHWXrwp3ef3QNrlCuEUxL4paeo87BK+7K6w2Dvrnzs="
+          "hash": "rAZcAYAHq86/FBSRQt7aYpJGYJu9ywtrIfJkvtPQH38="
         }
       },
       "is_incremental": false,
@@ -5622,7 +5622,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.QuickViewActionParameter.html",
-          "hash": "lywLN1Y8/XUQhgU1/MlO2GQS7L82mcMTRWWVuW3cCHY="
+          "hash": "9OT73qfH5iUA8CMBS0WFxIDW2yhFmdK/DdZJfJe1dMM="
         }
       },
       "is_incremental": false,
