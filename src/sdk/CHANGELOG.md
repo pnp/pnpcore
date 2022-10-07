@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - VerifyProperties fails to detect other model types loaded via `QueryProperties` as dirty #961 [jansenbe - Bert Jansen]
 - Getting pages with ".aspx" in file name fails #974 [jansenbe - Bert Jansen]
 - Fix for failure at getting list items with a column entitled "Comments" #979 [jansenbe - Bert Jansen]
+- Adding missing property IsVisible property to AdaptiveCardAction #986 [koenzomers - Koen Zomers]
 
 ## [1.7.0]
 
