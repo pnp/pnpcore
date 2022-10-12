@@ -23,6 +23,22 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CaseInsensitiveListByTitle()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Site pages", p=>p.Title, p=>p.Fields.QueryProperties(p=>p.InternalName));
+                Assert.IsTrue(list != null);
+                Assert.IsTrue(list.Fields.AsRequested().Count() > 0);
+                Assert.IsTrue(list.Fields.AsRequested().First().IsPropertyAvailable(p => p.InternalName));
+
+                var list2 = context.Web.Lists.GetByTitle("Site Page");
+                Assert.IsTrue(list2 == null);
+            }         
+        }
+
+        [TestMethod]
         public async Task GetListDataByRenderListDataAsStream()
         {
             //TestCommon.Instance.Mocking = false;

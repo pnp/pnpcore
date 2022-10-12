@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix for failure at getting list items with a column entitled "Comments" #979 [jansenbe - Bert Jansen]
 - Adding missing property IsVisible property to AdaptiveCardAction #986 [koenzomers - Koen Zomers]
 - GetAvailableThemesAsync throws exception when 'isInverted' or 'name' values missing from JSON response #990 [jansenbe - Bert Jansen]
+- Lists.GetByTitle should be case insensitive #991 [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
