@@ -1,4 +1,5 @@
 ﻿using Microsoft.SharePoint.Client;
+using PnP.Core.Model;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -30,6 +31,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
         /// <summary>
         /// Check if a property is available on a object
+        /// Note: this does not apply for the Values property of model classes that implement <see cref="IExpandoDataModel"/>
         /// </summary>
         /// <typeparam name="T">Type of object to operate on</typeparam>
         /// <param name="clientObject">Object to operate on</param>
@@ -44,6 +46,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
         /// <summary>
         /// Check if a property is instantiated on a object
+        /// Note: this does not apply for the Values property of model classes that implement <see cref="IExpandoDataModel"/>
         /// </summary>
         /// <typeparam name="T">Type of object to operate on</typeparam>
         /// <param name="clientObject">Object to operate on</param>
@@ -57,7 +60,8 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         }
 
         /// <summary>
-        /// Ensures that particular property is loaded on the <see cref="ClientObject"/> and immediately returns this property
+        /// Ensures that particular property is loaded on the <see cref="ClientObject"/> and immediately returns this property. 
+        /// Note: this does not apply for the Values property of model classes that implement <see cref="IExpandoDataModel"/>
         /// </summary>
         /// <typeparam name="T"><see cref="ClientObject"/> type</typeparam>
         /// <typeparam name="TResult">Property type</typeparam>
@@ -71,6 +75,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
         /// <summary>
         /// Ensures that particular property is loaded on the <see cref="ClientObject"/> and immediately returns this property
+        /// Note: this does not apply for the Values property of model classes that implement <see cref="IExpandoDataModel"/>
         /// </summary>
         /// <typeparam name="T"><see cref="ClientObject"/> type</typeparam>
         /// <typeparam name="TResult">Property type</typeparam>
