@@ -95,6 +95,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// If this webpart is used inline in a text editor then this property points to the editor using it
         /// </summary>
-        public string RichTextEditorInstanceId { get; }
+        public string RichTextEditorInstanceId { get; set; }
     }
 }
