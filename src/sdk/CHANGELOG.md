@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetAvailableThemesAsync throws exception when 'isInverted' or 'name' values missing from JSON response #990 [jansenbe - Bert Jansen]
 - Lists.GetByTitle should be case insensitive #991 [jansenbe - Bert Jansen]
 - Making RichTextEditorInstanceId setable to enable consuming libraries to set inline images #997 [heinrich-ulbricht - Heinrich Ulbricht]
+- Escape characters in inline image `Caption`, `AltText` and `Link` properties to prevent malformed JSON #995 [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
