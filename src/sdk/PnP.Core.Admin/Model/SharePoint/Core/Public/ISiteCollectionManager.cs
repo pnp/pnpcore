@@ -199,6 +199,22 @@ namespace PnP.Core.Admin.Model.SharePoint
         void DeleteSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
+        /// Deletes a site collection from the recycle bin.
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to delete from the recycle bin</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns></returns>
+        Task DeleteRecycledSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Deletes a site collection from the recycle bin.
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to delete from the recycle bin</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns></returns>
+        void DeleteRecycledSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
         /// Returns the properties of a site collection
         /// </summary>
         /// <param name="site">Site collection to get the properties for</param>

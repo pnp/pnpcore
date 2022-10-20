@@ -14,10 +14,16 @@ namespace PnP.Core.Model.SharePoint
         public string Title { get; set; }
 
         /// <summary>
-        /// Supported values: positive or defailt
+        /// Supported values: positive or default
         /// </summary>
         [JsonPropertyName("style")]
         public string Style { get; set; }
+
+        /// <summary>
+        /// Is the button visible
+        /// </summary>
+        [JsonPropertyName("isVisible")]
+        public bool? IsVisible { get; set; }
 
         /// <summary>
         /// Action to execute

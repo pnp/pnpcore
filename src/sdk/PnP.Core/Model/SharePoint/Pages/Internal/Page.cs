@@ -278,7 +278,7 @@ namespace PnP.Core.Model.SharePoint
                 pageName = pageName.ToLowerInvariant();
                 if (pageName.EndsWith(".aspx"))
                 {
-                    pageName = pageName.Replace(".aspx", "");
+                    pageName = pageName.Substring(0, pageName.Length - 5);
                 }
             }
 
@@ -2754,9 +2754,9 @@ namespace PnP.Core.Model.SharePoint
                                    .Replace("{Alignment}", imageOptions.Alignment.ToString())
                                    .Replace("{Height}", imageOptions.Height.Value.ToString())
                                    .Replace("{Width}", imageOptions.Width.Value.ToString())
-                                   .Replace("{Link}", imageOptions.Link)
-                                   .Replace("{Caption}", imageOptions.Caption)
-                                   .Replace("{AltText}", imageOptions.AlternativeText)
+                                   .Replace("{Link}", EscapeJsonString(imageOptions.Link))
+                                   .Replace("{Caption}", EscapeJsonString(imageOptions.Caption))
+                                   .Replace("{AltText}", EscapeJsonString(imageOptions.AlternativeText))
                                    .Replace("{SiteId}", PnPContext.Site.Id.ToString())
                                    .Replace("{WebId}", PnPContext.Web.Id.ToString())
                                    .Replace("{ListId}", image.ListId.ToString())
@@ -2790,7 +2790,22 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
         }
+        
+        private static string EscapeJsonString(string input)
+        {
+            // Escape JSON string
+            // https://www.json.org/json-en.html
 
+            // \b Backspace(ascii code 08)
+            // \f Form feed(ascii code 0C)
+            // \n New line
+            // \r Carriage return
+            // \t Tab
+            // \"  Double quote
+            // \\  Backslash character
+
+            return input.Replace("\f", "\\f").Replace("\b", "\\b").Replace("\t", "\\t").Replace("\r", "\\r").Replace("\n", "\\n").Replace("\\", "\\\\").Replace("\"", "\\\"");
+        }
         #endregion
 
         #endregion

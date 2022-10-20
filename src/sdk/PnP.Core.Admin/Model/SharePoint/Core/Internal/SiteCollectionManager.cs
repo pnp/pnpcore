@@ -149,6 +149,21 @@ namespace PnP.Core.Admin.Model.SharePoint
             DeleteSiteCollectionAsync(siteToDelete, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
+        public async Task DeleteRecycledSiteCollectionAsync(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
+        {
+            if (siteToDelete == null)
+            {
+                throw new ArgumentNullException(nameof(siteToDelete));
+            }
+
+            await SiteCollectionManagement.DeleteRecycledSiteCollectionAsync(context, siteToDelete, vanityUrlOptions).ConfigureAwait(false);
+        }
+
+        public void DeleteRecycledSiteCollection(Uri siteToDelete, VanityUrlOptions vanityUrlOptions = null)
+        {
+            DeleteRecycledSiteCollectionAsync(siteToDelete, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
         public async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site, VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)

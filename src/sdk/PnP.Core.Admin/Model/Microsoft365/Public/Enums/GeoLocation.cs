@@ -83,6 +83,16 @@
         /// <summary>
         /// United Kingdom
         /// </summary>
-        GBR
+        GBR,
+
+        /// <summary>
+        /// Qatar
+        /// </summary>
+        QAT,
+
+        /// <summary>
+        /// Sweden
+        /// </summary>
+        SWE,
     }
 }

@@ -193,7 +193,44 @@ namespace PnP.Core.Admin.Model.SharePoint
                     Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
                     GroupTypes = new List<string> { "Unified" },
                     Owners = siteToCreate.Owners,
+                    Members = siteToCreate.Members,
+                    ResourceBehaviorOptions = new List<string>()
                 };
+
+                if(siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("AllowOnlyMembersToPost");
+                }
+
+                if (siteToCreate.CalendarMemberReadOnly.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("CalendarMemberReadOnly");
+                }
+
+                if (siteToCreate.ConnectorsDisabled.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("ConnectorsDisabled");
+                }
+
+                if (siteToCreate.HideGroupInOutlook.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("HideGroupInOutlook");
+                }
+
+                if (siteToCreate.SubscribeMembersToCalendarEventsDisabled.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("SubscribeMembersToCalendarEventsDisabled");
+                }
+
+                if (siteToCreate.SubscribeNewGroupMembers.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("SubscribeNewGroupMembers");
+                }
+
+                if (siteToCreate.WelcomeEmailDisabled.GetValueOrDefault(false))
+                {
+                    newGroup.ResourceBehaviorOptions.Add("WelcomeEmailDisabled");
+                }
 
                 if (siteToCreate.PreferredDataLocation.HasValue)
                 {

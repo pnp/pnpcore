@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -100,7 +101,31 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
             }
 
-            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Title == title).ConfigureAwait(false);
+            var tempList = new List()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            var entityInfo = EntityManager.GetClassInfo(tempList.GetType(), tempList, null, selectors);
+            var apiCallRequest = await QueryClient.BuildGetAPICallAsync(tempList, entityInfo, new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest), true).ConfigureAwait(false);
+
+            try
+            {
+                await tempList.RequestAsync(apiCallRequest.ApiCall, HttpMethod.Get).ConfigureAwait(false);
+                return tempList;
+            }
+            catch(SharePointRestServiceException ex)
+            {
+                if (ex.Error is SharePointRestError error && error.HttpResponseCode == (int)HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         public async Task<IList> GetByTitleBatchAsync(Batch batch, string title, params Expression<Func<IList, object>>[] selectors)
@@ -314,7 +339,7 @@ namespace PnP.Core.Model.SharePoint
             var entityInfo = EntityManager.GetClassInfo(assetLibrary.GetType(), assetLibrary, expressions: selectors);
             var query = await QueryClient.BuildGetAPICallAsync(assetLibrary, entityInfo, apiCall).ConfigureAwait(false);
 
-            await assetLibrary.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            await assetLibrary.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.SPORest), System.Net.Http.HttpMethod.Post).ConfigureAwait(false);
             return assetLibrary;
         }
 

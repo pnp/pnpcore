@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace PnP.Core.Services.Core
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Event containing information about the happened retry

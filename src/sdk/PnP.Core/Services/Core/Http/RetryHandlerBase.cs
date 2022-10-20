@@ -18,15 +18,17 @@ namespace PnP.Core.Services
     internal abstract class RetryHandlerBase : DelegatingHandler
     {
         private readonly EventHub eventHub;
+        private readonly RateLimiter rateLimiter;
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings, EventHub events)
+        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings, EventHub events, RateLimiter limiter)
         {
             GlobalSettings = globalSettings;
             eventHub = events;
+            rateLimiter = limiter;
 
             if (GlobalSettings != null && GlobalSettings.Logger == null)
             {
@@ -56,8 +58,32 @@ namespace PnP.Core.Services
                 try
                 {
                     innermostEx = null;
+
+                    // Depending on the stored request rate limit headers we'll briefly pause before executing the request
+                    // The purpose here is to prevent getting throttled and as such achieve a higher overall throughput
+                    if (eventHub != null && eventHub.RequestRateLimitWaitAsync != null)
+                    {
+                        // If using a custom event then that's overruling the native handler
+                        await eventHub.RequestRateLimitWaitAsync.Invoke(cancellationToken).ConfigureAwait(false);
+                    }
+                    else if (rateLimiter != null)
+                    {
+                        await rateLimiter.WaitAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
+                    // If we received request rate limit headers then store them
+                    if (eventHub != null && eventHub.RequestRateLimitUpdate != null)
+                    {
+                        // If using a custom event then that's overruling the native handler
+                        eventHub.RequestRateLimitUpdate.Invoke(new RateLimitEvent(response));
+                    }
+                    else
+                    {
+                        rateLimiter?.UpdateWindow(response);
+                    }
+                    
                     if (!ShouldRetry(response.StatusCode))
                     {
                         return response;

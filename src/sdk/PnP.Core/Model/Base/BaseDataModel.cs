@@ -1293,10 +1293,11 @@ namespace PnP.Core.Model
 
                         string fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
 
-                        var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
-                        if (collectionToCheck != null)
+                        var collectionOrModelToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
+                        if (collectionOrModelToCheck != null)
                         {
                             var collection = model.GetPublicInstancePropertyValue(fieldToLoad);
+                            // Verify collections
                             if (collection is IRequestableCollection)
                             {
                                 if (!(collection as IRequestableCollection).Requested)
@@ -1307,16 +1308,35 @@ namespace PnP.Core.Model
                                 }
                                 else
                                 {
-                                    if (collectionToCheck.ExpandFieldInfo != null && (collection as IRequestableCollection).Length > 0)
+                                    if (collectionOrModelToCheck.ExpandFieldInfo != null && (collection as IRequestableCollection).Length > 0)
                                     {
                                         // Collection was requested and there's at least one item to check, let's see if we can figure out if all needed properties were loaded as well
-                                        if (!WereFieldsRequested(collectionToCheck, collectionToCheck.ExpandFieldInfo, collection as IRequestableCollection))
+                                        if (!WereModelCollectionFieldsRequested(collectionOrModelToCheck, collectionOrModelToCheck.ExpandFieldInfo, collection as IRequestableCollection))
                                         {
                                             expressionsToLoad.Add(expression);
                                             dirty = true;
                                         }
                                     }
                                     else
+                                    {
+                                        expressionsToLoad.Add(expression);
+                                        dirty = true;
+                                    }
+                                }
+                            }
+                            // Verify types that are a model (e.g. IFolder when ensuring list.RootFolder
+                            else if (collection is IRequestable)
+                            {
+                                if (!(collection as IRequestable).Requested)
+                                {
+                                    // Model was not requested at all, so let's load it again
+                                    expressionsToLoad.Add(expression);
+                                    dirty = true;
+                                }
+                                else
+                                {
+                                    // model was requested and there's at least one item to check, let's see if we can figure out if all needed properties were loaded as well
+                                    if (!WereModelFieldsRequested(collectionOrModelToCheck, collectionOrModelToCheck.ExpandFieldInfo, collection as IRequestable))
                                     {
                                         expressionsToLoad.Add(expression);
                                         dirty = true;
@@ -1347,7 +1367,7 @@ namespace PnP.Core.Model
             return expressionsToLoad;
         }
 
-        private static bool WereFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestableCollection collection)
+        private static bool WereModelCollectionFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestableCollection collection)
         {
             var enumerator = collection.RequestedItems.GetEnumerator();
 
@@ -1375,7 +1395,7 @@ namespace PnP.Core.Model
                 {
                     // this is another collection, so perform a recursive check
                     var collectionRecursive = itemToCheck.GetPublicInstancePropertyValue(fieldInExpression.Name) as IRequestableCollection;
-                    if (!WereFieldsRequested(collectionToCheck, fieldInExpression, collectionRecursive))
+                    if (!WereModelCollectionFieldsRequested(collectionToCheck, fieldInExpression, collectionRecursive))
                     {
                         return false;
                     }
@@ -1385,6 +1405,32 @@ namespace PnP.Core.Model
             return true;
         }
 
+        private static bool WereModelFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestable model)
+        {
+            TransientObject itemToCheck = model as TransientObject;
+
+            foreach (var fieldInExpression in expandFields.Fields)
+            {
+                if (!fieldInExpression.Fields.Any())
+                {
+                    if (!itemToCheck.HasValue(fieldInExpression.Name))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    // this is another collection, so perform a recursive check
+                    var collectionRecursive = itemToCheck.GetPublicInstancePropertyValue(fieldInExpression.Name) as IRequestableCollection;
+                    if (!WereModelCollectionFieldsRequested(collectionToCheck, fieldInExpression, collectionRecursive))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
         #endregion
     }
 }

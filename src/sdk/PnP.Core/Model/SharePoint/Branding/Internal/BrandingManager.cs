@@ -47,9 +47,18 @@ namespace PnP.Core.Model.SharePoint
             {
                 foreach (var theme in themePreviews.EnumerateArray())
                 {
+                    string name = "Unknown";
+                    if (theme.TryGetProperty("name", out JsonElement nameElement))
+                    {
+                        if (!string.IsNullOrEmpty(nameElement.GetString()))
+                        {
+                            name = nameElement.GetString();
+                        }
+                    }
+
                     availableThemes.Add(new Theme
                     {
-                        Name = theme.GetProperty("name").GetString(),
+                        Name = name,
                         IsCustomTheme = true,
                         
                         // The JSON theme information received from the GetTenantThemingOptions is not in a format that can be applied, so rewrite to the right model
@@ -181,19 +190,34 @@ namespace PnP.Core.Model.SharePoint
                 paletteValues.themePrimary = ToJsonColor(themePrimary.ToString());
             }
 
+            bool isInverted = false;
+            if (customThemeJson.TryGetProperty("isInverted", out JsonElement isInvertedElement))
+            {
+                isInverted = isInvertedElement.GetBoolean();
+            }
+
             var body = new
             {
                 backgroundImageUri = "",
                 palette = paletteValues,
                 cacheToken = "",
                 isDefault = true,
-                isInverted = customThemeJson.GetProperty("isInverted").GetBoolean(),
+                isInverted,
                 version = ""
             };
 
+            string name = "Unknown";
+            if (customThemeJson.TryGetProperty("name", out JsonElement nameElement))
+            {
+                if (!string.IsNullOrEmpty(nameElement.GetString()))
+                {
+                    name = nameElement.GetString();
+                }
+            }
+
             var final = new
             {
-                name = customThemeJson.GetProperty("name").GetString(),
+                name,
                 themeJson = JsonSerializer.Serialize(body),
             };        
 

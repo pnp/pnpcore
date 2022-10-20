@@ -11,7 +11,7 @@ namespace PnP.Core.Auth.Services.Http
     internal sealed class MsalRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MsalRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
+        public MsalRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub, RateLimiter limiter) : base(log, globalSettings?.Value, eventHub, null)
         {
             Configure();
         }

@@ -76,6 +76,7 @@ namespace PnP.Core.Services.Builder.Configuration
                 }
                 options.HttpUserAgent = pnpCoreOptions.Value.HttpRequests.UserAgent;
                 options.HttpTimeout = pnpCoreOptions.Value.HttpRequests.Timeout;
+                options.HttpRateLimiterMinimumCapacityLeft = pnpCoreOptions.Value.HttpRequests.RateLimiterMinimumCapacityLeft;
             }
         }
     }

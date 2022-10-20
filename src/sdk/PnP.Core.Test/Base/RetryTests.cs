@@ -48,7 +48,7 @@ namespace PnP.Core.Test.Base
                 retryEventSent = true;
             };
 
-            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null, null, events)
+            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null, null, events, null)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case
@@ -110,7 +110,7 @@ namespace PnP.Core.Test.Base
                 retryEventSent = true;
             };
 
-            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null, null, events)
+            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null, null, events, null)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case

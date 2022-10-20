@@ -90,7 +90,7 @@ It's highly recommended to use one of the "modern" site collections as these off
 Category | Delegated permissions | Application permissions
 ---------|-----------------------|------------------------
 Modern, no group | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions` | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions`. The `Owner` property must be set.
-Modern, with group | Use `TeamSiteOptions` | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
+Modern, with group | Use `TeamSiteOptions`. The `AllowOnlyMembersToPost`, `CalendarMemberReadOnly`, `ConnectorsDisabled`, `HideGroupInOutlook`, `SubscribeMembersToCalendarEventsDisabled`, `SubscribeNewGroupMembers`, `WelcomeEmailDisabled` and `Members` properties are not applicable here. | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `Language`, `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
 Classic site | Use `ClassicSiteOptions` | Use `ClassicSiteOptions`
 
 All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.
@@ -122,7 +122,6 @@ using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteC
 var teamSiteToCreate = new TeamSiteOptions("mynewsite", "My new site")
 {
     Description = "My site description",
-    Language = Language.English,
     IsPublic = true,
     Owners = new string[] { "ann@contoso.onmicrosoft.com" }
 };
@@ -244,11 +243,32 @@ foreach(var site in recycledSites)
 }
 ```
 
+## Deleting a recycled site collection
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
+> [!Note]
+> When the site collection being deleted from the recycle bin has an associated Microsoft 365 group it's recommended to not use this approach but rather permanently delete the Microsoft 365 group which will then delete all the resources linked to the Microsoft 365 group.
+
+A recycled site collection can be permanently deleted using the `DeleteRecycledSiteCollection` methods:
+
+```csharp
+var recycledSites = await context.GetSiteCollectionManager().GetRecycledSiteCollectionsAsync();
+foreach(var site in recycledSites)
+{
+    // delete all non group connected recycled site collections
+    if (site.GroupId == Guid.Empty)
+    {
+        await context.GetSiteCollectionManager().DeleteRecycledSiteCollectionAsync(site.Url);
+    }
+}
+```
+
 ## Deleting site collections
 
 [!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
-A site collection can also deleted via one of the `DeleteSiteCollection` methods.
+A site collection can also be permanently deleted via one of the `DeleteSiteCollection` methods. This method first moves the site collection to the recycled bin and then immediately purges the site collection from the recycle bin.
 
 > [!Note]
 > A group connected site will not be permanently deleted, calling the `DeleteSiteCollection` methods will recycle the site collection and group.
