@@ -20,6 +20,9 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
         }
         public object Result { get; }
 
+        public string TermSetId { get; set; }
+        public string TermGroupId { get; set; }
+
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {
             List<ActionObjectPath> result = new List<ActionObjectPath>();
@@ -119,8 +122,27 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             result.Add(groupsActionPath);
 
             #endregion
-
+            
             #region GROUPS GetByName
+
+            // var objectPathMethodGroupsGetByName = new ObjectPathMethod
+            // {
+            //     Id = idProvider.GetActionId(),
+            //     ParentId = objectPathPropertyGroups.Id,
+            //     Name = "GetById",
+            //     Parameters = new MethodParameter()
+            //     {
+            //         Properties = new List<Parameter>() {
+            //             new Parameter()
+            //             {
+            //                 Type = "String",
+            //                 Value = TermGroupId
+            //             }
+            //         }
+            //     }
+            // };
+
+            
             var objectPathMethodGroupsGetByName = new ObjectPathMethod
             {
                 Id = idProvider.GetActionId(),
@@ -132,7 +154,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                         new Parameter()
                         {
                             Type = "String",
-                            Value = "People"
+                            Value = this.TermGroupId
                         }
                     }
                 }
@@ -188,7 +210,25 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             #endregion
 
             #region TERMSETS GetByName
+            
+            // var objectPathMethodTermSetsGetById = new ObjectPathMethod
+            // {
+            //     Id = idProvider.GetActionId(),
+            //     ParentId = objectPathPropertyTermSets.Id,
+            //     Name = "GetById",
+            //     Parameters = new MethodParameter()
+            //     {
+            //         Properties = new List<Parameter>() {
+            //             new Parameter()
+            //             {
+            //                 Type = "String",
+            //                 Value = this.TermSetId
+            //             }
+            //         }
+            //     }
+            // };
 
+            
             var objectPathMethodTermSetsGetByName = new ObjectPathMethod
             {
                 Id = idProvider.GetActionId(),
@@ -200,7 +240,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                         new Parameter()
                         {
                             Type = "String",
-                            Value = "Department"
+                            Value = this.TermSetId
                         }
                     }
                 }
@@ -366,7 +406,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
         public void ProcessResponse(string response)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(response);
         }
     }
 }
