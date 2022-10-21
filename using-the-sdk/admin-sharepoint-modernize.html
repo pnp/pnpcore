@@ -107,6 +107,10 @@
     &quot;Site title&quot;);
 await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If in <strong>SharePoint Tenant Admin</strong> -&gt; <strong>Settings</strong> -&gt; <strong>Site creation</strong> you've not checked both boxes then connecting a site to a new Microsoft 365 Group can only work when the user is a site collection or tenant administrator.</p>
+</div>
 <h2 id="control-the-add-teams-prompt">Control the &quot;Add Teams&quot; prompt</h2>
 <p>Microsoft 365 group connected sites by default show a prompt in their left navigation to enable the creation of Team. Sometimes you might not want your users to create a Team or you do want to create the Team programmatically. For those cases you can use the <code>IsAddTeamsPromptHidden</code> and <code>HideAddTeamsPrompt</code> methods:</p>
 <pre><code class="lang-csharp">// Check if the Add Teams prompt is hidden
