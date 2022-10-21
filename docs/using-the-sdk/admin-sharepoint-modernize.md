@@ -16,8 +16,8 @@ ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(
 await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
 ```
 
-> [!Note]
-> If in **SharePoint Tenant Admin** -> **Settings** -> **Site creation** you've not checked both boxes then connecting a site to a new Microsoft 365 Group can only work when the user is a site collection or tenant administrator.
+> [!Important]
+> If in **SharePoint Tenant Admin** -> **Settings** -> **Site creation** you've not checked both boxes then connecting a site to a new Microsoft 365 Group can only work when the user is a SharePoint Administrator or Global Administrator.
 
 ## Control the "Add Teams" prompt
 
