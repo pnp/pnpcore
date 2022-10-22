@@ -488,7 +488,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SetAndRemoveIndexedWebPropertiesTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.ClassicSTS0TestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
