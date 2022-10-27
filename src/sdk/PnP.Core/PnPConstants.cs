@@ -126,11 +126,7 @@ namespace PnP.Core
         /// The string absolute path of the Content Type Hub
         /// </summary>
         internal const string ContentTypeHubUrl = "/sites/contenttypehub";
-
-        /// <summary>
-        /// Name of the indexed property web metadata
-        /// </summary>
-        internal const string IndexedPropertyKeysName = "vti_indexedpropertykeys";
+        
         #region Json serializers options
 
         /// <summary>

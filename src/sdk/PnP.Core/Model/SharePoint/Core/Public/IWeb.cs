@@ -467,22 +467,6 @@ namespace PnP.Core.Model.SharePoint
         public IPropertyValues AllProperties { get; }
 
         /// <summary>
-        /// Adds a web property as an indexed property
-        /// </summary>
-        /// <remarks>The property must already exist as metadata of the Web</remarks>
-        /// <param name="propertyName">The property name</param>
-        /// <returns>True if it was successfully added or if it is already exists otherwise false</returns>
-        public bool AddIndexedProperty(string propertyName);
-
-        /// <summary>
-        /// Removes a web propetry from the indexed properties
-        /// </summary>
-        /// <param name="propertyName">The property name</param>
-        /// <returns>True if it was successfully removed otherwise false</returns>
-        public bool RemoveIndexedProperty(string propertyName);
-
-
-        /// <summary>
         /// Gets the collection of all content types that apply to the current scope, including those of the current Web site, as well as any parent Web sites.
         /// Implements <see cref="IQueryable{T}"/>. <br />
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
@@ -1411,6 +1395,40 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         void ReIndex();
+
+        #endregion
+
+        #region Indexed properties
+        
+        /// <summary>
+        /// Adds a web property as an indexed property
+        /// </summary>
+        /// <remarks>The property must already exist as metadata of the Web</remarks>
+        /// <param name="propertyName">The property name</param>
+        /// <returns>True if it was successfully added or if it is already exists otherwise false</returns>
+        public Task<bool> AddIndexedPropertyAsync(string propertyName);
+
+        /// <summary>
+        /// Adds a web property as an indexed property
+        /// </summary>
+        /// <remarks>The property must already exist as metadata of the Web</remarks>
+        /// <param name="propertyName">The property name</param>
+        /// <returns>True if it was successfully added or if it is already exists otherwise false</returns>
+        public bool AddIndexedProperty(string propertyName);
+
+        /// <summary>
+        /// Removes a web propetry from the indexed properties
+        /// </summary>
+        /// <param name="propertyName">The property name</param>
+        /// <returns>True if it was successfully removed otherwise false</returns>
+        public Task<bool> RemoveIndexedPropertyAsync(string propertyName);
+
+        /// <summary>
+        /// Removes a web propetry from the indexed properties
+        /// </summary>
+        /// <param name="propertyName">The property name</param>
+        /// <returns>True if it was successfully removed otherwise false</returns>
+        public bool RemoveIndexedProperty(string propertyName);
 
         #endregion
 

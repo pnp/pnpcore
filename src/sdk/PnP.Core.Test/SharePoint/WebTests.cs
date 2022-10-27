@@ -337,7 +337,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SetWebPropertiesTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.ClassicSTS0TestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
@@ -516,7 +516,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(web.AddIndexedProperty(propertyKey2));
 
                     web = await context.Web.GetAsync(p => p.AllProperties);
-                    var indexedProperties = web.AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty)
+                    var indexedProperties = web.AllProperties.GetString("vti_indexedpropertykeys", string.Empty)
                         .Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
                     Assert.IsTrue(indexedProperties.Count == 1);
                     Assert.IsTrue(indexedProperties.
@@ -530,7 +530,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(web.RemoveIndexedProperty(propertyKey2));
                  
                     web = await context.Web.GetAsync(p => p.AllProperties);
-                    Assert.IsTrue(web.AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty).Length == 0);
+                    Assert.IsTrue(web.AllProperties.GetString("vti_indexedpropertykeys", string.Empty).Length == 0);
 
                     web = await context.Web.GetAsync(p => p.AllProperties);
                     myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
