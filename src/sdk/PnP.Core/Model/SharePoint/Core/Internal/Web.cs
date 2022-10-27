@@ -2062,5 +2062,58 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #endregion
+
+        public bool AddIndexedProperty(string propertyName)
+        {
+            if( AllProperties.Values.ContainsKey(propertyName) == false )
+            {
+                return false;
+            }
+
+            var propertyNameAsBase64String = Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyName));
+
+            var indexedProperties = AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty)
+                .Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+
+            if( indexedProperties.Contains<string>(propertyNameAsBase64String) )
+            {
+                return true;
+            }
+
+            indexedProperties.Add(propertyNameAsBase64String);
+         
+            AllProperties[PnPConstants.IndexedPropertyKeysName] = String.Join( "|", indexedProperties) + "|";            
+            AllProperties.Update();
+
+            return true;
+        }
+
+        public bool RemoveIndexedProperty(string propertyName)
+        {           
+            var propertyNameAsBase64String = Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyName));
+
+            var indexedProperties = AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty)
+                .Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+
+            if ( indexedProperties.Contains<string>(propertyNameAsBase64String) == false)
+            {
+                return false;
+            }
+
+            indexedProperties.Remove(propertyNameAsBase64String);
+
+            if (indexedProperties.Any())
+            {
+                AllProperties[PnPConstants.IndexedPropertyKeysName] = String.Join("|", indexedProperties) + "|";
+            }
+            else
+            {
+                AllProperties[PnPConstants.IndexedPropertyKeysName] = string.Empty;
+            }
+
+            AllProperties.Update();
+
+            return true;
+        }        
     }
 }

@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -336,7 +337,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SetWebPropertiesTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             TestCommon.ClassicSTS0TestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
@@ -484,6 +485,67 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task SetAndRemoveIndexedWebPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey1 = "SetWebPropertiesTest";
+                    var propertyKey2 = "SetWebPropertiesTest2";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey1] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.AddIndexedProperty(propertyKey1));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsFalse(web.AddIndexedProperty(propertyKey2));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    var indexedProperties = web.AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty)
+                        .Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+                    Assert.IsTrue(indexedProperties.Count == 1);
+                    Assert.IsTrue(indexedProperties.
+                        Contains<string>(Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyKey1))));
+                    Assert.IsFalse(indexedProperties.
+                        Contains<string>(Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyKey2))));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.RemoveIndexedProperty(propertyKey1));
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsFalse(web.RemoveIndexedProperty(propertyKey2));
+                 
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.AllProperties.GetString(PnPConstants.IndexedPropertyKeysName, string.Empty).Length == 0);
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey1] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+      
         [TestMethod]
         public async Task GetSiteLanguagesTest()
         {
