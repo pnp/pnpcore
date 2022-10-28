@@ -188,7 +188,7 @@ var page = await context.Web.NewPageAsync();
 page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
 // configure an image web part for a given site relative url
-var image = await GetImageWebPartAsync("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions
+var image = await page.GetImageWebPartAsync("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions
 { 
     Alignment = PageImageAlignment.Left,
     Width = 200,
