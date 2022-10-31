@@ -115,7 +115,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="you-need-to-read-system-properties-like-fileleafref-filedirref-or-you-need-to-filter-list-items-or-you-want-to-define-the-returned-fields">You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields</h3>
+<h3 id="you-need-to-read-system-properties-like-fileleafref-filedirref-or-you-need-to-filter-list-items-or-you-want-to-define-the-returned-fields-or-you-want-to-get-lookup-column-properties">You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields or you want to get lookup column properties</h3>
 <table>
 <thead>
 <tr>
@@ -129,7 +129,7 @@
 <td><a href="#c-getting-list-items-via-the-loaditemsbycamlquery-approach">Option C</a>: use a CAML query via the <code>LoadItemsByCamlQuery</code> methods</td>
 </tr>
 <tr>
-<td>You want to have more details on the list item properties (e.g. author name instead of only the author id)</td>
+<td>You want to have more details on the list item properties (e.g. author name instead of only the author id, lookup column values)</td>
 <td><a href="#d-using-the-listdataasstream-approach">Option D</a>: use a CAML query via the <code>ListDataAsStream</code> methods</td>
 </tr>
 </tbody>
@@ -443,6 +443,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 <li>When using <code>text</code> fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using <code>&lt;![CDATA[{MyVariable}]]</code></li>
 <li>When using the <code>CamlQueryOptions.FolderServerRelativeUrl</code> property then this will not work if the referred folder has a # or &amp; it it's name. A workaround then is scoping the CAML query to the folder via the <code>FileDirRef</code> element in combination with setting the <code>Scope=RecursiveAll</code> property in the <code>View</code> element. See <a href="https://github.com/pnp/pnpcore/issues/839">here</a> for more context.</li>
+<li>When you need to fetch additional fields populated via a lookup column just specify the field in the <code>ViewFields</code> node of the CAML query, e.g. <code>&lt;FieldRef Name='LookupSingle_x003a_Created' /&gt;</code> loads the <code>Created</code> field brought via the lookup column named <code>LookupSingle</code></li>
 </ul>
 </div>
 <h4 id="using-paging-with-listdataasstream">Using paging with ListDataAsStream</h4>
