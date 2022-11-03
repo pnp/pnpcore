@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Making RichTextEditorInstanceId setable to enable consuming libraries to set inline images #997 [heinrich-ulbricht - Heinrich Ulbricht]
 - Escape characters in inline image `Caption`, `AltText` and `Link` properties to prevent malformed JSON #995 [jansenbe - Bert Jansen]
 - Added support for also loading the additional fields returned by a lookup field when using `LoadListDataAsStreamAsync` [jansenbe - Bert Jansen]
+- Drop unused Microsoft.Extensions.Logging.Abstractions reference [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 
