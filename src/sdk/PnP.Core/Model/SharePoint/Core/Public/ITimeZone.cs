@@ -57,6 +57,11 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>A <see cref="DateTime"/> structure that contains the date and time converted to their local values.</returns>
         public DateTime UtcToLocalTime(DateTime dateTime);
 
+        /// <summary>
+        /// Returns the current SharePoint timezone information as a Windows TimeZoneInfo object
+        /// </summary>
+        /// <returns></returns>
+        public TimeZoneInfo GetTimeZoneInfo();
         #endregion
 
     }
