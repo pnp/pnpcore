@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests.Terms;
 using System;
 using System.Collections.Generic;
@@ -166,8 +167,10 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public async Task<ITermCollection> GetTermsByCustomProperty(string key, string value)
+        public async Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value)
         {
+            var result = new List<ITerm>();
+            
             if (string.IsNullOrEmpty(key))
             {
                 throw new ArgumentNullException(nameof(key));
@@ -177,7 +180,6 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(value));
             }
-
           
             GetTermsByCustomPropertyRequest request = new GetTermsByCustomPropertyRequest(key, value, false)
             {
@@ -191,11 +193,15 @@ namespace PnP.Core.Model.SharePoint
                  Request = this.PnPContext.Uri.ToString()
              };
 
-            var result = await RawRequestAsync(getTermsCall, HttpMethod.Post).ConfigureAwait(false);
+            var csomResult = await RawRequestAsync(getTermsCall, HttpMethod.Post).ConfigureAwait(false);
 
-
-
-            return null;
+            foreach (Guid guid in csomResult.ApiCall.CSOMRequests[0].Result as IList<Guid>)
+            {
+                string s = guid.ToString();
+                var term = this.Terms.Where(p => p.Id == s).FirstOrDefaultAsync();
+                result.Add(term.Result);
+            }
+            return result;
         }
         #endregion
     }

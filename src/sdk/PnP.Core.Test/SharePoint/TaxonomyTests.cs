@@ -1409,7 +1409,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetTermsByProperties()
+        public async Task GetTermsByCustomProperty()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -1447,15 +1447,30 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
 
                     // load the terms by custom property
-                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
-                    Assert.AreEqual(terms.Length, 1);
+                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property2", "value2");
+                    
+                    Assert.AreEqual(terms.Count, 1);
+                    
+                    foreach (ITerm term in terms)
+                    {
+                        await term.DeleteAsync();
+                    }
+                    
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    Assert.AreEqual(terms.Count, 1);
+                    
+                    foreach (ITerm term in terms)
+                    {
+                        await term.DeleteAsync();
+                    }
+
                 }
 
                 // delete term
-                await newChildTerm.DeleteAsync();
+                // await newChildTerm.DeleteAsync();
 
                 // delete term 
-                await newTerm.DeleteAsync();
+                // await newTerm.DeleteAsync();
 
                 // Delete term set 
                 await termSet.DeleteAsync();
