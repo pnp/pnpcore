@@ -181,6 +181,24 @@ if (field != null)
     await field.DeleteAsync();
 }
 </code></pre>
+<h2 id="control-field-visibility-on-list-display-edit-and-new-forms">Control field visibility on list display, edit and new forms</h2>
+<p>By default all fields on a list, unless marked as hidden, will appear on the list forms (display, edit and new). If you want to change the visibility of a field on one of these forms then you can use the <code>SetShowInDisplayForm</code>,  <code>SetShowInEditForm</code> or <code>SetShowInNewForm</code> methods.</p>
+<pre><code class="lang-csharp">// Find a field with a given id on a web or list
+Guid titleFieldId = new Guid(&quot;fa564e0f-0c70-4ab9-b863-0177e6ddd247&quot;);
+IField field = await context.Web.Fields.Where(f =&gt; f.Id == titleFieldId).FirstOrDefaultAsync();
+
+if (field != null)
+{
+    // Hide field in new display form
+    await field.SetShowInDisplayFormAsync(false);
+
+    // Hide field in new edit form
+    await field.SetShowInEditFormAsync(false);
+
+    // Hide field in new new form
+    await field.SetShowInNewFormAsync(false);
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
