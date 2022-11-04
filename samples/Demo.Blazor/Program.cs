@@ -24,6 +24,10 @@ namespace Demo.Blazor
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
                 // Provide a default scope, need to get Msal.js to work
                 options.ProviderOptions.DefaultAccessTokenScopes = new List<string>() { "https://graph.microsoft.com/.default" };
+
+                //https://github.com/dotnet/aspnetcore/issues/39104#issuecomment-1117082810
+                // Temp workaround for now...the auth popup otherwise doesn't close
+                options.ProviderOptions.LoginMode = "redirect";
             });
 
             // Add the PnP Core SDK library
