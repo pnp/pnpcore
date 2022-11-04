@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: ability to specify ResourceBehaviorOptions when creating a Group using application permissions #978 [koenzomers - Koen Zomers]
 - Admin library: Ability to specify members on team site creation time #981 [LeHailender - Jens Haile]
 - Added add and remove functionality for indexed web properties #1006 [LeHailender - Jens Haile]
+- Added .NET 7 binaries [jansenbe - Bert Jansen]
 
 ### Changed
 
