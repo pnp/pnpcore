@@ -1,8 +1,10 @@
-﻿using PnP.Core.Services.Core.CSOM.QueryAction;
+﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.Services.Core.CSOM.QueryAction;
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 {
@@ -19,15 +21,25 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             this.trimUnavailable = trimUnavailable;
         }
         public object Result { get; }
-
         public string TermSetId { get; set; }
         public string TermGroupId { get; set; }
+        
+        internal CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
+        
+        internal int IdentityPath { get; set; }
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {
             List<ActionObjectPath> result = new List<ActionObjectPath>();
 
+            #region XML Payload generated
+            
+            // todo
+            
+            #endregion
+            
             #region GetTaxonomySession
+            
             var staticMethodPathGetTaxonomySession = new StaticMethodPath
             {
                 Id = idProvider.GetActionId(),
@@ -123,31 +135,15 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             #endregion
             
-            #region GROUPS GetByName
-
-            // var objectPathMethodGroupsGetByName = new ObjectPathMethod
-            // {
-            //     Id = idProvider.GetActionId(),
-            //     ParentId = objectPathPropertyGroups.Id,
-            //     Name = "GetById",
-            //     Parameters = new MethodParameter()
-            //     {
-            //         Properties = new List<Parameter>() {
-            //             new Parameter()
-            //             {
-            //                 Type = "String",
-            //                 Value = TermGroupId
-            //             }
-            //         }
-            //     }
-            // };
-
+            // todo: check variable naming consistency
             
-            var objectPathMethodGroupsGetByName = new ObjectPathMethod
+            #region GROUPS GetById
+
+            var objectPathMethodGroupsGetById = new ObjectPathMethod
             {
                 Id = idProvider.GetActionId(),
                 ParentId = objectPathPropertyGroups.Id,
-                Name = "GetByName",
+                Name = "GetById",
                 Parameters = new MethodParameter()
                 {
                     Properties = new List<Parameter>() {
@@ -159,30 +155,30 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                     }
                 }
             };
-
-            ActionObjectPath methodGroupsGetByNameActionPath = new ActionObjectPath
+            
+            ActionObjectPath methodGroupsGetByIdActionPath = new ActionObjectPath
             {
                 Action = new BaseAction
                 {
                     Id = idProvider.GetActionId(),
-                    ObjectPathId = objectPathMethodGroupsGetByName.Id.ToString()
+                    ObjectPathId = objectPathMethodGroupsGetById.Id.ToString()
                 },
-                ObjectPath = objectPathMethodGroupsGetByName
+                ObjectPath = objectPathMethodGroupsGetById
             };
 
-            result.Add(methodGroupsGetByNameActionPath);
+            result.Add(methodGroupsGetByIdActionPath);
 
 
-            ActionObjectPath methodGroupsGetByNameActionPathIdentityQuery = new ActionObjectPath()
+            ActionObjectPath methodGroupsGetByIdActionPathIdentityQuery = new ActionObjectPath()
             {
                 Action = new IdentityQueryAction()
                 {
                     Id = idProvider.GetActionId(),
-                    ObjectPathId = objectPathMethodGroupsGetByName.Id.ToString()
+                    ObjectPathId = objectPathMethodGroupsGetById.Id.ToString()
                 }
             };
 
-            result.Add(methodGroupsGetByNameActionPathIdentityQuery);
+            result.Add(methodGroupsGetByIdActionPathIdentityQuery);
 
             #endregion
 
@@ -191,7 +187,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             var objectPathPropertyTermSets = new Property
             {
                 Id = idProvider.GetActionId(),
-                ParentId = objectPathMethodGroupsGetByName.Id,
+                ParentId = objectPathMethodGroupsGetById.Id,
                 Name = "TermSets"
             };
 
@@ -208,32 +204,16 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             result.Add(termSetsActionPath);
 
             #endregion
-
-            #region TERMSETS GetByName
             
-            // var objectPathMethodTermSetsGetById = new ObjectPathMethod
-            // {
-            //     Id = idProvider.GetActionId(),
-            //     ParentId = objectPathPropertyTermSets.Id,
-            //     Name = "GetById",
-            //     Parameters = new MethodParameter()
-            //     {
-            //         Properties = new List<Parameter>() {
-            //             new Parameter()
-            //             {
-            //                 Type = "String",
-            //                 Value = this.TermSetId
-            //             }
-            //         }
-            //     }
-            // };
-
+            // todo: check variable naming consistency
             
-            var objectPathMethodTermSetsGetByName = new ObjectPathMethod
+            #region TERMSETS GetById
+            
+            var objectPathMethodTermSetsGetById = new ObjectPathMethod
             {
                 Id = idProvider.GetActionId(),
                 ParentId = objectPathPropertyTermSets.Id,
-                Name = "GetByName",
+                Name = "GetById",
                 Parameters = new MethodParameter()
                 {
                     Properties = new List<Parameter>() {
@@ -246,28 +226,28 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 }
             };
 
-            ActionObjectPath getByNamweActionPath = new ActionObjectPath
+            ActionObjectPath getByIdActionPath = new ActionObjectPath
             {
                 Action = new BaseAction
                 {
                     Id = idProvider.GetActionId(),
-                    ObjectPathId = objectPathMethodTermSetsGetByName.Id.ToString()
+                    ObjectPathId = objectPathMethodTermSetsGetById.Id.ToString()
                 },
-                ObjectPath = objectPathMethodTermSetsGetByName
+                ObjectPath = objectPathMethodTermSetsGetById
             };
 
-            result.Add(getByNamweActionPath);
+            result.Add(getByIdActionPath);
 
-            ActionObjectPath getBynameActionPathIdentityQuery = new ActionObjectPath()
+            ActionObjectPath getByNameActionPathIdentityQuery = new ActionObjectPath()
             {
                 Action = new IdentityQueryAction()
                 {
                     Id = idProvider.GetActionId(),
-                    ObjectPathId = objectPathMethodTermSetsGetByName.Id.ToString()
+                    ObjectPathId = objectPathMethodTermSetsGetById.Id.ToString()
                 }
             };
 
-            result.Add(getBynameActionPathIdentityQuery);
+            result.Add(getByNameActionPathIdentityQuery);
             #endregion
 
             #region CustomPropertyMatchInformationConstructor
@@ -355,7 +335,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             var objectPathMethodGetTermsWithCustomProperty = new ObjectPathMethod
             {
                 Id = idProvider.GetActionId(),
-                ParentId = objectPathMethodTermSetsGetByName.Id,
+                ParentId = objectPathMethodTermSetsGetById.Id,
                 Name = "GetTermsWithCustomProperty",
                 Parameters = new MethodParameter
                 {
@@ -379,12 +359,14 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             result.Add(identityQueryBaseAction);
 
+            IdentityPath = idProvider.GetActionId();
+            
             ActionObjectPath identityQuery = new ActionObjectPath()
             {
                 ObjectPath = objectPathMethodGetTermsWithCustomProperty,
                 Action = new PnP.Core.Services.Core.CSOM.QueryAction.QueryAction()
                 {
-                    Id = idProvider.GetActionId(),
+                    Id = IdentityPath,
                     ObjectPathId = objectPathMethodGetTermsWithCustomProperty.Id.ToString(),
                     SelectQuery = new SelectQuery()
                     {
@@ -406,8 +388,29 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
         public void ProcessResponse(string response)
         {
+            List<JsonElement> results = JsonSerializer.Deserialize<List<JsonElement>>(response, PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
+            int idIndex = results.FindIndex(r => CompareIdElement(r, IdentityPath));
+            if (idIndex >= 0)
+            {
+                JsonElement result = results[idIndex + 1];
+                var x = JsonSerializer.Deserialize<TermCollection>(result.GetRawText(), PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
+            }
+            
+            // Term[] terms = ResponseHelper.ProcessResponse<Term[]>(response,
+            //     IdentityPath);
+            
             Console.WriteLine(response);
         }
+        
+        private static bool CompareIdElement(JsonElement element, long id)
+        {
+            if (element.ValueKind == JsonValueKind.Number && element.TryGetInt64(out long elementId))
+            {
+                return elementId == id;
+            }
+            return false;
+        }
+
     }
 }
 

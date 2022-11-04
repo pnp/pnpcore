@@ -178,20 +178,18 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(value));
             }
 
-            GetTermsByCustomPropertyRequest request = new GetTermsByCustomPropertyRequest(key, value, false);
-
-            await this.EnsurePropertiesAsync(t => t.LocalizedNames).ConfigureAwait(false);
-            await this.Group.EnsurePropertiesAsync(g => g.Name).ConfigureAwait(false);
-            request.TermSetId = this.LocalizedNames.First().Name;
-            request.TermGroupId = this.Group.Name;
+          
+            GetTermsByCustomPropertyRequest request = new GetTermsByCustomPropertyRequest(key, value, false)
+            {
+                TermSetId = this.Id,
+                TermGroupId = this.Group.Id
+            };
 
             ApiCall getTermsCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
-            // {
-            //     Commit = true,
-            // }
-                ;
-
-            getTermsCall.Request = this.PnPContext.Uri.ToString();
+             {
+                 Commit = true,
+                 Request = this.PnPContext.Uri.ToString()
+             };
 
             var result = await RawRequestAsync(getTermsCall, HttpMethod.Post).ConfigureAwait(false);
 
