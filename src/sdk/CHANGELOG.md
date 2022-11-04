@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: Ability to specify members on team site creation time #981 [LeHailender - Jens Haile]
 - Added add and remove functionality for indexed web properties #1006 [LeHailender - Jens Haile]
 - Added .NET 7 binaries [jansenbe - Bert Jansen]
+- Moved to C# 10 [jansenbe - Bert Jansen]
 
 ### Changed
 
