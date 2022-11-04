@@ -36,12 +36,12 @@ This library is an open-source and community provided library backed by an activ
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0, [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) and [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/). Use the .NET 6.0 build if you're using a modern .NET version as that's a LTS version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+
+- We currently target .NET Standard 2.0, [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/), [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/) and [.NET 7.0 RC2](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-rc-2/). Use the .NET 6.0 build if you're using a modern .NET version as that's a LTS version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](https://pnp.github.io/pnpcore/demos/README.html) to learn more):
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
   - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0 and .NET 6.0 versions
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0, .NET 6.0 and .NET 7.0 versions
   - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
