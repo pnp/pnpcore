@@ -39,11 +39,7 @@ else
     {
         using (var ctx = await pnpContextFactory.GetContextAsync())
         {
-            // Linq support seems to still fail, requires debug
-            var cts = ctx.Web.ContentTypes.QueryProperties(p => p.Id, p => p.Name);
-            contentTypes = await cts.ToListAsync();
-
-
+            contentTypes = await ctx.Web.ContentTypes.QueryProperties(p => p.Id, p => p.Name).ToListAsync();
             isLoading = false;
         }
     }
