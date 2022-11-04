@@ -45,6 +45,9 @@ if (termStore.Languages.Contains("nl-NL"))
 }
 ```
 
+> [!Important]
+> If your application is using application permissions when working with taxonomy you'll need to ensure you've added SharePoint principal as termstore administrator. Navigate to https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx (update to match your tenant name) and add `i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint` to the list of Term Store Administrators.
+
 ## Working with term groups
 
 Term groups are used to organize term sets and define permissions on who can manage or author new term sets and terms in the group. To get term groups you can either load all term groups, use a LINQ query to load specific groups or get a term group by id or name:
