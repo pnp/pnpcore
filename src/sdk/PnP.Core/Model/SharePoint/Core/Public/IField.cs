@@ -577,5 +577,47 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to</param>
         /// <returns></returns>
         void UpdateAndPushChangesBatch(Batch batch);
+
+        /// <summary>
+        /// Configure the visibility of the field in a Display form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        Task SetShowInDisplayFormAsync(bool show);
+
+        /// <summary>
+        /// Configure the visibility of the field in a Display form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        void SetShowInDisplayForm(bool show);
+
+        /// <summary>
+        /// Configure the visibility of the field in a Edit form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        Task SetShowInEditFormAsync(bool show);
+
+        /// <summary>
+        /// Configure the visibility of the field in a Edit form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        void SetShowInEditForm(bool show);
+
+        /// <summary>
+        /// Configure the visibility of the field in a New form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        Task SetShowInNewFormAsync(bool show);
+
+        /// <summary>
+        /// Configure the visibility of the field in a New form
+        /// </summary>
+        /// <param name="show">True when the field will be configured as visible (= default), false otherwise</param>
+        /// <returns></returns>
+        void SetShowInNewForm(bool show);
     }
 }

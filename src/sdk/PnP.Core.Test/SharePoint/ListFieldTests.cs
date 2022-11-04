@@ -2479,5 +2479,72 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNull(fieldToFind);
             }
         }
+
+
+        [TestMethod]
+        public async Task ListFieldVisibilityInFormTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AddListFieldNotVisibleInDisplayFormTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    IField displayField = await myList.Fields.AddTextAsync("DISPLAYFORMFIELD", new FieldTextOptions());
+
+                    // Hide the field from the display form
+                    displayField.SetShowInDisplayForm(false);
+
+                    // Load the field again
+                    IField fieldToFind = (from f in myList.Fields
+                                          where f.Title == "DISPLAYFORMFIELD"
+                                          select f).FirstOrDefault();
+                    Assert.IsTrue(fieldToFind != null);
+                    Assert.IsTrue(fieldToFind.SchemaXml.Contains("ShowInDisplayForm=\"FALSE\""));
+                    
+                    IField editField = await myList.Fields.AddTextAsync("EDITFORMFIELD", new FieldTextOptions());
+
+                    // Hide the field from the display form
+                    editField.SetShowInEditForm(false);
+
+                    // Load the field again
+                    IField editFieldToFind = (from f in myList.Fields
+                                          where f.Title == "EDITFORMFIELD"
+                                              select f).FirstOrDefault();
+                    Assert.IsTrue(editFieldToFind != null);
+                    Assert.IsTrue(editFieldToFind.SchemaXml.Contains("ShowInEditForm=\"FALSE\""));
+
+                    IField newField = await myList.Fields.AddTextAsync("NEWFORMFIELD", new FieldTextOptions());
+
+                    // Hide the field from the display form
+                    newField.SetShowInNewForm(false);
+
+                    // Load the field again
+                    IField newFieldToFind = (from f in myList.Fields
+                                              where f.Title == "NEWFORMFIELD"
+                                              select f).FirstOrDefault();
+                    Assert.IsTrue(newFieldToFind != null);
+                    Assert.IsTrue(newFieldToFind.SchemaXml.Contains("ShowInNewForm=\"FALSE\""));
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added add and remove functionality for indexed web properties #1006 [LeHailender - Jens Haile]
 - Added .NET 7 binaries [jansenbe - Bert Jansen]
 - Moved to C# 10 [jansenbe - Bert Jansen]
+- Support for configuring field visibility in display, edit and new forms #999 [jansenbe - Bert Jansen]
 
 ### Changed
 
