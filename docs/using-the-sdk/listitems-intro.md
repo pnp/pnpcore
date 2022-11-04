@@ -27,12 +27,12 @@ Requirements | Recommended approach
 List item count <= 100 | [Option A](#a-getting-list-items-max-100-items): expand the items via a `Get` or `Load` method
 List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limit): iterate over the list items using implicit paging
 
-### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields
+### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields or you want to get lookup column properties
 
 Requirements | Recommended approach
 -------------|---------------------
 You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
-You want to have more details on the list item properties (e.g. author name instead of only the author id) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
+You want to have more details on the list item properties (e.g. author name instead of only the author id, lookup column values) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
 
 ### A. Getting list items (max 100 items)
 
@@ -363,6 +363,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
 > - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope=RecursiveAll` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
+> - When you need to fetch additional fields populated via a lookup column just specify the field in the `ViewFields` node of the CAML query, e.g. `<FieldRef Name='LookupSingle_x003a_Created' />` loads the `Created` field brought via the lookup column named `LookupSingle`
 
 #### Using paging with ListDataAsStream
 

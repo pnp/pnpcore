@@ -635,15 +635,17 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            PnPContext clonedContext = PrepareClonedContext();
-            clonedContext.Uri = uri;
+            using (PnPContext clonedContext = PrepareClonedContext())
+            {
+                clonedContext.Uri = uri;
 
-            return clonedContext;
+                return clonedContext;
+            }
         }
 
         private PnPContext PrepareClonedContext()
         {
-            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
+            using (PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
@@ -651,8 +653,10 @@ namespace PnP.Core.Services
                 GraphFirst = GraphFirst,
                 Environment = Environment,
                 Properties = Properties,
-            };
-            return clonedContext;
+            })
+            {
+                return clonedContext;
+            }
         }
         #endregion
 

@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -485,6 +486,67 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetAndRemoveIndexedWebPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey1 = "SetWebPropertiesTest";
+                    var propertyKey2 = "SetWebPropertiesTest2";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey1] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.AddIndexedProperty(propertyKey1));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsFalse(web.AddIndexedProperty(propertyKey2));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    var indexedProperties = web.AllProperties.GetString("vti_indexedpropertykeys", string.Empty)
+                        .Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+                    Assert.IsTrue(indexedProperties.Count == 1);
+                    Assert.IsTrue(indexedProperties.
+                        Contains<string>(Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyKey1))));
+                    Assert.IsFalse(indexedProperties.
+                        Contains<string>(Convert.ToBase64String(Encoding.Unicode.GetBytes(propertyKey2))));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.RemoveIndexedProperty(propertyKey1));
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsFalse(web.RemoveIndexedProperty(propertyKey2));
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    Assert.IsTrue(web.AllProperties.GetString("vti_indexedpropertykeys", string.Empty).Length == 0);
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey1] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey1, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task GetSiteLanguagesTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -605,152 +667,131 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        [DataRow("(UTC-12:00) International Date Line West")]
-        [DataRow("(UTC-11:00) Coordinated Universal Time-11")]
-        [DataRow("(UTC-10:00) Hawaii")]
-        [DataRow("(UTC-09:00) Alaska")]
-        [DataRow("(UTC-08:00) Baja California")]
-        [DataRow("(UTC-08:00) Pacific Time (US and Canada)")]
-        [DataRow("(UTC-07:00) Arizona")]
-        [DataRow("(UTC-07:00) Chihuahua, La Paz, Mazatlan")]
-        [DataRow("(UTC-07:00) Mountain Time (US and Canada)")]
-        [DataRow("(UTC-06:00) Central America")]
-        [DataRow("(UTC-06:00) Central Time (US and Canada)")]
-        [DataRow("(UTC-06:00) Guadalajara, Mexico City, Monterrey")]
-        [DataRow("(UTC-06:00) Saskatchewan")]
-        [DataRow("(UTC-05:00) Bogota, Lima, Quito")]
-        [DataRow("(UTC-05:00) Eastern Time (US and Canada)")]
-        [DataRow("(UTC-05:00) Indiana (East)")]
-        [DataRow("(UTC-04:30) Caracas")]
-        [DataRow("(UTC-04:00) Asuncion")]
-        [DataRow("(UTC-04:00) Atlantic Time (Canada)")]
-        [DataRow("(UTC-04:00) Cuiaba")]
-        [DataRow("(UTC-04:00) Georgetown, La Paz, Manaus, San Juan")]
-        [DataRow("(UTC-04:00) Santiago")]
-        [DataRow("(UTC-03:30) Newfoundland")]
-        [DataRow("(UTC-03:00) Brasilia")]
-        [DataRow("(UTC-03:00) Buenos Aires")]
-        [DataRow("(UTC-03:00) Cayenne, Fortaleza")]
-        [DataRow("(UTC-03:00) Greenland")]
-        [DataRow("(UTC-03:00) Montevideo")]
-        [DataRow("(UTC-03:00) Salvador")]
-        [DataRow("(UTC-02:00) Coordinated Universal Time-02")]
-        [DataRow("(UTC-02:00) Mid-Atlantic")]
-        [DataRow("(UTC-01:00) Azores")]
-        [DataRow("(UTC-01:00) Cabo Verde")]
-        [DataRow("(UTC) Casablanca")]
-        [DataRow("(UTC) Coordinated Universal Time")]
-        [DataRow("(UTC) Dublin, Edinburgh, Lisbon, London")]
-        [DataRow("(UTC) Monrovia, Reykjavik")]
-        [DataRow("(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna")]
-        [DataRow("(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague")]
-        [DataRow("(UTC+01:00) Brussels, Copenhagen, Madrid, Paris")]
-        [DataRow("(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb")]
-        [DataRow("(UTC+01:00) West Central Africa")]
-        [DataRow("(UTC+01:00) Windhoek")]
-        [DataRow("(UTC+02:00) Amman")]
-        [DataRow("(UTC+02:00) Athens, Bucharest")]
-        [DataRow("(UTC+02:00) Beirut")]
-        [DataRow("(UTC+02:00) Cairo")]
-        [DataRow("(UTC+02:00) Damascus")]
-        [DataRow("(UTC+02:00) Harare, Pretoria")]
-        [DataRow("(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius")]
-        [DataRow("(UTC+02:00) Jerusalem")]
-        [DataRow("(UTC+02:00) Minsk (old)")]
-        [DataRow("(UTC+02:00) E. Europe")]
-        [DataRow("(UTC+02:00) Kaliningrad")]
-        [DataRow("(UTC+03:00) Baghdad")]
-        [DataRow("(UTC+03:00) Istanbul")]
-        [DataRow("(UTC+03:00) Kuwait, Riyadh")]
-        [DataRow("(UTC+03:00) Minsk")]
-        [DataRow("(UTC+03:00) Moscow, St. Petersburg, Volgograd")]
-        [DataRow("(UTC+03:00) Nairobi")]
-        [DataRow("(UTC+03:30) Tehran")]
-        [DataRow("(UTC+04:00) Abu Dhabi, Muscat")]
-        [DataRow("(UTC+04:00) Astrakhan, Ulyanovsk")]
-        [DataRow("(UTC+04:00) Baku")]
-        [DataRow("(UTC+04:00) Izhevsk, Samara")]
-        [DataRow("(UTC+04:00) Port Louis")]
-        [DataRow("(UTC+04:00) Tbilisi")]
-        [DataRow("(UTC+04:00) Yerevan")]
-        [DataRow("(UTC+04:30) Kabul")]
-        [DataRow("(UTC+05:00) Ekaterinburg")]
-        [DataRow("(UTC+05:00) Islamabad, Karachi")]
-        [DataRow("(UTC+05:00) Tashkent")]
-        [DataRow("(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi")]
-        [DataRow("(UTC+05:30) Sri Jayawardenepura")]
-        [DataRow("(UTC+05:45) Kathmandu")]
-        [DataRow("(UTC+06:00) Astana")]
-        [DataRow("(UTC+06:00) Dhaka")]
-        [DataRow("(UTC+06:00) Omsk")]
-        [DataRow("(UTC+06:30) Yangon (Rangoon)")]
-        [DataRow("(UTC+07:00) Bangkok, Hanoi, Jakarta")]
-        [DataRow("(UTC+07:00) Barnaul, Gorno-Altaysk")]
-        [DataRow("(UTC+07:00) Krasnoyarsk")]
-        [DataRow("(UTC+07:00) Novosibirsk")]
-        [DataRow("(UTC+07:00) Tomsk")]
-        [DataRow("(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi")]
-        [DataRow("(UTC+08:00) Irkutsk")]
-        [DataRow("(UTC+08:00) Kuala Lumpur, Singapore")]
-        [DataRow("(UTC+08:00) Perth")]
-        [DataRow("(UTC+08:00) Taipei")]
-        [DataRow("(UTC+08:00) Ulaanbaatar")]
-        [DataRow("(UTC+09:00) Osaka, Sapporo, Tokyo")]
-        [DataRow("(UTC+09:00) Seoul")]
-        [DataRow("(UTC+09:00) Yakutsk")]
-        [DataRow("(UTC+09:30) Adelaide")]
-        [DataRow("(UTC+09:30) Darwin")]
-        [DataRow("(UTC+10:00) Brisbane")]
-        [DataRow("(UTC+10:00) Canberra, Melbourne, Sydney")]
-        [DataRow("(UTC+10:00) Guam, Port Moresby")]
-        [DataRow("(UTC+10:00) Hobart")]
-        [DataRow("(UTC+10:00) Magadan")]
-        [DataRow("(UTC+10:00) Vladivostok")]
-        [DataRow("(UTC+11:00) Chokurdakh")]
-        [DataRow("(UTC+11:00) Sakhalin")]
-        [DataRow("(UTC+11:00) Solomon Is., New Caledonia")]
-        [DataRow("(UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky")]
-        [DataRow("(UTC+12:00) Auckland, Wellington")]
-        [DataRow("(UTC+12:00) Coordinated Universal Time+12")]
-        [DataRow("(UTC+12:00) Fiji")]
-        [DataRow("(UTC+12:00) Petropavlovsk-Kamchatsky - Old")]
-        [DataRow("(UTC+13:00) Nuku'alofa")]
-        [DataRow("(UTC+13:00) Samoa")]
-        [DataRow("(UTC-11:00) whatever")]
-        [DataRow("(UTC-12:00) whatever")]
-        [DataRow("(UTC-10:00) whatever")]
-        [DataRow("(UTC-09:00) whatever")]
-        [DataRow("(UTC-08:00) whatever")]
-        [DataRow("(UTC-07:00) whatever")]
-        [DataRow("(UTC-06:00) whatever")]
-        [DataRow("(UTC-05:00) whatever")]
-        [DataRow("(UTC-04:30) whatever")]
-        [DataRow("(UTC-04:00) whatever")]
-        [DataRow("(UTC-03:30) whatever")]
-        [DataRow("(UTC-03:00) whatever")]
-        [DataRow("(UTC-02:00) whatever")]
-        [DataRow("(UTC-01:00) whatever")]
-        [DataRow("(UTC) whatever")]
-        [DataRow("(UTC+01:00) whatever")]
-        [DataRow("(UTC+02:00) whatever")]
-        [DataRow("(UTC+03:00) whatever")]
-        [DataRow("(UTC+04:00) whatever")]
-        [DataRow("(UTC+05:00) whatever")]
-        [DataRow("(UTC+05:30) whatever")]
-        [DataRow("(UTC+05:45) whatever")]
-        [DataRow("(UTC+06:00) whatever")]
-        [DataRow("(UTC+06:30) whatever")]
-        [DataRow("(UTC+07:00) whatever")]
-        [DataRow("(UTC+08:00) whatever")]
-        [DataRow("(UTC+09:00) whatever")]
-        [DataRow("(UTC+09:30) whatever")]
-        [DataRow("(UTC+10:00) whatever")]
-        [DataRow("(UTC+11:00) whatever")]
-        [DataRow("(UTC+12:00) whatever")]
-        [DataRow("(UTC+13:00) whatever")]
-        public void TimeZoneMappingTest(string sharePointTimeZone)
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(4)]
+        [DataRow(5)]
+        [DataRow(6)]
+        [DataRow(7)]
+        [DataRow(8)]
+        [DataRow(9)]
+        [DataRow(10)]
+        [DataRow(11)]
+        [DataRow(12)]
+        [DataRow(13)]
+        [DataRow(14)]
+        [DataRow(15)]
+        [DataRow(16)]
+        [DataRow(17)]
+        [DataRow(18)]
+        [DataRow(19)]
+        [DataRow(20)]
+        [DataRow(21)]
+        [DataRow(22)]
+        [DataRow(23)]
+        [DataRow(24)]
+        [DataRow(25)]
+        [DataRow(26)]
+        [DataRow(27)]
+        [DataRow(28)]
+        [DataRow(29)]
+        [DataRow(30)]
+        [DataRow(31)]
+        [DataRow(32)]
+        [DataRow(33)]
+        [DataRow(34)]
+        [DataRow(35)]
+        [DataRow(36)]
+        [DataRow(37)]
+        [DataRow(38)]
+        [DataRow(39)]
+        [DataRow(40)]
+        [DataRow(41)]
+        [DataRow(42)]
+        [DataRow(43)]
+        [DataRow(44)]
+        [DataRow(45)]
+        [DataRow(46)]
+        [DataRow(47)]
+        [DataRow(48)]
+        [DataRow(49)]
+        [DataRow(50)]
+        [DataRow(51)]
+        [DataRow(53)]
+        [DataRow(54)]
+        [DataRow(55)]
+        [DataRow(56)]
+        [DataRow(57)]
+        [DataRow(58)]
+        [DataRow(59)]
+        [DataRow(60)]
+        [DataRow(61)]
+        [DataRow(62)]
+        [DataRow(63)]
+        [DataRow(64)]
+        [DataRow(65)]
+        [DataRow(66)]
+        [DataRow(67)]
+        [DataRow(68)]
+        [DataRow(69)]
+        [DataRow(70)]
+        [DataRow(71)]
+        [DataRow(72)]
+        [DataRow(73)]
+        [DataRow(74)]
+        [DataRow(75)]
+        [DataRow(76)]
+        [DataRow(77)]
+        [DataRow(78)]
+        [DataRow(79)]
+        [DataRow(80)]
+        [DataRow(81)]
+        [DataRow(82)]
+        [DataRow(83)]
+        [DataRow(84)]
+        [DataRow(85)]
+        [DataRow(86)]
+        [DataRow(87)]
+        [DataRow(88)]
+        [DataRow(89)]
+        [DataRow(90)]
+        [DataRow(91)]
+        [DataRow(92)]
+        [DataRow(93)]
+        [DataRow(94)]
+        [DataRow(95)]
+        [DataRow(96)]
+        [DataRow(97)]
+        [DataRow(98)]
+        [DataRow(99)]
+        [DataRow(100)]
+        [DataRow(101)]
+        [DataRow(102)]
+        [DataRow(103)]
+        [DataRow(104)]
+        [DataRow(106)]
+        [DataRow(107)]
+        [DataRow(108)]
+        [DataRow(109)]
+        [DataRow(110)]
+        [DataRow(111)]
+        [DataRow(112)]
+        [DataRow(114)]
+        [DataRow(115)]
+        public void TimeZoneMappingTest2(int sharePointTimeZone)
         {
             Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
+        }
+        
+        [TestMethod]
+        public async Task GetTimeZoneInfoTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var timeZoneInfo = context.Web.RegionalSettings.TimeZone.GetTimeZoneInfo();
+                Assert.IsTrue(timeZoneInfo != null);
+            } 
         }
 
         [TestMethod]
@@ -764,19 +805,19 @@ namespace PnP.Core.Test.SharePoint
             // Winter time in Belgium: Jan 15, 15:15 = 06:15 PST
             var localDate = new DateTime(2021, 1, 15, 15, 15, 15);
             var utcDate = localDate.ToUniversalTime();
-            var localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            var localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, 13);
             Assert.IsTrue(localWebTime.Hour == 6);
 
             // Summer time in Belgium: Jul 15, 15:15 = 06:15 PST
             localDate = new DateTime(2021, 6, 15, 15, 15, 15);
             utcDate = localDate.ToUniversalTime();
-            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, 13);
             Assert.IsTrue(localWebTime.Hour == 6);
 
             // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 = 07:15 PST
             localDate = new DateTime(2021, 3, 15, 15, 15, 15);
             utcDate = localDate.ToUniversalTime();
-            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, 13);
             Assert.IsTrue(localWebTime.Hour == 7);
 
             // Assume timezone UTC-1 (Brussels), description = (UTC+01:00) Brussels, Copenhagen, Madrid, Paris
@@ -785,26 +826,26 @@ namespace PnP.Core.Test.SharePoint
             // Winter time in Belgium: Jan 15, 15:15 stays the same
             localDate = new DateTime(2021, 1, 15, 15, 15, 15);
             utcDate = localDate.ToUniversalTime();
-            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, 3);
             Assert.IsTrue(localWebTime.Hour == 15);
 
             // Summer time in Belgium: Jul 15, 15:15 stays the same
             localDate = new DateTime(2021, 6, 15, 15, 15, 15);
             utcDate = localDate.ToUniversalTime();
-            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, 3);
             Assert.IsTrue(localWebTime.Hour == 15);
 
             // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 stays the same
             localDate = new DateTime(2021, 3, 15, 15, 15, 15);
             utcDate = localDate.ToUniversalTime();
-            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, 3);
             Assert.IsTrue(localWebTime.Hour == 15);
-
+            
         }
 
-        private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, string description)
+        private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, int id)
         {
-            return new TimeSpan(0, bias + (Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(description).IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
+            return new TimeSpan(0, bias + (Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(id).IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
         }
 
         [TestMethod]

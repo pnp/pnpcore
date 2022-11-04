@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Services.Core.CSOM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -83,7 +84,18 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!properties.ContainsKey("lookupId"))
             {
-                LookupId = -1;
+                LookupId = -1;                
+                IsSecretFieldValue = false;
+                
+                // If additional lookup properties are loaded they're returned as string, but using type "Lookup"
+                //
+                // "LookupSingle_x003a_Created": "30\\u002f03\\u002f2020 21:14",
+                // "LookupSingle_x003a_Created.": "2020-03-30T19:14:57Z",
+                // 
+                if (properties.Count == 1)
+                {
+                    LookupValue = properties.First().Value?.ToString();
+                }
             }
             else
             {
