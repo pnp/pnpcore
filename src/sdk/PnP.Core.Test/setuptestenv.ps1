@@ -23,26 +23,26 @@ $credentials = $null
 $UPN = $null
 if(![String]::IsNullOrEmpty($credentialManagerCredentialToUse) -and (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse) -ne $null)
 {
-    $UPN = (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse).UserName
-    $credentials = $credentialManagerCredentialToUse
+$UPN = (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse).UserName
+$credentials = $credentialManagerCredentialToUse
 }
 else
 {
-    # Prompts for credentials, if not found in the Windows Credential Manager.
-    $UPN = Read-Host -Prompt "Please enter UPN"
-    $pass = Read-host -AsSecureString "Please enter password"
-    $credentials = new-object management.automation.pscredential $UPN,$pass
+# Prompts for credentials, if not found in the Windows Credential Manager.
+$UPN = Read-Host -Prompt "Please enter UPN"
+$pass = Read-host -AsSecureString "Please enter password"
+$credentials = new-object management.automation.pscredential $UPN,$pass
 }
 
 if($credentials -eq $null)
 {
-    Write-Host "Error: No credentials supplied." -ForegroundColor Red
-    exit 1
+Write-Host "Error: No credentials supplied." -ForegroundColor Red
+exit 1
 }
 
 if ($tenantName -eq $null -or $tenantName.Length -le 0)
 {
-    $tenantName = Read-Host -Prompt 'Input your tenant name (e.g. contoso)'
+$tenantName = Read-Host -Prompt 'Input your tenant name (e.g. contoso)'
 }
 
 # Tenant admin url
