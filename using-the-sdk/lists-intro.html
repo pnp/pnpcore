@@ -160,10 +160,10 @@ var myList = await context.Web.Lists.Where(p=&gt;p.Title == &quot;Documents&quot
 <h3 id="enumerating-lists">Enumerating lists</h3>
 <p>Loading all lists is needed when you don't upfront know which list you want to process, or maybe you want to run over all lists of a given type. Doing an enumeration can be done by requesting the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Lists">Lists property</a> of an IWeb or via a LINQ query.</p>
 <pre><code class="lang-csharp">// Sample 1: Load all lists in the web with their default properties
-await context.Web.GetAsync(p =&gt; p.Lists);
+await context.Web.LoadAsync(p =&gt; p.Lists);
 
 // Sample 2: Load the web content types + all lists with their content types and the content type field links
-await context.Web.GetAsync(p =&gt; p.Title,
+await context.Web.LoadAsync(p =&gt; p.Title,
                            p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name),
                            p =&gt; p.Lists.QueryProperties(p =&gt; p.Id,
                                                         p =&gt; p.TemplateType,
