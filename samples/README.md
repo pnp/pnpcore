@@ -17,7 +17,7 @@ Sample | Description | .NET version | PnP Core version | Authentication Type | F
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
 [ASPNet Core site](Demo.ASPNetCore/README.md) | Demo application showing how use the PnP Core SDK from an ASP.Net Core application | .NET 5 | v1.4.0 | Custom authentication is used via the (`ExternalAuthenticationProvider`)
-[ASPNET Blazor app](Demo.Blazor/README.md) | Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development | .NET 6 | v1.5.0 | Custom `IAuthenticationProvider` implementation
+[ASPNET Blazor app](Demo.Blazor/README.md) | Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development | .NET 7 RC2 | v1.7.0 | Custom `IAuthenticationProvider` implementation
 
 ## Console applications
 
