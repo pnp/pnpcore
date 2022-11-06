@@ -41,7 +41,64 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             #region XML Payload generated
 
-            // todo
+            // <Request AddExpandoFieldTypeSuffix="true" SchemaVersion="15.0.0.0" LibraryVersion="16.0.0.0" ApplicationName="pnp core sdk"
+            //     xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009">
+            //     <Actions>
+            //         <ObjectPath Id="2" ObjectPathId="1" />
+            //         <ObjectIdentityQuery Id="3" ObjectPathId="1" />
+            //         <ObjectPath Id="5" ObjectPathId="4" />
+            //         <ObjectIdentityQuery Id="6" ObjectPathId="4" />
+            //         <ObjectPath Id="8" ObjectPathId="7" />
+            //         <ObjectPath Id="10" ObjectPathId="9" />
+            //         <ObjectIdentityQuery Id="11" ObjectPathId="9" />
+            //         <ObjectPath Id="13" ObjectPathId="12" />
+            //         <ObjectPath Id="15" ObjectPathId="14" />
+            //         <ObjectIdentityQuery Id="16" ObjectPathId="14" />
+            //         <ObjectPath Id="18" ObjectPathId="17" />
+            //         <SetProperty Id="19" ObjectPathId="17" Name="CustomPropertyName">
+            //             <Parameter Type="String">property2</Parameter>
+            //         </SetProperty>
+            //         <SetProperty Id="20" ObjectPathId="17" Name="CustomPropertyValue">
+            //             <Parameter Type="String">value2</Parameter>
+            //         </SetProperty>
+            //         <SetProperty Id="21" ObjectPathId="17" Name="TrimUnavailable">
+            //             <Parameter Type="Boolean">false</Parameter>
+            //         </SetProperty>
+            //         <ObjectPath Id="23" ObjectPathId="22" />
+            //         <Query Id="24" ObjectPathId="22">
+            //             <Query SelectAllProperties="true">
+            //                 <Properties />
+            //             </Query>
+            //             <ChildItemQuery SelectAllProperties="true">
+            //                 <Properties />
+            //             </ChildItemQuery>
+            //         </Query>
+            //     </Actions>
+            //     <ObjectPaths>
+            //         <StaticMethod Id="1" TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" Name="GetTaxonomySession">
+            //             <Parameters></Parameters>
+            //         </StaticMethod>
+            //         <Method Id="4" ParentId="1" Name="GetDefaultSiteCollectionTermStore" />
+            //         <Property Id="7" ParentId="4" Name="Groups" />
+            //         <Method Id="9" ParentId="7" Name="GetById">
+            //             <Parameters>
+            //                 <Parameter Type="String">6dd7c15d-6e74-481e-85c4-c587c19edb4a</Parameter>
+            //             </Parameters>
+            //         </Method>
+            //         <Property Id="12" ParentId="9" Name="TermSets" />
+            //         <Method Id="14" ParentId="12" Name="GetById">
+            //             <Parameters>
+            //                 <Parameter Type="String">74fc28b9-7013-42ca-90bd-3990630134b0</Parameter>
+            //             </Parameters>
+            //         </Method>
+            //         <Constructor Id="17" TypeId="{56747951-df44-4bed-bf36-2b3bddf587f9}" />
+            //         <Method Id="22" ParentId="14" Name="GetTermsWithCustomProperty">
+            //             <Parameters>
+            //                 <Parameter ObjectPathId="17" />
+            //             </Parameters>
+            //         </Method>
+            //     </ObjectPaths>
+            // </Request>
 
             #endregion
 
@@ -362,7 +419,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             if (results == null) return;
 
-            int idIndex = results.FindIndex(r => CompareIdElement(r, IdentityPath));
+            int idIndex = results.FindIndex(r => CSOMResponseHelper.CompareIdElement(r, IdentityPath));
 
             if (idIndex < 0) return;
 
@@ -383,75 +440,5 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 Result.Add(termGuid);
             }
         }
-        
-        // todo: code duplication
-        private static bool CompareIdElement(JsonElement element, long id)
-        {
-            if (element.ValueKind == JsonValueKind.Number && element.TryGetInt64(out long elementId))
-            {
-                return elementId == id;
-            }
-
-            return false;
-        }
     }
 }
-
-
-//```xml
-//<Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="16.0.0.0" ApplicationName="Javascript Library">
-//    <Actions>
-//        <ObjectPath Id="1" ObjectPathId="0" />
-//        <ObjectIdentityQuery Id="2" ObjectPathId="0" />
-//        <ObjectPath Id="4" ObjectPathId="3" />
-//        <ObjectIdentityQuery Id="5" ObjectPathId="3" />
-//        <ObjectPath Id="7" ObjectPathId="6" />
-//        <ObjectPath Id="9" ObjectPathId="8" />
-//        <ObjectIdentityQuery Id="10" ObjectPathId="8" />
-//        <ObjectPath Id="12" ObjectPathId="11" />
-//        <ObjectPath Id="14" ObjectPathId="13" />
-//        <ObjectIdentityQuery Id="15" ObjectPathId="13" />
-//        <ObjectPath Id="17" ObjectPathId="16" />
-//        <SetProperty Id="18" ObjectPathId="16" Name="CustomPropertyName">
-//            <Parameter Type="String">Key1</Parameter>
-//        </SetProperty>
-//        <SetProperty Id="19" ObjectPathId="16" Name="CustomPropertyValue">
-//            <Parameter Type="String">Value1</Parameter>
-//        </SetProperty >
-//        <SetProperty Id="20" ObjectPathId="16" Name="TrimUnavailable">
-//            <Parameter Type="Boolean">true</Parameter>
-//        </SetProperty>
-//        <ObjectPath Id="22" ObjectPathId="21" />
-//        <Query Id="23" ObjectPathId="21">
-//            <Query SelectAllProperties = "true" >
-//                <Properties />
-//            </Query>
-//            <ChildItemQuery SelectAllProperties="true">
-//                <Properties />
-//            </ChildItemQuery>
-//        </Query>
-//    </Actions>
-//    <ObjectPaths>
-//        <StaticMethod Id="0" Name="GetTaxonomySession" TypeId="{981cbc68-9edc-4f8d-872f-71146fcbb84f}" />
-//        <Method Id="3" ParentId="0" Name="GetDefaultSiteCollectionTermStore" />
-//        <Property Id="6" ParentId="3" Name="Groups" />
-//        <Method Id="8" ParentId="6" Name="GetByName">
-//            <Parameters>
-//                <Parameter Type="String">People</Parameter>
-//            </Parameters>
-//        </Method>
-//        <Property Id="11" ParentId="8" Name="TermSets" />
-//        <Method Id="13" ParentId="11" Name="GetByName">
-//            <Parameters>
-//                <Parameter Type="String">Department</Parameter>
-//            </Parameters>
-//        </Method>
-//        <Constructor Id="16" TypeId="{56747951-df44-4bed-bf36-2b3bddf587f9}" />
-//        <Method Id="21" ParentId="13" Name="GetTermsWithCustomProperty">
-//            <Parameters>
-//                <Parameter ObjectPathId="16" />
-//            </Parameters>
-//        </Method>
-//    </ObjectPaths>
-//</Request>
-//```
