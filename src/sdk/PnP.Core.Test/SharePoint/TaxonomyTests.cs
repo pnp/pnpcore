@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -1464,13 +1464,12 @@ namespace PnP.Core.Test.SharePoint
                         await term.DeleteAsync();
                     }
 
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property2", "value2");
+                    Assert.AreEqual(terms.Count, 0);
+
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    Assert.AreEqual(terms.Count, 0);
                 }
-
-                // delete term
-                // await newChildTerm.DeleteAsync();
-
-                // delete term 
-                // await newTerm.DeleteAsync();
 
                 // Delete term set 
                 await termSet.DeleteAsync();

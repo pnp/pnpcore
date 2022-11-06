@@ -73,6 +73,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="key">Property key</param>
         /// <param name="value">Property value</param>
-        public Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value);
+        /// <param name="trimUnavailable">Trim unavailable terms</param>
+        public Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false);
     }
 }

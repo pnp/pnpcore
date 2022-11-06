@@ -1,18 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Services;
-using PnP.Core.Services.Core.CSOM;
-using PnP.Core.Services.Core.CSOM.QueryAction;
-using PnP.Core.Services.Core.CSOM.QueryIdentities;
-using PnP.Core.Services.Core.CSOM.Requests.Fields;
 using PnP.Core.Services.Core.CSOM.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Terms;
-using PnP.Core.Test.Utilities;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Requests
 {
@@ -23,14 +12,19 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+           //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
         public void GetTermsByCustomPropertyRequest_Test_ProcessResponse()
         {
             var request = new GetTermsByCustomPropertyRequest(
-                "x", "y", false);
+                "x", 
+                "y", 
+                false,
+                "",
+                ""
+                );
 
             request.GetRequest(new IteratorIdProvider());
                 

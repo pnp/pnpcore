@@ -12,17 +12,24 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
         private readonly string key;
         private readonly string value;
         private readonly bool trimUnavailable;
+        private readonly string termSetId;
+        private readonly string termGroupId;
 
-        public GetTermsByCustomPropertyRequest(string key, string value, bool trimUnavailable)
+        public GetTermsByCustomPropertyRequest(
+            string key, 
+            string value, 
+            bool trimUnavailable,
+            string termSetId,
+            string termGroupId)
         {
             this.key = key;
             this.value = value;
             this.trimUnavailable = trimUnavailable;
+            this.termSetId = termSetId;
+            this.termGroupId = termGroupId;
         }
 
         public List<Guid> Result { get; } = new List<Guid>();
-        public string TermSetId { get; set; }
-        public string TermGroupId { get; set; }
 
         internal CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
 
@@ -130,8 +137,6 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             #endregion
 
-            // todo: check variable naming consistency
-
             #region GROUPS GetById
 
             var objectPathMethodGroupsGetById = new ObjectPathMethod
@@ -143,7 +148,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 {
                     Properties = new List<Parameter>()
                     {
-                        new Parameter() {Type = "String", Value = this.TermGroupId}
+                        new Parameter() {Type = "String", Value = this.termGroupId}
                     }
                 }
             };
@@ -192,8 +197,6 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
 
             #endregion
 
-            // todo: check variable naming consistency
-
             #region TERMSETS GetById
 
             var objectPathMethodTermSetsGetById = new ObjectPathMethod
@@ -205,12 +208,12 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 {
                     Properties = new List<Parameter>()
                     {
-                        new Parameter() {Type = "String", Value = this.TermSetId}
+                        new Parameter() {Type = "String", Value = this.termSetId}
                     }
                 }
             };
 
-            ActionObjectPath getByIdActionPath = new ActionObjectPath
+            ActionObjectPath methodTermSetsGetByIdActionPath = new ActionObjectPath
             {
                 Action = new BaseAction
                 {
@@ -219,9 +222,9 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 ObjectPath = objectPathMethodTermSetsGetById
             };
 
-            result.Add(getByIdActionPath);
+            result.Add(methodTermSetsGetByIdActionPath);
 
-            ActionObjectPath getByNameActionPathIdentityQuery = new ActionObjectPath()
+            ActionObjectPath methodTermSetsGetByIdActionPathIdentityQuery = new ActionObjectPath()
             {
                 Action = new IdentityQueryAction()
                 {
@@ -229,7 +232,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 }
             };
 
-            result.Add(getByNameActionPathIdentityQuery);
+            result.Add(methodTermSetsGetByIdActionPathIdentityQuery);
 
             #endregion
 
@@ -381,7 +384,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             }
         }
         
-        // fixme: code duplication
+        // todo: code duplication
         private static bool CompareIdElement(JsonElement element, long id)
         {
             if (element.ValueKind == JsonValueKind.Number && element.TryGetInt64(out long elementId))
