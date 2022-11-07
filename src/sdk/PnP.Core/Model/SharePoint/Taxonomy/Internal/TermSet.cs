@@ -1,8 +1,11 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests.Terms;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -163,6 +166,58 @@ namespace PnP.Core.Model.SharePoint
                 (Properties as TermSetPropertyCollection).Add(new TermSetProperty() { KeyField = key, Value = value });
             }
         }
+
+        public async Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false)
+        {
+            var result = new List<ITerm>();
+            
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+          
+            GetTermsByCustomPropertyRequest request = new GetTermsByCustomPropertyRequest(
+                key, 
+                value, 
+                trimUnavailable,
+                this.Id,
+                this.Group.Id
+                );
+
+            ApiCall getTermsCall = new ApiCall(
+                new List<Services.Core.CSOM.Requests.IRequest<object>>()
+                {
+                    request
+                })
+             {
+                 Commit = true,
+                 Request = this.PnPContext.Uri.ToString()
+             };
+
+            var csomResult = 
+                await RawRequestAsync(getTermsCall, HttpMethod.Post)
+                    .ConfigureAwait(false);
+
+            if (csomResult.ApiCall.CSOMRequests[0] is not GetTermsByCustomPropertyRequest getTermsByCustomPropertyRequest) return result;
+
+            foreach (var termGuidString in getTermsByCustomPropertyRequest.Result.Select(guid => guid.ToString()))
+            {
+                var term = await this.Terms
+                    .Where(p => p.Id == termGuidString)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
+                
+                result.Add(term);
+            }
+
+            return result;
+        }
+        
         #endregion
     }
 }

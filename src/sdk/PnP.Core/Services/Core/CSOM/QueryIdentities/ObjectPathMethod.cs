@@ -22,6 +22,17 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
+    internal class StaticMethodPath : ObjectPathMethod
+    {
+        internal string TypeId { get; set; }
+
+        public override string ToString()
+        {
+            string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
+            return $"<StaticMethod Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></StaticMethod>";
+        }
+    }
+    
     internal sealed class ConstructorPath : ObjectPathMethod
     {
         internal string TypeId { get; set; }

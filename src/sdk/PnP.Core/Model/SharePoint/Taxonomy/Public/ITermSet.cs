@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,5 +68,12 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="value">Property value</param>
         public void AddProperty(string key, string value);
 
+        /// <summary>
+        /// Gets all terms with this property.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
+        /// <param name="trimUnavailable">Trim unavailable terms</param>
+        public Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false);
     }
 }
