@@ -394,7 +394,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             ActionObjectPath identityQuery = new ActionObjectPath()
             {
                 ObjectPath = objectPathMethodGetTermsWithCustomProperty,
-                Action = new PnP.Core.Services.Core.CSOM.QueryAction.QueryAction()
+                Action = new QueryAction.QueryAction()
                 {
                     Id = IdentityPath,
                     ObjectPathId = objectPathMethodGetTermsWithCustomProperty.Id.ToString(),
@@ -417,11 +417,17 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             List<JsonElement> results = JsonSerializer.Deserialize<List<JsonElement>>(response,
                 PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
 
-            if (results == null) return;
+            if (results == null)
+            {
+                return;
+            }
 
             int idIndex = results.FindIndex(r => CSOMResponseHelper.CompareIdElement(r, IdentityPath));
 
-            if (idIndex < 0) return;
+            if (idIndex < 0)
+            {
+                return;
+            }
 
             JsonElement result = results[idIndex + 1];
             result.TryGetProperty("_Child_Items_", out JsonElement childItemsProperty);
@@ -429,15 +435,19 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             List<JsonElement> childItems = JsonSerializer.Deserialize<List<JsonElement>>(
                 childItemsProperty.GetRawText(), PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
 
-            if (childItems == null) return;
+            if (childItems == null)
+            {
+                return;
+            }
 
             foreach (JsonElement jsonElement in childItems)
             {
                 jsonElement.TryGetProperty("Id", out JsonElement termGuidProperty);
 
-                Guid.TryParse(termGuidProperty.GetString()?.Replace("/Guid(", "").Replace(")/", ""),
-                    out Guid termGuid);
-                Result.Add(termGuid);
+                if (Guid.TryParse(termGuidProperty.GetString()?.Replace("/Guid(", "").Replace(")/", ""), out Guid termGuid))
+                {
+                    Result.Add(termGuid);
+                }
             }
         }
     }

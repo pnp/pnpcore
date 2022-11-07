@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added .NET 7 binaries [jansenbe - Bert Jansen]
 - Moved to C# 10 [jansenbe - Bert Jansen]
 - Support for configuring field visibility in display, edit and new forms #999 [jansenbe - Bert Jansen]
+- Add ITermSet.GetTermsByCustomProperty method to retrieve a list of terms with a certain custom property key and value #1021 [mloitzl - Martin Loitzl]
 
 ### Changed
 

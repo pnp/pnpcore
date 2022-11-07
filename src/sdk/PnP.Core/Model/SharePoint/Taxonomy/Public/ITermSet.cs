@@ -74,6 +74,14 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="key">Property key</param>
         /// <param name="value">Property value</param>
         /// <param name="trimUnavailable">Trim unavailable terms</param>
-        public Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false);
+        public Task<IList<ITerm>> GetTermsByCustomPropertyAsync(string key, string value, bool trimUnavailable = false);
+
+        /// <summary>
+        /// Gets all terms with this property.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
+        /// <param name="trimUnavailable">Trim unavailable terms</param>
+        public IList<ITerm> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false);
     }
 }

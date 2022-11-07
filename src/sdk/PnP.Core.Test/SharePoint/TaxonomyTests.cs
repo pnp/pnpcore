@@ -1447,7 +1447,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
 
                     // load the terms by custom property
-                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property2", "value2");
+                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property2", "value2");
                     
                     Assert.AreEqual(terms.Count, 1);
                     
@@ -1456,7 +1456,7 @@ namespace PnP.Core.Test.SharePoint
                         await term.DeleteAsync();
                     }
                     
-                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    terms = termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
                     Assert.AreEqual(terms.Count, 1);
                     
                     foreach (ITerm term in terms)
@@ -1464,10 +1464,10 @@ namespace PnP.Core.Test.SharePoint
                         await term.DeleteAsync();
                     }
 
-                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property2", "value2");
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property2", "value2");
                     Assert.AreEqual(terms.Count, 0);
 
-                    terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property1", "value1");
                     Assert.AreEqual(terms.Count, 0);
                 }
 

@@ -326,6 +326,11 @@ namespace PnP.Core.Model.SharePoint
 
             if (entity.SharePointTarget == typeof(ContentTypeHub))
             {
+                if (!endPointUrl.StartsWith("/") && !endPointUrl.StartsWith("http"))
+                {
+                    endPointUrl = $"/{endPointUrl}";
+                }
+                
                 endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}");
             }
 

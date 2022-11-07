@@ -167,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public async Task<IList<ITerm>> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false)
+        public async Task<IList<ITerm>> GetTermsByCustomPropertyAsync(string key, string value, bool trimUnavailable = false)
         {
             var result = new List<ITerm>();
             
@@ -185,8 +185,8 @@ namespace PnP.Core.Model.SharePoint
                 key, 
                 value, 
                 trimUnavailable,
-                this.Id,
-                this.Group.Id
+                Id,
+                Group.Id
                 );
 
             ApiCall getTermsCall = new ApiCall(
@@ -196,7 +196,7 @@ namespace PnP.Core.Model.SharePoint
                 })
              {
                  Commit = true,
-                 Request = this.PnPContext.Uri.ToString()
+                 Request = PnPContext.Uri.ToString()
              };
 
             var csomResult = 
@@ -207,7 +207,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var termGuidString in getTermsByCustomPropertyRequest.Result.Select(guid => guid.ToString()))
             {
-                var term = await this.Terms
+                var term = await Terms
                     .Where(p => p.Id == termGuidString)
                     .FirstOrDefaultAsync()
                     .ConfigureAwait(false);
@@ -217,7 +217,12 @@ namespace PnP.Core.Model.SharePoint
 
             return result;
         }
-        
+
+        public IList<ITerm> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false)
+        {
+            return GetTermsByCustomPropertyAsync(key, value, trimUnavailable).GetAwaiter().GetResult();
+        }
+
         #endregion
     }
 }
