@@ -53,12 +53,16 @@ The configuration script:
 }
 ```
 
-> [!Note]
+> [!Important]
 > Currently, you cannot **manually** grant API Permissions to the System-Managed Identity
 
 Execute the [Configure.ps1](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/Tools/Configure.ps1), defining the `Permissions` level that your application requires.
 
-This sample requires `FullControl` permissions because it creates a new list. You may decide to only grant `Write` permissions to see the REST errors.
+This sample requires `FullControl` permissions because it creates a new list.
+> [!Note]
+>You may decide to only grant `Write` permissions to see the REST errors once the code reaches method requiring FullControl permissions.
+>
+> ![access denied](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/accessdenied.png)
 
 ```bash
 .\Configure.ps1 -SiteUrl $siteUrl -TenantId $tenantId -AzureADAppName $appName -Permissions FullControl -CertificatePwd ""
@@ -74,6 +78,14 @@ This sample requires `FullControl` permissions because it creates a new list. Yo
 > Before you get started, make sure to [configure your environment](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#configure-your-environment).
 
 To test your code locally, follow the [Run the function locally](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#run-the-function-locally) procedure.
+
+Observe the output printed to the **Terminal**. It will confirm you are running your code locally ("_Local DEV using cert auth_"), authenticate to the SharePoint site and attempt to execute functions requiring Read, Write and FullControl permissions.
+
+In case you only granted `Write` permissions to the app, you will see an error message when the function attempts to create a new list.
+> ![terminal output error](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/terminalError.png)
+
+If you granted `FullControl` permissions, all the steps will be completed successfully.
+> ![terminal output success](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/terminalOK.png)
 
 ## Deploy the sample to Azure
 

@@ -49,18 +49,23 @@ namespace Demo.AzFunction.ManagedIdentity
         {
             try
             {
+                log.LogInformation("Connecting to the SPO site. READ permissions required");
+
                 using (var pnpContext = await pnpContextFactory.CreateAsync("Default"))
                 {
-                    var today = DateTime.Now.ToString("yyyy-MM-dd");
                     log.LogInformation("Connection to SPO established.");
+
+                    var today = DateTime.Now.ToString("yyyy-MM-dd");
 
                     #region Get List; requires READ
                     var listName = "Site Assets";
+                    log.LogInformation($"Retrieving list '{listName}'. READ permissions required");
                     var demoList = pnpContext.Web.Lists.GetByTitle(listName, l => l.Id, l => l.Title, l => l.Description);
-                    log.LogInformation($"List {listName} found.");
+                    log.LogInformation("   Succeeded");
                     #endregion
 
                     #region Duplicate file; requires WRITE
+                    log.LogInformation($"Duplicating '__siteIcon__.png' in 'SiteAssets' . WRITE permissions required");
                     // Get logo image file
                     string logoPath = $"{pnpContext.Uri.PathAndQuery}/SiteAssets/__siteIcon__.png";
                     // Get a reference to the file
@@ -71,10 +76,13 @@ namespace Demo.AzFunction.ManagedIdentity
                     IFolder siteAssetsFolder = await pnpContext.Web.Folders.Where(f => f.Name == "SiteAssets").FirstOrDefaultAsync();
                     // Upload the '__siteIcon__.png' again, using __siteIcon__{today}.png file name
                     IFile addedFile = await siteAssetsFolder.Files.AddAsync($"__siteIcon__{today}.png", downloadedContentStream, true);
+                    log.LogInformation("   Succeeded");
                     #endregion
 
                     #region create list; requires FULL_CONTROL
                     var newListName = $"TEST_{today}";
+                    log.LogInformation($"Creating list '{newListName}' . FULL CONTROL permissions required");
+
                     // Check if lists exists and delete first if needed
                     var newList = pnpContext.Web.Lists.GetByTitle(newListName, l => l.Id, l => l.Title, l => l.Description);
                     // Delete if exists
@@ -84,6 +92,7 @@ namespace Demo.AzFunction.ManagedIdentity
                     }
                     // Create list
                     newList = await pnpContext.Web.Lists.AddAsync(newListName, ListTemplateType.GenericList);
+                    log.LogInformation("   Succeeded");
                     #endregion
                 }
             }
