@@ -173,6 +173,11 @@
 <td>Timeout in seconds for HTTP requests. Set higher if you need to for example download large files. Setting to -1 will result in an infinite timeout.</td>
 </tr>
 <tr>
+<td>PnPCore:HttpRequests:RateLimiterMinimumCapacityLeft</td>
+<td>0</td>
+<td>Setting this value between 1 and 20 will result in request delaying when RateLimit headers indicate the application is about to get throttled</td>
+</tr>
+<tr>
 <td>PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader</td>
 <td>false</td>
 <td>Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry.</td>
