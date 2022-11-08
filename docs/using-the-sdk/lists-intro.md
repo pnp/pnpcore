@@ -52,10 +52,10 @@ Loading all lists is needed when you don't upfront know which list you want to p
 
 ```csharp
 // Sample 1: Load all lists in the web with their default properties
-await context.Web.GetAsync(p => p.Lists);
+await context.Web.LoadAsync(p => p.Lists);
 
 // Sample 2: Load the web content types + all lists with their content types and the content type field links
-await context.Web.GetAsync(p => p.Title,
+await context.Web.LoadAsync(p => p.Title,
                            p => p.ContentTypes.QueryProperties(p => p.Name),
                            p => p.Lists.QueryProperties(p => p.Id,
                                                         p => p.TemplateType,

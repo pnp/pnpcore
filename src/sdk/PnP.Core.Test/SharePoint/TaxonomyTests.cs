@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -1405,6 +1405,77 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the group again
                 await group.DeleteAsync();
 
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermsByCustomProperty()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term set
+                var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
+
+                // test term update
+                newTerm.AddProperty("property1", "value1");
+                await newTerm.UpdateAsync();
+
+                // add child term
+                var newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
+
+                // update child term
+                newChildTerm.AddProperty("property2", "value2");
+                await newChildTerm.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
+                    Assert.IsTrue(groupLoadedViaLinq2.Requested);
+
+                    // read the termset again to test property loading
+                    var termsetLoadedViaLinq2 = await groupLoadedViaLinq2.Sets.GetByIdAsync(termSet.Id, p => p.Properties);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Requested);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
+
+                    // load the terms by custom property
+                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property2", "value2");
+                    
+                    Assert.AreEqual(terms.Count, 1);
+                    
+                    foreach (ITerm term in terms)
+                    {
+                        await term.DeleteAsync();
+                    }
+                    
+                    terms = termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    Assert.AreEqual(terms.Count, 1);
+                    
+                    foreach (ITerm term in terms)
+                    {
+                        await term.DeleteAsync();
+                    }
+
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property2", "value2");
+                    Assert.AreEqual(terms.Count, 0);
+
+                    terms = await termsetLoadedViaLinq2.GetTermsByCustomPropertyAsync("property1", "value1");
+                    Assert.AreEqual(terms.Count, 0);
+                }
+
+                // Delete term set 
+                await termSet.DeleteAsync();
+
+                // Delete the group again
+                await group.DeleteAsync();
             }
         }
 

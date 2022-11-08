@@ -16,7 +16,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>List</th>
                 <th>Id</th>
             </tr>
         </thead>
@@ -41,7 +41,7 @@ else
         using (var ctx = await pnpContextFactory.GetContextAsync())
         {
             var web = await ctx.Web.GetAsync(w => w.Lists, w => w.Lists.QueryProperties(p => p.Title, p => p.Id));
-            lists = await web.Lists.ToListAsync();
+            lists = web.Lists.AsRequested().ToList();
             isLoading = false;
         }
     }

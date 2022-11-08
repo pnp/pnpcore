@@ -22,6 +22,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: ability to specify ResourceBehaviorOptions when creating a Group using application permissions #978 [koenzomers - Koen Zomers]
 - Admin library: Ability to specify members on team site creation time #981 [LeHailender - Jens Haile]
 - Added add and remove functionality for indexed web properties #1006 [LeHailender - Jens Haile]
+- Added .NET 7 binaries [jansenbe - Bert Jansen]
+- Moved to C# 10 [jansenbe - Bert Jansen]
+- Support for configuring field visibility in display, edit and new forms #999 [jansenbe - Bert Jansen]
+- Add ITermSet.GetTermsByCustomProperty method to retrieve a list of terms with a certain custom property key and value #1021 [mloitzl - Martin Loitzl]
 
 ### Changed
 
@@ -41,6 +45,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Making RichTextEditorInstanceId setable to enable consuming libraries to set inline images #997 [heinrich-ulbricht - Heinrich Ulbricht]
 - Escape characters in inline image `Caption`, `AltText` and `Link` properties to prevent malformed JSON #995 [jansenbe - Bert Jansen]
 - Added support for also loading the additional fields returned by a lookup field when using `LoadListDataAsStreamAsync` [jansenbe - Bert Jansen]
+- Drop redundant Microsoft.Extensions.Logging.Abstractions reference [jansenbe - Bert Jansen]
+- Moved to a language neutral approach for translating SharePoint timezones to .NET `TimeZoneInfo` instances and provided a new public `GetTimeZoneInfo` method on `ITimeZone` [jansenbe - Bert Jansen]
 
 ## [1.7.0]
 

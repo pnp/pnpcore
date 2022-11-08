@@ -275,7 +275,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task<IField> AddAsXmlBatchAsync(Batch batch, string schemaXml, AddFieldOptionsFlags options)
         {
-            var endpointUrl = GetEndpointUrl();
+            var endpointUrl = GetEndpointUrl("/CreateFieldAsXml");
 
             var body = new
             {
@@ -297,7 +297,7 @@ namespace PnP.Core.Model.SharePoint
         internal async Task<IField> AddAsXmlAsync(string schemaXml, AddFieldOptionsFlags options)
         {
 
-            var endpointUrl = GetEndpointUrl();
+            var endpointUrl = GetEndpointUrl("/CreateFieldAsXml");
 
             var body = new
             {
@@ -316,17 +316,22 @@ namespace PnP.Core.Model.SharePoint
             return this;
         }
 
-        private string GetEndpointUrl()
+        private string GetEndpointUrl(string method)
         {
             // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
             // automatically provide the correct 'parent'
             // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
             EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
-            string endPointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+            string endPointUrl = $"{entity.SharePointGet}{method}";
 
             if (entity.SharePointTarget == typeof(ContentTypeHub))
             {
-                endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}/");
+                if (!endPointUrl.StartsWith("/") && !endPointUrl.StartsWith("http"))
+                {
+                    endPointUrl = $"/{endPointUrl}";
+                }
+                
+                endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}");
             }
 
             return endPointUrl;
@@ -522,6 +527,42 @@ namespace PnP.Core.Model.SharePoint
             webId = Guid.Parse(split[2]);
         }
 
+        #endregion
+
+        #region Control field visibility in forms
+
+        public async Task SetShowInDisplayFormAsync(bool show)
+        {
+            var endpointUrl = GetEndpointUrl($"('{{Id}}')/SetShowInDisplayForm({show.ToString().ToLower()})");
+            await RequestAsync(new ApiCall(endpointUrl, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetShowInDisplayForm(bool show)
+        {
+            SetShowInDisplayFormAsync(show).GetAwaiter().GetResult();
+        }
+
+        public async Task SetShowInEditFormAsync(bool show)
+        {
+            var endpointUrl = GetEndpointUrl($"('{{Id}}')/SetShowInEditForm({show.ToString().ToLower()})");
+            await RequestAsync(new ApiCall(endpointUrl, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetShowInEditForm(bool show)
+        {
+            SetShowInEditFormAsync(show).GetAwaiter().GetResult();
+        }
+
+        public async Task SetShowInNewFormAsync(bool show)
+        {
+            var endpointUrl = GetEndpointUrl($"('{{Id}}')/SetShowInNewForm({show.ToString().ToLower()})");
+            await RequestAsync(new ApiCall(endpointUrl, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetShowInNewForm(bool show)
+        {
+            SetShowInNewFormAsync(show).GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

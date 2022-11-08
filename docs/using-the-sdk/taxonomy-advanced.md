@@ -59,6 +59,18 @@ await termSet.UpdateAsync();
 
 Working with term properties is identical to working with term set properties.
 
+## Getting terms based upon their property values
+
+To get one or more terms based upon their properties you can use one of the `GetTermsByCustomProperty` methods specifying the property and property value to filter the terms on:
+
+```csharp
+var terms = await termSet.GetTermsByCustomPropertyAsync("property2", "value2");
+foreach(var term in terms)
+{
+    // do something with the terms
+}
+```
+
 ## Pinning and reusing a term
 
 Pinning a term makes linked copies of the term and its children available at the destination. The children of a pinned term can only be created or edited at the source and the changes will reflect everywhere the term is used. Reusing a term makes linked copies of the term and its children available at the destination. Children can be created for a reused term anywhere it is used but will exist only in the term set they were created.

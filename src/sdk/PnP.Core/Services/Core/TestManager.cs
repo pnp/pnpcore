@@ -76,9 +76,13 @@ namespace PnP.Core.Services
         /// <param name="responseHeaders">Response headers to persist</param>
         internal static void RecordResponse(PnPContext context, string requestKey, ref Stream response, bool isSuccessStatusCode, int statusCode, Dictionary<string, string> responseHeaders)
         {
-            var reader = new StreamReader(response);
-            var content = reader.ReadToEnd();
+            string content = null;
 
+            using (var reader = new StreamReader(response))
+            {
+                content = reader.ReadToEnd();
+            }
+            
             RecordResponse(context, requestKey, content, isSuccessStatusCode, statusCode, responseHeaders);
 
             // If the stream can be reused then let's do that
