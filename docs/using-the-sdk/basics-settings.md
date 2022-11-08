@@ -65,6 +65,7 @@ PnPCore:PnPContext:GraphCanUseBeta | true | When you ask for data that can only 
 PnPCore:PnPContext:GraphAlwaysUsesBeta | false | The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.
 PnPCore:HttpRequests:UserAgent | NONISV&#124;SharePointPnP<br />&#124;PnPCoreSDK | Value set as user agent when the request is sent to Microsoft 365.
 PnPCore:HttpRequests:Timeout | 100 | Timeout in seconds for HTTP requests. Set higher if you need to for example download large files. Setting to -1 will result in an infinite timeout.
+PnPCore:HttpRequests:RateLimiterMinimumCapacityLeft | 0 | Setting this value between 1 and 20 will result in request delaying when RateLimit headers indicate the application is about to get throttled
 PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry.
 PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.
 PnPCore:HttpRequests:SharePointRest:DelayInSeconds | 3 | Delay in seconds between SharePoint Rest request retries.
