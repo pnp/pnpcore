@@ -12,13 +12,9 @@ namespace Demo.AzFunction.ManagedIdentity
     // https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library?tabs=v2%2Ccmd#environment-variables
     public class AppConfig
     {
-        static string siteName = Environment.GetEnvironmentVariable("SiteName");
-        static string tenantName = Environment.GetEnvironmentVariable("TenantName");
-
+        public string SiteUrl = Environment.GetEnvironmentVariable("SiteUrl");
         // When MSI is enabled for an App Service, two environment variables MSI_ENDPOINT and MSI_SECRET are available
         public bool isMSI = !String.IsNullOrEmpty(Environment.GetEnvironmentVariable("MSI_SECRET"));
-
-        public string SiteUrl = $"https://{tenantName}.sharepoint.com/sites/{siteName}";
     }
     public class AppConfigCert
     {

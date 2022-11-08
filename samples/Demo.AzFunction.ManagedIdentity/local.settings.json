@@ -3,8 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "SiteName": "",
-    "TenantName": "",
+    "SiteUrl": "",
     "TenantId": "[TENANT ID]",
     "ClientId": "[CLIENT ID]",
     "CertificateThumbPrint": "[CERTIFICATE THUMBPRINT]",

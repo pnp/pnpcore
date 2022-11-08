@@ -10,13 +10,11 @@ using System;
 namespace Demo.AzFunction.ManagedIdentity
 {
     // https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
-    // If using X509CertificateAuthenticationProvider for local DEV ... otherwise upload certificate to the App
     public class Startup : FunctionsStartup
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var appConfig = new AppConfig();
-            Console.WriteLine($"===IS MSI {appConfig.isMSI}===");
 
             // Add the PnP Core SDK services
             builder.Services.AddPnPCore(options =>

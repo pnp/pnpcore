@@ -47,8 +47,7 @@ Write-Host "Saving app settings to local.settings.json"
 
 $localSettings = Get-Content "./../local.settings.json" | ConvertFrom-JSON
 
-$localSettings.Values.SiteName = ([uri](Get-PnPConnection).Url).Segments[2]
-$localSettings.Values.TenantName = (Get-AzureADTenantDetail).DisplayName
+$localSettings.Values.SiteUrl = $SiteUrl
 $localSettings.Values.TenantId = $TenantId
 $localSettings.Values.ClientId = $app.'AzureAppId/ClientId'
 $localSettings.Values.CertificateThumbPrint = $app.'Certificate Thumbprint'

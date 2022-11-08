@@ -1,7 +1,11 @@
 
 function Set-AzureADPermissions {
     param(
+        [Parameter(Mandatory = $true)]
+        [string]
         $appDisplayName,
+        [Parameter(Mandatory = $true)]
+        [string]
         $permissionName
     )
 
@@ -34,15 +38,22 @@ function Set-AzureADPermissions {
 
 function Set-PnPSiteAccess {
     param(
+        [Parameter(Mandatory = $true)]
+        [string]
         $siteUrl,
+        [Parameter(Mandatory = $true)]
+        [string]
         $appId,
+        [Parameter(Mandatory = $true)]
+        [string]
         $appName,
+        [Parameter(Mandatory = $true)]
         [ValidateSet('Read', 'Write', 'FullControl')]
-        $permission
+        [string]$Permissions
     )
 
     if ($permission -ne 'FullControl' ) {
-        Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appName -Site $siteUrl -Permissions $permission
+        Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appName -Site $siteUrl -Permissions $Permissions
     }
     else {
         Grant-PnPAzureADAppSitePermission -AppId $appId -DisplayName $appName -Site $siteUrl -Permissions Write
@@ -67,7 +78,7 @@ function Add-AppRegistration{
         [Parameter(Mandatory = $true)]
         [string]
         $CertificatePwd,
-        [string]$CertificateOutDir = ".\Tools\Certificates"
+        [string]$CertificateOutDir = ".\Certificates"
     )
     if (-not ( Test-Path -Path $CertificateOutDir -PathType Container )) {
         $f= mkdir $CertificateOutDir
