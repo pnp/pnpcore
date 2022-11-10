@@ -20,8 +20,6 @@ This solution follows the principle of least privilege, by using `Sites.Selected
 > [!Note]
 > This sample was authored by [Kinga Kazala](https://github.com/kkazala) 💪🥇.
 
-You can find the sample source code here: [/samples/Demo.PersistentTokenCache](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.PersistentTokenCache)
-
 You can find the sample source code here: [/samples/Demo.AzFunction.ManagedIdentity](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity)
 
 > [!Note]
