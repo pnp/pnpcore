@@ -2,7 +2,7 @@
 
 namespace ProvisioningDemo
 {
-    internal class AzureFunctionSettings
+    public class AzureFunctionSettings
     {
         public string SiteUrl { get; set; }
         public string TenantId { get; set; }

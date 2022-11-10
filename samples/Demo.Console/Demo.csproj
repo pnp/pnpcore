@@ -7,16 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
-    <PackageReference Include="PnP.Core.Auth" Version="1.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PnP.Core">
-      <HintPath>..\..\src\sdk\PnP.Core.Auth\bin\Debug\netstandard2.0\PnP.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PnP.Core.Auth">
-      <HintPath>..\..\src\sdk\PnP.Core.Auth\bin\Debug\netstandard2.0\PnP.Core.Auth.dll</HintPath>
-    </Reference>
+    <PackageReference Include="PnP.Core.Auth" Version="1.8.0" />
   </ItemGroup>
 
   <ItemGroup>
