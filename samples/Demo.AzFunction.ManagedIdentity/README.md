@@ -69,7 +69,7 @@ This sample requires `FullControl` permissions because it creates a new list.
 > [!Note]
 >You may decide to only grant `Write` permissions to see the REST errors once the code reaches method requiring FullControl permissions.
 >
-> ![access denied](assets/accessdenied.png)
+> ![access denied](docs-images/accessdenied.png)
 
 ```bash
 .\Configure.ps1 -SiteUrl $siteUrl -TenantId $tenantId -AzureADAppName $appName -Permissions FullControl -CertificatePwd ""
@@ -89,10 +89,10 @@ To test your code locally, follow the [Run the function locally](https://learn.m
 Observe the output printed to the **Terminal**. It will confirm you are running your code locally ("_Local DEV using cert auth_"), authenticate to the SharePoint site and attempt to execute functions requiring Read, Write and FullControl permissions.
 
 In case you only granted `Write` permissions to the app, you will see an error message when the function attempts to create a new list.
-> ![terminal output error](assets/terminalError.png)
+> ![terminal output error](docs-images/terminalError.png)
 
 If you granted `FullControl` permissions, all the steps will be completed successfully.
-> ![terminal output success](assets/terminalOK.png)
+> ![terminal output success](docs-images/terminalOK.png)
 
 ## Deploy the sample to Azure
 
