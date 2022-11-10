@@ -57,7 +57,7 @@
       {
         "files": [
           "images/**",
-          "demos/**/*.png",
+          "demos/**/**.png",
           "tutorials/images/**"
         ]
       }
