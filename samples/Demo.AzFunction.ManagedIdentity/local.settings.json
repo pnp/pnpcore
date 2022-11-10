@@ -1,0 +1,12 @@
+﻿{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "SiteUrl": "",
+    "TenantId": "[TENANT ID]",
+    "ClientId": "[CLIENT ID]",
+    "CertificateThumbPrint": "[CERTIFICATE THUMBPRINT]",
+    "WEBSITE_LOAD_CERTIFICATES": "[CERTIFICATE THUMBPRINT]"
+  }
+}
