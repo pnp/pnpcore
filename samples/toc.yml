@@ -3,6 +3,8 @@
   items:
   - name: Azure V4 Function
     href: Demo.AzureFunction.OutOfProcess.AppOnly/readme.md
+  - name: Azure V4 Function using managed identity
+    href: Demo.AzFunction.ManagedIdentity/README.md
   - name: Azure V3 Function
     href: Demo.AzureFunction/README.md
   - name: ASP.NET Core
