@@ -6,7 +6,7 @@ Samples are best way to learn how to use, hence we've some example PnP Core SDK 
 
 Sample | Description | .NET version | PnP Core version | Authentication Type | Function mode
 -------|-------------|--------------|------------------|---------------------|--------------
-[Managed identity](Demo.AzFunction.ManangedIdentity/README.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to use a managed identity in combination with `sites.selected` to authenticate to SharePoint | .NET 6 | v1.8.0 | Custom `IAuthenticationProvider` implementation + application permissions (`X509CertificateAuthenticationProvider`) | V4, in-process
+[Managed identity](Demo.AzFunction.ManagedIdentity/README.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to use a managed identity in combination with `sites.selected` to authenticate to SharePoint | .NET 6 | v1.8.0 | Custom `IAuthenticationProvider` implementation + application permissions (`X509CertificateAuthenticationProvider`) | V4, in-process
 [Out of process](Demo.AzureFunction.OutOfProcess.AppOnly/readme.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6 | v1.8.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
 [V3 function](Demo.AzureFunction/README.md) | Azure v3 Function that shows how to use the PnP Core SDK via dependency injection | .NET Core 3.1 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V3, in-process
 
