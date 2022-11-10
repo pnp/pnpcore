@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PnP Core SDK - Azure Function with Managed Identity Sample | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PnP Core SDK - Azure Function with Managed Identity Sample | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.AzFunction.ManagedIdentity/README.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="pnp-core-sdk---azure-function-with-managed-identity-sample">PnP Core SDK - Azure Function with Managed Identity Sample</h1>
+
+<p>This solution demonstrates how to build Azure function that connects to a SPO site using:</p>
+<ul>
+<li>System-Managed Identity, when running in Azure and</li>
+<li>Azure Ad application (App Registration) during local development.</li>
+</ul>
+<p>The Authentication Provider is selected based on the presence of the <code>MSI_SECRET</code> token, which is only available if Managed Identity is enabled.</p>
+<p>When the function is executed in Azure, it uses custom <em>ManagedIdentityTokenProvider</em> authentication provider, which invokes <code>Azure.Identity.ManagedIdentityCredential</code> class to attempt authentication using a managed identity that has been assigned to the Azure Function.</p>
+<p>For local development, certificate-based authentication with <em>X509CertificateAuthenticationProvider</em> is required.</p>
+<blockquote>
+<p>App-only authentication against SharePoint Online requires certificate based authentication for calling the &quot;classic&quot; SharePoint REST/CSOM APIs. The SharePoint Graph calls can work with clientid+secret, but since PnP Core SDK requires both type of APIs (as not all features are exposed via the Graph APIs) you need to use certificate based auth.</p>
+</blockquote>
+<p>This solution follows the principle of least privilege, by using <code>Sites.Selected</code> application permissions for Graph and SharePoint APIs, and <code>Read</code>/<code>Write</code>/<code>FullControl</code> permissions granted to a specific SPO site.</p>
+<blockquote>
+<p>Always choose minimum required permissions.</p>
+</blockquote>
+<h2 id="source-code">Source code</h2>
+<h2 id="source-code-1">Source code</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This sample was authored by <a href="https://github.com/kkazala">Kinga Kazala</a> 💪🥇.</p>
+</div>
+<p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.PersistentTokenCache">/samples/Demo.PersistentTokenCache</a></p>
+<p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity">/samples/Demo.AzFunction.ManagedIdentity</a></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This sample was created with <a href="https://code.visualstudio.com/">Visual Studio Code</a> using <a href="https://dotnet.microsoft.com/">.NET 6.0</a> and has been created as an <a href="https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process">Azure Function v4</a> running <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library?tabs=v2%2Ccmd">in-process</a>.</p>
+</div>
+<h2 id="sample-configuration">Sample configuration</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For the sample setup, you will need to have a recent version of <a href="https://pnp.github.io/powershell/">PnP.PowerShell</a> installed on your machine.</p>
+</div>
+<h3 id="create-and-configure-the-azure-ad-applications">Create and configure the Azure AD applications</h3>
+<p>The Azure Function must have System-Managed Identity enabled. Before you execute the next steps, make sure you <a href="https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=portal%2Chttp#add-a-system-assigned-identity">enable System-Managed Identity</a>.</p>
+<p>The configuration script:</p>
+<ul>
+<li>Creates a new App Registration with a name <code>{$appName}-LocalDev</code> and generates a new self-signed certificate</li>
+<li>Grants <code>Sites.Selected</code> API Permissions to the <code>{$appName}</code> Managed Identity and the <code>{$appName}-LocalDev</code> Azure AD application</li>
+<li>Grants permissions defined in <code>Permissions</code> parameter to the <code>{$appName}</code> Managed Identity and the <code>{$appName}-LocalDev</code> Azure AD application</li>
+<li>saves the site and tenant information, client id and the certificate thumbprint to the <code>local.settings.json</code> configuration file.</li>
+</ul>
+<pre><code class="lang-json">{
+  &quot;IsEncrypted&quot;: false,
+  &quot;Values&quot;: {
+    &quot;AzureWebJobsStorage&quot;: &quot;UseDevelopmentStorage=true&quot;,
+    &quot;FUNCTIONS_WORKER_RUNTIME&quot;: &quot;dotnet&quot;,
+    &quot;SiteUrl&quot;: &quot;&quot;,
+    &quot;TenantId&quot;: &quot;[TENANT ID]&quot;,
+    &quot;ClientId&quot;: &quot;[CLIENT ID]&quot;,
+    &quot;CertificateThumbPrint&quot;: &quot;[CERTIFICATE THUMBPRINT]&quot;,
+    &quot;WEBSITE_LOAD_CERTIFICATES&quot;: &quot;[CERTIFICATE THUMBPRINT]&quot;
+  }
+}
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Currently, you cannot <strong>manually</strong> grant API Permissions to the System-Managed Identity</p>
+</div>
+<p>Execute the <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/Tools/Configure.ps1">Configure.ps1</a>, defining the <code>Permissions</code> level that your application requires.</p>
+<p>This sample requires <code>FullControl</code> permissions because it creates a new list.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You may decide to only grant <code>Write</code> permissions to see the REST errors once the code reaches method requiring FullControl permissions.</p>
+<p><img src="docs-images/accessdenied.png" alt="access denied"></p>
+</div>
+<pre><code class="lang-bash">.\Configure.ps1 -SiteUrl $siteUrl -TenantId $tenantId -AzureADAppName $appName -Permissions FullControl -CertificatePwd &quot;&quot;
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<ul>
+<li>To consent to the application permissions, make sure you are an Azure AD admin or a global admin in your tenant</li>
+</ul>
+</div>
+<h2 id="run-the-sample-locally">Run the sample locally</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Before you get started, make sure to <a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#configure-your-environment">configure your environment</a>.</p>
+</div>
+<p>To test your code locally, follow the <a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#run-the-function-locally">Run the function locally</a> procedure.</p>
+<p>Observe the output printed to the <strong>Terminal</strong>. It will confirm you are running your code locally (&quot;<em>Local DEV using cert auth</em>&quot;), authenticate to the SharePoint site and attempt to execute functions requiring Read, Write and FullControl permissions.</p>
+<p>In case you only granted <code>Write</code> permissions to the app, you will see an error message when the function attempts to create a new list.</p>
+<blockquote>
+<p><img src="docs-images/terminalError.png" alt="terminal output error"></p>
+</blockquote>
+<p>If you granted <code>FullControl</code> permissions, all the steps will be completed successfully.</p>
+<blockquote>
+<p><img src="docs-images/terminalOK.png" alt="terminal output success"></p>
+</blockquote>
+<h2 id="deploy-the-sample-to-azure">Deploy the sample to Azure</h2>
+<h3 id="create-azure-function-app">Create Azure Function App</h3>
+<p>Go to the <a href="https://portal.azure.com/">Azure Portal</a> and create a new Function App (consumption plan) using following settings:</p>
+<ul>
+<li>Publish: <strong>Code</strong></li>
+<li>Runtime stack: <strong>.NET</strong></li>
+<li>Version: <strong>6</strong></li>
+<li>Region: pick the region that works best for you</li>
+<li>Plan type: <strong>Consumption (Serverless)</strong></li>
+</ul>
+<p>Click <strong>Review + create</strong>, verify the settings and click <strong>Create</strong>. Now your function is provisioned in Azure.</p>
+<h3 id="configure-the-function-app">Configure the Function App</h3>
+<p>Once the Function App has been created navigate to <strong>Settings</strong> -&gt; <strong>Configuration</strong> and add the following <strong>Application setting</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SiteUrl</td>
+<td>the Url of your SPO site, e.g. <a href="https://contoso.sharepoint.com/sites/subsiteName">https://contoso.sharepoint.com/sites/subsiteName</a></td>
+</tr>
+</tbody>
+</table>
+<p>Click <strong>Save</strong> to persist the changes.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You don't need <code>TenantId</code>, <code>ClientId</code>, <code>CertificateThumbPrint</code> or <code>WEBSITE_LOAD_CERTIFICATES</code> application settings when using Managed Identity authentication.</p>
+</div>
+<p>Under <strong>Function runtime settings</strong> verify the Runtime version is set to <strong>~4</strong>.</p>
+<h3 id="deploy-the-function-app-code-from-visual-studio">Deploy the Function App code from Visual Studio</h3>
+<p>To deploy the project to Azure:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#sign-in-to-azure">Sign to Azure</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process#deploy-the-project-to-azure">Deploy the project to Azure</a></li>
+</ul>
+<h3 id="test-your-function-app-in-azure">Test your Function App in Azure</h3>
+<p>Test the function in Azure using the <a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp">run the function in Azure</a> procedure.</p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>  </body>
+</html>

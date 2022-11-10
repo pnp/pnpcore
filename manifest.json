@@ -8364,6 +8364,62 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentity/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentity/README.html",
+          "hash": "DwtkiXAr/DP6LIW3ZgX9xi1PYtDr2xCvzNNkuRIOxs8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/accessdenied.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/accessdenied.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/connection.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/connection.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/terminalError.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/terminalError.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/terminalOK.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/terminalOK.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Resource",
       "source_relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/parker.png",
       "output": {
@@ -8608,7 +8664,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "GGtUm0ZMZqiuqX65/RERO10RuXZ7qMuYXYoQjlwm7lo="
+          "hash": "lnP854JRV7yiE+m3D/Eai2Wr9PdK5OWS27xU0dUjkB8="
         }
       },
       "is_incremental": false,
@@ -8620,7 +8676,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/toc.html",
-          "hash": "ZOsALIE5vYJMqTPHHJlpRYLNuqjujP2pPn/7agJGg4o="
+          "hash": "1KmAvG/x73o4HkNUHR2cBEkt84Z4w7vhWPZoO9HTNLs="
         }
       },
       "is_incremental": false,
@@ -10054,7 +10110,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 112,
+          "total_file_count": 113,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
