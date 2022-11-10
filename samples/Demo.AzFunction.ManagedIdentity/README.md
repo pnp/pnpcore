@@ -17,8 +17,6 @@ This solution follows the principle of least privilege, by using `Sites.Selected
 
 ## Source code
 
-## Source code
-
 > [!Note]
 > This sample was authored by [Kinga Kazala](https://github.com/kkazala) 💪🥇.
 
