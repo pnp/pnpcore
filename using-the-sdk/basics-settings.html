@@ -225,7 +225,17 @@
 <tr>
 <td>PnPCore:Environment</td>
 <td>Production</td>
-<td>Use this setting if you are using a cloud environment <strong>different</strong> from the standard production cloud: possible values are <code>Production</code>, <code>PreProduction</code>, <code>USGovernment</code> (a.k.a GCC), <code>USGovernmentHigh</code> (a.k.a GCC High), <code>USGovernmentDoD</code> (a.k.a DoD), <code>China</code> and <code>Germany</code>. <strong>Important:</strong> use the correct casing when using these values.</td>
+<td>Use this setting if you are using a cloud environment <strong>different</strong> from the standard production cloud: possible values are <code>Production</code>, <code>PreProduction</code>, <code>USGovernment</code> (a.k.a GCC), <code>USGovernmentHigh</code> (a.k.a GCC High), <code>USGovernmentDoD</code> (a.k.a DoD), <code>China</code>, <code>Germany</code> and <code>Custom</code>. <strong>Important:</strong> use the correct casing when using these values, when set to <code>Custom</code> also specify <code>MicrosoftGraphAuthority</code> and <code>AzureADLoginAuthority</code>.</td>
+</tr>
+<tr>
+<td>PnPCore:MicrosoftGraphAuthority</td>
+<td>null</td>
+<td>If you've set <code>PnPCore:Environment</code> to <code>Custom</code> then you're required to specify the Microsoft Graph authority to use (e.g. graph.microsoft.com).</td>
+</tr>
+<tr>
+<td>PnPCore:AzureADLoginAuthority</td>
+<td>null</td>
+<td>If you've set <code>PnPCore:Environment</code> to <code>Custom</code> then you're required to specify the Azure AD login authority to use (e.g. login.microsoftonline.com).</td>
 </tr>
 <tr>
 <td>PnPCore:DisableTelemetry</td>
