@@ -1,4 +1,4 @@
-﻿# PnP Core SDK - Azure Function with Managed Idendtity Sample
+﻿# PnP Core SDK - Azure Function with Managed Identity Sample
 
 This solution demonstrates how to build Azure function that connects to a SPO site using:
 
@@ -16,6 +16,13 @@ This solution follows the principle of least privilege, by using `Sites.Selected
 > Always choose minimum required permissions.
 
 ## Source code
+
+## Source code
+
+> [!Note]
+> This sample was authored by [Kinga Kazala](https://github.com/kkazala) 💪🥇.
+
+You can find the sample source code here: [/samples/Demo.PersistentTokenCache](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.PersistentTokenCache)
 
 You can find the sample source code here: [/samples/Demo.AzFunction.ManagedIdentity](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity)
 
@@ -35,7 +42,7 @@ The configuration script:
 
 - Creates a new App Registration with a name `{$appName}-LocalDev` and generates a new self-signed certificate
 - Grants `Sites.Selected` API Permissions to the `{$appName}` Managed Identity and the `{$appName}-LocalDev` Azure AD application
-- Grants permissions defined in `Permissions` parameter to the `{$appName}` Managed Idendity and the `{$appName}-LocalDev` Azure AD application
+- Grants permissions defined in `Permissions` parameter to the `{$appName}` Managed Identity and the `{$appName}-LocalDev` Azure AD application
 - saves the site and tenant information, client id and the certificate thumbprint to the `local.settings.json` configuration file.
 
 ```json
@@ -62,7 +69,7 @@ This sample requires `FullControl` permissions because it creates a new list.
 > [!Note]
 >You may decide to only grant `Write` permissions to see the REST errors once the code reaches method requiring FullControl permissions.
 >
-> ![access denied](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/accessdenied.png)
+> ![access denied](./assets/accessdenied.png)
 
 ```bash
 .\Configure.ps1 -SiteUrl $siteUrl -TenantId $tenantId -AzureADAppName $appName -Permissions FullControl -CertificatePwd ""
@@ -82,10 +89,10 @@ To test your code locally, follow the [Run the function locally](https://learn.m
 Observe the output printed to the **Terminal**. It will confirm you are running your code locally ("_Local DEV using cert auth_"), authenticate to the SharePoint site and attempt to execute functions requiring Read, Write and FullControl permissions.
 
 In case you only granted `Write` permissions to the app, you will see an error message when the function attempts to create a new list.
-> ![terminal output error](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/terminalError.png)
+> ![terminal output error](./assets/terminalError.png)
 
 If you granted `FullControl` permissions, all the steps will be completed successfully.
-> ![terminal output success](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity/assets/terminalOK.png)
+> ![terminal output success](./assets/terminalOK.png)
 
 ## Deploy the sample to Azure
 

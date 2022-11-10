@@ -7,10 +7,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using PnP.Core.Services;
 using PnP.Core.Model.SharePoint;
-using System.Collections.Generic;
 using PnP.Core.QueryModel;
 using PnP.Core;
 
