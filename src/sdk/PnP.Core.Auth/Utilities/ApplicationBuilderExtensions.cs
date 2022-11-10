@@ -15,9 +15,10 @@ namespace PnP.Core.Auth.Utilities
         /// <param name="redirectUri">The Redirect URI for authentication</param>
         /// <param name="tenantId">The ID of the Azure Active Directory Tenant</param>
         /// <param name="environment">Information about the configured cloud environment</param>
+        /// <param name="azureADLoginAuthority">Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when environment is set to <see cref="Microsoft365Environment.Custom"/></param>
         /// <returns></returns>
         internal static T WithPnPAdditionalAuthenticationSettings<T>(this AbstractApplicationBuilder<T> builder,
-            Uri authorityUri, Uri redirectUri, string tenantId, Microsoft365Environment? environment) where T : AbstractApplicationBuilder<T>
+            Uri authorityUri, Uri redirectUri, string tenantId, Microsoft365Environment? environment, string azureADLoginAuthority) where T : AbstractApplicationBuilder<T>
         {
             if (tenantId == null)
             {
@@ -28,11 +29,25 @@ namespace PnP.Core.Auth.Utilities
             {
                 if (tenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    builder = builder.WithAuthority($"https://{CloudManager.GetAzureADLoginAuthority(environment.Value)}/{AuthGlobals.OrganizationsTenantId}/");
+                    if (environment.Value == Microsoft365Environment.Custom)
+                    {
+                        builder = builder.WithAuthority($"https://{azureADLoginAuthority}/{AuthGlobals.OrganizationsTenantId}/");
+                    }
+                    else
+                    {
+                        builder = builder.WithAuthority($"https://{CloudManager.GetAzureADLoginAuthority(environment.Value)}/{AuthGlobals.OrganizationsTenantId}/");
+                    }
                 }
                 else
                 {
-                    builder = builder.WithAuthority(authorityUri?.ToString() ?? $"https://{CloudManager.GetAzureADLoginAuthority(environment.Value)}", tenantId, true);
+                    if (environment.Value == Microsoft365Environment.Custom)
+                    {
+                        builder = builder.WithAuthority(authorityUri?.ToString() ?? $"https://{azureADLoginAuthority}", tenantId, true);
+                    }
+                    else
+                    {
+                        builder = builder.WithAuthority(authorityUri?.ToString() ?? $"https://{CloudManager.GetAzureADLoginAuthority(environment.Value)}", tenantId, true);
+                    }
                 }
             }
             else

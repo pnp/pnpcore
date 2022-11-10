@@ -164,7 +164,8 @@ namespace PnP.Core.Auth
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
                         TenantId,
-                        options.Environment)
+                        options.Environment,
+                        options.AzureADLoginAuthority)
                     .Build();
             }
             else
@@ -177,7 +178,8 @@ namespace PnP.Core.Auth
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
                         TenantId,
-                        options.Environment)
+                        options.Environment,
+                        options.AzureADLoginAuthority)
                     .Build();
             }
 

@@ -19,6 +19,16 @@ namespace PnP.Core.Services.Builder.Configuration
         public string Environment { get; set; }
 
         /// <summary>
+        /// Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string MicrosoftGraphAuthority { get; set; }
+
+        /// <summary>
+        /// Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string AzureADLoginAuthority { get; set; }
+
+        /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
         /// </summary>
         public Guid AADTenantId { get; set; }

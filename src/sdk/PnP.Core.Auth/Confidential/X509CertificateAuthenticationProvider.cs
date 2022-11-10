@@ -126,7 +126,8 @@ namespace PnP.Core.Auth
                     options.X509Certificate.AuthorityUri,
                     options.X509Certificate.RedirectUri,
                     TenantId,
-                    options.Environment)
+                    options.Environment,
+                    options.AzureADLoginAuthority)
                 .Build();
 
             // Log the initialization information

@@ -105,6 +105,7 @@ namespace PnP.Core.Auth
                 ClientId = ClientId,
                 TenantId = TenantId,
                 Environment = options.Environment,
+                AzureADLoginAuthority = options.AzureADLoginAuthority,
                 UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
                 {
                     Username = credentials.UserName,

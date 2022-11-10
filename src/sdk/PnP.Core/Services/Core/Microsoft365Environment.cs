@@ -38,6 +38,11 @@
         /// <summary>
         /// DOD US Government environment, see https://docs.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod
         /// </summary>
-        USGovernmentDoD = 6
+        USGovernmentDoD = 6,
+
+        /// <summary>
+        /// Custom cloud configuration, specify the endpoints manually
+        /// </summary>
+        Custom = 100
     }
 }

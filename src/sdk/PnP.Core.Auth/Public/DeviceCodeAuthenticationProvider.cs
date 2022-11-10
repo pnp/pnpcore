@@ -103,7 +103,8 @@ namespace PnP.Core.Auth
                     options.DeviceCode.AuthorityUri,
                     RedirectUri,
                     TenantId,
-                    options.Environment)
+                    options.Environment,
+                    options.AzureADLoginAuthority)
                 .WithHttpClientFactory(msalHttpClientFactory)
                 .Build();
 

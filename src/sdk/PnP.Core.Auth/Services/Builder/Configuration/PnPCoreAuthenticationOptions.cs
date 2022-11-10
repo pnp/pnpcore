@@ -16,6 +16,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         public string Environment { get; set; }
 
         /// <summary>
+        /// Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string AzureADLoginAuthority { get; set; }
+
+        /// <summary>
         /// The sites options
         /// </summary>
         public PnPCoreAuthenticationSitesOptions Sites { get; } = new PnPCoreAuthenticationSitesOptions();
@@ -87,6 +92,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// </summary>
         public Microsoft365Environment? Environment { get; set; }
 
+        /// <summary>
+        /// Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string AzureADLoginAuthority { get; set; }
+        
         /// <summary>
         /// The options for the X509 Certificate Authentication Provider
         /// </summary>

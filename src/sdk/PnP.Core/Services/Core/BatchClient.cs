@@ -606,7 +606,14 @@ namespace PnP.Core.Services
 
                     if (PnPContext.Environment.HasValue)
                     {
-                        graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                        if (PnPContext.Environment == Microsoft365Environment.Custom)
+                        {
+                            graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
+                        }
+                        else
+                        {
+                            graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                        }
                     }
 
                     await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
@@ -981,7 +988,18 @@ namespace PnP.Core.Services
                 }
 
                 // Make the request
-                using (var request = new HttpRequestMessage(graphRequest.Method, $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}"))
+                string graphRequestUrl;
+
+                if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
+                {
+                    graphRequestUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/{graphEndpoint}/{requestUrl}";
+                }
+                else
+                {
+                    graphRequestUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}";
+                }
+
+                using (var request = new HttpRequestMessage(graphRequest.Method, graphRequestUrl))
                 {
                     // Add custom PnPContext properties to HttpRequest if needed
                     AddHttpRequestMessageProperties(request, batch);
@@ -1041,7 +1059,14 @@ namespace PnP.Core.Services
 
                         if (PnPContext.Environment.HasValue)
                         {
-                            graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                            if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
+                            {
+                                graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
+                            }
+                            else
+                            {
+                                graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                            }
                         }
 
                         // Do we need a streaming download?

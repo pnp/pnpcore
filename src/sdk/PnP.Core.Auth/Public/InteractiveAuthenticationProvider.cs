@@ -100,7 +100,8 @@ namespace PnP.Core.Auth
                     options.Interactive?.AuthorityUri,
                     RedirectUri,
                     TenantId,
-                    options.Environment)
+                    options.Environment,
+                    options.AzureADLoginAuthority)
                 .Build();
 
             // Log the initialization information

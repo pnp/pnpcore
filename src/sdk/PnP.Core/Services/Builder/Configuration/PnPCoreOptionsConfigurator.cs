@@ -47,6 +47,12 @@ namespace PnP.Core.Services.Builder.Configuration
                 if (Enum.TryParse(pnpCoreOptions.Value.Environment, out Microsoft365Environment environment))
                 {
                     options.Environment = environment;
+
+                    if (options.Environment == Microsoft365Environment.Custom)
+                    {
+                        options.MicrosoftGraphAuthority = pnpCoreOptions.Value.MicrosoftGraphAuthority;
+                        options.AzureADLoginAuthority = pnpCoreOptions.Value.AzureADLoginAuthority;
+                    }
                 }
             }
 

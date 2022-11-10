@@ -134,8 +134,20 @@ namespace PnP.Core.Services
             if (globalOptions != null && globalOptions.Environment.HasValue)
             {
                 Environment = globalOptions.Environment.Value;
-                // Ensure the Microsoft Graph URL is set depending on the used cloud environment
-                GraphClient.UpdateBaseAddress(CloudManager.GetMicrosoftGraphAuthority(Environment.Value));
+
+                if (Environment.Value == Microsoft365Environment.Custom)
+                {
+                    MicrosoftGraphAuthority = globalOptions.MicrosoftGraphAuthority;
+                    AzureADLoginAuthority = globalOptions.AzureADLoginAuthority;
+                    
+                    // Ensure the Microsoft Graph URL is set depending on the used cloud environment
+                    GraphClient.UpdateBaseAddress(MicrosoftGraphAuthority);
+                }
+                else
+                {
+                    // Ensure the Microsoft Graph URL is set depending on the used cloud environment
+                    GraphClient.UpdateBaseAddress(CloudManager.GetMicrosoftGraphAuthority(Environment.Value));
+                }
             }
 
             BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
@@ -173,6 +185,16 @@ namespace PnP.Core.Services
         /// Returns the used Microsoft 365 cloud environment
         /// </summary>
         public Microsoft365Environment? Environment { get; internal set; }
+
+        /// <summary>
+        /// Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string MicrosoftGraphAuthority { get; internal set; }
+
+        /// <summary>
+        /// Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string AzureADLoginAuthority { get; internal set; }
 
         /// <summary>
         /// Collection for custom properties that you want to attach to a <see cref="PnPContext"/>
@@ -870,7 +892,14 @@ namespace PnP.Core.Services
                     string loginEndpoint = "login.microsoftonline.com";
                     if (Environment.HasValue)
                     {
-                        loginEndpoint = CloudManager.GetAzureADLoginAuthority(Environment.Value);
+                        if (Environment.Value == Microsoft365Environment.Custom)
+                        {
+                            loginEndpoint = AzureADLoginAuthority;
+                        }
+                        else
+                        {
+                            loginEndpoint = CloudManager.GetAzureADLoginAuthority(Environment.Value);
+                        }
                     }
 
                     // Approach might not always work given the tenant name parsing, but at least works for 99%+ of the tenants

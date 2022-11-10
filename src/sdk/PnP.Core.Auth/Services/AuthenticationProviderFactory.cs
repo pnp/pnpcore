@@ -68,8 +68,7 @@ namespace PnP.Core.Auth.Services
         public IAuthenticationProvider Create(string name)
         {
             // Search for the provided configuration
-            PnPCoreAuthenticationCredentialConfigurationOptions options;
-            if (!this.options.Credentials.Configurations.TryGetValue(name, out options))
+            if (!this.options.Credentials.Configurations.TryGetValue(name, out PnPCoreAuthenticationCredentialConfigurationOptions options))
             {
                 throw new ClientException(ErrorType.ConfigurationError,
                     string.Format(System.Globalization.CultureInfo.InvariantCulture,
@@ -82,6 +81,11 @@ namespace PnP.Core.Auth.Services
                     if (Enum.TryParse(this.options.Environment, out Microsoft365Environment environment))
                     {
                         options.Environment = environment;
+
+                        if (options.Environment == Microsoft365Environment.Custom)
+                        {
+                            options.AzureADLoginAuthority = this.options.AzureADLoginAuthority;
+                        }
                     }
                 }
             }

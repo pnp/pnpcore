@@ -22,6 +22,16 @@ namespace PnP.Core.Services
         /// </summary>
         public Microsoft365Environment? Environment { get; set; }
 
+        /// <summary>
+        /// Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string MicrosoftGraphAuthority { get; set; }
+
+        /// <summary>
+        /// Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <see cref="Environment"/> is set to <see cref="Microsoft365Environment.Custom"/>
+        /// </summary>
+        public string AzureADLoginAuthority { get; set; }
+
         #region Http request settings
 
         private string httpUserAgent;
