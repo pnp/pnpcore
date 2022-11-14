@@ -34,8 +34,10 @@ using (PnPContext pnpCoreContext = PnPCoreSdk.Instance.GetPnPContext(csomContext
     // Use PnP Core SDK (Microsoft Graph / SPO Rest) to load the web title
     var web = pnpCoreContext.Web.Get(p => p.Title);
 
-    // After the first time passing in the IPnPContextFactory is will also be used by the implicit calls the GetPnPContext from within PnP Framework
-    // E.g. Calling the AddClientSidePage extension method will under the covers create a PnPContext using the passed IPnPContextFactory
+    // After the first time passing in the IPnPContextFactory it will also be used by the implicit 
+    // GetPnPContext calls from within PnP Framework
+    // E.g. Calling the AddClientSidePage extension method will under the covers create a PnPContext 
+    // using the passed IPnPContextFactory
     var page = csomContext.Web.AddClientSidePage("demo.aspx", true);
 }
 ```
