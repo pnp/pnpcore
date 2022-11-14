@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Lookup, Url and User fields were not loaded for list item versions #1031 [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 

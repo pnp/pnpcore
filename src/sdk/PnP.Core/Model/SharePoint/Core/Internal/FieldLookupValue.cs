@@ -69,6 +69,25 @@ namespace PnP.Core.Model.SharePoint
             {
                 LookupId = json.GetInt32();
             }
+            else if (json.ValueKind == JsonValueKind.Object)
+            {
+                /*
+                "Lookup1": {
+                        "LookupId": 686,
+                        "LookupValue": "Test"
+                    },
+                */
+                if (json.TryGetProperty("LookupId", out JsonElement lookupIdValue))
+                {
+                    LookupId = lookupIdValue.GetInt32();
+                    IsSecretFieldValue = false;
+                    
+                    if (json.TryGetProperty("LookupValue", out JsonElement lookupValue))
+                    {
+                        LookupValue = lookupValue.GetString();
+                    }
+                }
+            }
             else
             {
                 LookupId = -1;

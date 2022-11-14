@@ -386,7 +386,7 @@ namespace PnP.Core.Services
         private async static Task<Tuple<object, string>> ProcessSpecialRestFieldTypeAsync(TransientObject pnpObject, string propertyName, JsonElement json)
         {
             // This special processing only applies to list items, property bags are excluded
-            if (pnpObject.GetType() != typeof(ListItem))
+            if (pnpObject.GetType() != typeof(ListItem) && pnpObject.GetType() != typeof(ListItemVersion))
             {
                 return new Tuple<object, string>(null, null);
             }
@@ -559,6 +559,14 @@ namespace PnP.Core.Services
             {
                 parentList = (pnpObject as IDataModelParent).Parent.Parent as List;
             }
+            else if ((pnpObject as IDataModelParent).Parent.Parent is ListItem)
+            {
+                // We're dealing with a ListItemVersion
+                if ((pnpObject as IDataModelParent).Parent.Parent.Parent != null && (pnpObject as IDataModelParent).Parent.Parent.Parent.Parent != null)
+                {
+                    parentList = (pnpObject as IDataModelParent).Parent.Parent.Parent.Parent as List;
+                }
+            }
             else if (((pnpObject as IDataModelParent).Parent is File) || (pnpObject as IDataModelParent).Parent is Folder)
             {
                 if ((pnpObject as ListItem).IsPropertyAvailable(p => p.ParentList))
@@ -577,6 +585,8 @@ namespace PnP.Core.Services
                 {
                     // Ensure the needed list fields data is loaded
                     await parentList.EnsurePropertiesAsync(List.LoadFieldsExpression).ConfigureAwait(false);
+
+                    fieldName = PrepareFieldForLookup(fieldName);
 
                     return parentList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == fieldName);
                 }
@@ -1122,6 +1132,25 @@ namespace PnP.Core.Services
             }
 
             return entityField;
+        }
+
+        private static string PrepareFieldForLookup(string fieldName)
+        {
+            // Handle the OData__ case: SPO REST will replace the _ in field names that start with an _ by OData__
+            // This will pose compatability issues as other data retrieval methods don't do this, hence
+            // we're normalizing the fieldnames again 
+
+            if (fieldName.StartsWith("OData__"))
+            {
+                fieldName = fieldName.Replace("OData__", "_");
+            }
+
+            if (fieldName.Contains("_x005f_"))
+            {
+                fieldName = fieldName.Replace("_x005f_", "_");
+            }
+
+            return fieldName;
         }
 
         private static void AddToDictionary(TransientDictionary dictionary, string key, object value, TransientObject pnpObject)
