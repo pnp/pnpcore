@@ -16,7 +16,7 @@ If you don't have a Microsoft 365 tenant you can, for developer purposes, always
 
 ## Learning from live code via Polyglot notebooks
 
-If you want to read about PnP Core SDK, see the needed code and even execute the code against your tenant then checkout our Polyglot notebooks! Using Visual Studio Code you interactively use PnP Core SDK with your tenant, the available notebooks can be found [here](../../docs/polyglot/readme.md).
+If you want to read about PnP Core SDK, see the needed code and even execute the code against your tenant then checkout our Polyglot notebooks! Using Visual Studio Code you interactively use PnP Core SDK with your tenant, the available notebooks can be found [here](https://github.com/pnp/pnpcore/tree/dev/docs/polyglot#readme).
 
 ## Referencing the PnP Core SDK in your project
 
