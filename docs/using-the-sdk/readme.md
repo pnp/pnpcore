@@ -14,6 +14,10 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 If you don't have a Microsoft 365 tenant you can, for developer purposes, always request [a free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program) and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the [free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
+## Learning from live code via Polyglot notebooks
+
+If you want to read about PnP Core SDK, see the needed code and even execute the code against your tenant then checkout our Polyglot notebooks! Using Visual Studio Code you interactively use PnP Core SDK with your tenant, the available notebooks can be found [here](../../docs/polyglot/readme.md).
+
 ## Referencing the PnP Core SDK in your project
 
 The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
