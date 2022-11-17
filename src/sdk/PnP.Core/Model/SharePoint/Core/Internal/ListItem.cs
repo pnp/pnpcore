@@ -1594,7 +1594,10 @@ namespace PnP.Core.Model.SharePoint
                 // Use the query client to translate the seletors into the needed query string
                 var tempComment = new Comment()
                 {
-                    PnPContext = context
+                    PnPContext = context,
+                    // Ensure the temp comment has a parent as otherwise token resolving can fail when the page
+                    // list item was not reloaded after comments were added                    
+                    Parent = (listItem as ListItem).Comments
                 };
 
                 var entityInfo = EntityManager.GetClassInfo(tempComment.GetType(), tempComment, expressions: selectors);

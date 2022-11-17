@@ -2789,6 +2789,68 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task PageThreadedCommentingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IPage newPage = null;
+                try
+                {
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PageThreadedCommentingTest.aspx");
+
+                    // Save the page
+                    await newPage.SaveAsync(pageName);
+
+                    // Publish the page, required before it can be liked
+                    newPage.Publish();
+
+                    // Get Page comments                
+                    var comments = newPage.GetComments();
+                    Assert.IsTrue(comments.Length == 0);
+
+                    // Add a new comment with an at mentioning
+                    var currentUser = await context.Web.GetCurrentUserAsync();
+
+                    var addedComment = comments.Add($"This is great {comments.GetAtMentioningString("Bert", currentUser.UserPrincipalName)}!");
+
+                    // Like the added comment
+                    addedComment.Like();
+
+                    // Add a reply
+                    var addedReply = addedComment.Replies.Add("this is a reply");
+
+                    // Like the reply
+                    addedReply.Like();
+
+                    // Verify comment loading when the page was not reloaded after comments were added
+                    comments = newPage.GetComments(p => p.Author,
+                                                   p => p.Mentions,
+                                                   p => p.Text,
+                                                   p => p.ReplyCount,
+                                                   p => p.Replies);
+
+                    Assert.IsTrue(comments.Length == 1);
+
+                    var firstAtMention = comments.AsRequested().First().Mentions.AsRequested().First();
+                    // loginName: i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com
+                    Assert.IsTrue(firstAtMention.LoginName.Split('|')[2] == currentUser.UserPrincipalName);
+
+                    // Check if the replies are loaded
+                    Assert.IsTrue(comments.AsRequested().First().ReplyCount == 1);
+                    Assert.IsTrue(comments.AsRequested().First().Replies.AsRequested().First().Text == "this is a reply");
+                }
+                finally
+                {
+                    // Delete the page
+                    await newPage.DeleteAsync();
+                }
+            }
+        }
+
         #endregion
 
         #region Page scheduling
