@@ -8,11 +8,11 @@ param (
     [Parameter(Mandatory = $true)]
     [ValidateSet('Read', 'Write', 'FullControl')]
     [string]$Permissions,
-
-    [Parameter(Mandatory = $true)]
-    [string]
-    $CertificatePwd,
     [string]$AzureADAppName = "Demo-AzFunction-ManagedIdentity",
+
+    [Parameter(ParameterSetName = 'AppRegistration')]
+    [string]$CertificatePwd,
+    [Parameter(ParameterSetName = 'AppRegistration')]
     [string]$CertificateOutDir = ".\Certificates"
 )
 
@@ -20,12 +20,15 @@ Import-Module "./ConfigureHelper.ps1"
 
 ## if no connection to SPO, connect
 
-if ($null -eq (Get-PnPConnection)){
+try {
+    Get-PnPConnection
+}
+catch{
     Connect-PnPOnline -Url $SiteUrl -Interactive
 }
 ## if no connection to AzureAD, connect
 try {
-    $connection = Get-AzureADTenantDetail
+    Get-AzureADTenantDetail
 }
 catch [Microsoft.Open.Azure.AD.CommonLibrary.AadNeedAuthenticationException] {
     Connect-AzureAD -TenantId  $TenantId
