@@ -10,9 +10,9 @@ param (
     [string]$Permissions,
     [string]$AzureADAppName = "Demo-AzFunction-ManagedIdentity",
 
-    [Parameter(ParameterSetName = 'AppRegistration')]
+    [Parameter(ParameterSetName = 'AppRegistration', Mandatory=$true)]
     [string]$CertificatePwd,
-    [Parameter(ParameterSetName = 'AppRegistration')]
+    [Parameter(ParameterSetName = 'AppRegistration', Mandatory = $true)]
     [string]$CertificateOutDir = ".\Certificates"
 )
 
