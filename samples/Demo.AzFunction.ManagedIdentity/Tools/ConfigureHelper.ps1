@@ -17,7 +17,7 @@ function Set-AzureADPermissions {
     $servicePrincipal_SPO = Get-AzureADServicePrincipal -Filter "appId eq '$SPOAppId'"
     #$permissionName = "Sites.Selected"
 
-    $SPN = Get-AzADServicePrincipal -Filter "displayName eq '$appDisplayName'"
+    $SPN = Get-AzureADServicePrincipal -Filter "displayName eq '$appDisplayName'"
     Write-Host "App $appDisplayName created with client id: $($SPN.AppId)"
 
     # Use application permissions. Delegate permissions cannot be utilized using a Managed Identity.
@@ -27,8 +27,8 @@ function Set-AzureADPermissions {
     $appRole_SPOId = ($servicePrincipal_SPO.AppRoles | Where-Object { $_.AllowedMemberTypes -eq "Application" -and $_.Value -eq $permissionName }).Id
 
     # Grant API Permissions
-    New-AzureAdServiceAppRoleAssignment -ObjectId $($SPN.Id) -PrincipalId $($SPN.Id) -ResourceId $($servicePrincipal_Graph.ObjectId) -Id $appRole_GraphId
-    New-AzureAdServiceAppRoleAssignment -ObjectId $($SPN.Id) -PrincipalId $($SPN.Id) -ResourceId $($servicePrincipal_SPO.ObjectId)   -Id $appRole_SPOId
+    New-AzureAdServiceAppRoleAssignment -ObjectId $($SPN.ObjectId) -PrincipalId $($SPN.ObjectId) -ResourceId $($servicePrincipal_Graph.ObjectId) -Id $appRole_GraphId
+    New-AzureAdServiceAppRoleAssignment -ObjectId $($SPN.ObjectId) -PrincipalId $($SPN.ObjectId) -ResourceId $($servicePrincipal_SPO.ObjectId)   -Id $appRole_SPOId
 
     Start-Sleep -Seconds 10
     Get-AzureADServiceAppRoleAssignedTo -ObjectId  $SPN.Id
