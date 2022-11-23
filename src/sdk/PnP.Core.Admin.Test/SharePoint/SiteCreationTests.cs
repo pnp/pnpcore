@@ -336,7 +336,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
             finally
             {
-                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 1))
                 {
                     context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
                 }
@@ -573,6 +573,154 @@ namespace PnP.Core.Admin.Test.SharePoint
                     context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
                 }
 
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateTeamSiteUsingEmptyDescriptionApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as owner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Description = "",
+                        Language = Language.English,
+                        IsPublic = true,
+                        Owners = new string[] { user.UserPrincipalName }
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true,
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
+                        Assert.IsTrue(web.Description == teamSiteToCreate.Description);
+                        Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateTeamSiteUsingNoDescriptionApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as owner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Language = Language.English,
+                        IsPublic = true,
+                        Owners = new string[] { user.UserPrincipalName }
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true,
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
+                        Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
             }
         }
 

@@ -187,7 +187,6 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var newGroup = new GraphGroupOptions
                 {
                     DisplayName = siteToCreate.DisplayName,
-                    Description = string.IsNullOrEmpty(siteToCreate.Description) ? string.Empty : siteToCreate.Description,
                     MailNickname = siteToCreate.Alias,
                     MailEnabled = true,
                     Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
@@ -197,6 +196,11 @@ namespace PnP.Core.Admin.Model.SharePoint
                     ResourceBehaviorOptions = new List<string>()
                 };
 
+                if(string.IsNullOrEmpty(siteToCreate.Description) == false)
+                {
+                    newGroup.Description = siteToCreate.Description;
+                }
+                
                 if(siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
                 {
                     newGroup.ResourceBehaviorOptions.Add("AllowOnlyMembersToPost");
