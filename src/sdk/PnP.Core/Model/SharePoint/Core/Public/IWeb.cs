@@ -1031,6 +1031,26 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region AccessRequest
+
+        /// <summary>
+        /// Applies the access request settings
+        /// </summary>
+        /// <param name="operation">The operation to be performed</param>
+        /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
+        /// <returns></returns>
+        public Task SetAccessRequest(AccessRequestOption operation, String email = null);
+
+        /// <summary>
+        /// Applies the access request settings
+        /// </summary>
+        /// <param name="operation">The operation to be performed</param>
+        /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
+        /// <returns></returns>
+        public Task SetAccessRequestAsync(AccessRequestOption operation, String email = null);
+
+        #endregion
+
         #region Ensure page scheduling
 
         /// <summary>

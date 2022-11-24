@@ -709,6 +709,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The mail option is only supported when using the operation &apos;SpecificMail&apos;.
+        /// </summary>
+        internal static string Exception_Unsupported_AccessRequest_MailNotSupported {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_AccessRequest_MailNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to pass a valid mail when using the operation &apos;SpecificMail&apos;.
+        /// </summary>
+        internal static string Exception_Unsupported_AccessRequest_NoMail {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_AccessRequest_NoMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot add a content type to a list on the Content Type Hub.
         /// </summary>
         internal static string Exception_Unsupported_AddingContentTypesToListOnContentTypeHub {

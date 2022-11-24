@@ -1929,6 +1929,95 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AccessRequest
+        [TestMethod]
+        public async Task DisablesAccessReviewOnWeb()
+        {
+           //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.Disabled);
+
+                context.Web.Load(p=> p.UseAccessRequestDefault, p=> p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsFalse(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "");
+            }
+        }
+
+        [TestMethod]
+        public async Task EnablesAccessReview()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.Enabled);
+
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "someone@someone.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task EnablesSpecificMailInAccessReview()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, "pnp@rocks.com");
+
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsFalse(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "pnp@rocks.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsEmptyInSpecificMail()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, "");
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsNullInSpecificMail()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, null);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsPassedInDisablementdOption()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.Disabled, "pnp@rocks.com");
+                });
+            }
+        }
+        #endregion
+
         #region Get Search configuration
 
         [TestMethod]
