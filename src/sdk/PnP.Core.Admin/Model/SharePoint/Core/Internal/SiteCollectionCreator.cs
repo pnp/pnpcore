@@ -196,12 +196,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                     ResourceBehaviorOptions = new List<string>()
                 };
 
-                if(string.IsNullOrEmpty(siteToCreate.Description) == false)
+                if (!string.IsNullOrEmpty(siteToCreate.Description))
                 {
                     newGroup.Description = siteToCreate.Description;
                 }
                 
-                if(siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
+                if (siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
                 {
                     newGroup.ResourceBehaviorOptions.Add("AllowOnlyMembersToPost");
                 }
