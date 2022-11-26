@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Lookup, Url and User fields were not loaded for list item versions #1031 [jansenbe - Bert Jansen]
 - Fix issue when loading freshly added page comments without reloading the actual page [jansenbe - Bert Jansen]
 - Fix modern team site creation when no valid description was passed in #1037 [LeHailender - Jens Haile]
+- Fix for adding site collection term group #1041 [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 

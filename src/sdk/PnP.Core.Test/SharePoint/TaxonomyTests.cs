@@ -395,6 +395,31 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddSiteCollectionTermGroups()
+        {
+            //TestCommon.Instance.Mocking = false;            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description", scope: TermGroupScope.SiteCollection);
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task GetTermGroupsExtensionTests()
         {
             //TestCommon.Instance.Mocking = false;            

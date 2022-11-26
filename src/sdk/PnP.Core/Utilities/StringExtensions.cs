@@ -19,6 +19,24 @@ namespace PnP.Core
             return new MemoryStream(Encoding.UTF8.GetBytes(source));
         }
 
+#if NET5_0_OR_GREATER        
+        internal static string FirstCharToLower(this string input) =>
+            input switch
+            {
+                null => throw new ArgumentNullException(nameof(input)),
+                "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+                _ => string.Concat(input[0].ToString().ToLower(), input.AsSpan(1))
+            };
+#else
+        internal static string FirstCharToLower(this string input) =>
+            input switch
+            {
+                null => throw new ArgumentNullException(nameof(input)),
+                "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+                _ => input[0].ToString().ToLower() + input.Substring(1)
+            };
+#endif
+
         /// <summary>
         /// Used to alter a SharePoint eTag for Graph
         /// </summary>
