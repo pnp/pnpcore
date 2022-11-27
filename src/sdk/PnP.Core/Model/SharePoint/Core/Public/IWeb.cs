@@ -1039,7 +1039,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="operation">The operation to be performed</param>
         /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
         /// <returns></returns>
-        public Task SetAccessRequest(AccessRequestOption operation, String email = null);
+        public Task SetAccessRequest(AccessRequestOption operation, string email = null);
 
         /// <summary>
         /// Applies the access request settings
@@ -1047,7 +1047,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="operation">The operation to be performed</param>
         /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
         /// <returns></returns>
-        public Task SetAccessRequestAsync(AccessRequestOption operation, String email = null);
+        public Task SetAccessRequestAsync(AccessRequestOption operation, string email = null);
 
         #endregion
 

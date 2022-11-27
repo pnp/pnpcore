@@ -994,16 +994,21 @@ namespace PnP.Core.Model.SharePoint
             // the option is always true except when it needs to be disabled
             string targetMail = email;
             if (operation == AccessRequestOption.Enabled)
+            {
                 targetMail = "someone@someone.com";
-           
+            }
+
             if (operation == AccessRequestOption.Disabled)
+            {
                 targetMail = "";
+            }
             
             // Build body
             var useAccessRequest = new
             {
                 useAccessRequestDefault = operation == AccessRequestOption.Enabled ? "true" : "false"
             }.AsExpando();
+            
             string useAccessRequestBody = JsonSerializer.Serialize(useAccessRequest, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
             var setUseAccessRequestDefaultAndUpdateRequest = new ApiCall($"_api/web/setUseaccessrequestdefaultandupdate", ApiType.SPORest, useAccessRequestBody);
             await RawRequestAsync(setUseAccessRequestDefaultAndUpdateRequest, HttpMethod.Post).ConfigureAwait(false);
@@ -1013,6 +1018,7 @@ namespace PnP.Core.Model.SharePoint
                 __metadata = new { type = "SP.Web" },
                 RequestAccessEmail = targetMail
             }.AsExpando();
+            
             string updateRequestAccessMailBody = JsonSerializer.Serialize(updateRequestAccessMail, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
             var updateRequestAccessMailRequest = new ApiCall($"_api/web", ApiType.SPORest, updateRequestAccessMailBody);
             await RawRequestAsync(updateRequestAccessMailRequest, new HttpMethod("PATCH")).ConfigureAwait(false);

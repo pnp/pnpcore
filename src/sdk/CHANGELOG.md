@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Support for custom cloud environments by setting Environment to `Custom` followed by specifying the needed Graph and Azure AD endpoints #1014 [jansenbe - Bert Jansen]
+- Implements support for the access request configuration #1040 [plamber - Patrick Lamber]
 
 ### Changed
 
