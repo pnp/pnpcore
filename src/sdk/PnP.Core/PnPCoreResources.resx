@@ -492,4 +492,10 @@
   <data name="Exception_UserPrincipalNameEmpty" xml:space="preserve">
     <value>The user principal name can not be empty when obtaining user permissions</value>
   </data>
+  <data name="Exception_Unsupported_AccessRequest_MailNotSupported" xml:space="preserve">
+    <value>The mail option is only supported when using the operation 'SpecificMail'</value>
+  </data>
+  <data name="Exception_Unsupported_AccessRequest_NoMail" xml:space="preserve">
+    <value>You need to pass a valid mail when using the operation 'SpecificMail'</value>
+  </data>
 </root>

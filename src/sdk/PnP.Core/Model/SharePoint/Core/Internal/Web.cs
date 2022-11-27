@@ -972,6 +972,54 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region AccessRequest
+
+        public async Task SetAccessRequest(AccessRequestOption operation, string email = null)
+        {
+            await SetAccessRequestAsync(operation, email).ConfigureAwait(false);
+        }
+
+        public async Task SetAccessRequestAsync(AccessRequestOption operation, string email = null)
+        {
+            if (string.IsNullOrEmpty(email) && operation == AccessRequestOption.SpecificMail)
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_Unsupported_AccessRequest_NoMail);
+            }
+
+            if (!string.IsNullOrEmpty(email) && operation != AccessRequestOption.SpecificMail)
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_Unsupported_AccessRequest_MailNotSupported);
+            }
+
+            // the option is always true except when it needs to be disabled
+            string targetMail = email;
+            if (operation == AccessRequestOption.Enabled)
+                targetMail = "someone@someone.com";
+           
+            if (operation == AccessRequestOption.Disabled)
+                targetMail = "";
+            
+            // Build body
+            var useAccessRequest = new
+            {
+                useAccessRequestDefault = operation == AccessRequestOption.Enabled ? "true" : "false"
+            }.AsExpando();
+            string useAccessRequestBody = JsonSerializer.Serialize(useAccessRequest, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+            var setUseAccessRequestDefaultAndUpdateRequest = new ApiCall($"_api/web/setUseaccessrequestdefaultandupdate", ApiType.SPORest, useAccessRequestBody);
+            await RawRequestAsync(setUseAccessRequestDefaultAndUpdateRequest, HttpMethod.Post).ConfigureAwait(false);
+
+            var updateRequestAccessMail = new
+            {
+                __metadata = new { type = "SP.Web" },
+                RequestAccessEmail = targetMail
+            }.AsExpando();
+            string updateRequestAccessMailBody = JsonSerializer.Serialize(updateRequestAccessMail, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+            var updateRequestAccessMailRequest = new ApiCall($"_api/web", ApiType.SPORest, updateRequestAccessMailBody);
+            await RawRequestAsync(updateRequestAccessMailRequest, new HttpMethod("PATCH")).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Ensure page scheduling
 
         public async Task EnsurePageSchedulingAsync()
@@ -2006,10 +2054,10 @@ namespace PnP.Core.Model.SharePoint
         #region Reindex web
         public async Task ReIndexAsync()
         {
-            var webInfo = await GetAsync(p => p.EffectiveBasePermissions, 
-                                         p => p.AllProperties, 
+            var webInfo = await GetAsync(p => p.EffectiveBasePermissions,
+                                         p => p.AllProperties,
                                          p => p.Lists.QueryProperties(p => p.Title,
-                                                                      p => p.NoCrawl, 
+                                                                      p => p.NoCrawl,
                                                                       p => p.RootFolder.QueryProperties(p => p.Properties))).ConfigureAwait(false);
 
             const string reIndexKey = "vti_searchversion";
@@ -2126,6 +2174,7 @@ namespace PnP.Core.Model.SharePoint
         {
             return RemoveIndexedPropertyAsync(propertyName).GetAwaiter().GetResult();
         }
+
         #endregion
 
         #endregion
