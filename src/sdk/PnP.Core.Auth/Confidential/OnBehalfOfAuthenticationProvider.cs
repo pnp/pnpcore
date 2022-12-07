@@ -123,6 +123,8 @@ namespace PnP.Core.Auth
             UserTokenProvider = userTokenProvider;
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
+                ClientId = clientId,
+                TenantId = tenantId,
                 OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
                 {
                     Certificate = certificate
