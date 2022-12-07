@@ -189,6 +189,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The thumbprint of the certificate
         /// </summary>
         public string Thumbprint { get; set; }
+        
+        /// <summary>
+        /// Certificate can be set directly, if required
+        /// </summary>
+        public X509Certificate2 Certificate { get; set; }
     }
 
     /// <summary>
