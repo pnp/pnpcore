@@ -164,22 +164,18 @@ namespace PnP.Core.Auth.Test.Providers
             //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
-            using (X509Certificate2 certificate =
-                   new X509Certificate2(path, "PnPRocks!", X509KeyStorageFlags.Exportable))
-            {
-                var provider = new OnBehalfOfAuthenticationProvider(
-                    null,
-                 null,
-                    certificate,
-                    // We get the consumer access token using an InteractiveAuthenticationProvider
-                    () => GetUserAccessToken().GetAwaiter().GetResult());
-                Assert.IsNotNull(provider);
-                Assert.IsNotNull(provider.ClientId);
-                Assert.IsNotNull(provider.TenantId);
-                Assert.IsNotNull(provider.Certificate);
-            }
+            var provider = new OnBehalfOfAuthenticationProvider(
+                null,
+                null,
+                _certificateFromFile,
+                // We get the consumer access token using an InteractiveAuthenticationProvider
+                () => GetUserAccessToken().GetAwaiter().GetResult());
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.Certificate);
         }
-            
+
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestOnBehalfOfConstructorNoDIWithCertificate_NullClientId_NullTenantId()
