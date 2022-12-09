@@ -109,6 +109,30 @@ namespace PnP.Core.Auth
         }
 
         /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="certificate">The X.509 certificate to use for authentication</param>
+        /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
+            X509Certificate2 certificate,
+            Func<string> userTokenProvider)
+            : this(null, null)
+        {
+            UserTokenProvider = userTokenProvider;
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
+                {
+                    Certificate = certificate
+                }
+            });
+        }
+
+        /// <summary>
         /// Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
@@ -132,15 +156,21 @@ namespace PnP.Core.Auth
                     PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_InvalidConfiguration);
             }
 
-            // We need the certificate thumbprint
-            if (string.IsNullOrEmpty(options.OnBehalfOf.ClientSecret) && string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
+            if (options.OnBehalfOf.Certificate == null &&
+                string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint) &&
+                string.IsNullOrEmpty(options.OnBehalfOf.ClientSecret))
             {
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            if (!string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
+            if (options.OnBehalfOf.Certificate != null)
+            {
+                // We prioritize the X.509 certificate, if any
+                Certificate = options.OnBehalfOf.Certificate;
+            }
+            else if(!string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
             {
                 // We prioritize the X.509 certificate, if any
                 Certificate = X509CertificateUtility.LoadCertificate(
