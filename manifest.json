@@ -954,7 +954,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html",
-          "hash": "L8FVyTii+GPHQgQAre9MeHMPs8FD9tum93u0yrlLOjc="
+          "hash": "RjdkV2Mn7JnuUkMmJgNzAFo2Xv0t9GU2Ub2y9MLGSe0="
         }
       },
       "is_incremental": false,
@@ -990,7 +990,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html",
-          "hash": "OCFIHCgDmambgx/QPORwBxUnm24s086H5Zw2iHh1+10="
+          "hash": "YrAEvavTDbww4qW3qXtpmo370eOeMPD1cjS9sHlwzSY="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html",
-          "hash": "OhJ+qFGtMGSPCp8XkHhVm27Tm9H9Jv/ujG/IRUehe4Q="
+          "hash": "kYPJnSKh/DLhlhD5nyCDWHQ+oYjpQ13BqeO2M014g6M="
         }
       },
       "is_incremental": false,
@@ -1062,7 +1062,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html",
-          "hash": "uuCw0AEzZV7Fepq3EYg+OissOtQt8wGhgy9knFdBkQ0="
+          "hash": "kNgScJRy4smwZxd2Z8jDrEWjHAkk7+87Oc16jdiOqrk="
         }
       },
       "is_incremental": false,
@@ -1074,7 +1074,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html",
-          "hash": "OFrh3TU6dBvddjyis05bAYRFedV1i/iFszGL2dQSkxg="
+          "hash": "qNfh/8s8RsudkqFoP2e5fVOWSHoHDYTepXLBDMfHdWI="
         }
       },
       "is_incremental": false,
@@ -1122,7 +1122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions.html",
-          "hash": "+86um7dYZOx7baGBbAAkicUsVGI2bvDxptLur+AI/GQ="
+          "hash": "Xujjz98Uw0SDgGS6/DAoKPvZK0ZE+X7aKuYMatLeV78="
         }
       },
       "is_incremental": false,
