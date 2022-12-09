@@ -158,7 +158,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestOnBehalfOfConstructorNoDIWithCertificateFile_NullClientId_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
