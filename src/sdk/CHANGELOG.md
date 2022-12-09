@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Support for custom cloud environments by setting Environment to `Custom` followed by specifying the needed Graph and Azure AD endpoints #1014 [jansenbe - Bert Jansen]
 - Implements support for the access request configuration #1040 [plamber - Patrick Lamber]
+- Option to specify the `X509Certificate2` when using the `OnBehalfOfAuthenticationProvider`, similar to the support there is for this in the `X509CertificateAuthenticationProvider` #1047 [mloitzl - Martin Loitzl]
 
 ### Changed
 
