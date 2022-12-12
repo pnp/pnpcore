@@ -4,6 +4,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
+using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -582,6 +583,121 @@ namespace PnP.Core.Model.SharePoint
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
             var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
+        }
+
+        public IFile GetFileById(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdAsync(uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByIdAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await file.BaseRetrieveAsync(apiOverride: BuildGetFileByUniqueIdApiCall(uniqueFileId), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            return file;
+        }
+
+        public IFile GetFileByIdBatch(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdBatchAsync(batch, uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public IFile GetFileByIdBatch(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdBatchAsync(uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByIdBatchAsync(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await file.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFileByUniqueIdApiCall(uniqueFileId), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
+            return file;
+        }
+
+        public async Task<IFile> GetFileByIdBatchAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return await GetFileByIdBatchAsync(PnPContext.CurrentBatch, uniqueFileId, expressions).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildGetFileByUniqueIdApiCall(Guid uniqueFileId)
+        {
+            return new ApiCall($"_api/Web/getFileById('{uniqueFileId}')", ApiType.SPORest);
+        }
+
+        public async Task<IFile> GetFileByLinkAsync(string link, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // first encode the passed link
+            var encodedLink = DriveHelper.EncodeSharingUrl(link);
+
+            // Let's try to get DriveItem information
+            var apiCall = new ApiCall($"shares/{encodedLink}/driveitem?$select=sharepointids,parentreference", ApiType.Graph);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return await DeserializeGraphDriveItemAsync(response.Json, expressions).ConfigureAwait(false);
+        }
+
+        public IFile GetFileByLink(string link, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByLinkAsync(link, expressions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IFile> DeserializeGraphDriveItemAsync(string response, params Expression<Func<IFile, object>>[] expressions)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(response);
+
+            if (json.TryGetProperty("sharepointIds", out JsonElement parentReference))
+            {
+                Guid fileUniqueId = Guid.Empty;
+                Guid siteId = Guid.Empty;
+                Guid webId = Guid.Empty;
+
+                if (parentReference.TryGetProperty("listItemUniqueId", out JsonElement listItemUniqueId))
+                {
+                    fileUniqueId = listItemUniqueId.GetGuid();
+                }
+
+                if (parentReference.TryGetProperty("siteId", out JsonElement siteIdElement))
+                {
+                    siteId = siteIdElement.GetGuid();
+                }
+
+                if (parentReference.TryGetProperty("webId", out JsonElement webIdElement))
+                {
+                    webId = webIdElement.GetGuid();
+                }
+
+                if (PnPContext.Site.Id == siteId && PnPContext.Web.Id == webId)
+                {
+                    return await PnPContext.Web.GetFileByIdAsync(fileUniqueId, expressions).ConfigureAwait(false);
+                }
+                else
+                {
+                    // A PnPContext is bound to the web, creating a new one to get the file from the other site
+                    if (json.TryGetProperty("sharepointIds", out JsonElement sharepointIds))
+                    {
+                        if (sharepointIds.TryGetProperty("siteUrl", out JsonElement siteUrl))
+                        {
+                            var newContext = await PnPContext.CloneAsync(new Uri(siteUrl.ToString())).ConfigureAwait(false);
+                            return await newContext.Web.GetFileByIdAsync(fileUniqueId, expressions).ConfigureAwait(false);
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
         #endregion
 

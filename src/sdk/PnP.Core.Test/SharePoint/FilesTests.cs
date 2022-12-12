@@ -254,6 +254,143 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region GetFileById tests
+
+        [TestMethod]
+        public async Task GetFileByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            try
+            {
+                (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = context.Web.GetFileByServerRelativeUrl(documentUrl);
+
+                    IFile testDocumentLoadedById = context.Web.GetFileById(testDocument.UniqueId);
+
+                    Assert.IsNotNull(testDocument.UniqueId == testDocumentLoadedById.UniqueId);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileByIdCurrentBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            try
+            {
+                (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = context.Web.GetFileByServerRelativeUrlBatch(documentUrl);
+                    await context.ExecuteAsync();
+
+                    IFile testDocumentLoadedById = context.Web.GetFileByIdBatch(testDocument.UniqueId);
+                    await context.ExecuteAsync();
+
+                    Assert.IsNotNull(testDocument.UniqueId == testDocumentLoadedById.UniqueId);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileByIdBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            try
+            {
+                (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = context.Web.GetFileByServerRelativeUrlBatch(documentUrl);
+                    await context.ExecuteAsync();
+
+                    var batch = context.NewBatch();
+                    IFile testDocumentLoadedById = context.Web.GetFileByIdBatch(batch, testDocument.UniqueId);
+                    await context.ExecuteAsync(batch);
+
+                    Assert.IsNotNull(testDocument.UniqueId == testDocumentLoadedById.UniqueId);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+        #endregion
+
+        #region GetFileByLink tests
+
+        [TestMethod]
+        public async Task GetFileByLinkTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            try
+            {
+                (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile testDocument = context.Web.GetFileByServerRelativeUrl(documentUrl);
+
+                    // Test regular link
+                    IFile testDocumentLoadedByLink = context.Web.GetFileByLink($"https://{context.Uri.DnsSafeHost}{documentUrl}");
+                    Assert.IsNotNull(testDocument.UniqueId == testDocumentLoadedByLink.UniqueId);
+
+                    // Test sharing link
+                    var link = testDocument.CreateOrganizationalSharingLink(new Model.Security.OrganizationalLinkOptions
+                    {
+                        Type = Model.Security.ShareType.View,
+                    });
+
+                    IFile testDocumentLoadedByLink2 = context.Web.GetFileByLink(link.Link.WebUrl);
+                    Assert.IsNotNull(testDocument.UniqueId == testDocumentLoadedByLink2.UniqueId);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileByLinkOtherSiteCollectionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // Take the first list item
+                // For now hardcoded to https://bertonline.sharepoint.com/sites/prov-1/SiteAssets/donotdelete-sharingtest.mp4
+                // https://bertonline.sharepoint.com/:v:/s/prov-1/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5                    
+
+                // Test regular link
+                IFile testDocumentLoadedByLink = context.Web.GetFileByLink($"https://bertonline.sharepoint.com/sites/prov-1/SiteAssets/donotdelete-sharingtest.mp4");
+
+                // Test sharing link
+                IFile testDocumentLoadedByLink2 = context.Web.GetFileByLink("https://bertonline.sharepoint.com/:v:/s/prov-1/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5");
+                Assert.IsNotNull(testDocumentLoadedByLink.UniqueId == testDocumentLoadedByLink2.UniqueId);
+            }
+        }
+
+        #endregion
+
         #region Publish() variants
         // TODO: Review to cover 6 variants of each File methods with this set of tests as example
         [TestMethod]

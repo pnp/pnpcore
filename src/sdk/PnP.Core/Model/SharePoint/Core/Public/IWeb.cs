@@ -729,7 +729,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL, it not available null will be returned
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get or null if the file was not available</returns>
         public IFile GetFileByServerRelativeUrlOrDefault(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -737,7 +737,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL, it not available null will be returned
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get or null if the file was not available</returns>
         public Task<IFile> GetFileByServerRelativeUrlOrDefaultAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -745,7 +745,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -754,7 +754,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -763,7 +763,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -772,7 +772,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -780,7 +780,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -788,10 +788,84 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
+        #endregion
+
+        #region GetFileById
+
+        /// <summary>
+        /// Get a file in the current web from its unique id.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileById(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdBatchAsync(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileByIdBatch(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdBatchAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileByIdBatch(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        #endregion
+
+        #region GetFileByLink
+
+        /// <summary>
+        /// Get's a file from a given link (sharing link, path to file)
+        /// </summary>
+        /// <param name="link">Link pointing to a file</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns><see cref="IFile"/> reference when the file could be found, exception otherwise</returns>
+        public Task<IFile> GetFileByLinkAsync(string link, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get's a file from a given link (sharing link, path to file)
+        /// </summary>
+        /// <param name="link">Link pointing to a file</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns><see cref="IFile"/> reference when the file could be found, exception otherwise</returns>
+        public IFile GetFileByLink(string link, params Expression<Func<IFile, object>>[] expressions);
+        
         #endregion
 
         #region IsNoScriptSite 
