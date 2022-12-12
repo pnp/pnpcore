@@ -29,6 +29,34 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
+A file can also be loaded using it's unique id using one of the `GetFileById` methods:
+
+```csharp
+Guid fileId = Guid.Parse("{D61B52DE-2ED1-41E2-B3FC-360E7286B0F9}");
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByIdAsync(fileId);
+
+// Get a reference to the file, loading extra properties of the IFile 
+IFile testDocument = await context.Web.GetFileByIdAsync(fileId, f => f.CheckOutType, f => f.CheckedOutByUser);
+```
+
+### Get a file using a link
+
+Whenever you've a fully qualified link to a file or a sharing link for a file you can use the `GetFileByLink` methods to get the corresponding `IFile` object. Note that when the file happens to live in another site or web then under the covers a new `PnPContext` is instantiated and returned with that file.
+
+```csharp
+// Test regular link
+IFile file2 = await context.Web.GetFileByLinkAsync($"https://contoso.sharepoint.com/sites/asite/SiteAssets/somefile.docx");
+
+// Test sharing link
+IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5");
+
+// Test sharing link with extra properties of the IFile
+IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5", 
+                                                   f => f.CheckOutType, f => f.CheckedOutByUser);
+```
+
 ### Getting the file of a list item
 
 A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
