@@ -42,7 +42,7 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
   - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
   - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0, .NET 6.0 and .NET 7.0 versions
-  - dotNet MAUI: [Windows, iOS, macOS, Android](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-7.0)
+  - .NET MAUI: [Windows, iOS, macOS, Android](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-7.0)
   - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
