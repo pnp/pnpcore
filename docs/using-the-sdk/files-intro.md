@@ -53,8 +53,7 @@ IFile file2 = await context.Web.GetFileByLinkAsync($"https://contoso.sharepoint.
 IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5");
 
 // Test sharing link with extra properties of the IFile
-IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5", 
-                                                   f => f.CheckOutType, f => f.CheckedOutByUser);
+IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5", f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
 ### Getting the file of a list item
