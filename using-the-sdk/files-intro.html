@@ -119,8 +119,7 @@ IFile file2 = await context.Web.GetFileByLinkAsync($&quot;https://contoso.sharep
 IFile file1 = await context.Web.GetFileByLinkAsync(&quot;https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5&quot;);
 
 // Test sharing link with extra properties of the IFile
-IFile file1 = await context.Web.GetFileByLinkAsync(&quot;https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5&quot;, 
-                                                   f =&gt; f.CheckOutType, f =&gt; f.CheckedOutByUser);
+IFile file1 = await context.Web.GetFileByLinkAsync(&quot;https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5&quot;, f =&gt; f.CheckOutType, f =&gt; f.CheckedOutByUser);
 </code></pre>
 <h3 id="getting-the-file-of-a-list-item">Getting the file of a list item</h3>
 <p>A document in a document library is an <code>IListItem</code> holding the file metadata with an <code>IFile</code> holding the actual file. If you have an <code>IListItem</code> you can load the connected file via <code>File</code> property:</p>
