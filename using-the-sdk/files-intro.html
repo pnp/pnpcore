@@ -110,6 +110,10 @@ IFile testDocument = await context.Web.GetFileByIdAsync(fileId);
 // Get a reference to the file, loading extra properties of the IFile 
 IFile testDocument = await context.Web.GetFileByIdAsync(fileId, f =&gt; f.CheckOutType, f =&gt; f.CheckedOutByUser);
 </code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>See the <strong>Updating/reading file metadata</strong> chapter below in case you want to update/read the metadata of retrieved file.</p>
+</div>
 <h3 id="get-a-file-using-a-link">Get a file using a link</h3>
 <p>Whenever you've a fully qualified link to a file or a sharing link for a file you can use the <code>GetFileByLink</code> methods to get the corresponding <code>IFile</code> object. Note that when the file happens to live in another site or web then under the covers a new <code>PnPContext</code> is instantiated and returned with that file.</p>
 <pre><code class="lang-csharp">// Test regular link
@@ -121,6 +125,27 @@ IFile file1 = await context.Web.GetFileByLinkAsync(&quot;https://contoso.sharepo
 // Test sharing link with extra properties of the IFile
 IFile file1 = await context.Web.GetFileByLinkAsync(&quot;https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5&quot;, f =&gt; f.CheckOutType, f =&gt; f.CheckedOutByUser);
 </code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>See the <strong>Updating/reading file metadata</strong> chapter below in case you want to update/read the metadata of retrieved file.</p>
+</div>
+<h3 id="updatingreading-file-metadata">Updating/reading file metadata</h3>
+<p>If you plan to update the corresponding file metadata when you've used either the <code>GetFileByServerRelativeUrl</code>, <code>GetFileById</code> or <code>GetFileByLink</code> methods then you need to ensure the needed parent list information is loaded as part of this request. Below sample shows the minimal properties to load:</p>
+<pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl,
+                     f =&gt; f.ListItemAllFields.QueryProperties(li=&gt;li.All, 
+                        li =&gt; li.ParentList.QueryProperties(p =&gt; p.Title, 
+                            p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, 
+                                                          p =&gt; p.TypeAsString, p =&gt; p.Title))));
+
+testDocument.ListItemAllFields[&quot;Title&quot;] = &quot;Hello!&quot;;
+await testDocument.ListItemAllFields.UpdateOverwriteVersionAsync();
+// Or
+// await testDocument.ListItemAllFields.UpdateAsync()
+</code></pre>
+<p>If you don't load the <code>ParentList</code> details then field data of complex fields (e.g. Url fields) is not loaded correctly and metadata updates might fail.</p>
 <h3 id="getting-the-file-of-a-list-item">Getting the file of a list item</h3>
 <p>A document in a document library is an <code>IListItem</code> holding the file metadata with an <code>IFile</code> holding the actual file. If you have an <code>IListItem</code> you can load the connected file via <code>File</code> property:</p>
 <pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
