@@ -41,6 +41,9 @@ IFile testDocument = await context.Web.GetFileByIdAsync(fileId);
 IFile testDocument = await context.Web.GetFileByIdAsync(fileId, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
+> [!Important]
+> See the **Updating/reading file metadata** chapter below in case you want to update/read the metadata of retrieved file.
+
 ### Get a file using a link
 
 Whenever you've a fully qualified link to a file or a sharing link for a file you can use the `GetFileByLink` methods to get the corresponding `IFile` object. Note that when the file happens to live in another site or web then under the covers a new `PnPContext` is instantiated and returned with that file.
@@ -55,6 +58,31 @@ IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.c
 // Test sharing link with extra properties of the IFile
 IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5", f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
+
+> [!Important]
+> See the **Updating/reading file metadata** chapter below in case you want to update/read the metadata of retrieved file.
+
+### Updating/reading file metadata
+
+If you plan to update the corresponding file metadata when you've used either the `GetFileByServerRelativeUrl`, `GetFileById` or `GetFileByLink` methods then you need to ensure the needed parent list information is loaded as part of this request. Below sample shows the minimal properties to load:
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl,
+                     f => f.ListItemAllFields.QueryProperties(li=>li.All, 
+                        li => li.ParentList.QueryProperties(p => p.Title, 
+                            p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, 
+                                                          p => p.TypeAsString, p => p.Title))));
+
+testDocument.ListItemAllFields["Title"] = "Hello!";
+await testDocument.ListItemAllFields.UpdateOverwriteVersionAsync();
+// Or
+// await testDocument.ListItemAllFields.UpdateAsync()
+```
+
+If you don't load the `ParentList` details then field data of complex fields (e.g. Url fields) is not loaded correctly and metadata updates might fail.
 
 ### Getting the file of a list item
 
