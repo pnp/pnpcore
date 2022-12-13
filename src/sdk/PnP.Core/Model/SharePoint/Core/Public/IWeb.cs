@@ -198,6 +198,12 @@ namespace PnP.Core.Model.SharePoint
         public bool NextStepsFirstRunEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value that specifies if the web templates experience should open automatically as a first run experience
+        /// after the site was created
+        /// </summary>
+        public bool WebTemplatesGalleryFirstRunEnabled { get; set; }
+
+        /// <summary>
         /// Returns if true if the tenant allowed to send push notifications in OneDrive for Business.
         /// </summary>
         public bool NotificationsInOneDriveForBusinessEnabled { get; }

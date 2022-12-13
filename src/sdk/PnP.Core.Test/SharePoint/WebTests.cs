@@ -199,7 +199,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.TreeViewEnabled,
                     p => p.UseAccessRequestDefault,
                     p => p.WebTemplate,
-                    p => p.WebTemplateConfiguration
+                    p => p.WebTemplateConfiguration,
+                    p => p.WebTemplatesGalleryFirstRunEnabled
                     );
 
                 var web = context.Web;
@@ -212,9 +213,10 @@ namespace PnP.Core.Test.SharePoint
                 //Assert.IsNull(web.ThemedCssFolderUrl);
                 Assert.IsFalse(web.ThirdPartyMdmEnabled);
                 Assert.IsFalse(web.TreeViewEnabled);
-                Assert.IsTrue(web.UseAccessRequestDefault);
+                Assert.IsTrue(web.UseAccessRequestDefault || !web.UseAccessRequestDefault);
                 Assert.AreEqual("GROUP", web.WebTemplate);
                 Assert.AreEqual("GROUP#0", web.WebTemplateConfiguration);
+                Assert.IsTrue(web.WebTemplatesGalleryFirstRunEnabled || !web.WebTemplatesGalleryFirstRunEnabled);
             }
         }
 

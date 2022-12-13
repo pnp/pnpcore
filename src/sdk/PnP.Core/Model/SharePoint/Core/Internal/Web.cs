@@ -188,6 +188,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool NextStepsFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool NotificationsInOneDriveForBusinessEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool NotificationsInSharePointEnabled { get => GetValue<bool>(); set => SetValue(value); }
