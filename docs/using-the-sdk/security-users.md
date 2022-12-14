@@ -61,6 +61,9 @@ var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
 var specialUser = await context.Web.EnsureUserAsync("Everyone except external users");
 ```
 
+> [!Important]
+> Using `EnsureUser` will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling `EnsureUser` this method will not return an error. Calling one of hte `AsGraphUser` method will perform an actual validation.
+
 ## Granting permissions for a user at web level
 
 Once a user is added you can directly permission the user by granting it one or more role definitions via one of the `AddRoleDefinitions` methods. You can also enumerate the roles a user has via the `GetRoleDefinitions` methods and remove granted roles via the `RemoveRoleDefinitions` methods. These methods are equivalent to using the methods provided via the `ISecurableObject` interface on `IWeb`.
