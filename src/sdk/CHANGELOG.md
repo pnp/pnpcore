@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix issue when loading freshly added page comments without reloading the actual page [jansenbe - Bert Jansen]
 - Fix modern team site creation when no valid description was passed in #1037 [LeHailender - Jens Haile]
 - Fix for adding site collection term group #1041 [jansenbe - Bert Jansen]
+- The JSON controldata sectionindex value of page could not be converted to System.Int32 : Handle Pnp Provisioning template extraction failure from Project Management site template #1058 [stokuri - Suman Tokori]
 
 ## [1.8.0]
 
