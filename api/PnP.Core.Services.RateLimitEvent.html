@@ -114,32 +114,40 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent__ctor_HttpResponseMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.%23ctor(HttpResponseMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent__ctor_HttpRequestMessage_HttpResponseMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.%23ctor(HttpRequestMessage%2CHttpResponseMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RateLimitEvent__ctor_" data-uid="PnP.Core.Services.RateLimitEvent.#ctor*"></a>
   
-  <h4 id="PnP_Core_Services_RateLimitEvent__ctor_HttpResponseMessage_" data-uid="PnP.Core.Services.RateLimitEvent.#ctor(HttpResponseMessage)"><a href="#collapsible-PnP_Core_Services_RateLimitEvent__ctor_HttpResponseMessage_" class="expander" data-toggle="collapse">RateLimitEvent(HttpResponseMessage)</a></h4>
+  <h4 id="PnP_Core_Services_RateLimitEvent__ctor_HttpRequestMessage_HttpResponseMessage_" data-uid="PnP.Core.Services.RateLimitEvent.#ctor(HttpRequestMessage,HttpResponseMessage)"><a href="#collapsible-PnP_Core_Services_RateLimitEvent__ctor_HttpRequestMessage_HttpResponseMessage_" class="expander" data-toggle="collapse">RateLimitEvent(HttpRequestMessage, HttpResponseMessage)</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_RateLimitEvent__ctor_HttpResponseMessage_" class="collapse in">
+  <div id="collapsible-PnP_Core_Services_RateLimitEvent__ctor_HttpRequestMessage_HttpResponseMessage_" class="collapse in">
   <div class="markdown level1 summary"><p>Rate limit event constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RateLimitEvent(HttpResponseMessage requestMessage)</code></pre>
+    <pre><code class="lang-csharp hljs">public RateLimitEvent(HttpRequestMessage requestMessage, HttpResponseMessage responseMessage)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">HttpResponseMessage</span></span>
+        <span class="pull-right"><span class="xref">HttpRequestMessage</span></span>
         <span class="parametername">requestMessage</span>
+        <p><p>Response for the retried request</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">HttpResponseMessage</span></span>
+        <span class="parametername">responseMessage</span>
         <p><p>Request that's retried</p>
 </p>
       </td>
@@ -165,7 +173,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Limit.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Limit%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RateLimitEvent_Limit_" data-uid="PnP.Core.Services.RateLimitEvent.Limit*"></a>
@@ -208,10 +216,56 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Properties.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Properties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L36" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_RateLimitEvent_Properties_" data-uid="PnP.Core.Services.RateLimitEvent.Properties*"></a>
+  
+  <h4 id="PnP_Core_Services_RateLimitEvent_Properties" data-uid="PnP.Core.Services.RateLimitEvent.Properties"><a href="#collapsible-PnP_Core_Services_RateLimitEvent_Properties" class="expander" data-toggle="collapse">Properties</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_RateLimitEvent_Properties" class="collapse in">
+  <div class="markdown level1 summary"><p>Event property bag</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; Properties { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">IDictionary</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRateLimitEvent.html#PnP_Core_Services_IRateLimitEvent_Properties">IRateLimitEvent.Properties</a></div>
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Remaining.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Remaining%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RateLimitEvent_Remaining_" data-uid="PnP.Core.Services.RateLimitEvent.Remaining*"></a>
@@ -254,10 +308,56 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Reset.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Reset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Request.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Request%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_RateLimitEvent_Request_" data-uid="PnP.Core.Services.RateLimitEvent.Request*"></a>
+  
+  <h4 id="PnP_Core_Services_RateLimitEvent_Request" data-uid="PnP.Core.Services.RateLimitEvent.Request"><a href="#collapsible-PnP_Core_Services_RateLimitEvent_Request" class="expander" data-toggle="collapse">Request</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_RateLimitEvent_Request" class="collapse in">
+  <div class="markdown level1 summary"><p>Request that was retried</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Request { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Uri</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRateLimitEvent.html#PnP_Core_Services_IRateLimitEvent_Request">IRateLimitEvent.Request</a></div>
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RateLimitEvent_Reset.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RateLimitEvent.Reset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RateLimitEvent.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RateLimitEvent_Reset_" data-uid="PnP.Core.Services.RateLimitEvent.Reset*"></a>

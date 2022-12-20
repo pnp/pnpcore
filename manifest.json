@@ -7974,7 +7974,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.IRateLimitEvent.html",
-          "hash": "j+fm8UshQ6SjODcI3nNP7bNL9cSTIvtj2KiV5Sx4bkg="
+          "hash": "lwuQmPy6YObBjFYUYpHwZjdDB6+zht/Jpk0msupRErA="
         }
       },
       "is_incremental": false,
@@ -8118,7 +8118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.RateLimitEvent.html",
-          "hash": "MXMSRlP6mDXVY/0Gm6onS3hWhtWJGt7l/PC7M1ng2iU="
+          "hash": "I6lvoDW873ks4acsSu7eS8P1o6Tq8/O+mcN1FmsBnS4="
         }
       },
       "is_incremental": false,
