@@ -102,13 +102,85 @@
   
   <h5 id="PnP_Core_Services_RetryEvent_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class RetryEvent : object</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class RetryEvent : object, IRetryEvent</code></pre>
   </div>
 
   
   
   
   
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent__ctor_HttpRequestMessage_System_Int32_System_Int32_Exception_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.%23ctor(HttpRequestMessage%2CSystem.Int32%2CSystem.Int32%2CException)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_RetryEvent__ctor_" data-uid="PnP.Core.Services.RetryEvent.#ctor*"></a>
+  
+  <h4 id="PnP_Core_Services_RetryEvent__ctor_HttpRequestMessage_System_Int32_System_Int32_Exception_" data-uid="PnP.Core.Services.RetryEvent.#ctor(HttpRequestMessage,System.Int32,System.Int32,Exception)"><a href="#collapsible-PnP_Core_Services_RetryEvent__ctor_HttpRequestMessage_System_Int32_System_Int32_Exception_" class="expander" data-toggle="collapse">RetryEvent(HttpRequestMessage, Int32, Int32, Exception)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_RetryEvent__ctor_HttpRequestMessage_System_Int32_System_Int32_Exception_" class="collapse in">
+  <div class="markdown level1 summary"><p>Retry event constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RetryEvent(HttpRequestMessage requestMessage, int httpStatusCode, int waitTime, Exception exception)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">HttpRequestMessage</span></span>
+        <span class="parametername">requestMessage</span>
+        <p><p>Request that's retried</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">httpStatusCode</span>
+        <p><p>Http status code</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">waitTime</span>
+        <p><p>Wait before the next try in seconds</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Exception</span></span>
+        <span class="parametername">exception</span>
+        <p><p>Socket exception that triggered the retry</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
   <h3 id="properties">Properties
   </h3>
   
@@ -117,7 +189,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_Exception.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.Exception%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RetryEvent_Exception_" data-uid="PnP.Core.Services.RetryEvent.Exception*"></a>
@@ -150,6 +222,8 @@
   
   
   
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRetryEvent.html#PnP_Core_Services_IRetryEvent_Exception">IRetryEvent.Exception</a></div>
   
   
   
@@ -161,7 +235,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_HttpStatusCode.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.HttpStatusCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L40" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RetryEvent_HttpStatusCode_" data-uid="PnP.Core.Services.RetryEvent.HttpStatusCode*"></a>
@@ -194,6 +268,8 @@
   
   
   
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRetryEvent.html#PnP_Core_Services_IRetryEvent_HttpStatusCode">IRetryEvent.HttpStatusCode</a></div>
   
   
   
@@ -202,24 +278,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_PnpContextProperties.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.PnpContextProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_Properties.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.Properties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Services_RetryEvent_PnpContextProperties_" data-uid="PnP.Core.Services.RetryEvent.PnpContextProperties*"></a>
+  <a id="PnP_Core_Services_RetryEvent_Properties_" data-uid="PnP.Core.Services.RetryEvent.Properties*"></a>
   
-  <h4 id="PnP_Core_Services_RetryEvent_PnpContextProperties" data-uid="PnP.Core.Services.RetryEvent.PnpContextProperties"><a href="#collapsible-PnP_Core_Services_RetryEvent_PnpContextProperties" class="expander" data-toggle="collapse">PnpContextProperties</a></h4>
+  <h4 id="PnP_Core_Services_RetryEvent_Properties" data-uid="PnP.Core.Services.RetryEvent.Properties"><a href="#collapsible-PnP_Core_Services_RetryEvent_Properties" class="expander" data-toggle="collapse">Properties</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_RetryEvent_PnpContextProperties" class="collapse in">
-  <div class="markdown level1 summary"><p>PnPContext properties</p>
+  <div id="collapsible-PnP_Core_Services_RetryEvent_Properties" class="collapse in">
+  <div class="markdown level1 summary"><p>Event property bag</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; PnpContextProperties { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; Properties { get; }</code></pre>
   </div>
 
   
@@ -238,6 +314,8 @@
   
   
   
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRetryEvent.html#PnP_Core_Services_IRetryEvent_Properties">IRetryEvent.Properties</a></div>
   
   
   
@@ -249,7 +327,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_Request.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.Request%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RetryEvent_Request_" data-uid="PnP.Core.Services.RetryEvent.Request*"></a>
@@ -282,6 +360,8 @@
   
   
   
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRetryEvent.html#PnP_Core_Services_IRetryEvent_Request">IRetryEvent.Request</a></div>
   
   
   
@@ -293,7 +373,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_RetryEvent_WaitTime.md&amp;value=---%0Auid%3A%20PnP.Core.Services.RetryEvent.WaitTime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/RetryEvent.cs/#L45" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_RetryEvent_WaitTime_" data-uid="PnP.Core.Services.RetryEvent.WaitTime*"></a>
@@ -326,6 +406,8 @@
   
   
   
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IRetryEvent.html#PnP_Core_Services_IRetryEvent_WaitTime">IRetryEvent.WaitTime</a></div>
   
   
   

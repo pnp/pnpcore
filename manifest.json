@@ -7902,7 +7902,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.EventHub.html",
-          "hash": "+SaFRQ0HUoV+MTrm7AOPEqy5le53jYXCCAN5FEu6Z38="
+          "hash": "p72Vw3UbZT8rQO8gKT7YoWRUg8VhB1fo4GoFlsobmw4="
         }
       },
       "is_incremental": false,
@@ -7975,6 +7975,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Services.IRateLimitEvent.html",
           "hash": "j+fm8UshQ6SjODcI3nNP7bNL9cSTIvtj2KiV5Sx4bkg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.IRetryEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.IRetryEvent.html",
+          "hash": "POldCjxgRf+aGxRsGIWshldl/xOX+nnatG7idkq9jfc="
         }
       },
       "is_incremental": false,
@@ -8118,7 +8130,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.RetryEvent.html",
-          "hash": "XU/53Ea9P166SXvTrCKJnKECHW06eUUrTS/9+qZusO4="
+          "hash": "ytnOlh7DU+uMtIfoo3dfsvV6gix7hX40LzZXATrl5U8="
         }
       },
       "is_incremental": false,
@@ -8142,7 +8154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "2zubQY2drT3pOGB2YKYEbfxRZ72Y1j0SYaKT5PoskJw="
+          "hash": "I8iglcEJlj6hnEMWS1KhMuheLVOSyDYNYuLQzRR1zkY="
         }
       },
       "is_incremental": false,
@@ -8202,7 +8214,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "TgBhQIqS33y7OflHL6393hmIBToj/dfJLkqhCRPPs+U="
+          "hash": "uTAG1XZLNPfUsM7AyvaHVyMsE0sJSqi8vKebA66vyEU="
         }
       },
       "is_incremental": false,
@@ -10128,7 +10140,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 681,
+          "total_file_count": 682,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
