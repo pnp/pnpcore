@@ -54,7 +54,6 @@ namespace PnP.Core.Services
         /// </summary>
         public IDictionary<string, object> Properties { get; internal set; } = new Dictionary<string, object>();
 
-
         private void ProcessRequestProperties(HttpRequestMessage requestMessage)
         {
 #if NET5_0_OR_GREATER
