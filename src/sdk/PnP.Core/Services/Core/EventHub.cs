@@ -26,7 +26,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Event to subscribe to get notified whenever a request is getting retried due to throttling or an error
         /// </summary>
-        public Action<RetryEvent> RequestRetry { get; set; }
+        public Action<IRetryEvent> RequestRetry { get; set; }
 
         /// <summary>
         /// Event so subscribe to for getting event rate limit information
