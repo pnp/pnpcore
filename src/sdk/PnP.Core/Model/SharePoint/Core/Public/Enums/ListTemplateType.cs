@@ -291,6 +291,11 @@
         MySiteDocumentLibrary = 700,
 
         /// <summary>
+        /// Pages library in a classic publishing site
+        /// </summary>
+        PublishingPagesLibrary = 850,
+
+        /// <summary>
         /// IssueTracking list type
         /// </summary>
         IssueTracking = 1100,

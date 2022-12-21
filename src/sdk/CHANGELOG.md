@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - The JSON controldata sectionindex value of page could not be converted to System.Int32 : Handle Pnp Provisioning template extraction failure from Project Management site template #1058 [stokuri - Suman Tokori]
 - Improve code consistency for the eventhub model [jansenbe - Bert Jansen]
 - Added `DefaultViewUrl` property for `IList` [jansenbe - Bert Jansen]
+- Added `PublishingPagesLibrary` as possible `ListTemplateType` [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 
