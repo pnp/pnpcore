@@ -147,6 +147,11 @@ namespace PnP.Core.Model.SharePoint
         public string DefaultNewFormUrl { get; set; }
 
         /// <summary>
+        /// The url to the default view of this list.
+        /// </summary>
+        public string DefaultViewUrl { get; }
+
+        /// <summary>
         /// Defines a value that specifies the reading order of the list.
         /// </summary>
         public ListReadingDirection Direction { get; set; }

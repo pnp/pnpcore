@@ -149,6 +149,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string DefaultNewFormUrl { get => GetValue<string>(); set => SetValue(value); }
 
+        public string DefaultViewUrl { get => GetValue<string>(); set => SetValue(value); }
+        
         public ListReadingDirection Direction { get => GetValue<ListReadingDirection>(); set => SetValue(value); }
 
         public string ImageUrl { get => GetValue<string>(); set => SetValue(value); }
