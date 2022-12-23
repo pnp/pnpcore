@@ -220,6 +220,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IEventReceiverDefinitionCollection EventReceivers { get => GetModelCollectionValue<IEventReceiverDefinitionCollection>(); }
 
+        public IUserCustomActionCollection UserCustomActions { get => GetModelCollectionValue<IUserCustomActionCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 

@@ -313,6 +313,14 @@ namespace PnP.Core.Model.SharePoint
         public IEventReceiverDefinitionCollection EventReceivers { get; }
 
         /// <summary>
+        /// Gets a value that specifies the collection of user custom actions for this list
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
+        /// </summary>
+        public IUserCustomActionCollection UserCustomActions { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
