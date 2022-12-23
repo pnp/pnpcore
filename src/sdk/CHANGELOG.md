@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `DefaultViewUrl` property for `IList` [jansenbe - Bert Jansen]
 - Added `PublishingPagesLibrary` as possible `ListTemplateType` [jansenbe - Bert Jansen]
 - Added `UserCustomActions` to `IList` [jansenbe - Bert Jansen]
+- Fixed enum order for `ListExperience` [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 
