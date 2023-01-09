@@ -2108,5 +2108,61 @@ namespace PnP.Core.Test.SharePoint
             }
         }
         #endregion
+
+        #region Audience targeting tests
+
+        [TestMethod]
+        public async Task AudienceTargetingListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AudienceTargetingListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    myList.EnableAudienceTargeting();
+
+                    var listInfo = await context.Web.Lists.GetByIdAsync(myList.Id,
+                                                                        p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl),
+                                                                                                  p => p.EventReceivers,
+                                                                                                  p => p.ContentTypesEnabled,
+                                                                                                  p => p.Fields.QueryProperties(p => p.InternalName)).ConfigureAwait(false);
+                    bool addFirstModernTargetingField = listInfo.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "_ModernAudienceTargetUserField") != null;
+                    bool addSecondModernTargetingField = listInfo.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "_ModernAudienceAadObjectIds") != null;
+                    bool addItemAddingAudienceEventRecevier = listInfo.EventReceivers.AsRequested()
+                                                        .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" &&
+                                                                        p.EventType == EventReceiverType.ItemAdding) != null;
+                    bool addItemupdatingAudienceEventRecevier = listInfo.EventReceivers.AsRequested()
+                                                                .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" &&
+                                                                                p.EventType == EventReceiverType.ItemUpdating) != null;
+
+                    Assert.IsTrue(addFirstModernTargetingField);
+                    Assert.IsTrue(addSecondModernTargetingField);
+                    Assert.IsTrue(addItemAddingAudienceEventRecevier);
+                    Assert.IsTrue(addItemupdatingAudienceEventRecevier);
+
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        #endregion
     }
 }

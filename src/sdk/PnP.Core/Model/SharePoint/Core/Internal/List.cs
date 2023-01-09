@@ -1667,6 +1667,98 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Enable Audience targeting
+
+        private const string modernAudienceTargetingInternalName = "_ModernAudienceTargetUserField";
+        private const string modernAudienceTargetingMultiLookupInternalName = "_ModernAudienceAadObjectIds";
+
+        public async Task EnableAudienceTargetingAsync()
+        {
+            // Load the needed data using a single roundtrip
+            var batch = PnPContext.NewBatch();
+            var listInfo = await GetBatchAsync(batch,
+                                              p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl), 
+                                              p => p.EventReceivers,                                               
+                                              p => p.ContentTypesEnabled,
+                                              p => p.Fields.QueryProperties(p => p.InternalName)).ConfigureAwait(false);
+            var userInfoList = await PnPContext.Web.Lists.GetByTitleBatchAsync(batch, "User Information List").ConfigureAwait(false);
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+
+            batch = PnPContext.NewBatch();
+            // Verify if the needed fields exist
+            var addOptions = listInfo.Result.ContentTypesEnabled
+                                ? AddFieldOptionsFlags.AddFieldInternalNameHint | AddFieldOptionsFlags.AddToNoContentType
+                                : AddFieldOptionsFlags.AddFieldInternalNameHint | AddFieldOptionsFlags.AddToDefaultContentType;
+            string sourceId = listInfo.Result.Id.ToString("B");
+
+            var firstModernTargetingFieldXml = @$"
+                    <Field ID=""{{7f759147-c861-4cd6-a11f-5aa3037d9634}}"" Type=""UserMulti"" List=""UserInfo"" Name=""_ModernAudienceTargetUserField"" 
+                        StaticName=""_ModernAudienceTargetUserField"" DisplayName=""Audience"" Required=""FALSE"" 
+                        SourceID=""{sourceId}"" ColName=""int2"" RowOrdinal=""0"" ShowField=""ImnName"" ShowInDisplayForm=""TRUE"" ShowInListSettings=""FALSE"" UserSelectionMode=""GroupsOnly"" 
+                        UserSelectionScope=""0"" Mult=""TRUE"" Sortable=""FALSE"" Version=""1""/>";
+
+            var secondModernTargetingFieldFormat = @$"
+                    <Field Type=""LookupMulti"" DisplayName=""AudienceIds"" 
+                        List=""{userInfoList.Id:B}"" WebId=""{PnPContext.Web.Id}"" FieldRef=""7f759147-c861-4cd6-a11f-5aa3037d9634"" ReadOnly=""TRUE"" Mult=""TRUE"" Sortable=""FALSE"" 
+                        UnlimitedLengthInDocumentLibrary=""FALSE"" ID=""{Guid.NewGuid():B}"" SourceID=""{sourceId}"" StaticName=""_ModernAudienceAadObjectIds"" 
+                        Name=""_ModernAudienceAadObjectIds"" ShowField=""_AadObjectIdForUser"" ShowInListSettings=""FALSE"" Version=""1""/>";
+
+            bool addFirstModernTargetingField = listInfo.Result.Fields.AsRequested().FirstOrDefault(p => p.InternalName == modernAudienceTargetingInternalName) == null;
+            bool addSecondModernTargetingField = listInfo.Result.Fields.AsRequested().FirstOrDefault(p => p.InternalName == modernAudienceTargetingMultiLookupInternalName) == null;
+
+            if (addFirstModernTargetingField)
+            {
+                await listInfo.Result.Fields.AddFieldAsXmlBatchAsync(batch, firstModernTargetingFieldXml, false, addOptions).ConfigureAwait(false);
+            }
+
+            if (addSecondModernTargetingField)
+            {
+                await listInfo.Result.Fields.AddFieldAsXmlBatchAsync(batch, secondModernTargetingFieldFormat, false, addOptions).ConfigureAwait(false);
+            }
+
+            // Verify the needed event receivers have been configured
+            bool addItemAddingAudienceEventRecevier = listInfo.Result.EventReceivers.AsRequested()
+                                                        .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" && 
+                                                                        p.EventType == EventReceiverType.ItemAdding) == null;
+            bool addItemupdatingAudienceEventRecevier = listInfo.Result.EventReceivers.AsRequested()
+                                                        .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" && 
+                                                                        p.EventType == EventReceiverType.ItemUpdating) == null;
+            if (addItemAddingAudienceEventRecevier)
+            {
+                await AddAudienceEventReceiverAsync(batch, listInfo.Result, EventReceiverType.ItemAdding).ConfigureAwait(false);
+            }
+
+            if (addItemupdatingAudienceEventRecevier)
+            {
+                await AddAudienceEventReceiverAsync(batch, listInfo.Result, EventReceiverType.ItemUpdating).ConfigureAwait(false);
+            }
+
+            // Commit the needed changes
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        public void EnableAudienceTargeting()
+        {
+            EnableAudienceTargetingAsync().GetAwaiter().GetResult();
+        }
+
+        private static async Task AddAudienceEventReceiverAsync(Batch batch, IList listInfo, EventReceiverType eventReceiverType)
+        {
+            await listInfo.EventReceivers.AddBatchAsync(batch,
+                new EventReceiverOptions
+                {
+                    EventType = eventReceiverType,
+                    Synchronization = EventReceiverSynchronization.Synchronous,
+                    SequenceNumber = 10000,
+                    ReceiverName = "",
+                    ReceiverAssembly = "Microsoft.SharePoint.Portal, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c",
+                    ReceiverClass = "Microsoft.SharePoint.Portal.AudienceEventRecevier"
+                }).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #endregion
     }
 }

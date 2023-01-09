@@ -77,7 +77,10 @@ namespace PnP.Core.Model.SharePoint
 
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverName))
             {
-                throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverName)}");
+                if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverAssembly) || string.IsNullOrEmpty(eventReceiverOptions.ReceiverClass))
+                {
+                    throw new ArgumentNullException($"{nameof(eventReceiverOptions)}.{nameof(eventReceiverOptions.ReceiverName)}");
+                }
             }
 
             if (string.IsNullOrEmpty(eventReceiverOptions.ReceiverUrl))

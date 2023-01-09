@@ -839,6 +839,18 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         void ReIndex();
+
+        /// <summary>
+        /// Enable audience targeting for a list
+        /// </summary>
+        /// <returns></returns>
+        Task EnableAudienceTargetingAsync();
+
+        /// <summary>
+        /// Enable audience targeting for a list
+        /// </summary>
+        /// <returns></returns>
+        void EnableAudienceTargeting();
         #endregion
     }
 }
