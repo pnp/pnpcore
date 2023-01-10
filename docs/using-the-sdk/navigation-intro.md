@@ -17,10 +17,10 @@ As discussed before, the navigation nodes can be obtained for two types.
 
 ```csharp
 // Get Quick Launch navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n => n.QuickLaunch);
+var nodes = await context.Web.Navigation.GetAsync(n => n.QuickLaunch);
 
 // Get Top Navigation navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n => n.TopNavigationBar);
+var nodes = await context.Web.Navigation.GetAsync(n => n.TopNavigationBar);
 ```
 
 ## Getting a specific navigation node by id
