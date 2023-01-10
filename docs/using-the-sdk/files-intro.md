@@ -84,6 +84,9 @@ await testDocument.ListItemAllFields.UpdateOverwriteVersionAsync();
 
 If you don't load the `ParentList` details then field data of complex fields (e.g. Url fields) is not loaded correctly and metadata updates might fail.
 
+> [!Note]
+> Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the [Using audience targeting](audience-targeting-intro.md) page to learn more.
+
 ### Getting the file of a list item
 
 A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
@@ -307,6 +310,9 @@ addedFile.ListItemAllFields["Field2"] = true;
 // Persist the ListItem changes
 await addedFile.ListItemAllFields.UpdateAsync();
 ```
+
+> [!Note]
+> Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the [Using audience targeting](audience-targeting-intro.md) page to learn more.
 
 ## Updating the file Author, Editor, Created or Modified properties
 

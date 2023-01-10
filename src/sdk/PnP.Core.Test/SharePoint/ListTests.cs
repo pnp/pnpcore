@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -2162,6 +2163,69 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task AudienceTargetDocumentInListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AudienceTargetDocumentInListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    // Load relevant data
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, 
+                                                                     p => p.RootFolder,
+                                                                     p => p.Fields.QueryProperties(p => p.InternalName,
+                                                                                                   p => p.FieldTypeKind,
+                                                                                                   p => p.TypeAsString,
+                                                                                                   p => p.Title));
+                    // Enable audience targeting
+                    myList.EnableAudienceTargeting();
+
+                    // Upload document
+                    var fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
+                    IFile addedFile = await myList.RootFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+
+                    // Set audience for uploaded item
+                    await addedFile.LoadAsync(p => p.ListItemAllFields.QueryProperties(li => li.All));
+
+                    var batch = context.NewBatch();
+                    var myUser1 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|06ed1f73-c58d-45e8-ad07-66f4d1eed723");
+                    var myUser2 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|7bf72917-4c72-4a83-91d6-1362fcf7222a");
+                    var myUser3 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|0402aa20-e67a-47e3-bad4-03801247be9e");
+                    await context.ExecuteAsync(batch);
+
+                    var userCollection = new FieldValueCollection();
+                    userCollection.Values.Add(new FieldUserValue(myUser1));
+                    userCollection.Values.Add(new FieldUserValue(myUser2));
+                    userCollection.Values.Add(new FieldUserValue(myUser3));
+
+                    addedFile.ListItemAllFields.Values.Add("_ModernAudienceTargetUserField", userCollection);
+                    await addedFile.ListItemAllFields.UpdateAsync();
+
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
 
         #endregion
     }

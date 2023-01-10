@@ -122,3 +122,7 @@ var nodeToMoveAfter = await context.Web.Navigation.QuickLaunch.GetByIdAsync(2);
 // move the nodes
 await context.Web.Navigation.QuickLaunch.MoveNodeAfterAsync(nodeToMove, nodeToMoveAfter);
 ```
+
+## Using audience targeting
+
+Navigation nodes can be targeted to one or more audiences making the site's navigation dynamic depending on the user visiting the site. More details can be found on the [Using audience targeting](audience-targeting-intro.md) page.
