@@ -146,6 +146,10 @@ await testDocument.ListItemAllFields.UpdateOverwriteVersionAsync();
 // await testDocument.ListItemAllFields.UpdateAsync()
 </code></pre>
 <p>If you don't load the <code>ParentList</code> details then field data of complex fields (e.g. Url fields) is not loaded correctly and metadata updates might fail.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the <a href="audience-targeting-intro.html">Using audience targeting</a> page to learn more.</p>
+</div>
 <h3 id="getting-the-file-of-a-list-item">Getting the file of a list item</h3>
 <p>A document in a document library is an <code>IListItem</code> holding the file metadata with an <code>IFile</code> holding the actual file. If you have an <code>IListItem</code> you can load the connected file via <code>File</code> property:</p>
 <pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
@@ -327,6 +331,10 @@ addedFile.ListItemAllFields[&quot;Field2&quot;] = true;
 // Persist the ListItem changes
 await addedFile.ListItemAllFields.UpdateAsync();
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the <a href="audience-targeting-intro.html">Using audience targeting</a> page to learn more.</p>
+</div>
 <h2 id="updating-the-file-author-editor-created-or-modified-properties">Updating the file Author, Editor, Created or Modified properties</h2>
 <p>Each file has an <code>Author</code> property (the one who created the file), an <code>Editor</code> property (the one who last changed the file), a <code>Created</code> property (when was the file added) and a <code>Modified</code> property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the <code>UpdateOverwriteVersion</code> methods this however is possible as shown in below code snippet:</p>
 <pre><code class="lang-csharp">// Load the default documents folder of the site

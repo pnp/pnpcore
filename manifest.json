@@ -9185,6 +9185,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/audience-targeting-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/audience-targeting-intro.html",
+          "hash": "YebiMTT59+7TaNE9CwE+yolACpJ3X4AtkYxNMtwiXLQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-addupdatedelete.md",
       "output": {
         ".html": {
@@ -9501,7 +9513,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/files-intro.html",
-          "hash": "8yZvPq0Bb2RJV0WLRkFzJUAk+pLhiIkRZVRywIrmonY="
+          "hash": "KNA5FKmw0umgSGx4jJRiUm6Sn20F2J+yyL+SvxZuKoc="
         }
       },
       "is_incremental": false,
@@ -9669,7 +9681,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/navigation-intro.html",
-          "hash": "Z71L8czZDxcUTzqUP634/9p4MXVWLy+SN8UxFuhWaaA="
+          "hash": "jDHMxg2M/aPI7GQyHBkW91K3nZxUf+X9fV/ystTGEtA="
         }
       },
       "is_incremental": false,
@@ -10134,7 +10146,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 113,
+          "total_file_count": 114,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
