@@ -16,7 +16,7 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - In App registrations, click __New registration__
 
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __http://localhost__ (only needed if you want use an interactive authentication flow)
+- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in the *Mobile and desktop applications* platform enter __http://localhost__ (only needed if you want use an interactive authentication flow)
 
 - Under __Implicit grant__ section, check __ID tokens__ and __Access tokens__
 
