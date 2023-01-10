@@ -22,45 +22,127 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public NavigationNode()
         {
-            
+
             // Handler to construct the Add request for this list
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 var navigationNodeOptions = (NavigationNodeOptions)additionalInformation[NavigationNodeOptionsAdditionalInformationKey];
-                
-                var apiUrl = string.Empty;
-                if (navigationNodeOptions != null && navigationNodeOptions.ParentNode != null)
+
+                string apiUrl = BuildNavigationApiUrl(additionalInformation, navigationNodeOptions);
+
+                // Build body
+                ExpandoObject navigationNodeCreationInformation;
+                if (navigationNodeOptions.AudienceIds != null && navigationNodeOptions.AudienceIds.Count > 0)
                 {
-                    apiUrl += $"{getNodeUri.Replace("{Id}", navigationNodeOptions.ParentNode.Id.ToString())}/Children";
+                    navigationNodeCreationInformation = new
+                    {
+                        __metadata = new { type = NavigationConstants.NodeMetadataType },
+                        navigationNodeOptions.Title,
+                        navigationNodeOptions.Url,
+                        AudienceIds = new
+                        {
+                            __metadata = new { type = "Collection(Edm.Guid)" },
+                            results = navigationNodeOptions.AudienceIds.ToArray()
+                        },
+                    }.AsExpando();
                 }
                 else
                 {
-                    apiUrl = baseUri;
-                    var navigationType = (NavigationType)additionalInformation[NavigationTypeKey];
-                    if (navigationType == NavigationType.QuickLaunch)
+                    navigationNodeCreationInformation = new
                     {
-                        apiUrl += NavigationConstants.QuickLaunchUri;
-                    }
-                    else if (navigationType == NavigationType.TopNavigationBar)
-                    {
-                        apiUrl += NavigationConstants.TopNavigationBarUri;
-                    }
+                        __metadata = new { type = NavigationConstants.NodeMetadataType },
+                        navigationNodeOptions.Title,
+                        navigationNodeOptions.Url,
+                    }.AsExpando();
                 }
-
-                // Build body
-                var navigationNodeCreationInformation = new
-                {
-                    __metadata = new { type = NavigationConstants.NodeMetadataType },
-                    navigationNodeOptions.Title,
-                    navigationNodeOptions.Url
-                }.AsExpando();
 
                 string body = JsonSerializer.Serialize(navigationNodeCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 return new ApiCall(apiUrl, ApiType.SPORest, body);
             };
+        }
+
+        private static string BuildNavigationApiUrl(Dictionary<string, object> additionalInformation, NavigationNodeOptions navigationNodeOptions)
+        {
+            var apiUrl = string.Empty;
+            if (navigationNodeOptions != null && navigationNodeOptions.ParentNode != null)
+            {
+                apiUrl += $"{getNodeUri.Replace("{Id}", navigationNodeOptions.ParentNode.Id.ToString())}/Children";
+            }
+            else
+            {
+                apiUrl = baseUri;
+                var navigationType = (NavigationType)additionalInformation[NavigationTypeKey];
+                if (navigationType == NavigationType.QuickLaunch)
+                {
+                    apiUrl += NavigationConstants.QuickLaunchUri;
+                }
+                else if (navigationType == NavigationType.TopNavigationBar)
+                {
+                    apiUrl += NavigationConstants.TopNavigationBarUri;
+                }
+            }
+
+            return apiUrl;
+        }
+        #endregion
+
+        #region Override update payload generation
+        internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildUpdateApiCall();
+
+            await RawRequestAsync(api, new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
+        }
+
+        internal override async Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            var api = BuildUpdateApiCall();
+
+            // Add the request to the batch
+            await RawRequestBatchAsync(batch, api, new HttpMethod("PATCH"), "UpdateBatch").ConfigureAwait(false);
+        }
+
+        private ApiCall BuildUpdateApiCall()
+        {
+            ExpandoObject body;
+
+            if (AudienceIds != null && AudienceIds.Count > 0)
+            {
+                body = new
+                {
+                    __metadata = new { type = NavigationConstants.NodeMetadataType },                    
+                    Title,
+                    Url,
+                    IsVisible,
+                    AudienceIds = new
+                    {
+                        __metadata = new { type = "Collection(Edm.Guid)" },
+                        results = AudienceIds.ToArray()
+                    },
+                }.AsExpando();
+            }
+            else
+            {
+                body = new
+                {
+                    __metadata = new { type = NavigationConstants.NodeMetadataType },
+                    Title,
+                    Url,
+                    IsVisible,
+                    AudienceIds = new
+                    {
+                        __metadata = new { type = "Collection(Edm.Guid)" },
+                        results = new List<Guid>().ToArray()
+                    },
+                }.AsExpando();
+            }
+
+            string bodyString = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+
+            return new ApiCall($"{getNodeUri}", ApiType.SPORest, bodyString);
         }
         #endregion
 

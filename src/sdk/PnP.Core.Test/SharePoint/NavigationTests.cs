@@ -327,5 +327,89 @@ namespace PnP.Core.Test.SharePoint
                 await secondNode.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddQuickLaunchItemUsingAudienceTargeting()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                INavigationNode parentNode = null;
+                try
+                {
+                    // Ensure audience targeting is enabled for navigation nodes
+                    context.Web.EnsureProperties(w => w.NavAudienceTargetingEnabled);
+                    context.Web.NavAudienceTargetingEnabled = true;
+                    context.Web.Update();
+
+                    parentNode = await context.Web.Navigation.QuickLaunch.AddAsync(
+                      new NavigationNodeOptions
+                      {
+                          Title = "Parent Node",
+                          Url = context.Uri.AbsoluteUri,
+                          AudienceIds = new System.Collections.Generic.List<Guid> { context.Site.GroupId }
+                      });
+                }
+                finally
+                {
+                    if (parentNode != null)
+                    {
+                        await parentNode.DeleteAsync();
+                    }
+                    
+                    context.Web.NavAudienceTargetingEnabled = false;
+                    context.Web.Update();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task UpdateQuickLaunchItemUsingAudienceTargeting()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                INavigationNode parentNode = null;
+                try
+                {
+                    // Ensure audience targeting is enabled for navigation nodes
+                    context.Web.EnsureProperties(w => w.NavAudienceTargetingEnabled);
+                    context.Web.NavAudienceTargetingEnabled = true;
+                    context.Web.Update();
+
+                    // Create the node without audience targeting
+                    parentNode = await context.Web.Navigation.QuickLaunch.AddAsync(
+                      new NavigationNodeOptions
+                      {
+                          Title = "Parent Node",
+                          Url = context.Uri.AbsoluteUri,
+                          //AudienceIds = new System.Collections.Generic.List<Guid> { context.Site.GroupId }
+                      });
+
+                    // Load the created node again
+                    parentNode = context.Web.Navigation.QuickLaunch.GetById(parentNode.Id);
+
+                    // Update the node adding an audience
+                    parentNode.AudienceIds = new System.Collections.Generic.List<Guid> { context.Site.GroupId };
+                    parentNode.Update();
+
+                    parentNode = context.Web.Navigation.QuickLaunch.GetById(parentNode.Id);
+                    
+                    // Remove the audience again
+                    parentNode.AudienceIds.Clear();
+                    parentNode.Update();
+                }
+                finally
+                {
+                    if (parentNode != null)
+                    {
+                        await parentNode.DeleteAsync();
+                    }
+
+                    context.Web.NavAudienceTargetingEnabled = false;
+                    context.Web.Update();
+                }
+            }
+        }
     }
 }
