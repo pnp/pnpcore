@@ -92,10 +92,10 @@
 <h2 id="getting-all-the-navigation-nodes-for-a-specific-navigation-type">Getting all the navigation nodes for a specific navigation type</h2>
 <p>As discussed before, the navigation nodes can be obtained for two types.</p>
 <pre><code class="lang-csharp">// Get Quick Launch navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n =&gt; n.QuickLaunch);
+var nodes = await context.Web.Navigation.GetAsync(n =&gt; n.QuickLaunch);
 
 // Get Top Navigation navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n =&gt; n.TopNavigationBar);
+var nodes = await context.Web.Navigation.GetAsync(n =&gt; n.TopNavigationBar);
 </code></pre>
 <h2 id="getting-a-specific-navigation-node-by-id">Getting a specific navigation node by id</h2>
 <p>We can obtain a navigation node by his unique property <code>id</code>:</p>
