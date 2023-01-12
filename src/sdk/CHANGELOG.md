@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `EnableAudienceTargeting` methods on `IList` [jansenbe - Bert Jansen]
 - Added support for adding, updating and removing audiences on navigation nodes #1065 [jansenbe - Bert Jansen]
 - Admin library: added 43 new properties to `ITenantProperties` [jansenbe - Bert Jansen]
+- Admin library: added 15 new properties to `ISiteCollectionProperties` [jansenbe - Bert Jansen]
 
 ### Changed
 
