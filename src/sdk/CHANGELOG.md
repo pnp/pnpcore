@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Configure whether the web templates dialog shows up or not via the `WebTemplatesGalleryFirstRunEnabled` property on `IWeb` #1057 [jansenbe - Bert Jansen]
 - Added `EnableAudienceTargeting` methods on `IList` [jansenbe - Bert Jansen]
 - Added support for adding, updating and removing audiences on navigation nodes #1065 [jansenbe - Bert Jansen]
+- Admin library: added 43 new properties to `ITenantProperties` [jansenbe - Bert Jansen]
 
 ### Changed
 
