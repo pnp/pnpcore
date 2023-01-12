@@ -198,7 +198,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task GetTenantProperties()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var tenantProperties = context.GetSharePointAdmin().GetTenantProperties();
