@@ -170,18 +170,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ChannelMeetingRecordingPermissionType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ChannelMeetingRecordingPermissionType.html",
-          "hash": "ETH5ROjHNlyCJlSGmO4ZlbvKjJn0TQGNuysxsq2kWpc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.yml",
       "output": {
         ".html": {
@@ -498,7 +486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html",
-          "hash": "+l5FL2gZRaacV/SxpIHEkUZ11AfeFz4eTkUjHrBdpxA="
+          "hash": "OxmdV6Xo1UYoWM5V74vBVfirJWKd5PSmXDr3PS8ALf0="
         }
       },
       "is_incremental": false,
@@ -554,6 +542,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.NullableBool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.NullableBool.html",
+          "hash": "1Z9niLsRx2mVxtZmMqjlr08WuteBP3SN7Wn1qVSvw88="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ObjectCharacterRecognitionMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ObjectCharacterRecognitionMode.html",
+          "hash": "0LbAcov2U8tO49vvrP3v2POfD9n7DTQfE3ZP2WcYoTk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.PWAEnabledStatus.yml",
       "output": {
         ".html": {
@@ -578,6 +590,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPBlockDownloadFileTypeId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPBlockDownloadFileTypeId.html",
+          "hash": "LGBCL98iGwGpF9QcJ/UUa9m7zSLE7+wcnYhlSMFHcVk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOConditionalAccessPolicyType.yml",
       "output": {
         ".html": {
@@ -595,6 +619,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOLimitedAccessFileType.html",
           "hash": "eR+rwMIRt5bL7HiEEJLmqqJv1wQIYc+//N4pyWy9Gm0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOTlsTokenBindingPolicyValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOTlsTokenBindingPolicyValue.html",
+          "hash": "Jl17t2+Fm4PigRdSVxoAAV3VORQHCOZvEJtHleH3lTw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPResilienceModeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPResilienceModeType.html",
+          "hash": "ArRs3SX+QzVCn7zt3M3/FjCgFW57J1OdcbN9niK4P9o="
         }
       },
       "is_incremental": false,
@@ -655,6 +703,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingPermissionType.html",
           "hash": "EORXg1cM0vujTTeuMt8rJUYCtbkkDk3VB1DbQUADhT0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingScope.html",
+          "hash": "+KwtBPrjIH6nupgzBVYbNLUv6c7B6lXuskArk4LHTE4="
         }
       },
       "is_incremental": false,
@@ -810,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "L6tkZ7k1I2aukpwK4f4EO8nh9TY4CvSeRY/I0euRvuw="
+          "hash": "WU/aZ5/jepvQ0zsUQrt96jvacuZG/YhG7ool0CW5KHU="
         }
       },
       "is_incremental": false,
@@ -5726,6 +5786,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Role.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Role.html",
+          "hash": "gZsr6Ntct+UCMNBOpoULWs03WXKTgxcugoxjst4aBp8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.RoleType.yml",
       "output": {
         ".html": {
@@ -6198,7 +6270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "eeY8MkUsJlO3GojI+vug66xAEov6uF9BAf4UA9wRebo="
+          "hash": "vV6bUZ4JylRVFDZ3b+TmHUwCMM+Ddboowl9DBkW0rJQ="
         }
       },
       "is_incremental": false,
@@ -8214,7 +8286,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "uTAG1XZLNPfUsM7AyvaHVyMsE0sJSqi8vKebA66vyEU="
+          "hash": "Sp5FLd7K2jS5sFkbtKF5dZDyjcM1yVZ/oieE40e/kUg="
         }
       },
       "is_incremental": false,
@@ -10152,7 +10224,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 682,
+          "total_file_count": 688,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
