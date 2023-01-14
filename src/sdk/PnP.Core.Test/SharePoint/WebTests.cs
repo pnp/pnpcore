@@ -1098,6 +1098,40 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task UsersExistTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var userList = new List<string> { currentUser.UserPrincipalName, "xyz123@bertonline.onmicrosoft.com" };
+
+                var nonExistingUsers = context.Web.ValidateUsers(userList);
+
+                Assert.IsTrue(nonExistingUsers.Count == 1);
+                Assert.IsTrue(nonExistingUsers[0] == "xyz123@bertonline.onmicrosoft.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task ValidateAndEnsureUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var userList = new List<string> { currentUser.UserPrincipalName, "xyz123@bertonline.onmicrosoft.com" };
+
+                var existingUserList = context.Web.ValidateAndEnsureUsers(userList);
+
+                Assert.IsTrue(existingUserList.Count == 1);
+                Assert.IsTrue(existingUserList[0].Id == currentUser.Id);
+            }
+        }
+
+        [TestMethod]
         public async Task GetAssociatedGroups()
         {
             //TestCommon.Instance.Mocking = false;

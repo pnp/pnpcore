@@ -1,6 +1,7 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -1016,6 +1017,33 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
         public Task<ISharePointUser> GetUserByIdBatchAsync(Batch batch, int userId);
 
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>>A list of users that were not found in Azure AD</returns>
+        public Task<IList<string>> ValidateUsersAsync(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>A list of users that were not found in Azure AD</returns>
+        public IList<string> ValidateUsers(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD and returns the 'ensured' SharePoint user
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>The list of <see cref="ISharePointUser"/> that exist</returns>
+        public Task<IList<ISharePointUser>> ValidateAndEnsureUsersAsync(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD and returns the 'ensured' SharePoint user
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>The list of <see cref="ISharePointUser"/> that exist</returns>
+        public IList<ISharePointUser> ValidateAndEnsureUsers(IList<string> userList);
         #endregion
 
         #region Multi-lingual

@@ -938,6 +938,64 @@ namespace PnP.Core.Model.SharePoint
         {
             return new ApiCall($"_api/Web/GetUserById({userId})", ApiType.SPORest);
         }
+
+        public async Task<IList<string>> ValidateUsersAsync(IList<string> userList)
+        {
+            List<string> nonExistingUsers = new();
+
+            if (userList == null || userList.Count == 0)
+            {
+                return nonExistingUsers;
+            }
+
+            List<Tuple<string, BatchRequest>> requests = new();
+            var batch = PnPContext.NewBatch();
+            foreach(var user in userList)
+            {
+                requests.Add(Tuple.Create(user, await RawRequestBatchAsync(batch, new ApiCall($"users/{user}", ApiType.Graph), HttpMethod.Get, "GetUser").ConfigureAwait(false)));
+            }
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            foreach (var request in requests)
+            {
+                if (request.Item2.ResponseHeaders.Count == 0)
+                {
+                    nonExistingUsers.Add(request.Item1);
+                }
+            }
+          
+            return nonExistingUsers;
+        }
+
+        public IList<string> ValidateUsers(IList<string> userList)
+        {
+            return ValidateUsersAsync(userList).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList<ISharePointUser>> ValidateAndEnsureUsersAsync(IList<string> userList)
+        {
+            var nonExistingUsers = await ValidateUsersAsync(userList).ConfigureAwait(false);
+
+            List<ISharePointUser> ensuredUsers = new();
+            
+            var batch = PnPContext.NewBatch();
+            foreach (var user in userList)
+            {
+                if (!nonExistingUsers.Contains(user))
+                {
+                    ensuredUsers.Add(await EnsureUserBatchAsync(batch, user).ConfigureAwait(false));
+                }
+            }
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            return ensuredUsers;
+        }
+
+        public IList<ISharePointUser> ValidateAndEnsureUsers(IList<string> userList)
+        {
+            return ValidateAndEnsureUsersAsync(userList).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #region Multilingual
