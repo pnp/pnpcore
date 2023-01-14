@@ -148,8 +148,25 @@ var specialUser = await context.Web.EnsureUserAsync(&quot;Everyone except extern
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Using <code>EnsureUser</code> will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling <code>EnsureUser</code> this method will not return an error. Calling one of hte <code>AsGraphUser</code> method will perform an actual validation.</p>
+<p>Using <code>EnsureUser</code> will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling <code>EnsureUser</code> this method will not return an error. Calling one of the <code>ValidateAndEnsureUsers</code> method is the best option here, alternatively calling <code>AsGraphUser</code> method will perform an actual validation and throw an error is the user does not exist in Azure AD.</p>
 </div>
+<h3 id="validating-users">Validating users</h3>
+<p>When you've a list of users and you want to validate if these users still exist in Azure AD then use the <code>ValidateUsers</code> methods, if you also want to ensure (see previous chapter) that exist in Azure AD use the <code>ValidateAndEnsureUsers</code> methods.</p>
+<pre><code class="lang-csharp">var userList = new List&lt;string&gt; 
+{ 
+    &quot;ValidUser1@contoso.onmicrosoft.com&quot;, 
+    &quot;ValidUser2@contoso.onmicrosoft.com&quot;, 
+    &quot;NonExistingUser@contoso.onmicrosoft.com&quot; 
+};
+
+// Check users, returns a list containing the NonExistingUser@contoso.onmicrosoft.com user
+var nonExistingUsers = await context.Web.ValidateUsersAsync(userList);
+
+// Checks users and ensures the ones that exist in Azure AD. 
+// Returns a list with 2 ISharePointUser instances for ValidUser1@contoso.onmicrosoft.com
+// and ValidUser2@contoso.onmicrosoft.com
+var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
+</code></pre>
 <h2 id="granting-permissions-for-a-user-at-web-level">Granting permissions for a user at web level</h2>
 <p>Once a user is added you can directly permission the user by granting it one or more role definitions via one of the <code>AddRoleDefinitions</code> methods. You can also enumerate the roles a user has via the <code>GetRoleDefinitions</code> methods and remove granted roles via the <code>RemoveRoleDefinitions</code> methods. These methods are equivalent to using the methods provided via the <code>ISecurableObject</code> interface on <code>IWeb</code>.</p>
 <pre><code class="lang-csharp">var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
