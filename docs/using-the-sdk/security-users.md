@@ -62,7 +62,28 @@ var specialUser = await context.Web.EnsureUserAsync("Everyone except external us
 ```
 
 > [!Important]
-> Using `EnsureUser` will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling `EnsureUser` this method will not return an error. Calling one of hte `AsGraphUser` method will perform an actual validation.
+> Using `EnsureUser` will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling `EnsureUser` this method will not return an error. Calling one of the `ValidateAndEnsureUsers` method is the best option here, alternatively calling `AsGraphUser` method will perform an actual validation and throw an error is the user does not exist in Azure AD.
+
+### Validating users
+
+When you've a list of users and you want to validate if these users still exist in Azure AD then use the `ValidateUsers` methods, if you also want to ensure (see previous chapter) that exist in Azure AD use the `ValidateAndEnsureUsers` methods.
+
+```csharp
+var userList = new List<string> 
+{ 
+    "ValidUser1@contoso.onmicrosoft.com", 
+    "ValidUser2@contoso.onmicrosoft.com", 
+    "NonExistingUser@contoso.onmicrosoft.com" 
+};
+
+// Check users, returns a list containing the NonExistingUser@contoso.onmicrosoft.com user
+var nonExistingUsers = await context.Web.ValidateUsersAsync(userList);
+
+// Checks users and ensures the ones that exist in Azure AD. 
+// Returns a list with 2 ISharePointUser instances for ValidUser1@contoso.onmicrosoft.com
+// and ValidUser2@contoso.onmicrosoft.com
+var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
+```
 
 ## Granting permissions for a user at web level
 
