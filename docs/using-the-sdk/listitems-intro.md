@@ -182,7 +182,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
-> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope=RecursiveAll` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
+> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope='RecursiveAll'` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
 
 #### Using paging with LoadItemsByCamlQuery
 
@@ -362,7 +362,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
-> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope=RecursiveAll` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
+> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope='RecursiveAll'` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
 > - When you need to fetch additional fields populated via a lookup column just specify the field in the `ViewFields` node of the CAML query, e.g. `<FieldRef Name='LookupSingle_x003a_Created' />` loads the `Created` field brought via the lookup column named `LookupSingle`
 
 #### Using paging with ListDataAsStream
