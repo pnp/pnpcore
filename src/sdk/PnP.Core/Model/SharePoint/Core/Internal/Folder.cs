@@ -40,7 +40,7 @@ namespace PnP.Core.Model.SharePoint
                 //throw new ClientException(ErrorType.Unsupported, OnPCoreResources.Exception_Unsupported_AddingContentTypeToList);
                 //}
 
-                string encodedPath = WebUtility.UrlEncode(Name.Replace("'", "''")).Replace("+", "%20");
+                string encodedPath = WebUtility.UrlEncode(Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
                 return new ApiCall($"{entity.SharePointGet}/AddUsingPath(decodedurl='{encodedPath}')", ApiType.SPORest);
             };
         }

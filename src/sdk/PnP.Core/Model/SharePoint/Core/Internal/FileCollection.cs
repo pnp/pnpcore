@@ -73,7 +73,7 @@ namespace PnP.Core.Model.SharePoint
         #region File upload
         private static async Task<File> FileUpload(File newFile, Stream content, bool overwrite)
         {
-            var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''")).Replace("+", "%20");
+            var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/addusingpath(decodedUrl='{encodedServerFileName}',overwrite={overwrite.ToString().ToLowerInvariant()})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {

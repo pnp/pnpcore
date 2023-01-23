@@ -60,7 +60,7 @@ namespace PnP.Core.Services
                     if (model.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
                     {
                         // Encode the ID value to enable it to be used in methods using DecodedUrl input. Typically these methods end on Path
-                        var idAsPathValue = WebUtility.UrlEncode(model.Metadata[PnPConstants.MetaDataRestId].Replace("'", "''")).Replace("+", "%20");
+                        var idAsPathValue = WebUtility.UrlEncode(model.Metadata[PnPConstants.MetaDataRestId].Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
                         result = result.Replace("{IdAsPath}", idAsPathValue);
                     }
                 }
