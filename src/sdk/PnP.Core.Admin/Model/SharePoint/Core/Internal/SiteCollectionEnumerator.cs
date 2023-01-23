@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -146,7 +147,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, int pageSize = 500)
+        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, bool includeSharedAndPrivateTeamChannelSites, int pageSize = 500)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -171,12 +172,120 @@ namespace PnP.Core.Admin.Model.SharePoint
                                             <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
                                          </View>";
 
-            List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
+            List<ISiteCollectionWithDetails> loadedSites = new();
 
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
             }, vanityUrlOptions, true, pageSize).ConfigureAwait(false);
+
+            // Perform an extra query to list all the shared/private Teams channel site collections
+            if (includeSharedAndPrivateTeamChannelSites)
+            {
+                string sitesListFilterQuery = @"<View Scope='RecursiveAll'>
+                                                <ViewFields>
+                                                    <FieldRef Name='SiteUrl' />
+                                                    <FieldRef Name='Title' />
+                                                    <FieldRef Name='SiteId' />
+                                                    <FieldRef Name='GroupId' />
+                                                    <FieldRef Name='CreatedBy' />
+                                                    <FieldRef Name='DeletedBy' />
+                                                    <FieldRef Name='TimeCreated' />
+                                                    <FieldRef Name='TimeDeleted' />
+                                                    <FieldRef Name='SiteOwnerName' />
+                                                    <FieldRef Name='SiteOwnerEmail' />
+                                                    <FieldRef Name='StorageQuota' />
+                                                    <FieldRef Name='StorageUsed' />                                                    
+                                                    <FieldRef Name='TemplateName' />
+                                                    <FieldRef Name='ChannelType' />
+                                                </ViewFields>
+                                                <Query>
+                                                    <Where>
+                                                        <Gt>
+                                                            <FieldRef Name='ChannelType' /><Value Type='Integer'>0</Value>
+                                                        </Gt>
+                                                    </Where>
+                                                </Query>
+                                                <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+                                                <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
+                                                </View>";
+
+                List<ISiteCollectionWithDetails> channelSites = new();
+
+                await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListFilterQuery, (IEnumerable<IListItem> listItems) =>
+                {
+                    foreach (var listItem in listItems)
+                    {
+                        if (listItem["DeletedBy"] != null)
+                        {
+                            continue;
+                        }
+
+                        Uri url = new Uri(listItem["SiteUrl"].ToString());
+                        Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                        
+                        if (channelSites.FirstOrDefault(p => p.Id == siteId) == null)
+                        {
+                            channelSites.Add(new SiteCollectionWithDetails()
+                            {
+                                // WebId needs to be retrieved via a subsequent batch call
+                                //GraphId = $"{url.DnsSafeHost},{siteId},{webId}",
+                                //RootWebId = webId,
+                                Url = new Uri(listItem["SiteUrl"].ToString()),
+                                Id = siteId,
+                                Name = listItem["Title"]?.ToString(),
+                                CreatedBy = listItem["CreatedBy"]?.ToString(),
+                                TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                                // Hardcoded to false as the sharing happens via the Teams channel
+                                ShareByEmailEnabled = false,
+                                ShareByLinkEnabled = false,
+                                SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                                SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                                StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                                StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                                // Template id for TeamChannel sites
+                                TemplateId = 69,
+                                TemplateName = listItem["TemplateName"]?.ToString(),
+                            });
+                        }
+                    }
+
+                }, vanityUrlOptions, false, pageSize).ConfigureAwait(false);
+
+                // Complement the collected site information with the web id, using batching to optimize the number of roundtrips
+                if (channelSites.Count > 0)
+                {
+                    List<Tuple<Uri, IBatchSingleResult<BatchResultValue<string>>>> batchResults = new();
+                    var batch = context.NewBatch();
+                    foreach (var site in channelSites)
+                    {
+                        var apiRequest = new ApiRequest(ApiRequestType.SPORest, $"{site.Url}/_api/web?$select=Id");
+                        var response = await context.Web.ExecuteRequestBatchAsync(batch, apiRequest).ConfigureAwait(false);
+                        batchResults.Add(Tuple.Create(site.Url, response));
+                    }
+                    await context.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+                    foreach(var batchResult in batchResults)
+                    {
+                        var siteCollectionWithDetailsToUpdate = channelSites.FirstOrDefault(p => p.Url == batchResult.Item1);
+                        if (siteCollectionWithDetailsToUpdate != null && batchResult.Item2.IsAvailable)
+                        {
+                            var json = JsonSerializer.Deserialize<JsonElement>(batchResult.Item2.Result.Value);
+                            if (json.TryGetProperty("d", out JsonElement root))
+                            {
+                                if (root.TryGetProperty("Id", out JsonElement id))
+                                {
+                                    ((SiteCollectionWithDetails)siteCollectionWithDetailsToUpdate).RootWebId = id.GetGuid();
+                                    ((SiteCollectionWithDetails)siteCollectionWithDetailsToUpdate).GraphId = $"{siteCollectionWithDetailsToUpdate.Url.DnsSafeHost},{siteCollectionWithDetailsToUpdate.Id},{id.GetGuid()}";
+                                }
+                            }
+                        }
+                    }
+
+                    // Merge with the loadedSites list
+                    loadedSites.AddRange(channelSites);
+                }
+            }
 
             return loadedSites;
         }

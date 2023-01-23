@@ -24,14 +24,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin, filter, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null)
+        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null, bool includeSharedAndPrivateTeamChannelSites = false)
         {
-            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, vanityUrlOptions: vanityUrlOptions).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, vanityUrlOptions: vanityUrlOptions, includeSharedAndPrivateTeamChannelSites).ConfigureAwait(false);
         }
 
-        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null)
+        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null, bool includeSharedAndPrivateTeamChannelSites = false)
         {
-            return GetSiteCollectionsWithDetailsAsync(vanityUrlOptions).GetAwaiter().GetResult();
+            return GetSiteCollectionsWithDetailsAsync(vanityUrlOptions, includeSharedAndPrivateTeamChannelSites).GetAwaiter().GetResult();
         }
 
         public async Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url, VanityUrlOptions vanityUrlOptions = null)

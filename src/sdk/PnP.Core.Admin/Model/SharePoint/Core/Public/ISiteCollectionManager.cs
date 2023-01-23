@@ -44,8 +44,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// have the proper permissions
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <param name="includeSharedAndPrivateTeamChannelSites">Optionally include the site collections behind shared and private Microsoft Teams channels</param>
         /// <returns>A list of site collections with details</returns>
-        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null);
+        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync(VanityUrlOptions vanityUrlOptions = null, bool includeSharedAndPrivateTeamChannelSites = false);
 
         /// <summary>
         /// Returns a list of the site collections in the current tenant including details about the site. This method
@@ -53,8 +54,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// have the proper permissions
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <param name="includeSharedAndPrivateTeamChannelSites">Optionally include the site collections behind shared and private Microsoft Teams channels</param>
         /// <returns>A list of site collections with details</returns>
-        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null);
+        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails(VanityUrlOptions vanityUrlOptions = null, bool includeSharedAndPrivateTeamChannelSites = false);
 
         /// <summary>
         /// Returns details about the requested site. This method

@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: added 43 new properties to `ITenantProperties` [jansenbe - Bert Jansen]
 - Admin library: added 15 new properties to `ISiteCollectionProperties` [jansenbe - Bert Jansen]
 - Bulk user validation method `ValidateUsersAsync` and `ValidateAndEnsureUsersAsync` on `IWeb` [jansenbe - Bert Jansen]
+- When using the `GetSiteCollectionsWithDetailsAsync` method you now can choose to also return the site collections linked to private and shared Teams channels #1076 [jansenbe - Bert Jansen]
 
 ### Changed
 
