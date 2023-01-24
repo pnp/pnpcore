@@ -99,6 +99,11 @@
     var url = context.GetSharePointAdmin().GetTenantAdminCenterUri();
 }
 </code></pre>
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>If your tenant is using vanity URL's then you'll need to populate the <code>VanityUrlOptions</code> class and pass it to any method that allows it.</p>
+</div>
 <h2 id="enumerate-the-site-collections-in-a-tenant">Enumerate the site collections in a tenant</h2>
 <p>The typical SharePoint Online tenants contains hundreds of site collections and for quite often there's a need to perform admin tasks on all site collections, so being able to enumerate sites is important. The PnP Core SDK Admin component offers two approaches.</p>
 <h3 id="getting-all-site-collections">Getting all site collections</h3>
@@ -129,9 +134,13 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 <li>Storage quota information</li>
 <li>Template details</li>
 </ul>
+<p>This method also can optionally return the site collections connected to shared and private Microsoft Teams channels by setting the <code>includeSharedAndPrivateTeamChannelSites</code> parameter.</p>
 <p>Below sample shows how to use the <code>GetSiteCollectionsWithDetails</code> methods:</p>
 <pre><code class="lang-csharp">// Get a list of site collections with details about each site collection
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
+
+// Get a list of site collections with details about each site collection, including the site collections connected to shared and private Microsoft Teams channels
+var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync(includeSharedAndPrivateTeamChannelSites: true);
 
 // Get details for one given site collection
 var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollectionWithDetailsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetocheck&quot;));
