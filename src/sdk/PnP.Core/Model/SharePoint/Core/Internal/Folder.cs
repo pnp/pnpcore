@@ -353,6 +353,28 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Rename folder
+        public async Task RenameFolderAsync(string name)
+        {
+            var (driveId, driveItemId) = await GetGraphIdsAsync().ConfigureAwait(false);
+
+            dynamic body = new
+            {
+                name
+            };
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+            await RequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
+            // Update the Name property without marking the folder as changed
+            SetSystemValue(name, nameof(Name));
+        }
+
+        public void RenameFolder(string name)
+        {
+            RenameFolderAsync(name).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Get Changes
 
         public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
