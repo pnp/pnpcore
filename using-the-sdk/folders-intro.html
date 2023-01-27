@@ -156,6 +156,19 @@ await context.Web.EnsurePropertiesAsync(p =&gt; p.RootFolder);
 context.Web.RootFolder.WelcomePage = &quot;sitepages/myhomepage.aspx&quot;;
 await context.Web.RootFolder.UpdateAsync();
 </code></pre>
+<h2 id="renaming-folders">Renaming folders</h2>
+<p>To rename a folder you can either use the <code>Rename</code> methods or use the <code>MoveTo</code> methods.</p>
+<pre><code class="lang-csharp">string folderUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/Test&quot;;
+
+// Get a reference to the folder
+IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(folderUrl);
+
+// Option A: Use the Rename methods
+await testFolder.Rename(&quot;Test2&quot;);
+
+// Option B: Move the folder to rename it
+await testFolder.MoveToAsync($&quot;{context.Uri.PathAndQuery}/Shared Documents/Test2&quot;);
+</code></pre>
 <h2 id="deleting-folders">Deleting folders</h2>
 <pre><code class="lang-csharp">// Get the root folder of the Site Pages library
 IFolder folder = (await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, p =&gt; p.RootFolder)).RootFolder;
