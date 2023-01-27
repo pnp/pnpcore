@@ -625,7 +625,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(addedFolder.Name == "sub1");
 
                     // rename the added folder
-                    addedFolder.RenameFolder("newsub1");
+                    addedFolder.Rename("newsub1");
 
                     Assert.IsTrue(addedFolder.Name == "newsub1");
 

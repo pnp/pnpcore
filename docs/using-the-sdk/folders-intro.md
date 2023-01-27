@@ -99,6 +99,23 @@ context.Web.RootFolder.WelcomePage = "sitepages/myhomepage.aspx";
 await context.Web.RootFolder.UpdateAsync();
 ```
 
+## Renaming folders
+
+To rename a folder you can either use the `Rename` methods or use the `MoveTo` methods.
+
+```csharp
+string folderUrl = $"{context.Uri.PathAndQuery}/Shared Documents/Test";
+
+// Get a reference to the folder
+IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(folderUrl);
+
+// Option A: Use the Rename methods
+await testFolder.Rename("Test2");
+
+// Option B: Move the folder to rename it
+await testFolder.MoveToAsync($"{context.Uri.PathAndQuery}/Shared Documents/Test2");
+```
+
 ## Deleting folders
 
 ```csharp

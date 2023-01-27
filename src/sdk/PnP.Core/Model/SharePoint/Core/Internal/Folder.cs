@@ -354,7 +354,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Rename folder
-        public async Task RenameFolderAsync(string name)
+        public async Task RenameAsync(string name)
         {
             var (driveId, driveItemId) = await GetGraphIdsAsync().ConfigureAwait(false);
 
@@ -369,9 +369,9 @@ namespace PnP.Core.Model.SharePoint
             SetSystemValue(name, nameof(Name));
         }
 
-        public void RenameFolder(string name)
+        public void Rename(string name)
         {
-            RenameFolderAsync(name).GetAwaiter().GetResult();
+            RenameAsync(name).GetAwaiter().GetResult();
         }
         #endregion
 

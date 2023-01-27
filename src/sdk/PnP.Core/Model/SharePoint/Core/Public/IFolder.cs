@@ -271,14 +271,14 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="name">New folder name</param>
         /// <returns></returns>
-        public Task RenameFolderAsync(string name);
+        public Task RenameAsync(string name);
 
         /// <summary>
         /// Renames a folder
         /// </summary>
         /// <param name="name">New folder name</param>
         /// <returns></returns>
-        public void RenameFolder(string name);
+        public void Rename(string name);
         #endregion
 
         #region Syntex support
