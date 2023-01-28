@@ -110,7 +110,7 @@ string folderUrl = $"{context.Uri.PathAndQuery}/Shared Documents/Test";
 IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(folderUrl);
 
 // Option A: Use the Rename methods
-await testFolder.Rename("Test2");
+await testFolder.RenameAsync("Test2");
 
 // Option B: Move the folder to rename it
 await testFolder.MoveToAsync($"{context.Uri.PathAndQuery}/Shared Documents/Test2");
