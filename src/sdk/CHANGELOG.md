@@ -37,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added more values for `ListTemplateType` [jansenbe - Bert Jansen]
 - Added `UserCustomActions` to `IList` [jansenbe - Bert Jansen]
 - Fixed enum order for `ListExperience` [jansenbe - Bert Jansen]
+- Extended the `IPnPContext` interface to contain all the public method and properties to better support mocking in unit tests #1083 [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 
