@@ -12,7 +12,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// PnPContext interface to support mocking (that's the only reason)
     /// </summary>
-    public interface IPnPContext
+    public interface IPnPContext : IDisposable
     {
         /// <summary>
         /// Entry point for the Web Object
