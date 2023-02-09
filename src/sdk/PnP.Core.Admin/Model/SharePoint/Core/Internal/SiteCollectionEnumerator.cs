@@ -360,7 +360,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
 
-            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.AbsoluteUri), (IEnumerable<IListItem> listItems) =>
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.OriginalString), (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
             }, vanityUrlOptions, true, 500).ConfigureAwait(false);

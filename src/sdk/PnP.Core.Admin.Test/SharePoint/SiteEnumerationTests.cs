@@ -224,5 +224,19 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task EnumerateRootSiteWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var site = context.GetSiteCollectionManager().GetSiteCollectionWithDetails(new Uri($"https://{context.Uri.DnsSafeHost}"));
+
+                Assert.IsTrue(site != null);
+                
+            }
+        }
+
     }
 }
