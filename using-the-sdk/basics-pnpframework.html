@@ -118,7 +118,7 @@ using (var csomContext = authManager.GetContext(&quot;https://contoso.sharepoint
 }
 </code></pre>
 <h2 id="using-pnp-framework-when-the-pnp-core-sdk-was-already-configured">Using PnP Framework when the PnP Core SDK was already configured</h2>
-<p>If you already have a PnP Core SDK context and you want also use PnP Framework and/or SharePoint CSOM then you can create a CSOM ClientContext from your PnP Context via the <code>PnPCoreSDK.Instance.GetContext()</code> method.</p>
+<p>If you already have a PnP Core SDK context and you want also use PnP Framework and/or SharePoint CSOM then you can create a CSOM ClientContext from your PnP Context via the <code>PnPCoreSDK.Instance.GetClientContext()</code> method.</p>
 <pre><code class="lang-csharp">using (var pnpCoreContext = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Use PnP Core SDK (Microsoft Graph / SPO Rest) to load the web title
