@@ -73,6 +73,34 @@ namespace PnP.Core.Model.Security
         #region Methods
 
         /// <summary>
+        /// Adds permissions for a set of users to a specific permission
+        /// </summary>
+        /// <param name="recipients">List of recipients to add</param>
+        /// <returns></returns>
+        Task<IGraphPermission> GrantUserPermissionsAsync(List<IDriveRecipient> recipients);
+
+        /// <summary>
+        /// Adds permissions for a set of users to a specific permission
+        /// </summary>
+        /// <param name="recipients">List of recipients to add</param>
+        /// <returns></returns>
+        IGraphPermission GrantUserPermissions(List<IDriveRecipient> recipients);
+
+        /// <summary>
+        /// Removes permissions for a set of users from a specific permission
+        /// </summary>
+        /// <param name="recipients">List of recipients to remove</param>
+        /// <returns></returns>
+        Task<IGraphPermission> RemoveUserPermissionsAsync(List<IDriveRecipient> recipients);
+
+        /// <summary>
+        /// Removes permissions for a set of users from a specific permission
+        /// </summary>
+        /// <param name="recipients">List of recipients to remove</param>
+        /// <returns></returns>
+        IGraphPermission RemoveUserPermissions(List<IDriveRecipient> recipients);
+
+        /// <summary>
         /// Delete a specific permission
         /// </summary>
         Task DeletePermissionAsync();
