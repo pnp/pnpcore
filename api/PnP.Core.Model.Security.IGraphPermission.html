@@ -569,7 +569,7 @@ Note: Read-only.</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_DeletePermission.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.DeletePermission%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IGraphPermission_DeletePermission_" data-uid="PnP.Core.Model.Security.IGraphPermission.DeletePermission*"></a>
@@ -604,7 +604,7 @@ Note: Read-only.</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_DeletePermissionAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.DeletePermissionAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L78" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IGraphPermission_DeletePermissionAsync_" data-uid="PnP.Core.Model.Security.IGraphPermission.DeletePermissionAsync*"></a>
@@ -627,6 +627,226 @@ Note: Read-only.</p>
     <tr>
       <td>
         <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_GrantUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.GrantUserPermissions(List%7BPnP.Core.Model.Security.IDriveRecipient%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Security_IGraphPermission_GrantUserPermissions_" data-uid="PnP.Core.Model.Security.IGraphPermission.GrantUserPermissions*"></a>
+  
+  <h4 id="PnP_Core_Model_Security_IGraphPermission_GrantUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" data-uid="PnP.Core.Model.Security.IGraphPermission.GrantUserPermissions(List{PnP.Core.Model.Security.IDriveRecipient})"><a href="#collapsible-PnP_Core_Model_Security_IGraphPermission_GrantUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" class="expander" data-toggle="collapse">GrantUserPermissions(List&lt;IDriveRecipient&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Security_IGraphPermission_GrantUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds permissions for a set of users to a specific permission</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IGraphPermission GrantUserPermissions(List&lt;IDriveRecipient&gt; recipients)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a>&gt;</span>
+        <span class="parametername">recipients</span>
+        <p><p>List of recipients to add</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_GrantUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.GrantUserPermissionsAsync(List%7BPnP.Core.Model.Security.IDriveRecipient%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Security_IGraphPermission_GrantUserPermissionsAsync_" data-uid="PnP.Core.Model.Security.IGraphPermission.GrantUserPermissionsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_Security_IGraphPermission_GrantUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" data-uid="PnP.Core.Model.Security.IGraphPermission.GrantUserPermissionsAsync(List{PnP.Core.Model.Security.IDriveRecipient})"><a href="#collapsible-PnP_Core_Model_Security_IGraphPermission_GrantUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" class="expander" data-toggle="collapse">GrantUserPermissionsAsync(List&lt;IDriveRecipient&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Security_IGraphPermission_GrantUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds permissions for a set of users to a specific permission</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IGraphPermission&gt; GrantUserPermissionsAsync(List&lt;IDriveRecipient&gt; recipients)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a>&gt;</span>
+        <span class="parametername">recipients</span>
+        <p><p>List of recipients to add</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissions(List%7BPnP.Core.Model.Security.IDriveRecipient%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissions_" data-uid="PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissions*"></a>
+  
+  <h4 id="PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" data-uid="PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissions(List{PnP.Core.Model.Security.IDriveRecipient})"><a href="#collapsible-PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" class="expander" data-toggle="collapse">RemoveUserPermissions(List&lt;IDriveRecipient&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissions_List_PnP_Core_Model_Security_IDriveRecipient__" class="collapse in">
+  <div class="markdown level1 summary"><p>Removes permissions for a set of users from a specific permission</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IGraphPermission RemoveUserPermissions(List&lt;IDriveRecipient&gt; recipients)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a>&gt;</span>
+        <span class="parametername">recipients</span>
+        <p><p>List of recipients to remove</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissionsAsync(List%7BPnP.Core.Model.Security.IDriveRecipient%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphPermission.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissionsAsync_" data-uid="PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissionsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" data-uid="PnP.Core.Model.Security.IGraphPermission.RemoveUserPermissionsAsync(List{PnP.Core.Model.Security.IDriveRecipient})"><a href="#collapsible-PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" class="expander" data-toggle="collapse">RemoveUserPermissionsAsync(List&lt;IDriveRecipient&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Security_IGraphPermission_RemoveUserPermissionsAsync_List_PnP_Core_Model_Security_IDriveRecipient__" class="collapse in">
+  <div class="markdown level1 summary"><p>Removes permissions for a set of users from a specific permission</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IGraphPermission&gt; RemoveUserPermissionsAsync(List&lt;IDriveRecipient&gt; recipients)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a>&gt;</span>
+        <span class="parametername">recipients</span>
+        <p><p>List of recipients to remove</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a>&gt;
         <p>
       </td>
     </tr>
