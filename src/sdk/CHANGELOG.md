@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix URL encoding for use in SPO REST ...Path methods (e.g. `getFolderByServerRelativePath`) #1077 [jansenbe - Bert Jansen]
 - Added `Rename` methods on `IFolder` to make it easier to rename a folder #1080 [jansenbe - Bert Jansen]
 - Support for reading and cloning News Digest pages #1086 [jansenbe - Bert Jansen]
+- Add capabilities to grant or revoke permissions to existing sharing link #1094 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 
