@@ -434,6 +434,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal async static Task<IPage> NewPageAsync(PnPContext context, PageLayoutType pageLayoutType = PageLayoutType.Article)
         {
+            if (pageLayoutType == PageLayoutType.Topic || pageLayoutType == PageLayoutType.NewsDigest)
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_NotSupportedPageTypeForCreate);
+            }
+
             // Get a reference to the pages library, reuse the existing one if the correct properties were loaded
             IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);
             return new Page(context, pagesLibrary, null, pageLayoutType);
@@ -1340,8 +1345,8 @@ namespace PnP.Core.Model.SharePoint
             // Reindex the control order. We're starting control order from 1 for each column.
             ReIndex();
 
-            // Load page header controls. Cortex Topic pages do have 5 controls in the header (= controls that cannot be moved)
-            if (LayoutType == PageLayoutType.Topic)
+            // Load page header controls. Microsoft Syntex Topic pages do have 5 controls in the header (= controls that cannot be moved)
+            if (LayoutType == PageLayoutType.Topic || LayoutType == PageLayoutType.NewsDigest)
             {
                 using (var document = parser.ParseDocument(pageHeaderHtml))
                 {
@@ -1551,16 +1556,16 @@ namespace PnP.Core.Model.SharePoint
 
             var pageHeaderHtml = "";
             if (pageHeader != null && pageHeader.Type != PageHeaderType.None && LayoutType != PageLayoutType.RepostPage
-                && LayoutType != PageLayoutType.Topic)
+                && LayoutType != PageLayoutType.Topic && LayoutType != PageLayoutType.NewsDigest)
             {
                 // this triggers resolving of the header image which has to be done early as otherwise there will be version conflicts
                 // (see here: https://github.com/SharePoint/PnP-Sites-Core/issues/2203)
                 pageHeaderHtml = await pageHeader.ToHtmlAsync(PageTitle).ConfigureAwait(false);
             }
 
-            if (LayoutType == PageLayoutType.Topic)
+            if (LayoutType == PageLayoutType.Topic || LayoutType == PageLayoutType.NewsDigest)
             {
-                // If we have extra header controls (e.g. with topic pages) then we need to persist those controls to a html snippet that will need to be embedded in the header
+                // If we have extra header controls (e.g. with topic and news digest pages) then we need to persist those controls to a html snippet that will need to be embedded in the header
                 if (HeaderControls.Any())
                 {
                     pageHeaderHtml = $"<div>{HeaderControlsToHtml()}</div>";
@@ -1707,6 +1712,10 @@ namespace PnP.Core.Model.SharePoint
                 if (layoutType == PageLayoutType.Home && KeepDefaultWebParts && Sections.Count == 0)
                 {
                     PageListItem[PageConstants.CanvasField] = "";
+                }
+                else if (layoutType == PageLayoutType.NewsDigest)
+                {
+                    // Do nothing, news digest type has empty CanvasContent1 field and can't be edited
                 }
                 else
                 {

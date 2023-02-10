@@ -36,7 +36,7 @@
         Spaces = 5,
 
         /// <summary>
-        /// Page is a topic page (Cortex)
+        /// Page is a Microsoft Syntex Topic page
         /// </summary>
         Topic = 6,
 
@@ -44,5 +44,10 @@
         /// Page is a Viva Dashboard page
         /// </summary>
         Dashboard = 7,
+
+        /// <summary>
+        /// News digest page (https://support.microsoft.com/en-us/office/create-and-send-a-news-digest-42efc3c6-605f-4a9a-85d5-1f9ff46019bf)
+        /// </summary>
+        NewsDigest = 8,
     }
 }

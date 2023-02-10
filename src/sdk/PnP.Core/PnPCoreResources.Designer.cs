@@ -502,6 +502,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Topic and News Digest pages are not supported for creation, they can be read, copied and deleted but you can&apos;t create new ones.
+        /// </summary>
+        internal static string Exception_Page_NotSupportedPageTypeForCreate {
+            get {
+                return ResourceManager.GetString("Exception_Page_NotSupportedPageTypeForCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can only promote article and repost pages as news article.
         /// </summary>
         internal static string Exception_Page_PageCannotBePromotedAsNews {

@@ -415,9 +415,7 @@ namespace PnP.Core.Model.SharePoint
                     var user = await clientContext.Web.EnsureUserAsync(data.Replace("\"", "").Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries)[0]).ConfigureAwait(false);
                     userId = user.Id;
                 }
-#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception)
-#pragma warning restore CA1031 // Do not catch general exception types
                 {
 
                 }
