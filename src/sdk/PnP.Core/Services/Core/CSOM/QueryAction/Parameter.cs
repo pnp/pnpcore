@@ -35,6 +35,11 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                     string multiValue = string.Join("", (Value as List<Guid>).Select(value => $"<Object Type=\"Guid\">{TypeSpecificHandling(value.ToString(), Type)}</Object>"));
                     return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
                 }
+                else if (Value is List<int>)
+                {
+                    string multiValue = string.Join("", (Value as List<int>).Select(value => $"<Object Type=\"Int32\">{TypeSpecificHandling(value.ToString(), Type)}</Object>"));
+                    return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
+                }
                 else if (Value is List<NamedProperty>)
                 {
                     string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));

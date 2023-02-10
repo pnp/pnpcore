@@ -63,8 +63,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public bool BlockDownloadFileTypePolicy { get => GetValue<bool>(); set => SetValue(value); }
 
-        public IList<SPBlockDownloadFileTypeId> BlockDownloadFileTypeIds { get => GetValue<IList<SPBlockDownloadFileTypeId>>(); set => SetValue(value); }
-
         public bool BlockDownloadOfAllFilesForGuests { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool BlockDownloadOfAllFilesOnUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
@@ -170,8 +168,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool EnablePromotedFileHandlers { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool EnableRestrictedAccessControl { get => GetValue<bool>(); set => SetValue(value); }
-
-        public IList<Guid> ExcludedBlockDownloadGroupIds { get => GetValue<IList<Guid>>(); set => SetValue(value); }
 
         public IList<string> ExcludedFileExtensionsForSyncClient { get => GetValue<IList<string>>(); set => SetValue(value); }
         

@@ -347,7 +347,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(tenantProperties.AllowEveryoneExceptExternalUsersClaimInPrivateSite.Test());
                 Assert.IsTrue(tenantProperties.AllowSelectSecurityGroupsInSPSitesList == null || tenantProperties.AllowSelectSecurityGroupsInSPSitesList != null);
                 Assert.IsTrue((int)tenantProperties.AuthContextResilienceMode >= 0);
-                Assert.IsTrue(tenantProperties.BlockDownloadFileTypeIds != null);
                 Assert.IsTrue(tenantProperties.BlockDownloadFileTypePolicy.Test());
                 Assert.IsTrue(tenantProperties.CoreDefaultLinkToExistingAccess.Test());
                 Assert.IsTrue((int)tenantProperties.CoreDefaultShareLinkRole >= 0);
@@ -358,7 +357,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(tenantProperties.DenySelectSecurityGroupsInSPSitesList == null || tenantProperties.DenySelectSecurityGroupsInSPSitesList != null);
                 Assert.IsTrue(tenantProperties.DisableVivaConnectionsAnalytics.Test());
                 Assert.IsTrue(tenantProperties.EnableRestrictedAccessControl.Test());
-                Assert.IsTrue(tenantProperties.ExcludedBlockDownloadGroupIds != null);
                 Assert.IsTrue(tenantProperties.IBImplicitGroupBased.Test());
                 Assert.IsTrue(tenantProperties.IsLoopEnabled.Test());
                 Assert.IsTrue(tenantProperties.IsMultipleHomeSitesFlightEnabled.Test());

@@ -125,11 +125,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         BlockDownloadLinksFileTypes BlockDownloadLinksFileType { get; set; }
 
         /// <summary>
-        /// An array of File Type Ids subject to BlockDownloadFileTypePolicy
-        /// </summary>
-        IList<SPBlockDownloadFileTypeId> BlockDownloadFileTypeIds { get; }
-
-        /// <summary>
         /// Indicates whether Block Download by File Type Policy is enabled or not
         /// </summary>
         bool BlockDownloadFileTypePolicy { get; }
@@ -403,11 +398,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets or sets the value of policy which determines whether Restricted Access Control Policy is enabled
         /// </summary>
         bool EnableRestrictedAccessControl { get; set; }
-
-        /// <summary>
-        /// An array of Security Group Ids exempt from BlockDownloadFileTypePolicy
-        /// </summary>
-        IList<Guid> ExcludedBlockDownloadGroupIds { get; set; }
 
         /// <summary>
         /// Get/Set excluded file extensions for sync client
