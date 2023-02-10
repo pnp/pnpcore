@@ -2347,7 +2347,7 @@
   "api/PnP.Core.Model.SharePoint.PageLayoutType.html": {
     "href": "api/PnP.Core.Model.SharePoint.PageLayoutType.html",
     "title": "Enum PageLayoutType | PnP Core SDK",
-    "keywords": "Enum PageLayoutType Types of pages that can be created Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public enum PageLayoutType : int Article Custom article page, used for user created pages Dashboard Page is a Viva Dashboard page HeaderlessSearchResults Page is a custom search result page Home Home page of modern team sites RepostPage Page is a repost / link page SingleWebPartAppPage Page is an app page, hosting a single SPFX web part full screen Spaces Page is a spaces page Topic Page is a topic page (Cortex)"
+    "keywords": "Enum PageLayoutType Types of pages that can be created Namespace : PnP.Core.Model.SharePoint Assembly : PnP.Core.dll Syntax public enum PageLayoutType : int Article Custom article page, used for user created pages Dashboard Page is a Viva Dashboard page HeaderlessSearchResults Page is a custom search result page Home Home page of modern team sites NewsDigest News digest page ( https://support.microsoft.com/en-us/office/create-and-send-a-news-digest-42efc3c6-605f-4a9a-85d5-1f9ff46019bf ) RepostPage Page is a repost / link page SingleWebPartAppPage Page is an app page, hosting a single SPFX web part full screen Spaces Page is a spaces page Topic Page is a Microsoft Syntex Topic page"
   },
   "api/PnP.Core.Model.SharePoint.PageTranslationOptions.html": {
     "href": "api/PnP.Core.Model.SharePoint.PageTranslationOptions.html",
