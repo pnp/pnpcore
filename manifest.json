@@ -4302,7 +4302,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "RcLdI92MTvLor2uwIwOiWukdYT95K4hTHVlB19/IcsQ="
+          "hash": "AYDNP09J6EdFtXILXWyKZW09tr1Tye6vsa8xlBxClPM="
         }
       },
       "is_incremental": false,
@@ -5490,7 +5490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.MoveCopyOptions.html",
-          "hash": "8qMPaQkXMloXa5XjGpTfRo0FQ4DHEEU9CCR84ZcyyVM="
+          "hash": "5ANKeiBPqwBmrMBC2nKRmHpbNtun+yTWg2Me0/hRtoQ="
         }
       },
       "is_incremental": false,
@@ -9585,7 +9585,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/files-intro.html",
-          "hash": "KNA5FKmw0umgSGx4jJRiUm6Sn20F2J+yyL+SvxZuKoc="
+          "hash": "SLcy2Gk2dj+lex/RqsrIuA28VyfgTLInoRNCbMucmUo="
         }
       },
       "is_incremental": false,

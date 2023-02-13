@@ -394,6 +394,14 @@ await testDocument.CopyToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/doc
 
 // Move the file, overwrite if needed
 await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/document.docx&quot;, MoveOperations.Overwrite);
+
+// Move the file with options
+await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyDocuments/document.docx&quot;, MoveOperations.None, 
+                            new MoveCopyOptions 
+                            { 
+                                KeepBoth = true, 
+                                RetainEditorAndModifiedOnMove = true 
+                            });
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
