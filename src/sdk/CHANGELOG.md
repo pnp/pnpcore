@@ -43,6 +43,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix SiteCollectionManager.GetSiteCollectionWithDetailsAsync returning null when getting root site collection #1089 [jansenbe - Bert Jansen]
 - Removed `BlockDownloadFileTypeIds` and `ExcludedBlockDownloadGroupIds` properties from Tenant properties as they could not be saved preventing other property updates #1087 [jansenbe - Bert Jansen]
 - Added the `RetainEditorAndModifiedOnMove` property to the `MoveCopyOptions` and optimized file copy/move operations to use the cross site API as much as possible #989 #1091 [jansenbe - Bert Jansen]
+- Dropped .NET 5 support as it's not supported anymore [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 

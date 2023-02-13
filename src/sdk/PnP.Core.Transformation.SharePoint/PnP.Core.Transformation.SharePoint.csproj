@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
 		<LangVersion>10.0</LangVersion>
 		<Version>1.8.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -52,12 +52,6 @@
 		<EmbeddedResource Include="MappingFiles\pagelayoutmapping.xsd" />
 		<EmbeddedResource Include="MappingFiles\webpartmapping.xml" />
 		<EmbeddedResource Include="MappingFiles\webpartmapping.xsd" />
-	</ItemGroup>
-
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
