@@ -619,8 +619,13 @@ namespace PnP.Core.Model.SharePoint
 
         #region MoveTo
         /// <summary>
-        /// Move a file to the destination URL.
+        /// Move a file to the destination URL. 
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
         /// <param name="options">Options of the move operation.</param>
@@ -629,6 +634,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
         /// <param name="options">Options of the move operation.</param>
@@ -637,6 +647,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
         /// <param name="options">Options of the move operation.</param>
@@ -645,6 +660,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
         /// <param name="options">Options of the move operation.</param>
@@ -653,6 +673,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="batch">The batch instance to use.</param>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
@@ -662,6 +687,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="MoveOperations.AllowBrokenThickets"/> or <see cref="MoveOperations.BypassSharedLock"/> are used and the move 
+        /// is inside the same site then these are respected but the <see cref="MoveCopyOptions"/> are not used. For cross site moves the <see cref="MoveCopyOptions"/> options
+        /// are always used, if you want to use for example <see cref="MoveCopyOptions.KeepBoth"/> for a move inside the same site then omit the earlier mentioned <see cref="MoveOperations"/>.
+        /// </remarks>
         /// <param name="batch">The batch instance to use.</param>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>

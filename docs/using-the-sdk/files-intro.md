@@ -383,6 +383,14 @@ await testDocument.CopyToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document
 
 // Move the file, overwrite if needed
 await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document.docx", MoveOperations.Overwrite);
+
+// Move the file with options
+await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document.docx", MoveOperations.None, 
+                            new MoveCopyOptions 
+                            { 
+                                KeepBoth = true, 
+                                RetainEditorAndModifiedOnMove = true 
+                            });
 ```
 
 > [!Note]
