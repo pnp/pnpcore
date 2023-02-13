@@ -1660,7 +1660,9 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(PnPCoreResources.Exception_UserPrincipalNameEmpty);
             }
 
-            var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName);
+            var listId = await GetListIdAsync().ConfigureAwait(false);
+
+            var apiCall = BuildGetUserEffectivePermissionsApiCall(userPrincipalName, listId);
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
@@ -1672,11 +1674,9 @@ namespace PnP.Core.Model.SharePoint
             return EffectivePermissionsHandler.ParseGetUserEffectivePermissionsResponse(response.Json);
         }
 
-        private ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
+        private ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName, Guid parentListId)
         {
-            var parentList = Parent.Parent as List;
-
-            return new ApiCall($"_api/web/lists(guid'{parentList.Id}')/items({Id})/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
+            return new ApiCall($"_api/web/lists(guid'{parentListId}')/items({Id})/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
         }
 
         public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
