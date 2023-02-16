@@ -181,6 +181,32 @@ var shareRequestOptions = new InviteOptions()
 
 var share = await file.CreateSharingInviteAsync(shareRequestOptions);
 </code></pre>
+<h2 id="update-file-shares">Update file shares</h2>
+<p>When you've created a sharing link granting access to users you can still make changes to it by adding or removing users. Once you've a reference to a sharing link use the <code>GrantUserPermissions</code> and <code>RemoveUserPermissions</code> methods to update the users that get access via this sharing link.</p>
+<pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
+
+// Get the first sharing link for this file
+var sharingLink = await file.GetShareLinksAsync().First();
+
+// Define the new set users that need to get access
+var driveRecipientsToAdd = new List&lt;IDriveRecipient&gt;()
+{
+    UserLinkOptions.CreateDriveRecipient(&quot;linda@contoso.onmicrosoft.com&quot;),
+    UserLinkOptions.CreateDriveRecipient(&quot;joe@contoso.onmicrosoft.com&quot;)    
+};
+
+// Add the new users
+await sharingLink.GrantUserPermissionsAsync(driveRecipientsToAdd);
+
+//Define the users to remove
+var driveRecipientsToRemove = new List&lt;IDriveRecipient&gt;()
+{
+    UserLinkOptions.CreateDriveRecipient(&quot;tim@contoso.onmicrosoft.com&quot;)
+};
+
+// Remove user from sharing link
+await sharingLink.RemoveUserPermissionsAsync(driveRecipientsToRemove);
+</code></pre>
 <h2 id="deleting-file-shares">Deleting file shares</h2>
 <p>There are two options to delete sharing links for a file or folder: you can either delete all sharing links for a given file/folder or you can enumerate the current sharing links and delete a specific one. To delete all sharing links you can use one of the <code>DeleteShareLinks</code> methods, to delete an individual sharing link you first need to load the sharing links via one of the <code>GetShareLinks</code> methods followed by using one of the <code>DeletePermission</code> links on the returned <code>IGraphPermission</code> instance. Below code sample shows both approaches.</p>
 <pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
