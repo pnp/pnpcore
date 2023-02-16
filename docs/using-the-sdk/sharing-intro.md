@@ -124,6 +124,36 @@ var shareRequestOptions = new InviteOptions()
 var share = await file.CreateSharingInviteAsync(shareRequestOptions);
 ```
 
+## Update file shares
+
+When you've created a sharing link granting access to users you can still make changes to it by adding or removing users. Once you've a reference to a sharing link use the `GrantUserPermissions` and `RemoveUserPermissions` methods to update the users that get access via this sharing link.
+
+```csharp
+var file = await context.Web.GetFileByServerRelativeUrlAsync("/sites/demo/docs/fileA.docx");
+
+// Get the first sharing link for this file
+var sharingLink = await file.GetShareLinksAsync().First();
+
+// Define the new set users that need to get access
+var driveRecipientsToAdd = new List<IDriveRecipient>()
+{
+    UserLinkOptions.CreateDriveRecipient("linda@contoso.onmicrosoft.com"),
+    UserLinkOptions.CreateDriveRecipient("joe@contoso.onmicrosoft.com")    
+};
+
+// Add the new users
+await sharingLink.GrantUserPermissionsAsync(driveRecipientsToAdd);
+
+//Define the users to remove
+var driveRecipientsToRemove = new List<IDriveRecipient>()
+{
+    UserLinkOptions.CreateDriveRecipient("tim@contoso.onmicrosoft.com")
+};
+
+// Remove user from sharing link
+await sharingLink.RemoveUserPermissionsAsync(driveRecipientsToRemove);
+```
+
 ## Deleting file shares
 
 There are two options to delete sharing links for a file or folder: you can either delete all sharing links for a given file/folder or you can enumerate the current sharing links and delete a specific one. To delete all sharing links you can use one of the `DeleteShareLinks` methods, to delete an individual sharing link you first need to load the sharing links via one of the `GetShareLinks` methods followed by using one of the `DeletePermission` links on the returned `IGraphPermission` instance. Below code sample shows both approaches.
