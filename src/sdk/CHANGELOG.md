@@ -45,6 +45,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added the `RetainEditorAndModifiedOnMove` property to the `MoveCopyOptions` and optimized file copy/move operations to use the cross site API as much as possible #989 #1091 [jansenbe - Bert Jansen]
 - Dropped .NET 5 support as it's not supported anymore [jansenbe - Bert Jansen]
 - Fix for IFile/IListItem - CheckIfUserHasPermissionsAsync Throws ->System.NullReferenceException: #1097 [jansenbe - Bert Jansen]
+- Improved model for `PnPContext` extensions allowing them to be used by mocking frameworks in unit tests #1083 [plamber - Patrick Lamber]
 
 ## [1.8.0]
 
