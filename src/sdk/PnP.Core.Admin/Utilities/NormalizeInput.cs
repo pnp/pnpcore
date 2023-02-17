@@ -6,7 +6,7 @@ namespace PnP.Core.Admin.Utilities
     {
         internal static string RemoveUnallowedCharacters(string str)
         {
-            const string unallowedCharacters = "[&,!@;:#¤`´~¨=%<>/\\\\\"\\$\\*\\^\\+\\|\\{\\}\\[\\]\\(\\)\\?\\s]";
+            const string unallowedCharacters = "[&,!@;:#¤`´~¨='%<>/\\\\\"\\$\\*\\^\\+\\|\\{\\}\\[\\]\\(\\)\\?\\s]";
             var regex = new Regex(unallowedCharacters);
             return regex.Replace(str, "");
         }
