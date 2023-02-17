@@ -1,4 +1,5 @@
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.SharePoint.Core.Internal;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.QueryAction;
 using PnP.Core.Services.Core.CSOM.QueryIdentities;

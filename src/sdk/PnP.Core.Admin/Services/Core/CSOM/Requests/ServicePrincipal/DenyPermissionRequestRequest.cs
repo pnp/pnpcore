@@ -1,5 +1,3 @@
-using PnP.Core.Admin.Model.SharePoint;
-using PnP.Core.Admin.Model.SharePoint.Core.Internal;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.QueryAction;
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
@@ -9,17 +7,14 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.ServicePrincipal
 {
-    internal sealed class ApprovePermissionRequest : IRequest<IPermissionGrant>
+    internal sealed class DenyPermissionRequest : IRequest<object>
     {
         public string RequestId { get; set; }
-        private CSOMResponseHelper ResponseHelper { get; set; } = new();
-        private int IdentityPath { get; set; }
-        public IPermissionGrant Result { get; private set; }
+        public object Result { get; } = new();
 
         public void ProcessResponse(string response)
         {
-            PermissionGrant resultItem = ResponseHelper.ProcessResponse<PermissionGrant>(response, IdentityPath);
-            Result = resultItem;
+            // if BatchClient.ProcessCsomBatchResponse didn't throw an exception, everything is fine
         }
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
@@ -85,60 +80,32 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.ServicePrincipal
                 }
             };
 
-            ActionObjectPath actionPathGetById = new()
+            ActionObjectPath action = new()
             {
                 Action = new BaseAction
                 {
                     Id = idProvider.GetActionId(), ObjectPathId = getByIdObjectPathMethod.Id.ToString()
+                }
+            };
+
+            result.Add(action);
+
+            #endregion
+
+            #region Deny
+
+            ActionObjectPath actionPathGetById = new()
+            {
+                Action = new MethodAction
+                {
+                    Name = "Deny",
+                    ObjectPathId = getByIdObjectPathMethod.Id.ToString(),
+                    Id = idProvider.GetActionId()
                 },
                 ObjectPath = getByIdObjectPathMethod
             };
 
             result.Add(actionPathGetById);
-
-            #endregion
-
-            #region Approve
-
-            ObjectPathMethod approveObjectPathMethod = new ObjectPathMethod
-            {
-                Id = idProvider.GetActionId(),
-                ParentId = getByIdObjectPathMethod.Id,
-                Name = "Approve",
-                Parameters = new MethodParameter {Properties = new List<Parameter>()}
-            };
-
-            ActionObjectPath actionPathApprove = new()
-            {
-                Action = new BaseAction
-                {
-                    ObjectPathId = approveObjectPathMethod.Id.ToString(), Id = idProvider.GetActionId()
-                },
-                ObjectPath = approveObjectPathMethod
-            };
-
-            result.Add(actionPathApprove);
-
-            #endregion
-
-            #region Query
-
-            ActionObjectPath actionPathQueryAllProperties = new()
-            {
-                Action = new QueryAction
-                {
-                    Id = idProvider.GetActionId(),
-                    ObjectPathId = approveObjectPathMethod.Id.ToString(),
-                    SelectQuery = new SelectQuery
-                    {
-                        SelectAllProperties = true, Properties = new List<Property>()
-                    }
-                }
-            };
-
-            result.Add(actionPathQueryAllProperties);
-
-            IdentityPath = actionPathQueryAllProperties.Action.Id;
 
             #endregion
 
