@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Admin.Model.SharePoint.Core.Internal
+namespace PnP.Core.Admin.Model.SharePoint
 {
     internal sealed class ServicePrincipal : IServicePrincipal
     {
@@ -16,8 +16,13 @@ namespace PnP.Core.Admin.Model.SharePoint.Core.Internal
         {
             _context = context;
         }
-
-        public async Task<IPermissionGrant> ApprovePermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null)
+        
+        public IPermissionGrant ApprovePermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return ApprovePermissionRequestAsync(id, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+        
+        public async Task<IPermissionGrant> ApprovePermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null)
         {
             using PnPContext tenantAdminContext = await _context
                 .GetSharePointAdmin()
@@ -36,7 +41,12 @@ namespace PnP.Core.Admin.Model.SharePoint.Core.Internal
             return (IPermissionGrant)csomResult.ApiCall.CSOMRequests[0].Result;
         }
 
-        public async Task DenyPermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null)
+        public void DenyPermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null)
+        {
+            DenyPermissionRequestAsync(id, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task DenyPermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null)
         {
             using PnPContext tenantAdminContext = await _context
                 .GetSharePointAdmin()
@@ -48,12 +58,17 @@ namespace PnP.Core.Admin.Model.SharePoint.Core.Internal
             ApiCall getPermissionRequestsCall = new(
                 new List<IRequest<object>> {request});
             
-            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+            await ((Web)tenantAdminContext.Web)
                 .RawRequestAsync(getPermissionRequestsCall, HttpMethod.Post)
                 .ConfigureAwait(false);
         }
 
-        public async Task<List<IPermissionRequest>> GetPermissionRequests(VanityUrlOptions vanityUrlOptions = null)
+        public List<IPermissionRequest> GetPermissionRequests(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetPermissionRequestsAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IPermissionRequest>> GetPermissionRequestsAsync(VanityUrlOptions vanityUrlOptions = null)
         {
             using PnPContext tenantAdminContext = await _context
                 .GetSharePointAdmin()

@@ -1,6 +1,6 @@
 using System;
 
-namespace PnP.Core.Admin.Model.SharePoint.Core.Internal
+namespace PnP.Core.Admin.Model.SharePoint
 {
     internal sealed class PermissionRequest : IPermissionRequest
     {

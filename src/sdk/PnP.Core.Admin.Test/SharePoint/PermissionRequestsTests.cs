@@ -1,12 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
-using PnP.Core.Admin.Model.SharePoint.Core.Internal;
 using PnP.Core.Admin.Services.Core.CSOM.Requests.ServicePrincipal;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,15 +17,14 @@ namespace PnP.Core.Admin.Test.SharePoint
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            // TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
         public void ApprovePermissionRequestTest()
         {
-            ApprovePermissionRequest request = new();
+            ApprovePermissionRequest request = new() {RequestId = "0000aaaa00000"};
 
-            request.RequestId = "0000aaaa00000";
             request.GetRequest(new IteratorIdProvider());
 
             const string response =
@@ -42,9 +39,8 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public void DenyPermissionRequestTest()
         {
-            DenyPermissionRequest request = new();
+            DenyPermissionRequest request = new() {RequestId = "0000aaaa00000"};
 
-            request.RequestId = "0000aaaa00000";
             request.GetRequest(new IteratorIdProvider());
 
             const string response =
@@ -72,48 +68,43 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetPermissionsRequestsTest_Async()
-        {
-            TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
-            {
-                Uri url = context.GetSharePointAdmin().GetTenantPortalUri();
-
-                using (PnPContext tenantContext = await TestCommon.Instance.CloneAsync(context, url, 2))
-                {
-                    ServicePrincipal principal = new(context);
-                    List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequests();
-                    Assert.IsNotNull(permissionRequests);
-                    Assert.IsTrue(permissionRequests.Count > 0);
-                }
-            }
-        }
-
-        [TestMethod]
         public async Task ApprovePermissionsRequestTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
-            ServicePrincipal principal = new(context);
-            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequests();
-
-            var result = await principal.ApprovePermissionRequest(permissionRequests.First().Id.ToString());
             
+            ServicePrincipal principal = new(context);
+            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+
+            var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
         }
 
         [TestMethod]
+        public async Task GetPermissionsRequestsTest_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            
+            ServicePrincipal principal = new(context);
+            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+            
+            Assert.IsNotNull(permissionRequests);
+            Assert.IsTrue(permissionRequests.Count > 0);
+        }
+        
+        [TestMethod]
         public async Task DenyPermissionsRequestTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
-            Uri url = context.GetSharePointAdmin().GetTenantPortalUri();
 
             ServicePrincipal principal = new(context);
-            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequests();
+            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
 
-            await principal.DenyPermissionRequest(permissionRequests.First().Id.ToString());
+            await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
         }
     }
 }
