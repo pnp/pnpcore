@@ -14,10 +14,13 @@ namespace PnP.Core.Admin.Test.SharePoint
     [TestClass]
     public class PermissionRequestsTests
     {
+        private const string packageName = "apicalltest.sppkg";
+        private string packagePath = $"TestAssets/{packageName}";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -71,40 +74,68 @@ namespace PnP.Core.Admin.Test.SharePoint
         public async Task ApprovePermissionsRequestTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
-            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
-            
-            ServicePrincipal principal = new(context);
-            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                ITenantApp app = null;
+                try
+                {
+                    var appManager = context.GetTenantAppManager();
+                    app = appManager.Add(packagePath, true);
+                    var deployResult = app.Deploy(false);
 
-            var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+                    ServicePrincipal principal = new(context);
+                    List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
 
-            Assert.IsNotNull(result);
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
+                    var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+
+                    Assert.IsNotNull(result);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
+                }
+                finally
+                {
+                    var retractResult = app.Retract();
+                    app.Remove();
+                }
+            }
         }
 
         [TestMethod]
         public async Task GetPermissionsRequestsTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
-            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
-            
-            ServicePrincipal principal = new(context);
-            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
-            
-            Assert.IsNotNull(permissionRequests);
-            Assert.IsTrue(permissionRequests.Count > 0);
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                ServicePrincipal principal = new(context);
+                List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+
+                Assert.IsNotNull(permissionRequests);
+                Assert.IsTrue(permissionRequests.Count > 0);
+            }
         }
         
         [TestMethod]
         public async Task DenyPermissionsRequestTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
-            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                ITenantApp app = null;
+                try
+                {
+                    var appManager = context.GetTenantAppManager();
+                    app = appManager.Add(packagePath, true);
+                    var deployResult = app.Deploy(false);
+                    ServicePrincipal principal = new(context);
+                    List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
 
-            ServicePrincipal principal = new(context);
-            List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
-
-            await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+                    await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+                }
+                finally
+                {
+                    var retractResult = app.Retract();
+                    app.Remove();
+                }
+            }
         }
     }
 }

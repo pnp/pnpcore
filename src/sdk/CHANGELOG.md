@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `Rename` methods on `IFolder` to make it easier to rename a folder #1080 [jansenbe - Bert Jansen]
 - Support for reading and cloning News Digest pages #1086 [jansenbe - Bert Jansen]
 - Add capabilities to grant or revoke permissions to existing sharing link #1094 [MathijsVerbeeck - Mathijs Verbeeck]
+- Support for listing, approving and denying api access requests after installing an app #1100 [mloitzl - Martin Loitzl]
 
 ### Changed
 

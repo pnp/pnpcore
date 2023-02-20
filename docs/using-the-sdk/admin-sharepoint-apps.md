@@ -151,6 +151,46 @@ await appManager.RemoveAsync(app.Id);
 await app.RemoveAsync();
 ```
 
+## List, approve or reject the permissions requests for an app
+
+Some apps can request permissions to call additional APIs by adding a `webApiPermissionRequests` element in their `package-solution.json` file. Below snippet shows a part of such a file:
+
+```json
+{
+    "solution": {
+    "name": "apicalltest-client-side-solution",
+    "id": "da4e941c-a64e-401a-b63d-664e5bf62bdc",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.ReadBasic.All"
+      }
+    ]
+}
+```
+
+After adding and deploying an app to the app catalog these API permissions need to be approved by an admin (e.g. via https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement) or via code. The code approach can be implemented using the `IServicePrincipal` class and the `GetPermissionRequests`, `ApprovePermissionRequest` and `DenyPermissionRequest` methods:
+
+```csharp
+// List the permission requests that are pending approval or rejection
+ServicePrincipal principal = new(context);
+List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+
+// Approve a permission request
+var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+
+// Deny a permission request
+await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+```
+
 ## Tenant app catalog specific operations
 
 Some methods are available only for the tenant app catalog. They are listed below.
