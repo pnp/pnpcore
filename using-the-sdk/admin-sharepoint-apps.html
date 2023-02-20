@@ -203,6 +203,39 @@ await appManager.RemoveAsync(app.Id);
 // or use app instance
 await app.RemoveAsync();
 </code></pre>
+<h2 id="list-approve-or-reject-the-permissions-requests-for-an-app">List, approve or reject the permissions requests for an app</h2>
+<p>Some apps can request permissions to call additional APIs by adding a <code>webApiPermissionRequests</code> element in their <code>package-solution.json</code> file. Below snippet shows a part of such a file:</p>
+<pre><code class="lang-json">{
+    &quot;solution&quot;: {
+    &quot;name&quot;: &quot;apicalltest-client-side-solution&quot;,
+    &quot;id&quot;: &quot;da4e941c-a64e-401a-b63d-664e5bf62bdc&quot;,
+    &quot;version&quot;: &quot;1.0.0.0&quot;,
+    &quot;includeClientSideAssets&quot;: true,
+    &quot;skipFeatureDeployment&quot;: true,
+    &quot;isDomainIsolated&quot;: false,
+    &quot;webApiPermissionRequests&quot;: [
+      {
+        &quot;resource&quot;: &quot;Microsoft Graph&quot;,
+        &quot;scope&quot;: &quot;Calendars.Read&quot;
+      },
+      {
+        &quot;resource&quot;: &quot;Microsoft Graph&quot;,
+        &quot;scope&quot;: &quot;User.ReadBasic.All&quot;
+      }
+    ]
+}
+</code></pre>
+<p>After adding and deploying an app to the app catalog these API permissions need to be approved by an admin (e.g. via <a href="https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement">https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement</a>) or via code. The code approach can be implemented using the <code>IServicePrincipal</code> class and the <code>GetPermissionRequests</code>, <code>ApprovePermissionRequest</code> and <code>DenyPermissionRequest</code> methods:</p>
+<pre><code class="lang-csharp">// List the permission requests that are pending approval or rejection
+ServicePrincipal principal = new(context);
+List&lt;IPermissionRequest&gt; permissionRequests = await principal.GetPermissionRequestsAsync();
+
+// Approve a permission request
+var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+
+// Deny a permission request
+await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+</code></pre>
 <h2 id="tenant-app-catalog-specific-operations">Tenant app catalog specific operations</h2>
 <p>Some methods are available only for the tenant app catalog. They are listed below.</p>
 <h3 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h3>
