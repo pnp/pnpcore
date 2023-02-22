@@ -113,7 +113,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                                                    p => p.TypeAsString, 
                                                                                    p => p.Title));
 // Do a paged retrieval (non async sample) of the list items with additional collection loads
-foreach(var listItem in myList.Items.QueryProperties(
+foreach(var listItem in myList.Items.QueryProperties(p => p.All,
                                      p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
                                                                            p => p.RoleDefinitions))
 {
@@ -128,6 +128,7 @@ foreach(var listItem in myList.Items.QueryProperties(
 
 > [!Note]
 >
+> - Ensure you add `p => p.All` to ensure your custom fields are loaded in case you need those
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
