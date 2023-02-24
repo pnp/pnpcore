@@ -236,6 +236,19 @@ foreach(var property in testDocument.Properties)
 testDocument[&quot;myPropertyKey&quot;] = &quot;Some value&quot;;
 await testDocument.Properties.UpdateAsync();
 </code></pre>
+<h2 id="renaming-files">Renaming files</h2>
+<p>To rename a file you can either use the <code>Rename</code> methods or use the <code>MoveTo</code> methods.</p>
+<pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
+
+// Get a reference to the file, load the file property bag
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+// Option A: Use the Rename methods
+await testDocument.RenameAsync(&quot;renamed document.docx&quot;);
+
+// Option B: Move the file to rename it
+await testDocument.MoveToAsync($&quot;{context.Uri.PathAndQuery}/Shared Documents/renamed document.docx&quot;);
+</code></pre>
 <h2 id="publishing-and-un-publishing-files">Publishing and un-publishing files</h2>
 <p>Publishing a file will move the file from draft into published status and increase it's major version by one. Publishing can be done using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_PublishAsync_System_String_">PublishAsync method</a>, un-publishing a file will bring the file back to draft status and can be done using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_UnpublishAsync_System_String_">UnPublishAsync method</a>.</p>
 <div class="NOTE">
