@@ -877,5 +877,21 @@ namespace PnP.Core.Model.SharePoint
         IFilePreview GetPreview(PreviewOptions options = null);
 
         #endregion
+
+        #region Rename
+        /// <summary>
+        /// Renames a file
+        /// </summary>
+        /// <param name="name">New file name</param>
+        /// <returns></returns>
+        public Task RenameAsync(string name);
+
+        /// <summary>
+        /// Renames a file
+        /// </summary>
+        /// <param name="name">New file name</param>
+        /// <returns></returns>
+        public void Rename(string name);
+        #endregion
     }
 }

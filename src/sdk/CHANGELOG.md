@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for reading and cloning News Digest pages #1086 [jansenbe - Bert Jansen]
 - Add capabilities to grant or revoke permissions to existing sharing link #1094 [MathijsVerbeeck - Mathijs Verbeeck]
 - Support for listing, approving and denying api access requests after installing an app #1100 [mloitzl - Martin Loitzl]
+- Added `Rename` methods on `IFile` to make it easier to rename a file #1109 [jansenbe - Bert Jansen]
 
 ### Changed
 

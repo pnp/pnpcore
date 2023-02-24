@@ -3497,5 +3497,40 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        [TestMethod]
+        public async Task RenameFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFile addedFile = null;
+                try
+                {
+                    IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+
+                    string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
+                    addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+
+                    // Test the created object
+                    Assert.IsNotNull(addedFile);
+                    Assert.AreEqual(fileName, addedFile.Name);
+                    Assert.AreNotEqual(default, addedFile.UniqueId);
+
+                    // Rename file
+                    addedFile.Rename("rename.docx");
+
+                    // Get the file again
+                    IFile foundDocument = await context.Web.GetFileByServerRelativeUrlAsync($"{parentFolder.ServerRelativeUrl}/rename.docx");
+
+                    Assert.IsTrue(foundDocument != null);
+                }
+                finally
+                {
+                    // Cleanup the added file
+                    await addedFile.DeleteAsync();
+                }
+            }
+        }
     }
 }

@@ -1132,6 +1132,28 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Rename File
+        public async Task RenameAsync(string name)
+        {
+            await EnsurePropertiesAsync(y => y.VroomItemID, y => y.VroomDriveID).ConfigureAwait(false);
+
+            dynamic body = new
+            {
+                name
+            };
+
+            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+            await RequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
+            // Update the Name property without marking the file as changed
+            SetSystemValue(name, nameof(Name));
+        }
+
+        public void Rename(string name)
+        {
+            RenameAsync(name).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
 
         #region Helper methods
