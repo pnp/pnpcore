@@ -399,7 +399,7 @@ bool paging = true;
 string nextPage = null;
 while (paging)
 {
-    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
     {
         ViewXml = viewXml,
         RenderOptions = RenderListDataOptionsFlags.ListData,
@@ -435,7 +435,7 @@ while (paging)
     myList.Items.Clear();
 
     // Execute the query, this populates a page of list items 
-    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
     {
         ViewXml = viewXml,
         RenderOptions = RenderListDataOptionsFlags.ListData,
