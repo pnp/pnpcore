@@ -83,10 +83,14 @@ namespace PnP.Core.Admin.Test.SharePoint
                     app = appManager.Add(packagePath, true);
                     var deployResult = app.Deploy(false);
 
-                    ServicePrincipal principal = new(context);
-                    List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+                    Assert.IsTrue(deployResult);
 
-                    var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+                    List<IPermissionRequest> permissionRequests =
+                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
+
+                    var result =
+                        await appManager.ServicePrincipal.ApprovePermissionRequestAsync(permissionRequests.First().Id
+                            .ToString());
 
                     Assert.IsNotNull(result);
                     Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
@@ -105,11 +109,26 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
-                ServicePrincipal principal = new(context);
-                List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+                ITenantApp app = null;
+                try
+                {
+                    var appManager = context.GetTenantAppManager();
+                    app = appManager.Add(packagePath, true);
+                    var deployResult = app.Deploy(false);
+
+                    Assert.IsTrue(deployResult);
+
+                    List<IPermissionRequest> permissionRequests =
+                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
                 Assert.IsNotNull(permissionRequests);
                 Assert.IsTrue(permissionRequests.Count > 0);
+            }
+                finally
+                {
+                    var retractResult = app.Retract();
+                    app.Remove();
+                }
             }
         }
         
@@ -125,10 +144,14 @@ namespace PnP.Core.Admin.Test.SharePoint
                     var appManager = context.GetTenantAppManager();
                     app = appManager.Add(packagePath, true);
                     var deployResult = app.Deploy(false);
-                    ServicePrincipal principal = new(context);
-                    List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
 
-                    await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+                    Assert.IsTrue(deployResult);
+
+                    List<IPermissionRequest> permissionRequests =
+                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
+
+                    await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id
+                        .ToString());
                 }
                 finally
                 {

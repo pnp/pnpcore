@@ -181,14 +181,14 @@ After adding and deploying an app to the app catalog these API permissions need 
 
 ```csharp
 // List the permission requests that are pending approval or rejection
-ServicePrincipal principal = new(context);
-List<IPermissionRequest> permissionRequests = await principal.GetPermissionRequestsAsync();
+var appManager = context.GetTenantAppManager();
+List<IPermissionRequest> permissionRequests = await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
 // Approve a permission request
-var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+var result = await appManager.ServicePrincipal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
 
 // Deny a permission request
-await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
 ```
 
 ## Tenant app catalog specific operations

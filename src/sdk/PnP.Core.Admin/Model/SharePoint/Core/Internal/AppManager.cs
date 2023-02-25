@@ -242,6 +242,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await AddAsync(bytes, fileInfo.Name, overwrite).ConfigureAwait(false);
         }
 
+        public IServicePrincipal ServicePrincipal
+        {
+            get
+            {
+                return new ServicePrincipal(this.context);
+            }
+        }
+
         /// <summary>
         /// Executes an action and disposes <see cref="PnPContext" /> if it's not the current context
         /// </summary>
