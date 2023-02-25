@@ -86,5 +86,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             return (List<IPermissionRequest>)csomResult.ApiCall.CSOMRequests[0].Result;
         }
+
+        public Task<IServicePrincipalProperties> Enable(VanityUrlOptions vanityUrlOptions = null)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IServicePrincipalProperties> Disable(VanityUrlOptions vanityUrlOptions = null)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
