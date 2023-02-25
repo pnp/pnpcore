@@ -192,7 +192,7 @@ await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.
 ```
 ## Enable or disable the SharePoint app service principal
 
-The SharePoint app service can be enabled or disabled via Azure Active Directory portal or via code. The `Enable` and `Disable` operations can be found on the `IServicePrincipal` interface:
+The SharePoint app service principal can be enabled or disabled using the Azure Active Directory portal or via code. The `Enable` and `Disable` operations can be found on the `IServicePrincipal` interface:
 
 ```csharp
 // Enable the ServicePrincipal
