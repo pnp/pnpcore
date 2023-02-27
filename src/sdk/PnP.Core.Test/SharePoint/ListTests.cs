@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -2007,16 +2008,44 @@ namespace PnP.Core.Test.SharePoint
                         Assert.Inconclusive("Test data set should be setup to not have the list available.");
                     }
 
+                    var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                    var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                    await group.LoadAsync(g => g.Sets);
+                    var termSet = group.Sets.AsRequested().FirstOrDefault();
+                    await termSet.LoadAsync(g => g.Terms.QueryProperties(p => p.Labels));
+                    var term = termSet.Terms.AsRequested().FirstOrDefault();
+
+                    string fieldTitle = "";
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "FieldTitle", fieldTitle },
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        fieldTitle = properties["FieldTitle"];
+                    }
+
                     if (myList == null)
                     {
                         myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
                         myList.Fields.AddText("MyField");
+                        myList.Fields.AddTaxonomy(fieldTitle, new FieldTaxonomyOptions
+                        {
+                            TermSetId = new Guid(termSet.Id),
+                            TermStoreId = new Guid(termStore.Id),
+                        });
                     }
 
                     // Add some folders to put default values on
                     var batch = context.NewBatch();
-                    myList.RootFolder.AddFolderBatch(batch, "Folder1");
-                    myList.RootFolder.AddFolderBatch(batch, "Folder2");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 1");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 2");
                     context.Execute(batch);
 
                     // Set default values on these folders
@@ -2024,15 +2053,21 @@ namespace PnP.Core.Test.SharePoint
                     {
                         new DefaultColumnValueOptions
                         {
-                            FolderRelativePath = "/Folder1",
+                            FolderRelativePath = "/Folder 1",
                             FieldInternalName = "MyField",
                             DefaultValue = "F1"
                         },
                         new DefaultColumnValueOptions
                         {
-                            FolderRelativePath = "/Folder2",
+                            FolderRelativePath = "/Folder 2",
                             FieldInternalName = "MyField",
                             DefaultValue = "F2"
+                        },
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath ="/Folder 1",
+                            FieldInternalName = fieldTitle,
+                            DefaultValue = $"-1;#{term.Labels.First().Name}|{term.Id}"
                         }
                     };
 

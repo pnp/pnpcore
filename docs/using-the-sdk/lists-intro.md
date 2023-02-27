@@ -140,9 +140,12 @@ await myList.RecycleAsync();
 
 ## Configuring default values for a list
 
+> [!Note]
+> Setting default column values per folder only is supported for document libraries, not for lists.
+
 ### Setting default values
 
-A list contains fields and these fields can have a default value as part of the field definition. Another approach for setting default values is outlined below, using one of the `SetDefaultColumnValues` methods you can set a default value for one or more fields and this can be done per folder. In below sample you'll see that `Folder1` will get another default then `Folder2`:
+A list contains fields and these fields can have a default value as part of the field definition. Another approach for setting default values is outlined below, using one of the `SetDefaultColumnValues` methods you can set a default value for one or more fields and this can be done per folder. In below sample you'll see that `Folder 1` will get another default then `Folder2`. Also note that taxonomy fields require a slightly different value setting: to specify a term you need to use "-1;#TermLabel|TermId", if you're setting a multi value taxonomy field and you want to specify multiple terms as default value use "-1;#Term1Label|Term1Id;#-1;#Term2Label|Term2Id".
 
 ```csharp
 var myList = await context.Web.Lists.GetByTitleAsync("List to work with");
@@ -152,7 +155,7 @@ List<DefaultColumnValueOptions> defaultColumnValues = new()
 {
     new DefaultColumnValueOptions
     {
-        FolderRelativePath = "/Folder1",
+        FolderRelativePath = "/Folder 1",
         FieldInternalName = "MyField",
         DefaultValue = "F1"
     },
@@ -161,6 +164,13 @@ List<DefaultColumnValueOptions> defaultColumnValues = new()
         FolderRelativePath = "/Folder2",
         FieldInternalName = "MyField",
         DefaultValue = "F2"
+    },
+    // Taxonomy fields require a specific model for setting the default value 
+    new DefaultColumnValueOptions
+    {
+        FolderRelativePath ="/Folder 1",
+        FieldInternalName = "TaxonomyField",
+        DefaultValue = $"-1;#{term.Labels.First().Name}|{term.Id}"
     }
 };
 
