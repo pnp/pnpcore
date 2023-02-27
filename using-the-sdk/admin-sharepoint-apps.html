@@ -236,6 +236,16 @@ var result = await appManager.ServicePrincipal.ApprovePermissionRequestAsync(per
 // Deny a permission request
 await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
 </code></pre>
+<h2 id="enable-or-disable-the-sharepoint-app-service-principal">Enable or disable the SharePoint app service principal</h2>
+<p>The SharePoint app service principal can be enabled or disabled using the Azure Active Directory portal or via code. The <code>Enable</code> and <code>Disable</code> operations can be found on the <code>IServicePrincipal</code> interface:</p>
+<pre><code class="lang-csharp">// Enable the ServicePrincipal
+var appManager = context.GetTenantAppManager();
+IServicePrincipalProperties result = await appManager.ServicePrincipal.Enable();
+
+// Disable the ServicePrincipal
+var appManager = context.GetTenantAppManager();
+IServicePrincipalProperties result = await appManager.ServicePrincipal.Disable();
+</code></pre>
 <h2 id="tenant-app-catalog-specific-operations">Tenant app catalog specific operations</h2>
 <p>Some methods are available only for the tenant app catalog. They are listed below.</p>
 <h3 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h3>
