@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add capabilities to grant or revoke permissions to existing sharing link #1094 [MathijsVerbeeck - Mathijs Verbeeck]
 - Support for listing, approving and denying api access requests after installing an app #1100 [mloitzl - Martin Loitzl]
 - Added `Rename` methods on `IFile` to make it easier to rename a file #1109 [jansenbe - Bert Jansen]
+- Added feature to enable or disable the SharePoint service principal #1117 [mloitzl - Martin Loitzl]
 
 ### Changed
 

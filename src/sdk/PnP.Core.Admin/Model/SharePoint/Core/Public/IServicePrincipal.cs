@@ -57,13 +57,27 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
-        Task<IServicePrincipalProperties> Enable(VanityUrlOptions vanityUrlOptions = null);
+        Task<IServicePrincipalProperties> EnableAsync(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Enable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        IServicePrincipalProperties Enable(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Disable the Service Principal
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
-        Task<IServicePrincipalProperties> Disable(VanityUrlOptions vanityUrlOptions = null);
+        Task<IServicePrincipalProperties> DisableAsync(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Disable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        IServicePrincipalProperties Disable(VanityUrlOptions vanityUrlOptions = null);
     }
 }

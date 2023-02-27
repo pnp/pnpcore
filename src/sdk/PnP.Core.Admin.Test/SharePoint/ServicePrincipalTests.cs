@@ -5,6 +5,8 @@ using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.SharePoint
@@ -33,29 +35,29 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.IsNotNull(request.Result);
             Assert.IsTrue(request.Result.AccountEnabled);
         }
-
-
+       
         [TestMethod]
-        public async Task EnableServicePrincipalTest_Async()
+        public async Task EnableDisableServicePrincipalTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
-                ServicePrincipal principal = new(context);
-                var result = await principal.Enable();
-                Assert.IsTrue(result.AccountEnabled);
-            }
-        }
-        
-        [TestMethod]
-        public async Task DisableServicePrincipalTest_Async()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
-            {
-                ServicePrincipal principal = new(context);
-                var result = await principal.Disable();
-                Assert.IsFalse(result.AccountEnabled);
+                try
+                {
+                    ServicePrincipal principal = new(context);
+                    var result = principal.Disable();
+                    Assert.IsFalse(result.AccountEnabled);
+                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                    Assert.IsTrue(result.ReplyUrls.Any());
+                }
+                finally
+                {
+                    ServicePrincipal principal = new(context);
+                    var result = principal.Enable();
+                    Assert.IsTrue(result.AccountEnabled);
+                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                    Assert.IsTrue(result.ReplyUrls.Any());
+                }
             }
         }
     }
