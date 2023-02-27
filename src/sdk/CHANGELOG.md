@@ -51,6 +51,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved model for `PnPContext` extensions allowing them to be used by mocking frameworks in unit tests #1083 [plamber - Patrick Lamber]
 - Chars ' and . are allowed in alias and urls [jansenbe - Bert Jansen]
 - Add possibility to get the `IServicePrincipal` via `IAppManager` #1116 [mloitzl - Martin Loitzl]
+- Don't set `BaseAddress` of `MicrosoftGraphClient` when there's no change #1114 [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 
