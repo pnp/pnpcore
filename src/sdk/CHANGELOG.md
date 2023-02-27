@@ -49,6 +49,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix for IFile/IListItem - CheckIfUserHasPermissionsAsync Throws ->System.NullReferenceException: #1097 [jansenbe - Bert Jansen]
 - Improved model for `PnPContext` extensions allowing them to be used by mocking frameworks in unit tests #1083 [plamber - Patrick Lamber]
 - Chars ' and . are allowed in alias and urls [jansenbe - Bert Jansen]
+- Add possibility to get the `IServicePrincipal` via `IAppManager` #1116 [mloitzl - Martin Loitzl]
 
 ## [1.8.0]
 

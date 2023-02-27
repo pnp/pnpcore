@@ -246,7 +246,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             get
             {
-                return new ServicePrincipal(this.context);
+                return new ServicePrincipal(context);
             }
         }
 

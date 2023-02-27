@@ -84,7 +84,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         Task<T> AddAsync(string path, bool overwrite = false);
         
         /// <summary>
-        /// Get the SharePoint Apps ServicePrincipal
+        /// Get the SharePoint Apps Service Principal enabling you to approve/reject permissions requests
         /// </summary>
         IServicePrincipal ServicePrincipal { get; }
     }
