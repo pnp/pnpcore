@@ -9,6 +9,9 @@ using System.Text.Json;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.ServicePrincipal
 {
+    /// <summary>
+    /// Based upon the Microsoft.Online.SharePoint.TenantAdministration.Internal.SPOWebAppServicePrincipal CSOM Request
+    /// </summary>
     internal sealed class GetPermissionRequestsRequest : IRequest<List<IPermissionRequest>>
     {
         private int IdentityPath { get; set; }
