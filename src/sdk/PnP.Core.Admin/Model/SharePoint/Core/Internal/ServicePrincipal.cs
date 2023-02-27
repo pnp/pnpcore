@@ -86,5 +86,43 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             return (List<IPermissionRequest>)csomResult.ApiCall.CSOMRequests[0].Result;
         }
+
+        public async Task<IServicePrincipalProperties> Enable(VanityUrlOptions vanityUrlOptions = null)
+        {
+            using PnPContext tenantAdminContext = await _context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+            
+            SetServicePrincipalRequest request = new() {Enabled = true};
+
+            ApiCall requestsCall = new(
+                new List<IRequest<object>> {request});
+
+            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+                .RawRequestAsync(requestsCall, HttpMethod.Post)
+                .ConfigureAwait(false);
+
+            return (IServicePrincipalProperties)csomResult.ApiCall.CSOMRequests[0].Result;
+        }
+
+        public async Task<IServicePrincipalProperties> Disable(VanityUrlOptions vanityUrlOptions = null)
+        {
+            using PnPContext tenantAdminContext = await _context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+            
+            SetServicePrincipalRequest request = new() {Enabled = false};
+
+            ApiCall requestsCall = new(
+                new List<IRequest<object>> {request});
+
+            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+                .RawRequestAsync(requestsCall, HttpMethod.Post)
+                .ConfigureAwait(false);
+
+            return (IServicePrincipalProperties)csomResult.ApiCall.CSOMRequests[0].Result;
+        }
     }
 }
