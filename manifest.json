@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppManager-1.html",
-          "hash": "knO9Y1LRkNILmakka6xWBpUmtzaLnfJN8Dn326Zc5o4="
+          "hash": "Q3m9joDvA0wTM0BO30y/Mh5+JVuPcbgbnxZxpyLwNNk="
         }
       },
       "is_incremental": false,
@@ -450,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionAppManager.html",
-          "hash": "5Z/RYdxhVxDEm1g+2tgNSOQda+WVNSPfFis6QbnqMCI="
+          "hash": "5CLiNI6DVlb3ikYJEHALJP/5+DKZPZTKq4/88rl/QME="
         }
       },
       "is_incremental": false,
@@ -510,7 +510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantAppManager.html",
-          "hash": "3jNCQo6OKPCCQBpJ/or9YZMPUPn1lCgx2uR8GtIS4G4="
+          "hash": "1ezVFFviSBR8YiZZbUyrr9q+m8I8muGStwdJOoimElU="
         }
       },
       "is_incremental": false,
@@ -9261,7 +9261,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-apps.html",
-          "hash": "s/L91G0gWROFE1j2zITLMYbA0qdsDtcg/5Bn18LjLsM="
+          "hash": "NgkSUplYj5z/8YwLeWzp3rBelAXdhZ1I6tmfnPWl6hw="
         }
       },
       "is_incremental": false,

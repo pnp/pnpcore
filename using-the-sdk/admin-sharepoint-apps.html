@@ -227,14 +227,14 @@ await app.RemoveAsync();
 </code></pre>
 <p>After adding and deploying an app to the app catalog these API permissions need to be approved by an admin (e.g. via <a href="https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement">https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement</a>) or via code. The code approach can be implemented using the <code>IServicePrincipal</code> class and the <code>GetPermissionRequests</code>, <code>ApprovePermissionRequest</code> and <code>DenyPermissionRequest</code> methods:</p>
 <pre><code class="lang-csharp">// List the permission requests that are pending approval or rejection
-ServicePrincipal principal = new(context);
-List&lt;IPermissionRequest&gt; permissionRequests = await principal.GetPermissionRequestsAsync();
+var appManager = context.GetTenantAppManager();
+List&lt;IPermissionRequest&gt; permissionRequests = await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
 // Approve a permission request
-var result = await principal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+var result = await appManager.ServicePrincipal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
 
 // Deny a permission request
-await principal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
+await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
 </code></pre>
 <h2 id="tenant-app-catalog-specific-operations">Tenant app catalog specific operations</h2>
 <p>Some methods are available only for the tenant app catalog. They are listed below.</p>
