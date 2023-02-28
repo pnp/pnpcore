@@ -278,6 +278,8 @@ foreach(var addedValue in defaultColumnValues)
     // Do something with the retrieved value
 }
 </code></pre>
+<h3 id="updating-the-set-default-values">Updating the set default values</h3>
+<p>If you want to update existing default values then first get the existing values using one of the <code>GetDefaultColumnValues</code> methods, update the returned list of <code>DefaultColumnValueOptions</code> instances and then persist them again via one of the <code>SetDefaultColumnValues</code> methods.</p>
 <h3 id="clearing-the-set-default-values">Clearing the set default values</h3>
 <p>Clearing all the set default values can be done using the <code>ClearDefaultColumnValues</code> methods:</p>
 <pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
