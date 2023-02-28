@@ -194,6 +194,10 @@ foreach(var addedValue in defaultColumnValues)
 }
 ```
 
+### Updating the set default values
+
+If you want to update existing default values then first get the existing values using one of the `GetDefaultColumnValues` methods, update the returned list of `DefaultColumnValueOptions` instances and then persist them again via one of the `SetDefaultColumnValues` methods.
+
 ### Clearing the set default values
 
 Clearing all the set default values can be done using the `ClearDefaultColumnValues` methods:
