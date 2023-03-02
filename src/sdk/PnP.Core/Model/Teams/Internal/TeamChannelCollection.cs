@@ -21,24 +21,34 @@ namespace PnP.Core.Model.Teams
         /// Adds a new channel
         /// </summary>
         /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public async Task<ITeamChannel> AddAsync(string name, TeamChannelOptions options)
+        {
+            var newChannel = CreateNewAndAdd(name, options);
+            return await newChannel.AddAsync().ConfigureAwait(false) as TeamChannel;
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public async Task<ITeamChannel> AddAsync(string name, string description = null)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            return await AddAsync(name, new TeamChannelOptions(description)).ConfigureAwait(false);
+        }
 
-            // TODO: validate name restrictions
-
-            var newChannel = CreateNewAndAdd() as TeamChannel;
-
-            // Assign field values
-            newChannel.DisplayName = name;
-            newChannel.Description = description;
-
-            return await newChannel.AddAsync().ConfigureAwait(false) as TeamChannel;
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel Add(string name, TeamChannelOptions options)
+        {
+            return AddAsync(name, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -57,22 +67,36 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public async Task<ITeamChannel> AddBatchAsync(Batch batch, string name, TeamChannelOptions options)
+        {
+            var newChannel = CreateNewAndAdd(name, options);
+            return await newChannel.AddBatchAsync(batch).ConfigureAwait(false) as TeamChannel;
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public async Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            return await AddBatchAsync(name, new TeamChannelOptions(description)).ConfigureAwait(false);
+        }
 
-            var newChannel = CreateNewAndAdd() as TeamChannel;
-
-            // Assign field values
-            newChannel.DisplayName = name;
-            newChannel.Description = description;
-
-            return await newChannel.AddBatchAsync(batch).ConfigureAwait(false) as TeamChannel;
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel AddBatch(Batch batch, string name, TeamChannelOptions options)
+        {
+            return AddBatchAsync(batch, name, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -91,6 +115,17 @@ namespace PnP.Core.Model.Teams
         /// Adds a new channel
         /// </summary>
         /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public async Task<ITeamChannel> AddBatchAsync(string name, TeamChannelOptions options)
+        {
+            return await AddBatchAsync(PnPContext.CurrentBatch, name, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public async Task<ITeamChannel> AddBatchAsync(string name, string description = null)
@@ -102,11 +137,48 @@ namespace PnP.Core.Model.Teams
         /// Adds a new channel
         /// </summary>
         /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel AddBatch(string name, TeamChannelOptions options)
+        {
+            return AddBatchAsync(name, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public ITeamChannel AddBatch(string name, string description = null)
         {
             return AddBatchAsync(name, description).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new `TeamChannel` instance,
+        /// adds it to the collection and configures it.
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="options">Options for creating the channel</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Missing name argument</exception>
+        private TeamChannel CreateNewAndAdd(string name, TeamChannelOptions options)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            
+            // TODO: validate name restrictions
+            
+            var newChannel = CreateNewAndAdd() as TeamChannel;
+            
+            newChannel.DisplayName = name;
+            newChannel.Description = options.Description;
+            if(options.MembershipType.HasValue) newChannel.MembershipType = options.MembershipType.Value;
+
+            return newChannel;
         }
 
         #endregion
