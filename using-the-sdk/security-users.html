@@ -116,6 +116,11 @@
 <td>You can add an Azure AD security group to a SharePoint Group or directly grant it a role by using this login name. The <code>&lt;guid&gt;</code> is the Azure AD object id of the security group</td>
 </tr>
 <tr>
+<td>Company Administrator</td>
+<td><code>c:0t.c|tenant|&lt;guid&gt;</code></td>
+<td>Company Administrator translated to a group containing all the tenant level SharePoint administrators. The <code>&lt;guid&gt;</code> is the Azure AD object id of the security group</td>
+</tr>
+<tr>
 <td>Microsoft 365 group</td>
 <td><code>c:0o.c|federateddirectoryclaimprovider|&lt;guid&gt;</code></td>
 <td>You can add a Microsoft 365 group to a SharePoint Group or directly grant it a role by using this login name. The <code>&lt;guid&gt;</code> is the Azure AD object id of the Microsoft 365 group. Note that adding this Microsoft 365 group will grant it's members access</td>
@@ -143,8 +148,11 @@ foreach(var group in context.Web.SiteUsers.AsRequested())
 <pre><code class="lang-csharp">// Regular user
 var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
 
-// Special user
-var specialUser = await context.Web.EnsureUserAsync(&quot;Everyone except external users&quot;);
+// Special users
+var everyoneExceptEnternalUsers = await context.Web.EnsureUserAsync(&quot;Everyone except external users&quot;);
+
+var companyAdministators = await context.Web.EnsureUserAsync(&quot;Company Administrator&quot;);
+
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
