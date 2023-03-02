@@ -20,6 +20,7 @@ User account | Login name | Description
 Everyone | `c:0(.s|true` | Use this user to represent all users in your organization
 Everyone except external users | `c:0-.f|rolemanager|spo-grid-all-users/<guid>` | Use this user to represent all users except the internal users in your organization
 Azure AD security group | `c:0t.c|tenant|<guid>` | You can add an Azure AD security group to a SharePoint Group or directly grant it a role by using this login name. The `<guid>` is the Azure AD object id of the security group
+Company Administrator | `c:0t.c|tenant|<guid>` | Company Administrator translated to a group containing all the tenant level SharePoint administrators. The `<guid>` is the Azure AD object id of the security group
 Microsoft 365 group | `c:0o.c|federateddirectoryclaimprovider|<guid>` | You can add a Microsoft 365 group to a SharePoint Group or directly grant it a role by using this login name. The `<guid>` is the Azure AD object id of the Microsoft 365 group. Note that adding this Microsoft 365 group will grant it's members access
 
 As you can't simply update the user table list to add users, use the approaches as outlined below.
@@ -57,8 +58,11 @@ Before a user can be used the user needs to exist and the best way to ensure a u
 // Regular user
 var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
 
-// Special user
-var specialUser = await context.Web.EnsureUserAsync("Everyone except external users");
+// Special users
+var everyoneExceptEnternalUsers = await context.Web.EnsureUserAsync("Everyone except external users");
+
+var companyAdministators = await context.Web.EnsureUserAsync("Company Administrator");
+
 ```
 
 > [!Important]
