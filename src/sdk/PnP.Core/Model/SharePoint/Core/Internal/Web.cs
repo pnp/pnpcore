@@ -726,6 +726,54 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Users
+
+        private async Task<Guid> GetTenantIdAsync()
+        {
+            // in case telemetry is configured, return the tenant id from the globaloptions
+            if (this.PnPContext.GlobalOptions.AADTenantId != Guid.Empty)
+                return this.PnPContext.GlobalOptions.AADTenantId;
+
+            await EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
+            WebRequest request = WebRequest.Create(this.Url + "/_vti_bin/client.svc");
+            request.Headers.Add("Authorization: Bearer ");
+
+            try
+            {
+                await request.GetResponseAsync().ConfigureAwait(false);
+            }
+            catch (WebException e)
+            {
+                var bearerResponseHeader = e.Response.Headers["WWW-Authenticate"];
+
+                const string bearer = "Bearer realm=\"";
+                var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
+
+                var realmIndex = bearerIndex + bearer.Length;
+
+                if (bearerResponseHeader.Length >= realmIndex + 36)
+                {
+                    if (Guid.TryParse(bearerResponseHeader.Substring(realmIndex, 36), out Guid realmGuid))
+                    {
+                        return realmGuid;
+                    }
+                }
+            }
+            return Guid.Empty;
+        }
+
+
+        public ISharePointUser GetEveryoneExceptExternalUsers()
+        {
+            return GetEveryoneExceptExternalUsersAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetEveryoneExceptExternalUsersAsync()
+        {
+            var tenantId = await this.GetTenantIdAsync().ConfigureAwait(false);
+            var loginName = $"c:0-.f|rolemanager|spo-grid-all-users/{tenantId}";
+            return await this.EnsureUserAsync(loginName).ConfigureAwait(false);
+        }
+
         public ISharePointUser EnsureUser(string userPrincipalName)
         {
             return EnsureUserAsync(userPrincipalName).GetAwaiter().GetResult();
@@ -952,7 +1000,7 @@ namespace PnP.Core.Model.SharePoint
 
             List<Tuple<string, BatchRequest>> requests = new();
             var batch = PnPContext.NewBatch();
-            foreach(var user in userList)
+            foreach (var user in userList)
             {
                 requests.Add(Tuple.Create(user, await RawRequestBatchAsync(batch, new ApiCall($"users/{user}", ApiType.Graph), HttpMethod.Get, "GetUser").ConfigureAwait(false)));
             }
@@ -965,7 +1013,7 @@ namespace PnP.Core.Model.SharePoint
                     nonExistingUsers.Add(request.Item1);
                 }
             }
-          
+
             return nonExistingUsers;
         }
 
@@ -979,7 +1027,7 @@ namespace PnP.Core.Model.SharePoint
             var nonExistingUsers = await ValidateUsersAsync(userList).ConfigureAwait(false);
 
             List<ISharePointUser> ensuredUsers = new();
-            
+
             var batch = PnPContext.NewBatch();
             foreach (var user in userList)
             {
@@ -1180,13 +1228,13 @@ namespace PnP.Core.Model.SharePoint
             {
                 targetMail = "";
             }
-            
+
             // Build body
             var useAccessRequest = new
             {
                 useAccessRequestDefault = operation == AccessRequestOption.Enabled ? "true" : "false"
             }.AsExpando();
-            
+
             string useAccessRequestBody = JsonSerializer.Serialize(useAccessRequest, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
             var setUseAccessRequestDefaultAndUpdateRequest = new ApiCall($"_api/web/setUseaccessrequestdefaultandupdate", ApiType.SPORest, useAccessRequestBody);
             await RawRequestAsync(setUseAccessRequestDefaultAndUpdateRequest, HttpMethod.Post).ConfigureAwait(false);
@@ -1196,7 +1244,7 @@ namespace PnP.Core.Model.SharePoint
                 __metadata = new { type = "SP.Web" },
                 RequestAccessEmail = targetMail
             }.AsExpando();
-            
+
             string updateRequestAccessMailBody = JsonSerializer.Serialize(updateRequestAccessMail, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
             var updateRequestAccessMailRequest = new ApiCall($"_api/web", ApiType.SPORest, updateRequestAccessMailBody);
             await RawRequestAsync(updateRequestAccessMailRequest, new HttpMethod("PATCH")).ConfigureAwait(false);

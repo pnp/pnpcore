@@ -784,7 +784,7 @@ namespace PnP.Core.Test.SharePoint
         {
             Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
         }
-        
+
         [TestMethod]
         public async Task GetTimeZoneInfoTest()
         {
@@ -793,7 +793,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var timeZoneInfo = context.Web.RegionalSettings.TimeZone.GetTimeZoneInfo();
                 Assert.IsTrue(timeZoneInfo != null);
-            } 
+            }
         }
 
         [TestMethod]
@@ -842,7 +842,7 @@ namespace PnP.Core.Test.SharePoint
             utcDate = localDate.ToUniversalTime();
             localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, 3);
             Assert.IsTrue(localWebTime.Hour == 15);
-            
+
         }
 
         private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, int id)
@@ -1007,6 +1007,20 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(currentUser1.Requested);
                 Assert.IsTrue(currentUser1 is Model.Security.ISharePointUser);
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsuresEveryoneExceptExternalUsersTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var ensuredUser = await context.Web.GetEveryoneExceptExternalUsersAsync();
+
+                Assert.IsTrue(ensuredUser.Requested);
+                Assert.IsTrue(ensuredUser is Model.Security.ISharePointUser);
+                Assert.IsTrue(ensuredUser.LoginName.StartsWith($"c:0-.f|rolemanager|spo-grid-all-users/"));
             }
         }
 
@@ -1974,7 +1988,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 await context.Web.SetAccessRequestAsync(AccessRequestOption.Disabled);
 
-                context.Web.Load(p=> p.UseAccessRequestDefault, p=> p.RequestAccessEmail);
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
                 await context.ExecuteAsync();
 
                 Assert.IsFalse(context.Web.UseAccessRequestDefault);
@@ -2211,7 +2225,7 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Reindex tests
-        
+
         [TestMethod]
         public async Task ReIndexNoScriptSiteTest()
         {
