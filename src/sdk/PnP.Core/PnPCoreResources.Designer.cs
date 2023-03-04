@@ -1141,6 +1141,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Everyone except external users could not be ensured.
+        /// </summary>
+        internal static string Exception_Web_EveyoneExceptUsersCouldNotBeEnsured {
+            get {
+                return ResourceManager.GetString("Exception_Web_EveyoneExceptUsersCouldNotBeEnsured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A site template with the name {0} could not be found.
         /// </summary>
         internal static string Exception_WebTemplate_NotFound {

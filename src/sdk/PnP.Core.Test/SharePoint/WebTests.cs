@@ -1016,7 +1016,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var ensuredUser = await context.Web.GetEveryoneExceptExternalUsersAsync();
+                var ensuredUser = await context.Web.EnsureEveryoneExceptExternalUsersAsync();
 
                 Assert.IsTrue(ensuredUser.Requested);
                 Assert.IsTrue(ensuredUser is Model.Security.ISharePointUser);

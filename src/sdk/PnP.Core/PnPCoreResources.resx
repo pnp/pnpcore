@@ -501,4 +501,7 @@
   <data name="Exception_Page_NotSupportedPageTypeForCreate" xml:space="preserve">
     <value>Topic and News Digest pages are not supported for creation, they can be read, copied and deleted but you can't create new ones</value>
   </data>
+  <data name="Exception_Web_EveyoneExceptUsersCouldNotBeEnsured" xml:space="preserve">
+    <value>The Everyone except external users could not be ensured</value>
+  </data>
 </root>

@@ -895,13 +895,13 @@ namespace PnP.Core.Model.SharePoint
         /// Retrieves everyone except external users and ensures the user in the current web
         /// </summary>
         /// <returns>The ensured <see cref="ISharePointUser"/></returns>
-        public Task<ISharePointUser> GetEveryoneExceptExternalUsersAsync();
+        public Task<ISharePointUser> EnsureEveryoneExceptExternalUsersAsync();
 
         /// <summary>
         /// Retrieves everyone except external users and ensures the user in the current web
         /// </summary>
         /// <returns>The ensured <see cref="ISharePointUser"/></returns>
-        public ISharePointUser GetEveryoneExceptExternalUsers();
+        public ISharePointUser EnsureEveryoneExceptExternalUsers();
 
         /// <summary>
         /// Ensures the given users exists
