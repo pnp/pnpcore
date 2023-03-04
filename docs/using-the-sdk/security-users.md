@@ -52,15 +52,16 @@ var foundUser = await context.Web.GetUserByIdAsync(userId);
 
 ## Adding/ensuring a user
 
-Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` methods.
+Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` and `EnsureEveryoneExceptExternalUsers` methods. The latter method is needed for the "Everyone except external users" user as that string is different for sites created in other languages. Other "special" users are language neutral.
 
 ```csharp
 // Regular user
 var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
 
-// Special users
-var everyoneExceptEnternalUsers = await context.Web.EnsureUserAsync("Everyone except external users");
+// Special users: for the "Everyone except external users" user use the EnsureEveryoneExceptExternalUsersAsync method
+var everyoneExceptEnternalUsers = await context.Web.EnsureEveryoneExceptExternalUsersAsync();
 
+// Other special users can be done using the string
 var companyAdministators = await context.Web.EnsureUserAsync("Company Administrator");
 
 ```
