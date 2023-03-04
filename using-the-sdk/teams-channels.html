@@ -133,7 +133,7 @@ foreach(var file in folder.Files.AsRequested())
 }
 </code></pre>
 <h2 id="creating-channels">Creating Channels</h2>
-<p>To add a new channel, call the Add method, specifying a name and optionally a description.</p>
+<p>To add a new channel, call the Add method, specifying a name and optionally a description. When you want to create a private or shared channel use the <code>TeamChannelOptions</code> class as input.</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(p =&gt; p.Channels);
 
@@ -145,6 +145,13 @@ if (channelFound == null)
 {
     // Add a new channel
     channelFound = await team.Channels.AddAsync(channelName, &quot;This is my cool new Channel, check this out!&quot;);
+
+    // Add the channel as private
+    channelFound = await team.Channels.AddAsync(channelName, new TeamChannelOptions
+    { 
+        Description = &quot;This is my cool new Channel, check this out!&quot;, 
+        MembershipType = TeamChannelMembershipType.Private
+    });
 }
 </code></pre>
 <div class="TIP">
