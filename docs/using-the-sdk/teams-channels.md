@@ -68,7 +68,7 @@ foreach(var file in folder.Files.AsRequested())
 
 ## Creating Channels
 
-To add a new channel, call the Add method, specifying a name and optionally a description.
+To add a new channel, call the Add method, specifying a name and optionally a description. When you want to create a private or shared channel use the `TeamChannelOptions` class as input.
 
 ```csharp
 // Get the Team
@@ -82,6 +82,13 @@ if (channelFound == null)
 {
     // Add a new channel
     channelFound = await team.Channels.AddAsync(channelName, "This is my cool new Channel, check this out!");
+
+    // Add the channel as private
+    channelFound = await team.Channels.AddAsync(channelName, new TeamChannelOptions
+    { 
+        Description = "This is my cool new Channel, check this out!", 
+        MembershipType = TeamChannelMembershipType.Private
+    });
 }
 ```
 
