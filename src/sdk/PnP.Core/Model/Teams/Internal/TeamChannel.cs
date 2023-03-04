@@ -30,6 +30,7 @@ namespace PnP.Core.Model.Teams
                 {
                     body.description = Description;
                 }
+                body.MembershipType = MembershipType;
 
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);

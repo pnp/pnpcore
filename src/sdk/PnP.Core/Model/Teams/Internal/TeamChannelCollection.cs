@@ -176,7 +176,10 @@ namespace PnP.Core.Model.Teams
             
             newChannel.DisplayName = name;
             newChannel.Description = options.Description;
-            if(options.MembershipType.HasValue) newChannel.MembershipType = options.MembershipType.Value;
+            if (options.MembershipType.HasValue)
+            {
+                newChannel.MembershipType = options.MembershipType.Value;
+            }
 
             return newChannel;
         }
