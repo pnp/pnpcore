@@ -7026,7 +7026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannelCollection.html",
-          "hash": "LOEpQ6WkWOQlQz3M4gK4tfPEiKGqj+dZtkScqMvyCT4="
+          "hash": "T4OpFr+fx+G4jsWvLCKzW3SI29vzbXqe8DScVRY0qto="
         }
       },
       "is_incremental": false,
@@ -7418,6 +7418,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamChannelOptions.html",
+          "hash": "vRMv96I0ARLZ/vTANg5hD/eTEzCuaQjQHGWd2ZH10po="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelTabConstants.yml",
       "output": {
         ".html": {
@@ -7542,7 +7554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "JSO+9Cq7/adyh1CcHtx/lu3dHNcCUHLGV15zvS+q6Vk="
+          "hash": "2P8aaHGYlYWPoOdlS5VPw9bKJCU6546GqizEPCRCy+M="
         }
       },
       "is_incremental": false,
@@ -8358,7 +8370,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "ObhZ5vghQ8qOEdnfwsxv37hxpdmI43Itq0mYWyghtTM="
+          "hash": "Qk+iMJacayZi1Z/deSikhTgas5xSAu2uHmkPNutPhU8="
         }
       },
       "is_incremental": false,
@@ -10296,7 +10308,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 694,
+          "total_file_count": 695,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
