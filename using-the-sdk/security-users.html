@@ -144,13 +144,14 @@ foreach(var group in context.Web.SiteUsers.AsRequested())
 <pre><code class="lang-csharp">var foundUser = await context.Web.GetUserByIdAsync(userId);
 </code></pre>
 <h2 id="addingensuring-a-user">Adding/ensuring a user</h2>
-<p>Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the <code>EnsureUser</code> methods.</p>
+<p>Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the <code>EnsureUser</code> and <code>EnsureEveryoneExceptExternalUsers</code> methods. The latter method is needed for the &quot;Everyone except external users&quot; user as that string is different for sites created in other languages. Other &quot;special&quot; users are language neutral.</p>
 <pre><code class="lang-csharp">// Regular user
 var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
 
-// Special users
-var everyoneExceptEnternalUsers = await context.Web.EnsureUserAsync(&quot;Everyone except external users&quot;);
+// Special users: for the &quot;Everyone except external users&quot; user use the EnsureEveryoneExceptExternalUsersAsync method
+var everyoneExceptEnternalUsers = await context.Web.EnsureEveryoneExceptExternalUsersAsync();
 
+// Other special users can be done using the string
 var companyAdministators = await context.Web.EnsureUserAsync(&quot;Company Administrator&quot;);
 
 </code></pre>
