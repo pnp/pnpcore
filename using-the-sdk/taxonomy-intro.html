@@ -115,7 +115,10 @@ if (termStore.Languages.Contains(&quot;nl-NL&quot;))
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>If your application is using application permissions when working with taxonomy you'll need to ensure you've added SharePoint principal as termstore administrator. Navigate to <a href="https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx">https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx</a> (update to match your tenant name) and add <code>i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint</code> to the list of Term Store Administrators.</p>
+<p>If your application is using application permissions when working with taxonomy you'll need to ensure you've added SharePoint principal as termstore administrator. Navigate to <a href="https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx">https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx</a> (update to match your tenant name) and add <code>i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint</code> to the list of Term Store Administrators. If that page is not available anymore in your tenant you can use PnP PowerShell to add the SharePoint Principal: below code will replace the existing admins with the app principal one, so first take note of the added admins or alternatively update the payload of the request:</p>
+<pre><code class="lang-powershell">$body = &quot;{`&quot;administrators`&quot;:[{`&quot;user`&quot;: { `&quot;email`&quot;: `&quot;app@sharepoint`&quot;, `&quot;userPrincipalName`&quot;: `&quot;i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint`&quot;, displayName: `&quot;SharePoint App`&quot; }}]}&quot;
+Invoke-PnPSPRestMethod -Method PATCH -Url &quot;/_api/v2.1/termStore?select=*,administrators&quot; -Raw -Content $body
+</code></pre>
 </div>
 <h2 id="working-with-term-groups">Working with term groups</h2>
 <p>Term groups are used to organize term sets and define permissions on who can manage or author new term sets and terms in the group. To get term groups you can either load all term groups, use a LINQ query to load specific groups or get a term group by id or name:</p>
