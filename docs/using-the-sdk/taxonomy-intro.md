@@ -46,7 +46,11 @@ if (termStore.Languages.Contains("nl-NL"))
 ```
 
 > [!Important]
-> If your application is using application permissions when working with taxonomy you'll need to ensure you've added SharePoint principal as termstore administrator. Navigate to https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx (update to match your tenant name) and add `i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint` to the list of Term Store Administrators.
+> If your application is using application permissions when working with taxonomy you'll need to ensure you've added SharePoint principal as termstore administrator. Navigate to https://contoso-admin.sharepoint.com/_layouts/15/TermStoreManager.aspx (update to match your tenant name) and add `i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint` to the list of Term Store Administrators. If that page is not available anymore in your tenant you can use PnP PowerShell to add the SharePoint Principal: below code will replace the existing admins with the app principal one, so first take note of the added admins or alternatively update the payload of the request:
+> ```powershell
+> $body = "{`"administrators`":[{`"user`": { `"email`": `"app@sharepoint`", `"userPrincipalName`": `"i:0i.t|00000003-0000-0ff1-ce00-000000000000|app@sharepoint`", displayName: `"SharePoint App`" }}]}"
+> Invoke-PnPSPRestMethod -Method PATCH -Url "/_api/v2.1/termStore?select=*,administrators" -Raw -Content $body
+> ```
 
 ## Working with term groups
 
