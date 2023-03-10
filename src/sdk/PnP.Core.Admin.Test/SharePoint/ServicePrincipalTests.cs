@@ -71,25 +71,25 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
-                    ServicePrincipal servicePrincipal = new(context);
+                ServicePrincipal servicePrincipal = new(context);
 
-                    IPermissionGrant addedGrant =
-                        servicePrincipal.AddGrant("Microsoft Graph", "Calendars.ReadWrite.Shared");
+                IPermissionGrant addedGrant =
+                    servicePrincipal.AddGrant("Microsoft Graph", "Calendars.ReadWrite.Shared");
 
-                    Assert.IsNotNull(addedGrant);
-                    Assert.AreEqual("Microsoft Graph", addedGrant.Resource);
-                    Assert.AreEqual("Calendars.ReadWrite.Shared", addedGrant.Scope);
-                    
-                    var grants =
-                        servicePrincipal.ListGrants();
-                    
-                    Assert.IsTrue(grants.Any(g => g.ObjectId.Equals(addedGrant.ObjectId)));
-                    
-                    IPermissionGrant revokedGrant =
-                        servicePrincipal.RevokeGrant(addedGrant.ObjectId);
-                
-                    Assert.IsNotNull(revokedGrant);
-                    Assert.AreEqual("Calendars.ReadWrite.Shared", addedGrant.Scope);
+                Assert.IsNotNull(addedGrant);
+                Assert.AreEqual("Microsoft Graph", addedGrant.Resource);
+                Assert.AreEqual("Calendars.ReadWrite.Shared", addedGrant.Scope);
+
+                var grants =
+                    servicePrincipal.ListGrants();
+
+                Assert.IsTrue(grants.Any(g => g.ObjectId.Equals(addedGrant.ObjectId)));
+
+                IPermissionGrant revokedGrant =
+                    servicePrincipal.RevokeGrant(addedGrant.ObjectId);
+
+                Assert.IsNotNull(revokedGrant);
+                Assert.AreEqual("Calendars.ReadWrite.Shared", addedGrant.Scope);
             }
         }
 
