@@ -390,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IServicePrincipal.html",
-          "hash": "P+Zr9mlWQX0GWFcL0ojg12p5EDzV4syPOM5eI1ytpQo="
+          "hash": "gANf+xCwcl5Owh3Scr7MY0AejYzzgRMSbhtgTDjS2hU="
         }
       },
       "is_incremental": false,
@@ -9285,7 +9285,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-apps.html",
-          "hash": "C9eRBWp8W9+LRHvIf8VxF1sSBgh/ZBXBN+kad/45YUE="
+          "hash": "sXRdm6TwEnpPDpzs5JA8HiYmPzjL1K+OaNWdva2nwo8="
         }
       },
       "is_incremental": false,

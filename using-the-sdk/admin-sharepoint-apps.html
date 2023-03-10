@@ -236,6 +236,22 @@ var result = await appManager.ServicePrincipal.ApprovePermissionRequestAsync(per
 // Deny a permission request
 await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
 </code></pre>
+<h2 id="add-list-and-revoke-permission-grants-of-the-sharepoint-app-service-principal">Add, list and revoke permission grants of the SharePoint app service principal</h2>
+<p>Permission grants can be added and revoked to/from the SharePoint app service principal via code.</p>
+<pre><code class="lang-csharp">// Add a grant to the ServicePrincipal
+var appManager = context.GetTenantAppManager();
+IPermissionGrant addResult = appManager.ServicePrincipal
+      .AddGrant(&quot;Microsoft Graph&quot;, &quot;Calendars.ReadWrite.Shared&quot;);
+
+// Revoke a grant from the ServicePrincipal
+var appManager = context.GetTenantAppManager();
+IPermissionGrant revokeResult = appManager.ServicePrincipal.RevokeGrant(addResult.ObjectId);
+</code></pre>
+<p>Permissions granted to the the SharePoint app service principal can be listed via code.</p>
+<pre><code class="lang-csharp">// List grants from the ServicePrincipal
+var appManager = context.GetTenantAppManager();
+IEnumerable&lt;IPermissionGrant&gt; result = appManager.ServicePrincipal.ListGrants();
+</code></pre>
 <h2 id="enable-or-disable-the-sharepoint-app-service-principal">Enable or disable the SharePoint app service principal</h2>
 <p>The SharePoint app service principal can be enabled or disabled using the Azure Active Directory portal or via code. The <code>Enable</code> and <code>Disable</code> operations can be found on the <code>IServicePrincipal</code> interface:</p>
 <pre><code class="lang-csharp">// Enable the ServicePrincipal
