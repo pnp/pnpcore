@@ -40,4 +40,4 @@ The model implemented in the preview only covers a small part of what's possible
 
 **This community rocks, sharing is caring!**
 
-<img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/readme" />
+<!-- <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" /> -->
