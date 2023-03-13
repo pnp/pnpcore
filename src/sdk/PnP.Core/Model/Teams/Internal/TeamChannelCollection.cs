@@ -84,7 +84,7 @@ namespace PnP.Core.Model.Teams
         /// <returns>Newly added channel</returns>
         public async Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null)
         {
-            return await AddBatchAsync(name, new TeamChannelOptions(description)).ConfigureAwait(false);
+            return await AddBatchAsync(batch, name, new TeamChannelOptions(description)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -179,6 +179,10 @@ namespace PnP.Core.Model.Teams
             if (options.MembershipType.HasValue)
             {
                 newChannel.MembershipType = options.MembershipType.Value;
+            }
+            else
+            {
+                newChannel.MembershipType = TeamChannelMembershipType.Standard;
             }
 
             return newChannel;
