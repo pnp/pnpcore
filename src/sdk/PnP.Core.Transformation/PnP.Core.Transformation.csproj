@@ -7,7 +7,7 @@
     <AssemblyName>PnP.Core.Transformation</AssemblyName>
 	<Version>1.8.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>PnP 2022</Copyright>
+    <Copyright>PnP 2023</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
     <Description>[EXPERIMENTAL - Not yet officially released!] The PnP Core Transformation library provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
