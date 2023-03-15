@@ -56,5 +56,17 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetSharePointAddIns()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var addIns = context.GetSiteCollectionManager().GetSiteCollectionSharePointAddIns();
+
+                Assert.IsTrue(addIns.Any());
+            }
+        }
+
     }
 }

@@ -300,6 +300,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetLegacyServicePrincipalsAsync().GetAwaiter().GetResult();
         }
+
+        public async Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetSharePointAddInsAsync(context, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<ISharePointAddIn>().ToList();
+        }
+
+        public List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetSiteCollectionSharePointAddInsAsync(includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
         #endregion
     }
 }

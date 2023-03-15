@@ -419,6 +419,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>List of legacy service principals</returns>
         List<ILegacyServicePrincipal> GetLegacyServicePrincipals();
 
+        /// <summary>
+        /// Gets a list of SharePoint AddIns that are scoped to the current site and optionally it's subsites. 
+        /// </summary>
+        /// <param name="includeSubsites">Also load the SharePoint AddIns for the subsites</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of SharePoint AddIns</returns>
+        Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of SharePoint AddIns that are scoped to the current site and optionally it's subsites. 
+        /// </summary>
+        /// <param name="includeSubsites">Also load the SharePoint AddIns for the subsites</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of SharePoint AddIns</returns>
+        List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
         #endregion
     }
 }

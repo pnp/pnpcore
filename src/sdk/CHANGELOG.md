@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added feature to enable or disable the SharePoint service principal #1117 [mloitzl - Martin Loitzl]
 - Method to ensure the 'Everyone except external users' user for any site language #1127 [plamber - Patrick Lamber] 
 - Added support for listing, adding and revoking permission grants for a SharePoint service principal #1132 [mloitzl - Martin Loitzl]
+- Admin library: added support for listing Azure ACS principals and SharePoint AddIns [jansenbe - Bert Jansen]
 
 ### Changed
 
