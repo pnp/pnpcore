@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -263,7 +264,42 @@ namespace PnP.Core.Admin.Model.SharePoint
         public void EnableCommunicationSiteFeatures(Uri url)
         {
             EnableCommunicationSiteFeaturesAsync(url).GetAwaiter().GetResult();
-        }        
+        }
+        #endregion
+
+        #region Azure ACS principals and SharePoint AddIn discovery
+
+        public async Task<List<IACSPrincipal>> GetSiteCollectionACSPrincipalsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, null, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetSiteCollectionACSPrincipals(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetSiteCollectionACSPrincipalsAsync(includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IACSPrincipal>> GetTenantAndSiteCollectionACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetTenantAndSiteCollectionACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantAndSiteCollectionACSPrincipalsAsync(legacyServicePrincipals, includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync()
+        {
+            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context).ConfigureAwait(false);
+        }
+
+        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals()
+        {
+            return GetLegacyServicePrincipalsAsync().GetAwaiter().GetResult();
+        }
         #endregion
     }
 }

@@ -13,7 +13,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -728,28 +727,6 @@ namespace PnP.Core.Model.SharePoint
 
         #region Users
 
-        private async Task<Guid> GetTenantIdAsync()
-        {
-            // in case telemetry is configured, the globaloptions already has a populated tenantid value
-            if (PnPContext.GlobalOptions.AADTenantId == Guid.Empty)
-            {
-                var useOpenIdConfiguration = false;
-#if NET5_0_OR_GREATER
-                useOpenIdConfiguration = RuntimeInformation.RuntimeIdentifier == "browser-wasm";
-#endif
-                await PnPContext.SetAADTenantId(useOpenIdConfiguration).ConfigureAwait(false);
-            }
-
-            if (PnPContext.GlobalOptions.AADTenantId != Guid.Empty)
-            {
-                return PnPContext.GlobalOptions.AADTenantId;
-            }
-            else
-            {
-                return Guid.Empty;                
-            }
-        }
-
         public ISharePointUser EnsureEveryoneExceptExternalUsers()
         {
             return EnsureEveryoneExceptExternalUsersAsync().GetAwaiter().GetResult();
@@ -759,7 +736,7 @@ namespace PnP.Core.Model.SharePoint
         {
             try
             {
-                var tenantId = await GetTenantIdAsync().ConfigureAwait(false);
+                var tenantId = await PnPContext.GetTenantIdAsync().ConfigureAwait(false);
                 var loginName = $"c:0-.f|rolemanager|spo-grid-all-users/{tenantId}";
                 return await EnsureUserAsync(loginName).ConfigureAwait(false);
             }

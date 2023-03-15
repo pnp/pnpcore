@@ -365,5 +365,60 @@ namespace PnP.Core.Admin.Model.SharePoint
         void EnableCommunicationSiteFeatures(Uri site, Guid designPackageId);
 
         #endregion
+
+        #region Azure ACS principals and SharePoint AddIn discovery
+
+        /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped to the current site and optionally it's subsites. 
+        /// A Azure ACS principal granted tenant level permissions will not be included here. If you need that
+        /// then use the <see cref="GetTenantAndSiteCollectionACSPrincipalsAsync(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
+        /// </summary>
+        /// <param name="includeSubsites">Also load the Azure ACS principals for the subsites. This is relevant when a principal was granted web or list permissions but no site permissions</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of Azure ACS principals</returns>
+        Task<List<IACSPrincipal>> GetSiteCollectionACSPrincipalsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped to the current site and optionally it's subsites. 
+        /// A Azure ACS principal granted tenant level permissions will not be included here. If you need that
+        /// then use the <see cref="GetTenantAndSiteCollectionACSPrincipals(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
+        /// </summary>
+        /// <param name="includeSubsites">Also load the Azure ACS principals for the subsites. This is relevant when a principal was granted web or list permissions but no site permissions</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of Azure ACS principals</returns>
+        List<IACSPrincipal> GetSiteCollectionACSPrincipals(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped to the current site and/or scoped tenant wide. For performance reason this method 
+        /// requires the input of a <see cref="List{ILegacyServicePrincipal}"/> which can be retrieved using the <see cref="GetLegacyServicePrincipalsAsync"/> method.
+        /// </summary>
+        /// <param name="legacyServicePrincipals">List of legacy service principals to include</param>
+        /// <param name="includeSubsites">Also load the Azure ACS principals for the subsites. This is relevant when a principal was granted web or list permissions but no site permissions</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of Azure ACS principals</returns>
+        Task<List<IACSPrincipal>> GetTenantAndSiteCollectionACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped to the current site and/or scoped tenant wide. For performance reason this method 
+        /// requires the input of a <see cref="List{ILegacyServicePrincipal}"/> which can be retrieved using the <see cref="GetLegacyServicePrincipals"/> method.
+        /// </summary>
+        /// <param name="legacyServicePrincipals">List of legacy service principals to include</param>
+        /// <param name="includeSubsites">Also load the Azure ACS principals for the subsites. This is relevant when a principal was granted web or list permissions but no site permissions</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        List<IACSPrincipal> GetTenantAndSiteCollectionACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipalsAsync(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
+        /// </summary>
+        /// <returns>List of legacy service principals</returns>
+        Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync();
+
+        /// <summary>
+        /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipals(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
+        /// </summary>
+        /// <returns>List of legacy service principals</returns>
+        List<ILegacyServicePrincipal> GetLegacyServicePrincipals();
+
+        #endregion
     }
 }
