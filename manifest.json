@@ -302,6 +302,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.IACSPrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IACSPrincipal.html",
+          "hash": "0tv1xDD+RVdsPiCt7pZIgEgSl+fC8jrV3fNrHXUI3fA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.IApp.yml",
       "output": {
         ".html": {
@@ -343,6 +355,54 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppOperations.html",
           "hash": "rvd3wPUEf33yBMXcLEDD7/rtsv03c1pO8ZjlEjsIgUc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyPrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyPrincipal.html",
+          "hash": "tTO1aDof0M/SFWI1Gva7ZLOmcZyAwAKJjQvJBf/gm14="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyServicePrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyServicePrincipal.html",
+          "hash": "a9sMC4dkbiysi3TN+MQKvrYZEgDplmXn61NXkSw0KCA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacySiteCollectionPermission.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacySiteCollectionPermission.html",
+          "hash": "1jl2tzxIl7xAZTtgjtCQeggZnaGTqyXPPS/wuwjUDYE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyTenantPermission.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyTenantPermission.html",
+          "hash": "AsMH/V59WD6BVxB0SHEZ/6uyThpJYtiJeNx7vcqMDHA="
         }
       },
       "is_incremental": false,
@@ -403,6 +463,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html",
           "hash": "QD+U5AO3D/e6IRH7fjDQKtv7uJ8JbQ7h2xIzLfRsWmI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAddIn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAddIn.html",
+          "hash": "ceGPhOn4WDPYUw+x47BdqOXiL1r4qML7Zlk4K+y8hz8="
         }
       },
       "is_incremental": false,
@@ -474,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "AATxbfMpkxd2keXpu/BwZJg61E4L+l0jMqI0xI9lXRs="
+          "hash": "YHnQgfk3agXZznKKvU1J7fwjjPH3v4kJTRg2f+0nvrU="
         }
       },
       "is_incremental": false,
@@ -571,6 +643,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.Language.html",
           "hash": "iuBo3VfX5XcbLh7+HlsQI7ft6i11xSqibndh7FIZITc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.LegacySiteCollectionPermissionRight.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.LegacySiteCollectionPermissionRight.html",
+          "hash": "b670I1knLOuYDxiN8s5WWRyGS99yct9mQDE1Abq8cAM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.LegacyTenantPermissionRight.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.LegacyTenantPermissionRight.html",
+          "hash": "A490/4IWfhVFOiza8Ht67CgOf0InkkYKkwItGSFpRno="
         }
       },
       "is_incremental": false,
@@ -703,6 +799,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SensitiveByDefaultState.html",
           "hash": "fXY6xrHPAIS5TJkCrS00m6+Mn7w20G2Jf/GZnRFJZRI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharePointAddInSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharePointAddInSource.html",
+          "hash": "ZBEYpW+2Yp1L6kckYrNonO8gZiE1V4UO59Qkx2DBSk4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharePointAddInStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharePointAddInStatus.html",
+          "hash": "XxgBsMq8XpBeKKJb/OTXDXUtWEIPE7H4VDHhgAg4qYY="
         }
       },
       "is_incremental": false,
@@ -918,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "dbcT0hMH9Ud8myfxGFz9bXMJ/t5kB5YfqzUtYmnYpV8="
+          "hash": "RfSTGCdUuNkRKpmNdP7EnKdmliP5/X4ECZIpk/pIFPI="
         }
       },
       "is_incremental": false,
@@ -8178,7 +8298,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "RkkotUKYg5pkw86dfYHzitUesX7qRVLBUBLJeQjBNSo="
+          "hash": "WL4F4wtfB2cETl4V+w6TGsgVnmsT9EkrxDYx7m5AXLE="
         }
       },
       "is_incremental": false,
@@ -8370,7 +8490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Qk+iMJacayZi1Z/deSikhTgas5xSAu2uHmkPNutPhU8="
+          "hash": "pnXWG6hRcyWTijCKorU+YlqrLlwYPnSN1tSczFmKHKY="
         }
       },
       "is_incremental": false,
@@ -10308,7 +10428,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 695,
+          "total_file_count": 705,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
