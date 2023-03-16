@@ -17,7 +17,9 @@ namespace PnP.Core.Services
             if (telemetryConfiguration == null)
             {
                 telemetryConfiguration = TelemetryConfiguration.CreateDefault();
+#pragma warning disable CS0618 // Type or member is obsolete
                 telemetryConfiguration.InstrumentationKey = instrumentationKey;
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             if (telemetryClient == null)

@@ -56,6 +56,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add possibility to get the `IServicePrincipal` via `IAppManager` #1116 [mloitzl - Martin Loitzl]
 - Don't set `BaseAddress` of `MicrosoftGraphClient` when there's no change #1114 [jansenbe - Bert Jansen]
 - Option to create private/shared Teams channels #1126 [JakeStanger - Jake Stanger]
+- Bump Nuget package version dependencies to align with PnP PS needs [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 
