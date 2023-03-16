@@ -12,6 +12,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 {
     internal static class LegacyPrincipalManagement
     {
+        // max input objects for the related requests
+        private static int MaxServerRelativeUrls = 500;
+        private static int MaxPermissions = 500;
+        private static int MaxAppIds = 500;
+
         internal async static Task<List<SharePointAddIn>> GetSharePointAddInsAsync(PnPContext context, bool includeSubsites, VanityUrlOptions vanityUrlOptions)
         {
             List<SharePointAddIn> sharePointAddIns = new();
@@ -31,10 +36,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
             }
 
+            var serverRelativeUrlBuckets = SplitInBuckets(serverRelativeUrlsToCheck, MaxServerRelativeUrls);
+
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Generic principal load, we need this to know the permissions that the AddIns have
-                await LoadLegacyPrincipalsAsync(legacyPrincipals, null, serverRelativeUrlsToCheck, tenantAdminContext).ConfigureAwait(false);
+                await LoadLegacyPrincipalsAsync(legacyPrincipals, null, serverRelativeUrlBuckets, tenantAdminContext).ConfigureAwait(false);
 
                 var json = new
                 {
@@ -118,10 +125,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
             }
 
+            var serverRelativeUrlBuckets = SplitInBuckets(serverRelativeUrlsToCheck, MaxServerRelativeUrls);
+
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Generic principal load, this will get the permission information of the ACS principals
-                await LoadLegacyPrincipalsAsync(legacyPrincipals, legacyServicePrincipals, serverRelativeUrlsToCheck, tenantAdminContext).ConfigureAwait(false);
+                await LoadLegacyPrincipalsAsync(legacyPrincipals, legacyServicePrincipals, serverRelativeUrlBuckets, tenantAdminContext).ConfigureAwait(false);
 
                 // ACS specific data loading
                 List<string> appIds = new();
@@ -134,71 +143,79 @@ namespace PnP.Core.Admin.Model.SharePoint
                     }
                 }
 
-                var json = new
+                var appIdBuckets = SplitInBuckets(appIds, MaxAppIds);
+
+                foreach (var appIdBucket in appIdBuckets)
                 {
-                    appIds,
-                }.AsExpando();
-
-                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-                // Load the ACS principals
-                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/GetACSServicePrincipals", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
-                var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
-                if (jsonResponse.TryGetProperty("value", out JsonElement acsPrincipalArray) && acsPrincipalArray.ValueKind == JsonValueKind.Array)
-                {
-                    // Load the returned data
-                    List<ACSPrincipal> tempACSPrincipals = new();
-                    foreach(var acsPrincipal in acsPrincipalArray.EnumerateArray()) 
+                    var json = new
                     {
-                        var tempACSPrincipal = new ACSPrincipal
-                        {
-                            AppIdentifier = acsPrincipal.GetProperty("appIdentifier").GetString(),
-                            AppId = acsPrincipal.GetProperty("appId").GetGuid(),
-                            RedirectUri = acsPrincipal.GetProperty("redirectUri").GetString(),
-                        };
+                        appIds,
+                    }.AsExpando();
 
-                        if (legacyServicePrincipals != null)
+                    var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                    // Load the ACS principals
+                    var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/GetACSServicePrincipals", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+
+                    var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
+                    if (jsonResponse.TryGetProperty("value", out JsonElement acsPrincipalArray) && acsPrincipalArray.ValueKind == JsonValueKind.Array)
+                    {
+                        // Load the returned data
+                        List<ACSPrincipal> tempACSPrincipals = new();
+                        foreach (var acsPrincipal in acsPrincipalArray.EnumerateArray())
                         {
-                            var legacyServicePrincipal = legacyServicePrincipals.FirstOrDefault(p => p.AppIdentifier == tempACSPrincipal.AppIdentifier);
-                            if (legacyServicePrincipal != null)
+                            var tempACSPrincipal = new ACSPrincipal
                             {
-                                tempACSPrincipal.ValidUntil = legacyServicePrincipal.ValidUntil;
+                                AppIdentifier = acsPrincipal.GetProperty("appIdentifier").GetString(),
+                                AppId = acsPrincipal.GetProperty("appId").GetGuid(),
+                                RedirectUri = acsPrincipal.GetProperty("redirectUri").GetString(),
+                            };
+
+                            if (legacyServicePrincipals != null)
+                            {
+                                var legacyServicePrincipal = legacyServicePrincipals.FirstOrDefault(p => p.AppIdentifier == tempACSPrincipal.AppIdentifier);
+                                if (legacyServicePrincipal != null)
+                                {
+                                    tempACSPrincipal.ValidUntil = legacyServicePrincipal.ValidUntil;
+                                }
                             }
+
+                            if (acsPrincipal.TryGetProperty("appDomains", out JsonElement appDomains) && appDomains.ValueKind == JsonValueKind.Array)
+                            {
+                                List<string> appDomainList = new();
+                                foreach (var appDomain in appDomains.EnumerateArray())
+                                {
+                                    appDomainList.Add(appDomain.GetString());
+                                }
+                                tempACSPrincipal.AppDomains = appDomainList.ToArray();
+                            }
+
+                            tempACSPrincipals.Add(tempACSPrincipal);
                         }
 
-                        if (acsPrincipal.TryGetProperty("appDomains", out JsonElement appDomains) && appDomains.ValueKind == JsonValueKind.Array)
+                        // Merge the returned data with the earlier loaded legacy principals
+                        foreach (var legacyPrincipal in legacyPrincipals.Where(p => p.SiteCollectionScopedPermissions.Any() || p.TenantScopedPermissions.Any()))
                         {
-                            List<string> appDomainList = new();
-                            foreach(var appDomain in appDomains.EnumerateArray())
+                            var tempACSPrincipal = tempACSPrincipals.FirstOrDefault(p => p.AppIdentifier == legacyPrincipal.AppIdentifier);
+                            if (tempACSPrincipal != null)
                             {
-                                appDomainList.Add(appDomain.GetString());
+                                if (!acsPrincipals.Any(p => p.AppIdentifier == legacyPrincipal.AppIdentifier && p.ServerRelativeUrl == legacyPrincipal.ServerRelativeUrl))
+                                {
+                                    acsPrincipals.Add(new ACSPrincipal
+                                    {
+                                        AppIdentifier = legacyPrincipal.AppIdentifier,
+                                        AllowAppOnly = legacyPrincipal.AllowAppOnly,
+                                        ServerRelativeUrl = legacyPrincipal.ServerRelativeUrl,
+                                        SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions,
+                                        TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions,
+                                        Title = legacyPrincipal.Title,
+                                        AppId = tempACSPrincipal.AppId,
+                                        RedirectUri = tempACSPrincipal.RedirectUri,
+                                        AppDomains = tempACSPrincipal.AppDomains,
+                                        ValidUntil = tempACSPrincipal.ValidUntil,
+                                    });
+                                }
                             }
-                            tempACSPrincipal.AppDomains = appDomainList.ToArray();
-                        }
-
-                        tempACSPrincipals.Add(tempACSPrincipal);
-                    }
-
-                    // Merge the returned data with the earlier loaded legacy principals
-                    foreach(var legacyPrincipal in legacyPrincipals.Where(p=>p.SiteCollectionScopedPermissions.Any() || p.TenantScopedPermissions.Any()))
-                    {
-                        var tempACSPrincipal = tempACSPrincipals.FirstOrDefault(p=>p.AppIdentifier == legacyPrincipal.AppIdentifier);
-                        if (tempACSPrincipal != null) 
-                        {
-                            acsPrincipals.Add(new ACSPrincipal
-                            {
-                                AppIdentifier = legacyPrincipal.AppIdentifier,
-                                AllowAppOnly = legacyPrincipal.AllowAppOnly,
-                                ServerRelativeUrl = legacyPrincipal.ServerRelativeUrl,
-                                SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions,
-                                TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions,
-                                Title = legacyPrincipal.Title,
-                                AppId = tempACSPrincipal.AppId,
-                                RedirectUri = tempACSPrincipal.RedirectUri,
-                                AppDomains = tempACSPrincipal.AppDomains,
-                                ValidUntil = tempACSPrincipal.ValidUntil,
-                            });
                         }
                     }
                 }
@@ -276,51 +293,58 @@ namespace PnP.Core.Admin.Model.SharePoint
             return servicePrincipals;
         }
 
-        private static async Task LoadLegacyPrincipalsAsync(List<LegacyPrincipal> legacyPrincipals, List<ILegacyServicePrincipal> legacyServicePrincipals, List<string> serverRelativeUrlsToCheck, PnPContext tenantAdminContext)
+        private static async Task LoadLegacyPrincipalsAsync(List<LegacyPrincipal> legacyPrincipals, List<ILegacyServicePrincipal> legacyServicePrincipals, List<List<string>> serverRelativeUrlBuckets, PnPContext tenantAdminContext)
         {
-            // Step 1: Identify which principals have permissions in the web(s)
-            var json = new
+            int bucketCount = 1;
+            foreach (var serverRelativeUrlBucket in serverRelativeUrlBuckets)
             {
-                serverRelativeUrls = serverRelativeUrlsToCheck,
-            }.AsExpando();
-
-            var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-            var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/GetAddinPrincipalsHavingPermissionsInSites", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
-            var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
-            if (jsonResponse.TryGetProperty("addinPrincipals", out JsonElement addInPrincipals))
-            {
-                if (addInPrincipals.ValueKind == JsonValueKind.Array)
+                // Step 1: Identify which principals have permissions in the web(s)
+                var json = new
                 {
-                    foreach (var addInPrincipal in addInPrincipals.EnumerateArray())
+                    serverRelativeUrls = serverRelativeUrlBucket,
+                }.AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/GetAddinPrincipalsHavingPermissionsInSites", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+
+                var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
+                if (jsonResponse.TryGetProperty("addinPrincipals", out JsonElement addInPrincipals))
+                {
+                    if (addInPrincipals.ValueKind == JsonValueKind.Array)
                     {
-                        legacyPrincipals.Add(new LegacyPrincipal()
+                        foreach (var addInPrincipal in addInPrincipals.EnumerateArray())
                         {
-                            AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
-                            ServerRelativeUrl = addInPrincipal.GetProperty("serverRelativeUrl").GetString(),
-                            Title = addInPrincipal.GetProperty("title").GetString(),
-                        });
+                            legacyPrincipals.Add(new LegacyPrincipal()
+                            {
+                                AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
+                                ServerRelativeUrl = addInPrincipal.GetProperty("serverRelativeUrl").GetString(),
+                                Title = addInPrincipal.GetProperty("title").GetString(),
+                            });
+                        }
                     }
                 }
-            }
 
-            // add the legacy service principals (if any). This list will for example contain the ACS principals that have tenant level permissions
-            if (legacyServicePrincipals != null) 
-            { 
-                foreach(var legacyServicePrincipal in legacyServicePrincipals)
+                // add the legacy service principals (if any). This list will for example contain the ACS principals that have tenant level permissions
+                // we're only adding them on the first url for now
+                if (legacyServicePrincipals != null && bucketCount == 1)
                 {
-                    // As the list also contains the site collection scoped ACS principals we need to check for duplicates
-                    if (!legacyPrincipals.Any(p => p.AppIdentifier == legacyServicePrincipal.AppIdentifier && p.ServerRelativeUrl == serverRelativeUrlsToCheck[0]))
+                    foreach (var legacyServicePrincipal in legacyServicePrincipals)
                     {
-                        legacyPrincipals.Add(new LegacyPrincipal()
+                        // As the list also contains the site collection scoped ACS principals we need to check for duplicates
+                        if (!legacyPrincipals.Any(p => p.AppIdentifier == legacyServicePrincipal.AppIdentifier && p.ServerRelativeUrl == serverRelativeUrlBucket[0]))
                         {
-                            AppIdentifier = legacyServicePrincipal.AppIdentifier,
-                            ServerRelativeUrl = serverRelativeUrlsToCheck[0],
-                            Title = legacyServicePrincipal.Name,
-                        });
+                            legacyPrincipals.Add(new LegacyPrincipal()
+                            {
+                                AppIdentifier = legacyServicePrincipal.AppIdentifier,
+                                ServerRelativeUrl = serverRelativeUrlBucket[0],
+                                Title = legacyServicePrincipal.Name,
+                            });
+                        }
                     }
-                }   
+                }
+
+                bucketCount++;
             }
 
             // Step2: Get the permissions for each principal in each web
@@ -353,74 +377,79 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                     var addin = new
                     {
-                        serverRelativeUrl = serverRelativeUrlsToCheck[0],
+                        serverRelativeUrl = serverRelativeUrlBuckets[0][0],
                         appIdentifiers,
                     };
                     addinsToQuery.Add(addin.AsExpando());
                 }
             }
 
-            json = new
+            var addInsToQueryBuckets = SplitInBuckets(addinsToQuery, MaxPermissions);
+
+            foreach (var addInsToQueryBucket in addInsToQueryBuckets)
             {
-                addins = addinsToQuery
-            }.AsExpando();
-
-            body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-            results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/AddinPermissions", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
-            jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
-            if (jsonResponse.TryGetProperty("addinPermissions", out JsonElement addinPermissions))
-            {
-                if (addinPermissions.ValueKind == JsonValueKind.Array)
+                var json = new
                 {
-                    foreach (var addInPermission in addinPermissions.EnumerateArray())
+                    addins = addinsToQuery
+                }.AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/AddinPermissions", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+
+                var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
+                if (jsonResponse.TryGetProperty("addinPermissions", out JsonElement addinPermissions))
+                {
+                    if (addinPermissions.ValueKind == JsonValueKind.Array)
                     {
-                        string appIdentifier = addInPermission.GetProperty("appIdentifier").GetString();
-                        string serverRelativeUrl = addInPermission.GetProperty("serverRelativeUrl").GetString();
-
-                        var legacyPrincipalToUpdate = legacyPrincipals.First(p => p.AppIdentifier == appIdentifier && p.ServerRelativeUrl == serverRelativeUrl);
-
-                        legacyPrincipalToUpdate.AllowAppOnly = addInPermission.GetProperty("allowAppOnly").GetBoolean();
-
-                        if (addInPermission.TryGetProperty("siteCollectionScopedPermissions", out JsonElement siteCollectionScopedPermissions) && siteCollectionScopedPermissions.ValueKind == JsonValueKind.Array)
+                        foreach (var addInPermission in addinPermissions.EnumerateArray())
                         {
-                            List<LegacySiteCollectionPermission> legacySiteCollectionPermissions = new();
+                            string appIdentifier = addInPermission.GetProperty("appIdentifier").GetString();
+                            string serverRelativeUrl = addInPermission.GetProperty("serverRelativeUrl").GetString();
 
-                            foreach (var siteCollectionScopedPermission in siteCollectionScopedPermissions.EnumerateArray())
+                            var legacyPrincipalToUpdate = legacyPrincipals.First(p => p.AppIdentifier == appIdentifier && p.ServerRelativeUrl == serverRelativeUrl);
+
+                            legacyPrincipalToUpdate.AllowAppOnly = addInPermission.GetProperty("allowAppOnly").GetBoolean();
+
+                            if (addInPermission.TryGetProperty("siteCollectionScopedPermissions", out JsonElement siteCollectionScopedPermissions) && siteCollectionScopedPermissions.ValueKind == JsonValueKind.Array)
                             {
-                                LegacySiteCollectionPermission legacySiteCollectionPermission = new()
-                                {
-                                    SiteId = siteCollectionScopedPermission.GetProperty("siteId").GetGuid(),
-                                    WebId = siteCollectionScopedPermission.GetProperty("webId").GetGuid(),
-                                    ListId = siteCollectionScopedPermission.GetProperty("listId").GetGuid(),
-                                    Right = (LegacySiteCollectionPermissionRight)Enum.Parse(typeof(LegacySiteCollectionPermissionRight), siteCollectionScopedPermission.GetProperty("right").GetString())
-                                };
+                                List<LegacySiteCollectionPermission> legacySiteCollectionPermissions = new();
 
-                                legacySiteCollectionPermissions.Add(legacySiteCollectionPermission);
+                                foreach (var siteCollectionScopedPermission in siteCollectionScopedPermissions.EnumerateArray())
+                                {
+                                    LegacySiteCollectionPermission legacySiteCollectionPermission = new()
+                                    {
+                                        SiteId = siteCollectionScopedPermission.GetProperty("siteId").GetGuid(),
+                                        WebId = siteCollectionScopedPermission.GetProperty("webId").GetGuid(),
+                                        ListId = siteCollectionScopedPermission.GetProperty("listId").GetGuid(),
+                                        Right = (LegacySiteCollectionPermissionRight)Enum.Parse(typeof(LegacySiteCollectionPermissionRight), siteCollectionScopedPermission.GetProperty("right").GetString())
+                                    };
+
+                                    legacySiteCollectionPermissions.Add(legacySiteCollectionPermission);
+                                }
+
+                                legacyPrincipalToUpdate.SiteCollectionScopedPermissions = legacySiteCollectionPermissions;
                             }
 
-                            legacyPrincipalToUpdate.SiteCollectionScopedPermissions = legacySiteCollectionPermissions;
-                        }
-
-                        if (addInPermission.TryGetProperty("tenantScopedPermissions", out JsonElement tenantScopedPermissions) && tenantScopedPermissions.ValueKind == JsonValueKind.Array)
-                        {
-                            List<LegacyTenantPermission> legacyTenantScopedPermissions = new();
-
-                            foreach (var tenantScopedPermission in tenantScopedPermissions.EnumerateArray())
+                            if (addInPermission.TryGetProperty("tenantScopedPermissions", out JsonElement tenantScopedPermissions) && tenantScopedPermissions.ValueKind == JsonValueKind.Array)
                             {
-                                LegacyTenantPermission legacyTenantPermission = new()
+                                List<LegacyTenantPermission> legacyTenantScopedPermissions = new();
+
+                                foreach (var tenantScopedPermission in tenantScopedPermissions.EnumerateArray())
                                 {
-                                    ProductFeature = tenantScopedPermission.GetProperty("feature").GetString(),
-                                    ResourceId = tenantScopedPermission.GetProperty("id").GetString(),
-                                    Scope = tenantScopedPermission.GetProperty("scope").GetString(),
-                                    Right = (LegacyTenantPermissionRight)Enum.Parse(typeof(LegacyTenantPermissionRight), tenantScopedPermission.GetProperty("right").GetString())
-                                };
+                                    LegacyTenantPermission legacyTenantPermission = new()
+                                    {
+                                        ProductFeature = tenantScopedPermission.GetProperty("feature").GetString(),
+                                        ResourceId = tenantScopedPermission.GetProperty("id").GetString(),
+                                        Scope = tenantScopedPermission.GetProperty("scope").GetString(),
+                                        Right = (LegacyTenantPermissionRight)Enum.Parse(typeof(LegacyTenantPermissionRight), tenantScopedPermission.GetProperty("right").GetString())
+                                    };
 
-                                legacyTenantScopedPermissions.Add(legacyTenantPermission);
+                                    legacyTenantScopedPermissions.Add(legacyTenantPermission);
+                                }
+
+                                legacyPrincipalToUpdate.TenantScopedPermissions = legacyTenantScopedPermissions;
                             }
-
-                            legacyPrincipalToUpdate.TenantScopedPermissions = legacyTenantScopedPermissions;
                         }
                     }
                 }
@@ -442,6 +471,35 @@ namespace PnP.Core.Admin.Model.SharePoint
             return null;
         }
 
+        private static List<List<T>> SplitInBuckets<T>(List<T> inputList, int max)
+        {
+            List<List<T>> splitList = new();
 
+            if (inputList.Count <= max)
+            {
+                splitList.Add(inputList);
+            }
+            else
+            {
+                List<T> newList = new();
+                foreach (var input in inputList)
+                {
+                    newList.Add(input);
+
+                    if (newList.Count >= max)
+                    {
+                        splitList.Add(newList);
+                        newList = new();
+                    }
+                }
+
+                if (newList.Count > 0)
+                {
+                    splitList.Add(newList);
+                }
+            }
+
+            return splitList;
+        }
     }
 }
