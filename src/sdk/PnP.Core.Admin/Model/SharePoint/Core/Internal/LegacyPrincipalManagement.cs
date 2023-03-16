@@ -13,9 +13,9 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class LegacyPrincipalManagement
     {
         // max input objects for the related requests
-        private static int MaxServerRelativeUrls = 500;
-        private static int MaxPermissions = 500;
-        private static int MaxAppIds = 500;
+        private static readonly int MaxServerRelativeUrls = 500;
+        private static readonly int MaxPermissions = 500;
+        private static readonly int MaxAppIds = 500;
 
         internal async static Task<List<SharePointAddIn>> GetSharePointAddInsAsync(PnPContext context, bool includeSubsites, VanityUrlOptions vanityUrlOptions)
         {
@@ -215,6 +215,27 @@ namespace PnP.Core.Admin.Model.SharePoint
                                         ValidUntil = tempACSPrincipal.ValidUntil,
                                     });
                                 }
+                            }
+                        }
+
+                        // As we've only added principals with tenant permissions for the first site so far we need to copy them for all other investigated webs
+                        foreach (var acsPrincipal in acsPrincipals.ToList().Where(p => p.ServerRelativeUrl == serverRelativeUrlsToCheck[0] && p.TenantScopedPermissions.Any()))
+                        {
+                            for (int i = 1; i < serverRelativeUrlsToCheck.Count; i++) 
+                            { 
+                                acsPrincipals.Add(new ACSPrincipal
+                                {
+                                    AppIdentifier = acsPrincipal.AppIdentifier,
+                                    AllowAppOnly = acsPrincipal.AllowAppOnly,
+                                    ServerRelativeUrl = serverRelativeUrlsToCheck[i],
+                                    SiteCollectionScopedPermissions = acsPrincipal.SiteCollectionScopedPermissions,
+                                    TenantScopedPermissions = acsPrincipal.TenantScopedPermissions,
+                                    Title = acsPrincipal.Title,
+                                    AppId = acsPrincipal.AppId,
+                                    RedirectUri = acsPrincipal.RedirectUri,
+                                    AppDomains = acsPrincipal.AppDomains,
+                                    ValidUntil = acsPrincipal.ValidUntil,
+                                });
                             }
                         }
                     }
