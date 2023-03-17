@@ -9413,6 +9413,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-azureacsprincipals.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-azureacsprincipals.html",
+          "hash": "uaQRr/ePpWpNEW4/VVoKKNdWWKuf7syx+NtCiJyHcrI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/admin-sharepoint-modernize.md",
       "output": {
         ".html": {
@@ -9430,6 +9442,18 @@
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-security.html",
           "hash": "lLF+jFzd+jeuTJ1JreuClDB1odNi1WwQ30VwFSTerHc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-sharepointaddins.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-sharepointaddins.html",
+          "hash": "KXvjg+ukjb/RfpqbnSefB2+BRdbKCY6/qQ7JtVqXN0k="
         }
       },
       "is_incremental": false,
@@ -10341,7 +10365,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "aTfHdhSvVrQSrvrmgInxNHXZ59pTnNMMBTDE2X11C2c="
+          "hash": "0xnoYJewMRksfxlcZPwo/v8Ey6IE/R5wbZneIczQOGk="
         }
       },
       "is_incremental": false,
@@ -10422,7 +10446,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 114,
+          "total_file_count": 116,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
