@@ -57,6 +57,19 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTenantACSPrincipals()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var legacyServicePrincipals = context.GetSiteCollectionManager().GetLegacyServicePrincipals();
+                var principals = context.GetSiteCollectionManager().GetTenantACSPrincipals(legacyServicePrincipals);
+
+                Assert.IsTrue(principals.Any());
+            }
+        }
+
+        [TestMethod]
         public async Task GetSharePointAddIns()
         {
             //TestCommon.Instance.Mocking = false;

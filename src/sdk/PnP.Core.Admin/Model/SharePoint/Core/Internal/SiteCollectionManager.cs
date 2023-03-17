@@ -271,7 +271,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<List<IACSPrincipal>> GetSiteCollectionACSPrincipalsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
         {
-            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, null, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, null, includeSubsites, false, vanityUrlOptions).ConfigureAwait(false);
             return results.Cast<IACSPrincipal>().ToList();
         }
 
@@ -282,7 +282,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<List<IACSPrincipal>> GetTenantAndSiteCollectionACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
         {
-            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, includeSubsites, false, vanityUrlOptions).ConfigureAwait(false);
             return results.Cast<IACSPrincipal>().ToList();
         }
 
@@ -290,6 +290,18 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetTenantAndSiteCollectionACSPrincipalsAsync(legacyServicePrincipals, includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
         }
+
+        public async Task<List<IACSPrincipal>> GetTenantACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, false, true, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetTenantACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantACSPrincipalsAsync(legacyServicePrincipals, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
 
         public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync()
         {

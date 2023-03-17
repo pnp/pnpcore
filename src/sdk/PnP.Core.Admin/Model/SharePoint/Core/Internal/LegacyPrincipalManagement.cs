@@ -105,7 +105,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return sharePointAddIns;
         }
 
-        internal async static Task<List<ACSPrincipal>> GetACSPrincipalsAsync(PnPContext context, List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites, VanityUrlOptions vanityUrlOptions)
+        internal async static Task<List<ACSPrincipal>> GetACSPrincipalsAsync(PnPContext context, List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites, bool tenantOnly, VanityUrlOptions vanityUrlOptions)
         {
             List<ACSPrincipal> acsPrincipals = new();
 
@@ -116,7 +116,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 context.Web.Url.LocalPath
             };
 
-            if (includeSubsites) 
+            if (includeSubsites && !tenantOnly) 
             {
                 var webs = await WebEnumerator.GetWithDetailsAsync(context, null, true).ConfigureAwait(false);
                 foreach (var web in webs)
@@ -236,6 +236,24 @@ namespace PnP.Core.Admin.Model.SharePoint
                                     AppDomains = acsPrincipal.AppDomains,
                                     ValidUntil = acsPrincipal.ValidUntil,
                                 });
+                            }
+                        }
+
+                        // Drop site collection ACS principals (in case there were on the assessed site)
+                        if (tenantOnly)
+                        {
+                            foreach (var acsPrincipal in acsPrincipals.ToList().Where(p => p.SiteCollectionScopedPermissions.Any()))
+                            {
+                                if (!acsPrincipal.TenantScopedPermissions.Any())
+                                {
+                                    acsPrincipals.Remove(acsPrincipal);
+                                }
+                            }
+
+                            // empty server relative url as these apply for all server relative urls
+                            foreach(var acsPrincipal in acsPrincipals)
+                            {
+                                acsPrincipal.ServerRelativeUrl = "";
                             }
                         }
                     }

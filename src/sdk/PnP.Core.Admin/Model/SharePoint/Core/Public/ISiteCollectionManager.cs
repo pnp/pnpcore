@@ -408,6 +408,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         List<IACSPrincipal> GetTenantAndSiteCollectionACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped tenant wide. For performance reason this method 
+        /// requires the input of a <see cref="List{ILegacyServicePrincipal}"/> which can be retrieved using the <see cref="GetLegacyServicePrincipalsAsync"/> method.
+        /// </summary>
+        /// <param name="legacyServicePrincipals">List of legacy service principals to include</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of Azure ACS principals</returns>
+        Task<List<IACSPrincipal>> GetTenantACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Gets a list of Azure ACS principals that are scoped tenant wide. For performance reason this method 
+        /// requires the input of a <see cref="List{ILegacyServicePrincipal}"/> which can be retrieved using the <see cref="GetLegacyServicePrincipalsAsync"/> method.
+        /// </summary>
+        /// <param name="legacyServicePrincipals">List of legacy service principals to include</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>A list of Azure ACS principals</returns>
+        List<IACSPrincipal> GetTenantACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
         /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipalsAsync(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
         /// </summary>
         /// <returns>List of legacy service principals</returns>
