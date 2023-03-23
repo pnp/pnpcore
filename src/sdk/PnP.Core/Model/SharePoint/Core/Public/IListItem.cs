@@ -1,4 +1,4 @@
-﻿using PnP.Core.Model.Security;
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Linq;
@@ -178,6 +178,23 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
         public IFolder GetParentFolder();
+
+        #endregion
+
+        #region MoveTo
+
+        /// <summary>
+        /// Moves ListItem to the destination folder URL.
+        /// </summary>
+        /// <param name="destinationFolderUrl">folder path within the list, e.g. 'subfolder1/subfolder2'</param>
+        Task MoveToAsync(string destinationFolderUrl);
+
+        /// <summary>
+        /// Moves ListItem to the destination folder Folder.
+        /// </summary>
+        /// <param name="destinationFolderUrl">folder path within the list, e.g. 'subfolder1/subfolder2'</param>
+        void MoveTo(string destinationFolderUrl);
+
         #endregion
 
         #region SystemUpdate

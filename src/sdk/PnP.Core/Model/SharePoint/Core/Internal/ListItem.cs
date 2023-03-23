@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
@@ -364,12 +365,91 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetParentFolderAsync().GetAwaiter().GetResult();
         }
+        
+        #endregion
+
+        #region MoveTo
+
+        public async Task MoveToAsync(string destinationFolderUrl)
+        {
+            if (destinationFolderUrl.StartsWith("/"))
+            {
+                destinationFolderUrl = destinationFolderUrl.TrimStart('/');
+            }
+            
+            if (destinationFolderUrl.EndsWith("/"))
+            {
+                destinationFolderUrl = destinationFolderUrl.TrimEnd('/');
+            }
+            
+            await EnsurePropertiesAsync(item =>
+                item.ParentList.QueryProperties(
+                    l => l.Id,
+                    l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl)
+                )).ConfigureAwait(false);
+
+            IFolder folder = await PnPContext.Web
+                .GetFolderByServerRelativeUrlAsync($"{ParentList.RootFolder.ServerRelativeUrl}/{destinationFolderUrl}",
+                    f => f.ServerRelativeUrl).ConfigureAwait(false);
+
+            if (!Values.ContainsKey("FileRef"))
+            {
+                LoadKeyListItemProperties().GetAwaiter().GetResult();
+            }
+
+            var filename = Path.GetFileName(Values["FileRef"].ToString());
+            
+            string destinationUrl =
+                $"{UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, UrlUtility.EnsureTrailingSlash(folder.ServerRelativeUrl))}{filename}";
+
+            ApiCall apiCall = GetMoveToApiCall(destinationUrl);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+        
+        public void MoveTo(string destinationFolderUrl)
+        {
+            MoveToAsync(destinationFolderUrl).GetAwaiter().GetResult();
+        }
+
+        private ApiCall GetMoveToApiCall(string destinationUrl)
+        {
+            MoveCopyOptions options = new();
+            
+            string destUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, destinationUrl).ToString();
+
+            if (!Values.ContainsKey("FileRef"))
+            {
+                LoadKeyListItemProperties().GetAwaiter().GetResult();
+            }
+
+            string srcUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, Values["FileRef"].ToString()).ToString();
+
+            ExpandoObject parameters = new
+            {
+                destPath = new {__metadata = new {type = "SP.ResourcePath"}, DecodedUrl = destUrl},
+                srcPath = new {__metadata = new {type = "SP.ResourcePath"}, DecodedUrl = srcUrl},
+                options = new
+                {
+                    __metadata = new {type = "SP.MoveCopyOptions"},
+                    options.KeepBoth,
+                    options.ResetAuthorAndCreatedOnCopy,
+                    options.RetainEditorAndModifiedOnMove,
+                    options.ShouldBypassSharedLocks
+                }
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
+            string copyToEndpointUrl =
+                $"_api/SP.MoveCopyUtil.MoveFileByPath(overwrite=@a1)?@a1=true";
+
+            return new ApiCall(copyToEndpointUrl, ApiType.SPORest, body);
+        }
 
         private async Task LoadKeyListItemProperties()
         {
-            ApiCall apiCall = new ApiCall($"{GetItemUri()}?$select=ContentTypeId,FileDirRef", ApiType.SPORest);
+            ApiCall apiCall = new ApiCall($"{GetItemUri()}?$select=ContentTypeId,FileDirRef,FileRef", ApiType.SPORest);
             await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
         }
+        
         #endregion
 
         #region Item updates
