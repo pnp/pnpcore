@@ -679,7 +679,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public void ListItemMoveToNestedFolder()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (PnPContext context = TestCommon.Instance.GetContext(TestCommonBase.TestSite))
             {
                 string listTitle = TestCommonBase.GetPnPSdkTestAssetName("ListItemMoveToNestedTest");
@@ -731,7 +731,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task ListItemMoveTo_Async(string folderPath)
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 string listTitle = TestCommonBase.GetPnPSdkTestAssetName("ListItemMoveToTest");
