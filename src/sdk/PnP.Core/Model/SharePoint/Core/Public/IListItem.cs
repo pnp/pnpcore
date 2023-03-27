@@ -184,15 +184,15 @@ namespace PnP.Core.Model.SharePoint
         #region MoveTo
 
         /// <summary>
-        /// Moves ListItem to the destination folder URL.
+        /// Moves this ListItem to another folder in this list
         /// </summary>
-        /// <param name="destinationFolderUrl">folder path within the list, e.g. 'subfolder1/subfolder2'</param>
+        /// <param name="destinationFolderUrl">Folder path within this list, e.g. 'subfolder1/subfolder2'</param>
         Task MoveToAsync(string destinationFolderUrl);
 
         /// <summary>
-        /// Moves ListItem to the destination folder Folder.
+        /// Moves this ListItem to another folder in this list
         /// </summary>
-        /// <param name="destinationFolderUrl">folder path within the list, e.g. 'subfolder1/subfolder2'</param>
+        /// <param name="destinationFolderUrl">Folder path within this list, e.g. 'subfolder1/subfolder2'</param>
         void MoveTo(string destinationFolderUrl);
 
         #endregion

@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Method to ensure the 'Everyone except external users' user for any site language #1127 [plamber - Patrick Lamber] 
 - Added support for listing, adding and revoking permission grants for a SharePoint service principal #1132 [mloitzl - Martin Loitzl]
 - Admin library: added support for listing Azure ACS principals and SharePoint AddIns [jansenbe - Bert Jansen]
+- Support for moving a ListItem to a sub folder #1146 [mloitzl - Martin Loitzl]
 
 ### Changed
 

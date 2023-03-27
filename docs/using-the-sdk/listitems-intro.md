@@ -601,6 +601,44 @@ foreach (var listItem in myList.Items.AsRequested())
 await context.ExecuteAsync();
 ```
 
+## Adding a list folder
+
+To add a folder to a list the list first must be configured to allow content types (`ContentTypesEnabled`) and allow folders (`EnableFolderCreation`). Once that's done use one of the `AddListFolder` methods to add a folder.
+
+``` csharp
+list.ContentTypesEnabled = true;
+list.EnableFolderCreation = true;
+await list.UpdateAsync();
+
+// Option A: Add folder Test
+await list.AddListFolderAsync("Test");
+
+
+// Option B: Create path 'folderA/subfolderA'
+string path = new[] {"folderA", "subfolderA" }.Aggregate(
+    "",
+    (aggregate, element) =>
+    {
+        IListItem addedFolder = list.AddListFolder(element, aggregate);
+        return $"{aggregate}/{element}";
+    }
+);
+```
+
+## Moving a list item
+
+You can move a list item to another folder inside it's list using one of the `MoveTo` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+
+// Move to folder folderA/subfolderA inside this list
+await first.MoveToAsync("folderA/subfolderA");
+```
+
 ## Sharing a list item
 
 A list can be shared with your organization, with specific users or with everyone (anonymous), obviously all depending on how the sharing configuration of your tenant and site collection. Check out the [PnP Core SDK Sharing APIs](./sharing-listitems.md) to learn more on how you can share a list item.
