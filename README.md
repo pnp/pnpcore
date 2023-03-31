@@ -36,17 +36,17 @@ This library is an open-source and community provided library backed by an activ
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0, [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/), [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/) and [.NET 7.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/). Use the .NET 6.0 (LTS) or .NET 7.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+. Note that .NET 5.0 support will be dropped with version 1.9 as it's an unsupported .NET version
+- We currently target .NET Standard 2.0, [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/) and [.NET 7.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/). Use the .NET 6.0 (LTS) or .NET 7.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](https://pnp.github.io/pnpcore/demos/README.html) to learn more):
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
-  - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0, .NET 6.0 and .NET 7.0 versions
+  - Web: e.g. [ASP.NET core](https://dotnet.microsoft.com/en-us/apps/aspnet), [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 6.0 and .NET 7.0 versions
   - .NET MAUI: [Windows, iOS, macOS, Android](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-7.0)
-  - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
+  - Windows Client: [Windows Forms, WPF](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-7.0&preserve-view=true)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
-- The library internally uses [dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1) and you can consume it via dependency injection in your applications
+- The library internally uses [dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0) and you can consume it via dependency injection in your applications
 
 ### What underlying APIs are used
 
