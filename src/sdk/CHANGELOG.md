@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Recognize editor component (CK4/CK5) being used in pages and allow developer to act on that `IPage.EditorType` [jansenbe - Bert Jansen]
 - Retain extra page settings (`isSpellCheckEnabled`, `globalRichTextStylingVersion`, `isEmailReady`, `rtePageSettings` and `htmlAttributes`) [jansenbe - Bert Jansen]
+- Fix to enable empty text parts to be added to a page #1164 [cnesmark - Christian Nesmark]
 
 ## [1.9.0]
 
