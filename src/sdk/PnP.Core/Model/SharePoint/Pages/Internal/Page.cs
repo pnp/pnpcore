@@ -21,7 +21,14 @@ namespace PnP.Core.Model.SharePoint
         private const string inlineImageTextControl = "{TextEditorInstanceId}";
         private const string inlineImageAlignment = "{ImageAlignment}";
 
+        // page settings defaults
         private bool isDefaultDescription = true;
+        private bool isSpellCheckEnabled = true;
+        private int globalRichTextStylingVersion = 1;
+        private bool isEmailReady = false;
+        private string[] pageSettingsSliceHtmlAttributes;
+        private EditorType editorType = EditorType.CK4;
+
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
@@ -182,6 +189,14 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 return null;
+            }
+        }
+
+        public EditorType EditorType
+        {
+            get
+            {
+                return editorType;
             }
         }
 
@@ -946,10 +961,32 @@ namespace PnP.Core.Model.SharePoint
             foreach (var section in sections.OrderBy(p => p.Order))
             {
                 html.Append((section as CanvasSection).ToHtml());
-
             }
+
             // Thumbnail
-            var thumbnailData = new { controlType = 0, pageSettingsSlice = new { isDefaultDescription, isDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl) } };
+            var pageSettingsSlice = new PageSettingsSlice
+            {
+                IsDefaultDescription = isDefaultDescription,
+                IsDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl),
+                GlobalRichTextStylingVersion = globalRichTextStylingVersion,
+                IsSpellCheckEnabled = isSpellCheckEnabled,
+                IsEmailReady = isEmailReady,
+                RtePageSettings = new RtePageSettings
+                {
+                    contentVersion = editorType == EditorType.CK5 ? 5 : 4
+                },
+            };
+
+            object thumbnailData = null;
+            if (pageSettingsSliceHtmlAttributes != null)
+            {
+                thumbnailData = new { controlType = 0, pageSettingsSlice, htmlAttributes = pageSettingsSliceHtmlAttributes };
+            }
+            else
+            {
+                thumbnailData = new { controlType = 0, pageSettingsSlice };
+            }
+
             html.Append($@"<div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""{JsonSerializer.Serialize(thumbnailData).Replace("\"", "&quot;")}""></div>");
 
             html.Append("</div>");
@@ -1233,9 +1270,39 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                 }
                             }
+
                             if (sectionData.PageSettingsSlice.IsDefaultDescription.HasValue)
                             {
                                 isDefaultDescription = sectionData.PageSettingsSlice.IsDefaultDescription.Value;
+                            }
+
+                            if (sectionData.PageSettingsSlice.IsSpellCheckEnabled.HasValue)
+                            {
+                                isSpellCheckEnabled = sectionData.PageSettingsSlice.IsSpellCheckEnabled.Value;
+                            }
+
+                            if (sectionData.PageSettingsSlice.GlobalRichTextStylingVersion.HasValue)
+                            {
+                                globalRichTextStylingVersion = sectionData.PageSettingsSlice.GlobalRichTextStylingVersion.Value;
+                            }
+
+                            if (sectionData.PageSettingsSlice.IsEmailReady.HasValue)
+                            {
+                                isEmailReady = sectionData.PageSettingsSlice.IsEmailReady.Value;
+                            }
+
+                            editorType = EditorType.CK4;
+                            if (sectionData.PageSettingsSlice.RtePageSettings != null)
+                            {
+                                if (sectionData.PageSettingsSlice.RtePageSettings.contentVersion.HasValue && sectionData.PageSettingsSlice.RtePageSettings.contentVersion == 5)
+                                {
+                                    editorType = EditorType.CK5;
+                                }
+                            }
+
+                            if (sectionData.HtmlAttributes != null)
+                            {
+                                pageSettingsSliceHtmlAttributes = sectionData.HtmlAttributes;
                             }
                         }
                     }

@@ -142,6 +142,11 @@ namespace PnP.Core.Model.SharePoint
         public DateTime? ScheduledPublishDate { get; }
 
         /// <summary>
+        /// Returns the editor that was used to create/update this page
+        /// </summary>
+        public EditorType EditorType { get; }
+
+        /// <summary>
         /// Adds a new section to your client side page
         /// </summary>
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>

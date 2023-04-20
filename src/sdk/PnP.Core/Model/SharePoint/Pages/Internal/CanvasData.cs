@@ -21,5 +21,9 @@ namespace PnP.Core.Model.SharePoint
 
         [JsonPropertyName("zoneGroupMetadata")]
         public SectionZoneGroupMetadata ZoneGroupMetadata { get; set; }
+
+        [JsonPropertyName("htmlAttributes")]
+        public string[] HtmlAttributes { get; set; }
+
     }
 }
