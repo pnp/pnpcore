@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for adding, removing and re-ordering list view columns #1144 [jansenbe - Bert Jansen]
 
 ### Changed
 
