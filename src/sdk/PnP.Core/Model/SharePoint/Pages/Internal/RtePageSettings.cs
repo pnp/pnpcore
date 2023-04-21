@@ -5,6 +5,6 @@ namespace PnP.Core.Model.SharePoint
     internal sealed class RtePageSettings
     {
         [JsonPropertyName("contentVersion")]
-        public int? contentVersion { get; set; }
+        public float? contentVersion { get; set; }
     }
 }

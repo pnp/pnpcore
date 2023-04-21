@@ -1294,7 +1294,7 @@ namespace PnP.Core.Model.SharePoint
                             editorType = EditorType.CK4;
                             if (sectionData.PageSettingsSlice.RtePageSettings != null)
                             {
-                                if (sectionData.PageSettingsSlice.RtePageSettings.contentVersion.HasValue && sectionData.PageSettingsSlice.RtePageSettings.contentVersion == 5)
+                                if (sectionData.PageSettingsSlice.RtePageSettings.contentVersion.HasValue && sectionData.PageSettingsSlice.RtePageSettings.contentVersion >= 5)
                                 {
                                     editorType = EditorType.CK5;
                                 }
