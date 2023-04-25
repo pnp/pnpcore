@@ -287,7 +287,7 @@ namespace PnP.Core.Model.SharePoint
                     controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
                     {
                         // Set section type to 1 if it was not set (when new sections are added via code)
-                        Type = (Section as CanvasSection).SectionType,
+                        Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
                         DisplayName = Section.DisplayName,
                         IsExpanded = Section.IsExpanded,
                         ShowDividerLine = Section.ShowDividerLine,
