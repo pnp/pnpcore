@@ -64,6 +64,9 @@ To set the administrators of a given site collection use the `SetSiteCollectionA
 - For the other site collections you provide a list of login names (e.g. `i:0#.f|membership|anna@contoso.onmicrosoft.com` or `c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9`). The first one if the list will be set as the primary site collection administrator, the others will be set as secondary site collection administrators
 - For Microsoft 365 group connected site collections you do have the same option as for the other site collections with the difference that the primary site collection administrator of group connected sites is never updated. Next to that you can also specify the Azure AD user id's of users you want to grant site collection admin permissions by adding them to the Microsoft 365 group's owners. To stay in sync with with SharePoint Tenant admin center does, when adding a Microsoft 365 group owner the user is also added as a Microsoft 365 group member.
 
+> [!Note]
+> The `SetSiteCollectionAdmins` methods will not remove existing site collection admins, only add new site collection admins.
+
 ```csharp
 // Set the site collection admins for a regular site
 List<string> newAdmins = new List<string>();

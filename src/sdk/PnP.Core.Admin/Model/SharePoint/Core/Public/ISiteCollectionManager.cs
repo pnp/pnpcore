@@ -266,6 +266,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
         /// secondary admins. When the site collection is group connected you can also opt to set group owners as they are also SharePoint site collection administrators.
         /// To stay in sync with with SharePoint Tenant admin center does, when adding a group owner the user is also added as group member.
+        /// Note that this method does not remove existing admins, it only adds the provided admins.
         /// </summary>
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
@@ -278,6 +279,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
         /// secondary admins. When the site collection is group connected you can also opt to set group owners as they are also SharePoint site collection administrators.
         /// To stay in sync with with SharePoint Tenant admin center does, when adding a group owner the user is also added as group member.
+        /// Note that this method does not remove existing admins, it only adds the provided admins.
         /// </summary>
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
