@@ -282,7 +282,7 @@ namespace PnP.Core.Model.SharePoint
                 };
 
                 // Persist the collapsible section settings
-                if (Section.Collapsible)
+                if (Section.Collapsible && !Column.IsVerticalSectionColumn)
                 {
                     controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
                     {
