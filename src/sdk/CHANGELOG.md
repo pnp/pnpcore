@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Retain extra page settings (`isSpellCheckEnabled`, `globalRichTextStylingVersion`, `isEmailReady`, `rtePageSettings` and `htmlAttributes`) [jansenbe - Bert Jansen]
 - Fix to enable empty text parts to be added to a page #1164 [cnesmark - Christian Nesmark]
 - Use new syntax for inserting inline images when the page is using CK5 [jansenbe - Bert Jansen]
+- Fixed issue where section collapsibility is not set correctly when provisioning a clientsidepage with a collapsible section containing a webpart. #1167 [mmi-wp - Mikkel Bukholt Mikkelsen]
 
 ## [1.9.0]
 
