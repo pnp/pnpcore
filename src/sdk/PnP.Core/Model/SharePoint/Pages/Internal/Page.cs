@@ -1545,7 +1545,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (zoneGroupMetadata != null)
             {
-                currentSection.Collapsible = zoneGroupMetadata.IconAlignment != null ? true : false;
+                currentSection.Collapsible = zoneGroupMetadata.Type == 1;
                 currentSection.SectionType = zoneGroupMetadata.Type;
                 currentSection.DisplayName = zoneGroupMetadata.DisplayName;
                 currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
