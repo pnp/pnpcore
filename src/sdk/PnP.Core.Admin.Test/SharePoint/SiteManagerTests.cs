@@ -345,9 +345,92 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task SetSiteCollectionAdminsRegularSite()
+        public async Task SetSiteCollectionAdminsRegularSiteSetExact()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions);
+                    
+                    // new admins
+                    List<string> newAdmins = new List<string> 
+                    {
+                        // everyone claim
+                        "c:0(.s|true"
+                    };
+
+                    // set admins
+                    context.GetSiteCollectionManager().SetSiteCollectionAdmins(
+                        communicationSiteToCreate.Url, 
+                        newAdmins,
+                        null,
+                        CollectionUpdateOptions.SetExact
+                    );
+
+                    // Get admins again and verify if the added admin is present
+                    List<ISiteCollectionAdmin> admins = context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.Equals(1, admins.Count);
+                    
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteAddOnly()
+        {
+            TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -430,7 +513,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteApplicationPermissions()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -519,7 +602,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsGroupSite()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             TeamSiteOptions teamSiteToCreate = null;

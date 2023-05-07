@@ -209,7 +209,15 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionAdminsAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        public Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds,
+                CollectionUpdateOptions.AddOnly, vanityUrlOptions);
+        }
+
+        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,
+            VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
@@ -221,7 +229,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
         {
-            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).GetAwaiter().GetResult();
+            SetSiteCollectionAdmins(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds,
+                CollectionUpdateOptions.AddOnly, vanityUrlOptions);
+        }
+
+        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,  
+            VanityUrlOptions vanityUrlOptions = null)
+        {
+            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         #region Modernization
