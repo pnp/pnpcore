@@ -21,6 +21,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed issue where section collapsibility is not set correctly when provisioning a page with a collapsible section containing a webpart. #1167 [mmi-wp - Mikkel Bukholt Mikkelsen]
 - IconAlignment cannot be used to infer collapsibility of a page section #1168 [mmi-wp - Mikkel Bukholt Mikkelsen]
 - Vertical sections should not be collapsible #1169 [mmi-wp - Mikkel Bukholt Mikkelsen]
+- Added `CreatedDateTime` property to `ITeamChannel` [jansenbe - Bert Jansen]
+- Support `DateTime` and `DateTimeOffset` types in OData filters #1173 [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 
