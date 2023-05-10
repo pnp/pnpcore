@@ -148,7 +148,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             if (string.IsNullOrEmpty(siteToCreate.Owner) && creationOptions.UsingApplicationPermissions.Value)
             {
-                throw new ClientException(ErrorType.Unsupported, "You need to set an owner when using Application permissions to create a communicaiton site");
+                throw new ClientException(ErrorType.Unsupported, "You need to set an owner when using Application permissions to create a communication site");
             }
 
             var payload = BuildBaseCommonNoGroupSiteRequestPayload(siteToCreate);
