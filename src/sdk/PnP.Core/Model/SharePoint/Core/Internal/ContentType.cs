@@ -518,14 +518,15 @@ namespace PnP.Core.Model.SharePoint
                 if (options.WaitForCompletion)
                 {
                     await operation.WaitForCompletionAsync(options.LongRunningOperationOptions).ConfigureAwait(false);
+                    return null;
                 }
                 else
                 {
                     return operation;
                 }
             }
-
-            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);
+           
+            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);           
         }
 
         private static AddContentTypeFromHubOptions EnsureAddContentTypeFromHubOptions(AddContentTypeFromHubOptions options)
