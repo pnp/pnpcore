@@ -652,7 +652,7 @@ namespace PnP.Core.Model
                 {
                     keyDestination.Key = keySource.Key;
                 }
-                catch (ClientException)
+                catch (Exception)
                 {
                     // We intentionally ignore any exception 
                     // in case the source key is missing 
