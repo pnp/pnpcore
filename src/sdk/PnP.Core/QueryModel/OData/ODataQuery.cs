@@ -188,7 +188,7 @@ namespace PnP.Core.QueryModel
                                 urlEncode ? HttpUtility.UrlEncode(TranslateFieldName(filter.Field, targetPlatform)) : TranslateFieldName(filter.Field, targetPlatform),
                                 spacer,
                                 ConvertFilteringCriteria(filter.Criteria),
-                                urlEncode ? HttpUtility.UrlEncode(ODataUtilities.ConvertToString(filter.Value)) : ODataUtilities.ConvertToString(filter.Value));
+                                urlEncode ? HttpUtility.UrlEncode(ODataUtilities.ConvertToString(filter.Value, targetPlatform)) : ODataUtilities.ConvertToString(filter.Value, targetPlatform));
 
                         break;
                     default:

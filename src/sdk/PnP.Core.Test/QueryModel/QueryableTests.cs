@@ -135,7 +135,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryWhereLINQWithMultipleFilters()
         {
-            var expected = "$filter=(displayName eq 'Test' and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
+            var expected = "$filter=(displayName eq 'Test' and sharepointIds eq 69e8b219-d7af-4ac9-bc23-d382b7de985e)";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -144,6 +144,7 @@ namespace PnP.Core.Test.QueryModel
                              where w.Title == "Test" && w.Id == filteredId
                              select w);
 
+                // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual);
@@ -170,7 +171,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryComplexMultiWhere()
         {
-            var expected = "$filter=((displayName eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
+            var expected = "$filter=((displayName eq 'Test' and description eq 'Description') and sharepointIds eq 69e8b219-d7af-4ac9-bc23-d382b7de985e)";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -181,6 +182,7 @@ namespace PnP.Core.Test.QueryModel
                                 w.Id == filteredId
                              select w);
 
+                // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual);
@@ -191,14 +193,17 @@ namespace PnP.Core.Test.QueryModel
         public async Task TestNewGuidQuery()
         {
             //TestCommon.Instance.Mocking = false;
-            var expected = "$filter=Id eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e')";
+            var expected = "$filter=Id eq 69e8b219-d7af-4ac9-bc23-d382b7de985e";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var query = (from w in context.Web.Lists
                              where w.Id == new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e")
                              select w);
 
+                // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual);

@@ -89,6 +89,8 @@ namespace PnP.Core.Model.Teams
 
         public string Email { get => GetValue<string>(); set => SetValue(value); }
 
+        public DateTime CreatedDateTime { get => GetValue<DateTime>(); set => SetValue(value); }
+
         public TeamChannelMembershipType MembershipType { get => GetValue<TeamChannelMembershipType>(); set => SetValue(value); }
 
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
