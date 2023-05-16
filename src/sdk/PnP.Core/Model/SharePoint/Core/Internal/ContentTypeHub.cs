@@ -16,6 +16,9 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public ContentTypeHub()
         {
+            // As there's only one ContentTypeHub per tenant give it a fixed id
+            Id = Guid.Parse("{DCC44C1F-8D59-42FC-B6D8-774758DF329E}");
+
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
@@ -35,6 +38,11 @@ namespace PnP.Core.Model.SharePoint
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
         internal string SiteId { get; set; }
+
+        internal Guid Id { get; set; }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
         #endregion
 

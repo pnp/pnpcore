@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support `DateTime` and `DateTimeOffset` types in OData filters #1173 [jansenbe - Bert Jansen]
 - AddAvailableContentTypeFromHubAsync throws Exception, even on success #1175 [jansenbe - Bert Jansen]
 - Correctly handle `ContentTypeHub` when the original context was created for the root site collection [jansenbe - Bert Jansen]
+- Fixed `FieldLink` handling when `ContentTypeHub` was used [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 

@@ -69,6 +69,222 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ContentTypesFieldLinkAddTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = null;
+                IField field = null;
+                try
+                {
+                    // Get site content types, also load the content types field links in one go
+                    await context.ContentTypeHub.LoadAsync(
+                      p => p.Fields,
+                      p => p.ContentTypes.QueryProperties(
+                        p => p.Id,
+                        p => p.Name,
+                        p => p.Description,
+                        p => p.Group,
+                        p => p.StringId,
+                        p => p.FieldLinks.QueryProperties(
+                          p => p.Id,
+                          p => p.Name)
+                        )
+                      );
+
+                    var id = "0x0100302EF0D1F1DB4C4EBF58251BCCF5968F";
+                    var name = "TEST ADD";
+                    var group = "TESTING";
+
+                    contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p => p.StringId.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+
+                    if (contentType == null)
+                    {
+                        contentType = await context.ContentTypeHub.ContentTypes.AddAsync(id, name, group: group);
+                    }
+                    else
+                    {
+                        contentType.Name = name;
+                        contentType.Group = group;
+
+                        await contentType.UpdateAsync();
+                    }
+
+                    await contentType.FieldLinks.LoadAsync(
+                      p => p.FieldInternalName,
+                      p => p.Id,
+                      p => p.Name,
+                      p => p.ShowInDisplayForm,
+                      p => p.Hidden,
+                      p => p.Required
+                    );
+
+                    // Ensure the field
+                    var fieldId = "6C9E3B35-A1DD-4D30-80AF-0B593A56BC56";
+                    var fieldInternalName = "ContentTypesFieldLinkAddTest";
+                    var fieldDisplayName = "ContentTypesFieldLinkAddTest";
+                    var unlimitedLengthInDocumentLibrary = true;
+
+                    Guid guid = new(fieldId);
+                    field = context.ContentTypeHub.Fields.AsRequested().FirstOrDefault(f => f.Id == guid);
+
+                    field ??= await context.ContentTypeHub.Fields.AddMultilineTextAsync(fieldInternalName, new FieldMultilineTextOptions()
+                    {
+                        Id = guid,
+                        RichText = false,
+                        UnlimitedLengthInDocumentLibrary = unlimitedLengthInDocumentLibrary
+                    });
+
+                    field.Group = "TESTING";
+                    field.Title = fieldDisplayName;
+                    await field.UpdateAsync();
+
+                    // Ensure the field link
+                    var fieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(f => f.Id == field.Id);
+
+                    if (fieldLink == null)
+                    {
+                        // Use required = true as that will also trigger the update of the field link
+                        fieldLink = await contentType.FieldLinks.AddAsync(field, required: true);
+                    }
+
+                    // Delete the field link again
+                    await fieldLink.DeleteAsync();
+
+                }
+                finally
+                {
+                    if (contentType != null)
+                    {
+                        await contentType.DeleteAsync();
+                    }
+                    
+                    if (field != null)
+                    {
+                        await field.DeleteAsync();
+                    }                    
+                }
+            } 
+        }
+
+        [TestMethod]
+        public async Task ContentTypesFieldLinkAddBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = null;
+                IField field = null;
+                try
+                {
+                    // Get site content types, also load the content types field links in one go
+                    await context.ContentTypeHub.LoadAsync(
+                      p => p.Fields,
+                      p => p.ContentTypes.QueryProperties(
+                        p => p.Id,
+                        p => p.Name,
+                        p => p.Description,
+                        p => p.Group,
+                        p => p.StringId,
+                        p => p.FieldLinks.QueryProperties(
+                          p => p.Id,
+                          p => p.Name)
+                        )
+                      );
+
+                    var id = "0x0100302EF0D1F1DB4C4EBF58251BCCF5968F";
+                    var name = "TEST ADD";
+                    var group = "TESTING";
+
+                    contentType = context.ContentTypeHub.ContentTypes.AsRequested().FirstOrDefault(p => p.StringId.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+
+                    if (contentType == null)
+                    {
+                        contentType = await context.ContentTypeHub.ContentTypes.AddAsync(id, name, group: group);
+                    }
+                    else
+                    {
+                        contentType.Name = name;
+                        contentType.Group = group;
+
+                        await contentType.UpdateAsync();
+                    }
+
+                    await contentType.FieldLinks.LoadAsync(
+                      p => p.FieldInternalName,
+                      p => p.Id,
+                      p => p.Name,
+                      p => p.ShowInDisplayForm,
+                      p => p.Hidden,
+                      p => p.Required
+                    );
+
+                    // Ensure the field
+                    var fieldId = "6C9E3B35-A1DD-4D30-80AF-0B593A56BC56";
+                    var fieldInternalName = "ContentTypesFieldLinkAddTest";
+                    var fieldDisplayName = "ContentTypesFieldLinkAddTest";
+                    var unlimitedLengthInDocumentLibrary = true;
+
+                    Guid guid = new(fieldId);
+                    field = context.ContentTypeHub.Fields.AsRequested().FirstOrDefault(f => f.Id == guid);
+
+                    field ??= await context.ContentTypeHub.Fields.AddMultilineTextAsync(fieldInternalName, new FieldMultilineTextOptions()
+                    {
+                        Id = guid,
+                        RichText = false,
+                        UnlimitedLengthInDocumentLibrary = unlimitedLengthInDocumentLibrary
+                    });
+
+                    field.Group = "TESTING";
+                    field.Title = fieldDisplayName;
+                    await field.UpdateAsync();
+
+                    // Ensure the field link
+                    var fieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(f => f.Id == field.Id);
+
+                    var batch = context.NewBatch();
+                    if (fieldLink == null)
+                    {
+                        // Use required = true as that will also trigger the update of the field link
+                        await contentType.FieldLinks.AddBatchAsync(batch, field);
+                        await context.ExecuteAsync(batch);
+                    }
+
+                    await contentType.FieldLinks.LoadAsync(
+                      p => p.FieldInternalName,
+                      p => p.Id,
+                      p => p.Name,
+                      p => p.ShowInDisplayForm,
+                      p => p.Hidden,
+                      p => p.Required
+                    );
+
+                    fieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(f => f.Id == field.Id);
+
+                    // Delete the field link again
+                    batch = context.NewBatch();
+                    await fieldLink.DeleteBatchAsync(batch);
+                    await context.ExecuteAsync(batch);
+
+                }
+                finally
+                {
+                    if (contentType != null)
+                    {
+                        await contentType.DeleteAsync();
+                    }
+
+                    if (field != null)
+                    {
+                        await field.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task ContentTypesAddFieldLinkFromWebFieldTest()
         {
             //TestCommon.Instance.Mocking = false;

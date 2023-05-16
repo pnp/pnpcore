@@ -11,11 +11,16 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ContentTypes
     internal sealed class AddFieldLinkRequest : IRequest<object>
     {
 
-        internal AddFieldLinkRequest(IContentType contentType, IField field, bool updateContentTypeChildren = true)
+        private Guid siteId;
+        private Guid webId;
+
+        internal AddFieldLinkRequest(IContentType contentType, IField field, Guid siteId, Guid webId, bool updateContentTypeChildren = true)
         {
             ContentType = contentType;
             Field = field;
             UpdateContentType = updateContentTypeChildren;
+            this.siteId = siteId;
+            this.webId = webId;
             VerifyField(field);
         }
 
@@ -181,7 +186,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ContentTypes
                 ObjectPath = new Identity
                 {
                     Id = contentTypeIdentityId,
-                    Name = $"6e940ea0-6072-3000-787b-48a3d44d7291|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{ContentType.PnPContext.Site.Id}:web:{ContentType.PnPContext.Web.Id}:contenttype:{ContentType.StringId}"
+                    Name = $"6e940ea0-6072-3000-787b-48a3d44d7291|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{siteId}:web:{webId}:contenttype:{ContentType.StringId}"
                 }
             };
 
@@ -190,7 +195,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ContentTypes
                 ObjectPath = new Identity
                 {
                     Id = fieldIdentityId,
-                    Name = $"6ba80da0-a076-3000-b5f5-7110738edd1f|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{ContentType.PnPContext.Site.Id}:web:{ContentType.PnPContext.Web.Id}:field:{Field.Id}"
+                    Name = $"6ba80da0-a076-3000-b5f5-7110738edd1f|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{siteId}:web:{webId}:field:{Field.Id}"
                 }
             };
 
@@ -204,7 +209,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ContentTypes
                     ObjectPath = new Identity
                     {
                         Id = listContentTypeIdentityId,
-                        Name = $"0d9a0ea0-b0c6-3000-787b-49b762c80954|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{ContentType.PnPContext.Site.Id}:web:{ContentType.PnPContext.Web.Id}:list:{List.Id}:contenttype:{ContentType.StringId}"
+                        Name = $"0d9a0ea0-b0c6-3000-787b-49b762c80954|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{siteId}:web:{webId}:list:{List.Id}:contenttype:{ContentType.StringId}"
                     }
                 };
 
@@ -213,7 +218,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ContentTypes
                     ObjectPath = new Identity
                     {
                         Id = listFieldIdentityId,
-                        Name = $"0b9a0ea0-80e3-3000-baac-8a54b2429926|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{ContentType.PnPContext.Site.Id}:web:{ContentType.PnPContext.Web.Id}:list:{List.Id}:field:{Field.Id}"
+                        Name = $"0b9a0ea0-80e3-3000-baac-8a54b2429926|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{siteId}:web:{webId}:list:{List.Id}:field:{Field.Id}"
                     }
                 };
             }
