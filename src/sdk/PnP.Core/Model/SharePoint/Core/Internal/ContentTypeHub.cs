@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -19,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                var request = SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                 api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
 
                 return api;
@@ -72,6 +73,26 @@ namespace PnP.Core.Model.SharePoint
         public string GetSiteId()
         {
             return GetSiteIdAsync().GetAwaiter().GetResult();
+        }
+
+        internal static string SwitchToContentTypeHubUrl(Uri contextUri, string api)
+        {
+            if (contextUri.Segments.Length == 1)
+            {
+                // For when then context was created for the root site collection
+                if (Uri.IsWellFormedUriString(api, UriKind.Absolute))
+                {
+                    return api.Replace($"{contextUri.Scheme}://{contextUri.DnsSafeHost}", $"{contextUri.Scheme}://{contextUri.DnsSafeHost}{PnPConstants.ContentTypeHubUrl}");
+                }
+                else
+                {
+                    return $"{PnPConstants.ContentTypeHubUrl}{api}";
+                }
+            }
+            else
+            {
+                return api.Replace(contextUri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+            }
         }
 
         #endregion
