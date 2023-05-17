@@ -152,6 +152,29 @@ namespace PnP.Core.Test.SharePoint
                     // Delete the field link again
                     await fieldLink.DeleteAsync();
 
+                    // Test with taxonomy field
+                    // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
+                    Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
+                    Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
+
+                    string fldTaxonomy1 = "TaxonomyField1";
+                    IField addedTaxonomyField1 = await context.ContentTypeHub.Fields.AddTaxonomyAsync(fldTaxonomy1, new FieldTaxonomyOptions()
+                    {
+                        Group = "TESTING",
+                        TermStoreId = termStore,
+                        TermSetId = termSet
+                    });
+
+                    fieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(f => f.Id == addedTaxonomyField1.Id);
+
+                    if (fieldLink == null)
+                    {
+                        // Use required = true as that will also trigger the update of the field link
+                        fieldLink = await contentType.FieldLinks.AddAsync(field, required: true);
+                    }
+
+                    // Delete the field link again
+                    await fieldLink.DeleteAsync();
                 }
                 finally
                 {
