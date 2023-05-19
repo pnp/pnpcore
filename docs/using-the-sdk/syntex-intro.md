@@ -78,13 +78,13 @@ foreach(var model in models)
 }
 ```
 
-## Working with Syntex Content understanding models
+## Working with Syntex document processing models
 
-Once you've loaded a Syntex Content Center site you can work with the content understanding models defined in that Syntex Content Center site: you can publish a model to one or more libraries, you can unpublish a model from a library and you can list the libraries to which a model was published.
+Once you've loaded a Syntex Content Center site you can work with the document processing models defined in that Syntex Content Center site: you can publish a model to one or more libraries, you can unpublish a model from a library and you can list the libraries to which a model was published.
 
 ### Publishing a model to a library
 
-Syntex content understanding models extract metadata from unstructured content (documents) and therefore to use them you need to publish a model to a document library. Once the model is published to a document library and a new document is added to the library the model will process the added document and will populate the defined metadata. To publish a model via PnP Core SDK you do have several option you can chose to publish to a single library or to multiple libraries in one go. For both publish options you have the choice to provide either an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or to define [SyntexModelPublishOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html) as shown in below code snippet.
+Syntex document processing models extract metadata from unstructured content (documents) and therefore to use them you need to publish a model to a document library. Once the model is published to a document library and a new document is added to the library the model will process the added document and will populate the defined metadata. To publish a model via PnP Core SDK you do have several option you can chose to publish to a single library or to multiple libraries in one go. For both publish options you have the choice to provide either an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or to define [SyntexModelPublishOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html) as shown in below code snippet.
 
 ```csharp
 var cc = await context.Web.AsSyntexContentCenterAsync();
