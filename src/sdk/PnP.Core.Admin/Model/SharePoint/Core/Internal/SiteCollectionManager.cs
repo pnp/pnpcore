@@ -218,7 +218,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 throw new ArgumentNullException(nameof(site));
             }
 
-            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).ConfigureAwait(false);
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).ConfigureAwait(false);
         }
         
         public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, 

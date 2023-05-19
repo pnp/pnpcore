@@ -14,15 +14,19 @@ namespace PnP.Core.Admin.Model.SharePoint
 {
     internal static class SiteCollectionManagement
     {
-
-        internal static async Task<bool> RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle, VanityUrlOptions vanityUrlOptions)
+        internal static async Task<bool> RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle,
+            VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // When recycling a group connected site then use the groupsitemanager endpoint. This will also recycle the connected Microsoft 365 group
                 if (await HasGroupAsync(context, siteToRecycle).ConfigureAwait(false))
                 {
-                    await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                    await (context.Web as Web)
+                        .RawRequestAsync(
+                            new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'",
+                                ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
                     return true;
                 }
                 else
@@ -32,20 +36,25 @@ namespace PnP.Core.Admin.Model.SharePoint
                         new RemoveSiteRequest(siteToRecycle)
                     };
 
-                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                    var result = await (tenantAdminContext.Web as Web)
+                        .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                    await WaitForSpoOperationCompleteAsync(tenantAdminContext,
+                        result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
                     return false;
                 }
             }
         }
 
-        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete, VanityUrlOptions vanityUrlOptions)
+        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete,
+            VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // first recycle the site collection
-                bool siteHasGroup = await RecycleSiteCollectionAsync(context, siteToDelete, vanityUrlOptions).ConfigureAwait(false);
+                bool siteHasGroup = await RecycleSiteCollectionAsync(context, siteToDelete, vanityUrlOptions)
+                    .ConfigureAwait(false);
 
                 // Only supporting permanent delete of non group connected sites. For group connected sites permanently deleting the group will
                 // trigger the deletion of the linked resources (like the SharePoint site).  
@@ -57,44 +66,58 @@ namespace PnP.Core.Admin.Model.SharePoint
                         new RemoveDeletedSiteRequest(siteToDelete)
                     };
 
-                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                    var result = await (tenantAdminContext.Web as Web)
+                        .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                    await WaitForSpoOperationCompleteAsync(tenantAdminContext,
+                        result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
                 }
             }
         }
 
-        internal static async Task DeleteRecycledSiteCollectionAsync(PnPContext context, Uri siteToDelete, VanityUrlOptions vanityUrlOptions)
+        internal static async Task DeleteRecycledSiteCollectionAsync(PnPContext context, Uri siteToDelete,
+            VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
                     new RemoveDeletedSiteRequest(siteToDelete)
                 };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext,
+                    result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
             }
         }
 
-        internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle, VanityUrlOptions vanityUrlOptions)
+        internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle,
+            VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Get information about the site collection to restore from the SharePoint recycle bin
-                var deletedSiteCollection = await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, siteToRecycle, vanityUrlOptions).ConfigureAwait(false);
+                var deletedSiteCollection = await SiteCollectionEnumerator
+                    .GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context, siteToRecycle, vanityUrlOptions)
+                    .ConfigureAwait(false);
 
                 if (deletedSiteCollection == null)
                 {
-                    throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreAdminResources.Exception_SiteRestore_NotFound, siteToRecycle));
+                    throw new ClientException(ErrorType.Unsupported,
+                        string.Format(PnPCoreAdminResources.Exception_SiteRestore_NotFound, siteToRecycle));
                 }
 
                 if (deletedSiteCollection.GroupId != Guid.Empty)
                 {
                     // First restore the associated Microsoft 365 group (if it was recycled)
-                    await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"/directory/deletedItems/{deletedSiteCollection.GroupId}/restore", ApiType.Graph), HttpMethod.Post).ConfigureAwait(false);
+                    await (tenantAdminContext.Web as Web)
+                        .RawRequestAsync(
+                            new ApiCall($"/directory/deletedItems/{deletedSiteCollection.GroupId}/restore",
+                                ApiType.Graph), HttpMethod.Post).ConfigureAwait(false);
                 }
 
                 // Use the "classic CSOM based approach to restore the SharePoint site and wait for it to complete
@@ -103,13 +126,16 @@ namespace PnP.Core.Admin.Model.SharePoint
                     new RestoreDeletedSiteRequest(siteToRecycle)
                 };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext,
+                    result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
             }
         }
 
-        internal static async Task WaitForSpoOperationCompleteAsync(PnPContext tenantAdminContext, SpoOperation operation, int maxStatusChecks = 10)
+        internal static async Task WaitForSpoOperationCompleteAsync(PnPContext tenantAdminContext,
+            SpoOperation operation, int maxStatusChecks = 10)
         {
             if (operation.IsComplete)
             {
@@ -126,9 +152,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             do
             {
-                await tenantAdminContext.WaitAsync(TimeSpan.FromMilliseconds(operation.PollingInterval)).ConfigureAwait(false);
+                await tenantAdminContext.WaitAsync(TimeSpan.FromMilliseconds(operation.PollingInterval))
+                    .ConfigureAwait(false);
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
                 operation = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
 
@@ -138,9 +166,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
 
                 statusCheckAttempt++;
-            }
-            while (!operationComplete && statusCheckAttempt <= maxStatusChecks);
-
+            } while (!operationComplete && statusCheckAttempt <= maxStatusChecks);
         }
 
         private static async Task<bool> HasGroupAsync(PnPContext context, Uri siteToCheck)
@@ -158,44 +184,54 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed,VanityUrlOptions vanityUrlOptions)
+        internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context,
+            Uri siteUrl, bool detailed, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
                     new GetSitePropertiesRequest(siteUrl, detailed)
                 };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
                 (result.ApiCall.CSOMRequests[0].Result as IDataModelWithContext).PnPContext = tenantAdminContext;
 
                 return result.ApiCall.CSOMRequests[0].Result as ISiteCollectionProperties;
             }
         }
 
-        internal static async Task UpdateSiteCollectionPropertiesAsync(PnPContext context, SiteCollectionProperties properties, VanityUrlOptions vanityUrlOptions)
+        internal static async Task UpdateSiteCollectionPropertiesAsync(PnPContext context,
+            SiteCollectionProperties properties, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>
                 {
                     new SetSitePropertiesRequest(properties)
                 };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext,
+                    result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
             }
         }
 
-        internal static async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, VanityUrlOptions vanityUrlOptions)
+        internal static async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(PnPContext context,
+            Uri siteUrl, VanityUrlOptions vanityUrlOptions)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 List<ISiteCollectionAdmin> admins = new List<ISiteCollectionAdmin>();
 
                 // Load the site collection properties first as that will tell who is the primary admin (= owner)
-                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
+                var siteProperties = await tenantAdminContext.GetSiteCollectionManager()
+                    .GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
                 var adminUser = new SiteCollectionAdmin(tenantAdminContext)
                 {
                     IsSecondaryAdmin = false,
@@ -206,11 +242,17 @@ namespace PnP.Core.Admin.Model.SharePoint
                 };
 
                 // When the site is group connected we'll return the actual group owners instead of the group owner claim
-                if (siteProperties.GroupId != Guid.Empty && adminUser.UserPrincipalName == $"{siteProperties.GroupId}_o")
+                if (siteProperties.GroupId != Guid.Empty &&
+                    adminUser.UserPrincipalName == $"{siteProperties.GroupId}_o")
                 {
-                    var groupOwnerResults = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/owners?&$select=id,mail,principalName,displayName ", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
+                    var groupOwnerResults = await (tenantAdminContext.Web as Web)
+                        .RawRequestAsync(
+                            new ApiCall(
+                                $"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/owners?&$select=id,mail,principalName,displayName ",
+                                ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
 
                     #region Json response
+
                     /*
                     {
                         "d": {
@@ -252,6 +294,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         }
                     }
                     */
+
                     #endregion
 
                     var groupOwnerJsonResponse = JsonSerializer.Deserialize<JsonElement>(groupOwnerResults.Json);
@@ -280,28 +323,25 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
 
                 // Get the site details to acquire the site id
-                List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                {
-                    new GetSiteByUrlRequest(siteUrl)
-                };
+                List<IRequest<object>> csomRequests = new List<IRequest<object>> {new GetSiteByUrlRequest(siteUrl)};
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
                 var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
 
                 // Get the secondary admins
-                var json = new
-                {
-                    secondaryAdministratorsFieldsData = new
-                    {
-                        siteId = siteId
-                    }
-                }.AsExpando();
+                var json = new {secondaryAdministratorsFieldsData = new {siteId = siteId}}.AsExpando();
 
                 var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
 
-                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/GetSiteSecondaryAdministrators", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+                var results = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(
+                        new ApiCall(
+                            $"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/GetSiteSecondaryAdministrators",
+                            ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
 
                 #region Json response
+
                 /*
                 {
                     "d": {
@@ -321,6 +361,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     }
                 }
                 */
+
                 #endregion
 
                 var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
@@ -347,35 +388,62 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds, VanityUrlOptions vanityUrlOptions)
+        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl,
+            List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds,
+            CollectionUpdateOptions collectionUpdateOptions, VanityUrlOptions vanityUrlOptions)
         {
-            if ((sharePointAdminLoginNames == null || sharePointAdminLoginNames.Count == 0) && (ownerGroupAzureAdUserIds == null || ownerGroupAzureAdUserIds.Count == 0))
+            if ((sharePointAdminLoginNames == null || sharePointAdminLoginNames.Count == 0) &&
+                (ownerGroupAzureAdUserIds == null || ownerGroupAzureAdUserIds.Count == 0))
             {
                 // Nothing to set, so bail out
                 return;
             }
 
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Load the site collection props
-                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
+                var siteProperties = await tenantAdminContext.GetSiteCollectionManager()
+                    .GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
 
-                if (siteProperties.GroupId != Guid.Empty && ownerGroupAzureAdUserIds != null && ownerGroupAzureAdUserIds.Count > 0)
+                if (siteProperties.GroupId != Guid.Empty && ownerGroupAzureAdUserIds is {Count: > 0})
                 {
                     // We need to set the group owners, passing users who are already group owner will not break this flow
                     var batch = tenantAdminContext.NewBatch();
 
                     foreach (var owner in ownerGroupAzureAdUserIds)
                     {
-                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch, new ApiCall($"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Owners/Add(objectId='{owner}', principalName='')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch, new ApiCall($"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Members/Add(objectId='{owner}', principalName='')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch,
+                            new ApiCall(
+                                $"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Owners/Add(objectId='{owner}', principalName='')",
+                                ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch,
+                            new ApiCall(
+                                $"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Members/Add(objectId='{owner}', principalName='')",
+                                ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
                     }
 
                     // execute batch
                     await tenantAdminContext.ExecuteAsync(batch).ConfigureAwait(false);
                 }
 
-                if (sharePointAdminLoginNames != null && sharePointAdminLoginNames.Count > 0)
+                // Get the site details to acquire the site id
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new GetSiteByUrlRequest(siteUrl)
+                };
+
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
+                
+                if (sharePointAdminLoginNames != null && collectionUpdateOptions == CollectionUpdateOptions.SetExact &&
+                    sharePointAdminLoginNames.Count > 0)
+                {
+                    await SetExact(sharePointAdminLoginNames, siteId, tenantAdminContext).ConfigureAwait(false);                    
+                }
+                
+                if (sharePointAdminLoginNames != null  && collectionUpdateOptions == CollectionUpdateOptions.AddOnly && sharePointAdminLoginNames.Count > 0)
                 {
                     // Let's set the SharePoint admins
 
@@ -395,7 +463,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         List<string> userLoginNamesToAdd = new List<string>();
 
                         bool first = true;
-                        foreach(var sharePoint in sharePointAdminLoginNames)
+                        foreach (var sharePoint in sharePointAdminLoginNames)
                         {
                             if (first)
                             {
@@ -406,39 +474,49 @@ namespace PnP.Core.Admin.Model.SharePoint
                             {
                                 userLoginNamesToAdd.Add(sharePoint);
                             }
-                        }
-
-                        // Get the site details to acquire the site id
-                        List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                        {
-                            new GetSiteByUrlRequest(siteUrl)
-                        };
-
-                        var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-                        var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
-
-                        var secondaryAdministratorLoginNames = new
-                        {
-                            __metadata = new { type = "Collection(Edm.String)" },
-                            results = userLoginNamesToAdd
-                        }.AsExpando();
-
-                        var json = new
-                        {
-                            secondaryAdministratorsFieldsData = new
-                            {
-                                siteId,
-                                secondaryAdministratorLoginNames
-                            }
-                        }.AsExpando();
-
-                        var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-                        await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/SetSiteSecondaryAdministrators", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
+                        } 
+                        
+                        await AddOnly(userLoginNamesToAdd, siteId, tenantAdminContext).ConfigureAwait(false);
                     }
                 }
+            }
 
+            async Task AddOnly(List<string> userLoginNamesToAdd, Guid siteId, IPnPContext tenantAdminContext)
+            {
+                var secondaryAdministratorLoginNames = new
+                {
+                    __metadata = new {type = "Collection(Edm.String)"}, results = userLoginNamesToAdd
+                }.AsExpando();
+
+                var json = new {secondaryAdministratorsFieldsData = new {siteId, secondaryAdministratorLoginNames}}
+                    .AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(
+                        new ApiCall(
+                            $"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/SetSiteSecondaryAdministrators",
+                            ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+            }
+
+            async Task SetExact(List<string> userLoginNamesToAdd, Guid siteId, IPnPContext tenantAdminContext)
+            {
+                var siteAdministrators = new
+                {
+                    __metadata = new {type = "Collection(Edm.String)"}, results = userLoginNamesToAdd
+                }.AsExpando();
+
+                var json = new {siteAdministratorsFieldsData = new {siteId, siteAdministrators}}
+                    .AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(
+                        new ApiCall(
+                            $"_api/SPO.Tenant/SetSiteAdministrators",
+                            ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
             }
         }
     }

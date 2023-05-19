@@ -43,16 +43,6 @@ namespace PnP.Core.Admin.Model.SharePoint
             var result = await (context.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
             var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
 
-            // Get siteId of siteUrl
-
-            // PATCH _api/SPO.Tenant/sites('side id')
-            //  {
-            //      Owner: "",
-            //      OwnerEmail: "",
-            //      OwnerName: ""
-            //      SetOwnerWithoutUpdatingSecondaryAdmin=true
-            //  }
-
             var body = new
             {
                 Owner = this.LoginName,
@@ -61,18 +51,17 @@ namespace PnP.Core.Admin.Model.SharePoint
                 SetOwnerWithoutUpdatingSecondaryAdmin = true
             };
 
-            var request = new ApiCall(
-                $"_api/SPO.Tenant/sites('{siteId}')",
-                ApiType.SPORest, 
-                JsonSerializer.Serialize(body));
-            request.Headers = new Dictionary<string, string>();
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("odata-version", "4.0");
-            request.Headers.Add("accept", "application/json");
-           var response = await (context.Web as Web)
-                .RawRequestAsync(
-                    request, 
-                    new HttpMethod("PATCH"))
+            var request = new ApiCall($"_api/SPO.Tenant/sites('{siteId}')", ApiType.SPORest, JsonSerializer.Serialize(body))
+            {
+                // Extra headers required by SPO.Tenant/sites API
+                Headers = new Dictionary<string, string>
+                {
+                        {"Content-Type", "application/json"}, 
+                        {"odata-version", "4.0"},
+                        {"accept", "application/json"}
+                    }
+            };
+            var response = await (context.Web as Web).RawRequestAsync(request, new HttpMethod("PATCH"))
                 .ConfigureAwait(false);
            
            await SiteCollectionManagement.WaitForSpoOperationCompleteAsync(context,
