@@ -48,7 +48,7 @@ namespace PnP.Core.Model.SharePoint
         int ZoneEmphasis { get; set; }
 
         /// <summary>
-        /// Is this section collapsible?
+        /// Is this section collapsible? When setting to true, also set SectionType to 1
         /// </summary>
         bool Collapsible { get; set; }
 
@@ -71,5 +71,10 @@ namespace PnP.Core.Model.SharePoint
         /// Show a devided line for this collapsible section?
         /// </summary>
         bool ShowDividerLine { get; set; }
+
+        /// <summary>
+        /// Is the section collapsible? 0 - non collapsible, 1 - collapsible
+        /// </summary>
+        public int SectionType { get; set; }
     }
 }
