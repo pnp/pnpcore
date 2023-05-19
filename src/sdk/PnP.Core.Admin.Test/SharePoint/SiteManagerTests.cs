@@ -391,7 +391,8 @@ namespace PnP.Core.Admin.Test.SharePoint
                     List<string> newAdmins = new List<string> 
                     {
                         // everyone claim
-                        "c:0(.s|true"
+                        "c:0(.s|true",
+                        "i:0#.f|membership|alagu.siemienski@loitzl2.onmicrosoft.com"
                     };
 
                     // set admins
@@ -406,6 +407,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                     List<ISiteCollectionAdmin> admins = context.GetSiteCollectionManager()
                         .GetSiteCollectionAdmins(communicationSiteToCreate.Url);
 
+
+                    await admins[1].SetAsPrimarySiteCollectionAdministratorAsync(
+                        communicationSiteToCreate.Url);
                     Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
                     Assert.Equals(1, admins.Count);
                     

@@ -196,7 +196,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 // Load the site collection properties first as that will tell who is the primary admin (= owner)
                 var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
-                var adminUser = new SiteCollectionAdmin()
+                var adminUser = new SiteCollectionAdmin(tenantAdminContext)
                 {
                     IsSecondaryAdmin = false,
                     LoginName = siteProperties.OwnerLoginName,
@@ -261,7 +261,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         {
                             foreach (var value in valueProperty.EnumerateArray())
                             {
-                                admins.Add(new SiteCollectionAdmin()
+                                admins.Add(new SiteCollectionAdmin(tenantAdminContext)
                                 {
                                     IsSecondaryAdmin = false,
                                     IsMicrosoft365GroupOwner = true,
@@ -330,7 +330,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         foreach (var admin in resultsProperty.EnumerateArray())
                         {
-                            admins.Add(new SiteCollectionAdmin()
+                            admins.Add(new SiteCollectionAdmin(tenantAdminContext)
                             {
                                 IsSecondaryAdmin = true,
                                 LoginName = admin.GetProperty("loginName").GetString(),

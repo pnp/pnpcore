@@ -208,13 +208,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetSiteCollectionAdminsAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
-
-        public Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
-        {
-            return SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds,
-                CollectionUpdateOptions.AddOnly, vanityUrlOptions);
-        }
-
+        
         public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, 
             List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,
             VanityUrlOptions vanityUrlOptions = null)
@@ -226,13 +220,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).ConfigureAwait(false);
         }
-
-        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
-        {
-            SetSiteCollectionAdmins(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds,
-                CollectionUpdateOptions.AddOnly, vanityUrlOptions);
-        }
-
+        
         public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, 
             List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,  
             VanityUrlOptions vanityUrlOptions = null)

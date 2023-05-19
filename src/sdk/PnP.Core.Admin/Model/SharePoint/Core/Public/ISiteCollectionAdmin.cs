@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
@@ -34,7 +35,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string Mail { get; }
 
         /// <summary>
-        /// Is this a secondary site collection administator
+        /// Is this a secondary site collection administrator
         /// </summary>
         public bool IsSecondaryAdmin { get; }
 
@@ -42,5 +43,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Site collection admin is also a Microsoft 365 group owner
         /// </summary>
         public bool IsMicrosoft365GroupOwner { get; }
+
+        /// <summary>
+        /// Set site collection admin as primary admin
+        /// </summary>
+        /// <returns></returns>
+        Task SetAsPrimarySiteCollectionAdministratorAsync(Uri site);
     }
 }
