@@ -1,7 +1,7 @@
 namespace PnP.Core.Admin.Model.SharePoint
 {
     /// <summary>
-    /// 
+    /// Options for updating a collection 
     /// </summary>
     public enum CollectionUpdateOptions
     {

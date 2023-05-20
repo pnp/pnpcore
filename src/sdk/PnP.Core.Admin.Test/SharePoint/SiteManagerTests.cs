@@ -401,7 +401,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         CollectionUpdateOptions.AddOnly
                     );
 
-                    // Get admins again and verify if the added admin is present
+                    // Get admins and verify if the added admin is present
                     List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
                         .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
@@ -495,7 +495,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         CollectionUpdateOptions.AddOnly
                     );
 
-                    // Get admins again and verify if the added admin is present
+                    // Get admins and verify if the added admin is present
                     List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
                         .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
@@ -581,7 +581,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         CollectionUpdateOptions.SetExact
                     );
 
-                    // Get admins again and verify if the added admin is present
+                    // Get admins and verify if the added admin is present
                     List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
                         .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
@@ -844,7 +844,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         null, 
                         CollectionUpdateOptions.SetExact);
 
-                    // Get admins again and verify if the added admin is present
+                    // Get admins and verify if the added admin is present
                     List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
                     Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
