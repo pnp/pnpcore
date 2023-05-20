@@ -347,7 +347,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetAsPrimarySiteCollectionAdminRegularSite_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -433,7 +433,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetAsPrimarySiteCollectionAdminRegularSiteApplicationPermission_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -527,7 +527,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteSetExact_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -607,7 +607,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteAddOnly_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -691,7 +691,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteAddOnlyApplicationPermissions_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -783,7 +783,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteSetExactApplicationPermissions_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
@@ -871,7 +871,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionAdminsGroupSite()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
 
             TeamSiteOptions teamSiteToCreate = null;
