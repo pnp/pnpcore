@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -43,22 +44,22 @@ namespace PnP.Core.Admin.Model.SharePoint
             var result = await (context.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
             var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
 
-            var body = new
+            var json = new
             {
                 Owner = this.LoginName,
                 OwnerEmail = this.Mail,
                 OwnerName = this.Name,
                 SetOwnerWithoutUpdatingSecondaryAdmin = true
-            };
+            }.AsExpando();
 
-            var request = new ApiCall($"_api/SPO.Tenant/sites('{siteId}')", ApiType.SPORest, JsonSerializer.Serialize(body))
+            var request = new ApiCall($"_api/SPO.Tenant/sites('{siteId}')", ApiType.SPORest, JsonSerializer.Serialize(json, typeof(ExpandoObject)))
             {
                 // Extra headers required by SPO.Tenant/sites API
                 Headers = new Dictionary<string, string>
                 {
                         {"Content-Type", "application/json"}, 
-                        {"odata-version", "4.0"},
-                        {"accept", "application/json"}
+                        {"Odata-Version", "4.0"},
+                        {"Accept", "application/json"}
                     }
             };
             var response = await (context.Web as Web).RawRequestAsync(request, new HttpMethod("PATCH"))

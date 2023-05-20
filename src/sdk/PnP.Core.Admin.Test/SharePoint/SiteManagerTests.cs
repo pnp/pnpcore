@@ -687,6 +687,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
             }
         }
+
         [TestMethod]
         public async Task SetSiteCollectionAdminsRegularSiteAddOnlyApplicationPermissions_Async()
         {
