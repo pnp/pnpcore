@@ -8,6 +8,7 @@ using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
@@ -187,6 +188,19 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
             {
                 foreach (PropertyDescriptor changedProperty in Properties.ChangedProperties)
                 {
+                    // Deal with "special" cases
+
+                    // When RestrictedAccessControlGroups was set that works fine, however clearing them does not work by setting an empty array, one needs to set
+                    // the RemoveRestrictedAccessControlGroups guid array
+                    if (changedProperty.Name == "RestrictedAccessControlGroups" && GetFieldValue(changedProperty) is List<Guid> restrictedAccessControlGroups)
+                    {
+                        if (!restrictedAccessControlGroups.Any())
+                        {
+                            continue;
+                        }
+                    }
+
+
                     fields.Add(new CSOMItemField()
                     {
                         FieldName = changedProperty.Name,

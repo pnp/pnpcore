@@ -49,5 +49,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         Task SetAsPrimarySiteCollectionAdministratorAsync(Uri site);
+
+        /// <summary>
+        /// Set site collection admin as primary admin
+        /// </summary>
+        /// <returns></returns>
+        void SetAsPrimarySiteCollectionAdministrator(Uri site);
     }
 }

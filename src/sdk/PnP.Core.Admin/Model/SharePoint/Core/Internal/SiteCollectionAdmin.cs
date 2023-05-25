@@ -32,7 +32,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool IsSecondaryAdmin { get; set; }
 
         public bool IsMicrosoft365GroupOwner { get; set; }
-        
+
         public async Task SetAsPrimarySiteCollectionAdministratorAsync(Uri site)
         {
             // Get the site details to acquire the site id
@@ -46,9 +46,9 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             var json = new
             {
-                Owner = this.LoginName,
-                OwnerEmail = this.Mail,
-                OwnerName = this.Name,
+                Owner = LoginName,
+                OwnerEmail = Mail,
+                OwnerName = Name,
                 SetOwnerWithoutUpdatingSecondaryAdmin = true
             }.AsExpando();
 
@@ -57,17 +57,22 @@ namespace PnP.Core.Admin.Model.SharePoint
                 // Extra headers required by SPO.Tenant/sites API
                 Headers = new Dictionary<string, string>
                 {
-                        {"Content-Type", "application/json"}, 
+                        {"Content-Type", "application/json"},
                         {"Odata-Version", "4.0"},
                         {"Accept", "application/json"}
                     }
             };
             var response = await (context.Web as Web).RawRequestAsync(request, new HttpMethod("PATCH"))
                 .ConfigureAwait(false);
-           
-           await SiteCollectionManagement.WaitForSpoOperationCompleteAsync(context,
-                JsonSerializer.Deserialize<SpoOperation>(response.Json))
-                .ConfigureAwait(false);
+
+            await SiteCollectionManagement.WaitForSpoOperationCompleteAsync(context,
+                 JsonSerializer.Deserialize<SpoOperation>(response.Json))
+                 .ConfigureAwait(false);
+        }
+
+        public void SetAsPrimarySiteCollectionAdministrator(Uri site)
+        {
+            SetAsPrimarySiteCollectionAdministratorAsync(site).GetAwaiter().GetResult();
         }
     }
 }

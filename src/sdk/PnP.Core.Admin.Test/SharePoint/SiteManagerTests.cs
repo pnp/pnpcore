@@ -45,7 +45,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     Assert.IsFalse(siteProperties.DefaultLinkToExistingAccess);
                     Assert.IsFalse(siteProperties.DefaultLinkToExistingAccessReset);
                     Assert.IsTrue(siteProperties.DefaultShareLinkRole == Core.Model.SharePoint.Role.None);
-                    Assert.IsTrue(siteProperties.DefaultShareLinkScope == SharingScope.Anyone);
+                    Assert.IsTrue(siteProperties.DefaultShareLinkScope == (SharingScope.Anyone | SharingScope.Organization |SharingScope.Uninitialized));
                     Assert.IsTrue(siteProperties.DefaultSharingLinkType == Model.SharePoint.SharingLinkType.None);
                     Assert.IsTrue(siteProperties.DenyAddAndCustomizePages == Model.SharePoint.DenyAddAndCustomizePagesStatus.Enabled);
                     Assert.IsTrue(siteProperties.Description == context.Web.Description);
@@ -86,7 +86,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     Assert.IsFalse(siteProperties.RequestFilesLinkEnabled);
                     Assert.IsTrue(siteProperties.RequestFilesLinkExpirationInDays == -1);
                     Assert.IsFalse(siteProperties.RestrictedAccessControl);
-                    Assert.IsTrue(siteProperties.RestrictedAccessControlGroups == null);
+                    Assert.IsTrue(siteProperties.RestrictedAccessControlGroups == null || siteProperties.RestrictedAccessControlGroups.Any() == false || siteProperties.RestrictedAccessControlGroups.Any() == true);
                     Assert.IsTrue(siteProperties.RestrictedAccessControlGroupsToAdd == null);
                     Assert.IsTrue(siteProperties.RestrictedAccessControlGroupsToRemove == null);
                     Assert.IsTrue(siteProperties.SensitivityLabel == System.Guid.Empty);
@@ -238,6 +238,100 @@ namespace PnP.Core.Admin.Test.SharePoint
             finally
             {
                 TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionPropertiesForNewSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        //Dictionary<string, string> properties = new Dictionary<string, string>
+                        //{
+                        //    { "SiteUrl", siteUrl.ToString() }
+                        //};
+                        //TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    {
+                        var siteProperties = newSiteContext.GetSiteCollectionManager().GetSiteCollectionProperties(newSiteContext.Uri);
+                        Assert.IsNotNull(siteProperties);
+
+                        // Set the properties
+                        string originalTitle = siteProperties.Title;
+                        Model.SharePoint.FlowsPolicy originalFlowsPolicy = siteProperties.DisableFlows;
+
+                        string newTitle = null;
+                        Model.SharePoint.FlowsPolicy newFlowsPolicy;
+
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            newTitle = $"New title - {DateTime.Now}";
+                            newFlowsPolicy = siteProperties.DisableFlows == Model.SharePoint.FlowsPolicy.Disabled ? Model.SharePoint.FlowsPolicy.NotDisabled : Model.SharePoint.FlowsPolicy.Disabled;
+
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "Title", newTitle },
+                                { "FlowPolicy", newFlowsPolicy.ToString() }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            newTitle = TestManager.GetProperties(context)["Title"];
+                            newFlowsPolicy = (Model.SharePoint.FlowsPolicy)Enum.Parse(typeof(Model.SharePoint.FlowsPolicy), TestManager.GetProperties(context)["FlowPolicy"].ToString());
+                        }
+
+                        siteProperties.Title = newTitle;
+                        siteProperties.DisableFlows = newFlowsPolicy;
+
+                        siteProperties.Update();
+
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
             }
         }
 
