@@ -182,6 +182,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.CollectionUpdateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CollectionUpdateOptions.html",
+          "hash": "2QxnYUYgzJwAnZarUiDfW3CRuaVPAxOE+Ia9W5PdgQg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonGroupSiteOptions.yml",
       "output": {
         ".html": {
@@ -510,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionAdmin.html",
-          "hash": "fZb9PjXcI1dENBCZ/BMgf8MGvrmL1H9ZtDne8wgMDzg="
+          "hash": "CK+OSGNEaZ97OOQJPDWgyExfmD1kRzKpIcFeQHTw1Dg="
         }
       },
       "is_incremental": false,
@@ -546,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "a99OHamRkORSe/6UAWx/bhZGQJbhvJRGfrwiOCBfXJc="
+          "hash": "b6dgyWQll8PDop0Ug7g8224Y76jnixdVneKvXs4jmyo="
         }
       },
       "is_incremental": false,
@@ -1038,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "RfSTGCdUuNkRKpmNdP7EnKdmliP5/X4ECZIpk/pIFPI="
+          "hash": "QZ+SSGmJJpr/fM7tapbe/MheK1Nfklh4Tisfb6N8gKY="
         }
       },
       "is_incremental": false,
@@ -8502,7 +8514,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "7KpY+dPaDQA8/Ng1JleybV1uei/L0uNxMNWGRordgb4="
+          "hash": "5yPdVJRMxDxYX8wNMo7GttvGfqJIu13dBqo7rGlIr6U="
         }
       },
       "is_incremental": false,
@@ -9453,7 +9465,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-security.html",
-          "hash": "8kS1i49uiIhIWMANrZHfiL0u90XcL+PN1lwuFkDVWio="
+          "hash": "GPg0UiRFe/MT/kiUVtyDaK2b0u+GV3KIdKepK1rHPAM="
         }
       },
       "is_incremental": false,
@@ -10464,7 +10476,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 706,
+          "total_file_count": 707,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
