@@ -172,7 +172,7 @@ var termSet = await myTermGroup.Sets.GetByIdAsync(&quot;2374aacb-8c25-4991-aa94-
 <pre><code class="lang-csharp">// Update the term set description
 termSet.Description = &quot;updated description&quot;;
 // Add a new localized label for the term set
-(termSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { LanguageTag = &quot;nl-NL&quot;, Name = &quot;Dutch name&quot; });
+termSet.AddLocalizedName(&quot;Dutch name&quot;, &quot;nl-NL&quot;);
 // Send the updates to the server
 await termSet.UpdateAsync();
 </code></pre>
