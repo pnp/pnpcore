@@ -792,7 +792,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Update termset 
                 termSet.Description = "updated description";
-                (termSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { LanguageTag = "nl-NL", Name = "Dutch name" });
+                termSet.AddLocalizedName("Dutch name", "nl-NL");
                 await termSet.UpdateAsync();
 
                 // Delete term set 

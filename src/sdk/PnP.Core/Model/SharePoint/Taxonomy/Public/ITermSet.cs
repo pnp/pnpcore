@@ -83,5 +83,12 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="value">Property value</param>
         /// <param name="trimUnavailable">Trim unavailable terms</param>
         public IList<ITerm> GetTermsByCustomProperty(string key, string value, bool trimUnavailable = false);
+
+        /// <summary>
+        /// Adds a new localized termset name. Call update to persist this change.
+        /// </summary>
+        /// <param name="name">Termset label</param>
+        /// <param name="languageTag">Language the label is in</param>
+        public void AddLocalizedName(string name, string languageTag);
     }
 }
