@@ -209,20 +209,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetSiteCollectionAdminsAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
-
-        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        
+        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,
+            VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
                 throw new ArgumentNullException(nameof(site));
             }
 
-            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).ConfigureAwait(false);
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).ConfigureAwait(false);
         }
-
-        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        
+        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,  
+            VanityUrlOptions vanityUrlOptions = null)
         {
-            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).GetAwaiter().GetResult();
+            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         #region Modernization

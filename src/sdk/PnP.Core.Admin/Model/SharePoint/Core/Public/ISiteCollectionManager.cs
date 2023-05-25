@@ -271,9 +271,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
         /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <param name="collectionUpdateOptions">Add new admins to the list of admins with 'AddOnly' (default), or set exactly the submitted list using 'SetExact'</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null);
+        Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
@@ -284,9 +285,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="site">Url of the site collection to set the administrators for</param>
         /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
         /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <param name="collectionUpdateOptions">Add new admins to the list of admins with 'AddOnly' (default), or set exactly the submitted list using 'SetExact'</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns></returns>
-        void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null);
+        void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly, VanityUrlOptions vanityUrlOptions = null);
 
         #region Modernization
 

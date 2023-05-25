@@ -196,7 +196,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 // Load the site collection properties first as that will tell who is the primary admin (= owner)
                 var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
-                var adminUser = new SiteCollectionAdmin()
+                var adminUser = new SiteCollectionAdmin(tenantAdminContext)
                 {
                     IsSecondaryAdmin = false,
                     LoginName = siteProperties.OwnerLoginName,
@@ -261,7 +261,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         {
                             foreach (var value in valueProperty.EnumerateArray())
                             {
-                                admins.Add(new SiteCollectionAdmin()
+                                admins.Add(new SiteCollectionAdmin(tenantAdminContext)
                                 {
                                     IsSecondaryAdmin = false,
                                     IsMicrosoft365GroupOwner = true,
@@ -330,7 +330,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         foreach (var admin in resultsProperty.EnumerateArray())
                         {
-                            admins.Add(new SiteCollectionAdmin()
+                            admins.Add(new SiteCollectionAdmin(tenantAdminContext)
                             {
                                 IsSecondaryAdmin = true,
                                 LoginName = admin.GetProperty("loginName").GetString(),
@@ -347,35 +347,62 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl, List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds, VanityUrlOptions vanityUrlOptions)
+        internal static async Task SetSiteCollectionAdminsAsync(PnPContext context, Uri siteUrl,
+            List<string> sharePointAdminLoginNames, List<Guid> ownerGroupAzureAdUserIds,
+            CollectionUpdateOptions collectionUpdateOptions, VanityUrlOptions vanityUrlOptions)
         {
-            if ((sharePointAdminLoginNames == null || sharePointAdminLoginNames.Count == 0) && (ownerGroupAzureAdUserIds == null || ownerGroupAzureAdUserIds.Count == 0))
+            if ((sharePointAdminLoginNames == null || sharePointAdminLoginNames.Count == 0) &&
+                (ownerGroupAzureAdUserIds == null || ownerGroupAzureAdUserIds.Count == 0))
             {
                 // Nothing to set, so bail out
                 return;
             }
 
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            using (var tenantAdminContext = await context.GetSharePointAdmin()
+                       .GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
                 // Load the site collection props
-                var siteProperties = await tenantAdminContext.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
+                var siteProperties = await tenantAdminContext.GetSiteCollectionManager()
+                    .GetSiteCollectionPropertiesAsync(siteUrl, vanityUrlOptions).ConfigureAwait(false);
 
-                if (siteProperties.GroupId != Guid.Empty && ownerGroupAzureAdUserIds != null && ownerGroupAzureAdUserIds.Count > 0)
+                if (siteProperties.GroupId != Guid.Empty && ownerGroupAzureAdUserIds is {Count: > 0})
                 {
                     // We need to set the group owners, passing users who are already group owner will not break this flow
                     var batch = tenantAdminContext.NewBatch();
 
                     foreach (var owner in ownerGroupAzureAdUserIds)
                     {
-                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch, new ApiCall($"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Owners/Add(objectId='{owner}', principalName='')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch, new ApiCall($"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Members/Add(objectId='{owner}', principalName='')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch,
+                            new ApiCall(
+                                $"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Owners/Add(objectId='{owner}', principalName='')",
+                                ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                        await (tenantAdminContext.Web as Web).RawRequestBatchAsync(batch,
+                            new ApiCall(
+                                $"_api/SP.Directory.DirectorySession/Group('{siteProperties.GroupId}')/Members/Add(objectId='{owner}', principalName='')",
+                                ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
                     }
 
                     // execute batch
                     await tenantAdminContext.ExecuteAsync(batch).ConfigureAwait(false);
                 }
 
-                if (sharePointAdminLoginNames != null && sharePointAdminLoginNames.Count > 0)
+                // Get the site details to acquire the site id
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new GetSiteByUrlRequest(siteUrl)
+                };
+
+                var result = await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
+                
+                if (sharePointAdminLoginNames != null && collectionUpdateOptions == CollectionUpdateOptions.SetExact &&
+                    sharePointAdminLoginNames.Count > 0)
+                {
+                    await SetExact(sharePointAdminLoginNames, siteId, tenantAdminContext).ConfigureAwait(false);                    
+                }
+                
+                if (sharePointAdminLoginNames != null  && collectionUpdateOptions == CollectionUpdateOptions.AddOnly && sharePointAdminLoginNames.Count > 0)
                 {
                     // Let's set the SharePoint admins
 
@@ -395,7 +422,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         List<string> userLoginNamesToAdd = new List<string>();
 
                         bool first = true;
-                        foreach(var sharePoint in sharePointAdminLoginNames)
+                        foreach (var sharePoint in sharePointAdminLoginNames)
                         {
                             if (first)
                             {
@@ -406,39 +433,49 @@ namespace PnP.Core.Admin.Model.SharePoint
                             {
                                 userLoginNamesToAdd.Add(sharePoint);
                             }
-                        }
-
-                        // Get the site details to acquire the site id
-                        List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                        {
-                            new GetSiteByUrlRequest(siteUrl)
-                        };
-
-                        var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-                        var siteId = (result.ApiCall.CSOMRequests[0].Result as ISite).Id;
-
-                        var secondaryAdministratorLoginNames = new
-                        {
-                            __metadata = new { type = "Collection(Edm.String)" },
-                            results = userLoginNamesToAdd
-                        }.AsExpando();
-
-                        var json = new
-                        {
-                            secondaryAdministratorsFieldsData = new
-                            {
-                                siteId,
-                                secondaryAdministratorLoginNames
-                            }
-                        }.AsExpando();
-
-                        var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-                        await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/SetSiteSecondaryAdministrators", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
+                        } 
+                        
+                        await AddOnly(userLoginNamesToAdd, siteId, tenantAdminContext).ConfigureAwait(false);
                     }
                 }
+            }
 
+            async Task AddOnly(List<string> userLoginNamesToAdd, Guid siteId, IPnPContext tenantAdminContext)
+            {
+                var secondaryAdministratorLoginNames = new
+                {
+                    __metadata = new {type = "Collection(Edm.String)"}, results = userLoginNamesToAdd
+                }.AsExpando();
+
+                var json = new {secondaryAdministratorsFieldsData = new {siteId, secondaryAdministratorLoginNames}}
+                    .AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(
+                        new ApiCall(
+                            $"_api/Microsoft.Online.SharePoint.TenantAdministration.Tenant/SetSiteSecondaryAdministrators",
+                            ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+            }
+
+            async Task SetExact(List<string> userLoginNamesToAdd, Guid siteId, IPnPContext tenantAdminContext)
+            {
+                var siteAdministrators = new
+                {
+                    __metadata = new {type = "Collection(Edm.String)"}, results = userLoginNamesToAdd
+                }.AsExpando();
+
+                var json = new {siteAdministratorsFieldsData = new {siteId, siteAdministrators}}
+                    .AsExpando();
+
+                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                await (tenantAdminContext.Web as Web)
+                    .RawRequestAsync(
+                        new ApiCall(
+                            $"_api/SPO.Tenant/SetSiteAdministrators",
+                            ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
             }
         }
     }

@@ -343,9 +343,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(admins.Count >= 1);
             }
         }
-
+        
         [TestMethod]
-        public async Task SetSiteCollectionAdminsRegularSite()
+        public async Task SetAsPrimarySiteCollectionAdminRegularSite_Async()
         {
             //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
@@ -357,7 +357,6 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-
                     // Persist the used site url as we need to have the same url when we run an offline test
                     Uri siteUrl;
                     if (!TestCommon.Instance.Mocking)
@@ -380,35 +379,42 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Language = Language.English,
                     };
 
-
-                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    SiteCreationOptions siteCreationOptions = new()
                     {
                         UsingApplicationPermissions = false
                     };
 
-                    context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions);
-
-                    // get current admins
-                    var admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
-
-                    // update admins
-                    List<string> newAdmins = new List<string>();
-                    foreach (var admin in admins)
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+                    
+                    // new admins
+                    List<string> newAdmins = new List<string> 
                     {
-                        newAdmins.Add(admin.LoginName);
-                    }
-
-                    // everyone claim
-                    newAdmins.Add("c:0(.s|true");
+                        // everyone claim
+                        "c:0(.s|true"
+                    };
 
                     // set admins
-                    context.GetSiteCollectionManager().SetSiteCollectionAdmins(communicationSiteToCreate.Url, newAdmins);
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(
+                        communicationSiteToCreate.Url, 
+                        newAdmins,
+                        null,
+                        CollectionUpdateOptions.AddOnly
+                    );
 
-                    // Get admins again and verify if the added admin is present
-                    admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+                    // Get admins and verify if the added admin is present
+                    List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
                     Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.IsTrue(admins.Count > 1);
+                    
+                    await admins[1].SetAsPrimarySiteCollectionAdministratorAsync(communicationSiteToCreate.Url);
+                    
+                    admins = await context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
+                    Assert.IsTrue(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true").IsSecondaryAdmin);
+                    
                     if (context.Mode == TestMode.Record)
                     {
                         // Add a little delay between creation and deletion
@@ -419,16 +425,13 @@ namespace PnP.Core.Admin.Test.SharePoint
             finally
             {
                 TestCommon.Instance.UseApplicationPermissions = false;
-                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                {
-                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
-                }
-
+                using var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1);
+                await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
             }
         }
 
         [TestMethod]
-        public async Task SetSiteCollectionAdminsRegularSiteApplicationPermissions()
+        public async Task SetAsPrimarySiteCollectionAdminRegularSiteApplicationPermission_Async()
         {
             //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = true;
@@ -470,16 +473,183 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Owner = owner
                     };
 
-
-                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    SiteCreationOptions siteCreationOptions = new()
                     {
                         UsingApplicationPermissions = true
                     };
 
-                    context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions);
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+                    
+                    // new admins
+                    List<string> newAdmins = new List<string> 
+                    {
+                        // everyone claim
+                        "c:0(.s|true"
+                    };
+
+                    // set admins
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(
+                        communicationSiteToCreate.Url, 
+                        newAdmins,
+                        null,
+                        CollectionUpdateOptions.AddOnly
+                    );
+
+                    // Get admins and verify if the added admin is present
+                    List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.IsTrue(admins.Count > 1);
+                    
+                    await admins[1].SetAsPrimarySiteCollectionAdministratorAsync(communicationSiteToCreate.Url);
+                    
+                    admins = await context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    Assert.IsTrue(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true").IsSecondaryAdmin);
+                    
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1);
+                await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteSetExact_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+                    
+                    // new admins
+                    List<string> newAdmins = new List<string> 
+                    {
+                        // everyone claim
+                        "c:0(.s|true"
+                    };
+
+                    // set admins
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(
+                        communicationSiteToCreate.Url, 
+                        newAdmins,
+                        null,
+                        CollectionUpdateOptions.SetExact
+                    );
+
+                    // Get admins and verify if the added admin is present
+                    List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager()
+                        .GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.IsFalse(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true").IsSecondaryAdmin);
+                    Assert.IsTrue(admins.Count == 1);
+                    
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1);
+                await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteAddOnly_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
 
                     // get current admins
-                    var admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+                    var admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
                     // update admins
                     List<string> newAdmins = new List<string>();
@@ -492,10 +662,104 @@ namespace PnP.Core.Admin.Test.SharePoint
                     newAdmins.Add("c:0(.s|true");
 
                     // set admins
-                    context.GetSiteCollectionManager().SetSiteCollectionAdmins(communicationSiteToCreate.Url, newAdmins);
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(communicationSiteToCreate.Url, newAdmins);
 
                     // Get admins again and verify if the added admin is present
-                    admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+                    admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.IsTrue(admins.Count == 2);
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteAddOnlyApplicationPermissions_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as owner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    string owner = user.LoginName;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "SiteOwner", owner }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        owner = TestManager.GetProperties(context)["SiteOwner"];
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        Owner = owner
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true
+                    };
+
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+
+                    // get current admins
+                    var admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    // update admins
+                    List<string> newAdmins = new List<string>();
+                    foreach (var admin in admins)
+                    {
+                        newAdmins.Add(admin.LoginName);
+                    }
+
+                    // everyone claim
+                    newAdmins.Add("c:0(.s|true");
+
+                    // set admins
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(
+                        communicationSiteToCreate.Url, 
+                        newAdmins, 
+                        null, 
+                        CollectionUpdateOptions.AddOnly);
+
+                    // Get admins again and verify if the added admin is present
+                    admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
 
                     Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
 
@@ -510,7 +774,95 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                    await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
+                }
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteSetExactApplicationPermissions_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as owner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    string owner = user.LoginName;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "SiteOwner", owner }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        owner = TestManager.GetProperties(context)["SiteOwner"];
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        Owner = owner
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true
+                    };
+
+                    await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+
+                    // new admins
+                    List<string> newAdmins = new List<string> 
+                    {
+                        // everyone claim
+                        "c:0(.s|true"
+                    };
+
+                    // set admins
+                    await context.GetSiteCollectionManager().SetSiteCollectionAdminsAsync(
+                        communicationSiteToCreate.Url, 
+                        newAdmins, 
+                        null, 
+                        CollectionUpdateOptions.SetExact);
+
+                    // Get admins and verify if the added admin is present
+                    List<ISiteCollectionAdmin> admins = await context.GetSiteCollectionManager().GetSiteCollectionAdminsAsync(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+                    Assert.IsFalse(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true").IsSecondaryAdmin);
+                    Assert.IsTrue(admins.Count == 1);
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
                 }
                 TestCommon.Instance.UseApplicationPermissions = false;
             }
@@ -590,7 +942,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                     admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(createdSiteCollection);
 
                     Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
-
 
                     if (context.Mode == TestMode.Record)
                     {
