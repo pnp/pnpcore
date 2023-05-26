@@ -338,6 +338,32 @@ namespace PnP.Core.Services
                             }
                     }
                 }
+                // Replace TermSet.GraphId
+                else if (match.Value.Equals("{TermSet.GraphId}"))
+                {
+                    bool replaced = false;
+                    if (pnpObject is IMetadataExtensible withMetaData)
+                    {
+                        if (withMetaData.Metadata.ContainsKey(PnPConstants.MetaDataTermSetId))
+                        {
+                            result = result.Replace("{TermSet.GraphId}", withMetaData.Metadata[PnPConstants.MetaDataTermSetId]);
+                            replaced = true;
+                        }
+                    }
+
+                    if (!replaced)
+                    {
+                        IDataModelParent parent = GetParentDataModel(pnpObject);
+
+                        if (parent is IMetadataExtensible p)
+                        {
+                            if (p.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                            {
+                                result = result.Replace("{TermSet.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
+                            }
+                        }
+                    }
+                }
                 // Replace {hostname}
                 else if (match.Value.Equals("{hostname}"))
                 {

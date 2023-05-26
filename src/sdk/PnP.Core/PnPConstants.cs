@@ -73,6 +73,11 @@ namespace PnP.Core
         internal const string MetaDataListId = "listId";
 
         /// <summary>
+        /// The id of the TermSet holding a term
+        /// </summary>
+        internal const string MetaDataTermSetId = "termSetId";
+
+        /// <summary>
         /// The name of the Entity Type Name metadata attribute
         /// </summary>
         internal const string MetaDataRestEntityTypeName = "EntityTypeName";

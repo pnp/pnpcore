@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
@@ -101,7 +102,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ObjectReferenceParameter : Parameter
+    internal sealed class ObjectReferenceParameter : Parameter
     {
         internal int ObjectPathId { get; set; }
 
@@ -111,7 +112,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ChildItemQuery
+    internal sealed class ChildItemQuery
     {
         internal bool SelectAllProperties { get; set; }
         internal List<Property> Properties { get; set; }
@@ -128,11 +129,9 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                 return $"<ChildItemQuery SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties>{properties}</Properties></ChildItemQuery>";
             }
         }
-
-
     }
 
-    internal class SelectQuery
+    internal sealed class SelectQuery
     {
         internal bool SelectAllProperties { get; set; }
 
@@ -146,8 +145,26 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
             }
             else
             {
-                string properties = string.Join("", Properties.Select(value => $"<Property Name=\"{value.Name}\" ScalarProperty=\"true\" />"));
-                return $"<Query SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties>{properties}</Properties></Query>";
+                StringBuilder propertiesBuilder = new StringBuilder();
+                foreach (var property in Properties)
+                {
+                    if (property is QueryProperty queryProperty)
+                    {
+                        var queryStringProperties = "<Properties />";
+                        if (queryProperty.Query.Properties.Any())
+                        {
+                            queryStringProperties = string.Join("", queryProperty.Query.Properties.Select(value => $"<Property Name=\"{value.Name}\" ScalarProperty=\"true\" />"));
+                        }
+
+                        propertiesBuilder.Append($"<Property Name=\"{queryProperty.Name}\" SelectAll=\"{queryProperty.SelectAll.ToString().ToLower()}\"><Query SelectAllProperties=\"{queryProperty.Query.SelectAllProperties.ToString().ToLower()}\">{queryStringProperties}</Query></Property>");
+                    }
+                    else
+                    {
+                        propertiesBuilder.Append($"<Property Name=\"{property.Name}\" ScalarProperty=\"true\" />");
+                    }                   
+                }
+
+                return $"<Query SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties>{propertiesBuilder}</Properties></Query>";
             }
         }
     }
