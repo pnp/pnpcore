@@ -1661,7 +1661,7 @@ namespace PnP.Core.Model.SharePoint
             string itemApi = null;
             if (listItem.Parent is IListItemCollection)
             {
-                itemApi = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
+                itemApi = "_api/web/lists/getbyid(guid'{List.Id}')/items({Id})";
             }
             else if (listItem.Parent is IFile)
             {

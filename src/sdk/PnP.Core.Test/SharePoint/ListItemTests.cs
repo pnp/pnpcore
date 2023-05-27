@@ -4903,7 +4903,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
                 Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
                 Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
-                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
+                Assert.IsTrue(commentAuthor.UserPrincipalName != null);
 
                 // Load the comments with replies and verify the reply collection is now populated
                 comments = await item.GetCommentsAsync(p => p.Replies);
