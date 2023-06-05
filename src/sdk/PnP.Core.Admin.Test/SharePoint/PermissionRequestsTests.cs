@@ -5,6 +5,7 @@ using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,6 +71,62 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual(4, request.Result.Count);
         }
 
+        [TestMethod] public async Task ApproveSamePermissionsRequestTwoTimesTest_Async()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                ITenantApp app = null;
+                try
+                {
+                    var appManager = context.GetTenantAppManager();
+                    app = appManager.Add(packagePath, true);
+                    var deployResult = app.Deploy(false);
+
+                    Assert.IsTrue(deployResult);
+
+                    List<IPermissionRequest> permissionRequests =
+                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
+
+                    var result =
+                        await appManager
+                            .ServicePrincipal
+                            .ApprovePermissionRequestAsync(
+                                permissionRequests.First(r => r.Scope.Equals("User.ReadBasic.All", StringComparison.OrdinalIgnoreCase)).Id.ToString());
+
+                    Assert.IsNotNull(result);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
+                    
+                    var retractResult = app.Retract();
+                    
+                    Assert.IsTrue(retractResult);
+                    
+                    // Deploy second time
+                    app = appManager.Add(packagePath, true);
+                    deployResult = app.Deploy(false);
+
+                    Assert.IsTrue(deployResult);
+                    
+                    permissionRequests =
+                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
+                    
+                    Assert.IsNotNull(permissionRequests);
+                    
+                    result =
+                        await appManager
+                            .ServicePrincipal
+                            .ApprovePermissionRequestAsync(
+                                permissionRequests.First(r => r.Scope.Equals("User.ReadBasic.All", StringComparison.OrdinalIgnoreCase)).Id.ToString());
+                    
+                }
+                finally
+                {
+                    var retractResult = app.Retract();
+                    app.Remove();
+                }
+            }
+        }
+
         [TestMethod]
         public async Task ApprovePermissionsRequestTest_Async()
         {
@@ -106,7 +163,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task GetPermissionsRequestsTest_Async()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 ITenantApp app = null;
@@ -121,9 +178,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                     List<IPermissionRequest> permissionRequests =
                         await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
-                Assert.IsNotNull(permissionRequests);
-                Assert.IsTrue(permissionRequests.Count > 0);
-            }
+                    Assert.IsNotNull(permissionRequests);
+                    Assert.IsTrue(permissionRequests.Count > 0);
+                }
                 finally
                 {
                     var retractResult = app.Retract();
@@ -131,7 +188,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 }
             }
         }
-        
+
         [TestMethod]
         public async Task DenyPermissionsRequestTest_Async()
         {
