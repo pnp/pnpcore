@@ -237,6 +237,10 @@ await myList.RecycleAsync();
 </div>
 <h3 id="setting-default-values">Setting default values</h3>
 <p>A list contains fields and these fields can have a default value as part of the field definition. Another approach for setting default values is outlined below, using one of the <code>SetDefaultColumnValues</code> methods you can set a default value for one or more fields and this can be done per folder. In below sample you'll see that <code>Folder 1</code> will get another default then <code>Folder2</code>. Also note that taxonomy fields require a slightly different value setting: to specify a term you need to use &quot;-1;#TermLabel|TermId&quot;, if you're setting a multi value taxonomy field and you want to specify multiple terms as default value use &quot;-1;#Term1Label|Term1Id;#-1;#Term2Label|Term2Id&quot;.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>It's important you specify a folder relative path (e.g. <code>/Folder 1</code>) and not a server relative folder path (e.g. <code>/sites/myteamsite/mylibrary/Folder 1</code>).</p>
+</div>
 <pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to work with&quot;);
 
 // Set default values on these folders
