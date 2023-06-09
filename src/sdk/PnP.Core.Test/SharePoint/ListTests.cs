@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -2098,6 +2099,107 @@ namespace PnP.Core.Test.SharePoint
                     myList.Delete();
                 }
             }
+        }
+
+        [TestMethod]
+        public async Task DefaultValueUpdateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DefaultValueUpdateTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                        var batch2 = context.NewBatch();
+                        myList.Fields.AddTextBatch(batch2, "Project_Number");
+                        myList.Fields.AddTextBatch(batch2, "Project_Description");
+                        context.Execute(batch2);
+                    }
+
+                    // Add some folders to put default values on
+                    var batch = context.NewBatch();
+                    var folder1 = myList.RootFolder.AddFolderBatch(batch, "Folder 1");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 2");
+                    context.Execute(batch);
+
+                    // Set default values on these folders
+                    List<DefaultColumnValueOptions> defaultColumnValues = new()
+                    {
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder 1",
+                            FieldInternalName = "Project_Number",
+                            DefaultValue = "1"
+                        },
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder 1",
+                            FieldInternalName = "Project_Description",
+                            DefaultValue = "Description 1"
+                        }
+                    };
+
+                    myList.SetDefaultColumnValues(defaultColumnValues);
+
+                    // Load the default values again
+                    var loadedDefaults = myList.GetDefaultColumnValues();
+
+                    // verify that each added value was actually added
+                    foreach (var addedValue in defaultColumnValues)
+                    {
+                        var foundValue = loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == addedValue.FolderRelativePath &&
+                                                                       p.DefaultValue == addedValue.DefaultValue && p.FieldInternalName == addedValue.FieldInternalName);
+                        Assert.IsTrue(foundValue != null);
+                    }
+
+                    // Update the values
+                    await SetFolderDefaultValuesAsync(context, folder1, "2", "Description 2");
+
+                    // Load the default values again
+                    loadedDefaults = myList.GetDefaultColumnValues();
+
+                    Assert.IsTrue(loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == "/Folder 1" && p.DefaultValue == "2" && p.FieldInternalName == "Project_Number") != null);
+                    Assert.IsTrue(loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == "/Folder 1" && p.DefaultValue == "Description 2" && p.FieldInternalName == "Project_Description") != null);
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        private async Task SetFolderDefaultValuesAsync(PnPContext context, IFolder folder, string projectNumber, string projectDescription)
+        {
+            var list = await context.Web.Lists.GetByServerRelativeUrlAsync(folder.ServerRelativeUrl);
+            var existingColumns = await list.GetDefaultColumnValuesAsync();
+
+            foreach (var existingColumn in existingColumns)
+            {
+                var value = existingColumn.FieldInternalName switch
+                {
+                    "Project_Number" => projectNumber,
+                    "Project_Description" => projectDescription,
+                    _ => existingColumn.DefaultValue
+                };
+
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    existingColumn.DefaultValue = value;
+                }
+            }
+            await list.SetDefaultColumnValuesAsync(existingColumns);
         }
 
         #endregion
