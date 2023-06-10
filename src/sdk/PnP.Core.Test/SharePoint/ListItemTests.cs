@@ -4580,6 +4580,86 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task DeleteListItemVersionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string listTitle = "DeleteListItemVersionsTest";
+            int firstId;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    // Enable versioning
+                    myList.EnableVersioning = true;
+                    await myList.UpdateAsync();
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 5; i++)
+                {
+                    var values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                var first = myList.Items.AsRequested().First();
+                firstId = first.Id;
+                first.Title = "blabla";
+
+                // Use the batch update flow here
+                var batch = context.NewBatch();
+                await first.UpdateBatchAsync(batch).ConfigureAwait(false);
+                await context.ExecuteAsync(batch);
+            }
+
+            int versionId;
+            using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var myList2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+                var first2 = await myList2.Items.GetByIdAsync(firstId, li => li.All, li => li.Versions);
+
+                var lastVersion = first2.Versions.AsRequested().Last();
+                versionId = lastVersion.Id;
+
+                Assert.AreEqual("blabla", first2.Title);
+                Assert.AreEqual("2.0", first2.Values["_UIVersionString"].ToString());
+
+                Assert.AreEqual(2, first2.Versions.Length);
+                Assert.AreEqual("Item 0", lastVersion.Values["Title"].ToString());
+
+                // Delete the last version
+                lastVersion.Delete();
+
+                first2 = await myList2.Items.GetByIdAsync(firstId, li => li.All, li => li.Versions);
+                lastVersion = first2.Versions.AsRequested().Last();
+                Assert.AreEqual(1, first2.Versions.Length);
+                Assert.AreEqual("blabla", lastVersion.Values["Title"].ToString());
+            }
+
+            using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+            {
+                var myList = await contextFinal.Web.Lists.GetByTitleAsync(listTitle);
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task GetListItemVersionFileVersionContentAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;

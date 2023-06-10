@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListItemVersion object
     /// </summary>
     [ConcreteType(typeof(ListItemVersion))]
-    public interface IListItemVersion : IDataModel<IListItemVersion>, IDataModelGet<IListItemVersion>, IDataModelLoad<IListItemVersion>, IExpandoDataModel, IQueryableDataModel
+    public interface IListItemVersion : IDataModel<IListItemVersion>, IDataModelGet<IListItemVersion>, IDataModelLoad<IListItemVersion>, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
     {
         /// <summary>
         /// Gets a value that specifies the creation date and time for the list item version.
