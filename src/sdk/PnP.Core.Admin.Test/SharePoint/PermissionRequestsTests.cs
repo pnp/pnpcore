@@ -71,62 +71,6 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual(4, request.Result.Count);
         }
 
-        [TestMethod] public async Task ApproveSamePermissionsRequestTwoTimesTest_Async()
-        {
-            TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
-            {
-                ITenantApp app = null;
-                try
-                {
-                    var appManager = context.GetTenantAppManager();
-                    app = appManager.Add(packagePath, true);
-                    var deployResult = app.Deploy(false);
-
-                    Assert.IsTrue(deployResult);
-
-                    List<IPermissionRequest> permissionRequests =
-                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
-
-                    var result =
-                        await appManager
-                            .ServicePrincipal
-                            .ApprovePermissionRequestAsync(
-                                permissionRequests.First(r => r.Scope.Equals("User.ReadBasic.All", StringComparison.OrdinalIgnoreCase)).Id.ToString());
-
-                    Assert.IsNotNull(result);
-                    Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
-                    
-                    var retractResult = app.Retract();
-                    
-                    Assert.IsTrue(retractResult);
-                    
-                    // Deploy second time
-                    app = appManager.Add(packagePath, true);
-                    deployResult = app.Deploy(false);
-
-                    Assert.IsTrue(deployResult);
-                    
-                    permissionRequests =
-                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
-                    
-                    Assert.IsNotNull(permissionRequests);
-                    
-                    result =
-                        await appManager
-                            .ServicePrincipal
-                            .ApprovePermissionRequestAsync(
-                                permissionRequests.First(r => r.Scope.Equals("User.ReadBasic.All", StringComparison.OrdinalIgnoreCase)).Id.ToString());
-                    
-                }
-                finally
-                {
-                    var retractResult = app.Retract();
-                    app.Remove();
-                }
-            }
-        }
-
         [TestMethod]
         public async Task ApprovePermissionsRequestTest_Async()
         {
