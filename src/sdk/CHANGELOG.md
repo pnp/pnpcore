@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Localized names for a TermSet can now be added #1188 [jansenbe - Bert Jansen]
 - Using `GetTermById` on `ITermStore` now loads the additional `ITerm` properties needed to enable operations on the loaded term #1189 [jansenbe - Bert Jansen]
 - GetCommentsAsync throws InvalidClientQueryException #1191 [jansenbe - Bert Jansen]
+- Ensure `CultureInfo.InvariantCulture` is used when translating dates to string #1201 [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 

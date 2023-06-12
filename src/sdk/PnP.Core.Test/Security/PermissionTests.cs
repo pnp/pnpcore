@@ -6,6 +6,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -225,7 +226,7 @@ namespace PnP.Core.Test.Security
                 Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
                 Assert.AreEqual(permission.Link.PreventsDownload, false);
                 Assert.AreEqual(permission.HasPassword, true);
-                Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
                 var newSharingLinks = await file.GetShareLinksAsync();
 
                 Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);
@@ -814,7 +815,7 @@ namespace PnP.Core.Test.Security
                 Assert.AreEqual(permission.Link.Scope, ShareScope.Anonymous);
                 Assert.AreEqual(permission.Link.PreventsDownload, false);
                 Assert.AreEqual(permission.HasPassword, true);
-                Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                Assert.AreEqual(permission.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
                 var newSharingLinks = await folder.GetShareLinksAsync();
 
                 Assert.AreEqual(newSharingLinks.Count(), originalSharingLinks.Count() + 1);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -141,12 +142,12 @@ namespace PnP.Core.Model.Teams
 
         internal static string ConvertDateTimeToRegularString(DateTime date)
         {
-            return date.ToString("yyyy-MM-ddTHH:mm:ss.0000000");
+            return date.ToString("yyyy-MM-ddTHH:mm:ss.0000000", CultureInfo.InvariantCulture);
         }
 
         internal static string ConvertDateTimeToAllDayString(DateTime date)
         {
-            return date.ToString("yyyy-MM-ddT00:00:00.0000000");
+            return date.ToString("yyyy-MM-ddT00:00:00.0000000", CultureInfo.InvariantCulture);
         }
 
         /// <summary>

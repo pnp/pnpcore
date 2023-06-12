@@ -37,9 +37,9 @@ namespace PnP.Core.QueryModel
                 case Guid g:
                     return targetPlatform == ODataTargetPlatform.SPORest ? $"(guid'{g}')" : $"{g}";
                 case DateTime dt:
-                    return targetPlatform == ODataTargetPlatform.SPORest ? $"datetime'{dt.ToUniversalTime():yyyy-MM-ddThh:mm:ssZ}'" : $"{dt.ToUniversalTime():yyyy-MM-ddThh:mm:ssZ}";
+                    return targetPlatform == ODataTargetPlatform.SPORest ? $"datetime'{dt.ToUniversalTime().ToString("yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture)}'" : $"{dt.ToUniversalTime().ToString("yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture)}";
                 case DateTimeOffset dto:
-                    return targetPlatform == ODataTargetPlatform.SPORest ? $"datetime'{dto.UtcDateTime:yyyy-MM-ddThh:mm:ssZ}'" : $"{dto.UtcDateTime:yyyy-MM-ddThh:mm:ssZ}";
+                    return targetPlatform == ODataTargetPlatform.SPORest ? $"datetime'{dto.UtcDateTime.ToString("yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture)}'" : $"{dto.UtcDateTime.ToString("yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture)}";
                 default:
                     // Convert to invariant string
                     return string.Format(CultureInfo.InvariantCulture, "{0}", value);
