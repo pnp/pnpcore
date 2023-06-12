@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for adding, removing and re-ordering list view columns #1144 [jansenbe - Bert Jansen]
 - Support for replacing the site collection admins #1184 [mloitzl - Martin Loitzl]
 - Support to delete list item versions (`IListItemVersion`) [jansenbe - Bert Jansen] 
+- Admin Library: Tenant hub site join method `GetSharePointAdmin().ConnectToHubSiteAsync` #1193 [jansenbe - Bert Jansen] 
 
 ### Changed
 

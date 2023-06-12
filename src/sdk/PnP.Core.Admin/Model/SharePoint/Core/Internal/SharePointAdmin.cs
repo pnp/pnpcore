@@ -285,7 +285,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                ApiCall apiCall = new ApiCall(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription, configuration) });
+                ApiCall apiCall = new(new List<IRequest<object>> { new ImportSearchConfigurationRequest(SearchObjectLevel.SPSiteSubscription, configuration) });
 
                 await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             }
@@ -294,6 +294,23 @@ namespace PnP.Core.Admin.Model.SharePoint
         public void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null)
         {
             SetTenantSearchConfigurationXmlAsync(configuration, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Hub site functionality
+        public async Task ConnectToHubSiteAsync(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                ApiCall apiCall = new(new List<IRequest<object>> { new ConnectSiteToHubSiteRequest(hubSiteCollectionUrl, siteCollectionUrlToConnect) });
+
+                await (tenantAdminContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+        }
+
+        public void ConnectToHubSite(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)
+        {
+            ConnectToHubSiteAsync(siteCollectionUrlToConnect, hubSiteCollectionUrl, vanityUrlOptions).GetAwaiter().GetResult();
         }
         #endregion
     }
