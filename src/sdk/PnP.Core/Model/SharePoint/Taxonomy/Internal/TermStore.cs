@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -89,6 +90,11 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<ITerm> GetTermByIdAsync(string termSetId, string termId, params Expression<Func<ITerm, object>>[] selectors)
         {
+            // Ensure the manadatory properties are requested
+            Expression<Func<ITerm, object>>[] defaultTermProps = { s => s.Id, s => s.Labels, s => s.Descriptions, s => s.Set };
+            IEnumerable<Expression<Func<ITerm, object>>> defaultTermPropsToUse = defaultTermProps;
+            defaultTermPropsToUse = defaultTermProps.Union(selectors);
+
             var term = new Term()
             {
                 PnPContext = PnPContext
@@ -96,10 +102,56 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = BuildGetTermByIdApiCall(termSetId, termId);
 
-            var entityInfo = EntityManager.GetClassInfo(term.GetType(), term, expressions: selectors);
+            var entityInfo = EntityManager.GetClassInfo(term.GetType(), term, expressions: defaultTermPropsToUse.ToArray());
             var query = await QueryClient.BuildGetAPICallAsync(term, entityInfo, apiCall).ConfigureAwait(false);
 
             await term.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            if (term is IMetadataExtensible metadataExtensible)
+            {
+                metadataExtensible.Metadata[PnPConstants.MetaDataTermSetId] = termSetId;
+            }
+
+            // Load the term parent so that we can build up the proper parent tree to allow future operations on this term
+            var parentOfTerm = await term.GetParentAsync().ConfigureAwait(false);
+
+            if (parentOfTerm == null)
+            {
+                // The term is a root term in the termset
+                if (term.IsPropertyAvailable(p => p.Set))
+                {
+                    term.Parent = term.Set;
+                }
+            }
+            else
+            {
+                // Populate the set in case we have it
+                if (term.IsPropertyAvailable(p => p.Set))
+                {
+                    // Set key properties we need for minimal actions
+                    parentOfTerm.Set.SetSystemProperty(p=>p.Id, term.Set.Id);
+
+                    // Copy metadata from the parent to the term
+                    (parentOfTerm.Set as TermSet).Metadata = new Dictionary<string, string>(term.Metadata);
+
+                    // Mark requested
+                    parentOfTerm.Set.Requested = true;
+
+                    // Also set the termset as parent, needed to be able to resolve this termset id in all cases
+                    parentOfTerm.Parent = term.Set;
+                }
+
+                // The term is a child term of another term
+                var termCollection = new TermCollection(PnPContext, null)
+                {
+                    Parent = parentOfTerm
+                };
+
+                // Add the retrieved term to the term collection
+                termCollection.Add(term);
+
+                term.Parent = termCollection;
+            }
 
             return term;
         }

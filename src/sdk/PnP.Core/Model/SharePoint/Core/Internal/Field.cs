@@ -31,14 +31,14 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
                 else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
                     if (IsContentTypeHubFromParent())
                     {
-                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                     }
                 }
@@ -54,14 +54,14 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 } 
                 else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
                     if (IsContentTypeHubFromParent())
                     {
-                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                     }
                 }
@@ -77,14 +77,14 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
                 else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(ContentType))
                 {
                     if (IsContentTypeHubFromParent())
                     {
-                        var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                        var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                     }
                 }
@@ -330,8 +330,16 @@ namespace PnP.Core.Model.SharePoint
                 {
                     endPointUrl = $"/{endPointUrl}";
                 }
-                
-                endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}");
+
+                if (PnPContext.Uri.Segments.Length == 1)
+                {
+                    // For when then context was created for the root site collection
+                    endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}{PnPConstants.ContentTypeHubUrl}");
+                }
+                else
+                {
+                    endPointUrl = endPointUrl.Insert(0, $"{PnPContext.Uri.AbsoluteUri.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl)}");
+                }
             }
 
             return endPointUrl;

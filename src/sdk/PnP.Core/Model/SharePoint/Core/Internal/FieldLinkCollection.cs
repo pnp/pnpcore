@@ -20,7 +20,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task AddBatchAsync(Batch batch, IField field)
         {
-            ApiCall apiCall = BuildAddApiCall(field);
+            (Guid siteId, Guid webId) = await GetSiteAndWebIdsAsync(field).ConfigureAwait(false);
+
+            ApiCall apiCall = BuildAddApiCall(field, siteId, webId);
             await (Parent as ContentType).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -41,13 +43,16 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IFieldLink> AddAsync(IField field, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
-            ApiCall apiCall = BuildAddApiCall(field);
+            (Guid siteId, Guid webId) = await GetSiteAndWebIdsAsync(field).ConfigureAwait(false);
+
+            ApiCall apiCall = BuildAddApiCall(field, siteId, webId);
 
             var result = await (Parent as ContentType).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             Guid addedFieldLinkId = (Guid)result.ApiCall.CSOMRequests[0].Result;
 
             // Get the added field
             var addedFieldLink = await this.QueryProperties(p => p.All, p => p.ReadOnly, p => p.ShowInDisplayForm, p => p.DisplayName).FirstOrDefaultAsync(p => p.Id == addedFieldLinkId).ConfigureAwait(false);
+            //var fieldLinks = await this.GetA
 
             if (addedFieldLink != null)
             {
@@ -70,11 +75,42 @@ namespace PnP.Core.Model.SharePoint
             return addedFieldLink;
         }
 
-        private ApiCall BuildAddApiCall(IField field)
+        private async Task<(Guid,Guid)> GetSiteAndWebIdsAsync(IField field)
+        {
+            Guid siteId = Guid.Empty;
+            Guid webId = Guid.Empty;
+            if (field.Parent != null && field.Parent.Parent is ContentTypeHub hub)
+            {
+                hub.SiteId ??= await hub.GetSiteIdAsync().ConfigureAwait(false);
+
+                if (!string.IsNullOrEmpty(hub.SiteId))
+                {
+                    var split = hub.SiteId.Split(',');
+                    if (split.Length == 3)
+                    {
+                        siteId = Guid.Parse(split[1]);
+                        webId = Guid.Parse(split[2]);
+                    }
+                }
+                else
+                {
+                    throw new ClientException("No valid site id found");
+                }
+            }
+            else
+            {
+                siteId = PnPContext.Site.Id;
+                webId = PnPContext.Web.Id;
+            }
+
+            return (siteId, webId);
+        }
+
+        private ApiCall BuildAddApiCall(IField field, Guid siteId, Guid webId)
         {
             return new ApiCall(new List<IRequest<object>>
             {
-                new AddFieldLinkRequest(Parent as IContentType, field, true)
+                new AddFieldLinkRequest(Parent as IContentType, field, siteId, webId, true)
             });
         }
 

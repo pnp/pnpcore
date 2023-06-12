@@ -11,11 +11,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 {
     internal sealed class ServicePrincipal : IServicePrincipal
     {
-        private readonly PnPContext _context;
+        private readonly PnPContext context;
 
         internal ServicePrincipal(PnPContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public IPermissionGrant ApprovePermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null)
@@ -23,17 +23,18 @@ namespace PnP.Core.Admin.Model.SharePoint
             return ApprovePermissionRequestAsync(id, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IPermissionGrant> ApprovePermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null)
+        public async Task<IPermissionGrant> ApprovePermissionRequestAsync(string id,
+            VanityUrlOptions vanityUrlOptions = null)
         {
-            using PnPContext tenantAdminContext = await _context
+            using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
                 .GetTenantAdminCenterContextAsync(vanityUrlOptions)
                 .ConfigureAwait(false);
 
-            ApprovePermissionRequest request = new() { RequestId = id };
+            ApprovePermissionRequest request = new() {RequestId = id};
 
             ApiCall getPermissionRequestsCall = new(
-                new List<IRequest<object>> { request });
+                new List<IRequest<object>> {request});
 
             ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
                 .RawRequestAsync(getPermissionRequestsCall, HttpMethod.Post)
@@ -49,15 +50,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task DenyPermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null)
         {
-            using PnPContext tenantAdminContext = await _context
+            using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
                 .GetTenantAdminCenterContextAsync(vanityUrlOptions)
                 .ConfigureAwait(false);
 
-            DenyPermissionRequest request = new() { RequestId = id };
+            DenyPermissionRequest request = new() {RequestId = id};
 
             ApiCall getPermissionRequestsCall = new(
-                new List<IRequest<object>> { request });
+                new List<IRequest<object>> {request});
 
             await ((Web)tenantAdminContext.Web)
                 .RawRequestAsync(getPermissionRequestsCall, HttpMethod.Post)
@@ -71,7 +72,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<List<IPermissionRequest>> GetPermissionRequestsAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            using PnPContext tenantAdminContext = await _context
+            using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
                 .GetTenantAdminCenterContextAsync(vanityUrlOptions)
                 .ConfigureAwait(false);
@@ -79,7 +80,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             GetPermissionRequestsRequest request = new();
 
             ApiCall getPermissionRequestsCall = new(
-                new List<IRequest<object>> { request });
+                new List<IRequest<object>> {request});
 
             ApiCallResponse csomResult = await (tenantAdminContext.Web as Web)
                 .RawRequestAsync(getPermissionRequestsCall, HttpMethod.Post)
@@ -200,15 +201,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<IServicePrincipalProperties> EnableAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            using PnPContext tenantAdminContext = await _context
+            using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
                 .GetTenantAdminCenterContextAsync(vanityUrlOptions)
                 .ConfigureAwait(false);
 
-            SetServicePrincipalRequest request = new() { Enabled = true };
+            SetServicePrincipalRequest request = new() {Enabled = true};
 
             ApiCall requestsCall = new(
-                new List<IRequest<object>> { request });
+                new List<IRequest<object>> {request});
 
             ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
                 .RawRequestAsync(requestsCall, HttpMethod.Post)
@@ -224,15 +225,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<IServicePrincipalProperties> DisableAsync(VanityUrlOptions vanityUrlOptions = null)
         {
-            using PnPContext tenantAdminContext = await _context
+            using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
                 .GetTenantAdminCenterContextAsync(vanityUrlOptions)
                 .ConfigureAwait(false);
 
-            SetServicePrincipalRequest request = new() { Enabled = false };
+            SetServicePrincipalRequest request = new() {Enabled = false};
 
             ApiCall requestsCall = new(
-                new List<IRequest<object>> { request });
+                new List<IRequest<object>> {request});
 
             ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
                 .RawRequestAsync(requestsCall, HttpMethod.Post)
@@ -244,6 +245,79 @@ namespace PnP.Core.Admin.Model.SharePoint
         public IServicePrincipalProperties Disable(VanityUrlOptions vanityUrlOptions = null)
         {
             return DisableAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerable<IPermissionGrant>> ListGrantsAsync(VanityUrlOptions vanityUrlOptions = null)
+        {
+            using PnPContext tenantAdminContext = await context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+
+            ListGrantsRequest request = new();
+
+            ApiCall requestsCall = new(
+                new List<IRequest<object>> {request});
+
+            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+                .RawRequestAsync(requestsCall, HttpMethod.Post)
+                .ConfigureAwait(false);
+
+            return (IEnumerable<IPermissionGrant>)csomResult.ApiCall.CSOMRequests[0].Result;
+        }
+
+        public IEnumerable<IPermissionGrant> ListGrants(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return ListGrantsAsync(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPermissionGrant> AddGrantAsync(string resource, string scope,
+            VanityUrlOptions vanityUrlOptions = null)
+        {
+            using PnPContext tenantAdminContext = await context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+
+            AddGrantRequest request = new() {Resource = resource, Scope = scope};
+
+            ApiCall requestsCall = new(
+                new List<IRequest<object>> {request});
+
+            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+                .RawRequestAsync(requestsCall, HttpMethod.Post)
+                .ConfigureAwait(false);
+
+            return (IPermissionGrant)csomResult.ApiCall.CSOMRequests[0].Result;
+        }
+
+        public IPermissionGrant AddGrant(string resource, string scope, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return AddGrantAsync(resource, scope, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPermissionGrant> RevokeGrantAsync(string objectId, VanityUrlOptions vanityUrlOptions = null)
+        {
+            using PnPContext tenantAdminContext = await context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+
+            RevokeGrantRequest request = new() {ObjectId = objectId};
+
+            ApiCall requestsCall = new(
+                new List<IRequest<object>> {request});
+
+            ApiCallResponse csomResult = await ((Web)tenantAdminContext.Web)
+                .RawRequestAsync(requestsCall, HttpMethod.Post)
+                .ConfigureAwait(false);
+
+            return (IPermissionGrant)csomResult.ApiCall.CSOMRequests[0].Result;
+        }
+
+        public IPermissionGrant RevokeGrant(string objectId, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return RevokeGrantAsync(objectId, vanityUrlOptions).GetAwaiter().GetResult();
         }
     }
 }

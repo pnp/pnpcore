@@ -1,7 +1,9 @@
 using PnP.Core.Services;
 using System;
 using System.Dynamic;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -157,6 +159,79 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("*")]
         public object All { get => null; }
 
+        #endregion
+
+        #region Extension Methods
+
+        public async Task MoveViewFieldToAsync(string internalFieldName, int newOrder)
+        {
+            var apiCall = GetMoveViewFieldToApiCall(internalFieldName, newOrder);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall GetMoveViewFieldToApiCall(string internalFieldName, int newOrder)
+        {
+            var body = new
+            {
+                field = internalFieldName,
+                index = newOrder
+            };
+
+            var bodyString = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')/viewfields/moveviewfieldto", ApiType.SPORest, bodyString);
+        }
+
+        public void MoveViewFieldTo(string internalFieldName, int newOrder)
+        {
+            MoveViewFieldToAsync(internalFieldName, newOrder).GetAwaiter().GetResult();
+        }
+
+        public async Task AddViewFieldAsync(string internalFieldName)
+        {
+            var apiCall = GetAddViewFieldApiCall(internalFieldName);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall GetAddViewFieldApiCall(string internalFieldName)
+        {
+            var body = new
+            {
+                strField = internalFieldName,
+            };
+
+            var bodyString = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')/viewfields/addviewfield", ApiType.SPORest, bodyString);
+        }
+
+        public void AddViewField(string internalFieldName)
+        {
+            AddViewFieldAsync(internalFieldName).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveViewFieldAsync(string internalFieldName)
+        {
+            var apiCall = GetRemoveViewFieldApiCall(internalFieldName);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall GetRemoveViewFieldApiCall(string internalFieldName)
+        {
+            var body = new
+            {
+                strField = internalFieldName,
+            };
+
+            var bodyString = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')/viewfields/removeviewfield", ApiType.SPORest, bodyString);
+        }
+
+        public void RemoveViewField(string internalFieldName)
+        {
+            RemoveViewFieldAsync(internalFieldName).GetAwaiter().GetResult();
+        }
         #endregion
     }
 }

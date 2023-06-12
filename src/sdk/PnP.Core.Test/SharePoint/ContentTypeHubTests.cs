@@ -22,6 +22,20 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public void GetContentUrlReplacement()
+        {
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "https://bertonline.sharepoint.com/sites/demo1/_api/web/contenttypes") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "https://bertonline.sharepoint.com/_api/web/contenttypes") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "/sites/demo1/_api/web/contenttypes") == "/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "/_api/web/contenttypes") == "/sites/contenttypehub/_api/web/contenttypes");
+
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "https://bertonline.sharepoint.com/sites/demo1/_api/web/contenttypes?urlparam=a") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "https://bertonline.sharepoint.com/_api/web/contenttypes?urlparam=a") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "/sites/demo1/_api/web/contenttypes?urlparam=a") == "/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "/_api/web/contenttypes?urlparam=a") == "/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+        }
+
+        [TestMethod]
         public async Task GetContentTypesFromHubAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;

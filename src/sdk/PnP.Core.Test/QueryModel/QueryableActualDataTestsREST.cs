@@ -145,6 +145,24 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryItemsFilterOnDateAsync_REST()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var dt = DateTime.UtcNow;
+                var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dt).ToListAsync();                
+                Assert.IsTrue(lists.Count == 1);
+
+                var dto = DateTimeOffset.UtcNow;
+                lists = await context.Web.Lists.Where(p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dto).ToListAsync();
+                Assert.IsTrue(lists.Count == 1);
+            }
+        }
+
+        [TestMethod]
         public async Task TestQueryFirstOrDefaultNoPredicateLINQ_REST()
         {
             // TestCommon.Instance.Mocking = false;

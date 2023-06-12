@@ -10,6 +10,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for adding, removing and re-ordering list view columns #1144 [jansenbe - Bert Jansen]
+- Support for replacing the site collection admins #1184 [mloitzl - Martin Loitzl]
+
+### Changed
+
+- Recognize editor component (CK4/CK5) being used in pages and allow developer to act on that `IPage.EditorType` [jansenbe - Bert Jansen]
+- Retain extra page settings (`isSpellCheckEnabled`, `globalRichTextStylingVersion`, `isEmailReady`, `rtePageSettings` and `htmlAttributes`) [jansenbe - Bert Jansen]
+- Fix to enable empty text parts to be added to a page #1164 [cnesmark - Christian Nesmark]
+- Use new syntax for inserting inline images when the page is using CK5 [jansenbe - Bert Jansen]
+- Fixed issue where section collapsibility is not set correctly when provisioning a page with a collapsible section containing a webpart. #1167 [mmi-wp - Mikkel Bukholt Mikkelsen]
+- IconAlignment cannot be used to infer collapsibility of a page section #1168 [mmi-wp - Mikkel Bukholt Mikkelsen]
+- Vertical sections should not be collapsible #1169 [mmi-wp - Mikkel Bukholt Mikkelsen]
+- Added `CreatedDateTime` property to `ITeamChannel` [jansenbe - Bert Jansen]
+- Support `DateTime` and `DateTimeOffset` types in OData filters #1173 [jansenbe - Bert Jansen]
+- AddAvailableContentTypeFromHubAsync throws Exception, even on success #1175 [jansenbe - Bert Jansen]
+- Correctly handle `ContentTypeHub` when the original context was created for the root site collection [jansenbe - Bert Jansen]
+- Fixed `FieldLink` handling when `ContentTypeHub` was used [jansenbe - Bert Jansen]
+- Fixed `AddTaxonomy` field methods when `ContentTypeHub` was used [jansenbe - Bert Jansen]
+- Handle the CSOM limitation of not being able to set an empty `RestrictedAccessControlGroups` property on `ISiteCollectionProperties.Update` [jansenbe - Bert Jansen]
+- Localized names for a TermSet can now be added #1188 [jansenbe - Bert Jansen]
+- Using `GetTermById` on `ITermStore` now loads the additional `ITerm` properties needed to enable operations on the loaded term #1189 [jansenbe - Bert Jansen]
+- GetCommentsAsync throws InvalidClientQueryException #1191 [jansenbe - Bert Jansen]
+
+## [1.9.0]
+
+### Added
+
 - Support for custom cloud environments by setting Environment to `Custom` followed by specifying the needed Graph and Azure AD endpoints #1014 [jansenbe - Bert Jansen]
 - Implements support for the access request configuration #1040 [plamber - Patrick Lamber]
 - Option to specify the `X509Certificate2` when using the `OnBehalfOfAuthenticationProvider`, similar to the support there is for this in the `X509CertificateAuthenticationProvider` #1047 [mloitzl - Martin Loitzl]
@@ -30,6 +57,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `Rename` methods on `IFile` to make it easier to rename a file #1109 [jansenbe - Bert Jansen]
 - Added feature to enable or disable the SharePoint service principal #1117 [mloitzl - Martin Loitzl]
 - Method to ensure the 'Everyone except external users' user for any site language #1127 [plamber - Patrick Lamber] 
+- Added support for listing, adding and revoking permission grants for a SharePoint service principal #1132 [mloitzl - Martin Loitzl]
+- Admin library: added support for listing Azure ACS principals and SharePoint AddIns [jansenbe - Bert Jansen]
+- Support for moving a ListItem to a sub folder #1146 [mloitzl - Martin Loitzl]
 
 ### Changed
 
@@ -54,6 +84,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add possibility to get the `IServicePrincipal` via `IAppManager` #1116 [mloitzl - Martin Loitzl]
 - Don't set `BaseAddress` of `MicrosoftGraphClient` when there's no change #1114 [jansenbe - Bert Jansen]
 - Option to create private/shared Teams channels #1126 [JakeStanger - Jake Stanger]
+- Bump Nuget package version dependencies to align with PnP PS needs [jansenbe - Bert Jansen]
 
 ## [1.8.0]
 

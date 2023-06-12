@@ -1429,6 +1429,46 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task PageTextWithCK5InlineImageWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                (page as Page).EditorType = EditorType.CK5;
+
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithCK5InlineImageWithOptionsTest.aspx");
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+
+                // Add text with 3 inline images
+                var textPart = page.NewTextPart("");
+
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
+                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", Width = 96, Height = 96, WidthPercentage = 20 });
+                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text", Width = 96, Height = 96, WidthPercentage = 20 });
+                string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
+                textPart.Text = htmlAdded;
+                page.AddControl(textPart, page.Sections[0].Columns[0]);
+
+                // Persist the page
+                await page.SaveAsync(pageName);
+
+                // load the page again and verify
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                // in CK5 mode there are no extra hidden image web parts anymore
+                Assert.IsTrue(createdPage.Controls.Count == 1);
+
+                // Clone the page
+                await createdPage.SaveAsync(TestCommon.GetPnPSdkTestAssetName("ClonePageTextWithCK5InlineImageWithOptionsTest.aspx"));
+
+                await page.DeleteAsync();
+                await createdPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task PageTextWithInlineImageWithSpecialCharInTitleTest()
         {
             //TestCommon.Instance.Mocking = false;

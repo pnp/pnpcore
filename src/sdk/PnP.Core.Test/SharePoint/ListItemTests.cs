@@ -1,8 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
+using PnP.Core.Test.Common.Utilities;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -669,6 +671,109 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        #endregion
+
+        #region MoveTo()
+
+        [TestMethod]
+        public void ListItemMoveToNestedFolder()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (PnPContext context = TestCommon.Instance.GetContext(TestCommonBase.TestSite))
+            {
+                string listTitle = TestCommonBase.GetPnPSdkTestAssetName("ListItemMoveToNestedTest");
+                IList list = context.Web.Lists.Add(listTitle, ListTemplateType.GenericList);
+                try
+                {
+                    list.ContentTypesEnabled = true;
+                    list.EnableFolderCreation = true;
+                    list.Update();
+
+                    // Create path 'sub1/sub2/sub3/sub4'
+                    string path = new[] {"sub1", "sub2", "sub3", "sub4"}.Aggregate(
+                        "",
+                        (aggregate, element) =>
+                        {
+                            IListItem addedFolder = list.AddListFolder(element, aggregate);
+                            Assert.IsTrue(addedFolder != null);
+
+                            return $"{aggregate}/{element}";
+                        }
+                    );
+
+                    // Add item to root of the list
+                    IListItem rootItem = list.Items.Add(new Dictionary<string, object> {{"Title", "root"}});
+                    Assert.IsFalse(rootItem.IsFolder());
+                    Assert.IsFalse(rootItem.IsFile());
+
+                    // Move item to folder 'sub1/sub2/sub3/sub4'
+                    rootItem.MoveTo(path);
+
+                    // Retrieve moved item
+                    IListItem movedItem = list.Items.GetById(rootItem.Id);
+                    // Retrieve parent folder of moved item
+                    IFolder movedFolder = movedItem.GetParentFolder();
+
+                    Assert.IsTrue(movedFolder.Name == "sub4");
+                }
+                finally
+                {
+                    list.Delete();
+                }
+            }
+        }
+
+        [DataRow("Test")]
+        [DataRow("/Test")]
+        [DataRow("Test/")]
+        [DataRow("/Test/")]
+        [TestMethod]
+        public async Task ListItemMoveTo_Async(string folderPath)
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                string listTitle = TestCommonBase.GetPnPSdkTestAssetName("ListItemMoveToTest");
+                IList list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                try
+                {
+                    list.ContentTypesEnabled = true;
+                    list.EnableFolderCreation = true;
+                    await list.UpdateAsync();
+
+                    // Add item to root of the list
+                    IListItem rootItem = list.Items.Add(new Dictionary<string, object> {{"Title", "root"}});
+                    Assert.IsFalse(await rootItem.IsFolderAsync());
+                    Assert.IsFalse(await rootItem.IsFileAsync());
+
+                    // Add folder 'Test'
+                    IListItem folderItem = await list.AddListFolderAsync("Test");
+                    IFolder folderForFolderItem = await folderItem.GetParentFolderAsync();
+                    Assert.IsTrue(folderForFolderItem != null);
+
+                    IListItem newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                    Assert.IsTrue(await newFolderItem.IsFolderAsync());
+                    Assert.IsFalse(await newFolderItem.IsFileAsync());
+
+                    // Move item to folder 'Test'
+                    await rootItem.MoveToAsync(folderPath);
+
+                    // Retrieve moved item
+                    IListItem movedItem = await list.Items.GetByIdAsync(rootItem.Id);
+                    // Retrieve parent folder of moved item
+                    IFolder movedFolder = await movedItem.GetParentFolderAsync();
+
+                    Assert.IsTrue(movedFolder.Name == "Test");
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
         #endregion
 
         #region Recycle tests
@@ -4798,7 +4903,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
                 Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
                 Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
-                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
+                Assert.IsTrue(commentAuthor.UserPrincipalName != null);
 
                 // Load the comments with replies and verify the reply collection is now populated
                 comments = await item.GetCommentsAsync(p => p.Replies);

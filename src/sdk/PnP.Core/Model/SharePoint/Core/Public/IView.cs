@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -248,6 +249,54 @@ namespace PnP.Core.Model.SharePoint
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Moves a view field to a new position in the view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the view field to move</param>
+        /// <param name="newOrder">New position</param>
+        /// <returns></returns>
+        Task MoveViewFieldToAsync(string internalFieldName, int newOrder);
+
+        /// <summary>
+        /// Moves a view field to a new position in the view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the view field to move</param>
+        /// <param name="newOrder">New position</param>
+        /// <returns></returns>
+        void MoveViewFieldTo(string internalFieldName, int newOrder);
+
+        /// <summary>
+        /// Adds a field to the current view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the field to add</param>
+        /// <returns></returns>
+        Task AddViewFieldAsync(string internalFieldName);
+
+        /// <summary>
+        /// Adds a field to the current view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the field to add</param>
+        /// <returns></returns>
+        void AddViewField(string internalFieldName);
+
+        /// <summary>
+        /// Removes a field from the current view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the field to remove</param>
+        /// <returns></returns>
+        Task RemoveViewFieldAsync(string internalFieldName);
+
+        /// <summary>
+        /// Removes a field from the current view
+        /// </summary>
+        /// <param name="internalFieldName">Internal name of the field to remove</param>
+        /// <returns></returns>
+        void RemoveViewField(string internalFieldName);
 
         #endregion
 

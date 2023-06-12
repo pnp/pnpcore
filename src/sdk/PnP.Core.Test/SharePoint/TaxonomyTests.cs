@@ -792,7 +792,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Update termset 
                 termSet.Description = "updated description";
-                (termSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { LanguageTag = "nl-NL", Name = "Dutch name" });
+                termSet.AddLocalizedName("Dutch name", "nl-NL");
                 await termSet.UpdateAsync();
 
                 // Delete term set 
@@ -1303,6 +1303,135 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the group again
                 group.Delete();
 
+            }
+        }
+
+        [TestMethod]
+        public async Task AddUpdateDeleteTermsWithReload()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ITermGroup group = null;
+                ITermSet termSet = null;
+                ITerm newTerm = null;
+                ITerm newChildTerm = null;
+                ITerm newChildChildTerm = null;
+
+                try
+                {
+                    string newGroupName = GetGroupName(context);
+
+                    // Add new group
+                    group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                    // Add term set
+                    termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                    // Add term
+                    newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
+
+                    // test term update
+                    newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
+                    await newTerm.UpdateAsync();
+
+                    // Load the term again directly via the termstore approach
+                    newTerm = await context.TermStore.GetTermByIdAsync(termSet.Id, newTerm.Id);
+                    newTerm.AddLabelAndDescription("French label", "fr-FR");
+                    await newTerm.UpdateAsync();
+
+                    // add child term
+                    newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
+
+                    // update child term
+                    newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
+                    await newChildTerm.UpdateAsync();
+
+                    // Load the term again directly via the termstore approach
+                    newChildTerm = await context.TermStore.GetTermByIdAsync(termSet.Id, newChildTerm.Id, t => t.Labels, t => t.Terms, t => t.Set);
+                    newChildTerm.AddLabelAndDescription("T1.1 French", "fr-FR", false, "French label");
+                    await newChildTerm.UpdateAsync();
+
+                    // Test adding a child term to a term loaded via GetTermById
+                    newChildChildTerm = await newChildTerm.Terms.AddAsync("T1.1.1", "English T1.1.1");
+
+                }
+                finally
+                {
+                    if (newChildChildTerm != null)
+                    {
+                        // delete term
+                        newChildChildTerm.Delete();
+                    }
+
+                    if (newChildTerm != null)
+                    {
+                        // delete term
+                        newChildTerm.Delete();
+                    }
+
+                    // delete term 
+                    newTerm.Delete();
+
+                    // Delete term set 
+                    termSet.Delete();
+
+                    // Delete the group again
+                    group.Delete();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermParent()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                ITermGroup group = null;
+                ITermSet termSet = null;
+                ITerm newTerm = null;
+                ITerm newChildTerm = null;
+
+                try
+                {
+                    string newGroupName = GetGroupName(context);
+
+                    // Add new group
+                    group = context.TermStore.Groups.Add(newGroupName);
+
+                    // Add term set
+                    termSet = group.Sets.Add("PnPSet1", "Set description");
+
+                    // Add term
+                    newTerm = termSet.Terms.Add("T1", "Description in English");
+
+                    // add child term
+                    newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
+
+                    var newTermParent = await (newTerm as Term).GetParentAsync();
+
+                    Assert.IsTrue(newTermParent == null);
+
+                    var newChildTermParent = await (newChildTerm as Term).GetParentAsync();
+
+                    Assert.IsTrue(newChildTermParent.Id == newTerm.Id);
+
+                }
+                finally
+                {
+                    // delete term
+                    newChildTerm.Delete();
+
+                    // delete term 
+                    newTerm.Delete();
+
+                    // Delete term set 
+                    termSet.Delete();
+
+                    // Delete the group again
+                    group.Delete();
+                }
             }
         }
 

@@ -50,12 +50,16 @@
   items:
   - name: Apps
     href: admin-sharepoint-apps.md
+  - name: Azure ACS principals
+    href: admin-sharepoint-azureacsprincipals.md
   - name: Modernize sites
     href: admin-sharepoint-modernize.md
   - name: Security
     href: admin-sharepoint-security.md
   - name: Site Collections
     href: admin-sharepoint-sites.md
+  - name: SharePoint AddIns
+    href: admin-sharepoint-sharepointaddins.md
   - name: Tenant
     href: admin-sharepoint-tenant.md
 - name: Authentication  

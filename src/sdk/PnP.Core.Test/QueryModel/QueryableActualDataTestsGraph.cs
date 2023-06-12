@@ -85,6 +85,18 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryFirstOrDefault_Graph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var dt = DateTime.UtcNow;
+                var channel = context.Team.Channels.FirstOrDefault(i => i.DisplayName == "General" && i.CreatedDateTime <= dt);
+                Assert.IsTrue(channel != null);
+            }
+        }
+
+        [TestMethod]
         public async Task TestQueryFirstOrDefaultNoPredicateLINQ_Graph()
         {
             // TestCommon.Instance.Mocking = false;

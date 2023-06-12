@@ -102,7 +102,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Persist the collapsible section settings
-            if (Section.Collapsible)
+            if (Section.Collapsible && !Column.IsVerticalSectionColumn)
             {
                 controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
                 {
@@ -143,20 +143,23 @@ namespace PnP.Core.Model.SharePoint
             StringBuilder html = new StringBuilder();
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
             html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
-            if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<h1>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<h2>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<h3>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<h4>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<ul>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<blockquote>", StringComparison.InvariantCultureIgnoreCase) ||
-                Text.Trim().StartsWith("<pre>", StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(Text))
             {
-                html.Append(Text);
-            }
-            else
-            {
-                html.Append($@"<p>{Text}</p>");
+                if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<h1>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<h2>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<h3>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<h4>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<ul>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<blockquote>", StringComparison.InvariantCultureIgnoreCase) ||
+                    Text.Trim().StartsWith("<pre>", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    html.Append(Text);
+                }
+                else
+                {
+                    html.Append($@"<p>{Text}</p>");
+                }
             }
             html.Append("</div>");
             html.Append("</div>");

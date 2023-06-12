@@ -3,9 +3,9 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
 		<LangVersion>10.0</LangVersion>
-		<Version>1.8.0</Version>
+		<Version>1.9.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>PnP 2022</Copyright>
+		<Copyright>PnP 2023</Copyright>
 		<Company>PnP</Company>
 		<Authors>PnP</Authors>
 		<Description>[EXPERIMENTAL - Not yet officially released!] The PnP Core Transformation library provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
@@ -70,13 +70,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AngleSharp.Css" Version="0.14.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0-*">
+		<PackageReference Include="AngleSharp.Css" Version="0.17.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.SharePointOnline.CSOM" Version="16.1.*" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1-*" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

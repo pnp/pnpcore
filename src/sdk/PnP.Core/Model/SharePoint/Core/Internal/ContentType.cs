@@ -70,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
                 string requestUrl = PnPContext.Uri.ToString();
                 if (IsContentTypeHub())
                 {
-                    requestUrl = requestUrl.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    requestUrl = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, requestUrl);
                 }
 
                 return new ApiCall(new List<IRequest<object>>() { request })
@@ -85,7 +85,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
 
@@ -99,7 +99,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
                 return api;
@@ -112,7 +112,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                 if (IsContentTypeHub())
                 {
-                    var request = api.ApiCall.Request.Replace(PnPContext.Uri.AbsolutePath, PnPConstants.ContentTypeHubUrl);
+                    var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                     api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                 }
                 return api;
@@ -518,14 +518,15 @@ namespace PnP.Core.Model.SharePoint
                 if (options.WaitForCompletion)
                 {
                     await operation.WaitForCompletionAsync(options.LongRunningOperationOptions).ConfigureAwait(false);
+                    return null;
                 }
                 else
                 {
                     return operation;
                 }
             }
-
-            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);
+           
+            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, response.Json);           
         }
 
         private static AddContentTypeFromHubOptions EnsureAddContentTypeFromHubOptions(AddContentTypeFromHubOptions options)

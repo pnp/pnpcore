@@ -39,5 +39,3 @@ The model implemented in the preview only covers a small part of what's possible
 > The best way to reach out is by creating an issue in the issue list: https://github.com/pnp/pnpcore/issues
 
 **This community rocks, sharing is caring!**
-
-<!-- <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" /> -->

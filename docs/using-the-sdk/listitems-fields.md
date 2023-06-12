@@ -4,7 +4,7 @@ When getting and setting list item values you'll need to work with the various f
 
 > [!Note]
 > - The samples assume you've loaded a list into the variable `mylist`.
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 
 ## Text and Multiline text fields
 

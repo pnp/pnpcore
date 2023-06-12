@@ -129,7 +129,7 @@ Once you've a reference to a term set you can also update that term set:
 // Update the term set description
 termSet.Description = "updated description";
 // Add a new localized label for the term set
-(termSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { LanguageTag = "nl-NL", Name = "Dutch name" });
+termSet.AddLocalizedName("Dutch name", "nl-NL");
 // Send the updates to the server
 await termSet.UpdateAsync();
 ```

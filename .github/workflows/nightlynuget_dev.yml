@@ -35,7 +35,7 @@ jobs:
         ./build/build.ps1
     # Add, commit and push changes
     - name: Add & Commit & Push
-      uses: EndBug/add-and-commit@v6
+      uses: EndBug/add-and-commit@v9
       with:
         message: 'Nightly PnP Framework release'
         push: true

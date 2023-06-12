@@ -77,7 +77,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
 > [!Note]
 >
 > - When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
@@ -129,7 +129,7 @@ foreach(var listItem in myList.Items.QueryProperties(p => p.All,
 > [!Note]
 >
 > - Ensure you add `p => p.All` to ensure your custom fields are loaded in case you need those
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
@@ -179,7 +179,7 @@ foreach (var listItem in myList.Items.AsRequested())
 
 > [!Note]
 >
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
@@ -359,7 +359,7 @@ foreach (var listItem in myList.Items.AsRequested())
 
 > [!Note]
 >
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
@@ -500,7 +500,7 @@ await context.ExecuteAsync();
 ```
 
 > [!Note]
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
 ## Updating list items
@@ -535,7 +535,7 @@ await addedItem.UpdateAsync();
 ```
 
 > [!Note]
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
 ### Updating the list item Author, Editor, Created and Modified system properties
@@ -599,6 +599,44 @@ foreach (var listItem in myList.Items.AsRequested())
 
 // Execute the batch
 await context.ExecuteAsync();
+```
+
+## Adding a list folder
+
+To add a folder to a list the list first must be configured to allow content types (`ContentTypesEnabled`) and allow folders (`EnableFolderCreation`). Once that's done use one of the `AddListFolder` methods to add a folder.
+
+``` csharp
+list.ContentTypesEnabled = true;
+list.EnableFolderCreation = true;
+await list.UpdateAsync();
+
+// Option A: Add folder Test
+await list.AddListFolderAsync("Test");
+
+
+// Option B: Create path 'folderA/subfolderA'
+string path = new[] {"folderA", "subfolderA" }.Aggregate(
+    "",
+    (aggregate, element) =>
+    {
+        IListItem addedFolder = list.AddListFolder(element, aggregate);
+        return $"{aggregate}/{element}";
+    }
+);
+```
+
+## Moving a list item
+
+You can move a list item to another folder inside it's list using one of the `MoveTo` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+
+// Move to folder folderA/subfolderA inside this list
+await first.MoveToAsync("folderA/subfolderA");
 ```
 
 ## Sharing a list item

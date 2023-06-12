@@ -36,7 +36,9 @@ namespace PnP.Core.Transformation.Services.Core
             {
                 this.version = this.GetType().Assembly.FullName;
 
+#pragma warning disable CS0618 // Type or member is obsolete
                 this.telemetryConfiguration.InstrumentationKey = TELEMETRY_INSTRUMENTATION_KEY;
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 this.telemetryClient = new TelemetryClient(this.telemetryConfiguration);
 

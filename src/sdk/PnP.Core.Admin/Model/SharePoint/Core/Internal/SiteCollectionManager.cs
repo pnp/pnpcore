@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -208,20 +209,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetSiteCollectionAdminsAsync(site, vanityUrlOptions).GetAwaiter().GetResult();
         }
-
-        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        
+        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,
+            VanityUrlOptions vanityUrlOptions = null)
         {
             if (site == null)
             {
                 throw new ArgumentNullException(nameof(site));
             }
 
-            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).ConfigureAwait(false);
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).ConfigureAwait(false);
         }
-
-        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null, VanityUrlOptions vanityUrlOptions = null)
+        
+        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, 
+            List<Guid> ownerGroupAzureAdUserIds = null, CollectionUpdateOptions collectionUpdateOptions = CollectionUpdateOptions.AddOnly,  
+            VanityUrlOptions vanityUrlOptions = null)
         {
-            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, vanityUrlOptions).GetAwaiter().GetResult();
+            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds, collectionUpdateOptions, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         #region Modernization
@@ -263,7 +268,65 @@ namespace PnP.Core.Admin.Model.SharePoint
         public void EnableCommunicationSiteFeatures(Uri url)
         {
             EnableCommunicationSiteFeaturesAsync(url).GetAwaiter().GetResult();
-        }        
+        }
+        #endregion
+
+        #region Azure ACS principals and SharePoint AddIn discovery
+
+        public async Task<List<IACSPrincipal>> GetSiteCollectionACSPrincipalsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, null, includeSubsites, false, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetSiteCollectionACSPrincipals(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetSiteCollectionACSPrincipalsAsync(includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IACSPrincipal>> GetTenantAndSiteCollectionACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, includeSubsites, false, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetTenantAndSiteCollectionACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantAndSiteCollectionACSPrincipalsAsync(legacyServicePrincipals, includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IACSPrincipal>> GetTenantACSPrincipalsAsync(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetACSPrincipalsAsync(context, legacyServicePrincipals, false, true, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<IACSPrincipal>().ToList();
+        }
+
+        public List<IACSPrincipal> GetTenantACSPrincipals(List<ILegacyServicePrincipal> legacyServicePrincipals, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetTenantACSPrincipalsAsync(legacyServicePrincipals, vanityUrlOptions).GetAwaiter().GetResult();
+        }
+
+
+        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync()
+        {
+            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context).ConfigureAwait(false);
+        }
+
+        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals()
+        {
+            return GetLegacyServicePrincipalsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var results = await LegacyPrincipalManagement.GetSharePointAddInsAsync(context, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            return results.Cast<ISharePointAddIn>().ToList();
+        }
+
+        public List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        {
+            return GetSiteCollectionSharePointAddInsAsync(includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+        }
         #endregion
     }
 }
