@@ -177,6 +177,17 @@ foreach(var mp in managedProperties)
 <pre><code class="lang-csharp">// Set tenant search configuration XML
 await context.GetSharePointAdmin().SetSearchConfigurationXmlAsync(searchConfigXml);
 </code></pre>
+<h3 id="joining-a-site-to-a-hub-that-requires-approval">Joining a site to a hub that requires approval</h3>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
+</div>
+
+<p>Joining and un joining a hub site is available as methods on <code>ISite</code> and it's recommended to use those. There's however the case where joining a hub site requires approval from the hub and in that case the existing methods (<code>JoinHubSite</code>) return an error (&quot;This Hub Site requires approval to join. Please resubmit this request with an Approval Token from the Hub Site admin.&quot;). To workaround this limitation you can use the tenant <code>ConnectToHubSite</code> methods:</p>
+<pre><code class="lang-csharp">await context.GetSharePointAdmin().ConnectToHubSiteAsync(
+    new Uri(&quot;https://contoso.sharepoint.com/sites/sitetojointohub&quot;), 
+    new Uri(&quot;https://contoso.sharepoint.com/sites/hubsite&quot;));
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
