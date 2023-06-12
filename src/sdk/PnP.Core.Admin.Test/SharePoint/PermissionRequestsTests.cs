@@ -107,7 +107,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task GetPermissionsRequestsTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 ITenantApp app = null;
