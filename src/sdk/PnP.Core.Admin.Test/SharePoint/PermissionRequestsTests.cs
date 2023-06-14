@@ -5,6 +5,7 @@ using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -121,9 +122,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                     List<IPermissionRequest> permissionRequests =
                         await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
-                Assert.IsNotNull(permissionRequests);
-                Assert.IsTrue(permissionRequests.Count > 0);
-            }
+                    Assert.IsNotNull(permissionRequests);
+                    Assert.IsTrue(permissionRequests.Count > 0);
+                }
                 finally
                 {
                     var retractResult = app.Retract();
@@ -131,7 +132,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 }
             }
         }
-        
+
         [TestMethod]
         public async Task DenyPermissionsRequestTest_Async()
         {
