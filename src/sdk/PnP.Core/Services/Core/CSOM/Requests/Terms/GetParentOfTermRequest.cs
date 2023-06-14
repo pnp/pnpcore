@@ -289,6 +289,9 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                         term.SetSystemProperty(p => p.LastModifiedDateTime, dateConverter.ConverDate(lastModifiedDateProperty.GetString()));
                     }
 
+                    // Ensure the default language was loaded
+                    context.TermStore.EnsurePropertiesAsync(p => p.DefaultLanguage);
+
                     if (parent.TryGetProperty("Name", out JsonElement nameProperty))
                     {
                         (term.Labels as TermLocalizedLabelCollection).Add(new TermLocalizedLabel() { Name = nameProperty.GetString(), LanguageTag = context.TermStore.DefaultLanguage, IsDefault = true });

@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetCommentsAsync throws InvalidClientQueryException #1191 [jansenbe - Bert Jansen]
 - Ensure `CultureInfo.InvariantCulture` is used when translating dates to string #1201 [jansenbe - Bert Jansen]
 - Admin Library: do not return already approved permission requests #1202 [mloitzl - Martin Loitzl]
+- Ensure `TermStore.DefaultLanguage` is loaded before using it [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 
