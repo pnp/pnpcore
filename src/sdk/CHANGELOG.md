@@ -37,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Ensure `CultureInfo.InvariantCulture` is used when translating dates to string #1201 [jansenbe - Bert Jansen]
 - Admin Library: do not return already approved permission requests #1202 [mloitzl - Martin Loitzl]
 - Ensure `TermStore.DefaultLanguage` is loaded before using it [jansenbe - Bert Jansen]
+- Fixed: Incorrect url for getting `IRoleAssignment` by principal id #1207 [JakeStanger - Jake Stanger]
 
 ## [1.9.0]
 
