@@ -3,9 +3,9 @@ using PnP.Core.Services;
 
 namespace PnP.Core.Model.Security
 {
-    [SharePointType("SP.RoleAssignment", Target = typeof(Web), Uri = "_api/Web/RoleAssignments/GetByPrincipalId({PrincipalId})", Get = "_api/web/RoleAssignments", LinqGet = "_api/web/RoleAssignments")]
-    [SharePointType("SP.RoleAssignment", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments/GetByPrincipalId({PrincipalId})", Get = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments")]
-    [SharePointType("SP.RoleAssignment", Target = typeof(ListItem), Uri = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments/GetByPrincipalId({PrincipalId})", Get = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments", LinqGet = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments", Delete = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments/removeroleassignment(principalId={PrincipalId,roleDefId={RoleDefId})")]
+    [SharePointType("SP.RoleAssignment", Target = typeof(Web), Uri = "_api/Web/RoleAssignments/GetByPrincipalId({Id})", Get = "_api/web/RoleAssignments", LinqGet = "_api/web/RoleAssignments")]
+    [SharePointType("SP.RoleAssignment", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments/GetByPrincipalId({Id})", Get = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/RoleAssignments")]
+    [SharePointType("SP.RoleAssignment", Target = typeof(ListItem), Uri = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments/GetByPrincipalId({Id})", Get = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments", LinqGet = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/RoleAssignments")]
     internal sealed class RoleAssignment : BaseDataModel<IRoleAssignment>, IRoleAssignment
     {
         public int PrincipalId { get => GetValue<int>(); set => SetValue(value); }

@@ -285,6 +285,11 @@ namespace PnP.Core.Services
                                         listItem = GetParentDataModel(attachment as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.Security.IRoleAssignment roleAssignment)
+                                    {
+                                        listItem = GetParentDataModel(roleAssignment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
 
                                 // If we've got the list
