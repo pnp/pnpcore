@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin Library: do not return already approved permission requests #1202 [mloitzl - Martin Loitzl]
 - Ensure `TermStore.DefaultLanguage` is loaded before using it [jansenbe - Bert Jansen]
 - Fixed: Incorrect url for getting `IRoleAssignment` by principal id #1207 [JakeStanger - Jake Stanger]
+- Fixed: AddAvailableContentTypeFromHubAsync does not work on lists that are located in subsites - more broadly the 'site id' value used in Graph queries was not considering sub sites in multiple locations #1210 [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 

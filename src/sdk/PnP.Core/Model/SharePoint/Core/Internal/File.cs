@@ -1013,7 +1013,7 @@ namespace PnP.Core.Model.SharePoint
                 jpgOptions = $"&width={options.JpgFormatWidth}&height={options.JpgFormatHeight}";
             }
 
-            var convertEndpointUrl = $"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/content?format={options.Format.ToString().ToLowerInvariant()}{jpgOptions}";
+            var convertEndpointUrl = $"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{VroomDriveID}/items/{VroomItemID}/content?format={options.Format.ToString().ToLowerInvariant()}{jpgOptions}";
 
             ApiType typeToUse = ApiType.GraphBeta;
             if (options.Format == ConvertToFormat.Pdf)
@@ -1090,7 +1090,7 @@ namespace PnP.Core.Model.SharePoint
                 body.zoom = options.Zoom;
             }
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}/preview", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{VroomDriveID}/items/{VroomItemID}/preview", ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
@@ -1143,7 +1143,7 @@ namespace PnP.Core.Model.SharePoint
                 name
             };
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{VroomDriveID}/items/{VroomItemID}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{VroomDriveID}/items/{VroomItemID}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
             await RequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
             // Update the Name property without marking the file as changed
             SetSystemValue(name, nameof(Name));

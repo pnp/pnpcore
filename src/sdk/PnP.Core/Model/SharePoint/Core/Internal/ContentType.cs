@@ -488,13 +488,14 @@ namespace PnP.Core.Model.SharePoint
             // automatically provide the correct 'parent'
             if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(Web))
             {
+                // Content types are typically maintained at site collection level
                 return new ApiCall($"/sites/{PnPContext.Site.Id}/contentTypes/addCopyFromContentTypeHub", ApiType.Graph, bodyContent);
             }
             else if (EntityManager.GetClassInfo(GetType(), this).SharePointTarget == typeof(List))
             {
                 Guid listId = GetListIdFromParent(this);
 
-                return new ApiCall($"/sites/{PnPContext.Site.Id}/lists/{listId}/contentTypes/addCopyFromContentTypeHub", ApiType.Graph, bodyContent);
+                return new ApiCall($"/sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/lists/{listId}/contentTypes/addCopyFromContentTypeHub", ApiType.Graph, bodyContent);
             }
 
             throw new ClientException(ErrorType.Unsupported, "You can only add content types from the content type hub to sites and lists");
@@ -657,7 +658,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task<string> GetSiteIdAsync()
         {
-            var siteId = PnPContext.Site.Id.ToString();
+            var siteId = $"{PnPContext.Site.Id}";
 
             if (IsContentTypeHub())
             {

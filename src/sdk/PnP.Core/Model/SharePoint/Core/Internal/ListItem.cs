@@ -1383,7 +1383,7 @@ namespace PnP.Core.Model.SharePoint
         //{
         //    var listId = await GetListIdAsync().ConfigureAwait(false);
 
-        //    var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+        //    var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/lists/{listId}/items/{Id}/permissions?$filter=Link ne null", ApiType.GraphBeta);
         //    var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
         //    if (string.IsNullOrEmpty(response.Json))
@@ -1466,7 +1466,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var listId = await GetListIdAsync().ConfigureAwait(false);
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{Id}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/lists/{listId}/items/{Id}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)

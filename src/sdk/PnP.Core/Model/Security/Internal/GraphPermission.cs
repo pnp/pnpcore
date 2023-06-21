@@ -83,7 +83,7 @@ namespace PnP.Core.Model.Security
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 // refresh permission because apicall will not return permission object
-                apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
+                apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
                 response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
                 var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
                 return SharingManager.DeserializeGraphPermission(json, PnPContext, this);
@@ -127,7 +127,7 @@ namespace PnP.Core.Model.Security
 
             dynamic body = new ExpandoObject();
             body.grantees = recipients.ToArray();
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}/revokeGrants", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}/revokeGrants", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -150,7 +150,7 @@ namespace PnP.Core.Model.Security
             if (Parent.GetType() == typeof(File))
             {
                 var parent = (IFile)Parent;
-                var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{parent.VroomDriveID}/items/{parent.VroomItemID}/permissions/{Id}", ApiType.GraphBeta);
+                var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{parent.VroomDriveID}/items/{parent.VroomItemID}/permissions/{Id}", ApiType.GraphBeta);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
                 if (response.StatusCode != HttpStatusCode.NoContent)
                 {
@@ -162,7 +162,7 @@ namespace PnP.Core.Model.Security
                 var parent = (IFolder)Parent;
                 var (driveId, driveItemId) = await (parent as Folder).GetGraphIdsAsync().ConfigureAwait(false);
 
-                var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
+                var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/permissions/{Id}", ApiType.GraphBeta);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
                 if (response.StatusCode != HttpStatusCode.NoContent)
                 {
@@ -177,7 +177,7 @@ namespace PnP.Core.Model.Security
                 //var parent = (IListItem)Parent;
                 //var listId = await (parent as ListItem).GetListIdAsync().ConfigureAwait(false);
 
-                //var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/lists/{listId}/items/{(parent as ListItem).Id}/permissions/{Id}", ApiType.GraphBeta);
+                //var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/lists/{listId}/items/{(parent as ListItem).Id}/permissions/{Id}", ApiType.GraphBeta);
                 //var response = await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
                 //if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
                 //{

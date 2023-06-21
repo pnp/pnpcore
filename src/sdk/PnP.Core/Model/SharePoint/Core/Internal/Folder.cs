@@ -364,7 +364,7 @@ namespace PnP.Core.Model.SharePoint
                 name
             };
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}", ApiType.Graph, JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues));
             await RequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
             // Update the Name property without marking the folder as changed
             SetSystemValue(name, nameof(Name));
@@ -599,7 +599,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var (driveId, driveItemId) = await GetGraphIdsAsync().ConfigureAwait(false);
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/permissions?$filter=Link ne null", ApiType.GraphBeta);
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/permissions?$filter=Link ne null", ApiType.GraphBeta);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(response.Json))
@@ -692,7 +692,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var (driveId, driveItemId) = await GetGraphIdsAsync().ConfigureAwait(false);
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/createLink", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter));
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
@@ -763,7 +763,7 @@ namespace PnP.Core.Model.SharePoint
 
             var (driveId, driveItemId) = await GetGraphIdsAsync().ConfigureAwait(false);
 
-            var apiCall = new ApiCall($"sites/{PnPContext.Site.Id}/drives/{driveId}/items/{driveItemId}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
+            var apiCall = new ApiCall($"sites/{PnPContext.Uri.DnsSafeHost},{PnPContext.Site.Id},{PnPContext.Web.Id}/drives/{driveId}/items/{driveItemId}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
