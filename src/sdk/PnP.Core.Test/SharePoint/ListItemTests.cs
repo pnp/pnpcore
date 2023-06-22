@@ -1625,6 +1625,68 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task SystemUpdateFromFolderAndFileLoadedViaWeb()
+        {
+            //TestCommon.Instance.Mocking = false;
+            string listTitle = "SystemUpdateFromFolderAndFileLoadedViaWeb";
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    // Create a new list
+                    var documentLibrary = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    if (TestCommon.Instance.Mocking && documentLibrary != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (documentLibrary == null)
+                    {
+                        documentLibrary = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                        IField myField = await documentLibrary.Fields.AddTextAsync("CustomField", new FieldTextOptions()
+                        {
+                            Group = "Custom Fields",
+                            AddToDefaultView = true,
+                        });
+                    }
+
+                    // Get the root folder of the library
+                    IFolder folder = await documentLibrary.RootFolder.GetAsync();
+
+                    // Add a folder and a file
+                    var demoFolder = await folder.AddFolderAsync("Demo");
+                    IFile mockDocument = await demoFolder.Files.AddAsync("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+
+                    // Load the folder which we want to update again 
+                    var folderToUpdate = await context.Web.GetFolderByServerRelativeUrlAsync(demoFolder.ServerRelativeUrl, p => p.ListItemAllFields);
+
+                    // Call system update on the folder
+                    folderToUpdate.ListItemAllFields["CustomField"] = "blabla";
+                    await folderToUpdate.ListItemAllFields.SystemUpdateAsync();
+
+                    // Load the file we want to update again
+                    var fileToUpdate = await context.Web.GetFileByServerRelativeUrlAsync(mockDocument.ServerRelativeUrl, p => p.ListItemAllFields);
+
+                    // Call system update on the folder
+                    fileToUpdate.ListItemAllFields["CustomField"] = "blabla";
+                    await fileToUpdate.ListItemAllFields.SystemUpdateAsync();
+                }
+            }
+            finally
+            {
+                using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var documentLibrary = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    // Cleanup the created list
+                    await documentLibrary.DeleteAsync();
+                }
+            }
+        }
+
         #endregion
 
         #region Field type read/update tests

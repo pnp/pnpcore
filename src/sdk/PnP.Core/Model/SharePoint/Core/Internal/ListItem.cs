@@ -713,17 +713,26 @@ namespace PnP.Core.Model.SharePoint
         internal async Task PrepareUpdateCall(UpdateListItemRequest request)
         {
             string listId = "";
-            if (this.Parent is IFile file)
+            if (Parent is IFile file)
             {
                 // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
                 // will point to the File id while we need to list Id here
                 await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
                 listId = file.ListId.ToString();
             }
-
-            if (this.Parent.Parent is IList)
+            else if (Parent is Folder folder)
             {
-                listId = (this.Parent.Parent as IList).Id.ToString();
+                listId = $"{await folder.GetLibraryIdFromFolderAsync().ConfigureAwait(false)}";
+            }
+                        
+            if (listId == "" && Parent.Parent is IList)
+            {
+                listId = (Parent.Parent as IList).Id.ToString();
+            }
+
+            if (string.IsNullOrEmpty(listId))
+            {
+                throw new ClientException(ErrorType.InvalidParameters, PnPCoreResources.Exception_ListItem_CSOMUpdate_MissingListId);
             }
 
             request.ListId = listId;

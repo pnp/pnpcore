@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Ensure `TermStore.DefaultLanguage` is loaded before using it [jansenbe - Bert Jansen]
 - Fixed: Incorrect url for getting `IRoleAssignment` by principal id #1207 [JakeStanger - Jake Stanger]
 - Fixed: AddAvailableContentTypeFromHubAsync does not work on lists that are located in subsites - more broadly the 'site id' value used in Graph queries was not considering sub sites in multiple locations #1210 [jansenbe - Bert Jansen]
+- Fixed: Calling `UpdateOverwriteVersion` or `SystemUpdate` methods on `ListItemAllFields` when that was loaded from a `IFolder` resulted in error: "Guid should contain 32 digits with 4 dashes" #1213 [jansenbe - Bert Jansen]
 
 ## [1.9.0]
 

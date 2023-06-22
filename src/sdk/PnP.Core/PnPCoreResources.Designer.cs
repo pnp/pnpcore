@@ -358,6 +358,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The list id of the updated list item was not found..
+        /// </summary>
+        internal static string Exception_ListItem_CSOMUpdate_MissingListId {
+            get {
+                return ResourceManager.GetString("Exception_ListItem_CSOMUpdate_MissingListId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was an exception while writing field {0}. Verify you&apos;re using the correct InternalName value for the field you want to write to..
         /// </summary>
         internal static string Exception_ListItemAdd_WrongInternalFieldName {

@@ -496,37 +496,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We need to the id of the list hosting this folder, which can be obtained using different strategies
 
-                // Option A: try walking the parent tree to see if there's an IList
-                Guid docLibId = GetListIdFromFolder(this);
-
-                if (docLibId == Guid.Empty)
-                {
-                    // Option B: check if the ListItemAllFields property is loaded with the parent list property
-                    if (IsPropertyAvailable(p=>p.ListItemAllFields) && ListItemAllFields.IsPropertyAvailable(p=>p.ParentList))
-                    {
-                        docLibId = ListItemAllFields.ParentList.Id;
-                    }
-                }
-
-                if (docLibId == Guid.Empty)
-                {
-                    // Option C: get id from property bag
-                    if (IsPropertyAvailable(p => p.Properties))
-                    {
-                        docLibId = DiscoverDocLibId(Properties);
-                    }
-                }
-
-                if (docLibId == Guid.Empty)
-                {
-                    // Option D: load the needed information - requires server roundtrip
-                    var tempFolder = await GetAsync(p => p.Properties).ConfigureAwait(false);
-
-                    if (tempFolder.IsPropertyAvailable(p => p.Properties))
-                    {
-                        docLibId = DiscoverDocLibId(tempFolder.Properties);
-                    }
-                }
+                Guid docLibId = await GetLibraryIdFromFolderAsync().ConfigureAwait(false);
 
                 if (docLibId != Guid.Empty)
                 {
@@ -542,6 +512,43 @@ namespace PnP.Core.Model.SharePoint
 
 
             return (driveId, driveItemId);
+        }
+
+        internal async Task<Guid> GetLibraryIdFromFolderAsync()
+        {
+            // Option A: try walking the parent tree to see if there's an IList
+            Guid docLibId = GetListIdFromFolder(this);
+
+            if (docLibId == Guid.Empty)
+            {
+                // Option B: check if the ListItemAllFields property is loaded with the parent list property
+                if (IsPropertyAvailable(p => p.ListItemAllFields) && ListItemAllFields.IsPropertyAvailable(p => p.ParentList))
+                {
+                    docLibId = ListItemAllFields.ParentList.Id;
+                }
+            }
+
+            if (docLibId == Guid.Empty)
+            {
+                // Option C: get id from property bag
+                if (IsPropertyAvailable(p => p.Properties))
+                {
+                    docLibId = DiscoverDocLibId(Properties);
+                }
+            }
+
+            if (docLibId == Guid.Empty)
+            {
+                // Option D: load the needed information - requires server roundtrip
+                var tempFolder = await GetAsync(p => p.Properties).ConfigureAwait(false);
+
+                if (tempFolder.IsPropertyAvailable(p => p.Properties))
+                {
+                    docLibId = DiscoverDocLibId(tempFolder.Properties);
+                }
+            }
+
+            return docLibId;
         }
 
         private static Guid DiscoverDocLibId(IPropertyValues properties)

@@ -504,4 +504,7 @@
   <data name="Exception_Web_EveyoneExceptUsersCouldNotBeEnsured" xml:space="preserve">
     <value>The Everyone except external users could not be ensured</value>
   </data>
+  <data name="Exception_ListItem_CSOMUpdate_MissingListId" xml:space="preserve">
+    <value>The list id of the updated list item was not found.</value>
+  </data>
 </root>
