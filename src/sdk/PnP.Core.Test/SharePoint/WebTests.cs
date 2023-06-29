@@ -374,6 +374,49 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetMultipleWebPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    IWeb web = null;
+                    try
+                    {
+                        web = await context.Web.GetAsync(p => p.AllProperties);
+
+                        web.AllProperties["random1"] = "a";
+                        web.AllProperties["random2"] = "b";
+                        web.AllProperties["random3"] = "c";
+
+                        await web.AllProperties.UpdateAsync();
+
+                        // Reload the properties
+                        web = await context.Web.GetAsync(p => p.AllProperties);
+
+                        Assert.IsTrue(web.AllProperties.GetString("random1", null) == "a");
+                        Assert.IsTrue(web.AllProperties.GetString("random2", null) == "b");
+                        Assert.IsTrue(web.AllProperties.GetString("random3", null) == "c");
+                    }
+                    finally
+                    {
+                        web.AllProperties["random1"] = null;
+                        web.AllProperties["random2"] = null;
+                        web.AllProperties["random3"] = null;
+                        await web.AllProperties.UpdateAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task SetWebPropertiesUnderScoreTest()
         {
             //TestCommon.Instance.Mocking = false;
