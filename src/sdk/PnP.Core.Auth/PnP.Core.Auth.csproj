@@ -5,7 +5,7 @@
 		<LangVersion>10.0</LangVersion>
 		<RootNamespace>PnP.Core.Auth</RootNamespace>
 		<AssemblyName>PnP.Core.Auth</AssemblyName>
-		<Version>1.9.0</Version>
+		<Version>1.10.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Copyright>PnP 2023</Copyright>
 		<Company>PnP</Company>
