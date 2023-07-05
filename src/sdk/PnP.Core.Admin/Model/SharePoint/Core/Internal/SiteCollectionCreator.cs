@@ -187,149 +187,96 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private static async Task<PnPContext> CreateTeamSiteAsync(PnPContext context, TeamSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
-            // If we're using application permissions we use Microsoft Graph to create the site
-            if (creationOptions.UsingApplicationPermissions.Value)
+            var newGroup = new GraphGroupOptions
             {
-                var newGroup = new GraphGroupOptions
-                {
-                    DisplayName = siteToCreate.DisplayName,
-                    MailNickname = siteToCreate.Alias,
-                    MailEnabled = true,
-                    Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
-                    GroupTypes = new List<string> { "Unified" },
-                    Owners = siteToCreate.Owners,
-                    Members = siteToCreate.Members,
-                    ResourceBehaviorOptions = new List<string>()
-                };
+                DisplayName = siteToCreate.DisplayName,
+                MailNickname = siteToCreate.Alias,
+                MailEnabled = true,
+                Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
+                GroupTypes = new List<string> { "Unified" },
+                Owners = siteToCreate.Owners,
+                Members = siteToCreate.Members,
+                ResourceBehaviorOptions = new List<string>(),
+                CreationOptions = new List<string>(),
+            };
 
-                if (!string.IsNullOrEmpty(siteToCreate.Description))
-                {
-                    newGroup.Description = siteToCreate.Description;
-                }
-                
-                if (siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("AllowOnlyMembersToPost");
-                }
-
-                if (siteToCreate.CalendarMemberReadOnly.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("CalendarMemberReadOnly");
-                }
-
-                if (siteToCreate.ConnectorsDisabled.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("ConnectorsDisabled");
-                }
-
-                if (siteToCreate.HideGroupInOutlook.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("HideGroupInOutlook");
-                }
-
-                if (siteToCreate.SubscribeMembersToCalendarEventsDisabled.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("SubscribeMembersToCalendarEventsDisabled");
-                }
-
-                if (siteToCreate.SubscribeNewGroupMembers.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("SubscribeNewGroupMembers");
-                }
-
-                if (siteToCreate.WelcomeEmailDisabled.GetValueOrDefault(false))
-                {
-                    newGroup.ResourceBehaviorOptions.Add("WelcomeEmailDisabled");
-                }
-
-                if (siteToCreate.PreferredDataLocation.HasValue)
-                {
-                    newGroup.PreferredDataLocation = siteToCreate.PreferredDataLocation.Value.ToString();
-                }
-
-                if (!string.IsNullOrEmpty(siteToCreate.Classification))
-                {
-                    newGroup.Classification = siteToCreate.Classification;
-                }
-
-                Microsoft365.CreationOptions groupCreationOptions = new Microsoft365.CreationOptions
-                {
-                    MaxStatusChecks = creationOptions.MaxStatusChecks,
-                    WaitAfterStatusCheck = creationOptions.WaitAfterStatusCheck,
-                };
-
-                return await context.GetMicrosoft365Admin().CreateGroupAsync(newGroup, groupCreationOptions).ConfigureAwait(false);
-            }
-            else
+            if (!string.IsNullOrEmpty(siteToCreate.Description))
             {
-                var creationOptionsValues = new List<string>();
-                Dictionary<string, object> payload = new Dictionary<string, object>
-                {
-                    { "displayName", siteToCreate.DisplayName },
-                    { "alias", NormalizeSiteAlias(siteToCreate.Alias) },
-                    { "isPublic", siteToCreate.IsPublic }
-                };
-
-                var optionalParams = new Dictionary<string, object>
-                {
-                    { "Description", siteToCreate.Description ?? "" }
-                };
-
-                // Sensitivity labels have replaced classification (see https://docs.microsoft.com/en-us/microsoft-365/compliance/sensitivity-labels-teams-groups-sites?view=o365-worldwide#classic-azure-ad-group-classification)
-                // once enabled. Therefore we prefer setting a sensitivity label id over classification when specified. Also note that for setting sensitivity labels on 
-                // group connected sites one needs to have at least one Azure AD P1 license. See https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/groups-assign-sensitivity-labels
-                if (siteToCreate.SensitivityLabelId != Guid.Empty)
-                {
-                    creationOptionsValues.Add($"SensitivityLabel:{siteToCreate.SensitivityLabelId}");
-                }
-                else
-                {
-                    optionalParams.Add("Classification", siteToCreate.Classification ?? "");
-                }
-
-                if (siteToCreate.SiteDesignId.HasValue)
-                {
-                    creationOptionsValues.Add($"implicit_formula_292aa8a00786498a87a5ca52d9f4214a_{siteToCreate.SiteDesignId.Value.ToString("D").ToLower()}");
-                }
-                if (siteToCreate.Language != Language.Default)
-                {
-                    creationOptionsValues.Add($"SPSiteLanguage:{(int)siteToCreate.Language}");
-                }
-                if (!string.IsNullOrEmpty(siteToCreate.SiteAlias))
-                {
-                    creationOptionsValues.Add($"SiteAlias:{siteToCreate.SiteAlias}");
-                }
-                creationOptionsValues.Add($"HubSiteId:{siteToCreate.HubSiteId}");
-
-                if (siteToCreate.Owners != null && siteToCreate.Owners.Length > 0)
-                {
-                    var ownersBody = new
-                    {
-                        __metadata = new { type = "Collection(Edm.String)" },
-                        results = siteToCreate.Owners
-                    }.AsExpando();
-                    optionalParams.Add("Owners", ownersBody);
-                }
-                if (siteToCreate.PreferredDataLocation.HasValue)
-                {
-                    optionalParams.Add("PreferredDataLocation", siteToCreate.PreferredDataLocation.Value.ToString());
-                }
-
-                if (creationOptionsValues.Any())
-                {
-                    var creationOptionsValuesBody = new
-                    {
-                        __metadata = new { type = "Collection(Edm.String)" },
-                        results = creationOptionsValues
-                    }.AsExpando();
-                    optionalParams.Add("CreationOptions", creationOptionsValuesBody);
-                }
-
-                payload.Add("optionalParams", optionalParams);
-
-                // Delegated permissions can use the SharePoint endpoints for site collection creation
-                return await CreateSiteUsingSpoRestImplementationAsync(context, SiteCreationModel.GroupSiteManagerCreateGroupEx, payload, creationOptions).ConfigureAwait(false);
+                newGroup.Description = siteToCreate.Description;
             }
+
+            if (siteToCreate.AllowOnlyMembersToPost.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("AllowOnlyMembersToPost");
+            }
+
+            if (siteToCreate.CalendarMemberReadOnly.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("CalendarMemberReadOnly");
+            }
+
+            if (siteToCreate.ConnectorsDisabled.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("ConnectorsDisabled");
+            }
+
+            if (siteToCreate.HideGroupInOutlook.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("HideGroupInOutlook");
+            }
+
+            if (siteToCreate.SubscribeMembersToCalendarEventsDisabled.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("SubscribeMembersToCalendarEventsDisabled");
+            }
+
+            if (siteToCreate.SubscribeNewGroupMembers.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("SubscribeNewGroupMembers");
+            }
+
+            if (siteToCreate.WelcomeEmailDisabled.GetValueOrDefault(false))
+            {
+                newGroup.ResourceBehaviorOptions.Add("WelcomeEmailDisabled");
+            }
+
+            if (siteToCreate.PreferredDataLocation.HasValue)
+            {
+                newGroup.PreferredDataLocation = siteToCreate.PreferredDataLocation.Value.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(siteToCreate.Classification))
+            {
+                newGroup.Classification = siteToCreate.Classification;
+            }
+
+            if (siteToCreate.SensitivityLabelId != Guid.Empty)
+            {
+                newGroup.CreationOptions.Add($"SensitivityLabel:{siteToCreate.SensitivityLabelId}");
+            }
+
+            if (siteToCreate.SiteDesignId.HasValue)
+            {
+                newGroup.CreationOptions.Add($"implicit_formula_292aa8a00786498a87a5ca52d9f4214a_{siteToCreate.SiteDesignId.Value.ToString("D").ToLower()}");
+            }
+            if (siteToCreate.Language != Language.Default)
+            {
+                newGroup.CreationOptions.Add($"SPSiteLanguage:{(int)siteToCreate.Language}");
+            }
+            if (!string.IsNullOrEmpty(siteToCreate.SiteAlias))
+            {
+                newGroup.CreationOptions.Add($"SiteAlias:{siteToCreate.SiteAlias}");
+            }
+
+            newGroup.CreationOptions.Add($"HubSiteId:{siteToCreate.HubSiteId}");
+
+            Microsoft365.CreationOptions groupCreationOptions = new Microsoft365.CreationOptions
+            {
+                MaxStatusChecks = creationOptions.MaxStatusChecks,
+                WaitAfterStatusCheck = creationOptions.WaitAfterStatusCheck,
+            };
+
+            return await context.GetMicrosoft365Admin().CreateGroupAsync(newGroup, groupCreationOptions).ConfigureAwait(false);
         }
 
         private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions, VanityUrlOptions vanityUrlOptions)
