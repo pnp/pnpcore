@@ -58,5 +58,29 @@ namespace PnP.Core.Services
             };
         }
 
+
+        internal static string GetGraphBaseUrl(PnPContext context) 
+        {
+            string graphUrl = PnPConstants.MicrosoftGraphBaseUrl;
+            if (context.Environment.HasValue)
+            {
+                if (context.Environment.Value == Microsoft365Environment.Custom)
+                {
+                    graphUrl = $"https://{context.MicrosoftGraphAuthority}/";
+                }
+                else
+                {
+                    graphUrl = $"https://{GetMicrosoftGraphAuthority(context.Environment.Value)}/";
+                }
+            }
+
+            return graphUrl;
+        }
+
+        internal static Uri GetGraphBaseUri(PnPContext context) 
+        { 
+            return new Uri(GetGraphBaseUrl(context));
+        }
+
     }
 }

@@ -602,21 +602,7 @@ namespace PnP.Core.Services
                 {
 #endif
                     // Ensure the request contains authentication information
-                    var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
-
-                    if (PnPContext.Environment.HasValue)
-                    {
-                        if (PnPContext.Environment == Microsoft365Environment.Custom)
-                        {
-                            graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
-                        }
-                        else
-                        {
-                            graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
-                        }
-                    }
-
-                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
+                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(CloudManager.GetGraphBaseUri(PnPContext), request).ConfigureAwait(false);
 
                     // Send the request
                     HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
@@ -988,16 +974,7 @@ namespace PnP.Core.Services
                 }
 
                 // Make the request
-                string graphRequestUrl;
-
-                if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
-                {
-                    graphRequestUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/{graphEndpoint}/{requestUrl}";
-                }
-                else
-                {
-                    graphRequestUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}";
-                }
+                string graphRequestUrl = $"{CloudManager.GetGraphBaseUrl(PnPContext)}{graphEndpoint}/{requestUrl}"; ;
 
                 using (var request = new HttpRequestMessage(graphRequest.Method, graphRequestUrl))
                 {
@@ -1055,20 +1032,6 @@ namespace PnP.Core.Services
                     {
 #endif
                         // Ensure the request contains authentication information
-                        var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
-
-                        if (PnPContext.Environment.HasValue)
-                        {
-                            if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
-                            {
-                                graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
-                            }
-                            else
-                            {
-                                graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
-                            }
-                        }
-
                         // Do we need a streaming download?
                         HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseHeadersRead;
                         if (graphRequest.ApiCall.Interactive && !graphRequest.ApiCall.StreamResponse)
@@ -1076,7 +1039,7 @@ namespace PnP.Core.Services
                             httpCompletionOption = HttpCompletionOption.ResponseContentRead;
                         }
 
-                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(CloudManager.GetGraphBaseUri(PnPContext), request).ConfigureAwait(false);
 
                         // Send the request
                         HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, httpCompletionOption, PnPContext.CancellationToken).ConfigureAwait(false);

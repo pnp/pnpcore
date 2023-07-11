@@ -589,18 +589,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 if (json.TryGetProperty("@odata.nextLink", out JsonElement nextLink))
                 {
-
-                    string graphUrl;
-                    if (context.Environment == Microsoft365Environment.Custom)
-                    {
-                        graphUrl = $"https://{context.MicrosoftGraphAuthority}/";
-                    }
-                    else
-                    {
-                        graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(context.Environment.Value)}/";
-                    }
-
-                    sitesEnumerationApiCall = new ApiCall(nextLink.GetString().Replace($"{graphUrl}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
+                    sitesEnumerationApiCall = new ApiCall(nextLink.GetString().Replace($"{CloudManager.GetGraphBaseUrl(context)}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
                 }
                 else
                 {

@@ -330,16 +330,6 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
             var usersResult = new List<string>();
 
-            string graphUrl;
-            if (context.Environment == Microsoft365Environment.Custom)
-            {
-                graphUrl = $"https://{context.MicrosoftGraphAuthority}/";
-            }
-            else
-            {
-                graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(context.Environment.Value)}/";
-            }
-
             // TODO: rewrite as batched to optimize performance
             foreach (string groupUser in groupUsers)
             {
@@ -353,7 +343,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
                         if (json.TryGetProperty("id", out JsonElement idElement) && idElement.TryGetGuid(out Guid userId) && userId != Guid.Empty)
                         {
-                            usersResult.Add($"{graphUrl}v1.0/users('{userId}')");
+                            usersResult.Add($"{CloudManager.GetGraphBaseUrl(context)}v1.0/users('{userId}')");
                         }
                     }
                 }

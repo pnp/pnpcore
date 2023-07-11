@@ -35,17 +35,7 @@ namespace PnP.Core.Model.SharePoint
                         string.Format(PnPCoreResources.Exception_AsyncOperationError_MaxRetries, options.MaxRetries, Location));
                 }
 
-                string graphUrl;
-                if (PnPContext.Environment == Microsoft365Environment.Custom)
-                {
-                    graphUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/";
-                }
-                else
-                {
-                    graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/";
-                }
-
-                var apiCall = new ApiCall(Location.ToString().Replace($"{graphUrl}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
+                var apiCall = new ApiCall(Location.ToString().Replace($"{CloudManager.GetGraphBaseUrl(PnPContext)}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(response.Json))
                 {
