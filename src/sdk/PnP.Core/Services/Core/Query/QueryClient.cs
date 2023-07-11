@@ -671,12 +671,32 @@ namespace PnP.Core.Services
             // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph/SharePoint (for listitem paging)
             if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
             {
-                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
+                string graphUrl;
+                if ((collection as IDataModelWithContext).PnPContext.Environment == Microsoft365Environment.Custom)
+                {
+                    graphUrl = $"https://{(collection as IDataModelWithContext).PnPContext.MicrosoftGraphAuthority}/";
+                }
+                else
+                {
+                    graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority((collection as IDataModelWithContext).PnPContext.Environment.Value)}/";
+                }
+
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{graphUrl}{PnPConstants.GraphBetaEndpoint}/", "");
                 nextLinkApiType = ApiType.GraphBeta;
             }
             else if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
             {
-                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
+                string graphUrl;
+                if ((collection as IDataModelWithContext).PnPContext.Environment == Microsoft365Environment.Custom)
+                {
+                    graphUrl = $"https://{(collection as IDataModelWithContext).PnPContext.MicrosoftGraphAuthority}/";
+                }
+                else
+                {
+                    graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority((collection as IDataModelWithContext).PnPContext.Environment.Value)}/";
+                }
+
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{graphUrl}{PnPConstants.GraphV1Endpoint}/", "");
                 nextLinkApiType = ApiType.Graph;
             }
             else if (!string.IsNullOrEmpty(collection.Metadata[PnPConstants.SharePointRestListItemNextLink]))

@@ -428,7 +428,17 @@ namespace PnP.Core.Model.SharePoint
 
             dynamic body = new ExpandoObject();
 
-            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"https://graph.microsoft.com/v1.0/sites/{siteId}/columns/{field.Id}";
+            string graphUrl;
+            if (PnPContext.Environment == Microsoft365Environment.Custom)
+            {
+                graphUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/";
+            }
+            else
+            {
+                graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/";
+            }
+
+            ((IDictionary<string, object>)body)["sourceColumn@odata.bind"] = $"{graphUrl}v1.0/sites/{siteId}/columns/{field.Id}";
 
             return new ApiCall(requestUrl, ApiType.Graph, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
         }

@@ -20,14 +20,24 @@ namespace PnP.Core.Model.Me
             {
                 dynamic body = new ExpandoObject();
                 body.ChatType = ChatType.ToString();
-                
+
+                string graphUrl;
+                if (PnPContext.Environment == Microsoft365Environment.Custom)
+                {
+                    graphUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/";
+                }
+                else
+                {
+                    graphUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/";
+                }
+
                 dynamic memberList = new List<dynamic>();
                 foreach (var member in Members.AsRequested())
                 {
                     dynamic memb = new ExpandoObject();
                     memb.roles = member.Roles;
                     ((IDictionary<string, object>)memb).Add(PnPConstants.MetaDataGraphType, "#microsoft.graph.aadUserConversationMember");
-                    ((IDictionary<string, object>)memb).Add("user@odata.bind", "https://graph.microsoft.com/v1.0/users('" + member.UserId + "')");
+                    ((IDictionary<string, object>)memb).Add("user@odata.bind", $"{graphUrl}v1.0/users('" + member.UserId + "')");
                     memberList.Add(memb);
                 }
 

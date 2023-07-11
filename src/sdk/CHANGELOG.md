@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+### Changed
+
+- Fixed Graph paging for US Government, Germany and China clouds + removed some hardcoded references to graph.microsoft.com [jansenbe - Bert Jansen]
+
 ## [1.10.0]
 
 ### Added

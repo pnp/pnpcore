@@ -20,7 +20,7 @@ namespace PnP.Core
         /// <summary>
         /// The base URI of the Microsoft Graph
         /// </summary>
-        internal static readonly Uri MicrosoftGraphBaseUri = new Uri(MicrosoftGraphBaseUrl);
+        internal static readonly Uri MicrosoftGraphBaseUri = new(MicrosoftGraphBaseUrl);
 
         /// <summary>
         /// Graph v1 endpoint
