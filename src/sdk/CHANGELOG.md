@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Fixed Graph paging for US Government, Germany and China clouds + removed some hardcoded references to graph.microsoft.com [jansenbe - Bert Jansen]
+- Admin library: Group connected team sites use the Microsoft Graph api for both application and delegated permissions #1220 [danielpastoor - Daniel Pastoor]
 
 ## [1.10.0]
 
