@@ -70,5 +70,10 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// See https://learn.microsoft.com/en-us/graph/group-set-options#configure-groups
         /// </summary>
         public List<string> ResourceBehaviorOptions { get; set; }
+
+        /// <summary>
+        /// Allows defining creation options for SharePoint Site Creation
+        /// </summary>
+        public List<string> CreationOptions { get; set; }
     }
 }
