@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html",
-          "hash": "B0Z+UQbMNYzOGGoWf8mrMAAxqY9wj1G0+VvIHt3Cni0="
+          "hash": "9kTxfkV0jZnnpsmEX308zcQ8/k0jJ3mUOj30EBV5/es="
         }
       },
       "is_incremental": false,
@@ -7734,7 +7734,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.PnPException.html",
-          "hash": "4gU05HzHpD+zXVJ2UstsJpLp70GKk0AnNwhRiVBkrTA="
+          "hash": "KAZzHbDKy/fevObrBpP7Eoz0iufySDWbLGpmOgN2NTE="
         }
       },
       "is_incremental": false,
@@ -9489,7 +9489,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
-          "hash": "XW6IPQFdDGUmWd5wku3+HQwWirsWmogSGdAlYQA1SJ8="
+          "hash": "987QLMXMHMthvWRCav5BMWn2X25OIMBl2iUJIp2EUOQ="
         }
       },
       "is_incremental": false,
