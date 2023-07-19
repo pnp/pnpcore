@@ -66,9 +66,24 @@
         NOR,
 
         /// <summary>
+        /// Qatar
+        /// </summary>
+        QAT,
+
+        /// <summary>
+        /// Poland
+        /// </summary>
+        POL,
+
+        /// <summary>
         /// South Africa
         /// </summary>
         ZAF,
+
+        /// <summary>
+        /// Sweden
+        /// </summary>
+        SWE,
 
         /// <summary>
         /// Zwitserland
@@ -85,14 +100,5 @@
         /// </summary>
         GBR,
 
-        /// <summary>
-        /// Qatar
-        /// </summary>
-        QAT,
-
-        /// <summary>
-        /// Sweden
-        /// </summary>
-        SWE,
     }
 }
