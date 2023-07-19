@@ -27,7 +27,7 @@
   "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.html": {
     "href": "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.html",
     "title": "Enum GeoLocation | PnP Core SDK",
-    "keywords": "Enum GeoLocation Microsoft 365 Geo Locations Namespace : PnP.Core.Admin.Model.Microsoft365 Assembly : PnP.Core.Admin.dll Syntax public enum GeoLocation : int APC Asia-Pacific ARE United Arab Emirates AUS Australia BRA Brazil CAN Canada CHE Zwitserland DEU Germany EUR Europe / Middle East / Africa FRA France GBR United Kingdom IND India JPN Japan KOR Korea NAM North America NOR Norway QAT Qatar SWE Sweden ZAF South Africa"
+    "keywords": "Enum GeoLocation Microsoft 365 Geo Locations Namespace : PnP.Core.Admin.Model.Microsoft365 Assembly : PnP.Core.Admin.dll Syntax public enum GeoLocation : int APC Asia-Pacific ARE United Arab Emirates AUS Australia BRA Brazil CAN Canada CHE Zwitserland DEU Germany EUR Europe / Middle East / Africa FRA France GBR United Kingdom IND India JPN Japan KOR Korea NAM North America NOR Norway POL Poland QAT Qatar SWE Sweden ZAF South Africa"
   },
   "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html": {
     "href": "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html",
