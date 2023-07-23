@@ -14,15 +14,39 @@ namespace PnP.Core.Auth
     /// </summary>
     public sealed class ExternalAuthenticationProvider : OAuthAuthenticationProvider
     {
-        /// <summary>
-        /// A function providing the access token to use
-        /// </summary>
-        public Func<Uri, string[], string> AccessTokenProvider { get; set; }
+        private bool isAsync;
+        private Func<Uri, string[], string> accessTokenProvider;
+        private Func<Uri, string[], Task<string>> accessTokenTaskProvider;
+
+
 
         /// <summary>
         /// A function providing the access token to use
         /// </summary>
-        public Func<Uri, string[], Task<string>> AccessTokenTaskProvider { get; set; }
+        public Func<Uri, string[], string> AccessTokenProvider
+        {
+            get => accessTokenProvider;
+            set
+            {
+                isAsync = false;
+                accessTokenProvider = value;
+                accessTokenTaskProvider = (uri, scopes) => Task.FromResult(value(uri, scopes));
+            }
+        }
+
+        /// <summary>
+        /// A function providing the access token to use
+        /// </summary>
+        public Func<Uri, string[], Task<string>> AccessTokenTaskProvider
+        {
+            get => accessTokenTaskProvider; 
+            set
+            {
+                isAsync = true;
+                accessTokenTaskProvider = value;
+                accessTokenProvider = (uri, scopes) => value(uri, scopes).GetAwaiter().GetResult();
+            }
+        }
 
         /// <summary>
         /// Public constructor for external consumers of the library
@@ -109,7 +133,9 @@ namespace PnP.Core.Auth
                     PnPCoreAuthResources.ExternalAuthenticationProvider_MissingAccessTokenProvider);
             }
 
-            var accessToken = AccessTokenProvider?.Invoke(resource, scopes) ?? (await AccessTokenTaskProvider.Invoke(resource, scopes).ConfigureAwait(false));
+            var accessToken = isAsync
+                ? (await AccessTokenTaskProvider.Invoke(resource, scopes).ConfigureAwait(false))
+                : AccessTokenProvider?.Invoke(resource, scopes);
 
             // Log the access token retrieval action
             Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
