@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 using System.Configuration;
@@ -20,6 +20,11 @@ namespace PnP.Core.Auth
         public Func<Uri, string[], string> AccessTokenProvider { get; set; }
 
         /// <summary>
+        /// A function providing the access token to use
+        /// </summary>
+        public Func<Uri, string[], Task<string>> AccessTokenTaskProvider { get; set; }
+
+        /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="accessTokenProvider">A function providing the access token to use</param>
@@ -27,6 +32,16 @@ namespace PnP.Core.Auth
             : this((ILogger<OAuthAuthenticationProvider>)null)
         {
             AccessTokenProvider = accessTokenProvider;
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="accessTokenProvider">A function providing the access token to use</param>
+        public ExternalAuthenticationProvider(Func<Uri, string[], Task<string>> accessTokenProvider)
+            : this((ILogger<OAuthAuthenticationProvider>)null)
+        {
+            AccessTokenTaskProvider = accessTokenProvider;
         }
 
         /// <summary>
@@ -76,9 +91,7 @@ namespace PnP.Core.Auth
         /// <param name="resource">Resource to request an access token for</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (resource == null)
             {
@@ -90,13 +103,13 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(scopes));
             }
 
-            if (AccessTokenProvider == null)
+            if (AccessTokenProvider == null && AccessTokenTaskProvider == null)
             {
                 throw new ConfigurationErrorsException(
                     PnPCoreAuthResources.ExternalAuthenticationProvider_MissingAccessTokenProvider);
             }
 
-            var accessToken = AccessTokenProvider.Invoke(resource, scopes);
+            var accessToken = AccessTokenProvider?.Invoke(resource, scopes) ?? (await AccessTokenTaskProvider.Invoke(resource, scopes).ConfigureAwait(false));
 
             // Log the access token retrieval action
             Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
