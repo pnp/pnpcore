@@ -35,7 +35,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         /// <summary>
-        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using 
+        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
@@ -143,7 +143,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         /// <summary>
-        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using 
+        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
@@ -195,7 +195,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                                                     <FieldRef Name='SiteOwnerName' />
                                                     <FieldRef Name='SiteOwnerEmail' />
                                                     <FieldRef Name='StorageQuota' />
-                                                    <FieldRef Name='StorageUsed' />                                                    
+                                                    <FieldRef Name='StorageUsed' />
                                                     <FieldRef Name='TemplateName' />
                                                     <FieldRef Name='ChannelType' />
                                                 </ViewFields>
@@ -216,14 +216,14 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     foreach (var listItem in listItems)
                     {
-                        if (listItem["DeletedBy"] != null)
+                        if (listItem["TimeDeleted"] != null)
                         {
                             continue;
                         }
 
                         Uri url = new Uri(listItem["SiteUrl"].ToString());
                         Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
-                        
+
                         if (channelSites.FirstOrDefault(p => p.Id == siteId) == null)
                         {
                             channelSites.Add(new SiteCollectionWithDetails()
@@ -542,7 +542,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var result = await (context.Web as Web).RawRequestAsync(sitesEnumerationApiCall, HttpMethod.Get).ConfigureAwait(false);
 
                 #region Json response
-                /*              
+                /*
                 "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#sites",
                 "@odata.nextLink": "https://graph.microsoft.com/v1.0/sites?$skiptoken=UGFnZWQ9VFJVRSZwX0ZpbGVMZWFmUmVmPTE3MjgyXy4wMDAmcF9JRD0xNzI4Mg",
                 "value": [
