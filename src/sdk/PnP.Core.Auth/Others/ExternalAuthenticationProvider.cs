@@ -30,7 +30,7 @@ namespace PnP.Core.Auth
             {
                 isAsync = false;
                 accessTokenProvider = value;
-                accessTokenTaskProvider = (uri, scopes) => Task.FromResult(value(uri, scopes));
+                accessTokenTaskProvider = value == null ? null : (uri, scopes) => Task.FromResult(value(uri, scopes));
             }
         }
 
@@ -44,7 +44,7 @@ namespace PnP.Core.Auth
             {
                 isAsync = true;
                 accessTokenTaskProvider = value;
-                accessTokenProvider = (uri, scopes) => value(uri, scopes).GetAwaiter().GetResult();
+                accessTokenProvider = value == null ? null : (uri, scopes) => value (uri, scopes).GetAwaiter().GetResult();
             }
         }
 
