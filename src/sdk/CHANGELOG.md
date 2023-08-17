@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for using the `ILongRunningOperation` interface to track the progress of long running operations #1245 [JakeStanger - Jake Stanger]
+
 ### Changed
 
 - Fixed Graph paging for US Government, Germany and China clouds + removed some hardcoded references to graph.microsoft.com [jansenbe - Bert Jansen]

@@ -456,7 +456,7 @@ namespace PnP.Core.Services
         /// Gets an ongoing Graph long-running operation.
         /// </summary>
         /// <param name="location">The location of the operation</param>
-        /// <returns>An `ILongRunningOperation` associated with the location</returns>
+        /// <returns>An <see cref="ILongRunningOperation"/> associated with the location</returns>
         public ILongRunningOperation GetLongRunningOperation(string location)
         {
             return new LongRunningOperation(location, this);
