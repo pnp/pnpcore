@@ -107,7 +107,8 @@ namespace PnP.Core.Model.SharePoint
                 if (firstChunk)
                 {
                     // Add empty file
-                    string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/add(url='{newFile.Name}',overwrite={overwrite.ToString().ToLowerInvariant()})";
+                    var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
+                    string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/addusingpath(decodedUrl='{encodedServerFileName}',overwrite={overwrite.ToString().ToLowerInvariant()})";
                     var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
                     {
                         Interactive = true
