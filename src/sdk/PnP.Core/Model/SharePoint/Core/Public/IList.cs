@@ -152,6 +152,11 @@ namespace PnP.Core.Model.SharePoint
         public string DefaultViewUrl { get; }
 
         /// <summary>
+        /// Gets or sets whether the item is opened by default using the browser.
+        /// </summary>
+        public bool DefaultItemOpenInBrowser { get; set; }
+
+        /// <summary>
         /// Defines a value that specifies the reading order of the list.
         /// </summary>
         public ListReadingDirection Direction { get; set; }

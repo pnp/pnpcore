@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix issue to enumerate private/shared channel sites #1238 [valpvt]
 - Removed `ExcludedBlockDownloadGroupIds` properties from `ISiteCollectionProperties` as that prevented unlocking a site collection via the `LockState` property #1251 [jansenbe - Bert Jansen]
 - Upload of large files (chunked upload) also uses the `addusingpath` method, just like the regular upload #1256 [jansenbe - Bert Jansen]
+- Added `IList.DefaultItemOpenInBrowser` property #1248 [jansenbe - Bert Jansen]
 
 ## [1.10.0]
 
