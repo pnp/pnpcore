@@ -63,8 +63,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public bool ExcludeBlockDownloadPolicySiteOwners { get => GetValue<bool>(); set => SetValue(value); }
 
-        public IList<Guid> ExcludedBlockDownloadGroupIds { get => GetValue<IList<Guid>>(); set => SetValue(value); }
-
         public int ExternalUserExpirationInDays { get => GetValue<int>(); set => SetValue(value); }
 
         public Guid GroupId { get => GetValue<Guid>(); set => SetValue(value); }

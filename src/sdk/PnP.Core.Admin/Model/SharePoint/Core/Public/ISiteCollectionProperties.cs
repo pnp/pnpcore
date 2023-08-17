@@ -137,11 +137,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets or sets the exclude site owners flag for Block download policy
         /// </summary>
         bool ExcludeBlockDownloadPolicySiteOwners { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Microsoft365 group GUIDs that are excluded from Block download policy
-        /// </summary>
-        IList<Guid> ExcludedBlockDownloadGroupIds { get; set; }
         
         /// <summary>
         /// External user expiration in days

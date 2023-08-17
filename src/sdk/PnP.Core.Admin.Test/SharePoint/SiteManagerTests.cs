@@ -53,7 +53,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                     Assert.IsTrue(siteProperties.DisableCompanyWideSharingLinks == Model.SharePoint.CompanyWideSharingLinksPolicy.NotDisabled);
                     Assert.IsTrue(siteProperties.DisableFlows == Model.SharePoint.FlowsPolicy.NotDisabled);
                     Assert.IsFalse(siteProperties.ExcludeBlockDownloadPolicySiteOwners);
-                    Assert.IsTrue(siteProperties.ExcludedBlockDownloadGroupIds != null);
                     Assert.IsTrue(siteProperties.ExternalUserExpirationInDays == 0);
                     Assert.IsTrue(siteProperties.GroupId == context.Site.GroupId);
                     Assert.IsTrue(siteProperties.GroupOwnerLoginName == $"c:0o.c|federateddirectoryclaimprovider|{context.Site.GroupId}_o");
@@ -334,6 +333,115 @@ namespace PnP.Core.Admin.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task SetSiteCollectionLockingPropertiesForNewSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        //Dictionary<string, string> properties = new Dictionary<string, string>
+                        //{
+                        //    { "SiteUrl", siteUrl.ToString() }
+                        //};
+                        //TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    {
+                        var siteProperties = newSiteContext.GetSiteCollectionManager().GetSiteCollectionProperties(newSiteContext.Uri);
+                        Assert.IsNotNull(siteProperties);
+
+                        // Set the properties
+                        string originalTitle = siteProperties.Title;
+                        string originalLockState = siteProperties.LockState;
+
+                        string newTitle = null;
+                        string newLockState;
+
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            newTitle = $"New title - {DateTime.Now}";
+                            newLockState = "NoAccess";
+
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "Title", newTitle },
+                                { "LockState", newLockState }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            newTitle = TestManager.GetProperties(context)["Title"];
+                            newLockState = TestManager.GetProperties(context)["LockState"];
+                        }
+
+                        siteProperties.Title = newTitle;
+                        siteProperties.LockState = newLockState;
+
+                        // Lock the site
+                        siteProperties.Update();
+
+                        // Get the site props again
+                        siteProperties = newSiteContext.GetSiteCollectionManager().GetSiteCollectionProperties(newSiteContext.Uri);
+
+                        // Restore the original values
+                        siteProperties.LockState = originalLockState;
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(10));
+                        }
+
+                        siteProperties.Update();
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+            }
+        }
+
 
         [TestMethod]
         public async Task ConnectGroupToExistingSiteUsingDelegatedPermissions()
