@@ -451,6 +451,16 @@ namespace PnP.Core.Services
         {
             return BatchClient.EnsureBatch();
         }
+        
+        /// <summary>
+        /// Gets an ongoing Graph long-running operation.
+        /// </summary>
+        /// <param name="location">The location of the operation</param>
+        /// <returns>An `ILongRunningOperation` associated with the location</returns>
+        public ILongRunningOperation GetLongRunningOperation(string location)
+        {
+            return new LongRunningOperation(location, this);
+        }
 
         /// <summary>
         /// Method to execute the current batch
