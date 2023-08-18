@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-    <PackageReference Include="PnP.Core.Auth" Version="1.8.2-nightly" />
+    <PackageReference Include="PnP.Core.Auth" Version="1.10.50-nightly" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="7.0.0" />
   </ItemGroup>
