@@ -1176,6 +1176,51 @@ namespace PnP.Core.Services
                 {
                     key = key.Replace("_x0020_", " ");
                 }
+
+                if (key.Contains("_x002d_"))
+                {
+                    key = key.Replace("_x002d_", "-");
+                }
+
+                if (key.Contains("_x002e_"))
+                {
+                    key = key.Replace("_x002e_", ".");
+                }
+
+                if (key.Contains("_x002f_"))
+                {
+                    key = key.Replace("_x002f_", "/");
+                }
+
+                if (key.Contains("_x003a_"))
+                {
+                    key = key.Replace("_x003a_", ":");
+                }
+
+                if (key.Contains("_x003c_"))
+                {
+                    key = key.Replace("_x003c_", "<");
+                }
+
+                if (key.Contains("_x003e_"))
+                {
+                    key = key.Replace("_x003e_", ">");
+                }
+
+                if (key.Contains("_x007c_"))
+                {
+                    key = key.Replace("_x007c_", "|");
+                }
+
+                if (key.Contains("_x005b_"))
+                {
+                    key = key.Replace("_x005b_", "[");
+                }
+
+                if (key.Contains("_x005d_"))
+                {
+                    key = key.Replace("_x005d_", "]");
+                }
             }
 
             if (!dictionary.ContainsKey(key))

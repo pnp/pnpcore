@@ -431,7 +431,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var web = await context.Web.GetAsync(p => p.AllProperties);
 
-                    var propertyKey = "With SpaceAnd_Underscore";
+                    var propertyKey = "With SpacePlus_-./:<>|[]";
                     var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
                     if (myProperty == 0)
                     {

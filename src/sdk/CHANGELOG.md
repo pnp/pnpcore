@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Upload of large files (chunked upload) also uses the `addusingpath` method, just like the regular upload #1256 [jansenbe - Bert Jansen]
 - Added `IList.DefaultItemOpenInBrowser` property #1248 [jansenbe - Bert Jansen]
 - Calling `LoadAsync` or `EnsurePropertiesAsync` on `IFolder` was broken #1236 [jansenbe - Bert Jansen]
+- Fixed the encoding of `IPropertyValues` (property bag) values when any of these chars was used in the property name: -./:<>|[] #1263 [jansenbe - Bert Jansen]
 
 ## [1.10.0]
 
