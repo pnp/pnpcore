@@ -307,25 +307,25 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
 
-        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync()
+        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false)
         {
-            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context).ConfigureAwait(false);
+            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context, includeExpiredPrincipals).ConfigureAwait(false);
         }
 
-        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals()
+        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false)
         {
-            return GetLegacyServicePrincipalsAsync().GetAwaiter().GetResult();
+            return GetLegacyServicePrincipalsAsync(includeExpiredPrincipals).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        public async Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null, bool loadLegacyPrincipalData = true)
         {
-            var results = await LegacyPrincipalManagement.GetSharePointAddInsAsync(context, includeSubsites, vanityUrlOptions).ConfigureAwait(false);
+            var results = await LegacyPrincipalManagement.GetSharePointAddInsAsync(context, includeSubsites, vanityUrlOptions, loadLegacyPrincipalData).ConfigureAwait(false);
             return results.Cast<ISharePointAddIn>().ToList();
         }
 
-        public List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null)
+        public List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null, bool loadLegacyPrincipalData = true)
         {
-            return GetSiteCollectionSharePointAddInsAsync(includeSubsites, vanityUrlOptions).GetAwaiter().GetResult();
+            return GetSiteCollectionSharePointAddInsAsync(includeSubsites, vanityUrlOptions, loadLegacyPrincipalData).GetAwaiter().GetResult();
         }
         #endregion
     }

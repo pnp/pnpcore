@@ -432,30 +432,34 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipalsAsync(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
         /// </summary>
+        /// <param name="includeExpiredPrincipals">Also include the legacy service principals for which the password credential has expired</param>
         /// <returns>List of legacy service principals</returns>
-        Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync();
+        Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false);
 
         /// <summary>
         /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipals(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
         /// </summary>
+        /// <param name="includeExpiredPrincipals">Also include the legacy service principals for which the password credential has expired</param>
         /// <returns>List of legacy service principals</returns>
-        List<ILegacyServicePrincipal> GetLegacyServicePrincipals();
+        List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false);
 
         /// <summary>
         /// Gets a list of SharePoint AddIns that are scoped to the current site and optionally it's subsites. 
         /// </summary>
         /// <param name="includeSubsites">Also load the SharePoint AddIns for the subsites</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <param name="loadLegacyPrincipalData">Optionally do not load the related legacy principal with permission data</param>
         /// <returns>A list of SharePoint AddIns</returns>
-        Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+        Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null, bool loadLegacyPrincipalData = true);
 
         /// <summary>
         /// Gets a list of SharePoint AddIns that are scoped to the current site and optionally it's subsites. 
         /// </summary>
         /// <param name="includeSubsites">Also load the SharePoint AddIns for the subsites</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <param name="loadLegacyPrincipalData">Optionally do not load the related legacy principal with permission data</param>
         /// <returns>A list of SharePoint AddIns</returns>
-        List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null);
+        List<ISharePointAddIn> GetSiteCollectionSharePointAddIns(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null, bool loadLegacyPrincipalData = true);
         #endregion
     }
 }

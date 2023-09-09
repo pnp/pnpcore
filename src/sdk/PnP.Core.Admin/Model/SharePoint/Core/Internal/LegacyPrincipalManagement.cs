@@ -17,7 +17,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         private static readonly int MaxPermissions = 500;
         private static readonly int MaxAppIds = 500;
 
-        internal async static Task<List<SharePointAddIn>> GetSharePointAddInsAsync(PnPContext context, bool includeSubsites, VanityUrlOptions vanityUrlOptions)
+        internal async static Task<List<SharePointAddIn>> GetSharePointAddInsAsync(PnPContext context, bool includeSubsites, VanityUrlOptions vanityUrlOptions, bool loadLegacyPrincipalData = true)
         {
             List<SharePointAddIn> sharePointAddIns = new();
             List<LegacyPrincipal> legacyPrincipals = new();
@@ -40,8 +40,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                // Generic principal load, we need this to know the permissions that the AddIns have
-                await LoadLegacyPrincipalsAsync(legacyPrincipals, null, serverRelativeUrlBuckets, tenantAdminContext).ConfigureAwait(false);
+                if (loadLegacyPrincipalData)
+                {
+                    // Generic principal load, we need this to know the permissions that the AddIns have
+                    await LoadLegacyPrincipalsAsync(legacyPrincipals, null, serverRelativeUrlBuckets, tenantAdminContext).ConfigureAwait(false);
+                }
 
                 var json = new
                 {
@@ -58,6 +61,13 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     foreach (var addIn in addIns.EnumerateArray())
                     {
+                        // Skip some SPFx solutions that accidently might show up (API fix coming)
+                        if (addIn.GetProperty("appIdentifier").GetString().Contains("|ms.sp.int|", StringComparison.InvariantCultureIgnoreCase) && 
+                            addIn.GetProperty("appWebId").GetGuid() == Guid.Empty)
+                        {
+                            continue;
+                        }
+
                         SharePointAddIn sharePointAddIn = new()
                         {
                             AppIdentifier = addIn.GetProperty("appIdentifier").GetString(),
@@ -78,7 +88,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                             InstalledWebFullUrl = addIn.GetProperty("installedWebUrl").GetString(),
                             InstalledBy = addIn.GetProperty("installedBy").GetString(),
                             LaunchUrl = addIn.GetProperty("launchUrl").GetString(),
-                            LicensePurchaseTime = addIn.GetProperty("licensePurchaseTime").GetDateTime(),
+                            LicensePurchaseTime = addIn.GetProperty("licensePurchaseTime").ValueKind == JsonValueKind.Null ? DateTime.MinValue : addIn.GetProperty("licensePurchaseTime").GetDateTime(),
                             Locale = addIn.GetProperty("locale").GetString(),
                             ProductId = addIn.GetProperty("productId").GetGuid(),
                             PurchaserIdentity = addIn.GetProperty("purchaserIdentity").GetString(),
@@ -88,13 +98,16 @@ namespace PnP.Core.Admin.Model.SharePoint
                             Title = addIn.GetProperty("title").GetString(),
                         };
 
-                        // Complement the AddIn with the permission related information
-                        var legacyPrincipal = legacyPrincipals.FirstOrDefault(p=>p.AppIdentifier == sharePointAddIn.AppIdentifier && p.ServerRelativeUrl == sharePointAddIn.ServerRelativeUrl);
-                        if (legacyPrincipal != null)
+                        if (loadLegacyPrincipalData)
                         {
-                            sharePointAddIn.SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions;
-                            sharePointAddIn.TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions;
-                            sharePointAddIn.AllowAppOnly = legacyPrincipal.AllowAppOnly;
+                            // Complement the AddIn with the permission related information
+                            var legacyPrincipal = legacyPrincipals.FirstOrDefault(p => p.AppIdentifier == sharePointAddIn.AppIdentifier && p.ServerRelativeUrl == sharePointAddIn.ServerRelativeUrl);
+                            if (legacyPrincipal != null)
+                            {
+                                sharePointAddIn.SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions;
+                                sharePointAddIn.TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions;
+                                sharePointAddIn.AllowAppOnly = legacyPrincipal.AllowAppOnly;
+                            }
                         }
 
                         sharePointAddIns.Add(sharePointAddIn);
@@ -263,7 +276,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return acsPrincipals;
         }
 
-        internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context)
+        internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context, bool includeExpiredPrincipals)
         {
             List<ILegacyServicePrincipal> servicePrincipals = new();
 
@@ -303,7 +316,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                                     endDate = endDateTime.GetDateTime();
                                 }
 
-                                if (endDate >= DateTime.Now.ToUniversalTime())
+                                if (includeExpiredPrincipals || endDate >= DateTime.Now.ToUniversalTime())
                                 {
                                     servicePrincipals.Add(new LegacyServicePrincipal
                                     {
@@ -313,7 +326,8 @@ namespace PnP.Core.Admin.Model.SharePoint
                                         ValidUntil = endDate
                                     });
 
-                                    // no need to check the next keycredential as we've a valid one
+                                    // no need to check the next keycredential as we've a valid one, if there's more than one credential they're returned with the 
+                                    // most recent first. So the first will be either a valid credential or the last expired one
                                     break;
                                 }
                             }
@@ -359,6 +373,8 @@ namespace PnP.Core.Admin.Model.SharePoint
                                 AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
                                 ServerRelativeUrl = addInPrincipal.GetProperty("serverRelativeUrl").GetString(),
                                 Title = addInPrincipal.GetProperty("title").GetString(),
+                                SiteCollectionScopedPermissions = new List<LegacySiteCollectionPermission>(),
+                                TenantScopedPermissions = new List<LegacyTenantPermission>()
                             });
                         }
                     }
@@ -378,6 +394,8 @@ namespace PnP.Core.Admin.Model.SharePoint
                                 AppIdentifier = legacyServicePrincipal.AppIdentifier,
                                 ServerRelativeUrl = serverRelativeUrlBucket[0],
                                 Title = legacyServicePrincipal.Name,
+                                SiteCollectionScopedPermissions = new List<LegacySiteCollectionPermission>(),
+                                TenantScopedPermissions = new List<LegacyTenantPermission>()
                             });
                         }
                     }
