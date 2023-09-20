@@ -186,6 +186,18 @@ namespace PnP.Core.Auth.Test.Providers
             Assert.IsTrue(accessToken.Length > 0);
         }
 
+        [TestMethod]
+        public async Task TestExternalGetAccessTokenAsyncAsyncCorrect()
+        {
+            var provider = PrepareExternalAuthenticationProvider(useAsyncConstructor: true);
+
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
+
+            Assert.IsNotNull(accessToken);
+            Assert.IsTrue(accessToken.Length > 0);
+        }
+
+
         private static ExternalAuthenticationProvider PrepareExternalAuthenticationProvider(bool useFakeToken = false, bool useAsyncConstructor = false)
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
