@@ -180,6 +180,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > [!Note]
 >
 > - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When you want to reuse a `PnPContext` which you've previously used to load items you first need to clear the loaded items via `myList.Items.Clear()`
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
@@ -360,6 +361,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > [!Note]
 >
 > - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When you want to reuse a `PnPContext` which you've previously used to load items you first need to clear the loaded items via `myList.Items.Clear()`
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
