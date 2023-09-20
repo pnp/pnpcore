@@ -267,6 +267,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>InternalName</code>. If you've created a field with name <code>Version Tag</code> then the <code>InternalName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When you want to reuse a <code>PnPContext</code> which you've previously used to load items you first need to clear the loaded items via <code>myList.Items.Clear()</code></li>
 <li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 <li>When using <code>text</code> fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using <code>&lt;![CDATA[{MyVariable}]]</code></li>
@@ -440,6 +441,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>InternalName</code>. If you've created a field with name <code>Version Tag</code> then the <code>InternalName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When you want to reuse a <code>PnPContext</code> which you've previously used to load items you first need to clear the loaded items via <code>myList.Items.Clear()</code></li>
 <li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 <li>When using <code>text</code> fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using <code>&lt;![CDATA[{MyVariable}]]</code></li>
