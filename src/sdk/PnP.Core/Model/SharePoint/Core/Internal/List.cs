@@ -112,7 +112,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool EnableMinorVersions { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int DraftVersionVisibility { get => GetValue<int>(); set => SetValue(value); }
+        public DraftVisibilityType DraftVersionVisibility { get => GetValue<DraftVisibilityType>(); set => SetValue(value); }
 
         public bool EnableModeration { get => GetValue<bool>(); set => SetValue(value); }
 

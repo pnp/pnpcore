@@ -124,7 +124,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(myListToCheck.ContentTypesEnabled);
                 Assert.AreEqual(myListToCheck.Direction, ListReadingDirection.None);
                 Assert.IsNull(myListToCheck.DocumentTemplate);
-                Assert.AreEqual(0, myListToCheck.DraftVersionVisibility);
+                Assert.AreEqual(DraftVisibilityType.Reader, myListToCheck.DraftVersionVisibility);
                 Assert.AreEqual("TEST DESCRIPTION", myListToCheck.Description);
                 Assert.IsFalse(myListToCheck.EnableAttachments);
                 Assert.IsTrue(myListToCheck.EnableFolderCreation);

@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the DraftVersionVisibility for the list
         /// </summary>
-        public int DraftVersionVisibility { get; set; }
+        public DraftVisibilityType DraftVersionVisibility { get; set; }
 
         /// <summary>
         /// Gets or sets whether moderation/content approval is enabled on the list
