@@ -446,7 +446,7 @@ namespace PnP.Core.Model.SharePoint
             // NOTE WebUtility encode spaces to "+" instead of %20
             // Replace %20 by space as otherwise %20 gets encoded as %2520 which will break the API request
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
+            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl=@u)?@u='{encodedServerRelativeUrl}'", ApiType.SPORest);
             return apiCall;
         }
         #endregion
@@ -585,7 +585,7 @@ namespace PnP.Core.Model.SharePoint
             // NOTE WebUtility encode spaces to "+" instead of %20
             // Replace %20 by space as otherwise %20 gets encoded as %2520 which will break the API request
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
+            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl=@u)?@u='{encodedServerRelativeUrl}'", ApiType.SPORest);
             return apiCall;
         }
 
