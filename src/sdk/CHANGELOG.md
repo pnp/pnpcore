@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: Fixed issues with loading SharePoint Add-Ins [jansenbe - Bert Jansen]
 - Admin library: Extra parameters to configure the SharePoint Add-In and Azure ACS principal loading [jansenbe - Bert Jansen]
 - Changed `IList.DraftVersionVisibility` to use enum `DraftVisibilityType` instead of an `int` #1286 [jansenbe - Bert Jansen]
+- Fixing URL too long issue when downloading files #1290 [koenzomers - Koen Zomers]
 
 ## [1.10.0]
 
