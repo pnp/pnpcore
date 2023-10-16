@@ -164,7 +164,16 @@ namespace PnP.Core.Services
                 // In .NET Framework to ToString() of a NameValueCollection will use HttpUtility.UrlEncodeUnicode under
                 // the covers resulting in issues. So we decode and encode again as a workaround. This code produces the 
                 // same result when used under .NET5/Core versus .NET Framework
-                sb.Append($"?{queryString.ToEncodedString()}");
+
+                // The base query string can already contain a URL parameter (e.g. _api/Web/getFileByServerRelativePath(decodedUrl=@u)?@u='<server relative url>')
+                if (baseApiCall.Contains('?'))
+                {
+                    sb.Append($"&{queryString.ToEncodedString()}");
+                }
+                else
+                {
+                    sb.Append($"?{queryString.ToEncodedString()}");
+                }
             }
 
             // Create ApiCall instance and call the override option if needed
