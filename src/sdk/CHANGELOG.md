@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixing URL too long issue when downloading files #1290 [koenzomers - Koen Zomers]
 - Fixed regression coming from #1290 #1297 [jansenbe - Bert Jansen]
 - Admin library: switched to the new multi-geo aware site enumaration endpoint [jansenbe - Bert Jansen]
+- Fixed `LoadListDataAsStream` paging issue when item count was a multiple of the page size #1296 [jansenbe - Bert Jansen]
 
 ## [1.10.0]
 

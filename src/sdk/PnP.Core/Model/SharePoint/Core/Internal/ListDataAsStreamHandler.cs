@@ -207,8 +207,17 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 var file = itemToUpdate.File;
                                 file.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
-                                (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, uniqueId.ToString());
-                                (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.File");
+                                
+                                if (!(file as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                                {
+                                    (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, uniqueId.ToString());
+                                }
+                                
+                                if (!(file as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataType))
+                                {
+                                    (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.File");
+                                }
+                                
                                 (file as File).Requested = true;
                             }
                         }
