@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Changed `IList.DraftVersionVisibility` to use enum `DraftVisibilityType` instead of an `int` #1286 [jansenbe - Bert Jansen]
 - Fixing URL too long issue when downloading files #1290 [koenzomers - Koen Zomers]
 - Fixed regression coming from #1290 #1297 [jansenbe - Bert Jansen]
+- Admin library: switched to the new multi-geo aware site enumaration endpoint [jansenbe - Bert Jansen]
 
 ## [1.10.0]
 

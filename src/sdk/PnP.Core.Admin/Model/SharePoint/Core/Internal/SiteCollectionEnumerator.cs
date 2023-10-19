@@ -534,7 +534,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             // Get the my site host url
             var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync(vanityUrlOptions).ConfigureAwait(false);
 
-            ApiCall sitesEnumerationApiCall = new ApiCall("sites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
+            ApiCall sitesEnumerationApiCall = new ApiCall("sites/getallsites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
 
             bool paging = true;
             while (paging)
