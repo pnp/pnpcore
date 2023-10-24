@@ -95,6 +95,8 @@
 </li>
 <li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected. As the Redirect URI, in Web platform enter <strong>https://localhost:44349/authentication/login-callback</strong> (The port may vary according to your Visual Studio)</p>
 </li>
+<li><p>Make sure that the added Redirect URI is for a Single-Page Application</p>
+</li>
 <li><p>Under <strong>Implicit grant</strong> section, check <strong>Access tokens</strong> and <strong>ID tokens</strong></p>
 </li>
 <li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong>
@@ -110,8 +112,8 @@
 </ul>
 <h2 id="configure-your-application">Configure your application</h2>
 <ul>
-<li>Configure the URL of your SharePoint site as the value of <code>SharePoint:SiteUrl</code> app setting</li>
-<li>in the file <code>wwwroot/appsettings.json</code>, replace the <code>{app_id}</code> and the <code>{tenant_id}</code> accordingly with the values from above</li>
+<li>Replace <code>{sharepoint_url}</code> the URL of your SharePoint site in app setting</li>
+<li>in the file <code>wwwroot/appsettings.json</code>, replace the <code>{client_id}</code> and the <code>{tenant_id}</code> accordingly with the values from above</li>
 </ul>
 <h2 id="execute">Execute</h2>
 <p>Hit F5 in Visual studio to execute the Blazor app.
