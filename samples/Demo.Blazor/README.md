@@ -18,6 +18,8 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __https://localhost:44349/authentication/login-callback__ (The port may vary according to your Visual Studio)
 
+- Make sure that the added Redirect URI is for a Single-Page Application
+
 - Under __Implicit grant__ section, check __Access tokens__ and __ID tokens__
 
 - Go to __API permissions__ section , click __Add a permission__
@@ -32,8 +34,8 @@ In order for the user to authenticate on the App, A new app registration should 
 
 ## Configure your application
 
-- Configure the URL of your SharePoint site as the value of `SharePoint:SiteUrl` app setting
-- in the file `wwwroot/appsettings.json`, replace the `{app_id}` and the `{tenant_id}` accordingly with the values from above
+- Replace `{sharepoint_url}` the URL of your SharePoint site in app setting
+- in the file `wwwroot/appsettings.json`, replace the `{client_id}` and the `{tenant_id}` accordingly with the values from above
 
 ## Execute
 
