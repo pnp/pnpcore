@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Support for using the `ILongRunningOperation` interface to track the progress of long running operations #1245 [JakeStanger - Jake Stanger]
 - Option to invoke external access provider asynchronously when using the `ExternalAuthenticationProvider` authentication provider #1269 [quails4Eva - David Petchey]
+- Support for .NET 8.0 [jansenbe - Bert Jansen]
 
 ### Changed
 
