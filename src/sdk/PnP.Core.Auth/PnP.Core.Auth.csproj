@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
 		<LangVersion>10.0</LangVersion>
 		<RootNamespace>PnP.Core.Auth</RootNamespace>
 		<AssemblyName>PnP.Core.Auth</AssemblyName>
@@ -43,12 +43,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1-*">
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0-*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.50.0" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1-*" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

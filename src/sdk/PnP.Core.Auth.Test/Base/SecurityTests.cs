@@ -59,7 +59,7 @@ namespace PnP.Core.Auth.Test.Base
             var sampleText = "ThisIsACoolSDK";
             var secureString = sampleText.ToSecureString();
 
-            Assert.AreNotEqual(sampleText, secureString);
+            Assert.AreNotEqual(sampleText, secureString.ToString());
             Assert.IsTrue(secureString.Length > 0);
 
             var backToInSecure = secureString.ToInsecureString();
