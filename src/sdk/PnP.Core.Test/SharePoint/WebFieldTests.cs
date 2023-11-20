@@ -172,6 +172,32 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddNewWebFieldTextSpecificInternalNameTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD INTERNAL 5", new FieldTextOptions()
+                {
+                    InternalName = "AddFldInternal5",
+                    Group = "TEST GROUP",
+                    MaxLength = 100
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD INTERNAL 5", addedField.Title);
+                Assert.AreEqual("AddFldInternal5", addedField.InternalName);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                Assert.AreEqual(100, addedField.MaxLength);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task AddFieldWithFieldCustomizerTest()
         {
             //TestCommon.Instance.Mocking = false;
