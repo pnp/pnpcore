@@ -88,10 +88,15 @@
 <h5>Note</h5>
 <p>The code samples create field on a list &quot;myList&quot; by adding the fields to the list's Fields collection. The same logic applies for adding site fields by adding them to the web's Fields collection.</p>
 </div>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>By default the passed field title will be used as display name and the internal name will be deducted from that. In some cases you may want to control the internal name via code, you can do this by setting the <code>InternalName</code> property of the respective field options class. The sample in next paragraph shows this.</p>
+</div>
 <h2 id="text-fields">Text fields</h2>
 <p>When adding a text field you use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.FieldTextOptions.html">FieldTextOptions class</a> which allows to define the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.FieldTextOptions.html#collapsible-PnP_Core_Model_SharePoint_FieldTextOptions_MaxLength">MaxLenght</a> of a text field.</p>
 <pre><code class="lang-csharp">IField myField = await myList.Fields.AddTextAsync(&quot;My Field&quot;, new FieldTextOptions()
 {
+    InternalName = &quot;MyField&quot;,
     Group = &quot;Custom Fields&quot;,
     AddToDefaultView = true,
     MaxLength = 30
