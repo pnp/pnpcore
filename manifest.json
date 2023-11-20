@@ -3210,7 +3210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.html",
-          "hash": "n3ochFxg/xmF0ylqi1Krhbuj8OtW3L5NA4SazyV6+Cg="
+          "hash": "uEwOGjxRGsVeZMwFuBZ9HBWEPrDC/+X4d29DFLJEQ9g="
         }
       },
       "is_incremental": false,
@@ -3462,7 +3462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldBooleanOptions.html",
-          "hash": "xkPQyG31G+e1GbcXadJDTets/Y6e00fuLdcR6u6nvFI="
+          "hash": "hAKK779R5m9eK2QiKZ8Bf7VEmzpnHXoPudRaSKgpGC0="
         }
       },
       "is_incremental": false,
@@ -3474,7 +3474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.html",
-          "hash": "BY3py4ovhpACOtrUTlvY8IFLtTNCPiJuS6RUxaAZa1U="
+          "hash": "dal1CzpKccHa/qeYRlgVl+8MfxZqiiymF8ZYaS3oCyk="
         }
       },
       "is_incremental": false,
@@ -3486,7 +3486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html",
-          "hash": "nn9CaYpSXHyd/XPNX7ZwUsbucWov9s4yB1qw4abXB9Q="
+          "hash": "WxQW4GaxHrDy9ORQm8rFYRC+Rl4J8trpIkmybodomJo="
         }
       },
       "is_incremental": false,
@@ -3498,7 +3498,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceOptions.html",
-          "hash": "b38wN61cEQZjErTZjt1ANvOHLZ38W5/niv/I/3bFywI="
+          "hash": "ybDh81u5K4VDiBYVkR+eYH/vVbhZcPpxJ8O2YnqtV54="
         }
       },
       "is_incremental": false,
@@ -3510,7 +3510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html",
-          "hash": "KUip/A0wndh5QNMeWWmDrzw7pRaPuhJLr4q2WeZ7jmQ="
+          "hash": "YHG2Ir6JPP39glX/NvgH5HVgeBBEKQuwB4BFNdMdc+A="
         }
       },
       "is_incremental": false,
@@ -3522,7 +3522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.html",
-          "hash": "yiY+3RldXbWK1jzwA42UNPLEYi+iDlyZU7DtSDIc3P4="
+          "hash": "5nIq/ir3b51TeTjGXhC9vwomTQydS2mEiDRSyVOwiJA="
         }
       },
       "is_incremental": false,
@@ -3558,7 +3558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupOptions.html",
-          "hash": "50didO46/pUE9tWm0Ma4m5+zA/ZXklJy4LRN/wYo2ug="
+          "hash": "Ho0+8WWiPEGFVA2mvqM2ceT58+eLPCVy6I4r9hRIUFE="
         }
       },
       "is_incremental": false,
@@ -3582,7 +3582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html",
-          "hash": "cz77f3it16/z1pXvDoY92jH9orOX7nTpRQ0n5oVCsFE="
+          "hash": "JvGPe5NmBTBLncgSp6CwDJ19d2YfgQZeacYBlypsS1I="
         }
       },
       "is_incremental": false,
@@ -3594,7 +3594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.html",
-          "hash": "91B5EefKwu72t5Wbdriwn8/sCm7oGTacQ8VsZYgnZ0M="
+          "hash": "A7vgSWI7UAyvQ3RqtVUW4PSzZOqER+8lWzo3CWqDxog="
         }
       },
       "is_incremental": false,
@@ -3606,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html",
-          "hash": "Vbx9C/A2RGLH+qE9OuOeKESumjShid9NPyfbV9DX2J4="
+          "hash": "VALgv+2ujG+8CGSeEjtANYFS18VXDKwC7FJ2/fO0Csg="
         }
       },
       "is_incremental": false,
@@ -3630,7 +3630,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldTextOptions.html",
-          "hash": "xmBzBkfjYrvsDp4h8rwuZm76FWXksjEi/pVfKhp2lkc="
+          "hash": "xVZNWUK98Tu9Dy8QPGJHCxKZcnh3JEtPLkQ13wL3LSc="
         }
       },
       "is_incremental": false,
@@ -3654,7 +3654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldUrlOptions.html",
-          "hash": "j22ADnSQrnFavx+YeOKmv2gb3rNBxfLk8kW25BV8JyE="
+          "hash": "aZpOKdlIqewd2stJqhB8HiVNSSzIKw07sj+jQTifM4M="
         }
       },
       "is_incremental": false,
@@ -3678,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.html",
-          "hash": "aYsrN/gfYUIt8E9td0wosGWi9oGxf32vHJNXfCbiYpg="
+          "hash": "k6sxtxWJ7ehumE9djV7Bt7IZLfJYXr26JnSzRNui2WM="
         }
       },
       "is_incremental": false,
