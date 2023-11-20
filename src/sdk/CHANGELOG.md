@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed `LoadListDataAsStream` paging issue when item count was a multiple of the page size #1296 [jansenbe - Bert Jansen]
 - Made it easier to set a `IField` internal name [jansenbe - Bert Jansen]
 - Leave 'Teamify' loop when Team already existed #1319 [jansenbe - Bert Jansen]
+- Fixed 'hot reload' warning when debugging [jansenbe - Bert Jansen]
 
 ## [1.10.0]
 
