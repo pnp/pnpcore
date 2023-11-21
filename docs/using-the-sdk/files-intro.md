@@ -132,7 +132,8 @@ If you do not know the exact name and location of on or more file and need to fi
 The FindFiles method accepts a string value which is matched to any part of the filename using a case insensitive regular expression and returns all found matches.
 
 > [!Note]
-> This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
+> - This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
+> - It's important to use the * to indicate any wild cards in your search string
 
 Find files in a list:
 
@@ -141,7 +142,7 @@ Find files in a list:
 IList documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
 
 // Get files from the list whose name contains "foo"
-List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
+List<IFile> foundFiles = await documentsList.FindFilesAsync("*foo*");
 ```
 
 Find files in a folder:
@@ -151,7 +152,7 @@ Find files in a folder:
 IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
 
 // Get files from folder whose name contains "bar"
-List<IFile> foundFiles = await documentsFolder.FindFilesAsync("bar");
+List<IFile> foundFiles = await documentsFolder.FindFilesAsync("*bar*");
 ```
 
 ## Getting file properties
