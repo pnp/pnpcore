@@ -185,21 +185,24 @@ foreach(var file in folder.Files.AsRequested())
 <p>The FindFiles method accepts a string value which is matched to any part of the filename using a case insensitive regular expression and returns all found matches.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.</p>
+<ul>
+<li>This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.</li>
+<li>It's important to use the * to indicate any wild cards in your search string</li>
+</ul>
 </div>
 <p>Find files in a list:</p>
 <pre><code class="lang-csharp">// Get a reference to a list
 IList documentsList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;);
 
 // Get files from the list whose name contains &quot;foo&quot;
-List&lt;IFile&gt; foundFiles = await documentsList.FindFilesAsync(&quot;foo&quot;);
+List&lt;IFile&gt; foundFiles = await documentsList.FindFilesAsync(&quot;*foo*&quot;);
 </code></pre>
 <p>Find files in a folder:</p>
 <pre><code class="lang-csharp">// Get a reference to a folder
 IFolder documentsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;Documents&quot;).FirstOrDefaultAsync();
 
 // Get files from folder whose name contains &quot;bar&quot;
-List&lt;IFile&gt; foundFiles = await documentsFolder.FindFilesAsync(&quot;bar&quot;);
+List&lt;IFile&gt; foundFiles = await documentsFolder.FindFilesAsync(&quot;*bar*&quot;);
 </code></pre>
 <h2 id="getting-file-properties">Getting file properties</h2>
 <p>A file in SharePoint has properties which can be requested by loading them on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html">IFile</a>. Below snippet shows some ways on how to load file properties.</p>
