@@ -444,7 +444,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
 
         [TestMethod]
-        public async Task SetSiteCollectionAdminsRegularSiteAddOnly_GroupifiedSite_Async()
+        public async Task SetSiteCollectionAdminsGroupifiedSiteAddOnly_Async()
         {
             //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
@@ -490,7 +490,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     };
 
                     // first create the site collection
-                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(teamSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title);
 
@@ -502,7 +502,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         ConnectSiteToGroupOptions groupConnectOptions = new(teamSiteToCreate.Url, alias, web.Title);
                         CreationOptions creationOptions = new CreationOptions() { UsingApplicationPermissions = false };
 
-                        newSiteContext.GetSiteCollectionManager().ConnectSiteCollectionToGroup(groupConnectOptions, creationOptions);
+                        await newSiteContext.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions, creationOptions);
 
                         // load site again to see if there's a group connected
                         await newSiteContext.Site.LoadAsync(p => p.GroupId);
@@ -538,7 +538,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 // Cleanup the created site collection
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSiteCollectionManager().DeleteSiteCollection(teamSiteToCreate.Url);
+                    await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(teamSiteToCreate.Url);
                 }
             }
         }
