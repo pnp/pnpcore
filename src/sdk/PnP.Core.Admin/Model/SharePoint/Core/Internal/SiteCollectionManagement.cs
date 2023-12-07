@@ -1,4 +1,4 @@
-﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
@@ -414,7 +414,6 @@ namespace PnP.Core.Admin.Model.SharePoint
                         siteProperties.Owner = sharePointAdminLoginNames[0];
                         siteProperties.SetOwnerWithoutUpdatingSecondaryAdmin = true;
                         await siteProperties.UpdateAsync(vanityUrlOptions).ConfigureAwait(false);
-                    }
 
                     // add the other users as secondary SharePoint admins
                     if (sharePointAdminLoginNames.Count > 1)
@@ -436,6 +435,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                         } 
                         
                         await AddOnly(userLoginNamesToAdd, siteId, tenantAdminContext).ConfigureAwait(false);
+                        }
+                    }
+
+                    if (siteProperties.GroupId != Guid.Empty)
+                    {
+                        await AddOnly(sharePointAdminLoginNames, siteId, tenantAdminContext).ConfigureAwait(false);
                     }
                 }
             }
