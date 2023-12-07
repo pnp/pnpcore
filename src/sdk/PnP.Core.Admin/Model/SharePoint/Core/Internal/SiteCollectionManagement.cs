@@ -415,31 +415,31 @@ namespace PnP.Core.Admin.Model.SharePoint
                         siteProperties.SetOwnerWithoutUpdatingSecondaryAdmin = true;
                         await siteProperties.UpdateAsync(vanityUrlOptions).ConfigureAwait(false);
 
-                    // add the other users as secondary SharePoint admins
-                    if (sharePointAdminLoginNames.Count > 1)
-                    {
-                        List<string> userLoginNamesToAdd = new List<string>();
-
-                        bool first = true;
-                        foreach (var sharePoint in sharePointAdminLoginNames)
+                        // add the other users as secondary SharePoint admins
+                        if (sharePointAdminLoginNames.Count > 1)
                         {
-                            if (first)
+                            List<string> userLoginNamesToAdd = new List<string>();
+
+                            bool first = true;
+                            foreach (var sharePoint in sharePointAdminLoginNames)
                             {
-                                // skip the first one
-                                first = false;
+                                if (first)
+                                {
+                                    // skip the first one
+                                    first = false;
+                                }
+                                else
+                                {
+                                    userLoginNamesToAdd.Add(sharePoint);
+                                }
                             }
-                            else
-                            {
-                                userLoginNamesToAdd.Add(sharePoint);
-                            }
-                        } 
-                        
-                        await AddOnly(userLoginNamesToAdd, siteId, tenantAdminContext).ConfigureAwait(false);
+
+                            await AddOnly(userLoginNamesToAdd, siteId, tenantAdminContext).ConfigureAwait(false);
                         }
                     }
-
-                    if (siteProperties.GroupId != Guid.Empty)
+                    else
                     {
+                        // for group connected sites we can only add secondary admins
                         await AddOnly(sharePointAdminLoginNames, siteId, tenantAdminContext).ConfigureAwait(false);
                     }
                 }

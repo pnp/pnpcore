@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Made it easier to set a `IField` internal name [jansenbe - Bert Jansen]
 - Leave 'Teamify' loop when Team already existed #1319 [jansenbe - Bert Jansen]
 - Fixed 'hot reload' warning when debugging [jansenbe - Bert Jansen]
+- Fix setting site collection admins for groupified sites #1323 [mloitzl - Martin Loitzl]
 
 ## [1.10.0]
 
