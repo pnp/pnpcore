@@ -184,7 +184,29 @@ await subFolder.DeleteAsync();
 <h2 id="getting-changes-for-a-folder">Getting changes for a folder</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IFolder</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
 <h2 id="copying-or-moving-folders">Copying or moving folders</h2>
+<p>A folder can be copied or moved into another SharePoint location and this can be done using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_">CopyToAsync</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_">MoveToAsync</a> methods.</p>
+<pre><code class="lang-csharp">string folderUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/customFolder&quot;;
+
+// Get a reference to the folder
+IFolder testFolder = await context.Web.GetFolderByServerRelativeUrlAsync(folderUrl);
+
+// Copy the Folder
+await testFolder.CopyToAsync($&quot;{context.Uri.PathAndQuery}/MyFolder&quot;);
+
+// Move the folder
+await testFolder.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyFolder&quot;);
+
+// Move the folder with options
+await testFolder.MoveToAsync($&quot;{context.Uri.PathAndQuery}/MyFolder&quot;,
+                            new MoveCopyOptions 
+                            { 
+                                KeepBoth = false
+                            });
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
 <p>To copy or move a folder you can use an asynchronous bulk file/folder copy/move via the <code>CreateCopyJobs</code> methods on <code>ISite</code>. See <a href="sites-copymovecontent.html">here</a> for more details.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
