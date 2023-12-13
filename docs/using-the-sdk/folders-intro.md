@@ -139,4 +139,29 @@ You can use the `GetChanges` methods on an `IFolder` to list all the changes. Se
 
 ## Copying or moving folders
 
-To copy or move a folder you can use an asynchronous bulk file/folder copy/move via the `CreateCopyJobs` methods on `ISite`. See [here](sites-copymovecontent.md) for more details.
+A folder can be copied or moved into another SharePoint location and this can be done using the [CopyToAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_) and [MoveToAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_) methods.
+
+```csharp
+string folderUrl = $"{context.Uri.PathAndQuery}/Shared Documents/customFolder";
+
+// Get a reference to the folder
+IFolder testFolder = await context.Web.GetFolderByServerRelativeUrlAsync(folderUrl);
+
+// Copy the Folder
+await testFolder.CopyToAsync($"{context.Uri.PathAndQuery}/MyFolder");
+
+// Move the folder
+await testFolder.MoveToAsync($"{context.Uri.PathAndQuery}/MyFolder");
+
+// Move the folder with options
+await testFolder.MoveToAsync($"{context.Uri.PathAndQuery}/MyFolder",
+                            new MoveCopyOptions 
+                            { 
+                                KeepBoth = false
+                            });
+```
+
+> [!Note]
+> To copy or move a folder you can use an asynchronous bulk file/folder copy/move via the `CreateCopyJobs` methods on `ISite`. See [here](sites-copymovecontent.md) for more details.
+
+
