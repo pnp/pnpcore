@@ -74,5 +74,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
 
+        /// <summary>
+        /// The time zone to use for the site.
+        /// </summary>
+        public TimeZone? TimeZone { get; set; }
     }
 }
