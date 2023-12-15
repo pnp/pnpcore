@@ -182,6 +182,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                 payload["Classification"] = siteToCreate.Classification ?? "";
             }
 
+            if (siteToCreate.TimeZone.HasValue)
+            {
+                payload.Add("TimeZoneId", (int)siteToCreate.TimeZone.Value);
+            }
+
+
             return await CreateSiteUsingSpoRestImplementationAsync(context, SiteCreationModel.SPSiteManagerCreate, payload, creationOptions).ConfigureAwait(false);
         }
 
