@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeZone = PnP.Core.Admin.Model.SharePoint.TimeZone;
 
 namespace PnP.Core.Admin.Test.SharePoint
 {
