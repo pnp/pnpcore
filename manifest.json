@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html",
-          "hash": "GO5ofjk4OWrkA2ja1HJ+RQn/gKp8rW6jMnZwKHGM6wU="
+          "hash": "1uQdAf33RizFXS2mBnw1QIRw2DAKW8HGcgee/zYiUzc="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommunicationSiteOptions.html",
-          "hash": "jLd94gnNN74PM6p8e3DstoDCjDVo93vK5GKHBiRKFoA="
+          "hash": "zOTV7GEfy41vl+1PP16Bj6ujCyledQhyyU34J94bdT4="
         }
       },
       "is_incremental": false,
@@ -978,7 +978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamSiteWithoutGroupOptions.html",
-          "hash": "UZUAF6rLaJ3ajWUyg5DUYTZ/Nif8X8LQ7hB3WQkPuyk="
+          "hash": "TmDF8mlIU602cZU8RLyC1pA+7oaTEacatkz/lQ4xrqg="
         }
       },
       "is_incremental": false,
