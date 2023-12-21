@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimeZone = PnP.Core.Admin.Model.SharePoint.TimeZone;
 
 namespace PnP.Core.Admin.Test.SharePoint
 {
@@ -1164,6 +1165,70 @@ namespace PnP.Core.Admin.Test.SharePoint
                     await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
                 }
                 TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
+        public async Task SetSiteCollectionWithTimeZome_Async()
+        {
+            //Time zone object to test with
+            var selectedTimeZone = TimeZone.UTCPLUS0200_JERUSALEM;
+
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        TimeZone = selectedTimeZone
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    var siteProperties = context.GetSiteCollectionManager().GetSiteCollectionProperties(context.Uri);
+
+                    //Validating time zone set as expected
+                    Assert.IsTrue(siteProperties.TimeZoneId == selectedTimeZone);
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1);
+                await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(communicationSiteToCreate.Url);
             }
         }
 
