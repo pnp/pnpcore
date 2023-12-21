@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+### Changed
+
+- Admin library: added support to specify the timezone when creating a site collection #1334 [kfircs - Kfir Chen]
+
 ## [1.11.0]
 
 ### Added

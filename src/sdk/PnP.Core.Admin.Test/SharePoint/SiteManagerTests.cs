@@ -1171,11 +1171,11 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task SetSiteCollectionWithTimeZome_Async()
         {
-            //Time zone object to test with
-            var selectedTimeZone = TimeZone.UTCPLUS0200_JERUSALEM;
-
             //TestCommon.Instance.Mocking = false;
             TestCommon.Instance.UseApplicationPermissions = false;
+
+            //Time zone object to test with
+            var selectedTimeZone = TimeZone.UTCPLUS0200_JERUSALEM;
 
             CommunicationSiteOptions communicationSiteToCreate = null;
 
@@ -1212,7 +1212,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
-                    var siteProperties = context.GetSiteCollectionManager().GetSiteCollectionProperties(context.Uri);
+                    var createdSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions);
+
+                    var siteProperties = context.GetSiteCollectionManager().GetSiteCollectionProperties(createdSiteContext.Uri);
 
                     //Validating time zone set as expected
                     Assert.IsTrue(siteProperties.TimeZoneId == selectedTimeZone);
