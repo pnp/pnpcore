@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Admin library: added support to specify the timezone when creating a site collection #1334 [kfircs - Kfir Chen]
+- Auth library: default access token retrieval log message to `debug` instead of `information` #1328 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 
