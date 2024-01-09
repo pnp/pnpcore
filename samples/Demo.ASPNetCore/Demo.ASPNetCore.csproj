@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.25.5" />
     <PackageReference Include="PnP.Core.Auth" Version="1.8.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
   </ItemGroup>
 
 </Project>
