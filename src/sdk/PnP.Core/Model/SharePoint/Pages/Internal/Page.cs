@@ -485,11 +485,18 @@ namespace PnP.Core.Model.SharePoint
                         // The site pages library has the CanvasContent1 column, using that to distinguish between Site Pages and other wiki page libraries
                         if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
                         {
-                            if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                            // Verify this is the "real" pages library, sites supporting Viva Connections have a second pages library (named Announcements) used to
+                            // store Viva Connections announcements
+                            if (list.IsPropertyAvailable(p => p.ListItemEntityTypeFullName) && list.ListItemEntityTypeFullName == "SP.Data.SitePagesItem")
                             {
-                                pagesLibrary = list;
+                                if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                                {
+                                    pagesLibrary = list;
+                                }
+
+                                // As there's only one real pages library we can bail out now
+                                break;
                             }
-                            break;
                         }
                     }
                 }
@@ -510,7 +517,11 @@ namespace PnP.Core.Model.SharePoint
                 {
                     foreach (var list in libraries)
                     {
-                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
+                        if (list.IsPropertyAvailable(p => p.Fields) && 
+                            list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null &&
+                            // Verify this is the "real" pages library, sites supporting Viva Connections have a second pages library (named Announcements) used to
+                            // store Viva Connections announcements
+                            list.ListItemEntityTypeFullName == "SP.Data.SitePagesItem")
                         {
                             pagesLibrary = list;
                             break;
