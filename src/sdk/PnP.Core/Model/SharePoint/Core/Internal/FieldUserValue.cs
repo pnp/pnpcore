@@ -162,7 +162,14 @@ namespace PnP.Core.Model.SharePoint
 
             if (properties.ContainsKey("title"))
             {
-                Title = properties["title"];
+                Title = properties["title"]; 
+                LookupValue = properties["title"];
+            }
+
+            // when using UserMulti fields the value is stored in the value property
+            if (properties.ContainsKey(properties["value"]))
+            {
+                LookupValue = properties["value"];
             }
 
             if (properties.ContainsKey("sip"))
