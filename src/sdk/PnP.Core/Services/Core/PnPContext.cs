@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// PnP Context class...the glue between the model and the data stores
     /// </summary>
-    public class PnPContext : IDisposable, IPnPContext
+    public class PnPContext : IPnPContext
     {
         #region Private fields
 
