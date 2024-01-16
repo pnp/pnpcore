@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-Creates the needed sites (communitation site with sub site + group connected team site with sub site and Team) for doing "live" testing of the PnP Microsoft 365 Library.
+Creates the needed sites (communication site with sub site + group connected team site with sub site and Team) for doing "live" testing of the PnP Microsoft 365 Library.
 
 This script creates:
 - A communication site named pnpcoresdktest with a sub site named subsite
-- A modern team site which uses the group name pnpcoresdktestgroup and has a sub site anmed subsite. The group connected to this site also does have a Team connected (teamified site)
+- A modern team site which uses the group name pnpcoresdktestgroup and has a sub site named subsite. The group connected to this site also does have a Team connected (teamified site)
 - a test document named test.docx
 
 Note: You do need to have an app catalog setup before running this script. Check if Get-PnPTenantAppCatalogUrl returns an app catalog url if you are in doubt
