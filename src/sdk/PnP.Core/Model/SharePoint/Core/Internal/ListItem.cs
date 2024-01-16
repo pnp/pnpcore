@@ -129,12 +129,22 @@ namespace PnP.Core.Model.SharePoint
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri) || !parentList.IsPropertyAvailable(p => p.TemplateType))
                 {
                     // Fall back to loading the RootFolder property if we can't determine the list name
-                    await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
-                    serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+                    serverRelativeUrl = await GetServerRelativeUrlAsync(parentList, serverRelativeUrl).ConfigureAwait(false);
                 }
                 else
                 {
-                    serverRelativeUrl = ListMetaDataMapper.RestEntityTypeNameToUrl(PnPContext.Uri, parentListTitle, parentList.TemplateType);
+                    if (parentList.TemplateType == ListTemplateType.Events)
+                    {
+                        // Depending on how the Events list is created it's url will be different: /sites/prov-2/lists/Events or /sites/prov-2/Events. The latter you'll
+                        // get when there was no Events list on the site and the user adds the Events web part to the site home page, in that case the Events list is created
+                        // using a different URL. To ensure we always have the valid URL we query the list server relative URL
+                        serverRelativeUrl = await GetServerRelativeUrlAsync(parentList, serverRelativeUrl).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        // Determine the server relative url of the list without roundtrip to the server
+                        serverRelativeUrl = ListMetaDataMapper.RestEntityTypeNameToUrl(PnPContext.Uri, parentListTitle, parentList.TemplateType);
+                    }
                 }
 
                 // drop the everything in front of _api as the batching logic will add that automatically
@@ -209,6 +219,13 @@ namespace PnP.Core.Model.SharePoint
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
             };
+        }
+
+        private static async Task<string> GetServerRelativeUrlAsync(List parentList, string serverRelativeUrl)
+        {
+            await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+            serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+            return serverRelativeUrl;
         }
         #endregion
 

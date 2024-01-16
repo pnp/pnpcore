@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Auth library: default access token retrieval log message to `debug` instead of `information` #1328 [jansenbe - Bert Jansen]
 - Viva Announcement Library resulted in two `pages` libaries breaking the page library detection logic #1343 [jansenbe - Bert Jansen]
 - Fix LookupValue handling for FromListDataAsStream in UserMulti field type #1348 [eduardpaul - Eduard Paul]
+- Fix adding Events (=calendar) list items when Events list was created at site root versus under /lists #1349 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 
