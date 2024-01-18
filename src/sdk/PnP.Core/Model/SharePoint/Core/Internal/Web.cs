@@ -2334,6 +2334,10 @@ namespace PnP.Core.Model.SharePoint
                 DatesInUtc = true,
             };
 
+            // Clear the cached item from previous runs
+            TaxonomyHiddenList.Items.Clear();
+
+            // Fetch the item
             await TaxonomyHiddenList.LoadItemsByCamlQueryAsync(camlQuery).ConfigureAwait(false);
             var items = TaxonomyHiddenList.Items.AsRequested();
 
