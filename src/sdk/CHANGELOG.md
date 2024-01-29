@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added missing members to "IPnPContext" to improve testability #1351 [fzbm - Florian Zink]
 - Upgrade to version 6.35.0 of System.IdentityModel.Tokens.Jwt [jansenbe - Bert Jansen]
 - GetWssIdForTermAsync returns wrong WssId if used multiple times on the same PnPContext instance #1355 [jansenbe - Bert Jansen]
+- ViewType2 updating error #1360 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 

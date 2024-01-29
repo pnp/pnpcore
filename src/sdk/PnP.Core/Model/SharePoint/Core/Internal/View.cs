@@ -57,6 +57,24 @@ namespace PnP.Core.Model.SharePoint
 
                 return new ApiCall($"{entity.SharePointGet}/Add", ApiType.SPORest, body);
             };
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            UpdateApiCallOverrideHandler = async (ApiCallRequest api) =>
+            {
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+
+                string bodyString = api.ApiCall.JsonBody;
+
+                // ViewType2 property must be set as string and not as integer
+                if (!string.IsNullOrEmpty(bodyString) && bodyString.Contains("\"ViewType2\":"))
+                {
+                    bodyString = bodyString.Replace($"\"ViewType2\": {(int)ViewType2}", $"\"ViewType2\": \"{ViewType2}\"");
+                    api.ApiCall = new ApiCall(api.ApiCall.Request, api.ApiCall.Type, bodyString, api.ApiCall.ReceivingProperty);
+                }                
+
+                return api;
+            };
+
         }
         #endregion
 

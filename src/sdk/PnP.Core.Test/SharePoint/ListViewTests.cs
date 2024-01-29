@@ -245,25 +245,50 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
 
-                var viewTitle = "PnPCoreTestViewType2CompactList";
-                var result = list.Views.Add(new ViewOptions()
+                IView result = null;
+
+                try
                 {
-                    Title = viewTitle,
-                    RowLimit = 3,
-                    ViewType2 = ViewType2.COMPACTLIST,
-                    ViewTypeKind = ViewTypeKind.Html
-                });
+                    var viewTitle = "PnPCoreTestViewType2CompactList";
+                    result = list.Views.Add(new ViewOptions()
+                    {
+                        Title = viewTitle,
+                        RowLimit = 3,
+                        ViewType2 = ViewType2.COMPACTLIST,
+                        ViewTypeKind = ViewTypeKind.Html
+                    });
 
-                Assert.IsNotNull(result);
-                Assert.AreEqual(viewTitle, result.Title);
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual(viewTitle, result.Title);
 
-                var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
-                Assert.IsNotNull(newView);
-                Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
+                    var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
+                    Assert.IsNotNull(newView);
+                    Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 
-                // Removes the view
-                await result.DeleteAsync();
+                    // Set viewtype2 
+                    newView.ViewType2 = ViewType2.NONE;
+                    newView.Update();
+
+                    list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
+                    Assert.IsNotNull(newView);
+                    Assert.IsTrue(newView.ViewType2 == ViewType2.NONE);
+
+                    // Update other view property
+                    newView.Title = "PnPCoreTestViewType2CompactListUpdated";
+                    newView.Update();
+
+                    list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == "PnPCoreTestViewType2CompactListUpdated");
+                    Assert.IsNotNull(newView);                    
+
+                }
+                finally
+                {
+                    // Removes the view
+                    await result.DeleteAsync();
+                }
 
             }
         }
