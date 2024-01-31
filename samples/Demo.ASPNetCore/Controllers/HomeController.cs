@@ -138,7 +138,7 @@ namespace Demo.ASPNetCore.Controllers
             return await _pnpContextFactory.CreateAsync(siteUrl,
                             new ExternalAuthenticationProvider((resourceUri, scopes) =>
                             {
-                                return _tokenAcquisition.GetAccessTokenForUserAsync(scopes).GetAwaiter().GetResult();
+                                return _tokenAcquisition.GetAccessTokenForUserAsync(scopes);
                             }
                             ));
         }
