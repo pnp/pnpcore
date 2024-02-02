@@ -117,61 +117,10 @@ namespace PnP.Core.Model.SharePoint
             AddApiCallHandler = async (keyValuePairs) =>
             {
                 var parentList = Parent.Parent as List;
-                // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = $"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{parentList.Id}')";
-
-                // sample parent list entity type name: DemolistList (skip last 4 chars)
-                // Sample parent library type name: MyDocs
-                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName) : null;
-
-                // If this list we're adding items to was not fetched from the server than throw an error
-                string serverRelativeUrl = null;
-                if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri) || !parentList.IsPropertyAvailable(p => p.TemplateType))
-                {
-                    // Fall back to loading the RootFolder property if we can't determine the list name
-                    serverRelativeUrl = await GetServerRelativeUrlAsync(parentList, serverRelativeUrl).ConfigureAwait(false);
-                }
-                else
-                {
-                    if (parentList.TemplateType == ListTemplateType.Events)
-                    {
-                        // Depending on how the Events list is created it's url will be different: /sites/prov-2/lists/Events or /sites/prov-2/Events. The latter you'll
-                        // get when there was no Events list on the site and the user adds the Events web part to the site home page, in that case the Events list is created
-                        // using a different URL. To ensure we always have the valid URL we query the list server relative URL
-                        serverRelativeUrl = await GetServerRelativeUrlAsync(parentList, serverRelativeUrl).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        // Determine the server relative url of the list without roundtrip to the server
-                        serverRelativeUrl = ListMetaDataMapper.RestEntityTypeNameToUrl(PnPContext.Uri, parentListTitle, parentList.TemplateType);
-                    }
-                }
-
-                // drop the everything in front of _api as the batching logic will add that automatically
-                var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
 
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
-
-                var decodedUrlFolderPath = serverRelativeUrl;
-                if (keyValuePairs.ContainsKey(FolderPath))
-                {
-                    if (keyValuePairs[FolderPath] != null)
-                    {
-                        var folderPath = keyValuePairs[FolderPath].ToString();
-                        if (!string.IsNullOrEmpty(folderPath))
-                        {
-                            if (folderPath.ToLower().StartsWith(serverRelativeUrl))
-                            {
-                                decodedUrlFolderPath = folderPath;
-                            }
-                            else
-                            {
-                                decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
-                            }
-                        }
-                    }
-                }
 
                 var underlyingObjectType = (int)FileSystemObjectType.File;
 
@@ -183,16 +132,24 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                body.listItemCreateInfo = new
-                {
-                    FolderPath = new
-                    {
-                        DecodedUrl = decodedUrlFolderPath
-                    },
-                    UnderlyingObjectType = underlyingObjectType
-                };
-
                 body.bNewDocumentUpdate = false;
+                // configure folderpath if folderpath key is present
+                if ((await TryGetDecodedUrlFolderPath(keyValuePairs,parentList).ConfigureAwait(false)) is string decodedUrlFolderPath
+                    && !string.IsNullOrEmpty(decodedUrlFolderPath))
+                {
+                    body.listItemCreateInfo=new {
+                        FolderPath = new
+                        {
+                            DecodedUrl = decodedUrlFolderPath
+                        },
+                        UnderlyingObjectType = underlyingObjectType
+                    };
+                }else{
+                    body.listItemCreateInfo = new
+                    {
+                        UnderlyingObjectType = underlyingObjectType
+                    };
+                }
 
                 if (Values.Any())
                 {
@@ -216,15 +173,47 @@ namespace PnP.Core.Model.SharePoint
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedTrue);
 
+                // drop the everything in front of _api as the batching logic will add that automatically
+                var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
             };
         }
 
-        private static async Task<string> GetServerRelativeUrlAsync(List parentList, string serverRelativeUrl)
+        /// <summary>
+        /// Tries to get the decoded URL for the folder path from the provided key-value pairs.
+        /// If the folder path starts with the server relative URL or it is an absolute URL, it is returned as is.
+        /// Otherwise, the server relative URL is added in front of the folder path.
+        /// The method ensures that the returned URL is an absolute URL.
+        /// </summary>
+        /// <param name="keyValuePairs">The key-value pairs that may contain the folder path.</param>
+        /// <param name="parentList">The parent list that contains the server relative URL.</param>
+        /// <returns>The decoded URL for the folder path, or null if the folder path is not found or is empty.</returns>
+        private static async Task<string> TryGetDecodedUrlFolderPath(Dictionary<string, object> keyValuePairs, List parentList)
+        {
+            if (!keyValuePairs.TryGetValue(FolderPath, out object folderPathObject)
+                || folderPathObject is not string folderPath
+                || string.IsNullOrEmpty(folderPath))
+            {
+                return null;
+            }
+
+            var webServerRelativeUrl= parentList.PnPContext.Uri.AbsolutePath.TrimEnd('/');
+            var decodedUrlFolderPath = folderPath.ToLower() switch
+            {
+                // If the folder path starts with the server relative url or it is absolute then we're good to go,
+                // otherwise we need to add the server relative url in front of the folder path
+                string s when s.StartsWith(webServerRelativeUrl,StringComparison.OrdinalIgnoreCase) 
+                    || s.StartsWith("https://",StringComparison.OrdinalIgnoreCase) => folderPath,
+                _ => $"{await GetServerRelativeUrlAsync(parentList).ConfigureAwait(false)}/{folderPath.TrimStart('/')}"
+            };
+            return UrlUtility.EnsureAbsoluteUrl(parentList.PnPContext.Web.Url, decodedUrlFolderPath).ToString();
+        }
+
+        private static async Task<string> GetServerRelativeUrlAsync(List parentList)
         {
             await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
-            serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+            var serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
             return serverRelativeUrl;
         }
         #endregion
