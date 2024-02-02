@@ -29,59 +29,59 @@ namespace PnP.Core.Model.SharePoint
             return entityNameToUse;
         }
 
-        internal static string RestEntityTypeNameToUrl(Uri pnpContextUri, string restEntityTypeName, ListTemplateType listTemplateType)
-        {
-            var contextUrl = pnpContextUri.ToString().TrimEnd('/');
-            (bool isList, _, bool isCatalog) = DetectListType(listTemplateType);
+        //internal static string RestEntityTypeNameToUrl(Uri pnpContextUri, string restEntityTypeName, ListTemplateType listTemplateType)
+        //{
+        //    var contextUrl = pnpContextUri.ToString().TrimEnd('/');
+        //    (bool isList, _, bool isCatalog) = DetectListType(listTemplateType);
 
-            // Translate special chars back to their regular values
-            if (isCatalog)
-            {
-                restEntityTypeName = restEntityTypeName.Replace("OData__x005f_catalogs_x002f_", "");
-            }
-            var listUrl = restEntityTypeName.Replace("_x005f_", "_").Replace("_x0020_", " ");
+        //    // Translate special chars back to their regular values
+        //    if (isCatalog)
+        //    {
+        //        restEntityTypeName = restEntityTypeName.Replace("OData__x005f_catalogs_x002f_", "");
+        //    }
+        //    var listUrl = restEntityTypeName.Replace("_x005f_", "_").Replace("_x0020_", " ");
 
-            if (listTemplateType == ListTemplateType.UserInformation)
-            {
-                listUrl = "users";
-            }
+        //    if (listTemplateType == ListTemplateType.UserInformation)
+        //    {
+        //        listUrl = "users";
+        //    }
 
-            if (isList)
-            {
-                // Regular list
+        //    if (isList)
+        //    {
+        //        // Regular list
 
-                // Drop List suffix
-                listUrl = listUrl.Substring(0, listUrl.Length - 4);
-                return $"{contextUrl}/lists/{listUrl}";
-            }
-            else if (isCatalog)
-            {
-                // catalog
-                return $"{contextUrl}/_catalogs/{listUrl}";
-            }
-            else
-            {
-                // library
-                return $"{contextUrl}/{listUrl}";
-            }
-        }
+        //        // Drop List suffix
+        //        listUrl = listUrl.Substring(0, listUrl.Length - 4);
+        //        return $"{contextUrl}/lists/{listUrl}";
+        //    }
+        //    else if (isCatalog)
+        //    {
+        //        // catalog
+        //        return $"{contextUrl}/_catalogs/{listUrl}";
+        //    }
+        //    else
+        //    {
+        //        // library
+        //        return $"{contextUrl}/{listUrl}";
+        //    }
+        //}
 
-        internal static bool IsList(ListTemplateType listTemplateType)
-        {
-            (bool isList, _, _) = DetectListType(listTemplateType);
-            return isList;
-        }
+        //internal static bool IsList(ListTemplateType listTemplateType)
+        //{
+        //    (bool isList, _, _) = DetectListType(listTemplateType);
+        //    return isList;
+        //}
 
-        internal static bool IsLibrary(ListTemplateType listTemplateType)
-        {
-            (_, bool isLibrary, _) = DetectListType(listTemplateType);
-            return isLibrary;
-        }
-        internal static bool IsCatalog(ListTemplateType listTemplateType)
-        {
-            (_, _, bool isCatalog) = DetectListType(listTemplateType);
-            return isCatalog;
-        }
+        //internal static bool IsLibrary(ListTemplateType listTemplateType)
+        //{
+        //    (_, bool isLibrary, _) = DetectListType(listTemplateType);
+        //    return isLibrary;
+        //}
+        //internal static bool IsCatalog(ListTemplateType listTemplateType)
+        //{
+        //    (_, _, bool isCatalog) = DetectListType(listTemplateType);
+        //    return isCatalog;
+        //}
 
         internal static (bool isList, bool isLibrary, bool isCatalog) DetectListType(ListTemplateType listTemplateType)
         {

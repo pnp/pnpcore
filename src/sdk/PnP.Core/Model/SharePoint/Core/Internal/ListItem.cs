@@ -134,17 +134,20 @@ namespace PnP.Core.Model.SharePoint
 
                 body.bNewDocumentUpdate = false;
                 // configure folderpath if folderpath key is present
-                if ((await TryGetDecodedUrlFolderPath(keyValuePairs,parentList).ConfigureAwait(false)) is string decodedUrlFolderPath
+                if ((await TryGetDecodedUrlFolderPathAsync(keyValuePairs, parentList).ConfigureAwait(false)) is string decodedUrlFolderPath
                     && !string.IsNullOrEmpty(decodedUrlFolderPath))
                 {
-                    body.listItemCreateInfo=new {
+                    body.listItemCreateInfo = new
+                    {
                         FolderPath = new
                         {
                             DecodedUrl = decodedUrlFolderPath
                         },
                         UnderlyingObjectType = underlyingObjectType
                     };
-                }else{
+                }
+                else
+                {
                     body.listItemCreateInfo = new
                     {
                         UnderlyingObjectType = underlyingObjectType
@@ -189,7 +192,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="keyValuePairs">The key-value pairs that may contain the folder path.</param>
         /// <param name="parentList">The parent list that contains the server relative URL.</param>
         /// <returns>The decoded URL for the folder path, or null if the folder path is not found or is empty.</returns>
-        private static async Task<string> TryGetDecodedUrlFolderPath(Dictionary<string, object> keyValuePairs, List parentList)
+        private static async Task<string> TryGetDecodedUrlFolderPathAsync(Dictionary<string, object> keyValuePairs, List parentList)
         {
             if (!keyValuePairs.TryGetValue(FolderPath, out object folderPathObject)
                 || folderPathObject is not string folderPath
@@ -198,13 +201,13 @@ namespace PnP.Core.Model.SharePoint
                 return null;
             }
 
-            var webServerRelativeUrl= parentList.PnPContext.Uri.AbsolutePath.TrimEnd('/');
+            var webServerRelativeUrl = parentList.PnPContext.Uri.AbsolutePath.TrimEnd('/');
             var decodedUrlFolderPath = folderPath.ToLower() switch
             {
                 // If the folder path starts with the server relative url or it is absolute then we're good to go,
                 // otherwise we need to add the server relative url in front of the folder path
-                string s when s.StartsWith(webServerRelativeUrl,StringComparison.OrdinalIgnoreCase) 
-                    || s.StartsWith("https://",StringComparison.OrdinalIgnoreCase) => folderPath,
+                string s when s.StartsWith(webServerRelativeUrl, StringComparison.OrdinalIgnoreCase)
+                    || s.StartsWith("https://", StringComparison.OrdinalIgnoreCase) => folderPath,
                 _ => $"{await GetServerRelativeUrlAsync(parentList).ConfigureAwait(false)}/{folderPath.TrimStart('/')}"
             };
             return UrlUtility.EnsureAbsoluteUrl(parentList.PnPContext.Web.Url, decodedUrlFolderPath).ToString();
