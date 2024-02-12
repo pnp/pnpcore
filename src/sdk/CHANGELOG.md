@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetWssIdForTermAsync returns wrong WssId if used multiple times on the same PnPContext instance #1355 [jansenbe - Bert Jansen]
 - ViewType2 updating error #1360 [jansenbe - Bert Jansen]
 - Improved approach for getting the listitem folderpath #1353 [4ndri - Andri Capol]
+- Ensure the finishupload endpoint is always called #1387 [alexchx - Alex Chen]
 
 ## [1.11.0]
 
