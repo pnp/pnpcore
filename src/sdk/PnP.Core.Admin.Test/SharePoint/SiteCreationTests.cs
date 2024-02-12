@@ -500,6 +500,96 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateTeamSiteAdvancedUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Get a list of available sensitivity labels
+                    var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
+                    var siteLabel = labels.FirstOrDefault();
+                    Guid sensitivityLabelId = Guid.Empty;
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+
+                        if (siteLabel != null)
+                        {
+                            sensitivityLabelId = siteLabel.Id;
+                        }
+
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias },
+                            { "SensitivityLabelId", sensitivityLabelId.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                        sensitivityLabelId = Guid.Parse(TestManager.GetProperties(context)["SensitivityLabelId"]);
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        IsPublic = true,
+                        SensitivityLabelId = sensitivityLabelId
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
+                        Assert.IsTrue(web.Description == teamSiteToCreate.Description);
+                        Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+
+                        var site = await newSiteContext.Site.GetAsync(p => p.SensitivityLabelId);
+                        Assert.IsTrue(site.SensitivityLabelId == sensitivityLabelId);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
+
+            }
+        }
+
+        [TestMethod]
         public async Task CreateTeamSiteUsingApplicationPermissions()
         {
             //TestCommon.Instance.Mocking = false;
@@ -575,6 +665,8 @@ namespace PnP.Core.Admin.Test.SharePoint
 
             }
         }
+
+
 
         [TestMethod]
         public async Task CreateTeamSiteUsingEmptyDescriptionApplicationPermissions()
@@ -858,20 +950,33 @@ namespace PnP.Core.Admin.Test.SharePoint
                     await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
                     var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
 
+                    // Get a list of available sensitivity labels
+                    var labels = await SensitivityLabelManager.GetLabelsUsingApplicationPermissionsAsync(context);
+                    var siteLabel = labels.FirstOrDefault();
+                    Guid sensitivityLabelId = Guid.Empty;
+
                     // Persist the used site url as we need to have the same url when we run an offline test
                     string alias;
                     if (!TestCommon.Instance.Mocking)
                     {
                         alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+
+                        if (siteLabel != null)
+                        {
+                            sensitivityLabelId = siteLabel.Id;
+                        }
+
                         Dictionary<string, string> properties = new Dictionary<string, string>
                         {
-                            { "Alias", alias }
+                            { "Alias", alias },
+                            { "SensitivityLabelId", sensitivityLabelId.ToString() }
                         };
                         TestManager.SaveProperties(context, properties);
                     }
                     else
                     {
                         alias = TestManager.GetProperties(context)["Alias"];
+                        sensitivityLabelId = Guid.Parse(TestManager.GetProperties(context)["SensitivityLabelId"]);
                     }
 
                     teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
@@ -887,6 +992,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         ConnectorsDisabled = true,
                         SubscribeMembersToCalendarEventsDisabled = true,
                         SubscribeNewGroupMembers = true,
+                        SensitivityLabelId = sensitivityLabelId
                     };
 
                     SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
@@ -903,6 +1009,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                         var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Description == teamSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+
+                        var site = await newSiteContext.Site.GetAsync(p => p.SensitivityLabelId);
+                        Assert.IsTrue(site.SensitivityLabelId == sensitivityLabelId);
                     }
 
                     if (context.Mode == TestMode.Record)

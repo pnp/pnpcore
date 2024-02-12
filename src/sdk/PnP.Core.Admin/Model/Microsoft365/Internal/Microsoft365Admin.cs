@@ -210,7 +210,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
                 throw new ArgumentException($"{nameof(graphGroupOptions)}.{nameof(graphGroupOptions.MailNickname)}");
             }
 
-            // check whether sensitivity label exists
+            // Check whether sensitivity label exists
             var sensitivityLabelOption = graphGroupOptions.CreationOptions.FirstOrDefault(i => i.StartsWith("SensitivityLabel:"));
             if (sensitivityLabelOption != null)
             {
@@ -291,14 +291,11 @@ namespace PnP.Core.Admin.Model.Microsoft365
                 }
             }
             
-            // apply group sensitivity label by updating related site properties
+            // Apply group sensitivity label by updating related site properties
             if (sensitivityLabelOption != null)
             {
-                await responseContext.Site.LoadAsync(i => i.Url).ConfigureAwait(false);
-                var props = context.GetSiteCollectionManager().GetSiteCollectionProperties(responseContext.Site.Url, null);
-                var sensitivityLabelValue = sensitivityLabelOption.Replace("SensitivityLabel:", string.Empty);
-                props.SensitivityLabel2 = sensitivityLabelValue;
-            
+                var props = context.GetSiteCollectionManager().GetSiteCollectionProperties(responseContext.Uri, null);
+                props.SensitivityLabel2 = sensitivityLabelOption.Replace("SensitivityLabel:", string.Empty);             
                 await props.UpdateAsync(null).ConfigureAwait(false);
             }
             return responseContext;
