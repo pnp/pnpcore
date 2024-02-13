@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - ViewType2 updating error #1360 [jansenbe - Bert Jansen]
 - Improved approach for getting the listitem folderpath #1353 [4ndri - Andri Capol]
 - Ensure the finishupload endpoint is always called #1387 [alexchx - Alex Chen]
-- Add code to set sensitivity label to a group via updating associated site properties #1389 [wilecoyotegenius - Konrad K.]
+- Admin library: Add code to set sensitivity label to a group via updating associated site properties #1389 [wilecoyotegenius - Konrad K.]
 
 ## [1.11.0]
 
