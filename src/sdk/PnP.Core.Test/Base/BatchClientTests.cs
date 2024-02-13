@@ -538,13 +538,26 @@ namespace PnP.Core.Test.Base
                 {
                     await myList.Items.DeleteByIdBatchAsync(i);
                 }
+
+                var batchRequests = new SortedList<int, BatchRequest>(context.CurrentBatch.Requests);
+
                 // Execute the batch without throwing an error, should get a result collection back
-                var batchResponse = await context.ExecuteAsync(false);
+                var batchId = context.CurrentBatch.Id;
+                var batchResponse = await context.ExecuteAsync(false);                
+
+                var executedBatch = context.BatchClient.GetBatchById(batchId);
 
                 Assert.IsTrue(batchResponse != null);
                 Assert.IsTrue(batchResponse.Count == 3);
                 var errorResults = batchResponse.Where(p => p.Error != null);
                 Assert.IsTrue(errorResults.Count() == 3);
+
+                // Find the corresponding batch requests
+                foreach (var errorResult in errorResults)
+                {
+                    var batchRequest = batchRequests.FirstOrDefault(p => p.Value.Id == errorResult.BatchRequestId);
+                    Assert.IsTrue(batchRequest.Value != null);
+                }
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
