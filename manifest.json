@@ -7986,7 +7986,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Batch.html",
-          "hash": "6p9/XYATYfy7r0E+plICL6W8W8/rc1fbcGBCY8fZSYc="
+          "hash": "d4PIm3xcXGEujzUdix6MwCPkNgwIqVpoTFQ4QZEHKj4="
         }
       },
       "is_incremental": false,
@@ -7998,7 +7998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.BatchRequest.html",
-          "hash": "9seQgOlyZgkBUncHIHJcw0LEPOW5IMEKHlTzx6v/ehA="
+          "hash": "XN0658vQzrMAA7NHOS0A2f/QEiudjKREgAHVDHCUETM="
         }
       },
       "is_incremental": false,
@@ -8010,7 +8010,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.BatchResult.html",
-          "hash": "Rzsl/IOjsO8BxjK8I/WXdU0PXf8iCrtswqs9dVwBSqs="
+          "hash": "5r3znR89T5CCXjLIptIxSwURfgQSwhqEx01Verj/UDc="
         }
       },
       "is_incremental": false,
