@@ -270,6 +270,48 @@ foreach(var batchResponse in batchResponses)
 }
 
 </code></pre>
+<p>It's also possible to track additional request information (e.g. the id of the deleted items) and then link the failing requests in a batch back to that tracked information. Below code snippet shows how this could be implemented.</p>
+<pre><code class="lang-csharp">// Create a list
+var myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+// Add 150 items to the list
+for (int i = 1; i &lt;= 150; i++)
+{
+    Dictionary&lt;string, object&gt; values = new Dictionary&lt;string, object&gt;
+        {
+            { &quot;Title&quot;, $&quot;Item {i}&quot; }
+        };
+
+    await myList.Items.AddBatchAsync(values);
+}
+await context.ExecuteAsync();
+
+// Delete some items from within both 1..100 and 101..150 sets
+await myList.Items.DeleteByIdBatchAsync(5);
+await myList.Items.DeleteByIdBatchAsync(50);
+await myList.Items.DeleteByIdBatchAsync(125);
+await context.ExecuteAsync();
+
+var batch = context.NewBatch();
+
+// Sample on how to track additional information for a batch request
+Dictionary&lt;Guid, int&gt; deletedListItemIds = new();
+
+for (int i = 1; i &lt;= 150; i++)
+{
+    await myList.Items.DeleteByIdBatchAsync(batch, i);
+    deletedListItemIds.Add(batch.Requests.Last().Value.Id, i);
+}
+
+// Execute the batch without throwing an error, should get a result collection back
+var batchResponse = await context.ExecuteAsync(batch, false);                
+
+// Find the corresponding batch requests
+foreach (var errorResult in errorResults)
+{
+    var failedListItemIdDelete = deletedListItemIds.FirstOrDefault(p=&gt; p.Key == errorResult.BatchRequestId).Value;
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
