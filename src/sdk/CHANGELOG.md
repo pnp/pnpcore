@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Ensure the finishupload endpoint is always called #1387 [alexchx - Alex Chen]
 - Admin library: Add code to set sensitivity label to a group via updating associated site properties #1389 [wilecoyotegenius - Konrad K.]
 - Expose the `BatchRequest.Id` property and include it in the corresponding `BatchResponse` to enable more advanced batch handling scenarios #1374 [jansenbe - Bert Jansen]
+- Admin library: fixed issues with loading SharePoint Add-In and Azure ACS principal permissions when the payload exceeded 500 items [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 

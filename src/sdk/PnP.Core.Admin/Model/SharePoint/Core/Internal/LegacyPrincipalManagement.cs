@@ -46,71 +46,74 @@ namespace PnP.Core.Admin.Model.SharePoint
                     await LoadLegacyPrincipalsAsync(legacyPrincipals, null, serverRelativeUrlBuckets, tenantAdminContext).ConfigureAwait(false);
                 }
 
-                var json = new
+                foreach (var serverRelativeUrlBucket in serverRelativeUrlBuckets)
                 {
-                    serverRelativeUrls = serverRelativeUrlsToCheck,
-                }.AsExpando();
-
-                var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-
-                // Get the AddIns
-                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/AvailableAddIns", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
-
-                var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
-                if (jsonResponse.TryGetProperty("addins", out JsonElement addIns) && addIns.ValueKind == JsonValueKind.Array)
-                {
-                    foreach (var addIn in addIns.EnumerateArray())
+                    var json = new
                     {
-                        // Skip some SPFx solutions that accidently might show up (API fix coming)
-                        if (addIn.GetProperty("appIdentifier").GetString().Contains("|ms.sp.int|", StringComparison.InvariantCultureIgnoreCase) && 
-                            addIn.GetProperty("appWebId").GetGuid() == Guid.Empty)
-                        {
-                            continue;
-                        }
+                        serverRelativeUrls = serverRelativeUrlBucket,
+                    }.AsExpando();
 
-                        SharePointAddIn sharePointAddIn = new()
-                        {
-                            AppIdentifier = addIn.GetProperty("appIdentifier").GetString(),
-                            ServerRelativeUrl = new Uri(addIn.GetProperty("currentWebUrl").GetString()).PathAndQuery,
-                            AppInstanceId = addIn.GetProperty("appInstanceId").GetGuid(),
-                            AppSource = (SharePointAddInSource)Enum.Parse(typeof(SharePointAddInSource), addIn.GetProperty("appSource").GetString()),
-                            AppWebFullUrl = addIn.GetProperty("appWebFullUrl").GetString(),
-                            AppWebId = addIn.GetProperty("appWebId").GetGuid(),
-                            AssetId = addIn.GetProperty("assetId").GetString(),
-                            CreationTime = addIn.GetProperty("creationTimeUtc").GetDateTime(),
-                            CurrentSiteId = addIn.GetProperty("currentSiteId").GetGuid(),
-                            CurrentWebId = addIn.GetProperty("currentWebId").GetGuid(),
-                            CurrentWebName = addIn.GetProperty("currentWebName").GetString(),
-                            CurrentWebFullUrl = addIn.GetProperty("currentWebUrl").GetString(),
-                            InstalledSiteId = addIn.GetProperty("installedSiteId").GetGuid(),
-                            InstalledWebId = addIn.GetProperty("installedWebId").GetGuid(),
-                            InstalledWebName = addIn.GetProperty("installedWebName").GetString(),
-                            InstalledWebFullUrl = addIn.GetProperty("installedWebUrl").GetString(),
-                            InstalledBy = addIn.GetProperty("installedBy").GetString(),
-                            LaunchUrl = addIn.GetProperty("launchUrl").GetString(),
-                            LicensePurchaseTime = addIn.GetProperty("licensePurchaseTime").ValueKind == JsonValueKind.Null ? DateTime.MinValue : addIn.GetProperty("licensePurchaseTime").GetDateTime(),
-                            Locale = addIn.GetProperty("locale").GetString(),
-                            ProductId = addIn.GetProperty("productId").GetGuid(),
-                            PurchaserIdentity = addIn.GetProperty("purchaserIdentity").GetString(),
-                            Status = (SharePointAddInStatus)Enum.Parse(typeof(SharePointAddInStatus), addIn.GetProperty("status").GetString()),
-                            TenantAppData = addIn.GetProperty("tenantAppData").GetString(),
-                            TenantAppDataUpdateTime = addIn.GetProperty("tenantAppDataUpdateTime").ValueKind == JsonValueKind.Null ? DateTime.MinValue : addIn.GetProperty("tenantAppDataUpdateTime").GetDateTime(),
-                            Title = addIn.GetProperty("title").GetString(),
-                        };
+                    var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
 
-                        if (loadLegacyPrincipalData)
+                    // Get the AddIns
+                    var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/AvailableAddIns", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+
+                    var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
+                    if (jsonResponse.TryGetProperty("addins", out JsonElement addIns) && addIns.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var addIn in addIns.EnumerateArray())
                         {
-                            // Complement the AddIn with the permission related information
-                            var legacyPrincipal = legacyPrincipals.FirstOrDefault(p => p.AppIdentifier == sharePointAddIn.AppIdentifier && p.ServerRelativeUrl == sharePointAddIn.ServerRelativeUrl);
-                            if (legacyPrincipal != null)
+                            // Skip some SPFx solutions that accidently might show up (API fix coming)
+                            if (addIn.GetProperty("appIdentifier").GetString().Contains("|ms.sp.int|", StringComparison.InvariantCultureIgnoreCase) &&
+                                addIn.GetProperty("appWebId").GetGuid() == Guid.Empty)
                             {
-                                sharePointAddIn.SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions;
-                                sharePointAddIn.TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions;
-                                sharePointAddIn.AllowAppOnly = legacyPrincipal.AllowAppOnly;
+                                continue;
                             }
-                        }
 
-                        sharePointAddIns.Add(sharePointAddIn);
+                            SharePointAddIn sharePointAddIn = new()
+                            {
+                                AppIdentifier = addIn.GetProperty("appIdentifier").GetString(),
+                                ServerRelativeUrl = new Uri(addIn.GetProperty("currentWebUrl").GetString()).PathAndQuery,
+                                AppInstanceId = addIn.GetProperty("appInstanceId").GetGuid(),
+                                AppSource = (SharePointAddInSource)Enum.Parse(typeof(SharePointAddInSource), addIn.GetProperty("appSource").GetString()),
+                                AppWebFullUrl = addIn.GetProperty("appWebFullUrl").GetString(),
+                                AppWebId = addIn.GetProperty("appWebId").GetGuid(),
+                                AssetId = addIn.GetProperty("assetId").GetString(),
+                                CreationTime = addIn.GetProperty("creationTimeUtc").GetDateTime(),
+                                CurrentSiteId = addIn.GetProperty("currentSiteId").GetGuid(),
+                                CurrentWebId = addIn.GetProperty("currentWebId").GetGuid(),
+                                CurrentWebName = addIn.GetProperty("currentWebName").GetString(),
+                                CurrentWebFullUrl = addIn.GetProperty("currentWebUrl").GetString(),
+                                InstalledSiteId = addIn.GetProperty("installedSiteId").GetGuid(),
+                                InstalledWebId = addIn.GetProperty("installedWebId").GetGuid(),
+                                InstalledWebName = addIn.GetProperty("installedWebName").GetString(),
+                                InstalledWebFullUrl = addIn.GetProperty("installedWebUrl").GetString(),
+                                InstalledBy = addIn.GetProperty("installedBy").GetString(),
+                                LaunchUrl = addIn.GetProperty("launchUrl").GetString(),
+                                LicensePurchaseTime = addIn.GetProperty("licensePurchaseTime").ValueKind == JsonValueKind.Null ? DateTime.MinValue : addIn.GetProperty("licensePurchaseTime").GetDateTime(),
+                                Locale = addIn.GetProperty("locale").GetString(),
+                                ProductId = addIn.GetProperty("productId").GetGuid(),
+                                PurchaserIdentity = addIn.GetProperty("purchaserIdentity").GetString(),
+                                Status = (SharePointAddInStatus)Enum.Parse(typeof(SharePointAddInStatus), addIn.GetProperty("status").GetString()),
+                                TenantAppData = addIn.GetProperty("tenantAppData").GetString(),
+                                TenantAppDataUpdateTime = addIn.GetProperty("tenantAppDataUpdateTime").ValueKind == JsonValueKind.Null ? DateTime.MinValue : addIn.GetProperty("tenantAppDataUpdateTime").GetDateTime(),
+                                Title = addIn.GetProperty("title").GetString(),
+                            };
+
+                            if (loadLegacyPrincipalData)
+                            {
+                                // Complement the AddIn with the permission related information
+                                var legacyPrincipal = legacyPrincipals.FirstOrDefault(p => p.AppIdentifier == sharePointAddIn.AppIdentifier && p.ServerRelativeUrl == sharePointAddIn.ServerRelativeUrl);
+                                if (legacyPrincipal != null)
+                                {
+                                    sharePointAddIn.SiteCollectionScopedPermissions = legacyPrincipal.SiteCollectionScopedPermissions;
+                                    sharePointAddIn.TenantScopedPermissions = legacyPrincipal.TenantScopedPermissions;
+                                    sharePointAddIn.AllowAppOnly = legacyPrincipal.AllowAppOnly;
+                                }
+                            }
+
+                            sharePointAddIns.Add(sharePointAddIn);
+                        }
                     }
                 }
             }
@@ -162,7 +165,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     var json = new
                     {
-                        appIds,
+                        appIds = appIdBucket,
                     }.AsExpando();
 
                     var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
@@ -447,7 +450,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 var json = new
                 {
-                    addins = addinsToQuery
+                    addins = addInsToQueryBucket
                 }.AsExpando();
 
                 var body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
