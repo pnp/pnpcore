@@ -52,6 +52,11 @@ namespace PnP.Core.Model.Security
         public bool IsSiteAdmin { get; }
 
         /// <summary>
+        /// Returns the collection of <see cref="ISharePointGroup"/> for this user
+        /// </summary>
+        public ISharePointGroupCollection Groups { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
@@ -105,5 +110,6 @@ namespace PnP.Core.Model.Security
         /// <param name="names"></param>
         /// <returns></returns>
         public Task<bool> RemoveRoleDefinitionsAsync(params string[] names);
+
     }
 }

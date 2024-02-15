@@ -64,6 +64,8 @@ namespace PnP.Core.Model.Security
 
         public bool IsSiteAdmin { get => GetValue<bool>(); set => SetValue(value); }
 
+        public ISharePointGroupCollection Groups { get => GetModelCollectionValue<ISharePointGroupCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = int.Parse(value.ToString()); }
 

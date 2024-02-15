@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Add `Groups` property to `ISharePointUser` #1363 [jansenbe - Bert Jansen]
+
 ### Changed
 
 - Admin library: added support to specify the timezone when creating a site collection #1334 [kfircs - Kfir Chen]
