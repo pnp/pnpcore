@@ -305,6 +305,14 @@ namespace PnP.Core.Services
                                     TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
                                 }
                             }
+                            else if (metadataBasedObject is ListItem)
+                            {
+                                var commentCollection = (metadataBasedObject as ListItem).Comments;
+                                if (commentCollection != null)
+                                {
+                                    TrackAndUpdateMetaData(commentCollection as IMetadataExtensible, property);
+                                }
+                            }
                         }
                         else if (useOverflowField)
                         {

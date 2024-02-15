@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Expose the `BatchRequest.Id` property and include it in the corresponding `BatchResponse` to enable more advanced batch handling scenarios #1374 [jansenbe - Bert Jansen]
 - Admin library: fixed issues with loading SharePoint Add-In and Azure ACS principal permissions when the payload exceeded 500 items [jansenbe - Bert Jansen]
 - GetUserEffectivePermissions not working with External accounts #1350 [jansenbe - Bert Jansen]
+- GetComments() only return maximum of 30 comments. It used to return all comments. #1361 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 

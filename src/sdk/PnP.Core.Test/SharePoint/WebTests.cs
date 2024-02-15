@@ -2242,7 +2242,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetEffectiveExternalUserPermissionsAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var basePermissions = await context.Web.GetUserEffectivePermissionsAsync("bjansen_microsoft.com#ext#@bertonline.onmicrosoft.com");
