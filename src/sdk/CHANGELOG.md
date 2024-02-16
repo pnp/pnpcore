@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Add `Groups` property to `ISharePointUser` #1363 [jansenbe - Bert Jansen]
+- Added `DeleteAll`, `DeleteByID`, `DeleteByLabel`, `RecycleByID`, `RecycleByLabel` and `RestoreByLabel` methods for `IFileVersionCollection` #1375 [jansenbe - Bert Jansen]
 
 ### Changed
 

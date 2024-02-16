@@ -2218,6 +2218,841 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region File versions
+        [TestMethod]
+        public async Task GetRecycleDeleteFileVersionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete a version
+                    documentWithVersions.Versions.RecycleById(versions.ElementAt(1).Id);
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(3, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(2).VersionLabel);
+
+                    // Test batch recycle
+                    documentWithVersions.Versions.RecycleByIdBatch(versions.ElementAt(1).Id);
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(2, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(1).VersionLabel);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteFileVersionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete a version
+                    documentWithVersions.Versions.DeleteById(versions.ElementAt(1).Id);
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(3, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(2).VersionLabel);
+
+                    // Test batch recycle
+                    documentWithVersions.Versions.DeleteByIdBatch(versions.ElementAt(1).Id);
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(2, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(1).VersionLabel);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteFileVersionByLabelTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete a version
+                    documentWithVersions.Versions.DeleteByLabel("0.2");
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(3, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(2).VersionLabel);
+
+                    // Test batch recycle
+                    documentWithVersions.Versions.DeleteByLabelBatch("0.3");
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(2, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(1).VersionLabel);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteAllVersionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete all version
+                    documentWithVersions.Versions.DeleteAll();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(0, versions.Count);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteAllVersionsBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete all version
+                    documentWithVersions.Versions.DeleteAllBatch();
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(0, versions.Count);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFileVersionByLabelTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // delete a version
+                    documentWithVersions.Versions.RecycleByLabel("0.2");
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(3, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(2).VersionLabel);
+
+                    // Test batch recycle
+                    documentWithVersions.Versions.RecycleByLabelBatch("0.3");
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(2, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(1).VersionLabel);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task RestoreFileVersionByLabelTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+
+                    const string fileContent1 = "PnP Rocks !!!";
+                    const string fileContent2 = "BlahBlahBlah???";
+
+                    var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                    var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                    string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                    IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+
+                    // Create 2 additional minor versions
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync();
+
+                    // Create major version
+                    await testDocument.CheckoutAsync();
+                    testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                    await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+
+                    // Create another major version
+                    await testDocument.CheckoutAsync();
+                    await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+
+                    IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(4, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                    // restore the version 0.2 again
+                    documentWithVersions.Versions.RestoreByLabel("0.2");
+
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(1, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.1", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(5, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+                    Assert.AreEqual("2.0", versions.ElementAt(4).VersionLabel);
+
+                    documentWithVersions.Versions.RestoreByLabelBatch("0.3");
+                    context.Execute();
+
+                    // Load the versions file and it's versions again
+                    documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
+                        f => f.Versions,
+                        f => f.CheckInComment,
+                        f => f.MajorVersion,
+                        f => f.MinorVersion,
+                        f => f.UIVersionLabel);
+
+                    Assert.AreEqual("", documentWithVersions.CheckInComment);
+                    Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                    Assert.AreEqual(2, documentWithVersions.MinorVersion);
+                    Assert.AreEqual("2.2", documentWithVersions.UIVersionLabel);
+
+                    Assert.IsNotNull(documentWithVersions.Versions);
+
+                    versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                    // The versions history contains 2 versions
+                    Assert.AreEqual(6, versions.Count);
+
+                    Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+
+                    Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                    Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                    Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                    Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+                    Assert.AreEqual("2.0", versions.ElementAt(4).VersionLabel);
+                    Assert.AreEqual("2.1", versions.ElementAt(5).VersionLabel);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+
+        #endregion
+
         #region Work with very large files
         //[TestMethod]
         //public async Task AddVeryLargeFileTest()
