@@ -2723,7 +2723,7 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
-
+        
         [TestMethod]
         public async Task LikeUnLikePage()
         {

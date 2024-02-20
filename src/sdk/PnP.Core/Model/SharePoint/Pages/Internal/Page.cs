@@ -2481,7 +2481,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Already load the actual likes, assuming this will be needed in most cases and thus saving the roundtrip
-            return (await PageListItem.GetAsync(p => p.LikedByInformation.QueryProperties(p => p.LikeCount, p => p.IsLikedByUser, p => p.LikedBy)).ConfigureAwait(false)).LikedByInformation;
+            return (await PageListItem.LikedByInformation.GetAsync(p => p.LikeCount, p => p.IsLikedByUser, p => p.LikedBy).ConfigureAwait(false));            
         }
 
         public ILikedByInformation GetLikedByInformation()

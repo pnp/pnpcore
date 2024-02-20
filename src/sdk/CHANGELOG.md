@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetUserEffectivePermissions not working with External accounts #1350 [jansenbe - Bert Jansen]
 - GetComments() only return maximum of 30 comments. It used to return all comments. #1361 [jansenbe - Bert Jansen]
 - Improved testability by removing type checking in `QueryableExtensions.AsRequested` #1376 [jansenbe - Bert Jansen]
+- `IListItem` like (`ILikedByInformation`) was not always loaded #1395 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 

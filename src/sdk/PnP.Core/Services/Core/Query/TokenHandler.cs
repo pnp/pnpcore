@@ -290,6 +290,19 @@ namespace PnP.Core.Services
                                         listItem = GetParentDataModel(roleAssignment as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.SharePoint.ILikedByInformation likedByInformation)
+                                    {
+                                        listItem = GetParentDataModel(likedByInformation as IMetadataExtensible) as Model.SharePoint.IListItem;
+
+                                        // the IListItem has a property that indicates the used list
+                                        if (listItem != null && (listItem as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataListId))
+                                        {
+                                            result = result.Replace(match.Value, (listItem as IMetadataExtensible).Metadata[PnPConstants.MetaDataListId]);
+                                            break;
+                                        }
+
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
 
                                 // If we've got the list
