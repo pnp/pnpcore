@@ -140,9 +140,9 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (properties.ContainsKey("id"))
+            if (properties.TryGetValue("id", out string valueId))
             {
-                if (string.IsNullOrEmpty(properties["id"]))
+                if (string.IsNullOrEmpty(valueId))
                 {
                     LookupId = -1;
 
@@ -152,35 +152,35 @@ namespace PnP.Core.Model.SharePoint
                     return this;
                 }
 
-                LookupId = int.Parse(properties["id"]);
+                LookupId = int.Parse(valueId);
             }
 
-            if (properties.ContainsKey("email"))
+            if (properties.TryGetValue("email", out string valueEmail))
             {
-                Email = properties["email"];
+                Email = valueEmail;
             }
 
-            if (properties.ContainsKey("title"))
+            if (properties.TryGetValue("title", out string valueTitle))
             {
-                Title = properties["title"]; 
+                Title = valueTitle; 
                 // when using User fields the value is stored in the title property
-                LookupValue = properties["title"];
+                LookupValue = valueTitle;
             }
 
             // when using UserMulti fields the value is stored in the value property
-            if (properties.ContainsKey("value"))
+            if (properties.TryGetValue("value", out string valueValue))
             {
-                LookupValue = properties["value"];
+                LookupValue = valueValue;
             }
 
-            if (properties.ContainsKey("sip"))
+            if (properties.TryGetValue("sip", out string valueSip))
             {
-                Sip = properties["sip"];
+                Sip = valueSip;
             }
 
-            if (properties.ContainsKey("picture"))
+            if (properties.TryGetValue("picture", out string valuePicture))
             {
-                Picture = properties["picture"];
+                Picture = valuePicture;
             }
 
             // Clear changes

@@ -116,14 +116,14 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (properties.ContainsKey("Label"))
+                if (properties.TryGetValue("Label", out string valueLabel))
                 {
-                    Label = properties["Label"];
+                    Label = valueLabel;
                 }
 
-                if (properties.ContainsKey("TermID"))
+                if (properties.TryGetValue("TermID", out string valueTermId))
                 {
-                    TermId = Guid.Parse(properties["TermID"]);
+                    TermId = Guid.Parse(valueTermId);
                 }
 
                 WssId = -1;
