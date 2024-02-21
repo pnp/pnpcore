@@ -590,7 +590,7 @@ await context.ExecuteAsync();
 <tbody>
 <tr>
 <td>Update, UpdateAsync</td>
-<td>Regular update, this will result in a new version being created and the modified and editor list item fields will be updated</td>
+<td>Regular update, this will result in a new version being created and the modified and editor list item fields will be updated. When updating fields in a document library the update might silently fail when the field value exceeds 255 characters. If so, please use one of the other methods in this table.</td>
 </tr>
 <tr>
 <td>SystemUpdate, SystemUpdateAsync</td>
