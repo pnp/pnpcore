@@ -576,6 +576,23 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task ConfigureWithContextOptionsCaseKnown()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            // Note: to make this test work the casing specified in the test config file must be correct!
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+                SiteUriCasingIsCorrect = true
+            })
+                )
+            {
+                Assert.IsNotNull(context.Web);
+                Assert.IsNotNull(context.Site);
+            }
+        }
+
+        [TestMethod]
         public async Task ContextCloningForSameSiteWithContextOptions()
         {
             //TestCommon.Instance.Mocking = false;

@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetComments() only return maximum of 30 comments. It used to return all comments. #1361 [jansenbe - Bert Jansen]
 - Improved testability by removing type checking in `QueryableExtensions.AsRequested` #1376 [jansenbe - Bert Jansen]
 - `IListItem` like (`ILikedByInformation`) was not always loaded #1395 [jansenbe - Bert Jansen]
+- Performance: `PnPContext` initialization can be done with a single roundtrip to SharePoint if the valid site casing is used in combination with `PnPContextOptions.SiteUriCasingIsCorrect` #1383 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 
