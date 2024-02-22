@@ -244,6 +244,53 @@
   
   </div>
   
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContextOptions_SiteUriCasingIsCorrect.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContextOptions.SiteUriCasingIsCorrect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContextOptions.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_PnPContextOptions_SiteUriCasingIsCorrect_" data-uid="PnP.Core.Services.PnPContextOptions.SiteUriCasingIsCorrect*"></a>
+  
+  <h4 id="PnP_Core_Services_PnPContextOptions_SiteUriCasingIsCorrect" data-uid="PnP.Core.Services.PnPContextOptions.SiteUriCasingIsCorrect"><a href="#collapsible-PnP_Core_Services_PnPContextOptions_SiteUriCasingIsCorrect" class="expander" data-toggle="collapse">SiteUriCasingIsCorrect</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_PnPContextOptions_SiteUriCasingIsCorrect" class="collapse in">
+  <div class="markdown level1 summary"><p>By default <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> initialization requires two roundtrips, the first one is done interactively as that allows
+PnP Core SDK to pickup the correct casing for the site URI as batching in SharePoint requires exact casing. The second roundtrip
+is used to load the remaining initialization data. If you set this property to true then both requests are executed as a single
+batch request, resulting in only 1 roundtrip. This can be useful in scenarios where you want to reduce the number of requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SiteUriCasingIsCorrect { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
   
 </article>
           </div>
