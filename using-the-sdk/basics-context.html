@@ -106,6 +106,19 @@ using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&qu
 }
 
 </code></pre>
+<h2 id="optimzing-performance-when-you-know-the-exact-case-of-the-site-to-work-with">Optimzing performance when you know the exact case of the site to work with</h2>
+<p>PnP Core SDK does use a lot of SharePoint batching and that requires that the SharePoint site URIs are used with correct casing inside the batch request. To ensure we know the correct case during <code>PnPContext</code> initialization we do two requests to initialize the context, first one is interactive (that works with invalid casing) and then pick up the correct case from that response, followed by loading the remaining initialization data. If you know the site URI casing you can all the initialization requests in a single roundtrip, to do so specify <code>PnPContextOptions</code> with the <code>SiteUriCasingIsCorrect</code> set to <code>true</code>.</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, 
+                                                        new PnPContextOptions()
+                                                        {
+                                                            SiteUriCasingIsCorrect = true
+                                                        })
+    )
+{
+    // Use the context
+}
+
+</code></pre>
 <h2 id="loading-additional-iweb-and-isite-properties-when-creating-a-pnpcontext">Loading additional IWeb and ISite properties when creating a PnPContext</h2>
 <p>When a <code>PnPContext</code> is created two calls are issued to SharePoint Online. In a first call the <code>IWeb</code> is loaded with following properties: <code>Id</code>, <code>Url</code> and <code>RegionalSettings</code>. In the second call <code>ISite</code> is loaded with the <code>Id</code> and <code>GroupId</code> properties. If your application needs additional <code>IWeb</code> or <code>ISite</code> properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading <code>IWeb</code> and <code>ISite</code>. To do this you can provide a <code>PnPContextOptions</code> object specifying the additional <code>IWeb</code> and <code>ISite</code> properties to load.</p>
 <pre><code class="lang-csharp">var options = new PnPContextOptions()
