@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GraphGroupOptions.html",
-          "hash": "9kTxfkV0jZnnpsmEX308zcQ8/k0jJ3mUOj30EBV5/es="
+          "hash": "Dlxn8zEHcREi9Wy+fP86BVu1oSsRuhVvoW2sZQF0Dug="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html",
-          "hash": "nhKJRd5/HnYTEh+XC0OP5HN00KFPHSmQ8BXjzSEIQKU="
+          "hash": "KdUmYaze8tkFNwY9t/OUeYtSdMeGSxyFSvqlhstI9hI="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html",
-          "hash": "OLC6jxpKaxXgJmtdq03X6ejSH0CXeS3ehpmASIXbX98="
+          "hash": "wdrZDZMK05KGpAzFkfh8he5G3D3lUkt5KJUtweirkm8="
         }
       },
       "is_incremental": false,
@@ -198,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonGroupSiteOptions.html",
-          "hash": "P1/Aac3J12P0LPNbaGMZY9EMYdk5zs3n0ZQH9QGzz4w="
+          "hash": "LEI2eqVEvOkkW0uwIz81Fypb4wdKFZoLTsm8chsnUGQ="
         }
       },
       "is_incremental": false,
@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html",
-          "hash": "1uQdAf33RizFXS2mBnw1QIRw2DAKW8HGcgee/zYiUzc="
+          "hash": "iQedFH2LGpJI4AC7vu8AaySGZ5GLBrAv957W8qbAF/M="
         }
       },
       "is_incremental": false,
@@ -270,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html",
-          "hash": "AqGu4kSN4IeHvgnMWx4Dspwir3ClFox5mar9Ibyelek="
+          "hash": "3DYjGULmiLtuicWcKItraSZnyVfos5qqxQjmsnDJdmI="
         }
       },
       "is_incremental": false,
@@ -282,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html",
-          "hash": "dJaVA6ExjhxOl4zvgbsQKGuy5DlNQCy5sf0G2AKOw2A="
+          "hash": "yUPmyhqIBSZarwlG7XSb3lQcXV+83OPY3QGNm9pwio0="
         }
       },
       "is_incremental": false,
@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IApp.html",
-          "hash": "WRXAeEzepdUQoyxtLCybNo9EaaxYdUM4sCGa8MNkeTE="
+          "hash": "Cyg27nBaBKdgbX43Z3UFJ0izmbLQd+7W9J/uFT3i1cw="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppManager-1.html",
-          "hash": "0MSCFaqCaQqYaCRYjCN79VccfMlX4zvbhsLhySPHmao="
+          "hash": "0+1+WWWRpU8z73Rbqs49yEjVPYpT5MCtuvQ8eHexKio="
         }
       },
       "is_incremental": false,
@@ -366,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppOperations.html",
-          "hash": "rvd3wPUEf33yBMXcLEDD7/rtsv03c1pO8ZjlEjsIgUc="
+          "hash": "rZ0RIoQdtWMvc6D11i6Ja098Jm3uCLWLH1u7kkPDHDc="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyPrincipal.html",
-          "hash": "tTO1aDof0M/SFWI1Gva7ZLOmcZyAwAKJjQvJBf/gm14="
+          "hash": "LRwzX1bi7HTYI6LNCy76+h63xua/EkQMfT3y5P2D+D4="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IPermissionGrant.html",
-          "hash": "FHcI8TeeLuKA00UvwrZBVMayX0u7edgTyWYpK+P0ekY="
+          "hash": "xFGboeX08SMlvpPoRPQxaSN8F7Np7WMOU43bn9wcWIU="
         }
       },
       "is_incremental": false,
@@ -438,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IPermissionRequest.html",
-          "hash": "EjlooxdAUriyTJWcbLd3c9C7Q+ZLtwnHF4h8hV6HPDk="
+          "hash": "TmP7un6vpw6V0pG02SlXCnq4srOQo+mBBdK7ycS+WC4="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html",
-          "hash": "QD+U5AO3D/e6IRH7fjDQKtv7uJ8JbQ7h2xIzLfRsWmI="
+          "hash": "6fSm8Q5X4vqFSmD/rWDLfL/6V/VVOO8p5w2S5Rac2N8="
         }
       },
       "is_incremental": false,
@@ -498,7 +498,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html",
-          "hash": "w4Lh7Q/MOGTmtFOmYYMgU5/Lbnxnurk36GllSIqM+tw="
+          "hash": "WIUt+/tIi0/tJV6/h32EIzfYI8fU4uTfBE5XK0WC+9Q="
         }
       },
       "is_incremental": false,
@@ -522,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionAdmin.html",
-          "hash": "CK+OSGNEaZ97OOQJPDWgyExfmD1kRzKpIcFeQHTw1Dg="
+          "hash": "6DHrLWz75vPBsQAFtvVT2lNOmsFWcUPAsUJLmO4AhY4="
         }
       },
       "is_incremental": false,
@@ -558,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "tl5AdlAp7pB6wbYRUo59eDEV9peMZ37WsWxapi8W0q0="
+          "hash": "yXt1IWevXECE8Avjyjxvk5weD27FiL8gIFgZMj/cMUs="
         }
       },
       "is_incremental": false,
@@ -570,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html",
-          "hash": "fkU52hTqmxCn+zou8hE2CMgheqz76TNN4QcqRgMHZZI="
+          "hash": "oPQ1ZpHDZYHvf6PFF//EV+Mji4rGHAQ/s5nZ71TDKzE="
         }
       },
       "is_incremental": false,
@@ -582,7 +582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionWithDetails.html",
-          "hash": "eWdouOc8InjC5ghhh4/b6noS22pSbPfLrFU5DkXDHnU="
+          "hash": "v+3xEzdbDp7YQV71v29LXfX1oN9xC7XggnoEhCcEh9M="
         }
       },
       "is_incremental": false,
@@ -606,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantAppManager.html",
-          "hash": "DyjCCHPXqkR1KODT52geS5aXRBuSfh1hnnlUHLNvaQk="
+          "hash": "wz1/uCwRycOQAvcw2lgKoC+MSUGzt+QMPZWoKBeQn4Y="
         }
       },
       "is_incremental": false,
@@ -618,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html",
-          "hash": "rddHgowL1EIl9e6Z/bd4MrGHlf7yQV0N5gmo+OkpzoE="
+          "hash": "rLtWXOuYlmpEzwNdidgXfFT5A4ySFssveH/juLxFcRU="
         }
       },
       "is_incremental": false,
@@ -930,7 +930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html",
-          "hash": "ogwvZAvMJwLBuhc9JB8k2QrTjGNsySBFEH0ylrtyN8E="
+          "hash": "8JapmCCXDQicqAd2ZSHwpyfJe15wqz+NAl4piHkeZ1w="
         }
       },
       "is_incremental": false,
@@ -966,7 +966,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamSiteOptions.html",
-          "hash": "GFZzuKTHikj7qFzcEha1TEWpjl+P6bIwflZU300Xsi0="
+          "hash": "Qpahexwi78UWbpSbPgmVEU7v3/3Sp1F0nzoASNhd45o="
         }
       },
       "is_incremental": false,
@@ -1698,7 +1698,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IBatchResult.html",
-          "hash": "QOdQwEM5ned6v3L5ZhRO7FG6D7Bf6qqc5Cp/l/kO2QI="
+          "hash": "c10N0RxFPPWZ0Y6oOUjxMzbnbI1JzMonuZ4aW4CTNIo="
         }
       },
       "is_incremental": false,
@@ -1734,7 +1734,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IDataModel-1.html",
-          "hash": "CxsjoIXrwfgbahl9H3krhpqJ9V0aU0jK0xK9PPOOTSk="
+          "hash": "aGcgxy00G10Xs/SoT9CUzITEaf78BqM0tdPk0GicW+I="
         }
       },
       "is_incremental": false,
@@ -1950,7 +1950,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IManageableCollection-1.html",
-          "hash": "4KK1wU4v1NjbbMSxR1OXtC+UUGqLIxmFLibvkdDwmJE="
+          "hash": "iD89Y2N85VuPx2OoEXgubjbhKy3YXIfsPbKLKN2Lix8="
         }
       },
       "is_incremental": false,
@@ -1962,7 +1962,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IManageableCollection.html",
-          "hash": "tpHZwQ/LTolzcj+r3AkKgq9IDQJM9lnD+ig/UyEvcHY="
+          "hash": "RF9OvjORBDGgJmZfuyVSm3yP77xP0orGkTVEvYC7s34="
         }
       },
       "is_incremental": false,
@@ -1998,7 +1998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IRequestable.html",
-          "hash": "uS4VVsJ37HifBXcR+k1Q0+F3zQOe8tJQCWgjGnJsqcs="
+          "hash": "qzr0/Re2YSO0DwtpZa0/Ux8b2QufSmoSIaCijeM3RG8="
         }
       },
       "is_incremental": false,
@@ -2010,7 +2010,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IRequestableCollection.html",
-          "hash": "2/XT7Rwssv9645Oppmkkc93TFc/tR+DsEDcQuuEI9iQ="
+          "hash": "KVFMk1vwTdtKLT6GcHunKFkCWn/W1WtG+po/1jsN8co="
         }
       },
       "is_incremental": false,
@@ -2346,7 +2346,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IGraphGroup.html",
-          "hash": "PKA+VeyF6uxfubdH4CSDSaAkqtlyXDXD/0iNVb7JWcA="
+          "hash": "GVQtZYcnV3U7N2UUEcnke0RiMex8r/UNnAU1yhSerNo="
         }
       },
       "is_incremental": false,
@@ -2370,7 +2370,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IGraphPermission.html",
-          "hash": "7gwXpi4ZNg3gX96McifFiEH0ly8K7VZL7pMm5TZiRv8="
+          "hash": "ZhJtecwNNfzcuCPONsT/SDrkCqsyfKaATj3PCqIJdNg="
         }
       },
       "is_incremental": false,
@@ -2478,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IRoleDefinition.html",
-          "hash": "2KJwPZu6OZgQSlr+Nqwu0R3XoeAOVvpm0uvw7JCIROE="
+          "hash": "Vs/TCvqEp4VJpDcdl0ntE1PzAR+WomrndWeOHbNkYOQ="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IRoleDefinitionCollection.html",
-          "hash": "NcLuWx42EHmFMGfnXgoVPR9IgKo0ilbfN8V201Ra3lc="
+          "hash": "9/IifoEZEvfygBFB9EFMSU78syTlO7tZ8hcCgiaXA08="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointGroup.html",
-          "hash": "lhM8qpCBccr90BsNHeP9bYx13Nv/xbjadU8s1YhOT/U="
+          "hash": "mPuxNcRIdVByvcwrpP7LzytlnIPHSdAfHABeiFX0IRY="
         }
       },
       "is_incremental": false,
@@ -2550,7 +2550,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointPrincipal.html",
-          "hash": "ZJ74YDPEDTyq+0Nmi+BP4D3/eqquXbDpozsco4gOcck="
+          "hash": "AZ25PKy2X7yuWmZcvns9J9P/q96nOBYSUQTuXMv79+4="
         }
       },
       "is_incremental": false,
@@ -2562,7 +2562,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointSharingPrincipal.html",
-          "hash": "zmesiqIA4LCW0EAM8UVYp/jJeJZ6Y2t0i/VBLic/XJI="
+          "hash": "d9YteqvplwbOhYjQmX3EGqeZJYlnszCCBCr0CVB+kt8="
         }
       },
       "is_incremental": false,
@@ -2574,7 +2574,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointUser.html",
-          "hash": "mKDT49Vu0Pt6u707CaBMDlzSO8g6XFgimQTqxvuCjc8="
+          "hash": "hS4MPn05kvSR/AOb1OqhWBOxvM0pYlYHJQ512WfOzTI="
         }
       },
       "is_incremental": false,
@@ -2598,7 +2598,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharingInvitation.html",
-          "hash": "10lHa+wrhGsj51Lr5KAGkoY1H3PdgRWzsaZ5yhcTirY="
+          "hash": "BCDXk1c/L9+Ef4N3yWiIuREGf9uJwi3udrJ5DTzx9NY="
         }
       },
       "is_incremental": false,
@@ -2610,7 +2610,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharingLink.html",
-          "hash": "JQ157nj2GiJgCxiE9z7w/2jYjbySVpoK5dRyz6QLVl8="
+          "hash": "+b7VE+5AmmmdK8cNdmogAwc+6m4Ad4ifPGfA+P+Jpvg="
         }
       },
       "is_incremental": false,
@@ -2622,7 +2622,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.InviteOptions.html",
-          "hash": "txn+RS3/UQtIztTb42UjMZ3rW5FuupLzQV80qww/i2s="
+          "hash": "LHxSpwqXa9jovtDl0PCnLQDnYesnzzY+ehmBjr45mM0="
         }
       },
       "is_incremental": false,
@@ -2646,7 +2646,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.MailOptions.html",
-          "hash": "HK8h/9gmOsKYy9Or4SF3YRczcIs4oS+RVVDZJjvkzYY="
+          "hash": "qzTAUOt6gX/2eOECN0mC96r4TDtxilxNu/kyVtHBoCU="
         }
       },
       "is_incremental": false,
@@ -2874,7 +2874,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.AdaptiveCardControl.html",
-          "hash": "z1ErOUOMdFMGI53bSMmvNmAsJEHA4cvHJnIES2WwGo4="
+          "hash": "uw9poirZIZw0E64+ZLDMjnJ4Ca9WabDstZp41aNA0c4="
         }
       },
       "is_incremental": false,
@@ -2922,7 +2922,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.AddContentTypeFromHubOptions.html",
-          "hash": "xCBRyFPC4NRO/6WVgBW0i7lIb1OuZxzG4weiRMT4/uY="
+          "hash": "2gu7aJVL3v6tKf9KF59MtQLS28Duy8ZqKS3QCI4Gfko="
         }
       },
       "is_incremental": false,
@@ -3018,7 +3018,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ButtonAction.html",
-          "hash": "pIoFeGRLsKDX4QPMhJXOyPGKCThjQIGZPlBucBQUqAI="
+          "hash": "rIlOPwEu6euhrJTzJFcN+paSD0mNavzDi0Tq819WeG4="
         }
       },
       "is_incremental": false,
@@ -3042,7 +3042,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CamlQueryOptions.html",
-          "hash": "5mYmgRGEUUcNBPX+pN/04ZK0+uONjnKyM/GXdGa4tM0="
+          "hash": "IOxFYV/qiGsZXhLIe6Ok9/zW923tOKhEwQyIUKArcHQ="
         }
       },
       "is_incremental": false,
@@ -3090,7 +3090,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CardDesignerProps.html",
-          "hash": "rLsU2P0p1QLs/3cnl+Vv+skDA2AHyPIW5IuRDhSM/F8="
+          "hash": "SEUKFpVHooktYpcQ+8AMycz/oQCF85Ic5jYya8GvYwU="
         }
       },
       "is_incremental": false,
@@ -3126,7 +3126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ChangeQueryOptions.html",
-          "hash": "7Bg6Llf3oKix3yRMMXt8XA1csm0QLpdyItMB44Rs5ws="
+          "hash": "L9yp4K1XBUROhcGB6lXBklYMZBPTEnUSNPYYTspi0tA="
         }
       },
       "is_incremental": false,
@@ -3210,7 +3210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.html",
-          "hash": "uEwOGjxRGsVeZMwFuBZ9HBWEPrDC/+X4d29DFLJEQ9g="
+          "hash": "8JmOxGhrsxWzihCopHhkTOk6zqdcJONZS/YUKFmqTnI="
         }
       },
       "is_incremental": false,
@@ -3234,7 +3234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ConvertToOptions.html",
-          "hash": "DQGT+AJYjoPEXUbZ6kpibGmf1x5ZTkBr3QX4t191sQk="
+          "hash": "nV+QEvAgs/a5tQXRfaAMe8BCeiI3bAYSZFWHm3BOens="
         }
       },
       "is_incremental": false,
@@ -3246,7 +3246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CopyMigrationOptions.html",
-          "hash": "gAXHIH6nypdv7bJlfpyggHaqPPFr23at3fqQRMJp/MA="
+          "hash": "yjtVP+7G2H3sA/A27idUGf7tisdQulj4URY5VEzKHOE="
         }
       },
       "is_incremental": false,
@@ -3270,7 +3270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.CustomThumbnailOptions.html",
-          "hash": "LXO3iEPiJixGC8DpwAmqhPVwik1qm8/2a5BMn74OpS4="
+          "hash": "cM4P/I1uWmlJL99SBCUIiCYozeEoY9frp4rFEfWhcZ4="
         }
       },
       "is_incremental": false,
@@ -3366,7 +3366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.DocumentSetOptions.html",
-          "hash": "YghdRAatmwXNH5Fl7rkoEI0oCkoaUQ5ES0C7mxoAqdk="
+          "hash": "l3pevz0MH4fLRJp2SAzVjraszUZ+wte4I85CceTkeBg="
         }
       },
       "is_incremental": false,
@@ -3474,7 +3474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.html",
-          "hash": "dal1CzpKccHa/qeYRlgVl+8MfxZqiiymF8ZYaS3oCyk="
+          "hash": "+sebw7YHE3yfgvIUlLRA4djpE3PRVcXhoZFYo0RDHM4="
         }
       },
       "is_incremental": false,
@@ -3486,7 +3486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html",
-          "hash": "WxQW4GaxHrDy9ORQm8rFYRC+Rl4J8trpIkmybodomJo="
+          "hash": "AELuvjNFtv9/YTUDR6uLJoBwrjmcYoPW8HTIbd6th9g="
         }
       },
       "is_incremental": false,
@@ -3570,7 +3570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupValue.html",
-          "hash": "0ZodSOwGCXcPVw0V3HSf9xgOAUadxezLm7CVNKnyWV4="
+          "hash": "mHSJbztZIMeP6A3iByjr9NtaSwZ4l2sk4vZdOc0tYSQ="
         }
       },
       "is_incremental": false,
@@ -3582,7 +3582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html",
-          "hash": "JvGPe5NmBTBLncgSp6CwDJ19d2YfgQZeacYBlypsS1I="
+          "hash": "+5BtlvqL16n6kYgtcn8IdQQZfzPxz/WXN3H3MLnagmU="
         }
       },
       "is_incremental": false,
@@ -3594,7 +3594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.html",
-          "hash": "A7vgSWI7UAyvQ3RqtVUW4PSzZOqER+8lWzo3CWqDxog="
+          "hash": "V8sbIUklA/kdebce8nFr3qt1WVhZLIzKTNjooHxMxtA="
         }
       },
       "is_incremental": false,
@@ -3606,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html",
-          "hash": "VALgv+2ujG+8CGSeEjtANYFS18VXDKwC7FJ2/fO0Csg="
+          "hash": "4iErMt7yzk4fNCsUc7eB/8+/5FyScXhBF3+dPrByWos="
         }
       },
       "is_incremental": false,
@@ -3678,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.html",
-          "hash": "k6sxtxWJ7ehumE9djV7Bt7IZLfJYXr26JnSzRNui2WM="
+          "hash": "mDQCT7JIKXeQgdIOIDFeT/puQ0iMlSnNHGKmQuRYgaQ="
         }
       },
       "is_incremental": false,
@@ -3834,7 +3834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IActivityIncomplete.html",
-          "hash": "E9Muo9Te/XWXElb/6a02ovEeKtraR3X/kYibwovR1s4="
+          "hash": "qW+yyXeh39odgFA/BnfshB23Uvj0y7iRNrwfcyTLREA="
         }
       },
       "is_incremental": false,
@@ -3846,7 +3846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IActivityStat.html",
-          "hash": "6ap8KxMohY8FQf0pqt/y48MH5yywF/DfBzzKIwAh4lU="
+          "hash": "f9V73nNhzO9R3zLvF3vVLCCfkpKFk0lqk+jgcICu/qE="
         }
       },
       "is_incremental": false,
@@ -3858,7 +3858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IAttachment.html",
-          "hash": "Yn/F3fdZYLXQvyHUY2jkEgLViWO4BfnTCm5Wb1Csr3w="
+          "hash": "+t9uEycKq0lZI75+OF76EpDPn4+m8MDf7Xq/Dz5LG5U="
         }
       },
       "is_incremental": false,
@@ -3882,7 +3882,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IBasePermissions.html",
-          "hash": "yeyS59J7Mzqqu3bVosrAjRKO0r4jTi9ql2QXRJn2EkM="
+          "hash": "DwoP4Vwab08Uo058FOYGR9WMwoegSw5TwwwFVD6c5Vo="
         }
       },
       "is_incremental": false,
@@ -3906,7 +3906,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICanvasColumn.html",
-          "hash": "+07Zc/ihPL7dPtyNrLNS9TBXNFZUdmNzq6RVirGCzmQ="
+          "hash": "c7t/HbRvOmm+mQvkFaknlZL3aqjZM1tZyT9oBWrWGtE="
         }
       },
       "is_incremental": false,
@@ -3930,7 +3930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICanvasSection.html",
-          "hash": "/dfuhcvQ7f59r9zBnOnImeldyqV3DHljk26XIqmuJTY="
+          "hash": "0iaDcd8zP5rja9MO4uBCutIHiKBRudCXLgDVncjhtH0="
         }
       },
       "is_incremental": false,
@@ -3942,7 +3942,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IChange.html",
-          "hash": "S9kAtWEZOqIRkNl5uoz39NDeTzuaGUW+7UHkIDM63+w="
+          "hash": "QfTpEHfqX1AqEp3PhrRmSOJ1LieOftaIdWI1vms84QA="
         }
       },
       "is_incremental": false,
@@ -4026,7 +4026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IChangeItem.html",
-          "hash": "IvEqlZ78siGovX0G057bWbSq0t+8lBGysNTVeapN4So="
+          "hash": "xgs7Ay0R7uD+OtnpTdof71rnRsFWJGroigJTFfG/aKk="
         }
       },
       "is_incremental": false,
@@ -4038,7 +4038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IChangeList.html",
-          "hash": "qHLN1jLFhVaFJx264zQ3jQg5Joeec1k2SubV+pjfW1c="
+          "hash": "C5ZYvGZdaMrFch2tncTkkZF5FmEd0QACy80g2tIWqoQ="
         }
       },
       "is_incremental": false,
@@ -4074,7 +4074,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IChangeUser.html",
-          "hash": "J+VgRx4p4EGs5h+LDu0VQoQfHnYw4CUabVIc2dMyc6k="
+          "hash": "HlO8uE9/Ef/6dQ0LQwxEssQAj/4tEwYksmae3oC8CJM="
         }
       },
       "is_incremental": false,
@@ -4122,7 +4122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IComment.html",
-          "hash": "FNnSL+zRvrCg5BBQdajQqSsKf39yPHEIuBH+0m3lins="
+          "hash": "/FRyRzGWQVZMMUMDKPR73uvSaQb0ClJxM5wtKgypm1s="
         }
       },
       "is_incremental": false,
@@ -4170,7 +4170,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IComplianceTag.html",
-          "hash": "iUXx089guOS0adXh/L8vHCaZvpuQrDcWaO31IxiPnRQ="
+          "hash": "WOPRTzm6VeO/pXMAa/ixjgQ5AoyIhSASqVc8pYV89tw="
         }
       },
       "is_incremental": false,
@@ -4182,7 +4182,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IContentType.html",
-          "hash": "O5Ldc42EWi+AAayQv86HdLQ0sYLqdWusIoXSYAdLgy0="
+          "hash": "S2KAXSvOUjJHzTrajpgnidkRZzEed73wjxJ8JbbT94g="
         }
       },
       "is_incremental": false,
@@ -4278,7 +4278,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IDocumentSet.html",
-          "hash": "4AkYFWJJOHDi+4TNI3TtNBz7Bcjmq3IPRkuTxPhf2KM="
+          "hash": "qV5MmjdXI6OynFZsOkRZJ8PYz7TB8YGwAhbXxjvX/qA="
         }
       },
       "is_incremental": false,
@@ -4302,7 +4302,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html",
-          "hash": "FjrCzuGtDZSIprFAMCdlDRdS2DNl871p30oUG1/nuNs="
+          "hash": "ChfT6YR68kl1OJC0olJWc8TfCUM+4Jc9r9vWNDNwBaU="
         }
       },
       "is_incremental": false,
@@ -4362,7 +4362,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IField.html",
-          "hash": "zLFNUNUA34AxNuiUnX22RXrVh063f/wFpBsI8OEXLCA="
+          "hash": "KDew1plRV+Kh20JXoUrFGJ5jzgG+cCY4jWpqjcgxNK8="
         }
       },
       "is_incremental": false,
@@ -4374,7 +4374,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldCollection.html",
-          "hash": "KuakVgMD+yCJf2I0l/g97AUiFgN1CcjJIH2lsrOdz+8="
+          "hash": "0FCKil3qUZljjxPjkjN7lJgYgOKTIEigSWdgZl0Vt5Y="
         }
       },
       "is_incremental": false,
@@ -4386,7 +4386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLink.html",
-          "hash": "hgSuGIircC4LOiv/u32b5SVZrBbC7Oa7lr3yM6lNanI="
+          "hash": "qQI/Pr4c69qI2RlCIMJRHzdfsKBN4DPA9q1dXzS5AJA="
         }
       },
       "is_incremental": false,
@@ -4398,7 +4398,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html",
-          "hash": "66kDTVHh38/jAjXqZ9x/apJDbbsZJCdixzoh2ouZexg="
+          "hash": "SUPoxBelxdY5EGPWs3Aj3F1X/kX7oZwh+5UoNXTaDKU="
         }
       },
       "is_incremental": false,
@@ -4422,7 +4422,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLookupValue.html",
-          "hash": "k2bQEsV8SLnNrjqtFAVd3QLpnT1lLy/0lT6DLYS5TTI="
+          "hash": "WR5oa6iT4lacNfmBscv9ZPpoDF53nBmQVSTT+8Ahz9k="
         }
       },
       "is_incremental": false,
@@ -4506,7 +4506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "vr/8/zp36VyLx/dneT7nDoVEOCniblQmDMPyLkoaCXM="
+          "hash": "W8hLIO9/SKKtK1ldXcpvy7DFyo1Gm7Jl0qwbU6Y6Xz0="
         }
       },
       "is_incremental": false,
@@ -4518,7 +4518,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFileCollection.html",
-          "hash": "gUe4+0HHZnuZD8Kcy2zHxhHF/2t8MqkkiqYXjHU6nX4="
+          "hash": "tb/o2w1sf0ED4jzivKxIK8t7YoC6rhH3m1/XKNuENWQ="
         }
       },
       "is_incremental": false,
@@ -4542,7 +4542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFileVersion.html",
-          "hash": "fcS0Vbn+sVE4WxIDeFIPJU3pVNP21+inml6Am30WA/Q="
+          "hash": "CfhE5csslfAbvUIP1K4hmzACqPn5YHgDkGMuzIEEDOA="
         }
       },
       "is_incremental": false,
@@ -4602,7 +4602,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "x3fGaG6y/ZOCGaMA/uy2s+fXAdlBcQKGR/EA7OCfD5E="
+          "hash": "6DkvHVA6SONqKNCPRj3rHRbaCSGQ1HpICc1V254KbAE="
         }
       },
       "is_incremental": false,
@@ -4626,7 +4626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFollowing.html",
-          "hash": "6qSwLIobmp3utaiGnJY/tDkrrHDGrkmzPbKb9km6/zE="
+          "hash": "YhKJ1n5t5YmrVC7F8/KMMcy+MxnSXHZJLTK/Qjw6a1E="
         }
       },
       "is_incremental": false,
@@ -4650,7 +4650,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFooterOptions.html",
-          "hash": "w5XfdRKsEQkimDPFFBdGX8FYcQUlUIX7HGIE22j4tJQ="
+          "hash": "8ga8mWCgbJR3D8eY5j30lrpgbJw+UwgyHx4QlyyhBJM="
         }
       },
       "is_incremental": false,
@@ -4662,7 +4662,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IHeaderOptions.html",
-          "hash": "jMBy9pX3tgRJvsyws0dncGDg5oynihaGKDDxfoBUaMc="
+          "hash": "DS8RxTgzju7Fjf781f+KcgcfpfAQ29KS0itFz/Wc5cM="
         }
       },
       "is_incremental": false,
@@ -4674,7 +4674,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IHubSite.html",
-          "hash": "9YI9aruSTlglMaWRVM9ohOxBIheHlul3jGekr5jCPX0="
+          "hash": "VzMvjq0rpFXqNQBsxPzdbJyuy7ckNnhYYvFhZi9AjsM="
         }
       },
       "is_incremental": false,
@@ -4686,7 +4686,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html",
-          "hash": "/EVfUDSo4Da5ezPxM4vHe6VrsjVVDuKEfl1/i+uUTXk="
+          "hash": "szPjwyWTZkNcJWK177qNYYF+G5R7WT5ZcDeSU7PJyZ4="
         }
       },
       "is_incremental": false,
@@ -4698,7 +4698,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.html",
-          "hash": "O+qalCFe//46aYIARHHRGhdySXgjDDrHtLafajKj5PU="
+          "hash": "+OQArgD1rT3g3biRkpizdaSRkHvZYLrb7KtYkfSeRNs="
         }
       },
       "is_incremental": false,
@@ -4710,7 +4710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ILikedByInformation.html",
-          "hash": "A6u9O9x17iI89jP3PSPrxfDSbzFkK+St8C6bWbtU75g="
+          "hash": "qOjs6aap3k4BpL9TLek9r78s8PI0vPViZRfkcl17iaY="
         }
       },
       "is_incremental": false,
@@ -4722,7 +4722,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "LmzSThoo6uDC/4a8de2RoRhzwFvQ1/xqT0iHG1M7FKY="
+          "hash": "EsNH86alTVzYl5Xy42m2t5qf4ard8kLmG9DMji87nYg="
         }
       },
       "is_incremental": false,
@@ -4746,7 +4746,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "F4x1BtZyKVd4VubjS/ygLdxLW3T/ta1jVm8vYepqeYY="
+          "hash": "h/rkLIqPOBAgRR9TN9RNzWT53cNfqNQLjEaKzHkNIj8="
         }
       },
       "is_incremental": false,
@@ -4758,7 +4758,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemCollection.html",
-          "hash": "pHyUH9YwDll1E3l4l+NcR8xbf0DIay/zAbWaSXRGack="
+          "hash": "hvTGkw3QkLp0CFjp3XTdigHC5ZziGg5zLSR7276dqN0="
         }
       },
       "is_incremental": false,
@@ -4770,7 +4770,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersion.html",
-          "hash": "kaJ5JoZhvkHJdS+g/ENjgM3c4/3AJEC6NJFo3n0ASY4="
+          "hash": "zHZvRzUJFrjPopqT7zXBnhh6qwbR7SkqTOHe/va+x3E="
         }
       },
       "is_incremental": false,
@@ -4842,7 +4842,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.INavigation.html",
-          "hash": "rn4/4hWnyUy7eAa9DT6GwPZetbCAtpoJMPN1w0hAAS8="
+          "hash": "tHM25quchaTW6YwYa4LACCyXz53j7MZmZJBoVxSI+CM="
         }
       },
       "is_incremental": false,
@@ -4854,7 +4854,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.INavigationNode.html",
-          "hash": "YEgzU0cukRElDlqCjedt5uqBnghYf1I9nXnBkd4hPcQ="
+          "hash": "cEmIb5YDUQy/7TcvR+8kljvh0vu5APfmB5zCHyIyd38="
         }
       },
       "is_incremental": false,
@@ -4878,7 +4878,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.INavigationOptions.html",
-          "hash": "VC4njf/v2cQwFVSQSGeGyM/djdtMmVIrcakdVv25r+Q="
+          "hash": "XREeBCLlLtZwrSjTiYbDr2rrz/4WGyK4gA/Dwb9xj14="
         }
       },
       "is_incremental": false,
@@ -4890,7 +4890,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "9Txu3o0Iw0tXv2oDGeclcFXPOjz2L4u7WS5Iu5X3Mo4="
+          "hash": "iPfERe7FHZ1ZB4rNTTgX478S3+aUnST6PBGb4tYfKmk="
         }
       },
       "is_incremental": false,
@@ -4914,7 +4914,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageHeader.html",
-          "hash": "shjOVoknXlpK09fIyZ9iOP7AHhMjRQNrCs9NnZLPVH4="
+          "hash": "zUMCX83fFsZoJE16HBuhDByA3b/znj4cVJ+Vruefs+c="
         }
       },
       "is_incremental": false,
@@ -4938,7 +4938,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html",
-          "hash": "ldCKpYRRMwazTF1RvK6UgxkMCtrOuwUdKvW0ZWA0lWM="
+          "hash": "2iHavKmkMwvHoLj83RD4IzuZyWWHpmoUWuusadXy/VE="
         }
       },
       "is_incremental": false,
@@ -4962,7 +4962,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageWebPart.html",
-          "hash": "BMZabCkZQjUsyNHMGK04Os8TemZgxf99wu2gNIciUlg="
+          "hash": "6j97Gx1XdqPzGRClhZIHzQNj2oVDiAfc04Y+riFIQ9M="
         }
       },
       "is_incremental": false,
@@ -4974,7 +4974,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPersonProperties.html",
-          "hash": "Dfx0ZW+PGrBn7+ONrasVxWfO/C6rTzcvL6KeDvBxyKs="
+          "hash": "WuMhvntYs6iUXFO2MgBIery/lTrx8NNoU9U2WPf2xcE="
         }
       },
       "is_incremental": false,
@@ -4986,7 +4986,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPropertyValues.html",
-          "hash": "Ib9Uvuto0Q9wBJayr8v4KPEkHO1OYErui1hQZl8MVwQ="
+          "hash": "dy3SBzaClMhrulpOwDjP4l1q4IRwwGdUzLORKIW0PWM="
         }
       },
       "is_incremental": false,
@@ -5022,7 +5022,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IRegionalSettings.html",
-          "hash": "suhBcc2acH7kFdPhK/4928k/5yEeA8kRoZZz1jUNh3I="
+          "hash": "pg6470mxKrDE+ULp95elCKqYmE4kaXfExDULlSXHQ+4="
         }
       },
       "is_incremental": false,
@@ -5058,7 +5058,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISecurableObject.html",
-          "hash": "sOkPy8QzU9eTbJKJHzGbK2Ob0L4go3GhhAy/QyP9msA="
+          "hash": "nPGcYtD4wl6TEMgRgWzoQuV4EWubXyPAu1tBONuRcWw="
         }
       },
       "is_incremental": false,
@@ -5070,7 +5070,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "L+HH2bl0FmU2nxnDvY6eJ+4eDX3ZZNQA2s/R2p+Am+k="
+          "hash": "USrS9DPztRf0aSgFWpI0TtAuMqyrwKfKgPg67ACX41A="
         }
       },
       "is_incremental": false,
@@ -5094,7 +5094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISocialActor.html",
-          "hash": "KdihXxarGOylCE/PWnHbWRAYcMiWCyu3VThrEd/INFo="
+          "hash": "e20FcEeOAfG4E3Xd4nOZXJ1I2LBxtVIPUqdHyNWVcOw="
         }
       },
       "is_incremental": false,
@@ -5166,7 +5166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html",
-          "hash": "fNhXf4OKGS204BUNHvbiL0AnbDqfbZag9s59yjk0iJk="
+          "hash": "hVK5283RSMarfqW8e8Kap/H0FRGpeNouHo6UUfxdDQ8="
         }
       },
       "is_incremental": false,
@@ -5178,7 +5178,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITerm.html",
-          "hash": "NMzGmjNb6yay4iTLs7+M7L5N6W6RL+r7fLcH5fp28bg="
+          "hash": "2tS37/Y95XXmXijQtNg+bTVgUJmH7g3IF2leFpOzLr4="
         }
       },
       "is_incremental": false,
@@ -5250,7 +5250,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html",
-          "hash": "2NigCtVEqCWIcF5wwzH4PZluXEoBw30VrTPR7XDKKQY="
+          "hash": "440PHb1dUvuCly6GJ8V9Pd/Qi4kTLDaPUbUmOs/uDFU="
         }
       },
       "is_incremental": false,
@@ -5322,7 +5322,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.html",
-          "hash": "X8Z6HWtExRp9ey07aLc/Bw9ye6vi6BAQQyBD90KMoCo="
+          "hash": "vtJKkExEs6OK39odH17mvkD37+8+5u8XXutH4nakTf0="
         }
       },
       "is_incremental": false,
@@ -5406,7 +5406,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITheme.html",
-          "hash": "61ItPJ/fyQSBAUMVZSUovVPBxXIw7m+f/19tvUCwXWE="
+          "hash": "Mq0xvqwTQC6cnbYKr7Rlqnjmxx3fu9TynlQvGIHSuoY="
         }
       },
       "is_incremental": false,
@@ -5490,7 +5490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IUserProfile.html",
-          "hash": "VaRNBOt8ntYRdmUKEleEdD7LlITz2juMb6bex7Bz4x4="
+          "hash": "mFRL9kIKZidISvgAJOtYymPCysFJY2a3IF6+kCWq+KA="
         }
       },
       "is_incremental": false,
@@ -5502,7 +5502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IView.html",
-          "hash": "WU2wTmczkMcYr+8e/Op3CJB/PpbvbN2wF1J2Z4GM4zQ="
+          "hash": "H1aW9/4ltFrJc6/4XOTSzO2u+e0rePov9sc8Sd25I0g="
         }
       },
       "is_incremental": false,
@@ -5550,7 +5550,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "9Rx79DboDUbIkUd93XjaEYwD4yw7ryrV5rOqrVr64No="
+          "hash": "KvvIGc7hjOJCqbJKHypE+UfeIKGnv7hWiZ9tTQ1zZkA="
         }
       },
       "is_incremental": false,
@@ -5574,7 +5574,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWebTemplate.html",
-          "hash": "ZMQiOX667LP4rUoKZzI06pwqjcgB1FnLYq9LAKQALa4="
+          "hash": "ybqDZ9TDyfw4Z+TC5XOkbo3vhMrrio+EXIURfNrnL3A="
         }
       },
       "is_incremental": false,
@@ -5694,7 +5694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.MoveCopyOptions.html",
-          "hash": "MgO9Zd/0xUMIlses73iTgFzJXTtHbRMq6Bei8z+YhKo="
+          "hash": "PXPX1xJBRcJ0bzo4MoEiEOd2sHmeD+ui0jkNIkfPK+U="
         }
       },
       "is_incremental": false,
@@ -5946,7 +5946,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinQueryOptions.html",
-          "hash": "OHFxSzb1GvGoLqRnykdf79Fw/cniRyBrgD1yp4hUzfM="
+          "hash": "qoMm3FUGJIU+hEvPEe+MO5HSi7uwQ5rY3bdne/YQJ0U="
         }
       },
       "is_incremental": false,
@@ -5970,7 +5970,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.RenderListDataOptions.html",
-          "hash": "etnVnNfq6gtkb4yinJOlgeLfDek48yg4kZS0kKE5F1Q="
+          "hash": "f1PveUGEGQ7jbsZBBiG/92rPFQUoUYU6qAn6uOxklfc="
         }
       },
       "is_incremental": false,
@@ -6054,7 +6054,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.SearchOptions.html",
-          "hash": "FuxQuC+m78lkeMLBuxFTJcm04aZhdaIdo89T/SwCPBI="
+          "hash": "hHb3FYAEbHgfgvut8TlNAvFM3B74UjTU1ne6dUuy0zg="
         }
       },
       "is_incremental": false,
@@ -6222,7 +6222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.TeamsACEApp.html",
-          "hash": "vou0BXSMr6zz2+opTjGgSyX6IBcsyeUHJF36C2MeqoM="
+          "hash": "jqWitsXpg+MJP/6XqtHAoG+qHewnzpoN0G9WyWCnwEA="
         }
       },
       "is_incremental": false,
@@ -6402,7 +6402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ViewOptions.html",
-          "hash": "TzMVuyL7UYp8TTChko72Xnet0igAAbWSrF3rv+njdJM="
+          "hash": "nc21v7fkb6DZpnkUoX3alIe9VrCYpy5bDRCJkShtSvc="
         }
       },
       "is_incremental": false,
@@ -6462,7 +6462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.WebOptions.html",
-          "hash": "gh+O+x/xjbGiLTz+2Y2Yt1tgeREkaMjIzlMDIy13hZ4="
+          "hash": "Lg4hbQnDhwhwmp0YqzHDka3+Rx2UtZt7Cgo01dV962Q="
         }
       },
       "is_incremental": false,
@@ -6642,7 +6642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.EventCreateOptions.html",
-          "hash": "cuHkImetXFhIQvHGphrIzJBCdCjwgSbVhVxhDt6JnRw="
+          "hash": "UuED5rxEXl9f1I5yI7J9pxd4WVqs2XXKKQqHak49EXg="
         }
       },
       "is_incremental": false,
@@ -6846,7 +6846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.EventUpdateOptions.html",
-          "hash": "SF5F5/3XO7TGkH7b3cdbagl7+HpnkFt/LjkUWVMmyrY="
+          "hash": "In1mM1AORyFZStgM30g/MpOrl4JwEZ5HdpjSVzllHws="
         }
       },
       "is_incremental": false,
@@ -6894,7 +6894,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.IGraphEvent.html",
-          "hash": "6UrRanzbyXWce3v0K+BljECxm+o5gZztNp3x+cR54HI="
+          "hash": "fSrL92aBGsGc0lsdBPSChupPCzaLtlSR+rnLLTzwaXU="
         }
       },
       "is_incremental": false,
@@ -7122,7 +7122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "WOv+I1ZS/BPMEKFWipePIUpCtdHycrS9h/oRYEbCXlw="
+          "hash": "elS82DksbO3gtnpsSh7OzPCeV96gLjm1VaLXrV5hJu8="
         }
       },
       "is_incremental": false,
@@ -7170,7 +7170,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannel.html",
-          "hash": "wLJiCqZKOkX6L0RPw/TloxYnPXyxsYww8LxTv1FMaZw="
+          "hash": "x2l8QwtETpVfStcEKGpw7f5n9DeObM1uyuBNyGXuy4g="
         }
       },
       "is_incremental": false,
@@ -7230,7 +7230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html",
-          "hash": "Xw0mJFaCQaPpGN5c0iqIP65aD3nuO7KX4gJe0K58FK8="
+          "hash": "SBUalDqTYGlbPKyuTRkvaOUO/KhKhliQkA2/fOEgN8M="
         }
       },
       "is_incremental": false,
@@ -7410,7 +7410,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamClassSettings.html",
-          "hash": "LGhKeXU2OMgBe2RilMcV9sxj7zdJ3OfM3AKGXu8MMY8="
+          "hash": "OIpIdrM9jIkXs08PqHGej8tj7qMQBcP6mKtq1gTEr5Y="
         }
       },
       "is_incremental": false,
@@ -7434,7 +7434,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamDiscoverySettings.html",
-          "hash": "6qHUDGWLOf+Wz6Ddvq0Zh/bHSBOERxSl+9Xqw48rqG0="
+          "hash": "+sN0Z61ZZLaEhh+4809aAPdW5G1zn6aBd7L9MPgelPA="
         }
       },
       "is_incremental": false,
@@ -7446,7 +7446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamFunSettings.html",
-          "hash": "1krO4sVp865MlS73nxnoKda+IuvAb51qHbxHQ1k3y0A="
+          "hash": "GTTKe9S6Y+yOchgAIj2KtQqMDjZ0SMiqB5EuxQEVm4c="
         }
       },
       "is_incremental": false,
@@ -7458,7 +7458,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamGuestSettings.html",
-          "hash": "cUhiE1IbhgAaSMs/97qMfVBMKnGdWXLbHNEYK9UkYFw="
+          "hash": "45gWlwkh82L7Xmr5slvO5XzN188M8rhbdF4hoAg0m/U="
         }
       },
       "is_incremental": false,
@@ -7482,7 +7482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamMembersSettings.html",
-          "hash": "1O5jyu4dmqYa+EZSFWUWA9tcRuf+GBBcd5ByS0B0K2M="
+          "hash": "Rf4vFtzTMMpZNTLfbEGMtsBVnUKU2u61GA7y1WMyhT0="
         }
       },
       "is_incremental": false,
@@ -7494,7 +7494,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamMessagingSettings.html",
-          "hash": "YbEK6JHJg2ke12zatN4X50jhEJ6wnhzs4xsA+yxdXbo="
+          "hash": "9U05hnKaR0BZjFPKKwfKisuyfsdvJY4vraE30mU08jk="
         }
       },
       "is_incremental": false,
@@ -7722,7 +7722,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.TransientDictionary.html",
-          "hash": "AB/S49B/44cFiHJZmLDa++jsY7heWcZmdfTfJgzg06I="
+          "hash": "oNDDivpT7zvtqZk5FVgSoxGrlDeFUye9qJBU+d7RevQ="
         }
       },
       "is_incremental": false,
@@ -7890,7 +7890,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.QueryableExtensions.html",
-          "hash": "ShugcDZtQ/Wfk1hXXMA+E7Q/vEncLC8QTLGe5xwcFwU="
+          "hash": "UJisR9zU9BQDPuAG/OjuCM11uxL4HUag+stYbKvAm8k="
         }
       },
       "is_incremental": false,
@@ -7986,7 +7986,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Batch.html",
-          "hash": "d4PIm3xcXGEujzUdix6MwCPkNgwIqVpoTFQ4QZEHKj4="
+          "hash": "/V+iaDaf1L1w9ti2Giy41Pk2zRTBZ6QLb4RkhM6HqNE="
         }
       },
       "is_incremental": false,
@@ -8034,7 +8034,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html",
-          "hash": "QpgYPmiC6ZqJhDPklVHjm83AI5TsHvyKjWtZDsgPBa8="
+          "hash": "gP230g4KxC/B9pc2ZdeakD6Rev8ucogND2cgU9uCYIU="
         }
       },
       "is_incremental": false,
@@ -8046,7 +8046,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html",
-          "hash": "dEVvYU4sSkQtawSca1dHgS0BUzhsM9/KaFH7X5q/1MI="
+          "hash": "eDuBeCncs1MvvbXQBUb6fSAWtn3rizGWJLCTl5CiR54="
         }
       },
       "is_incremental": false,
@@ -8058,7 +8058,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html",
-          "hash": "ROfwILL53szKq9bdCqx3W2VXGfywpeio7gSrqVTvqaA="
+          "hash": "kZ8rKUXiDY99k5Wm9dSPrw7vToAA19rGQ3GapLpROr8="
         }
       },
       "is_incremental": false,
@@ -8082,7 +8082,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html",
-          "hash": "+dL0UPeO2z/+mUcXcMMFKwkTgturLxjqq3tdCTxfJBc="
+          "hash": "fagUhyt+MKlVPhz//CyBWO9lssiihymB0w1oYPnrCd8="
         }
       },
       "is_incremental": false,
@@ -8094,7 +8094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html",
-          "hash": "3QEZ9xFB3BU2FtvadxJ6fYSsfpbKm0VUEUhfTkAzQPo="
+          "hash": "lL/R49mnGytDrntWUrLjDVpKYvx2ld5anPuY9sXpYMI="
         }
       },
       "is_incremental": false,
@@ -8226,7 +8226,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.ILegacyAuthenticationProvider.html",
-          "hash": "s2OYaaNcNDAv8AlOgQf6/I6xq8Bd+QpUu9nV8l2ADTE="
+          "hash": "Id60kv2NBpREgUVCtRsILkAsFtaTczWTpX+tzQxNHLo="
         }
       },
       "is_incremental": false,
@@ -8238,7 +8238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.IPnPContext.html",
-          "hash": "TLRaJFZRTRK32pVla8Sx9OM4JkG4vn6/HJ7vdwvRXKg="
+          "hash": "Ua3slYpeO0EEqMW1ujVIlfdIWGLyYK7S+NDUt4wjiso="
         }
       },
       "is_incremental": false,
@@ -8334,7 +8334,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "1dJhQOAE+EyTDULXno1P/Yv+dhhqF7DSyYQxwYfBag0="
+          "hash": "gzzej4Z5oXhOfozqBrUu6uEI17Sa0WDNvLcq9Iv5BQI="
         }
       },
       "is_incremental": false,
@@ -8382,7 +8382,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryOptions.html",
-          "hash": "6wLGbBmhKyhA04kevQfYZoMqJgSgAXr77KOLW1jmnzA="
+          "hash": "AR4+fMGeeKri6OMIeSP3ccPe2HvfRxuB0svQbK0Th6g="
         }
       },
       "is_incremental": false,
@@ -8406,7 +8406,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextOptions.html",
-          "hash": "DrE7/J9Pn/JeQrnHlapUPKQitnbgEMJEdhI85SNPIpE="
+          "hash": "W0UxVvdBppCcRt34YgoB1JRuat6KdDH+IbtIOEdxklc="
         }
       },
       "is_incremental": false,
@@ -8418,7 +8418,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPGlobalSettingsOptions.html",
-          "hash": "GkxzNQp4nAxO4yaYVxZ2wgBbSgo0k14yGzKDvbw10Tc="
+          "hash": "oxBZ/koKc7IQsCCvgHN/03N4vbMDyMCEMMFIB9se9nE="
         }
       },
       "is_incremental": false,
