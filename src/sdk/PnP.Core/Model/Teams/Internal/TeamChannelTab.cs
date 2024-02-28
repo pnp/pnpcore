@@ -68,7 +68,7 @@ namespace PnP.Core.Model.Teams
         #endregion
 
         #region Properties
-        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
 
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
 
@@ -82,7 +82,7 @@ namespace PnP.Core.Model.Teams
         public ITeamApp TeamsApp { get => GetModelValue<ITeamApp>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
     }
 }

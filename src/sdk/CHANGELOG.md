@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved testability by removing type checking in `QueryableExtensions.AsRequested` #1376 [jansenbe - Bert Jansen]
 - `IListItem` like (`ILikedByInformation`) was not always loaded #1395 [jansenbe - Bert Jansen]
 - Performance: `PnPContext` initialization can be done with a single roundtrip to SharePoint if the valid site casing is used in combination with `PnPContextOptions.SiteUriCasingIsCorrect` #1383 [jansenbe - Bert Jansen]
+- BREAKING CHANGE: `ITeamChannelTab.Id` now is of type `string` instead of `Guid` #1407 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 
