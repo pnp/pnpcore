@@ -519,6 +519,7 @@ namespace PnP.Core.Model.SharePoint
                 case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue() { Field = field }, true);
                 case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue() { Field = field }, false);
                 case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue() { Field = field }, false);
+                case "Thumbnail": return new Tuple<FieldValue, bool>(new FieldThumbnailValue() { Field = field }, false);
 
                 default:
                     {
@@ -535,7 +536,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (propertyValue.ValueKind == JsonValueKind.Number)
             {
-                return propertyValue.GetInt32().ToString();
+                return propertyValue.GetDouble().ToString();
             }
             else if (propertyValue.ValueKind == JsonValueKind.Undefined)
             {
@@ -691,6 +692,10 @@ namespace PnP.Core.Model.SharePoint
                         if (propertyValue.ValueKind == JsonValueKind.Undefined)
                         {
                             return null;
+                        }
+                        else if (propertyValue.ValueKind == JsonValueKind.Object)
+                        {
+                            return propertyValue.ToObject<System.Dynamic.ExpandoObject>();
                         }
                         else
                         {

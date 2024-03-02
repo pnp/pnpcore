@@ -1981,6 +1981,29 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+
+        [TestMethod]
+        public async Task ImageAndLocationFieldLoadListDataAsStreamTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var myList = await context.Web.Lists.GetByTitleAsync("WithImageAndLocation", p => p.Items,
+                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+                await myList.LoadListDataAsStreamAsync(new RenderListDataOptions { });
+
+                var item = myList.Items.AsRequested().First();
+                var lf = item.Values.TryGetValue("LinkFilename", out object lfval);
+                var loc = item.Values["TestLocation"] as IFieldLocationValue;
+                var image = item.Values["TestImage"] as IFieldThumbnailValue;
+
+                Assert.AreEqual(image.FileName, "river.jpg");
+                Assert.AreEqual(loc.Latitude, (double)-37.8099m);
+            }
+        }
+
+
         [TestMethod]
         public async Task RegularFieldCsomTest()
         {
@@ -3732,7 +3755,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
             (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
-
+            
             try
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
