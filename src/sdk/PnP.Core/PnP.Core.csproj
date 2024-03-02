@@ -5,9 +5,9 @@
 		<LangVersion>10.0</LangVersion>
 		<RootNamespace>PnP.Core</RootNamespace>
 		<AssemblyName>PnP.Core</AssemblyName>
-		<Version>1.11.0</Version>
+		<Version>1.12.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>PnP 2023</Copyright>
+		<Copyright>PnP 2024</Copyright>
 		<Company>PnP</Company>
 		<Authors>PnP</Authors>
 		<Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>

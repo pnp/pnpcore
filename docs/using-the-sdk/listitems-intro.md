@@ -511,7 +511,7 @@ Updating a list item comes down to updating the field values followed by calling
 
 Methods | Description
 --------|------------
-Update, UpdateAsync | Regular update, this will result in a new version being created and the modified and editor list item fields will be updated
+Update, UpdateAsync | Regular update, this will result in a new version being created and the modified and editor list item fields will be updated. When updating fields in a document library the update might silently fail when the field value exceeds 255 characters. If so, please use one of the other methods in this table.
 SystemUpdate, SystemUpdateAsync | Updates the item without creating a new version and without updating the modified and editor list item fields
 UpdateOverWriteVersion, UpdateOverWriteVersionAsync | Updates the item without creating a new version and the modified and editor list item fields will be updated
 

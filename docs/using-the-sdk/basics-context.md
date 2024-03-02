@@ -29,6 +29,23 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith",
 
 ```
 
+## Optimzing performance when you know the exact case of the site to work with
+
+PnP Core SDK does use a lot of SharePoint batching and that requires that the SharePoint site URIs are used with correct casing inside the batch request. To ensure we know the correct case during `PnPContext` initialization we do two requests to initialize the context, first one is interactive (that works with invalid casing) and then pick up the correct case from that response, followed by loading the remaining initialization data. If you know the site URI casing you can all the initialization requests in a single roundtrip, to do so specify `PnPContextOptions` with the `SiteUriCasingIsCorrect` set to `true`.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith", 
+                                                        new PnPContextOptions()
+                                                        {
+                                                            SiteUriCasingIsCorrect = true
+                                                        })
+    )
+{
+    // Use the context
+}
+
+```
+
 ## Loading additional IWeb and ISite properties when creating a PnPContext
 
 When a `PnPContext` is created two calls are issued to SharePoint Online. In a first call the `IWeb` is loaded with following properties: `Id`, `Url` and `RegionalSettings`. In the second call `ISite` is loaded with the `Id` and `GroupId` properties. If your application needs additional `IWeb` or `ISite` properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading `IWeb` and `ISite`. To do this you can provide a `PnPContextOptions` object specifying the additional `IWeb` and `ISite` properties to load.

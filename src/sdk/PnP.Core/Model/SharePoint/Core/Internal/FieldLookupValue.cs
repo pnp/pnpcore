@@ -101,7 +101,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (!properties.ContainsKey("lookupId"))
+            if (!properties.TryGetValue("lookupId", out string value))
             {
                 LookupId = -1;                
                 IsSecretFieldValue = false;
@@ -118,19 +118,16 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (properties.ContainsKey("lookupId"))
+                LookupId = int.Parse(value);
+
+                if (properties.TryGetValue("lookupValue", out string valueLookupValue))
                 {
-                    LookupId = int.Parse(properties["lookupId"]);
+                    LookupValue = valueLookupValue;
                 }
 
-                if (properties.ContainsKey("lookupValue"))
+                if (properties.TryGetValue("isSecretFieldValue", out string valueIsSecretValue))
                 {
-                    LookupValue = properties["lookupValue"];
-                }
-
-                if (properties.ContainsKey("isSecretFieldValue"))
-                {
-                    IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
+                    IsSecretFieldValue = bool.Parse(valueIsSecretValue);
                 }
             }
 

@@ -43,7 +43,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Id of the <see cref="BatchRequest"/>
         /// </summary>
-        internal Guid Id { get; private set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Entity object on for which this request was meant

@@ -6,9 +6,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.12.0]
 
 ### Added
+
+- Add `Groups` property to `ISharePointUser` #1363 [jansenbe - Bert Jansen]
+- Added `DeleteAll`, `DeleteByID`, `DeleteByLabel`, `RecycleByID`, `RecycleByLabel` and `RestoreByLabel` methods for `IFileVersionCollection` #1375 [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -22,6 +25,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetWssIdForTermAsync returns wrong WssId if used multiple times on the same PnPContext instance #1355 [jansenbe - Bert Jansen]
 - ViewType2 updating error #1360 [jansenbe - Bert Jansen]
 - Improved approach for getting the listitem folderpath #1353 [4ndri - Andri Capol]
+- Ensure the finishupload endpoint is always called #1387 [alexchx - Alex Chen]
+- Admin library: Add code to set sensitivity label to a group via updating associated site properties #1389 [wilecoyotegenius - Konrad K.]
+- Expose the `BatchRequest.Id` property and include it in the corresponding `BatchResponse` to enable more advanced batch handling scenarios #1374 [jansenbe - Bert Jansen]
+- Admin library: fixed issues with loading SharePoint Add-In and Azure ACS principal permissions when the payload exceeded 500 items [jansenbe - Bert Jansen]
+- GetUserEffectivePermissions not working with External accounts #1350 [jansenbe - Bert Jansen]
+- GetComments() only return maximum of 30 comments. It used to return all comments. #1361 [jansenbe - Bert Jansen]
+- Improved testability by removing type checking in `QueryableExtensions.AsRequested` #1376 [jansenbe - Bert Jansen]
+- `IListItem` like (`ILikedByInformation`) was not always loaded #1395 [jansenbe - Bert Jansen]
+- Performance: `PnPContext` initialization can be done with a single roundtrip to SharePoint if the valid site casing is used in combination with `PnPContextOptions.SiteUriCasingIsCorrect` #1383 [jansenbe - Bert Jansen]
+- BREAKING CHANGE: `ITeamChannelTab.Id` now is of type `string` instead of `Guid` #1407 [jansenbe - Bert Jansen]
 
 ## [1.11.0]
 

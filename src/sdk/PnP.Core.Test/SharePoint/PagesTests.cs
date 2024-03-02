@@ -2723,7 +2723,7 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
-
+        
         [TestMethod]
         public async Task LikeUnLikePage()
         {
@@ -2882,6 +2882,51 @@ namespace PnP.Core.Test.SharePoint
                     // Check if the replies are loaded
                     Assert.IsTrue(comments.AsRequested().First().ReplyCount == 1);
                     Assert.IsTrue(comments.AsRequested().First().Replies.AsRequested().First().Text == "this is a reply");
+                }
+                finally
+                {
+                    // Delete the page
+                    await newPage.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task PageCommentingTestOnlyReturn30Comments()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IPage newPage = null;
+                try
+                {
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PageCommentingTestOnlyReturn30Comments.aspx");
+
+                    // Save the page
+                    await newPage.SaveAsync(pageName);
+
+                    // Publish the page, required before it can be liked
+                    newPage.Publish();
+
+                    // Get Page comments                
+                    var comments = newPage.GetComments();
+                    Assert.IsTrue(comments.Length == 0);
+
+                    var noCommentsAdded = 45;
+
+                    foreach (var i in Enumerable.Range(1, noCommentsAdded))
+                    {
+                        // Add a comment
+                        await comments.AddBatchAsync($"Comment #: {i} added by unit test");
+                    }
+
+                    await context.ExecuteAsync();
+
+                    comments = newPage.GetComments();
+                    // Expecting 45 but only 30 is returned. 
+                    Assert.IsTrue(comments.Length == noCommentsAdded);
+
                 }
                 finally
                 {

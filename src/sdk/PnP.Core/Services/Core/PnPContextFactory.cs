@@ -473,32 +473,42 @@ namespace PnP.Core.Services
             // Add context properties (if any)
             SetPnPContextProperties(context, options);
 
-            // IMPORTANT: this first call is an interactive call by design as that allows us set the 
-            //            web URL using the correct casing. Correct casing is required in REST batching
-
             // IMPORTANT: if you change this logic by adding more initialization data you also need
             //            to update the CopyContextInitialization method!
 
             // Combine the default properties to load with optional additional properties
             var (siteProps, webProps) = GetDefaultPropertiesToLoad(options);
 
-            // Use the query client to build the correct initialization query for the given Web properties 
-            BaseDataModel<IWeb> concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(IWeb), context.Web, context) as BaseDataModel<IWeb>;
-            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, webProps.ToArray());
-            var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall($"_api/Web", ApiType.SPORest), true).ConfigureAwait(false);
-
-            // Load required web properties
-            var api = new ApiCall(apiCallRequest.ApiCall.Request, ApiType.SPORest)
+            if (options != null && options.SiteUriCasingIsCorrect)
             {
-                Interactive = true
-            };
-            await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
+                var initializationBatch = context.NewBatch();
+                await context.Web.LoadBatchAsync(initializationBatch, webProps.ToArray()).ConfigureAwait(false);
+                await context.Site.LoadBatchAsync(initializationBatch, siteProps.ToArray()).ConfigureAwait(false);
+                await context.ExecuteAsync(initializationBatch).ConfigureAwait(false);
+            }
+            else
+            {
+                // IMPORTANT: this first call is an interactive call by design as that allows us set the 
+                //            web URL using the correct casing. Correct casing is required in REST batching
 
-            // Replace the context URI with the value using the correct casing
-            context.Uri = context.Web.Url;
+                // Use the query client to build the correct initialization query for the given Web properties 
+                BaseDataModel<IWeb> concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(IWeb), context.Web, context) as BaseDataModel<IWeb>;
+                var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, webProps.ToArray());
+                var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall($"_api/Web", ApiType.SPORest), true).ConfigureAwait(false);
 
-            // Request the site properties
-            await context.Site.LoadAsync(siteProps.ToArray()).ConfigureAwait(false);
+                // Load required web properties
+                var api = new ApiCall(apiCallRequest.ApiCall.Request, ApiType.SPORest)
+                {
+                    Interactive = true
+                };
+                await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
+
+                // Replace the context URI with the value using the correct casing
+                context.Uri = context.Web.Url;
+
+                // Request the site properties
+                await context.Site.LoadAsync(siteProps.ToArray()).ConfigureAwait(false);
+            }
 
             // Ensure the Graph ID is set once and only once
             if (context.Web is IMetadataExtensible me)

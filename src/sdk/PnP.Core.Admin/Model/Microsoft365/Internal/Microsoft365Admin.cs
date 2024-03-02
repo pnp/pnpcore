@@ -210,6 +210,13 @@ namespace PnP.Core.Admin.Model.Microsoft365
                 throw new ArgumentException($"{nameof(graphGroupOptions)}.{nameof(graphGroupOptions.MailNickname)}");
             }
 
+            // Check whether sensitivity label exists
+            var sensitivityLabelOption = graphGroupOptions.CreationOptions.FirstOrDefault(i => i.StartsWith("SensitivityLabel:"));
+            if (sensitivityLabelOption != null)
+            {
+                graphGroupOptions.CreationOptions.Remove(sensitivityLabelOption);
+            }
+
             if (groupCreationOptions == null)
             {
                 groupCreationOptions = new CreationOptions();
@@ -283,7 +290,14 @@ namespace PnP.Core.Admin.Model.Microsoft365
                     }
                 }
             }
-
+            
+            // Apply group sensitivity label by updating related site properties
+            if (sensitivityLabelOption != null)
+            {
+                var props = context.GetSiteCollectionManager().GetSiteCollectionProperties(responseContext.Uri, null);
+                props.SensitivityLabel2 = sensitivityLabelOption.Replace("SensitivityLabel:", string.Empty);             
+                await props.UpdateAsync(null).ConfigureAwait(false);
+            }
             return responseContext;
         }
 

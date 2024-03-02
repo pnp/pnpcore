@@ -1686,7 +1686,7 @@ namespace PnP.Core.Model.SharePoint
                 itemApi = "_api/web/lists(guid'{List.Id}')/getitembyid({Id})";
             }
 
-            var apiCall = new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
+            var apiCall = new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments), loadPages: true);
             if (selectors != null && selectors.Any())
             {
                 // Use the query client to translate the seletors into the needed query string
@@ -1699,7 +1699,7 @@ namespace PnP.Core.Model.SharePoint
                 };
 
                 var entityInfo = EntityManager.GetClassInfo(tempComment.GetType(), tempComment, expressions: selectors);
-                var query = await QueryClient.BuildGetAPICallAsync(tempComment, entityInfo, apiCall).ConfigureAwait(false);
+                var query = await QueryClient.BuildGetAPICallAsync(tempComment, entityInfo, apiCall, loadPages:true).ConfigureAwait(false);
                 return new ApiCall(query.ApiCall.Request, ApiType.SPORest, receivingProperty: nameof(Comments));
             }
             else

@@ -102,9 +102,9 @@ namespace PnP.Core.Model.SharePoint
                 // first property is the url field
                 Url = properties.First().Value;
 
-                if (properties.ContainsKey("desc"))
+                if (properties.TryGetValue("desc", out string valueDesc))
                 {
-                    Description = properties["desc"];
+                    Description = valueDesc;
                 }
 
                 if (!HasValue(nameof(Description)) && HasValue(nameof(Url)))

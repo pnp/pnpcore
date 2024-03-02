@@ -32,7 +32,7 @@ namespace PnP.Core.Services
         internal Guid Id { get; private set; }
 
         /// <summary>
-        /// List with requests 
+        /// List with requests, this list will be cleared after the requests have been executed 
         /// </summary>
         public SortedList<int, BatchRequest> Requests { get; internal set; } = new SortedList<int, BatchRequest>();
 
@@ -239,7 +239,8 @@ namespace PnP.Core.Services
                 request.ApiCall.Type.ToString(),
                 request.ApiCall.Request,
                 request.Method,
-                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : ""));
+                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : "",
+                request.Id));
         }
 
         internal Guid PrepareLastAddedRequestForBatchProcessing<T>(Action<string, ApiCall> rawResultsHandler, T resultObject)

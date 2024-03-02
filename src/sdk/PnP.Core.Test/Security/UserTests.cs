@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -48,6 +49,23 @@ namespace PnP.Core.Test.Security
             }
         }
 
+        [TestMethod]
+        public async Task GetCurrentUserWithGroups()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Load the current user from current web
+                var web = await context.Web.GetAsync(w => w.CurrentUser.QueryProperties(p => p.Groups));
+
+                Assert.IsNotNull(web.CurrentUser);
+                Assert.IsTrue(web.CurrentUser.Requested);
+                Assert.IsTrue(web.CurrentUser.Id > 0);
+
+                Assert.IsTrue(web.CurrentUser.Groups.Requested);
+                Assert.IsTrue(web.CurrentUser.Groups.Length > 0);
+            }
+        }
 
         [TestMethod]
         public async Task GetSharePointUserAsGraphUser()

@@ -5,9 +5,9 @@
 		<LangVersion>10.0</LangVersion>
 		<RootNamespace>PnP.Core.Admin</RootNamespace>
 		<AssemblyName>PnP.Core.Admin</AssemblyName>
-		<Version>1.11.0</Version>
+		<Version>1.12.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>PnP 2023</Copyright>
+		<Copyright>PnP 2024</Copyright>
 		<Company>PnP</Company>
 		<Authors>PnP</Authors>
 		<Description>This library adds admin related functionality to PnP Core SDK</Description>

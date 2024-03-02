@@ -11,7 +11,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Identifier that uniquely identifies a specific instance of a channel tab. Read only.
         /// </summary>
-        public Guid Id { get; }
+        public string Id { get; }
 
         /// <summary>
         /// Name of the tab.

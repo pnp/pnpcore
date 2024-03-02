@@ -605,12 +605,15 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (source is BaseQueryableDataModelCollection<TSource> enumerable)
-            {
-                return (IEnumerable<TSource>)enumerable.RequestedItems;
-            }
+            return (IEnumerable<TSource>)source.RequestedItems;
 
-            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+            // Below check impacts testability via mocking, so we removed it
+            //if (source is BaseQueryableDataModelCollection<TSource> enumerable)
+            //{
+            //    return (IEnumerable<TSource>)enumerable.RequestedItems;
+            //}
+
+            //throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
         }
 
         #endregion
