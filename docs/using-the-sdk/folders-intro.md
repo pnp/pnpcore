@@ -51,7 +51,7 @@ foreach(var property in folder.Properties)
 }
 
 // Add a new property
-folder["myPropertyKey"] = "Some value";
+folder.Properties["myPropertyKey"] = "Some value";
 await folder.Properties.UpdateAsync();
 ```
 
