@@ -549,6 +549,21 @@ namespace PnP.Core.Services
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         }
+                    case "Thumbnail":
+                        {
+                            var fieldValue = new FieldThumbnailValue() { Field = field };
+                            if (json.ValueKind != JsonValueKind.Null && json.ValueKind != JsonValueKind.Undefined)
+                            {
+                                var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
+                                fieldValue.FromJson(parsedFieldContent);
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(new JsonElement());
+                            }
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        }
                     default:
                         {
                             return new Tuple<object, string>(null, null);
