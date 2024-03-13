@@ -1405,6 +1405,22 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetByServerRelativeSeparatorEncoding()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
+
+                sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery.Replace("/", "\\")}\\Shared Documents";
+                sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
+            }
+        }
+
+        [TestMethod]
         public async Task GetWebChangesAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
