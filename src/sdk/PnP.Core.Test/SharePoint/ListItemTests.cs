@@ -1981,28 +1981,140 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
         [TestMethod]
-        public async Task ImageAndLocationFieldLoadListDataAsStreamTest()
+        public async Task ImageFieldTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var myList = await context.Web.Lists.GetByTitleAsync("WithImageAndLocation", p => p.Items,
-                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
-                await myList.LoadListDataAsStreamAsync(new RenderListDataOptions { });
+                //==========================================================
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ImageAndLocationFieldTest");
 
-                var item = myList.Items.AsRequested().First();
-                var lf = item.Values.TryGetValue("LinkFilename", out object lfval);
-                var loc = item.Values["TestLocation"] as IFieldLocationValue;
-                var image = item.Values["TestImage"] as IFieldThumbnailValue;
+                IList myList = null;
 
-                Assert.AreEqual(image.FileName, "river.jpg");
-                Assert.AreEqual(loc.Latitude, (double)-37.8099m);
+                try
+                {
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    //==========================================================
+                    string fldImage1 = "Image1";
+                    IField addedImageField1 = await myList.Fields.AddFieldAsXmlAsync($"<Field DisplayName='{fldImage1}' Format='Thumbnail' IsModern='TRUE' Name='{fldImage1}' Title='{fldImage1}' Type='Thumbnail'></Field>", addToDefaultView: true);
+
+                    // Upload an item 
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "Item1" }                        
+                    });
+
+                    // Read the item again to get a reference to the image column
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+                    // Set the image for the added item
+                    addedItem = myList.Items.AsRequested().First();
+                    // Important to add the extension in the image name as that's being checked to be a valid image extension
+                    await (addedItem[$"{fldImage1}"] as IFieldThumbnailValue).UploadImageAsync(addedItem, "parker-ms-300.png", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"));
+
+                    // Read the item again to get a reference to the image column which now should be populated
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                    addedItem = myList.Items.AsRequested().First();
+
+                    Assert.IsTrue(addedItem[$"{fldImage1}"] is IFieldThumbnailValue);
+                    Assert.IsTrue((addedItem[$"{fldImage1}"] as IFieldThumbnailValue).FileName.Contains("parker-ms-300"));
+
+                    // Read the item using LoadListDataAsStreamAsync
+                    myList.Items.Clear();
+                    await myList.LoadListDataAsStreamAsync(new RenderListDataOptions 
+                    { 
+                        
+                    });
+
+                    addedItem = myList.Items.AsRequested().First();
+                    Assert.IsTrue(addedItem[$"{fldImage1}"] is IFieldThumbnailValue);
+                    Assert.IsTrue((addedItem[$"{fldImage1}"] as IFieldThumbnailValue).FileName.Contains("parker-ms-300"));
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
             }
         }
 
+        [TestMethod]
+        public async Task LocationFieldTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                //==========================================================
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("LocationFieldTest");
+
+                IList myList = null;
+
+                try
+                {
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    //==========================================================
+                    string fldLocation1 = "Location1";
+                    IField addedLocationField1 = await myList.Fields.AddFieldAsXmlAsync($"<Field DisplayName='{fldLocation1}' Format='Dropdown' IsModern='TRUE' Name='{fldLocation1}' Title='{fldLocation1}' Type='Location'></Field>", addToDefaultView: true);
+
+                    // Upload an item 
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "Item1" },
+                        { fldLocation1, addedLocationField1.NewFieldLocationValue("Somewhere", 50.6354, 3.06998) }
+                    });
+
+                    // Read the item again to get a reference to the image column which now should be populated
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                    addedItem = myList.Items.AsRequested().First();
+
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).DisplayName == "Somewhere");
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).Latitude == 50.6354);
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).Longitude == 3.06998);
+
+                    // Read the item using LoadListDataAsStreamAsync
+                    myList.Items.Clear();
+                    await myList.LoadListDataAsStreamAsync(new RenderListDataOptions
+                    {
+
+                    });
+
+                    addedItem = myList.Items.AsRequested().First();
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).DisplayName == "Somewhere");
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).Latitude == 50.6354);
+                    Assert.IsTrue((addedItem[$"{fldLocation1}"] as IFieldLocationValue).Longitude == 3.06998);
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
 
         [TestMethod]
         public async Task RegularFieldCsomTest()

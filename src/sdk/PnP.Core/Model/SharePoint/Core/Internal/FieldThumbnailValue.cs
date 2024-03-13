@@ -1,14 +1,19 @@
-﻿using System;
+﻿using AngleSharp.Dom;
+using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents a location field value
     /// </summary>
-    public sealed class FieldThumbnailValue
-        : FieldValue, IFieldThumbnailValue
+    public sealed class FieldThumbnailValue: FieldValue, IFieldThumbnailValue
     {
         /// <summary>
         /// Default constructor
@@ -48,22 +53,23 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (properties.ContainsKey("fileName"))
+            if (properties.TryGetValue("fileName", out string valueFileName))
             {
-                FileName = properties["fileName"];
+                FileName = valueFileName;
             }
-            if (properties.ContainsKey("serverRelativeUrl"))
+            if (properties.TryGetValue("serverRelativeUrl", out string valueServerRelativeUrl))
             {
-                ServerRelativeUrl = properties["serverRelativeUrl"];
+                ServerRelativeUrl = valueServerRelativeUrl;
             }
-            if (properties.ContainsKey("serverUrl"))
+            if (properties.TryGetValue("serverUrl", out string valueServerUrl))
             {
-                ServerUrl = properties["serverUrl"];
+                ServerUrl = valueServerUrl;
             }
-            if (properties.ContainsKey("thumbnailRenderer"))
+            if (properties.TryGetValue("thumbnailRenderer", out string valueThumbnailRenderer))
             {
-                ThumbnailRenderer = properties["thumbnailRenderer"];
+                ThumbnailRenderer = valueThumbnailRenderer;
             }
+
             // Clear changes
             Commit();
 
@@ -90,5 +96,38 @@ namespace PnP.Core.Model.SharePoint
             return "";
         }
 
+        public async Task UploadImageAsync(IListItem item, string name, Stream content)
+        {
+            var encodedServerFileName = WebUtility.UrlEncode(name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
+            string fileCreateRequest = $"_api/web/lists/getbyid(guid'{{List.Id}}')/Items(@a1)/AddThumbnailFieldData(imageName=@a2,fieldInternalName=@a3)?@a1={item.Id}&@a2=%27{encodedServerFileName}%27&@a3=%27{Field.InternalName}%27";
+            var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
+            {
+                Interactive = true,
+                BinaryBody = ToByteArray(content),
+            };
+            
+            var response = await (item as ListItem).RawRequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                if (json.TryGetProperty("Name", out JsonElement nameValue) && nameValue.ValueKind != JsonValueKind.Null)
+                {
+                    FileName = nameValue.GetString();
+                }
+                if (json.TryGetProperty("ServerRelativeUrl", out JsonElement serverRelativeUrlValue) && serverRelativeUrlValue.ValueKind != JsonValueKind.Null)
+                {
+                    ServerRelativeUrl = serverRelativeUrlValue.GetString();
+                }
+            }
+        }
+
+        private static byte[] ToByteArray(Stream source)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                source.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
     }
 }

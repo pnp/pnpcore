@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
@@ -83,61 +84,61 @@ namespace PnP.Core.Model.SharePoint
             else
             {
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+                if (json.TryGetProperty("DisplayName", out JsonElement displayName) || json.TryGetProperty("displayName", out displayName))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                 {
                     DisplayName = displayName.GetString();
                 }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                if (json.TryGetProperty("LocationUri", out JsonElement locationUri))
+                if (json.TryGetProperty("LocationUri", out JsonElement locationUri) || json.TryGetProperty("locationUri", out locationUri))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                 {
                     LocationUri = locationUri.GetString();
                 }
 
-                if (json.TryGetProperty("Address", out JsonElement address))
+                if (json.TryGetProperty("Address", out JsonElement address) || json.TryGetProperty("address", out address))
                 {
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (address.TryGetProperty("Street", out JsonElement street))
+                    if (address.TryGetProperty("Street", out JsonElement street) || address.TryGetProperty("street", out street))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         Street = street.GetString();
                     }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (address.TryGetProperty("City", out JsonElement city))
+                    if (address.TryGetProperty("City", out JsonElement city) || address.TryGetProperty("city", out city))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         City = city.GetString();
                     }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (address.TryGetProperty("State", out JsonElement state))
+                    if (address.TryGetProperty("State", out JsonElement state) || address.TryGetProperty("state", out  state))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         State = state.GetString();
                     }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (address.TryGetProperty("CountryOrRegion", out JsonElement countryOrRegion))
+                    if (address.TryGetProperty("CountryOrRegion", out JsonElement countryOrRegion) || address.TryGetProperty("countryOrRegion", out countryOrRegion))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         CountryOrRegion = countryOrRegion.GetString();
                     }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (address.TryGetProperty("PostalCode", out JsonElement postalCode))
+                    if (address.TryGetProperty("PostalCode", out JsonElement postalCode) || address.TryGetProperty("postalCode", out postalCode))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         PostalCode = postalCode.GetString();
                     }
                 }
 
-                if (json.TryGetProperty("Coordinates", out JsonElement coordinates))
+                if (json.TryGetProperty("Coordinates", out JsonElement coordinates) || json.TryGetProperty("coordinates", out coordinates))
                 {
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (coordinates.TryGetProperty("Latitude", out JsonElement latitude))
+                    if (coordinates.TryGetProperty("Latitude", out JsonElement latitude) || coordinates.TryGetProperty("latitude", out latitude))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         if (latitude.ValueKind == JsonValueKind.Number)
@@ -147,7 +148,7 @@ namespace PnP.Core.Model.SharePoint
                     }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                    if (coordinates.TryGetProperty("Longitude", out JsonElement longitude))
+                    if (coordinates.TryGetProperty("Longitude", out JsonElement longitude) || coordinates.TryGetProperty("longitude", out longitude))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                     {
                         if (longitude.ValueKind == JsonValueKind.Number)
@@ -255,8 +256,19 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToValidateUpdateItemJson()
         {
-            //throw new NotImplementedException();
-            return null;
+            var addFieldByCoordinates = new
+            {
+                EntityType = "Custom",
+                DisplayName,
+                Coordinates = new
+                {
+                    Latitude,
+                    Longitude
+                }
+            };
+
+            var bodyContent = JsonSerializer.Serialize(addFieldByCoordinates, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
+            return bodyContent;
         }
 
         internal override string ToCsomXml()

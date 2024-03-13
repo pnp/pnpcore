@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Improved support for reading 'Image' and 'Location' fields #1411 [wizofaus - Dylan Nicholson]
+- Support for setting 'Image' and 'Location' fields [jansenbe - Bert Jansen]
 
 ### Changed
 

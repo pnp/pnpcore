@@ -424,6 +424,16 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
+        public IFieldLocationValue NewFieldLocationValue(string displayName, double latitude, double longitude)
+        {
+            return new FieldLocationValue()
+            {
+                DisplayName = displayName,
+                Latitude = latitude,
+                Longitude = longitude,
+            };
+        }
+
         public IFieldValueCollection NewFieldValueCollection()
         {
             return new FieldValueCollection(this, InternalName);
