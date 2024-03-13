@@ -171,6 +171,18 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
 
+        public string NewFormClientSideComponentId { get => GetValue<string>(); set => SetValue(value); }
+
+        public string NewFormClientSideComponentProperties { get => GetValue<string>(); set => SetValue(value); }
+
+        public string EditFormClientSideComponentId { get => GetValue<string>(); set => SetValue(value); }
+
+        public string EditFormClientSideComponentProperties { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayFormClientSideComponentId { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayFormClientSideComponentProperties { get => GetValue<string>(); set => SetValue(value); }
+
         public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
 
         public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
