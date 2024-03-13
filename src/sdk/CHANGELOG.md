@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Calls to `GetUserEffectivePermissions` are not not clearing collections loaded in the used `PnPContext` instance #1416 [jansenbe - Bert Jansen]
 - Verify TermId is a valid GUID before assigning it #1414 [jansenbe - Bert Jansen]
 - Loading site pages is more robust when a custom web part on the page is erroring #1410 [jansenbe - Bert Jansen]
+- `IContentType.SchemaXml` is not settable in SharePoint so removing the set option for it #1418 [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 

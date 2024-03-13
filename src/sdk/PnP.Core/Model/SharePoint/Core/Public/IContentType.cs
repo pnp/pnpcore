@@ -116,7 +116,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or Sets the Schema XML of the Content Type
         /// </summary>
-        public string SchemaXml { get; set; }
+        public string SchemaXml { get; }
 
         /// <summary>
         /// Gets or Sets the Schema XML with resource tokens of the Content Type
