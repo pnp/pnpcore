@@ -2386,7 +2386,10 @@ namespace PnP.Core.Model.SharePoint
 
         private static ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
         {
-            return new ApiCall($"_api/web/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|" + userPrincipalName)}')", ApiType.SPORest);
+            return new ApiCall($"_api/web/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|" + userPrincipalName)}')", ApiType.SPORest)
+            {
+                SkipCollectionClearing = true
+            };
         }
 
         public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
