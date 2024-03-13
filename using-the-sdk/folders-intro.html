@@ -122,7 +122,7 @@ foreach(var property in folder.Properties)
 }
 
 // Add a new property
-folder[&quot;myPropertyKey&quot;] = &quot;Some value&quot;;
+folder.Properties[&quot;myPropertyKey&quot;] = &quot;Some value&quot;;
 await folder.Properties.UpdateAsync();
 </code></pre>
 <h2 id="adding-folders">Adding folders</h2>
