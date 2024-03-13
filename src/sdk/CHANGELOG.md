@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Calls to `GetUserEffectivePermissions` are not not clearing collections loaded in the used `PnPContext` instance #1416 [jansenbe - Bert Jansen]
+- Verify TermId is a valid GUID before assigning it #1414 [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 
