@@ -1171,7 +1171,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (string.IsNullOrEmpty(html))
             {
-                throw new ArgumentNullException(nameof(pageHeaderHtml));
+                throw new ArgumentNullException(nameof(html));
             }
 
             HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });
@@ -1195,7 +1195,7 @@ namespace PnP.Core.Model.SharePoint
                         {
                             Order = controlOrder
                         };
-                        control.FromHtml(clientSideControl);
+                        control.FromHtml(clientSideControl, false);
 
                         // Handle control positioning in sections and columns
                         ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
@@ -1208,7 +1208,7 @@ namespace PnP.Core.Model.SharePoint
                         {
                             Order = controlOrder
                         };
-                        control.FromHtml(clientSideControl);
+                        control.FromHtml(clientSideControl, false);
 
                         // Handle control positioning in sections and columns
                         ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
@@ -1455,7 +1455,7 @@ namespace PnP.Core.Model.SharePoint
                             Order = headerControlOrder,
                             IsHeaderControl = true,
                         };
-                        control.FromHtml(clientSideHeaderControl);
+                        control.FromHtml(clientSideHeaderControl, true);
 
                         HeaderControls.Add(control);
                         headerControlOrder++;

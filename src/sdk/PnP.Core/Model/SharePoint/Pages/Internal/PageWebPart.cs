@@ -515,9 +515,9 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Internal and private methods
-        internal override void FromHtml(IElement element)
+        internal override void FromHtml(IElement element, bool isHeader)
         {
-            base.FromHtml(element);
+            base.FromHtml(element, isHeader);
 
             // Set/update dataVersion if it was provided as html attribute
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
@@ -530,11 +530,11 @@ namespace PnP.Core.Model.SharePoint
             controlType = SpControlData.ControlType;
             RichTextEditorInstanceId = SpControlData.RteInstanceId;
 
-            var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
+            IElement wpDiv = null;
+            string decodedWebPart = null;
 
-            string decodedWebPart;
             // Some components are in the page header and need to be handled as a control instead of a webpart
-            if (wpDiv == null)
+            if (isHeader)
             {
                 // Decode the html encoded string
                 decodedWebPart = WebUtility.HtmlDecode(element.GetAttribute(ControlDataAttribute));
@@ -542,10 +542,37 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                WebPartData = wpDiv.GetAttribute(WebPartAttribute);
+                wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
+                if (wpDiv != null)
+                {
+                    // This is a valid web part
+                    WebPartData = wpDiv.GetAttribute(WebPartAttribute);
 
-                // Decode the html encoded string
-                decodedWebPart = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
+                    // Decode the html encoded string
+                    decodedWebPart = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
+                }
+                else
+                {
+                    // The web part is not presented by a data-sp-webpartdata attribute on the DIV, typically
+                    // this means the web part is broken. Check the page and see if it renders properly
+
+                    // Let's try to get the web part data from the webPartData element in the control data attribute json content
+                    var controlDataAttributeJsonContent = WebUtility.HtmlDecode(element.GetAttribute(ControlDataAttribute));
+                    if (!string.IsNullOrEmpty(controlDataAttributeJsonContent))
+                    {
+                        var controlDataAttributeJsonObject = JsonSerializer.Deserialize<JsonElement>(controlDataAttributeJsonContent);
+                        if (controlDataAttributeJsonObject.TryGetProperty("webPartData", out JsonElement webPartDataProperty) && webPartDataProperty.ValueKind != JsonValueKind.Null)
+                        {
+                            decodedWebPart = webPartDataProperty.ToString();
+                        }
+                    }
+                }
+            }
+
+            // If above fallback code did not result in web part data then return with just the basic info we have
+            if (string.IsNullOrEmpty(decodedWebPart))
+            {
+                return;
             }
 
             var wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
