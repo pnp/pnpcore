@@ -115,7 +115,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
 // Do a paged retrieval (non async sample) of the list items with additional collection loads
 foreach(var listItem in myList.Items.QueryProperties(p => p.All,
                                      p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
-                                                                           p => p.RoleDefinitions))
+                                                                            p => p.RoleDefinitions))
 {
     // Do something with the list item
     if (listItem["MyStatus"].ToString() == "Pending")
@@ -158,8 +158,8 @@ string viewXml = @"<View>
                           <Value Type='text'><![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                    </View>";
 
 // Execute the query
@@ -215,10 +215,10 @@ string viewXml = @$"<View>
             <Value Type='Integer'>0</Value>
         </Eq>
         </Where>
+        <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
     </Query>
-    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
     <RowLimit>{pageSize}</RowLimit>
-    </View>";
+</View>";
 
 // Load all the needed data using paged requests
 bool paging = true;
@@ -337,8 +337,8 @@ string viewXml = @"<View>
                           <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit>5</RowLimit>
                    </View>";
 
@@ -391,8 +391,8 @@ string viewXml = @"<View>
                           <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>20</RowLimit>
                    </View>";
 
@@ -607,7 +607,7 @@ await context.ExecuteAsync();
 
 To add a folder to a list the list first must be configured to allow content types (`ContentTypesEnabled`) and allow folders (`EnableFolderCreation`). Once that's done use one of the `AddListFolder` methods to add a folder.
 
-``` csharp
+```csharp
 list.ContentTypesEnabled = true;
 list.EnableFolderCreation = true;
 await list.UpdateAsync();
