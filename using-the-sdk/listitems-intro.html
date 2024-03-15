@@ -204,7 +204,7 @@ var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
 // Do a paged retrieval (non async sample) of the list items with additional collection loads
 foreach(var listItem in myList.Items.QueryProperties(p =&gt; p.All,
                                      p =&gt; p.RoleAssignments.QueryProperties(p =&gt; p.PrincipalId, 
-                                                                           p =&gt; p.RoleDefinitions))
+                                                                            p =&gt; p.RoleDefinitions))
 {
     // Do something with the list item
     if (listItem[&quot;MyStatus&quot;].ToString() == &quot;Pending&quot;)
@@ -245,8 +245,8 @@ string viewXml = @&quot;&lt;View&gt;
                           &lt;Value Type='text'&gt;&lt;![CDATA[Item1]]&lt;/Value&gt;
                         &lt;/BeginsWith&gt;
                       &lt;/Where&gt;
+                      &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name='ID' Ascending='FALSE' /&gt;&lt;/OrderBy&gt;
                     &lt;/Query&gt;
-                    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
                    &lt;/View&gt;&quot;;
 
 // Execute the query
@@ -300,10 +300,10 @@ string viewXml = @$&quot;&lt;View&gt;
             &lt;Value Type='Integer'&gt;0&lt;/Value&gt;
         &lt;/Eq&gt;
         &lt;/Where&gt;
+        &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name='ID' Ascending='FALSE' /&gt;&lt;/OrderBy&gt;
     &lt;/Query&gt;
-    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
     &lt;RowLimit&gt;{pageSize}&lt;/RowLimit&gt;
-    &lt;/View&gt;&quot;;
+&lt;/View&gt;&quot;;
 
 // Load all the needed data using paged requests
 bool paging = true;
@@ -417,8 +417,8 @@ string viewXml = @&quot;&lt;View&gt;
                           &lt;Value Type='text'&gt;![CDATA[Item1]]&lt;/Value&gt;
                         &lt;/BeginsWith&gt;
                       &lt;/Where&gt;
+                      &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name='ID' Ascending='FALSE' /&gt;&lt;/OrderBy&gt;
                     &lt;/Query&gt;
-                    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
                     &lt;RowLimit&gt;5&lt;/RowLimit&gt;
                    &lt;/View&gt;&quot;;
 
@@ -470,8 +470,8 @@ string viewXml = @&quot;&lt;View&gt;
                           &lt;Value Type='text'&gt;![CDATA[Item1]]&lt;/Value&gt;
                         &lt;/BeginsWith&gt;
                       &lt;/Where&gt;
+                      &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name='ID' Ascending='FALSE' /&gt;&lt;/OrderBy&gt;
                     &lt;/Query&gt;
-                    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
                     &lt;RowLimit Paged='TRUE'&gt;20&lt;/RowLimit&gt;
                    &lt;/View&gt;&quot;;
 
