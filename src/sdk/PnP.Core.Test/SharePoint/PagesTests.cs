@@ -2927,6 +2927,12 @@ namespace PnP.Core.Test.SharePoint
                     // Expecting 45 but only 30 is returned. 
                     Assert.IsTrue(comments.Length == noCommentsAdded);
 
+                    comments = newPage.GetComments(p => p.Author,
+                                                   p => p.Text,
+                                                   p => p.ReplyCount,
+                                                   p => p.CreatedDate,
+                                                   p => p.Replies);
+                    Assert.IsTrue(comments.Length == noCommentsAdded);
                 }
                 finally
                 {

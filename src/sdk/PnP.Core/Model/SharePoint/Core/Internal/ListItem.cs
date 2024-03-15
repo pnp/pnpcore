@@ -1700,7 +1700,7 @@ namespace PnP.Core.Model.SharePoint
 
                 var entityInfo = EntityManager.GetClassInfo(tempComment.GetType(), tempComment, expressions: selectors);
                 var query = await QueryClient.BuildGetAPICallAsync(tempComment, entityInfo, apiCall, loadPages:true).ConfigureAwait(false);
-                return new ApiCall(query.ApiCall.Request, ApiType.SPORest, receivingProperty: nameof(Comments));
+                return new ApiCall(query.ApiCall.Request, ApiType.SPORest, receivingProperty: nameof(Comments), loadPages: true);
             }
             else
             {
