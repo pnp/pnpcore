@@ -55,6 +55,8 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public string ServerRelativeUrl { get; set; }
 
+        public string AbsoluteUrl { get; set; }
+
         public string Title { get; set; }
 
         public bool AllowAppOnly { get; set; }
