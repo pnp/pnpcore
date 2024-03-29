@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - `IContentType.SchemaXml` is not settable in SharePoint so removing the set option for it #1418 [jansenbe - Bert Jansen]
 - Ensure `GetFolderByServerRelativeUrl` and `GetFileByServerRelativeUr	l` can handle \ as path separator #1412 [jansenbe - Bert Jansen]
 - GetComments() with a selector only return maximum of 30 comments #1424 [jansenbe - Bert Jansen]
+- `CheckIn` and `Approve` methods on `IFile` now support comments with special characters like cariage returns #1432 [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 

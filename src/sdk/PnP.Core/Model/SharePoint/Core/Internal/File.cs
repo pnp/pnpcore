@@ -525,7 +525,8 @@ namespace PnP.Core.Model.SharePoint
         public async Task CheckinAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
         {
             var entity = EntityManager.GetClassInfo(GetType(), this);
-            string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment='{comment ?? string.Empty}',checkintype={(int)checkinType})";
+
+            string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment=@a1,checkintype=@a2)?@a1=%27{comment}%27&@a2={(int)checkinType}";
 
             var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
 
@@ -568,7 +569,8 @@ namespace PnP.Core.Model.SharePoint
         public async Task ApproveAsync(string comment = null)
         {
             var entity = EntityManager.GetClassInfo(GetType(), this);
-            string checkinEndpointUrl = $"{entity.SharePointUri}/approve(comment='{comment ?? string.Empty}')";
+
+            string checkinEndpointUrl = $"{entity.SharePointUri}/approve(comment=@a1)?@a1=%27{comment}%27";
 
             var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
 

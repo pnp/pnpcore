@@ -1116,6 +1116,38 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ApproveFileWithFormattedCommentTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true, parentLibraryApprove: true);
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
+                await testDocument.ApproveAsync("TEST \n APPROVE");
+
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckInComment, f => f.MajorVersion, f => f.MinorVersion, p => p.ListItemAllFields);
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+
+                Assert.AreEqual("0", testDocument.ListItemAllFields["_ModerationStatus"].ToString());
+                Assert.AreEqual("TEST \n APPROVE", testDocument.ListItemAllFields["_ModerationComments"].ToString());
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
+            }
+
+            await TestAssets.CleanupTestDedicatedListAsync(3);
+        }
+
+
+        [TestMethod]
         public async Task ApproveFileWithBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1173,6 +1205,34 @@ namespace PnP.Core.Test.SharePoint
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
+            }
+
+            await TestAssets.CleanupTestDedicatedListAsync(3);
+        }
+
+        [TestMethod]
+        public async Task CheckinFileMajorVersionWithFormattedCommentTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST \n CHECK IN", CheckinType.MajorCheckIn);
+
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual("TEST \n CHECK IN", testDocument.CheckInComment);
                 Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
