@@ -32,6 +32,7 @@ namespace PnP.Core.Model.SharePoint
     {
         internal const string FolderPath = "folderPath";
         internal const string UnderlyingObjectType = "underlyingObjectType";
+        GenericRequestModule handleUpdateExceptionsModule;
 
         #region Construction
         public ListItem()
@@ -50,28 +51,7 @@ namespace PnP.Core.Model.SharePoint
 
                             // In some cases SharePoint will return HTTP 200 indicating the list item was added ok, but one or more fields could 
                             // not be added which is indicated via the HasException property on the field. If so then throw an error.
-                            if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
-                            {
-                                bool handled = false;
-                                if (!input.ApiResponse.Equals(default) && input.ApiResponse.BatchRequestId != Guid.Empty)
-                                {
-                                    var actualBatch = PnPContext.BatchClient.GetBatchByBatchRequestId(input.ApiResponse.BatchRequestId);
-                                    if (!actualBatch.ThrowOnError)
-                                    {
-                                        // Add error to used batch
-                                        actualBatch.AddBatchResult(actualBatch.GetRequest(input.ApiResponse.BatchRequestId),
-                                                                 System.Net.HttpStatusCode.OK,
-                                                                 input.JsonElement.ToString(),
-                                                                 new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
-                                        handled = true;     
-                                    }
-                                }
-
-                                if (!handled)
-                                {
-                                    throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
-                                }
-                            }
+                            HandleValidateAddAndUpdateResponse(field, input.JsonElement, fieldName, input.ApiResponse.BatchRequestId);
 
                             if (fieldName == "Id")
                             {
@@ -181,6 +161,59 @@ namespace PnP.Core.Model.SharePoint
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
             };
+
+            handleUpdateExceptionsModule = new GenericRequestModule()
+            {
+                ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
+                {
+                    // Parse the received json content
+                    var json = JsonSerializer.Deserialize<JsonElement>(responseContent, PnPConstants.JsonSerializer_AllowTrailingCommasTrue);
+
+                    if (json.TryGetProperty("value", out JsonElement value) && value.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var field in value.EnumerateArray())
+                        {
+                            var fieldName = field.GetProperty("FieldName").GetString();
+                            var fieldValue = field.GetProperty("FieldValue").GetString();
+
+                            // In some cases SharePoint will return HTTP 200 indicating the list item was added ok, but one or more fields could 
+                            // not be added which is indicated via the HasException property on the field. If so then throw an error.
+                            HandleValidateAddAndUpdateResponse(field, value, fieldName, batchRequestId);
+                        }
+                    }
+
+                    return responseContent;
+                }
+            };
+        }
+
+        private void HandleValidateAddAndUpdateResponse(JsonElement field, JsonElement value, string fieldName, Guid batchRequestId)
+        {
+            // In some cases SharePoint will return HTTP 200 indicating the list item was added ok, but one or more fields could 
+            // not be added which is indicated via the HasException property on the field. If so then throw an error.
+            if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
+            {
+                bool handled = false;
+                if (batchRequestId != Guid.Empty)
+                {
+                    var actualBatch = PnPContext.BatchClient.GetBatchByBatchRequestId(batchRequestId);
+                    if (!actualBatch.ThrowOnError)
+                    {
+                        // Add error to used batch
+                        actualBatch.AddBatchResult(actualBatch.GetRequest(batchRequestId),
+                                                 System.Net.HttpStatusCode.OK,
+                                                 value.ToString(),
+                                                 new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
+                        handled = true;
+                    }
+                }
+
+                if (!handled)
+                {
+                    throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                }
+            }
+
         }
 
         /// <summary>
@@ -458,11 +491,10 @@ namespace PnP.Core.Model.SharePoint
             ApiCall apiCall = new ApiCall($"{GetItemUri()}?$select=ContentTypeId,FileDirRef,FileRef", ApiType.SPORest);
             await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
         }
-        
+
         #endregion
 
-        #region Item updates
-
+        #region Item updates        
         internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
@@ -472,8 +504,19 @@ namespace PnP.Core.Model.SharePoint
 
             // Add the request to the batch and execute the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "Update");
-            await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+
+            try
+            {
+                this.WithModule(handleUpdateExceptionsModule);
+
+                batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "Update");
+                await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+            }
+            finally
+            {
+                // Ensure the module get's removed again as this one only applies to this update request
+                PnPContext.RequestModules?.Remove(handleUpdateExceptionsModule);
+            }
         }
 
 
@@ -484,8 +527,17 @@ namespace PnP.Core.Model.SharePoint
 
             var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
 
-            // Add the request to the batch
-            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "UpdateBatch");
+            try
+            {
+                this.WithModule(handleUpdateExceptionsModule);
+                // Add the request to the batch
+                batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "UpdateBatch");
+            }
+            finally
+            {
+                // Ensure the module get's removed again as this one only applies to this update request
+                PnPContext.RequestModules?.Remove(handleUpdateExceptionsModule);
+            }
         }
 
         private async Task<ApiCall> BuildUpdateApiCallAsync(PnPContext context)

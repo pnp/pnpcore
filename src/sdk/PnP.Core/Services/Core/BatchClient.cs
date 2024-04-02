@@ -928,7 +928,7 @@ namespace PnP.Core.Services
             {
                 if (module.ResponseHandler != null)
                 {
-                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
                 }
             }
 
@@ -1791,7 +1791,7 @@ namespace PnP.Core.Services
             {
                 if (module.ResponseHandler != null)
                 {
-                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
                 }
             }
 

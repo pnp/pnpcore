@@ -415,6 +415,158 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task UpdateWithWrongValuesInteractive()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("UpdateWithWrongValuesInteractive");
+                IList myList = null;
+
+                try
+                {
+                    myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    if (myList == null)
+                    {
+                        // Create the list
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                        IField myDateField = await myList.Fields.AddDateTimeAsync("MyDateField", new FieldDateTimeOptions
+                        {
+                            Group = "Custom Fields",
+                            AddToDefaultView = true,                            
+                        });
+
+                        // Add a list item to this list
+                        // Add a list item
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", "Yes" },
+                            { "MyDateField", DateTime.Now }
+                        };
+                        await myList.Items.AddAsync(values);
+                    }
+                    else
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList != null)
+                    {
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items);
+
+                        // grab first item
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            firstItem.Values["Title"] = "No";
+                            firstItem.Values["MyDateField"] = "2024-33-33";
+
+                            await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
+                            {
+                                await firstItem.UpdateAsync();
+                            });
+                        }
+                    }
+                }
+                finally
+                {
+                    // Clean up
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task UpdateWithWrongValuesInteractiveBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("UpdateWithWrongValuesInteractiveBatch");
+                IList myList = null;
+
+                try
+                {
+                    myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    if (myList == null)
+                    {
+                        // Create the list
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                        IField myDateField = await myList.Fields.AddDateTimeAsync("MyDateField", new FieldDateTimeOptions
+                        {
+                            Group = "Custom Fields",
+                            AddToDefaultView = true,
+                        });
+
+                        // Add a list item to this list
+                        // Add a list item
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", "Yes" },
+                            { "MyDateField", DateTime.Now }
+                        };
+                        await myList.Items.AddAsync(values);
+                    }
+                    else
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList != null)
+                    {
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items);
+
+                        // grab first item
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            firstItem.Values["Title"] = "No";
+                            firstItem.Values["MyDateField"] = "2024-33-33";
+                            
+                            var batch = context.NewBatch();
+                            await firstItem.UpdateBatchAsync(batch);
+
+                            var batchResults = await context.ExecuteAsync(batch, false);
+
+                            Assert.IsTrue(batchResults.Count == 1);
+                        }
+
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items);
+
+                        // grab first item
+                        firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            firstItem.Values["Title"] = "No";
+                            firstItem.Values["MyDateField"] = "2024-33-33";
+
+                            var batch = context.NewBatch();
+                            await firstItem.UpdateBatchAsync(batch);
+
+                            await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
+                            {
+                                var batchResults = await context.ExecuteAsync(batch);
+                            });
+                        }
+
+                    }
+                }
+                finally
+                {
+                    // Clean up
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
 
         [TestMethod]
         public async Task VerifyUserFieldsInRepetiveUpdates()

@@ -47,6 +47,6 @@ namespace PnP.Core.Services
         /// <summary>
         /// Delegate that can be implemented to manipulate the request response before it gets processed
         /// </summary>
-        Func<HttpStatusCode, Dictionary<string, string>, string, string> ResponseHandler { get; }
+        Func<HttpStatusCode, Dictionary<string, string>, string, Guid, string> ResponseHandler { get; }
     }
 }
