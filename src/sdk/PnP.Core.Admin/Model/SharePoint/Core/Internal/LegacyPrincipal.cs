@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
@@ -8,6 +7,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string AppIdentifier { get; set; }
 
         public string ServerRelativeUrl { get; set; }
+
+        public string AbsoluteUrl { get; set; }
 
         public string Title { get; set; }
         

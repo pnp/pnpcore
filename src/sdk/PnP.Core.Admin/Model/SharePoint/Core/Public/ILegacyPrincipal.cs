@@ -19,6 +19,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         string ServerRelativeUrl { get; }
 
         /// <summary>
+        /// The absolute url of the <see cref="IWeb"/> where the legacy principal is located
+        /// </summary>
+        string AbsoluteUrl { get; }
+
+        /// <summary>
         /// Title of the legacy principal
         /// </summary>
         string Title { get; }

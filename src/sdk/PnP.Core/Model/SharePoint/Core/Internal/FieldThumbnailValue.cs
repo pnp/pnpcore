@@ -1,5 +1,4 @@
-﻿using AngleSharp.Dom;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,12 +25,24 @@ namespace PnP.Core.Model.SharePoint
 
         internal override Guid CsomType => Guid.Empty;
 
+        /// <summary>
+        /// Filename identifiying this image
+        /// </summary>
         public string FileName { get => GetValue<string>(); internal set => SetValue(value); }
 
+        /// <summary>
+        /// Server relative URL to access this image
+        /// </summary>        
         public string ServerRelativeUrl { get => GetValue<string>(); internal set => SetValue(value); }
 
+        /// <summary>
+        /// Server URL
+        /// </summary>
         public string ServerUrl { get => GetValue<string>(); internal set => SetValue(value); }
 
+        /// <summary>
+        /// Thumbnail renderer
+        /// </summary>
         public object ThumbnailRenderer { get => GetValue<object>(); internal set => SetValue(value); }
 
         internal override IFieldValue FromJson(JsonElement json)
@@ -96,6 +107,13 @@ namespace PnP.Core.Model.SharePoint
             return "";
         }
 
+        /// <summary>
+        /// Uploads an image to a modern image field for the current list item
+        /// </summary>
+        /// <param name="item">List item to update</param>
+        /// <param name="name">Image name</param>
+        /// <param name="content">The content of the file.</param>
+        /// <returns></returns>
         public async Task UploadImageAsync(IListItem item, string name, Stream content)
         {
             var encodedServerFileName = WebUtility.UrlEncode(name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");

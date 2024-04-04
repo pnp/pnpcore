@@ -20,10 +20,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Verify TermId is a valid GUID before assigning it #1414 [jansenbe - Bert Jansen]
 - Loading site pages is more robust when a custom web part on the page is erroring #1410 [jansenbe - Bert Jansen]
 - `IContentType.SchemaXml` is not settable in SharePoint so removing the set option for it #1418 [jansenbe - Bert Jansen]
-- Ensure `GetFolderByServerRelativeUrl` and `GetFileByServerRelativeUr	l` can handle \ as path separator #1412 [jansenbe - Bert Jansen]
+- Ensure `GetFolderByServerRelativeUrl` and `GetFileByServerRelativeUrl` can handle \ as path separator #1412 [jansenbe - Bert Jansen]
 - GetComments() with a selector only return maximum of 30 comments #1424 [jansenbe - Bert Jansen]
 - `CheckIn` and `Approve` methods on `IFile` now support comments with special characters like cariage returns #1432 [jansenbe - Bert Jansen]
 - `Update` methods on `IListItem` now handle validation errors similar to the `Add` methods #1433 [jansenbe - Bert Jansen]
+- Admin library: Improved support for vanity URL tenants when loading ACS principals and SharePoint Add-Ins [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 
