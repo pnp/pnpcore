@@ -318,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IACSPrincipal.html",
-          "hash": "0tv1xDD+RVdsPiCt7pZIgEgSl+fC8jrV3fNrHXUI3fA="
+          "hash": "w1fC7OW4kfPRDqFW3EwuNlSi0JHLvzYmPf17hFQQcm0="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ILegacyPrincipal.html",
-          "hash": "tTO1aDof0M/SFWI1Gva7ZLOmcZyAwAKJjQvJBf/gm14="
+          "hash": "Mdqde5e4ELpcky82FFmrnRIvz19QdT21i1lsS0f+qeg="
         }
       },
       "is_incremental": false,
@@ -486,7 +486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAddIn.html",
-          "hash": "ceGPhOn4WDPYUw+x47BdqOXiL1r4qML7Zlk4K+y8hz8="
+          "hash": "PTNORnt9OLBpNDFBhtbBiz3aiPdFgcTAb65yUUKOA7A="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldThumbnailValue.html",
-          "hash": "Rh3l9CAliIbJCbvtZGO9zoZbilo+Xgd+OzH05ERlzjo="
+          "hash": "tctRCpcPigCSHdyA2SlOdMOy3HEqUcMekn1DTn+bMTU="
         }
       },
       "is_incremental": false,
