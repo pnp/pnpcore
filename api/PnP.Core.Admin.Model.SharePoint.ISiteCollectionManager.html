@@ -850,24 +850,24 @@ Requirements:</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipals(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipals(System.Boolean%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L444" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L446" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipals*"></a>
   
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipals(System.Boolean)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_" class="expander" data-toggle="collapse">GetLegacyServicePrincipals(Boolean)</a></h4>
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipals(System.Boolean,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetLegacyServicePrincipals(Boolean, VanityUrlOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of legacy service principals which are required when using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantAndSiteCollectionACSPrincipals_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantAndSiteCollectionACSPrincipals(List&lt;ILegacyServicePrincipal&gt;, Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;ILegacyServicePrincipal&gt; GetLegacyServicePrincipals(bool includeExpiredPrincipals = false)</code></pre>
+    <pre><code class="lang-csharp hljs">List&lt;ILegacyServicePrincipal&gt; GetLegacyServicePrincipals(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -877,6 +877,14 @@ Requirements:</p>
         <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">includeExpiredPrincipals</span>
         <p><p>Also include the legacy service principals for which the password credential has expired</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
 </p>
       </td>
     </tr>
@@ -906,24 +914,24 @@ Requirements:</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipalsAsync(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipalsAsync(System.Boolean%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L437" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L438" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipalsAsync*"></a>
   
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipalsAsync(System.Boolean)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_" class="expander" data-toggle="collapse">GetLegacyServicePrincipalsAsync(Boolean)</a></h4>
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetLegacyServicePrincipalsAsync(System.Boolean,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetLegacyServicePrincipalsAsync(Boolean, VanityUrlOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of legacy service principals which are required when using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantAndSiteCollectionACSPrincipalsAsync_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantAndSiteCollectionACSPrincipalsAsync(List&lt;ILegacyServicePrincipal&gt;, Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;List&lt;ILegacyServicePrincipal&gt;&gt; GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;ILegacyServicePrincipal&gt;&gt; GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -933,6 +941,14 @@ Requirements:</p>
         <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">includeExpiredPrincipals</span>
         <p><p>Also include the legacy service principals for which the password credential has expired</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
 </p>
       </td>
     </tr>
@@ -1627,7 +1643,7 @@ accessible by the requesting user are returned. Under the covers this method use
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionSharePointAddIns_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionSharePointAddIns(System.Boolean%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L462" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L464" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionSharePointAddIns_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionSharePointAddIns*"></a>
@@ -1699,7 +1715,7 @@ accessible by the requesting user are returned. Under the covers this method use
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionSharePointAddInsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionSharePointAddInsAsync(System.Boolean%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L453" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L455" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionSharePointAddInsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionSharePointAddInsAsync*"></a>
@@ -2174,7 +2190,7 @@ have the proper permissions</p>
   
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantACSPrincipals_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of Azure ACS principals that are scoped tenant wide. For performance reason this method
-requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_">GetLegacyServicePrincipalsAsync(Boolean)</a> method.</p>
+requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetLegacyServicePrincipalsAsync(Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2239,7 +2255,7 @@ requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> wh
   
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantACSPrincipalsAsync_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of Azure ACS principals that are scoped tenant wide. For performance reason this method
-requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_">GetLegacyServicePrincipalsAsync(Boolean)</a> method.</p>
+requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetLegacyServicePrincipalsAsync(Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2304,7 +2320,7 @@ requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> wh
   
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantAndSiteCollectionACSPrincipals_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of Azure ACS principals that are scoped to the current site and/or scoped tenant wide. For performance reason this method
-requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_">GetLegacyServicePrincipals(Boolean)</a> method.</p>
+requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipals_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetLegacyServicePrincipals(Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2376,7 +2392,7 @@ requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> wh
   
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetTenantAndSiteCollectionACSPrincipalsAsync_List_PnP_Core_Admin_Model_SharePoint_ILegacyServicePrincipal__System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets a list of Azure ACS principals that are scoped to the current site and/or scoped tenant wide. For performance reason this method
-requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_">GetLegacyServicePrincipalsAsync(Boolean)</a> method.</p>
+requires the input of a <see cref="!:List&lt;ILegacyServicePrincipal>"></see> which can be retrieved using the <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetLegacyServicePrincipalsAsync_System_Boolean_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetLegacyServicePrincipalsAsync(Boolean, VanityUrlOptions)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
