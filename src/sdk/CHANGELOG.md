@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - `CheckIn` and `Approve` methods on `IFile` now support comments with special characters like cariage returns #1432 [jansenbe - Bert Jansen]
 - `Update` methods on `IListItem` now handle validation errors similar to the `Add` methods #1433 [jansenbe - Bert Jansen]
 - Admin library: Improved support for vanity URL tenants when loading ACS principals and SharePoint Add-Ins [jansenbe - Bert Jansen]
+- Admin library: Azure ACS principal with only tenant level permissions that are created from running appinv.aspx for an "regular" Entra application are now correclty detected [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 

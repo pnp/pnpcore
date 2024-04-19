@@ -307,14 +307,14 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
 
-        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false)
+        public async Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null)
         {
-            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context, includeExpiredPrincipals).ConfigureAwait(false);
+            return await LegacyPrincipalManagement.GetValidLegacyServicePrincipalAppIdsAsync(context, includeExpiredPrincipals, vanityUrlOptions).ConfigureAwait(false);
         }
 
-        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false)
+        public List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null)
         {
-            return GetLegacyServicePrincipalsAsync(includeExpiredPrincipals).GetAwaiter().GetResult();
+            return GetLegacyServicePrincipalsAsync(includeExpiredPrincipals, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         public async Task<List<ISharePointAddIn>> GetSiteCollectionSharePointAddInsAsync(bool includeSubsites = true, VanityUrlOptions vanityUrlOptions = null, bool loadLegacyPrincipalData = true)

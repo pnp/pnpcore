@@ -326,7 +326,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return acsPrincipals;
         }
 
-        internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context, bool includeExpiredPrincipals)
+        internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context, bool includeExpiredPrincipals, VanityUrlOptions vanityUrlOptions)
         {
             List<ILegacyServicePrincipal> servicePrincipals = new();
 
@@ -392,6 +392,55 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
             }
             while (nextPageToken != null);
+
+            // While above approach will find all principals registered using appregnew.aspx it's not detecting the case where the app was created using Entra registration and then 
+            // later granted permissions using appinv.aspx. This only applies to ACS principals scoped to the full tenant created by calling appinv.asxp from tenant admin center.
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
+            {
+                Uri tenantAdminUrl = vanityUrlOptions != null ? vanityUrlOptions.AdminCenterUri : tenantAdminContext.Uri;
+                var json = new
+                {
+                    urls = new List<string> { tenantAdminUrl.ToString() }
+                }.AsExpando();
+
+                string body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
+
+                var results = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall($"_api/web/GetAddinPrincipalsHavingPermissionsInSites", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+
+                jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
+                if (jsonResponse.TryGetProperty("addinPrincipals", out JsonElement addInPrincipals))
+                {
+                    if (addInPrincipals.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var addInPrincipal in addInPrincipals.EnumerateArray())
+                        {
+                            Guid appId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString()));
+
+                            if (appId == Guid.Parse("00000003-0000-0ff1-ce00-000000000000"))
+                            {
+
+                               // Skip the SharePoint Online principal
+                                continue;
+                            }
+
+                            if (servicePrincipals.Any(p => p.AppId == appId))
+                            {
+                                // Skip the principal as it's already loaded
+                                continue;
+                            }
+
+                            servicePrincipals.Add(new LegacyServicePrincipal()
+                            {
+                                AppId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString())),
+                                AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
+                                Name = addInPrincipal.GetProperty("title").GetString(),
+                                // We don't know 
+                                ValidUntil = DateTime.MinValue
+                            });
+                        }
+                    }
+                }
+            }
 
             return servicePrincipals;
         }

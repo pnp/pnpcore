@@ -433,15 +433,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipalsAsync(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
         /// </summary>
         /// <param name="includeExpiredPrincipals">Also include the legacy service principals for which the password credential has expired</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>List of legacy service principals</returns>
-        Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false);
+        Task<List<ILegacyServicePrincipal>> GetLegacyServicePrincipalsAsync(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Gets a list of legacy service principals which are required when using the <see cref="GetTenantAndSiteCollectionACSPrincipals(List{ILegacyServicePrincipal}, bool, VanityUrlOptions)"/> method.
         /// </summary>
         /// <param name="includeExpiredPrincipals">Also include the legacy service principals for which the password credential has expired</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>List of legacy service principals</returns>
-        List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false);
+        List<ILegacyServicePrincipal> GetLegacyServicePrincipals(bool includeExpiredPrincipals = false, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
         /// Gets a list of SharePoint AddIns that are scoped to the current site and optionally it's subsites. 
