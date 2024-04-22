@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - `Update` methods on `IListItem` now handle validation errors similar to the `Add` methods #1433 [jansenbe - Bert Jansen]
 - Admin library: Improved support for vanity URL tenants when loading ACS principals and SharePoint Add-Ins [jansenbe - Bert Jansen]
 - Admin library: Azure ACS principal with only tenant level permissions that are created from running appinv.aspx for an "regular" Entra application are now correclty detected [jansenbe - Bert Jansen]
+- Bumped version of Microsoft.Identity.Client package version to 4.60.3 #1447 [gautamdsheth - Gautam Sheth]
 
 ## [1.12.0]
 
