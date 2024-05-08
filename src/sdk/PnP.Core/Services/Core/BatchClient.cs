@@ -1617,12 +1617,12 @@ namespace PnP.Core.Services
             {
                 // Signals the start of a response
                 // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718
-                // and end of a response
+                // and end of an empty response
                 // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718--
                 if (line.StartsWith("--batchresponse_"))
                 {
                     // Reponse was closed, let's store the result 
-                    if (line.EndsWith("--"))
+                    if (responseContentOpen || line.EndsWith("--"))
                     {
                         // responses are in the same order as the request, so use a counter based system
                         BatchRequest currentBatchRequest = batch.GetRequest(counter);
