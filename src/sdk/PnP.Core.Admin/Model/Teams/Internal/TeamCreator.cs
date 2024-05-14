@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Teams
@@ -77,7 +78,7 @@ namespace PnP.Core.Admin.Model.Teams
 
         private static string BuildTeamCreationBody(TeamOptions options)
         {
-            return "{}";
+            return JsonSerializer.Serialize(options, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
         }
 
         private static async Task<PnPContext> GetPnPContextWithTeamAsync(PnPContext context, Guid groupId)
