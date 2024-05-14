@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Model;
+using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -1269,7 +1270,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                     };
 
 

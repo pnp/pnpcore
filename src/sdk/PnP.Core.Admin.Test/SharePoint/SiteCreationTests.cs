@@ -4,6 +4,7 @@ using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Model.Teams;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Model;
+using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -450,7 +451,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                     };
 
 
@@ -547,7 +548,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         SensitivityLabelId = sensitivityLabelId
                     };
 
@@ -627,7 +628,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         Owners = new string[] { user.UserPrincipalName }
                     };
 
@@ -706,7 +707,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         Owners = new string[] { user.UserPrincipalName }
                     };
 
@@ -780,7 +781,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
                     {
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         Owners = new string[] { user.UserPrincipalName }
                     };
 
@@ -862,7 +863,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         Owners = new string[] { testOwner.UserPrincipalName },
                         Members = new string[] { testMember.UserPrincipalName }
                     };
@@ -983,7 +984,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                         Owners = new string[] { user.UserPrincipalName },
                         HideGroupInOutlook = true,
                         WelcomeEmailDisabled = true,
@@ -1325,7 +1326,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         {
                             Description = "This is a test site collection",
                             Language = Language.English,
-                            IsPublic = true,
+                            Visibility = GroupVisibility.Public,
                         };
 
                         SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
@@ -1661,7 +1662,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic = true,
+                        Visibility = GroupVisibility.Public,
                     };
 
 

@@ -67,7 +67,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         { "displayName", siteToGroupify.DisplayName },
                         { "alias", NormalizeSiteAlias(siteToGroupify.Alias) },
-                        { "isPublic", siteToGroupify.IsPublic }
+                        { "isPublic", siteToGroupify.Visibility == GroupVisibility.Public }
                     };
 
                     var optionalParams = new Dictionary<string, object>
@@ -198,12 +198,13 @@ namespace PnP.Core.Admin.Model.SharePoint
                 DisplayName = siteToCreate.DisplayName,
                 MailNickname = siteToCreate.Alias,
                 MailEnabled = true,
-                Visibility = siteToCreate.IsPublic ? GroupVisibility.Public.ToString() : GroupVisibility.Private.ToString(),
+                Visibility = siteToCreate.Visibility.ToString(),
                 GroupTypes = new List<string> { "Unified" },
                 Owners = siteToCreate.Owners,
                 Members = siteToCreate.Members,
                 ResourceBehaviorOptions = new List<string>(),
                 CreationOptions = new List<string>(),
+                AdditionalData = siteToCreate.AdditionalData
             };
 
             if (!string.IsNullOrEmpty(siteToCreate.Description))

@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Admin.Model.Microsoft365;
+using PnP.Core.Model.Security;
 using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
@@ -40,9 +42,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Defines whether the Office 365 Group will be public (default), or private.
+        /// Defines whether the Office 365 Group will be public (default), or private or hiddenMembership.
         /// </summary>
-        public bool IsPublic { get; set; } = true;
+        public GroupVisibility Visibility { get; set; } = GroupVisibility.Public;
 
         /// <summary>
         /// The description of the site to be created.
@@ -73,6 +75,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// The geography in which to create the site collection. Only applicable to multi-geo enabled tenants
         /// </summary>
         public GeoLocation? PreferredDataLocation { get; set; }
+
+        /// <summary>
+        /// Option to add custom data to the post request for creating a group like the custom property for a EducationClass
+        /// </summary>
+        public IDictionary<string, object> AdditionalData { get; set; } = null;
 
     }
 }
