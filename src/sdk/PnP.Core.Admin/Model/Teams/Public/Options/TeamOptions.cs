@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PnP.Core.Admin.Model.Teams
 {
@@ -7,5 +8,6 @@ namespace PnP.Core.Admin.Model.Teams
     /// </summary>
     public class TeamOptions
     {
+        public string Specialization { get; set; }
     }
 }
