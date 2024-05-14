@@ -91,23 +91,17 @@
 <p>In this step by step guide you will register an application in Azure Active Directory, in order to consume the PnP Core SDK in the name of the user connected to your app (i.e. with a delegated access token) from within a .NET Core Console application.
 Follow below steps to configure an application in Azure AD:</p>
 <ol>
-<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
-</li>
-<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
-</li>
-<li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
-</li>
-<li><p>Click on <strong>New registration</strong></p>
-</li>
-<li><p>Give the application a name (e.g. PnP Core SDK) and click on <strong>Register</strong></p>
-</li>
-<li><p>Copy the <strong>Application ID</strong> (Client ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
-</li>
-<li><p>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
-</li>
-<li><p>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</p>
-</li>
-<li><p>Click on <strong>Add Permissions</strong> and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.</p>
+<li>Navigate to <a href="https://entra.microsoft.com">https://entra.microsoft.com</a></li>
+<li>Click on <strong>Identity</strong> from the left navigation</li>
+<li>Click on <strong>Applications</strong> from the left navigation</li>
+<li>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Click on <strong>New registration</strong></li>
+<li>Give the application a name (e.g. PnP Core SDK) and click on <strong>Register</strong></li>
+<li>Copy the <strong>Application ID</strong> (Client ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</li>
+<li>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</li>
+<li>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Click on <strong>Add Permissions</strong> and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.</li>
+</ol>
 <ul>
 <li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.FullControl</li>
 <li>SharePoint -&gt; Delegated Permissions -&gt; Sites -&gt; Sites.Search.All</li>
@@ -118,13 +112,10 @@ Follow below steps to configure an application in Azure AD:</p>
 <li>Microsoft Graph -&gt; Delegated Permissions -&gt; Directory -&gt; Directory.AccessAsUser.All</li>
 <li>Microsoft Graph -&gt; Delegated Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
 </ul>
-</li>
-<li><p>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</p>
-</li>
-<li><p>Click on <strong>Authentication</strong> in the <strong>Manage</strong> left navigation group</p>
-</li>
-<li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong> (this step is optional and you should do that if and only if you are planning to use the <code>UsernamePasswordAuthenticationProvider</code> or the <code>CredentialManagerAuthenticationProvider</code> for authentication)</p>
-</li>
+<ol start="11">
+<li>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</li>
+<li>Click on <strong>Authentication</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong> (this step is optional and you should do that if and only if you are planning to use the <code>UsernamePasswordAuthenticationProvider</code> or the <code>CredentialManagerAuthenticationProvider</code> for authentication)</li>
 </ol>
 <p>If you want to configure support for interactive login you should also configure the <em>Platform</em> and the <em>redirect URI</em> in the <strong>Authentication</strong> panel. You can read <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri">further details here</a>.</p>
 <ol start="13">
