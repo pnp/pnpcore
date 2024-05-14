@@ -16,15 +16,16 @@ In this section you can learn how to register an application in Azure Active Dir
 In this step by step guide you will register an application in Azure Active Directory, in order to consume the PnP Core SDK in the name of the user connected to your app (i.e. with a delegated access token) from within a .NET Core Console application.
 Follow below steps to configure an application in Azure AD:
 
-1. Navigate to https://aad.portal.azure.com/
-2. Click on **Azure Active Directory** from the left navigation
-3. Click on **App registrations** in the **Manage** left navigation group
-4. Click on **New registration**
-5. Give the application a name (e.g. PnP Core SDK) and click on **Register**
-6. Copy the **Application ID** (Client ID) from the **Overview** page, you'll need this GUID value later on
-7. Copy the **Directory ID** (Tenant ID) from the **Overview** page, you'll need this GUID value later on
-8. Click on the **API Permissions** in the **Manage** left navigation group
-9. Click on **Add Permissions** and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.
+1. Navigate to https://entra.microsoft.com
+2. Click on **Identity** from the left navigation
+3. Click on **Applications** from the left navigation
+4. Click on **App registrations** in the **Manage** left navigation group
+5. Click on **New registration**
+6. Give the application a name (e.g. PnP Core SDK) and click on **Register**
+7. Copy the **Application ID** (Client ID) from the **Overview** page, you'll need this GUID value later on
+8. Copy the **Directory ID** (Tenant ID) from the **Overview** page, you'll need this GUID value later on
+9. Click on the **API Permissions** in the **Manage** left navigation group
+10. Click on **Add Permissions** and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.
 
    - SharePoint -> Delegated Permissions -> AllSites -> AllSites.FullControl
    - SharePoint -> Delegated Permissions -> Sites -> Sites.Search.All
@@ -35,9 +36,9 @@ Follow below steps to configure an application in Azure AD:
    - Microsoft Graph -> Delegated Permissions -> Directory -> Directory.AccessAsUser.All
    - Microsoft Graph -> Delegated Permissions -> Group -> Group.ReadWrite.All
 
-10. Click on the **Grant admin consent for** button to consent to these permissions for the users in your organization
-11. Click on **Authentication** in the **Manage** left navigation group
-12. Change **Default client type** to **Treat application as public client** and hit **Save** (this step is optional and you should do that if and only if you are planning to use the `UsernamePasswordAuthenticationProvider` or the `CredentialManagerAuthenticationProvider` for authentication)
+11. Click on the **Grant admin consent for** button to consent to these permissions for the users in your organization
+12. Click on **Authentication** in the **Manage** left navigation group
+13. Change **Default client type** to **Treat application as public client** and hit **Save** (this step is optional and you should do that if and only if you are planning to use the `UsernamePasswordAuthenticationProvider` or the `CredentialManagerAuthenticationProvider` for authentication)
 
 If you want to configure support for interactive login you should also configure the _Platform_ and the _redirect URI_ in the **Authentication** panel. You can read [further details here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri).
 
