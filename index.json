@@ -457,12 +457,12 @@
   "api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html": {
     "href": "api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html",
     "title": "Class TeamForGroupOptions | PnP Core SDK",
-    "keywords": "Class TeamForGroupOptions Options to configure the created Team Inheritance Object TeamOptions TeamForGroupOptions Namespace : PnP.Core.Admin.Model.Teams Assembly : PnP.Core.Admin.dll Syntax public class TeamForGroupOptions : TeamOptions Constructors TeamForGroupOptions(Guid) Default constructor used for creating a Team Declaration public TeamForGroupOptions(Guid groupId) Parameters Guid groupId Id of the Microsoft 365 group to create the Team for Properties GroupId Id of the Microsoft 365 group to create the Team for Declaration public Guid GroupId { get; set; } Property Value Guid"
+    "keywords": "Class TeamForGroupOptions Options to configure the created Team Inheritance Object TeamOptions TeamForGroupOptions Inherited Members TeamOptions.Specialization Namespace : PnP.Core.Admin.Model.Teams Assembly : PnP.Core.Admin.dll Syntax public class TeamForGroupOptions : TeamOptions Constructors TeamForGroupOptions(Guid) Default constructor used for creating a Team Declaration public TeamForGroupOptions(Guid groupId) Parameters Guid groupId Id of the Microsoft 365 group to create the Team for Properties GroupId Id of the Microsoft 365 group to create the Team for Declaration public Guid GroupId { get; set; } Property Value Guid"
   },
   "api/PnP.Core.Admin.Model.Teams.TeamOptions.html": {
     "href": "api/PnP.Core.Admin.Model.Teams.TeamOptions.html",
     "title": "Class TeamOptions | PnP Core SDK",
-    "keywords": "Class TeamOptions Options to configure the created Team Inheritance Object TeamOptions TeamForGroupOptions Namespace : PnP.Core.Admin.Model.Teams Assembly : PnP.Core.Admin.dll Syntax public class TeamOptions : object"
+    "keywords": "Class TeamOptions Options to configure the created Team Inheritance Object TeamOptions TeamForGroupOptions Namespace : PnP.Core.Admin.Model.Teams Assembly : PnP.Core.Admin.dll Syntax public class TeamOptions : object Properties Specialization Allows to specify the specialization for the Team creation Declaration public TeamSpecialization Specialization { get; set; } Property Value TeamSpecialization"
   },
   "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html": {
     "href": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html",
