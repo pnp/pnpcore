@@ -108,6 +108,11 @@ namespace PnP.Core
         internal static Guid CustomHeadersModuleId = Guid.Parse("{46307280-190E-4365-8AA1-085C451E7799}");
 
         /// <summary>
+        /// Id of the SharePoint Response headers module
+        /// </summary>
+        internal static Guid SPResponseHeadersModuleId = Guid.Parse("{1706C4C0-84DE-470B-B862-51DD75524F0E}");
+
+        /// <summary>
         /// SPRequestGuid SharePoint REST response header
         /// </summary>
         internal const string SPRequestGuidHeader = "SPRequestGuid";

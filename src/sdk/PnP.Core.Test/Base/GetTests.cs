@@ -704,7 +704,9 @@ namespace PnP.Core.Test.Base
             {
                 // Relative url for current site
                 var apiRequest = new ApiRequest(ApiRequestType.SPORest, "_api/web");
-                var response = context.Web.ExecuteRequest(apiRequest);
+                var response = context.Web.WithSPResponseHeaders((responseHeaders) => {
+                    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"]));
+                }).ExecuteRequest(apiRequest);
 
                 Assert.IsTrue(response.ApiRequest == apiRequest);
                 Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
@@ -748,6 +750,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(string.IsNullOrEmpty(webResponse.Result.Value));
                 Assert.IsTrue(siteResponse.IsAvailable);
                 Assert.IsFalse(string.IsNullOrEmpty(siteResponse.Result.Value));
+
+                // In case of a batch the there's only one SPRequestGuid for the entire batch, but it's linked to each individual request
+                Assert.IsTrue(batch.Requests[0].SPRequestGuid != null);
+                Assert.IsTrue(batch.Requests[1].SPRequestGuid != null);
             }
         }
 

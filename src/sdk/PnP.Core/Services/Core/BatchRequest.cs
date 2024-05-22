@@ -108,7 +108,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// The value of the SPRequestGuid header of SharePoint also know as Correlation Id (only populated when the <see cref="Batch"/> was executed and the server send it)
         /// </summary>
-        public string SPRequestGuidHeader
+        public string SPRequestGuid
         {
             get
             {

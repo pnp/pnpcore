@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved support for reading 'Image' and 'Location' fields #1411 [wizofaus - Dylan Nicholson]
 - Support for setting 'Image' and 'Location' fields [jansenbe - Bert Jansen]
 - Added xxxClientSideComponentId and xxxFormClientSideComponentProperties properties for `IContentType` #1421 [jansenbe - Bert Jansen]
+- Allow access to SharePoint Response headers for interactive/batch requests, including the SPRequest Guid [jansenbe - Bert Jansen]
+- Allow access to the SPRequest Guid via the returned `BatchRequest` #1464 [StefanSchoof - Stefan Schoof]
 
 ### Changed
 
