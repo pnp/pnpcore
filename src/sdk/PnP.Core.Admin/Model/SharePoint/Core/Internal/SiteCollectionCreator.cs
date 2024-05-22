@@ -193,6 +193,15 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private static async Task<PnPContext> CreateTeamSiteAsync(PnPContext context, TeamSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            // IsPublic is deprecated, but in case it was set to non-default do respect it in case the Visibility was set to it's default value (= Public)
+            if (!siteToCreate.IsPublic && siteToCreate.Visibility == GroupVisibility.Public)
+            {
+                siteToCreate.Visibility = GroupVisibility.Private;
+            }
+#pragma warning restore CS0618 // Type or member is obsolete
+
             var newGroup = new GraphGroupOptions
             {
                 DisplayName = siteToCreate.DisplayName,

@@ -42,6 +42,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string DisplayName { get; set; }
 
         /// <summary>
+        /// Defines whether the Office 365 Group will be public (default), or private.
+        /// </summary>
+        [Obsolete("Use the Visibility property instead")]
+        public bool IsPublic { get; set; } = true;
+
+        /// <summary>
         /// Defines whether the Office 365 Group will be public (default), or private or hiddenMembership.
         /// </summary>
         public GroupVisibility Visibility { get; set; } = GroupVisibility.Public;

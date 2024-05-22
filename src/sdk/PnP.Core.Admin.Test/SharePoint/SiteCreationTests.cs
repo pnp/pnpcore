@@ -447,12 +447,15 @@ namespace PnP.Core.Admin.Test.SharePoint
                         alias = TestManager.GetProperties(context)["Alias"];
                     }
 
+#pragma warning disable CS0618 // Type or member is obsolete
                     teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        Visibility = GroupVisibility.Public,
+                        // On purpose use the obsolete property to test backwards compatibility
+                        IsPublic = false,
                     };
+#pragma warning restore CS0618 // Type or member is obsolete
 
 
                     SiteCreationOptions siteCreationOptions = new SiteCreationOptions()

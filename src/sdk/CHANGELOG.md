@@ -31,7 +31,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Bumped version of Microsoft.Identity.Client package version to 4.60.3 #1447 [gautamdsheth - Gautam Sheth]
 - Correctly process empty batch responses #1463 [StefanSchoof - Stefan Schoof]
 - CSOM execution flow now also processes post request modules [jansenbe - Bert Jansen]
-- Added specialization support when adding a Team to a group #1468 [danielpastoor - Daniel Pastoor
+- Added specialization support when adding a Team to a group #1468 [danielpastoor - Daniel Pastoor]
+- Add better support for the Visibility HiddenMembership and added additionaldata support for creating a Group #1467 [danielpastoor - Daniel Pastoor]
 
 ## [1.12.0]
 
