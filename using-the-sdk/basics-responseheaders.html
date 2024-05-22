@@ -5,11 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ICommentLikeUserEntityCollection
-   | PnP Core SDK </title>
+    <title>Getting the response headers for Microsoft Graph and SharePoint API requests | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface ICommentLikeUserEntityCollection
-   | PnP Core SDK ">
+    <meta name="title" content="Getting the response headers for Microsoft Graph and SharePoint API requests | PnP Core SDK ">
     <meta name="generator" content="docfx 2.59.2.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,65 +76,35 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection">
+            <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ICommentLikeUserEntityCollection.cs/#L8" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ICommentLikeUserEntityCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-responseheaders.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Model_SharePoint_ICommentLikeUserEntityCollection" data-uid="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection">Interface ICommentLikeUserEntityCollection
-  </h1>
-  <div class="markdown level0 summary"><p>Public interface to define a collection of userEntity objects</p>
-</div>
-  <div class="markdown level0 conceptual"></div>
+                    <h1 id="getting-the-response-headers-for-microsoft-graph-and-sharepoint-api-requests">Getting the response headers for Microsoft Graph and SharePoint API requests</h1>
 
-  
-  
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Requested">IRequestableCollection.Requested</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Length">IRequestableCollection.Length</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_RequestedItems">IRequestableCollection.RequestedItems</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear">IRequestableCollection.Clear()</a>
-    </div>
-  </div>
-  
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-  
-  <h5 id="PnP_Core_Model_SharePoint_ICommentLikeUserEntityCollection_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ICommentLikeUserEntityCollection : IDataModelCollection&lt;ICommentLikeUserEntity&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportModules&lt;ICommentLikeUserEntity&gt;</code></pre>
-  </div>
+<p>When PnP Core SDK makes requests is either uses Microsoft Graph, SharePoint REST or SharePoint CSOM. In most cases things are fine, but you might need to get insights in the key response headers for the made requests. For example you want to log the SharePoint correlation id or Microsoft Graph request id because that's needed for support/debug purposes.</p>
+<h2 id="generic-way-of-getting-response-headers">Generic way of getting response headers</h2>
+<p>The easiest way to get response headers, for both batch and interactive requests, is by using the <code>WithResponseHeaders</code> extension method. If there's a <code>SPRequestGuid</code> header than the request was fulfilled via a SharePoint REST/CSOM call, if there's a <code>client-id</code> header a Microsoft Graph request was used.</p>
+<pre><code class="lang-csharp">
+// Interactive request capturing the 
+await myList.WithResponseHeaders((responseHeaders) =&gt; { 
+    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders[&quot;SPRequestGuid&quot;])); 
+}).DeleteAsync();
 
-  
-  
-  
-  
-  
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders__1_PnP_Core_Model_ISupportModules___0__Dictionary_System_String_System_String__Action_Dictionary_System_String_System_String___">RequestModuleExtensions.WithHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Dictionary&lt;String, String&gt;, Action&lt;Dictionary&lt;String, String&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__Action_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;String, String&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsRequested__1_PnP_Core_Model_IDataModelCollection___0__">QueryableExtensions.AsRequested&lt;TSource&gt;(IDataModelCollection&lt;TSource&gt;)</a>
-  </div>
-  
+// Batch request
+var batch = context.NewBatch();
+// Shows how to get the response headers from the batch for the SharePoint REST and CSOM requests
+await myList.WithResponseHeaders((responseHeaders) =&gt; {
+    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders[&quot;SPRequestGuid&quot;]));
+}).DeleteBatchAsync(batch);
+await context.ExecuteAsync(batch);
+
+// Sample of a possible Microsoft Graph request
+var web = await context.Web.WithResponseHeaders((responseHeaders) =&gt; {
+    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders[&quot;request-id&quot;]));
+}).GetAsync(p =&gt; p.Description);
+
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
