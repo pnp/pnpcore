@@ -18,6 +18,6 @@
         /// <summary>
         /// Group is a hidden membership group
         /// </summary>
-        Hiddenmembership
+        HiddenMembership
     }
 }
