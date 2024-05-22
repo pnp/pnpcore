@@ -106,6 +106,22 @@ namespace PnP.Core.Services
         public HttpStatusCode ResponseHttpStatusCode { get; private set; }
 
         /// <summary>
+        /// The value of the SPRequestGuid header of SharePoint also know as Correlation Id (only populated when the <see cref="Batch"/> was executed and the server send it)
+        /// </summary>
+        public string SPRequestGuidHeader
+        {
+            get
+            {
+                return ResponseHeaders.TryGetValue(
+                    PnPConstants.SPRequestGuidHeader,
+                    out string spRequestGuid
+                )
+                    ? spRequestGuid
+                    : null;
+            }
+        }
+
+        /// <summary>
         /// Additional headers supplied for this request
         /// </summary>
         internal Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
