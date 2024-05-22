@@ -5,6 +5,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -97,8 +98,13 @@ namespace PnP.Core.Test.Base
                 var listCount = context.Web.Lists.Length;
 
                 // Delete the list
-                await myList.DeleteBatchAsync();
-                await context.ExecuteAsync();
+                var batch = context.NewBatch();
+
+                await myList.DeleteBatchAsync(batch);
+                await context.ExecuteAsync(batch);
+
+                // Check that the batch response was OK
+                Assert.IsTrue(batch.Requests[0].ResponseHttpStatusCode == HttpStatusCode.OK);
 
                 // Was the list added
                 bool exceptionThrown = false;
