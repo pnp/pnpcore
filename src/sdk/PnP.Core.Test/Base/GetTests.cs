@@ -704,7 +704,7 @@ namespace PnP.Core.Test.Base
             {
                 // Relative url for current site
                 var apiRequest = new ApiRequest(ApiRequestType.SPORest, "_api/web");
-                var response = context.Web.WithSPResponseHeaders((responseHeaders) => {
+                var response = context.Web.WithResponseHeaders((responseHeaders) => {
                     Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"]));
                 }).ExecuteRequest(apiRequest);
 
@@ -766,7 +766,9 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Description);
+                var web = await context.Web.WithResponseHeaders((responseHeaders) => {
+                    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["request-id"]));
+                }).GetAsync(p => p.Description);
 
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));

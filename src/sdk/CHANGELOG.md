@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved support for reading 'Image' and 'Location' fields #1411 [wizofaus - Dylan Nicholson]
 - Support for setting 'Image' and 'Location' fields [jansenbe - Bert Jansen]
 - Added xxxClientSideComponentId and xxxFormClientSideComponentProperties properties for `IContentType` #1421 [jansenbe - Bert Jansen]
-- Allow access to SharePoint Response headers for interactive/batch requests, including the SPRequest Guid [jansenbe - Bert Jansen]
+- Allow access to SharePoint and Microsoft Graph response headers for interactive/batch requests, including the `SPRequestGuid` (=correlation id) and Microsoft Graph `request-id` [jansenbe - Bert Jansen]
 - Allow access to the SPRequest Guid via the returned `BatchRequest` #1464 [StefanSchoof - Stefan Schoof]
 
 ### Changed
@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: Azure ACS principal with only tenant level permissions that are created from running appinv.aspx for an "regular" Entra application are now correclty detected [jansenbe - Bert Jansen]
 - Bumped version of Microsoft.Identity.Client package version to 4.60.3 #1447 [gautamdsheth - Gautam Sheth]
 - Correctly process empty batch responses #1463 [StefanSchoof - Stefan Schoof]
+- CSOM execution flow now also processes post request modules [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 

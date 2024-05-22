@@ -49,15 +49,15 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Returns the response headers for SharePoint REST and CSOM requests after this request has been executed
+        /// Returns the response headers for Microsoft Graph, SharePoint REST and CSOM requests after this request has been executed
         /// </summary>
         /// <typeparam name="TModel">Model type</typeparam>
         /// <param name="dataModel">Model instance to operate on</param>
         /// <param name="responseHeaders">Delegate that can be invoked to receive the response headers</param>
         /// <returns>The passed model instance</returns>
-        public static TModel WithSPResponseHeaders<TModel>(this ISupportModules<TModel> dataModel, Action<Dictionary<string, string>> responseHeaders = null)
+        public static TModel WithResponseHeaders<TModel>(this ISupportModules<TModel> dataModel, Action<Dictionary<string, string>> responseHeaders = null)
         {
-            return dataModel.WithModule(new SPResponseHeadersModule(responseHeaders));
+            return dataModel.WithModule(new ResponseHeadersModule(responseHeaders));
         }
         #endregion
 

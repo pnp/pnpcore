@@ -1457,7 +1457,10 @@ namespace PnP.Core.Test.SharePoint
 
                 // Use the batch update flow here
                 var batch = context.NewBatch();
-                await first.UpdateOverwriteVersionBatchAsync(batch).ConfigureAwait(false);
+                // CSOM is used under the covers
+                await first.WithResponseHeaders((responseHeaders) => {
+                    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"]));
+                }).UpdateOverwriteVersionBatchAsync(batch).ConfigureAwait(false);
                 await context.ExecuteAsync(batch);
             }
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))

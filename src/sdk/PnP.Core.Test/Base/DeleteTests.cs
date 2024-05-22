@@ -50,7 +50,7 @@ namespace PnP.Core.Test.Base
                 var listCount = context.Web.Lists.Length;
 
                 // Delete the list
-                await myList.WithSPResponseHeaders((responseHeaders) => { 
+                await myList.WithResponseHeaders((responseHeaders) => { 
                     Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"])); 
                 }).DeleteAsync();
                 // Verify that the list was removed from the model collection as well
@@ -103,7 +103,7 @@ namespace PnP.Core.Test.Base
                 var batch = context.NewBatch();
 
                 // Shows how to get the response headers from the batch for the SharePoint REST and CSOM requests
-                await myList.WithSPResponseHeaders((responseHeaders) => {
+                await myList.WithResponseHeaders((responseHeaders) => {
                     Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"]));
                 }).DeleteBatchAsync(batch);
                 await context.ExecuteAsync(batch);

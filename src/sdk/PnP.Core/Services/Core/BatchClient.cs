@@ -2257,7 +2257,7 @@ namespace PnP.Core.Services
                                                 }
 #endif
 
-                                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                                             }
                                         }
                                     }
@@ -2297,7 +2297,7 @@ namespace PnP.Core.Services
                                            testResponse.Headers);
                                 }
 
-                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode);
+                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers);
                             }
 #endif
 
@@ -2325,7 +2325,7 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">The raw content of the response</param>
         /// <param name="statusCode">The Http status code of the request</param>
         /// <returns></returns>
-        private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode)
+        private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode, Dictionary<string, string> headers)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteCsomBatchAsync-JSONToModel"))
             {
@@ -2361,6 +2361,12 @@ namespace PnP.Core.Services
                     // No error, so let's return the results
                     foreach (var request in csomBatch.Batch.Requests)
                     {
+                        // Run request modules if they're connected
+                        if (request.Value.RequestModules != null && request.Value.RequestModules.Count > 0)
+                        {
+                            batchResponse = ExecuteSpoCsomRequestModulesOnResponse(statusCode, headers, request.Value, batchResponse);
+                        }
+
                         // Call the logic that processes the csom response
                         request.Value.ApiCall.CSOMRequests[0].ProcessResponse(batchResponse);
 
@@ -2378,6 +2384,19 @@ namespace PnP.Core.Services
                     }
                 }
             }
+        }
+
+        private static string ExecuteSpoCsomRequestModulesOnResponse(HttpStatusCode httpStatusCode, Dictionary<string, string> responseHeaders, BatchRequest currentBatchRequest, string responseStringContent)
+        {
+            foreach (var module in currentBatchRequest.RequestModules.Where(p => p.ExecuteForSpoCsom))
+            {
+                if (module.ResponseHandler != null)
+                {
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
+                }
+            }
+
+            return responseStringContent;
         }
 
         private static List<CsomBatch> CsomBatchSplitting(Batch batch)

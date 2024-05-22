@@ -34,6 +34,8 @@
     href: basics-threading.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
+  - name: Response headers (correlation id)
+    href: basics-responseheaders.md
   - name: SharePoint CSOM vs PnP Core SDK
     href: basics-csom-vs-pnp.md
   - name: Upgrade to beta3 or later
