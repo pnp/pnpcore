@@ -80,6 +80,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>the list of permission requests</returns>
         IServicePrincipalProperties Disable(VanityUrlOptions vanityUrlOptions = null);
 
+
+        /// <summary>
+        /// Get all granted permissions of the SharePoint Online Client Extensibility Web Application Principal  
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>The list of granted OAuth2 permissions</returns>
+        IOAuth2PermissionGrant[] ListGrants2(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Get all granted permissions of the SharePoint Online Client Extensibility Web Application Principal  
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>The list of granted OAuth2 permissions</returns>
+        Task<IOAuth2PermissionGrant[]> ListGrantsAsync2(VanityUrlOptions vanityUrlOptions = null);
+        
         /// <summary>
         /// Lists all granted Permissions
         /// </summary>
@@ -94,6 +109,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>the list of granted permissions</returns>
         IEnumerable<IPermissionGrant> ListGrants(VanityUrlOptions vanityUrlOptions = null);
 
+        /// <summary>
+        /// Grants scope on a resource
+        /// </summary>
+        /// <param name="resource">The name of the resource, e.g. Microsoft Graph</param>
+        /// <param name="scope">The scope to grant, e.g. 'User.ReadBasic.All'</param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>The resulting <see cref="IOAuth2PermissionGrant"/></returns>
+        Task<IOAuth2PermissionGrant> AddGrantAsync2(string resource, string scope, VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        /// Grants scope on a resource
+        /// </summary>
+        /// <param name="resource">The name of the resource, e.g. Microsoft Graph</param>
+        /// <param name="scope">The scope to grant, e.g. 'User.ReadBasic.All'</param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>The resulting <see cref="IOAuth2PermissionGrant"/></returns>
+        IOAuth2PermissionGrant AddGrant2(string resource, string scope, VanityUrlOptions vanityUrlOptions = null);
+        
         /// <summary>
         /// Grants a Permission
         /// </summary>
@@ -111,7 +144,41 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the new permission grant</returns>
         IPermissionGrant AddGrant(string resource, string scope, VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        ///  Removed a scope from an existing grant
+        /// </summary>
+        /// <param name="grantId">The id of the grant</param>
+        /// <param name="scope">The scope to remove from the grant denoted by <param name="grantId"></param></param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>The updated <see cref="IOAuth2PermissionGrant"/>, or null if the last scope was removed from the grant</returns>
+        Task<IOAuth2PermissionGrant> RevokeGrantAsync2(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null);
 
+        /// <summary>
+        ///  Removed a scope from an existing grant
+        /// </summary>
+        /// <param name="grantId">The id of the grant</param>
+        /// <param name="scope">The scope to remove from the grant denoted by <param name="grantId"></param></param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>The updated <see cref="IOAuth2PermissionGrant"/>, or null if the last scope was removed from the grant</returns>
+        IOAuth2PermissionGrant RevokeGrant2(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        /// Deletes the whole grant with all scopes.
+        /// </summary>
+        /// <param name="grantId">The id of the grant</param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>void</returns>
+        Task DeleteGrantAsync2(string grantId, VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        /// Deletes the whole grant with all scopes.
+        /// </summary>
+        /// <param name="grantId">The id of the grant</param>
+        /// <param name="vanityUrlOptions"></param>
+        /// <returns>void</returns>
+        void DeleteGrant2(string grantId, VanityUrlOptions vanityUrlOptions = null);
+        
         /// <summary>
         /// Revokes a Permission
         /// </summary>

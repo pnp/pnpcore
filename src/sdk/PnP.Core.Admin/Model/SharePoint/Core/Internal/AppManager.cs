@@ -23,7 +23,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             Remove,
             Deploy,
             Upgrade,
-            Uninstall
+            Uninstall,
+            Approve
         }
 
         internal AppManager(PnPContext pnpContext)
@@ -242,6 +243,49 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await AddAsync(bytes, fileInfo.Name, overwrite).ConfigureAwait(false);
         }
 
+        public async Task<IOAuth2PermissionGrant[]> ApproveAsync(string aadPermissions)
+        {
+            var result = new List<IOAuth2PermissionGrant>();
+            foreach (var appPermissionRequest in ParsePermissionRequests(aadPermissions))
+            {
+                result.Add(await this.ServicePrincipal
+                    .AddGrantAsync2(
+                        appPermissionRequest.Key, 
+                        appPermissionRequest.Value).ConfigureAwait(false));
+            }
+
+            return result.ToArray();
+        }
+
+        internal static Dictionary<string, string> ParsePermissionRequests(string aadPermissions)
+        {
+            var result = new Dictionary<string, string>();
+
+            if (aadPermissions == null) return result;
+
+            foreach (string permission in aadPermissions.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var appAndScope = permission.Split(',');
+                if (appAndScope.Length != 2)
+                            {
+                    continue;
+                }
+
+                var appName = appAndScope[0].Trim();
+                var scope = appAndScope[1].Trim();
+                if (result.TryGetValue(appName, out string value))
+                {
+                    result[appName] = $"{value} {scope}"; // append
+                }
+                else
+                {
+                    result[appName] = scope; // add
+                }
+            }
+
+            return result;
+        }
+        
         public IServicePrincipal ServicePrincipal
         {
             get
@@ -320,7 +364,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             if (this is TenantAppManager &&
                 (action == AppManagerAction.Deploy ||
                 action == AppManagerAction.Retract ||
-                action == AppManagerAction.Remove))
+                action == AppManagerAction.Remove ||
+                action == AppManagerAction.Approve 
+                ))
             {
                 return await GetTenantAppCatalogContextAsync().ConfigureAwait(false);
             }

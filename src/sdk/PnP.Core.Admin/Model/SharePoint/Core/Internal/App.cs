@@ -13,16 +13,20 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public string AadAppId { get; set; }
         public string AadPermissions { get; set; }
+
         [JsonConverter(typeof(VersionConverter))]
         public Version AppCatalogVersion { get; set; }
+
         public bool CanUpgrade { get; set; }
         public string CDNLocation { get; set; }
         public bool ContainsTenantWideExtension { get; set; }
         public bool CurrentVersionDeployed { get; set; }
         public bool Deployed { get; set; }
         public string ErrorMessage { get; set; }
+
         [JsonConverter(typeof(VersionConverter))]
         public Version InstalledVersion { get; set; }
+
         public bool IsClientSideSolution { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsPackageDefaultSkipFeatureDeployment { get; set; }
@@ -32,6 +36,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool SkipDeploymentFeature { get; set; }
         public string ThumbnailUrl { get; set; }
         public PnPContext PnPContext { get; set; }
+
+        
+        public IOAuth2PermissionGrant[] ApprovePermissionRequests()
+        {
+            return ApprovePermissionRequestsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IOAuth2PermissionGrant[]> ApprovePermissionRequestsAsync()
+        {
+            return await GetAppManager().ApproveAsync( AadPermissions ).ConfigureAwait(false);
+        }
 
         public bool Deploy(bool skipFeatureDeployment = true)
         {

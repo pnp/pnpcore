@@ -5,6 +5,7 @@ using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
         }
 
+        #region SPOWebAppServicePrincipal CSOM based grants API
+        
         [TestMethod]
         public void ListGrantsRequestTest()
         {
@@ -64,11 +67,10 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual("Calendars.ReadWrite.Shared", request.Result.Scope);
         }
 
-
         [TestMethod]
         public async Task AddListRevokeGrantTest_Async()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 ServicePrincipal servicePrincipal = new(context);
@@ -156,5 +158,80 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual("19cef431-469f-4898-8e72-dfd13054b3f5", request.Result.ResourceId);
             Assert.AreEqual("Calendars.Read Calendars.ReadWrite Calendars.ReadWrite.Shared", request.Result.Scope);
         }
+        
+        #endregion
+        
+        #region Graph based grants API
+        
+        // todo(ml) Split into smaller pieces
+        [TestMethod]
+        public async Task AddListRevokeDeleteGrant2Test_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            ServicePrincipal servicePrincipal = new(context);
+
+            IOAuth2PermissionGrant addedGrant1 =
+                servicePrincipal.AddGrant2("Microsoft Graph", "Calendars.ReadWrite.Shared");
+
+            Assert.IsNotNull(addedGrant1);
+            Assert.AreEqual("Microsoft Graph", addedGrant1.ResourceName);
+            Assert.IsTrue(
+                addedGrant1
+                .Scope
+                .Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+
+            var grants1 = servicePrincipal.ListGrants2();
+
+            Assert.IsNotNull(grants1);
+            Assert.IsTrue(grants1.Length > 0);
+            Assert.IsTrue(grants1
+                .Any(g => 
+                    g.ResourceId.Equals(addedGrant1.ResourceId, StringComparison.InvariantCultureIgnoreCase)));
+
+            IOAuth2PermissionGrant addedGrant2 =
+                servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
+
+            Assert.IsNotNull(addedGrant2);
+            Assert.AreEqual("Microsoft Graph", addedGrant2.ResourceName);
+            Assert.IsTrue(
+                addedGrant2
+                    .Scope
+                    .Contains("User.ReadBasic.All", StringComparison.InvariantCultureIgnoreCase));
+
+            var grants2 = servicePrincipal.ListGrants2();
+
+            Assert.IsNotNull(grants2);
+            Assert.IsTrue(grants2.Length > 0);
+            Assert.IsTrue(grants2
+                .Any(g => 
+                    g.ResourceId.Equals(addedGrant2.ResourceId, StringComparison.InvariantCultureIgnoreCase)));
+
+            
+            var grantToRevokeFrom = grants2.FirstOrDefault(
+                grant => grant.ResourceName.Equals("Microsoft Graph", StringComparison.InvariantCultureIgnoreCase));
+            
+            Assert.IsNotNull(grantToRevokeFrom);
+            
+            var revokedGrant1 = servicePrincipal.RevokeGrant2(grantToRevokeFrom.Id, "Calendars.ReadWrite.Shared");
+            
+            Assert.IsFalse(revokedGrant1.Scope.Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+            
+            var revokedGrant2 = servicePrincipal.RevokeGrant2(grantToRevokeFrom.Id, "User.ReadBasic.All");
+            
+            // that was the last, so it was a DELETE actually
+            Assert.IsNull(revokedGrant2);
+            
+            IOAuth2PermissionGrant addedGrant3 =
+                servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
+
+            servicePrincipal.DeleteGrant2(addedGrant3.Id);
+            
+            var grants3 = servicePrincipal.ListGrants2();
+            Assert.IsFalse(grants3.Any( g => g.ResourceName.Equals("Microsoft Graph", StringComparison.InvariantCultureIgnoreCase)));
+        }
+        
+        #endregion
     }
 }
