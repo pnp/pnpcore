@@ -8,7 +8,7 @@
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="PnP.Core.Auth" Version="1.8.0" />
-    <PackageReference Include="Azure.Identity" Version="1.11.0" />
+    <PackageReference Include="Azure.Identity" Version="1.11.4" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
