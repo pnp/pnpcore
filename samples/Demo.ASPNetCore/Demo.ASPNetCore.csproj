@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="6.0.11" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.59.1" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.60.4" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.25.5" />
     <PackageReference Include="PnP.Core.Auth" Version="1.11.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
