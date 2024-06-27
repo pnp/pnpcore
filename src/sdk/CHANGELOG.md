@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - CSOM execution flow now also processes post request modules [jansenbe - Bert Jansen]
 - Added specialization support when adding a Team to a group #1468 [danielpastoor - Daniel Pastoor]
 - Add better support for the Visibility HiddenMembership and added additionaldata support for creating a Group #1467 [danielpastoor - Daniel Pastoor]
+- Admin libray: Fixed paging when loading sites using Graph search [jansenbe - Bert Jansen]
 
 ## [1.12.0]
 

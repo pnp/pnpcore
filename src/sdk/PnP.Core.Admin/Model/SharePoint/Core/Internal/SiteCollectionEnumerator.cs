@@ -680,8 +680,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     foreach (var hitsContainer in queryResult.GetProperty("hitsContainers").EnumerateArray())
                     {
                         paging = hitsContainer.GetProperty("moreResultsAvailable").GetBoolean();
-                        from += pageSize;
-                        to += pageSize;
+                        from += pageSize;                        
 
                         if (hitsContainer.TryGetProperty("hits", out JsonElement hits) && hits.ValueKind == JsonValueKind.Array)
                         {
