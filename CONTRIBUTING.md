@@ -6,7 +6,7 @@ Sharing is caring!
 
 ## You have an idea for a new feature
 
-Awesome! Good ideas are invaluable for every product. Before you start hacking away, please check if there is no similar idea already listed in the [issue list](https://github.com/pnp/pnpcore/issues). If not, please create a new issue describing your idea. Once we agree on the feature scope and architecture, the feature will be ready for building. Don't hesitate to mention in the issue if you'd like to build the feature yourself. If it's the first time you're contributing to the PnP Core SDK checkout the [contributor guide](https://pnp.github.io/pnpcore/articles/contributor/readme.html) to get started.
+Awesome! Good ideas are invaluable for every product. Before you start hacking away, please check if there is no similar idea already listed in the [issue list](https://github.com/pnp/pnpcore/issues). If not, please create a new issue describing your idea. Once we agree on the feature scope and architecture, the feature will be ready for building. Don't hesitate to mention in the issue if you'd like to build the feature yourself. If it's the first time you're contributing to the PnP Core SDK checkout the [contributor guide](https://pnp.github.io/pnpcore/contributing/readme.html) to get started.
 
 ## You have a suggestion for improving an existing feature
 
