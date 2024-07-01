@@ -165,6 +165,10 @@ namespace PnP.Core.Model.SharePoint
             body.scope = ShareScope.Organization;
             body.type = organizationalLinkOptions.Type;
 
+            if (organizationalLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = organizationalLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+            }
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
             
         }
