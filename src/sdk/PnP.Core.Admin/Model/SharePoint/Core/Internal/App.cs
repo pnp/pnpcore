@@ -38,12 +38,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         public PnPContext PnPContext { get; set; }
 
         
-        public IOAuth2PermissionGrant[] ApprovePermissionRequests()
+        public IPermissionGrant2[] ApprovePermissionRequests()
         {
             return ApprovePermissionRequestsAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IOAuth2PermissionGrant[]> ApprovePermissionRequestsAsync()
+        public async Task<IPermissionGrant2[]> ApprovePermissionRequestsAsync()
         {
             return await GetAppManager().ApproveAsync( AadPermissions ).ConfigureAwait(false);
         }

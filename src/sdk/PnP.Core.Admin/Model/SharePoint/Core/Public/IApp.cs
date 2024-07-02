@@ -133,13 +133,13 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Approves All PermissionRequests 
         /// </summary>
         /// <returns><em>true</em> if all permissions have been approved successfully.</returns>
-        IOAuth2PermissionGrant[] ApprovePermissionRequests();
+        IPermissionGrant2[] ApprovePermissionRequests();
         
         /// <summary>
         /// Approves All PermissionRequests 
         /// </summary>
         /// <returns></returns>
-        Task<IOAuth2PermissionGrant[]> ApprovePermissionRequestsAsync();
+        Task<IPermissionGrant2[]> ApprovePermissionRequestsAsync();
 
         /// <summary>
         /// Retracts the app in the app catalog. Notice that this will not remove the app from the app catalog.

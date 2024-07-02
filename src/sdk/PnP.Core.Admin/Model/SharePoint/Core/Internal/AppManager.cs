@@ -243,13 +243,13 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await AddAsync(bytes, fileInfo.Name, overwrite).ConfigureAwait(false);
         }
 
-        public async Task<IOAuth2PermissionGrant[]> ApproveAsync(string aadPermissions)
+        public async Task<IPermissionGrant2[]> ApproveAsync(string aadPermissions)
         {
-            var result = new List<IOAuth2PermissionGrant>();
+            var result = new List<IPermissionGrant2>();
             foreach (var appPermissionRequest in ParsePermissionRequests(aadPermissions))
             {
                 result.Add(await this.ServicePrincipal
-                    .AddGrantAsync2(
+                    .AddGrant2Async(
                         appPermissionRequest.Key, 
                         appPermissionRequest.Value).ConfigureAwait(false));
             }
@@ -267,7 +267,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 var appAndScope = permission.Split(',');
                 if (appAndScope.Length != 2)
-                            {
+                {
                     continue;
                 }
 

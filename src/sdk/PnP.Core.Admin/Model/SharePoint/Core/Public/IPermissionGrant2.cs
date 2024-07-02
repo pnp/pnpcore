@@ -5,7 +5,7 @@ namespace PnP.Core.Admin.Model.SharePoint
     /// <summary>
     /// An oauth2 permission granted on the SharePoint Online Client Extensibility Web Application Principal
     /// </summary>
-    public interface IOAuth2PermissionGrant
+    public interface IPermissionGrant2
     {
         /// <summary>
         /// ClientId of the SharePoint Online Client Extensibility Web Application Principal

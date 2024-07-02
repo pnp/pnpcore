@@ -111,7 +111,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
 
             var alreadyGranted =
-                await ListGrantsAsync2(vanityUrlOptions).ConfigureAwait(false);
+                await ListGrants2Async(vanityUrlOptions).ConfigureAwait(false);
 
             var filtered = new List<IPermissionRequest>();
 
@@ -267,16 +267,16 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         #region Graph based grants API
 
-        public async Task<IOAuth2PermissionGrant> AddGrantAsync2(string resource, string scope,
+        public async Task<IPermissionGrant2> AddGrant2Async(string resource, string scope,
             VanityUrlOptions vanityUrlOptions = null)
         {
             // get id for resource
             string resourcePrincipalId = await GetAppPrincipalIdAsync(resource, vanityUrlOptions).ConfigureAwait(false);
 
             // get existing grants for resource
-            var grants = await ListGrantsAsync2(vanityUrlOptions).ConfigureAwait(false);
+            var grants = await ListGrants2Async(vanityUrlOptions).ConfigureAwait(false);
 
-            IOAuth2PermissionGrant result = null;
+            IPermissionGrant2 result = null;
             var existingGrant = grants.FirstOrDefault(grant => grant.ResourceId.Equals(resourcePrincipalId));
             if (existingGrant != null)
             {
@@ -298,17 +298,17 @@ namespace PnP.Core.Admin.Model.SharePoint
             return result;
         }
 
-        public IOAuth2PermissionGrant AddGrant2(string resource, string scope, VanityUrlOptions vanityUrlOptions = null)
+        public IPermissionGrant2 AddGrant2(string resource, string scope, VanityUrlOptions vanityUrlOptions = null)
         {
-            return AddGrantAsync2(resource, scope, vanityUrlOptions).GetAwaiter().GetResult();
+            return AddGrant2Async(resource, scope, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public IOAuth2PermissionGrant[] ListGrants2(VanityUrlOptions vanityUrlOptions = null)
+        public IPermissionGrant2[] ListGrants2(VanityUrlOptions vanityUrlOptions = null)
         {
-            return ListGrantsAsync2(vanityUrlOptions).GetAwaiter().GetResult();
+            return ListGrants2Async(vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<IOAuth2PermissionGrant[]> ListGrantsAsync2(VanityUrlOptions vanityUrlOptions = null)
+        public async Task<IPermissionGrant2[]> ListGrants2Async(VanityUrlOptions vanityUrlOptions = null)
         {
             using PnPContext tenantAdminContext = await context
                 .GetSharePointAdmin()
@@ -353,12 +353,12 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             if (root.ValueKind != JsonValueKind.Array)
             {
-                return Array.Empty<IOAuth2PermissionGrant>();
+                return Array.Empty<IPermissionGrant2>();
             }
 
             var permissionGrants = root
                 .EnumerateArray()
-                .Select(element => new OAuth2PermissionGrant
+                .Select(element => new PermissionGrant2
                 {
                     ClientId = element.GetProperty("clientId").GetString(),
                     ConsentType = element.GetProperty("consentType").GetString(),
@@ -379,26 +379,26 @@ namespace PnP.Core.Admin.Model.SharePoint
                     })
                 .Select(t => t.Result);
 
-            return enriched.Cast<IOAuth2PermissionGrant>().ToArray();
+            return enriched.Cast<IPermissionGrant2>().ToArray();
         }
 
-        public async Task<IOAuth2PermissionGrant> RevokeGrantAsync2(string grantId, string scope,
+        public async Task<IPermissionGrant2> RevokeGrant2Async(string grantId, string scope,
             VanityUrlOptions vanityUrlOptions = null)
         {
             // fetch grant
-            IOAuth2PermissionGrant latestGrant = await GetGrantAsync(grantId, vanityUrlOptions).ConfigureAwait(false);
+            IPermissionGrant2 latestGrant = await GetGrantAsync(grantId, vanityUrlOptions).ConfigureAwait(false);
             // remove 'scope' from grant
             return await UpdateGrantAsync(latestGrant, scope, UpdateGrantAction.Remove, vanityUrlOptions)
                 .ConfigureAwait(false);
         }
 
-        public IOAuth2PermissionGrant RevokeGrant2(string grantId, string scope,
+        public IPermissionGrant2 RevokeGrant2(string grantId, string scope,
             VanityUrlOptions vanityUrlOptions = null)
         {
-            return RevokeGrantAsync2(grantId, scope, vanityUrlOptions).GetAwaiter().GetResult();
+            return RevokeGrant2Async(grantId, scope, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
-        public Task DeleteGrantAsync2(
+        public Task DeleteGrant2Async(
             string grantId,
             VanityUrlOptions vanityUrlOptions = null)
         {
@@ -410,7 +410,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             string grantId,
             VanityUrlOptions vanityUrlOptions = null)
         {
-            DeleteGrantAsync2(grantId, vanityUrlOptions).GetAwaiter().GetResult();
+            DeleteGrant2Async(grantId, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
         #region Helpers
@@ -589,7 +589,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         # region CRUD Operations
         
-        private async Task<IOAuth2PermissionGrant> CreateGrantAsync(
+        private async Task<IPermissionGrant2> CreateGrantAsync(
             string sharePointAppPrincipalId,
             string resourceId,
             string scope,
@@ -647,7 +647,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             if (root.ValueKind == JsonValueKind.Object)
             {
-                var resultGrant = new OAuth2PermissionGrant()
+                var resultGrant = new PermissionGrant2()
                 {
                     ClientId = root.GetProperty("clientId").GetString(),
                     ConsentType = root.GetProperty("consentType").GetString(),
@@ -668,7 +668,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return null;
         }
 
-        private async Task<IOAuth2PermissionGrant> GetGrantAsync(string existingGrantId,
+        private async Task<IPermissionGrant2> GetGrantAsync(string existingGrantId,
             VanityUrlOptions vanityUrlOptions)
         {
             using PnPContext tenantAdminContext = await context
@@ -709,7 +709,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             if (root.ValueKind == JsonValueKind.Object)
             {
-                var resultGrant = new OAuth2PermissionGrant()
+                var resultGrant = new PermissionGrant2()
                 {
                     ClientId = root.GetProperty("clientId").GetString(),
                     ConsentType = root.GetProperty("consentType").GetString(),
@@ -731,8 +731,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             return null;
         }
 
-        private async Task<IOAuth2PermissionGrant> UpdateGrantAsync(
-            IOAuth2PermissionGrant existingGrant,
+        private async Task<IPermissionGrant2> UpdateGrantAsync(
+            IPermissionGrant2 existingGrant,
             string scope,
             UpdateGrantAction updateGrantAction,
             VanityUrlOptions vanityUrlOptions = null)
@@ -762,7 +762,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             if (scopes.Count == 0)
             {
                 // no scopes left, delete the whole oAuth2PermissionGrants item
-                await DeleteGrantAsync2(existingGrant.Id, vanityUrlOptions).ConfigureAwait(false);
+                await DeleteGrant2Async(existingGrant.Id, vanityUrlOptions).ConfigureAwait(false);
                 return null;
             }
 
@@ -812,7 +812,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             if (root.ValueKind == JsonValueKind.Object)
             {
-                var resultGrant = new OAuth2PermissionGrant()
+                var resultGrant = new PermissionGrant2()
                 {
                     ClientId = root.GetProperty("clientId").GetString(),
                     ConsentType = root.GetProperty("consentType").GetString(),

@@ -70,7 +70,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task AddListRevokeGrantTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 ServicePrincipal servicePrincipal = new(context);
@@ -172,7 +172,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
             ServicePrincipal servicePrincipal = new(context);
 
-            IOAuth2PermissionGrant addedGrant1 =
+            IPermissionGrant2 addedGrant1 =
                 servicePrincipal.AddGrant2("Microsoft Graph", "Calendars.ReadWrite.Shared");
 
             Assert.IsNotNull(addedGrant1);
@@ -190,7 +190,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 .Any(g => 
                     g.ResourceId.Equals(addedGrant1.ResourceId, StringComparison.InvariantCultureIgnoreCase)));
 
-            IOAuth2PermissionGrant addedGrant2 =
+            IPermissionGrant2 addedGrant2 =
                 servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
 
             Assert.IsNotNull(addedGrant2);
@@ -223,7 +223,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             // that was the last, so it was a DELETE actually
             Assert.IsNull(revokedGrant2);
             
-            IOAuth2PermissionGrant addedGrant3 =
+            IPermissionGrant2 addedGrant3 =
                 servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
 
             servicePrincipal.DeleteGrant2(addedGrant3.Id);

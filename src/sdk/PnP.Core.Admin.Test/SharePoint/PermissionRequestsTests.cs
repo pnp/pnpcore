@@ -133,7 +133,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                 Assert.IsTrue(deployResult1);
 
-                IOAuth2PermissionGrant[] approvedPermissionGrants1
+                IPermissionGrant2[] approvedPermissionGrants1
                     = await app1.ApprovePermissionRequestsAsync();
 
                 Assert.AreEqual(1, approvedPermissionGrants1.Length);
@@ -144,7 +144,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                 Assert.IsTrue(deployResult2);
 
-                IOAuth2PermissionGrant[] approvedPermissionGrants2 = await app2.ApprovePermissionRequestsAsync();
+                IPermissionGrant2[] approvedPermissionGrants2 = await app2.ApprovePermissionRequestsAsync();
                 Assert.AreEqual(2, approvedPermissionGrants2.Length);
             }
             finally

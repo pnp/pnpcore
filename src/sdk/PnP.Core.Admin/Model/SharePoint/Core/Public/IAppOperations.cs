@@ -99,6 +99,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="aadPermissions">The requested AAD permissions, e.g. </param>
         /// <returns></returns>
-        Task<IOAuth2PermissionGrant[]> ApproveAsync(string aadPermissions);
+        Task<IPermissionGrant2[]> ApproveAsync(string aadPermissions);
     }
 }

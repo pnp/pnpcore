@@ -2,7 +2,7 @@ using System;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal record OAuth2PermissionGrant : IOAuth2PermissionGrant
+    internal record PermissionGrant2 : IPermissionGrant2
     {
         public string ClientId { get; set; }
         public string ConsentType { get; set; }
