@@ -303,6 +303,26 @@ namespace PnP.Core.Admin.Model.SharePoint
             return AddGrant2Async(resource, scope, vanityUrlOptions).GetAwaiter().GetResult();
         }
 
+        public Task<IServicePrincipalProperties> Disable2Async(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return UpdateServicePrincipalAsync(false, vanityUrlOptions);
+        }
+
+        public IServicePrincipalProperties Disable2(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return Disable2Async(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+        
+        public Task<IServicePrincipalProperties> Enable2Async(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return UpdateServicePrincipalAsync(true, vanityUrlOptions);
+        }
+
+        public IServicePrincipalProperties Enable2(VanityUrlOptions vanityUrlOptions = null)
+        {
+            return Enable2Async(vanityUrlOptions).GetAwaiter().GetResult();
+        }
+        
         public IPermissionGrant2[] ListGrants2(VanityUrlOptions vanityUrlOptions = null)
         {
             return ListGrants2Async(vanityUrlOptions).GetAwaiter().GetResult();
@@ -585,6 +605,136 @@ namespace PnP.Core.Admin.Model.SharePoint
                 : root.GetProperty("appDisplayName").ToString();
         }
 
+        private async Task<IServicePrincipalProperties> UpdateServicePrincipalAsync(bool active, VanityUrlOptions vanityUrlOptions = null)
+        {
+            var sharePointAppPrincipalId =
+                await GetAppPrincipalIdAsync(
+                    "SharePoint Online Client Extensibility Web Application Principal",
+                    vanityUrlOptions).ConfigureAwait(false);
+
+            using PnPContext tenantAdminContext = await context
+                .GetSharePointAdmin()
+                .GetTenantAdminCenterContextAsync(vanityUrlOptions)
+                .ConfigureAwait(false);
+            
+            var json = new {accountEnabled = active};
+            var body = JsonSerializer.Serialize(json);
+            
+            var patchServicePrincipalsCall = new ApiCall(
+                $"servicePrincipals/{sharePointAppPrincipalId}",
+                ApiType.Graph,
+                body);
+            
+            // no response
+            await (tenantAdminContext.Web as Web)
+                .RawRequestAsync(patchServicePrincipalsCall, new HttpMethod("PATCH"))
+                .ConfigureAwait(false);
+            
+            var getServicePrincipalsCall = new ApiCall(
+                $"servicePrincipals/{sharePointAppPrincipalId}",
+                ApiType.Graph,
+                body);
+
+            var result = await (tenantAdminContext.Web as Web)
+                .RawRequestAsync(getServicePrincipalsCall, HttpMethod.Get)
+                .ConfigureAwait(false);
+
+            #region JsonResponse
+            
+            /*
+                {
+                 "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+                 "id": "9b994571-2cf2-4fa4-acd0-9fe1f271410f",
+                 "deletedDateTime": null,
+                 "accountEnabled": false,
+                 "alternativeNames": [],
+                 "appDisplayName": "SharePoint Online Client Extensibility Web Application Principal",
+                 "appDescription": null,
+                 "appId": "40ed0677-9e6f-435c-b198-7634beba3874",
+                 "applicationTemplateId": null,
+                 "appOwnerOrganizationId": "60df2466-a102-404a-8d9d-95c950626730",
+                 "appRoleAssignmentRequired": false,
+                 "createdDateTime": "2021-05-12T10:22:37Z",
+                 "description": null,
+                 "disabledByMicrosoftStatus": null,
+                 "displayName": "SharePoint Online Client Extensibility Web Application Principal",
+                 "homepage": null,
+                 "loginUrl": null,
+                 "logoutUrl": null,
+                 "notes": null,
+                 "notificationEmailAddresses": [],
+                 "preferredSingleSignOnMode": null,
+                 "preferredTokenSigningKeyThumbprint": null,
+                 "replyUrls": [
+                   "https://loitzl2.sharepoint.com/",
+                   "https://loitzl2-admin.sharepoint.com/_forms/spfxsinglesignon.aspx",
+                   "https://dev.fluidpreview.office.net/spfxsinglesignon",
+                   "https://fluidpreview.office.net/spfxsinglesignon",
+                   "https://loitzl2.sharepoint.com/_forms/spfxmsalv3singlesignon.aspx",
+                   "https://loitzl2.sharepoint.com/_forms/spfxsinglesignon.aspx?redirect",
+                   "https://loitzl2.sharepoint.com/_forms/spfxsinglesignon.aspx",
+                   "https://loitzl2.sharepoint.com"
+                 ],
+                 "servicePrincipalNames": [
+                   "api://60df2466-a102-404a-8d9d-95c950626730/loitzl2.sharepoint.com",
+                   "api://60df2466-a102-404a-8d9d-95c950626730/microsoft.spfx3rdparty.com",
+                   "40ed0677-9e6f-435c-b198-7634beba3874"
+                 ],
+                 "servicePrincipalType": "Application",
+                 "signInAudience": "AzureADMyOrg",
+                 "tags": [],
+                 "tokenEncryptionKeyId": null,
+                 "samlSingleSignOnSettings": null,
+                 "addIns": [],
+                 "appRoles": [],
+                 "info": {
+                   "logoUrl": null,
+                   "marketingUrl": null,
+                   "privacyStatementUrl": null,
+                   "supportUrl": null,
+                   "termsOfServiceUrl": null
+                 },
+                 "keyCredentials": [],
+                 "oauth2PermissionScopes": [
+                   {
+                     "adminConsentDescription": "Allow the application to access SharePoint Online Client Extensibility Web Application Principal on behalf of the signed-in user.",
+                     "adminConsentDisplayName": "Access SharePoint Online Client Extensibility Web Application Principal",
+                     "id": "80908136-1ead-4acd-acdb-c006ba6072bd",
+                     "isEnabled": true,
+                     "type": "User",
+                     "userConsentDescription": "Allow the application to access SharePoint Online Client Extensibility Web Application Principal on your behalf.",
+                     "userConsentDisplayName": "Access SharePoint Online Client Extensibility Web Application Principal",
+                     "value": "user_impersonation"
+                   }
+                 ],
+                 "passwordCredentials": [],
+                 "resourceSpecificApplicationPermissions": [],
+                 "verifiedPublisher": {
+                   "displayName": null,
+                   "verifiedPublisherId": null,
+                   "addedDateTime": null
+                 }
+               }
+            */            
+            #endregion
+
+            // todo(ml): create IServicePrincipalProperties
+            var root = JsonDocument.Parse(result.Json).RootElement;
+
+            if (root.ValueKind == JsonValueKind.Object)
+            {
+                var servicePrincipalProperties = new ServicePrincipalProperties
+                {
+                    AccountEnabled = root.GetProperty("accountEnabled").GetBoolean(),
+                    AppId = root.GetProperty("appId").GetString(),
+                    ReplyUrls = root.GetProperty("replyUrls").EnumerateArray().Select( r => r.GetString())
+                };
+                return servicePrincipalProperties;
+            }
+
+            return null;
+        }
+        
         #endregion
 
         # region CRUD Operations

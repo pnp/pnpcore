@@ -163,6 +163,33 @@ namespace PnP.Core.Admin.Test.SharePoint
         
         #region Graph based grants API
         
+        
+        [TestMethod]
+        public async Task Enable2Disable2ServicePrincipalTest_Async()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            {
+                try
+                {
+                    ServicePrincipal principal = new(context);
+                    IServicePrincipalProperties result = principal.Disable2();
+                    Assert.IsFalse(result.AccountEnabled);
+                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                    Assert.IsTrue(result.ReplyUrls.Any());
+                }
+                finally
+                {
+                    ServicePrincipal principal = new(context);
+                    IServicePrincipalProperties result = principal.Enable2();
+                    Assert.IsTrue(result.AccountEnabled);
+                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                    Assert.IsTrue(result.ReplyUrls.Any());
+                }
+            }
+        }
+
+        
         // todo(ml) Split into smaller pieces
         [TestMethod]
         public async Task AddListRevokeDeleteGrant2Test_Async()

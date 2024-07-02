@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="id">permission request id</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>permission grant</returns>
+        [Obsolete("Use IApp.ApprovePermissionRequests instead")]
         IPermissionGrant ApprovePermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -22,6 +24,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="id">permission request id</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>permission grant</returns>
+        [Obsolete("Use IApp.ApprovePermissionRequestsAsync instead")]
         Task<IPermissionGrant> ApprovePermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -29,6 +32,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="id">permission request id</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        [Obsolete("Use RevokeGrant2 instead")]
         void DenyPermissionRequest(string id, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -36,6 +40,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="id">permission request id</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        [Obsolete("Use RevokeGrant2Async instead")]
         Task DenyPermissionRequestAsync(string id, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -43,6 +48,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        [Obsolete("Use ListGrants2 instead")]
         List<IPermissionRequest> GetPermissionRequests(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -50,6 +56,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        [Obsolete("Use ListGrants2Async instead")]
         Task<List<IPermissionRequest>> GetPermissionRequestsAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -57,6 +64,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        Task<IServicePrincipalProperties> Enable2Async(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Enable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        IServicePrincipalProperties Enable2(VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        /// Enable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        [Obsolete("Use Enable2Async instead")]
         Task<IServicePrincipalProperties> EnableAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -64,6 +86,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        [Obsolete("Use Enable2 instead")]
         IServicePrincipalProperties Enable(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -71,6 +94,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        Task<IServicePrincipalProperties> Disable2Async(VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Disable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        IServicePrincipalProperties Disable2(VanityUrlOptions vanityUrlOptions = null);
+        
+        /// <summary>
+        /// Disable the Service Principal
+        /// </summary>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns>the list of permission requests</returns>
+        [Obsolete("Use Disable2Async instead")]
         Task<IServicePrincipalProperties> DisableAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -78,6 +116,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of permission requests</returns>
+        [Obsolete("Use Disable2 instead")]
         IServicePrincipalProperties Disable(VanityUrlOptions vanityUrlOptions = null);
 
 
@@ -100,6 +139,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of granted permissions</returns>
+        [Obsolete("Use ListGrants2Async instead")]
         Task<IEnumerable<IPermissionGrant>> ListGrantsAsync(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -107,6 +147,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the list of granted permissions</returns>
+        [Obsolete("Use ListGrants2 instead")]
         IEnumerable<IPermissionGrant> ListGrants(VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -134,6 +175,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="scope">Scope of the permission</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the new permission grant</returns>
+        [Obsolete("Use AddGrant2Async instead")]
         Task<IPermissionGrant> AddGrantAsync(string resource, string scope, VanityUrlOptions vanityUrlOptions = null);
 
         /// <summary>
@@ -143,6 +185,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="scope">Scope of the permission</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the new permission grant</returns>
+        [Obsolete("Use AddGrant2 instead")]
         IPermissionGrant AddGrant(string resource, string scope, VanityUrlOptions vanityUrlOptions = null);
         
         /// <summary>
@@ -185,6 +228,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="objectId">Object Id of the permission</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the revoked permission grant</returns>
+        [Obsolete("Use RevokeGrant2Async instead")]
         Task<IPermissionGrant> RevokeGrantAsync(string objectId, VanityUrlOptions vanityUrlOptions = null);
         
         /// <summary>
@@ -193,6 +237,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="objectId">Object Id of the permission</param>
         /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
         /// <returns>the revoked permission grant</returns>
+        [Obsolete("Use RevokeGrant2 instead")]
         IPermissionGrant RevokeGrant(string objectId, VanityUrlOptions vanityUrlOptions = null);
     }
 }
