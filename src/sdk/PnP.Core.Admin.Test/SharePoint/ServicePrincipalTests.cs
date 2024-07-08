@@ -167,24 +167,22 @@ namespace PnP.Core.Admin.Test.SharePoint
         public async Task Enable2Disable2ServicePrincipalTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            try
             {
-                try
-                {
-                    ServicePrincipal principal = new(context);
-                    IServicePrincipalProperties result = principal.Disable2();
-                    Assert.IsFalse(result.AccountEnabled);
-                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
-                    Assert.IsTrue(result.ReplyUrls.Any());
-                }
-                finally
-                {
-                    ServicePrincipal principal = new(context);
-                    IServicePrincipalProperties result = principal.Enable2();
-                    Assert.IsTrue(result.AccountEnabled);
-                    Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
-                    Assert.IsTrue(result.ReplyUrls.Any());
-                }
+                ServicePrincipal principal = new(context);
+                IServicePrincipalProperties result = principal.Disable2();
+                Assert.IsFalse(result.AccountEnabled);
+                Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                Assert.IsTrue(result.ReplyUrls.Any());
+            }
+            finally
+            {
+                ServicePrincipal principal = new(context);
+                IServicePrincipalProperties result = principal.Enable2();
+                Assert.IsTrue(result.AccountEnabled);
+                Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                Assert.IsTrue(result.ReplyUrls.Any());
             }
         }
 
@@ -215,7 +213,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         [TestMethod]
         public async Task Add2Delete2ServicePrincipalTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
             ServicePrincipal servicePrincipal = new(context);
             
