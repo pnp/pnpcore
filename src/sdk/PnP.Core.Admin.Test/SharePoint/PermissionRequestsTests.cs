@@ -105,13 +105,13 @@ namespace PnP.Core.Admin.Test.SharePoint
         public void IApp_ParsePermissionRequests_Succeeds()
         {
             var result = 
-                TenantAppManager.ParsePermissionRequests("Microsoft Graph, User.ReadBasic.All; Microsoft Graph, Calendars.Read; Microsoft Graph, Application.ReadWrite.All; App1, access_as_user; App1, Scope2");
+                TenantAppManager.ParsePermissionRequests("MyLife Legacy, User.ReadBasic.All; MyLife Legacy, Calendars.Read; MyLife Legacy, Application.ReadWrite.All; Rockstar App, access_as_user; Rockstar App, RockStars.ReadWriteAll");
         
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("Microsoft Graph", result.ElementAt(0).Key);
+            Assert.AreEqual("MyLife Legacy", result.ElementAt(0).Key);
             Assert.AreEqual("User.ReadBasic.All Calendars.Read Application.ReadWrite.All", result.ElementAt(0).Value);
-            Assert.AreEqual("App1", result.ElementAt(1).Key);
-            Assert.AreEqual("access_as_user Scope2", result.ElementAt(1).Value);
+            Assert.AreEqual("Rockstar App", result.ElementAt(1).Key);
+            Assert.AreEqual("access_as_user RockStars.ReadWriteAll", result.ElementAt(1).Value);
         }
 
         #endregion
@@ -134,9 +134,11 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(deployResult1);
 
                 IPermissionGrant2[] approvedPermissionGrants1
-                    = await app1.ApprovePermissionRequestsAsync();
+                    = app1.ApprovePermissionRequests();
 
                 Assert.AreEqual(1, approvedPermissionGrants1.Length);
+                Assert.AreEqual("User.ReadBasic.All Sites.Selected", approvedPermissionGrants1.ElementAt(0).Scope);
+                Assert.AreEqual("Microsoft Graph", approvedPermissionGrants1.ElementAt(0).ResourceName);
                 
                 // App2 contains permission request: Office 365 SharePoint Online (Sites.Selected)
                 app2 = await appManager.AddAsync(packagePath2, true);
@@ -144,8 +146,10 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                 Assert.IsTrue(deployResult2);
 
-                IPermissionGrant2[] approvedPermissionGrants2 = await app2.ApprovePermissionRequestsAsync();
+                IPermissionGrant2[] approvedPermissionGrants2 = app2.ApprovePermissionRequests();
                 Assert.AreEqual(2, approvedPermissionGrants2.Length);
+                Assert.IsTrue(approvedPermissionGrants2.Any( g => g.ResourceName.Equals("Office 365 SharePoint Online")));
+                Assert.IsTrue(approvedPermissionGrants2.Any( g => g.Scope.Contains("Sites.Selected")));
             }
             finally
             {
