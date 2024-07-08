@@ -163,11 +163,10 @@ namespace PnP.Core.Admin.Test.SharePoint
         
         #region Graph based grants API
         
-        
         [TestMethod]
         public async Task Enable2Disable2ServicePrincipalTest_Async()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
             {
                 try
