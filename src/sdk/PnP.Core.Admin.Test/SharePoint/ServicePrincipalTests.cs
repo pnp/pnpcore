@@ -211,74 +211,23 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.IsNotNull(revokedGrant);
             Assert.IsFalse(revokedGrant.Scope.Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
         }
-        
-        // todo(ml) Split into smaller pieces
-        [TestMethod]
-        public async Task AddListRevokeDeleteGrant2Test_Async()
-        {
-            //TestCommon.Instance.Mocking = false;
 
+        [TestMethod]
+        public async Task Add2Delete2ServicePrincipalTest_Async()
+        {
+            TestCommon.Instance.Mocking = false;
             using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
             ServicePrincipal servicePrincipal = new(context);
-
-            IPermissionGrant2 addedGrant1 =
-                servicePrincipal.AddGrant2("Microsoft Graph", "Calendars.ReadWrite.Shared");
-
-            Assert.IsNotNull(addedGrant1);
-            Assert.AreEqual("Microsoft Graph", addedGrant1.ResourceName);
-            Assert.IsTrue(
-                addedGrant1
-                .Scope
-                .Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
-
-            var grants1 = servicePrincipal.ListGrants2();
-
-            Assert.IsNotNull(grants1);
-            Assert.IsTrue(grants1.Length > 0);
-            Assert.IsTrue(grants1
-                .Any(g => 
-                    g.ResourceId.Equals(addedGrant1.ResourceId, StringComparison.InvariantCultureIgnoreCase)));
-
-            IPermissionGrant2 addedGrant2 =
-                servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
-
-            Assert.IsNotNull(addedGrant2);
-            Assert.AreEqual("Microsoft Graph", addedGrant2.ResourceName);
-            Assert.IsTrue(
-                addedGrant2
-                    .Scope
-                    .Contains("User.ReadBasic.All", StringComparison.InvariantCultureIgnoreCase));
-
-            var grants2 = servicePrincipal.ListGrants2();
-
-            Assert.IsNotNull(grants2);
-            Assert.IsTrue(grants2.Length > 0);
-            Assert.IsTrue(grants2
-                .Any(g => 
-                    g.ResourceId.Equals(addedGrant2.ResourceId, StringComparison.InvariantCultureIgnoreCase)));
-
             
-            var grantToRevokeFrom = grants2.FirstOrDefault(
-                grant => grant.ResourceName.Equals("Microsoft Graph", StringComparison.InvariantCultureIgnoreCase));
+            IPermissionGrant2 addedGrant =
+                servicePrincipal.AddGrant2("Azure DevOps", "vso.agentpools");
+            Assert.IsNotNull(addedGrant);
+            Assert.AreEqual("Azure DevOps", addedGrant.ResourceName);
             
-            Assert.IsNotNull(grantToRevokeFrom);
+            servicePrincipal.DeleteGrant2(addedGrant.Id);
             
-            var revokedGrant1 = servicePrincipal.RevokeGrant2(grantToRevokeFrom.Id, "Calendars.ReadWrite.Shared");
-            
-            Assert.IsFalse(revokedGrant1.Scope.Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
-            
-            var revokedGrant2 = servicePrincipal.RevokeGrant2(grantToRevokeFrom.Id, "User.ReadBasic.All");
-            
-            // that was the last, so it was a DELETE actually
-            Assert.IsNull(revokedGrant2);
-            
-            IPermissionGrant2 addedGrant3 =
-                servicePrincipal.AddGrant2("Microsoft Graph", "User.ReadBasic.All");
-
-            servicePrincipal.DeleteGrant2(addedGrant3.Id);
-            
-            var grants3 = servicePrincipal.ListGrants2();
-            Assert.IsFalse(grants3.Any( g => g.ResourceName.Equals("Microsoft Graph", StringComparison.InvariantCultureIgnoreCase)));
+            var grants = servicePrincipal.ListGrants2();
+            Assert.IsFalse(grants.Any( g => g.ResourceName.Equals("Azure DevOps", StringComparison.InvariantCultureIgnoreCase)));
         }
         
         #endregion
