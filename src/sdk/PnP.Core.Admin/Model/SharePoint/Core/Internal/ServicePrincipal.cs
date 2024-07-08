@@ -718,7 +718,6 @@ namespace PnP.Core.Admin.Model.SharePoint
             */            
             #endregion
 
-            // todo(ml): create IServicePrincipalProperties
             var root = JsonDocument.Parse(result.Json).RootElement;
 
             if (root.ValueKind == JsonValueKind.Object)
@@ -854,7 +853,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             #endregion
 
-            // todo(ml): DRY
             var root = JsonDocument.Parse(result.Json).RootElement;
 
             if (root.ValueKind == JsonValueKind.Object)
@@ -957,7 +955,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             #endregion
 
-            // todo(ml): DRY
             var root = JsonDocument.Parse(result.Json).RootElement;
 
             if (root.ValueKind == JsonValueKind.Object)
