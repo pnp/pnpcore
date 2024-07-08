@@ -188,6 +188,29 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task Add2Revoke2ServicePrincipalTest_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            ServicePrincipal servicePrincipal = new(context);
+            
+            IPermissionGrant2 addedGrant =
+                servicePrincipal.AddGrant2("Microsoft Graph", "Calendars.ReadWrite.Shared");
+            
+            Assert.IsNotNull(addedGrant);
+            Assert.AreEqual("Microsoft Graph", addedGrant.ResourceName);
+            Assert.AreEqual("AllPrincipals", addedGrant.ConsentType);
+            Assert.IsTrue(
+                addedGrant
+                    .Scope
+                    .Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+
+            var revokedGrant = servicePrincipal.RevokeGrant2(addedGrant.Id, "Calendars.ReadWrite.Shared");
+            
+            Assert.IsNotNull(revokedGrant);
+            Assert.IsFalse(revokedGrant.Scope.Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+        }
         
         // todo(ml) Split into smaller pieces
         [TestMethod]

@@ -406,9 +406,9 @@ namespace PnP.Core.Admin.Model.SharePoint
             VanityUrlOptions vanityUrlOptions = null)
         {
             // fetch grant
-            IPermissionGrant2 latestGrant = await GetGrantAsync(grantId, vanityUrlOptions).ConfigureAwait(false);
+            IPermissionGrant2 grant = await GetGrantAsync(grantId, vanityUrlOptions).ConfigureAwait(false);
             // remove 'scope' from grant
-            return await UpdateGrantAsync(latestGrant, scope, UpdateGrantAction.Remove, vanityUrlOptions)
+            return await UpdateGrantAsync(grant, scope, UpdateGrantAction.Remove, vanityUrlOptions)
                 .ConfigureAwait(false);
         }
 
