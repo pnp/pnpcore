@@ -1235,6 +1235,8 @@ namespace PnP.Core.Model.SharePoint
                             }
                         }
 
+                        ApplyCollapsibleSectionSettings(sectionData.ZoneGroupMetadata, currentSection);
+                        
                         ICanvasColumn currentColumn = null;
                         if (sectionData.Position != null)
                         {
