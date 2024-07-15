@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "scopes-app-1-web-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/scopesApp1WebPart/ScopesApp1.js",
+          "manifest": "./src/webparts/scopesApp1WebPart/ScopesApp1.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ScopesApp1Strings": "lib/webparts/scopesApp1WebPart/loc/{locale}.js"
+  }
+}
