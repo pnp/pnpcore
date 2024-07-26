@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Security
@@ -417,6 +418,55 @@ namespace PnP.Core.Test.Security
                    
             }
             await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task ShareFileOrganizationalLinkWithExpirationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            try
+            {
+                (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+
+                    // Set expiration date
+                    DateTime expirationDate = DateTime.MinValue;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        expirationDate = DateTime.Now.AddDays(5);
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Ticks", expirationDate.Ticks.ToString() },
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        expirationDate = new DateTime(long.Parse(properties["Ticks"]));
+                    }
+
+                    var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    var shareLinkRequestOptions = new OrganizationalLinkOptions()
+                    {
+                        Type = ShareType.Edit,
+                        ExpirationDateTime = expirationDate
+                    };
+
+                    var sharingLink = await file.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
+                    Assert.AreEqual(sharingLink.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
+
+                    var newSharingLinks = await file.GetShareLinksAsync();
+                    Assert.AreEqual(newSharingLinks.AsRequested().First().ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture), shareLinkRequestOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
         }
 
         [TestMethod]
