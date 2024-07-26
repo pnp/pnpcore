@@ -1142,7 +1142,7 @@
   "api/PnP.Core.Model.Security.OrganizationalLinkOptions.html": {
     "href": "api/PnP.Core.Model.Security.OrganizationalLinkOptions.html",
     "title": "Class OrganizationalLinkOptions | PnP Core SDK",
-    "keywords": "Class OrganizationalLinkOptions Properties that can be set when creating a new Organizational Link Inheritance System.Object OrganizationalLinkOptions Namespace : PnP.Core.Model.Security Assembly : PnP.Core.dll Syntax public class OrganizationalLinkOptions : object Properties Type The type of sharing link to create. Declaration public ShareType Type { get; set; } Property Value ShareType"
+    "keywords": "Class OrganizationalLinkOptions Properties that can be set when creating a new Organizational Link Inheritance System.Object OrganizationalLinkOptions Namespace : PnP.Core.Model.Security Assembly : PnP.Core.dll Syntax public class OrganizationalLinkOptions : object Properties ExpirationDateTime Indicates the expiration datetime of the permission. Declaration public DateTime ExpirationDateTime { get; set; } Property Value DateTime Type The type of sharing link to create. Declaration public ShareType Type { get; set; } Property Value ShareType"
   },
   "api/PnP.Core.Model.Security.PermissionRole.html": {
     "href": "api/PnP.Core.Model.Security.PermissionRole.html",
