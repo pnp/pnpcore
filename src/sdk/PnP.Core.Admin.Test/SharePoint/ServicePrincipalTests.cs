@@ -5,6 +5,7 @@ using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Test.Common.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
         }
 
+        #region SPOWebAppServicePrincipal CSOM based grants API
+        
         [TestMethod]
         public void ListGrantsRequestTest()
         {
@@ -63,7 +66,6 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual("19cef431-469f-4898-8e72-dfd13054b3f5", request.Result.ResourceId);
             Assert.AreEqual("Calendars.ReadWrite.Shared", request.Result.Scope);
         }
-
 
         [TestMethod]
         public async Task AddListRevokeGrantTest_Async()
@@ -156,5 +158,76 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual("19cef431-469f-4898-8e72-dfd13054b3f5", request.Result.ResourceId);
             Assert.AreEqual("Calendars.Read Calendars.ReadWrite Calendars.ReadWrite.Shared", request.Result.Scope);
         }
+        
+        #endregion
+        
+        #region Graph based grants API
+        
+        [TestMethod]
+        public async Task Enable2Disable2ServicePrincipalTest_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            try
+            {
+                ServicePrincipal principal = new(context);
+                IServicePrincipalProperties result = principal.Disable2();
+                Assert.IsFalse(result.AccountEnabled);
+                Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                Assert.IsTrue(result.ReplyUrls.Any());
+            }
+            finally
+            {
+                ServicePrincipal principal = new(context);
+                IServicePrincipalProperties result = principal.Enable2();
+                Assert.IsTrue(result.AccountEnabled);
+                Assert.IsTrue(!string.IsNullOrEmpty(result.AppId));
+                Assert.IsTrue(result.ReplyUrls.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task Add2Revoke2ServicePrincipalTest_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            ServicePrincipal servicePrincipal = new(context);
+            
+            IPermissionGrant2 addedGrant =
+                servicePrincipal.AddGrant2("Microsoft Graph", "Calendars.ReadWrite.Shared");
+            
+            Assert.IsNotNull(addedGrant);
+            Assert.AreEqual("Microsoft Graph", addedGrant.ResourceName);
+            Assert.AreEqual("AllPrincipals", addedGrant.ConsentType);
+            Assert.IsTrue(
+                addedGrant
+                    .Scope
+                    .Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+
+            var revokedGrant = servicePrincipal.RevokeGrant2(addedGrant.Id, "Calendars.ReadWrite.Shared");
+            
+            Assert.IsNotNull(revokedGrant);
+            Assert.IsFalse(revokedGrant.Scope.Contains("Calendars.ReadWrite.Shared", StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        [TestMethod]
+        public async Task Add2Delete2ServicePrincipalTest_Async()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            ServicePrincipal servicePrincipal = new(context);
+            
+            IPermissionGrant2 addedGrant =
+                servicePrincipal.AddGrant2("Azure DevOps", "vso.agentpools");
+            Assert.IsNotNull(addedGrant);
+            Assert.AreEqual("Azure DevOps", addedGrant.ResourceName);
+            
+            servicePrincipal.DeleteGrant2(addedGrant.Id);
+            
+            var grants = servicePrincipal.ListGrants2();
+            Assert.IsFalse(grants.Any( g => g.ResourceName.Equals("Azure DevOps", StringComparison.InvariantCultureIgnoreCase)));
+        }
+        
+        #endregion
     }
 }

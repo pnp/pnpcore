@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "scopes-app-2-client-side-solution",
+    "id": "b5835612-d7aa-487f-8408-fb9f6f21841c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+        {
+          "resource": "Microsoft Graph",
+          "scope": "User.ReadBasic.All"
+        },
+      {
+        "resource": "Office 365 SharePoint Online",
+        "scope": "Sites.Selected"
+      }
+    ],
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "scopes-app-2 description"
+      },
+      "longDescription": {
+        "default": "scopes-app-2 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "scopes-app-2 Feature",
+        "description": "The feature that activates elements of the scopes-app-2 solution.",
+        "id": "82c2ea5b-2978-41ad-9e4c-5141b70be4ed",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/scopes-app-2.sppkg"
+  }
+}

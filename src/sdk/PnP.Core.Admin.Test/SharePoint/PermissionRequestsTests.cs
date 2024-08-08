@@ -17,6 +17,12 @@ namespace PnP.Core.Admin.Test.SharePoint
         private const string packageName = "apicalltest.sppkg";
         private string packagePath = $"TestAssets/{packageName}";
 
+        private const string packageName1 = "scopes-app-1.sppkg";
+        private string packagePath1 = $"TestAssets/{packageName1}";
+
+        private const string packageName2 = "scopes-app-2.sppkg";
+        private string packagePath2 = $"TestAssets/{packageName2}";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -53,7 +59,6 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.IsNotNull(request.Result);
         }
 
-
         [TestMethod]
         public void GetPermissionsRequestsRequestTest()
         {
@@ -70,64 +75,93 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.AreEqual(4, request.Result.Count);
         }
 
+        #region IApp.ParsePermissionRequests
+
         [TestMethod]
-        public async Task ApprovePermissionsRequestTest_Async()
+        public void IApp_ParsePermissionRequests_ErroneousInput3()
         {
-            //TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
-            {
-                ITenantApp app = null;
-                try
-                {
-                    var appManager = context.GetTenantAppManager();
-                    app = appManager.Add(packagePath, true);
-                    var deployResult = app.Deploy(false);
-
-                    Assert.IsTrue(deployResult);
-
-                    List<IPermissionRequest> permissionRequests =
-                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
-
-                    var result =
-                        await appManager.ServicePrincipal.ApprovePermissionRequestAsync(permissionRequests.First().Id
-                            .ToString());
-
-                    Assert.IsNotNull(result);
-                    Assert.IsTrue(!string.IsNullOrWhiteSpace(result.ObjectId));
-                }
-                finally
-                {
-                    var retractResult = app.Retract();
-                    app.Remove();
-                }
-            }
+            var result = TenantAppManager.ParsePermissionRequests(null);
+            
+            Assert.AreEqual(0, result.Count);
+        }
+        
+        [TestMethod]
+        public void IApp_ParsePermissionRequests_ErroneousInput2()
+        {
+            var result = TenantAppManager.ParsePermissionRequests("Lorem Ipsum");
+        
+            Assert.AreEqual(0, result.Count);
+        }
+        
+        [TestMethod]
+        public void IApp_ParsePermissionRequests_ErroneousInput()
+        {
+            var result = TenantAppManager.ParsePermissionRequests("Lorem Ipsum; dolor");
+        
+            Assert.AreEqual(0, result.Count);
+        }
+        
+        [TestMethod]
+        public void IApp_ParsePermissionRequests_Succeeds()
+        {
+            var result = 
+                TenantAppManager.ParsePermissionRequests("MyLife Legacy, User.ReadBasic.All; MyLife Legacy, Calendars.Read; MyLife Legacy, Application.ReadWrite.All; Rockstar App, access_as_user; Rockstar App, RockStars.ReadWriteAll");
+        
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("MyLife Legacy", result.ElementAt(0).Key);
+            Assert.AreEqual("User.ReadBasic.All Calendars.Read Application.ReadWrite.All", result.ElementAt(0).Value);
+            Assert.AreEqual("Rockstar App", result.ElementAt(1).Key);
+            Assert.AreEqual("access_as_user RockStars.ReadWriteAll", result.ElementAt(1).Value);
         }
 
+        #endregion
+
         [TestMethod]
-        public async Task GetPermissionsRequestsTest_Async()
+        public async Task ApprovePermissionRequestsTest_Async()
         {
             //TestCommon.Instance.Mocking = false;
-            using (PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite))
+            using PnPContext context = await TestCommon.Instance.GetContextAsync(TestCommonBase.TestSite);
+            
+            ITenantApp app1 = null;
+            ITenantApp app2 = null;
+            try
             {
-                ITenantApp app = null;
-                try
+                // App1 contains permission request: Microsoft Graph (Sites.Selected)   
+                var appManager = context.GetTenantAppManager();
+                app1 = await appManager.AddAsync(packagePath1, true);
+                var deployResult1 = await app1.DeployAsync(false);
+
+                Assert.IsTrue(deployResult1);
+
+                IPermissionGrant2[] approvedPermissionGrants1
+                    = app1.ApprovePermissionRequests();
+
+                Assert.AreEqual(1, approvedPermissionGrants1.Length);
+                Assert.AreEqual("User.ReadBasic.All Sites.Selected", approvedPermissionGrants1.ElementAt(0).Scope);
+                Assert.AreEqual("Microsoft Graph", approvedPermissionGrants1.ElementAt(0).ResourceName);
+                
+                // App2 contains permission request: Office 365 SharePoint Online (Sites.Selected)
+                app2 = await appManager.AddAsync(packagePath2, true);
+                var deployResult2 = await app2.DeployAsync(false);
+
+                Assert.IsTrue(deployResult2);
+
+                IPermissionGrant2[] approvedPermissionGrants2 = app2.ApprovePermissionRequests();
+                Assert.AreEqual(2, approvedPermissionGrants2.Length);
+                Assert.IsTrue(approvedPermissionGrants2.Any( g => g.ResourceName.Equals("Office 365 SharePoint Online")));
+                Assert.IsTrue(approvedPermissionGrants2.Any( g => g.Scope.Contains("Sites.Selected")));
+            }
+            finally
+            {
+                if (app1 != null)
                 {
-                    var appManager = context.GetTenantAppManager();
-                    app = appManager.Add(packagePath, true);
-                    var deployResult = app.Deploy(false);
-
-                    Assert.IsTrue(deployResult);
-
-                    List<IPermissionRequest> permissionRequests =
-                        await appManager.ServicePrincipal.GetPermissionRequestsAsync();
-
-                    Assert.IsNotNull(permissionRequests);
-                    Assert.IsTrue(permissionRequests.Count > 0);
+                    await app1.RetractAsync();
+                    await app1.RemoveAsync();
                 }
-                finally
+                if (app2 != null)
                 {
-                    var retractResult = app.Retract();
-                    app.Remove();
+                    await app2.RetractAsync();
+                    await app2.RemoveAsync();
                 }
             }
         }

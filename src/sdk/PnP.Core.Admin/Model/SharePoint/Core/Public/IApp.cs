@@ -130,6 +130,18 @@ namespace PnP.Core.Admin.Model.SharePoint
         Task<bool> DeployAsync(bool skipFeatureDeployment = true);
 
         /// <summary>
+        /// Approves All PermissionRequests 
+        /// </summary>
+        /// <returns><em>true</em> if all permissions have been approved successfully.</returns>
+        IPermissionGrant2[] ApprovePermissionRequests();
+        
+        /// <summary>
+        /// Approves All PermissionRequests 
+        /// </summary>
+        /// <returns></returns>
+        Task<IPermissionGrant2[]> ApprovePermissionRequestsAsync();
+
+        /// <summary>
         /// Retracts the app in the app catalog. Notice that this will not remove the app from the app catalog.
         /// </summary>
         /// <returns><em>true</em> if retract was successful.</returns>

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.ServicePrincipal
 {
+    /// <summary>
+    /// Based upon the Microsoft.Online.SharePoint.TenantAdministration.Internal.SPOWebAppServicePrincipal CSOM Request
+    /// </summary>
     internal class AddGrantRequest : IRequest<IPermissionGrant>
     {
         private int IdentityPath { get; set; }
