@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Added ExpirationDataTime to OrganizationLinkOptions #1494 [reshmee011 - Reshmee Auckloo]
+- Update CloudManager.cs for GCC Login URL Fix #1502 [SteveWinward - Steve Winward]
 
 ## [1.13]
 

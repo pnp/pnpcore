@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Misc
         [TestMethod()]
         [DataRow("login.microsoftonline.com", Microsoft365Environment.Production)]
         [DataRow("login.windows-ppe.net", Microsoft365Environment.PreProduction)]
-        [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernment)]
+        [DataRow("login.microsoftonline.com", Microsoft365Environment.USGovernment)]
         [DataRow("login.microsoftonline.de", Microsoft365Environment.Germany)]
         [DataRow("login.chinacloudapi.cn", Microsoft365Environment.China)]
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentHigh)]

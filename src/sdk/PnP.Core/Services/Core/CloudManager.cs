@@ -19,7 +19,8 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Returns the graph authority for the in use environment. See https://docs.microsoft.com/en-us/graph/deployments for details
+        /// Returns the graph authority for the in use environment. See https://docs.microsoft.com/en-us/graph/deployments 
+        /// and https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide for details
         /// </summary>
         /// <param name="environment"></param>
         /// <returns></returns>
@@ -39,7 +40,8 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Returns the Azure AD login authority. See https://docs.microsoft.com/en-us/graph/deployments for details
+        /// Returns the Azure AD login authority. See https://docs.microsoft.com/en-us/graph/deployments 
+        /// and https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide for details
         /// </summary>
         /// <param name="environment"></param>
         /// <returns></returns>
