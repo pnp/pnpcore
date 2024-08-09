@@ -49,7 +49,7 @@ namespace PnP.Core.Services
             {
                 Microsoft365Environment.Production => "login.microsoftonline.com",
                 Microsoft365Environment.PreProduction => "login.windows-ppe.net",
-                Microsoft365Environment.USGovernment => "login.microsoftonline.us",
+                Microsoft365Environment.USGovernment => "login.microsoftonline.com",
                 Microsoft365Environment.USGovernmentHigh => "login.microsoftonline.us",
                 Microsoft365Environment.USGovernmentDoD => "login.microsoftonline.us",
                 Microsoft365Environment.Germany => "login.microsoftonline.de",
