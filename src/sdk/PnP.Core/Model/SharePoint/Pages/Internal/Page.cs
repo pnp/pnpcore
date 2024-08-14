@@ -1646,8 +1646,12 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var pageHeaderHtml = "";
+            var hasPageTitleWPInOneColumFullWith = false;
+            if (sections.Any() && sections.First().Type == CanvasSectionTemplate.OneColumnFullWidth && sections.First().Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true))
+                hasPageTitleWPInOneColumFullWith = true; //Message ID: MC791596 / Roadmap ID: 386904
+
             if (pageHeader != null && pageHeader.Type != PageHeaderType.None && LayoutType != PageLayoutType.RepostPage
-                && LayoutType != PageLayoutType.Topic && LayoutType != PageLayoutType.NewsDigest)
+                && LayoutType != PageLayoutType.Topic && LayoutType != PageLayoutType.NewsDigest && !hasPageTitleWPInOneColumFullWith)
             {
                 // this triggers resolving of the header image which has to be done early as otherwise there will be version conflicts
                 // (see here: https://github.com/SharePoint/PnP-Sites-Core/issues/2203)
@@ -1840,7 +1844,8 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
+                if (!string.IsNullOrWhiteSpace(pageHeaderHtml))
+                    PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
                 var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
