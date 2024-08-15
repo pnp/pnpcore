@@ -246,6 +246,11 @@ namespace PnP.Core.Model.SharePoint
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
 
         /// <summary>
+        /// Sets page header back to the default for PageTilte WebPart (Message ID: MC791596 / Roadmap ID: 386904). The PageTitle WebPart has to be added into a first OneColumnFullWith Section separate.
+        /// </summary>
+        public void SetPageTitleWebPartPageHeader();
+
+        /// <summary>
         /// Adds a new header control to your client side page with a given order. Used for topic page creation
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
