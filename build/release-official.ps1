@@ -19,7 +19,7 @@ dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --con
 
 # Sign the binaries
 Write-Host "Signing the binaries..."
-d:\github\SharePointPnP\CodeSigning\PnP\sign-pnpbinaries.ps1 -SignJson pnpcoreassemblies
+q:\github\SharePointPnP\CodeSigning\PnP\sign-pnpbinaries.ps1 -SignJson pnpcoreassemblies
 
 # Package the release version
 Write-Host "Packinging PnP.Core version $version..."
@@ -38,9 +38,9 @@ $apiKey = Read-Host "NuGet API key"
 if ($apiKey.Length -gt 0)
 {
     # Push the actual packages and the symbol packages
-    nuget push d:\github\pnpcore\src\sdk\PnP.Core\bin\release\PnP.Core.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
-    nuget push d:\github\pnpcore\src\sdk\PnP.Core.Auth\bin\release\PnP.Core.Auth.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
-    nuget push d:\github\pnpcore\src\sdk\PnP.Core.Admin\bin\release\PnP.Core.Admin.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
+    nuget push q:\github\pnpcore\src\sdk\PnP.Core\bin\release\PnP.Core.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
+    nuget push q:\github\pnpcore\src\sdk\PnP.Core.Auth\bin\release\PnP.Core.Auth.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
+    nuget push q:\github\pnpcore\src\sdk\PnP.Core.Admin\bin\release\PnP.Core.Admin.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
 
     # Persist last used version
     Write-Host "Writing $version to git"
