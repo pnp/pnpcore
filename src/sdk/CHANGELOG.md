@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added ExpirationDataTime to OrganizationLinkOptions #1494 [reshmee011 - Reshmee Auckloo]
 - Update CloudManager.cs for GCC Login URL Fix #1502 [SteveWinward - Steve Winward]
 - Updated pages API to support the new page header model via full width page header web part #1506 [czullu - Christian Zuellig]
+- Bump System.Text.Json versions [jansenbe - Bert Jansen]
 
 ## [1.13]
 
