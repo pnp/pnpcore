@@ -198,6 +198,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 SupportsFullBleed = supportsFullBleed.GetBoolean();
             }
+            else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle)
+            {
+                SupportsFullBleed = true; //Message ID: MC791596 / Roadmap ID: 386904
+            }
             else
             {
                 SupportsFullBleed = false;
@@ -598,6 +602,8 @@ namespace PnP.Core.Model.SharePoint
             // Set property to trigger correct loading of properties 
             PropertiesJson = wpJObject.GetProperty("properties").ToString();
 
+            WebPartId = wpJObject.GetProperty("id").GetString();
+
             // Set/update dataVersion if it was set in the json data
             if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersionValue))
             {
@@ -610,6 +616,10 @@ namespace PnP.Core.Model.SharePoint
                 if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
                 {
                     SupportsFullBleed = isFullWidth.GetBoolean();
+                }
+                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle)
+                {
+                    SupportsFullBleed = true; //Message ID: MC791596 / Roadmap ID: 386904
                 }
             }
 
@@ -628,8 +638,6 @@ namespace PnP.Core.Model.SharePoint
             {
                 DynamicDataValues = dynamicDataValues;
             }
-
-            WebPartId = wpJObject.GetProperty("id").GetString();
 
             if (wpDiv != null)
             {
