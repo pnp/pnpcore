@@ -1445,8 +1445,11 @@ namespace PnP.Core.Model.SharePoint
             ReIndex();
 
             var hasPageTitleWPInOneColumFullWith = false;
-            if (sections.Any() && sections.First().Type == CanvasSectionTemplate.OneColumnFullWidth && sections.First().Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true))
+            if (sections.Count != 0 && sections.First().Type == CanvasSectionTemplate.OneColumnFullWidth &&
+                sections.First().Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true))
+            {
                 hasPageTitleWPInOneColumFullWith = true; //Message ID: MC791596 / Roadmap ID: 386904
+            }
 
             // Load page header controls. Microsoft Syntex Topic pages do have 5 controls in the header (= controls that cannot be moved)
             if (LayoutType == PageLayoutType.Topic || LayoutType == PageLayoutType.NewsDigest)
@@ -1477,10 +1480,14 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 if (hasPageTitleWPInOneColumFullWith)
+                {
                     pageHeader = new PageHeader(PnPContext, PageHeaderType.PageTitleWebPart, null);
+                }
                 else
+                {
                     // Load the page header
                     pageHeader.FromHtml(pageHeaderHtml);
+                }
             }
         }
 
@@ -1865,7 +1872,13 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 if (pageHeader.Type == PageHeaderType.PageTitleWebPart)
+                {
                     PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.PageTitleWebPartHeader();
+                }
+                else
+                {
+                    PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
+                }
 
                 // AuthorByline depends on a field holding the author values
                 var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);

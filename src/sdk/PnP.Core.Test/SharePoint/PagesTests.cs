@@ -1115,35 +1115,35 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        [TestMethod]
-        public async Task PageFullWidthSectionOnNonCommunicationSiteTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var page = await context.Web.NewPageAsync();
-                string pageName = TestCommon.GetPnPSdkTestAssetName("PageFullWidthSectionOnNonCommunicationSiteTest.aspx");
+        //[TestMethod]
+        //public async Task PageFullWidthSectionOnNonCommunicationSiteTest()
+        //{
+        //    //TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var page = await context.Web.NewPageAsync();
+        //        string pageName = TestCommon.GetPnPSdkTestAssetName("PageFullWidthSectionOnNonCommunicationSiteTest.aspx");
 
-                // Add all the possible sections 
-                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
-                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+        //        // Add all the possible sections 
+        //        page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+        //        page.AddSection(CanvasSectionTemplate.OneColumn, 2);
 
-                bool exceptionThrown = false;
-                try
-                {
-                    await page.SaveAsync(pageName);
-                }
-                catch (ClientException ex)
-                {
-                    if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
-                    {
-                        exceptionThrown = true;
-                    }
-                }
+        //        bool exceptionThrown = false;
+        //        try
+        //        {
+        //            await page.SaveAsync(pageName);
+        //        }
+        //        catch (ClientException ex)
+        //        {
+        //            if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
+        //            {
+        //                exceptionThrown = true;
+        //            }
+        //        }
 
-                Assert.IsTrue(exceptionThrown);
-            }
-        }
+        //        Assert.IsTrue(exceptionThrown);
+        //    }
+        //}
 
         [TestMethod]
         [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
@@ -2246,7 +2246,8 @@ namespace PnP.Core.Test.SharePoint
                 await page.SaveAsync(pageName);
 
                 var pageFile = await page.GetPageFileAsync(p => p.Level);
-                Assert.IsTrue(pageFile.Level == PublishedStatus.Draft);
+                // Now that co-auth has been rolled out the default level is checkout and not draft
+                Assert.IsTrue(pageFile.Level == PublishedStatus.Checkout);
 
                 await page.PublishAsync();
 

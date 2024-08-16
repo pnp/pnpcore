@@ -360,7 +360,9 @@ namespace PnP.Core.Model.SharePoint
         public async Task<string> ToHtmlAsync(string pageTitle)
         {
             if (Type == PageHeaderType.PageTitleWebPart)
+            {
                 return PageTitleWPHeader;
+            }
 
             if (pageTitle == null)
             {
