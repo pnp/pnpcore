@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+
+### Changed
+
+- Moved the approve permissions for deployed SPFx packages to use Graph instead of CSOM #1479 [mloitzl - Martin Loitzl]
+
 ## [1.14]
 
 ### Added
