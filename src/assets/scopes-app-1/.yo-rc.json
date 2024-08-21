@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.17.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "scopes-app-1",
+    "libraryId": "abe00f22-7fe1-40b4-bd2c-e8984787e42d",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "scopes-app-1",
+    "solutionShortDescription": "scopes-app-1 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

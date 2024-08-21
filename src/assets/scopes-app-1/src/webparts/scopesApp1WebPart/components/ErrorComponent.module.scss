@@ -1,0 +1,12 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.errorComponent {
+    &.teams {
+        font-family: $ms-font-family-fallbacks;
+      }
+}
+
+.error {
+    text-align: left;
+    color: #c71818;
+}

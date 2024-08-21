@@ -1,8 +1,11 @@
+using System;
+
 namespace PnP.Core.Admin.Model.SharePoint
 {
     /// <summary>
     /// A permission grant
     /// </summary>
+    [Obsolete("Use IPermissionGrant2 instead")]
     public interface IPermissionGrant
     {
         /// <summary>
