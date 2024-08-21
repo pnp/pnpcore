@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IApp.html",
-          "hash": "MEa8uNvgZGxIL7Mo2zrnvCADbxJlhQNLR2SkNBLDtX0="
+          "hash": "Y69X5CMPvhbkE7gH0jrLdqSGS4lnNZTVmPB6uzgc84U="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppManager-1.html",
-          "hash": "4OzItFurqCtdpSPlMRyLfma2Dm2OHKAOU36spebgErg="
+          "hash": "QluxFxPuysgOt7VPIH/rXncoWxElzALHlex7sCJ6ke0="
         }
       },
       "is_incremental": false,
@@ -366,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppOperations.html",
-          "hash": "rZ0RIoQdtWMvc6D11i6Ja098Jm3uCLWLH1u7kkPDHDc="
+          "hash": "1P7G7vOtRpvAz6RteP8OdzKx9DNwXAXwbjdNyNy/hO0="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IPermissionGrant.html",
-          "hash": "kZNJSX+UnTVqbXCm3UjA8waN7y9LPjxeOWWTpCcUnu4="
+          "hash": "DdhTF+qQaBLaQdTC2kDZE2oBTPU9MHlRccRVTob4f84="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html",
+          "hash": "90ouCXvo8QbmNeiLfaK3tzWXH98o37oMY1ZlcqZwCD4="
         }
       },
       "is_incremental": false,
@@ -462,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.IServicePrincipal.html",
-          "hash": "yX7Bm4sqs6lzhBNdTvUjbqYoR1QOf3QstqziuDFolJs="
+          "hash": "OPXhbbt7dr7HPHYRrhTRMrWeAgvbCyC9e9IMJclkk1s="
         }
       },
       "is_incremental": false,
@@ -534,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionApp.html",
-          "hash": "Wc8R4l7h38UgjNUBVVcivAS/8Y1nVy46TMon94T8Qq0="
+          "hash": "JI9rtmtJreL5M7Jo58QAVLRUWhMuYXa00Y3NDW/VIm4="
         }
       },
       "is_incremental": false,
@@ -546,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionAppManager.html",
-          "hash": "utT9q0THcYAV5Stcylbr+bDxqJmElr2UeoZgD/aABHc="
+          "hash": "whSEN2PWFOx/K36D3GBWvvkDFq3nu9cvcAVhMHcobKE="
         }
       },
       "is_incremental": false,
@@ -594,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantApp.html",
-          "hash": "8Uw6FVGd3eXw0axzCm5nSNqy7K0GcIXtoP9C6bba1cc="
+          "hash": "WY1zb5wDe/JrICuYifcr/HIKiL1B5YsjG/N3eQKU7BU="
         }
       },
       "is_incremental": false,
@@ -606,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ITenantAppManager.html",
-          "hash": "QJ9apK+p8YCuQ/IjKbJd8XTO/YxvbGeGng1bcLzYQ5o="
+          "hash": "lqbPgUQHvoq9x+q6bKRS0TVH/yL+nUmd4MGn+puUJlI="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1062,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "QZ+SSGmJJpr/fM7tapbe/MheK1Nfklh4Tisfb6N8gKY="
+          "hash": "QnU28spfR2ECAezGZ+8TkaTcEGcsE1SQC/SUZeE/9nM="
         }
       },
       "is_incremental": false,
@@ -8550,7 +8562,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "so+N/0R8zc38NTNhTbyWRFd1qSGuLt45MXIQkthcjiY="
+          "hash": "7YrEnVLGme+h5CpOjiGqKJqKhBCRfvkRMs9rVSDXb3c="
         }
       },
       "is_incremental": false,
@@ -9465,7 +9477,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-apps.html",
-          "hash": "sXRdm6TwEnpPDpzs5JA8HiYmPzjL1K+OaNWdva2nwo8="
+          "hash": "F9J0DuAOHZe2JBvtsbzUzWAqyZQ7d3SINgEoXho7n/4="
         }
       },
       "is_incremental": false,
@@ -10524,7 +10536,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 710,
+          "total_file_count": 711,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

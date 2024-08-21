@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L9" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L10" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal">Interface IServicePrincipal
@@ -112,7 +112,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L113" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant*"></a>
@@ -181,10 +181,152 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L169" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2(System.String,System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">AddGrant2(String, String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Grants scope on a resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IPermissionGrant2 AddGrant2(string resource, string scope, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">resource</span>
+        <p><p>The name of the resource, e.g. Microsoft Graph</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">scope</span>
+        <p><p>The scope to grant, e.g. 'User.ReadBasic.All'</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>
+        <p><p>The resulting <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2Async(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L160" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrant2Async(System.String,System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">AddGrant2Async(String, String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Grants scope on a resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IPermissionGrant2&gt; AddGrant2Async(string resource, string scope, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">resource</span>
+        <p><p>The name of the resource, e.g. Microsoft Graph</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">scope</span>
+        <p><p>The scope to grant, e.g. 'User.ReadBasic.All'</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>&gt;
+        <p><p>The resulting <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrantAsync_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrantAsync(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L104" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_AddGrantAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.AddGrantAsync*"></a>
@@ -256,7 +398,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ApprovePermissionRequest_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ApprovePermissionRequest(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ApprovePermissionRequest_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ApprovePermissionRequest*"></a>
@@ -320,7 +462,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ApprovePermissionRequestAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ApprovePermissionRequestAsync(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ApprovePermissionRequestAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ApprovePermissionRequestAsync*"></a>
@@ -381,10 +523,126 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L223" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">DeleteGrant2(String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Deletes the whole grant with all scopes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteGrant2(string grantId, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">grantId</span>
+        <p><p>The id of the grant</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2Async_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2Async(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L215" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2Async_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DeleteGrant2Async(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2Async_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">DeleteGrant2Async(String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DeleteGrant2Async_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Deletes the whole grant with all scopes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteGrant2Async(string grantId, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">grantId</span>
+        <p><p>The id of the grant</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p><p>void</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DenyPermissionRequest_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DenyPermissionRequest(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DenyPermissionRequest_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DenyPermissionRequest*"></a>
@@ -438,7 +696,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DenyPermissionRequestAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DenyPermissionRequestAsync(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DenyPermissionRequestAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DenyPermissionRequestAsync*"></a>
@@ -501,7 +759,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable*"></a>
@@ -554,10 +812,122 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L104" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">Disable2(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Disable the Service Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IServicePrincipalProperties Disable2(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html">IServicePrincipalProperties</a>
+        <p><p>the list of permission requests</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Disable2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">Disable2Async(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Disable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Disable the Service Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IServicePrincipalProperties&gt; Disable2Async(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html">IServicePrincipalProperties</a>&gt;
+        <p><p>the list of permission requests</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DisableAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DisableAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_DisableAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.DisableAsync*"></a>
@@ -613,7 +983,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L89" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable*"></a>
@@ -666,10 +1036,122 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">Enable2(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enable the Service Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IServicePrincipalProperties Enable2(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html">IServicePrincipalProperties</a>
+        <p><p>the list of permission requests</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.Enable2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">Enable2Async(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_Enable2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enable the Service Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IServicePrincipalProperties&gt; Enable2Async(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.IServicePrincipalProperties.html">IServicePrincipalProperties</a>&gt;
+        <p><p>the list of permission requests</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_EnableAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.EnableAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_EnableAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.EnableAsync*"></a>
@@ -725,7 +1207,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_GetPermissionRequests_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.GetPermissionRequests(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_GetPermissionRequests_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.GetPermissionRequests*"></a>
@@ -781,7 +1263,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_GetPermissionRequestsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.GetPermissionRequestsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L59" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_GetPermissionRequestsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.GetPermissionRequestsAsync*"></a>
@@ -837,7 +1319,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L95" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L150" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants*"></a>
@@ -890,10 +1372,122 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L128" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">ListGrants2(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get all granted permissions of the SharePoint Online Client Extensibility Web Application Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IPermissionGrant2[] ListGrants2(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>[]
+        <p><p>The list of granted OAuth2 permissions</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L135" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrants2Async(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">ListGrants2Async(VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrants2Async_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get all granted permissions of the SharePoint Online Client Extensibility Web Application Principal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IPermissionGrant2[]&gt; ListGrants2Async(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>[]&gt;
+        <p><p>The list of granted OAuth2 permissions</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrantsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrantsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L142" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_ListGrantsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.ListGrantsAsync*"></a>
@@ -949,7 +1543,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L129" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L240" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant*"></a>
@@ -1010,10 +1604,152 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L207" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2(System.String,System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">RevokeGrant2(String, String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Removed a scope from an existing grant</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IPermissionGrant2 RevokeGrant2(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">grantId</span>
+        <p><p>The id of the grant</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">scope</span>
+        <p><p>The scope to remove from the grant denoted by <param name="grantId"></p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>
+        <p><p>The updated <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>, or null if the last scope was removed from the grant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2Async(System.String%2CSystem.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L198" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2Async_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2Async*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrant2Async(System.String,System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">RevokeGrant2Async(String, String, VanityUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrant2Async_System_String_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Removed a scope from an existing grant</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IPermissionGrant2&gt; RevokeGrant2Async(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">grantId</span>
+        <p><p>The id of the grant</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">System.String</span></span>
+        <span class="parametername">scope</span>
+        <p><p>The scope to remove from the grant denoted by <param name="grantId"></p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
+        <span class="parametername">vanityUrlOptions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>&gt;
+        <p><p>The updated <a class="xref" href="PnP.Core.Admin.Model.SharePoint.IPermissionGrant2.html">IPermissionGrant2</a>, or null if the last scope was removed from the grant</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrantAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrantAsync(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/IServicePrincipal.cs/#L231" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_IServicePrincipal_RevokeGrantAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.IServicePrincipal.RevokeGrantAsync*"></a>

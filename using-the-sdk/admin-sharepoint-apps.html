@@ -163,6 +163,36 @@ await app.InstallAsync();
 <h5>Important</h5>
 <p>Install operation is context-specific. It means that you should use the <code>PnPContext</code> instance from the corresponding site to install the app to that site.</p>
 </div>
+<h3 id="approve-permissions">Approve Permissions</h3>
+<p>Some apps can request permissions to call additional APIs by adding a <code>webApiPermissionRequests</code> element in their <code>package-solution.json</code> file. Below snippet shows a part of such a file:</p>
+<pre><code class="lang-json">{
+    &quot;solution&quot;: {
+    &quot;name&quot;: &quot;apicalltest-client-side-solution&quot;,
+    &quot;id&quot;: &quot;da4e941c-a64e-401a-b63d-664e5bf62bdc&quot;,
+    &quot;version&quot;: &quot;1.0.0.0&quot;,
+    &quot;includeClientSideAssets&quot;: true,
+    &quot;skipFeatureDeployment&quot;: true,
+    &quot;isDomainIsolated&quot;: false,
+    &quot;webApiPermissionRequests&quot;: [
+      {
+        &quot;resource&quot;: &quot;Microsoft Graph&quot;,
+        &quot;scope&quot;: &quot;Calendars.Read&quot;
+      },
+      {
+        &quot;resource&quot;: &quot;Microsoft Graph&quot;,
+        &quot;scope&quot;: &quot;User.ReadBasic.All&quot;
+      }
+    ]
+}
+</code></pre>
+<p>Permissions requested this way can be approved by using the <code>ApprovePermissionRequests</code> method.</p>
+<pre><code class="lang-csharp">var app = await appManager.AddAsync(packagePath, true);
+var result = await appManager.DeployAsync(app.Id, false);
+
+// approve permissions requested from the app
+IPermissionGrant2[] approvedPermissionGrants = app.ApprovePermissionRequests();
+</code></pre>
+<p>The result is an array of <code>IPermissionGrant2</code> containing the effective permissions including those previously granted for other apps on this resource.</p>
 <h3 id="upgrade-an-app">Upgrade an app</h3>
 <p>To upgrade the app on the specific site you need to call the <code>Upgrade</code> method:</p>
 <pre><code class="lang-csharp">// upgrades the app on the site
@@ -178,7 +208,7 @@ await app.UpgradeAsync();
 <h3 id="uninstall-an-app">Uninstall an app</h3>
 <p>To uninstall the app from the specific site you need to call the <code>Uninstall</code> method:</p>
 <pre><code class="lang-csharp">// uninstalls the app from the site
-await appManager.uninstallAsync(app.Id);
+await appManager.UninstallAsync(app.Id);
 
 // or use app instance
 await app.UninstallAsync();
@@ -203,7 +233,7 @@ await appManager.RemoveAsync(app.Id);
 // or use app instance
 await app.RemoveAsync();
 </code></pre>
-<h2 id="list-approve-or-reject-the-permissions-requests-for-an-app">List, approve or reject the permissions requests for an app</h2>
+<h2 id="list-add-revoke-or-delete-the-permission-grants">List, add, revoke or delete the permission grants</h2>
 <p>Some apps can request permissions to call additional APIs by adding a <code>webApiPermissionRequests</code> element in their <code>package-solution.json</code> file. Below snippet shows a part of such a file:</p>
 <pre><code class="lang-json">{
     &quot;solution&quot;: {
@@ -225,43 +255,43 @@ await app.RemoveAsync();
     ]
 }
 </code></pre>
-<p>After adding and deploying an app to the app catalog these API permissions need to be approved by an admin (e.g. via <a href="https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement">https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement</a>) or via code. The code approach can be implemented using the <code>IServicePrincipal</code> class and the <code>GetPermissionRequests</code>, <code>ApprovePermissionRequest</code> and <code>DenyPermissionRequest</code> methods:</p>
-<pre><code class="lang-csharp">// List the permission requests that are pending approval or rejection
+<p>After adding and deploying an app to the app catalog these API permissions need to be approved by an admin (e.g. via <a href="https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement">https://contoso-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx#/webApiPermissionManagement</a>) or via code. The code approach can be implemented using the <code>IApp</code> class and the <code>ApprovePermissionRequests</code> method (see <a href="admin-sharepoint-apps.html#approve-permissions">Approve Permissions</a>).</p>
+<p>Additional API permissions are granted on the <code>ServicePrincipal</code> object. These permission grants can be listed, added, revoked, and deleted using these methods:</p>
+<pre><code class="lang-csharp">// instantiate the TenantAppManager
 var appManager = context.GetTenantAppManager();
-List&lt;IPermissionRequest&gt; permissionRequests = await appManager.ServicePrincipal.GetPermissionRequestsAsync();
 
-// Approve a permission request
-var result = await appManager.ServicePrincipal.ApprovePermissionRequestAsync(permissionRequests.First().Id.ToString());
+// list permissions granted to ServicePrincipal
+IPermissionGrant2[] grants = appManager.ServisePrincipal.ListGrants2();
 
-// Deny a permission request
-await appManager.ServicePrincipal.DenyPermissionRequestAsync(permissionRequests.First().Id.ToString());
-</code></pre>
-<h2 id="add-list-and-revoke-permission-grants-of-the-sharepoint-app-service-principal">Add, list and revoke permission grants of the SharePoint app service principal</h2>
-<p>Permission grants can be added and revoked to/from the SharePoint app service principal via code.</p>
-<pre><code class="lang-csharp">// Add a grant to the ServicePrincipal
-var appManager = context.GetTenantAppManager();
-IPermissionGrant addResult = appManager.ServicePrincipal
-      .AddGrant(&quot;Microsoft Graph&quot;, &quot;Calendars.ReadWrite.Shared&quot;);
+// add a grant, e.g. scope &quot;Calendars.ReadWrite.Shared&quot; for &quot;Microsoft Graph&quot;
+IPermissionGrant2 addedGrant 
+    = appManager.ServisePrincipal.AddGrant2(&quot;Microsoft Graph&quot;, &quot;Calendars.ReadWrite.Shared&quot;);
 
-// Revoke a grant from the ServicePrincipal
-var appManager = context.GetTenantAppManager();
-IPermissionGrant revokeResult = appManager.ServicePrincipal.RevokeGrant(addResult.ObjectId);
+// revoke the scope &quot;Calendars.ReadWrite.Shared&quot; for &quot;Microsoft Graph&quot; from 'addedGrant'
+IPermissionGrant2 revokedGrant 
+    = appManager.ServisePrincipal.RevokeGrant2(addedGrant.Id, &quot;Calendars.ReadWrite.Shared&quot;);
+
+// delete all permissions for 'addedGrant', all of &quot;Microsoft Graph&quot; in this example
+appManager.ServisePrincipal.DeleteGrant2(addedGrant.Id);
 </code></pre>
-<p>Permissions granted to the the SharePoint app service principal can be listed via code.</p>
-<pre><code class="lang-csharp">// List grants from the ServicePrincipal
-var appManager = context.GetTenantAppManager();
-IEnumerable&lt;IPermissionGrant&gt; result = appManager.ServicePrincipal.ListGrants();
-</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Please not that the previous implemenations of the <code>GetPermissionRequests</code>, <code>ApprovePermissionRequest</code>, <code>DenyPermissionRequest</code>, <code>RevokeGrant</code>,  and <code>ListGrants</code> operations were based on the SharePoint Client Side Object Model (CSOM). These operations are considered for internal use only. Therefore these operations are now marked obsolete and will be removed in the next major release.</p>
+</div>
 <h2 id="enable-or-disable-the-sharepoint-app-service-principal">Enable or disable the SharePoint app service principal</h2>
-<p>The SharePoint app service principal can be enabled or disabled using the Azure Active Directory portal or via code. The <code>Enable</code> and <code>Disable</code> operations can be found on the <code>IServicePrincipal</code> interface:</p>
+<p>The SharePoint app service principal can be enabled or disabled using the Azure Active Directory portal or via code. The <code>Enable2</code> and <code>Disable2</code> operations can be found on the <code>ServicePrincipal</code> object:</p>
 <pre><code class="lang-csharp">// Enable the ServicePrincipal
 var appManager = context.GetTenantAppManager();
-IServicePrincipalProperties result = await appManager.ServicePrincipal.Enable();
+IServicePrincipalProperties result = await appManager.ServicePrincipal.Enable2();
 
 // Disable the ServicePrincipal
 var appManager = context.GetTenantAppManager();
-IServicePrincipalProperties result = await appManager.ServicePrincipal.Disable();
+IServicePrincipalProperties result = await appManager.ServicePrincipal.Disable2();
 </code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Please not that the previous implemenations of the <code>Enable</code> and <code>Disable</code> operations were based on the SharePoint Client Side Object Model (CSOM). These oprations are considered for internal use only. Therefore these operations are now marked obsolete and will be removed in the next major release.</p>
+</div>
 <h2 id="tenant-app-catalog-specific-operations">Tenant app catalog specific operations</h2>
 <p>Some methods are available only for the tenant app catalog. They are listed below.</p>
 <h3 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h3>
