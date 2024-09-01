@@ -251,7 +251,7 @@ namespace PnP.Core.Services
 
             lastBatchRequest.ApiCall = new ApiCall()
             {
-                BinaryBody = sourceApiCall.BinaryBody,
+                Content = sourceApiCall.Content,
                 Commit = sourceApiCall.Commit,
                 CSOMRequests = sourceApiCall.CSOMRequests,
                 ExecuteRequestApiCall = sourceApiCall.ExecuteRequestApiCall,

@@ -44,8 +44,9 @@ namespace PnP.Core.Model.SharePoint
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {
                 Interactive = true,
-                BinaryBody = ToByteArray(content)
+                Content = new ByteArrayContent(ToByteArray(content))
             };
+
             await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
             return newFile;
         }
