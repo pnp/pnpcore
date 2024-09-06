@@ -1,1 +1,1 @@
-{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"e27542a0-e0ac-4000-36bd-5b071a9b2a2c","SPClientServiceRequestDuration":"72","X-SharePointHealthScore":"3","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":""}
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"facb46a1-10f3-9000-ba9e-d4e036295d01","SPClientServiceRequestDuration":"112","X-SharePointHealthScore":"0","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":""}

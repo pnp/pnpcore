@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core", "PnP.Core\PnP.Core.csproj", "{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}"
 EndProject
@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		CHANGELOG.md = CHANGELOG.md
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Auth", "PnP.Core.Auth\PnP.Core.Auth.csproj", "{3309B9C6-8407-4697-A534-5242B4504FD8}"
@@ -31,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Admin.Test", "PnP.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Test.Common", "PnP.Core.Test.Common\PnP.Core.Test.Common.csproj", "{A973BF05-1883-49AE-BA39-8CB837C5476F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.Core.Perf", "PnP.Core.Perf\PnP.Core.Perf.csproj", "{DD5D5A88-A185-41A1-B73F-5D8481673CD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Perf", "PnP.Core.Perf\PnP.Core.Perf.csproj", "{DD5D5A88-A185-41A1-B73F-5D8481673CD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

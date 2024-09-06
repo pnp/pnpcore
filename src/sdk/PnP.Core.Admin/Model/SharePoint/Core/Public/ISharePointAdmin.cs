@@ -154,5 +154,26 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         #endregion
 
+        #region Hub site functionality
+
+        /// <summary>
+        /// Connects a site collection to a hub site. This method can also connect the site collection when the hub site requires approval for connecting new sites.
+        /// </summary>
+        /// <param name="siteCollectionUrlToConnect">Uri of the site collection to connect to the hub</param>
+        /// <param name="hubSiteCollectionUrl">Uri of the hub to connect the site collection to</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns></returns>
+        Task ConnectToHubSiteAsync(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null);
+
+        /// <summary>
+        /// Connects a site collection to a hub site. This method can also connect the site collection when the hub site requires approval for connecting new sites.
+        /// </summary>
+        /// <param name="siteCollectionUrlToConnect">Uri of the site collection to connect to the hub</param>
+        /// <param name="hubSiteCollectionUrl">Uri of the hub to connect the site collection to</param>
+        /// <param name="vanityUrlOptions">Optionally specify the custom vanity URI's used by this tenant</param>
+        /// <returns></returns>
+        void ConnectToHubSite(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null);
+
+        #endregion
     }
 }

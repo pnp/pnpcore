@@ -164,7 +164,16 @@ namespace PnP.Core.Services
                 // In .NET Framework to ToString() of a NameValueCollection will use HttpUtility.UrlEncodeUnicode under
                 // the covers resulting in issues. So we decode and encode again as a workaround. This code produces the 
                 // same result when used under .NET5/Core versus .NET Framework
-                sb.Append($"?{queryString.ToEncodedString()}");
+
+                // The base query string can already contain a URL parameter (e.g. _api/Web/getFileByServerRelativePath(decodedUrl=@u)?@u='<server relative url>')
+                if (baseApiCall.Contains('?'))
+                {
+                    sb.Append($"&{queryString.ToEncodedString()}");
+                }
+                else
+                {
+                    sb.Append($"?{queryString.ToEncodedString()}");
+                }
             }
 
             // Create ApiCall instance and call the override option if needed
@@ -671,12 +680,12 @@ namespace PnP.Core.Services
             // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph/SharePoint (for listitem paging)
             if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
             {
-                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{CloudManager.GetGraphBaseUrl((collection as IDataModelWithContext).PnPContext)}{PnPConstants.GraphBetaEndpoint}/", "");
                 nextLinkApiType = ApiType.GraphBeta;
             }
             else if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
             {
-                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{CloudManager.GetGraphBaseUrl((collection as IDataModelWithContext).PnPContext)}{PnPConstants.GraphV1Endpoint}/", "");
                 nextLinkApiType = ApiType.Graph;
             }
             else if (!string.IsNullOrEmpty(collection.Metadata[PnPConstants.SharePointRestListItemNextLink]))

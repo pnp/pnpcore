@@ -562,8 +562,17 @@ namespace PnP.Core.Model.SharePoint
         private async Task WireUpTaxonomyFieldAsync(Field field, TaxonomyFieldCreationOptions options)
         {
             string parentId = (Parent is IList) ? (Parent as IList).Id.ToString() : "";
-            ProvisionTaxonomyFieldRequest request = new ProvisionTaxonomyFieldRequest(PnPContext.Site.Id.ToString(),
-                PnPContext.Web.Id.ToString(),
+
+            Guid siteId = PnPContext.Site.Id;
+            Guid webId = PnPContext.Web.Id;
+            if (field.Parent != null && field.Parent.Parent is ContentTypeHub hub)
+            {
+                var contentTypeHubSiteId = await hub.GetSiteIdAsync().ConfigureAwait(false);
+                GetSiteAndWebId(contentTypeHubSiteId, out siteId, out webId);
+            }
+
+            ProvisionTaxonomyFieldRequest request = new ProvisionTaxonomyFieldRequest(siteId.ToString(),
+                webId.ToString(),
                 field.Id.ToString(),
                 parentId,
                 options.TermStoreId,
@@ -576,6 +585,14 @@ namespace PnP.Core.Model.SharePoint
             };
 
             await field.RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static void GetSiteAndWebId(string graphId, out Guid siteId, out Guid webId)
+        {
+            string[] split = graphId.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            siteId = Guid.Parse(split[1]);
+            webId = Guid.Parse(split[2]);
         }
 
         public async Task<IField> AddTaxonomyAsync(string title, FieldTaxonomyOptions options)

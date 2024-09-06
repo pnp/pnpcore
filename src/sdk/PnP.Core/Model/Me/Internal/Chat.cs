@@ -20,14 +20,14 @@ namespace PnP.Core.Model.Me
             {
                 dynamic body = new ExpandoObject();
                 body.ChatType = ChatType.ToString();
-                
+
                 dynamic memberList = new List<dynamic>();
                 foreach (var member in Members.AsRequested())
                 {
                     dynamic memb = new ExpandoObject();
                     memb.roles = member.Roles;
                     ((IDictionary<string, object>)memb).Add(PnPConstants.MetaDataGraphType, "#microsoft.graph.aadUserConversationMember");
-                    ((IDictionary<string, object>)memb).Add("user@odata.bind", "https://graph.microsoft.com/v1.0/users('" + member.UserId + "')");
+                    ((IDictionary<string, object>)memb).Add("user@odata.bind", $"{CloudManager.GetGraphBaseUrl(PnPContext)}v1.0/users('" + member.UserId + "')");
                     memberList.Add(memb);
                 }
 

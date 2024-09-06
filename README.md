@@ -9,7 +9,7 @@ The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a uni
 
 ## Packages and status 🏭
 
-![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test/badge.svg?branch=dev) [![codecov](https://codecov.io/gh/jansenbe/pnpcore/branch/dev/graph/badge.svg?token=FL0EY8DRPQ)](https://codecov.io/gh/jansenbe/pnpcore) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev)
+![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test%20%F0%9F%9A%80%E2%9C%85/badge.svg?branch=dev) [![codecov](https://codecov.io/gh/jansenbe/pnpcore/branch/dev/graph/badge.svg?token=FL0EY8DRPQ)](https://codecov.io/gh/jansenbe/pnpcore) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev)
 
 Nuget package |  Downloads | Stable | Preview 
 --------------|------------|--------|--------
@@ -36,16 +36,17 @@ This library is an open-source and community provided library backed by an activ
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0, [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/), [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/) and [.NET 7.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/). Use the .NET 6.0 (LTS) or .NET 7.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+. Note that .NET 5.0 support will be dropped with version 1.9 as it's an unsupported .NET version
+- We currently target .NET Standard 2.0, [.NET 6.0](https://devblogs.microsoft.com/dotnet/announcing-net-6/), [.NET 7.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) and [.NET 8.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/). Use the .NET 6.0 (LTS), .NET 7.0 or .NET 8.0 (LTS) builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](https://pnp.github.io/pnpcore/demos/README.html) to learn more):
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
-  - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0, .NET 6.0 and .NET 7.0 versions
-  - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
+  - Web: e.g. [ASP.NET core](https://dotnet.microsoft.com/en-us/apps/aspnet), [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 6.0 and later versions
+  - .NET MAUI: [Windows, iOS, macOS, Android](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-7.0)
+  - Windows Client: [Windows Forms, WPF](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-7.0&preserve-view=true)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
-- The library internally uses [dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1) and you can consume it via dependency injection in your applications
+- The library internally uses [dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0) and you can consume it via dependency injection in your applications
 
 ### What underlying APIs are used
 
@@ -60,3 +61,5 @@ The [PnP Framework](https://github.com/pnp/pnpframework) library is very popular
 **Community rocks, sharing is caring!**
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+<img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/readme.svg" />

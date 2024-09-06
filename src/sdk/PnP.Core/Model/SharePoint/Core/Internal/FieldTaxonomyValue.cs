@@ -71,7 +71,15 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (termGuid.ValueKind != JsonValueKind.Null)
                     {
-                        TermId = termGuid.GetGuid();
+                        // Don't just assume the field value is always properly defined as GUID (see #1414)
+                        if (Guid.TryParse(termGuid.GetString(), out Guid parsedTermGuid))
+                        {
+                            TermId = parsedTermGuid;
+                        }
+                        else
+                        {
+                            TermId = Guid.Empty;
+                        }
                     }
                 }
 
@@ -116,14 +124,14 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (properties.ContainsKey("Label"))
+                if (properties.TryGetValue("Label", out string valueLabel))
                 {
-                    Label = properties["Label"];
+                    Label = valueLabel;
                 }
 
-                if (properties.ContainsKey("TermID"))
+                if (properties.TryGetValue("TermID", out string valueTermId))
                 {
-                    TermId = Guid.Parse(properties["TermID"]);
+                    TermId = Guid.Parse(valueTermId);
                 }
 
                 WssId = -1;

@@ -315,7 +315,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue((int)tenantProperties.BlockDownloadLinksFileType >= 0);
                 Assert.IsTrue((int)tenantProperties.BlockUserInfoVisibilityInOneDrive >= 0);
                 Assert.IsTrue((int)tenantProperties.BlockUserInfoVisibilityInSharePoint >= 0);
-                Assert.IsTrue((int)tenantProperties.ChannelMeetingRecordingPermission >= 0);
                 Assert.IsTrue((int)tenantProperties.ConditionalAccessPolicy >= 0);
                 Assert.IsTrue((int)tenantProperties.DefaultLinkPermission >= 0);
                 Assert.IsTrue((int)tenantProperties.DefaultSharingLinkType >= 0);
@@ -339,6 +338,50 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(tenantProperties.StorageQuota >= 0);
                 Assert.IsTrue(tenantProperties.StorageQuotaAllocated >= 0);
                 Assert.IsTrue((int)tenantProperties.Workflows2013State >= 0);
+
+                Assert.IsTrue(tenantProperties.AIBuilderDefaultPowerAppsEnvironment.Test());
+                Assert.IsTrue(tenantProperties.AIBuilderEnabled.Test());
+                Assert.IsTrue((int)tenantProperties.AIBuilderEnabledInContentCenter >= -1);
+                Assert.IsTrue(tenantProperties.AIBuilderSiteListFileName.Test());
+                Assert.IsTrue((int)tenantProperties.AllowAnonymousMeetingParticipantsToAccessWhiteboards >= 0);
+                Assert.IsTrue(tenantProperties.AllowEveryoneExceptExternalUsersClaimInPrivateSite.Test());
+                Assert.IsTrue(tenantProperties.AllowSelectSecurityGroupsInSPSitesList == null || tenantProperties.AllowSelectSecurityGroupsInSPSitesList != null);
+                Assert.IsTrue((int)tenantProperties.AuthContextResilienceMode >= 0);
+                Assert.IsTrue(tenantProperties.BlockDownloadFileTypePolicy.Test());
+                Assert.IsTrue(tenantProperties.CoreDefaultLinkToExistingAccess.Test());
+                Assert.IsTrue((int)tenantProperties.CoreDefaultShareLinkRole >= 0);
+                Assert.IsTrue((int)tenantProperties.CoreDefaultShareLinkScope >= -1);
+                Assert.IsTrue(tenantProperties.CoreRequestFilesLinkEnabled.Test());
+                Assert.IsTrue(tenantProperties.CoreRequestFilesLinkExpirationInDays >= -1);
+                Assert.IsTrue((int)tenantProperties.CoreSharingCapability >= 0);
+                Assert.IsTrue(tenantProperties.DenySelectSecurityGroupsInSPSitesList == null || tenantProperties.DenySelectSecurityGroupsInSPSitesList != null);
+                Assert.IsTrue(tenantProperties.DisableVivaConnectionsAnalytics.Test());
+                Assert.IsTrue(tenantProperties.EnableRestrictedAccessControl.Test());
+                Assert.IsTrue(tenantProperties.IBImplicitGroupBased.Test());
+                Assert.IsTrue(tenantProperties.IsLoopEnabled.Test());
+                Assert.IsTrue(tenantProperties.IsMultipleHomeSitesFlightEnabled.Test());
+                Assert.IsTrue(tenantProperties.IsVivaHomeFlightEnabled.Test());
+                Assert.IsTrue(tenantProperties.OCRAdminSiteListFileName.Test());
+                Assert.IsTrue(tenantProperties.OCRComplianceSiteListFileName.Test());
+                Assert.IsTrue((int)tenantProperties.OCRModeForAdminSites >= 0);
+                Assert.IsTrue((int)tenantProperties.OCRModeForComplianceODBs >= 0);
+                Assert.IsTrue((int)tenantProperties.OCRModeForComplianceSites >= 0);
+                Assert.IsTrue(tenantProperties.OneDriveDefaultLinkToExistingAccess.Test());
+                Assert.IsTrue((int)tenantProperties.OneDriveDefaultShareLinkRole >= 0);
+                Assert.IsTrue((int)tenantProperties.OneDriveDefaultShareLinkScope >= -1);
+                Assert.IsTrue(tenantProperties.OneDriveRequestFilesLinkEnabled.Test());
+                Assert.IsTrue(tenantProperties.OneDriveRequestFilesLinkExpirationInDays >= -1);
+                Assert.IsTrue(tenantProperties.ReduceTempTokenLifetimeEnabled.Test());
+                Assert.IsTrue((int)tenantProperties.ReduceTempTokenLifetimeValue >= 0);
+                Assert.IsTrue(tenantProperties.RestrictedSharePointLicense.Test());
+                Assert.IsTrue(tenantProperties.ShowOpenInDesktopOptionForSyncedFiles.Test());
+                Assert.IsTrue(tenantProperties.ShowPeoplePickerGroupSuggestionsForIB.Test());
+                Assert.IsTrue((int)tenantProperties.StreamLaunchConfig >= 0);
+                Assert.IsTrue(tenantProperties.StreamLaunchConfigLastUpdated >= DateTime.MinValue);
+                Assert.IsTrue(tenantProperties.StreamLaunchConfigUpdateCount >= 0);
+                Assert.IsTrue((int)tenantProperties.TlsTokenBindingPolicyValue >= 0);
+                Assert.IsTrue(tenantProperties.UsePersistentCookiesForExplorerView.Test());
+
             }
         }
 

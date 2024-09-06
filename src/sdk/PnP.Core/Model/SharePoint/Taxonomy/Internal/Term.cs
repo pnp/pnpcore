@@ -1,9 +1,11 @@
 ﻿using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests.Terms;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -12,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
     [GraphType(Uri = V, LinqGet = baseUri)]
     internal sealed class Term : BaseDataModel<ITerm>, ITerm
     {
-        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms";
+        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{TermSet.GraphId}/terms";
         private const string V = baseUri + "/{GraphId}";
 
         #region Construction
@@ -293,6 +295,30 @@ namespace PnP.Core.Model.SharePoint
             await BaseRetrieveAsync(apiOverride: GetByIdApiCall(id), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return this;
+        }
+
+
+        internal async Task<Term> GetParentAsync()
+        {
+            GetParentOfTermRequest request = new GetParentOfTermRequest(PnPContext, Guid.Parse(Id));
+
+            ApiCall getParentOfTermRequest = new ApiCall(
+                new List<Services.Core.CSOM.Requests.IRequest<object>>()
+                {
+                    request
+                })
+            {
+                Request = PnPContext.Uri.ToString()
+            };
+
+            // Make the CSOM call on a dummy term object otherwise the term collections will be reinitialized
+            var newTerm = new Term
+            {
+                PnPContext = PnPContext
+            };
+
+            var csomResult = await newTerm.RawRequestAsync(getParentOfTermRequest, HttpMethod.Post).ConfigureAwait(false);
+            return csomResult.ApiCall.CSOMRequests[0].Result as Term; 
         }
 
         #endregion

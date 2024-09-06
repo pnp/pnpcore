@@ -82,5 +82,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="overwrite">If true will overwrite an existing entry.</param>
         /// <returns>An instance of the app.</returns>
         Task<T> AddAsync(string path, bool overwrite = false);
+        
+        /// <summary>
+        /// Get the SharePoint Apps Service Principal enabling you to approve/reject permissions requests
+        /// </summary>
+        IServicePrincipal ServicePrincipal { get; }
     }
 }

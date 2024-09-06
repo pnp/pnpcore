@@ -24,50 +24,52 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {
-            int updateActionId = idProvider.GetActionId();
             IdentityPath = idProvider.GetActionId();
             int propertiesId = idProvider.GetActionId();
 
-            List<Parameter> parameters = new List<Parameter>();
+            List<ActionObjectPath> actionPaths = new();
+
             foreach (CSOMItemField field in FieldsToUpdate)
             {
-                parameters.AddRange(field.GetRequestParameters());
-            }
-
-            return new List<ActionObjectPath>()
-            {
-                new ActionObjectPath()
+                actionPaths.Add(new ActionObjectPath()
                 {
                     Action = new MethodAction()
                     {
-                        Id = updateActionId,
+                        Id = idProvider.GetActionId(),
                         Name = "SetFieldValue",
                         ObjectPathId = propertiesId.ToString(),
-                        Parameters = parameters
-                    },
-                    ObjectPath = new Property()
-                    {
-                        Id = propertiesId,
-                        ParentId = IdentityPath,
-                        Name = PropertyName
+                        Parameters = field.GetRequestParameters()
                     }
-                },
-                new ActionObjectPath()
+                });
+            }
+
+            actionPaths.Add(new ActionObjectPath()
+            {
+                ObjectPath = new Property()
                 {
-                    Action = new MethodAction()
-                    {
-                        Id = updateActionId,
-                        ObjectPathId = IdentityPath.ToString(),
-                        Name = "Update",
-                        Parameters = new List<Parameter>()
-                    },
-                    ObjectPath = new Identity()
-                    {
-                        Id = IdentityPath,
-                        Name = $"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{SiteId}:web:{WebId}{ObjectId}"
-                    }
+                    Id = propertiesId,
+                    ParentId = IdentityPath,
+                    Name = PropertyName
                 }
-            };
+            });
+
+            actionPaths.Add(new ActionObjectPath()
+            {
+                Action = new MethodAction()
+                {
+                    Id = idProvider.GetActionId(),
+                    ObjectPathId = IdentityPath.ToString(),
+                    Name = "Update",
+                    Parameters = new List<Parameter>()
+                },
+                ObjectPath = new Identity()
+                {
+                    Id = IdentityPath,
+                    Name = $"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{SiteId}:web:{WebId}{ObjectId}"
+                }
+            });
+
+            return actionPaths;
         }
 
         public void ProcessResponse(string response)

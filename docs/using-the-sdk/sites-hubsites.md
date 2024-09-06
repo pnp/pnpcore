@@ -41,7 +41,8 @@ if(!site.IsHubSite){
 This associates the site to an existing hub site, using this code to apply this to a site:
 
 > [!Important]
-> Joining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
+> - Joining a hub site that lives in a geo location (so not the main location) require delegated permissions to work.
+> - If joining the hub site requires approval then this will fail, use the `GetSharePointAdmin().ConnectToHubSiteAsync` methods from the [Admin library](admin-sharepoint-tenant.md) instead
 
 ```csharp
 using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSite"))

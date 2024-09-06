@@ -4,6 +4,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -296,8 +297,8 @@ namespace PnP.Core.Test.Teams
 
                 Assert.AreEqual(eventOptions.Subject, newEvent.Subject);
 
-                Assert.AreEqual(eventOptions.Start.ToString("yyyy-MM-ddTHH:mm:ss.0000000"), newEvent.Start.DateTime);
-                Assert.AreEqual(eventOptions.End.ToString("yyyy-MM-ddTHH:mm:ss.0000000"), newEvent.End.DateTime);
+                Assert.AreEqual(eventOptions.Start.ToString("yyyy-MM-ddTHH:mm:ss.0000000", CultureInfo.InvariantCulture), newEvent.Start.DateTime);
+                Assert.AreEqual(eventOptions.End.ToString("yyyy-MM-ddTHH:mm:ss.0000000", CultureInfo.InvariantCulture), newEvent.End.DateTime);
 
                 await newEvent.DeleteAsync();
             }

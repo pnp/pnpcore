@@ -20,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
         {
             PnPContext = context;
             Parent = parent;
-            Enum.TryParse(memberName, out NavigationType tempNavigationType);
+            _ = Enum.TryParse(memberName, out NavigationType tempNavigationType);
             NavigationType = tempNavigationType;
         }
 

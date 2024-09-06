@@ -43,7 +43,7 @@ namespace PnP.Core.Services
 
             if (responseHeaders != null)
             {
-                ResponseHandler = (HttpStatusCode statusCode, Dictionary<string, string> headers, string responseContent) =>
+                ResponseHandler = (HttpStatusCode statusCode, Dictionary<string, string> headers, string responseContent, Guid batchRequestId) =>
                 {
                     responseHeaders.Invoke(new Dictionary<string, string>(headers));
                     return responseContent;

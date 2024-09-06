@@ -1,6 +1,7 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -196,6 +197,12 @@ namespace PnP.Core.Model.SharePoint
         /// when someone visits the site. You can only enable the experience for sites created on or after January 1, 2020
         /// </summary>
         public bool NextStepsFirstRunEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies if the web templates experience should open automatically as a first run experience
+        /// after the site was created
+        /// </summary>
+        public bool WebTemplatesGalleryFirstRunEnabled { get; set; }
 
         /// <summary>
         /// Returns if true if the tenant allowed to send push notifications in OneDrive for Business.
@@ -729,7 +736,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL, it not available null will be returned
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get or null if the file was not available</returns>
         public IFile GetFileByServerRelativeUrlOrDefault(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -737,7 +744,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL, it not available null will be returned
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get or null if the file was not available</returns>
         public Task<IFile> GetFileByServerRelativeUrlOrDefaultAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -745,7 +752,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -754,7 +761,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -763,7 +770,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -772,7 +779,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -780,7 +787,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
@@ -788,10 +795,84 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
+        #endregion
+
+        #region GetFileById
+
+        /// <summary>
+        /// Get a file in the current web from its unique id.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileById(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdBatchAsync(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileByIdBatch(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public Task<IFile> GetFileByIdBatchAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its unique id via batch.
+        /// </summary>
+        /// <param name="uniqueFileId">The unique id of the file to get.</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns>The file to get</returns>
+        public IFile GetFileByIdBatch(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions);
+
+        #endregion
+
+        #region GetFileByLink
+
+        /// <summary>
+        /// Get's a file from a given link (sharing link, path to file)
+        /// </summary>
+        /// <param name="link">Link pointing to a file</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns><see cref="IFile"/> reference when the file could be found, exception otherwise</returns>
+        public Task<IFile> GetFileByLinkAsync(string link, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get's a file from a given link (sharing link, path to file)
+        /// </summary>
+        /// <param name="link">Link pointing to a file</param>
+        /// <param name="expressions">Properties to load for the requested <see cref="IFile"/></param>
+        /// <returns><see cref="IFile"/> reference when the file could be found, exception otherwise</returns>
+        public IFile GetFileByLink(string link, params Expression<Func<IFile, object>>[] expressions);
+        
         #endregion
 
         #region IsNoScriptSite 
@@ -809,6 +890,18 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Users
+
+        /// <summary>
+        /// Retrieves everyone except external users and ensures the user in the current web
+        /// </summary>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> EnsureEveryoneExceptExternalUsersAsync();
+
+        /// <summary>
+        /// Retrieves everyone except external users and ensures the user in the current web
+        /// </summary>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public ISharePointUser EnsureEveryoneExceptExternalUsers();
 
         /// <summary>
         /// Ensures the given users exists
@@ -936,6 +1029,33 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
         public Task<ISharePointUser> GetUserByIdBatchAsync(Batch batch, int userId);
 
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>>A list of users that were not found in Azure AD</returns>
+        public Task<IList<string>> ValidateUsersAsync(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>A list of users that were not found in Azure AD</returns>
+        public IList<string> ValidateUsers(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD and returns the 'ensured' SharePoint user
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>The list of <see cref="ISharePointUser"/> that exist</returns>
+        public Task<IList<ISharePointUser>> ValidateAndEnsureUsersAsync(IList<string> userList);
+
+        /// <summary>
+        /// Checks if the provided list of user UPN's are valid users in Azure AD and returns the 'ensured' SharePoint user
+        /// </summary>
+        /// <param name="userList">List of user UPN's to validate in Azure AD</param>
+        /// <returns>The list of <see cref="ISharePointUser"/> that exist</returns>
+        public IList<ISharePointUser> ValidateAndEnsureUsers(IList<string> userList);
         #endregion
 
         #region Multi-lingual
@@ -1028,6 +1148,26 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>True if the web is a sub site</returns>
         bool IsSubSite();
+
+        #endregion
+
+        #region AccessRequest
+
+        /// <summary>
+        /// Applies the access request settings
+        /// </summary>
+        /// <param name="operation">The operation to be performed</param>
+        /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
+        /// <returns></returns>
+        public Task SetAccessRequest(AccessRequestOption operation, string email = null);
+
+        /// <summary>
+        /// Applies the access request settings
+        /// </summary>
+        /// <param name="operation">The operation to be performed</param>
+        /// <param name="email">Applies the email address for the 'SpecificMail' operation</param>
+        /// <returns></returns>
+        public Task SetAccessRequestAsync(AccessRequestOption operation, string email = null);
 
         #endregion
 

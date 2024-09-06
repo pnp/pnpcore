@@ -246,6 +246,41 @@
         Categories = 303,
 
         /// <summary>
+        /// App catalog
+        /// </summary>
+        CorporateCatalog = 330,
+
+        /// <summary>
+        /// Apps for Office
+        /// </summary>
+        OfficeExtensionCatalog = 332,
+
+        /// <summary>
+        /// App requests
+        /// </summary>
+        AppRequestsList = 333,
+
+        /// <summary>
+        /// Site Collection App catalog
+        /// </summary>
+        SiteCollectionAppCatalog = 336,
+
+        /// <summary>
+        /// App catalog tenant wide extensions
+        /// </summary>
+        CorporateCatalogTenantWideExtensions = 337,
+
+        /// <summary>
+        /// Access Services USys appplication log
+        /// </summary>
+        AccSrvUSysAppLog = 398,
+
+        /// <summary>
+        /// Access Services MSys ASO
+        /// </summary>
+        AccSrvMSysAso = 399,
+
+        /// <summary>
         /// Facility list type
         /// </summary>
         Facility = 402,
@@ -276,9 +311,34 @@
         Holidays = 421,
 
         /// <summary>
+        /// Report list template type
+        /// </summary>
+        ReportListTemplate = 433,
+
+        /// <summary>
+        /// BI Center dashboard library
+        /// </summary>
+        BICenterDashboardsLibrary = 480,
+
+        /// <summary>
         /// IMEDic list type
         /// </summary>
         IMEDic = 499,
+
+        /// <summary>
+        /// Community site categories list type
+        /// </summary>
+        CategoriesList = 500,
+
+        /// <summary>
+        /// Visio Repository Site Process Diagrams list
+        /// </summary>
+        VisioProcessRepositoryList = 506,
+
+        /// <summary>
+        /// MicroBlogList (MicroFeed)
+        /// </summary>
+        MySiteMicroBlogList = 544,
 
         /// <summary>
         /// ExternalList list type
@@ -289,6 +349,21 @@
         /// MySiteDocumentLibrary list type
         /// </summary>
         MySiteDocumentLibrary = 700,
+
+        /// <summary>
+        /// Pages library in a classic publishing site
+        /// </summary>
+        PublishingPagesLibrary = 850,
+
+        /// <summary>
+        /// Asset library
+        /// </summary>
+        AssetLibrary = 851,
+
+        /// <summary>
+        /// Community site membership list type
+        /// </summary>
+        MembershipList = 880,
 
         /// <summary>
         /// IssueTracking list type
@@ -316,6 +391,46 @@
         DeveloperSiteDraftApps = 1230,
 
         /// <summary>
+        /// In place records list type
+        /// </summary>
+        InPlaceRecords = 1302,
+
+        /// <summary>
+        /// Ediscovery sources
+        /// </summary>
+        EDiscoverySources = 1305,
+
+        /// <summary>
+        /// Ediscovery source instances
+        /// </summary>
+        EDiscoverySourceInstances = 1306,
+
+        /// <summary>
+        /// Ediscovery source groups
+        /// </summary>
+        EDiscoverySourceGroups = 1307,
+
+        /// <summary>
+        /// Ediscovery custodians
+        /// </summary>
+        EDiscoveryCustodians = 1308,
+
+        /// <summary>
+        /// Ediscovery custom queries
+        /// </summary>
+        EDiscoveryCustomQueries = 1309,
+
+        /// <summary>
+        /// Ediscovery exports
+        /// </summary>
+        EDiscoveryExports = 1310,
+
+        /// <summary>
+        /// Model Library for Content Center Site Template. Value = 1328
+        /// </summary>
+        ContentCenterModelLibrary = 1328,
+        
+        /// <summary>
         /// ContentCenterPrimeLibrary list type
         /// </summary>
         ContentCenterPrimeLibrary = 1329,
@@ -324,6 +439,16 @@
         /// ContentCenterSampleLibrary list type
         /// </summary>
         ContentCenterSampleLibrary = 1330,
+
+        /// <summary>
+        /// ContentCenterModelUsage list type
+        /// </summary>
+        ContentCenterModelUsage = 1331,
+
+        /// <summary>
+        /// ContentCenterExplanation list type
+        /// </summary>
+        ContentCenterExplanation = 1332,
 
         /// <summary>
         /// AccessApp list type

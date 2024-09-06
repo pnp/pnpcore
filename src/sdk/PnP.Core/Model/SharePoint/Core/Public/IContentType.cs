@@ -116,7 +116,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or Sets the Schema XML of the Content Type
         /// </summary>
-        public string SchemaXml { get; set; }
+        public string SchemaXml { get; }
 
         /// <summary>
         /// Gets or Sets the Schema XML with resource tokens of the Content Type
@@ -132,6 +132,42 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or Sets whether the Content Type is sealed
         /// </summary>
         public bool Sealed { get; set; }
+
+        /// <summary>
+        /// The unique identifier of the client-side component defined with SharePoint Framework
+        /// </summary>
+        public string NewFormClientSideComponentId { get; set; }
+
+        /// <summary>
+        /// This property is only used when a NewFormClientSideComponentId is specified. It is optional.
+        /// If non-empty, the string must contain a JSON object with custom initialization properties
+        /// whose format and meaning are defined by the client-side component. 
+        /// </summary>
+        public string NewFormClientSideComponentProperties { get; set; }
+
+        /// <summary>
+        /// The unique identifier of the client-side component defined with SharePoint Framework
+        /// </summary>
+        public string EditFormClientSideComponentId { get; set; }
+
+        /// <summary>
+        /// This property is only used when a EditFormClientSideComponentId is specified. It is optional.
+        /// If non-empty, the string must contain a JSON object with custom initialization properties
+        /// whose format and meaning are defined by the client-side component. 
+        /// </summary>
+        public string EditFormClientSideComponentProperties { get; set; }
+
+        /// <summary>
+        /// The unique identifier of the client-side component defined with SharePoint Framework
+        /// </summary>
+        public string DisplayFormClientSideComponentId { get; set; }
+
+        /// <summary>
+        /// This property is only used when a DisplayFormClientSideComponentId is specified. It is optional.
+        /// If non-empty, the string must contain a JSON object with custom initialization properties
+        /// whose format and meaning are defined by the client-side component. 
+        /// </summary>
+        public string DisplayFormClientSideComponentProperties { get; set; }
 
         /// <summary>
         /// Gets the collection of field links of the Content Type.

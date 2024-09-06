@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 
 namespace PnP.Core.Services
@@ -9,7 +10,7 @@ namespace PnP.Core.Services
     public class BatchResult
     {
 
-        internal BatchResult(HttpStatusCode statusCode, ServiceError error, string apiResponse, string apiType, string apiRequest, HttpMethod apiMethod, string apiBody)
+        internal BatchResult(HttpStatusCode statusCode, ServiceError error, string apiResponse, string apiType, string apiRequest, HttpMethod apiMethod, string apiBody, Guid batchRequestId)
         {
             StatusCode = statusCode;
             Error = error;
@@ -18,6 +19,7 @@ namespace PnP.Core.Services
             ApiRequest = apiRequest;
             ApiMethod = apiMethod;
             ApiBody = apiBody;
+            BatchRequestId = batchRequestId;
         }
 
         /// <summary>
@@ -54,5 +56,10 @@ namespace PnP.Core.Services
         /// API call body
         /// </summary>
         public string ApiBody { get; private set; }
+
+        /// <summary>
+        /// Id of the <see cref="BatchRequest"/> this result is for
+        /// </summary>
+        public Guid BatchRequestId { get; private set; }
     }
 }

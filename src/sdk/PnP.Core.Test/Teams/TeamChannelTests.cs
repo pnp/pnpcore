@@ -4,7 +4,6 @@ using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 

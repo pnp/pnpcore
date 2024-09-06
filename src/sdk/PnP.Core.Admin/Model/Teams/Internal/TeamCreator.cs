@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Teams
@@ -22,6 +23,7 @@ namespace PnP.Core.Admin.Model.Teams
             stopwatch.Start();
 
             bool isProvisioningComplete = false;
+            bool teamAlreadyExisted = false;
             var retryAttempt = 1;
             Exception lastException = null;
             do
@@ -44,17 +46,27 @@ namespace PnP.Core.Admin.Model.Teams
                     // Log and eat exception here
                     context.Logger.LogWarning(PnPCoreAdminResources.Log_Warning_ExceptionWhileCreatingTeamForGroup, teamToCreate.GroupId, ex.ToString());
                     lastException = ex;
+
+                    // Leave the retry loop if the Team already existed
+                    if ((ex is MicrosoftGraphServiceException graphServiceException) && graphServiceException.Error is MicrosoftGraphError microsoftGraphError)
+                    {
+                        // Conflict: means the Team already exists
+                        if (microsoftGraphError.HttpResponseCode == 409)
+                        {
+                            teamAlreadyExisted = true;
+                        }
+                    }                    
                 }
 
                 retryAttempt++;
             }
-            while (!isProvisioningComplete && retryAttempt <= creationOptions.MaxStatusChecks);
+            while (!(isProvisioningComplete || teamAlreadyExisted) && retryAttempt <= creationOptions.MaxStatusChecks);
 
             stopwatch.Stop();
 
             context.Logger.LogDebug($"Elapsed: {stopwatch.Elapsed:mm\\:ss\\.fff} | Finished");
 
-            if (isProvisioningComplete)
+            if (isProvisioningComplete || teamAlreadyExisted)
             {
                 return await GetPnPContextWithTeamAsync(context, teamToCreate.GroupId).ConfigureAwait(false);
             }
@@ -66,7 +78,7 @@ namespace PnP.Core.Admin.Model.Teams
 
         private static string BuildTeamCreationBody(TeamOptions options)
         {
-            return "{}";
+            return JsonSerializer.Serialize(options, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
         }
 
         private static async Task<PnPContext> GetPnPContextWithTeamAsync(PnPContext context, Guid groupId)

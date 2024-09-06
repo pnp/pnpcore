@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
                 }
                 if (IsPropertyAvailable(p => p.Scope))
                 {
-                    body.scope = Scope;
+                    body.scope = Scope.ToString().FirstCharToLower();
                 }
 
                 // Serialize object to json

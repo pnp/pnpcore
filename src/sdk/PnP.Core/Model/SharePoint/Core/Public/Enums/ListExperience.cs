@@ -8,14 +8,16 @@
         /// <summary>
         ///  SPO will automatically define the right experience based on the settings of the current list, it is the default value.
         /// </summary>
-        Auto,
-        /// <summary>
-        /// The Classic experience will be forced for the current list.
-        /// </summary>
-        ClassicExperience,
+        Auto = 0,
+        
         /// <summary>
         /// The Modern experience will be forced for the current list.
         /// </summary>
-        NewExperience,
+        NewExperience = 1,
+
+        /// <summary>
+        /// The Classic experience will be forced for the current list.
+        /// </summary>
+        ClassicExperience = 2,
     }
 }

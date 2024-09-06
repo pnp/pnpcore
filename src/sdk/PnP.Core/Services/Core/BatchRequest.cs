@@ -43,7 +43,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Id of the <see cref="BatchRequest"/>
         /// </summary>
-        internal Guid Id { get; private set; }
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Entity object on for which this request was meant
@@ -104,6 +104,22 @@ namespace PnP.Core.Services
         /// Http response code for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
         public HttpStatusCode ResponseHttpStatusCode { get; private set; }
+
+        /// <summary>
+        /// The value of the SPRequestGuid header of SharePoint also know as Correlation Id (only populated when the <see cref="Batch"/> was executed and the server send it)
+        /// </summary>
+        public string SPRequestGuid
+        {
+            get
+            {
+                return ResponseHeaders.TryGetValue(
+                    PnPConstants.SPRequestGuidHeader,
+                    out string spRequestGuid
+                )
+                    ? spRequestGuid
+                    : null;
+            }
+        }
 
         /// <summary>
         /// Additional headers supplied for this request

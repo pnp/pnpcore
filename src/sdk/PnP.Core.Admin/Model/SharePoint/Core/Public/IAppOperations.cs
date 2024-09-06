@@ -93,5 +93,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="id">The unique id of the app. Notice that this is not the product id as listed in the app catalog.</param>
         /// <returns><em>true</em> if uninstall was successful.</returns>
         Task<bool> UninstallAsync(Guid id);
+
+        /// <summary>
+        /// Approves all permissions requested by the app.
+        /// </summary>
+        /// <param name="aadPermissions">The requested AAD permissions, e.g. </param>
+        /// <returns></returns>
+        Task<IPermissionGrant2[]> ApproveAsync(string aadPermissions);
     }
 }

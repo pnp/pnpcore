@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -197,7 +198,7 @@ namespace PnP.Core.Model.SharePoint
                     return "analytics/lastSevenDays";
                 }
 
-                return $"getActivitiesByInterval(startDateTime='{options.CustomStartDate:yyyy-MM-dd}',endDateTime='{options.CustomEndDate:yyyy-MM-dd}',interval='{options.CustomAggregationInterval.ToString().ToLowerInvariant()}')";
+                return $"getActivitiesByInterval(startDateTime='{options.CustomStartDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}',endDateTime='{options.CustomEndDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}',interval='{options.CustomAggregationInterval.ToString().ToLowerInvariant()}')";
             }
 
             return "analytics/allTime";

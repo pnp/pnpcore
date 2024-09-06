@@ -245,25 +245,50 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
 
-                var viewTitle = "PnPCoreTestViewType2CompactList";
-                var result = list.Views.Add(new ViewOptions()
+                IView result = null;
+
+                try
                 {
-                    Title = viewTitle,
-                    RowLimit = 3,
-                    ViewType2 = ViewType2.COMPACTLIST,
-                    ViewTypeKind = ViewTypeKind.Html
-                });
+                    var viewTitle = "PnPCoreTestViewType2CompactList";
+                    result = list.Views.Add(new ViewOptions()
+                    {
+                        Title = viewTitle,
+                        RowLimit = 3,
+                        ViewType2 = ViewType2.COMPACTLIST,
+                        ViewTypeKind = ViewTypeKind.Html
+                    });
 
-                Assert.IsNotNull(result);
-                Assert.AreEqual(viewTitle, result.Title);
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual(viewTitle, result.Title);
 
-                var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
-                Assert.IsNotNull(newView);
-                Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
+                    var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
+                    Assert.IsNotNull(newView);
+                    Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 
-                // Removes the view
-                await result.DeleteAsync();
+                    // Set viewtype2 
+                    newView.ViewType2 = ViewType2.NONE;
+                    newView.Update();
+
+                    list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
+                    Assert.IsNotNull(newView);
+                    Assert.IsTrue(newView.ViewType2 == ViewType2.NONE);
+
+                    // Update other view property
+                    newView.Title = "PnPCoreTestViewType2CompactListUpdated";
+                    newView.Update();
+
+                    list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                    newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == "PnPCoreTestViewType2CompactListUpdated");
+                    Assert.IsNotNull(newView);                    
+
+                }
+                finally
+                {
+                    // Removes the view
+                    await result.DeleteAsync();
+                }
 
             }
         }
@@ -282,6 +307,95 @@ namespace PnP.Core.Test.SharePoint
                 var view = list.Views.FirstOrDefault(v => v.Id == new Guid(idString));
 
                 Assert.IsTrue(view != null);
+            }
+        }
+
+        [TestMethod]
+        public async Task ReorderListViewViewFields()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IView result = null;
+                try
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
+
+                    var viewTitle = "ReorderListViewViewFields";
+                    result = list.Views.Add(new ViewOptions()
+                    {
+                        Title = viewTitle,
+                        RowLimit = 3,
+                        Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
+                        ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu", "Modified" }
+                    });
+
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual(viewTitle, result.Title);
+
+                    // Reorder the listview fields
+                    result.MoveViewFieldTo("Modified", 0);
+
+                    // reload view
+                    var listViews = await list.GetAsync(p => p.Views.QueryProperties(p=>p.Title, p=>p.ViewFields));
+                    var view = listViews.Views.AsRequested().FirstOrDefault(v => v.Title == viewTitle);
+                    Assert.IsTrue(view.ViewFields.Items.First() == "Modified");
+
+                }
+                finally
+                {
+                    // Removes the view
+                    await result.DeleteAsync();
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task AddRemoveListViewViewFields()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IView result = null;
+                try
+                {
+                    var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
+
+                    var viewTitle = "AddRemoveListViewViewFields";
+                    result = list.Views.Add(new ViewOptions()
+                    {
+                        Title = viewTitle,
+                        RowLimit = 3,
+                        Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
+                        ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu"}
+                    });
+
+                    Assert.IsNotNull(result);
+                    Assert.AreEqual(viewTitle, result.Title);
+
+                    // Add the modified field 
+                    result.AddViewField("Modified");
+
+                    // reload view
+                    var listViews = await list.GetAsync(p => p.Views.QueryProperties(p => p.Title, p => p.ViewFields));
+                    var view = listViews.Views.AsRequested().FirstOrDefault(v => v.Title == viewTitle);
+                    Assert.IsTrue(view.ViewFields.Items.Last() == "Modified");
+
+                    // remove the modified field
+                    view.RemoveViewField("Modified");
+                    
+                    listViews = await list.GetAsync(p => p.Views.QueryProperties(p => p.Title, p => p.ViewFields));
+                    view = listViews.Views.AsRequested().FirstOrDefault(v => v.Title == viewTitle);
+                    Assert.IsTrue(view.ViewFields.Items.Last() == "LinkFilenameNoMenu");
+
+                }
+                finally
+                {
+                    // Removes the view
+                    await result.DeleteAsync();
+                }
+
             }
         }
     }

@@ -534,17 +534,34 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // Now create a batch that deletes items 1..150 ==> given we've already deleted 3 we should get back a result set with 3 errors
+                var batch = context.NewBatch();
+
+                // Sample on how to track additional information for a batch request
+                Dictionary<Guid, int> deletedListItemIds = new();
+
                 for (int i = 1; i <= 150; i++)
                 {
-                    await myList.Items.DeleteByIdBatchAsync(i);
+                    await myList.Items.DeleteByIdBatchAsync(batch, i);
+                    deletedListItemIds.Add(batch.Requests.Last().Value.Id, i);
                 }
+
                 // Execute the batch without throwing an error, should get a result collection back
-                var batchResponse = await context.ExecuteAsync(false);
+                var batchResponse = await context.ExecuteAsync(batch, false);                
 
                 Assert.IsTrue(batchResponse != null);
                 Assert.IsTrue(batchResponse.Count == 3);
                 var errorResults = batchResponse.Where(p => p.Error != null);
                 Assert.IsTrue(errorResults.Count() == 3);
+
+                // Find the corresponding batch requests
+                foreach (var errorResult in errorResults)
+                {
+                    var batchRequest = batch.Requests.FirstOrDefault(p => p.Value.Id == errorResult.BatchRequestId);
+                    Assert.IsTrue(batchRequest.Value != null);
+
+                    var failedListItemIdDelete = deletedListItemIds.FirstOrDefault(p=> p.Key == errorResult.BatchRequestId).Value;
+                    Assert.IsTrue(failedListItemIdDelete > 0);
+                }
 
                 // Cleanup the created list
                 await myList.DeleteAsync();

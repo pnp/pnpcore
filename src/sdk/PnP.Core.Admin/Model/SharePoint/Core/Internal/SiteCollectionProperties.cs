@@ -1,6 +1,8 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -27,6 +29,10 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public BlockDownloadLinksFileTypes BlockDownloadLinksFileType { get => GetValue<BlockDownloadLinksFileTypes>(); set => SetValue(value); }
 
+        public bool BlockDownloadPolicy { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ClearRestrictedAccessControl { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool CommentsOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public int CompatibilityLevel { get => GetValue<int>(); set => SetValue(value); }
@@ -39,6 +45,10 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public bool DefaultLinkToExistingAccessReset { get => GetValue<bool>(); set => SetValue(value); }
 
+        public Role DefaultShareLinkRole { get => GetValue<Role>(); set => SetValue(value); }
+
+        public SharingScope DefaultShareLinkScope { get => GetValue<SharingScope>(); set => SetValue(value); }
+
         public SharingLinkType DefaultSharingLinkType { get => GetValue<SharingLinkType>(); set => SetValue(value); }
 
         public DenyAddAndCustomizePagesStatus DenyAddAndCustomizePages { get => GetValue<DenyAddAndCustomizePagesStatus>(); set => SetValue(value); }
@@ -50,6 +60,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         public CompanyWideSharingLinksPolicy DisableCompanyWideSharingLinks { get => GetValue<CompanyWideSharingLinksPolicy>(); set => SetValue(value); }
 
         public FlowsPolicy DisableFlows { get => GetValue<FlowsPolicy>(); set => SetValue(value); }
+
+        public bool ExcludeBlockDownloadPolicySiteOwners { get => GetValue<bool>(); set => SetValue(value); }
 
         public int ExternalUserExpirationInDays { get => GetValue<int>(); set => SetValue(value); }
 
@@ -105,7 +117,21 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public PWAEnabledStatus PWAEnabled { get => GetValue<PWAEnabledStatus>(); set => SetValue(value); }
 
+        public bool ReadOnlyForUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
+
         public Guid RelatedGroupId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool RequestFilesLinkEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int RequestFilesLinkExpirationInDays { get => GetValue<int>(); set => SetValue(value); }
+
+        public bool RestrictedAccessControl { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IList<Guid> RestrictedAccessControlGroups { get => GetValue<IList<Guid>>(); set => SetValue(value); }
+
+        public IList<Guid> RestrictedAccessControlGroupsToAdd { get => GetValue<IList<Guid>>(); set => SetValue(value); }
+
+        public IList<Guid> RestrictedAccessControlGroupsToRemove { get => GetValue<IList<Guid>>(); set => SetValue(value); }
 
         public RestrictedToRegion RestrictedToRegion { get => GetValue<RestrictedToRegion>(); set => SetValue(value); }
 
@@ -122,6 +148,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         public SharingCapabilities SharingCapability { get => GetValue<SharingCapabilities>(); set => SetValue(value); }
 
         public SharingDomainRestrictionModes SharingDomainRestrictionMode { get => GetValue<SharingDomainRestrictionModes>(); set => SetValue(value); }
+
+        public bool SharingLockDownCanBeCleared { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool SharingLockDownEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool ShowPeoplePickerSuggestionsForGuestUsers { get => GetValue<bool>(); set => SetValue(value); }
 

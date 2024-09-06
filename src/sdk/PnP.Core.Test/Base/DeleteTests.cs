@@ -5,6 +5,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -49,7 +50,9 @@ namespace PnP.Core.Test.Base
                 var listCount = context.Web.Lists.Length;
 
                 // Delete the list
-                await myList.DeleteAsync();
+                await myList.WithResponseHeaders((responseHeaders) => { 
+                    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"])); 
+                }).DeleteAsync();
                 // Verify that the list was removed from the model collection as well
                 Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
 
@@ -97,8 +100,19 @@ namespace PnP.Core.Test.Base
                 var listCount = context.Web.Lists.Length;
 
                 // Delete the list
-                await myList.DeleteBatchAsync();
-                await context.ExecuteAsync();
+                var batch = context.NewBatch();
+
+                // Shows how to get the response headers from the batch for the SharePoint REST and CSOM requests
+                await myList.WithResponseHeaders((responseHeaders) => {
+                    Assert.IsTrue(!string.IsNullOrEmpty(responseHeaders["SPRequestGuid"]));
+                }).DeleteBatchAsync(batch);
+                await context.ExecuteAsync(batch);
+
+                // Check that the batch response was OK
+                Assert.IsTrue(batch.Requests[0].ResponseHttpStatusCode == HttpStatusCode.OK);
+
+                // Shortcut to just get the SPRequestGuid from the batch response
+                Assert.IsTrue(batch.Requests[0].SPRequestGuid != null);
 
                 // Was the list added
                 bool exceptionThrown = false;

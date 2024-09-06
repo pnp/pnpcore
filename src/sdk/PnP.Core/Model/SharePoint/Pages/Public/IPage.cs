@@ -142,6 +142,11 @@ namespace PnP.Core.Model.SharePoint
         public DateTime? ScheduledPublishDate { get; }
 
         /// <summary>
+        /// Returns the editor that was used to create/update this page
+        /// </summary>
+        public EditorType EditorType { get; }
+
+        /// <summary>
         /// Adds a new section to your client side page
         /// </summary>
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
@@ -239,6 +244,11 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="translateX">X focal point for image</param>
         /// <param name="translateY">Y focal point for image</param>
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
+
+        /// <summary>
+        /// Sets page header back to the default for PageTilte WebPart (Message ID: MC791596 / Roadmap ID: 386904). The PageTitle WebPart has to be added into a first OneColumnFullWith Section separate.
+        /// </summary>
+        public void SetPageTitleWebPartPageHeader();
 
         /// <summary>
         /// Adds a new header control to your client side page with a given order. Used for topic page creation
@@ -573,7 +583,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Prepares an inline image for adding to text by adding the needed image web part and returning the HTML snippet that needs to be appended to the text editor content
         /// </summary>
-        /// <param name="textEditorInstance">Text editor instance to add the inline image to</param>
+        /// <param name="textEditorInstance">Text editor instance to add the inline image to, when the <see cref="Page.EditorType"/> is <see cref="EditorType.CK5"/> then this can be left null</param>
         /// <param name="serverRelativeUrl">Server relative url of the image to add inline</param>
         /// <param name="imageOptions">Options to configure the inline image when being added</param>
         /// <returns>Html snippet to be appended to the text editor content</returns>

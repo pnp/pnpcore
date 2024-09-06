@@ -11,6 +11,11 @@ namespace PnP.Core.Services
     public sealed class RateLimitEvent : IRateLimitEvent
     {
         /// <summary>
+        /// Request that was retried
+        /// </summary>
+        public Uri Request { get; private set; }
+
+        /// <summary>
         /// The time, in <see cref="TimeSpan.Seconds"/>, when the current window gets reset
         /// </summary>
         public int Reset { get; private set; }
@@ -26,35 +31,47 @@ namespace PnP.Core.Services
         public int Remaining { get; private set; }
 
         /// <summary>
+        /// Event property bag
+        /// </summary>
+        public IDictionary<string, object> Properties { get; internal set; } = new Dictionary<string, object>();
+
+        /// <summary>
         /// Rate limit event constructor
         /// </summary>
-        /// <param name="requestMessage">Request that's retried</param>
-        public RateLimitEvent(HttpResponseMessage requestMessage)
+        /// <param name="responseMessage">Request that's retried</param>
+        /// <param name="requestMessage">Response for the retried request</param>
+        public RateLimitEvent(HttpRequestMessage requestMessage, HttpResponseMessage responseMessage)
         {
-            ProcessRequestProperties(requestMessage);
+            if (requestMessage != null)
+            {
+                Request = requestMessage.RequestUri;
+                ProcessRequestProperties(requestMessage);
+            }
+            
+            ProcessResponseProperties(responseMessage);
         }
 
-        private void ProcessRequestProperties(HttpResponseMessage requestMessage)
+        private void ProcessResponseProperties(HttpResponseMessage responseMessage)
         {
             int rateLimit = -1;
             int rateRemaining = -1;
             int rateReset = -1;
 
-            if (requestMessage != null)
+            if (responseMessage != null)
             {
-                if (requestMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_LIMIT, out IEnumerable<string> limitValues))
+                if (responseMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_LIMIT, out IEnumerable<string> limitValues))
                 {
                     string rateString = limitValues.First();
                     _ = int.TryParse(rateString, out rateLimit);
                 }
 
-                if (requestMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_REMAINING, out IEnumerable<string> remainingValues))
+                if (responseMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_REMAINING, out IEnumerable<string> remainingValues))
                 {
                     string rateString = remainingValues.First();
                     _ = int.TryParse(rateString, out rateRemaining);
                 }
 
-                if (requestMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_RESET, out IEnumerable<string> resetValues))
+                if (responseMessage.Headers.TryGetValues(RateLimiter.RATELIMIT_RESET, out IEnumerable<string> resetValues))
                 {
                     string rateString = resetValues.First();
                     _ = int.TryParse(rateString, out rateReset);
@@ -64,6 +81,27 @@ namespace PnP.Core.Services
             Limit = rateLimit;
             Reset = rateReset;
             Remaining = rateRemaining;
+        }
+
+        private void ProcessRequestProperties(HttpRequestMessage requestMessage)
+        {
+#if NET5_0_OR_GREATER
+            if (requestMessage.Options != null)
+            {
+                foreach(var property in requestMessage.Options)
+                {
+                    Properties[property.Key] = property.Value;
+                }
+            }
+#else
+            if (requestMessage.Properties != null && requestMessage.Properties.Count > 0)
+            {
+                foreach (var property in requestMessage.Properties)
+                {
+                    Properties[property.Key] = property.Value;
+                }
+            }
+#endif
         }
     }
 }

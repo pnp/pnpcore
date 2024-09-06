@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// PnP Context class...the glue between the model and the data stores
     /// </summary>
-    public class PnPContext : IDisposable, IPnPContext
+    public class PnPContext : IPnPContext
     {
         #region Private fields
 
@@ -450,6 +451,16 @@ namespace PnP.Core.Services
         {
             return BatchClient.EnsureBatch();
         }
+        
+        /// <summary>
+        /// Gets an ongoing Graph long-running operation.
+        /// </summary>
+        /// <param name="location">The location of the operation</param>
+        /// <returns>An <see cref="ILongRunningOperation"/> associated with the location</returns>
+        public ILongRunningOperation GetLongRunningOperation(string location)
+        {
+            return new LongRunningOperation(location, this);
+        }
 
         /// <summary>
         /// Method to execute the current batch
@@ -683,6 +694,28 @@ namespace PnP.Core.Services
         #endregion
 
         #region Internal methods
+
+        internal async Task<Guid> GetTenantIdAsync()
+        {
+            // in case telemetry is configured, the globaloptions already has a populated tenantid value
+            if (GlobalOptions.AADTenantId == Guid.Empty)
+            {
+                var useOpenIdConfiguration = false;
+#if NET5_0_OR_GREATER
+                useOpenIdConfiguration = RuntimeInformation.RuntimeIdentifier == "browser-wasm";
+#endif
+                await SetAADTenantId(useOpenIdConfiguration).ConfigureAwait(false);
+            }
+
+            if (GlobalOptions.AADTenantId != Guid.Empty)
+            {
+                return GlobalOptions.AADTenantId;
+            }
+            else
+            {
+                return Guid.Empty;
+            }
+        }
 
         internal async Task<bool> AccessTokenHasRoleAsync(string role)
         {

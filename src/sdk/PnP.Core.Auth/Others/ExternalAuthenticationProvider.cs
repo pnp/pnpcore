@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 using System.Configuration;
@@ -14,10 +14,39 @@ namespace PnP.Core.Auth
     /// </summary>
     public sealed class ExternalAuthenticationProvider : OAuthAuthenticationProvider
     {
+        private bool isAsync;
+        private Func<Uri, string[], string> accessTokenProvider;
+        private Func<Uri, string[], Task<string>> accessTokenTaskProvider;
+
+
+
         /// <summary>
         /// A function providing the access token to use
         /// </summary>
-        public Func<Uri, string[], string> AccessTokenProvider { get; set; }
+        public Func<Uri, string[], string> AccessTokenProvider
+        {
+            get => accessTokenProvider;
+            set
+            {
+                isAsync = false;
+                accessTokenProvider = value;
+                accessTokenTaskProvider = value == null ? null : (uri, scopes) => Task.FromResult(value(uri, scopes));
+            }
+        }
+
+        /// <summary>
+        /// A function providing the access token to use
+        /// </summary>
+        public Func<Uri, string[], Task<string>> AccessTokenTaskProvider
+        {
+            get => accessTokenTaskProvider; 
+            set
+            {
+                isAsync = true;
+                accessTokenTaskProvider = value;
+                accessTokenProvider = value == null ? null : (uri, scopes) => value (uri, scopes).GetAwaiter().GetResult();
+            }
+        }
 
         /// <summary>
         /// Public constructor for external consumers of the library
@@ -27,6 +56,16 @@ namespace PnP.Core.Auth
             : this((ILogger<OAuthAuthenticationProvider>)null)
         {
             AccessTokenProvider = accessTokenProvider;
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="accessTokenProvider">A function providing the access token to use</param>
+        public ExternalAuthenticationProvider(Func<Uri, string[], Task<string>> accessTokenProvider)
+            : this((ILogger<OAuthAuthenticationProvider>)null)
+        {
+            AccessTokenTaskProvider = accessTokenProvider;
         }
 
         /// <summary>
@@ -76,9 +115,7 @@ namespace PnP.Core.Auth
         /// <param name="resource">Resource to request an access token for</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (resource == null)
             {
@@ -90,16 +127,18 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(scopes));
             }
 
-            if (AccessTokenProvider == null)
+            if (AccessTokenProvider == null && AccessTokenTaskProvider == null)
             {
                 throw new ConfigurationErrorsException(
                     PnPCoreAuthResources.ExternalAuthenticationProvider_MissingAccessTokenProvider);
             }
 
-            var accessToken = AccessTokenProvider.Invoke(resource, scopes);
+            var accessToken = isAsync
+                ? (await AccessTokenTaskProvider.Invoke(resource, scopes).ConfigureAwait(false))
+                : AccessTokenProvider?.Invoke(resource, scopes);
 
             // Log the access token retrieval action
-            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+            Log?.LogDebug(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
                 GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it

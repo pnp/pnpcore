@@ -519,6 +519,15 @@ namespace PnP.Core.Model.SharePoint
         public IFieldTaxonomyValue NewFieldTaxonomyValue(Guid termId, string label, int wssId = -1);
 
         /// <summary>
+        /// Creates a new <see cref="IFieldLocationValue"/> object
+        /// </summary>
+        /// <param name="displayName">Name to display for this location</param>
+        /// <param name="latitude">Latitude for the location</param>
+        /// <param name="longitude">Longitude for the location</param>
+        /// <returns>Configured <see cref="IFieldLocationValue"/> object</returns>
+        public IFieldLocationValue NewFieldLocationValue(string displayName, double latitude, double longitude);
+
+        /// <summary>
         /// Creates a new collection to hold <see cref="IFieldValue"/> objects
         /// </summary>
         /// <returns></returns>

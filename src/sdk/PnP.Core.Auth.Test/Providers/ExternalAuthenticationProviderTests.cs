@@ -15,6 +15,7 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class ExternalAuthenticationProviderTests
     {
+        private const string fakeToken = "ThisIsATestToken";
         private static readonly string externalRealProviderConfigurationPath = "externalRealProvider";
 
         private static readonly Lazy<CredentialManagerAuthenticationProvider> realProvider =
@@ -185,18 +186,40 @@ namespace PnP.Core.Auth.Test.Providers
             Assert.IsTrue(accessToken.Length > 0);
         }
 
-        private static ExternalAuthenticationProvider PrepareExternalAuthenticationProvider()
+        [TestMethod]
+        public async Task TestExternalGetAccessTokenAsyncAsyncCorrect()
+        {
+            var provider = PrepareExternalAuthenticationProvider(useAsyncConstructor: true);
+
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
+
+            Assert.IsNotNull(accessToken);
+            Assert.IsTrue(accessToken.Length > 0);
+        }
+
+
+        private static ExternalAuthenticationProvider PrepareExternalAuthenticationProvider(bool useFakeToken = false, bool useAsyncConstructor = false)
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
-            var provider = new ExternalAuthenticationProvider(
+            Func<Uri, string[], Task<string>> getAccessToken = useFakeToken
+                ? (Func<Uri, string[], Task<string>>)GetFakeAccessToken
                 // We get the access token using a CredentialManagerAuthenticationProvider
-                (uri, scopes) => GetAccessToken(uri, scopes).GetAwaiter().GetResult());
+                : GetRealAccessToken;
+
+            var provider = useAsyncConstructor
+            ? new ExternalAuthenticationProvider(getAccessToken)
+            : new ExternalAuthenticationProvider((uri, scopes) => getAccessToken(uri, scopes).GetAwaiter().GetResult());
 
             return provider;
         }
 
-        private static async Task<string> GetAccessToken(Uri resource, string[] scopes)
+        private static Task<string> GetFakeAccessToken(Uri resource, string[] scopes)
+        {
+            return Task.FromResult(fakeToken);
+        }
+
+        private static async Task<string> GetRealAccessToken(Uri resource, string[] scopes)
         {
             return await RealProvider.GetAccessTokenAsync(resource, scopes);
         }

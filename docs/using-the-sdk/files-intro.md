@@ -29,6 +29,64 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
+A file can also be loaded using it's unique id using one of the `GetFileById` methods:
+
+```csharp
+Guid fileId = Guid.Parse("{D61B52DE-2ED1-41E2-B3FC-360E7286B0F9}");
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByIdAsync(fileId);
+
+// Get a reference to the file, loading extra properties of the IFile 
+IFile testDocument = await context.Web.GetFileByIdAsync(fileId, f => f.CheckOutType, f => f.CheckedOutByUser);
+```
+
+> [!Important]
+> See the **Updating/reading file metadata** chapter below in case you want to update/read the metadata of retrieved file.
+
+### Get a file using a link
+
+Whenever you've a fully qualified link to a file or a sharing link for a file you can use the `GetFileByLink` methods to get the corresponding `IFile` object. Note that when the file happens to live in another site or web then under the covers a new `PnPContext` is instantiated and returned with that file.
+
+```csharp
+// Test regular link
+IFile file2 = await context.Web.GetFileByLinkAsync($"https://contoso.sharepoint.com/sites/asite/SiteAssets/somefile.docx");
+
+// Test sharing link
+IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5");
+
+// Test sharing link with extra properties of the IFile
+IFile file1 = await context.Web.GetFileByLinkAsync("https://contoso.sharepoint.com/:v:/s/asite/Ed2UMAoNf0tJhAjSJLt94wYBUd9U-ZhCKOoOXZcGS2dLBQ?e=KobeE5", f => f.CheckOutType, f => f.CheckedOutByUser);
+```
+
+> [!Important]
+> See the **Updating/reading file metadata** chapter below in case you want to update/read the metadata of retrieved file.
+
+### Updating/reading file metadata
+
+If you plan to update the corresponding file metadata when you've used either the `GetFileByServerRelativeUrl`, `GetFileById` or `GetFileByLink` methods then you need to ensure the needed parent list information is loaded as part of this request. Below sample shows the minimal properties to load:
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl,
+                     f => f.ListItemAllFields.QueryProperties(li=>li.All, 
+                        li => li.ParentList.QueryProperties(p => p.Title, 
+                            p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, 
+                                                          p => p.TypeAsString, p => p.Title))));
+
+testDocument.ListItemAllFields["Title"] = "Hello!";
+await testDocument.ListItemAllFields.UpdateOverwriteVersionAsync();
+// Or
+// await testDocument.ListItemAllFields.UpdateAsync()
+```
+
+If you don't load the `ParentList` details then field data of complex fields (e.g. Url fields) is not loaded correctly and metadata updates might fail.
+
+> [!Note]
+> Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the [Using audience targeting](audience-targeting-intro.md) page to learn more.
+
 ### Getting the file of a list item
 
 A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
@@ -74,7 +132,8 @@ If you do not know the exact name and location of on or more file and need to fi
 The FindFiles method accepts a string value which is matched to any part of the filename using a case insensitive regular expression and returns all found matches.
 
 > [!Note]
-> This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
+> - This operation can be slow, as it iterates over all the files in the list. If performance is key, then try using a search based solution.
+> - It's important to use the * to indicate any wild cards in your search string
 
 Find files in a list:
 
@@ -83,7 +142,7 @@ Find files in a list:
 IList documentsList = await context.Web.Lists.GetByTitleAsync("Documents");
 
 // Get files from the list whose name contains "foo"
-List<IFile> foundFiles = await documentsList.FindFilesAsync("foo");
+List<IFile> foundFiles = await documentsList.FindFilesAsync("*foo*");
 ```
 
 Find files in a folder:
@@ -93,7 +152,7 @@ Find files in a folder:
 IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
 
 // Get files from folder whose name contains "bar"
-List<IFile> foundFiles = await documentsFolder.FindFilesAsync("bar");
+List<IFile> foundFiles = await documentsFolder.FindFilesAsync("*bar*");
 ```
 
 ## Getting file properties
@@ -137,6 +196,23 @@ foreach(var property in testDocument.Properties)
 // Add a new property
 testDocument["myPropertyKey"] = "Some value";
 await testDocument.Properties.UpdateAsync();
+```
+
+## Renaming files
+
+To rename a file you can either use the `Rename` methods or use the `MoveTo` methods.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file, load the file property bag
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+// Option A: Use the Rename methods
+await testDocument.RenameAsync("renamed document.docx");
+
+// Option B: Move the file to rename it
+await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/Shared Documents/renamed document.docx");
 ```
 
 ## Publishing and un-publishing files
@@ -253,6 +329,9 @@ addedFile.ListItemAllFields["Field2"] = true;
 await addedFile.ListItemAllFields.UpdateAsync();
 ```
 
+> [!Note]
+> Files can have audiences set enabling page web parts to conditionally show the file depending on who loads the page. See the [Using audience targeting](audience-targeting-intro.md) page to learn more.
+
 ## Updating the file Author, Editor, Created or Modified properties
 
 Each file has an `Author` property (the one who created the file), an `Editor` property (the one who last changed the file), a `Created` property (when was the file added) and a `Modified` property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the `UpdateOverwriteVersion` methods this however is possible as shown in below code snippet:
@@ -322,6 +401,14 @@ await testDocument.CopyToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document
 
 // Move the file, overwrite if needed
 await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document.docx", MoveOperations.Overwrite);
+
+// Move the file with options
+await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document.docx", MoveOperations.None, 
+                            new MoveCopyOptions 
+                            { 
+                                KeepBoth = true, 
+                                RetainEditorAndModifiedOnMove = true 
+                            });
 ```
 
 > [!Note]

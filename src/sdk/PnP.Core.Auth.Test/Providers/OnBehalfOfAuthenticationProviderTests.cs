@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -44,9 +45,17 @@ namespace PnP.Core.Auth.Test.Providers
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            // NOOP so far
+            // Install the debug cert in the certstore ~ this works on Linux as well
+            string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
+            using (X509Certificate2 certificate = new X509Certificate2(path, "PnPRocks!"))
+            {
+                X509Store xstore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+                xstore.Open(OpenFlags.ReadWrite);
+                xstore.Add(certificate);
+                xstore.Close();
+            }
         }
-
+        
         [TestMethod]
         public async Task TestOnBehalfOfWithGraph()
         {
@@ -142,6 +151,33 @@ namespace PnP.Core.Auth.Test.Providers
             Assert.IsNotNull(provider.ClientId);
             Assert.IsNotNull(provider.TenantId);
             Assert.IsNotNull(provider.ClientSecret);
+        }
+
+        [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task TestOnBehalfOfConstructorNoDIWithCertificateFile_NullClientId_NullTenantId()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+
+            var configuration = TestCommon.GetConfigurationSettings();
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+
+            var certificateFromFile = X509CertificateUtility.LoadCertificate(storeName, storeLocation, thumbprint);
+
+            //string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
+            var provider = new OnBehalfOfAuthenticationProvider(
+                null,
+                null,
+                certificate: certificateFromFile,
+                // We get the consumer access token using an InteractiveAuthenticationProvider
+                () => GetUserAccessToken().GetAwaiter().GetResult());
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.Certificate);
         }
 
         [TestMethod]
@@ -358,6 +394,17 @@ namespace PnP.Core.Auth.Test.Providers
         }
 
         [TestMethod]
+        public async Task TestOnBehalfOfGetAccessTokenAsyncCorrectWithCertificateFile()
+        {
+            var provider = PrepareOnBehalfOfAuthenticationProviderWithCertificateFile();
+
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
+
+            Assert.IsNotNull(accessToken);
+            Assert.IsTrue(accessToken.Length > 0);
+        }
+        
+        [TestMethod]
         public async Task TestOnBehalfOfGetAccessTokenAsyncCorrectWithClientSecret()
         {
             var provider = PrepareOnBehalfOfAuthenticationProviderWithClientSecret();
@@ -388,6 +435,31 @@ namespace PnP.Core.Auth.Test.Providers
                 // We get the consumer access token using an InteractiveAuthenticationProvider
                 () => GetUserAccessToken().GetAwaiter().GetResult());
 
+            return provider;
+        }
+
+        private static OnBehalfOfAuthenticationProvider PrepareOnBehalfOfAuthenticationProviderWithCertificateFile()
+        {
+            if (TestCommon.RunningInGitHubWorkflow())
+                Assert.Inconclusive(
+                    "Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+
+            var configuration = TestCommon.GetConfigurationSettings();
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:TenantId");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+
+            var certificateFromFile = X509CertificateUtility.LoadCertificate(storeName, storeLocation, thumbprint);
+            
+            var provider = new OnBehalfOfAuthenticationProvider(
+                clientId,
+                tenantId,
+                certificateFromFile,
+                // We get the consumer access token using an InteractiveAuthenticationProvider
+                () => GetUserAccessToken().GetAwaiter().GetResult());
+            
             return provider;
         }
 

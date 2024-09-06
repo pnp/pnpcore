@@ -7,6 +7,9 @@ Adding fields typically is done using one of the Add*FieldType* or Add*FieldType
 > [!Note]
 > The code samples create field on a list "myList" by adding the fields to the list's Fields collection. The same logic applies for adding site fields by adding them to the web's Fields collection.
 
+> [!Important]
+> By default the passed field title will be used as display name and the internal name will be deducted from that. In some cases you may want to control the internal name via code, you can do this by setting the `InternalName` property of the respective field options class. The sample in next paragraph shows this.
+
 ## Text fields
 
 When adding a text field you use the [FieldTextOptions class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.FieldTextOptions.html) which allows to define the [MaxLenght](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.FieldTextOptions.html#collapsible-PnP_Core_Model_SharePoint_FieldTextOptions_MaxLength) of a text field.
@@ -14,6 +17,7 @@ When adding a text field you use the [FieldTextOptions class](https://pnp.github
 ```csharp
 IField myField = await myList.Fields.AddTextAsync("My Field", new FieldTextOptions()
 {
+    InternalName = "MyField",
     Group = "Custom Fields",
     AddToDefaultView = true,
     MaxLength = 30

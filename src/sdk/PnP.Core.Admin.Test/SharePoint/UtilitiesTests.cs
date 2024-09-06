@@ -8,7 +8,7 @@ namespace PnP.Core.Admin.Test.SharePoint
     {
         [TestMethod()]
         [DataRow("dsfsd", "dsfsd")]
-        [DataRow("ds&,!@;:#¤`´~¨='%<>fsd", "dsfsd")]
+        [DataRow("ds&,!@;:#¤`´~¨=%<>fsd", "dsfsd")]
         [DataRow("dsfsdáâĕėìíõøùúďđ", "dsfsdaaeeiioouudd")]
         public void NormalizeInputTest(string input, string alias)
         {

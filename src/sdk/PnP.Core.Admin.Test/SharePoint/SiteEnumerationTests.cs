@@ -167,7 +167,29 @@ namespace PnP.Core.Admin.Test.SharePoint
             TestCommon.Instance.UseApplicationPermissions = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, null);
+                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, null, false);
+
+                Assert.IsTrue(sites.Count > 0);
+                var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);
+                Assert.IsTrue(myTestSite != null);
+                Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.CreatedBy));
+                Assert.IsTrue(myTestSite.TimeCreated > DateTime.MinValue);
+                Assert.IsTrue(myTestSite.StorageQuota > 0);
+                Assert.IsTrue(myTestSite.StorageUsed > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.TemplateName));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnumerateSitesIncludingSharedPrivateTeamChannelSitesWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, null, true);
 
                 Assert.IsTrue(sites.Count > 0);
                 var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);
@@ -199,6 +221,20 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(site.StorageQuota > 0);
                 Assert.IsTrue(site.StorageUsed > 0);
                 Assert.IsTrue(!string.IsNullOrEmpty(site.TemplateName));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnumerateRootSiteWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var site = context.GetSiteCollectionManager().GetSiteCollectionWithDetails(new Uri($"https://{context.Uri.DnsSafeHost}"));
+
+                Assert.IsTrue(site != null);
+                
             }
         }
 

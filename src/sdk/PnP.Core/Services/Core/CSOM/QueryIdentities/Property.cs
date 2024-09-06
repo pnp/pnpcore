@@ -12,6 +12,18 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
+    internal sealed class QueryProperty: Property
+    {
+        internal bool SelectAll { get; set; }
+
+        internal SelectQuery Query { get; set; }
+
+        public override string ToString()
+        {
+            return $"<Property Name=\"{Name}\" SelectAll=\"{SelectAll.ToString().ToLower()}\">{Query}<Property>";
+        }
+    }
+
     internal sealed class StaticProperty : Identity
     {
         internal string TypeId { get; set; }

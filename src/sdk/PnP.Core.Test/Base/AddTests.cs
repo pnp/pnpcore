@@ -124,7 +124,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(myListToCheck.ContentTypesEnabled);
                 Assert.AreEqual(myListToCheck.Direction, ListReadingDirection.None);
                 Assert.IsNull(myListToCheck.DocumentTemplate);
-                Assert.AreEqual(0, myListToCheck.DraftVersionVisibility);
+                Assert.AreEqual(DraftVisibilityType.Reader, myListToCheck.DraftVersionVisibility);
                 Assert.AreEqual("TEST DESCRIPTION", myListToCheck.Description);
                 Assert.IsFalse(myListToCheck.EnableAttachments);
                 Assert.IsTrue(myListToCheck.EnableFolderCreation);
@@ -487,6 +487,41 @@ namespace PnP.Core.Test.Base
                     int channelCount = team.Channels.Length;
                     // Add a new channel
                     channelFound = team.Channels.Add(channelName, "Test channel, will be deleted in 21 days");
+
+                    Assert.IsNotNull(channelFound);
+                    Assert.IsTrue(channelFound.Requested);
+                    Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
+                    Assert.IsTrue(team.Channels.Length == channelCount + 1);
+
+                }
+                else
+                {
+                    Assert.Inconclusive($"Channel {channelName} already exists...channels can't be immediately deleted");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void AddTeamChannelPrivateViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(p => p.Channels);
+
+                // Channel names have to be unique
+                string channelName = $"Channel test {new Random().Next()}";
+                // Check if the channel exists
+                var channelFound = team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelFound == null)
+                {
+                    int channelCount = team.Channels.Length;
+                    // Add a new channel
+                    channelFound = team.Channels.Add(channelName, new Model.Teams.TeamChannelOptions
+                    {
+                        Description = "Test channel, will be deleted in 21 days",
+                        MembershipType = Model.Teams.TeamChannelMembershipType.Private,
+                    });
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);

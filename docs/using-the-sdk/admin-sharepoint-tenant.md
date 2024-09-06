@@ -98,3 +98,15 @@ Just like the search schema can be exported it's also possible to import it agai
 // Set tenant search configuration XML
 await context.GetSharePointAdmin().SetSearchConfigurationXmlAsync(searchConfigXml);
 ```
+
+## Joining a site to a hub that requires approval
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
+Joining and un-joining a hub site can be done using methods (`JoinHubSite`, `UnJoinHubSite`) on `ISite` and it's recommended to use those. There's however the case where joining a hub site requires approval from the hub and in that case the existing methods (`JoinHubSite`) return an error ("This Hub Site requires approval to join. Please resubmit this request with an Approval Token from the Hub Site admin."). To workaround this limitation you can use the tenant `ConnectToHubSite` methods:
+
+```csharp
+await context.GetSharePointAdmin().ConnectToHubSiteAsync(
+    new Uri("https://contoso.sharepoint.com/sites/sitetojointohub"), 
+    new Uri("https://contoso.sharepoint.com/sites/hubsite"));
+```

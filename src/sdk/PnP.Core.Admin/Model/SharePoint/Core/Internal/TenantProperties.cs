@@ -17,6 +17,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         [JsonPropertyName("_ObjectIdentity_")]
         public string ObjectIdentity { get; set; }
 
+        public string AIBuilderDefaultPowerAppsEnvironment { get => GetValue<string>(); set => SetValue(value); }
+        
+        public bool AIBuilderEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public NullableBool AIBuilderEnabledInContentCenter { get => GetValue<NullableBool>(); set => SetValue(value); }
+
+        public string AIBuilderSiteListFileName { get => GetValue<string>(); set => SetValue(value); }
+
+        public SharingState AllowAnonymousMeetingParticipantsToAccessWhiteboards { get => GetValue<SharingState>(); set => SetValue(value); }
+
         public bool AllowCommentsTextOnEmailEnabled { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool AllowDownloadingNonWebViewableFiles { get => GetValue<bool>(); set => SetValue(value); }
@@ -25,18 +35,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool AllowEditing { get => GetValue<bool>(); set => SetValue(value); }
         
+        public bool AllowEveryoneExceptExternalUsersClaimInPrivateSite { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool AllowGuestUserShareToUsersNotInSiteCollection { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool AllowLimitedAccessOnUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool AllowOverrideForBlockUserInfoVisibility { get => GetValue<bool>(); set => SetValue(value); }
         
+        public IList<string> AllowSelectSecurityGroupsInSPSitesList { get => GetValue<IList<string>>(); set => SetValue(value); }
+
         public IList<string> AllowSelectSGsInODBListInTenant { get => GetValue<IList<string>>(); set => SetValue(value); }
         
         public bool AnyoneLinkTrackUsers { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool ApplyAppEnforcedRestrictionsToAdHocRecipients { get => GetValue<bool>(); set => SetValue(value); }
-        
+
+        public SPResilienceModeType AuthContextResilienceMode { get => GetValue<SPResilienceModeType>(); set => SetValue(value); }
+
         public bool BccExternalSharingInvitations { get => GetValue<bool>(); set => SetValue(value); }
         
         public string BccExternalSharingInvitationsList { get => GetValue<string>(); set => SetValue(value); }
@@ -44,7 +60,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool BlockAccessOnUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
         
         public BlockDownloadLinksFileTypes BlockDownloadLinksFileType { get => GetValue<BlockDownloadLinksFileTypes>(); set => SetValue(value); }
-        
+
+        public bool BlockDownloadFileTypePolicy { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool BlockDownloadOfAllFilesForGuests { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool BlockDownloadOfAllFilesOnUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
@@ -54,14 +72,13 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool BlockDownloadOfViewableFilesOnUnmanagedDevices { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool BlockMacSync { get => GetValue<bool>(); set => SetValue(value); }
+        
         public bool BlockSendLabelMismatchEmail { get => GetValue<bool>(); set => SetValue(value); }
                 
         public TenantBrowseUserInfoPolicyValue BlockUserInfoVisibilityInOneDrive { get => GetValue<TenantBrowseUserInfoPolicyValue>(); set => SetValue(value); }
         
         public TenantBrowseUserInfoPolicyValue BlockUserInfoVisibilityInSharePoint { get => GetValue<TenantBrowseUserInfoPolicyValue>(); set => SetValue(value); }
-        
-        public ChannelMeetingRecordingPermissionType ChannelMeetingRecordingPermission { get => GetValue<ChannelMeetingRecordingPermissionType>(); set => SetValue(value); }
-        
+                
         public bool CommentsOnFilesDisabled { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool CommentsOnListItemsDisabled { get => GetValue<bool>(); set => SetValue(value); }
@@ -75,7 +92,19 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string ConditionalAccessPolicyErrorHelpLink { get => GetValue<string>(); set => SetValue(value); }
         
         public IEnumerable<string> ContentTypeSyncSiteTemplatesList { get => GetValue<IEnumerable<string>>(); set => SetValue(value); }
-        
+
+        public bool CoreDefaultLinkToExistingAccess { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Role CoreDefaultShareLinkRole { get => GetValue<Role>(); set => SetValue(value); }
+
+        public SharingScope CoreDefaultShareLinkScope { get => GetValue<SharingScope>(); set => SetValue(value); }
+
+        public bool CoreRequestFilesLinkEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int CoreRequestFilesLinkExpirationInDays { get => GetValue<int>(); set => SetValue(value); }
+
+        public SharingCapabilities CoreSharingCapability { get => GetValue<SharingCapabilities>(); set => SetValue(value); }
+
         public string CustomizedExternalSharingServiceUrl { get => GetValue<string>(); set => SetValue(value); }
         
         public SharingPermissionType DefaultLinkPermission { get => GetValue<SharingPermissionType>(); set => SetValue(value); }
@@ -83,6 +112,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         public string DefaultODBMode { get => GetValue<string>(); set => SetValue(value); }
         
         public SharingLinkType DefaultSharingLinkType { get => GetValue<SharingLinkType>(); set => SetValue(value); }
+
+        public IList<string> DenySelectSecurityGroupsInSPSitesList { get => GetValue<IList<string>>(); set => SetValue(value); }
         
         public bool DisableAddToOneDrive { get => GetValue<bool>(); set => SetValue(value); }
         
@@ -92,6 +123,8 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public bool DisableListSync { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool DisableVivaConnectionsAnalytics { get => GetValue<bool>(); set => SetValue(value); }
+    
         public Guid[] DisabledModernListTemplateIds { get => GetValue<Guid[]>(); set => SetValue(value); }
         
         public Guid[] DisabledWebPartIds { get => GetValue<Guid[]>(); set => SetValue(value); }
@@ -134,6 +167,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool EnablePromotedFileHandlers { get => GetValue<bool>(); set => SetValue(value); }
         
+        public bool EnableRestrictedAccessControl { get => GetValue<bool>(); set => SetValue(value); }
+
         public IList<string> ExcludedFileExtensionsForSyncClient { get => GetValue<IList<string>>(); set => SetValue(value); }
         
         public bool ExternalServicesEnabled { get => GetValue<bool>(); set => SetValue(value); }
@@ -166,6 +201,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool IncludeAtAGlanceInShareEmails { get => GetValue<bool>(); set => SetValue(value); }
         
+        public bool IBImplicitGroupBased { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool InformationBarriersSuspension { get => GetValue<bool>(); set => SetValue(value); }
         
         public string IPAddressAllowList { get => GetValue<string>(); set => SetValue(value); }
@@ -180,15 +217,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool IsFluidEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IsLoopEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool IsHubSitesMultiGeoFlightEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IsMnAFlightEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IsMultiGeo { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IsMultipleHomeSitesFlightEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool IsUnmanagedSyncClientForTenantRestricted { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IsUnmanagedSyncClientRestrictionFlightEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsVivaHomeFlightEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IsWBFluidEnabled { get => GetValue<bool>(); set => SetValue(value); }
         
@@ -215,6 +258,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool NotifyOwnersWhenInvitationsAccepted { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool NotifyOwnersWhenItemsReshared { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string OCRAdminSiteListFileName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string OCRComplianceSiteListFileName { get => GetValue<string>(); set => SetValue(value); }
+
+        public ObjectCharacterRecognitionMode OCRModeForAdminSites { get => GetValue<ObjectCharacterRecognitionMode>(); set => SetValue(value); }
+
+        public ObjectCharacterRecognitionMode OCRModeForComplianceODBs { get => GetValue<ObjectCharacterRecognitionMode>(); set => SetValue(value); }
+
+        public ObjectCharacterRecognitionMode OCRModeForComplianceSites { get => GetValue<ObjectCharacterRecognitionMode>(); set => SetValue(value); }
         
         public SharingState ODBAccessRequests { get => GetValue<SharingState>(); set => SetValue(value); }
         
@@ -224,8 +277,18 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool OfficeClientADALDisabled { get => GetValue<bool>(); set => SetValue(value); }
         
+        public bool OneDriveDefaultLinkToExistingAccess { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Role OneDriveDefaultShareLinkRole { get => GetValue<Role>(); set => SetValue(value); }
+
+        public SharingScope OneDriveDefaultShareLinkScope { get => GetValue<SharingScope>(); set => SetValue(value); }
+
         public bool OneDriveForGuestsEnabled { get => GetValue<bool>(); set => SetValue(value); }
-        
+
+        public bool OneDriveRequestFilesLinkEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int OneDriveRequestFilesLinkExpirationInDays { get => GetValue<int>(); set => SetValue(value); }
+
         public long OneDriveStorageQuota { get => GetValue<long>(); set => SetValue(value); }
                 
         public string OrgNewsSiteUrl { get => GetValue<string>(); set => SetValue(value); }
@@ -244,11 +307,17 @@ namespace PnP.Core.Admin.Model.SharePoint
              
         public IList<string> PublicCdnOrigins { get => GetValue<IList<string>>(); set => SetValue(value); }
 
+        public bool ReduceTempTokenLifetimeEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int ReduceTempTokenLifetimeValue { get => GetValue<int>(); set => SetValue(value); }
+
         public bool RequireAcceptingAccountMatchInvitedAccount { get => GetValue<bool>(); set => SetValue(value); }
 
         public int RequireAnonymousLinksExpireInDays { get => GetValue<int>(); set => SetValue(value); }
 
         public bool RestrictedOneDriveLicense { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool RestrictedSharePointLicense { get => GetValue<bool>(); set => SetValue(value); }
 
         public string RootSiteUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -268,6 +337,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool ShowEveryoneExceptExternalUsersClaim { get => GetValue<bool>(); set => SetValue(value); }
         
+        public bool ShowOpenInDesktopOptionForSyncedFiles { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShowPeoplePickerGroupSuggestionsForIB { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool ShowPeoplePickerSuggestionsForGuestUsers { get => GetValue<bool>(); set => SetValue(value); }
         
         public string SignInAccelerationDomain { get => GetValue<string>(); set => SetValue(value); }
@@ -285,13 +358,23 @@ namespace PnP.Core.Admin.Model.SharePoint
         public long StorageQuota { get => GetValue<long>(); set => SetValue(value); }
 
         public long StorageQuotaAllocated { get => GetValue<long>(); set => SetValue(value); }
-        
+
+        public int StreamLaunchConfig { get => GetValue<int>(); set => SetValue(value); }
+
+        public DateTime StreamLaunchConfigLastUpdated { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public int StreamLaunchConfigUpdateCount { get => GetValue<int>(); set => SetValue(value); }
+
         public bool SyncAadB2BManagementPolicy { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool SyncPrivacyProfileProperties { get => GetValue<bool>(); set => SetValue(value); }
         
+        public SPOTlsTokenBindingPolicyValue TlsTokenBindingPolicyValue { get => GetValue<SPOTlsTokenBindingPolicyValue>(); set => SetValue(value); }
+
         public bool UseFindPeopleInPeoplePicker { get => GetValue<bool>(); set => SetValue(value); }
-               
+
+        public bool UsePersistentCookiesForExplorerView { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool UserVoiceForFeedbackEnabled { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool ViewersCanCommentOnMediaDisabled { get => GetValue<bool>(); set => SetValue(value); }

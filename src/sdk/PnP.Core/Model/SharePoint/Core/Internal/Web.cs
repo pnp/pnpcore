@@ -4,6 +4,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.SearchConfiguration;
+using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -186,6 +187,8 @@ namespace PnP.Core.Model.SharePoint
         public bool NavAudienceTargetingEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool NextStepsFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool NotificationsInOneDriveForBusinessEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -441,8 +444,10 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
+            // Replace %20 by space as otherwise %20 gets encoded as %2520 which will break the API request
+            // When using the "parameter" model (@u) the server relative URL has to be specified using /, using \ only works in the non parameterized version (#1412)
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''").Replace("%20", " ").Replace("\\", "/")).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl=@u)?@u='{encodedServerRelativeUrl}'", ApiType.SPORest);
             return apiCall;
         }
         #endregion
@@ -579,9 +584,126 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFileByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
+            // Replace %20 by space as otherwise %20 gets encoded as %2520 which will break the API request
+            // When using the "parameter" model (@u) the server relative URL has to be specified using /, using \ only works in the non parameterized version (#1412)
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''").Replace("%20", " ").Replace("\\", "/")).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl=@u)?@u='{encodedServerRelativeUrl}'", ApiType.SPORest);
             return apiCall;
+        }
+
+        public IFile GetFileById(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdAsync(uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByIdAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await file.BaseRetrieveAsync(apiOverride: BuildGetFileByUniqueIdApiCall(uniqueFileId), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            return file;
+        }
+
+        public IFile GetFileByIdBatch(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdBatchAsync(batch, uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public IFile GetFileByIdBatch(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByIdBatchAsync(uniqueFileId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByIdBatchAsync(Batch batch, Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await file.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFileByUniqueIdApiCall(uniqueFileId), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
+            return file;
+        }
+
+        public async Task<IFile> GetFileByIdBatchAsync(Guid uniqueFileId, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return await GetFileByIdBatchAsync(PnPContext.CurrentBatch, uniqueFileId, expressions).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildGetFileByUniqueIdApiCall(Guid uniqueFileId)
+        {
+            return new ApiCall($"_api/Web/getFileById('{uniqueFileId}')", ApiType.SPORest);
+        }
+
+        public async Task<IFile> GetFileByLinkAsync(string link, params Expression<Func<IFile, object>>[] expressions)
+        {
+            // first encode the passed link
+            var encodedLink = DriveHelper.EncodeSharingUrl(link);
+
+            // Let's try to get DriveItem information
+            var apiCall = new ApiCall($"shares/{encodedLink}/driveitem?$select=sharepointids,parentreference", ApiType.Graph);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return await DeserializeGraphDriveItemAsync(response.Json, expressions).ConfigureAwait(false);
+        }
+
+        public IFile GetFileByLink(string link, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByLinkAsync(link, expressions).GetAwaiter().GetResult();
+        }
+
+        private async Task<IFile> DeserializeGraphDriveItemAsync(string response, params Expression<Func<IFile, object>>[] expressions)
+        {
+            var json = JsonSerializer.Deserialize<JsonElement>(response);
+
+            if (json.TryGetProperty("sharepointIds", out JsonElement parentReference))
+            {
+                Guid fileUniqueId = Guid.Empty;
+                Guid siteId = Guid.Empty;
+                Guid webId = Guid.Empty;
+
+                if (parentReference.TryGetProperty("listItemUniqueId", out JsonElement listItemUniqueId))
+                {
+                    fileUniqueId = listItemUniqueId.GetGuid();
+                }
+
+                if (parentReference.TryGetProperty("siteId", out JsonElement siteIdElement))
+                {
+                    siteId = siteIdElement.GetGuid();
+                }
+
+                if (parentReference.TryGetProperty("webId", out JsonElement webIdElement))
+                {
+                    webId = webIdElement.GetGuid();
+                }
+
+                if (PnPContext.Site.Id == siteId && PnPContext.Web.Id == webId)
+                {
+                    return await PnPContext.Web.GetFileByIdAsync(fileUniqueId, expressions).ConfigureAwait(false);
+                }
+                else
+                {
+                    // A PnPContext is bound to the web, creating a new one to get the file from the other site
+                    if (json.TryGetProperty("sharepointIds", out JsonElement sharepointIds))
+                    {
+                        if (sharepointIds.TryGetProperty("siteUrl", out JsonElement siteUrl))
+                        {
+                            var newContext = await PnPContext.CloneAsync(new Uri(siteUrl.ToString())).ConfigureAwait(false);
+                            return await newContext.Web.GetFileByIdAsync(fileUniqueId, expressions).ConfigureAwait(false);
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
         #endregion
 
@@ -606,6 +728,169 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Users
+
+        public ISharePointUser EnsureEveryoneExceptExternalUsers()
+        {
+            return EnsureEveryoneExceptExternalUsersAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> EnsureEveryoneExceptExternalUsersAsync()
+        {
+            try
+            {
+                var tenantId = await PnPContext.GetTenantIdAsync().ConfigureAwait(false);
+                var loginName = $"c:0-.f|rolemanager|spo-grid-all-users/{tenantId}";
+                return await EnsureUserAsync(loginName).ConfigureAwait(false);
+            }
+            catch(SharePointRestServiceException ex) when (ex.HResult == -2146233088)
+            {
+                var web = await GetAsync(p=>p.Language).ConfigureAwait(false);
+                string userIdentity = null;
+                switch (web.Language)
+                {
+                    case 1025: // Arabic
+                        userIdentity = "الجميع باستثناء المستخدمين الخارجيين";
+                        break;
+                    case 1069: // Basque
+                        userIdentity = "Guztiak kanpoko erabiltzaileak izan ezik";
+                        break;
+                    case 1026: // Bulgarian
+                        userIdentity = "Всички освен външни потребители";
+                        break;
+                    case 1027: // Catalan
+                        userIdentity = "Tothom excepte els usuaris externs";
+                        break;
+                    case 2052: // Chinese (Simplified)
+                        userIdentity = "除外部用户外的任何人";
+                        break;
+                    case 1028: // Chinese (Traditional)
+                        userIdentity = "外部使用者以外的所有人";
+                        break;
+                    case 1050: // Croatian
+                        userIdentity = "Svi osim vanjskih korisnika";
+                        break;
+                    case 1029: // Czech
+                        userIdentity = "Všichni kromě externích uživatelů";
+                        break;
+                    case 1030: // Danish
+                        userIdentity = "Alle undtagen eksterne brugere";
+                        break;
+                    case 1043: // Dutch
+                        userIdentity = "Iedereen behalve externe gebruikers";
+                        break;
+                    case 1033: // English
+                        userIdentity = "Everyone except external users";
+                        break;
+                    case 1061: // Estonian
+                        userIdentity = "Kõik peale väliskasutajate";
+                        break;
+                    case 1035: // Finnish
+                        userIdentity = "Kaikki paitsi ulkoiset käyttäjät";
+                        break;
+                    case 1036: // French
+                        userIdentity = "Tout le monde sauf les utilisateurs externes";
+                        break;
+                    case 1110: // Galician
+                        userIdentity = "Todo o mundo excepto os usuarios externos";
+                        break;
+                    case 1031: // German
+                        userIdentity = "Jeder, außer externen Benutzern";
+                        break;
+                    case 1032: // Greek
+                        userIdentity = "Όλοι εκτός από εξωτερικούς χρήστες";
+                        break;
+                    case 1037: // Hebrew
+                        userIdentity = "כולם פרט למשתמשים חיצוניים";
+                        break;
+                    case 1081: // Hindi
+                        userIdentity = "बाह्य उपयोगकर्ताओं को छोड़कर सभी";
+                        break;
+                    case 1038: // Hungarian
+                        userIdentity = "Mindenki, kivéve külső felhasználók";
+                        break;
+                    case 1057: // Indonesian
+                        userIdentity = "Semua orang kecuali pengguna eksternal";
+                        break;
+                    case 1040: // Italian
+                        userIdentity = "Tutti tranne gli utenti esterni";
+                        break;
+                    case 1041: // Japanese
+                        userIdentity = "外部ユーザー以外のすべてのユーザー";
+                        break;
+                    case 1087: // Kazakh
+                        userIdentity = "Сыртқы пайдаланушылардан басқасының барлығы";
+                        break;
+                    case 1042: // Korean
+                        userIdentity = "외부 사용자를 제외한 모든 사람";
+                        break;
+                    case 1062: // Latvian
+                        userIdentity = "Visi, izņemot ārējos lietotājus";
+                        break;
+                    case 1063: // Lithuanian
+                        userIdentity = "Visi, išskyrus išorinius vartotojus";
+                        break;
+                    case 1086: // Malay
+                        userIdentity = "Semua orang kecuali pengguna luaran";
+                        break;
+                    case 1044: // Norwegian (Bokmål)
+                        userIdentity = "Alle bortsett fra eksterne brukere";
+                        break;
+                    case 1045: // Polish
+                        userIdentity = "Wszyscy oprócz użytkowników zewnętrznych";
+                        break;
+                    case 1046: // Portuguese (Brazil)
+                        userIdentity = "Todos exceto os usuários externos";
+                        break;
+                    case 2070: // Portuguese (Portugal)
+                        userIdentity = "Todos exceto os utilizadores externos";
+                        break;
+                    case 1048: // Romanian
+                        userIdentity = "Toată lumea, cu excepția utilizatorilor externi";
+                        break;
+                    case 1049: // Russian
+                        userIdentity = "Все, кроме внешних пользователей";
+                        break;
+                    case 10266: // Serbian (Cyrillic, Serbia)
+                        userIdentity = "Сви осим спољних корисника";
+                        break;
+                    case 2074:// Serbian (Latin)
+                        userIdentity = "Svi osim spoljnih korisnika";
+                        break;
+                    case 1051:// Slovak
+                        userIdentity = "Všetci okrem externých používateľov";
+                        break;
+                    case 1060: // Slovenian
+                        userIdentity = "Vsi razen zunanji uporabniki";
+                        break;
+                    case 3082: // Spanish
+                        userIdentity = "Todos excepto los usuarios externos";
+                        break;
+                    case 1053: // Swedish
+                        userIdentity = "Alla utom externa användare";
+                        break;
+                    case 1054: // Thai
+                        userIdentity = "ทุกคนยกเว้นผู้ใช้ภายนอก";
+                        break;
+                    case 1055: // Turkish
+                        userIdentity = "Dış kullanıcılar hariç herkes";
+                        break;
+                    case 1058: // Ukranian
+                        userIdentity = "Усі, крім зовнішніх користувачів";
+                        break;
+                    case 1066: // Vietnamese
+                        userIdentity = "Tất cả mọi người trừ người dùng bên ngoài";
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(userIdentity))
+                {
+                    return await EnsureUserAsync(userIdentity).ConfigureAwait(false);
+                }
+            }
+
+            throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Web_EveyoneExceptUsersCouldNotBeEnsured);
+        }
+
         public ISharePointUser EnsureUser(string userPrincipalName)
         {
             return EnsureUserAsync(userPrincipalName).GetAwaiter().GetResult();
@@ -820,6 +1105,64 @@ namespace PnP.Core.Model.SharePoint
         {
             return new ApiCall($"_api/Web/GetUserById({userId})", ApiType.SPORest);
         }
+
+        public async Task<IList<string>> ValidateUsersAsync(IList<string> userList)
+        {
+            List<string> nonExistingUsers = new();
+
+            if (userList == null || userList.Count == 0)
+            {
+                return nonExistingUsers;
+            }
+
+            List<Tuple<string, BatchRequest>> requests = new();
+            var batch = PnPContext.NewBatch();
+            foreach (var user in userList)
+            {
+                requests.Add(Tuple.Create(user, await RawRequestBatchAsync(batch, new ApiCall($"users/{user}", ApiType.Graph), HttpMethod.Get, "GetUser").ConfigureAwait(false)));
+            }
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            foreach (var request in requests)
+            {
+                if (request.Item2.ResponseHeaders.Count == 0)
+                {
+                    nonExistingUsers.Add(request.Item1);
+                }
+            }
+
+            return nonExistingUsers;
+        }
+
+        public IList<string> ValidateUsers(IList<string> userList)
+        {
+            return ValidateUsersAsync(userList).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList<ISharePointUser>> ValidateAndEnsureUsersAsync(IList<string> userList)
+        {
+            var nonExistingUsers = await ValidateUsersAsync(userList).ConfigureAwait(false);
+
+            List<ISharePointUser> ensuredUsers = new();
+
+            var batch = PnPContext.NewBatch();
+            foreach (var user in userList)
+            {
+                if (!nonExistingUsers.Contains(user))
+                {
+                    ensuredUsers.Add(await EnsureUserBatchAsync(batch, user).ConfigureAwait(false));
+                }
+            }
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            return ensuredUsers;
+        }
+
+        public IList<ISharePointUser> ValidateAndEnsureUsers(IList<string> userList)
+        {
+            return ValidateAndEnsureUsersAsync(userList).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #region Multilingual
@@ -970,6 +1313,60 @@ namespace PnP.Core.Model.SharePoint
         {
             return IsSubSiteAsync().GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region AccessRequest
+
+        public async Task SetAccessRequest(AccessRequestOption operation, string email = null)
+        {
+            await SetAccessRequestAsync(operation, email).ConfigureAwait(false);
+        }
+
+        public async Task SetAccessRequestAsync(AccessRequestOption operation, string email = null)
+        {
+            if (string.IsNullOrEmpty(email) && operation == AccessRequestOption.SpecificMail)
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_Unsupported_AccessRequest_NoMail);
+            }
+
+            if (!string.IsNullOrEmpty(email) && operation != AccessRequestOption.SpecificMail)
+            {
+                throw new ArgumentNullException(PnPCoreResources.Exception_Unsupported_AccessRequest_MailNotSupported);
+            }
+
+            // the option is always true except when it needs to be disabled
+            string targetMail = email;
+            if (operation == AccessRequestOption.Enabled)
+            {
+                targetMail = "someone@someone.com";
+            }
+
+            if (operation == AccessRequestOption.Disabled)
+            {
+                targetMail = "";
+            }
+
+            // Build body
+            var useAccessRequest = new
+            {
+                useAccessRequestDefault = operation == AccessRequestOption.Enabled ? "true" : "false"
+            }.AsExpando();
+
+            string useAccessRequestBody = JsonSerializer.Serialize(useAccessRequest, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+            var setUseAccessRequestDefaultAndUpdateRequest = new ApiCall($"_api/web/setUseaccessrequestdefaultandupdate", ApiType.SPORest, useAccessRequestBody);
+            await RawRequestAsync(setUseAccessRequestDefaultAndUpdateRequest, HttpMethod.Post).ConfigureAwait(false);
+
+            var updateRequestAccessMail = new
+            {
+                __metadata = new { type = "SP.Web" },
+                RequestAccessEmail = targetMail
+            }.AsExpando();
+
+            string updateRequestAccessMailBody = JsonSerializer.Serialize(updateRequestAccessMail, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+            var updateRequestAccessMailRequest = new ApiCall($"_api/web", ApiType.SPORest, updateRequestAccessMailBody);
+            await RawRequestAsync(updateRequestAccessMailRequest, new HttpMethod("PATCH")).ConfigureAwait(false);
+        }
+
         #endregion
 
         #region Ensure page scheduling
@@ -1939,6 +2336,10 @@ namespace PnP.Core.Model.SharePoint
                 DatesInUtc = true,
             };
 
+            // Clear the cached item from previous runs
+            TaxonomyHiddenList.Items.Clear();
+
+            // Fetch the item
             await TaxonomyHiddenList.LoadItemsByCamlQueryAsync(camlQuery).ConfigureAwait(false);
             var items = TaxonomyHiddenList.Items.AsRequested();
 
@@ -1987,7 +2388,10 @@ namespace PnP.Core.Model.SharePoint
 
         private static ApiCall BuildGetUserEffectivePermissionsApiCall(string userPrincipalName)
         {
-            return new ApiCall($"_api/web/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|")}{userPrincipalName}')", ApiType.SPORest);
+            return new ApiCall($"_api/web/getusereffectivepermissions('{HttpUtility.UrlEncode("i:0#.f|membership|" + userPrincipalName)}')", ApiType.SPORest)
+            {
+                SkipCollectionClearing = true
+            };
         }
 
         public bool CheckIfUserHasPermissions(string userPrincipalName, PermissionKind permissionKind)
@@ -2006,10 +2410,10 @@ namespace PnP.Core.Model.SharePoint
         #region Reindex web
         public async Task ReIndexAsync()
         {
-            var webInfo = await GetAsync(p => p.EffectiveBasePermissions, 
-                                         p => p.AllProperties, 
+            var webInfo = await GetAsync(p => p.EffectiveBasePermissions,
+                                         p => p.AllProperties,
                                          p => p.Lists.QueryProperties(p => p.Title,
-                                                                      p => p.NoCrawl, 
+                                                                      p => p.NoCrawl,
                                                                       p => p.RootFolder.QueryProperties(p => p.Properties))).ConfigureAwait(false);
 
             const string reIndexKey = "vti_searchversion";
@@ -2126,6 +2530,7 @@ namespace PnP.Core.Model.SharePoint
         {
             return RemoveIndexedPropertyAsync(propertyName).GetAwaiter().GetResult();
         }
+
         #endregion
 
         #endregion

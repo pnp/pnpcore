@@ -1,20 +1,21 @@
+using System;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Public interface to define a ViewFieldCollection object
+    /// View fields model
     /// </summary>
     [ConcreteType(typeof(ViewFieldCollection))]
-    public interface IViewFieldCollection : IDataModel<IViewFieldCollection>, IDataModelCollectionLoad<IViewFieldCollection>, IDataModelUpdate, IDataModelDelete, ISupportModules<IViewFieldCollection>
+    public interface IViewFieldCollection : IDataModel<IViewFieldCollection>, IDataModelCollectionLoad<IViewFieldCollection>, ISupportModules<IViewFieldCollection>
     {
-
-        #region New properties
+        /// <summary>
+        /// List view fields
+        /// </summary>
+        public System.Collections.Generic.List<string> Items { get; }
 
         /// <summary>
-        /// To update...
+        /// Listview fields schema xml
         /// </summary>
-        public string SchemaXml { get; set; }
-
-        #endregion
-
+        public string SchemaXml { get; }
     }
 }

@@ -7,7 +7,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Event containing information about the happened retry
     /// </summary>
-    public sealed class RetryEvent
+    public sealed class RetryEvent : IRetryEvent
     {
         /// <summary>
         /// Retry event constructor
@@ -16,14 +16,17 @@ namespace PnP.Core.Services
         /// <param name="httpStatusCode">Http status code</param>
         /// <param name="waitTime">Wait before the next try in seconds</param>
         /// <param name="exception">Socket exception that triggered the retry</param>
-        internal RetryEvent(HttpRequestMessage requestMessage, int httpStatusCode, int waitTime, Exception exception)
+        public RetryEvent(HttpRequestMessage requestMessage, int httpStatusCode, int waitTime, Exception exception)
         {
-            Request = requestMessage.RequestUri;
             HttpStatusCode = httpStatusCode;
             WaitTime = waitTime;
             Exception = exception;
 
-            ProcessRequestProperties(requestMessage);
+            if (requestMessage != null)
+            {
+                Request = requestMessage.RequestUri;
+                ProcessRequestProperties(requestMessage);
+            }
         }
 
         /// <summary>
@@ -47,10 +50,9 @@ namespace PnP.Core.Services
         public Exception Exception { get; private set; }
 
         /// <summary>
-        /// PnPContext properties
+        /// Event property bag
         /// </summary>
-        public IDictionary<string, object> PnpContextProperties { get; internal set; } = new Dictionary<string, object>();
-
+        public IDictionary<string, object> Properties { get; internal set; } = new Dictionary<string, object>();
 
         private void ProcessRequestProperties(HttpRequestMessage requestMessage)
         {
@@ -59,7 +61,7 @@ namespace PnP.Core.Services
             {
                 foreach(var property in requestMessage.Options)
                 {
-                    PnpContextProperties[property.Key] = property.Value;
+                    Properties[property.Key] = property.Value;
                 }
             }
 #else
@@ -67,7 +69,7 @@ namespace PnP.Core.Services
             {
                 foreach (var property in requestMessage.Properties)
                 {
-                    PnpContextProperties[property.Key] = property.Value;
+                    Properties[property.Key] = property.Value;
                 }
             }
 #endif

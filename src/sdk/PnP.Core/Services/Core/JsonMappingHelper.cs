@@ -305,6 +305,14 @@ namespace PnP.Core.Services
                                     TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
                                 }
                             }
+                            else if (metadataBasedObject is ListItem)
+                            {
+                                var commentCollection = (metadataBasedObject as ListItem).Comments;
+                                if (commentCollection != null)
+                                {
+                                    TrackAndUpdateMetaData(commentCollection as IMetadataExtensible, property);
+                                }
+                            }
                         }
                         else if (useOverflowField)
                         {
@@ -529,6 +537,21 @@ namespace PnP.Core.Services
                     case "Location":
                         {
                             var fieldValue = new FieldLocationValue() { Field = field };
+                            if (json.ValueKind != JsonValueKind.Null && json.ValueKind != JsonValueKind.Undefined)
+                            {
+                                var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
+                                fieldValue.FromJson(parsedFieldContent);
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(new JsonElement());
+                            }
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        }
+                    case "Thumbnail":
+                        {
+                            var fieldValue = new FieldThumbnailValue() { Field = field };
                             if (json.ValueKind != JsonValueKind.Null && json.ValueKind != JsonValueKind.Undefined)
                             {
                                 var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
@@ -1175,6 +1198,51 @@ namespace PnP.Core.Services
                 if (key.Contains("_x0020_"))
                 {
                     key = key.Replace("_x0020_", " ");
+                }
+
+                if (key.Contains("_x002d_"))
+                {
+                    key = key.Replace("_x002d_", "-");
+                }
+
+                if (key.Contains("_x002e_"))
+                {
+                    key = key.Replace("_x002e_", ".");
+                }
+
+                if (key.Contains("_x002f_"))
+                {
+                    key = key.Replace("_x002f_", "/");
+                }
+
+                if (key.Contains("_x003a_"))
+                {
+                    key = key.Replace("_x003a_", ":");
+                }
+
+                if (key.Contains("_x003c_"))
+                {
+                    key = key.Replace("_x003c_", "<");
+                }
+
+                if (key.Contains("_x003e_"))
+                {
+                    key = key.Replace("_x003e_", ">");
+                }
+
+                if (key.Contains("_x007c_"))
+                {
+                    key = key.Replace("_x007c_", "|");
+                }
+
+                if (key.Contains("_x005b_"))
+                {
+                    key = key.Replace("_x005b_", "[");
+                }
+
+                if (key.Contains("_x005d_"))
+                {
+                    key = key.Replace("_x005d_", "]");
                 }
             }
 

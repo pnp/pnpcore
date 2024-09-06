@@ -69,3 +69,58 @@ var viewToDelete = myList.Views.AsRequested().FirstOrDefault(p => p.Title == "Vi
 
 await viewToDelete.DeleteAsync();
 ```
+
+## Adding a field to an existing view
+
+You can add a new field to an existing view using one of the `AddViewField` methods and supplying the field using it's internal name.
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
+
+var myView = myList.Views.Add(new ViewOptions()
+                                {
+                                    Title = "My custom view",
+                                    RowLimit = 10,
+                                    Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
+                                    ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu" }
+                                });
+// Add the "Modified" field
+await myView.AddViewFieldAsync("Modified");                                
+```
+
+## Removing a field from an existing view
+
+You can remove a field from an existing view using one of the `RemoveViewField` methods and supplying the field using it's internal name.
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
+
+var myView = myList.Views.Add(new ViewOptions()
+                                {
+                                    Title = "My custom view",
+                                    RowLimit = 10,
+                                    Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
+                                    ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu", "Modified" }
+                                });
+// Removes the "Modified" field from the view
+await myView.RemoveViewFieldAsync("Modified");                                
+```
+
+## Re-ordering a field in an existing view
+
+A field in a view can be moved to a new position using one of the `MoveViewFieldTo` methods.
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
+
+var myView = myList.Views.Add(new ViewOptions()
+                                {
+                                    Title = "My custom view",
+                                    RowLimit = 10,
+                                    Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
+                                    ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu", "Modified" }
+                                });
+
+// Moves the "Modified" field to be the first field in the view
+await myView.MoveViewFieldToAsync("Modified", 0);                               
+```

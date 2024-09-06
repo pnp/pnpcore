@@ -11,25 +11,40 @@ namespace PnP.Core.Services
     /// </summary>
     public static class PnPContextExtensions
     {
+        private static readonly IPnPContextExtensions defaultImplementation = new IPnPContextExtensionsImplementation();
+
+        /// <summary>
+        /// Allows you to replace the default implementation of <see cref="IPnPContextExtensions"/> with your own implementation.
+        /// </summary>
+        public static IPnPContextExtensions Implementation { private get; set; } = defaultImplementation;
+
+        /// <summary>
+        /// When you've replaced the default implementation of <see cref="IPnPContextExtensions"/> with your own, you can use this method to revert back to the default implementation.
+        /// </summary>
+        public static void RevertToDefaultImplementation()
+        {
+            Implementation = defaultImplementation;
+        }
+
         #region Extend context with SharePoint Admin and Microsoft 365 admin capabilities
         /// <summary>
-        /// Extends a <see cref="PnPContext"/> with SharePoint admin functionality
+        /// Extends a <see cref="IPnPContext"/> with SharePoint admin functionality
         /// </summary>
-        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <param name="context"><see cref="IPnPContext"/> to extend</param>
         /// <returns>An <see cref="ISharePointAdmin"/> instance enabling SharePoint admin operations</returns>
-        public static ISharePointAdmin GetSharePointAdmin(this PnPContext context)
+        public static ISharePointAdmin GetSharePointAdmin(this IPnPContext context)
         {
-            return new SharePointAdmin(context);
+            return Implementation.GetSharePointAdmin(context);
         }
 
         /// <summary>
-        /// Extends a <see cref="PnPContext"/> with site collection admin functionality
+        /// Extends a <see cref="IPnPContext"/> with site collection admin functionality
         /// </summary>
-        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <param name="context"><see cref="IPnPContext"/> to extend</param>
         /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
-        public static ISiteCollectionManager GetSiteCollectionManager(this PnPContext context)
+        public static ISiteCollectionManager GetSiteCollectionManager(this IPnPContext context)
         {
-            return new SiteCollectionManager(context);
+            return Implementation.GetSiteCollectionManager(context);
         }
 
         /// <summary>
@@ -37,9 +52,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
         /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
-        public static ITeamManager GetTeamManager(this PnPContext context)
+        public static ITeamManager GetTeamManager(this IPnPContext context)
         {
-            return new TeamManager(context);
+            return Implementation.GetTeamManager(context);
         }
 
         /// <summary>
@@ -47,9 +62,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
         /// <returns>An <see cref="ITenantAppManager"/> instance enabling tenant app catalog operations</returns>
-        public static ITenantAppManager GetTenantAppManager(this PnPContext context)
+        public static ITenantAppManager GetTenantAppManager(this IPnPContext context)
         {
-            return new TenantAppManager(context);
+            return Implementation.GetTenantAppManager(context);
         }
 
         /// <summary>
@@ -57,9 +72,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
         /// <returns>An <see cref="ISiteCollectionAppManager"/> instance enabling site collection app catalog operations</returns>
-        public static ISiteCollectionAppManager GetSiteCollectionAppManager(this PnPContext context)
+        public static ISiteCollectionAppManager GetSiteCollectionAppManager(this IPnPContext context)
         {
-            return new SiteCollectionAppManager(context);
+            return Implementation.GetSiteCollectionAppManager(context);
         }
 
         /// <summary>
@@ -67,9 +82,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
         /// <returns>An <see cref="IMicrosoft365Admin"/> instance enabling Microsoft 365 admin operations</returns>
-        public static IMicrosoft365Admin GetMicrosoft365Admin(this PnPContext context)
+        public static IMicrosoft365Admin GetMicrosoft365Admin(this IPnPContext context)
         {
-            return new Microsoft365Admin(context);
+            return Implementation.GetMicrosoft365Admin(context);
         }
 
         #endregion

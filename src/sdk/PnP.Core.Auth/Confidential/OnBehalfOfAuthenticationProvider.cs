@@ -36,6 +36,11 @@ namespace PnP.Core.Auth
         /// </summary>
         public Func<string> UserTokenProvider { get; set; }
 
+        /// <summary>
+        /// Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false.
+        /// </summary>
+        public bool UseSharedCache { get; set; }
+
         // Instance private member, to keep the token cache at service instance level
         private IConfidentialClientApplication confidentialClientApplication;
 
@@ -49,13 +54,15 @@ namespace PnP.Core.Auth
         /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="clientSecret">The Client Secret of the app</param>
         /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        /// <param name="useSharedCache">Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</param>
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             SecureString clientSecret,
-            Func<string> userTokenProvider)
+            Func<string> userTokenProvider,
+            bool useSharedCache = false)
             : this(clientId, tenantId, new PnPCoreAuthenticationOnBehalfOfOptions
             {
                 ClientSecret = clientSecret?.ToInsecureString()
-            }, userTokenProvider)
+            }, userTokenProvider, useSharedCache)
         {
         }
 
@@ -66,12 +73,15 @@ namespace PnP.Core.Auth
         /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="options">Options for the authentication provider</param>
         /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        /// <param name="useSharedCache">Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</param>
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             PnPCoreAuthenticationOnBehalfOfOptions options,
-            Func<string> userTokenProvider)
+            Func<string> userTokenProvider,
+            bool useSharedCache = false)
             : this(null, null)
         {
             UserTokenProvider = userTokenProvider;
+            UseSharedCache = useSharedCache;
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
@@ -89,12 +99,15 @@ namespace PnP.Core.Auth
         /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
         /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
         /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        /// <param name="useSharedCache">Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</param>
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             StoreName storeName, StoreLocation storeLocation, string thumbprint,
-            Func<string> userTokenProvider)
+            Func<string> userTokenProvider,
+            bool useSharedCache = false)
             : this(null, null)
         {
             UserTokenProvider = userTokenProvider;
+            UseSharedCache = useSharedCache;
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
@@ -104,6 +117,33 @@ namespace PnP.Core.Auth
                     StoreName = storeName,
                     StoreLocation = storeLocation,
                     Thumbprint = thumbprint
+                }
+            });
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="certificate">The X.509 certificate to use for authentication</param>
+        /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        /// <param name="useSharedCache">Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</param>
+        public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
+            X509Certificate2 certificate,
+            Func<string> userTokenProvider,
+            bool useSharedCache = false)
+            : this(null, null)
+        {
+            UserTokenProvider = userTokenProvider;
+            UseSharedCache = useSharedCache;
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
+                {
+                    Certificate = certificate
                 }
             });
         }
@@ -132,15 +172,21 @@ namespace PnP.Core.Auth
                     PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_InvalidConfiguration);
             }
 
-            // We need the certificate thumbprint
-            if (string.IsNullOrEmpty(options.OnBehalfOf.ClientSecret) && string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
+            if (options.OnBehalfOf.Certificate == null &&
+                string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint) &&
+                string.IsNullOrEmpty(options.OnBehalfOf.ClientSecret))
             {
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            if (!string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
+            if (options.OnBehalfOf.Certificate != null)
+            {
+                // We prioritize the X.509 certificate, if any
+                Certificate = options.OnBehalfOf.Certificate;
+            }
+            else if(!string.IsNullOrEmpty(options.OnBehalfOf.Thumbprint))
             {
                 // We prioritize the X.509 certificate, if any
                 Certificate = X509CertificateUtility.LoadCertificate(
@@ -154,9 +200,10 @@ namespace PnP.Core.Auth
                 ClientSecret = options.OnBehalfOf.ClientSecret.ToSecureString();
             }
 
+            ConfidentialClientApplicationBuilder confidentialClientApplicationBuilder;
             if (Certificate != null)
             {
-                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                confidentialClientApplicationBuilder = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithCertificate(Certificate)
                     .WithHttpClientFactory(msalHttpClientFactory)
@@ -165,12 +212,11 @@ namespace PnP.Core.Auth
                         options.OnBehalfOf.RedirectUri,
                         TenantId,
                         options.Environment,
-                        options.AzureADLoginAuthority)
-                    .Build();
+                        options.AzureADLoginAuthority);
             }
             else
             {
-                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                confidentialClientApplicationBuilder = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithClientSecret(ClientSecret.ToInsecureString())
                     .WithHttpClientFactory(msalHttpClientFactory)
@@ -179,9 +225,18 @@ namespace PnP.Core.Auth
                         options.OnBehalfOf.RedirectUri,
                         TenantId,
                         options.Environment,
-                        options.AzureADLoginAuthority)
-                    .Build();
+                        options.AzureADLoginAuthority);
             }
+
+            if (UseSharedCache)
+            {
+                confidentialClientApplicationBuilder.WithCacheOptions(new CacheOptions()
+                {
+                    UseSharedCache = true
+                });
+            }
+
+            confidentialClientApplication = confidentialClientApplicationBuilder.Build();
 
             // Log the initialization information
             Log?.LogInformation(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_LogInit);
@@ -252,7 +307,7 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+            Log?.LogDebug(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
                 GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it

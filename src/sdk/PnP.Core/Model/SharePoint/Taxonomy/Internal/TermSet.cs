@@ -223,6 +223,26 @@ namespace PnP.Core.Model.SharePoint
             return GetTermsByCustomPropertyAsync(key, value, trimUnavailable).GetAwaiter().GetResult();
         }
 
+        public void AddLocalizedName(string name, string languageTag)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (string.IsNullOrEmpty(languageTag))
+            {
+                throw new ArgumentNullException(nameof(languageTag));
+            }
+
+            var newTermSetLocalizedName = new TermSetLocalizedName
+            {
+                Name = name,
+                LanguageTag = languageTag
+            };
+
+            (LocalizedNames as TermSetLocalizedNameCollection).Add(newTermSetLocalizedName);
+        }
         #endregion
     }
 }

@@ -44,7 +44,7 @@ using (PnPContext pnpCoreContext = PnPCoreSdk.Instance.GetPnPContext(csomContext
 
 ## Using PnP Framework when the PnP Core SDK was already configured
 
-If you already have a PnP Core SDK context and you want also use PnP Framework and/or SharePoint CSOM then you can create a CSOM ClientContext from your PnP Context via the `PnPCoreSDK.Instance.GetContext()` method.
+If you already have a PnP Core SDK context and you want also use PnP Framework and/or SharePoint CSOM then you can create a CSOM ClientContext from your PnP Context via the `PnPCoreSDK.Instance.GetClientContext()` method.
 
 ```csharp
 using (var pnpCoreContext = await pnpContextFactory.CreateAsync("SiteToWorkWith"))

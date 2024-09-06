@@ -166,9 +166,9 @@ namespace PnP.Core.Model.SharePoint
         public Guid HubSiteId { get; }
 
         /// <summary>
-        /// Gets or sets the Information Protection Label Id for an individual site collection.
+        /// Gets the Information Protection Label Id for an individual site collection.
         /// </summary>
-        public Guid SensitivityLabelId { get; set; }
+        public Guid SensitivityLabelId { get; }
 
         /// <summary>
         /// Information Protection Label Id for an individual site collection

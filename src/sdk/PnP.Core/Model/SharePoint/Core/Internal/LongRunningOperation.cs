@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
                         string.Format(PnPCoreResources.Exception_AsyncOperationError_MaxRetries, options.MaxRetries, Location));
                 }
 
-                var apiCall = new ApiCall(Location.ToString().Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
+                var apiCall = new ApiCall(Location.ToString().Replace($"{CloudManager.GetGraphBaseUrl(PnPContext)}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(response.Json))
                 {

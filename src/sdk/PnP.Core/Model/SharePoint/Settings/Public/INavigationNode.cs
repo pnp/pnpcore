@@ -52,9 +52,9 @@ namespace PnP.Core.Model.SharePoint
         public ListTemplateType ListTemplateType { get; }
 
         /// <summary>
-        /// 
+        /// Define the up to 1O audiences for this navigation node. Note that Web.NavAudienceTargetingEnabled has to be set to true first.
         /// </summary>
-        public List<Guid> AudienceIds { get; }
+        public List<Guid> AudienceIds { get; set; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement

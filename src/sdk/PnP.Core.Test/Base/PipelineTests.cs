@@ -43,7 +43,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }
@@ -77,7 +77,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }
@@ -115,7 +115,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }
@@ -151,7 +151,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }
@@ -185,7 +185,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }
@@ -229,7 +229,7 @@ namespace PnP.Core.Test.Base
                     {
                         return body;
                     },
-                    ResponseHandler = (statusCode, headers, responseContent) =>
+                    ResponseHandler = (statusCode, headers, responseContent, batchRequestId) =>
                     {
                         return responseContent;
                     }

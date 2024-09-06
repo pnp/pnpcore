@@ -610,6 +610,38 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         [TestMethod]
+        public async Task RenameFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder addedFolder = null;
+                try
+                {
+                    IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                    addedFolder = await parentFolder.EnsureFolderAsync("sub1");
+                    Assert.IsTrue(addedFolder != null);
+                    Assert.IsTrue(addedFolder.Name == "sub1");
+
+                    // rename the added folder
+                    addedFolder.Rename("newsub1");
+
+                    Assert.IsTrue(addedFolder.Name == "newsub1");
+
+                    // Get the folder again
+                    IFolder addedFolder2 = await context.Web.GetFolderByIdAsync(addedFolder.UniqueId);
+
+                    Assert.IsTrue(addedFolder2.Name == addedFolder.Name);
+                }
+                finally
+                {
+                    await addedFolder.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task UpdateFolderTest()
         {
             //TestCommon.Instance.Mocking = false;

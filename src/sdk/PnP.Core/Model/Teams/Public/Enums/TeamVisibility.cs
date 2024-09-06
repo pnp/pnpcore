@@ -13,6 +13,11 @@
         /// <summary>
         /// Public team
         /// </summary>
-        Public
+        Public,
+
+        /// <summary>
+        /// Team is a hidden membership Team
+        /// </summary>
+        HiddenMembership
     }
 }

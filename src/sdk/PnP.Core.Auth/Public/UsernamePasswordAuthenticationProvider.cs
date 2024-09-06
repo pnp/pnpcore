@@ -181,12 +181,14 @@ namespace PnP.Core.Auth
             catch (MsalUiRequiredException)
             {
                 // Try to get the token directly through AAD if it is not available in the tokens cache
+#pragma warning disable CS0618 // Type or member is obsolete
                 tokenResult = await publicClientApplication.AcquireTokenByUsernamePassword(scopes, Username, Password)
                     .ExecuteAsync().ConfigureAwait(false);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             // Log the access token retrieval action
-            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+            Log?.LogDebug(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
                 GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it

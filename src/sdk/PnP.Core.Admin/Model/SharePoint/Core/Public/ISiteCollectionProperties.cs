@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -51,6 +53,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         BlockDownloadLinksFileTypes BlockDownloadLinksFileType { get; set; }
 
         /// <summary>
+        /// Gets or sets the Block download policy flag
+        /// </summary>
+        bool BlockDownloadPolicy { get; set; }
+
+        /// <summary>
+        /// Clears the Restricted access control groups
+        /// </summary>
+        bool ClearRestrictedAccessControl { get; set; }
+
+        /// <summary>
         /// Whether comments on site pages are disabled or not
         /// </summary>
         bool CommentsOnSitePagesDisabled { get; set; }
@@ -82,6 +94,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool DefaultLinkToExistingAccessReset { get; set; }
 
         /// <summary>
+        /// Default share link role
+        /// </summary>
+        Role DefaultShareLinkRole { get; set; }
+
+        /// <summary>
+        /// Default share link scope
+        /// </summary>
+        SharingScope DefaultShareLinkScope { get; set; }
+
+        /// <summary>
         /// The default link type for this site
         /// </summary>
         SharingLinkType DefaultSharingLinkType { get; set; }
@@ -111,6 +133,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         FlowsPolicy DisableFlows { get; set; }
 
+        /// <summary>
+        /// Gets or sets the exclude site owners flag for Block download policy
+        /// </summary>
+        bool ExcludeBlockDownloadPolicySiteOwners { get; set; }
+        
         /// <summary>
         /// External user expiration in days
         /// </summary>
@@ -250,9 +277,44 @@ namespace PnP.Core.Admin.Model.SharePoint
         PWAEnabledStatus PWAEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets the Read only access for unmanaged devices policy flag
+        /// </summary>
+        bool ReadOnlyForUnmanagedDevices { get; set; }
+
+        /// <summary>
         /// The GroupId of the group this site is associated with
         /// </summary>
         Guid RelatedGroupId { get; }
+
+        /// <summary>
+        /// Gets or sets request files link enabled
+        /// </summary>
+        bool RequestFilesLinkEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets request files link expiration days
+        /// </summary>
+        int RequestFilesLinkExpirationInDays { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Restricted access control policy flag based on group membership
+        /// </summary>
+        bool RestrictedAccessControl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Restricted Access Control Groups
+        /// </summary>
+        IList<Guid> RestrictedAccessControlGroups { get; set; }
+
+        /// <summary>
+        /// Gets or sets the restricted access control groups to be added
+        /// </summary>
+        IList<Guid> RestrictedAccessControlGroupsToAdd { get; set; }
+
+        /// <summary>
+        /// Gets or sets the restricted access control groups to be removed
+        /// </summary>
+        IList<Guid> RestrictedAccessControlGroupsToRemove { get; set; }
 
         /// <summary>
         /// Determines whether the site is resticted to a specific geo location
@@ -293,6 +355,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Indicates what this site's domain restriction mode is
         /// </summary>
         SharingDomainRestrictionModes SharingDomainRestrictionMode { get; set; }
+
+        /// <summary>
+        /// Get whether the sharing lock can be cleared
+        /// </summary>
+        bool SharingLockDownCanBeCleared { get; }
+
+        /// <summary>
+        /// Gets the SharingLockDownEnabled setting
+        /// </summary>
+        bool SharingLockDownEnabled { get; }
 
         /// <summary>
         /// Flag that controls allowing members to search guest users in the directory

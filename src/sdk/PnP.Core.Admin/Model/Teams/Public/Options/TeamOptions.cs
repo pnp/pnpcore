@@ -1,4 +1,4 @@
-﻿using System;
+﻿using PnP.Core.Model.Teams;
 
 namespace PnP.Core.Admin.Model.Teams
 {
@@ -7,5 +7,9 @@ namespace PnP.Core.Admin.Model.Teams
     /// </summary>
     public class TeamOptions
     {
+        /// <summary>
+        /// Allows to specify the specialization for the Team creation
+        /// </summary>
+        public TeamSpecialization Specialization { get; set; }
     }
 }

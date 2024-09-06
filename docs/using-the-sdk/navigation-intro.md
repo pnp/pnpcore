@@ -17,10 +17,10 @@ As discussed before, the navigation nodes can be obtained for two types.
 
 ```csharp
 // Get Quick Launch navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n => n.QuickLaunch);
+var nodes = await context.Web.Navigation.GetAsync(n => n.QuickLaunch);
 
 // Get Top Navigation navigation nodes
-var nodes = await context.Web.Navigation.LoadAsync(n => n.TopNavigationBar);
+var nodes = await context.Web.Navigation.GetAsync(n => n.TopNavigationBar);
 ```
 
 ## Getting a specific navigation node by id
@@ -122,3 +122,7 @@ var nodeToMoveAfter = await context.Web.Navigation.QuickLaunch.GetByIdAsync(2);
 // move the nodes
 await context.Web.Navigation.QuickLaunch.MoveNodeAfterAsync(nodeToMove, nodeToMoveAfter);
 ```
+
+## Using audience targeting
+
+Navigation nodes can be targeted to one or more audiences making the site's navigation dynamic depending on the user visiting the site. More details can be found on the [Using audience targeting](audience-targeting-intro.md) page.

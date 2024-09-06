@@ -18,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets JsonProperty "sectionIndex"
         /// </summary>
         [JsonPropertyName("sectionIndex")]
-        public int SectionIndex { get; set; }
+        public float SectionIndex { get; set; }
 
         /// <summary>
         /// Gets or sets JsonProperty "sectionFactor"

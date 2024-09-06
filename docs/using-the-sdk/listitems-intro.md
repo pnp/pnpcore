@@ -77,7 +77,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
 > [!Note]
 >
 > - When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
@@ -113,9 +113,9 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                                                    p => p.TypeAsString, 
                                                                                    p => p.Title));
 // Do a paged retrieval (non async sample) of the list items with additional collection loads
-foreach(var listItem in myList.Items.QueryProperties(
+foreach(var listItem in myList.Items.QueryProperties(p => p.All,
                                      p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
-                                                                           p => p.RoleDefinitions))
+                                                                            p => p.RoleDefinitions))
 {
     // Do something with the list item
     if (listItem["MyStatus"].ToString() == "Pending")
@@ -128,7 +128,8 @@ foreach(var listItem in myList.Items.QueryProperties(
 
 > [!Note]
 >
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - Ensure you add `p => p.All` to ensure your custom fields are loaded in case you need those
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
@@ -157,8 +158,8 @@ string viewXml = @"<View>
                           <Value Type='text'><![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                    </View>";
 
 // Execute the query
@@ -178,11 +179,12 @@ foreach (var listItem in myList.Items.AsRequested())
 
 > [!Note]
 >
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When you want to reuse a `PnPContext` which you've previously used to load items you first need to clear the loaded items via `myList.Items.Clear()`
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
-> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope=RecursiveAll` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
+> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope='RecursiveAll'` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
 
 #### Using paging with LoadItemsByCamlQuery
 
@@ -213,10 +215,10 @@ string viewXml = @$"<View>
             <Value Type='Integer'>0</Value>
         </Eq>
         </Where>
+        <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
     </Query>
-    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
     <RowLimit>{pageSize}</RowLimit>
-    </View>";
+</View>";
 
 // Load all the needed data using paged requests
 bool paging = true;
@@ -335,8 +337,8 @@ string viewXml = @"<View>
                           <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit>5</RowLimit>
                    </View>";
 
@@ -358,11 +360,12 @@ foreach (var listItem in myList.Items.AsRequested())
 
 > [!Note]
 >
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When you want to reuse a `PnPContext` which you've previously used to load items you first need to clear the loaded items via `myList.Items.Clear()`
 > - When referencing a field ensure to use the correct field name casing: `version_x0020_tag` is not the same as `Version_x0020_Tag`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - When using `text` fields in a CAML query is recommended to escape the text field value to ensure the query does not break. Escaping should be done using `<![CDATA[{MyVariable}]]`
-> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope=RecursiveAll` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
+> - When using the `CamlQueryOptions.FolderServerRelativeUrl` property then this will not work if the referred folder has a # or & it it's name. A workaround then is scoping the CAML query to the folder via the `FileDirRef` element in combination with setting the `Scope='RecursiveAll'` property in the `View` element. See [here](https://github.com/pnp/pnpcore/issues/839) for more context.
 > - When you need to fetch additional fields populated via a lookup column just specify the field in the `ViewFields` node of the CAML query, e.g. `<FieldRef Name='LookupSingle_x003a_Created' />` loads the `Created` field brought via the lookup column named `LookupSingle`
 
 #### Using paging with ListDataAsStream
@@ -388,8 +391,8 @@ string viewXml = @"<View>
                           <Value Type='text'>![CDATA[Item1]]</Value>
                         </BeginsWith>
                       </Where>
+                      <OrderBy Override='TRUE'><FieldRef Name='ID' Ascending='FALSE' /></OrderBy>
                     </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>20</RowLimit>
                    </View>";
 
@@ -398,7 +401,7 @@ bool paging = true;
 string nextPage = null;
 while (paging)
 {
-    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
     {
         ViewXml = viewXml,
         RenderOptions = RenderListDataOptionsFlags.ListData,
@@ -434,7 +437,7 @@ while (paging)
     myList.Items.Clear();
 
     // Execute the query, this populates a page of list items 
-    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
     {
         ViewXml = viewXml,
         RenderOptions = RenderListDataOptionsFlags.ListData,
@@ -499,7 +502,7 @@ await context.ExecuteAsync();
 ```
 
 > [!Note]
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
 ## Updating list items
@@ -508,7 +511,7 @@ Updating a list item comes down to updating the field values followed by calling
 
 Methods | Description
 --------|------------
-Update, UpdateAsync | Regular update, this will result in a new version being created and the modified and editor list item fields will be updated
+Update, UpdateAsync | Regular update, this will result in a new version being created and the modified and editor list item fields will be updated. When updating fields in a document library the update might silently fail when the field value exceeds 255 characters. If so, please use one of the other methods in this table.
 SystemUpdate, SystemUpdateAsync | Updates the item without creating a new version and without updating the modified and editor list item fields
 UpdateOverWriteVersion, UpdateOverWriteVersionAsync | Updates the item without creating a new version and the modified and editor list item fields will be updated
 
@@ -534,7 +537,7 @@ await addedItem.UpdateAsync();
 ```
 
 > [!Note]
-> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field keep in mind that you need to use the field's `InternalName`. If you've created a field with name `Version Tag` then the `InternalName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
 ### Updating the list item Author, Editor, Created and Modified system properties
@@ -598,6 +601,44 @@ foreach (var listItem in myList.Items.AsRequested())
 
 // Execute the batch
 await context.ExecuteAsync();
+```
+
+## Adding a list folder
+
+To add a folder to a list the list first must be configured to allow content types (`ContentTypesEnabled`) and allow folders (`EnableFolderCreation`). Once that's done use one of the `AddListFolder` methods to add a folder.
+
+```csharp
+list.ContentTypesEnabled = true;
+list.EnableFolderCreation = true;
+await list.UpdateAsync();
+
+// Option A: Add folder Test
+await list.AddListFolderAsync("Test");
+
+
+// Option B: Create path 'folderA/subfolderA'
+string path = new[] {"folderA", "subfolderA" }.Aggregate(
+    "",
+    (aggregate, element) =>
+    {
+        IListItem addedFolder = list.AddListFolder(element, aggregate);
+        return $"{aggregate}/{element}";
+    }
+);
+```
+
+## Moving a list item
+
+You can move a list item to another folder inside it's list using one of the `MoveTo` methods:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+
+// Move to folder folderA/subfolderA inside this list
+await first.MoveToAsync("folderA/subfolderA");
 ```
 
 ## Sharing a list item

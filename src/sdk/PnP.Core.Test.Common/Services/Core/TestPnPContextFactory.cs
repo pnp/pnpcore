@@ -61,7 +61,9 @@ namespace PnP.Core.Test.Common.Services
             if (TelemetryManager != null && !TestCommonBase.RunningInGitHubWorkflow())
             {
                 // Send telemetry to the test Azure AppInsights instance
+#pragma warning disable CS0618 // Type or member is obsolete
                 TelemetryManager.TelemetryClient.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         }
 

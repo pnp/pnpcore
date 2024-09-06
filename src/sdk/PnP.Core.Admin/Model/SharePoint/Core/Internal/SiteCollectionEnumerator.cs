@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -34,7 +35,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         /// <summary>
-        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using 
+        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
@@ -142,11 +143,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         }
 
         /// <summary>
-        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using 
+        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, int pageSize = 500)
+        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, VanityUrlOptions vanityUrlOptions, bool includeSharedAndPrivateTeamChannelSites, int pageSize = 500)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -171,12 +172,120 @@ namespace PnP.Core.Admin.Model.SharePoint
                                             <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
                                          </View>";
 
-            List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
+            List<ISiteCollectionWithDetails> loadedSites = new();
 
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
             }, vanityUrlOptions, true, pageSize).ConfigureAwait(false);
+
+            // Perform an extra query to list all the shared/private Teams channel site collections
+            if (includeSharedAndPrivateTeamChannelSites)
+            {
+                string sitesListFilterQuery = @"<View Scope='RecursiveAll'>
+                                                <ViewFields>
+                                                    <FieldRef Name='SiteUrl' />
+                                                    <FieldRef Name='Title' />
+                                                    <FieldRef Name='SiteId' />
+                                                    <FieldRef Name='GroupId' />
+                                                    <FieldRef Name='CreatedBy' />
+                                                    <FieldRef Name='DeletedBy' />
+                                                    <FieldRef Name='TimeCreated' />
+                                                    <FieldRef Name='TimeDeleted' />
+                                                    <FieldRef Name='SiteOwnerName' />
+                                                    <FieldRef Name='SiteOwnerEmail' />
+                                                    <FieldRef Name='StorageQuota' />
+                                                    <FieldRef Name='StorageUsed' />
+                                                    <FieldRef Name='TemplateName' />
+                                                    <FieldRef Name='ChannelType' />
+                                                </ViewFields>
+                                                <Query>
+                                                    <Where>
+                                                        <Gt>
+                                                            <FieldRef Name='ChannelType' /><Value Type='Integer'>0</Value>
+                                                        </Gt>
+                                                    </Where>
+                                                </Query>
+                                                <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+                                                <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
+                                                </View>";
+
+                List<ISiteCollectionWithDetails> channelSites = new();
+
+                await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListFilterQuery, (IEnumerable<IListItem> listItems) =>
+                {
+                    foreach (var listItem in listItems)
+                    {
+                        if (listItem["TimeDeleted"] != null)
+                        {
+                            continue;
+                        }
+
+                        Uri url = new Uri(listItem["SiteUrl"].ToString());
+                        Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+
+                        if (channelSites.FirstOrDefault(p => p.Id == siteId) == null)
+                        {
+                            channelSites.Add(new SiteCollectionWithDetails()
+                            {
+                                // WebId needs to be retrieved via a subsequent batch call
+                                //GraphId = $"{url.DnsSafeHost},{siteId},{webId}",
+                                //RootWebId = webId,
+                                Url = new Uri(listItem["SiteUrl"].ToString()),
+                                Id = siteId,
+                                Name = listItem["Title"]?.ToString(),
+                                CreatedBy = listItem["CreatedBy"]?.ToString(),
+                                TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                                // Hardcoded to false as the sharing happens via the Teams channel
+                                ShareByEmailEnabled = false,
+                                ShareByLinkEnabled = false,
+                                SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                                SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                                StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                                StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                                // Template id for TeamChannel sites
+                                TemplateId = 69,
+                                TemplateName = listItem["TemplateName"]?.ToString(),
+                            });
+                        }
+                    }
+
+                }, vanityUrlOptions, false, pageSize).ConfigureAwait(false);
+
+                // Complement the collected site information with the web id, using batching to optimize the number of roundtrips
+                if (channelSites.Count > 0)
+                {
+                    List<Tuple<Uri, IBatchSingleResult<BatchResultValue<string>>>> batchResults = new();
+                    var batch = context.NewBatch();
+                    foreach (var site in channelSites)
+                    {
+                        var apiRequest = new ApiRequest(ApiRequestType.SPORest, $"{site.Url}/_api/web?$select=Id");
+                        var response = await context.Web.ExecuteRequestBatchAsync(batch, apiRequest).ConfigureAwait(false);
+                        batchResults.Add(Tuple.Create(site.Url, response));
+                    }
+                    await context.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+                    foreach(var batchResult in batchResults)
+                    {
+                        var siteCollectionWithDetailsToUpdate = channelSites.FirstOrDefault(p => p.Url == batchResult.Item1);
+                        if (siteCollectionWithDetailsToUpdate != null && batchResult.Item2.IsAvailable)
+                        {
+                            var json = JsonSerializer.Deserialize<JsonElement>(batchResult.Item2.Result.Value);
+                            if (json.TryGetProperty("d", out JsonElement root))
+                            {
+                                if (root.TryGetProperty("Id", out JsonElement id))
+                                {
+                                    ((SiteCollectionWithDetails)siteCollectionWithDetailsToUpdate).RootWebId = id.GetGuid();
+                                    ((SiteCollectionWithDetails)siteCollectionWithDetailsToUpdate).GraphId = $"{siteCollectionWithDetailsToUpdate.Url.DnsSafeHost},{siteCollectionWithDetailsToUpdate.Id},{id.GetGuid()}";
+                                }
+                            }
+                        }
+                    }
+
+                    // Merge with the loadedSites list
+                    loadedSites.AddRange(channelSites);
+                }
+            }
 
             return loadedSites;
         }
@@ -251,7 +360,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
 
-            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.AbsoluteUri), (IEnumerable<IListItem> listItems) =>
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.OriginalString), (IEnumerable<IListItem> listItems) =>
             {
                 ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
             }, vanityUrlOptions, true, 500).ConfigureAwait(false);
@@ -425,7 +534,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             // Get the my site host url
             var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync(vanityUrlOptions).ConfigureAwait(false);
 
-            ApiCall sitesEnumerationApiCall = new ApiCall("sites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
+            ApiCall sitesEnumerationApiCall = new ApiCall("sites/getallsites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
 
             bool paging = true;
             while (paging)
@@ -433,7 +542,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var result = await (context.Web as Web).RawRequestAsync(sitesEnumerationApiCall, HttpMethod.Get).ConfigureAwait(false);
 
                 #region Json response
-                /*              
+                /*
                 "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#sites",
                 "@odata.nextLink": "https://graph.microsoft.com/v1.0/sites?$skiptoken=UGFnZWQ9VFJVRSZwX0ZpbGVMZWFmUmVmPTE3MjgyXy4wMDAmcF9JRD0xNzI4Mg",
                 "value": [
@@ -480,7 +589,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 if (json.TryGetProperty("@odata.nextLink", out JsonElement nextLink))
                 {
-                    sitesEnumerationApiCall = new ApiCall(nextLink.GetString().Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
+                    sitesEnumerationApiCall = new ApiCall(nextLink.GetString().Replace($"{CloudManager.GetGraphBaseUrl(context)}{PnPConstants.GraphV1Endpoint}/", ""), ApiType.Graph);
                 }
                 else
                 {
@@ -571,8 +680,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     foreach (var hitsContainer in queryResult.GetProperty("hitsContainers").EnumerateArray())
                     {
                         paging = hitsContainer.GetProperty("moreResultsAvailable").GetBoolean();
-                        from += pageSize;
-                        to += pageSize;
+                        from += pageSize;                        
 
                         if (hitsContainer.TryGetProperty("hits", out JsonElement hits) && hits.ValueKind == JsonValueKind.Array)
                         {

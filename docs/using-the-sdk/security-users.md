@@ -20,6 +20,7 @@ User account | Login name | Description
 Everyone | `c:0(.s|true` | Use this user to represent all users in your organization
 Everyone except external users | `c:0-.f|rolemanager|spo-grid-all-users/<guid>` | Use this user to represent all users except the internal users in your organization
 Azure AD security group | `c:0t.c|tenant|<guid>` | You can add an Azure AD security group to a SharePoint Group or directly grant it a role by using this login name. The `<guid>` is the Azure AD object id of the security group
+Company Administrator | `c:0t.c|tenant|<guid>` | Company Administrator translated to a group containing all the tenant level SharePoint administrators. The `<guid>` is the Azure AD object id of the security group
 Microsoft 365 group | `c:0o.c|federateddirectoryclaimprovider|<guid>` | You can add a Microsoft 365 group to a SharePoint Group or directly grant it a role by using this login name. The `<guid>` is the Azure AD object id of the Microsoft 365 group. Note that adding this Microsoft 365 group will grant it's members access
 
 As you can't simply update the user table list to add users, use the approaches as outlined below.
@@ -51,14 +52,42 @@ var foundUser = await context.Web.GetUserByIdAsync(userId);
 
 ## Adding/ensuring a user
 
-Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` methods.
+Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` and `EnsureEveryoneExceptExternalUsers` methods. The latter method is needed for the "Everyone except external users" user as that string is different for sites created in other languages. Other "special" users are language neutral.
 
 ```csharp
 // Regular user
 var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
 
-// Special user
-var specialUser = await context.Web.EnsureUserAsync("Everyone except external users");
+// Special users: for the "Everyone except external users" user use the EnsureEveryoneExceptExternalUsersAsync method
+var everyoneExceptEnternalUsers = await context.Web.EnsureEveryoneExceptExternalUsersAsync();
+
+// Other special users can be done using the string
+var companyAdministators = await context.Web.EnsureUserAsync("Company Administrator");
+
+```
+
+> [!Important]
+> Using `EnsureUser` will add the user to the site's users list whenever the user was not there, during that operation the passed in user needs to be a valid user. However, if the user already was added to the site, then deleted from Azure AD, followed by calling `EnsureUser` this method will not return an error. Calling one of the `ValidateAndEnsureUsers` method is the best option here, alternatively calling `AsGraphUser` method will perform an actual validation and throw an error is the user does not exist in Azure AD.
+
+### Validating users
+
+When you've a list of users and you want to validate if these users still exist in Azure AD then use the `ValidateUsers` methods, if you also want to ensure (see previous chapter) that exist in Azure AD use the `ValidateAndEnsureUsers` methods.
+
+```csharp
+var userList = new List<string> 
+{ 
+    "ValidUser1@contoso.onmicrosoft.com", 
+    "ValidUser2@contoso.onmicrosoft.com", 
+    "NonExistingUser@contoso.onmicrosoft.com" 
+};
+
+// Check users, returns a list containing the NonExistingUser@contoso.onmicrosoft.com user
+var nonExistingUsers = await context.Web.ValidateUsersAsync(userList);
+
+// Checks users and ensures the ones that exist in Azure AD. 
+// Returns a list with 2 ISharePointUser instances for ValidUser1@contoso.onmicrosoft.com
+// and ValidUser2@contoso.onmicrosoft.com
+var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
 ```
 
 ## Granting permissions for a user at web level

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -32,150 +33,287 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        // TODO: Need to write test methods for this
-        //#region RecycleById methods
+        #region DeleteAll methods
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Guid RecycleById(int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <returns></returns>
+        public void DeleteAll();
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task<Guid> RecycleByIdAsync(int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <returns></returns>
+        public Task DeleteAllAsync();
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public void RecycleByIdBatch(int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <returns></returns>
+        public void DeleteAllBatch();
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task RecycleByIdBatchAsync(int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <returns></returns>
+        public Task DeleteAllBatchAsync();
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public void RecycleByIdBatch(Batch batch, int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public void DeleteAllBatch(Batch batch);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="id">Id of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task RecycleByIdBatchAsync(Batch batch, int id);
+        /// <summary>
+        /// Delete all file versions
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public Task DeleteAllBatchAsync(Batch batch);
 
-        //#endregion
+        #endregion
 
-        // TODO:
-        //#region RecycleByLabel methods
+        #region DeleteById methods
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Guid RecycleByLabel(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteById(int id);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task<Guid> RecycleByLabelAsync(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByIdAsync(int id);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public void RecycleByLabelBatch(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteByIdBatch(int id);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task RecycleByLabelBatchAsync(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByIdBatchAsync(int id);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public void RecycleByLabelBatch(Batch batch, string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteByIdBatch(Batch batch, int id);
 
-        ///// <summary>
-        ///// Recycle the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="label">Label of the file version to recycle</param>
-        ///// <returns></returns>
-        //public Task RecycleByLabelBatchAsync(Batch batch, string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByIdBatchAsync(Batch batch, int id);
 
-        //#endregion
+        #endregion
 
-        //#region RestoreByLabel methods
+        #region DeleteByLabel methods
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public Guid RestoreByLabel(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteByLabel(string label);
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public Task<Guid> RestoreByLabelAsync(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByLabelAsync(string label);
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public void RestoreByLabelBatch(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteByLabelBatch(string label);
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public Task RestoreByLabelBatchAsync(string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByLabelBatchAsync(string label);
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public void RestoreByLabelBatch(Batch batch, string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public void DeleteByLabelBatch(Batch batch, string label);
 
-        ///// <summary>
-        ///// Restore the file version
-        ///// </summary>
-        ///// <param name="batch">Batch to add the request to</param>
-        ///// <param name="label">Label of the file version to restore</param>
-        ///// <returns></returns>
-        //public Task RestoreByLabelBatchAsync(Batch batch, string label);
+        /// <summary>
+        /// Delete the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to Delete</param>
+        /// <returns></returns>
+        public Task DeleteByLabelBatchAsync(Batch batch, string label);
 
-        //#endregion
+        #endregion
+
+
+        #region RecycleById methods
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleById(int id);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByIdAsync(int id);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleByIdBatch(int id);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByIdBatchAsync(int id);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleByIdBatch(Batch batch, int id);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByIdBatchAsync(Batch batch, int id);
+
+        #endregion
+
+        #region RecycleByLabel methods
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleByLabel(string label);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByLabelAsync(string label);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleByLabelBatch(string label);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByLabelBatchAsync(string label);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public void RecycleByLabelBatch(Batch batch, string label);
+
+        /// <summary>
+        /// Recycle the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByLabelBatchAsync(Batch batch, string label);
+
+        #endregion
+
+        #region RestoreByLabel methods
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public void RestoreByLabel(string label);
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public Task RestoreByLabelAsync(string label);
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public void RestoreByLabelBatch(string label);
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public Task RestoreByLabelBatchAsync(string label);
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public void RestoreByLabelBatch(Batch batch, string label);
+
+        /// <summary>
+        /// Restore the file version
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="label">Label of the file version to restore</param>
+        /// <returns></returns>
+        public Task RestoreByLabelBatchAsync(Batch batch, string label);
+
+        #endregion
     }
 }

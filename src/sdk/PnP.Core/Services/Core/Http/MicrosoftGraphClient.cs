@@ -68,6 +68,17 @@ namespace PnP.Core.Services
         {
             if (!baseAddressWasSet && !string.IsNullOrEmpty(authority))
             {
+                // Only set base address when there's a different authority
+                var currentBaseAddress = Client.BaseAddress;
+                if (currentBaseAddress != null) 
+                { 
+                    if (!string.IsNullOrEmpty(currentBaseAddress.Authority) && currentBaseAddress.Authority.Equals(authority, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        baseAddressWasSet = true;
+                        return;
+                    }
+                }
+
                 Client.BaseAddress = new Uri($"https://{authority}/");
                 baseAddressWasSet = true;
             }

@@ -199,7 +199,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.TreeViewEnabled,
                     p => p.UseAccessRequestDefault,
                     p => p.WebTemplate,
-                    p => p.WebTemplateConfiguration
+                    p => p.WebTemplateConfiguration,
+                    p => p.WebTemplatesGalleryFirstRunEnabled
                     );
 
                 var web = context.Web;
@@ -212,9 +213,10 @@ namespace PnP.Core.Test.SharePoint
                 //Assert.IsNull(web.ThemedCssFolderUrl);
                 Assert.IsFalse(web.ThirdPartyMdmEnabled);
                 Assert.IsFalse(web.TreeViewEnabled);
-                Assert.IsTrue(web.UseAccessRequestDefault);
+                Assert.IsTrue(web.UseAccessRequestDefault || !web.UseAccessRequestDefault);
                 Assert.AreEqual("GROUP", web.WebTemplate);
                 Assert.AreEqual("GROUP#0", web.WebTemplateConfiguration);
+                Assert.IsTrue(web.WebTemplatesGalleryFirstRunEnabled || !web.WebTemplatesGalleryFirstRunEnabled);
             }
         }
 
@@ -372,6 +374,49 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetMultipleWebPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    IWeb web = null;
+                    try
+                    {
+                        web = await context.Web.GetAsync(p => p.AllProperties);
+
+                        web.AllProperties["random1"] = "a";
+                        web.AllProperties["random2"] = "b";
+                        web.AllProperties["random3"] = "c";
+
+                        await web.AllProperties.UpdateAsync();
+
+                        // Reload the properties
+                        web = await context.Web.GetAsync(p => p.AllProperties);
+
+                        Assert.IsTrue(web.AllProperties.GetString("random1", null) == "a");
+                        Assert.IsTrue(web.AllProperties.GetString("random2", null) == "b");
+                        Assert.IsTrue(web.AllProperties.GetString("random3", null) == "c");
+                    }
+                    finally
+                    {
+                        web.AllProperties["random1"] = null;
+                        web.AllProperties["random2"] = null;
+                        web.AllProperties["random3"] = null;
+                        await web.AllProperties.UpdateAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task SetWebPropertiesUnderScoreTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -386,7 +431,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var web = await context.Web.GetAsync(p => p.AllProperties);
 
-                    var propertyKey = "With SpaceAnd_Underscore";
+                    var propertyKey = "With SpacePlus_-./:<>|[]";
                     var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
                     if (myProperty == 0)
                     {
@@ -782,7 +827,7 @@ namespace PnP.Core.Test.SharePoint
         {
             Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
         }
-        
+
         [TestMethod]
         public async Task GetTimeZoneInfoTest()
         {
@@ -791,7 +836,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var timeZoneInfo = context.Web.RegionalSettings.TimeZone.GetTimeZoneInfo();
                 Assert.IsTrue(timeZoneInfo != null);
-            } 
+            }
         }
 
         [TestMethod]
@@ -840,7 +885,7 @@ namespace PnP.Core.Test.SharePoint
             utcDate = localDate.ToUniversalTime();
             localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, 3);
             Assert.IsTrue(localWebTime.Hour == 15);
-            
+
         }
 
         private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, int id)
@@ -1009,6 +1054,20 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task EnsuresEveryoneExceptExternalUsersTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var ensuredUser = await context.Web.EnsureEveryoneExceptExternalUsersAsync();
+
+                Assert.IsTrue(ensuredUser.Requested);
+                Assert.IsTrue(ensuredUser is Model.Security.ISharePointUser);
+                Assert.IsTrue(ensuredUser.LoginName.StartsWith($"c:0-.f|rolemanager|spo-grid-all-users/"));
+            }
+        }
+
+        [TestMethod]
         public async Task EnsureUserTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1092,6 +1151,40 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(foundUser2 is Model.Security.ISharePointUser);
                 Assert.IsTrue(foundUser1.UserPrincipalName == currentUser.UserPrincipalName);
                 Assert.IsTrue(foundUser1.Id != foundUser2.Id);
+            }
+        }
+
+        [TestMethod]
+        public async Task UsersExistTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var userList = new List<string> { currentUser.UserPrincipalName, "xyz123@bertonline.onmicrosoft.com" };
+
+                var nonExistingUsers = context.Web.ValidateUsers(userList);
+
+                Assert.IsTrue(nonExistingUsers.Count == 1);
+                Assert.IsTrue(nonExistingUsers[0] == "xyz123@bertonline.onmicrosoft.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task ValidateAndEnsureUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var userList = new List<string> { currentUser.UserPrincipalName, "xyz123@bertonline.onmicrosoft.com" };
+
+                var existingUserList = context.Web.ValidateAndEnsureUsers(userList);
+
+                Assert.IsTrue(existingUserList.Count == 1);
+                Assert.IsTrue(existingUserList[0].Id == currentUser.Id);
             }
         }
 
@@ -1308,6 +1401,22 @@ namespace PnP.Core.Test.SharePoint
                 IFile specialFile2 = await context.Web.GetFileByServerRelativeUrlAsync(lib2.RootFolder.ServerRelativeUrl + "/Hi'there# is &ok/Hi'there# is &ok.docx");
 
                 await lib2.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetByServerRelativeSeparatorEncoding()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
+
+                sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery.Replace("/", "\\")}\\Shared Documents";
+                sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
             }
         }
 
@@ -1929,6 +2038,95 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AccessRequest
+        [TestMethod]
+        public async Task DisablesAccessReviewOnWeb()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.Disabled);
+
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsFalse(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "");
+            }
+        }
+
+        [TestMethod]
+        public async Task EnablesAccessReview()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.Enabled);
+
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "someone@someone.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task EnablesSpecificMailInAccessReview()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, "pnp@rocks.com");
+
+                context.Web.Load(p => p.UseAccessRequestDefault, p => p.RequestAccessEmail);
+                await context.ExecuteAsync();
+
+                Assert.IsFalse(context.Web.UseAccessRequestDefault);
+                Assert.IsTrue(context.Web.RequestAccessEmail == "pnp@rocks.com");
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsEmptyInSpecificMail()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, "");
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsNullInSpecificMail()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.SpecificMail, null);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task FailsIfMailIsPassedInDisablementdOption()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.SetAccessRequestAsync(AccessRequestOption.Disabled, "pnp@rocks.com");
+                });
+            }
+        }
+        #endregion
+
         #region Get Search configuration
 
         [TestMethod]
@@ -2057,6 +2255,17 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetEffectiveExternalUserPermissionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var basePermissions = await context.Web.GetUserEffectivePermissionsAsync("bjansen_microsoft.com#ext#@bertonline.onmicrosoft.com");
+
+                Assert.IsNotNull(basePermissions);
+            }
+        }
 
         [TestMethod]
         public async Task CheckIfUserHasPermissionsAsyncTest()
@@ -2086,7 +2295,7 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Reindex tests
-        
+
         [TestMethod]
         public async Task ReIndexNoScriptSiteTest()
         {

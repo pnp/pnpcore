@@ -1,0 +1,1 @@
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"ca5fbda0-f005-6000-aa4f-0816e2078696","SPClientServiceRequestDuration":"22","X-SharePointHealthScore":"3","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":"{\u0022RoleAssignments\u0022:[],\u0022HasUniqueRoleAssignments\u0022:true,\u0022Id\u0022:\u0022ec7a4fbb-04a9-4962-b09a-1a8d2ce2aa8c\u0022}"}

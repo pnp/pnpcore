@@ -77,7 +77,7 @@ namespace PnP.Core.Services
                     if (eventHub != null && eventHub.RequestRateLimitUpdate != null)
                     {
                         // If using a custom event then that's overruling the native handler
-                        eventHub.RequestRateLimitUpdate.Invoke(new RateLimitEvent(response));
+                        eventHub.RequestRateLimitUpdate.Invoke(new RateLimitEvent(request, response));
                     }
                     else
                     {

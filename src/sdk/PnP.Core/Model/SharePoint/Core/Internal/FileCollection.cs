@@ -73,7 +73,7 @@ namespace PnP.Core.Model.SharePoint
         #region File upload
         private static async Task<File> FileUpload(File newFile, Stream content, bool overwrite)
         {
-            var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''")).Replace("+", "%20");
+            var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/addusingpath(decodedUrl='{encodedServerFileName}',overwrite={overwrite.ToString().ToLowerInvariant()})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {
@@ -96,8 +96,10 @@ namespace PnP.Core.Model.SharePoint
 
             var buffer = new byte[chunkSizeBytes];
             int bytesRead;
-            while ((bytesRead = content.Read(buffer, 0, buffer.Length)) > 0)
+            while (true)
             {
+                bytesRead = content.Read(buffer, 0, buffer.Length);
+            
                 // A chunk can be returned smaller than the bytes requested. See https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=net-5.0&viewFallbackFrom=net-3.1#System_IO_Stream_Read_System_Byte___System_Int32_System_Int32_
                 // The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available,
                 // or zero (0) if the end of the stream has been reached.
@@ -107,7 +109,8 @@ namespace PnP.Core.Model.SharePoint
                 if (firstChunk)
                 {
                     // Add empty file
-                    string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/add(url='{newFile.Name}',overwrite={overwrite.ToString().ToLowerInvariant()})";
+                    var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
+                    string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/addusingpath(decodedUrl='{encodedServerFileName}',overwrite={overwrite.ToString().ToLowerInvariant()})";
                     var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
                     {
                         Interactive = true
@@ -134,6 +137,8 @@ namespace PnP.Core.Model.SharePoint
                         BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
+
+                    break;
                 }
                 else
                 {

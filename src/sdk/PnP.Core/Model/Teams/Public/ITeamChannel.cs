@@ -38,6 +38,11 @@ namespace PnP.Core.Model.Teams
         public string Email { get; }
 
         /// <summary>
+        /// Timestamp at which the channel was created
+        /// </summary>
+        public DateTime CreatedDateTime { get; }
+
+        /// <summary>
         /// Defines the Membership type for the Team Channel
         /// </summary>
         public TeamChannelMembershipType MembershipType { get; set; }

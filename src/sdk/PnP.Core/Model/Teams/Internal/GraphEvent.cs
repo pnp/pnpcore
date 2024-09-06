@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -342,12 +343,12 @@ namespace PnP.Core.Model.Teams
 
             if (recurrenceRange.HasValue("EndDate") && recurrenceRange.EndDate != DateTime.MinValue)
             {
-                range.endDate = recurrenceRange.EndDate.ToString("yyyy-MM-dd");
+                range.endDate = recurrenceRange.EndDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
 
             if (recurrenceRange.HasValue("StartDate") && recurrenceRange.StartDate != DateTime.MinValue)
             {
-                range.startDate = recurrenceRange.StartDate.ToString("yyyy-MM-dd");
+                range.startDate = recurrenceRange.StartDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
 
             if (recurrenceRange.HasValue("NumberOfOccurrences") && recurrenceRange.NumberOfOccurrences > 0)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,6 +11,31 @@ namespace PnP.Core.Admin.Model.SharePoint
     public interface ITenantProperties
     {
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the default PowerApps environment in which the Microsoft Syntex form processing feature will create models
+        /// </summary>
+        string AIBuilderDefaultPowerAppsEnvironment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value if the AIBuilder settings should be shown in the tenant
+        /// </summary>
+        bool AIBuilderEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value if the AIBuilder settings should be shown in content centers. True means that it is shown
+        /// </summary>
+        NullableBool AIBuilderEnabledInContentCenter { get; set; }
+
+        /// <summary>
+        /// It is a name of the file which contains the list of AIBuilder enabled sites
+        /// </summary>
+        string AIBuilderSiteListFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value to indicate whether to allow anonymous meeting participants to access whiteboards
+        /// </summary>
+        SharingState AllowAnonymousMeetingParticipantsToAccessWhiteboards { get; set; }
 
         /// <summary>
         /// Gets or sets a value AllowCommentsTextOnEmail boolean
@@ -33,6 +59,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool AllowEditing { get; set; }
 
         /// <summary>
+        /// Gets or sets the value if EveryoneExceptExternalUsers claim is allowed or not in people picker in a private group site. False value means it is blocked.
+        /// </summary>
+        bool AllowEveryoneExceptExternalUsersClaimInPrivateSite { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to handle guest sharing to users not in guest users' site collection
         /// </summary>
         bool AllowGuestUserShareToUsersNotInSiteCollection { get; set; }
@@ -48,6 +79,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool AllowOverrideForBlockUserInfoVisibility { get; set; }
 
         /// <summary>
+        /// Gets or sets a value to handle guest sharing group's allow list
+        /// </summary>
+        IList<string> AllowSelectSecurityGroupsInSPSitesList { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to handle the tenant allowing select security groups access to ODB setting
         /// </summary>
         IList<string> AllowSelectSGsInODBListInTenant { get; set; }
@@ -61,6 +97,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets or sets whether app-enforced restrictions apply to TOAA users
         /// </summary>
         bool ApplyAppEnforcedRestrictionsToAdHocRecipients { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value of AuthContextResilienceMode
+        /// </summary>
+        SPResilienceModeType AuthContextResilienceMode { get; set; }
 
         /// <summary>
         /// Gets or sets a value to specify if BCC functionality is enabled for external invitations
@@ -82,6 +123,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// There is an equivalent site level policy
         /// </summary>
         BlockDownloadLinksFileTypes BlockDownloadLinksFileType { get; set; }
+
+        /// <summary>
+        /// Indicates whether Block Download by File Type Policy is enabled or not
+        /// </summary>
+        bool BlockDownloadFileTypePolicy { get; }
 
         /// <summary>
         /// Gets or sets a Boolean value that specifies whether the following policy is enabled: set block download of all files for guests
@@ -124,11 +170,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         TenantBrowseUserInfoPolicyValue BlockUserInfoVisibilityInSharePoint { get; set; }
 
         /// <summary>
-        /// Gets or sets a value to specify the channel meeting recording permission
-        /// </summary>
-        ChannelMeetingRecordingPermissionType ChannelMeetingRecordingPermission { get; set; }
-
-        /// <summary>
         /// Whether comments on files are disabled or not
         /// </summary>
         bool CommentsOnFilesDisabled { get; set; }
@@ -165,6 +206,36 @@ namespace PnP.Core.Admin.Model.SharePoint
         IEnumerable<string> ContentTypeSyncSiteTemplatesList { get; set; }
 
         /// <summary>
+        /// Gets or sets default share link to existing access on core partition
+        /// </summary>
+        bool CoreDefaultLinkToExistingAccess { get; set; }
+
+        /// <summary>
+        /// Gets or sets default share link role on core partition
+        /// </summary>
+        Role CoreDefaultShareLinkRole { get; set; }
+
+        /// <summary>
+        /// Gets or sets default share link scope on core partition
+        /// </summary>
+        SharingScope CoreDefaultShareLinkScope { get; set; }
+
+        /// <summary>
+        /// Gets or sets request files link expiration days on core partition
+        /// </summary>
+        int CoreRequestFilesLinkExpirationInDays { get; set; }
+
+        /// <summary>
+        /// Enable the request files functionality for the tenant
+        /// </summary>
+        bool CoreRequestFilesLinkEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets collaboration type on core partition
+        /// </summary>
+        SharingCapabilities CoreSharingCapability { get; set; }
+
+        /// <summary>
         /// Gets or sets customized external sharing service url
         /// </summary>
         string CustomizedExternalSharingServiceUrl { get; set; }
@@ -185,6 +256,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         SharingLinkType DefaultSharingLinkType { get; set; }
 
         /// <summary>
+        /// Gets or sets a value to handle guest sharing group's allow list
+        /// </summary>
+        IList<string> DenySelectSecurityGroupsInSPSitesList { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to specify whether Add To OneDrive is disabled
         /// </summary>
         bool DisableAddToOneDrive { get; set; }
@@ -203,6 +279,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Get/Set whether Nucleus Sync should be disabled for Lists
         /// </summary>
         bool DisableListSync { get; set; }
+
+        /// <summary>
+        /// Indicates whether Viva Connections Analytics is disabled or not on the tenant
+        /// </summary>
+        bool DisableVivaConnectionsAnalytics { get; set; }
 
         /// <summary>
         /// An array of modern List template ids that are disabled on the tenant
@@ -314,6 +395,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool EnablePromotedFileHandlers { get; set; }
 
         /// <summary>
+        /// Gets or sets the value of policy which determines whether Restricted Access Control Policy is enabled
+        /// </summary>
+        bool EnableRestrictedAccessControl { get; set; }
+
+        /// <summary>
         /// Get/Set excluded file extensions for sync client
         /// </summary>
         IList<string> ExcludedFileExtensionsForSyncClient { get; set; }
@@ -397,6 +483,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool IncludeAtAGlanceInShareEmails { get; set; }
 
         /// <summary>
+        /// Gets or sets IBImplicitGroupBased value
+        /// </summary>
+        bool IBImplicitGroupBased { get; set; }
+
+        /// <summary>
         /// Gets or sets InformationBarriersSuspension value
         /// </summary>
         bool InformationBarriersSuspension { get; set; }
@@ -435,12 +526,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool IsFluidEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value to specify whether the Loop feature for the Fluid Framework is enabled
+        /// </summary>
+        bool IsLoopEnabled { get; set; }
+
+        /// <summary>
         /// Get status of HubSitesMultiGeo flight
         /// </summary>
         bool IsHubSitesMultiGeoFlightEnabled { get; }
 
         /// <summary>
-        /// Get status of M&amp;A flight
+        /// Get status of MnA flight
         /// </summary>
         bool IsMnAFlightEnabled { get; }
 
@@ -448,6 +544,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// The property indicates if tenant has multi-geo tenant instances
         /// </summary>
         bool IsMultiGeo { get; }
+
+        /// <summary>
+        /// Status of flight IsMultipleHomeSitesFlightEnabled
+        /// </summary>
+        bool IsMultipleHomeSitesFlightEnabled { get; }
 
         /// <summary>
         /// Get/Set sync client restrictions
@@ -458,6 +559,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Get status of feature sync client restriction allowed
         /// </summary>
         bool IsUnmanagedSyncClientRestrictionFlightEnabled { get; }
+
+        /// <summary>
+        /// Status of flight IsVivaHomeFlightEnabled
+        /// </summary>
+        bool IsVivaHomeFlightEnabled { get; }
 
         /// <summary>
         /// Gets or sets a value to specify whether Whiteboard Fluid Framework is enabled
@@ -528,6 +634,41 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool NotifyOwnersWhenItemsReshared { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the file which contains the list which contains OCR for full text search enabled sites by the tenant admin
+        /// </summary>
+        string OCRAdminSiteListFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets name of the file which contains the list which contains OCR for full text search enabled sites by the compliance admin
+        /// </summary>
+        string OCRComplianceSiteListFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets an enum value that specifies whether the tenant admin has enabled OCR on SharePoint sites for full text search through Syntex
+        /// </summary>
+        ObjectCharacterRecognitionMode OCRModeForAdminSites { get; set; }
+
+        /// <summary>
+        /// Gets or sets an enum value that specifies whether the compliance admin has enabled OCR for full text search through Syntex for ODBs
+        /// </summary>
+        /// <value>
+        /// Disabled indicates that the OCR features should be disabled
+        /// InclusionList indicates that the OCR features should be enabled and filter to include specific ODBs
+        /// ExclusionList indicates that the OCR features should be enabled and filter to exclude specific ODBs
+        /// </value>
+        ObjectCharacterRecognitionMode OCRModeForComplianceODBs { get; set; }
+
+        /// <summary>
+        /// Gets or sets an enum value that specifies whether the compliance admin has enabled OCR for full text search through Syntex for SharePoint sites
+        /// </summary>
+        /// <value>
+        /// Disabled indicates that the OCR features should be disabled
+        /// InclusionList indicates that the OCR features should be enabled and filter to include specific sites
+        /// ExclusionList indicates that the OCR features should be enabled and filter to exclude specific sites
+        /// </value>
+        ObjectCharacterRecognitionMode OCRModeForComplianceSites { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to specify if AccessRequests is On, Off or Unspecified for Onedrive for Business
         /// </summary>
         SharingState ODBAccessRequests { get; set; }
@@ -548,9 +689,34 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool OfficeClientADALDisabled { get; set; }
 
         /// <summary>
+        /// Gets or sets default share link to existing access on OneDrive partition
+        /// </summary>
+        bool OneDriveDefaultLinkToExistingAccess { get; set; }
+
+        /// <summary>
+        /// Gets or sets default share link role on OneDrive partition
+        /// </summary>
+        Role OneDriveDefaultShareLinkRole { get; set; }
+
+        /// <summary>
+        /// Gets or sets default share link scope on OneDrive partition
+        /// </summary>
+        SharingScope OneDriveDefaultShareLinkScope { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to specify if OneDriveForGuestUsers functionality is enabled for the tenant
         /// </summary>
         bool OneDriveForGuestsEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets request files link enabled on OneDrive partition
+        /// </summary>
+        bool OneDriveRequestFilesLinkEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets request files link expiration days on OneDrive partition
+        /// </summary>
+        int OneDriveRequestFilesLinkExpirationInDays { get; set; }
 
         /// <summary>
         /// The default OneDrive quota allocated to new OneDrive sites for the tenant's users
@@ -598,6 +764,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         IList<string> PublicCdnOrigins { get; }
 
         /// <summary>
+        /// Gets or sets whether Hashed Proof Token IP binding is enabled
+        /// </summary>
+        bool ReduceTempTokenLifetimeEnabled { get; set; }
+
+        /// <summary>
+        /// Determines the grace period for Hashed Proof Tokens from an IP address that doesn't match the
+        /// IP address in the token, when the IP policy is not enabled and IP Binding is enabled.
+        /// </summary>
+        int ReduceTempTokenLifetimeValue { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to specify if user accepting invitation must use the same email address invitation was sent to
         /// </summary>
         bool RequireAcceptingAccountMatchInvitedAccount { get; set; }
@@ -611,6 +788,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets the info whether tenant has license for Restricted Onedrive for Business
         /// </summary>
         bool RestrictedOneDriveLicense { get; }
+
+        /// <summary>
+        /// Gets the info whether tenant has license for Restricted SharePoint
+        /// </summary>
+        bool RestrictedSharePointLicense { get; }
 
         /// <summary>
         /// The tenant's root site url
@@ -656,6 +838,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Gets or sets the value if EveryoneExceptExternalUsers claim is visible or not in people picker. False value means it is hidden
         /// </summary>
         bool ShowEveryoneExceptExternalUsersClaim { get; set; }
+
+        /// <summary>
+        /// Get/Set ShowOpenInDesktopOptionForSyncedFiles value
+        /// </summary>
+        bool ShowOpenInDesktopOptionForSyncedFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value to handle if showing group suggestions for IB is supported
+        /// </summary>
+        bool ShowPeoplePickerGroupSuggestionsForIB { get; set; }
 
         /// <summary>
         /// Gets or sets a value that allows members to search all existing guest users in the directory.       
@@ -711,6 +903,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         long StorageQuotaAllocated { get; }
 
         /// <summary>
+        /// Gets or sets a value to specify the Stream launch tile URL in office.com
+        /// </summary>
+        int StreamLaunchConfig { get; set; }
+
+        /// <summary>
+        /// Gets last updated timestamp for StreamLaunchConfig property
+        /// </summary>
+        DateTime StreamLaunchConfigLastUpdated { get; }
+
+        /// <summary>
+        /// Gets update count for StreamLaunchConfig property
+        /// </summary>
+        int StreamLaunchConfigUpdateCount { get; }
+
+        /// <summary>
         /// Gets or sets whether or not the AAD B2B management policy will be synced on the next request
         /// </summary>
         bool SyncAadB2BManagementPolicy { get; set; }
@@ -721,9 +928,19 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool SyncPrivacyProfileProperties { get; set; }
 
         /// <summary>
+        /// Gets or sets the value of the TLS token binding policy
+        /// </summary>
+        SPOTlsTokenBindingPolicyValue TlsTokenBindingPolicyValue { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to specify if use FindPeople in PeoplePicker
         /// </summary>
         bool UseFindPeopleInPeoplePicker { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether ExplorerView feature uses persistent cookies
+        /// </summary>
+        bool UsePersistentCookiesForExplorerView { get; set; }
 
         /// <summary>
         /// Gets or sets a value to specify if User Voice for customer feedback is enabled

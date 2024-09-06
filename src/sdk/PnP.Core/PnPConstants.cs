@@ -20,7 +20,7 @@ namespace PnP.Core
         /// <summary>
         /// The base URI of the Microsoft Graph
         /// </summary>
-        internal static readonly Uri MicrosoftGraphBaseUri = new Uri(MicrosoftGraphBaseUrl);
+        internal static readonly Uri MicrosoftGraphBaseUri = new(MicrosoftGraphBaseUrl);
 
         /// <summary>
         /// Graph v1 endpoint
@@ -73,6 +73,11 @@ namespace PnP.Core
         internal const string MetaDataListId = "listId";
 
         /// <summary>
+        /// The id of the TermSet holding a term
+        /// </summary>
+        internal const string MetaDataTermSetId = "termSetId";
+
+        /// <summary>
         /// The name of the Entity Type Name metadata attribute
         /// </summary>
         internal const string MetaDataRestEntityTypeName = "EntityTypeName";
@@ -101,6 +106,11 @@ namespace PnP.Core
         /// Id of the custom header request module
         /// </summary>
         internal static Guid CustomHeadersModuleId = Guid.Parse("{46307280-190E-4365-8AA1-085C451E7799}");
+
+        /// <summary>
+        /// Id of the SharePoint Response headers module
+        /// </summary>
+        internal static Guid SPResponseHeadersModuleId = Guid.Parse("{1706C4C0-84DE-470B-B862-51DD75524F0E}");
 
         /// <summary>
         /// SPRequestGuid SharePoint REST response header

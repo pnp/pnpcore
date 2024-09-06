@@ -30,6 +30,7 @@ namespace PnP.Core.Model.Teams
                 {
                     body.description = Description;
                 }
+                body.MembershipType = MembershipType;
 
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
@@ -87,6 +88,8 @@ namespace PnP.Core.Model.Teams
         public bool IsFavoriteByDefault { get => GetValue<bool>(); set => SetValue(value); }
 
         public string Email { get => GetValue<string>(); set => SetValue(value); }
+
+        public DateTime CreatedDateTime { get => GetValue<DateTime>(); set => SetValue(value); }
 
         public TeamChannelMembershipType MembershipType { get => GetValue<TeamChannelMembershipType>(); set => SetValue(value); }
 

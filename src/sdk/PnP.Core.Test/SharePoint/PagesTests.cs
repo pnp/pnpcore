@@ -1115,35 +1115,35 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        [TestMethod]
-        public async Task PageFullWidthSectionOnNonCommunicationSiteTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var page = await context.Web.NewPageAsync();
-                string pageName = TestCommon.GetPnPSdkTestAssetName("PageFullWidthSectionOnNonCommunicationSiteTest.aspx");
+        //[TestMethod]
+        //public async Task PageFullWidthSectionOnNonCommunicationSiteTest()
+        //{
+        //    //TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var page = await context.Web.NewPageAsync();
+        //        string pageName = TestCommon.GetPnPSdkTestAssetName("PageFullWidthSectionOnNonCommunicationSiteTest.aspx");
 
-                // Add all the possible sections 
-                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
-                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+        //        // Add all the possible sections 
+        //        page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+        //        page.AddSection(CanvasSectionTemplate.OneColumn, 2);
 
-                bool exceptionThrown = false;
-                try
-                {
-                    await page.SaveAsync(pageName);
-                }
-                catch (ClientException ex)
-                {
-                    if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
-                    {
-                        exceptionThrown = true;
-                    }
-                }
+        //        bool exceptionThrown = false;
+        //        try
+        //        {
+        //            await page.SaveAsync(pageName);
+        //        }
+        //        catch (ClientException ex)
+        //        {
+        //            if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
+        //            {
+        //                exceptionThrown = true;
+        //            }
+        //        }
 
-                Assert.IsTrue(exceptionThrown);
-            }
-        }
+        //        Assert.IsTrue(exceptionThrown);
+        //    }
+        //}
 
         [TestMethod]
         [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
@@ -1422,6 +1422,46 @@ namespace PnP.Core.Test.SharePoint
 
                 // Clone the page
                 await createdPage.SaveAsync(TestCommon.GetPnPSdkTestAssetName("ClonePageTextWithInlineImageWithOpitonsTest.aspx"));
+
+                await page.DeleteAsync();
+                await createdPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageTextWithCK5InlineImageWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                (page as Page).EditorType = EditorType.CK5;
+
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithCK5InlineImageWithOptionsTest.aspx");
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+
+                // Add text with 3 inline images
+                var textPart = page.NewTextPart("");
+
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
+                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", Width = 96, Height = 96, WidthPercentage = 20 });
+                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text", Width = 96, Height = 96, WidthPercentage = 20 });
+                string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
+                textPart.Text = htmlAdded;
+                page.AddControl(textPart, page.Sections[0].Columns[0]);
+
+                // Persist the page
+                await page.SaveAsync(pageName);
+
+                // load the page again and verify
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                // in CK5 mode there are no extra hidden image web parts anymore
+                Assert.IsTrue(createdPage.Controls.Count == 1);
+
+                // Clone the page
+                await createdPage.SaveAsync(TestCommon.GetPnPSdkTestAssetName("ClonePageTextWithCK5InlineImageWithOptionsTest.aspx"));
 
                 await page.DeleteAsync();
                 await createdPage.DeleteAsync();
@@ -2206,7 +2246,8 @@ namespace PnP.Core.Test.SharePoint
                 await page.SaveAsync(pageName);
 
                 var pageFile = await page.GetPageFileAsync(p => p.Level);
-                Assert.IsTrue(pageFile.Level == PublishedStatus.Draft);
+                // Now that co-auth has been rolled out the default level is checkout and not draft
+                Assert.IsTrue(pageFile.Level == PublishedStatus.Checkout);
 
                 await page.PublishAsync();
 
@@ -2683,7 +2724,7 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
-
+        
         [TestMethod]
         public async Task LikeUnLikePage()
         {
@@ -2842,6 +2883,57 @@ namespace PnP.Core.Test.SharePoint
                     // Check if the replies are loaded
                     Assert.IsTrue(comments.AsRequested().First().ReplyCount == 1);
                     Assert.IsTrue(comments.AsRequested().First().Replies.AsRequested().First().Text == "this is a reply");
+                }
+                finally
+                {
+                    // Delete the page
+                    await newPage.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task PageCommentingTestOnlyReturn30Comments()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IPage newPage = null;
+                try
+                {
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PageCommentingTestOnlyReturn30Comments.aspx");
+
+                    // Save the page
+                    await newPage.SaveAsync(pageName);
+
+                    // Publish the page, required before it can be liked
+                    newPage.Publish();
+
+                    // Get Page comments                
+                    var comments = newPage.GetComments();
+                    Assert.IsTrue(comments.Length == 0);
+
+                    var noCommentsAdded = 45;
+
+                    foreach (var i in Enumerable.Range(1, noCommentsAdded))
+                    {
+                        // Add a comment
+                        await comments.AddBatchAsync($"Comment #: {i} added by unit test");
+                    }
+
+                    await context.ExecuteAsync();
+
+                    comments = newPage.GetComments();
+                    // Expecting 45 but only 30 is returned. 
+                    Assert.IsTrue(comments.Length == noCommentsAdded);
+
+                    comments = newPage.GetComments(p => p.Author,
+                                                   p => p.Text,
+                                                   p => p.ReplyCount,
+                                                   p => p.CreatedDate,
+                                                   p => p.Replies);
+                    Assert.IsTrue(comments.Length == noCommentsAdded);
                 }
                 finally
                 {

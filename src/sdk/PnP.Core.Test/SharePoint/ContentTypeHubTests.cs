@@ -22,6 +22,20 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public void GetContentUrlReplacement()
+        {
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "https://bertonline.sharepoint.com/sites/demo1/_api/web/contenttypes") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "https://bertonline.sharepoint.com/_api/web/contenttypes") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "/sites/demo1/_api/web/contenttypes") == "/sites/contenttypehub/_api/web/contenttypes");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "/_api/web/contenttypes") == "/sites/contenttypehub/_api/web/contenttypes");
+
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "https://bertonline.sharepoint.com/sites/demo1/_api/web/contenttypes?urlparam=a") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "https://bertonline.sharepoint.com/_api/web/contenttypes?urlparam=a") == "https://bertonline.sharepoint.com/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com/sites/demo1"), "/sites/demo1/_api/web/contenttypes?urlparam=a") == "/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+            Assert.IsTrue(ContentTypeHub.SwitchToContentTypeHubUrl(new Uri("https://bertonline.sharepoint.com"), "/_api/web/contenttypes?urlparam=a") == "/sites/contenttypehub/_api/web/contenttypes?urlparam=a");
+        }
+
+        [TestMethod]
         public async Task GetContentTypesFromHubAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -300,6 +314,80 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddContentTypeToHubAndConsumeInSubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType newContentType = null;
+                IWeb addedWeb = null;
+                try
+                {
+                    // Add content type to the hub
+                    newContentType = await context.ContentTypeHub.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", "AddContentTypeToHubAsyncTest", "TESTING", "TESTING");
+
+                    // Test the created object
+                    Assert.IsNotNull(newContentType);
+                    Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5966F", newContentType.StringId);
+                    Assert.AreEqual("AddContentTypeToHubAsyncTest", newContentType.Name);
+                    Assert.AreEqual("TESTING", newContentType.Description);
+                    Assert.AreEqual("TESTING", newContentType.Group);
+
+                    // Ensure the content type is published in the hub
+                    await newContentType.PublishAsync();
+
+                    string webTitle = "contenttypetestweb";
+
+                    addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                    using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                    {
+
+                        string listTitle = TestCommon.GetPnPSdkTestAssetName("AddContentTypeToHubAndConsumeInListTest");
+
+                        var myList = context2.Web.Lists.GetByTitle(listTitle);
+
+                        if (TestCommon.Instance.Mocking && myList != null)
+                        {
+                            Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                        }
+
+                        if (myList == null)
+                        {
+                            myList = await context2.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                        }
+
+                        myList.ContentTypesEnabled = true;
+                        await myList.UpdateAsync();
+
+                        // Add content type from hub to list
+                        var added = myList.ContentTypes.AddAvailableContentTypeFromHub(newContentType.StringId);
+
+                        //Assert.IsTrue(added);
+
+                        // Load the list content types
+                        await myList.LoadAsync(y => y.ContentTypes);
+
+                        var matchingCt = myList.ContentTypes.AsRequested().FirstOrDefault(y => y.Id.StartsWith(newContentType.StringId));
+
+                        Assert.IsNotNull(matchingCt);
+                    }
+                }
+                finally
+                {
+                    // Delete the created web again
+                    await addedWeb.DeleteAsync();
+
+                    if (newContentType != null)
+                    {
+                        // Delete from content type hub
+                        await newContentType.DeleteAsync();
+                    }
+                }
+            }
+        }
 
         [TestMethod]
         public async Task LongRunningOperationTest()

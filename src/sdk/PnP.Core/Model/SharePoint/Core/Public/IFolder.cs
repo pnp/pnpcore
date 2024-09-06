@@ -265,6 +265,22 @@ namespace PnP.Core.Model.SharePoint
         public IFolder EnsureFolder(string folderRelativeUrl);
         #endregion
 
+        #region Rename
+        /// <summary>
+        /// Renames a folder
+        /// </summary>
+        /// <param name="name">New folder name</param>
+        /// <returns></returns>
+        public Task RenameAsync(string name);
+
+        /// <summary>
+        /// Renames a folder
+        /// </summary>
+        /// <param name="name">New folder name</param>
+        /// <returns></returns>
+        public void Rename(string name);
+        #endregion
+
         #region Syntex support
         /// <summary>
         /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue

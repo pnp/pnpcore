@@ -110,10 +110,17 @@ namespace PnP.Core.Model.SharePoint
 
             DisplayName = title;
             InternalName = title;
-
             if (common == null)
             {
                 return;
+            }
+
+            // In a field internal name is provided then use that one
+            InternalName = common.InternalName ?? title;
+            // Ensure the AddFieldInternalNameHint is set
+            if (!string.IsNullOrEmpty(common.InternalName))
+            {
+                common.Options |= AddFieldOptionsFlags.AddFieldInternalNameHint;
             }
 
             AddToDefaultView = common.AddToDefaultView;

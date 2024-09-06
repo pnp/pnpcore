@@ -62,6 +62,8 @@ namespace ProvisioningDemo
                         {
                             AuthenticationProviderName = "CertAuth",
                         });
+                        
+                        options.Credentials.DefaultConfiguration = "CertAuth";
                     });
 
                 })

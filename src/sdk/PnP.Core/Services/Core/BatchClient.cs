@@ -602,21 +602,7 @@ namespace PnP.Core.Services
                 {
 #endif
                     // Ensure the request contains authentication information
-                    var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
-
-                    if (PnPContext.Environment.HasValue)
-                    {
-                        if (PnPContext.Environment == Microsoft365Environment.Custom)
-                        {
-                            graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
-                        }
-                        else
-                        {
-                            graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
-                        }
-                    }
-
-                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
+                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(CloudManager.GetGraphBaseUri(PnPContext), request).ConfigureAwait(false);
 
                     // Send the request
                     HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
@@ -942,7 +928,7 @@ namespace PnP.Core.Services
             {
                 if (module.ResponseHandler != null)
                 {
-                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
                 }
             }
 
@@ -988,16 +974,7 @@ namespace PnP.Core.Services
                 }
 
                 // Make the request
-                string graphRequestUrl;
-
-                if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
-                {
-                    graphRequestUrl = $"https://{PnPContext.MicrosoftGraphAuthority}/{graphEndpoint}/{requestUrl}";
-                }
-                else
-                {
-                    graphRequestUrl = $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}";
-                }
+                string graphRequestUrl = $"{CloudManager.GetGraphBaseUrl(PnPContext)}{graphEndpoint}/{requestUrl}"; ;
 
                 using (var request = new HttpRequestMessage(graphRequest.Method, graphRequestUrl))
                 {
@@ -1055,20 +1032,6 @@ namespace PnP.Core.Services
                     {
 #endif
                         // Ensure the request contains authentication information
-                        var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
-
-                        if (PnPContext.Environment.HasValue)
-                        {
-                            if (PnPContext.Environment.Value == Microsoft365Environment.Custom)
-                            {
-                                graphBaseUri = new Uri($"https://{PnPContext.MicrosoftGraphAuthority}/");
-                            }
-                            else
-                            {
-                                graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
-                            }
-                        }
-
                         // Do we need a streaming download?
                         HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseHeadersRead;
                         if (graphRequest.ApiCall.Interactive && !graphRequest.ApiCall.StreamResponse)
@@ -1076,7 +1039,7 @@ namespace PnP.Core.Services
                             httpCompletionOption = HttpCompletionOption.ResponseContentRead;
                         }
 
-                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(CloudManager.GetGraphBaseUri(PnPContext), request).ConfigureAwait(false);
 
                         // Send the request
                         HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, httpCompletionOption, PnPContext.CancellationToken).ConfigureAwait(false);
@@ -1652,12 +1615,14 @@ namespace PnP.Core.Services
             foreach (var line in responseLines)
 #endif
             {
-                // Signals the start/end of a response
+                // Signals the start of a response
                 // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718
+                // and end of an empty response
+                // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718--
                 if (line.StartsWith("--batchresponse_"))
                 {
                     // Reponse was closed, let's store the result 
-                    if (responseContentOpen)
+                    if (responseContentOpen || line.EndsWith("--"))
                     {
                         // responses are in the same order as the request, so use a counter based system
                         BatchRequest currentBatchRequest = batch.GetRequest(counter);
@@ -1828,7 +1793,7 @@ namespace PnP.Core.Services
             {
                 if (module.ResponseHandler != null)
                 {
-                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
                 }
             }
 
@@ -2292,7 +2257,7 @@ namespace PnP.Core.Services
                                                 }
 #endif
 
-                                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                                             }
                                         }
                                     }
@@ -2332,7 +2297,7 @@ namespace PnP.Core.Services
                                            testResponse.Headers);
                                 }
 
-                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode);
+                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers);
                             }
 #endif
 
@@ -2360,7 +2325,7 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">The raw content of the response</param>
         /// <param name="statusCode">The Http status code of the request</param>
         /// <returns></returns>
-        private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode)
+        private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode, Dictionary<string, string> headers)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteCsomBatchAsync-JSONToModel"))
             {
@@ -2396,6 +2361,12 @@ namespace PnP.Core.Services
                     // No error, so let's return the results
                     foreach (var request in csomBatch.Batch.Requests)
                     {
+                        // Run request modules if they're connected
+                        if (request.Value.RequestModules != null && request.Value.RequestModules.Count > 0)
+                        {
+                            batchResponse = ExecuteSpoCsomRequestModulesOnResponse(statusCode, headers, request.Value, batchResponse);
+                        }
+
                         // Call the logic that processes the csom response
                         request.Value.ApiCall.CSOMRequests[0].ProcessResponse(batchResponse);
 
@@ -2413,6 +2384,19 @@ namespace PnP.Core.Services
                     }
                 }
             }
+        }
+
+        private static string ExecuteSpoCsomRequestModulesOnResponse(HttpStatusCode httpStatusCode, Dictionary<string, string> responseHeaders, BatchRequest currentBatchRequest, string responseStringContent)
+        {
+            foreach (var module in currentBatchRequest.RequestModules.Where(p => p.ExecuteForSpoCsom))
+            {
+                if (module.ResponseHandler != null)
+                {
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent, currentBatchRequest.Id);
+                }
+            }
+
+            return responseStringContent;
         }
 
         private static List<CsomBatch> CsomBatchSplitting(Batch batch)

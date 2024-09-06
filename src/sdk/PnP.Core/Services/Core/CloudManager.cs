@@ -19,7 +19,8 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Returns the graph authority for the in use environment. See https://docs.microsoft.com/en-us/graph/deployments for details
+        /// Returns the graph authority for the in use environment. See https://docs.microsoft.com/en-us/graph/deployments 
+        /// and https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide for details
         /// </summary>
         /// <param name="environment"></param>
         /// <returns></returns>
@@ -39,7 +40,8 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Returns the Azure AD login authority. See https://docs.microsoft.com/en-us/graph/deployments for details
+        /// Returns the Azure AD login authority. See https://docs.microsoft.com/en-us/graph/deployments 
+        /// and https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide for details
         /// </summary>
         /// <param name="environment"></param>
         /// <returns></returns>
@@ -49,13 +51,37 @@ namespace PnP.Core.Services
             {
                 Microsoft365Environment.Production => "login.microsoftonline.com",
                 Microsoft365Environment.PreProduction => "login.windows-ppe.net",
-                Microsoft365Environment.USGovernment => "login.microsoftonline.us",
+                Microsoft365Environment.USGovernment => "login.microsoftonline.com",
                 Microsoft365Environment.USGovernmentHigh => "login.microsoftonline.us",
                 Microsoft365Environment.USGovernmentDoD => "login.microsoftonline.us",
                 Microsoft365Environment.Germany => "login.microsoftonline.de",
                 Microsoft365Environment.China => "login.chinacloudapi.cn",
                 _ => "login.microsoftonline.com"
             };
+        }
+
+
+        internal static string GetGraphBaseUrl(PnPContext context) 
+        {
+            string graphUrl = PnPConstants.MicrosoftGraphBaseUrl;
+            if (context.Environment.HasValue)
+            {
+                if (context.Environment.Value == Microsoft365Environment.Custom)
+                {
+                    graphUrl = $"https://{context.MicrosoftGraphAuthority}/";
+                }
+                else
+                {
+                    graphUrl = $"https://{GetMicrosoftGraphAuthority(context.Environment.Value)}/";
+                }
+            }
+
+            return graphUrl;
+        }
+
+        internal static Uri GetGraphBaseUri(PnPContext context) 
+        { 
+            return new Uri(GetGraphBaseUrl(context));
         }
 
     }

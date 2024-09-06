@@ -4,6 +4,9 @@ The Core SDK Admin library provides SharePoint Admin security related APIs for e
 
 [!INCLUDE [SharePoint Admin setup](fragments/setup-admin-sharepoint.md)]
 
+> [!Note]
+> If your tenant is using vanity URL's then you'll need to populate the `VanityUrlOptions` class and pass it to any method that allows it.
+
 ## Enumerate the site collections in a tenant
 
 The typical SharePoint Online tenants contains hundreds of site collections and for quite often there's a need to perform admin tasks on all site collections, so being able to enumerate sites is important. The PnP Core SDK Admin component offers two approaches.
@@ -38,11 +41,16 @@ Whereas above approach works for any user, the amount of information returned fo
 - Storage quota information
 - Template details
 
+This method also can optionally return the site collections connected to shared and private Microsoft Teams channels by setting the `includeSharedAndPrivateTeamChannelSites` parameter.
+
 Below sample shows how to use the `GetSiteCollectionsWithDetails` methods:
 
 ```csharp
 // Get a list of site collections with details about each site collection
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
+
+// Get a list of site collections with details about each site collection, including the site collections connected to shared and private Microsoft Teams channels
+var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync(includeSharedAndPrivateTeamChannelSites: true);
 
 // Get details for one given site collection
 var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollectionWithDetailsAsync(new Uri("https://contoso.sharepoint.com/sites/sitetocheck"));
@@ -50,7 +58,7 @@ var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollect
 
 ## Enumerate all webs in a site collection
 
-If you want to know all the webs that exist in a site collection then you can use the `GetSiteCollectionWebsWithDetails` methods. These methods will return a list with information about **all** webs in the site collection, webs are enumerated recursively to ensure all webs are listed. By default app webs (being created as part of installed SharePoint add-ins) are skipped but these can optionally be included. 
+If you want to know all the webs that exist in a site collection then you can use the `GetSiteCollectionWebsWithDetails` methods. These methods will return a list with information about **all** webs in the site collection, webs are enumerated recursively to ensure all webs are listed. By default app webs (being created as part of installed SharePoint add-ins) are skipped but these can optionally be included.
 
 ```csharp
 var webs = await context.GetSiteCollectionManager().GetSiteCollectionWebsWithDetailsAsync();
@@ -90,7 +98,7 @@ It's highly recommended to use one of the "modern" site collections as these off
 Category | Delegated permissions | Application permissions
 ---------|-----------------------|------------------------
 Modern, no group | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions` | Use `CommunicationSiteOptions` or `TeamSiteWithoutGroupOptions`. The `Owner` property must be set.
-Modern, with group | Use `TeamSiteOptions`. The `AllowOnlyMembersToPost`, `CalendarMemberReadOnly`, `ConnectorsDisabled`, `HideGroupInOutlook`, `SubscribeMembersToCalendarEventsDisabled`, `SubscribeNewGroupMembers`, `WelcomeEmailDisabled` and `Members` properties are not applicable here. | Use `TeamSiteOptions`.  The `Owners` property must be set, properties `Language`, `SiteDesignId`, `HubSiteId`, `SensitivityLabelId` and `SiteAlias` are not applicable here.
+Modern, with group | Use `TeamSiteOptions` | Use `TeamSiteOptions`. The `Owners` property must be set.
 Classic site | Use `ClassicSiteOptions` | Use `ClassicSiteOptions`
 
 All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.

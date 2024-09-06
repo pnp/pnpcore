@@ -60,7 +60,7 @@ namespace PnP.Core.Services
                     if (model.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
                     {
                         // Encode the ID value to enable it to be used in methods using DecodedUrl input. Typically these methods end on Path
-                        var idAsPathValue = WebUtility.UrlEncode(model.Metadata[PnPConstants.MetaDataRestId].Replace("'", "''")).Replace("+", "%20");
+                        var idAsPathValue = WebUtility.UrlEncode(model.Metadata[PnPConstants.MetaDataRestId].Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
                         result = result.Replace("{IdAsPath}", idAsPathValue);
                     }
                 }
@@ -285,6 +285,24 @@ namespace PnP.Core.Services
                                         listItem = GetParentDataModel(attachment as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.Security.IRoleAssignment roleAssignment)
+                                    {
+                                        listItem = GetParentDataModel(roleAssignment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
+                                    else if (pnpObject is Model.SharePoint.ILikedByInformation likedByInformation)
+                                    {
+                                        listItem = GetParentDataModel(likedByInformation as IMetadataExtensible) as Model.SharePoint.IListItem;
+
+                                        // the IListItem has a property that indicates the used list
+                                        if (listItem != null && (listItem as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataListId))
+                                        {
+                                            result = result.Replace(match.Value, (listItem as IMetadataExtensible).Metadata[PnPConstants.MetaDataListId]);
+                                            break;
+                                        }
+
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
 
                                 // If we've got the list
@@ -336,6 +354,32 @@ namespace PnP.Core.Services
                                 }
                                 break;
                             }
+                    }
+                }
+                // Replace TermSet.GraphId
+                else if (match.Value.Equals("{TermSet.GraphId}"))
+                {
+                    bool replaced = false;
+                    if (pnpObject is IMetadataExtensible withMetaData)
+                    {
+                        if (withMetaData.Metadata.ContainsKey(PnPConstants.MetaDataTermSetId))
+                        {
+                            result = result.Replace("{TermSet.GraphId}", withMetaData.Metadata[PnPConstants.MetaDataTermSetId]);
+                            replaced = true;
+                        }
+                    }
+
+                    if (!replaced)
+                    {
+                        IDataModelParent parent = GetParentDataModel(pnpObject);
+
+                        if (parent is IMetadataExtensible p)
+                        {
+                            if (p.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                            {
+                                result = result.Replace("{TermSet.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
+                            }
+                        }
                     }
                 }
                 // Replace {hostname}

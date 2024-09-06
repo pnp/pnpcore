@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -2006,16 +2009,44 @@ namespace PnP.Core.Test.SharePoint
                         Assert.Inconclusive("Test data set should be setup to not have the list available.");
                     }
 
+                    var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                    var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                    await group.LoadAsync(g => g.Sets);
+                    var termSet = group.Sets.AsRequested().FirstOrDefault();
+                    await termSet.LoadAsync(g => g.Terms.QueryProperties(p => p.Labels));
+                    var term = termSet.Terms.AsRequested().FirstOrDefault();
+
+                    string fieldTitle = "";
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "FieldTitle", fieldTitle },
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        fieldTitle = properties["FieldTitle"];
+                    }
+
                     if (myList == null)
                     {
                         myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
                         myList.Fields.AddText("MyField");
+                        myList.Fields.AddTaxonomy(fieldTitle, new FieldTaxonomyOptions
+                        {
+                            TermSetId = new Guid(termSet.Id),
+                            TermStoreId = new Guid(termStore.Id),
+                        });
                     }
 
                     // Add some folders to put default values on
                     var batch = context.NewBatch();
-                    myList.RootFolder.AddFolderBatch(batch, "Folder1");
-                    myList.RootFolder.AddFolderBatch(batch, "Folder2");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 1");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 2");
                     context.Execute(batch);
 
                     // Set default values on these folders
@@ -2023,15 +2054,21 @@ namespace PnP.Core.Test.SharePoint
                     {
                         new DefaultColumnValueOptions
                         {
-                            FolderRelativePath = "/Folder1",
+                            FolderRelativePath = "/Folder 1",
                             FieldInternalName = "MyField",
                             DefaultValue = "F1"
                         },
                         new DefaultColumnValueOptions
                         {
-                            FolderRelativePath = "/Folder2",
+                            FolderRelativePath = "/Folder 2",
                             FieldInternalName = "MyField",
                             DefaultValue = "F2"
+                        },
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath ="/Folder 1",
+                            FieldInternalName = fieldTitle,
+                            DefaultValue = $"-1;#{term.Labels.First().Name}|{term.Id}"
                         }
                     };
 
@@ -2062,6 +2099,107 @@ namespace PnP.Core.Test.SharePoint
                     myList.Delete();
                 }
             }
+        }
+
+        [TestMethod]
+        public async Task DefaultValueUpdateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DefaultValueUpdateTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                        var batch2 = context.NewBatch();
+                        myList.Fields.AddTextBatch(batch2, "Project_Number");
+                        myList.Fields.AddTextBatch(batch2, "Project_Description");
+                        context.Execute(batch2);
+                    }
+
+                    // Add some folders to put default values on
+                    var batch = context.NewBatch();
+                    var folder1 = myList.RootFolder.AddFolderBatch(batch, "Folder 1");
+                    myList.RootFolder.AddFolderBatch(batch, "Folder 2");
+                    context.Execute(batch);
+
+                    // Set default values on these folders
+                    List<DefaultColumnValueOptions> defaultColumnValues = new()
+                    {
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder 1",
+                            FieldInternalName = "Project_Number",
+                            DefaultValue = "1"
+                        },
+                        new DefaultColumnValueOptions
+                        {
+                            FolderRelativePath = "/Folder 1",
+                            FieldInternalName = "Project_Description",
+                            DefaultValue = "Description 1"
+                        }
+                    };
+
+                    myList.SetDefaultColumnValues(defaultColumnValues);
+
+                    // Load the default values again
+                    var loadedDefaults = myList.GetDefaultColumnValues();
+
+                    // verify that each added value was actually added
+                    foreach (var addedValue in defaultColumnValues)
+                    {
+                        var foundValue = loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == addedValue.FolderRelativePath &&
+                                                                       p.DefaultValue == addedValue.DefaultValue && p.FieldInternalName == addedValue.FieldInternalName);
+                        Assert.IsTrue(foundValue != null);
+                    }
+
+                    // Update the values
+                    await SetFolderDefaultValuesAsync(context, folder1, "2", "Description 2");
+
+                    // Load the default values again
+                    loadedDefaults = myList.GetDefaultColumnValues();
+
+                    Assert.IsTrue(loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == "/Folder 1" && p.DefaultValue == "2" && p.FieldInternalName == "Project_Number") != null);
+                    Assert.IsTrue(loadedDefaults.FirstOrDefault(p => p.FolderRelativePath == "/Folder 1" && p.DefaultValue == "Description 2" && p.FieldInternalName == "Project_Description") != null);
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        private async Task SetFolderDefaultValuesAsync(PnPContext context, IFolder folder, string projectNumber, string projectDescription)
+        {
+            var list = await context.Web.Lists.GetByServerRelativeUrlAsync(folder.ServerRelativeUrl);
+            var existingColumns = await list.GetDefaultColumnValuesAsync();
+
+            foreach (var existingColumn in existingColumns)
+            {
+                var value = existingColumn.FieldInternalName switch
+                {
+                    "Project_Number" => projectNumber,
+                    "Project_Description" => projectDescription,
+                    _ => existingColumn.DefaultValue
+                };
+
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    existingColumn.DefaultValue = value;
+                }
+            }
+            await list.SetDefaultColumnValuesAsync(existingColumns);
         }
 
         #endregion
@@ -2107,6 +2245,162 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+        #endregion
+
+        #region Audience targeting tests
+
+        [TestMethod]
+        public async Task AudienceTargetingListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AudienceTargetingListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    myList.EnableAudienceTargeting();
+
+                    var listInfo = await context.Web.Lists.GetByIdAsync(myList.Id,
+                                                                        p => p.RootFolder.QueryProperties(p => p.ServerRelativeUrl),
+                                                                                                  p => p.EventReceivers,
+                                                                                                  p => p.ContentTypesEnabled,
+                                                                                                  p => p.Fields.QueryProperties(p => p.InternalName)).ConfigureAwait(false);
+                    bool addFirstModernTargetingField = listInfo.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "_ModernAudienceTargetUserField") != null;
+                    bool addSecondModernTargetingField = listInfo.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "_ModernAudienceAadObjectIds") != null;
+                    bool addItemAddingAudienceEventRecevier = listInfo.EventReceivers.AsRequested()
+                                                        .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" &&
+                                                                        p.EventType == EventReceiverType.ItemAdding) != null;
+                    bool addItemupdatingAudienceEventRecevier = listInfo.EventReceivers.AsRequested()
+                                                                .FirstOrDefault(p => p.ReceiverClass == "Microsoft.SharePoint.Portal.AudienceEventRecevier" &&
+                                                                                p.EventType == EventReceiverType.ItemUpdating) != null;
+
+                    Assert.IsTrue(addFirstModernTargetingField);
+                    Assert.IsTrue(addSecondModernTargetingField);
+                    Assert.IsTrue(addItemAddingAudienceEventRecevier);
+                    Assert.IsTrue(addItemupdatingAudienceEventRecevier);
+
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AudienceTargetDocumentInListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AudienceTargetDocumentInListTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    // Load relevant data
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, 
+                                                                     p => p.RootFolder,
+                                                                     p => p.Fields.QueryProperties(p => p.InternalName,
+                                                                                                   p => p.FieldTypeKind,
+                                                                                                   p => p.TypeAsString,
+                                                                                                   p => p.Title));
+                    // Enable audience targeting
+                    myList.EnableAudienceTargeting();
+
+                    // Upload document
+                    var fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
+                    IFile addedFile = await myList.RootFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+
+                    // Set audience for uploaded item
+                    await addedFile.LoadAsync(p => p.ListItemAllFields.QueryProperties(li => li.All));
+
+                    var batch = context.NewBatch();
+                    var myUser1 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|06ed1f73-c58d-45e8-ad07-66f4d1eed723");
+                    var myUser2 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|7bf72917-4c72-4a83-91d6-1362fcf7222a");
+                    var myUser3 = await context.Web.EnsureUserBatchAsync(batch, "c:0o.c|federateddirectoryclaimprovider|0402aa20-e67a-47e3-bad4-03801247be9e");
+                    await context.ExecuteAsync(batch);
+
+                    var userCollection = new FieldValueCollection();
+                    userCollection.Values.Add(new FieldUserValue(myUser1));
+                    userCollection.Values.Add(new FieldUserValue(myUser2));
+                    userCollection.Values.Add(new FieldUserValue(myUser3));
+
+                    addedFile.ListItemAllFields.Values.Add("_ModernAudienceTargetUserField", userCollection);
+                    await addedFile.ListItemAllFields.UpdateAsync();
+
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task ItemOpenListSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new library
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ItemOpenListSettingsTest");
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                    }
+
+                    myList.DefaultItemOpenInBrowser = false;
+                    await myList.UpdateAsync();
+
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.DefaultItemOpenInBrowser);
+
+                    Assert.IsTrue(myList.DefaultItemOpenInBrowser == false);
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
         #endregion
     }
 }

@@ -34,6 +34,11 @@ namespace PnP.Core.Model.SharePoint
         public string Description { get; set; }
 
         /// <summary>
+        /// Set a specific internal name for the field
+        /// </summary>
+        public string InternalName { get; set; }
+
+        /// <summary>
         /// Sets the default formula of the field
         /// </summary>
         public string DefaultFormula { get; set; }
