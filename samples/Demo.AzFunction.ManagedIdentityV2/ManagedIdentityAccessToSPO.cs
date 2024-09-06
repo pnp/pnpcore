@@ -10,10 +10,10 @@ using PnP.Core;
 
 namespace Demo.AzFunction.ManagedIdentity
 {
-    public class ManagedIdentityAccessToSPO(IPnPContextFactory pnpContextFactory, FunctionContext executionContext)
+    public class ManagedIdentityAccessToSPO(IPnPContextFactory pnpContextFactory, ILogger<ManagedIdentityAccessToSPO> _logger)
     {
         #region private properties
-        private readonly ILogger logger = executionContext.GetLogger(nameof(ManagedIdentityAccessToSPO));
+        private readonly ILogger logger = _logger;
         private readonly IPnPContextFactory pnpContextFactory = pnpContextFactory;
         #endregion
 
