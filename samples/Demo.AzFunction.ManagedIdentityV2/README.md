@@ -1,8 +1,9 @@
 ﻿# PnP Core SDK - Azure Function with Managed Identity Sample
 
+
 > [!Important]
 > Beginning **10 November 2026**, the **in-process model** for .NET apps in Azure Functions will **no longer be supported**. To ensure that your apps that use this model continue being supported, you'll need to transition to the isolated worker model by that date. [Retirement: Support for the in-process model for .NET apps in Azure Functions ends 10 November 2026.](https://azure.microsoft.com/en-us/updates/retirement-support-for-the-inprocess-model-for-net-apps-in-azure-functions-ends-10-november-2026/)
-> Please use the new version of this sample: **Azure V4 Function using managed identity (isolated)**
+> This sample is a new version of the **Azure V4 Function using managed identity (in-process)** using in-process model.
 
 This solution demonstrates how to build Azure function that connects to a SPO site using:
 
@@ -24,10 +25,10 @@ This solution follows the principle of least privilege, by using `Sites.Selected
 > [!Note]
 > This sample was authored by [Kinga Kazala](https://github.com/kkazala) 💪🥇.
 
-You can find the sample source code here: [/samples/Demo.AzFunction.ManagedIdentity](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity)
+You can find the sample source code here: [/samples/Demo.AzFunction.ManagedIdentityV2](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentityV2)
 
 > [!Note]
-> This sample was created with [Visual Studio Code](https://code.visualstudio.com/) using [.NET 6.0](https://dotnet.microsoft.com/) and has been created as an [Azure Function v4](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process) running [in-process](https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library?tabs=v2%2Ccmd).
+> This sample was created with [Visual Studio Code](https://code.visualstudio.com/) using [.NET 8.0](https://dotnet.microsoft.com/) and has been created as an [Azure Function v4](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process) running in the [isolated worker model](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide?tabs=windows).
 
 ## Sample configuration
 
@@ -100,11 +101,13 @@ If you granted `FullControl` permissions, all the steps will be completed succes
 
 Go to the [Azure Portal](https://portal.azure.com/) and create a new Function App (consumption plan) using following settings:
 
-- Publish: **Code**
 - Runtime stack: **.NET**
-- Version: **6**
+- Version: **8 (LTS), isolated worked model**
 - Region: pick the region that works best for you
-- Plan type: **Consumption (Serverless)**
+- Operating System: **Windows**
+
+> Note: This sample has only been tested with the above configuration.
+
 
 Click **Review + create**, verify the settings and click **Create**. Now your function is provisioned in Azure.
 
@@ -133,3 +136,6 @@ To deploy the project to Azure:
 ### Test your Function App in Azure
 
 Test the function in Azure using the [run the function in Azure](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp) procedure.
+
+### Performance optimizations
+See [Performance optimizations](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide?tabs=windows#performance-optimizations) for changes you can implement to improve performance of your Azure Function.
