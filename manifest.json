@@ -8741,7 +8741,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzFunction.ManagedIdentity/README.html",
-          "hash": "qyXy7ET8/Hu0Aolp+J9RITY6MUH9v0oMqehbazjNoWs="
+          "hash": "CRvfDHhjiRAF2i6KcZ1xMKBzN7s+lNxf0d81JRXh/rw="
         }
       },
       "is_incremental": false,
@@ -8786,6 +8786,62 @@
       "output": {
         "resource": {
           "relative_path": "demos/Demo.AzFunction.ManagedIdentity/docs-images/terminalOK.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/README.html",
+          "hash": "KkfGXvwYa8qmLznaZ2TDQy+daWfFehnbZVZSInIaLY8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/accessdenied.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/accessdenied.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/connection.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/connection.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/terminalError.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/terminalError.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/terminalOK.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzFunction.ManagedIdentityV2/docs-images/terminalOK.png"
         }
       },
       "is_incremental": false,
@@ -9048,7 +9104,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/toc.html",
-          "hash": "1KmAvG/x73o4HkNUHR2cBEkt84Z4w7vhWPZoO9HTNLs="
+          "hash": "+s+qbHhFLzdFj+7Y9AUgwPvQZMNI6FypEf+zqYrzsjM="
         }
       },
       "is_incremental": false,
@@ -10530,7 +10586,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 117,
+          "total_file_count": 118,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

@@ -78,14 +78,14 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.AzFunction.ManagedIdentity/README.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.AzFunction.ManagedIdentityV2/README.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                     <h1 id="pnp-core-sdk---azure-function-with-managed-identity-sample">PnP Core SDK - Azure Function with Managed Identity Sample</h1>
 
 <div class="IMPORTANT">
 <h5>Important</h5>
 <p>Beginning <strong>10 November 2026</strong>, the <strong>in-process model</strong> for .NET apps in Azure Functions will <strong>no longer be supported</strong>. To ensure that your apps that use this model continue being supported, you'll need to transition to the isolated worker model by that date. <a href="https://azure.microsoft.com/en-us/updates/retirement-support-for-the-inprocess-model-for-net-apps-in-azure-functions-ends-10-november-2026/">Retirement: Support for the in-process model for .NET apps in Azure Functions ends 10 November 2026.</a>
-Please use the new version of this sample: <strong>Azure V4 Function using managed identity (isolated)</strong></p>
+This sample is a new version of the <strong>Azure V4 Function using managed identity (in-process)</strong> using in-process model.</p>
 </div>
 <p>This solution demonstrates how to build Azure function that connects to a SPO site using:</p>
 <ul>
@@ -107,10 +107,10 @@ Please use the new version of this sample: <strong>Azure V4 Function using manag
 <h5>Note</h5>
 <p>This sample was authored by <a href="https://github.com/kkazala">Kinga Kazala</a> 💪🥇.</p>
 </div>
-<p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentity">/samples/Demo.AzFunction.ManagedIdentity</a></p>
+<p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzFunction.ManagedIdentityV2">/samples/Demo.AzFunction.ManagedIdentityV2</a></p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>This sample was created with <a href="https://code.visualstudio.com/">Visual Studio Code</a> using <a href="https://dotnet.microsoft.com/">.NET 6.0</a> and has been created as an <a href="https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process">Azure Function v4</a> running <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library?tabs=v2%2Ccmd">in-process</a>.</p>
+<p>This sample was created with <a href="https://code.visualstudio.com/">Visual Studio Code</a> using <a href="https://dotnet.microsoft.com/">.NET 8.0</a> and has been created as an <a href="https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process">Azure Function v4</a> running in the <a href="https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide?tabs=windows">isolated worker model</a>.</p>
 </div>
 <h2 id="sample-configuration">Sample configuration</h2>
 <div class="NOTE">
@@ -177,12 +177,14 @@ Please use the new version of this sample: <strong>Azure V4 Function using manag
 <h3 id="create-azure-function-app">Create Azure Function App</h3>
 <p>Go to the <a href="https://portal.azure.com/">Azure Portal</a> and create a new Function App (consumption plan) using following settings:</p>
 <ul>
-<li>Publish: <strong>Code</strong></li>
 <li>Runtime stack: <strong>.NET</strong></li>
-<li>Version: <strong>6</strong></li>
+<li>Version: <strong>8 (LTS), isolated worked model</strong></li>
 <li>Region: pick the region that works best for you</li>
-<li>Plan type: <strong>Consumption (Serverless)</strong></li>
+<li>Operating System: <strong>Windows</strong></li>
 </ul>
+<blockquote>
+<p>Note: This sample has only been tested with the above configuration.</p>
+</blockquote>
 <p>Click <strong>Review + create</strong>, verify the settings and click <strong>Create</strong>. Now your function is provisioned in Azure.</p>
 <h3 id="configure-the-function-app">Configure the Function App</h3>
 <p>Once the Function App has been created navigate to <strong>Settings</strong> -&gt; <strong>Configuration</strong> and add the following <strong>Application setting</strong>:</p>
@@ -214,6 +216,8 @@ Please use the new version of this sample: <strong>Azure V4 Function using manag
 </ul>
 <h3 id="test-your-function-app-in-azure">Test your Function App in Azure</h3>
 <p>Test the function in Azure using the <a href="https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp">run the function in Azure</a> procedure.</p>
+<h3 id="performance-optimizations">Performance optimizations</h3>
+<p>See <a href="https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide?tabs=windows#performance-optimizations">Performance optimizations</a> for changes you can implement to improve performance of your Azure Function.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
