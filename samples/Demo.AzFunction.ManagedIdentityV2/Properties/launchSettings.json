@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Demo.AzFunction.ManagedIdentityV2": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7150",
+      "launchBrowser": false
+    }
+  }
+}
