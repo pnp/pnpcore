@@ -302,7 +302,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "Documents";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -310,13 +310,15 @@ namespace PnP.Core.Test.QueryModel
                 var actual = context.Web.Lists.GetByTitle(expected,
                     l => l.Id,
                     l => l.Title,
-                    l => l.TemplateType
+                    l => l.TemplateType,
+                    l => l.BaseType
                     );
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
                 Assert.AreNotEqual(Guid.Empty, actual.Id);
                 Assert.AreEqual(ListTemplateType.DocumentLibrary, actual.TemplateType);
+                Assert.AreEqual(ListBaseType.DocumentLibrary, actual.BaseType);
             }
         }
 

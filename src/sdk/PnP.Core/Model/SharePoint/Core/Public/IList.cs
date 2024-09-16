@@ -49,6 +49,11 @@ namespace PnP.Core.Model.SharePoint
         public ListTemplateType TemplateType { get; }
 
         /// <summary>
+        /// Gets the base type for a list.
+        /// </summary>
+        public ListBaseType BaseType { get; }
+
+        /// <summary>
         /// Gets or sets whether verisioning is enabled on the list
         /// </summary>
         public bool EnableVersioning { get; set; }

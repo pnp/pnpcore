@@ -108,6 +108,8 @@ namespace PnP.Core.Model.SharePoint
         //[GraphProperty("list", JsonPath = "template")]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
 
+        public ListBaseType BaseType { get => GetValue<ListBaseType>(); set => SetValue(value); }
+
         public bool EnableVersioning { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool EnableMinorVersions { get => GetValue<bool>(); set => SetValue(value); }
