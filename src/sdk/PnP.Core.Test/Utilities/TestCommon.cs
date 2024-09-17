@@ -33,9 +33,10 @@ namespace PnP.Core.Test.Utilities
             var pnpCoreSDKTestUserPassword = Environment.GetEnvironmentVariable(PnPCoreSDKTestUserPassword);
             var pnpCoreSDKTestUser = Environment.GetEnvironmentVariable(PnPCoreSDKTestUser);
             var pnpCoreSDKTestSite = Environment.GetEnvironmentVariable(PnPCoreSDKTestSite);
-            if (string.IsNullOrEmpty(pnpCoreSDKTestUser) || string.IsNullOrEmpty(pnpCoreSDKTestUserPassword) || string.IsNullOrEmpty(pnpCoreSDKTestSite))
+            var pnpCoreSDKTestClientId = Environment.GetEnvironmentVariable(PnPCoreSDKTestClientId);
+            if (string.IsNullOrEmpty(pnpCoreSDKTestUser) || string.IsNullOrEmpty(pnpCoreSDKTestUserPassword) || string.IsNullOrEmpty(pnpCoreSDKTestSite) || string.IsNullOrEmpty(pnpCoreSDKTestClientId))
             {
-                Assert.Inconclusive("Skipping test because 'live' tests are not configured. Add pnpcoresdktestsite, pnpcoresdktestuser and pnpcoresdktestuserpassword environment variables");
+                Assert.Inconclusive("Skipping test because 'live' tests are not configured. Add pnpcoresdktestsite, pnpcoresdktestuser, pnpcoresdktestuserpassword and pnpCoreSDKTestClientId environment variables");
             }
         }
 

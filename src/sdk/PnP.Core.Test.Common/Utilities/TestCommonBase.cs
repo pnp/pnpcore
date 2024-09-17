@@ -23,6 +23,7 @@ namespace PnP.Core.Test.Common.Utilities
         protected const string PnPCoreSDKTestSite = "pnpcoresdktestsite";
         protected const string PnPCoreSDKTestUser = "pnpcoresdktestuser";
         protected const string PnPCoreSDKTestUserPassword = "pnpcoresdktestuserpassword";
+        protected const string PnPCoreSDKTestClientId = "pnpcoresdktestclientid";
         protected IPnPTestContextFactory pnpContextFactoryCache;
         protected static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
 
@@ -224,10 +225,11 @@ namespace PnP.Core.Test.Common.Utilities
             var pnpCoreSDKTestUserPassword = Environment.GetEnvironmentVariable(PnPCoreSDKTestUserPassword);
             var pnpCoreSDKTestUser = Environment.GetEnvironmentVariable(PnPCoreSDKTestUser);
             var pnpCoreSDKTestSite = Environment.GetEnvironmentVariable(PnPCoreSDKTestSite);
+            var pnpCoreSDKTestClientId = Environment.GetEnvironmentVariable(PnPCoreSDKTestClientId);
 
             var pwd = new NetworkCredential(null, pnpCoreSDKTestUserPassword).SecurePassword;
 
-            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd)).ConfigureAwait(false);
+            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(pnpCoreSDKTestClientId, null, pnpCoreSDKTestUser, pwd)).ConfigureAwait(false);
 
             return context;
         }
