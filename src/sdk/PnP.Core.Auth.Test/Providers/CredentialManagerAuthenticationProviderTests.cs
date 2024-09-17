@@ -60,27 +60,27 @@ namespace PnP.Core.Auth.Test.Providers
             Assert.IsNotNull(provider.CredentialManagerName);
         }
 
-        [TestMethod]
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestCredentialManagerConstructorNoDI_NullClientId_NullTenantId()
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-        {
-            // Credentialmanager does not work on Linux
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+//        [TestMethod]
+//#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+//        public async Task TestCredentialManagerConstructorNoDI_NullClientId_NullTenantId()
+//#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+//        {
+//            // Credentialmanager does not work on Linux
+//            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            var configuration = TestCommon.GetConfigurationSettings();
-            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
+//            var configuration = TestCommon.GetConfigurationSettings();
+//            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
 
-            var provider = new CredentialManagerAuthenticationProvider(
-                null,
-                null,
-                credentialManagerName);
+//            var provider = new CredentialManagerAuthenticationProvider(
+//                null,
+//                null,
+//                credentialManagerName);
 
-            Assert.IsNotNull(provider);
-            Assert.IsNotNull(provider.ClientId);
-            Assert.IsNotNull(provider.TenantId);
-            Assert.IsNotNull(provider.CredentialManagerName);
-        }
+//            Assert.IsNotNull(provider);
+//            Assert.IsNotNull(provider.ClientId);
+//            Assert.IsNotNull(provider.TenantId);
+//            Assert.IsNotNull(provider.CredentialManagerName);
+//        }
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]

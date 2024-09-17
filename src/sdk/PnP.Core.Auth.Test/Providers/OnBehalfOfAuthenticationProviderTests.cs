@@ -155,7 +155,7 @@ namespace PnP.Core.Auth.Test.Providers
 
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestOnBehalfOfConstructorNoDIWithCertificateFile_NullClientId_NullTenantId()
+        public async Task TestOnBehalfOfConstructorNoDIWithCertificateFile_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
@@ -164,12 +164,13 @@ namespace PnP.Core.Auth.Test.Providers
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
             var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
 
             var certificateFromFile = X509CertificateUtility.LoadCertificate(storeName, storeLocation, thumbprint);
 
             //string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
             var provider = new OnBehalfOfAuthenticationProvider(
-                null,
+                clientId,
                 null,
                 certificate: certificateFromFile,
                 // We get the consumer access token using an InteractiveAuthenticationProvider
@@ -182,7 +183,7 @@ namespace PnP.Core.Auth.Test.Providers
 
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestOnBehalfOfConstructorNoDIWithCertificate_NullClientId_NullTenantId()
+        public async Task TestOnBehalfOfConstructorNoDIWithCertificate_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
@@ -191,9 +192,10 @@ namespace PnP.Core.Auth.Test.Providers
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
             var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
 
             var provider = new OnBehalfOfAuthenticationProvider(
-                null,
+                clientId,
                 null,
                 storeName,
                 storeLocation,
@@ -209,16 +211,17 @@ namespace PnP.Core.Auth.Test.Providers
 
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestOnBehalfOfConstructorNoDIWithClientSecret_NullClientId_NullTenantId()
+        public async Task TestOnBehalfOfConstructorNoDIWithClientSecret_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var clientSecret = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:ClientSecret");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
 
             var provider = new OnBehalfOfAuthenticationProvider(
-                null,
+                clientId,
                 null,
                 clientSecret.ToSecureString(),
                 // We get the consumer access token using an InteractiveAuthenticationProvider
@@ -241,7 +244,7 @@ namespace PnP.Core.Auth.Test.Providers
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
 
             var provider = new OnBehalfOfAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 storeName,
                 storeLocation,
@@ -261,7 +264,7 @@ namespace PnP.Core.Auth.Test.Providers
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
 
             var provider = new OnBehalfOfAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 clientSecret: null,
                 // We get the consumer access token using an InteractiveAuthenticationProvider

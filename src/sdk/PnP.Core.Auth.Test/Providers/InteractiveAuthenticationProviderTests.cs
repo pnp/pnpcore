@@ -102,11 +102,14 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestInteractiveConstructorNoDI_DefaultValues()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-
-            var provider = new InteractiveAuthenticationProvider();
+            var configuration = TestCommon.GetConfigurationSettings();
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            Uri test = null;
+            var provider = new InteractiveAuthenticationProvider(clientId, null, test);
 
             Assert.IsNotNull(provider);
-            Assert.IsNotNull(provider.ClientId);
+            // ClientId is required now
+            //Assert.IsNotNull(provider.ClientId);
             Assert.IsNotNull(provider.TenantId);
             Assert.IsNotNull(provider.RedirectUri);
         }

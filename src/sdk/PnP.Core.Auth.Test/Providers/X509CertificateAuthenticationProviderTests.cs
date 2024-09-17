@@ -71,7 +71,7 @@ namespace PnP.Core.Auth.Test.Providers
 
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestX509CertificateConstructorNoDI_NullClientId_NullTenantId()
+        public async Task TestX509CertificateConstructorNoDI_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
@@ -80,9 +80,10 @@ namespace PnP.Core.Auth.Test.Providers
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreLocation");
             var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:Thumbprint");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:ClientId");
 
             var provider = new X509CertificateAuthenticationProvider(
-                null,
+                clientId,
                 null,
                 storeName,
                 storeLocation,
@@ -105,7 +106,7 @@ namespace PnP.Core.Auth.Test.Providers
             var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreLocation");
 
             var provider = new X509CertificateAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 storeName,
                 storeLocation,

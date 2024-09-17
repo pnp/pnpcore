@@ -50,7 +50,7 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -64,11 +64,11 @@ namespace PnP.Core.Auth.Test.Providers
 
         [TestMethod]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TestUsernamePasswordConstructorNoDI_NullClientId_NullTenantId()
+        public async Task TestUsernamePasswordConstructorNoDI_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                null,
+                TestGlobals.FakeClientId,
                 null,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -87,7 +87,7 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 null,
                 "FakePassword".ToSecureString());
@@ -100,7 +100,7 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 null);
@@ -111,7 +111,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestUsernamePasswordAuthenticateRequestAsyncNoResource()
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -124,7 +124,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestUsernamePasswordAuthenticateRequestAsyncNoHttpRequest()
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -140,9 +140,10 @@ namespace PnP.Core.Auth.Test.Providers
             var configuration = TestCommon.GetConfigurationSettings();
             var username = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
             var password = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:ClientId");
 
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                clientId,
                 AuthGlobals.OrganizationsTenantId,
                 username,
                 password.ToSecureString());
@@ -159,7 +160,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestUsernamePasswordGetAccessTokenAsyncNullResource()
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -172,7 +173,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestUsernamePasswordGetAccessTokenAsyncFullNullResource()
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -185,7 +186,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestUsernamePasswordGetAccessTokenAsyncFullNullScopes()
         {
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                TestGlobals.FakeClientId,
                 AuthGlobals.OrganizationsTenantId,
                 "FakeUsername",
                 "FakePassword".ToSecureString());
@@ -201,9 +202,10 @@ namespace PnP.Core.Auth.Test.Providers
             var configuration = TestCommon.GetConfigurationSettings();
             var username = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
             var password = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:ClientId");
 
             var provider = new UsernamePasswordAuthenticationProvider(
-                AuthGlobals.DefaultClientId,
+                clientId,
                 AuthGlobals.OrganizationsTenantId,
                 username,
                 password.ToSecureString());

@@ -111,7 +111,15 @@ namespace PnP.Core.Auth
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint);
             }
 
-            ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
+            if (!string.IsNullOrEmpty(options.ClientId))
+            {
+                ClientId = options.ClientId;
+            }
+            else
+            {
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.InvalidClientId);
+            }
+
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             Certificate = options.X509Certificate.Certificate ?? X509CertificateUtility.LoadCertificate(
                 options.X509Certificate.StoreName,

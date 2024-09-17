@@ -3,6 +3,7 @@ using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Auth.Utilities;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -88,7 +89,15 @@ namespace PnP.Core.Auth
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
+            if (!string.IsNullOrEmpty(options.ClientId))
+            {
+                ClientId = options.ClientId;
+            }
+            else
+            {
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.InvalidClientId);
+            }
+
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             RedirectUri = options.Interactive?.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 

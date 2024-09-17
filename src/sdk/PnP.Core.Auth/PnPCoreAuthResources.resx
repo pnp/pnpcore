@@ -201,4 +201,7 @@
   <data name="X509CertificateAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized X509CertificateAuthenticationProvider with certificate with thumbprint {0} from store {1} location {2}</value>
   </data>
+  <data name="InvalidClientId" xml:space="preserve">
+    <value>Missing ClientId value</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ namespace PnP.Core.Auth {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreAuthResources {
@@ -192,6 +192,15 @@ namespace PnP.Core.Auth {
         internal static string InteractiveAuthenticationProvider_LogInit {
             get {
                 return ResourceManager.GetString("InteractiveAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing ClientId value.
+        /// </summary>
+        internal static string InvalidClientId {
+            get {
+                return ResourceManager.GetString("InvalidClientId", resourceCulture);
             }
         }
         

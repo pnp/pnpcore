@@ -92,7 +92,15 @@ namespace PnP.Core.Auth
                     PnPCoreAuthResources.DeviceCodeAuthenticationProvider_InvalidConfiguration);
             }
 
-            ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
+            if (!string.IsNullOrEmpty(options.ClientId))
+            {
+                ClientId = options.ClientId;
+            }
+            else
+            {
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.InvalidClientId);
+            }
+
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             RedirectUri = options.DeviceCode.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 

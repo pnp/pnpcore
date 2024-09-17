@@ -107,7 +107,15 @@ namespace PnP.Core.Auth
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_InvalidPassword);
             }
 
-            ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
+            if (!string.IsNullOrEmpty(options.ClientId))
+            {
+                ClientId = options.ClientId;
+            }
+            else
+            {
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.InvalidClientId);
+            }
+
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             Username = options.UsernamePassword.Username;
             Password = options.UsernamePassword.Password.ToSecureString();

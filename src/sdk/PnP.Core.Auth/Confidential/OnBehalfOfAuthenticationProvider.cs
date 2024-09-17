@@ -179,7 +179,15 @@ namespace PnP.Core.Auth
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate);
             }
 
-            ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
+            if (!string.IsNullOrEmpty(options.ClientId))
+            {
+                ClientId = options.ClientId;
+            }
+            else
+            {
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.InvalidClientId);
+            }
+
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             if (options.OnBehalfOf.Certificate != null)
             {
