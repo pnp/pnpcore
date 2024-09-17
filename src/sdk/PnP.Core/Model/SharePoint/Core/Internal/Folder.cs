@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -308,7 +309,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region EnsureFolder
-        public async Task<IFolder> EnsureFolderAsync(string folderRelativeUrl)
+        public async Task<IFolder> EnsureFolderAsync(string folderRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             if (string.IsNullOrEmpty(folderRelativeUrl))
             {
@@ -331,7 +332,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     try
                     {
-                        currentFolder = await currentFolder.PnPContext.Web.GetFolderByServerRelativeUrlAsync(currentUrl).ConfigureAwait(false);
+                        currentFolder = await currentFolder.PnPContext.Web.GetFolderByServerRelativeUrlAsync(currentUrl, expressions).ConfigureAwait(false);
                     }
                     catch (SharePointRestServiceException)
                     {
@@ -348,9 +349,9 @@ namespace PnP.Core.Model.SharePoint
             return currentFolder;
         }
 
-        public IFolder EnsureFolder(string folderRelativeUrl)
+        public IFolder EnsureFolder(string folderRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
-            return EnsureFolderAsync(folderRelativeUrl).GetAwaiter().GetResult();
+            return EnsureFolderAsync(folderRelativeUrl, expressions).GetAwaiter().GetResult();
         }
         #endregion
 

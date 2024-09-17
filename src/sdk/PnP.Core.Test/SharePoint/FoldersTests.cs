@@ -603,6 +603,12 @@ namespace PnP.Core.Test.SharePoint
                 var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
                 Assert.IsTrue(folderToDelete != null);
                 Assert.IsTrue(folderToDelete.Name == "sub1");
+                Assert.IsFalse(folderToDelete.IsPropertyAvailable(p => p.StorageMetrics));
+
+                var folderToLoadWithExpression = await parentFolder.EnsureFolderAsync("sub1/sub2", p => p.Name, p => p.StorageMetrics); 
+                Assert.IsTrue(folderToLoadWithExpression != null);
+                Assert.IsTrue(folderToLoadWithExpression.Name == "sub2");
+                Assert.IsTrue(folderToLoadWithExpression.IsPropertyAvailable(p => p.StorageMetrics));
 
                 await folderToDelete.DeleteAsync();
             }

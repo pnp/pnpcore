@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Moved the approve permissions for deployed SPFx packages to use Graph instead of CSOM #1479 [mloitzl - Martin Loitzl]
 - Added `BaseType` property to `IList` #1532 [jansenbe - Bert Jansen]
+- Added support for listing the properties to load when using `IFolder.EnsureFolderAsync` #1504 [jansenbe - Bert Jansen]
 
 ## [1.14]
 

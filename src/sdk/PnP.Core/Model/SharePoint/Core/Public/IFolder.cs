@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -254,15 +255,17 @@ namespace PnP.Core.Model.SharePoint
         /// Ensures a (hiarchy) of folders exists on a given folder
         /// </summary>
         /// <param name="folderRelativeUrl">a (hiarchy) of folders (e.g. folderA/folderB/FolderC) </param>
+        /// <param name="expressions">Expressions needed to create the request, only used when the folder exists, if the returned folder was newly created the default properties are returned</param>
         /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
-        public Task<IFolder> EnsureFolderAsync(string folderRelativeUrl);
+        public Task<IFolder> EnsureFolderAsync(string folderRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         /// <summary>
         /// Ensures a (hiarchy) of folders exists on a given folder
         /// </summary>
         /// <param name="folderRelativeUrl">a (hiarchy) of folders (e.g. folderA/folderB/FolderC) </param>
+        /// <param name="expressions">Expressions needed to create the request, only used when the folder exists, if the returned folder was newly created the default properties are returned</param>
         /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
-        public IFolder EnsureFolder(string folderRelativeUrl);
+        public IFolder EnsureFolder(string folderRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
         #endregion
 
         #region Rename
