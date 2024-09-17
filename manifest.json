@@ -1134,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html",
-          "hash": "PkDZEzsrirtDVBwSbygFvPe7kqbdgwAwDU4RYuiRWqM="
+          "hash": "DBPsS9GN9qlLF+6pe1ST8PZuSvMiDCSUzQNh3uE9q+Y="
         }
       },
       "is_incremental": false,
@@ -1146,7 +1146,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html",
-          "hash": "cteyfakMDh/JG9tgReOaBgiVQmLMnIs3vu4wOd4a//k="
+          "hash": "LDcSWrswFLxELEl6Wnr8S0oW3fo5/erZ0gLX76vkgw8="
         }
       },
       "is_incremental": false,
@@ -1170,7 +1170,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.ExternalAuthenticationProvider.html",
-          "hash": "8RQdtXr4RM3sfIrykbldJ2O7DGsb6AWGFTuVyFa2VfQ="
+          "hash": "ujqQjSbYQ0XrhaI5Urx4QASZrXliuUlkPpTug03isns="
         }
       },
       "is_incremental": false,
@@ -1182,7 +1182,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.html",
-          "hash": "gi8ukWjOujFGnVKAuE9AbOGi+XLUZFdGDAtLrPLF8Z0="
+          "hash": "81Q0kJbAeCbb+xz50Qb7gvuQt3mQ82MSv60c5hSxGSk="
         }
       },
       "is_incremental": false,
@@ -1194,7 +1194,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OAuthAuthenticationProvider.html",
-          "hash": "W2iLmhPguxifJGi/OutnsJdDTsZ3fA+AWZgy/Je1dfA="
+          "hash": "/iTE+0C6i+5TmZgxbXFRBM/Ucd0gqnRCKyLSHzuhN64="
         }
       },
       "is_incremental": false,
@@ -1206,7 +1206,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html",
-          "hash": "bC0R4FRFSCPzv76aBUW3cTCWVm3xvputOH7gT1vKIEo="
+          "hash": "jRFV4/x1vyfKZYW7Sx8EPghlqjit8NDQhfLZEF4zo+k="
         }
       },
       "is_incremental": false,
@@ -1470,7 +1470,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html",
-          "hash": "8Z4JB62w8RZgo+S9511/h8dKWGNd8SNT7veQ2VlSSlk="
+          "hash": "7L6l50b1iyQFziVxHsvw4Wv8yofg9ha44KSTWMV8gZA="
         }
       },
       "is_incremental": false,
@@ -1482,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html",
-          "hash": "TU9EKcpjycyAGtFbAGmke5vuECSIh6jlxC3XZh4daVg="
+          "hash": "E+DF7QWe3fffIOTBD1fmgJ5T79LCEVsqS1znMJNTE1s="
         }
       },
       "is_incremental": false,
