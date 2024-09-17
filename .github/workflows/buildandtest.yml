@@ -59,6 +59,7 @@ jobs:
         pnpcoresdktestsite: ${{ secrets.PNPCORESDKTESTSITE }}
         pnpcoresdktestuser: ${{ secrets.PNPCORESDKTESTUSER }}
         pnpcoresdktestuserpassword: ${{ secrets.PNPCORESDKTESTUSERPASSWORD }}
+        pnpcoresdktestclientid: ${{ secrets.PNPCORESDKTESTCLIENTID }}
       run: |
         dotnet test ./PnP.Core.Test/PnP.Core.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
         dotnet test ./PnP.Core.Auth.Test/PnP.Core.Auth.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
