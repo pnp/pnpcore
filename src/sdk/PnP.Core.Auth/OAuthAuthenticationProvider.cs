@@ -28,11 +28,6 @@ namespace PnP.Core.Auth
         public string TenantId { get; set; }
 
         /// <summary>
-        /// Default Azure AD application id (PnP Management Shell)
-        /// </summary>
-        protected const string DefaultAADAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
-
-        /// <summary>
         /// Local copy of the logger class
         /// </summary>
         internal readonly ILogger Log;
