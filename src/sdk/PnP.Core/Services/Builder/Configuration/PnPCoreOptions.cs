@@ -98,7 +98,7 @@ namespace PnP.Core.Services.Builder.Configuration
     public class PnPCoreHttpRequestsSharePointRestOptions
     {
         /// <summary>
-        /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to false
+        /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to true
         /// </summary>
         public bool UseRetryAfterHeader { get; set; } = true;
 
