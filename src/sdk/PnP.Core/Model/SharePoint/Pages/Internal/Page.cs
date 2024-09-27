@@ -1445,7 +1445,7 @@ namespace PnP.Core.Model.SharePoint
             ReIndex();
 
             var hasPageTitleWPInOneColumFullWith = false;
-            if (sections.Any(s=> s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
+            if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
             {
                 hasPageTitleWPInOneColumFullWith = true; //Message ID: MC791596 / Roadmap ID: 386904
             }
@@ -1669,7 +1669,7 @@ namespace PnP.Core.Model.SharePoint
             var pageHeaderHtml = "";
             if (pageHeader != null)
             {
-                if(pageHeader.Type == PageHeaderType.Default && sections.Any(s=>s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
+                if(pageHeader.Type == PageHeaderType.Default && sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
                 {
                     //Page created from code and Header was not set
                     SetPageTitleWebPartPageHeader();

@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `BaseType` property to `IList` #1532 [jansenbe - Bert Jansen]
 - Added support for listing the properties to load when using `IFolder.EnsureFolderAsync` #1504 [jansenbe - Bert Jansen]
 - Auth library: Removed the PnP Managent Shell App (`31359c7f-bd7e-475c-86db-fdb8c937548e`) as default app to authenticate with [jansenbe - Bert Jansen]
+- Fix check for HeaderTypes as new PageTitle WebPart in OneColumnFullWIth is not always in first section #1543 [czullu - Christian Zuellig]
 
 ## [1.14]
 
