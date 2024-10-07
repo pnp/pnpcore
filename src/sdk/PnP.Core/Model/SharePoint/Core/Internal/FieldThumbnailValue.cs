@@ -121,7 +121,7 @@ namespace PnP.Core.Model.SharePoint
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {
                 Interactive = true,
-                BinaryBody = ToByteArray(content),
+                Content = new ByteArrayContent(ToByteArray(content))
             };
             
             var response = await (item as ListItem).RawRequestAsync(api, HttpMethod.Post).ConfigureAwait(false);

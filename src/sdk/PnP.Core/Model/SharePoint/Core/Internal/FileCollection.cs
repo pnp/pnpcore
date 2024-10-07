@@ -78,7 +78,7 @@ namespace PnP.Core.Model.SharePoint
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {
                 Interactive = true,
-                BinaryBody = ToByteArray(content)
+                Content = new ByteArrayContent(ToByteArray(content))
             };
             await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
             return newFile;
@@ -122,7 +122,7 @@ namespace PnP.Core.Model.SharePoint
                     api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = chunk
+                        Content = new ByteArrayContent(chunk)
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                     firstChunk = false;
@@ -134,7 +134,7 @@ namespace PnP.Core.Model.SharePoint
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = chunk
+                        Content = new ByteArrayContent(chunk)
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
 
@@ -146,7 +146,7 @@ namespace PnP.Core.Model.SharePoint
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = chunk
+                        Content = new ByteArrayContent(chunk)
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }
