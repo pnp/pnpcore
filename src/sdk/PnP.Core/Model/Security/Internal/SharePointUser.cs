@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.User", Target = typeof(SharePointGroup), Uri = "_api/Web/sitegroups/getbyid({Parent.Id})/users/getbyid({Id})", Get = "_api/Web/sitegroups/getbyid({Parent.Id})/users", LinqGet = "_api/Web/sitegroups/getbyid({Parent.Id})/users")]
-    [SharePointType("SP.User", Target = typeof(Web), Uri = "_api/Web/GetUserById({Id})", Get = "_api/Web/SiteUsers", LinqGet = "_api/Web/SiteUsers")]
+    [SharePointType("SP.User", Target = typeof(Web), Uri = "_api/Web/GetUserById({Id})", LinqGet = "_api/Web/SiteUsers")]
     internal sealed class SharePointUser : BaseDataModel<ISharePointUser>, ISharePointUser
     {
         #region Construction
@@ -28,7 +28,7 @@ namespace PnP.Core.Model.Security
                         LoginName
                     };
                     var jsonBody = JsonSerializer.Serialize(body);
-                    return new ApiCall(entity.SharePointGet, ApiType.SPORest, jsonBody);
+                    return new ApiCall("_api/Web/SiteUsers", ApiType.SPORest, jsonBody);
 
                 }).ConfigureAwait(false);
             };

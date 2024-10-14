@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for listing the properties to load when using `IFolder.EnsureFolderAsync` #1504 [jansenbe - Bert Jansen]
 - Auth library: Removed the PnP Managent Shell App (`31359c7f-bd7e-475c-86db-fdb8c937548e`) as default app to authenticate with [jansenbe - Bert Jansen]
 - Fix check for HeaderTypes as new PageTitle WebPart in OneColumnFullWIth is not always in first section #1543 [czullu - Christian Zuellig]
+- Fix loading additional properties of an `ISharePointUser` #1553 [jansenbe - Bert Jansen]
 
 ## [1.14]
 
