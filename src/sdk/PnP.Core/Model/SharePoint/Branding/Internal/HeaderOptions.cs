@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -74,29 +75,63 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                Dictionary<string, string> headers;
+                var byteContent = new ByteArrayContent(ToByteArray(content));
+
                 if (MimeTypeMap.TryGetMimeType(fileName, out string mimeType))
                 {
-                    headers = new Dictionary<string, string>
-                    {
-                        { "Content-Type", mimeType }
-                    };
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
                 }
                 else
                 {
-                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_NotAnImageMimeType);
+                    throw new ClientException(ErrorType.Unsupported,
+                        PnPCoreResources.Exception_Unsupported_NotAnImageMimeType);
                 }
 
-                // We're setting the group logo as that serves as the site logo thumbnail
-                var api = new ApiCall("_api/GroupService/SetGroupImage", ApiType.SPORest)
+                var apiCall = new ApiCall($"groups/{PnPContext.Site.GroupId}/photo/$value", ApiType.Graph)
                 {
-                    Interactive = true,
-                    BinaryBody = ToByteArray(content),
-                    Headers = headers
+                    Interactive = true, Content = byteContent
                 };
 
-                // Set the uploaded file as site logo
-                await (PnPContext.Web as Web).RawRequestAsync(api, HttpMethod.Post, "SetGroupImage").ConfigureAwait(false);
+                // Upload the image and set it as group logo
+                await (PnPContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Put).ConfigureAwait(false);
+
+                // get the site url and current used site logo url to check if it is set correctly
+                await PnPContext.Web.EnsurePropertiesAsync(x => x.SiteLogoUrl, x => x.Url).ConfigureAwait(false);
+
+                var correctSiteLogoUrl =
+                    $"{PnPContext.Web.Url.PathAndQuery}/_api/GroupService/GetGroupImage?id='{PnPContext.Site.GroupId}'";
+
+                // Use StartSWith to avoid issues with the query string that can contains &hash=xxxx
+                if (string.IsNullOrEmpty(PnPContext.Web.SiteLogoUrl) ||
+                    !PnPContext.Web.SiteLogoUrl.StartsWith(correctSiteLogoUrl))
+                {
+                    PnPContext.Web.SiteLogoUrl = correctSiteLogoUrl;
+                    await PnPContext.Web.UpdateAsync().ConfigureAwait(false);
+
+                    const string cachedSiteIcon = "__siteIcon__.png";
+
+                    try
+                    {
+                        // check if we have a file named "__siteIcon__.jpg" in the SiteAssets folder
+                        var file = await PnPContext.Web
+                            .GetFileByServerRelativeUrlAsync(
+                                $"{PnPContext.Uri.AbsolutePath}/siteassets/{cachedSiteIcon}")
+                            .ConfigureAwait(false);
+
+                        // delete the cached file to ensure the new logo is used https://learn.microsoft.com/en-us/sharepoint/troubleshoot/sites/error-when-changing-o365-site-logo
+                        await file.DeleteAsync().ConfigureAwait(false);
+                    }
+                    catch (SharePointRestServiceException ex)
+                    {
+                        var error = ex.Error as SharePointRestError;
+
+                        // If the exception indicated a non existing file then ignore, else throw
+                        if (!File.ErrorIndicatesFileDoesNotExists(error))
+                        {
+                            throw;
+                        }
+                    }
+                }
             }
         }
 

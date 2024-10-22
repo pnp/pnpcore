@@ -195,7 +195,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             var apiCall = new ApiCall($"_api/web/{Scope}appcatalog/Add(overwrite={overwrite.ToString().ToLower()},url='{fileName}')", ApiType.SPORest)
             {
                 Interactive = true,
-                BinaryBody = fileBytes,
+                Content = new ByteArrayContent(fileBytes),
                 Headers = new Dictionary<string, string>()
             };
 

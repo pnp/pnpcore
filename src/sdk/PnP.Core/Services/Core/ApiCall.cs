@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -9,7 +10,8 @@ namespace PnP.Core.Services
     /// </summary>
     internal struct ApiCall
     {
-        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null, bool loadPages = false)
+        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null,
+            bool loadPages = false)
         {
             Type = apiType;
             Request = request;
@@ -22,7 +24,7 @@ namespace PnP.Core.Services
             RawResultsHandler = null;
             Commit = false;
             Interactive = false;
-            BinaryBody = null;
+            Content = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
@@ -46,7 +48,7 @@ namespace PnP.Core.Services
             RawResultsHandler = null;
             Commit = false;
             Interactive = false;
-            BinaryBody = null;
+            Content = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
@@ -117,9 +119,9 @@ namespace PnP.Core.Services
         internal bool Interactive { get; set; }
 
         /// <summary>
-        /// Binary content for this API call
+        /// Http Content to add Binary content or other content to this API call
         /// </summary>
-        internal byte[] BinaryBody { get; set; }
+        internal HttpContent Content { get; set; }
 
         /// <summary>
         /// Indicates whether the call expects a binary response

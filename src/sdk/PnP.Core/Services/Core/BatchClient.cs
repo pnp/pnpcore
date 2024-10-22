@@ -995,10 +995,9 @@ namespace PnP.Core.Services
                         content.Headers.Add($"Content-Type", $"application/json");
                         PnPContext.Logger.LogDebug(requestBody);
                     }
-                    else if (graphRequest.ApiCall.BinaryBody != null)
+                    else if (graphRequest.ApiCall.Content != null)
                     {
-                        binaryContent = new ByteArrayContent(graphRequest.ApiCall.BinaryBody);
-                        request.Content = binaryContent;
+                        request.Content = graphRequest.ApiCall.Content;
                     }
 
                     // Add extra headers
@@ -1876,10 +1875,9 @@ namespace PnP.Core.Services
                         content.Headers.Add($"Content-Type", $"application/json;odata=verbose");
                         PnPContext.Logger.LogDebug(requestBody);
                     }
-                    else if (restRequest.ApiCall.BinaryBody != null)
+                    else if (restRequest.ApiCall.Content != null)
                     {
-                        binaryContent = new ByteArrayContent(restRequest.ApiCall.BinaryBody);
-                        request.Content = binaryContent;
+                        request.Content = restRequest.ApiCall.Content;
                     }
 
                     if (restRequest.ApiCall.ExpectBinaryResponse)

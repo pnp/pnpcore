@@ -114,9 +114,6 @@ await chrome.Header.ResetSiteLogoThumbnailAsync();
 
 While above methods work for any modern SharePoint site the implementation is different for group connected sites (such as a Team site) as for those sites the logo is maintained via the connected group. For group connected sites the site logo and the site logo thumbnail are the same and as such is does not matter which set or reset method you use, both result in the same code being called. Another difference is on how the provided image is stored: for group connected sites the image is stored with the Microsoft 365 group, whereas for other sites the image is first uploaded to the site assets library. Consequently there's also a difference in reset behavior: for group connected sites a reset will try to load the `__siteIcon__.jpg` file from the site assets library and set that as group image, for other site types there's no dependency on an image in site assets library.
 
-> [!Important]
-> When you're using the `SetSiteLogo` and `SetSiteLogoThumbnail` methods on a Microsoft 365 group connected site while using application permissions then you'll get an error. Currently these methods require delegated permissions when used on a group connected sites, usage on other sites is not impacted.
-
 ### Set and clear the header background image
 
 Whenever the site header layout is set to `Extended` you can optionally set a header background image via the `SetHeaderBackgroundImage` methods. Clearing the header background can be done using the `ClearHeaderBackgroundImage` methods.
