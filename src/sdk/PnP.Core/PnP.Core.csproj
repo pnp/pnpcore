@@ -73,7 +73,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.0" />
 		<PackageReference Include="TimeZoneConverter" Version="6.1.0" />
 	</ItemGroup>
 
