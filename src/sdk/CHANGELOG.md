@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix loading additional properties of an `ISharePointUser` #1553 [jansenbe - Bert Jansen]
 - Updated assembly versions #1559 [gautamdsheth - Gautam Sheth]
 - Removed support for .NET 6 and .NET 7 as they are out of support [gautamdsheth - Gautam Sheth]
+- Fixed to the issue where users were getting added to User Info list instead of a SharePoint group. #1577 [czullu - Christian Zuellig]
 
 ## [1.14]
 
