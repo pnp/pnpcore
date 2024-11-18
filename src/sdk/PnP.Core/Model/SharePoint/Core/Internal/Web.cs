@@ -363,14 +363,14 @@ namespace PnP.Core.Model.SharePoint
             return GetPagesAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article)
+        public async Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5)
         {
-            return await Page.NewPageAsync(PnPContext, pageLayoutType).ConfigureAwait(false);
+            return await Page.NewPageAsync(PnPContext, pageLayoutType, editorType).ConfigureAwait(false);
         }
 
-        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article)
+        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5)
         {
-            return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
+            return NewPageAsync(pageLayoutType, editorType).GetAwaiter().GetResult();
         }
 
         public async Task<IVivaDashboard> GetVivaDashboardAsync()

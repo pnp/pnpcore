@@ -612,15 +612,17 @@ namespace PnP.Core.Model.SharePoint
         /// Creates a new modern page
         /// </summary>
         /// <param name="pageLayoutType">Optionally specify the page type, defaults to <see cref="PageLayoutType.Article"/></param>
+        /// <param name="editorType">Editor type to be used by the new page, CK4 is the legacy model, CK5 the current</param>
         /// <returns>Created modern page</returns>
-        public Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article);
+        public Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5);
 
         /// <summary>
         /// Creates a new modern page
         /// </summary>
         /// <param name="pageLayoutType">Optionally specify the page type, defaults to <see cref="PageLayoutType.Article"/></param>
+        /// <param name="editorType">Editor type to be used by the new page, CK4 is the legacy model, CK5 the current</param>
         /// <returns>Created modern page</returns>
-        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article);
+        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5);
         #endregion
 
         #region GetFolderByServerRelativeUrl

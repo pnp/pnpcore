@@ -18,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
     internal sealed class Page : IPage
     {
         private const string inlineImageCK4Html = "<div tabindex=\"-1\" data-cke-widget-wrapper=\"1\" data-cke-filter=\"off\" class=\"cke_widget_wrapper cke_widget_block cke_widget_inlineimage cke_widget_wrapper_webPartInRteInlineImage cke_widget_wrapper_{ImageAlignment} cke_widget_wrapper_webPartInRte\" data-cke-display-name=\"div\" data-cke-widget-id=\"0\" role=\"region\" aria-label=\"Inline image in RTE. Use Alt + F11 to go to toolbar. Use Alt + P to open the property pane.\"><div data-webpart-id=\"image\" class=\"webPartInRte {ImageAlignment} webPartInRteInlineImage cke_widget_element\" data-cke-widget-data=\"%7B%22classes%22%3A%7B%22webPartInRteInlineImage%22%3A1%2C%22{ImageAlignment}%22%3A1%2C%22webPartInRte%22%3A1%7D%7D\" data-cke-widget-upcasted=\"1\" data-cke-widget-keep-attr=\"0\" data-widget=\"inlineimage\" data-instance-id=\"{TextEditorInstanceId}\" title=\"\"></div></div>";
-        private const string inlineImageCK5Html = "<div class=\"imagePlugin\" style=\"background-color:transparent;position:relative;\" data-alignment=\"{ImageAlignment}\" data-imageurl=\"{ImageUrl}\" data-uploading=\"0\" data-height=\"{ImageHeight}\" data-width=\"{ImageWidth}\" data-widthpercentage=\"{WidthPercentage}\" data-captiontext=\"{ImageCaption}\" data-alttext=\"{ImageAlternativeText}\" data-linkurl=\"{ImageLinkUrl}\"></div>";
+        private const string inlineImageCK5Html = "<div class=\"imagePlugin\" style=\"background-color:transparent;position:relative;\" data-alignment=\"{ImageAlignment}\" data-imageurl=\"{ImageUrl}\" data-uploading=\"0\" data-height=\"{ImageHeight}\" data-width=\"{ImageWidth}\" data-imagenaturalheight=\"{ImageHeight}\" data-imagenaturalwidth=\"{ImageWidth}\" data-widthpercentage=\"{WidthPercentage}\" data-webid=\"{WebId}\" data-siteid=\"{SiteId}\" data-listid=\"{ListId}\" data-uniqueid=\"{UniqueId}\" data-isoverlaytextenabled=\"false\" data-captiontext=\"{ImageCaption}\" data-alttext=\"{ImageAlternativeText}\" data-linkurl=\"{ImageLinkUrl}\"></div>";
         private const string inlineImageTextControl = "{TextEditorInstanceId}";
         private const string inlineImageAlignment = "{ImageAlignment}";
         private const string inlineImageUrl = "{ImageUrl}";
@@ -28,19 +28,24 @@ namespace PnP.Core.Model.SharePoint
         private const string inlineImageWidth = "{ImageWidth}";
         private const string inlineImageHeight = "{ImageHeight}";
         private const string inlineWidthPercentage = "{WidthPercentage}";
+        private const string inlineWebId = "{WebId}";
+        private const string inlineSiteId = "{SiteId}";
+        private const string inlineListId = "{ListId}";
+        private const string inlineUniqueId = "{UniqueId}";
 
-    // page settings defaults
-    private bool isDefaultDescription = true;
+        // page settings defaults
+        private bool isDefaultDescription = true;
         private bool isSpellCheckEnabled = true;
         private int globalRichTextStylingVersion = 1;
         private bool isEmailReady = false;
         private string[] pageSettingsSliceHtmlAttributes;
-        private EditorType editorType = EditorType.CK4;
+        private EditorType editorType = EditorType.CK5;
 
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder.QueryProperties(p => p.Properties, p => p.ServerRelativeUrl), p => p.ListItemEntityTypeFullName, p => p.Fields };
+        
         #region Construction
 
         internal Page(PnPContext context, IList pagesLibrary, IListItem pageListItem, PageLayoutType pageLayoutType = PageLayoutType.Article)
@@ -460,7 +465,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        internal async static Task<IPage> NewPageAsync(PnPContext context, PageLayoutType pageLayoutType = PageLayoutType.Article)
+        internal async static Task<IPage> NewPageAsync(PnPContext context, PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5)
         {
             if (pageLayoutType == PageLayoutType.Topic || pageLayoutType == PageLayoutType.NewsDigest)
             {
@@ -469,7 +474,10 @@ namespace PnP.Core.Model.SharePoint
 
             // Get a reference to the pages library, reuse the existing one if the correct properties were loaded
             IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);
-            return new Page(context, pagesLibrary, null, pageLayoutType);
+            return new Page(context, pagesLibrary, null, pageLayoutType)
+            {
+                EditorType = editorType
+            };
         }
 
         private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context)
@@ -2848,6 +2856,10 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
+                // Find the server relative image
+                var image = await PnPContext.Web.GetFileByServerRelativeUrlAsync(serverRelativeUrl, p => p.UniqueId, p => p.ListId).ConfigureAwait(false);
+
+
                 // Set defaults in case height and width are not set
                 if (!imageOptions.Height.HasValue)
                 {
@@ -2861,7 +2873,7 @@ namespace PnP.Core.Model.SharePoint
                     imageOptions.Width = 0;
                 }
 
-                if (!imageOptions.WidthPercentage.HasValue) 
+                if (!imageOptions.WidthPercentage.HasValue)
                 {
                     // Assume by default 100% of the editor width, aligned with the SPO behavior
                     imageOptions.WidthPercentage = 100;
@@ -2870,7 +2882,7 @@ namespace PnP.Core.Model.SharePoint
                 imageOptions.Link ??= "";
                 imageOptions.Caption ??= "";
                 imageOptions.AlternativeText ??= "";
-                
+
                 return inlineImageCK5Html.Replace(inlineImageUrl, serverRelativeUrl)
                                          .Replace(inlineImageAlignment, imageOptions.Alignment.ToString())
                                          .Replace(inlineImageCaption, imageOptions.Caption)
@@ -2878,7 +2890,11 @@ namespace PnP.Core.Model.SharePoint
                                          .Replace(inlineImageLinkUrl, imageOptions.Link)
                                          .Replace(inlineImageWidth, imageOptions.Width.Value.ToString())
                                          .Replace(inlineImageHeight, imageOptions.Height.Value.ToString())
-                                         .Replace(inlineWidthPercentage, imageOptions.WidthPercentage.Value.ToString());
+                                         .Replace(inlineWidthPercentage, imageOptions.WidthPercentage.Value.ToString())
+                                         .Replace(inlineWebId, PnPContext.Web.Id.ToString())
+                                         .Replace(inlineSiteId, PnPContext.Site.Id.ToString())
+                                         .Replace(inlineListId, image.ListId.ToString())
+                                         .Replace(inlineUniqueId, image.UniqueId.ToString());
             }
         }
 

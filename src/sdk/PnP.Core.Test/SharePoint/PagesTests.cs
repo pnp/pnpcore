@@ -1448,7 +1448,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var page = await context.Web.NewPageAsync();
+                var page = await context.Web.NewPageAsync(editorType: EditorType.CK4);
                 string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithInlineImageWithOpitonsTest.aspx");
                 page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
 
@@ -1486,7 +1486,6 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var page = await context.Web.NewPageAsync();
-                (page as Page).EditorType = EditorType.CK5;
 
                 string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithCK5InlineImageWithOptionsTest.aspx");
                 page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
@@ -1497,7 +1496,7 @@ namespace PnP.Core.Test.SharePoint
                 var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
                 var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", Width = 96, Height = 96, WidthPercentage = 20 });
                 var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text", Width = 96, Height = 96, WidthPercentage = 20 });
-                string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
+                string htmlAdded = $"<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Before inline images </p>{html1}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>{html2}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>{html3}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>";
                 textPart.Text = htmlAdded;
                 page.AddControl(textPart, page.Sections[0].Columns[0]);
 

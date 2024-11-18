@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved page parsing robustness by allowing zone and section index values to be not defined #1552 [jansenbe - Bert Jansen]
 - Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag #1554 [jansenbe - Bert Jansen]
 - Doing a People Search Using PnP Core Search API - Blocked with Readonly Setter for ResultSourceId #1566 [jansenbe - Bert Jansen]
+- Switched to default CK5 editor type for new pages + improved the inline image handling for the CK5 editor #1558 [jansenbe - Bert Jansen]
 
 ## [1.14]
 
