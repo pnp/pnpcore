@@ -2084,6 +2084,7 @@ namespace PnP.Core.Model.SharePoint
                     // we allow enabling communication site features on STS and EHS sites, so don't block adding full width sections on those sites
                     !PnPContext.Web.WebTemplate.Equals("STS", StringComparison.InvariantCultureIgnoreCase) &&
                     !PnPContext.Web.WebTemplate.Equals("GROUP", StringComparison.InvariantCultureIgnoreCase) &&
+                    !PnPContext.Web.WebTemplate.Equals("TEAMCHANNEL", StringComparison.InvariantCultureIgnoreCase) &&
                     !PnPContext.Web.WebTemplate.Equals("EHS", StringComparison.InvariantCultureIgnoreCase) &&
                     // SharePoint Syntex Content Center sites can also have full width sections
                     !PnPContext.Web.WebTemplate.Equals("CONTENTCTR", StringComparison.InvariantCultureIgnoreCase))
