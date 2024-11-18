@@ -349,6 +349,10 @@ namespace PnP.Core.Model.SharePoint
                         }
                     }
                 }
+                else
+                {
+                    Type = PageHeaderType.None;
+                }
             }
         }
 

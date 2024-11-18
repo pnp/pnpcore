@@ -1858,7 +1858,13 @@ namespace PnP.Core.Model.SharePoint
             // Persist the page header
             if (pageHeader.Type == PageHeaderType.None)
             {
-                PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.NoHeader(pageTitle);
+                // Only set the page header to "old" empty page header when there's no one column full width section present. A one column full width section
+                // with a banner web part is considered to be a page header
+                if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth) == false)
+                {
+                    PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.NoHeader(pageTitle);
+                }
+
                 if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
                 {
                     PageListItem[PageConstants._AuthorByline] = null;

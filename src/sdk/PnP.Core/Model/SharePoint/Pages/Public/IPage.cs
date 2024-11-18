@@ -228,7 +228,7 @@ namespace PnP.Core.Model.SharePoint
         public void AddControl(ICanvasControl control, ICanvasColumn column, int order);
 
         /// <summary>
-        /// Removes the set page header 
+        /// Removes the set page header by setting the page banner web part to "Plain" mode
         /// </summary>
         public void RemovePageHeader();
 

@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Removed support for .NET 6 and .NET 7 as they are out of support [gautamdsheth - Gautam Sheth]
 - Fixed to the issue where users were getting added to User Info list instead of a SharePoint group. #1577 [czullu - Christian Zuellig]
 - Modern Page Title in OneColumnFullWithSection also allowed in TEAMCHANNEL Sites #1564 [czullu - Christian Zuellig]
+- Pages that removed the full width section and the banner web part and therefore have no page title anymore do not get a page title when being updated #1550 [jansenbe - Bert Jansen]
 
 ## [1.14]
 
