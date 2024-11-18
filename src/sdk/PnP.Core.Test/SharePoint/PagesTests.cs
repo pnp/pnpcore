@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -23,6 +24,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
         }
 
+        
         #region Page Loading
         [TestMethod]
         public async Task CleanLoad()
@@ -217,6 +219,55 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the created pages again
                 await newPage1.DeleteAsync();
             }
+        }
+
+        [TestMethod]
+        public void DeserializeCanvasControlDataTest()
+        {
+            var controlDataJson = """
+            {
+              "id": "61f0ef56-b5f0-4d94-b1b9-0a5087332cc7",
+              "controlType": 3,
+              "position": {
+                "layoutIndex": 1,
+                "zoneIndex": null,
+                "sectionIndex": null,
+                "controlIndex": 1,
+                "sectionFactor": 0,
+                "zoneId": "f419c0ec-ee17-48d1-b8cb-30e296c9d286"
+              },
+              "webPartId": "cbe7b0a9-3504-44dd-a3a3-0e5cacd07788",
+              "reservedHeight": 207,
+              "addedFromPersistedData": true,
+              "reservedWidth": 1607
+            }
+            """;
+            var controlData = JsonSerializer.Deserialize<CanvasControlData>(controlDataJson, PnPConstants.JsonSerializer_IgnoreNullValues);
+            Assert.IsNotNull(controlData.Position.ZoneIndex == 0);
+            Assert.IsNotNull(controlData.Position.SectionIndex == 0);
+
+            controlDataJson = """
+            {
+              "id": "61f0ef56-b5f0-4d94-b1b9-0a5087332cc7",
+              "controlType": 3,
+              "position": {
+                "layoutIndex": 1,
+                "zoneIndex": 2,
+                "sectionIndex": 3,
+                "controlIndex": 1,
+                "sectionFactor": 0,
+                "zoneId": "f419c0ec-ee17-48d1-b8cb-30e296c9d286"
+              },
+              "webPartId": "cbe7b0a9-3504-44dd-a3a3-0e5cacd07788",
+              "reservedHeight": 207,
+              "addedFromPersistedData": true,
+              "reservedWidth": 1607
+            }
+            """;
+
+            controlData = JsonSerializer.Deserialize<CanvasControlData>(controlDataJson, PnPConstants.JsonSerializer_IgnoreNullValues);
+            Assert.IsNotNull(controlData.Position.ZoneIndex == 2);
+            Assert.IsNotNull(controlData.Position.SectionIndex == 3);
         }
         #endregion
 

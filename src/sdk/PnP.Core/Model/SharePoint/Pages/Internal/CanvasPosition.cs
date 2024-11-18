@@ -12,12 +12,14 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets JsonProperty "zoneIndex"
         /// </summary>
         [JsonPropertyName("zoneIndex")]
+        [JsonConverter(typeof(IndexJsonConverter))]
         public float ZoneIndex { get; set; }
 
         /// <summary>
         /// Gets or sets JsonProperty "sectionIndex"
         /// </summary>
         [JsonPropertyName("sectionIndex")]
+        [JsonConverter(typeof(IndexJsonConverter))] 
         public float SectionIndex { get; set; }
 
         /// <summary>
