@@ -617,9 +617,13 @@ namespace PnP.Core.Model.SharePoint
                 {
                     SupportsFullBleed = isFullWidth.GetBoolean();
                 }
-                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle)
+                // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
+                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
                 {
-                    SupportsFullBleed = true; //Message ID: MC791596 / Roadmap ID: 386904
+                    SupportsFullBleed = true; 
                 }
             }
 
