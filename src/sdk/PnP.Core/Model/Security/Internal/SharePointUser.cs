@@ -28,7 +28,16 @@ namespace PnP.Core.Model.Security
                         LoginName
                     };
                     var jsonBody = JsonSerializer.Serialize(body);
-                    return new ApiCall(entity.SharePointGet, ApiType.SPORest, jsonBody);
+                    
+                    if (entity.Target == typeof(Web))
+                    {
+                        return new ApiCall("_api/Web/SiteUsers", ApiType.SPORest, jsonBody);
+                    }
+                    else
+                    {
+                        return new ApiCall(entity.SharePointGet, ApiType.SPORest, jsonBody);
+                    }
+                    
 
                 }).ConfigureAwait(false);
             };
