@@ -75,6 +75,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Result source id to use for the search query
         /// </summary>
-        public string ResultSourceId { get; internal set; } = "8413cd39-2156-4e00-b54d-11efd9abdb89";
+        public string ResultSourceId { get; set; } = "8413cd39-2156-4e00-b54d-11efd9abdb89";
     }
 }

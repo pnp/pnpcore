@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed regression introduced by https://github.com/pnp/pnpcore/commit/29a64bef0cfedbb3a0f7b64386b64d54793d7d71 and was partly fixed by #1577 [jansenbe - Bert Jansen]
 - Improved page parsing robustness by allowing zone and section index values to be not defined #1552 [jansenbe - Bert Jansen]
 - Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag #1554 [jansenbe - Bert Jansen]
+- Doing a People Search Using PnP Core Search API - Blocked with Readonly Setter for ResultSourceId #1566 [jansenbe - Bert Jansen]
 
 ## [1.14]
 
