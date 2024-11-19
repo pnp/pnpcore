@@ -47,6 +47,7 @@ namespace PnP.Core.Auth.Test.Providers
         {
             // Install the debug cert in the certstore ~ this works on Linux as well
             string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
+#pragma warning disable SYSLIB0057 // Type or member is obsolete
             using (X509Certificate2 certificate = new X509Certificate2(path, "PnPRocks!"))
             {
                 X509Store xstore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
@@ -54,6 +55,7 @@ namespace PnP.Core.Auth.Test.Providers
                 xstore.Add(certificate);
                 xstore.Close();
             }
+#pragma warning restore SYSLIB0057 // Type or member is obsolete
         }
         
         [TestMethod]

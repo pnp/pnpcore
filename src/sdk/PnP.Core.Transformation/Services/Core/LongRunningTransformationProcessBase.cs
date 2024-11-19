@@ -119,7 +119,7 @@ namespace PnP.Core.Transformation.Services.Core
             if (status.State == TransformationExecutionState.Running)
             {
                 bool hasPending = false;
-                await foreach (var task in GetTasksStatusAsync(new TasksStatusQuery(TransformationTaskExecutionState.Pending), token))
+                await foreach (var task in GetTasksStatusAsync(new TasksStatusQuery(TransformationTaskExecutionState.Pending), token).ConfigureAwait(false))
                 {
                     hasPending = true;
                     break;

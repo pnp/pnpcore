@@ -77,7 +77,7 @@ namespace PnP.Core.Transformation.Services.Core
             try
             {
                 // Iterate through each task
-                await foreach (var task in transformationDistiller.GetPageTransformationTasksAsync(sourceProvider, targetContext, token))
+                await foreach (var task in transformationDistiller.GetPageTransformationTasksAsync(sourceProvider, targetContext, token).ConfigureAwait(false))
                 {
 
                     var taskStatus = TransformationProcessTaskStatus.CreateNormal(Id, task.Id, DateTimeOffset.Now, DateTimeOffset.Now, null, TransformationTaskExecutionState.Running);

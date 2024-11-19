@@ -13,7 +13,7 @@ namespace PnP.Core.Test.Misc
             string inputValue = "Fullständig Behörighet,+=";
             NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
             // Add key and value, which will be automatically URL-encoded, if needed
-            queryString.Add("$filter", inputValue);
+            queryString.Add("filter", inputValue);
 
             string expected = queryString.ToString();
             // In .NET Framework the .ToString() returns data wrongly encoded, hence we're

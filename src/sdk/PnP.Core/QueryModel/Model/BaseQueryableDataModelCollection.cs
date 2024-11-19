@@ -53,7 +53,7 @@ namespace PnP.Core.QueryModel
                 async Task<IEnumerable<TModel>> ToList()
                 {
                     var result = new List<TModel>();
-                    await foreach (var item in asyncEnumerable)
+                    await foreach (var item in asyncEnumerable.ConfigureAwait(false))
                     {
                         result.Add(item);
                     }

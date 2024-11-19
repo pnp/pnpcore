@@ -1387,7 +1387,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var page = await context.Web.NewPageAsync();
+                var page = await context.Web.NewPageAsync(editorType: EditorType.CK4);
                 string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithInlineImageTest.aspx");
                 page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
 

@@ -192,7 +192,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         ///  Removed a scope from an existing grant
         /// </summary>
         /// <param name="grantId">The id of the grant</param>
-        /// <param name="scope">The scope to remove from the grant denoted by <param name="grantId"></param></param>
+        /// <param name="scope">The scope to remove from the grant denoted by grantId</param>
         /// <param name="vanityUrlOptions"></param>
         /// <returns>The updated <see cref="IPermissionGrant2"/>, or null if the last scope was removed from the grant</returns>
         Task<IPermissionGrant2> RevokeGrant2Async(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null);
@@ -201,7 +201,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         ///  Removed a scope from an existing grant
         /// </summary>
         /// <param name="grantId">The id of the grant</param>
-        /// <param name="scope">The scope to remove from the grant denoted by <param name="grantId"></param></param>
+        /// <param name="scope">The scope to remove from the grant denoted by grantId</param>
         /// <param name="vanityUrlOptions"></param>
         /// <returns>The updated <see cref="IPermissionGrant2"/>, or null if the last scope was removed from the grant</returns>
         IPermissionGrant2 RevokeGrant2(string grantId, string scope, VanityUrlOptions vanityUrlOptions = null);

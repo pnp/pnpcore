@@ -2324,6 +2324,7 @@ namespace PnP.Core.Services
         /// <param name="csomBatch">The batch request to process</param>
         /// <param name="batchResponse">The raw content of the response</param>
         /// <param name="statusCode">The Http status code of the request</param>
+        /// <param name="headers">Headers to include in the request</param>
         /// <returns></returns>
         private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode, Dictionary<string, string> headers)
         {
