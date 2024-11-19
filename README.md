@@ -36,7 +36,7 @@ This library is an open-source and community provided library backed by an activ
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0 and [.NET 8.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/). Use the .NET 8.0 (LTS) builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
+- We currently target .NET Standard 2.0, [.NET 8.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) and [.NET 9.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/). Use the .NET 8.0 (LTS) or .NET 9.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](https://pnp.github.io/pnpcore/demos/README.html) to learn more):
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
