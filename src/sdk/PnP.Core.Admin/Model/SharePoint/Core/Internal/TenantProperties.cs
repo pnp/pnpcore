@@ -46,7 +46,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         public IList<string> AllowSelectSecurityGroupsInSPSitesList { get => GetValue<IList<string>>(); set => SetValue(value); }
 
         public IList<string> AllowSelectSGsInODBListInTenant { get => GetValue<IList<string>>(); set => SetValue(value); }
-        
+
+        public bool AllowWebPropertyBagUpdateWhenDenyAddAndCustomizePagesIsEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool AnyoneLinkTrackUsers { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool ApplyAppEnforcedRestrictionsToAdHocRecipients { get => GetValue<bool>(); set => SetValue(value); }
