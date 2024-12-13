@@ -79,6 +79,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool AllowOverrideForBlockUserInfoVisibility { get; set; }
 
         /// <summary>
+        /// Gets or sets AllowWebPropertyBagUpdateWhenDenyAddAndCustomizePagesIsEnabled value
+        /// </summary>
+        bool AllowWebPropertyBagUpdateWhenDenyAddAndCustomizePagesIsEnabled { get; set; }
+
+        /// <summary>
         /// Gets or sets a value to handle guest sharing group's allow list
         /// </summary>
         IList<string> AllowSelectSecurityGroupsInSPSitesList { get; set; }
