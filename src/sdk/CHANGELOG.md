@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Switched to default CK5 editor type for new pages + improved the inline image handling for the CK5 editor #1558 [jansenbe - Bert Jansen]
 - Turned on Rate-Limiting by default with a remaining limit percentage of 10% [jansenbe - Bert Jansen]
 - IRetryEvent.WaitTime will be incorrect when the delay time is greater than 59 seconds #1590 [jansenbe - Bert Jansen]
+- Admin library: TenantProperties: AllowWebPropertyBagUpdateWhenDenyAddAndCustomizePagesIsEnabled #1591 [czullu - Christian Zuellig]
 
 ## [1.14]
 
