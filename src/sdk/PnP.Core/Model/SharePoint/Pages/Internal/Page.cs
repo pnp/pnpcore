@@ -1452,10 +1452,10 @@ namespace PnP.Core.Model.SharePoint
             // Reindex the control order. We're starting control order from 1 for each column.
             ReIndex();
 
-            var hasPageTitleWPInOneColumFullWith = false;
-            if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
+            var hasPageTitleWepPart = false;
+            if (sections.Any(s => s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
             {
-                hasPageTitleWPInOneColumFullWith = true; //Message ID: MC791596 / Roadmap ID: 386904
+                hasPageTitleWepPart = true; //Message ID: MC791596 / Roadmap ID: 386904
             }
 
             // Load page header controls. Microsoft Syntex Topic pages do have 5 controls in the header (= controls that cannot be moved)
@@ -1486,7 +1486,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (hasPageTitleWPInOneColumFullWith)
+                if (hasPageTitleWepPart)
                 {
                     pageHeader = new PageHeader(PnPContext, PageHeaderType.PageTitleWebPart, null);
                 }
@@ -1677,7 +1677,7 @@ namespace PnP.Core.Model.SharePoint
             var pageHeaderHtml = "";
             if (pageHeader != null)
             {
-                if(pageHeader.Type == PageHeaderType.Default && sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth && s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
+                if(pageHeader.Type == PageHeaderType.Default && sections.Any(s => s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
                 {
                     //Page created from code and Header was not set
                     SetPageTitleWebPartPageHeader();
