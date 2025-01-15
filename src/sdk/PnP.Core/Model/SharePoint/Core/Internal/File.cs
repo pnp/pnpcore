@@ -315,14 +315,14 @@ namespace PnP.Core.Model.SharePoint
             {
                 // for WASM we use the browser's network stack and need to comply to CORS policies
                 // hence we're not using the download.aspx page approach here
-                downloadUrl = $"{PnPContext.Uri}/_api/Web/getFileById('{UniqueId}')/$value";
+                downloadUrl = $"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/_api/Web/getFileById('{UniqueId}')/$value";
             }
             else
             {
-                downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+                downloadUrl = $"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/_layouts/15/download.aspx?UniqueId={UniqueId}";
             }
 #else
-            string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+            string downloadUrl = $"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/_layouts/15/download.aspx?UniqueId={UniqueId}";
 #endif
 
             var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)

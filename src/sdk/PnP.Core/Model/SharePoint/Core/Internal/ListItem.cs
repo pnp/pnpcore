@@ -97,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
             AddApiCallHandler = async (keyValuePairs) =>
             {
                 var parentList = Parent.Parent as List;
-                var parentListUri = $"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{parentList.Id}')";
+                var parentListUri = $"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/_api/Web/Lists(guid'{parentList.Id}')";
 
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
@@ -582,7 +582,7 @@ namespace PnP.Core.Model.SharePoint
                 entityInfo.Target = Parent.GetType();
             }
             
-            var itemUri = $"{PnPContext.Uri}/{entityInfo.SharePointUri}";
+            var itemUri = $"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/{entityInfo.SharePointUri}";
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{itemUri}/ValidateUpdateListItem").ConfigureAwait(false);

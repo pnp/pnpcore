@@ -41,7 +41,7 @@ namespace PnP.Core.Model.SharePoint
                             var arguments = new Uri(api.ApiCall.Request).Query;
                             arguments ??= "";
 
-                            api.ApiCall = new ApiCall($"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{(Parent.Parent.Parent as IList).Id}')/ContentTypes('{(Parent as IContentType).StringId}')/FieldLinks{arguments}", api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                            api.ApiCall = new ApiCall($"{PnPContext.Uri.AbsoluteUri.TrimEnd('/')}/_api/Web/Lists(guid'{(Parent.Parent.Parent as IList).Id}')/ContentTypes('{(Parent as IContentType).StringId}')/FieldLinks{arguments}", api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                         }
                     }
                 }
