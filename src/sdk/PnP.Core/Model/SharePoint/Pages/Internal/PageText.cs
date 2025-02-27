@@ -123,14 +123,6 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
-            {
-                if (section.Columns.First().Equals(Column))
-                {
-                    controlData.Position.SectionFactor = 12;
-                }
-            }
-
             jsonControlData = JsonSerializer.Serialize(controlData);
 
             try
