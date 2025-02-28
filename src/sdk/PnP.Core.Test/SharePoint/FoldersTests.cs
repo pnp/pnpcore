@@ -1238,6 +1238,56 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+
+        [TestMethod]
+        public async Task RecycleNestedFolderTest()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsNotNull(addedFolder);
+                Assert.AreEqual("sub2", addedFolder.Name);
+                
+                IFolder folder1ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(addedFolder.ServerRelativeUrl);
+                Guid recycleBin1Id = folder1ToDelete.Recycle();
+                Assert.AreNotEqual(Guid.Empty, recycleBin1Id);
+
+                try
+                {
+                    await context.Web.GetFolderByServerRelativeUrlAsync(addedFolder.ServerRelativeUrl);
+                }
+                catch (SharePointRestServiceException e)
+                {
+                    var error = e.Error as SharePointRestError;
+                    Assert.AreEqual(404, error.HttpResponseCode);
+                }
+                
+                await CleanupMockFolderFromRecycleBin(context, recycleBin1Id);
+                
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsNotNull(folderToDelete);
+                Assert.AreEqual("sub1", folderToDelete.Name);
+                
+                IFolder folder2ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(folderToDelete.ServerRelativeUrl);
+                Guid recycleBin2Id = folder2ToDelete.Recycle();
+                Assert.AreNotEqual(Guid.Empty, recycleBin2Id);
+
+                try
+                {
+                    await context.Web.GetFolderByServerRelativeUrlAsync(folderToDelete.ServerRelativeUrl);
+                }
+                catch (SharePointRestServiceException e)
+                {
+                    var error = e.Error as SharePointRestError;
+                    Assert.AreEqual(404, error.HttpResponseCode);
+                }
+                
+                await CleanupMockFolderFromRecycleBin(context, recycleBin2Id);
+            }
+        }
+        
         #endregion
 
         [TestMethod]
