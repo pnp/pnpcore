@@ -26,20 +26,22 @@ namespace PnP.Core.Model.SharePoint
             LayoutIndex = 1;
         }
 
-        internal CanvasColumn(CanvasSection section, int order, int? sectionFactor)
+        internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, string zoneId = null)
         {
             Section = section ?? throw new ArgumentNullException(nameof(section));
             Order = order;
             ColumnFactor = sectionFactor ?? 12;
             LayoutIndex = 1;
+            ZoneId = !string.IsNullOrEmpty(zoneId) ? zoneId : null;
         }
 
-        internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, int? layoutIndex)
+        internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, int? layoutIndex, string zoneId = null)
         {
             Section = section ?? throw new ArgumentNullException(nameof(section));
             Order = order;
             ColumnFactor = sectionFactor ?? 12;
             LayoutIndex = layoutIndex ?? 1;
+            ZoneId = !string.IsNullOrEmpty(zoneId) ? zoneId : null;
         }
         #endregion
 
@@ -60,6 +62,8 @@ namespace PnP.Core.Model.SharePoint
         /// Returns the layout index. Defaults to 1, except for the vertical section column this is 2
         /// </summary>
         public int LayoutIndex { get; }
+
+        public string ZoneId { get; private set; }
 
         /// <summary>
         /// List of <see cref="ICanvasControl"/> instances that are hosted in this section

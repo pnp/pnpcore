@@ -1,4 +1,4 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using System;
 using System.Linq;
 using System.Net;
@@ -254,6 +254,7 @@ namespace PnP.Core.Model.SharePoint
                     SectionFactor = Column.ColumnFactor,
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
+                    ZoneId = column.ZoneId
                 };
 
                 if (SpControlData != null)
@@ -522,7 +523,7 @@ namespace PnP.Core.Model.SharePoint
         internal override void FromHtml(IElement element, bool isHeader)
         {
             base.FromHtml(element, isHeader);
-
+                
             // Set/update dataVersion if it was provided as html attribute
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             if (!string.IsNullOrEmpty(webPartDataVersion))
@@ -602,7 +603,10 @@ namespace PnP.Core.Model.SharePoint
             // Set property to trigger correct loading of properties 
             PropertiesJson = wpJObject.GetProperty("properties").ToString();
 
-            WebPartId = wpJObject.GetProperty("id").GetString();
+            if (wpJObject.TryGetProperty("id", out JsonElement webPartId))
+            {
+                WebPartId = webPartId.GetString();
+            }
 
             // Set/update dataVersion if it was set in the json data
             if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersionValue))
@@ -610,20 +614,27 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = dataVersionValue.GetString();
             }
 
-            // Check for fullbleed supporting web parts
-            if (wpJObject.TryGetProperty("properties", out JsonElement properties))
+            if (controlType == 14) // Special control type for background image
             {
-                if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
+                SupportsFullBleed = true;
+            }
+            else
+            {
+                // Check for fullbleed supporting web parts
+                if (wpJObject.TryGetProperty("properties", out JsonElement properties))
                 {
-                    SupportsFullBleed = isFullWidth.GetBoolean();
-                }
-                // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
-                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
-                {
-                    SupportsFullBleed = true; 
+                    if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
+                    {
+                        SupportsFullBleed = isFullWidth.GetBoolean();
+                    }
+                    // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
+                    else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
+                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
+                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
+                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
+                    {
+                        SupportsFullBleed = true;
+                    }
                 }
             }
 

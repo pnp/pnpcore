@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -41,6 +41,11 @@ namespace PnP.Core.Model.SharePoint
         /// Color emphasis of the column (used for the vertical section column) 
         /// </summary>
         int? VerticalSectionEmphasis { get; }
+
+        /// <summary>
+        /// The Zone Identifier
+        /// </summary>
+        string ZoneId { get; }
 
         /// <summary>
         /// Resets the column, used in scenarios where a section is changed from type (e.g. from 3 column to 2 column)

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -33,5 +33,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         [JsonPropertyName("layoutIndex")]
         public int? LayoutIndex { get; set; }
+
+        /// <summary>
+        /// Gets or sets JsonProperty "zoneId"
+        /// </summary>
+        [JsonPropertyName("zoneId")]
+        public string ZoneId { get; set; }
     }
 }
