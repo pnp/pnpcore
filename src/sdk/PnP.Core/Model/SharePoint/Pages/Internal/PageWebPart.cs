@@ -1,4 +1,4 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using System;
 using System.Linq;
 using System.Net;
@@ -254,6 +254,7 @@ namespace PnP.Core.Model.SharePoint
                     SectionFactor = Column.ColumnFactor,
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
+                    IsLayoutReflowOnTop = Column.IsLayoutReflowOnTop
                 };
 
                 if (SpControlData != null)

@@ -93,6 +93,7 @@ namespace PnP.Core.Model.SharePoint
                     SectionFactor = Column.ColumnFactor,
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
+                    IsLayoutReflowOnTop = Column.IsLayoutReflowOnTop
                 },
                 Emphasis = new SectionEmphasis()
                 {
