@@ -23,7 +23,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
     //[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
-    internal sealed class List : BaseDataModel<IList>, IList
+    internal sealed class List : RecyclableBaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
@@ -262,71 +262,15 @@ namespace PnP.Core.Model.SharePoint
         #region Extension methods
 
         #region Recycle
-        public Guid Recycle()
-        {
-            return RecycleAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<Guid> RecycleAsync()
-        {
-            ApiCall apiCall = GetRecycleApiCall();
-
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(response.Json))
-            {
-                return ParseRecycleResponse(response.Json);
-            }
-
-            return Guid.Empty;
-        }
-
-        private static Guid ParseRecycleResponse(string json)
-        {
-            var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
-            {
-                // return the recyclebin item id
-                return recycleBinItemId.GetGuid();
-            }
-            return Guid.Empty;
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
-        {
-            return RecycleBatchAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
-        {
-            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
-        {
-            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
-        {
-            ApiCall apiCall = GetRecycleApiCall();
-            apiCall.RawSingleResult = new BatchResultValue<Guid>(Guid.Empty);
-            apiCall.RawResultsHandler = (json, apiCall) =>
-            {
-                (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ParseRecycleResponse(json);
-            };
-
-            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
-        }
-
-        private ApiCall GetRecycleApiCall()
+        
+        protected override ApiCall BuildRecycleApiCall()
         {
             return new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest)
             {
                 RemoveFromModel = true
             };
         }
+        
         #endregion
 
         #region GetItemsByCamlQuery

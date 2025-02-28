@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.Folder", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Folders")]
     [SharePointType("SP.Folder", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/rootFolder", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Folders")]
     [SharePointType("SP.Folder", Target = typeof(ListItem), Uri = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/Folder")]
-    internal sealed class Folder : BaseDataModel<IFolder>, IFolder
+    internal sealed class Folder : RecyclableBaseDataModel<IFolder>, IFolder
     {
         #region Construction
         public Folder()
@@ -157,80 +157,6 @@ namespace PnP.Core.Model.SharePoint
         public IFolder AddFolderBatch(string name)
         {
             return AddFolderBatchAsync(name).GetAwaiter().GetResult();
-        }
-        #endregion
-
-        #region Recycle
-
-        public Guid Recycle()
-        {
-            return RecycleAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<Guid> RecycleAsync()
-        {
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-            string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
-
-            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest)
-            {
-                RemoveFromModel = true
-            };
-
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(response.Json))
-            {
-                return ProcessRecycleResponse(response.Json);
-            }
-
-            return Guid.Empty;
-        }
-
-        private static Guid ProcessRecycleResponse(string json)
-        {
-            var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
-            {
-                // return the recyclebin item id
-                return recycleBinItemId.GetGuid();
-            }
-
-            return Guid.Empty;
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
-        {
-            return RecycleBatchAsync().GetAwaiter().GetResult();
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
-        {
-            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
-        {
-            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
-        {
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-            string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
-
-            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest)
-            {
-                RemoveFromModel = true,
-                RawSingleResult = new BatchResultValue<Guid>(Guid.Empty),
-                RawResultsHandler = (json, apiCall) =>
-                {
-                    (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ProcessRecycleResponse(json);
-                }
-            };
-
-            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
         }
         #endregion
 

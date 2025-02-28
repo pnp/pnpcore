@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace PnP.Core.Model
     /// https://weblog.west-wind.com/posts/2012/feb/08/creating-a-dynamic-extensible-c-expando-object
     /// </remarks>
     /// <typeparam name="TModel">The actual type of the entity of the Domain Model</typeparam>
-    internal class ExpandoBaseDataModel<TModel> : BaseDataModel<TModel>, IExpandoDataModel
+    internal class ExpandoBaseDataModel<TModel> : RecyclableBaseDataModel<TModel>, IExpandoDataModel
     {
         /// <summary>
         /// Type of the instance object

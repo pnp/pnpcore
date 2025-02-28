@@ -987,72 +987,15 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Recycle
-        public Guid Recycle()
-        {
-            return RecycleAsync().GetAwaiter().GetResult();
-        }
 
-        public async Task<Guid> RecycleAsync()
-        {
-            ApiCall apiCall = BuildRecycleApiCall();
-
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(response.Json))
-            {
-                return ProcessRecyleResponse(response.Json);
-            }
-
-            return Guid.Empty;
-        }
-
-        private static Guid ProcessRecyleResponse(string json)
-        {
-            var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
-            {
-                // return the recyclebin item id
-                return recycleBinItemId.GetGuid();
-            }
-
-            return Guid.Empty;
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
-        {
-            return RecycleBatchAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
-        {
-            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
-        {
-            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
-        {
-            ApiCall apiCall = BuildRecycleApiCall();
-            apiCall.RawSingleResult = new BatchResultValue<Guid>(Guid.Empty);
-            apiCall.RawResultsHandler = (json, apiCall) =>
-            {
-                (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ProcessRecyleResponse(json);
-            };
-
-            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
-        }
-
-        private ApiCall BuildRecycleApiCall()
+        protected override ApiCall BuildRecycleApiCall()
         {
             return new ApiCall($"{GetItemUri()}/recycle", ApiType.SPORest)
             {
                 RemoveFromModel = true
             };
         }
+        
         #endregion
 
         #region Graph/Rest interoperability overrides
