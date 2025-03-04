@@ -608,6 +608,11 @@ namespace PnP.Core.Model.SharePoint
 
             return webPart;
         }
+
+        public IPageWebPart NewBackGroundImageControl()
+        {
+            return new PageBackgroundControl();
+        }
         #endregion
 
         #region Section, column and control methods
@@ -1231,6 +1236,21 @@ namespace PnP.Core.Model.SharePoint
 
                         AddControl(control);
                     }
+                    else if (controlType == typeof(PageBackgroundControl))
+                    {
+                        var control = new PageBackgroundControl
+                        {
+                            Order = controlOrder 
+
+                        };
+                        control.FromHtml(clientSideControl, false);
+
+                        // Handle control positioning in sections and columns
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
+
+                        AddControl(control);
+                    }
+
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
@@ -1270,7 +1290,7 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 if (sectionData.Position.LayoutIndex.HasValue)
                                 {
-                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.LayoutIndex.Value));
+                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.LayoutIndex.Value, sectionData.Position.ZoneId));
                                     currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).First();
 
                                     // ZoneEmphasis on a vertical section column needs to be retained as that "overrides" the zone emphasis set on the section

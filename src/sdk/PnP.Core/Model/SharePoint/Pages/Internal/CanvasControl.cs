@@ -344,7 +344,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (controlData.ControlType == 14) // Special Control Type used for section background image
             {
-                return typeof(PageWebPart);
+                return typeof(PageBackgroundControl);
             }
 
             return null;

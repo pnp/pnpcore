@@ -614,27 +614,20 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = dataVersionValue.GetString();
             }
 
-            if (controlType == 14) // Special control type for background image
+            // Check for fullbleed supporting web parts
+            if (wpJObject.TryGetProperty("properties", out JsonElement properties))
             {
-                SupportsFullBleed = true;
-            }
-            else
-            {
-                // Check for fullbleed supporting web parts
-                if (wpJObject.TryGetProperty("properties", out JsonElement properties))
+                if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
                 {
-                    if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
-                    {
-                        SupportsFullBleed = isFullWidth.GetBoolean();
-                    }
-                    // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
-                    else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
-                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
-                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
-                             Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
-                    {
-                        SupportsFullBleed = true;
-                    }
+                    SupportsFullBleed = isFullWidth.GetBoolean();
+                }
+                // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
+                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
+                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
+                {
+                    SupportsFullBleed = true;
                 }
             }
 

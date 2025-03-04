@@ -272,6 +272,13 @@ namespace PnP.Core.Model.SharePoint
         public IPageWebPart NewWebPart(IPageComponent clientSideComponent = null);
 
         /// <summary>
+        /// Creates a new web part
+        /// </summary>
+        /// <param name="controlType"></param>
+        /// <returns></returns>
+        public IPageWebPart NewBackGroundImageControl();
+
+        /// <summary>
         /// Clears the sections and controls from the page
         /// </summary>
         public void ClearPage();

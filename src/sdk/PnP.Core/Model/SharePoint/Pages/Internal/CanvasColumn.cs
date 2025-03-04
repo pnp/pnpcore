@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -147,6 +147,7 @@ namespace PnP.Core.Model.SharePoint
                         SectionIndex = Order,
                         SectionFactor = ColumnFactor,
                         LayoutIndex = LayoutIndex,
+                        ZoneId = ZoneId
                     },
 
                     Emphasis = new SectionEmphasis()
@@ -172,6 +173,15 @@ namespace PnP.Core.Model.SharePoint
         {
             Order = order;
             ColumnFactor = columnFactor;
+        }
+
+        /// <summary>
+        /// Sets the zone id
+        /// </summary>
+        /// <param name="zoneId"></param>
+        public void SetZoneId(string zoneId)
+        {
+            ZoneId = zoneId;
         }
 
         #region Internal and helper methods
