@@ -167,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
                         SectionIndex = Order,
                         SectionFactor = ColumnFactor,
                         LayoutIndex = LayoutIndex,
-                        IsLayoutReflowOnTop = IsLayoutReflowOnTop
+                        IsLayoutReflowOnTop = IsLayoutReflowOnTop,
                     },
 
                     Emphasis = new SectionEmphasis()
@@ -194,6 +194,16 @@ namespace PnP.Core.Model.SharePoint
             Order = order;
             ColumnFactor = columnFactor;
         }
+
+        /// <summary>
+        /// Set IsLayoutReflowOnTop
+        /// </summary>
+        /// <param name="layoutReflowOnTop"></param>
+        public void SetIsLayoutReflowOnTop(bool layoutReflowOnTop)
+        {
+            IsLayoutReflowOnTop = layoutReflowOnTop;
+        }
+
 
         #region Internal and helper methods
         internal void MoveTo(CanvasSection section)

@@ -53,5 +53,11 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="order">Column order to set</param>
         /// <param name="columnFactor">Column factor to set</param>
         void ResetColumn(int order, int columnFactor);
+
+        /// <summary>
+        /// Sets if vertical section should reflow on top
+        /// </summary>
+        /// <param name="isLayoutReflowOnTop"></param>
+        void SetIsLayoutReflowOnTop(bool isLayoutReflowOnTop);
     }
 }
