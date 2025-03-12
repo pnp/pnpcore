@@ -272,14 +272,6 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
-                {
-                    if (section.Columns.First().Equals(Column))
-                    {
-                        controlData.Position.SectionFactor = 12;
-                    }
-                }
-
                 controlData.Emphasis = new SectionEmphasis()
                 {
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,

@@ -1425,7 +1425,6 @@ namespace PnP.Core.Model.SharePoint
                     if (section.Columns.Count == 2)
                     {
                         section.Type = CanvasSectionTemplate.OneColumnVerticalSection;
-                        (section.Columns[0] as CanvasColumn).ResetColumn(section.Columns[0].Order, section.Columns[0].ColumnFactor != 0 ? section.Columns[0].ColumnFactor : 12);
                     }
                     else if (section.Columns.Count == 3)
                     {
