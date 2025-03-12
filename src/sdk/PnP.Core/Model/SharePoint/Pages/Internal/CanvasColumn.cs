@@ -13,6 +13,7 @@ namespace PnP.Core.Model.SharePoint
         internal const string CanvasDataVersionAttribute = "data-sp-canvasdataversion";
         internal const string ControlDataAttribute = "data-sp-controldata";
         private int? zoneEmphasis;
+        private bool? isLayoutReflowOnTop;
         private readonly string DataVersion = "1.0";
         #endregion
 
@@ -112,6 +113,29 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
         }
+
+        public bool? IsLayoutReflowOnTop
+        {
+            get
+            {
+                if (LayoutIndex == 2)
+                {
+                    return isLayoutReflowOnTop;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (LayoutIndex == 2)
+                {
+                    isLayoutReflowOnTop = value;
+                }
+            }
+        }
+        
         #endregion
 
         #region public methods
@@ -143,6 +167,7 @@ namespace PnP.Core.Model.SharePoint
                         SectionIndex = Order,
                         SectionFactor = ColumnFactor,
                         LayoutIndex = LayoutIndex,
+                        IsLayoutReflowOnTop = IsLayoutReflowOnTop,
                     },
 
                     Emphasis = new SectionEmphasis()
@@ -169,6 +194,16 @@ namespace PnP.Core.Model.SharePoint
             Order = order;
             ColumnFactor = columnFactor;
         }
+
+        /// <summary>
+        /// Set IsLayoutReflowOnTop
+        /// </summary>
+        /// <param name="layoutReflowOnTop"></param>
+        public void SetIsLayoutReflowOnTop(bool layoutReflowOnTop)
+        {
+            IsLayoutReflowOnTop = layoutReflowOnTop;
+        }
+
 
         #region Internal and helper methods
         internal void MoveTo(CanvasSection section)

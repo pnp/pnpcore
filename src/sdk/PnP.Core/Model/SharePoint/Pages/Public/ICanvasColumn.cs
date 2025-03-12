@@ -43,10 +43,21 @@ namespace PnP.Core.Model.SharePoint
         int? VerticalSectionEmphasis { get; }
 
         /// <summary>
+        /// The position of the Vertical section for smaller screens. Applied only for Vertical section
+        /// </summary>
+        bool? IsLayoutReflowOnTop { get; }
+
+        /// <summary>
         /// Resets the column, used in scenarios where a section is changed from type (e.g. from 3 column to 2 column)
         /// </summary>
         /// <param name="order">Column order to set</param>
         /// <param name="columnFactor">Column factor to set</param>
         void ResetColumn(int order, int columnFactor);
+
+        /// <summary>
+        /// Sets if vertical section should reflow on top
+        /// </summary>
+        /// <param name="isLayoutReflowOnTop"></param>
+        void SetIsLayoutReflowOnTop(bool isLayoutReflowOnTop);
     }
 }

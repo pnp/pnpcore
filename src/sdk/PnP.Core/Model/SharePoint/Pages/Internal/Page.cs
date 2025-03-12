@@ -1,4 +1,4 @@
-﻿using AngleSharp.Html.Parser;
+using AngleSharp.Html.Parser;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -1277,6 +1277,7 @@ namespace PnP.Core.Model.SharePoint
                                     if (currentColumn.IsVerticalSectionColumn)
                                     {
                                         (currentColumn as CanvasColumn).VerticalSectionEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0;
+                                        (currentColumn as CanvasColumn).IsLayoutReflowOnTop = sectionData.Position.IsLayoutReflowOnTop;
                                     }
                                 }
                                 else
@@ -1566,6 +1567,7 @@ namespace PnP.Core.Model.SharePoint
                         if (currentColumn.IsVerticalSectionColumn)
                         {
                             (currentColumn as CanvasColumn).VerticalSectionEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0;
+                            (currentColumn as CanvasColumn).IsLayoutReflowOnTop = position.IsLayoutReflowOnTop;
                         }
                     }
                     else
