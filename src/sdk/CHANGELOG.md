@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Support for .NET 9.0 [jansenbe - Bert Jansen]
 - Support for recycling folders #1620 [mloitzl - Martin Loitzl]
+- Page API: added support for reflowing vertical sections to the top on smaller screens #1616 [nicolaor - Rene Nicolao]
 
 ### Changed
 
