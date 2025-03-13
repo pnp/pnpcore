@@ -254,6 +254,7 @@ namespace PnP.Core.Model.SharePoint
                     SectionFactor = Column.ColumnFactor,
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
+                    ZoneId = column.ZoneId,
                     IsLayoutReflowOnTop = Column.IsLayoutReflowOnTop
                 };
 
@@ -515,7 +516,7 @@ namespace PnP.Core.Model.SharePoint
         internal override void FromHtml(IElement element, bool isHeader)
         {
             base.FromHtml(element, isHeader);
-
+                
             // Set/update dataVersion if it was provided as html attribute
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             if (!string.IsNullOrEmpty(webPartDataVersion))
@@ -595,7 +596,10 @@ namespace PnP.Core.Model.SharePoint
             // Set property to trigger correct loading of properties 
             PropertiesJson = wpJObject.GetProperty("properties").ToString();
 
-            WebPartId = wpJObject.GetProperty("id").GetString();
+            if (wpJObject.TryGetProperty("id", out JsonElement webPartId))
+            {
+                WebPartId = webPartId.GetString();
+            }
 
             // Set/update dataVersion if it was set in the json data
             if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersionValue))
@@ -616,7 +620,7 @@ namespace PnP.Core.Model.SharePoint
                          Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
                          Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
                 {
-                    SupportsFullBleed = true; 
+                    SupportsFullBleed = true;
                 }
             }
 

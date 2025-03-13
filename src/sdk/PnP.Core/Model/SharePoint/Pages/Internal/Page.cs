@@ -608,6 +608,11 @@ namespace PnP.Core.Model.SharePoint
 
             return webPart;
         }
+
+        public IPageWebPart NewSectionBackgroundControl()
+        {
+            return new SectionBackgroundControl();
+        }
         #endregion
 
         #region Section, column and control methods
@@ -1231,6 +1236,21 @@ namespace PnP.Core.Model.SharePoint
 
                         AddControl(control);
                     }
+                    else if (controlType == typeof(SectionBackgroundControl))
+                    {
+                        var control = new SectionBackgroundControl
+                        {
+                            Order = controlOrder 
+
+                        };
+                        control.FromHtml(clientSideControl, false);
+
+                        // Handle control positioning in sections and columns
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
+
+                        AddControl(control);
+                    }
+
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
@@ -1270,7 +1290,7 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 if (sectionData.Position.LayoutIndex.HasValue)
                                 {
-                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.LayoutIndex.Value));
+                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.LayoutIndex.Value, sectionData.Position.ZoneId));
                                     currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).First();
 
                                     // ZoneEmphasis on a vertical section column needs to be retained as that "overrides" the zone emphasis set on the section
@@ -1282,7 +1302,7 @@ namespace PnP.Core.Model.SharePoint
                                 }
                                 else
                                 {
-                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor));
+                                    currentSection.AddColumn(new CanvasColumn(currentSection, (int)sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.ZoneId));
                                     currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).First();
                                 }
                             }
@@ -1560,7 +1580,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (position.LayoutIndex.HasValue)
                     {
-                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, (int)position.SectionIndex, position.SectionFactor, position.LayoutIndex.Value));
+                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, (int)position.SectionIndex, position.SectionFactor, position.LayoutIndex.Value, position.ZoneId));
                         currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value).First();
 
                         // ZoneEmphasis on a vertical section column needs to be retained as that "overrides" the zone emphasis set on the section
@@ -1572,7 +1592,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else
                     {
-                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, (int)position.SectionIndex, position.SectionFactor));
+                        (currentSection as CanvasSection).AddColumn(new CanvasColumn(currentSection as CanvasSection, (int)position.SectionIndex, position.SectionFactor, position.ZoneId));
                         currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).First();
                     }
                 }
@@ -2629,6 +2649,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal static DefaultWebPart IdToDefaultWebPart(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return DefaultWebPart.ThirdParty;
+            }
+
             return (id.ToLower()) switch
             {
                 "daf0b71c-6de8-4ef7-b511-faae7c388708" => DefaultWebPart.ContentRollup,

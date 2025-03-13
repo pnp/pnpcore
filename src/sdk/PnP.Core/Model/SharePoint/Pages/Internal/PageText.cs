@@ -1,4 +1,4 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using System;
 using System.Collections.Generic;
@@ -93,6 +93,7 @@ namespace PnP.Core.Model.SharePoint
                     SectionFactor = Column.ColumnFactor,
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
+                    ZoneId = column.ZoneId,
                     IsLayoutReflowOnTop = Column.IsLayoutReflowOnTop
                 },
                 Emphasis = new SectionEmphasis()

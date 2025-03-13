@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -43,6 +43,11 @@ namespace PnP.Core.Model.SharePoint
         int? VerticalSectionEmphasis { get; }
 
         /// <summary>
+        /// The Zone Identifier
+        /// </summary>
+        string ZoneId { get; }
+
+        /// <summary>
         /// The position of the Vertical section for smaller screens. Applied only for Vertical section
         /// </summary>
         bool? IsLayoutReflowOnTop { get; }
@@ -53,6 +58,12 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="order">Column order to set</param>
         /// <param name="columnFactor">Column factor to set</param>
         void ResetColumn(int order, int columnFactor);
+
+        /// <summary>
+        /// Sets the zone id
+        /// </summary>
+        /// <param name="zoneId"></param>
+        void SetZoneId(string zoneId);
 
         /// <summary>
         /// Sets if vertical section should reflow on top
