@@ -538,7 +538,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You already have a full width section on this page, you can&apos;t add a section with vertical column.
+        ///   Looks up a localized string similar to You already have more than one full width section on this page, you can&apos;t add a section with vertical column.
         /// </summary>
         internal static string Exception_Page_VerticalColumnFullWidthSectionExists {
             get {

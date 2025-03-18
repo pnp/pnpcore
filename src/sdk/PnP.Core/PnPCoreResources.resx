@@ -262,7 +262,7 @@
     <value>Page {0} was not loaded/saved to SharePoint and therefore can't be deleted</value>
   </data>
   <data name="Exception_Page_VerticalColumnFullWidthSectionExists" xml:space="preserve">
-    <value>You already have a full width section on this page, you can't add a section with vertical column</value>
+    <value>You already have more than one full width section on this page, you can't add a section with vertical column</value>
   </data>
   <data name="Exception_Page_VerticalColumnSectionExists" xml:space="preserve">
     <value>You can only have one section with a vertical column on a page</value>
