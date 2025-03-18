@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -1073,6 +1074,223 @@ namespace PnP.Core.Test.SharePoint
             await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
         }
 
+        #region Recycle() variants
+
+        [TestMethod]
+        public async Task RecycleFolderAsyncTest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                Guid recycleBinId = await folderToDelete.RecycleAsync();
+
+                Assert.AreNotEqual(Guid.Empty, recycleBinId);
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, recycleBinId);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                Guid recycleBinId = folderToDelete.Recycle();
+
+                Assert.AreNotEqual(Guid.Empty, recycleBinId);
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, recycleBinId);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFolderCurrentBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                var batchRecycle = await folderToDelete.RecycleBatchAsync();
+                Assert.IsFalse(batchRecycle.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(batchRecycle.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, batchRecycle.Result.Value);
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, batchRecycle.Result.Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFolderCurrentBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                var batchRecycle = folderToDelete.RecycleBatch();
+
+                await context.ExecuteAsync();
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, batchRecycle.Result.Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFolderBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                var batch = context.NewBatch();
+                var batchRecycle = await folderToDelete.RecycleBatchAsync(batch);
+                await context.ExecuteAsync(batch);
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, batchRecycle.Result.Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFolderBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TO RECYCLE FOLDER");
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+                // Test if the folder is created
+                Assert.IsNotNull(folderToDelete);
+
+                var batch = context.NewBatch();
+                var batchRecycle = folderToDelete.RecycleBatch(batch);
+                await context.ExecuteAsync(batch);
+
+                // Test if the folder is still found
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
+                    .Folders
+                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+
+                Assert.IsNull(folderToFind);
+
+                await CleanupMockFolderFromRecycleBin(context, batchRecycle.Result.Value);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task RecycleNestedFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsNotNull(addedFolder);
+                Assert.AreEqual("sub2", addedFolder.Name);
+                
+                IFolder folder1ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(addedFolder.ServerRelativeUrl);
+                Guid recycleBin1Id = folder1ToDelete.Recycle();
+                Assert.AreNotEqual(Guid.Empty, recycleBin1Id);
+
+                try
+                {
+                    await context.Web.GetFolderByServerRelativeUrlAsync(addedFolder.ServerRelativeUrl);
+                }
+                catch (SharePointRestServiceException e)
+                {
+                    var error = e.Error as SharePointRestError;
+                    Assert.AreEqual(404, error.HttpResponseCode);
+                }
+                
+                await CleanupMockFolderFromRecycleBin(context, recycleBin1Id);
+                
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsNotNull(folderToDelete);
+                Assert.AreEqual("sub1", folderToDelete.Name);
+                
+                IFolder folder2ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(folderToDelete.ServerRelativeUrl);
+                Guid recycleBin2Id = folder2ToDelete.Recycle();
+                Assert.AreNotEqual(Guid.Empty, recycleBin2Id);
+
+                try
+                {
+                    await context.Web.GetFolderByServerRelativeUrlAsync(folderToDelete.ServerRelativeUrl);
+                }
+                catch (SharePointRestServiceException e)
+                {
+                    var error = e.Error as SharePointRestError;
+                    Assert.AreEqual(404, error.HttpResponseCode);
+                }
+                
+                await CleanupMockFolderFromRecycleBin(context, recycleBin2Id);
+            }
+        }
+        
+        #endregion
+
         [TestMethod]
         public async Task GetFolderChangesAsyncTest()
         {
@@ -1182,6 +1400,14 @@ namespace PnP.Core.Test.SharePoint
                 await mockFolder.DeleteAsync();
             }
         }
+
+        private async Task CleanupMockFolderFromRecycleBin(PnPContext context, Guid recycleBinId,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            IRecycleBinItem recycleBinItem = await context.Site.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinId);
+            await recycleBinItem.DeleteAsync();
+        }
+
         #endregion
     }
 }

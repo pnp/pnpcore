@@ -1548,7 +1548,7 @@ namespace PnP.Core.Test.SharePoint
                     var pages = await context.Web.GetPagesAsync(pageName);
                     var createdPage = pages.First();
 
-                    Assert.IsTrue(!string.IsNullOrEmpty((createdPage.Sections[0].Columns[0].Controls[0] as PageWebPart).RichTextEditorInstanceId));
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as PageText).Text.Contains("class=\"imagePlugin\"", StringComparison.InvariantCultureIgnoreCase));
                 }
                 finally
                 {

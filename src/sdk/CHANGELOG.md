@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Support for .NET 9.0 [jansenbe - Bert Jansen]
+- Support for recycling folders #1620 [mloitzl - Martin Loitzl]
+- Page API: added support for reflowing vertical sections to the top on smaller screens #1616 [nicolaor - Rene Nicolao]
+- Page API: added support for retaining section background settings (image) during read/save #1622 [nicolaor - Rene Nicolao]
 
 ### Changed
 
@@ -36,6 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Pages - act on general existence of PageTitle-WebPart #1597 [czullu - Christian Zuellig]
 - The Url for Root-Site-API Request had // in path #1598 [czullu - Christian Zuellig]
 - Bumped version of Microsoft.Identity.Client package version to 4.68.0 #1611 [gautamdsheth - Gautam Sheth]
+- Page API: maintain full width header section in combination with vertical section #1615 [nicolaor - Rene Nicolao]
 
 ## [1.14]
 

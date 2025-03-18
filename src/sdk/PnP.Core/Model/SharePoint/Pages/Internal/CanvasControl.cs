@@ -342,6 +342,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 return typeof(CanvasColumn);
             }
+            else if (controlData.ControlType == 14) // Special Control Type used for section background image
+            {
+                return typeof(SectionBackgroundControl);
+            }
 
             return null;
         }
@@ -356,7 +360,7 @@ namespace PnP.Core.Model.SharePoint
             canvasDataVersion = element.GetAttribute(CanvasDataVersionAttribute);
             canvasControlData = element.GetAttribute(CanvasControlAttribute);
             controlType = controlData.ControlType;
-            instanceId = new Guid(controlData.Id);
+            instanceId = new Guid(controlData.Id ?? Guid.NewGuid().ToString());
         }
 
         internal void MoveTo(ICanvasSection newSection, ICanvasColumn newColumn)

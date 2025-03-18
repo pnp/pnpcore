@@ -250,6 +250,42 @@ namespace PnP.Core.Model.SharePoint
         void MoveToBatch(Batch batch, string destinationUrl, MoveCopyOptions options = null);
         #endregion
 
+        #region Recycle
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <returns>The Id of the created recycle bin item</returns>
+        Task<Guid> RecycleAsync();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <returns>The Id of the created recycle bin item</returns>
+        Guid Recycle();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Send the file to recycle bin
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+        #endregion
+       
         #region EnsureFolder
         /// <summary>
         /// Ensures a (hiarchy) of folders exists on a given folder
