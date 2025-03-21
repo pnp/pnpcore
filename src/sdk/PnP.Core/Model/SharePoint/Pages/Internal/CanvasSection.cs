@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
                     Columns.Add(new CanvasColumn(this, 1, 0));
                     break;
                 case CanvasSectionTemplate.OneColumnVerticalSection:
-                    Columns.Add(new CanvasColumn(this, 1, 0, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 1));
                     Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 case CanvasSectionTemplate.TwoColumn:

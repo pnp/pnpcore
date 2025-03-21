@@ -720,13 +720,14 @@ namespace PnP.Core.Model.SharePoint
 
             if (section.VerticalSectionColumn != null)
             {
-                // we're adding a section that has a vertical column. This can not be combined with either another section with a vertical column or a full width section
+                // we're adding a section that has a vertical column. This can not be combined with either another section with a vertical column or a full width section wich is not in the top position
                 if (Sections.Where(p => p.VerticalSectionColumn != null).Any())
                 {
                     throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnSectionExists);
                 }
 
-                if (Sections.Where(p => p.Type == CanvasSectionTemplate.OneColumnFullWidth).Any())
+                var fullwidthSections = Sections.Where(p => p.Type == CanvasSectionTemplate.OneColumnFullWidth);
+                if(fullwidthSections.Count() > 1)
                 {
                     throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnFullWidthSectionExists);
                 }
@@ -734,7 +735,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (section.Type == CanvasSectionTemplate.OneColumnFullWidth)
             {
-                // we're adding a full width section. This can not be combined with either a vertical column section
+                // we're adding a full width section. This can not be combined with either a vertical column section 
                 if (Sections.Where(p => p.VerticalSectionColumn != null).Any())
                 {
                     throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnSectionExistsNoFullWidth);
@@ -1378,12 +1379,12 @@ namespace PnP.Core.Model.SharePoint
             if (verticalSectionColumn != null && verticalSectionColumn.Columns.Count == 1)
             {
                 // find another, non vertical section, column with the same zoneindex
-                var matchedUpSection = sections.FirstOrDefault(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order);
+                var matchedUpSection = sections.FirstOrDefault(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order && !p.Columns.Any(c => c.ColumnFactor == 0));
                 if (matchedUpSection == null)
                 {
                     // matchup did not yet happen, so let's handle it now
                     // Get the top section
-                    var topSection = sections.OrderBy(p => p.Order).FirstOrDefault(p => p.VerticalSectionColumn == null);
+                    var topSection = sections.OrderBy(p => p.Order).FirstOrDefault(p => p.VerticalSectionColumn == null && !p.Columns.Any(c => c.ColumnFactor == 0));
                     if (topSection != null)
                     {
                         // Add the "standalone" vertical section column to this section
@@ -1559,11 +1560,20 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                var currentSection = sections.FirstOrDefault(p => p.Order == position.ZoneIndex);
+                var currentSection = sections.FirstOrDefault(p => p.Order == position.ZoneIndex && !p.Columns.Any(c => c.ColumnFactor == 0)); // A full-width section can only contain 1 column, terefore the current column must be added to a new section 
                 if (currentSection == null)
                 {
-                    AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
-                    currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
+                    if (position.SectionFactor == 0) // Sectionfactor = 0 means we have a full-width section
+                    {
+                        AddSection(new CanvasSection(this, CanvasSectionTemplate.OneColumnFullWidth, 0) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
+                        currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
+                    }
+                    else
+                    {
+                        AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
+                        currentSection = sections.Where(p => p.Order == position.ZoneIndex).First(p => !p.Columns.Any(c => c.ColumnFactor == 0));
+                    }
+                    
                 }
 
                 ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection as CanvasSection);
