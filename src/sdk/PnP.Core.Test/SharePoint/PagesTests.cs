@@ -1214,7 +1214,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     // Add all the possible sections 
                     page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
-                    page.AddSection(sectionType, 2);
+                    page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 2);
+                    page.AddSection(sectionType, 3);
                 }
                 catch (ClientException ex)
                 {
@@ -1358,7 +1359,7 @@ namespace PnP.Core.Test.SharePoint
 
                 page = pages.AsEnumerable().First();
 
-                Assert.IsTrue(page.Sections.Count == 3);
+                Assert.IsTrue(page.Sections.Count == 4);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
                 Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);
                 Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
@@ -1372,9 +1373,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 2);
 
                 // Move the image web part, setting position as last control in the column
-                page.Sections[1].Columns[1].Controls[0].MovePosition(page.Sections[2].Columns[2], 100);
+                page.Sections[2].Columns[1].Controls[0].MovePosition(page.Sections[3].Columns[2], 100);
 
-                Assert.IsTrue(page.Sections[2].Columns[2].Controls.Count == 4);
+                Assert.IsTrue(page.Sections[3].Columns[2].Controls.Count == 4);
 
                 // delete the page
                 await page.DeleteAsync();
