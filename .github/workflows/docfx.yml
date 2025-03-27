@@ -35,8 +35,8 @@ jobs:
         wget https://github.com/dotnet/docfx/releases/download/v2.59.2/docfx.zip
         sudo unzip docfx.zip -d /usr/local/lib/docfx
         rm docfx.zip
-        echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx > /dev/null
-        echo 'exec `which mono` $MONO_OPTIONS /usr/local/lib/docfx/docfx.exe "$@"' | sudo tee -a /usr/local/bin/docfx > /dev/null
+        echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx
+        echo 'exec `which mono` $MONO_OPTIONS /usr/local/lib/docfx/docfx.exe "$@"' | sudo tee -a /usr/local/bin/docfx
         sudo chmod +x /usr/local/bin/docfx
     # Build docs
     - name: Build docs
