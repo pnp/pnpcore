@@ -181,6 +181,18 @@ namespace PnP.Core.Model.SharePoint
                     }
                 };
 
+                if (Section.Collapsible)
+                {
+                    clientSideCanvasPosition.ZoneGroupMetadata = new SectionZoneGroupMetadata()
+                    {
+                        IsExpanded = Section.IsExpanded,
+                        DisplayName = Section.DisplayName,
+                        ShowDividerLine = Section.ShowDividerLine,
+                        IconAlignment = Section.IconAlignment == IconAlignment.Right ? "right" : "left",
+                        Type = 1,
+                    };
+                }
+
                 var jsonControlData = JsonSerializer.Serialize(clientSideCanvasPosition);
 
                 html.Append($@"<div {CanvasControlAttribute}="""" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}""></div>");
