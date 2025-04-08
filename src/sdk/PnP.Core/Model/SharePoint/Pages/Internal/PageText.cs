@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -135,18 +136,11 @@ namespace PnP.Core.Model.SharePoint
             catch { }
 
             StringBuilder html = new StringBuilder();
-            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
+            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
             html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
             if (!string.IsNullOrEmpty(Text))
             {
-                if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<h1>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<h2>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<h3>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<h4>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<ul>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<blockquote>", StringComparison.InvariantCultureIgnoreCase) ||
-                    Text.Trim().StartsWith("<pre>", StringComparison.InvariantCultureIgnoreCase))
+                if (Regex.IsMatch(Text.Trim(), @"^<(p|h1|h2|h3|h4|ul|blockquote|pre)(\s+[^>]*)?>\s*", RegexOptions.IgnoreCase))
                 {
                     html.Append(Text);
                 }
@@ -158,7 +152,7 @@ namespace PnP.Core.Model.SharePoint
             html.Append("</div>");
             html.Append("</div>");
             return html.ToString();
-        }        
+        }
         #endregion
 
         #region Internal and private methods
