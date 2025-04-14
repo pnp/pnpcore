@@ -1516,7 +1516,10 @@ namespace PnP.Core.Services
                     {
                         sb.AppendLine($"Content-Length: 0");
                     }
-                    sb.AppendLine($"If-Match: *"); // TODO: Here we need the E-Tag or something to specify to use *
+                    if (!headers.ContainsKey("IF-MATCH"))
+                    {                    
+                        sb.AppendLine($"If-Match: *"); // TODO: Here we need the E-Tag or something to specify to use *
+                    }
                     sb.AppendLine();
                     sb.AppendLine(requestBody);
                     sb.AppendLine();
@@ -1538,7 +1541,14 @@ namespace PnP.Core.Services
                     {
                         sb.AppendLine($"{header.Key}: {header.Value}");
                     }
-                    sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
+                    if (!headers.ContainsKey("X-HTTP-Method"))
+                    {
+                        sb.AppendLine($"X-HTTP-Method: DELETE");
+                    }                    
+                    if (!headers.ContainsKey("IF-MATCH"))
+                    {
+                        sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
+                    }                    
                     sb.AppendLine();
                     sb.AppendLine($"--changeset_{changesetId}--");
                 }
