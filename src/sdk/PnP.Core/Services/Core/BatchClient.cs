@@ -1541,7 +1541,10 @@ namespace PnP.Core.Services
                     {
                         sb.AppendLine($"{header.Key}: {header.Value}");
                     }
-                    sb.AppendLine($"X-HTTP-Method: DELETE");
+                    if (!headers.ContainsKey("X-HTTP-Method"))
+                    {
+                        sb.AppendLine($"X-HTTP-Method: DELETE");
+                    }                    
                     if (!headers.ContainsKey("IF-MATCH"))
                     {
                         sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
