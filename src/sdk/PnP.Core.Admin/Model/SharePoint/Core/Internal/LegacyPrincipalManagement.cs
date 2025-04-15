@@ -219,6 +219,14 @@ namespace PnP.Core.Admin.Model.SharePoint
                                 }
                             }
 
+                            if (tempACSPrincipal.ValidUntil == DateTime.MinValue)
+                            {
+                                // The principal was not retrieved as part of the legacy service principals, this can happen because
+                                // since end of 2024 we're creating ACS principals as regular Entra app which do not have the
+                                // legacyServicePrincipal type set to Legacy
+                                await UpdateACSPrincipalDataWithEntraAppPropertiesAsync(context, tempACSPrincipal).ConfigureAwait(false);
+                            }
+
                             if (acsPrincipal.TryGetProperty("appDomains", out JsonElement appDomains) && appDomains.ValueKind == JsonValueKind.Array)
                             {
                                 List<string> appDomainList = new();
@@ -324,6 +332,31 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
 
             return acsPrincipals;
+        }
+
+        private static async Task UpdateACSPrincipalDataWithEntraAppPropertiesAsync(PnPContext context, ACSPrincipal tempACSPrincipal)
+        {
+            var response = await (context.Web as Web).RawRequestAsync(new ApiCall(string.Format("applications?$filter=appid eq '{0}'&$select=id,appId,passwordCredentials,displayName", tempACSPrincipal.AppId), ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            var jsonResponse2 = JsonSerializer.Deserialize<JsonElement>(response.Json);
+            if (jsonResponse2.TryGetProperty("value", out JsonElement appArray) && appArray.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var acsApp in appArray.EnumerateArray())
+                {
+                    if (acsApp.TryGetProperty("passwordCredentials", out JsonElement keyCredentials) && keyCredentials.ValueKind == JsonValueKind.Array)
+                    {
+                        // Only include service principals which are still valid
+                        foreach (var keyCredential in keyCredentials.EnumerateArray())
+                        {
+                            if (keyCredential.TryGetProperty("endDateTime", out JsonElement endDateTime))
+                            {
+                                tempACSPrincipal.ValidUntil = endDateTime.GetDateTime();
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context, bool includeExpiredPrincipals, VanityUrlOptions vanityUrlOptions)

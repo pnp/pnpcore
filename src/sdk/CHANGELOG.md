@@ -42,6 +42,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page API: maintain full width header section in combination with vertical section #1615 #1629 [nicolaor - Rene Nicolao]
 - Additional header check for BatchClient #1635 [koenzomers - Koen Zomers]
 - Prevent blank lines when html tags have attributes #1636 [robi26 - Stephan Steiger]
+- Admin library: ACS principals created as of December 2024 are regular Entra apps, ensure the principal validity is loaded correctly [jansenbe - Bert Jansen]
+
 
 ## [1.14]
 
