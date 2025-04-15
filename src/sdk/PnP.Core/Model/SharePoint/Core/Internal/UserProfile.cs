@@ -113,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall(baseUrl, ApiType.SPORest)
             {
                 Interactive = true,
-                BinaryBody = fileBytes
+                Content = new ByteArrayContent(fileBytes)
             };
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
