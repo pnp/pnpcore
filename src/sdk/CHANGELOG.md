@@ -40,7 +40,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - The Url for Root-Site-API Request had // in path #1598 [czullu - Christian Zuellig]
 - Bumped version of Microsoft.Identity.Client package version to 4.70.2 #1642 [gautamdsheth - Gautam Sheth]
 - Page API: maintain full width header section in combination with vertical section #1615 #1629 [nicolaor - Rene Nicolao]
-- Additional header check for BatchClient. #1635 [koenzomers - Koen Zomers ]
+- Additional header check for BatchClient #1635 [koenzomers - Koen Zomers]
+- Prevent blank lines when html tags have attributes #1636 [robi26 - Stephan Steiger]
 
 ## [1.14]
 
