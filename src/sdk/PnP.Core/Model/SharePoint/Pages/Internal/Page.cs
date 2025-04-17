@@ -480,7 +480,7 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
-        private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context)
+        private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context, bool firstTry = true)
         {
             IList pagesLibrary = null;
             var lists = context.Web.Lists.AsRequested();
@@ -536,6 +536,17 @@ namespace PnP.Core.Model.SharePoint
                         }
                     }
                 }
+            }
+
+            // Still no pages library found, maybe it doesn't exist?
+            if (pagesLibrary == null && firstTry)
+            {
+                var sitePagesFeatureId = Guid.Parse(PageConstants.SitePagesFeatureId);
+                var activatedFeatureIds = context.Web.Features.ToList().Select(x => x.DefinitionId);
+                if (!activatedFeatureIds.Contains(sitePagesFeatureId)) await context.Web.Features.EnableAsync(sitePagesFeatureId).ConfigureAwait(false);
+
+                // Now we should have the pages library
+                pagesLibrary = await EnsurePagesLibraryAsync(context, false).ConfigureAwait(false);
             }
 
             return pagesLibrary;
