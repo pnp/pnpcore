@@ -2966,6 +2966,66 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.AlertDeliveryMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.AlertDeliveryMethod.html",
+          "hash": "CCIcTb/QYq2zWnBAR+Vc6FeQdhNDr2iGfo18KZXKsKU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.AlertEventType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.AlertEventType.html",
+          "hash": "yFaw3lk/3N3CyXJO5TrhCT5qMvrHBiAVvdyrsnKS5Z8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.AlertFrequency.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.AlertFrequency.html",
+          "hash": "3B4/tmurS25y6JHo/660l2sPtv1z4b7qfLPjT6pBKS4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.AlertStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.AlertStatus.html",
+          "hash": "mtMhh77Q/Xy/6Gn8OzCutlfY11IaGMX7HC6RZlzs9bU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.AlertType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.AlertType.html",
+          "hash": "+qOZECL5qgnV19eVlQ7Q7AweRpPJ+2/kflcQHlSq7po="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.AnalyticsAggregationInterval.yml",
       "output": {
         ".html": {
@@ -3871,6 +3931,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IActivityStat.html",
           "hash": "f9V73nNhzO9R3zLvF3vVLCCfkpKFk0lqk+jgcICu/qE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IAlert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IAlert.html",
+          "hash": "qlNBUpuxa2ucjklGrGRLkc8DHGzX0/z92s3OUuFJNBk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IAlertCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IAlertCollection.html",
+          "hash": "AMX5wbTmAs07xX/JQZ4ozb1BCs7AfXkReZ2KYVZ653U="
         }
       },
       "is_incremental": false,
@@ -5586,7 +5670,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "yr8eCSYDiW1ZVblsB8lAapGOFqqxidRYEz1Ynt52GxY="
+          "hash": "GNIehMx6H/r6I91V7IlDw3UdL1llBje8d8GPWv0xzVs="
         }
       },
       "is_incremental": false,
@@ -6522,7 +6606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "8+lVKmjXFmh19NyxHlHMdaOb5Oog1zPbtW6FMQo9BLE="
+          "hash": "RRwGYK4g18N2jQZ/DXn9Podd4xWNmYwQYVwhcQNLxPE="
         }
       },
       "is_incremental": false,
@@ -8574,7 +8658,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "j5oDzA88t6QxNafxxsnomXsIUM6PWiRdfWdGTm9GFoY="
+          "hash": "IR0YOKkqyUCfhOM288AIn7wQW+dBY/IgefU0BSpvVCU="
         }
       },
       "is_incremental": false,
@@ -10604,7 +10688,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 712,
+          "total_file_count": 719,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
