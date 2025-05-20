@@ -729,11 +729,7 @@ namespace PnP.Core.Transformation.Services.Core
                             // Don't serialize null values
                             var jsonSerializerOptions = new JsonSerializerOptions()
                             {
-#if NET5_0_OR_GREATER
                                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#else
-                                IgnoreNullValues = true,
-#endif
                             };
 
                             var json = JsonSerializer.Serialize(author, jsonSerializerOptions);

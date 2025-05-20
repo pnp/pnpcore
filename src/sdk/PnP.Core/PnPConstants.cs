@@ -145,11 +145,7 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues = new JsonSerializerOptions
         {
-#if NET5_0_OR_GREATER
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-#else
-            IgnoreNullValues = true
-#endif
         };
 
         /// <summary>
@@ -157,11 +153,7 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions()
         {
-#if NET5_0_OR_GREATER
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#else
-            IgnoreNullValues = true,
-#endif
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
@@ -180,11 +172,7 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions()
         {
-#if NET5_0_OR_GREATER
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#else
-            IgnoreNullValues = true,
-#endif
             Converters =
             {
                 new JsonStringEnumConverter()
@@ -229,11 +217,7 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_SharePointRestCollectionJsonConverter_JsonStringEnumConverter = new JsonSerializerOptions()
         {
-#if NET5_0_OR_GREATER
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#else
-            IgnoreNullValues = true,
-#endif
             Converters =
             {
                 new SharePointRestCollectionJsonConverter<string>(),
