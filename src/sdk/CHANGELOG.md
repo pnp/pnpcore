@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Moved to version 9.0.5 of System.Text.Json for the .NET Standard, .NET 8 and .NET 9 builds [jansenbe - Bert Jansen]
+- Moved to version 9.0.0 of System.Text.Json for the .NET Standard build [jansenbe - Bert Jansen]
 
 ## [1.15]
 
