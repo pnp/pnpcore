@@ -17,9 +17,18 @@ namespace PnP.Core.Services
         /// <summary>
         /// Adds the <see cref="PnPContextFactory"/> to the collection of services
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// </para>
+        /// </remarks>
         /// <param name="collection">Collection of loaded services</param>
+        /// <param name="configureSharePointRest">additional configuration to <see cref="SharePointRestClient"/></param>
+        /// <param name="configureMicrosoftGraph">additional configuration to <see cref="MicrosoftGraphClient"/></param>
         /// <returns>Collection of loaded services</returns>
-        public static IServiceCollection AddPnPContextFactory(this IServiceCollection collection)
+        public static IServiceCollection AddPnPContextFactory(this IServiceCollection collection,
+            Action<IHttpClientBuilder> configureSharePointRest = null,
+            Action<IHttpClientBuilder> configureMicrosoftGraph = null)
         {
             if (collection == null)
             {
@@ -29,17 +38,28 @@ namespace PnP.Core.Services
             // Add a SharePoint Online Context Factory service instance
             return collection
                 .AddHttpHandlers()
-                .AddHttpClients()
+                .AddHttpClients(configureSharePointRest, configureMicrosoftGraph)
                 .AddPnPServices();
         }
 
         /// <summary>
-        /// Adds the <see cref="PnPContextFactory"/> to the collection of services with options
+        /// Adds the <see cref="PnPContextFactory"/> to the collection of services with options. 
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// </para>
+        /// </remarks>
         /// <param name="collection">Collection of loaded services</param>
         /// <param name="options"><see cref="PnPContextFactory"/> configuration options</param>
+        /// <param name="configureSharePointRest">additional configuration to <see cref="SharePointRestClient"/></param>
+        /// <param name="configureMicrosoftGraph">additional configuration to <see cref="MicrosoftGraphClient"/></param>
         /// <returns>Collection of loaded services</returns>
-        public static IServiceCollection AddPnPContextFactory(this IServiceCollection collection, Action<PnPContextFactoryOptions> options)
+        public static IServiceCollection AddPnPContextFactory(
+            this IServiceCollection collection,
+            Action<PnPContextFactoryOptions> options,
+            Action<IHttpClientBuilder> configureSharePointRest = null,
+            Action<IHttpClientBuilder> configureMicrosoftGraph = null)
         {
             if (collection == null)
             {
@@ -55,7 +75,7 @@ namespace PnP.Core.Services
             // Add a PnP Context Factory service instance
             return collection
                 .AddHttpHandlers()
-                .AddHttpClients()
+                .AddHttpClients(configureSharePointRest, configureMicrosoftGraph)
                 .AddPnPServices();
         }
 
@@ -69,19 +89,22 @@ namespace PnP.Core.Services
             return collection;
         }
 
-        private static IServiceCollection AddHttpClients(this IServiceCollection collection)
+        private static IServiceCollection AddHttpClients(this IServiceCollection collection, Action<IHttpClientBuilder> configureSharePointRest = null, Action<IHttpClientBuilder> configureMicrosoftGraph = null)
         {
+            IHttpClientBuilder sharePointRestBuilder;
+            IHttpClientBuilder microsoftGraphBuilder;
+
 #if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
-                collection.AddHttpClient<SharePointRestClient>()
+                sharePointRestBuilder = collection.AddHttpClient<SharePointRestClient>()
                     .AddHttpMessageHandler<SharePointRestRetryHandler>();
-                collection.AddHttpClient<MicrosoftGraphClient>()
+                microsoftGraphBuilder = collection.AddHttpClient<MicrosoftGraphClient>()
                     .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
             }
             else
             {
-                collection.AddHttpClient<SharePointRestClient>()
+                sharePointRestBuilder = collection.AddHttpClient<SharePointRestClient>()
                     .AddHttpMessageHandler<SharePointRestRetryHandler>()
                     // We use cookies by adding them to the header which works great when used from Core framework,
                     // however when running the .NET Standard 2.0 version from .NET Framework we explicetely have to
@@ -91,7 +114,7 @@ namespace PnP.Core.Services
                         UseCookies = false,
                         AutomaticDecompression = DecompressionMethods.All
                     });
-                collection.AddHttpClient<MicrosoftGraphClient>()
+                microsoftGraphBuilder = collection.AddHttpClient<MicrosoftGraphClient>()
                     .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
                     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                     {
@@ -99,7 +122,7 @@ namespace PnP.Core.Services
                     });
             }
 #else
-            collection.AddHttpClient<SharePointRestClient>()
+            sharePointRestBuilder = collection.AddHttpClient<SharePointRestClient>()
                 .AddHttpMessageHandler<SharePointRestRetryHandler>()
                 // We use cookies by adding them to the header which works great when used from Core framework,
                 // however when running the .NET Standard 2.0 version from .NET Framework we explicetely have to
@@ -109,13 +132,17 @@ namespace PnP.Core.Services
                     UseCookies = false,
                     AutomaticDecompression = DecompressionMethods.GZip
                 });
-            collection.AddHttpClient<MicrosoftGraphClient>()
+            microsoftGraphBuilder = collection.AddHttpClient<MicrosoftGraphClient>()
                 .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
+                .
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
                     AutomaticDecompression = DecompressionMethods.GZip
                 });
 #endif
+            configureSharePointRest?.Invoke(sharePointRestBuilder);
+            configureMicrosoftGraph?.Invoke(microsoftGraphBuilder);
+
             return collection;
         }
 
