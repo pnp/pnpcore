@@ -19,7 +19,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// Optional additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
         /// </para>
         /// </remarks>
         /// <param name="collection">Collection of loaded services</param>
@@ -47,7 +47,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// Optional additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
         /// </para>
         /// </remarks>
         /// <param name="collection">Collection of loaded services</param>
@@ -134,7 +134,6 @@ namespace PnP.Core.Services
                 });
             microsoftGraphBuilder = collection.AddHttpClient<MicrosoftGraphClient>()
                 .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
-                .
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
                     AutomaticDecompression = DecompressionMethods.GZip

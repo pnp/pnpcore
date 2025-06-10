@@ -15,7 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// Optional additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
         /// </para>
         /// </remarks>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Optionally additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
+        /// Optional additional configuration can be provided for <see cref="SharePointRestClient"/> and/or <see cref="MicrosoftGraphClient"/>
         /// </para>
         /// </remarks>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
