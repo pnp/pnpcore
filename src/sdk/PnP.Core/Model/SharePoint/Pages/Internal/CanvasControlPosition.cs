@@ -11,6 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets JsonProperty "controlIndex"
         /// </summary>
         [JsonPropertyName("controlIndex")]
+        [JsonConverter(typeof(IndexJsonConverter))]
         public float ControlIndex { get; set; }
     }
 }
