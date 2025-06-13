@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Moved to version 9.0.0 of System.Text.Json for the .NET Standard build [jansenbe - Bert Jansen]
+- Improved page parsing robustness by allowing control index values to be not defined #1655 [singingknight - Per Jakobsen]
 
 ## [1.15]
 
