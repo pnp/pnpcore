@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Support for reading Alerts [jansenbe - Bert Jansen]
+- Allow optional configuration of used SharePointRestClient and MicrosoftGraphClient #1659 [kola-tm]
 
 ### Changed
 

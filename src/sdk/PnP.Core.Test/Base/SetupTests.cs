@@ -93,7 +93,7 @@ namespace PnP.Core.Test.Base
             Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 ServiceCollection services = new ServiceCollection();
-                services.AddPnPContextFactory(null);
+                services.AddPnPContextFactory(null, null, null);
             });
         }
     }
