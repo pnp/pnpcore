@@ -516,7 +516,7 @@ namespace PnP.Core.Model.SharePoint
         internal override void FromHtml(IElement element, bool isHeader)
         {
             base.FromHtml(element, isHeader);
-                
+
             // Set/update dataVersion if it was provided as html attribute
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             if (!string.IsNullOrEmpty(webPartDataVersion))
@@ -573,7 +573,11 @@ namespace PnP.Core.Model.SharePoint
                 return;
             }
 
-            var wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
+            if (!SafeDeserializeDecoded(decodedWebPart, out var wpJObject))
+            {
+                Title = "Failed to deserialize WebPart";
+                return;
+            }
 
             if (wpJObject.TryGetProperty("title", out JsonElement titleProperty))
             {
@@ -655,6 +659,62 @@ namespace PnP.Core.Model.SharePoint
             if (wpJObject.TryGetProperty("cardSize", out JsonElement ACECardSizeElement))
             {
                 ACECardSize = ACECardSizeElement.GetString();
+            }
+        }
+
+        private static bool SafeDeserializeDecoded(string decodedWebPart, out JsonElement wpJObject)
+        {
+            while (true)
+            {
+                try
+                {
+                    wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
+                    return true;
+                }
+                catch (JsonException ex)
+                {
+                    // Try to fix decoded double quote
+                    if ((ex.Message.Contains("is invalid after a value")
+                      || ex.Message.Contains("is an invalid start of a property name"))
+                     && ex.LineNumber == 0
+                     && ex.BytePositionInLine > 1
+                     )
+                    {
+                        var bytes = Encoding.UTF8.GetBytes(decodedWebPart);
+                        if (ex.BytePositionInLine < bytes.Length)
+                        {
+                            var replacedQuote = false;
+                            for (int pos = (int)ex.BytePositionInLine.Value - 1; pos > 0; pos--)
+                            {
+                                if (Char.IsWhiteSpace((char)bytes[pos])
+                                 || bytes[pos] == ',')
+                                    continue;
+                                if (bytes[pos] == '"')
+                                {
+                                    // Found a double quote we can try to escape
+                                    //
+                                    var builder = new StringBuilder(decodedWebPart.Length + 1);
+                                    builder.Append(Encoding.UTF8.GetString(bytes, 0, pos));
+                                    builder.Append("\\\"");
+                                    builder.Append(Encoding.UTF8.GetString(bytes, pos + 1, bytes.Length - pos - 1));
+                                    replacedQuote = true;
+                                    decodedWebPart = builder.ToString();
+                                }
+                                break;
+                            }
+                            if (replacedQuote)
+                            {
+                                continue;
+                            }
+                        }
+                    }
+
+                    // If we reach here then we cannot fix the issue, so return false
+                    // and set the wpJObject to an empty JsonElement
+                    //
+                    wpJObject = new JsonElement();
+                    return false;
+                }
             }
         }
 
