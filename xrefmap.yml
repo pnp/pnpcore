@@ -41,21 +41,24 @@ references:
   commentId: T:Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions
   fullName: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions
   nameWithType: PnPCoreServiceCollectionExtensions
-- uid: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection)
-  name: AddPnPCore(IServiceCollection)
-  href: api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_PnPCoreServiceCollectionExtensions_AddPnPCore_IServiceCollection_
-  commentId: M:Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection)
-  fullName: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection)
-  nameWithType: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection)
-- uid: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{PnP.Core.Services.Builder.Configuration.PnPCoreOptions})
-  name: AddPnPCore(IServiceCollection, Action<PnPCoreOptions>)
-  href: api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_PnPCoreServiceCollectionExtensions_AddPnPCore_IServiceCollection_Action_PnP_Core_Services_Builder_Configuration_PnPCoreOptions__
-  commentId: M:Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{PnP.Core.Services.Builder.Configuration.PnPCoreOptions})
-  name.vb: AddPnPCore(IServiceCollection, Action(Of PnPCoreOptions))
-  fullName: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<PnP.Core.Services.Builder.Configuration.PnPCoreOptions>)
-  fullName.vb: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of PnP.Core.Services.Builder.Configuration.PnPCoreOptions))
-  nameWithType: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<PnPCoreOptions>)
-  nameWithType.vb: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of PnPCoreOptions))
+- uid: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name: AddPnPCore(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  href: api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_PnPCoreServiceCollectionExtensions_AddPnPCore_IServiceCollection_Action_IHttpClientBuilder__Action_IHttpClientBuilder__
+  commentId: M:Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name.vb: AddPnPCore(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  fullName: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  fullName.vb: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  nameWithType: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  nameWithType.vb: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+- uid: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{PnP.Core.Services.Builder.Configuration.PnPCoreOptions},Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name: AddPnPCore(IServiceCollection, Action<PnPCoreOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  href: api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_PnPCoreServiceCollectionExtensions_AddPnPCore_IServiceCollection_Action_PnP_Core_Services_Builder_Configuration_PnPCoreOptions__Action_IHttpClientBuilder__Action_IHttpClientBuilder__
+  commentId: M:Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection,Action{PnP.Core.Services.Builder.Configuration.PnPCoreOptions},Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name.vb: AddPnPCore(IServiceCollection, Action(Of PnPCoreOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  fullName: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<PnP.Core.Services.Builder.Configuration.PnPCoreOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  fullName.vb: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of PnP.Core.Services.Builder.Configuration.PnPCoreOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  nameWithType: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action<PnPCoreOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  nameWithType.vb: PnPCoreServiceCollectionExtensions.AddPnPCore(IServiceCollection, Action(Of PnPCoreOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
 - uid: Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.AddPnPCore*
   name: AddPnPCore
   href: api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_PnPCoreServiceCollectionExtensions_AddPnPCore_
@@ -71055,21 +71058,24 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactoryCollectionExtensions
   fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions
   nameWithType: PnPContextFactoryCollectionExtensions
-- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
-  name: AddPnPContextFactory(IServiceCollection)
-  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_
-  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
-  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
-  nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
-- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{PnP.Core.Services.PnPContextFactoryOptions})
-  name: AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>)
-  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_Action_PnP_Core_Services_PnPContextFactoryOptions__
-  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{PnP.Core.Services.PnPContextFactoryOptions})
-  name.vb: AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions))
-  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<PnP.Core.Services.PnPContextFactoryOptions>)
-  fullName.vb: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of PnP.Core.Services.PnPContextFactoryOptions))
-  nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>)
-  nameWithType.vb: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions))
+- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name: AddPnPContextFactory(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_Action_IHttpClientBuilder__Action_IHttpClientBuilder__
+  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name.vb: AddPnPContextFactory(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  fullName.vb: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  nameWithType.vb: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{PnP.Core.Services.PnPContextFactoryOptions},Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name: AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_Action_PnP_Core_Services_PnPContextFactoryOptions__Action_IHttpClientBuilder__Action_IHttpClientBuilder__
+  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,Action{PnP.Core.Services.PnPContextFactoryOptions},Action{IHttpClientBuilder},Action{IHttpClientBuilder})
+  name.vb: AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<PnP.Core.Services.PnPContextFactoryOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  fullName.vb: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of PnP.Core.Services.PnPContextFactoryOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
+  nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>, Action<IHttpClientBuilder>, Action<IHttpClientBuilder>)
+  nameWithType.vb: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions), Action(Of IHttpClientBuilder), Action(Of IHttpClientBuilder))
 - uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory*
   name: AddPnPContextFactory
   href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_

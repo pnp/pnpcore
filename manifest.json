@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html",
-          "hash": "V3UIknFOWnhKp4GcICcJsyJx1kOZA7lEBqBmOQXdRnk="
+          "hash": "c0A1rySV7SGYpoOwChIBos5AVm4dwfVceF4f9lxAaKQ="
         }
       },
       "is_incremental": false,
@@ -8502,7 +8502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html",
-          "hash": "L6gqi4PXl/1eZJooy4t3ns4ZEah3Hzewd/djfSkYfIc="
+          "hash": "yK3i4hINxX7VePDzMeG4QTHqTTiTlehfbf7kUVWxHZA="
         }
       },
       "is_incremental": false,
