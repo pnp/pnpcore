@@ -249,6 +249,38 @@ In above sample the following configuration file is used: `appsettings.demo.json
 > [!Note]
 > To learn more about how to setup authentication check the [Configuring authentication](configuring%20authentication.md) article.
 
+## Advanced Configuration of PnPContext Services
+
+For more fine grained control over the setup of the internally used `SharePointRestClient` and `MicrosoftGraphClient` used in `PnPContext`, 
+there are optional actions to enable configuring the `IHttpClientBuilder` of each in the `AddPnPCore` extension method.
+
+```csharp
+var host = Host.CreateDefaultBuilder()
+// Configure logging
+.ConfigureServices((hostingContext, services) =>
+{
+    // Add the PnP Core SDK library services with additional delegating handler
+    services.AddPnPCore(sharePointRestClientBuilder =>
+    {
+       sharePointRestBuilder.AddHttpMessageHandler<CustomDelegatingHandler>();
+    }, microsoftGraphBuilder =>
+    {
+       microsoftGraphBuilder.AddHttpMessageHandler<CustomDelegatingHandler>();
+    });
+
+    // Add the PnP Core SDK library services configuration from the appsettings.json file
+    services.Configure<PnPCoreOptions>(hostingContext.Configuration.GetSection("PnPCore"));
+    // Add the PnP Core SDK Authentication Providers
+    services.AddPnPCoreAuthentication();
+    // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
+    services.Configure<PnPCoreAuthenticationOptions>(hostingContext.Configuration.GetSection("PnPCore"));
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+```
+
 ## Obtaining a PnPContext
 
 The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site URL or the id of a Microsoft 365 group.
