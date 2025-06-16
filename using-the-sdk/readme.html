@@ -308,6 +308,34 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <h5>Note</h5>
 <p>To learn more about how to setup authentication check the <a href="configuring%20authentication.html">Configuring authentication</a> article.</p>
 </div>
+<h2 id="advanced-configuration-of-pnpcontext-services">Advanced Configuration of PnPContext Services</h2>
+<p>For more fine grained control over the setup of the internally used <code>SharePointRestClient</code> and <code>MicrosoftGraphClient</code> used in <code>PnPContext</code>,
+there are optional actions to enable configuring the <code>IHttpClientBuilder</code> of each in the <code>AddPnPCore</code> extension method.</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+    // Add the PnP Core SDK library services with additional delegating handler
+    services.AddPnPCore(sharePointRestClientBuilder =&gt;
+    {
+       sharePointRestBuilder.AddHttpMessageHandler&lt;CustomDelegatingHandler&gt;();
+    }, microsoftGraphBuilder =&gt;
+    {
+       microsoftGraphBuilder.AddHttpMessageHandler&lt;CustomDelegatingHandler&gt;();
+    });
+
+    // Add the PnP Core SDK library services configuration from the appsettings.json file
+    services.Configure&lt;PnPCoreOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
+    // Add the PnP Core SDK Authentication Providers
+    services.AddPnPCoreAuthentication();
+    // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
+    services.Configure&lt;PnPCoreAuthenticationOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
 <h2 id="obtaining-a-pnpcontext">Obtaining a PnPContext</h2>
 <p>The <code>PnPContext</code> is the entry point for using the PnP Core SDK, you can create a <code>PnPContext</code> from either a SharePoint site URL or the id of a Microsoft 365 group.</p>
 <div class="NOTE">
