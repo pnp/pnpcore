@@ -264,6 +264,8 @@ namespace PnP.Core.Model.SharePoint
                     controlData.AddedFromPersistedData = SpControlData.AddedFromPersistedData;
                     controlData.ReservedHeight = SpControlData.ReservedHeight;
                     controlData.ReservedWidth = SpControlData.ReservedWidth;
+                    controlData.ZoneReflowStrategy = SpControlData.ZoneReflowStrategy;
+                    controlData.FlexibleLayoutPosition = SpControlData.FlexibleLayoutPosition;
                 }
                 else
                 {

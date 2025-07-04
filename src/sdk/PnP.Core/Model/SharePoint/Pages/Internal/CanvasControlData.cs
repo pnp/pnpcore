@@ -17,10 +17,20 @@ namespace PnP.Core.Model.SharePoint
         [JsonPropertyName("position")]
         public CanvasControlPosition Position { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("emphasis")]
         public SectionEmphasis Emphasis { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("zoneGroupMetadata")]
         public SectionZoneGroupMetadata ZoneGroupMetadata { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("zoneReflowStrategy")]
+        public SectionZoneReflowStrategy ZoneReflowStrategy { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("flexibleLayoutPosition")]
+        public SectionFlexibleLayoutPosition FlexibleLayoutPosition { get; set; }
     }
 }
