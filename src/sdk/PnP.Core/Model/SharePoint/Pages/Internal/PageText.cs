@@ -102,8 +102,8 @@ namespace PnP.Core.Model.SharePoint
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 },
                 EditorType = "CKEditor",
-                ZoneReflowStrategy = SpControlData.ZoneReflowStrategy,
-                FlexibleLayoutPosition = SpControlData.FlexibleLayoutPosition
+                ZoneReflowStrategy = SpControlData?.ZoneReflowStrategy,
+                FlexibleLayoutPosition = SpControlData?.FlexibleLayoutPosition
             };
 
             // Persist the collapsible section settings
