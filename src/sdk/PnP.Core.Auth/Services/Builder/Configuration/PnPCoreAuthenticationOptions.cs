@@ -78,6 +78,10 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     public class PnPCoreAuthenticationCredentialConfigurationOptions
     {
         /// <summary>
+        /// Action to notify the end user about the device code request
+        /// </summary>
+        public Action<DeviceCodeNotification> DeviceCodeVerification { get; set; }
+        /// <summary>
         /// The ClientId of the application to use for authentication
         /// </summary>
         public string ClientId { get; set; }

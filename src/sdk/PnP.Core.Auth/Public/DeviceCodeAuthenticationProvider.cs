@@ -116,6 +116,12 @@ namespace PnP.Core.Auth
                 .WithHttpClientFactory(msalHttpClientFactory)
                 .Build();
 
+            // DeviceCodeVerification を options からセット
+            if (options.DeviceCodeVerification != null)
+            {
+                DeviceCodeVerification = options.DeviceCodeVerification;
+            }
+
             // Log the initialization information
             Log?.LogInformation(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_LogInit);
         }
