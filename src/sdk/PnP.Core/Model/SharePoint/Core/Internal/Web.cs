@@ -744,9 +744,9 @@ namespace PnP.Core.Model.SharePoint
                 var loginName = $"c:0-.f|rolemanager|spo-grid-all-users/{tenantId}";
                 return await EnsureUserAsync(loginName).ConfigureAwait(false);
             }
-            catch(SharePointRestServiceException ex) when (ex.HResult == -2146233088)
+            catch (SharePointRestServiceException ex) when (ex.HResult == -2146233088)
             {
-                var web = await GetAsync(p=>p.Language).ConfigureAwait(false);
+                var web = await GetAsync(p => p.Language).ConfigureAwait(false);
                 string userIdentity = null;
                 switch (web.Language)
                 {
@@ -1111,6 +1111,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<IList<string>> ValidateUsersAsync(IList<string> userList)
         {
             List<string> nonExistingUsers = new();
+            var props = "userPrincipalName,accountEnabled";
 
             if (userList == null || userList.Count == 0)
             {
@@ -1121,7 +1122,7 @@ namespace PnP.Core.Model.SharePoint
             var batch = PnPContext.NewBatch();
             foreach (var user in userList)
             {
-                requests.Add(Tuple.Create(user, await RawRequestBatchAsync(batch, new ApiCall($"users/{user}", ApiType.Graph), HttpMethod.Get, "GetUser").ConfigureAwait(false)));
+                requests.Add(Tuple.Create(user, await RawRequestBatchAsync(batch, new ApiCall($"users/{user}?$select={props}", ApiType.Graph), HttpMethod.Get, "GetUser").ConfigureAwait(false)));
             }
             await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
 
@@ -1130,6 +1131,18 @@ namespace PnP.Core.Model.SharePoint
                 if (request.Item2.ResponseHeaders.Count == 0)
                 {
                     nonExistingUsers.Add(request.Item1);
+                }
+                else if (request.Item2.ResponseJson != null)
+                {
+                    var user = JsonSerializer.Deserialize<JsonElement>(request.Item2.ResponseJson);
+
+                    if (user.TryGetProperty("accountEnabled", out JsonElement accountEnabled)
+                        && accountEnabled.ValueKind != JsonValueKind.Null
+                        && accountEnabled.ValueKind != JsonValueKind.Undefined
+                        && !accountEnabled.GetBoolean())
+                    {
+                        nonExistingUsers.Add(request.Item1);
+                    }
                 }
             }
 
@@ -1850,7 +1863,8 @@ namespace PnP.Core.Model.SharePoint
                 case "Null":
                     {
                         return (key, null);
-                    };
+                    }
+                    ;
                 case "Edm.Double":
                     {
                         if (double.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double result))
@@ -1858,7 +1872,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Decimal":
                     {
                         if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out decimal result))
@@ -1866,7 +1881,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Float":
                     {
                         if (float.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out float result))
@@ -1874,7 +1890,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Int16":
                     {
                         if (short.TryParse(value, out short result))
@@ -1882,7 +1899,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Int32":
                     {
                         if (int.TryParse(value, out int result))
@@ -1890,7 +1908,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Int64":
                     {
                         if (long.TryParse(value, out long result))
@@ -1898,7 +1917,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Guid":
                     {
                         if (Guid.TryParse(value, out Guid result))
@@ -1906,7 +1926,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.Boolean":
                     {
                         if (bool.TryParse(value, out bool result))
@@ -1914,7 +1935,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.DateTime":
                     {
                         if (DateTime.TryParse(value, out DateTime result))
@@ -1922,7 +1944,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 case "Edm.DateTimeOffSet":
                     {
                         if (DateTimeOffset.TryParse(value, out DateTimeOffset result))
@@ -1930,7 +1953,8 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    };
+                    }
+                    ;
                 default:
                     {
                         return (key, value);
