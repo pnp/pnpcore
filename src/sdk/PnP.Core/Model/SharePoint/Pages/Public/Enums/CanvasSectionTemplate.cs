@@ -58,6 +58,16 @@
         /// <summary>
         /// Two columns, left 1/3, right 2/3 + one vertical section column
         /// </summary>
-        TwoColumnRightVerticalSection = 10
+        TwoColumnRightVerticalSection = 10,
+
+        /// <summary>
+        /// Create a section that can provides a flexible layout
+        /// </summary>
+        FlexibleLayoutSection = 11,
+
+        /// <summary>
+        /// Create a section that can provides a flexible layout with one vertical section column
+        /// </summary>
+        FlexibleLayoutVerticalSection = 12
     }
 }

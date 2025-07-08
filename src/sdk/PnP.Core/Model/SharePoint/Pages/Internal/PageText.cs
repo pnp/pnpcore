@@ -16,6 +16,42 @@ namespace PnP.Core.Model.SharePoint
     {
         #region variables
         internal const string TextRteAttribute = "data-sp-rte";
+
+        public ControlFlexLayoutPosition FlexibleLayoutPosition
+        {
+            get
+            {
+                if(SpControlData == null || SpControlData.FlexibleLayoutPosition == null)
+                {
+                    return null;
+                }
+
+                return new ControlFlexLayoutPosition { 
+                    XPos = SpControlData.FlexibleLayoutPosition.LG.X, 
+                    YPos = SpControlData.FlexibleLayoutPosition.LG.Y,
+                    Width = SpControlData.FlexibleLayoutPosition.LG.W,
+                    Height = SpControlData.FlexibleLayoutPosition.LG.H,
+                    wpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
+                };
+            }
+            set
+            {
+                if (SpControlData == null)
+                {
+                    SpControlData = new TextControlData();
+                }
+                SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition { 
+                    GroupId = value.wpGroupId,
+                    LG = new CanvasControlFlexibleLayoutPositionLG
+                    {
+                        X = value.XPos,
+                        Y = value.YPos,
+                        W = value.Width,
+                        H = value.Height
+                    }
+                };
+            }
+        }
         #endregion
 
         #region construction
@@ -102,9 +138,17 @@ namespace PnP.Core.Model.SharePoint
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 },
                 EditorType = "CKEditor",
-                ZoneReflowStrategy = SpControlData?.ZoneReflowStrategy,
                 FlexibleLayoutPosition = SpControlData?.FlexibleLayoutPosition
             };
+
+            if (column.ZoneReflowStrategy.HasValue)
+            {
+                controlData.ZoneReflowStrategy = new CanvasColumnZoneReflowStrategy { Axis = column.ZoneReflowStrategy.Value };
+            }
+            else
+            {
+                controlData.ZoneReflowStrategy = null;
+            }
 
             // Persist the collapsible section settings
             if (Section.Collapsible && !Column.IsVerticalSectionColumn)

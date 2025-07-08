@@ -27,10 +27,10 @@ namespace PnP.Core.Model.SharePoint
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("zoneReflowStrategy")]
-        public SectionZoneReflowStrategy ZoneReflowStrategy { get; set; }
+        public CanvasColumnZoneReflowStrategy ZoneReflowStrategy { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("flexibleLayoutPosition")]
-        public SectionFlexibleLayoutPosition FlexibleLayoutPosition { get; set; }
+        public CanvasControlFlexibleLayoutPosition FlexibleLayoutPosition { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal sealed class SectionZoneReflowStrategy
+    internal sealed class CanvasColumnZoneReflowStrategy
     {
         /// <summary>
         /// Specifies the strategy used to reflow web parts within a zone.

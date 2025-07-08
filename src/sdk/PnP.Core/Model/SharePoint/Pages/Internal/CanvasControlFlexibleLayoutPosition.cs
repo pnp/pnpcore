@@ -3,10 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal sealed class SectionFlexibleLayoutPosition
+    internal sealed class CanvasControlFlexibleLayoutPosition
     {
         [JsonPropertyName("lg")]
-        public SectionFlexibleLayoutPositionLG LG
+        public CanvasControlFlexibleLayoutPositionLG LG
         {
             get; set;
         }

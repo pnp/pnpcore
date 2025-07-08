@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal sealed class SectionFlexibleLayoutPositionLG
+    internal sealed class CanvasControlFlexibleLayoutPositionLG
     {
         /// <summary>
         /// x-postion of the control in the section
