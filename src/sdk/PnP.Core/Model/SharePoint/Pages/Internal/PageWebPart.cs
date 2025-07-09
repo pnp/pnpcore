@@ -43,21 +43,31 @@ namespace PnP.Core.Model.SharePoint
             }
             set
             {
-                if (SpControlData == null)
+                if (value != null)
                 {
-                    SpControlData = new WebPartControlData();
-                }
-                SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
-                {
-                    GroupId = value.wpGroupId,
-                    LG = new CanvasControlFlexibleLayoutPositionLG
+                    if (SpControlData == null)
                     {
-                        X = value.XPos,
-                        Y = value.YPos,
-                        W = value.Width,
-                        H = value.Height
+                        SpControlData = new WebPartControlData();
                     }
-                };
+                    SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
+                    {
+                        GroupId = value.wpGroupId,
+                        LG = new CanvasControlFlexibleLayoutPositionLG
+                        {
+                            X = value.XPos,
+                            Y = value.YPos,
+                            W = value.Width,
+                            H = value.Height
+                        }
+                    };
+                }
+                else
+                {
+                    if (SpControlData != null)
+                    {
+                        SpControlData.FlexibleLayoutPosition = null;
+                    }
+                }
             }
         }
 
