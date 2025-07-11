@@ -346,6 +346,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 return typeof(SectionBackgroundControl);
             }
+            else if (controlData.ControlType == 1)
+            {
+                return typeof(EmptySection); // Special Control Type used if no WebPart is in Section
+            }
 
             return null;
         }
@@ -360,7 +364,15 @@ namespace PnP.Core.Model.SharePoint
             canvasDataVersion = element.GetAttribute(CanvasDataVersionAttribute);
             canvasControlData = element.GetAttribute(CanvasControlAttribute);
             controlType = controlData.ControlType;
-            instanceId = new Guid(controlData.Id ?? Guid.NewGuid().ToString());
+            if (Guid.TryParse(controlData.Id, out var controlId))
+            {
+                instanceId = controlId;
+            }
+            else
+            {
+                // If the Id is not a valid Guid, generate a new one - but need to be carefull as emptySection has Id = "emptySection"
+                instanceId = Guid.NewGuid();
+            }
         }
 
         internal void MoveTo(ICanvasSection newSection, ICanvasColumn newColumn)

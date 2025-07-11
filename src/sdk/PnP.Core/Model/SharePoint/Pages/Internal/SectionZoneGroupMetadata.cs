@@ -34,5 +34,12 @@ namespace PnP.Core.Model.SharePoint
         {
             get; set;
         }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("isTitleEnabled")]
+        public bool? IsTitleEnabled
+        {
+            get; set;
+        }
     }
 }

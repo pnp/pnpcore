@@ -1242,7 +1242,6 @@ namespace PnP.Core.Model.SharePoint
                         var control = new SectionBackgroundControl
                         {
                             Order = controlOrder 
-
                         };
                         control.FromHtml(clientSideControl, false);
 
@@ -1251,7 +1250,19 @@ namespace PnP.Core.Model.SharePoint
 
                         AddControl(control);
                     }
+                    else if (controlType ==typeof(EmptySection))
+                    {
+                        var control = new EmptySection
+                        {
+                            Order = controlOrder
+                        };
+                        control.FromHtml(clientSideControl, false);
 
+                        // Handle control positioning in sections and columns
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
+
+                        AddControl(control);
+                    }
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
