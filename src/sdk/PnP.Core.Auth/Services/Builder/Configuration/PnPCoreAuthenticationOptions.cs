@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using PnP.Core.Auth;
 using PnP.Core.Services;
 
 namespace PnP.Core.Auth.Services.Builder.Configuration
@@ -221,7 +222,13 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// <summary>
     /// Options for the DeviceCodeAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationDeviceCodeOptions : PnPCoreAuthenticationBaseOptions { }
+    public class PnPCoreAuthenticationDeviceCodeOptions : PnPCoreAuthenticationBaseOptions 
+    {
+        /// <summary>
+        /// Action to notify the end user about the device code request
+        /// </summary>
+        public Action<DeviceCodeNotification> DeviceCodeVerification { get; set; }
+    }
 
     /// <summary>
     /// Options for the DeviceCodeAuthenticationProvider
