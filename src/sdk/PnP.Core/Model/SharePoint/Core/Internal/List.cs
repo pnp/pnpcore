@@ -1666,6 +1666,9 @@ namespace PnP.Core.Model.SharePoint
             listInfo.RootFolder.Properties.Values[reIndexKey] = searchVersion + 1;
 
             await listInfo.RootFolder.Properties.UpdateAsync().ConfigureAwait(false);
+
+            // Updating the list is required, otherwise the re-indexing of the list doesn't start (fixes issue 1656).
+            await listInfo.UpdateAsync().ConfigureAwait(false);
         }
 
         public void ReIndex()
