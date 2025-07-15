@@ -64,7 +64,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var timeZoneInfo = timeZoneId switch
             {
-                2 => TZConvert.GetTimeZoneInfo("UTC"), // (UTC) Dublin, Edinburgh, Lisbon, London
+                2 => TZConvert.GetTimeZoneInfo("GMT Standard Time"), // (UTC) Dublin, Edinburgh, Lisbon, London
                 3 => TZConvert.GetTimeZoneInfo("Romance Standard Time"), // (UTC+01:00) Brussels, Copenhagen, Madrid, Paris
                 4 => TZConvert.GetTimeZoneInfo("W. Europe Standard Time"), // (UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
                 5 => TZConvert.GetTimeZoneInfo("GTB Standard Time"), // (UTC+02:00) Athens, Bucharest
