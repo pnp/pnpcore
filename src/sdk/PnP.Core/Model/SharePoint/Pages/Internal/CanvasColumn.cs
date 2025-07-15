@@ -14,6 +14,7 @@ namespace PnP.Core.Model.SharePoint
         internal const string ControlDataAttribute = "data-sp-controldata";
         private int? zoneEmphasis;
         private bool? isLayoutReflowOnTop;
+        private ZoneReflowStrategy? zoneReflowStrategy;
         private readonly string DataVersion = "1.0";
         #endregion
 
@@ -139,7 +140,25 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Gets or sets the strategy used to reflow content within a zone.
+        /// </summary>
+        public ZoneReflowStrategy? ZoneReflowStrategy
+        {
+            get
+            {
+                if(Section.Type == CanvasSectionTemplate.FlexibleLayoutSection || Section.Type == CanvasSectionTemplate.FlexibleLayoutVerticalSection)
+                    return zoneReflowStrategy;
+                else
+                    return null;
+            }
+
+            set
+            {
+                zoneReflowStrategy=value;
+            }
+        }
         #endregion
 
         #region public methods

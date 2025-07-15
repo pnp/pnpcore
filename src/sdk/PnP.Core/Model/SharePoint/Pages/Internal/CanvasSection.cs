@@ -34,7 +34,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="page"><see cref="IPage"/> instance that holds this section</param>
         /// <param name="canvasSectionTemplate">Type of section to create</param>
         /// <param name="order">Order of this section in the collection of sections on the page</param>
-        internal CanvasSection(IPage page, CanvasSectionTemplate canvasSectionTemplate, float order)
+        /// <param name="zoneReflowStrategy">Optional reflow strategy for the Flexible Layout section</param>
+        internal CanvasSection(IPage page, CanvasSectionTemplate canvasSectionTemplate, float order, ZoneReflowStrategy? zoneReflowStrategy=null)
         {
             if (page == null)
             {
@@ -93,6 +94,13 @@ namespace PnP.Core.Model.SharePoint
                 case CanvasSectionTemplate.TwoColumnRightVerticalSection:
                     Columns.Add(new CanvasColumn(this, 1, 4, 1));
                     Columns.Add(new CanvasColumn(this, 2, 8, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    break;
+                case CanvasSectionTemplate.FlexibleLayoutSection:
+                    Columns.Add(new CanvasColumn(this, 1, 100) { ZoneReflowStrategy= zoneReflowStrategy });
+                    break;
+                case CanvasSectionTemplate.FlexibleLayoutVerticalSection:
+                    Columns.Add(new CanvasColumn(this, 1, 100) { ZoneReflowStrategy = zoneReflowStrategy });
                     Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 default:

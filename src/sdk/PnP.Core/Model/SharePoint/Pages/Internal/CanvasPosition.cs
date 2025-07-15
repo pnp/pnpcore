@@ -43,6 +43,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets JsonProperty "isLayoutReflowOnTop"
         /// </summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("isLayoutReflowOnTop")]
         public bool? IsLayoutReflowOnTop { get; set; }
     }

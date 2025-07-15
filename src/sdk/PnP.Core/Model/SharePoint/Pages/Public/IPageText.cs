@@ -22,5 +22,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public new Type Type { get; }
 
+        /// <summary>
+        /// Flexible layout position of the control
+        /// </summary>  
+        public ControlFlexLayoutPosition FlexibleLayoutPosition { get; set; }
+
     }
 }

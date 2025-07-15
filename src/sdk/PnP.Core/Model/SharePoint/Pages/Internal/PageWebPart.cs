@@ -22,6 +22,55 @@ namespace PnP.Core.Model.SharePoint
         internal const string WebPartHtmlPropertiesAttribute = "data-sp-htmlproperties";
 
         private string propertiesJson;
+
+        public ControlFlexLayoutPosition FlexibleLayoutPosition
+        {
+            get
+            {
+                if (SpControlData == null || SpControlData.FlexibleLayoutPosition == null)
+                {
+                    return null;
+                }
+
+                return new ControlFlexLayoutPosition
+                {
+                    XPos = SpControlData.FlexibleLayoutPosition.LG.X,
+                    YPos = SpControlData.FlexibleLayoutPosition.LG.Y,
+                    Width = SpControlData.FlexibleLayoutPosition.LG.W,
+                    Height = SpControlData.FlexibleLayoutPosition.LG.H,
+                    wpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
+                };
+            }
+            set
+            {
+                if (value != null)
+                {
+                    if (SpControlData == null)
+                    {
+                        SpControlData = new WebPartControlData();
+                    }
+                    SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
+                    {
+                        GroupId = value.wpGroupId,
+                        LG = new CanvasControlFlexibleLayoutPositionLG
+                        {
+                            X = value.XPos,
+                            Y = value.YPos,
+                            W = value.Width,
+                            H = value.Height
+                        }
+                    };
+                }
+                else
+                {
+                    if (SpControlData != null)
+                    {
+                        SpControlData.FlexibleLayoutPosition = null;
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region construction
@@ -264,6 +313,7 @@ namespace PnP.Core.Model.SharePoint
                     controlData.AddedFromPersistedData = SpControlData.AddedFromPersistedData;
                     controlData.ReservedHeight = SpControlData.ReservedHeight;
                     controlData.ReservedWidth = SpControlData.ReservedWidth;
+                    controlData.FlexibleLayoutPosition = SpControlData?.FlexibleLayoutPosition;
                 }
                 else
                 {
@@ -273,7 +323,14 @@ namespace PnP.Core.Model.SharePoint
                         controlData.AddedFromPersistedData = true;
                     }
                 }
-
+                if (column.ZoneReflowStrategy.HasValue)
+                {
+                    controlData.ZoneReflowStrategy = new CanvasColumnZoneReflowStrategy { Axis = column.ZoneReflowStrategy.Value };
+                }
+                else
+                {
+                    controlData.ZoneReflowStrategy = null;
+                }
                 controlData.Emphasis = new SectionEmphasis()
                 {
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,

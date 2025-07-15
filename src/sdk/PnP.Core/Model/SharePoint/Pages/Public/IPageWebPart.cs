@@ -96,5 +96,10 @@ namespace PnP.Core.Model.SharePoint
         /// If this webpart is used inline in a text editor then this property points to the editor using it
         /// </summary>
         public string RichTextEditorInstanceId { get; set; }
+
+        /// <summary>
+        /// Flexible layout position of the control
+        /// </summary>  
+        public ControlFlexLayoutPosition FlexibleLayoutPosition { get; set; }
     }
 }
