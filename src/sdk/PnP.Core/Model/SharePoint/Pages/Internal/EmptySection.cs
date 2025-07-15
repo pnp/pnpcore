@@ -12,9 +12,14 @@ namespace PnP.Core.Model.SharePoint
     {
         public EmptySection() : base()
         {
-            var emptyJson = JsonSerializer.Deserialize<JsonElement>("{}");
-
             controlType = 1; // emptySection
+        }
+
+        public EmptySection(ICanvasSection Section, ICanvasColumn Column) : base()
+        {
+            controlType = 1; // emptySection
+            section = Section;
+            column = Column;
         }
 
         /// <summary>
