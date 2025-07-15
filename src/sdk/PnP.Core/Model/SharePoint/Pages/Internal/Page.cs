@@ -1273,7 +1273,7 @@ namespace PnP.Core.Model.SharePoint
                         control.FromHtml(clientSideControl, false);
 
                         // Handle control positioning in sections and columns
-                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata, control.SpControlData?.ZoneReflowStrategy?.Axis);
 
                         AddControl(control);
                     }
