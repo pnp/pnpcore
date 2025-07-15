@@ -162,28 +162,9 @@ namespace PnP.Core.Model.SharePoint
             // if a section does not contain a control we still need to render it, otherwise it get's "lost"
             if (!controlWrittenToSection)
             {
-                // Obtain the json data
-                var clientSideCanvasPosition = new CanvasData()
-                {
-                    Position = new CanvasPosition()
-                    {
-                        ZoneIndex = Section.Order,
-                        SectionIndex = Order,
-                        SectionFactor = ColumnFactor,
-                        LayoutIndex = LayoutIndex,
-                        ZoneId = ZoneId,
-                        IsLayoutReflowOnTop = IsLayoutReflowOnTop,
-                    },
-
-                    Emphasis = new SectionEmphasis()
-                    {
-                        ZoneEmphasis = VerticalSectionEmphasis ?? Section.ZoneEmphasis,
-                    }
-                };
-
-                var jsonControlData = JsonSerializer.Serialize(clientSideCanvasPosition);
-
-                html.Append($@"<div {CanvasControlAttribute}="""" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}""></div>");
+                var emptySection = new EmptySection(Section, this);
+                controlIndex++;
+                html.Append(emptySection.ToHtml(controlIndex));
             }
 
             return html.ToString();
