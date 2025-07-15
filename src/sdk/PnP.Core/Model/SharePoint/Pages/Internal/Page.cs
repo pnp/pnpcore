@@ -1431,6 +1431,10 @@ namespace PnP.Core.Model.SharePoint
                         {
                             section.Type = CanvasSectionTemplate.OneColumnFullWidth;
                         }
+                        else if (section.Columns[0].ColumnFactor == 100)
+                        {
+                            section.Type = CanvasSectionTemplate.FlexibleLayoutSection;
+                        }
                         else
                         {
                             section.Type = CanvasSectionTemplate.OneColumn;
@@ -1460,7 +1464,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (section.Columns.Count == 2)
                     {
-                        if (section.Type == CanvasSectionTemplate.FlexibleLayoutSection)
+                        if (section.Columns.Any(c=>c.ColumnFactor ==100))
                             section.Type = CanvasSectionTemplate.FlexibleLayoutVerticalSection;
                         else
                             section.Type = CanvasSectionTemplate.OneColumnVerticalSection;
@@ -3025,7 +3029,8 @@ namespace PnP.Core.Model.SharePoint
                         Controls.Add(webPart);
                     }
                 }
-                pageText.FlexibleLayoutPosition = controlFlexLayoutPosition;
+                if(controlFlexLayoutPosition != null)
+                    pageText.FlexibleLayoutPosition = controlFlexLayoutPosition;
             }
         }
 
@@ -3034,7 +3039,8 @@ namespace PnP.Core.Model.SharePoint
             if (control is PageWebPart pageWebPart)
             {
                 // Set the flexible layout position if available
-                pageWebPart.FlexibleLayoutPosition = controlFlexLayoutPosition;
+                if (controlFlexLayoutPosition != null)
+                    pageWebPart.FlexibleLayoutPosition = controlFlexLayoutPosition;
             }
         }
 
