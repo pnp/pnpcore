@@ -233,7 +233,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
         /// <param name="order">Order of the control in the given section</param>
-        public void AddControl(ICanvasControl control, ICanvasColumn column, int order);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasColumn column, int order, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Removes the set page header by setting the page banner web part to "Plain" mode

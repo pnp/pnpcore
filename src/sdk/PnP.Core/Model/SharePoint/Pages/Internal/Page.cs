@@ -893,7 +893,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
         /// <param name="order">Order of the control in the given section</param>
-        public void AddControl(ICanvasControl control, ICanvasColumn column, int order)
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasColumn column, int order, ControlFlexLayoutPosition controlFlexLayoutPosition = null)
         {
             if (control == null)
             {
@@ -907,6 +908,9 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).section = column.Section;
             (control as CanvasControl).column = column;
             control.Order = order;
+
+            ProcessPageTextInlineControls(control, controlFlexLayoutPosition);
+            ProcessPageWebPartControl(control, controlFlexLayoutPosition);
 
             Controls.Add(control);
         }

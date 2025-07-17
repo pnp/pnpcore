@@ -198,8 +198,30 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>HTML representation of the client side web part</returns>
         public override string ToHtml(float controlIndex)
         {
-            WebPartControlData controlData = new() {
-                ControlType = controlType, 
+            BuildControlData(controlIndex);
+            
+            StringBuilder html = new StringBuilder();
+            
+                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
+                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
+                html.Append($@"<div {WebPartComponentIdAttribute}=""""></div>");
+                html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
+                RenderHtmlProperties(ref html);
+                html.Append("</div>");
+                html.Append("</div>");
+                html.Append("</div>");
+            
+            return html.ToString();
+        }
+
+        /// <summary>
+        /// Builds Control attributes based on current settings, also used by pnpframework
+        /// </summary>
+        public void BuildControlData(float controlIndex)
+        {
+            WebPartControlData controlData = new()
+            {
+                ControlType = controlType,
                 Id = InstanceId.ToString("D"),
                 WebPartId = WebPartId,
                 Emphasis = new SectionEmphasis
@@ -224,31 +246,22 @@ namespace PnP.Core.Model.SharePoint
                 Title = Title,
                 Description = Description,
                 DataVersion = DataVersion,
-                Properties = "jsonPropsToReplacePnPRules", 
-                DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", 
-                DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", 
-                ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" 
+                Properties = "jsonPropsToReplacePnPRules",
+                DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules",
+                DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules",
+                ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules"
             };
-            
-            jsonControlData = JsonSerializer.Serialize(controlData);
+
             JsonWebPartData = JsonSerializer.Serialize(webpartData);
             JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
             JsonWebPartData = JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", ServerProcessedContent.ToString());
-            
-            StringBuilder html = new StringBuilder();
-            
-                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
-                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
-                html.Append($@"<div {WebPartComponentIdAttribute}=""""></div>");
-                html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
-                RenderHtmlProperties(ref html);
-                html.Append("</div>");
-                html.Append("</div>");
-                html.Append("</div>");
-            
-            return html.ToString();
+
+            jsonControlData = JsonSerializer.Serialize(controlData);
         }
 
+        #endregion
+
+        #region Internal and private methods
         /// <summary>
         /// Overrideable method that allows inheriting webparts to control the HTML rendering
         /// </summary>
@@ -270,9 +283,7 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
         }
-        #endregion
 
-        #region Internal and private methods
         internal override void FromHtml(IElement element, bool isHeader)
         {
             base.FromHtml(element, isHeader);
@@ -390,62 +401,66 @@ namespace PnP.Core.Model.SharePoint
 
             propertiesJson = parsedJson.ToString();
 
-            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))
-            {
-                if (webPartData.TryGetProperty("properties", out JsonElement properties))
-                {
-                    Properties = properties;
-                }
+            JsonElement wpConfig = default;
+            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData1))
+                wpConfig = webPartData1;
 
-                if (webPartData.TryGetProperty("dataVersion", out JsonElement dataVersion))
-                {
-                    this.dataVersion = dataVersion.GetString().Trim('"');
-                }
-
-                if (webPartData.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
-                {
-                    ServerProcessedContent = serverProcessedContent;
-                }
-
-                if (webPartData.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
-                {
-                    DynamicDataPaths = dynamicDataPaths;
-                }
-
-                if (webPartData.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
-                {
-                    DynamicDataValues = dynamicDataValues;
-                }
-            }
-            else
+            if (default(JsonElement).Equals(wpConfig))
             {
                 if (parsedJson.TryGetProperty("properties", out JsonElement properties))
+                {
+                    wpConfig = properties;
+                }
+                else
+                {
+                    wpConfig = parsedJson;
+                }
+            }
+
+            if (!default(JsonElement).Equals(wpConfig))
+            {
+                if (wpConfig.TryGetProperty("properties", out JsonElement properties))
                 {
                     Properties = properties;
                 }
                 else
                 {
-                    Properties = parsedJson;
+                    Properties = wpConfig;
                 }
 
-                if (parsedJson.TryGetProperty("dataVersion", out JsonElement dataVersion))
+                if (wpConfig.TryGetProperty("dataVersion", out JsonElement dataVersion))
                 {
                     this.dataVersion = dataVersion.GetString().Trim('"');
                 }
 
-                if (parsedJson.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
+                if (wpConfig.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
                 {
                     ServerProcessedContent = serverProcessedContent;
                 }
 
-                if (parsedJson.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
+                if (wpConfig.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
                 {
                     DynamicDataPaths = dynamicDataPaths;
                 }
 
-                if (parsedJson.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
+                if (wpConfig.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
                 {
                     DynamicDataValues = dynamicDataValues;
+                }
+
+                if (parsedJson.TryGetProperty("flexibleLayoutPosition", out JsonElement flexibleLayoutPosition))
+                {
+                    FlexibleLayoutPosition = new ControlFlexLayoutPosition
+                    {
+                        XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
+                        YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
+                        Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
+                        Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
+                    };
+                    if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
+                    {
+                        FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
+                    }
                 }
             }
         }

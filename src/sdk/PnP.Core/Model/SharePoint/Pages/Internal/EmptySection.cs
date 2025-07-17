@@ -41,6 +41,19 @@ namespace PnP.Core.Model.SharePoint
         #region public methods
         public override string ToHtml(float controlIndex)
         {
+            BuildControlData(controlIndex);
+
+            StringBuilder html = new StringBuilder();
+            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
+            html.Append("</div>");
+            return html.ToString();
+        }
+
+        /// <summary>
+        /// Builds Control attributes based on current settings, also used by pnpframework
+        /// </summary>
+        public void BuildControlData(float controlIndex)
+        {
             CanvasControlData controlData = new CanvasControlData
             {
                 ControlType = ControlType,
@@ -84,11 +97,6 @@ namespace PnP.Core.Model.SharePoint
             }
 
             jsonControlData = JsonSerializer.Serialize(controlData);
-
-            StringBuilder html = new StringBuilder();
-            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
-            html.Append("</div>");
-            return html.ToString();
         }
         #endregion
 

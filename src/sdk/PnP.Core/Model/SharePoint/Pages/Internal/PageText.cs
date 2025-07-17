@@ -129,6 +129,39 @@ namespace PnP.Core.Model.SharePoint
                 throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_ControlNotAllowedInFullWidthSection);
             }
 
+            BuildControlData(controlIndex);
+
+            try
+            {
+                var nodeList = new HtmlParser().ParseFragment(Text, null);
+                PreviewText = string.Concat(nodeList.Select(x => x.Text()));
+            }
+            catch { }
+
+            StringBuilder html = new StringBuilder();
+            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
+            html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
+            if (!string.IsNullOrEmpty(Text))
+            {
+                if (Regex.IsMatch(Text.Trim(), @"^<(p|h1|h2|h3|h4|ul|blockquote|pre)(\s+[^>]*)?>\s*", RegexOptions.IgnoreCase))
+                {
+                    html.Append(Text);
+                }
+                else
+                {
+                    html.Append($@"<p>{Text}</p>");
+                }
+            }
+            html.Append("</div>");
+            html.Append("</div>");
+            return html.ToString();
+        }
+
+        /// <summary>
+        /// Builds Control attributes based on current settings, also used by pnpframework
+        /// </summary>
+        public void BuildControlData(float controlIndex)
+        {
             // Obtain the json data
             TextControlData controlData = new TextControlData()
             {
@@ -182,33 +215,7 @@ namespace PnP.Core.Model.SharePoint
                     controlData.ZoneGroupMetadata.IconAlignment = "true";
                 }
             }
-
             jsonControlData = JsonSerializer.Serialize(controlData);
-
-            try
-            {
-                var nodeList = new HtmlParser().ParseFragment(Text, null);
-                PreviewText = string.Concat(nodeList.Select(x => x.Text()));
-            }
-            catch { }
-
-            StringBuilder html = new StringBuilder();
-            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
-            html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
-            if (!string.IsNullOrEmpty(Text))
-            {
-                if (Regex.IsMatch(Text.Trim(), @"^<(p|h1|h2|h3|h4|ul|blockquote|pre)(\s+[^>]*)?>\s*", RegexOptions.IgnoreCase))
-                {
-                    html.Append(Text);
-                }
-                else
-                {
-                    html.Append($@"<p>{Text}</p>");
-                }
-            }
-            html.Append("</div>");
-            html.Append("</div>");
-            return html.ToString();
         }
         #endregion
 

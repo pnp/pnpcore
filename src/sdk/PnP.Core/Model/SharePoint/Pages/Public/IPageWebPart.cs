@@ -101,5 +101,10 @@ namespace PnP.Core.Model.SharePoint
         /// Flexible layout position of the control
         /// </summary>  
         public ControlFlexLayoutPosition FlexibleLayoutPosition { get; set; }
+
+        /// <summary>
+        /// Builds Control attributes based on current settings, also used by pnpframework
+        /// </summary>
+        public void BuildControlData(float controlIndex);
     }
 }

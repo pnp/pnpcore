@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -14,5 +12,10 @@ namespace PnP.Core.Model.SharePoint
         /// Type of the control (= <see cref="IEmptySection"/>)
         /// </summary>
         public new Type Type { get; }
+
+        /// <summary>
+        /// Builds Control attributes based on current settings, also used by pnpframework
+        /// </summary>
+        public void BuildControlData(float controlIndex);
     }
 }
