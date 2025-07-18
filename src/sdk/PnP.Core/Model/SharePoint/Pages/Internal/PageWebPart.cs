@@ -417,6 +417,22 @@ namespace PnP.Core.Model.SharePoint
                     {
                         dataVersion = "2.2";
                     }
+                    else if (webPartType == DefaultWebPart.Hero)
+                    {
+                        dataVersion = "1.7";
+                    }
+                    else if (webPartType == DefaultWebPart.PageFields)
+                    {
+                        dataVersion = "1.1";
+                    }
+                    else if (webPartType == DefaultWebPart.MyDocuments)
+                    {
+                        dataVersion = "1.2";
+                    }
+                    else if (webPartType == DefaultWebPart.PageTitle)
+                    {
+                        dataVersion = "1.6";
+                    }
                 }
 
                 // Set the web part preview image url
@@ -573,6 +589,14 @@ namespace PnP.Core.Model.SharePoint
                     foreach (var property in htmlStrings.EnumerateObject())
                     {
                         htmlWriter.Append($@"<div data-sp-prop-name=""{property.Name}"">{property.Value.GetString()}</div>");
+                    }
+                }
+
+                if (ServerProcessedContent.TryGetProperty("componentDependencies", out JsonElement componentDependencies))
+                {
+                    foreach (var property in componentDependencies.EnumerateObject())
+                    {
+                        htmlWriter.Append($@"<div data-sp-prop-name=""{property.Name}"" data-sp-component-dependency=""{property.Value.GetString()}""></div>");
                     }
                 }
             }
@@ -796,68 +820,59 @@ namespace PnP.Core.Model.SharePoint
 
             propertiesJson = parsedJson.ToString();
 
-            JsonElement wpConfig = default;
-            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData1))
-                wpConfig = webPartData1;
-
-            if (default(JsonElement).Equals(wpConfig))
+            JsonElement wpConfigRoot = parsedJson;
+            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))
             {
-                if (parsedJson.TryGetProperty("properties", out JsonElement properties))
+                wpConfigRoot = webPartData;
+                if (wpConfigRoot.TryGetProperty("properties", out JsonElement properties))
                 {
-                    wpConfig = properties;
-                }
-                else
-                {
-                    wpConfig = parsedJson;
+                    Properties = properties;
                 }
             }
-
-            if (!default(JsonElement).Equals(wpConfig))
+            else
             {
-                if (wpConfig.TryGetProperty("properties", out JsonElement properties))
+                if (wpConfigRoot.TryGetProperty("properties", out JsonElement properties))
                 {
                     Properties = properties;
                 }
                 else
                 {
-                    Properties = wpConfig;
+                    Properties = parsedJson;
                 }
+            }
 
-                if (wpConfig.TryGetProperty("dataVersion", out JsonElement dataVersion))
+            if (wpConfigRoot.TryGetProperty("dataVersion", out JsonElement dataVersion))
+            {
+                this.dataVersion = dataVersion.GetString().Trim('"');
+            }
+
+            if (wpConfigRoot.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
+            {
+                ServerProcessedContent = serverProcessedContent;
+            }
+
+            if (wpConfigRoot.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
+            {
+                DynamicDataPaths = dynamicDataPaths;
+            }
+
+            if (wpConfigRoot.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
+            {
+                DynamicDataValues = dynamicDataValues;
+            }
+
+            if (wpConfigRoot.TryGetProperty("flexibleLayoutPosition", out JsonElement flexibleLayoutPosition))
+            {
+                FlexibleLayoutPosition = new ControlFlexLayoutPosition
                 {
-                    this.dataVersion = dataVersion.GetString().Trim('"');
-                }
-
-                if (wpConfig.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
+                    XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
+                    YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
+                    Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
+                    Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
+                };
+                if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
                 {
-                    ServerProcessedContent = serverProcessedContent;
-                }
-
-                if (wpConfig.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
-                {
-                    DynamicDataPaths = dynamicDataPaths;
-                }
-
-                if (wpConfig.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
-                {
-                    DynamicDataValues = dynamicDataValues;
-                }
-
-                //zoneGroupMetadata
-
-                if (parsedJson.TryGetProperty("flexibleLayoutPosition", out JsonElement flexibleLayoutPosition))
-                {
-                    FlexibleLayoutPosition = new ControlFlexLayoutPosition
-                    {
-                        XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
-                        YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
-                        Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
-                        Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
-                    };
-                    if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
-                    {
-                        FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
-                    }
+                    FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
                 }
             }
         }

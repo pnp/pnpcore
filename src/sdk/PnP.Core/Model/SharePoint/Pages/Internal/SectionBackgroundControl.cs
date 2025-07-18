@@ -247,8 +247,6 @@ namespace PnP.Core.Model.SharePoint
                 Description = Description,
                 DataVersion = DataVersion,
                 Properties = "jsonPropsToReplacePnPRules",
-                DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules",
-                DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules",
                 ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules"
             };
 
@@ -401,66 +399,59 @@ namespace PnP.Core.Model.SharePoint
 
             propertiesJson = parsedJson.ToString();
 
-            JsonElement wpConfig = default;
-            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData1))
-                wpConfig = webPartData1;
-
-            if (default(JsonElement).Equals(wpConfig))
+            JsonElement wpConfigRoot = parsedJson;
+            if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))
             {
-                if (parsedJson.TryGetProperty("properties", out JsonElement properties))
+                wpConfigRoot = webPartData;
+                if (wpConfigRoot.TryGetProperty("properties", out JsonElement properties))
                 {
-                    wpConfig = properties;
-                }
-                else
-                {
-                    wpConfig = parsedJson;
+                    Properties = properties;
                 }
             }
-
-            if (!default(JsonElement).Equals(wpConfig))
+            else
             {
-                if (wpConfig.TryGetProperty("properties", out JsonElement properties))
+                if (wpConfigRoot.TryGetProperty("properties", out JsonElement properties))
                 {
                     Properties = properties;
                 }
                 else
                 {
-                    Properties = wpConfig;
+                    Properties = parsedJson;
                 }
+            }
 
-                if (wpConfig.TryGetProperty("dataVersion", out JsonElement dataVersion))
-                {
-                    this.dataVersion = dataVersion.GetString().Trim('"');
-                }
+            if (wpConfigRoot.TryGetProperty("dataVersion", out JsonElement dataVersion))
+            {
+                this.dataVersion = dataVersion.GetString().Trim('"');
+            }
 
-                if (wpConfig.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
-                {
-                    ServerProcessedContent = serverProcessedContent;
-                }
+            if (wpConfigRoot.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
+            {
+                ServerProcessedContent = serverProcessedContent;
+            }
 
-                if (wpConfig.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
-                {
-                    DynamicDataPaths = dynamicDataPaths;
-                }
+            if (wpConfigRoot.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
+            {
+                DynamicDataPaths = dynamicDataPaths;
+            }
 
-                if (wpConfig.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
-                {
-                    DynamicDataValues = dynamicDataValues;
-                }
+            if (wpConfigRoot.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
+            {
+                DynamicDataValues = dynamicDataValues;
+            }
 
-                if (parsedJson.TryGetProperty("flexibleLayoutPosition", out JsonElement flexibleLayoutPosition))
+            if (wpConfigRoot.TryGetProperty("flexibleLayoutPosition", out JsonElement flexibleLayoutPosition))
+            {
+                FlexibleLayoutPosition = new ControlFlexLayoutPosition
                 {
-                    FlexibleLayoutPosition = new ControlFlexLayoutPosition
-                    {
-                        XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
-                        YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
-                        Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
-                        Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
-                    };
-                    if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
-                    {
-                        FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
-                    }
+                    XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
+                    YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
+                    Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
+                    Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
+                };
+                if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
+                {
+                    FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
                 }
             }
         }
