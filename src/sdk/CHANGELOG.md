@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved page parsing robustness when wrongly decoded quotes #1658 [singingknight - Per Jakobsen]
 - Map dublin timezone correctly #1665 [tikki100 - Oliver Fast]
 - Page API: Escape JSON from the Property value #1674 [PedroMordeP - Pedro Monte]
+- Fix #1656: IList.ReIndexAsync() has no effect. #1677 [lucmoco - Luc Mo Costabella]
 
 ## [1.15]
 
