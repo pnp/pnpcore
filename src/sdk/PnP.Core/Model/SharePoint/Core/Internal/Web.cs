@@ -1863,8 +1863,7 @@ namespace PnP.Core.Model.SharePoint
                 case "Null":
                     {
                         return (key, null);
-                    }
-                    ;
+                    };
                 case "Edm.Double":
                     {
                         if (double.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double result))
@@ -1872,8 +1871,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Decimal":
                     {
                         if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out decimal result))
@@ -1881,8 +1879,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Float":
                     {
                         if (float.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out float result))
@@ -1890,8 +1887,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Int16":
                     {
                         if (short.TryParse(value, out short result))
@@ -1899,8 +1895,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Int32":
                     {
                         if (int.TryParse(value, out int result))
@@ -1908,8 +1903,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Int64":
                     {
                         if (long.TryParse(value, out long result))
@@ -1917,8 +1911,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Guid":
                     {
                         if (Guid.TryParse(value, out Guid result))
@@ -1926,8 +1919,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.Boolean":
                     {
                         if (bool.TryParse(value, out bool result))
@@ -1935,8 +1927,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.DateTime":
                     {
                         if (DateTime.TryParse(value, out DateTime result))
@@ -1944,8 +1935,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 case "Edm.DateTimeOffSet":
                     {
                         if (DateTimeOffset.TryParse(value, out DateTimeOffset result))
@@ -1953,8 +1943,7 @@ namespace PnP.Core.Model.SharePoint
                             return (key, result);
                         }
                         goto default;
-                    }
-                    ;
+                    };
                 default:
                     {
                         return (key, value);
