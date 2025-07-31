@@ -688,7 +688,7 @@ namespace PnP.Core.Model.SharePoint
                     // Check for at least one unescaped double quote
                     if (regexUnescaped.IsMatch(stringSnippet))
                     {
-                        // replace all double quotes with escaped double quotes
+                        // replace all unescaped double quotes with escaped double quotes
                         var escapedSnipped = regexUnescaped.Replace(stringSnippet, "\\\"");
 
                         // replace the original match with the escaped match
