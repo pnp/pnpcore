@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -3337,6 +3338,47 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the page
                 await newPage.DeleteAsync();
             }
+        }
+        #endregion
+
+        #region Miscellaneous
+        private static string CallEscapeJsonValues(string input)
+        {
+            var method = typeof(PageWebPart).GetMethod("EscapeJsonValues", BindingFlags.NonPublic | BindingFlags.Static);
+            return (string)method.Invoke(null, new object[] { input });
+        }
+
+        [TestMethod]
+        public void EscapeJsonValues_ReturnsUnchanged_WhenNoMatch()
+        {
+            string input = "{\"key\":\"value\"}";
+            string result = CallEscapeJsonValues(input);
+            Assert.AreEqual(input, result);
+        }
+
+        [TestMethod]
+        public void EscapeJsonValues_DoesNotReEscapeMalformedJson()
+        {
+            string input = "data-config-json=\\\"{\"key\":value with missing quote}\\\"";
+            string result = CallEscapeJsonValues(input);
+            Assert.AreEqual(input, result);
+        }
+
+        [TestMethod]
+        public void EscapeJsonValues_MultipleMatches()
+        {
+            string input = "a=\\\"{\"k1\":\"v1\"}\\\" b=\\\"{\"k2\":\"v2\"}\\\"";
+            string expected = "a=\\\"{\\\"k1\\\":\\\"v1\\\"}\\\" b=\\\"{\\\"k2\\\":\\\"v2\\\"}\\\"";
+            string result = CallEscapeJsonValues(input);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void EscapeJsonValues_AlreadyEscapedJson()
+        {
+            string input = "data-config-json=\\\"{\\\"key\\\":\\\"value\\\"}\\\"";
+            string result = CallEscapeJsonValues(input);
+            Assert.AreEqual(input, result);
         }
         #endregion
 
