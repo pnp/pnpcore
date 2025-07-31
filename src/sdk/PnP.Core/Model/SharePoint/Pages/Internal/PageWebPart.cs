@@ -573,6 +573,8 @@ namespace PnP.Core.Model.SharePoint
                 return;
             }
 
+            decodedWebPart = EscapeJsonValues(decodedWebPart);
+
             if (!SafeDeserializeDecoded(decodedWebPart, out var wpJObject))
             {
                 Title = "Failed to deserialize WebPart";
@@ -660,6 +662,45 @@ namespace PnP.Core.Model.SharePoint
             {
                 ACECardSize = ACECardSizeElement.GetString();
             }
+        }
+
+        /// <summary>
+        /// Escape JSON from the Property value
+        /// </summary>
+        /// <param name="decodedWebPart"></param>
+        /// <returns></returns>
+        private static string EscapeJsonValues(string decodedWebPart)
+        {
+            // regular expression to find a JSON string value (property with html content example: data-config-json=\"{ "k1":"v1", "k2":"{v2}", "k3": ["k4":"v4","k5":"v5"] }\" )
+            System.Text.RegularExpressions.Regex regex = new(@"\\""({"".+?})\\""", System.Text.RegularExpressions.RegexOptions.Singleline);
+            // get all matches
+            System.Text.RegularExpressions.MatchCollection matches = regex.Matches(decodedWebPart);
+            if (matches.Count > 0)
+            {
+                string jsonSnippet = string.Empty;
+                // iterate over all matches
+                foreach (System.Text.RegularExpressions.Match match in matches)
+                {
+                    jsonSnippet = match.Groups[1].Value;
+                    // Try to parse the JSON to see if it's valid
+                    try
+                    {
+                        _ = JsonDocument.Parse(jsonSnippet); // success = unescaped
+                    }
+                    catch
+                    {
+                        // Already escaped or malformed – don't re-escape
+                        continue;
+                    }
+
+                    // replace all double quotes with escaped double quotes
+                    var escapedSnipped = jsonSnippet.Replace("\"", "\\\"");
+                    // replace the original match with the escaped match
+                    decodedWebPart = decodedWebPart.Replace(jsonSnippet, escapedSnipped);
+                }
+            }
+
+            return decodedWebPart;
         }
 
         private static bool SafeDeserializeDecoded(string decodedWebPart, out JsonElement wpJObject)
