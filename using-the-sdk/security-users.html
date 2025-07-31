@@ -176,6 +176,10 @@ var nonExistingUsers = await context.Web.ValidateUsersAsync(userList);
 // and ValidUser2@contoso.onmicrosoft.com
 var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
 </code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Disabled users cannot be added as members to a SharePoint site. The  <code>ValidateUsers</code> and <code>ValidateAndEnsureUsers</code> methods verify the 'Enabled' or 'Disabled' status of users in Azure Active Directory (Azure AD), treating disabled users as non-existing. To access the 'enabled' property of a user, the application executing this method must be granted the <code>User.ReadBasic.All</code> API permission.&quot;</p>
+</div>
 <h2 id="granting-permissions-for-a-user-at-web-level">Granting permissions for a user at web level</h2>
 <p>Once a user is added you can directly permission the user by granting it one or more role definitions via one of the <code>AddRoleDefinitions</code> methods. You can also enumerate the roles a user has via the <code>GetRoleDefinitions</code> methods and remove granted roles via the <code>RemoveRoleDefinitions</code> methods. These methods are equivalent to using the methods provided via the <code>ISecurableObject</code> interface on <code>IWeb</code>.</p>
 <pre><code class="lang-csharp">var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
