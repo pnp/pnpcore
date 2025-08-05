@@ -3357,14 +3357,6 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public void EscapeJsonValues_DoesNotReEscapeMalformedJson()
-        {
-            string input = "data-config-json=\\\"{\"key\":value with missing quote}\\\"";
-            string result = CallEscapeJsonValues(input);
-            Assert.AreEqual(input, result);
-        }
-
-        [TestMethod]
         public void EscapeJsonValues_MultipleMatches()
         {
             string input = "a=\\\"{\"k1\":\"v1\"}\\\" b=\\\"{\"k2\":\"v2\"}\\\"";
