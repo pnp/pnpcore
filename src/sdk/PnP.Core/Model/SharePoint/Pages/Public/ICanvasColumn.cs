@@ -53,6 +53,11 @@ namespace PnP.Core.Model.SharePoint
         bool? IsLayoutReflowOnTop { get; }
 
         /// <summary>
+        /// Gets or sets the strategy used to reflow zones within a layout.
+        /// </summary>
+        ZoneReflowStrategy? ZoneReflowStrategy { get; set; }
+
+        /// <summary>
         /// Resets the column, used in scenarios where a section is changed from type (e.g. from 3 column to 2 column)
         /// </summary>
         /// <param name="order">Column order to set</param>

@@ -153,7 +153,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="order">Controls the order of the new section</param>
         /// <param name="zoneEmphasis">Zone emphasis (section background)</param>
         /// <param name="verticalSectionZoneEmphasis">Vertical Section Zone emphasis (section background)</param>
-        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, VariantThemeType zoneEmphasis, VariantThemeType verticalSectionZoneEmphasis = VariantThemeType.None);
+        /// <param name="zoneReflowStrategy">Optional <see cref="ZoneReflowStrategy"/> to define how the section should reflow in a responsive layout</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, VariantThemeType zoneEmphasis, VariantThemeType verticalSectionZoneEmphasis = VariantThemeType.None, ZoneReflowStrategy? zoneReflowStrategy = null);
 
         /// <summary>
         /// Adds a new section to your client side page
@@ -162,14 +163,16 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="order">Controls the order of the new section</param>
         /// <param name="zoneEmphasis">Zone emphasis (section background)</param>
         /// <param name="verticalSectionZoneEmphasis">Vertical Section Zone emphasis (section background)</param>
-        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, int zoneEmphasis, int? verticalSectionZoneEmphasis = null);
+        /// <param name="zoneReflowStrategy">Optional <see cref="ZoneReflowStrategy"/> to define how the section should reflow in a responsive layout</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, int zoneEmphasis, int? verticalSectionZoneEmphasis = null, ZoneReflowStrategy? zoneReflowStrategy = null);
 
         /// <summary>
         /// Adds a new section to your client side page
         /// </summary>
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
         /// <param name="order">Controls the order of the new section</param>
-        public void AddSection(CanvasSectionTemplate sectionTemplate, float order);
+        /// <param name="zoneReflowStrategy">Optional <see cref="ZoneReflowStrategy"/> to define how the section should reflow in a responsive layout</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, ZoneReflowStrategy? zoneReflowStrategy = null);
 
         /// <summary>
         /// Adds a new section to your client side page
@@ -188,21 +191,24 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new control to your client side page using the default <see cref="ICanvasSection"/>
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
-        public void AddControl(ICanvasControl control);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Adds a new control to your client side page using the default <see cref="ICanvasSection"/> using a given order
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="order">Order of the control in the default section</param>
-        public void AddControl(ICanvasControl control, int order);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, int order, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Adds a new control to your client side page in the given section
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="section"><see cref="ICanvasSection"/> that will hold the control. Control will end up in the <see cref="ICanvasSection.DefaultColumn"/>.</param>
-        public void AddControl(ICanvasControl control, ICanvasSection section);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasSection section, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Adds a new control to your client side page in the given section with a given order
@@ -210,14 +216,16 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="section"><see cref="ICanvasSection"/> that will hold the control. Control will end up in the <see cref="ICanvasSection.DefaultColumn"/>.</param>
         /// <param name="order">Order of the control in the given section</param>
-        public void AddControl(ICanvasControl control, ICanvasSection section, int order);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasSection section, int order, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Adds a new control to your client side page in the given section
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
-        public void AddControl(ICanvasControl control, ICanvasColumn column);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasColumn column, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Adds a new control to your client side page in the given section with a given order
@@ -225,7 +233,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
         /// <param name="order">Order of the control in the given section</param>
-        public void AddControl(ICanvasControl control, ICanvasColumn column, int order);
+        /// <param name="controlFlexLayoutPosition">Optional <see cref="ControlFlexLayoutPosition"/> to define the position of the control in a flexible layout</param>
+        public void AddControl(ICanvasControl control, ICanvasColumn column, int order, ControlFlexLayoutPosition controlFlexLayoutPosition = null);
 
         /// <summary>
         /// Removes the set page header by setting the page banner web part to "Plain" mode
