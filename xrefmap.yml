@@ -20581,6 +20581,18 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.CanvasSectionTemplate
   fullName: PnP.Core.Model.SharePoint.CanvasSectionTemplate
   nameWithType: CanvasSectionTemplate
+- uid: PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutSection
+  name: FlexibleLayoutSection
+  href: api/PnP.Core.Model.SharePoint.CanvasSectionTemplate.html#PnP_Core_Model_SharePoint_CanvasSectionTemplate_FlexibleLayoutSection
+  commentId: F:PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutSection
+  fullName: PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutSection
+  nameWithType: CanvasSectionTemplate.FlexibleLayoutSection
+- uid: PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutVerticalSection
+  name: FlexibleLayoutVerticalSection
+  href: api/PnP.Core.Model.SharePoint.CanvasSectionTemplate.html#PnP_Core_Model_SharePoint_CanvasSectionTemplate_FlexibleLayoutVerticalSection
+  commentId: F:PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutVerticalSection
+  fullName: PnP.Core.Model.SharePoint.CanvasSectionTemplate.FlexibleLayoutVerticalSection
+  nameWithType: CanvasSectionTemplate.FlexibleLayoutVerticalSection
 - uid: PnP.Core.Model.SharePoint.CanvasSectionTemplate.OneColumn
   name: OneColumn
   href: api/PnP.Core.Model.SharePoint.CanvasSectionTemplate.html#PnP_Core_Model_SharePoint_CanvasSectionTemplate_OneColumn
@@ -21964,6 +21976,77 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ValidationMessage
   nameWithType: CommonFieldOptions.ValidationMessage
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition
+  name: ControlFlexLayoutPosition
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html
+  commentId: T:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition
+  nameWithType: ControlFlexLayoutPosition
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_Height
+  commentId: P:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height
+  nameWithType: ControlFlexLayoutPosition.Height
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height*
+  name: Height
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_Height_
+  commentId: Overload:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Height
+  nameWithType: ControlFlexLayoutPosition.Height
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_Width
+  commentId: P:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width
+  nameWithType: ControlFlexLayoutPosition.Width
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width*
+  name: Width
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_Width_
+  commentId: Overload:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.Width
+  nameWithType: ControlFlexLayoutPosition.Width
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId
+  name: WpGroupId
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_WpGroupId
+  commentId: P:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId
+  nameWithType: ControlFlexLayoutPosition.WpGroupId
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId*
+  name: WpGroupId
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_WpGroupId_
+  commentId: Overload:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.WpGroupId
+  nameWithType: ControlFlexLayoutPosition.WpGroupId
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos
+  name: XPos
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_XPos
+  commentId: P:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos
+  nameWithType: ControlFlexLayoutPosition.XPos
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos*
+  name: XPos
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_XPos_
+  commentId: Overload:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.XPos
+  nameWithType: ControlFlexLayoutPosition.XPos
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos
+  name: YPos
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_YPos
+  commentId: P:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos
+  nameWithType: ControlFlexLayoutPosition.YPos
+- uid: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos*
+  name: YPos
+  href: api/PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.html#PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_YPos_
+  commentId: Overload:PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ControlFlexLayoutPosition.YPos
+  nameWithType: ControlFlexLayoutPosition.YPos
 - uid: PnP.Core.Model.SharePoint.ConvertToFormat
   name: ConvertToFormat
   href: api/PnP.Core.Model.SharePoint.ConvertToFormat.html
@@ -26439,6 +26522,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICanvasColumn.ZoneId
   nameWithType: ICanvasColumn.ZoneId
+- uid: PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy
+  name: ZoneReflowStrategy
+  href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html#PnP_Core_Model_SharePoint_ICanvasColumn_ZoneReflowStrategy
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy
+  fullName: PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy
+  nameWithType: ICanvasColumn.ZoneReflowStrategy
+- uid: PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy*
+  name: ZoneReflowStrategy
+  href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html#PnP_Core_Model_SharePoint_ICanvasColumn_ZoneReflowStrategy_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasColumn.ZoneReflowStrategy
+  nameWithType: ICanvasColumn.ZoneReflowStrategy
 - uid: PnP.Core.Model.SharePoint.ICanvasControl
   name: ICanvasControl
   href: api/PnP.Core.Model.SharePoint.ICanvasControl.html
@@ -29674,6 +29770,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
   nameWithType: IEffectiveInformationRightsManagementSettings.TemplateId
+- uid: PnP.Core.Model.SharePoint.IEmptySection
+  name: IEmptySection
+  href: api/PnP.Core.Model.SharePoint.IEmptySection.html
+  commentId: T:PnP.Core.Model.SharePoint.IEmptySection
+  fullName: PnP.Core.Model.SharePoint.IEmptySection
+  nameWithType: IEmptySection
+- uid: PnP.Core.Model.SharePoint.IEmptySection.BuildControlData(System.Single)
+  name: BuildControlData(Single)
+  href: api/PnP.Core.Model.SharePoint.IEmptySection.html#PnP_Core_Model_SharePoint_IEmptySection_BuildControlData_System_Single_
+  commentId: M:PnP.Core.Model.SharePoint.IEmptySection.BuildControlData(System.Single)
+  fullName: PnP.Core.Model.SharePoint.IEmptySection.BuildControlData(System.Single)
+  nameWithType: IEmptySection.BuildControlData(Single)
+- uid: PnP.Core.Model.SharePoint.IEmptySection.BuildControlData*
+  name: BuildControlData
+  href: api/PnP.Core.Model.SharePoint.IEmptySection.html#PnP_Core_Model_SharePoint_IEmptySection_BuildControlData_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEmptySection.BuildControlData
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEmptySection.BuildControlData
+  nameWithType: IEmptySection.BuildControlData
 - uid: PnP.Core.Model.SharePoint.IEventReceiverDefinition
   name: IEventReceiverDefinition
   href: api/PnP.Core.Model.SharePoint.IEventReceiverDefinition.html
@@ -41685,42 +41800,42 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IPage
   fullName: PnP.Core.Model.SharePoint.IPage
   nameWithType: IPage
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl)
-  name: AddControl(ICanvasControl)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl)
-  nameWithType: IPage.AddControl(ICanvasControl)
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn)
-  name: AddControl(ICanvasControl, ICanvasColumn)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasColumn)
-  nameWithType: IPage.AddControl(ICanvasControl, ICanvasColumn)
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,System.Int32)
-  name: AddControl(ICanvasControl, ICanvasColumn, Int32)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasColumn, System.Int32)
-  nameWithType: IPage.AddControl(ICanvasControl, ICanvasColumn, Int32)
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection)
-  name: AddControl(ICanvasControl, ICanvasSection)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasSection)
-  nameWithType: IPage.AddControl(ICanvasControl, ICanvasSection)
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,System.Int32)
-  name: AddControl(ICanvasControl, ICanvasSection, Int32)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasSection, System.Int32)
-  nameWithType: IPage.AddControl(ICanvasControl, ICanvasSection, Int32)
-- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
-  name: AddControl(ICanvasControl, Int32)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, System.Int32)
-  nameWithType: IPage.AddControl(ICanvasControl, Int32)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, ControlFlexLayoutPosition)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, ICanvasColumn, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasColumn, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, ICanvasColumn, ControlFlexLayoutPosition)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, ICanvasColumn, Int32, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_System_Int32_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasColumn, System.Int32, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, ICanvasColumn, Int32, ControlFlexLayoutPosition)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, ICanvasSection, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasSection, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, ICanvasSection, ControlFlexLayoutPosition)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, ICanvasSection, Int32, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_System_Int32_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasSection, System.Int32, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, ICanvasSection, Int32, ControlFlexLayoutPosition)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  name: AddControl(ICanvasControl, Int32, ControlFlexLayoutPosition)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_System_Int32_PnP_Core_Model_SharePoint_ControlFlexLayoutPosition_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32,PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, System.Int32, PnP.Core.Model.SharePoint.ControlFlexLayoutPosition)
+  nameWithType: IPage.AddControl(ICanvasControl, Int32, ControlFlexLayoutPosition)
 - uid: PnP.Core.Model.SharePoint.IPage.AddControl*
   name: AddControl
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_
@@ -41741,27 +41856,33 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl
   nameWithType: IPage.AddHeaderControl
-- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
-  name: AddSection(CanvasSectionTemplate, Single)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single)
-  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single)
-- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,PnP.Core.Model.SharePoint.VariantThemeType,PnP.Core.Model.SharePoint.VariantThemeType)
-  name: AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_PnP_Core_Model_SharePoint_VariantThemeType_PnP_Core_Model_SharePoint_VariantThemeType_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,PnP.Core.Model.SharePoint.VariantThemeType,PnP.Core.Model.SharePoint.VariantThemeType)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, PnP.Core.Model.SharePoint.VariantThemeType, PnP.Core.Model.SharePoint.VariantThemeType)
-  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType)
-- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Int32,System.Nullable{System.Int32})
-  name: AddSection(CanvasSectionTemplate, Single, Int32, Nullable<Int32>)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_System_Int32_System_Nullable_System_Int32__
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Int32,System.Nullable{System.Int32})
-  name.vb: AddSection(CanvasSectionTemplate, Single, Int32, Nullable(Of Int32))
-  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Int32, System.Nullable<System.Int32>)
-  fullName.vb: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Int32, System.Nullable(Of System.Int32))
-  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single, Int32, Nullable<Int32>)
-  nameWithType.vb: IPage.AddSection(CanvasSectionTemplate, Single, Int32, Nullable(Of Int32))
+- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,PnP.Core.Model.SharePoint.VariantThemeType,PnP.Core.Model.SharePoint.VariantThemeType,System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name: AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType, Nullable<ZoneReflowStrategy>)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_PnP_Core_Model_SharePoint_VariantThemeType_PnP_Core_Model_SharePoint_VariantThemeType_System_Nullable_PnP_Core_Model_SharePoint_ZoneReflowStrategy__
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,PnP.Core.Model.SharePoint.VariantThemeType,PnP.Core.Model.SharePoint.VariantThemeType,System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name.vb: AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType, Nullable(Of ZoneReflowStrategy))
+  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, PnP.Core.Model.SharePoint.VariantThemeType, PnP.Core.Model.SharePoint.VariantThemeType, System.Nullable<PnP.Core.Model.SharePoint.ZoneReflowStrategy>)
+  fullName.vb: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, PnP.Core.Model.SharePoint.VariantThemeType, PnP.Core.Model.SharePoint.VariantThemeType, System.Nullable(Of PnP.Core.Model.SharePoint.ZoneReflowStrategy))
+  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType, Nullable<ZoneReflowStrategy>)
+  nameWithType.vb: IPage.AddSection(CanvasSectionTemplate, Single, VariantThemeType, VariantThemeType, Nullable(Of ZoneReflowStrategy))
+- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Int32,System.Nullable{System.Int32},System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name: AddSection(CanvasSectionTemplate, Single, Int32, Nullable<Int32>, Nullable<ZoneReflowStrategy>)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_System_Int32_System_Nullable_System_Int32__System_Nullable_PnP_Core_Model_SharePoint_ZoneReflowStrategy__
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Int32,System.Nullable{System.Int32},System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name.vb: AddSection(CanvasSectionTemplate, Single, Int32, Nullable(Of Int32), Nullable(Of ZoneReflowStrategy))
+  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Int32, System.Nullable<System.Int32>, System.Nullable<PnP.Core.Model.SharePoint.ZoneReflowStrategy>)
+  fullName.vb: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Int32, System.Nullable(Of System.Int32), System.Nullable(Of PnP.Core.Model.SharePoint.ZoneReflowStrategy))
+  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single, Int32, Nullable<Int32>, Nullable<ZoneReflowStrategy>)
+  nameWithType.vb: IPage.AddSection(CanvasSectionTemplate, Single, Int32, Nullable(Of Int32), Nullable(Of ZoneReflowStrategy))
+- uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name: AddSection(CanvasSectionTemplate, Single, Nullable<ZoneReflowStrategy>)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_System_Nullable_PnP_Core_Model_SharePoint_ZoneReflowStrategy__
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single,System.Nullable{PnP.Core.Model.SharePoint.ZoneReflowStrategy})
+  name.vb: AddSection(CanvasSectionTemplate, Single, Nullable(Of ZoneReflowStrategy))
+  fullName: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Nullable<PnP.Core.Model.SharePoint.ZoneReflowStrategy>)
+  fullName.vb: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate, System.Single, System.Nullable(Of PnP.Core.Model.SharePoint.ZoneReflowStrategy))
+  nameWithType: IPage.AddSection(CanvasSectionTemplate, Single, Nullable<ZoneReflowStrategy>)
+  nameWithType.vb: IPage.AddSection(CanvasSectionTemplate, Single, Nullable(Of ZoneReflowStrategy))
 - uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.ICanvasSection)
   name: AddSection(ICanvasSection)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_ICanvasSection_
@@ -43178,6 +43299,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IPageText
   fullName: PnP.Core.Model.SharePoint.IPageText
   nameWithType: IPageText
+- uid: PnP.Core.Model.SharePoint.IPageText.BuildControlData(System.Single)
+  name: BuildControlData(Single)
+  href: api/PnP.Core.Model.SharePoint.IPageText.html#PnP_Core_Model_SharePoint_IPageText_BuildControlData_System_Single_
+  commentId: M:PnP.Core.Model.SharePoint.IPageText.BuildControlData(System.Single)
+  fullName: PnP.Core.Model.SharePoint.IPageText.BuildControlData(System.Single)
+  nameWithType: IPageText.BuildControlData(Single)
+- uid: PnP.Core.Model.SharePoint.IPageText.BuildControlData*
+  name: BuildControlData
+  href: api/PnP.Core.Model.SharePoint.IPageText.html#PnP_Core_Model_SharePoint_IPageText_BuildControlData_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageText.BuildControlData
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageText.BuildControlData
+  nameWithType: IPageText.BuildControlData
+- uid: PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition
+  name: FlexibleLayoutPosition
+  href: api/PnP.Core.Model.SharePoint.IPageText.html#PnP_Core_Model_SharePoint_IPageText_FlexibleLayoutPosition
+  commentId: P:PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition
+  fullName: PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition
+  nameWithType: IPageText.FlexibleLayoutPosition
+- uid: PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition*
+  name: FlexibleLayoutPosition
+  href: api/PnP.Core.Model.SharePoint.IPageText.html#PnP_Core_Model_SharePoint_IPageText_FlexibleLayoutPosition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageText.FlexibleLayoutPosition
+  nameWithType: IPageText.FlexibleLayoutPosition
 - uid: PnP.Core.Model.SharePoint.IPageText.PreviewText
   name: PreviewText
   href: api/PnP.Core.Model.SharePoint.IPageText.html#PnP_Core_Model_SharePoint_IPageText_PreviewText
@@ -43339,6 +43486,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IPageWebPart
   fullName: PnP.Core.Model.SharePoint.IPageWebPart
   nameWithType: IPageWebPart
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData(System.Single)
+  name: BuildControlData(Single)
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_BuildControlData_System_Single_
+  commentId: M:PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData(System.Single)
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData(System.Single)
+  nameWithType: IPageWebPart.BuildControlData(Single)
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData*
+  name: BuildControlData
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_BuildControlData_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.BuildControlData
+  nameWithType: IPageWebPart.BuildControlData
 - uid: PnP.Core.Model.SharePoint.IPageWebPart.Description
   name: Description
   href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_Description
@@ -43378,6 +43538,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPageWebPart.DynamicDataValues
   nameWithType: IPageWebPart.DynamicDataValues
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition
+  name: FlexibleLayoutPosition
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_FlexibleLayoutPosition
+  commentId: P:PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition
+  nameWithType: IPageWebPart.FlexibleLayoutPosition
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition*
+  name: FlexibleLayoutPosition
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_FlexibleLayoutPosition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.FlexibleLayoutPosition
+  nameWithType: IPageWebPart.FlexibleLayoutPosition
 - uid: PnP.Core.Model.SharePoint.IPageWebPart.HtmlProperties
   name: HtmlProperties
   href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_HtmlProperties
@@ -58320,6 +58493,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.WebOptions.Url
   nameWithType: WebOptions.Url
+- uid: PnP.Core.Model.SharePoint.ZoneReflowStrategy
+  name: ZoneReflowStrategy
+  href: api/PnP.Core.Model.SharePoint.ZoneReflowStrategy.html
+  commentId: T:PnP.Core.Model.SharePoint.ZoneReflowStrategy
+  fullName: PnP.Core.Model.SharePoint.ZoneReflowStrategy
+  nameWithType: ZoneReflowStrategy
+- uid: PnP.Core.Model.SharePoint.ZoneReflowStrategy.LeftToRight
+  name: LeftToRight
+  href: api/PnP.Core.Model.SharePoint.ZoneReflowStrategy.html#PnP_Core_Model_SharePoint_ZoneReflowStrategy_LeftToRight
+  commentId: F:PnP.Core.Model.SharePoint.ZoneReflowStrategy.LeftToRight
+  fullName: PnP.Core.Model.SharePoint.ZoneReflowStrategy.LeftToRight
+  nameWithType: ZoneReflowStrategy.LeftToRight
+- uid: PnP.Core.Model.SharePoint.ZoneReflowStrategy.TopToDown
+  name: TopToDown
+  href: api/PnP.Core.Model.SharePoint.ZoneReflowStrategy.html#PnP_Core_Model_SharePoint_ZoneReflowStrategy_TopToDown
+  commentId: F:PnP.Core.Model.SharePoint.ZoneReflowStrategy.TopToDown
+  fullName: PnP.Core.Model.SharePoint.ZoneReflowStrategy.TopToDown
+  nameWithType: ZoneReflowStrategy.TopToDown
 - uid: PnP.Core.Model.Teams
   name: PnP.Core.Model.Teams
   href: api/PnP.Core.Model.Teams.html
