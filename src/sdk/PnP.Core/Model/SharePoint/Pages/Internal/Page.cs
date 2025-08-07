@@ -45,7 +45,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder.QueryProperties(p => p.Properties, p => p.ServerRelativeUrl), p => p.ListItemEntityTypeFullName, p => p.Fields };
-        
+
         #region Construction
 
         internal Page(PnPContext context, IList pagesLibrary, IListItem pageListItem, PageLayoutType pageLayoutType = PageLayoutType.Article)
@@ -525,7 +525,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     foreach (var list in libraries)
                     {
-                        if (list.IsPropertyAvailable(p => p.Fields) && 
+                        if (list.IsPropertyAvailable(p => p.Fields) &&
                             list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null &&
                             // Verify this is the "real" pages library, sites supporting Viva Connections have a second pages library (named Announcements) used to
                             // store Viva Connections announcements
@@ -587,7 +587,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IPageText NewTextPart(string text = null)
         {
-            var textPart = new PageText(); 
+            var textPart = new PageText();
             if (!string.IsNullOrEmpty(text))
             {
                 textPart.Text = text;
@@ -654,7 +654,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="zoneEmphasis">Zone emphasis (section background)</param>
         /// <param name="verticalSectionZoneEmphasis">Vertical Section Zone emphasis (section background)</param>
         /// <param name="zoneReflowStrategy">for section with flexible layout define reflow strategy for webparts or group of webparts</param>
-        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, int zoneEmphasis, int? verticalSectionZoneEmphasis = null, ZoneReflowStrategy? zoneReflowStrategy=null)
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, int zoneEmphasis, int? verticalSectionZoneEmphasis = null, ZoneReflowStrategy? zoneReflowStrategy = null)
         {
             var section = new CanvasSection(this, sectionTemplate, order, zoneReflowStrategy)
             {
@@ -673,7 +673,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
         /// <param name="order">Controls the order of the new section</param>
         /// <param name="zoneReflowStrategy">for section with flexible layout define reflow strategy for webparts or group of webparts</param>
-        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, ZoneReflowStrategy? zoneReflowStrategy=null)
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, ZoneReflowStrategy? zoneReflowStrategy = null)
         {
             var section = new CanvasSection(this, sectionTemplate, order, zoneReflowStrategy);
             AddSection(section);
@@ -731,7 +731,7 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 var fullwidthSections = Sections.Where(p => p.Type == CanvasSectionTemplate.OneColumnFullWidth);
-                if(fullwidthSections.Count() > 1)
+                if (fullwidthSections.Count() > 1)
                 {
                     throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnFullWidthSectionExists);
                 }
@@ -1259,7 +1259,7 @@ namespace PnP.Core.Model.SharePoint
                     {
                         var control = new SectionBackgroundControl
                         {
-                            Order = controlOrder 
+                            Order = controlOrder
                         };
                         control.FromHtml(clientSideControl, false);
 
@@ -1268,7 +1268,7 @@ namespace PnP.Core.Model.SharePoint
 
                         AddControl(control);
                     }
-                    else if (controlType ==typeof(EmptySection))
+                    else if (controlType == typeof(EmptySection))
                     {
                         var control = new EmptySection
                         {
@@ -1479,7 +1479,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (section.Columns.Count == 2)
                     {
-                        if (section.Columns.Any(c=>c.ColumnFactor ==100))
+                        if (section.Columns.Any(c => c.ColumnFactor == 100))
                             section.Type = CanvasSectionTemplate.FlexibleLayoutVerticalSection;
                         else
                             section.Type = CanvasSectionTemplate.OneColumnVerticalSection;
@@ -1744,7 +1744,7 @@ namespace PnP.Core.Model.SharePoint
             var pageHeaderHtml = "";
             if (pageHeader != null)
             {
-                if(pageHeader.Type == PageHeaderType.Default && sections.Any(s => s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
+                if (pageHeader.Type == PageHeaderType.Default && sections.Any(s => s.Controls.Any(c => (c as PageWebPart)?.WebPartId?.Equals("cbe7b0a9-3504-44dd-a3a3-0e5cacd07788") == true)))
                 {
                     //Page created from code and Header was not set
                     SetPageTitleWebPartPageHeader();
@@ -2086,11 +2086,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}",
-                    p => p.ListItemAllFields.QueryProperties(p => p.All, 
+                    p => p.ListItemAllFields.QueryProperties(p => p.All,
                         p => p.ParentList.QueryProperties(
                             p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title)
                         )
-                    ), 
+                    ),
                     p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
         }
 
@@ -2601,7 +2601,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Already load the actual likes, assuming this will be needed in most cases and thus saving the roundtrip
-            return (await PageListItem.LikedByInformation.GetAsync(p => p.LikeCount, p => p.IsLikedByUser, p => p.LikedBy).ConfigureAwait(false));            
+            return (await PageListItem.LikedByInformation.GetAsync(p => p.LikeCount, p => p.IsLikedByUser, p => p.LikedBy).ConfigureAwait(false));
         }
 
         public ILikedByInformation GetLikedByInformation()
@@ -3017,10 +3017,10 @@ namespace PnP.Core.Model.SharePoint
                                    .Replace("{WebId}", PnPContext.Web.Id.ToString())
                                    .Replace("{ListId}", image.ListId.ToString())
                                    .Replace("{UniqueId}", image.UniqueId.ToString());
-            
+
             // Create the web part
             var webPart = NewWebPart();
-            (webPart as PageWebPart).WebPartId = WebPartEnumToId(DefaultWebPart.Image);            
+            (webPart as PageWebPart).WebPartId = WebPartEnumToId(DefaultWebPart.Image);
             webPart.PropertiesJson = inlineImageWebPart;
 
             return webPart;
@@ -3044,8 +3044,11 @@ namespace PnP.Core.Model.SharePoint
                         Controls.Add(webPart);
                     }
                 }
-                if(controlFlexLayoutPosition != null)
+
+                if (controlFlexLayoutPosition != null)
+                {
                     pageText.FlexibleLayoutPosition = controlFlexLayoutPosition;
+                }
             }
         }
 

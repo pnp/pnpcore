@@ -1559,6 +1559,176 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddFormattedText()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("AddFormattedText.aspx");
+
+                // adding sections to the page
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+                // Adding text control to the first section, first column
+                page.AddControl(page.NewTextPart("PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue((page.Controls[0] as IPageText).Text == "PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>");
+
+                // Delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EmptyCollapsibleSections()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IPage newPage = null;
+                try
+                {
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("EmptyCollapsibleSection.aspx");
+
+                    newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1);
+                    var section = newPage.Sections[0];
+                    section.DisplayName = "My Collapsible Section - expanded";
+                    section.Collapsible = true;
+                    section.IsExpanded = true;
+                    section.ZoneEmphasis = 2; // Can not set this for a vertical section by code
+
+                    newPage.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+                    var section1 = newPage.Sections[1];
+                    section1.DisplayName = "My Collapsible Section - collapsed";
+                    section1.Collapsible = true;
+                    section1.IsExpanded = false;
+
+                    newPage.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    var section2 = newPage.Sections[2];
+                    section2.DisplayName = "My Section";
+                    section2.Collapsible = false;
+                    section2.ZoneEmphasis = 2; // Can not set this for a vertical section by code
+
+                    // Persist the page
+                    await newPage.SaveAsync(pageName);
+
+                    // load the page again and verify
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    var createdPage = pages.First();
+
+                    // Verify we're reading back a flexible section
+                    Assert.IsTrue(createdPage.Sections[0].Collapsible == true);
+                    Assert.IsTrue(createdPage.Sections[0].IsExpanded == true);
+                    Assert.IsTrue(createdPage.Sections[1].Collapsible == true);
+                    Assert.IsTrue(createdPage.Sections[1].IsExpanded == false);
+                    Assert.IsTrue(createdPage.Sections[2].Collapsible == false);
+                    Assert.IsTrue(createdPage.Sections[2].IsExpanded == false);
+                }
+                finally
+                {
+                    await newPage.DeleteAsync();
+                }
+            }
+        }
+
+        #region Flexible layouts
+
+        [TestMethod]
+        public async Task CreateFlexLayoutPage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IPage newPage = null;
+                try
+                {
+                    Guid groupWP;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        groupWP = Guid.NewGuid();
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "GroupWP", groupWP.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        groupWP = new Guid(TestManager.GetProperties(context)["GroupWP"]);
+                    }
+
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("FlexLayoutPage1.aspx");
+
+                    var availableComponents = await newPage.AvailablePageComponentsAsync();
+                    var eventsWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == newPage.DefaultWebPartToWebPartId(DefaultWebPart.Events));
+
+                    newPage.AddSection(CanvasSectionTemplate.FlexibleLayoutVerticalSection, 1, zoneReflowStrategy: ZoneReflowStrategy.LeftToRight);
+                    var section = newPage.Sections[0];
+                    section.DisplayName = "My Collapsible Section";
+                    section.Collapsible = true;
+                    section.IsExpanded = true;
+                    section.ZoneEmphasis = 2; // Can not set this for a vertical section by code
+                    
+                    newPage.AddControl(newPage.NewTextPart("PnP Rocks 1!"), section.Columns[0], new ControlFlexLayoutPosition { XPos = 0, YPos = 0, Width = 20, Height = 3, WpGroupId = groupWP });
+                    newPage.AddControl(newPage.NewTextPart("PnP Rocks 2!"), section.Columns[0], new ControlFlexLayoutPosition { XPos = 10, YPos = 3, Width = 20, Height = 3, WpGroupId = groupWP });
+                    newPage.AddControl(newPage.NewWebPart(eventsWebPartComponent), section.Columns[0], new ControlFlexLayoutPosition { XPos = 0, YPos = 7, Width = 40, Height = 25 });
+                    newPage.AddControl(newPage.NewTextPart("PnP Rocks in Vertical!"), section.Columns[1]);
+
+                    newPage.AddSection(CanvasSectionTemplate.OneColumn, 2);
+                    newPage.AddControl(newPage.NewWebPart(eventsWebPartComponent), newPage.Sections[1].Columns[0]);
+
+                    // Persist the page
+                    await newPage.SaveAsync(pageName);
+
+                    // load the page again and verify
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    var createdPage = pages.First();
+
+                    // Verify we're reading back a flexible section
+                    Assert.IsTrue(createdPage.Sections[0].Type == CanvasSectionTemplate.FlexibleLayoutVerticalSection);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[0].ZoneReflowStrategy == ZoneReflowStrategy.LeftToRight);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[1].ZoneReflowStrategy == null);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[0].Controls.Count == 3);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[0].Controls[0] is IPageText);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[0].Controls[1] is IPageText);
+                    Assert.IsTrue(createdPage.Sections[0].Columns[0].Controls[2] is IPageWebPart);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as IPageText).FlexibleLayoutPosition.XPos == 0);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as IPageText).FlexibleLayoutPosition.YPos == 0);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as IPageText).FlexibleLayoutPosition.Width == 20);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as IPageText).FlexibleLayoutPosition.Height == 3);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as IPageText).FlexibleLayoutPosition.WpGroupId == groupWP);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as IPageText).FlexibleLayoutPosition.XPos == 10);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as IPageText).FlexibleLayoutPosition.YPos == 3);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as IPageText).FlexibleLayoutPosition.Width == 20);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as IPageText).FlexibleLayoutPosition.Height == 3);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as IPageText).FlexibleLayoutPosition.WpGroupId == groupWP);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as IPageWebPart).FlexibleLayoutPosition.XPos == 0);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as IPageWebPart).FlexibleLayoutPosition.YPos == 7);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as IPageWebPart).FlexibleLayoutPosition.Width == 40);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as IPageWebPart).FlexibleLayoutPosition.Height == 25);
+                    Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as IPageWebPart).FlexibleLayoutPosition.WpGroupId == null);
+                }
+                finally
+                {
+                    await newPage.DeleteAsync();
+                }
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Page Header handling
@@ -1843,32 +2013,40 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task AddFormattedText()
+        public async Task CustomPageHeaderNoImageTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var page = await context.Web.NewPageAsync();
-                string pageName = TestCommon.GetPnPSdkTestAssetName("AddFormattedText.aspx");
+                IPage newPage = null;
+                try
+                {
+                    newPage = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("CustomPageHeaderNoImageTest.aspx");
 
-                // adding sections to the page
-                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    newPage.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
+                    newPage.AddSection(CanvasSectionTemplate.OneColumnVerticalSection, 1);
+                    newPage.Sections[0].ZoneEmphasis = 1;
+                    newPage.AddSection(CanvasSectionTemplate.OneColumn, 2);
+                    newPage.Sections[1].ZoneEmphasis = 2;
 
-                // Adding text control to the first section, first column
-                page.AddControl(page.NewTextPart("PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>"), page.Sections[0].Columns[0]);
+                    // Save the page
+                    await newPage.SaveAsync(pageName);
 
-                // Save the page
-                await page.SaveAsync(pageName);
+                    // load page again
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    var page = pages.AsEnumerable().First();
 
-                // load page again
-                var pages = await context.Web.GetPagesAsync(pageName);
-                Assert.IsTrue(pages.Count == 1);
-                page = pages.AsEnumerable().First();
+                    Assert.IsTrue(pages.Count == 1);
+                    Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
 
-                Assert.IsTrue((page.Controls[0] as IPageText).Text == "PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>");
-
-                // Delete the page
-                await page.DeleteAsync();
+                    newPage = pages.AsEnumerable().First();
+                }
+                finally
+                {
+                    // delete the page
+                    await newPage.DeleteAsync();
+                }
             }
         }
 

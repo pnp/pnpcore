@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
                     YPos = SpControlData.FlexibleLayoutPosition.LG.Y,
                     Width = SpControlData.FlexibleLayoutPosition.LG.W,
                     Height = SpControlData.FlexibleLayoutPosition.LG.H,
-                    wpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
+                    WpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
                 };
             }
             set
@@ -51,7 +51,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                     SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
                     {
-                        GroupId = value.wpGroupId,
+                        GroupId = value.WpGroupId,
                         LG = new CanvasControlFlexibleLayoutPositionLG
                         {
                             X = value.XPos,
@@ -190,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region public methods
-       
+
         /// <summary>
         /// Returns a HTML representation of the client side web part
         /// </summary>
@@ -199,18 +199,18 @@ namespace PnP.Core.Model.SharePoint
         public override string ToHtml(float controlIndex)
         {
             BuildControlData(controlIndex);
-            
+
             StringBuilder html = new StringBuilder();
-            
-                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
-                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
-                html.Append($@"<div {WebPartComponentIdAttribute}=""""></div>");
-                html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
-                RenderHtmlProperties(ref html);
-                html.Append("</div>");
-                html.Append("</div>");
-                html.Append("</div>");
-            
+
+            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
+            html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
+            html.Append($@"<div {WebPartComponentIdAttribute}=""""></div>");
+            html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
+            RenderHtmlProperties(ref html);
+            html.Append("</div>");
+            html.Append("</div>");
+            html.Append("</div>");
+
             return html.ToString();
         }
 
@@ -285,7 +285,7 @@ namespace PnP.Core.Model.SharePoint
         internal override void FromHtml(IElement element, bool isHeader)
         {
             base.FromHtml(element, isHeader);
-                
+
             // Set/update dataVersion if it was provided as html attribute
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             if (!string.IsNullOrEmpty(webPartDataVersion))
@@ -451,7 +451,7 @@ namespace PnP.Core.Model.SharePoint
                 };
                 if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
                 {
-                    FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
+                    FlexibleLayoutPosition.WpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
                 }
             }
         }

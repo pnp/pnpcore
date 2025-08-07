@@ -30,9 +30,9 @@ namespace PnP.Core.Model.SharePoint
         public int Height { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique identifier for the WordPress group associated with the entity.
+        /// Gets or sets the unique identifier for the web part group associated with the entity.
         /// </summary>
-        public Guid? wpGroupId { get; set; }
+        public Guid? WpGroupId { get; set; }
 
     }
 }

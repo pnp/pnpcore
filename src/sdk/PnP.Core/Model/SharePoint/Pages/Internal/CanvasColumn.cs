@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
             Section = section ?? throw new ArgumentNullException(nameof(section));
             ColumnFactor = 12;
             Order = 0;
-            LayoutIndex = 1;            
+            LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, string zoneId = null)
@@ -148,7 +148,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if(Section.Type == CanvasSectionTemplate.FlexibleLayoutSection || Section.Type == CanvasSectionTemplate.FlexibleLayoutVerticalSection)
+                if (Section.Type == CanvasSectionTemplate.FlexibleLayoutSection || Section.Type == CanvasSectionTemplate.FlexibleLayoutVerticalSection)
                     return zoneReflowStrategy;
                 else
                     return null;
@@ -156,7 +156,7 @@ namespace PnP.Core.Model.SharePoint
 
             set
             {
-                zoneReflowStrategy=value;
+                zoneReflowStrategy = value;
             }
         }
         #endregion

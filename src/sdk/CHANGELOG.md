@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Support for reading Alerts [jansenbe - Bert Jansen]
 - Allow optional configuration of used SharePointRestClient and MicrosoftGraphClient #1659 [kola-tm]
+- Page API: support for flexible sections! #1682 [czullu - Christian Zuellig]
+- Page API: fix to retain empty, collapsible sections #1682 [czullu - Christian Zuellig]
+- Page API: fix to retain NoImage setting on custom page header #1682 [czullu - Christian Zuellig]
 
 ### Changed
 

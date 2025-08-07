@@ -21,17 +21,18 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if(SpControlData == null || SpControlData.FlexibleLayoutPosition == null)
+                if (SpControlData == null || SpControlData.FlexibleLayoutPosition == null)
                 {
                     return null;
                 }
 
-                return new ControlFlexLayoutPosition { 
-                    XPos = SpControlData.FlexibleLayoutPosition.LG.X, 
+                return new ControlFlexLayoutPosition
+                {
+                    XPos = SpControlData.FlexibleLayoutPosition.LG.X,
                     YPos = SpControlData.FlexibleLayoutPosition.LG.Y,
                     Width = SpControlData.FlexibleLayoutPosition.LG.W,
                     Height = SpControlData.FlexibleLayoutPosition.LG.H,
-                    wpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
+                    WpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
                 };
             }
             set
@@ -42,9 +43,10 @@ namespace PnP.Core.Model.SharePoint
                     {
                         SpControlData = new TextControlData();
                     }
+
                     SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
                     {
-                        GroupId = value.wpGroupId,
+                        GroupId = value.WpGroupId,
                         LG = new CanvasControlFlexibleLayoutPositionLG
                         {
                             X = value.XPos,

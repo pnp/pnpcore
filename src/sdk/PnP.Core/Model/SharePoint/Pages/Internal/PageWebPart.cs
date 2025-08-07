@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
                     YPos = SpControlData.FlexibleLayoutPosition.LG.Y,
                     Width = SpControlData.FlexibleLayoutPosition.LG.W,
                     Height = SpControlData.FlexibleLayoutPosition.LG.H,
-                    wpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
+                    WpGroupId = SpControlData.FlexibleLayoutPosition.GroupId
                 };
             }
             set
@@ -51,7 +51,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                     SpControlData.FlexibleLayoutPosition = new CanvasControlFlexibleLayoutPosition
                     {
-                        GroupId = value.wpGroupId,
+                        GroupId = value.WpGroupId,
                         LG = new CanvasControlFlexibleLayoutPositionLG
                         {
                             X = value.XPos,
@@ -910,7 +910,7 @@ namespace PnP.Core.Model.SharePoint
                 };
                 if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
                 {
-                    FlexibleLayoutPosition.wpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
+                    FlexibleLayoutPosition.WpGroupId = Guid.TryParse(groupId.GetString(), out var wpGroupId) ? wpGroupId : null;
                 }
             }
         }
