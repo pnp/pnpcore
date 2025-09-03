@@ -1655,6 +1655,7 @@ namespace PnP.Core.Model.SharePoint
                 currentSection.Collapsible = zoneGroupMetadata.Type == 1;
                 currentSection.SectionType = zoneGroupMetadata.Type;
                 currentSection.DisplayName = zoneGroupMetadata.DisplayName;
+                currentSection.HeadingLevel = zoneGroupMetadata.HeadingLevel;
                 currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
                 currentSection.ShowDividerLine = zoneGroupMetadata.ShowDividerLine;
                 if (zoneGroupMetadata.IconAlignment != null)
