@@ -23,6 +23,11 @@
         /// <summary>
         /// Global navigation logo
         /// </summary>
-        GlobalNavLogo = 3
+        GlobalNavLogo = 3,
+
+        /// <summary>
+        /// Footer background image
+        /// </summary>
+        FooterBackground = 4
     }
 }

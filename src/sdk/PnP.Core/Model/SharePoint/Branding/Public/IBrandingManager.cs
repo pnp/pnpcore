@@ -223,5 +223,81 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         void SetChromeOptionsBatch(IChromeOptions chromeOptions);
         #endregion
+
+        #region Fonts
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        List<IFontPackage> GetOutOfBoxFontPackages();
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<List<IFontPackage>> GetFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        List<IFontPackage> GetFontPackages();
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<List<IFontPackage>> GetSiteFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        List<IFontPackage> GetSiteFontPackages();
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetSiteFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch);
+
+        #endregion
     }
 }

@@ -813,7 +813,126 @@ namespace PnP.Core.Model.SharePoint
                 context.Web.SetSystemProperty(p => p.FooterLayout, chromeOptions.Footer.Layout);
             }
         }
+        #endregion
 
+        #region font
+
+        public async Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetOutOfBoxFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public List<IFontPackage> GetOutOfBoxFontPackages()
+        {
+            return GetOutOfBoxFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetOutOfBoxFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch)
+        {
+            return GetOutOfBoxFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IFontPackage>> GetFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public List<IFontPackage> GetFontPackages()
+        {
+            return GetFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch)
+        {
+            return GetFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IFontPackage>> GetSiteFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetSiteFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public List<IFontPackage> GetSiteFontPackages()
+        {
+            return GetSiteFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetSiteFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetSiteFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch)
+        {
+            return GetSiteFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetSiteFontPackagesApiCall()
+        {
+            return new ApiCall("_api/SiteFontPackages", ApiType.SPORest);
+        }
+
+        private static ApiCall BuildGetOutOfBoxFontPackagesApiCall()
+        {
+            return new ApiCall("_api/OutOfBoxFontPackages", ApiType.SPORest);
+        }
+
+        private static ApiCall BuildGetFontPackagesApiCall()
+        {
+            return new ApiCall("_api/FontPackages", ApiType.SPORest);
+        }
+
+        internal async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch, ApiCall apiCall)
+        {
+            // Since we're doing a raw batch request the processing of the batch response needs be implemented
+            apiCall.RawSingleResult = new List<IFontPackage>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessGetFontPackagesResponse(json, (List<IFontPackage>)apiCall.RawSingleResult);
+            };
+
+            // Add the request to the batch
+            var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchSingleResult<List<IFontPackage>>(batch, batchRequest.Id, (List<IFontPackage>)apiCall.RawSingleResult);
+        }
+
+
+        internal static void ProcessGetFontPackagesResponse(string jsonString, List<IFontPackage> fontPackageList)
+        {
+            var jDoc = JsonSerializer.Deserialize<JsonElement>(jsonString);
+            var results = jDoc.GetProperty("value").ValueKind == JsonValueKind.Null ? "[]" : jDoc.GetProperty("value").GetRawText();
+
+            var jsonFontPackageList = JsonSerializer.Deserialize<List<FontPackage>>(results);
+
+            foreach (var fontPackage in jsonFontPackageList)
+            {
+                fontPackageList.Add(fontPackage);
+            }
+        }
         #endregion
     }
 }

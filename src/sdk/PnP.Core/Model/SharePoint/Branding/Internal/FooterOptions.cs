@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -106,5 +107,53 @@ namespace PnP.Core.Model.SharePoint
             return menuStateWrapper;
         }
 
+        public async Task SetFooterBackgroundImageAsync(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
+        {
+            // Upload the image
+            IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
+            // Set the uploaded file as header background
+            await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.FooterBackground, SiteLogoAspect.Square, focalX, focalY), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+        }
+
+        public void SetFooterBackgroundImage(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
+        {
+            SetFooterBackgroundImageAsync(fileName, content, focalX, focalY, overwrite).GetAwaiter().GetResult();
+        }
+
+        public async Task ClearFooterBackgroundImageAsync()
+        {
+            await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall("", SiteLogoType.FooterBackground, SiteLogoAspect.Square, 0, 0), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+        }
+
+        public void ClearFooterBackgroundImage()
+        {
+            ClearFooterBackgroundImageAsync().GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildSetSiteLogoApiCall(string serverRelativeUrl, SiteLogoType type, SiteLogoAspect aspect, double focalX = 0, double focalY = 0)
+        {
+            string jsonBody;
+            if (type == SiteLogoType.FooterBackground)
+            {
+                jsonBody = JsonSerializer.Serialize(new
+                {
+                    relativeLogoUrl = serverRelativeUrl,
+                    type = (int)type,
+                    aspect = (int)aspect,
+                    focalx = focalX,
+                    focaly = focalY
+                });
+            }
+            else
+            {
+                jsonBody = JsonSerializer.Serialize(new
+                {
+                    relativeLogoUrl = serverRelativeUrl,
+                    type = (int)type,
+                    aspect = (int)aspect
+                });
+            }
+            return new ApiCall("_api/siteiconmanager/setsitelogo", ApiType.SPORest, jsonBody);
+        }
     }
 }
