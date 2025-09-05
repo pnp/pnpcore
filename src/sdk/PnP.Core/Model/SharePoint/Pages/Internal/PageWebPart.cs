@@ -903,10 +903,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 FlexibleLayoutPosition = new ControlFlexLayoutPosition
                 {
-                    XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetInt32(),
-                    YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetInt32(),
-                    Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetInt32(),
-                    Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetInt32()
+                    XPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("x").GetDouble(),
+                    YPos = flexibleLayoutPosition.GetProperty("lg").GetProperty("y").GetDouble(),
+                    Width = flexibleLayoutPosition.GetProperty("lg").GetProperty("w").GetDouble(),
+                    Height = flexibleLayoutPosition.GetProperty("lg").GetProperty("h").GetDouble()
                 };
                 if (flexibleLayoutPosition.TryGetProperty("groupId", out JsonElement groupId))
                 {
