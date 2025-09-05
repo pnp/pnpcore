@@ -24,6 +24,35 @@ namespace PnP.Core.Model.SharePoint
         FooterVariantThemeType Emphasis { get; set; }
 
         /// <summary>
+        /// specifies the alignment of links in the footer
+        /// </summary>
+        FooterLinkAlignment LinkAlignment { get; set; }
+        
+        /// <summary>
+        /// Specifies the available overlay color types that can be applied to header or footer.
+        /// </summary>
+        OverlayColorType OverlayColor { get; set; }
+        /// <summary>
+        /// Gets or sets the opacity level of the overlay [0-100].
+        /// </summary>
+        int OverlayOpacity { get; set; }
+
+        /// <summary>
+        /// Defines the possible directions for an overlay gradient layout.
+        /// </summary>
+        OverlayGradientDirectionType OverlayGradientDirection { get; set; }
+
+        /// <summary>
+        /// seesm to be alays -1
+        /// </summary>
+        int ColorIndexInLightMode { get; set; }
+
+        /// <summary>
+        /// seesm to be alays -1
+        /// </summary>
+        int ColorIndexInDarkMode { get; set; }
+
+        /// <summary>
         /// The footer display name
         /// </summary>
         string DisplayName { get; set; }

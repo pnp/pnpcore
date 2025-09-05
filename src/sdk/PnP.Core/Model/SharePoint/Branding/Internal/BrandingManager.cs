@@ -425,7 +425,8 @@ namespace PnP.Core.Model.SharePoint
                                         p => p.HorizontalQuickLaunch,
                                         // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                         p => p.WebTemplate,
-                                        p => p.Features).ConfigureAwait(false);
+                                        p => p.Features,
+                                        p => p.AllProperties).ConfigureAwait(false);
 
             var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
 
@@ -451,6 +452,28 @@ namespace PnP.Core.Model.SharePoint
                 Emphasis = web.HeaderEmphasis
             };
 
+            // Modern Header Feature MC1098935
+            if (web.AllProperties.Values.TryGetValue("HeaderOverlayColor", out var HeaderOverlayColor) && int.TryParse(HeaderOverlayColor.ToString(), out var headerOverlayColor) && Enum.IsDefined(typeof(OverlayColorType), headerOverlayColor))
+            {
+                chromeOptions.Header.OverlayColor = (OverlayColorType)headerOverlayColor;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderOverlayOpacity", out var HeaderOverlayOpacity) && int.TryParse(HeaderOverlayOpacity.ToString(), out var headerOverlayOpacity))
+            {
+                chromeOptions.Header.OverlayOpacity = headerOverlayOpacity;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderOverlayGradientDirection", out var HeaderOverlayGradientDirection) && int.TryParse(HeaderOverlayGradientDirection.ToString(), out var headerOverlayGradientDirection) && Enum.IsDefined(typeof(OverlayGradientDirectionType), headerOverlayGradientDirection))
+            {
+                chromeOptions.Header.OverlayGradientDirection = (OverlayGradientDirectionType)headerOverlayGradientDirection;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInLightMode", out var HeaderColorIndexInLightMode) && int.TryParse(HeaderColorIndexInLightMode.ToString(), out var headerColorIndexInLightMode))
+            {
+                chromeOptions.Header.ColorIndexInLightMode = headerColorIndexInLightMode;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInDarkMode", out var HeaderColorIndexInDarkMode) && int.TryParse(HeaderColorIndexInDarkMode.ToString(), out var headerColorIndexInDarkMode))
+            {
+                chromeOptions.Header.ColorIndexInDarkMode = headerColorIndexInDarkMode;
+            }
+
             chromeOptions.Navigation = new NavigationOptions
             {
                 MegaMenuEnabled = web.MegaMenuEnabled,
@@ -467,6 +490,34 @@ namespace PnP.Core.Model.SharePoint
                     Enabled = web.FooterEnabled
                 };
 
+                // Modern Footer Feature MC1098935
+                if (web.AllProperties.Values.TryGetValue("FooterAlignment", out var FooterAlignment) && int.TryParse(FooterAlignment.ToString(), out var footerAlignment) && Enum.IsDefined(typeof(FooterLinkAlignment), footerAlignment))
+                {
+                    chromeOptions.Footer.LinkAlignment = (FooterLinkAlignment)footerAlignment;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterOverlayColor", out var FooterOverlayColor) && int.TryParse(FooterOverlayColor.ToString(), out var footerOverlayColor) && Enum.IsDefined(typeof(OverlayColorType), footerOverlayColor))
+                {
+                    chromeOptions.Footer.OverlayColor = (OverlayColorType)footerOverlayColor;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterOverlayOpacity", out var FooterOverlayOpacity) && int.TryParse(FooterOverlayOpacity.ToString(), out var footerOverlayOpacity))
+                {
+                    chromeOptions.Footer.OverlayOpacity = footerOverlayOpacity;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterOverlayGradientDirection", out var FooterOverlayGradientDirection) && int.TryParse(FooterOverlayGradientDirection.ToString(), out var footerOverlayGradientDirection) && Enum.IsDefined(typeof(OverlayGradientDirectionType), footerOverlayGradientDirection))
+                {
+                    chromeOptions.Footer.OverlayGradientDirection = (OverlayGradientDirectionType)footerOverlayGradientDirection;
+                }
+
+                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInLightMode", out var FooterColorIndexInLightMode) && int.TryParse(FooterColorIndexInLightMode.ToString(), out var footerColorIndexInLightMode))
+                {
+                    chromeOptions.Footer.ColorIndexInLightMode = footerColorIndexInLightMode;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInDarkMode", out var FooterColorIndexInDarkMode) && int.TryParse(FooterColorIndexInDarkMode.ToString(), out var footerColorIndexInDarkMode))
+                {
+                    chromeOptions.Footer.ColorIndexInDarkMode = footerColorIndexInDarkMode;
+                }
+
+
                 if (menuState != null)
                 {
                     (chromeOptions.Footer as FooterOptions).MenuState = menuState;
@@ -480,6 +531,32 @@ namespace PnP.Core.Model.SharePoint
                             chromeOptions.Footer.DisplayName = displayNameNode.Title;
                         }
                     }
+                }
+            }
+
+
+            //Font Options
+            if(web.AllProperties.Values.TryGetValue("FontOptionForSiteTitle", out var FontOptionForSiteTitle) 
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteNav", out var FontOptionForSiteNav)
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterTitle", out var FontOptionForSiteFooterTitle)
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterNav", out var FontOptionForSiteFooterNav))
+            {
+                chromeOptions.Font = new FontOptions();
+                if(!string.IsNullOrWhiteSpace(FontOptionForSiteTitle?.ToString()))
+                {
+                    chromeOptions.Font.SiteTitle = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteTitle.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteNav?.ToString()))
+                {
+                    chromeOptions.Font.SiteNav = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteNav.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteFooterTitle?.ToString()))
+                {
+                    chromeOptions.Font.SiteFooterTitle = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteFooterTitle.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteFooterNav?.ToString()))
+                {
+                    chromeOptions.Font.SiteFooterNav = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteFooterNav.ToString());
                 }
             }
         }
@@ -504,7 +581,8 @@ namespace PnP.Core.Model.SharePoint
                                                 p => p.HorizontalQuickLaunch,
                                                 // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                                 p => p.WebTemplate,
-                                                p => p.Features).ConfigureAwait(false);
+                                                p => p.Features,
+                                                p => p.AllProperties).ConfigureAwait(false);
             
             var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
 
@@ -593,13 +671,28 @@ namespace PnP.Core.Model.SharePoint
             {
                 headerLayout = chromeOptions.Header.Layout,
                 headerEmphasis = chromeOptions.Header.Emphasis,
+                headerOverlayColor = chromeOptions.Header.OverlayColor,
+                headerOverlayOpacity = chromeOptions.Header.OverlayOpacity,
+                headerOverlayGradientDirection = chromeOptions.Header.OverlayGradientDirection,
+                headerColorIndexInLightMode = chromeOptions.Header.ColorIndexInLightMode,
+                headerColorIndexInDarkMode = chromeOptions.Header.ColorIndexInDarkMode,
                 hideTitleInHeader = chromeOptions.Header.HideTitle,
                 logoAlignment = chromeOptions.Header.LogoAlignment,
                 megaMenuEnabled = chromeOptions.Navigation != null ? chromeOptions.Navigation.MegaMenuEnabled : false,
                 horizontalQuickLaunch = chromeOptions.Navigation != null ? chromeOptions.Navigation.HorizontalQuickLaunch : false,
                 footerEnabled = chromeOptions.Footer != null ? chromeOptions.Footer.Enabled : false,
                 footerLayout = chromeOptions.Footer != null ? chromeOptions.Footer.Layout : FooterLayoutType.Simple,
-                footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong
+                footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong,
+                footerAlignment = chromeOptions.Footer != null ? chromeOptions.Footer.LinkAlignment: FooterLinkAlignment.Right,
+                footerOverlayColor = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayColor : OverlayColorType.None,
+                footerOverlayOpacity = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayOpacity : 0,
+                footerOverlayGradientDirection = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayGradientDirection : OverlayGradientDirectionType.TopToBottom,
+                footerColorIndexInLightMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInLightMode : -1,
+                footerColorIndexInDarkMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInDarkMode : -1,
+                fontOptionForSiteTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteTitle : null,
+                fontOptionForSiteNav = chromeOptions.Font != null ? chromeOptions.Font.SiteNav : null,
+                fontOptionForSiteFooterTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterTitle : null,
+                fontOptionForSiteFooterNav = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterNav : null,
             };
 
             string jsonBody = JsonSerializer.Serialize(body);

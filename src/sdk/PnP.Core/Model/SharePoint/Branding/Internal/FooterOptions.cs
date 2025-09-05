@@ -25,6 +25,13 @@ namespace PnP.Core.Model.SharePoint
 
         public string DisplayName { get; set; }
 
+        public FooterLinkAlignment LinkAlignment { get; set; }
+        public OverlayColorType OverlayColor { get; set; }
+        public int OverlayOpacity { get; set; }
+        public OverlayGradientDirectionType OverlayGradientDirection { get; set; }
+        public int ColorIndexInLightMode { get; set; }
+        public int ColorIndexInDarkMode { get; set; }
+
         public async Task SetLogoAsync(string fileName, Stream content, bool overwrite = false)
         {
             // Upload the image

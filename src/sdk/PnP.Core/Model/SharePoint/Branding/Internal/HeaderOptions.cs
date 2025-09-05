@@ -25,6 +25,11 @@ namespace PnP.Core.Model.SharePoint
         public bool HideTitle { get; set; }
 
         public LogoAlignment LogoAlignment { get; set; }
+        public OverlayColorType OverlayColor { get; set; } = OverlayColorType.None;
+        public int OverlayOpacity { get; set; } = 0;
+        public OverlayGradientDirectionType OverlayGradientDirection { get; set; } = OverlayGradientDirectionType.TopToBottom;
+        public int ColorIndexInLightMode { get; set; } = -1;
+        public int ColorIndexInDarkMode { get; set; } = -1;
 
         public async Task SetSiteLogoAsync(string fileName, Stream content, bool overwrite = false)
         {
