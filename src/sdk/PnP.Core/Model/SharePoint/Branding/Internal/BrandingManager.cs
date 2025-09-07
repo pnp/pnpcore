@@ -815,7 +815,7 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
-        #region font
+        #region OutOfBoxFontPackages
 
         public async Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync()
         {
@@ -841,6 +841,50 @@ namespace PnP.Core.Model.SharePoint
             return GetOutOfBoxFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
         }
 
+        public void SetOutOfBoxFontPackage(string fontId)
+        {
+            SetOutOfBoxFontPackageAsync(fontId).Wait();
+        }
+
+        public async Task SetOutOfBoxFontPackageAsync(string fontId)
+        {
+            var batch = context.NewBatch();
+            SetOutOfBoxFontPackageBatch(batch, fontId);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        public void SetOutOfBoxFontPackageBatch(Batch batch, string fontId)
+        {
+            SetOutOfBoxFontPackageBatchAsync(batch, fontId).GetAwaiter().GetResult();
+        }
+
+        public Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId)
+        {
+            BuildAndSetOutOfBoxFontPackageApiCall(batch, fontId).Wait();
+            return Task.CompletedTask;
+        }
+
+        private static ApiCall BuildGetOutOfBoxFontPackagesApiCall()
+        {
+            return new ApiCall("_api/OutOfBoxFontPackages", ApiType.SPORest);
+        }
+
+        private async Task BuildAndSetOutOfBoxFontPackageApiCall(Batch batch,string fontId)
+        {
+            var apiCall = new ApiCall($"_api/OutOfBoxFontPackages/GetById('{fontId}')/Apply", ApiType.SPORest)
+            {   // The provided JSON is of the minimal odata type
+                Headers = new Dictionary<string, string>
+                {
+                    { "Content-Type", "application/json;odata.metadata=nometadata" },
+                }
+            };
+
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SetOutOfBoxFontPackage").ConfigureAwait(false);
+        }
+
+        #endregion OutOfBoxFontPackages
+
+        #region Branding Center FontPackages
         public async Task<List<IFontPackage>> GetFontPackagesAsync()
         {
             var batch = context.NewBatch();
@@ -873,6 +917,50 @@ namespace PnP.Core.Model.SharePoint
             return fontPackages.Result;
         }
 
+        public void SetFontPackage(string fontId)
+        {
+            SetFontPackageAsync(fontId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetFontPackageAsync(string fontId)
+        {
+            var batch = context.NewBatch();
+            SetFontPackageBatch(batch, fontId);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        public void SetFontPackageBatch(Batch batch, string fontId)
+        {
+            SetPackageBatchAsync(batch,fontId).GetAwaiter().GetResult();
+        }
+
+        public Task SetPackageBatchAsync(Batch batch, string fontId)
+        {
+            BuildAndSetFontPackageApiCall(batch, fontId).Wait();
+            return Task.CompletedTask;
+        }
+
+        private static ApiCall BuildGetFontPackagesApiCall()
+        {
+            return new ApiCall("_api/FontPackages", ApiType.SPORest);
+        }
+
+        private async Task BuildAndSetFontPackageApiCall(Batch batch, string fontId)
+        {
+            var apiCall = new ApiCall($"_api/FontPackages/GetById('{fontId}')/Apply", ApiType.SPORest)
+            {   // The provided JSON is of the minimal odata type
+                Headers = new Dictionary<string, string>
+                {
+                    { "Content-Type", "application/json;odata.metadata=nometadata" },
+                }
+            };
+
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SetFontPackages").ConfigureAwait(false);
+        }
+
+        #endregion Branding Center FontPackages
+
+        #region SiteFontPackages
         public List<IFontPackage> GetSiteFontPackages()
         {
             return GetSiteFontPackagesAsync().GetAwaiter().GetResult();
@@ -893,16 +981,13 @@ namespace PnP.Core.Model.SharePoint
         {
             return new ApiCall("_api/SiteFontPackages", ApiType.SPORest);
         }
+        #endregion SiteFontPackages
 
-        private static ApiCall BuildGetOutOfBoxFontPackagesApiCall()
+        private async Task SetFontPackageBatchAsync(Batch batch, ApiCall apiCall)
         {
-            return new ApiCall("_api/OutOfBoxFontPackages", ApiType.SPORest);
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SaveMenuState").ConfigureAwait(false);
         }
 
-        private static ApiCall BuildGetFontPackagesApiCall()
-        {
-            return new ApiCall("_api/FontPackages", ApiType.SPORest);
-        }
 
         internal async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch, ApiCall apiCall)
         {
@@ -933,6 +1018,5 @@ namespace PnP.Core.Model.SharePoint
                 fontPackageList.Add(fontPackage);
             }
         }
-        #endregion
     }
 }

@@ -224,7 +224,7 @@ namespace PnP.Core.Model.SharePoint
         void SetChromeOptionsBatch(IChromeOptions chromeOptions);
         #endregion
 
-        #region Fonts
+        #region OutOfBoxFontPackages
 
         /// <summary>
         /// Gets the out of the box fonts available
@@ -241,6 +241,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the out of the box fonts available
         /// </summary>
+        /// <param name="batch"></param>
         /// <returns>Site's <see cref="IFontPackage"/></returns>
         Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch);
 
@@ -249,6 +250,36 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
         IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        void SetOutOfBoxFontPackage(string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        Task SetOutOfBoxFontPackageAsync(string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        void SetOutOfBoxFontPackageBatch(Batch batch, string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId);
+
+        #endregion OutOfBoxFontPackages
+
+        #region Branding Center FontPackages
 
         /// <summary>
         /// Gets the fonts available in branding center
@@ -275,6 +306,36 @@ namespace PnP.Core.Model.SharePoint
         IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch);
 
         /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        void SetFontPackage(string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        Task SetFontPackageAsync(string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        void SetFontPackageBatch(Batch batch, string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        Task SetPackageBatchAsync(Batch batch, string fontId);
+
+        #endregion Branding Center FontPackages
+
+        #region SiteFontPackages
+
+        /// <summary>
         /// Gets the fonts installed on the site
         /// </summary>
         /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
@@ -298,6 +359,6 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
         IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch);
 
-        #endregion
+        #endregion SiteFontPackages
     }
 }
