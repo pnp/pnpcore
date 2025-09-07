@@ -1764,8 +1764,6 @@ namespace PnP.Core.Test.SharePoint
 
                 page = pages.AsEnumerable().First();
 
-                //TODO: Check the page.PageHeader.Type
-
                 Assert.IsTrue(page.PageHeader.Type == PageHeaderType.None);
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Left);
