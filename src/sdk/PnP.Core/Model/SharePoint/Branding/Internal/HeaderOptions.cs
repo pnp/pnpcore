@@ -150,10 +150,11 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SetHeaderBackgroundImageAsync(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
         {
-            if (Layout != HeaderLayoutType.Extended)
-            {
-                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended);
-            }
+            // => modern Header does allow background images for all layouts
+            //if (Layout != HeaderLayoutType.Extended)
+            //{
+            //    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended);
+            //}
 
             // Upload the image
             IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
