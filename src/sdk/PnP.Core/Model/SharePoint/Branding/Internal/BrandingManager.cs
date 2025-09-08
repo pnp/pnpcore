@@ -534,14 +534,13 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-
+            chromeOptions.Font = new FontOptions();
             //Font Options
-            if(web.AllProperties.Values.TryGetValue("FontOptionForSiteTitle", out var FontOptionForSiteTitle) 
+            if (web.AllProperties.Values.TryGetValue("FontOptionForSiteTitle", out var FontOptionForSiteTitle) 
                 | web.AllProperties.Values.TryGetValue("FontOptionForSiteNav", out var FontOptionForSiteNav)
                 | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterTitle", out var FontOptionForSiteFooterTitle)
                 | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterNav", out var FontOptionForSiteFooterNav))
             {
-                chromeOptions.Font = new FontOptions();
                 if(!string.IsNullOrWhiteSpace(FontOptionForSiteTitle?.ToString()))
                 {
                     chromeOptions.Font.SiteTitle = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteTitle.ToString());
