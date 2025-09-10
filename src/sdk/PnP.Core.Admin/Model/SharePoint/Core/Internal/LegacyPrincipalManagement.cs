@@ -178,7 +178,11 @@ namespace PnP.Core.Admin.Model.SharePoint
                     string appIdToAdd = AppIdFromAppIdentifier(app.AppIdentifier);
                     if (appIdToAdd != null && !appIds.Contains(appIdToAdd))
                     {
-                        appIds.Add(appIdToAdd);
+                        // Only add appids that are valid GUIDs as these are used to build the payload for the GetACSServicePrincipals call which only accepts GUIDs
+                        if (Guid.TryParse(appIdToAdd, out Guid appIdGuid))
+                        {
+                            appIds.Add(appIdToAdd);
+                        }
                     }
                 }
 
