@@ -205,6 +205,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
 
+        public bool DisableCommenting { get => GetValue<bool>(); set => SetValue(value); }
+
         // BERT/PAOLO: not possible at this moment after refactoring, something to reassess later on
         //[GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items { get => GetModelCollectionValue<IListItemCollection>(); }
