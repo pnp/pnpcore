@@ -35,6 +35,13 @@ namespace PnP.Core.Model.SharePoint
             get; set;
         }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonPropertyName("headingLevel")]
+        public int HeadingLevel
+        {
+            get; set;
+        }
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("isTitleEnabled")]
         public bool? IsTitleEnabled

@@ -204,6 +204,7 @@ namespace PnP.Core.Model.SharePoint
                     // Set section type to 1 if it was not set (when new sections are added via code)
                     Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
                     DisplayName = Section.DisplayName,
+                    HeadingLevel = Section.HeadingLevel,
                     IsExpanded = Section.IsExpanded,
                     ShowDividerLine = Section.ShowDividerLine,
                 };
