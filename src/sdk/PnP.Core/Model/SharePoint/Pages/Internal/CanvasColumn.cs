@@ -173,9 +173,12 @@ namespace PnP.Core.Model.SharePoint
             int controlIndex = 0;
             foreach (var control in Section.Page.Controls.Where(p => p.Section == Section && p.Column == this).OrderBy(z => z.Order))
             {
-                controlIndex++;
-                html.Append((control as CanvasControl).ToHtml(controlIndex));
-                controlWrittenToSection = true;
+                if (!(control is EmptySection))
+                {
+                    controlIndex++;
+                    html.Append((control as CanvasControl).ToHtml(controlIndex));
+                    controlWrittenToSection = true;
+                }
             }
 
             // if a section does not contain a control we still need to render it, otherwise it get's "lost"

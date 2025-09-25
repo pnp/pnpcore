@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
         /// x-postion of the control in the section
         /// </summary>
         [JsonPropertyName("x")]
-        public int X
+        public double X
         {
             get; set;
         }
@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
         /// y-postion of the control in the section
         /// </summary>
         [JsonPropertyName("y")]
-        public int Y
+        public double Y
         {
             get; set;
         }
@@ -26,7 +26,7 @@ namespace PnP.Core.Model.SharePoint
         /// width of the control in the section
         /// </summary>
         [JsonPropertyName("w")]
-        public int W
+        public double W
         {
             get; set;
         }
@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
         /// height of the control in the section
         /// </summary>
         [JsonPropertyName("h")]
-        public int H
+        public double H
         {
             get; set;
         }
