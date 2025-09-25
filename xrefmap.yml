@@ -21713,6 +21713,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ChoiceFormatType.RadioButtons
   fullName: PnP.Core.Model.SharePoint.ChoiceFormatType.RadioButtons
   nameWithType: ChoiceFormatType.RadioButtons
+- uid: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel
+  name: CollapsibleSectionHeadingLevel
+  href: api/PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.html
+  commentId: T:PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel
+  fullName: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel
+  nameWithType: CollapsibleSectionHeadingLevel
+- uid: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading2
+  name: Heading2
+  href: api/PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.html#PnP_Core_Model_SharePoint_CollapsibleSectionHeadingLevel_Heading2
+  commentId: F:PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading2
+  fullName: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading2
+  nameWithType: CollapsibleSectionHeadingLevel.Heading2
+- uid: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading3
+  name: Heading3
+  href: api/PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.html#PnP_Core_Model_SharePoint_CollapsibleSectionHeadingLevel_Heading3
+  commentId: F:PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading3
+  fullName: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading3
+  nameWithType: CollapsibleSectionHeadingLevel.Heading3
+- uid: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading4
+  name: Heading4
+  href: api/PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.html#PnP_Core_Model_SharePoint_CollapsibleSectionHeadingLevel_Heading4
+  commentId: F:PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading4
+  fullName: PnP.Core.Model.SharePoint.CollapsibleSectionHeadingLevel.Heading4
+  nameWithType: CollapsibleSectionHeadingLevel.Heading4
 - uid: PnP.Core.Model.SharePoint.CommentsDisabledScope
   name: CommentsDisabledScope
   href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html
@@ -26823,6 +26847,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
   nameWithType: ICanvasSection.DisplayName
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel
+  name: HeadingLevel
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_HeadingLevel
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel
+  nameWithType: ICanvasSection.HeadingLevel
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel*
+  name: HeadingLevel
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_HeadingLevel_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.HeadingLevel
+  nameWithType: ICanvasSection.HeadingLevel
 - uid: PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
   name: IconAlignment
   href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_IconAlignment
