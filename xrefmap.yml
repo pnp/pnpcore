@@ -38107,6 +38107,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.Direction
   nameWithType: IList.Direction
+- uid: PnP.Core.Model.SharePoint.IList.DisableCommenting
+  name: DisableCommenting
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_DisableCommenting
+  commentId: P:PnP.Core.Model.SharePoint.IList.DisableCommenting
+  fullName: PnP.Core.Model.SharePoint.IList.DisableCommenting
+  nameWithType: IList.DisableCommenting
+- uid: PnP.Core.Model.SharePoint.IList.DisableCommenting*
+  name: DisableCommenting
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_DisableCommenting_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.DisableCommenting
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.DisableCommenting
+  nameWithType: IList.DisableCommenting
 - uid: PnP.Core.Model.SharePoint.IList.DocumentTemplate
   name: DocumentTemplate
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_DocumentTemplate
