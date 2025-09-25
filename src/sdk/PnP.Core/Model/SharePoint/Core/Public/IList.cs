@@ -270,6 +270,11 @@ namespace PnP.Core.Model.SharePoint
         public DateTime LastItemUserModifiedDate { get; }
 
         /// <summary>
+        /// Gets or sets whether comments are disabled. Defaults to false.
+        /// </summary>
+        public bool DisableCommenting { get; set; }
+
+        /// <summary>
         /// Collection of list items in the current List object
         /// Implements <see cref="IQueryable{T}"/>. <br />
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 

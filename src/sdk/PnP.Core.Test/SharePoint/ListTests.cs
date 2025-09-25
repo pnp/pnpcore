@@ -2402,5 +2402,79 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Comments test
+
+        [TestMethod]
+        public async Task DisableCommentingSettingDefaultValueTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = "DisableCommentingListSettingsTest";
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.DisableCommenting);
+
+                    Assert.IsTrue(myList.DisableCommenting == false);
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task DisableCommentingSettingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = "DisableCommentingListSettingsTest";
+                IList myList = null;
+                try
+                {
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    myList.DisableCommenting = true;
+                    await myList.UpdateAsync();
+
+                    myList = context.Web.Lists.GetByTitle(listTitle, p => p.DisableCommenting);
+
+                    Assert.IsTrue(myList.DisableCommenting == true);
+                }
+                finally
+                {
+                    myList.Delete();
+                }
+            }
+        }
+
+        #endregion
     }
 }
