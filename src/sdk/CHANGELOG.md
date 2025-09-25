@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix #1656: IList.ReIndexAsync() has no effect. #1677 [lucmoco - Luc Mo Costabella]
 - Fix: Detecting disabled users added to ValidateUsers and ValidateAndEnsureUsersAsync #1671 [kkazala - Kinga]
 - Page API fix: changed flexible layout position from int to double #1688 [czullu - Christian Zuellig]
+- Page API fix: Load Page Type correctly to fix page header removal #1692 [A-Murchison - Adam Murchison]
 
 ## [1.15]
 
