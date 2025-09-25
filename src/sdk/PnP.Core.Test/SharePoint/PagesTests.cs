@@ -1772,6 +1772,7 @@ namespace PnP.Core.Test.SharePoint
                 // Configure the page header
                 page.RemovePageHeader();
 
+                Assert.IsTrue(page.PageHeader.Type == PageHeaderType.None);
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Left);
                 Assert.IsTrue(page.PageHeader.ShowTopicHeader == false);
@@ -1787,6 +1788,7 @@ namespace PnP.Core.Test.SharePoint
 
                 page = pages.AsEnumerable().First();
 
+                Assert.IsTrue(page.PageHeader.Type == PageHeaderType.None);
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Left);
                 Assert.IsTrue(page.PageHeader.ShowTopicHeader == false);
