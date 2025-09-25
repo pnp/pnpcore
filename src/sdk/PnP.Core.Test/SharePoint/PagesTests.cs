@@ -901,6 +901,16 @@ namespace PnP.Core.Test.SharePoint
                 page.Sections[2].Collapsible = true;
                 page.Sections[2].IsExpanded = true;
                 page.Sections[2].ShowDividerLine = false;
+                //page.Sections[2].HeadingLevel = (int)CollapsibleSectionHeadingLevel.Heading2;
+
+                // Collapsible section - header 4
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 4, VariantThemeType.Soft);
+                page.Sections[3].Collapsible = true;
+                page.Sections[3].DisplayName = "Section 2";
+                page.Sections[3].IsExpanded = false;
+                page.Sections[3].ShowDividerLine = false;
+                page.Sections[3].IconAlignment = IconAlignment.Right;
+                page.Sections[3].HeadingLevel = (int)CollapsibleSectionHeadingLevel.Heading4;
 
                 var availableComponents = await page.AvailablePageComponentsAsync();
                 var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
@@ -912,6 +922,8 @@ namespace PnP.Core.Test.SharePoint
                 page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[0]);
                 page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[1]);
                 page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[2]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[3].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[3].Columns[1]);
 
                 // Add a webpart in each section
                 page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
@@ -930,11 +942,11 @@ namespace PnP.Core.Test.SharePoint
 
                 page = pages.AsEnumerable().First();
 
-                Assert.IsTrue(page.Sections.Count == 3);
+                Assert.IsTrue(page.Sections.Count == 4);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
                 Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
                 Assert.IsTrue(page.Sections[0].Collapsible == false);
-                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);                
 
                 Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.TwoColumn);
                 Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.Soft);
@@ -945,6 +957,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[1].IconAlignment == IconAlignment.Right);
                 Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 2);
                 Assert.IsTrue(page.Sections[1].Columns[1].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[1].HeadingLevel == (int)CollapsibleSectionHeadingLevel.Heading2);
 
                 Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.ThreeColumn);
                 Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.None);
@@ -956,6 +969,17 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[2].Columns[0].Controls.Count == 2);
                 Assert.IsTrue(page.Sections[2].Columns[1].Controls.Count == 2);
                 Assert.IsTrue(page.Sections[2].Columns[2].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[2].HeadingLevel == (int)CollapsibleSectionHeadingLevel.Heading2);
+
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].ZoneEmphasis == (int)VariantThemeType.Soft);
+                Assert.IsTrue(page.Sections[3].Collapsible == true);
+                Assert.IsTrue(page.Sections[3].DisplayName == "Section 2");
+                Assert.IsTrue(page.Sections[3].IsExpanded == false);
+                Assert.IsTrue(page.Sections[3].ShowDividerLine == false);
+                Assert.IsTrue(page.Sections[3].IconAlignment == IconAlignment.Right);
+                Assert.IsTrue(page.Sections[3].HeadingLevel == (int)CollapsibleSectionHeadingLevel.Heading4);
+
 
                 // delete the page
                 await page.DeleteAsync();
