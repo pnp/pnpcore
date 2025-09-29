@@ -25,10 +25,10 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Properties
-        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
 
         #region Extension methods
