@@ -195,7 +195,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             using (var tenantAdminCenterContext = await GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                return await tenantAdminCenterContext.Web.SiteUsers.Where(p => p.IsSiteAdmin == true).ToListAsync().ConfigureAwait(false);
+                // Materialize the collection first, then filter in-memory to avoid ambiguity
+                var users = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(tenantAdminCenterContext.Web.SiteUsers).ConfigureAwait(false);
+                return users.Where(p => p.IsSiteAdmin == true).ToList();
             }
         }
 

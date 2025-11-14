@@ -207,11 +207,11 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var termGuidString in getTermsByCustomPropertyRequest.Result.Select(guid => guid.ToString()))
             {
-                var term = await Terms
-                    .Where(p => p.Id == termGuidString)
+                var term = await System.Linq.Queryable
+                    .Where(Terms, p => p.Id == termGuidString)
                     .FirstOrDefaultAsync()
                     .ConfigureAwait(false);
-                
+
                 result.Add(term);
             }
 
