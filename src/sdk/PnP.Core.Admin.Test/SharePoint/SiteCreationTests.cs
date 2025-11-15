@@ -840,7 +840,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                     // Determine the user to set as testMember
                     await context.Web.LoadAsync(p => p.AssociatedMemberGroup.QueryProperties(p => p.Users));
-                    var testMember = context.Web.AssociatedMemberGroup.Users.Where(u => u.PrincipalType == Core.Model.Security.PrincipalType.User).FirstOrDefault();
+                    var testMember = System.Linq.Queryable.Where(context.Web.AssociatedMemberGroup.Users, u => u.PrincipalType == Core.Model.Security.PrincipalType.User).FirstOrDefault();
                     if(testMember == null)
                     {
                         testMember = testOwner;
