@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
@@ -1949,7 +1949,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
 
-                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                 var basePermissions = await list.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
 
@@ -1966,7 +1966,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents");
 
-                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                 var hasPermissions = await list.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
 

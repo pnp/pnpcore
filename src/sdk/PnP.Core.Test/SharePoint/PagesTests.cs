@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -1944,7 +1944,7 @@ namespace PnP.Core.Test.SharePoint
                 page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
 
                 // Upload image to site assets library
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), overwrite: true);
 
                 // Configure the page header
@@ -1996,7 +1996,7 @@ namespace PnP.Core.Test.SharePoint
                 page.AddControl(page.NewTextPart("PnP"), page.DefaultSection.DefaultColumn);
 
                 // Upload image to site assets library
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), overwrite: true);
 
                 // Configure the page header
@@ -3316,7 +3316,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Upload image to site assets library
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 IFile previewImage = await parentFolder.Files.AddAsync("repostpreview.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), overwrite: true);
 
                 var newPage = await context.Web.NewPageAsync(PageLayoutType.RepostPage);

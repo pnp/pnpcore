@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -143,7 +143,7 @@ namespace PnP.Core.Test.Security
                 {
                     await context.Web.SiteGroups.AddAsync(groupName);
 
-                    siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
+                    siteGroup = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteGroups, g => g.Title == groupName);
 
                     Assert.IsTrue(siteGroup.Requested);
                     Assert.AreEqual(siteGroup.Title, groupName);
@@ -174,7 +174,7 @@ namespace PnP.Core.Test.Security
                     siteGroup.Description = "<title>GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called</title><meta name=\"description\" content=\"The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called - GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called\"><link rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"/opensearch.xml\" title=\"GitHub\"><link rel=\"fluid-icon\" href=\"https://github.com/fluidicon.png\" title=\"GitHub\">";
                     await siteGroup.UpdateAsync();
 
-                    siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
+                    siteGroup = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteGroups, g => g.Title == groupName);
 
                     Assert.IsTrue(siteGroup.Requested);
                     Assert.AreEqual(siteGroup.Description.Length, 511);
@@ -394,13 +394,13 @@ namespace PnP.Core.Test.Security
                 {
                     await context.Web.SiteGroups.AddAsync(groupName);
 
-                    var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
+                    var siteGroup = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteGroups, g => g.Title == groupName);
 
                     siteGroup.Title = groupNameRenamed;
 
                     await siteGroup.UpdateAsync();
 
-                    updatedSiteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupNameRenamed);
+                    updatedSiteGroup = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteGroups, g => g.Title == groupNameRenamed);
 
                     Assert.IsTrue(updatedSiteGroup.Requested);
                 }
@@ -426,7 +426,7 @@ namespace PnP.Core.Test.Security
                 try
                 {
                     siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User);
 
                     await siteGroup.SetUserAsOwnerAsync(siteUser.Id);
 
@@ -457,7 +457,7 @@ namespace PnP.Core.Test.Security
                 try
                 {
                     siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User);
 
                     await siteGroup.SetUserAsOwnerBatchAsync(siteUser.Id);
                     await context.ExecuteAsync();

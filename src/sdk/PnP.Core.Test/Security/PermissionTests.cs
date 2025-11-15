@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -506,7 +506,7 @@ namespace PnP.Core.Test.Security
                 var originalSharingLinks = await file.GetShareLinksAsync();
 
                 var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
-                var testUser2 = context.Web.SiteUsers.Skip(1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                var testUser2 = System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
@@ -554,7 +554,7 @@ namespace PnP.Core.Test.Security
                 var originalSharingLinks = await file.GetShareLinksAsync();
 
                 var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
-                var testUser2 = context.Web.SiteUsers.Skip(1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                var testUser2 = System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
@@ -1015,7 +1015,7 @@ namespace PnP.Core.Test.Security
                 var originalSharingLinks = await folder.GetShareLinksAsync();
 
                 var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
-                var testUser2 = context.Web.SiteUsers.Skip(1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                var testUser2 = System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {
@@ -1066,7 +1066,7 @@ namespace PnP.Core.Test.Security
                 var originalSharingLinks = await folder.GetShareLinksAsync();
 
                 var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
-                var testUser2 = context.Web.SiteUsers.Skip(1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                var testUser2 = System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
 
                 var driveRecipients = new List<IDriveRecipient>()
                 {

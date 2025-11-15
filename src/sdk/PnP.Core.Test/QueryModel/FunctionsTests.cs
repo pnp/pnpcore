@@ -12,8 +12,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestWhereMethodNotSupported()
         {
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.IndexOf("Value") == 0)
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.IndexOf("Value") == 0)
                 as QueryableDataModelCollection<IListItem>;
 
             Assert.ThrowsException<NotSupportedException>(() => query.ToString());
@@ -22,8 +21,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestWhereMemberNotSupported()
         {
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Ticks == 0)
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Ticks == 0)
                 as QueryableDataModelCollection<IListItem>;
 
             Assert.ThrowsException<NotSupportedException>(() => query.ToString());
@@ -32,8 +30,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestWhereMethodCallNotSupported()
         {
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.Equals("Value"))
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.Equals("Value"))
                 as QueryableDataModelCollection<IListItem>;
 
             Assert.ThrowsException<NotSupportedException>(() => query.ToString());
@@ -44,8 +41,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=substringof('Value',Title) eq true";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Title.Contains("Value"));
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.Contains("Value"));
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -56,8 +52,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=substringof('Value',Title) eq true";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.Contains("Value") == true);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.Contains("Value") == true);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -70,8 +65,7 @@ namespace PnP.Core.Test.QueryModel
 
             var trueVar = true;
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.Contains("Value") == trueVar);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.Contains("Value") == trueVar);
 
             var result = query.ToString();
             Assert.AreEqual(expected, result);
@@ -82,8 +76,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=substringof('Value',Title) eq false";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.Contains("Value") == false);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.Contains("Value") == false);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -94,8 +87,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=substringof('Value',Title) eq false";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => !i.Title.Contains("Value"));
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => !i.Title.Contains("Value"));
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -106,8 +98,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=HasUniqueRoleAssignments eq true";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.HasUniqueRoleAssignments == true);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.HasUniqueRoleAssignments == true);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -118,8 +109,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=HasUniqueRoleAssignments eq false";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.HasUniqueRoleAssignments == false);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.HasUniqueRoleAssignments == false);
 
             var result = query.ToString();
             Assert.AreEqual(expected, result);
@@ -130,8 +120,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=HasUniqueRoleAssignments eq true";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.HasUniqueRoleAssignments);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.HasUniqueRoleAssignments);
 
             var result = query.ToString();
             Assert.AreEqual(expected, result);
@@ -142,8 +131,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=HasUniqueRoleAssignments eq false";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => !i.HasUniqueRoleAssignments);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => !i.HasUniqueRoleAssignments);
 
             var result = query.ToString();
             Assert.AreEqual(expected, result);
@@ -154,8 +142,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=startswith(Title,'Value') eq true";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title.StartsWith("Value"));
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title.StartsWith("Value"));
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -166,8 +153,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=day(Date) eq 1";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Day == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Day == 1);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -178,8 +164,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=month(Date) eq 1";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Month == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Month == 1);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -190,8 +175,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=year(Date) eq 1";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Year == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Year == 1);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -202,8 +186,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=minute(Date) eq 1";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Minute == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Minute == 1);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);
@@ -214,8 +197,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=second(Date) eq 1";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => ((DateTime)i.Values["Date"]).Second == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => ((DateTime)i.Values["Date"]).Second == 1);
 
             var result = query.ToString();
             Assert.AreEqual(expected,result);

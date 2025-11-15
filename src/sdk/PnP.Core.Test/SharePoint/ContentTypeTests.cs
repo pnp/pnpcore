@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -162,9 +162,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.StringId == "0x01"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.StringId == "0x01")
                             .QueryProperties(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
 
@@ -180,9 +178,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.StringId == "0x01"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.StringId == "0x01")
                             .QueryProperties(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
 
@@ -638,9 +634,7 @@ namespace PnP.Core.Test.SharePoint
                 await contentType.UpdateAsync();
 
                 // Test if the updated content type is still found
-                IContentType contentTypeToFind = (from ct in context.Web.ContentTypes
-                                                  where ct.Name == "UPDATED"
-                                                  select ct).FirstOrDefault();
+                IContentType contentTypeToFind = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.Name == "UPDATED").FirstOrDefault();
 
                 Assert.IsNotNull(contentTypeToFind);
 
@@ -663,9 +657,7 @@ namespace PnP.Core.Test.SharePoint
                 await contentType.DeleteAsync();
 
                 // Test if the content type is still found
-                IContentType contentTypeToFind = (from ct in context.Web.ContentTypes
-                                                  where ct.Name == "TEST DELETE"
-                                                  select ct).FirstOrDefault();
+                IContentType contentTypeToFind = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.Name == "TEST DELETE").FirstOrDefault();
 
                 Assert.IsNull(contentTypeToFind);
             }
@@ -803,9 +795,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.StringId == "0x0120D520"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.StringId == "0x0120D520")
                             .QueryProperties(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
 
@@ -862,11 +852,11 @@ namespace PnP.Core.Test.SharePoint
 
                     (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(1, parentFolder: rootFolder);
 
-                    var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
-                    var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                    var categoriesField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "Categories").ConfigureAwait(false);
+                    var managersField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "ManagersName").ConfigureAwait(false);
                     var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl).ConfigureAwait(false);
-                    var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
-                    var formCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Form").ConfigureAwait(false);
+                    var documentCt = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.ContentTypes, y => y.Name == "Document").ConfigureAwait(false);
+                    var formCt = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.ContentTypes, y => y.Name == "Form").ConfigureAwait(false);
 
                     var documentSetOptions = new DocumentSetOptions
                     {
@@ -932,9 +922,9 @@ namespace PnP.Core.Test.SharePoint
 
                 (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(parentFolder: rootFolder);
 
-                var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
-                var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
+                var categoriesField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "Categories").ConfigureAwait(false);
+                var managersField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                var documentCt = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.ContentTypes, y => y.Name == "Document").ConfigureAwait(false);
 
                 var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
@@ -1019,9 +1009,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.StringId == "0x0101"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.StringId == "0x0101")
                             .QueryProperties(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
                 var documentSet = contentType.AsDocumentSet();

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -69,7 +69,7 @@ namespace PnP.Core.Test.Base
                 var termSetForPaging = await termSet.GetAsync(p => p.Terms);
                 Assert.IsTrue(termSetForPaging.Terms.Length == 45);
 
-                var terms = await termSetForPaging.Terms.ToArrayAsync();
+                var terms = await PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync(termSetForPaging.Terms);
                 Assert.IsTrue(terms.Length == 45);
 
                 // Delete term set 
@@ -122,19 +122,19 @@ namespace PnP.Core.Test.Base
                 int pageSize = 10;
 
                 // Read pages of terms
-                var page = termSet.Terms.Take(pageSize).ToArray();
+                var page = System.Linq.Queryable.Take(termSet.Terms, pageSize).ToArray();
                 Assert.IsTrue(page.Length == pageSize);
 
-                page = termSet.Terms.Take(pageSize * 2).ToArray();
+                page = System.Linq.Queryable.Take(termSet.Terms, pageSize * 2).ToArray();
                 Assert.IsTrue(page.Length == pageSize * 2);
 
-                page = termSet.Terms.Take(pageSize * 3).ToArray();
+                page = System.Linq.Queryable.Take(termSet.Terms, pageSize * 3).ToArray();
                 Assert.IsTrue(page.Length == pageSize * 3);
 
-                page = termSet.Terms.Take(pageSize * 4).ToArray();
+                page = System.Linq.Queryable.Take(termSet.Terms, pageSize * 4).ToArray();
                 Assert.IsTrue(page.Length == 40);
 
-                page = termSet.Terms.Take(pageSize * 5).ToArray();
+                page = System.Linq.Queryable.Take(termSet.Terms, pageSize * 5).ToArray();
                 Assert.IsTrue(page.Length == 45);
 
                 // Delete term set 
@@ -179,7 +179,7 @@ namespace PnP.Core.Test.Base
                         // Skip is not supported for items of a list
                         Assert.ThrowsException<InvalidOperationException>(() =>
                         {
-                            list.Items.Skip(1).Take(2).ToArray();
+                            System.Linq.Queryable.Skip(list.Items, 1).Take(2).ToArray();
                         });
 
                     }
@@ -233,7 +233,7 @@ namespace PnP.Core.Test.Base
 
                         var list2 = context.Web.Lists.FirstOrDefault(p => p.Id == list.Id);
 
-                        var queryResult2 = list2.Items.Take(2).ToList();
+                        var queryResult2 = System.Linq.Queryable.Take(list2.Items, 2).ToList();
 
                         // We should have loaded 1 list item
                         Assert.IsTrue(queryResult2.Count == 2);
@@ -244,13 +244,13 @@ namespace PnP.Core.Test.Base
 
                         // Check paging when starting from the middle, the skip + take combination results in a __next url that 
                         // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
-                        var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+                        var list3 = System.Linq.Queryable.Where(context.Web.Lists, p => p.Id == list.Id).FirstOrDefault();
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
                         await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                         {
-                            var queryResult3 = list3.Items.Skip(4).Take(2).ToList();
+                            var queryResult3 = System.Linq.Queryable.Skip(list3.Items, 4).Take(2).ToList();
 
                             // We should have loaded 1 list item
                             Assert.IsTrue(queryResult3.Count == 2);
@@ -574,7 +574,7 @@ namespace PnP.Core.Test.Base
                         // Force rest
                         context2.GraphFirst = false;
 
-                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+                        var list2 = System.Linq.Queryable.Where(context2.Web.Lists, p => p.Id == list.Id).FirstOrDefault();
 
                         await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
@@ -638,7 +638,7 @@ namespace PnP.Core.Test.Base
                         }
                         await context.ExecuteAsync();
 
-                        var list2 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+                        var list2 = System.Linq.Queryable.Where(context.Web.Lists, p => p.Id == list.Id).FirstOrDefault();
 
                         var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {

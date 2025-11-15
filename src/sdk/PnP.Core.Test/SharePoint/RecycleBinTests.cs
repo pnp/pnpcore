@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -168,13 +168,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 await recycleBinItem.RestoreAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -192,13 +192,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 recycleBinItem.Restore();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -216,7 +216,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 var batch = context.NewBatch();
                 await recycleBinItem.RestoreBatchAsync(batch);
@@ -224,7 +224,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -242,7 +242,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 var batch = context.NewBatch();
                 recycleBinItem.RestoreBatch(batch);
@@ -250,7 +250,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -268,14 +268,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 await recycleBinItem.RestoreBatchAsync();
                 await context.ExecuteAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -293,14 +293,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 recycleBinItem.RestoreBatch();
                 await context.ExecuteAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -320,7 +320,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -351,7 +351,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -380,7 +380,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -411,7 +411,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -442,7 +442,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -472,7 +472,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -1016,7 +1016,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1046,7 +1046,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1078,7 +1078,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1110,7 +1110,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1141,7 +1141,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1172,7 +1172,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1233,7 +1233,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RecycleBin, item => item.Id == recycleBinItemId);
                 await recycleBinItem.DeleteAsync();
             }
         }
@@ -1242,7 +1242,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                IRecycleBinItem recycleBinItem = await context.Site.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Site.RecycleBin, item => item.Id == recycleBinItemId);
                 await recycleBinItem.DeleteAsync();
             }
         }

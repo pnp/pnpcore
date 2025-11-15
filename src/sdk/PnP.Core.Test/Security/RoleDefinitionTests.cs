@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
@@ -79,7 +79,7 @@ namespace PnP.Core.Test.Security
                     Assert.IsTrue(roleDefinition.Requested);
 
                     // grab added role def again from server
-                    var addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+                    var addedRoleDefinition = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RoleDefinitions, d => d.Name == "Test RoleDef 2");
 
                     // Remove AddAndCustomizePages role, add other + set description
                     addedRoleDefinition.BasePermissions.Clear(Model.SharePoint.PermissionKind.AddAndCustomizePages);
@@ -88,7 +88,7 @@ namespace PnP.Core.Test.Security
                     await addedRoleDefinition.UpdateAsync();
 
                     // read again from server
-                    addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+                    addedRoleDefinition = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RoleDefinitions, d => d.Name == "Test RoleDef 2");
 
                     // Verify
                     Assert.IsTrue(addedRoleDefinition.Description == "hi new role");
@@ -128,7 +128,7 @@ namespace PnP.Core.Test.Security
                     Assert.IsTrue(roleDefinition.Requested);
 
                     // grab added role def again from server
-                    var addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+                    var addedRoleDefinition = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RoleDefinitions, d => d.Name == "Test RoleDef 2");
 
                     // Remove AddAndCustomizePages role, add other + set description
                     addedRoleDefinition.BasePermissions.Clear(Model.SharePoint.PermissionKind.AddAndCustomizePages);
@@ -138,7 +138,7 @@ namespace PnP.Core.Test.Security
                     await context.ExecuteAsync();
 
                     // read again from server
-                    addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+                    addedRoleDefinition = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RoleDefinitions, d => d.Name == "Test RoleDef 2");
 
                     // Verify
                     Assert.IsTrue(addedRoleDefinition.Description == "hi new role");

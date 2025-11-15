@@ -54,7 +54,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Nested QueryProperties with Where
-                var lists2 = context.Web.Lists.Where(l => l.Title == "Documents")
+                var lists2 = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == "Documents")
                     .QueryProperties(l => l.Id,
                         l => l.Title,
                         l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description));
@@ -81,8 +81,7 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsNotNull(lists);
 
                 // AsBatchAsync
-                var queryBatchAsync = await context.Web.Lists
-                    .Where(l => l.Title == "Documents")
+                var queryBatchAsync = await System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == "Documents")
                     .QueryProperties(l => l.Title, l => l.TemplateType)
                     .AsBatchAsync();
                 Assert.IsFalse(queryBatchAsync.IsAvailable);
@@ -97,8 +96,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // AsBatch
-                var queryBatch = context.Web.Lists
-                    .Where(l => l.Title == "Documents")
+                var queryBatch = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == "Documents")
                     .QueryProperties(l => l.Title, l => l.TemplateType)
                     .AsBatch();
                 Assert.IsFalse(queryBatch.IsAvailable);
@@ -116,8 +114,7 @@ namespace PnP.Core.Test.QueryModel
                 var batch = context.NewBatch();
 
                 // AsBatchAsync
-                queryBatchAsync = await context.Web.Lists
-                    .Where(l => l.Title == "Documents")
+                queryBatchAsync = await System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == "Documents")
                     .QueryProperties(l => l.Title, l => l.TemplateType)
                     .AsBatchAsync(batch);
                 Assert.IsFalse(queryBatchAsync.IsAvailable);
@@ -135,8 +132,7 @@ namespace PnP.Core.Test.QueryModel
                 batch = context.NewBatch();
 
                 // AsBatch
-                queryBatch = context.Web.Lists
-                    .Where(l => l.Title == "Documents")
+                queryBatch = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == "Documents")
                     .QueryProperties(l => l.Title, l => l.TemplateType)
                     .AsBatch(batch);
                 Assert.IsFalse(queryBatch.IsAvailable);
@@ -246,7 +242,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = true;
 
-                var list = await context.Web.Lists.FirstOrDefaultAsync();
+                var list = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists);
 
                 // The objects connected to the context should be empty
                 Assert.IsTrue(context.Web.Lists.Length == 0);
@@ -264,7 +260,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var list = await context.Web.Lists.FirstOrDefaultAsync();
+                var list = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists);
 
                 // The objects connected to the context should be empty
                 Assert.IsTrue(context.Web.Lists.Length == 0);

@@ -48,7 +48,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = context.Site.AllWebs
                     .QueryProperties(w => w.Id, w => w.Title, w => w.Description);
 
-                var queryResult = await query.ToListAsync();
+                var queryResult = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(query);
 
                 Assert.IsNotNull(queryResult);
                 Assert.IsTrue(queryResult.Count > 0);
@@ -63,8 +63,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
@@ -82,11 +81,10 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
-                var queryResult = await query.ToListAsync();
+                var queryResult = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(query);
 
                 Assert.IsNotNull(queryResult);
                 Assert.IsTrue(queryResult.Count >= 5);
@@ -103,9 +101,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var query = (from i in context.Web.Lists.GetByTitle("Site Pages").Items
-                             where i.Title == expectedListItemTitle
-                             select i)
+                var query = System.Linq.Queryable.Where(context.Web.Lists.GetByTitle("Site Pages").Items, i => i.Title == expectedListItemTitle)
                              .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
@@ -130,12 +126,10 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 IList list = await context.Web.Lists.GetByTitleAsync("Site Pages");
-                var query = (from i in list.Items
-                             where i.Title == expectedListItemTitle
-                             select i)
+                var query = System.Linq.Queryable.Where(list.Items, i => i.Title == expectedListItemTitle)
                     .QueryProperties(l => l.Id, l => l.Title);
 
-                var queryResult = await query.ToListAsync();
+                var queryResult = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(query);
 
                 // Ensure that we have 1 item in the result and that its title is the expected one
                 Assert.IsNotNull(queryResult);
@@ -153,11 +147,11 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var dt = DateTime.UtcNow;
-                var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dt).ToListAsync();                
+                var lists = await System.Linq.Queryable.Where(context.Web.Lists, p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dt).ToListAsync();                
                 Assert.IsTrue(lists.Count == 1);
 
                 var dto = DateTimeOffset.UtcNow;
-                lists = await context.Web.Lists.Where(p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dto).ToListAsync();
+                lists = await System.Linq.Queryable.Where(context.Web.Lists, p => p.Title == "Site Pages" && p.LastItemModifiedDate <= dto).ToListAsync();
                 Assert.IsTrue(lists.Count == 1);
             }
         }
@@ -184,7 +178,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.FirstOrDefaultAsync();
+                var actual = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists);
 
                 Assert.IsNotNull(actual);
             }
@@ -200,8 +194,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = (from l in context.Web.Lists
-                              select l)
+                var actual = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                              .QueryProperties(l => l.Id, l => l.Title)
                              .FirstOrDefault(l => l.Title == expected);
 
@@ -237,9 +230,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = (from l in context.Web.Lists
-                              where l.Title == expected
-                              select l).FirstOrDefault();
+                var actual = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == expected).FirstOrDefault();
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -256,7 +247,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == expected);
+                var actual = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -359,7 +350,7 @@ namespace PnP.Core.Test.QueryModel
                 await context.Web.LoadAsync(w => w.Title);
                 var newWeb = await context.Web.GetAsync(w => w.Title);
 
-                var list = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == "Something");
+                var list = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, l => l.Title == "Something");
 
                 context.GraphFirst = false;
 
@@ -452,7 +443,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var cts = context.Web.ContentTypes.QueryProperties(p => p.Id, p => p.Name);
-                var contentTypes = await cts.ToListAsync();
+                var contentTypes = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(cts);
 
                 // Ensure that we a result
                 Assert.IsNotNull(contentTypes);

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -1630,7 +1630,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(webs.Count == context.Web.Webs.Length);
                 Guid id = webs.First().Id;
 
-                var webs2 = context.Web.Webs.Where(p => p.Id == id).ToList();
+                var webs2 = System.Linq.Queryable.Where(context.Web.Webs, p => p.Id == id).ToList();
                 Assert.IsTrue(webs2.Count == 1);
                 Assert.IsTrue(webs2.First().Id == webs.First().Id);
             }
@@ -2247,7 +2247,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                 var basePermissions = await context.Web.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
 
@@ -2273,7 +2273,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                 var hasPermissions = await context.Web.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
 

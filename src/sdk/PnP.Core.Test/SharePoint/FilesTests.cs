@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -33,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 // Get the default document library root folder
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == documentName);
+                IFile documentToFind = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocumentsFolder.Files, f => f.Name == documentName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(documentName, documentToFind.Name);
@@ -1990,7 +1990,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
 
                 string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
                 IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -2010,7 +2010,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
 
                 string fileName = TestCommon.GetPnPSdkTestAssetName("testchunked_added.docx");
 
@@ -4402,7 +4402,7 @@ namespace PnP.Core.Test.SharePoint
                 IFile addedFile = null;
                 try
                 {
-                    IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                    IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
 
                     string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
                     addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));

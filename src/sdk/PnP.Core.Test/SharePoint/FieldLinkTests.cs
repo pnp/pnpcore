@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -26,9 +26,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get existing content type
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.Name == "Document"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.Name == "Document")
                                             .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
@@ -51,9 +49,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Get existing content type
 
-                IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
-                                            where ct.Name == "Document"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.Lists.GetByTitle("Documents").ContentTypes, ct => ct.Name == "Document")
                                             .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
