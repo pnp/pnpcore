@@ -241,7 +241,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && l.Title.StartsWith("Test") == true);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && l.Title.StartsWith("Test"));
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
