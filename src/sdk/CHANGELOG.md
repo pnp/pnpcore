@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page API fix: changed flexible layout position from int to double #1688 [czullu - Christian Zuellig]
 - Page API fix: Load Page Type correctly to fix page header removal #1692 [A-Murchison - Adam Murchison]
 - Admin library: Apps and service principals that were used with sites.selected scopes/roles were wrongly flagged as ACS principals
+- Fix File.Approve method to work properly. It was doing the checkin operation instead. #1712 [gautamdsheth - Gautam Sheth]
 
 ## [1.15]
 
