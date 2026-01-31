@@ -1409,5 +1409,70 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Issue 1722 - GetFolder* methods throw wrong error
+
+        [TestMethod]
+        [ExpectedException(typeof(SharePointRestServiceException))]
+        public async Task GetFolderByServerRelativeUrl_NonExistentFolder_ShouldThrowCorrectException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                string nonExistentFolderUrl = $"{context.Uri.PathAndQuery}/NonExistentFolder12345";
+
+                try
+                {
+                    // This should throw an exception because the folder doesn't exist
+                    var folder = await context.Web.GetFolderByServerRelativeUrlAsync(nonExistentFolderUrl);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception Type: {ex.GetType().FullName}");
+                    Console.WriteLine($"Exception Message: {ex.Message}");
+                    if (ex is PnPException pnpEx && pnpEx.Error is SharePointRestError spError)
+                    {
+                        Console.WriteLine($"Error Message: {spError.Message}");
+                        Console.WriteLine($"Error Code: {spError.Code}");
+                        Console.WriteLine($"Server Error Code: {spError.ServerErrorCode}");
+                        Console.WriteLine($"HTTP Response Code: {spError.HttpResponseCode}");
+                    }
+                    throw;
+                }
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SharePointRestServiceException))]
+        public async Task GetFolderById_NonExistentFolder_ShouldThrowCorrectException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                // Use a random GUID that doesn't exist
+                Guid nonExistentFolderId = Guid.NewGuid();
+
+                try
+                {
+                    // This should throw an exception because the folder doesn't exist
+                    var folder = await context.Web.GetFolderByIdAsync(nonExistentFolderId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception Type: {ex.GetType().FullName}");
+                    Console.WriteLine($"Exception Message: {ex.Message}");
+                    if (ex is PnPException pnpEx && pnpEx.Error is SharePointRestError spError)
+                    {
+                        Console.WriteLine($"Error Message: {spError.Message}");
+                        Console.WriteLine($"Error Code: {spError.Code}");
+                        Console.WriteLine($"Server Error Code: {spError.ServerErrorCode}");
+                        Console.WriteLine($"HTTP Response Code: {spError.HttpResponseCode}");
+                    }
+                    throw;
+                }
+            }
+        }
+
+        #endregion
     }
 }

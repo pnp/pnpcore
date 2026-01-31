@@ -892,6 +892,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        internal static bool ErrorIndicatesFolderDoesNotExists(SharePointRestError error)
+        {
+            // SharePoint returns ERROR_FILE_NOT_FOUND (-2147024894) for both files and folders
+            if (error?.HttpResponseCode == 404 && error.ServerErrorCode == -2147024894)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
     }
 }
