@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page API fix: Load Page Type correctly to fix page header removal #1692 [A-Murchison - Adam Murchison]
 - Admin library: Apps and service principals that were used with sites.selected scopes/roles were wrongly flagged as ACS principals
 - Fix File.Approve method to work properly. It was doing the checkin operation instead. #1712 [gautamdsheth - Gautam Sheth]
+- Fixed folder not found errors to DirectoryNotFoundException. #1725 [ejazhussain - Ejaz Hussain]
 
 ## [1.15]
 
