@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Me;
 using PnP.Core.Model.SharePoint;
@@ -221,7 +221,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -430,7 +430,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -1265,7 +1265,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -1474,7 +1474,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -2309,7 +2309,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -2518,7 +2518,7 @@ namespace PnP.Core.Test.Me
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(folder.Files, o => o.Name == "test_added.docx");
                 if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));

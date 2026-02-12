@@ -1495,7 +1495,7 @@ namespace PnP.Core.Test.SharePoint
                 #region Test Setup
 
                 // Create a new list
-                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -1537,7 +1537,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList2 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context2.Web.Lists, p => p.Title == listTitle);
                 await myList2.LoadAsync(p => p.Items);
 
                 var first2 = myList2.Items.AsRequested().First();
@@ -1552,7 +1552,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList3 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context3.Web.Lists, p => p.Title == listTitle);
                 await myList3.LoadAsync(p => p.Items);
 
                 var first3 = myList3.Items.AsRequested().First();
@@ -1569,7 +1569,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList4 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context4.Web.Lists, p => p.Title == listTitle);
                 await myList4.LoadAsync(p => p.Items);
 
                 var first4 = myList4.Items.AsRequested().First();
@@ -1585,7 +1585,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var myList5 = await context5.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList5 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context5.Web.Lists, p => p.Title == listTitle);
                 await myList5.LoadAsync(p => p.Items);
 
                 var first5 = myList5.Items.AsRequested().First();
@@ -1597,7 +1597,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(contextFinal.Web.Lists, p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -1614,7 +1614,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 #region Test Setup
 
-                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -1656,7 +1656,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList2 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context2.Web.Lists, p => p.Title == listTitle);
                 await myList2.LoadAsync(p => p.Items);
 
                 var first2 = myList2.Items.AsRequested().First();
@@ -1670,7 +1670,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList3 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context3.Web.Lists, p => p.Title == listTitle);
                 await myList3.LoadAsync(p => p.Items);
 
                 var first3 = myList3.Items.AsRequested().First();
@@ -1685,7 +1685,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList4 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context4.Web.Lists, p => p.Title == listTitle);
                 await myList4.LoadAsync(p => p.Items);
 
                 var first4 = myList4.Items.AsRequested().First();
@@ -1698,7 +1698,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
-                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(contextFinal.Web.Lists, p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -5600,7 +5600,7 @@ namespace PnP.Core.Test.SharePoint
                     list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
 
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                     var basePermissions = await item.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
 
@@ -5629,7 +5629,7 @@ namespace PnP.Core.Test.SharePoint
                     list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
 
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                     var hasPermissions = await item.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
 

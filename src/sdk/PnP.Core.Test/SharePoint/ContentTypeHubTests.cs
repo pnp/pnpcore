@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -582,9 +582,9 @@ namespace PnP.Core.Test.SharePoint
 
                     (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(parentFolder: rootFolder);
 
-                    var categoriesField = await context.Web.Fields.FirstAsync(y => y.InternalName == "Categories").ConfigureAwait(false);
-                    var managersField = await context.Web.Fields.FirstAsync(y => y.InternalName == "ManagersName").ConfigureAwait(false);
-                    var documentCt = await context.Web.ContentTypes.FirstAsync(y => y.Name == "Document").ConfigureAwait(false);
+                    var categoriesField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "Categories").ConfigureAwait(false);
+                    var managersField = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.Fields, y => y.InternalName == "ManagersName").ConfigureAwait(false);
+                    var documentCt = await PnP.Core.QueryModel.QueryableExtensions.FirstAsync(context.Web.ContentTypes, y => y.Name == "Document").ConfigureAwait(false);
 
                     file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
@@ -679,9 +679,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IContentType contentType = (from ct in context.Web.ContentTypes
-                                            where ct.StringId == "0x0101"
-                                            select ct)
+                IContentType contentType = System.Linq.Queryable.Where(context.Web.ContentTypes, ct => ct.StringId == "0x0101")
                             .QueryProperties(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
                 var documentSet = contentType.AsDocumentSet();

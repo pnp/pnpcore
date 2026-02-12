@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -60,8 +60,8 @@ namespace PnP.Core.Test.Teams
             {
                 await context.Web.GetAsync(y => y.SiteUsers);
 
-                var firstUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).First();
-                var secondUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
+                var firstUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).First();
+                var secondUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
 
                 var eventOptions = new EventCreateOptions
                 {
@@ -184,8 +184,8 @@ namespace PnP.Core.Test.Teams
             {
                 await context.Web.GetAsync(y => y.SiteUsers);
 
-                var firstUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).First();
-                var secondUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
+                var firstUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).First();
+                var secondUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
 
                 var eventOptions = new EventCreateOptions
                 {
@@ -229,8 +229,8 @@ namespace PnP.Core.Test.Teams
             {
                 await context.Web.GetAsync(y => y.SiteUsers);
 
-                var firstUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).First();
-                var secondUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
+                var firstUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).First();
+                var secondUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
 
                 var eventOptions = new EventCreateOptions
                 {
@@ -492,8 +492,8 @@ namespace PnP.Core.Test.Teams
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var firstUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).First();
-                var secondUser = context.Web.SiteUsers.Where(y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
+                var firstUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).First();
+                var secondUser = System.Linq.Queryable.Where(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User).Skip(1).First();
 
                 var eventOptions = new EventCreateOptions
                 {

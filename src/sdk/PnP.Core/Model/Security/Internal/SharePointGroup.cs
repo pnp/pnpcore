@@ -188,7 +188,11 @@ namespace PnP.Core.Model.Security
             var result = false;
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                // Explicitly use the QueryableExtensions to resolve ambiguity
+                var roleDefinition = await QueryableExtensions.FirstOrDefaultAsync(
+                    PnPContext.Web.RoleDefinitions, 
+                    d => d.Name == name
+                ).ConfigureAwait(false);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/roleassignments/addroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);

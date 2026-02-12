@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -47,9 +47,7 @@ namespace PnP.Core.Test.SharePoint
                 //await context.Web.GetAsync(p => p.Lists);
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-                IField field = (from f in documents.Fields
-                                where f.Id == titleFieldId
-                                select f).FirstOrDefault();
+                IField field = System.Linq.Queryable.Where(documents.Fields, f => f.Id == titleFieldId).FirstOrDefault();
 
                 Assert.IsNotNull(field);
                 Assert.AreEqual("Title", field.Title);
@@ -2446,9 +2444,7 @@ namespace PnP.Core.Test.SharePoint
                 await field.UpdateAsync();
 
                 // Test if the content type is still found
-                IField fieldToFind = (from ct in documents.Fields
-                                      where ct.Title == "UPDATED"
-                                      select ct).FirstOrDefault();
+                IField fieldToFind = System.Linq.Queryable.Where(documents.Fields, ct => ct.Title == "UPDATED").FirstOrDefault();
 
                 Assert.IsNotNull(fieldToFind);
 
@@ -2472,9 +2468,7 @@ namespace PnP.Core.Test.SharePoint
                 await field.DeleteAsync();
 
                 // Test if the content type is still found
-                IField fieldToFind = (from ct in documents.Fields
-                                      where ct.Title == "TO DELETE FIELD"
-                                      select ct).FirstOrDefault();
+                IField fieldToFind = System.Linq.Queryable.Where(documents.Fields, ct => ct.Title == "TO DELETE FIELD").FirstOrDefault();
 
                 Assert.IsNull(fieldToFind);
             }
@@ -2510,9 +2504,7 @@ namespace PnP.Core.Test.SharePoint
                     displayField.SetShowInDisplayForm(false);
 
                     // Load the field again
-                    IField fieldToFind = (from f in myList.Fields
-                                          where f.Title == "DISPLAYFORMFIELD"
-                                          select f).FirstOrDefault();
+                    IField fieldToFind = System.Linq.Queryable.Where(myList.Fields, f => f.Title == "DISPLAYFORMFIELD").FirstOrDefault();
                     Assert.IsTrue(fieldToFind != null);
                     Assert.IsTrue(fieldToFind.SchemaXml.Contains("ShowInDisplayForm=\"FALSE\""));
                     
@@ -2522,9 +2514,7 @@ namespace PnP.Core.Test.SharePoint
                     editField.SetShowInEditForm(false);
 
                     // Load the field again
-                    IField editFieldToFind = (from f in myList.Fields
-                                          where f.Title == "EDITFORMFIELD"
-                                              select f).FirstOrDefault();
+                    IField editFieldToFind = System.Linq.Queryable.Where(myList.Fields, f => f.Title == "EDITFORMFIELD").FirstOrDefault();
                     Assert.IsTrue(editFieldToFind != null);
                     Assert.IsTrue(editFieldToFind.SchemaXml.Contains("ShowInEditForm=\"FALSE\""));
 
@@ -2534,9 +2524,7 @@ namespace PnP.Core.Test.SharePoint
                     newField.SetShowInNewForm(false);
 
                     // Load the field again
-                    IField newFieldToFind = (from f in myList.Fields
-                                              where f.Title == "NEWFORMFIELD"
-                                              select f).FirstOrDefault();
+                    IField newFieldToFind = System.Linq.Queryable.Where(myList.Fields, f => f.Title == "NEWFORMFIELD").FirstOrDefault();
                     Assert.IsTrue(newFieldToFind != null);
                     Assert.IsTrue(newFieldToFind.SchemaXml.Contains("ShowInNewForm=\"FALSE\""));
                 }

@@ -26,7 +26,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 var currentGraphFirstSetting = Web.PnPContext.GraphFirst;
                 Web.PnPContext.GraphFirst = false;
-                modelLibrary = await Web.Lists.Where(p => p.TemplateType == (ListTemplateType)1328).FirstOrDefaultAsync().ConfigureAwait(false);
+                modelLibrary = await ((IQueryable<IList>)Web.Lists)
+                    .Where(p => p.TemplateType == (ListTemplateType)1328)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
                 Web.PnPContext.GraphFirst = currentGraphFirstSetting;
             }
 

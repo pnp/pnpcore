@@ -23,9 +23,7 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = from c in context.Team.Channels
-                            where c.DisplayName == expectedDisplayName
-                            select c;
+                var query = System.Linq.Queryable.Where(context.Team.Channels, c => c.DisplayName == expectedDisplayName);
 
                 var queryResult = query.ToList();
 

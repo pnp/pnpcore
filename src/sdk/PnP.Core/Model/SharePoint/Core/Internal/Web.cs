@@ -1595,7 +1595,7 @@ namespace PnP.Core.Model.SharePoint
                 return false;
             }
 
-            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var roleDefinitions = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(PnPContext.Web.RoleDefinitions).ConfigureAwait(false);
             var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {

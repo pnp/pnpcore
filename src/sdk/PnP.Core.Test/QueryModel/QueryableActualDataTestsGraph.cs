@@ -41,8 +41,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = true;
 
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
@@ -65,9 +64,7 @@ namespace PnP.Core.Test.QueryModel
                 {
                     context.GraphFirst = true;
 
-                    var query = (from i in context.Web.Lists.GetByTitle(listName).Items
-                                 where i.Title == itemTitle
-                                 select i)
+                    var query = System.Linq.Queryable.Where(context.Web.Lists.GetByTitle(listName).Items, i => i.Title == itemTitle)
                                  .QueryProperties(l => l.Id, l => l.Title);
 
                     var queryResult = query.ToList();
@@ -120,8 +117,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = true;
 
-                var actual = (from l in context.Web.Lists
-                              select l)
+                var actual = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                              .QueryProperties(l => l.Id, l => l.Title)
                              .FirstOrDefault(l => l.Title == expected);
 
@@ -140,9 +136,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = true;
 
-                var actual = (from l in context.Web.Lists
-                              where l.Title == expected
-                              select l).FirstOrDefault();
+                var actual = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title == expected).FirstOrDefault();
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);

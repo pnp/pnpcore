@@ -84,8 +84,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get the whole set of lists via LINQ - shoudl use Graph and should contain the "Site Pages" system list
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
@@ -105,8 +104,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
@@ -131,8 +129,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get the whole set of lists via LINQ
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
@@ -147,7 +144,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Now add a new list
                 string listTitle = "TestQueryListsConsistency";
-                var newList = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == listTitle);
+                var newList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, l => l.Title == listTitle);
 
                 if (newList != null)
                 {
@@ -182,8 +179,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get the whole set of lists via LINQ
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
@@ -241,8 +237,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get the whole set of lists via LINQ
-                var query = (from l in context.Web.Lists
-                             select l)
+                var query = System.Linq.Queryable.Select(context.Web.Lists, l => l)
                             .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
@@ -313,9 +308,7 @@ namespace PnP.Core.Test.QueryModel
                 var sitePages = context.Web.Lists.GetByTitle("Site Pages");
 
                 // Retrieve a single item via LINQ query
-                var query = (from i in sitePages.Items
-                             where i.Title == expectedListItemTitle
-                             select i)
+                var query = System.Linq.Queryable.Where(sitePages.Items, i => i.Title == expectedListItemTitle)
                              .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
@@ -365,8 +358,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Retrieve all the list items via LINQ query
-                var query = (from i in myList.Items
-                             select i)
+                var query = System.Linq.Queryable.Select(myList.Items, i => i)
                              .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
@@ -423,8 +415,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Retrieve all the list items via LINQ query
-                var query = (from i in myList.Items
-                             select i)
+                var query = System.Linq.Queryable.Select(myList.Items, i => i)
                              .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
@@ -485,8 +476,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Retrieve all the list items via LINQ query
-                var query = (from i in myList.Items
-                             select i)
+                var query = System.Linq.Queryable.Select(myList.Items, i => i)
                              .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();

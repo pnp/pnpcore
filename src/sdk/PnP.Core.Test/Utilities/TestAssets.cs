@@ -1,4 +1,4 @@
-﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
@@ -309,16 +309,14 @@ namespace PnP.Core.Test.Utilities
             {
                 if (fromSiteCollection)
                 {
-                    var foundUserCustomAction = await context.Site.UserCustomActions.Where(p => p.Name == customActionName).FirstOrDefaultAsync();
+                    var foundUserCustomAction = await System.Linq.Queryable.Where(context.Site.UserCustomActions, p => p.Name == customActionName).FirstOrDefaultAsync();
                     await foundUserCustomAction.DeleteAsync();
                 }
                 else
                 {
                     // Just to show a different syntex doing the same
                     var web = await context.Web.GetAsync(w => w.UserCustomActions);
-                    var query = from uca in web.UserCustomActions
-                                where uca.Name == customActionName
-                                select uca;
+                    var query = System.Linq.Queryable.Where(web.UserCustomActions, uca => uca.Name == customActionName);
                     IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
                     await foundUserCustomAction.DeleteAsync();
                 }

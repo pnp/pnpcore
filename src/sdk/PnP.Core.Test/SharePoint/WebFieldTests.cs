@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -44,9 +44,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-                IField field = (from f in context.Web.Fields
-                                where f.Id == titleFieldId
-                                select f).FirstOrDefault();
+                IField field = System.Linq.Queryable.Where(context.Web.Fields, f => f.Id == titleFieldId).FirstOrDefault();
 
                 Assert.IsNotNull(field);
                 Assert.AreEqual("Title", field.Title);
@@ -226,9 +224,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IField field = (from f in context.Web.Fields
-                                where f.Title == fieldName
-                                select f).FirstOrDefault();
+                IField field = System.Linq.Queryable.Where(context.Web.Fields, f => f.Title == fieldName).FirstOrDefault();
 
                 Assert.IsNotNull(field);
                 Assert.AreEqual(clientSideComponentId, field.ClientSideComponentId);
@@ -599,9 +595,7 @@ namespace PnP.Core.Test.SharePoint
                 await field.UpdateAsync();
 
                 // Test if the content type is still found
-                IField fieldToFind = (from ct in context.Web.Fields
-                                      where ct.Title == "UPDATED"
-                                      select ct).FirstOrDefault();
+                IField fieldToFind = System.Linq.Queryable.Where(context.Web.Fields, ct => ct.Title == "UPDATED").FirstOrDefault();
 
                 Assert.IsNotNull(fieldToFind);
 
@@ -624,9 +618,7 @@ namespace PnP.Core.Test.SharePoint
                 await field.DeleteAsync();
 
                 // Test if the content type is still found
-                IField fieldToFind = (from ct in context.Web.Fields
-                                      where ct.Title == "TO DELETE FIELD"
-                                      select ct).FirstOrDefault();
+                IField fieldToFind = System.Linq.Queryable.Where(context.Web.Fields, ct => ct.Title == "TO DELETE FIELD").FirstOrDefault();
 
                 Assert.IsNull(fieldToFind);
             }
@@ -651,13 +643,13 @@ namespace PnP.Core.Test.SharePoint
                 });
 
                 // request it again, since not all properties are mapped on the initail creation request
-                var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+                var newField = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Fields, f => f.Title == fieldTitle);
 
                 Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
                 Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
                 Assert.IsTrue(newField.IsTermSetValid);
 
-                var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+                var fieldsToDelete = await System.Linq.Queryable.Where(context.Web.Fields, f => f.Title.StartsWith("tax_test")).ToListAsync();
 
                 foreach (var field in fieldsToDelete)
                 {
@@ -694,7 +686,7 @@ namespace PnP.Core.Test.SharePoint
                     });
 
                     // request it again, since not all properties are mapped on the initail creation request
-                    var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+                    var newField = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Fields, f => f.Title == fieldTitle);
 
                     Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
                     Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
@@ -705,7 +697,7 @@ namespace PnP.Core.Test.SharePoint
                     newField.DefaultValue = $"-1;#{term2.Labels.First(p => p.IsDefault == true).Name}|{term2.Id}";
                     await newField.UpdateAsync();
 
-                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+                    newField = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Fields, f => f.Title == fieldTitle);
 
                     Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
                     Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
@@ -720,7 +712,7 @@ namespace PnP.Core.Test.SharePoint
                         DefaultValues = new System.Collections.Generic.List<ITerm>() { term1, term2 }
                     });
 
-                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+                    newField = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Fields, f => f.Title == fieldTitle);
 
                     Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
                     Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
@@ -731,7 +723,7 @@ namespace PnP.Core.Test.SharePoint
                 }
                 finally
                 {
-                    var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+                    var fieldsToDelete = await System.Linq.Queryable.Where(context.Web.Fields, f => f.Title.StartsWith("tax_test")).ToListAsync();
 
                     foreach (var field in fieldsToDelete)
                     {
@@ -768,7 +760,7 @@ namespace PnP.Core.Test.SharePoint
                     });
 
                     // request it again, since not all properties are mapped on the initail creation request
-                    var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+                    var newField = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Fields, f => f.Title == fieldTitle);
 
                     Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
                     Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
@@ -777,7 +769,7 @@ namespace PnP.Core.Test.SharePoint
                 }
                 finally
                 {
-                    var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+                    var fieldsToDelete = await System.Linq.Queryable.Where(context.Web.Fields, f => f.Title.StartsWith("tax_test")).ToListAsync();
 
                     foreach (var field in fieldsToDelete)
                     {

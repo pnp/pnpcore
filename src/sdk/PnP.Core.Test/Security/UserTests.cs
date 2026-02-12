@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
@@ -133,12 +133,12 @@ namespace PnP.Core.Test.Security
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-                    var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                    var testUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User && p.Mail != "");
                     var graphUser = await testUser.AsGraphUserAsync();
 
-                    var toUser = await context.Web.SiteUsers.Skip(1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
-                    var ccUser = await context.Web.SiteUsers.Skip(2).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
-                    var bccUser = await context.Web.SiteUsers.Skip(3).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                    var toUser = await System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                    var ccUser = await System.Linq.Queryable.Skip(context.Web.SiteUsers, 2).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                    var bccUser = await System.Linq.Queryable.Skip(context.Web.SiteUsers, 3).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
 
                     await graphUser.SendMailAsync(
                         new MailOptions
@@ -195,10 +195,10 @@ namespace PnP.Core.Test.Security
                 {
                     using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                     {
-                        var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                        var testUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User && p.Mail != "");
                         var graphUser = await testUser.AsGraphUserAsync();
 
-                        var toUser = await context.Web.SiteUsers.Skip(1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
+                        var toUser = await System.Linq.Queryable.Skip(context.Web.SiteUsers, 1).FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User && p.Mail != "");
 
                         var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
@@ -256,7 +256,7 @@ namespace PnP.Core.Test.Security
 
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                    var testUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User);
                     var graphUser = await testUser.AsGraphUserAsync();
 
                     MailOptions mailOptions = null;
@@ -307,7 +307,7 @@ namespace PnP.Core.Test.Security
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var testUser = await context.Web.SiteUsers.FirstOrDefaultAsync(p => p.PrincipalType == PrincipalType.User);
+                var testUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, p => p.PrincipalType == PrincipalType.User);
                 var graphUser = await testUser.AsGraphUserAsync();
 
                 MailOptions mailOptions = new()

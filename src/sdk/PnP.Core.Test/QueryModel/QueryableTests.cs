@@ -23,8 +23,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = context.Site.AllWebs
-                    .Take(10);
+                var query = System.Linq.Queryable.Take(context.Site.AllWebs, 10);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -39,8 +38,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = context.Site.AllWebs
-                    .Skip(10);
+                var query = System.Linq.Queryable.Skip(context.Site.AllWebs, 10);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -122,9 +120,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Site.AllWebs
-                             where w.Title == "Test"
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Site.AllWebs, w => w.Title == "Test");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -140,9 +136,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Site.AllWebs
-                             where w.Title == "Test" && w.Id == filteredId
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Site.AllWebs, w => w.Title == "Test" && w.Id == filteredId);
 
                 // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
@@ -158,9 +152,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Site.AllWebs
-                             where w.Title == "Test"
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Site.AllWebs, w => w.Title == "Test");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -176,11 +168,9 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Site.AllWebs
-                             where w.Title == "Test" &&
+                var query = System.Linq.Queryable.Where(context.Site.AllWebs, w => w.Title == "Test" &&
                                 w.Description == "Description" &&
-                                w.Id == filteredId
-                             select w);
+                                w.Id == filteredId);
 
                 // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
@@ -199,9 +189,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var query = (from w in context.Web.Lists
-                             where w.Id == new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e")
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, w => w.Id == new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e"));
 
                 // This defaults to the Graph Query model, hence the expected value uses the Graph output
                 var actual = query.ToString();
@@ -219,9 +207,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Title.StartsWith("Test") && l.Description == "Test"
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title.StartsWith("Test") && l.Description == "Test");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -238,9 +224,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Title.StartsWith("Test") == true && l.Description == "Test"
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Title.StartsWith("Test") == true && l.Description == "Test");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -257,9 +241,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Description == "Test" && l.Title.StartsWith("Test")
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && l.Title.StartsWith("Test"));
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -276,9 +258,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Description == "Test" || l.Title.StartsWith("Test")
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" || l.Title.StartsWith("Test"));
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -295,9 +275,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Description == "Test" && !l.Title.StartsWith("Test")
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && !l.Title.StartsWith("Test"));
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -314,9 +292,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Description == "Test" && !l.Title.StartsWith("Test") && l.Hidden
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && !l.Title.StartsWith("Test") && l.Hidden);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -333,9 +309,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from l in context.Web.Lists
-                             where l.Description == "Test" && l.Title.StartsWith("Test") && !l.Hidden
-                             select l);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, l => l.Description == "Test" && l.Title.StartsWith("Test") && !l.Hidden);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -351,9 +325,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Web.Lists
-                             where w.Hidden
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, w => w.Hidden);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -369,9 +341,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Web.Lists
-                             where w.Hidden && w.Title == "Hello"
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, w => w.Hidden && w.Title == "Hello");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -387,9 +357,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Web.Lists
-                             where !w.Hidden && w.Title == "Hello"
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, w => !w.Hidden && w.Title == "Hello");
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -405,9 +373,7 @@ namespace PnP.Core.Test.QueryModel
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var query = (from w in context.Web.Lists
-                             where !w.Hidden
-                             select w);
+                var query = System.Linq.Queryable.Where(context.Web.Lists, w => !w.Hidden);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
