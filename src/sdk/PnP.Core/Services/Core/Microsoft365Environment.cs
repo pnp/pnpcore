@@ -41,6 +41,21 @@
         USGovernmentDoD = 6,
 
         /// <summary>
+        /// French sovereign cloud environment,A joint venture between Orange and Capgemini, designed to meet SecNumCloud requirements , see https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds
+        /// </summary>
+        BleuCloud = 7,
+
+        /// <summary>
+        /// Represents the Delos Cloud environment option. Operated by an SAP subsidiary, aligned with German Cloud Platform Requirements, see see https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds
+        /// </summary>
+        DelosCloud = 8,
+
+        /// <summary>
+        /// Represents the GovSG Cloud environment option. Operated by a Singaporean government-owned company, aligned with Singapore's Sovereign Cloud Framework, see https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds
+        /// </summary>
+        GovSGCloud = 9,
+
+        /// <summary>
         /// Custom cloud configuration, specify the endpoints manually
         /// </summary>
         Custom = 100
