@@ -46,8 +46,8 @@
         BleuCloud = 7,
 
         /// <summary>
-        /// Represents the Delos Cloud environment option. Operated by an SAP subsidiary, aligned with German Cloud Platform Requirements, see see https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds
-        /// </summary>
+        /// Represents the Delos Cloud environment option. Operated by an SAP subsidiary and aligned with German Cloud Platform Requirements.
+        /// See https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds for more information.
         DelosCloud = 8,
 
         /// <summary>
