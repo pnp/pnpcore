@@ -85,16 +85,22 @@
 <p>This solution aims at showing you how you can use PnP Core SDK using the minimal amount of configuration and code.</p>
 <h2 id="source-code">Source code</h2>
 <p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Console.Minimal">/samples/Demo.Console.Minimal</a></p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>This sample was created with <a href="https://visualstudio.microsoft.com/vs/">Visual Studio 2022</a> using <a href="https://dotnet.microsoft.com/">.NET 6.0</a>.</p>
-</div>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>.NET 10.0 SDK or higher installed. You can download it from <a href="https://dotnet.microsoft.com/download">https://dotnet.microsoft.com/download</a></li>
+</ul>
+<h3 id="additional-prerequisites-for-visual-studio-code">Additional prerequisites for Visual Studio Code</h3>
+<p>In order to run and debug this sample in Visual Studio Code you need to install the following extensions:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">C#</a></li>
+</ul>
 <h2 id="sample-configuration">Sample configuration</h2>
-<h3 id="create-an-azure-ad-application">Create an Azure AD application</h3>
+<h3 id="step-1-create-an-azure-ad-application">Step 1) Create an Azure AD application</h3>
 <p>The one thing to configure before you can use this sample is an Azure AD application:</p>
 <ol>
-<li>Navigate to <a href="https://aad.portal.azure.com">https://aad.portal.azure.com</a></li>
-<li>Click on <strong>Azure Active Directory</strong>, followed by navigating to <strong>App registrations</strong></li>
+<li>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></li>
+<li>Click on <strong>Entra ID</strong>, followed by navigating to <strong>App registrations</strong></li>
 <li>Add a new application via the <strong>New registration</strong> link</li>
 <li>Give your application a name, e.g. PnPCoreSDKConsoleDemo and add <strong>http://localhost</strong> as redirect URI. Clicking on <strong>Register</strong> will create the application and open it</li>
 <li>Take note of the <strong>Application (client) ID</strong> value, you'll need it in the next step</li>
@@ -106,53 +112,14 @@
 </li>
 <li>Consent the application permissions by clicking on <strong>Grant admin consent</strong></li>
 </ol>
-<h3 id="configure-the-application">Configure the application</h3>
-<p>Open <strong>Program.cs</strong> and update the value assigned to the <code>clientId</code> and <code>siteUrl</code> variables to the created Azure AD client id and valid site URL for your tenant.</p>
-<pre><code class="lang-csharp">using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using PnP.Core.Auth;
-using PnP.Core.Services;
-
-string clientId = &quot;c6b15c83-d569-4514-b4af-d433110123de&quot;;
-string siteUrl = &quot;https://bertonline.sharepoint.com/sites/prov-1&quot;;
-
-// Creates and configures the host
-var host = Host.CreateDefaultBuilder()
-    .ConfigureServices((context, services) =&gt; 
-    {
-        // Add PnP Core SDK
-        services.AddPnPCore(options =&gt;
-        {
-            // Configure the interactive authentication provider as default
-            options.DefaultAuthenticationProvider = new InteractiveAuthenticationProvider()
-            {
-                ClientId = clientId,
-                RedirectUri = new Uri(&quot;http://localhost&quot;)
-            };
-        });
-    })
-    .UseConsoleLifetime()
-    .Build();
-
-// Start the host
-await host.StartAsync();
-
-using (var scope = host.Services.CreateScope())
-{
-    // Ask an IPnPContextFactory from the host
-    var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
-
-    // Create a PnPContext
-    using (var context = await pnpContextFactory.CreateAsync(new Uri(siteUrl)))
-    {
-        // Load the Title property of the site's root web
-        await context.Web.LoadAsync(p =&gt; p.Title);
-        Console.WriteLine($&quot;The title of the web is {context.Web.Title}&quot;);
-    }
-}
-</code></pre>
-<h2 id="run-the-sample">Run the sample</h2>
+<h3 id="step-2-configure-the-application">Step 2) Configure the application</h3>
+<p>Open <strong>Program.cs</strong> and update the value assigned to the <code>clientId</code>, <code>tenantId</code>, and <code>siteUrl</code> variables to the created Entra Id client id, tenant id, and valid site URL for your tenant.</p>
+<h2 id="step-3-run-the-sample">Step 3) Run the sample</h2>
+<h3 id="visual-studio-code-and-visual-studio">Visual Studio Code and Visual Studio</h3>
 <p>Press <strong>F5</strong> to launch the sample. A new browser window/tab will open asking you to authenticate with your Microsoft 365 account. Once you've done that the application will get the title of the site and display it.</p>
+<h3 id="terminal">Terminal</h3>
+<p>First you will need to build the project by running <code>dotnet build</code> in the project folder. Once the build is successful you can run the sample by executing <code>dotnet run</code> in the same folder. A new browser window/tab will open asking you to authenticate with your Microsoft 365 account. Once you've done that the application will get the title of the site and display it.</p>
+<h2 id="example-output">Example output</h2>
 <p><img src="preview.png" alt="Console output"></p>
 </article>
           </div>
