@@ -1,24 +1,36 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PnP.Core.Auth;
+using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
 
-string clientId = "c6b15c83-d569-4514-b4af-d433110123de";
-string siteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
+string clientId = "<YourClientId>";
+string tenantId = "<YourTenantId>";
+string siteUrl = "<YourSiteUrl>";
 
 // Creates and configures the host
 var host = Host.CreateDefaultBuilder()
     .ConfigureServices((context, services) => 
     {
         // Add PnP Core SDK
-        services.AddPnPCore(options =>
+        services.AddPnPCore();
+        
+        // Add PnP Core SDK Authentication
+        services.AddPnPCoreAuthentication(options =>
         {
-            // Configure the interactive authentication provider as default
-            options.DefaultAuthenticationProvider = new InteractiveAuthenticationProvider()
-            {
-                ClientId = clientId,
-                RedirectUri = new Uri("http://localhost")
-            };
+            // Configure interactive authentication
+            options.Credentials.Configurations.Add("interactive",
+                new PnPCoreAuthenticationCredentialConfigurationOptions
+                {
+                    ClientId = clientId,
+                    TenantId = tenantId,
+                    Interactive = new PnPCoreAuthenticationInteractiveOptions
+                    {
+                        RedirectUri = new Uri("http://localhost")
+                    }
+                });
+
+            // Set as default configuration
+            options.Credentials.DefaultConfiguration = "interactive";
         });
     })
     .UseConsoleLifetime()
