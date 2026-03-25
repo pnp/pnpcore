@@ -1931,54 +1931,60 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            // Persist the page header
-            if (pageHeader.Type == PageHeaderType.None)
+            // Persist the page header (Home layout pages do not support a banner header, so skip entirely)
+            if (LayoutType != PageLayoutType.Home)
             {
-                // Only set the page header to "old" empty page header when there's no one column full width section present. A one column full width section
-                // with a banner web part is considered to be a page header
-                if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth) == false)
+                if (pageHeader.Type == PageHeaderType.None)
                 {
-                    PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.NoHeader(pageTitle);
-                }
+                    // For pages with no header, write an empty LayoutWebpartsContent instead of the legacy NoHeader() HTML.
+                    // Writing NoHeader() triggers SharePoint's MC791596 Page Title Web Part migration: when the page is
+                    // first opened in the browser SharePoint converts the old header HTML into a Banner web part in
+                    // CanvasContent1, resulting in an unwanted full-width title section appearing on the page.
+                    // An empty string correctly signals "no header" without triggering the migration.
+                    if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth) == false)
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = string.Empty;
+                    }
 
-                if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
-                {
-                    PageListItem[PageConstants._AuthorByline] = null;
-                }
-                if (PageListItem.Values.ContainsKey(PageConstants._TopicHeader))
-                {
-                    PageListItem[PageConstants._TopicHeader] = null;
-                }
-            }
-            else
-            {
-                if (pageHeader.Type == PageHeaderType.PageTitleWebPart)
-                {
-                    PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.PageTitleWebPartHeader();
+                    if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
+                    {
+                        PageListItem[PageConstants._AuthorByline] = null;
+                    }
+                    if (PageListItem.Values.ContainsKey(PageConstants._TopicHeader))
+                    {
+                        PageListItem[PageConstants._TopicHeader] = null;
+                    }
                 }
                 else
                 {
-                    PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
-                }
+                    if (pageHeader.Type == PageHeaderType.PageTitleWebPart)
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.PageTitleWebPartHeader();
+                    }
+                    else
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
+                    }
 
-                // AuthorByline depends on a field holding the author values
-                var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
-                if (pageHeader.AuthorByLineId > -1)
-                {
-                    var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
-                    fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
-                    PageListItem[PageConstants._AuthorByline] = fieldUsers;
-                }
-                else
-                {
-                    // Ensure there's an empty collection set
-                    PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField);
-                }
+                    // AuthorByline depends on a field holding the author values
+                    var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                    if (pageHeader.AuthorByLineId > -1)
+                    {
+                        var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
+                        fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
+                        PageListItem[PageConstants._AuthorByline] = fieldUsers;
+                    }
+                    else
+                    {
+                        // Ensure there's an empty collection set
+                        PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField);
+                    }
 
-                // Topic header needs to be persisted in a field
-                if (!string.IsNullOrEmpty(pageHeader.TopicHeader))
-                {
-                    PageListItem[PageConstants._TopicHeader] = PageHeader.TopicHeader;
+                    // Topic header needs to be persisted in a field
+                    if (!string.IsNullOrEmpty(pageHeader.TopicHeader))
+                    {
+                        PageListItem[PageConstants._TopicHeader] = PageHeader.TopicHeader;
+                    }
                 }
             }
 
