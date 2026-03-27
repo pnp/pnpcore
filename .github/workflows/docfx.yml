@@ -9,7 +9,9 @@ jobs:
   # This workflow contains a single job called "build"
   docfx:
     # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # prevent parallel executions
@@ -19,25 +21,24 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
     # Checks-out dev branch
     - name: Checkout dev branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         ref: dev
         path: dev
     # Checks-out gh-pages branch
-    - name: Checkout dev branch
-      uses: actions/checkout@v2
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v4
       with: 
         ref: gh-pages
         path: gh-pages
-    # Install docfx, stick with version 2.51 as higher versions result in https://github.com/dotnet/docfx/issues/5785 > fixed in 2.56.4+
+    # Setup .NET (required for DocFx)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    # Install docfx as a .NET global tool
     - name: Install dependencies
-      run: |
-        wget https://github.com/dotnet/docfx/releases/download/v2.59.2/docfx.zip
-        sudo unzip docfx.zip -d /usr/local/lib/docfx
-        rm docfx.zip
-        echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx
-        echo 'exec `which mono` $MONO_OPTIONS /usr/local/lib/docfx/docfx.exe "$@"' | sudo tee -a /usr/local/bin/docfx
-        sudo chmod +x /usr/local/bin/docfx
+      run: dotnet tool install -g docfx --version 2.78.5
     # Build docs
     - name: Build docs
       shell: pwsh

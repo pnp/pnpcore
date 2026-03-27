@@ -179,3 +179,69 @@ $(function (){
         }
     });
 });
+
+$(function () {
+    var copyToClipboard = function (text) {
+        // Create a textblock and assign the text and add to document
+        var el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.style.display = "block";
+
+        // select the entire textblock
+        el.select();
+
+        // copy to clipboard
+        document.execCommand('copy');
+
+        // clean up element
+        document.body.removeChild(el);
+    }
+
+    $("code.hljs").each(function () {
+        var $this = $(this);
+        var match = /lang-(.+?)(\s|$)/.exec($this.attr("class"));
+        if (!match) {
+            return;
+        }
+        var language = match[1].toUpperCase();
+        if (language === 'CS') {
+            language = "C#";
+        }
+        if (language === 'JS') {
+            language = "JavaScript";
+        }
+        if (language === 'POWERSHELL') {
+            language = "PowerShell"
+        }
+        if (language === 'BAT') {
+            language = "Bat"
+        }
+        if (language === 'BASH') {
+            language = "Bash"
+        }
+        if (language !== 'YAML') {
+            var $codeHeader = $(
+                '<div class="code-header">' +
+                '    <span class="language">' + language + '</span>' +
+                '    <button type="button" class="action" aria-label="Copy code">' +
+                '		<span class="icon"><span class="glyphicon glyphicon-duplicate" role="presentation"></span></span>' +
+                '		<span>Copy</span>' +
+                '		<div class="successful-copy-alert is-transparent" aria-hidden="true">' +
+                '			<span class="icon is-size-large">' +
+                '				<span class="glyphicon glyphicon-ok" role="presentation"></span>' +
+                '			</span>' +
+                '		</div>' +
+                '	</button>' +
+                '</div>'
+            );
+            $this.closest("pre").before($codeHeader);
+            $codeHeader.find("button").click(function () {
+                copyToClipboard($this.closest("pre").text());
+                var successAlert = $(this).find(".successful-copy-alert");
+                successAlert.removeClass("is-transparent");
+                setTimeout(function () { successAlert.addClass("is-transparent"); }, 2000);
+            });
+        }
+    });
+});
