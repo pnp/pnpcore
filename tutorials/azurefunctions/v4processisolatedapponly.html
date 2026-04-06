@@ -1,29 +1,29 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html lang="en">
-  
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.59.2.0">
-    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <meta name="generator" content="docfx ">
+  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <meta property="docfx:navrel" content="../../toc.html">
     <meta property="docfx:tocrel" content="../toc.html">
-    
-    <meta property="docfx:rel" content="../../">
-    <meta property="docfx:newtab" content="true">
+  
+  <meta property="docfx:rel" content="../../">
+  <meta property="docfx:newtab" content="true">
   </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../index.html">
                 <img id="logo" class="svg" src="../../images/logo.svg" alt="">
               </a>
@@ -47,7 +47,7 @@
               </form>
             </div>
           </div>
-        </nav>        
+        </nav>
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,17 +57,17 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,10 +77,11 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+                
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/tutorials/azurefunctions/v4processisolatedapponly.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/tutorials/azurefunctions/v4processisolatedapponly.md/#L1" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="build-an-v4-azure-function-that-runs-as-an-isolated-process-while-using-application-app-only-permissions">Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions</h1>
+  <h1 id="build-an-v4-azure-function-that-runs-as-an-isolated-process-while-using-application-app-only-permissions">Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions</h1>
 
 <p>PnP Core SDK works great in Azure functions and this tutorial will walk you through the needed steps to create an <a href="https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process">.NET 6.0 Azure V4 function which runs as an isolated process</a>. Process isolation is a feature in Azure Functions that will ensure your function code will not collide with the code already loaded by the Azure Function host process.</p>
 <h2 id="pre-requisites">Pre-requisites</h2>
@@ -525,6 +526,7 @@ using System.Web;
 </ul>
 <p>The final result will be something along these lines:</p>
 <p><code>https://myfunctionapphost.azurewebsites.net/api/CreateSite?code=OerO/tVAIGbCacM1e6PYi6MsH5rsHmzpjUmZMlKTYayDhcYMJ9zjZw==&amp;owner=joe@contoso.onmicrosoft.com&amp;sitename=azurefunctiondemo001</code></p>
+
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
@@ -534,7 +536,7 @@ using System.Web;
             </div>
           </div>        </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -542,16 +544,14 @@ using System.Web;
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-            
-            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+      
+            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
           </div>
         </div>
       </footer>    </div>
-    
-    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../styles/docfx.js"></script>
-    <script type="text/javascript" src="../../styles/main.js"></script>    
-    <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs">
-  </body>
+    <script type="text/javascript" src="../../styles/main.js"></script>  </body>
 </html>

@@ -1,31 +1,29 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html lang="en">
-  
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class BaseQueryProvider
-   | PnP Core SDK </title>
+    <title>Class BaseQueryProvider | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class BaseQueryProvider
-   | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.59.2.0">
-    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <meta name="title" content="Class BaseQueryProvider | PnP Core SDK ">
+    <meta name="generator" content="docfx ">
+  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    <meta property="docfx:newtab" content="true">
+  
+  <meta property="docfx:rel" content="../">
+  <meta property="docfx:newtab" content="true">
   </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -35,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../images/logo.svg" alt="">
               </a>
@@ -49,7 +47,7 @@
               </form>
             </div>
           </div>
-        </nav>        
+        </nav>
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -59,17 +57,17 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -79,558 +77,592 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.QueryModel.BaseQueryProvider">
+                
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L17" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_QueryModel_BaseQueryProvider" data-uid="PnP.Core.QueryModel.BaseQueryProvider">Class BaseQueryProvider
-  </h1>
+  
+  <h1 id="PnP_Core_QueryModel_BaseQueryProvider" data-uid="PnP.Core.QueryModel.BaseQueryProvider">Class BaseQueryProvider</h1>
   <div class="markdown level0 summary"><p>Base abstract class to implement the basic logic of an IQueryProvider</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><span class="xref">BaseQueryProvider</span></div>
   </div>
-  
-  
-  
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.QueryModel.html">PnP.Core.QueryModel</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-  
-  <h5 id="PnP_Core_QueryModel_BaseQueryProvider_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseQueryProvider : object, IAsyncQueryProvider</code></pre>
+
+
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
   </div>
 
-  
-  
-  
-  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.QueryModel.html">QueryModel</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+
+  <h5 id="PnP_Core_QueryModel_BaseQueryProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang- hljs">public abstract class BaseQueryProvider : IAsyncQueryProvider, IQueryProvider</code></pre>
+  </div>
+
+
+
+
+
   <h3 id="methods">Methods
-  </h3>
-  
+</h3>
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync%60%601(Expression%2CPnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_System_Linq_Expressions_Expression_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync%60%601(System.Linq.Expressions.Expression%2CPnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync``1(Expression,PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">AddToBatchAsync&lt;TResult&gt;(Expression, Batch)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_System_Linq_Expressions_Expression_PnP_Core_Services_Batch_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync``1(System.Linq.Expressions.Expression,PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_System_Linq_Expressions_Expression_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">AddToBatchAsync&lt;TResult&gt;(Expression, Batch)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_System_Linq_Expressions_Expression_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds the expression to the batch specified</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract Task&lt;IEnumerableBatchResult&lt;TResult&gt;&gt; AddToBatchAsync&lt;TResult&gt;(Expression expression, Batch batch)</code></pre>
+    <pre><code class="lang- hljs">public abstract Task&lt;IEnumerableBatchResult&lt;TResult&gt;&gt; AddToBatchAsync&lt;TResult&gt;(Expression expression, Batch batch)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
-        <p>
+        <p></p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
         <span class="parametername">batch</span>
-        <p>
+        <p></p>
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TResult&gt;&gt;
-        <p>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TResult&gt;&gt;
+        <p></p>
       </td>
     </tr>
   </table>
-  
+
   <h5 class="typeParameters">Type Parameters</h5>
   <table>
     <tr>
       <td>
         <span class="parametername">TResult</span>
-        <p>
+        <p></p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
+
+
+
+
+
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_">IAsyncQueryProvider.AddToBatchAsync&lt;TResult&gt;(Expression, Batch)</a></div>
-  
-  
-  
-  
+      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToBatchAsync__1_System_Linq_Expressions_Expression_PnP_Core_Services_Batch_">IAsyncQueryProvider.AddToBatchAsync&lt;TResult&gt;(Expression, Batch)</a></div>
+
+
+
+
   </div>
-  
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync%60%601(Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync%60%601(System.Linq.Expressions.Expression)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync``1(Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_Expression_" class="expander" data-toggle="collapse">AddToCurrentBatchAsync&lt;TResult&gt;(Expression)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_Expression_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_System_Linq_Expressions_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync``1(System.Linq.Expressions.Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_System_Linq_Expressions_Expression_" class="expander" data-toggle="collapse">AddToCurrentBatchAsync&lt;TResult&gt;(Expression)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync__1_System_Linq_Expressions_Expression_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds the expression to the current batch</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract Task&lt;IEnumerableBatchResult&lt;TResult&gt;&gt; AddToCurrentBatchAsync&lt;TResult&gt;(Expression expression)</code></pre>
+    <pre><code class="lang- hljs">public abstract Task&lt;IEnumerableBatchResult&lt;TResult&gt;&gt; AddToCurrentBatchAsync&lt;TResult&gt;(Expression expression)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
-        <p>
+        <p></p>
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TResult&gt;&gt;
-        <p>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TResult&gt;&gt;
+        <p></p>
       </td>
     </tr>
   </table>
-  
+
   <h5 class="typeParameters">Type Parameters</h5>
   <table>
     <tr>
       <td>
         <span class="parametername">TResult</span>
-        <p>
+        <p></p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
+
+
+
+
+
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToCurrentBatchAsync__1_Expression_">IAsyncQueryProvider.AddToCurrentBatchAsync&lt;TResult&gt;(Expression)</a></div>
-  
-  
-  
-  
+      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToCurrentBatchAsync__1_System_Linq_Expressions_Expression_">IAsyncQueryProvider.AddToCurrentBatchAsync&lt;TResult&gt;(Expression)</a></div>
+
+
+
+
   </div>
-  
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.CreateQuery(Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.CreateQuery(System.Linq.Expressions.Expression)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L149" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery(Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_Expression_" class="expander" data-toggle="collapse">CreateQuery(Expression)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_Expression_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_System_Linq_Expressions_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery(System.Linq.Expressions.Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_System_Linq_Expressions_Expression_" class="expander" data-toggle="collapse">CreateQuery(Expression)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_System_Linq_Expressions_Expression_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a query for the provided expression</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract IQueryable CreateQuery(Expression expression)</code></pre>
+    <pre><code class="lang- hljs">public abstract IQueryable CreateQuery(Expression expression)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
         <p><p>Expression to create a query for</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">IQueryable</span>
-        <p>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable">IQueryable</a>
+        <p></p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryprovider.createquery#system-linq-iqueryprovider-createquery(system-linq-expressions-expression)">IQueryProvider.CreateQuery(Expression)</a></div>
+
+
+
+
   </div>
-  
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.CreateQuery%60%601(Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.CreateQuery%60%601(System.Linq.Expressions.Expression)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery``1(Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_Expression_" class="expander" data-toggle="collapse">CreateQuery&lt;TResult&gt;(Expression)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_Expression_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_System_Linq_Expressions_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.CreateQuery``1(System.Linq.Expressions.Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_System_Linq_Expressions_Expression_" class="expander" data-toggle="collapse">CreateQuery&lt;TResult&gt;(Expression)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_CreateQuery__1_System_Linq_Expressions_Expression_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a query for the provided expression</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IQueryable&lt;TResult&gt; CreateQuery&lt;TResult&gt;(Expression expression)</code></pre>
+    <pre><code class="lang- hljs">public IQueryable&lt;TResult&gt; CreateQuery&lt;TResult&gt;(Expression expression)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
         <p><p>Expression that will be translated into a query</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">IQueryable</span>&lt;TResult&gt;
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;
         <p><p>Created query</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="typeParameters">Type Parameters</h5>
   <table>
     <tr>
       <td>
         <span class="parametername">TResult</span>
         <p><p>Result type of the query</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryprovider.createquery#system-linq-iqueryprovider-createquery-1(system-linq-expressions-expression)">IQueryProvider.CreateQuery&lt;TResult&gt;(Expression)</a></div>
+
+
+
+
   </div>
-  
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_Execute_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.Execute(Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_Execute_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.Execute(System.Linq.Expressions.Expression)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L140" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_Execute_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_Execute_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute(Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute_Expression_" class="expander" data-toggle="collapse">Execute(Expression)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute_Expression_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_Execute_System_Linq_Expressions_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute(System.Linq.Expressions.Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute_System_Linq_Expressions_Expression_" class="expander" data-toggle="collapse">Execute(Expression)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute_System_Linq_Expressions_Expression_" class="collapse in">
   <div class="markdown level1 summary"><p>Executes the provided expression</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public object Execute(Expression expression)</code></pre>
+    <pre><code class="lang- hljs">public object Execute(Expression expression)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
         <p><p>Expression to execute</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">System.Object</span>
-        <p>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>
+        <p></p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_Execute__1_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.Execute%60%601(Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_QueryModel_BaseQueryProvider_Execute_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_Execute__1_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute``1(Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute__1_Expression_" class="expander" data-toggle="collapse">Execute&lt;TResult&gt;(Expression)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute__1_Expression_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes the provided expression</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TResult Execute&lt;TResult&gt;(Expression expression)</code></pre>
+
+
+
+
+
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryprovider.execute#system-linq-iqueryprovider-execute(system-linq-expressions-expression)">IQueryProvider.Execute(Expression)</a></div>
+
+
+
+
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
-        <span class="parametername">expression</span>
-        <p><p>Expression to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">TResult</span>
-        <p><p>Loaded model instace of type <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="parametername">TResult</span>
-        <p><p>Resulting type of the linq expression execution</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_Expression_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync%60%601(Expression%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync%60%601(System.Linq.Expressions.Expression%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_Expression_CancellationToken_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync``1(Expression,CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_Expression_CancellationToken_" class="expander" data-toggle="collapse">ExecuteAsync&lt;TResult&gt;(Expression, CancellationToken)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_Expression_CancellationToken_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync``1(System.Linq.Expressions.Expression,System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ExecuteAsync&lt;TResult&gt;(Expression, CancellationToken)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" class="collapse in">
   <div class="markdown level1 summary"><p>Executes the provided expression</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TResult ExecuteAsync&lt;TResult&gt;(Expression expression, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang- hljs">public TResult ExecuteAsync&lt;TResult&gt;(Expression expression, CancellationToken cancellationToken)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
         <p><p>Expression to execute</p>
-</p>
+
       </td>
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">CancellationToken</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
         <span class="parametername">cancellationToken</span>
         <p><p>Cancellation token</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">TResult</span>
-        <p><p>Loaded model instace of type <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
-</p>
+      <span class="xref">TResult</span>
+        <p><p>Loaded model instace of type <code class="typeparamref">TResult</code></p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="typeParameters">Type Parameters</h5>
   <table>
     <tr>
       <td>
         <span class="parametername">TResult</span>
         <p><p>Resulting type of the linq expression execution</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
+
+
+
+
+
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_ExecuteAsync__1_Expression_CancellationToken_">IAsyncQueryProvider.ExecuteAsync&lt;TResult&gt;(Expression, CancellationToken)</a></div>
-  
-  
-  
-  
+      <div><a class="xref" href="PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_">IAsyncQueryProvider.ExecuteAsync&lt;TResult&gt;(Expression, CancellationToken)</a></div>
+
+
+
+
   </div>
-  
+
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_Expression_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(Expression%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_System_Linq_Expressions_Expression_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(System.Linq.Expressions.Expression%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
   </span>
-  
+
   <a id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync*"></a>
-  
-  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_Expression_CancellationToken_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(Expression,CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_Expression_CancellationToken_" class="expander" data-toggle="collapse">ExecuteObjectAsync(Expression, CancellationToken)</a></h4>
-  
-  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_Expression_CancellationToken_" class="collapse in">
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(System.Linq.Expressions.Expression,System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ExecuteObjectAsync(Expression, CancellationToken)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_System_Linq_Expressions_Expression_System_Threading_CancellationToken_" class="collapse in">
   <div class="markdown level1 summary"><p>Executes the provided expression</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract Task&lt;object&gt; ExecuteObjectAsync(Expression expression, CancellationToken token)</code></pre>
+    <pre><code class="lang- hljs">public abstract Task&lt;object&gt; ExecuteObjectAsync(Expression expression, CancellationToken token)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">Expression</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
         <span class="parametername">expression</span>
         <p><p>Expression to execute</p>
-</p>
+
       </td>
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><span class="xref">CancellationToken</span></span>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
         <span class="parametername">token</span>
         <p><p>Token for cancellation</p>
-</p>
+
       </td>
     </tr>
   </table>
-  
+
   <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="xref">Task</span>&lt;<span class="xref">System.Object</span>&gt;
-        <p>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;
+        <p></p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
   </div>
-  
-  
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseQueryProvider_Execute__1_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseQueryProvider.Execute%60%601(System.Linq.Expressions.Expression)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/BaseQueryProvider.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+
+  <a id="PnP_Core_QueryModel_BaseQueryProvider_Execute_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute*"></a>
+
+  <h4 id="PnP_Core_QueryModel_BaseQueryProvider_Execute__1_System_Linq_Expressions_Expression_" data-uid="PnP.Core.QueryModel.BaseQueryProvider.Execute``1(System.Linq.Expressions.Expression)"><a href="#collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute__1_System_Linq_Expressions_Expression_" class="expander" data-toggle="collapse">Execute&lt;TResult&gt;(Expression)</a></h4>
+
+  <div id="collapsible-PnP_Core_QueryModel_BaseQueryProvider_Execute__1_System_Linq_Expressions_Expression_" class="collapse in">
+  <div class="markdown level1 summary"><p>Executes the provided expression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang- hljs">public TResult Execute&lt;TResult&gt;(Expression expression)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></span>
+        <span class="parametername">expression</span>
+        <p><p>Expression to execute</p>
+
+      </td>
+    </tr>
+  </table>
+
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+      <span class="xref">TResult</span>
+        <p><p>Loaded model instace of type <code class="typeparamref">TResult</code></p>
+
+      </td>
+    </tr>
+  </table>
+
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TResult</span>
+        <p><p>Resulting type of the linq expression execution</p>
+
+      </td>
+    </tr>
+  </table>
+
+
+
+
+
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryprovider.execute#system-linq-iqueryprovider-execute-1(system-linq-expressions-expression)">IQueryProvider.Execute&lt;TResult&gt;(Expression)</a></div>
+
+
+
+
+  </div>
+
+
+
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
@@ -640,7 +672,7 @@
             </div>
           </div>        </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -648,16 +680,14 @@
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-            
-            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+      
+            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
           </div>
         </div>
       </footer>    </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>    
-    <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs">
-  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
 </html>
