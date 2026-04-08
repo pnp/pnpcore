@@ -14,7 +14,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Wait for actions to finish
-      uses: softprops/turnstyle@v1
+      uses: softprops/turnstyle@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
