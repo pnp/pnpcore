@@ -11832,16 +11832,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "using-the-sdk/transformation-getting-started.md",
-      "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/transformation-getting-started.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/unfurl-intro.md",
       "output": {
         ".html": {
