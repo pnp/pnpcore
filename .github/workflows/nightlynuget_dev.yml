@@ -8,6 +8,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    if: github.repository_owner == 'pnp'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -26,7 +27,6 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: '10.0.x'    
-        include-prerelease: false
     - name: Create and publish nuget 
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

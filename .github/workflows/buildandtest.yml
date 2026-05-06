@@ -23,7 +23,7 @@ on:
 
 jobs:
   build:
-
+    if: github.repository_owner == 'pnp'
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,6 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: '10.0.x'
-        include-prerelease: false
     - name: Install dependencies
       run: dotnet restore
       working-directory: src/sdk
