@@ -25,6 +25,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Properties
+        [SharePointProperty("__PnPCoreKey")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]

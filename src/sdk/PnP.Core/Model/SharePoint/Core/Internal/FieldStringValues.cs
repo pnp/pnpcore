@@ -13,6 +13,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Properties
+        [SharePointProperty("__PnPCoreKey")]
         public int Id { get => GetValue<int>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
