@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed folder not found errors to DirectoryNotFoundException. #1725 [ejazhussain - Ejaz Hussain]
 - Updated console minimal sample for latest .Net and PnP.Core version. #1713 [adam-it - Adam Wójcik]
 - Improved stability when handling guids in GetValidLegacyServicePrincipalAppIdsAsync [jansenbe - Bert Jansen]
+- Added a attribute name for the internal ID property. #1761 [adam-it - Adam Wójcik]
 
 ## [1.15]
 
