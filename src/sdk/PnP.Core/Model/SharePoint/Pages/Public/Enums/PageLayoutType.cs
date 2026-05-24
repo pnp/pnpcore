@@ -36,11 +36,6 @@
         Spaces = 5,
 
         /// <summary>
-        /// Page is a Microsoft Syntex Topic page
-        /// </summary>
-        Topic = 6,
-
-        /// <summary>
         /// Page is a Viva Dashboard page
         /// </summary>
         Dashboard = 7,

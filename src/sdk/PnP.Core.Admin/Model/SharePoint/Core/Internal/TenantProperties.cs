@@ -193,8 +193,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         
         public bool HasIntelligentContentServicesCapability { get => GetValue<bool>(); set => SetValue(value); }
         
-        public bool HasTopicExperiencesCapability { get => GetValue<bool>(); set => SetValue(value); }
-        
         public bool HideSyncButtonOnDocLib { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool HideSyncButtonOnODB { get => GetValue<bool>(); set => SetValue(value); }

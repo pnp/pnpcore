@@ -49,15 +49,6 @@ namespace PnP.Core.Test.Utilities
             }
         }
 
-        internal static void SharePointVivaTopicsTestSetup()
-        {
-            var configuration = GetConfigurationSettings();
-            if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl")))
-            {
-                Assert.Inconclusive("No Viva Topic Center setup for live testing");
-            }
-        }
-
         internal static void ClassicSTS0TestSetup()
         {
             var configuration = GetConfigurationSettings();

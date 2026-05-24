@@ -247,21 +247,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string SpaceContent { get; set; }
 
-        /// <summary>
-        /// Entity id field for topic pages
-        /// </summary>
-        public string EntityId { get; set; }
-
-        /// <summary>
-        /// Entity relations field for topic pages
-        /// </summary>
-        public string EntityRelations { get; set; }
-
-        /// <summary>
-        /// Entity type field for topic pages
-        /// </summary>
-        public string EntityType { get; set; }
-
         // repost page configuration
         public string RepostSourceUrl { get; set; }
 
@@ -369,9 +354,6 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants.ClientSideApplicationId}' />
                     <FieldRef Name='{PageConstants.PageLayoutType}' />
                     <FieldRef Name='{PageConstants.SpaceContentField}' />
-                    <FieldRef Name='{PageConstants.TopicEntityId}' />
-                    <FieldRef Name='{PageConstants.TopicEntityType}' />
-                    <FieldRef Name='{PageConstants.TopicEntityRelations}' />
                     <FieldRef Name='{PageConstants.CanvasField}' />
                     <FieldRef Name='{PageConstants._AuthorByline}' />
                     <FieldRef Name='{PageConstants.PageLayoutContentField}' />
@@ -467,7 +449,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal async static Task<IPage> NewPageAsync(PnPContext context, PageLayoutType pageLayoutType = PageLayoutType.Article, EditorType editorType = EditorType.CK5)
         {
-            if (pageLayoutType == PageLayoutType.Topic || pageLayoutType == PageLayoutType.NewsDigest)
+            if (pageLayoutType == PageLayoutType.NewsDigest)
             {
                 throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_NotSupportedPageTypeForCreate);
             }
@@ -1080,10 +1062,6 @@ namespace PnP.Core.Model.SharePoint
                     {
                         loadedPage.LayoutType = PageLayoutType.Spaces;
                     }
-                    else if (item.Values[PageConstants.PageLayoutType].ToString().Equals(PageConstants.TopicLayoutType, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        loadedPage.LayoutType = PageLayoutType.Topic;
-                    }
                     else
                     {
                         loadedPage.LayoutType = (PageLayoutType)Enum.Parse(typeof(PageLayoutType), item.Values[PageConstants.PageLayoutType].ToString());
@@ -1099,24 +1077,6 @@ namespace PnP.Core.Model.SharePoint
                     if (item.Values.ContainsKey(PageConstants.SpaceContentField) && item.Values[PageConstants.SpaceContentField] != null && !string.IsNullOrEmpty(item.Values[PageConstants.SpaceContentField].ToString()))
                     {
                         loadedPage.SpaceContent = item.Values[PageConstants.SpaceContentField].ToString();
-                    }
-                }
-
-                if (loadedPage.LayoutType == PageLayoutType.Topic)
-                {
-                    if (item.Values.ContainsKey(PageConstants.TopicEntityId) && item.Values[PageConstants.TopicEntityId] != null && !string.IsNullOrEmpty(item.Values[PageConstants.TopicEntityId].ToString()))
-                    {
-                        loadedPage.EntityId = item.Values[PageConstants.TopicEntityId].ToString();
-                    }
-
-                    if (item.Values.ContainsKey(PageConstants.TopicEntityRelations) && item.Values[PageConstants.TopicEntityRelations] != null && !string.IsNullOrEmpty(item.Values[PageConstants.TopicEntityRelations].ToString()))
-                    {
-                        loadedPage.EntityRelations = item.Values[PageConstants.TopicEntityRelations].ToString();
-                    }
-
-                    if (item.Values.ContainsKey(PageConstants.TopicEntityType) && item.Values[PageConstants.TopicEntityType] != null && !string.IsNullOrEmpty(item.Values[PageConstants.TopicEntityType].ToString()))
-                    {
-                        loadedPage.EntityType = item.Values[PageConstants.TopicEntityType].ToString();
                     }
                 }
 
@@ -1519,8 +1479,8 @@ namespace PnP.Core.Model.SharePoint
                 hasPageTitleWepPart = true; //Message ID: MC791596 / Roadmap ID: 386904
             }
 
-            // Load page header controls. Microsoft Syntex Topic pages do have 5 controls in the header (= controls that cannot be moved)
-            if (LayoutType == PageLayoutType.Topic || LayoutType == PageLayoutType.NewsDigest)
+            // Load page header controls. Microsoft Syntex News Digest pages do have 5 controls in the header (= controls that cannot be moved)
+            if (LayoutType == PageLayoutType.NewsDigest)
             {
                 using (var document = parser.ParseDocument(pageHeaderHtml))
                 {
@@ -1756,7 +1716,7 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 if (pageHeader.Type != PageHeaderType.None && LayoutType != PageLayoutType.RepostPage
-                    && LayoutType != PageLayoutType.Topic && LayoutType != PageLayoutType.NewsDigest && pageHeader.Type != PageHeaderType.PageTitleWebPart)
+                    && LayoutType != PageLayoutType.NewsDigest && pageHeader.Type != PageHeaderType.PageTitleWebPart)
                 {
                     // this triggers resolving of the header image which has to be done early as otherwise there will be version conflicts
                     // (see here: https://github.com/SharePoint/PnP-Sites-Core/issues/2203)
@@ -1764,9 +1724,9 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            if (LayoutType == PageLayoutType.Topic || LayoutType == PageLayoutType.NewsDigest)
+            if (LayoutType == PageLayoutType.NewsDigest)
             {
-                // If we have extra header controls (e.g. with topic and news digest pages) then we need to persist those controls to a html snippet that will need to be embedded in the header
+                // If we have extra header controls (e.g. with news digest pages) then we need to persist those controls to a html snippet that will need to be embedded in the header
                 if (HeaderControls.Any())
                 {
                     pageHeaderHtml = $"<div>{HeaderControlsToHtml()}</div>";
@@ -1831,18 +1791,6 @@ namespace PnP.Core.Model.SharePoint
                     {
                         PageListItem[PageConstants.SpaceContentField] = SpaceContent;
                     }
-                }
-                else if (LayoutType == PageLayoutType.Topic)
-                {
-                    PageListItem[PageConstants.PageLayoutType] = PageConstants.TopicLayoutType;
-                    // Each page needs to have a unique topic Entity ID, so generate a new one
-                    PageListItem[PageConstants.TopicEntityId] = GenerateTopicPageEntityId(PnPContext.Site.Id, PnPContext.Web.Id, addedFile.UniqueId);
-                    PageListItem[PageConstants.TopicEntityRelations] = EntityRelations;
-                    PageListItem[PageConstants.TopicEntityType] = EntityType;
-
-                    // Set the _SPSitePageFlags field
-                    PageListItem[PageConstants._SPSitePageFlags] = ";#TopicPage;#";
-
                 }
                 else
                 {
@@ -1923,11 +1871,6 @@ namespace PnP.Core.Model.SharePoint
                     PageListItem[PageConstants.CanvasField] = ToHtml();
                 }
 
-
-                if (layoutType == PageLayoutType.Topic && string.IsNullOrEmpty(PageListItem[PageConstants.CanvasField]?.ToString()))
-                {
-                    PageListItem[PageConstants.CanvasField] = "<div></div>";
-                }
 
                 if (!string.IsNullOrEmpty(ThumbnailUrl))
                 {
@@ -2851,48 +2794,6 @@ namespace PnP.Core.Model.SharePoint
                 DefaultWebPart.SpacesPeople => "102f1fc1-3369-4372-8e44-f27dd11a9377",
                 _ => "",
             };
-        }
-        #endregion
-
-        #region Viva Topic pages
-        /// <summary>
-        /// Generate topic page entity id based on current sharepoint page ids
-        /// </summary>
-        /// <param name="siteId">Site collection id</param>
-        /// <param name="webId">Web id</param>
-        /// <param name="uniqueId">Unique id of the page file</param>
-        /// <returns>Generated topic page entity id</returns>
-        internal static string GenerateTopicPageEntityId(Guid siteId, Guid webId, Guid uniqueId)
-        {
-            return string.Format(CultureInfo.InvariantCulture, "CRKB_{0}", GenerateUrlHash(string.Format(CultureInfo.InvariantCulture, "{0}_{1}_{2}", siteId, webId, uniqueId)));
-        }
-
-        private static string GenerateUrlHash(string value)
-        {
-#if NET5_0_OR_GREATER
-            if (System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier == "browser-wasm")
-            {
-                // https://docs.microsoft.com/en-us/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
-                return "";
-            }
-            else
-            {
-                return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
-            }
-#else
-            return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
-#endif
-        }
-
-        private static byte[] MD5Hash(string stringToHash)
-        {
-            return System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
-        }
-
-        private static string Base64Encode(byte[] input)
-        {
-            string str = Convert.ToBase64String(input).Split(new char[] { '=' })[0];
-            return str.Replace('+', '-').Replace('/', '_');
         }
         #endregion
 
