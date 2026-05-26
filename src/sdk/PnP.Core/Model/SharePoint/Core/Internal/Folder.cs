@@ -410,13 +410,13 @@ namespace PnP.Core.Model.SharePoint
                     }
                     catch (SharePointRestServiceException)
                     {
-                        currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false);
+                        currentFolder = await AddFolderHandleRaceAsync(currentFolder, folderName, currentUrl, expressions).ConfigureAwait(false);
                         currentFolderWasCreated = true;
                     }
                 }
                 else
                 {
-                    currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false);
+                    currentFolder = await AddFolderHandleRaceAsync(currentFolder, folderName, currentUrl, expressions).ConfigureAwait(false);
                 }
             }
 
@@ -426,6 +426,32 @@ namespace PnP.Core.Model.SharePoint
         public IFolder EnsureFolder(string folderRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             return EnsureFolderAsync(folderRelativeUrl, expressions).GetAwaiter().GetResult();
+        }
+
+        private static async Task<IFolder> AddFolderHandleRaceAsync(
+            IFolder parentFolder,
+            string folderName,
+            string folderServerRelativeUrl,
+            Expression<Func<IFolder, object>>[] expressions)
+        {
+            try
+            {
+                return await parentFolder.AddFolderAsync(folderName).ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex) when (ex.Error is SharePointRestError error && ErrorIndicatesFolderAlreadyExists(error))
+            {
+                // Race condition: another concurrent call created the folder between our GET (404)
+                // and our subsequent POST. Re-fetch the folder and continue.
+                try
+                {
+                    return await parentFolder.PnPContext.Web.GetFolderByServerRelativeUrlAsync(folderServerRelativeUrl, expressions).ConfigureAwait(false);
+                }
+                catch
+                {
+                    // If the re-fetch fails, surface the original "already exists" error
+                    throw ex;
+                }
+            }
         }
         #endregion
 
@@ -903,6 +929,17 @@ namespace PnP.Core.Model.SharePoint
             {
                 return false;
             }
+        }
+
+        internal static bool ErrorIndicatesFolderAlreadyExists(SharePointRestError error)
+        {
+            // -2130575257 indicates that the folder already exists.
+            if (error?.HttpResponseCode == 400 && error.ServerErrorCode == -2130575257)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
