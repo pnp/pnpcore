@@ -25,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
         }
 
-        
+
         #region Page Loading
         [TestMethod]
         public async Task CleanLoad()
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
             }
         }
-        
+
         [TestMethod]
         public async Task LoadPagesWhenThereAreMultiplePagesLibraries()
         {
@@ -946,7 +946,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
                 Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
                 Assert.IsTrue(page.Sections[0].Collapsible == false);
-                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);                
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);
 
                 Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.TwoColumn);
                 Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.Soft);
@@ -1022,7 +1022,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(updatedPage.Sections[0].Collapsible);
 
                     // Delete the page
-                    await updatedPage.DeleteAsync();                    
+                    await updatedPage.DeleteAsync();
                 }
             }
         }
@@ -1188,6 +1188,62 @@ namespace PnP.Core.Test.SharePoint
 
                 // delete the page
                 await page.DeleteAsync();
+            }
+        }
+
+        /// <summary>
+        /// Regression test for PR #1757: vertical section column (layoutIndex=2) appearing at
+        /// Columns[0] caused TwoColumnVerticalSection, TwoColumnLeftVerticalSection and
+        /// TwoColumnRightVerticalSection to be misclassified as OneColumn after a save/reload.
+        /// LoadFromHtml must skip the vertical column and use the first non-vertical column's
+        /// ColumnFactor when determining the section type.
+        /// </summary>
+        [TestMethod]
+        [DataRow(CanvasSectionTemplate.TwoColumnVerticalSection, 1)]
+        [DataRow(CanvasSectionTemplate.TwoColumnLeftVerticalSection, 2)]
+        [DataRow(CanvasSectionTemplate.TwoColumnRightVerticalSection, 3)]
+        public async Task VerticalSectionTypePreservedAfterSaveReloadTest(CanvasSectionTemplate sectionType, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VerticalSectionTypePreservedAfterSaveReloadTest.aspx");
+
+                // Add a vertical section and a plain section so the page is non-trivial
+                page.AddSection(sectionType, 1);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+
+                await page.SaveAsync(pageName);
+
+                // Reload the page from SharePoint – this exercises LoadFromHtml
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 2);
+
+                // The first section must round-trip as the original vertical section type,
+                // NOT be misclassified as OneColumn (the bug described in PR #1757).
+                Assert.AreEqual(sectionType, page.Sections[0].Type,
+                    $"Section type was misclassified. Expected {sectionType} but got {page.Sections[0].Type}. " +
+                    "This indicates the vertical column (layoutIndex=2) at Columns[0] is causing " +
+                    "LoadFromHtml to read the wrong ColumnFactor for type detection (PR #1757 regression).");
+
+                // The vertical section column must still be present
+                Assert.IsNotNull(page.Sections[0].VerticalSectionColumn,
+                    "VerticalSectionColumn should not be null for a vertical section type.");
+
+                // The second section must remain OneColumn
+                Assert.AreEqual(CanvasSectionTemplate.OneColumn, page.Sections[1].Type,
+                    "The plain OneColumn section should not have been affected.");
+
+                // NOTE: page deletion is intentionally skipped so the page can be
+                // inspected in SharePoint to verify the section layout visually.
+                // Uncomment the line below to clean up after inspection:
+                // await page.DeleteAsync();
             }
         }
 
@@ -1425,8 +1481,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.ThrowsException<ArgumentNullException>(() => { page.GetInlineImage(textPart, null); });
 
                 var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png");
-                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left});
-                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right});
+                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left });
+                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right });
                 string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
                 textPart.Text = htmlAdded;
                 page.AddControl(textPart, page.Sections[0].Columns[0]);
@@ -1436,7 +1492,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add text with 2 inline images
                 var textPart2 = page.NewTextPart("");
-                var html21 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center});
+                var html21 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center });
                 var html22 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
                 var html33 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left, Height = 50, Width = 50 });
                 textPart2.Text = $"<p>Before inline images</p>{html21}<p>Post image</p>{html22}<p>Post image</p>{html33}<p>Post image</p>";
@@ -1481,7 +1537,7 @@ namespace PnP.Core.Test.SharePoint
                 // Add text with 3 inline images
                 var textPart = page.NewTextPart("");
 
-                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp" });
                 var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption" });
                 var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text" });
                 string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
@@ -1519,7 +1575,7 @@ namespace PnP.Core.Test.SharePoint
                 // Add text with 3 inline images
                 var textPart = page.NewTextPart("");
 
-                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp" });
                 var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", Width = 96, Height = 96, WidthPercentage = 20 });
                 var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text", Width = 96, Height = 96, WidthPercentage = 20 });
                 string htmlAdded = $"<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Before inline images </p>{html1}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>{html2}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>{html3}<p class=\"noSpacingAbove spacingBelow\" data-text-type=\"withSpacing\">Post image</p>";
@@ -1704,7 +1760,7 @@ namespace PnP.Core.Test.SharePoint
                     section.Collapsible = true;
                     section.IsExpanded = true;
                     section.ZoneEmphasis = 2; // Can not set this for a vertical section by code
-                    
+
                     newPage.AddControl(newPage.NewTextPart("PnP Rocks 1!"), section.Columns[0], new ControlFlexLayoutPosition { XPos = 0, YPos = 0, Width = 20, Height = 3, WpGroupId = groupWP });
                     newPage.AddControl(newPage.NewTextPart("PnP Rocks 2!"), section.Columns[0], new ControlFlexLayoutPosition { XPos = 10, YPos = 3, Width = 20, Height = 3, WpGroupId = groupWP });
                     newPage.AddControl(newPage.NewWebPart(eventsWebPartComponent), section.Columns[0], new ControlFlexLayoutPosition { XPos = 0, YPos = 7, Width = 40, Height = 25 });
@@ -2357,7 +2413,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Load the Page File
                 var pageFile = await newPage.GetPageFileAsync(p => p.ListItemAllFields);
-                
+
                 // load the current user
                 var currentUser = await context.Web.GetCurrentUserAsync();
                 var newDate = new DateTime(2020, 10, 20);
@@ -2377,7 +2433,7 @@ namespace PnP.Core.Test.SharePoint
                 var updatedPage = pages.AsEnumerable().First();
 
                 pageFile = await updatedPage.GetPageFileAsync(p => p.ListItemAllFields);
-                
+
                 Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Year == newDate.Year);
                 Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Month == newDate.Month);
                 Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Modified"]).Year == newDate.Year);
@@ -2980,7 +3036,7 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
-        
+
         [TestMethod]
         public async Task LikeUnLikePage()
         {
