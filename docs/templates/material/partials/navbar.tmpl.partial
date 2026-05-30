@@ -17,6 +17,9 @@
           <label class="glyphicon glyphicon-search" for="search-query"></label>
           <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
         </div>
+        <button type="button" class="btn navbar-btn" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-toggle-icon fa fa-moon-o" aria-hidden="true"></span>
+        </button>
       </form>
     </div>
   </div>

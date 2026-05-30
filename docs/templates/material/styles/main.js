@@ -9,6 +9,69 @@ BLOB_URI_PREFIX = 'https://azuresdkdocs.blob.core.windows.net/$web/dotnet/'
 
 ATTR1 = '[<span class="hljs-meta">System.ComponentModel.EditorBrowsable</span>]\n<'
 
+THEME_STORAGE_KEY = 'pnp-docfx-theme'
+
+function readStoredTheme() {
+    try {
+        var storedTheme = localStorage.getItem(THEME_STORAGE_KEY)
+        if (storedTheme === 'dark' || storedTheme === 'light') {
+            return storedTheme
+        }
+    }
+    catch (e) {
+        // Ignore storage access issues and fall back to system preference.
+    }
+
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function updateThemeToggle(theme) {
+    var themeToggle = document.getElementById('theme-toggle')
+    if (!themeToggle) {
+        return
+    }
+
+    var isDarkMode = theme === 'dark'
+    var nextMode = isDarkMode ? 'light' : 'dark'
+
+    themeToggle.setAttribute('aria-label', 'Switch to ' + nextMode + ' mode')
+    themeToggle.setAttribute('title', 'Switch to ' + nextMode + ' mode')
+
+    var icon = themeToggle.querySelector('.theme-toggle-icon')
+    if (icon) {
+        icon.className = 'theme-toggle-icon fa ' + (isDarkMode ? 'fa-sun-o' : 'fa-moon-o')
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme)
+    updateThemeToggle(theme)
+}
+
+function initializeThemeToggle() {
+    var initialTheme = readStoredTheme()
+    applyTheme(initialTheme)
+
+    var themeToggle = document.getElementById('theme-toggle')
+    if (!themeToggle) {
+        return
+    }
+
+    themeToggle.addEventListener('click', function () {
+        var currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+        var nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
+
+        applyTheme(nextTheme)
+
+        try {
+            localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
+        }
+        catch (e) {
+            // Ignore storage access issues and keep runtime-only preference.
+        }
+    })
+}
+
 // Navbar Hamburger
 $(function () {
     $(".navbar-toggle").click(function () {
@@ -79,6 +142,10 @@ $(function () {
             $(this).html(link)
         }
     });
+})
+
+$(function () {
+    initializeThemeToggle()
 })
 
 function httpGetAsync(targetUrl, callback) {
