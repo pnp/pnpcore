@@ -16,8 +16,7 @@ Nuget package |  Downloads | Stable | Preview
 [PnP.Core](https://pnp.github.io/pnpcore/using-the-sdk/readme.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
 [PnP.Core.Auth](https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) |[![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
 [PnP.Core.Admin](https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-tenant.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/) | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/v/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/) | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
-[PnP.Core.Transformation](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
-[PnP.Core.Transformation.SharePoint](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint/)
+
 ## Getting started 🚀
 
 For more details on how to get started with the PnP.Core SDK checkout our [documentation](https://pnp.github.io/pnpcore/using-the-sdk/readme.html).
@@ -36,7 +35,7 @@ This library is an open-source and community provided library backed by an activ
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0, [.NET 8.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) and [.NET 9.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/). Use the .NET 8.0 (LTS) or .NET 9.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
+- We currently target .NET Standard 2.0, [.NET 8.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/), [.NET 9.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) and [.NET 10.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/). Use the .NET 10.0 (LTS) or .NET 9.0 builds if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+.
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](https://pnp.github.io/pnpcore/demos/README.html) to learn more):
   - Backend: e.g. [Azure functions v3/v4](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
@@ -44,7 +43,7 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
   - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 6.0 and later versions
   - .NET MAUI: [Windows, iOS, macOS, Android](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-7.0)
   - Windows Client: [Windows Forms, WPF](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-7.0&preserve-view=true)
-  - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
+  - Mobile: [MAUI](https://dotnet.microsoft.com/en-us/apps/maui)
   
 - The library internally uses [dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0) and you can consume it via dependency injection in your applications
 
