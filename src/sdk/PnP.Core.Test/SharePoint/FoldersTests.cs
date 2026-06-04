@@ -624,12 +624,12 @@ namespace PnP.Core.Test.SharePoint
                 IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
 
                 var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
-                Assert.IsTrue(addedFolder != null);
+                Assert.IsNotNull(addedFolder);
                 Assert.IsTrue(addedFolder.Name == "sub2");
 
                 // Calling EnsureFolderAsync again for the same path must succeed and return the same folder
                 var ensuredFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
-                Assert.IsTrue(ensuredFolder != null);
+                Assert.IsNotNull(ensuredFolder);
                 Assert.IsTrue(ensuredFolder.Name == "sub2");
                 Assert.AreEqual(addedFolder.UniqueId, ensuredFolder.UniqueId);
 

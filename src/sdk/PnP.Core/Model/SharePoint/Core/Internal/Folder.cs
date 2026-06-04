@@ -449,7 +449,7 @@ namespace PnP.Core.Model.SharePoint
                 catch
                 {
                     // If the re-fetch fails, surface the original "already exists" error
-                    throw ex;
+                    throw;
                 }
             }
         }
