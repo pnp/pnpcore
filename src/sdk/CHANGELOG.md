@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## 1.17 - Unreleased
+
+### Added 
+
+### Changed 
+
+- Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
+- Updated setup test env script #1769 [adam-it - Adam Wójcik]
+
 ## [1.16]
 
 ### Added
