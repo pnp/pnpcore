@@ -9,3 +9,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "npm"
+    directory: "/src"          # Scan /src but NOT /src/assets subfolders
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "*"   # Ignore everything found here if no real projects exist
