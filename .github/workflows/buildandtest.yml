@@ -32,7 +32,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}              
     - name: Checkout dev branch
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with: 
         ref: dev
     - name: Setup .NET Core
