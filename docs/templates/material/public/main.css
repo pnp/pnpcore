@@ -115,6 +115,15 @@ img {
   transition: 200ms;
 }
 
+/* Fix for nav links wrapping on smaller screens */
+.navbar-nav > li {
+  flex: 0 0 auto;
+}
+
+.navbar-nav a.nav-link {
+  white-space: nowrap;
+}
+
 .navbar-nav a.nav-link:focus,
 .navbar-nav a.nav-link:hover {
   background-color: var(--bs-primary-border-subtle);
@@ -158,6 +167,24 @@ img {
 .navbar #navbar form.icons a.btn,
 .navbar #navbar form.icons a.dropdown-item:hover {
   color: var(--bs-white);
+}
+
+/* align to the left of the navbar on mobile for dark mode toggle*/
+header .navbar button[data-bs-target='#navpanel'] {
+  color: var(--bs-white);
+}
+
+@media (max-width: 767.98px) {
+  .navbar .navbar-collapse.show #navbar form.icons {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .navbar .navbar-collapse.show #navbar form.icons #theme-toggle,
+  .navbar .navbar-collapse.show #navbar form.icons a.btn {
+    margin-left: 0 !important;
+  }
 }
 
 /** SEARCH AND FILTER **/
