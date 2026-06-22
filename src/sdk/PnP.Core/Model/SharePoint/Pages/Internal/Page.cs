@@ -2026,11 +2026,11 @@ namespace PnP.Core.Model.SharePoint
                     if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) && !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
                     {
                         if (previewImageFromCustomHeader && pageHeader.HeaderImageId != Guid.Empty)
-                    {
-                        await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
-                        await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                        {
+                            await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                            await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
 
-                        SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
+                            SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
                         }
                         else
                         {
