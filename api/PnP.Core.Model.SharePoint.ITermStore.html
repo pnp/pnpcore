@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ITermStore | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface ITermStore | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface ITermStore | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ITermStore | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Microsoft 365 Term store">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.ITermStore">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_ITermStore" data-uid="PnP.Core.Model.SharePoint.ITermStore">Interface ITermStore</h1>
-  <div class="markdown level0 summary"><p>Microsoft 365 Term store</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.ITermStore">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_ITermStore" data-uid="PnP.Core.Model.SharePoint.ITermStore" class="text-break">
+Interface ITermStore  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Microsoft 365 Term store</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ITermStore : IDataModel&lt;ITermStore&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;ITermStore&gt;, IDataModelGet&lt;ITermStore&gt;, IDataModelLoad&lt;ITermStore&gt;, IDataModelUpdate</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;ITermStore&gt;.Requested</a>
     </div>
@@ -167,1053 +189,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update">IDataModelUpdate.Update()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_ITermStore_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface ITermStore : IDataModel&lt;ITermStore&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;ITermStore&gt;, IDataModelGet&lt;ITermStore&gt;, IDataModelLoad&lt;ITermStore&gt;, IDataModelUpdate</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage_" data-uid="PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage" data-uid="PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage" class="expander" data-toggle="collapse">DefaultLanguage</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage" class="collapse in">
-  <div class="markdown level1 summary"><p>Default language of the termstore.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string DefaultLanguage { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_Groups.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.Groups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_Groups_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Groups*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_Groups" data-uid="PnP.Core.Model.SharePoint.ITermStore.Groups"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_Groups" class="expander" data-toggle="collapse">Groups</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_Groups" class="collapse in">
-  <div class="markdown level1 summary"><p>Collection of term groups in this term store
-Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
-See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
-and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITermGroupCollection Groups { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITermGroupCollection.html">ITermGroupCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_Id_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Id*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_Id" data-uid="PnP.Core.Model.SharePoint.ITermStore.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_Id" class="expander" data-toggle="collapse">Id</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>The Unique ID of the Term Store</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Id { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_Languages.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.Languages%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_Languages_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Languages*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_Languages" data-uid="PnP.Core.Model.SharePoint.ITermStore.Languages"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_Languages" class="expander" data-toggle="collapse">Languages</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_Languages" class="collapse in">
-  <div class="markdown level1 summary"><p>List of languages for the term store.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">List&lt;string&gt; Languages { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermById_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermById(System.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermById_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermById_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermById(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermById_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermById(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermById_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITerm GetTermById(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermByIdAsync(System.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L102" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdAsync(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermByIdAsync(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITerm&gt; GetTermByIdAsync(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L149" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(PnP.Core.Services.Batch,System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermByIdBatch(Batch, string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITerm GetTermByIdBatch(Batch batch, string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this reques to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(System.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L129" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermByIdBatch(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITerm GetTermByIdBatch(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L139" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermByIdBatchAsync(Batch, string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITerm&gt; GetTermByIdBatchAsync(Batch batch, string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this reques to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(System.String%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITerm%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L120" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="expander" data-toggle="collapse">GetTermByIdBatchAsync(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITerm&gt; GetTermByIdBatchAsync(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termSetId</span>
-        <p><p>Termset id of the termset containing the term</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">termId</span>
-        <p><p>Term id of the term to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the term</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;
-        <p><p>The loaded term</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetById(System.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L59" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetById(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetById(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITermSet GetTermSetById(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdAsync(System.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetByIdAsync(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITermSet&gt; GetTermSetByIdAsync(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L93" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetByIdBatch(Batch, string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITermSet GetTermSetByIdBatch(Batch batch, string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this reques to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(System.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetByIdBatch(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ITermSet GetTermSetByIdBatch(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L84" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetByIdBatchAsync(Batch, string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITermSet&gt; GetTermSetByIdBatchAsync(Batch batch, string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this reques to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(System.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.ITermSet%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="expander" data-toggle="collapse">GetTermSetByIdBatchAsync(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITermSet&gt; GetTermSetByIdBatchAsync(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">id</span>
-        <p><p>Termset id to retrieve</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>Properties to load for the termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;
-        <p><p>The loaded termset</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -1253,33 +233,708 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage_" data-uid="PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage" data-uid="PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage">
+  DefaultLanguage
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default language of the termstore.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultLanguage { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_Groups_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Groups*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_Groups" data-uid="PnP.Core.Model.SharePoint.ITermStore.Groups">
+  Groups
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Collection of term groups in this term store
+Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
+See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
+and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITermGroupCollection Groups { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITermGroupCollection.html">ITermGroupCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_Id_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Id*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_Id" data-uid="PnP.Core.Model.SharePoint.ITermStore.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The Unique ID of the Term Store</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Id { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_Languages_" data-uid="PnP.Core.Model.SharePoint.ITermStore.Languages*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_Languages" data-uid="PnP.Core.Model.SharePoint.ITermStore.Languages">
+  Languages
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>List of languages for the term store.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;string&gt; Languages { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermById_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermById_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermById(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermById(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITerm GetTermById(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a></dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdAsync(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermByIdAsync(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITerm&gt; GetTermByIdAsync(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;</dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(PnP.Core.Services.Batch,System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermByIdBatch(Batch, string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L149"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITerm GetTermByIdBatch(Batch batch, string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this reques to</p>
+</dd>
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a></dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatch(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermByIdBatch(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITerm GetTermByIdBatch(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a></dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermByIdBatchAsync(Batch, string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITerm&gt; GetTermByIdBatchAsync(Batch batch, string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this reques to</p>
+</dd>
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;</dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermByIdBatchAsync_System_String_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITerm_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermByIdBatchAsync(System.String,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITerm,System.Object}}[])">
+  GetTermByIdBatchAsync(string, string, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a term from this termstore via it's id and it's termset id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITerm&gt; GetTermByIdBatchAsync(string termSetId, string termId, params Expression&lt;Func&lt;ITerm, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>termSetId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id of the termset containing the term</p>
+</dd>
+    <dt><code>termId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Term id of the term to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the term</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a>&gt;</dt>
+    <dd><p>The loaded term</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetById_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetById(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetById(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITermSet GetTermSetById(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a></dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetByIdAsync(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITermSet&gt; GetTermSetByIdAsync(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;</dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetByIdBatch(Batch, string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITermSet GetTermSetByIdBatch(Batch batch, string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this reques to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a></dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatch(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetByIdBatch(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITermSet GetTermSetByIdBatch(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a></dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetByIdBatchAsync(Batch, string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITermSet&gt; GetTermSetByIdBatchAsync(Batch batch, string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this reques to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;</dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_ITermStore_GetTermSetByIdBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____" data-uid="PnP.Core.Model.SharePoint.ITermStore.GetTermSetByIdBatchAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])">
+  GetTermSetByIdBatchAsync(string, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a termset from this termstore via it's id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITermSet&gt; GetTermSetByIdBatchAsync(string id, params Expression&lt;Func&lt;ITermSet, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Termset id to retrieve</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Properties to load for the termset</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a>&gt;</dt>
+    <dd><p>The loaded termset</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermStore.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

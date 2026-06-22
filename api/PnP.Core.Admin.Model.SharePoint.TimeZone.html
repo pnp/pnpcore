@@ -1,694 +1,521 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum TimeZone | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum TimeZone | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Enum TimeZone | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum TimeZone | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Timezones to use when creating sitecollections Format UTC[PLUS|MINUS][HH:MM]_[DESCRIPTION]">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_TimeZone.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.TimeZone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Admin.Model.SharePoint.TimeZone">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/TimeZone.cs/#L7" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_TimeZone.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.TimeZone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
 
-  <h1 id="PnP_Core_Admin_Model_SharePoint_TimeZone" data-uid="PnP.Core.Admin.Model.SharePoint.TimeZone">Enum TimeZone</h1>
-  <div class="markdown level0 summary"><p>Timezones to use when creating sitecollections
+        <article data-uid="PnP.Core.Admin.Model.SharePoint.TimeZone">
+
+
+
+
+  <h1 id="PnP_Core_Admin_Model_SharePoint_TimeZone" data-uid="PnP.Core.Admin.Model.SharePoint.TimeZone" class="text-break">
+Enum TimeZone  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/TimeZone.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.Admin.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Timezones to use when creating sitecollections
 Format UTC[PLUS|MINUS][HH:MM]_[DESCRIPTION]</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.Admin.dll</h6>
-
-  <h5 id="PnP_Core_Admin_Model_SharePoint_TimeZone_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public enum TimeZone</code></pre>
+    <pre><code class="lang-csharp hljs">public enum TimeZone</code></pre>
   </div>
 
 
 
 
 
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_None"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_None" class="expander" data-toggle="collapse">None</a></h4>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_None" class="collapse in">
-        <p><p>No Timezone</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_AZORES"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_AZORES" class="expander" data-toggle="collapse">UTCMINUS0100_AZORES</a></h4>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_AZORES" class="collapse in">
-        <p><p>Timezone for AZORES</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_CAPE_VERDE_ISLANDS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_CAPE_VERDE_ISLANDS" class="expander" data-toggle="collapse">UTCMINUS0100_CAPE_VERDE_ISLANDS</a></h4>
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_None"><code>None = 0</code></dt>
+  
+  <dd><p>No Timezone</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_AZORES"><code>UTCMINUS0100_AZORES = 29</code></dt>
+  
+  <dd><p>Timezone for AZORES</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_CAPE_VERDE_ISLANDS"><code>UTCMINUS0100_CAPE_VERDE_ISLANDS = 53</code></dt>
+  
+  <dd><p>Timezone for CAPE VERDE ISLANDS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0200_MID_ATLANTIC"><code>UTCMINUS0200_MID_ATLANTIC = 30</code></dt>
+  
+  <dd><p>Timezone for MIDATLANTIC</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BRASILIA"><code>UTCMINUS0300_BRASILIA = 8</code></dt>
+  
+  <dd><p>Timezone for BRASILIA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BUENOS_AIRES"><code>UTCMINUS0300_BUENOS_AIRES = 85</code></dt>
+  
+  <dd><p>Timezone for BUENOS AIRES</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_CAYENNE"><code>UTCMINUS0300_CAYENNE = 32</code></dt>
+  
+  <dd><p>Timezone for CAYENNE</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_GREENLAND"><code>UTCMINUS0300_GREENLAND = 60</code></dt>
+  
+  <dd><p>Timezone for GREENLAND</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_MONTEVIDEO"><code>UTCMINUS0300_MONTEVIDEO = 90</code></dt>
+  
+  <dd><p>Timezone for MONTEVIDEO</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR"><code>UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR = 28</code></dt>
+  
+  <dd><p>Timezone for NEWFOUNDLAND and LABRADOR</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ASUNCION"><code>UTCMINUS0400_ASUNCION = 91</code></dt>
+  
+  <dd><p>Timezone for ASUNCION</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ATLANTIC_TIME_CANADA"><code>UTCMINUS0400_ATLANTIC_TIME_CANADA = 9</code></dt>
+  
+  <dd><p>Timezone for ATLANTIC CANADA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN"><code>UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN = 33</code></dt>
+  
+  <dd><p>Timezone for GEORGETOWN and LA PAZ - SAN JUAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_MANAUS"><code>UTCMINUS0400_MANAUS = 81</code></dt>
+  
+  <dd><p>Timezone for MANAUS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_SANTIAGO"><code>UTCMINUS0400_SANTIAGO = 65</code></dt>
+  
+  <dd><p>Timezone for SANTIAGO</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0430_CARACAS"><code>UTCMINUS0430_CARACAS = 88</code></dt>
+  
+  <dd><p>Timezone for CARACAS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_BOGOTA_LIMA_QUITO"><code>UTCMINUS0500_BOGOTA_LIMA_QUITO = 35</code></dt>
+  
+  <dd><p>Timezone for BOGOTA, LIMA and QUITO</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_EASTERN_TIME_US_AND_CANADA"><code>UTCMINUS0500_EASTERN_TIME_US_AND_CANADA = 10</code></dt>
+  
+  <dd><p>Timezone for EASTERN US and CANADA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_INDIANA_EAST"><code>UTCMINUS0500_INDIANA_EAST = 34</code></dt>
+  
+  <dd><p>Timezone for INDIANA EAST</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_AMERICA"><code>UTCMINUS0600_CENTRAL_AMERICA = 55</code></dt>
+  
+  <dd><p>Timezone for CENTRAL AMERICA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA"><code>UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA = 11</code></dt>
+  
+  <dd><p>Timezone for CENTRAL US and CANADA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY"><code>UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY = 37</code></dt>
+  
+  <dd><p>Timezone for GUADALAJARA, MEXICO CITY and MONTERREY</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_SASKATCHEWAN"><code>UTCMINUS0600_SASKATCHEWAN = 36</code></dt>
+  
+  <dd><p>Timezone for SASKATCHEWAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_ARIZONA"><code>UTCMINUS0700_ARIZONA = 38</code></dt>
+  
+  <dd><p>Timezone for ARIZONA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN"><code>UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN = 77</code></dt>
+  
+  <dd><p>Timezone for CHIHUAHUA and LA PAZ - MAZATLAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA"><code>UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA = 12</code></dt>
+  
+  <dd><p>Timezone for MOUNTAIN US and CANADA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA"><code>UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA = 13</code></dt>
+  
+  <dd><p>Timezone for PACIFIC US and CANADA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_TIJUANA_BAJA_CALFORNIA"><code>UTCMINUS0800_TIJUANA_BAJA_CALFORNIA = 78</code></dt>
+  
+  <dd><p>Timezone for TIJUANA, BAJA and CALFORNIA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_ULAANBAATAR"><code>UTCMINUS0800_ULAANBAATAR = 94</code></dt>
+  
+  <dd><p>Timezone for ULAANBAATAR</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0900_ALASKA"><code>UTCMINUS0900_ALASKA = 14</code></dt>
+  
+  <dd><p>Timezone for ALASKA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1000_HAWAII"><code>UTCMINUS1000_HAWAII = 15</code></dt>
+  
+  <dd><p>Timezone for HAWAII</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1100_MIDWAY_ISLAND_SAMOA"><code>UTCMINUS1100_MIDWAY_ISLAND_SAMOA = 16</code></dt>
+  
+  <dd><p>Timezone for MIDWAY ISLAND and SAMOA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST"><code>UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST = 39</code></dt>
+  
+  <dd><p>Timezone for INTERNATIONAL DATE LINE WEST</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA"><code>UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA = 4</code></dt>
+  
+  <dd><p>Timezone for AMSTERDAM, BERLIN, BERN, ROME, STOCKHOLM and VIENNA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE"><code>UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE = 6</code></dt>
+  
+  <dd><p>Timezone for BELGRADE, BRATISLAVA, BUDAPEST, LJUBLJANA and PRAGUE</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS"><code>UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS = 3</code></dt>
+  
+  <dd><p>Timezone for BRUSSELS, COPENHAGEN, MADRID and PARIS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB"><code>UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB = 57</code></dt>
+  
+  <dd><p>Timezone for SARAJEVO, SKOPJE, WARSAW and ZAGREB</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_WEST_CENTRAL_AFRICA"><code>UTCPLUS0100_WEST_CENTRAL_AFRICA = 69</code></dt>
+  
+  <dd><p>Timezone for WEST CENTRAL AFRICA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_AMMAN"><code>UTCPLUS0200_AMMAN = 79</code></dt>
+  
+  <dd><p>Timezone for AMMAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL"><code>UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL = 5</code></dt>
+  
+  <dd><p>Timezone for ATHENS, BUCHAREST and ISTANBUL</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_BEIRUT"><code>UTCPLUS0200_BEIRUT = 80</code></dt>
+  
+  <dd><p>Timezone for BEIRUT</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_CAIRO"><code>UTCPLUS0200_CAIRO = 49</code></dt>
+  
+  <dd><p>Timezone for CAIRO</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HARARE_PRETORIA"><code>UTCPLUS0200_HARARE_PRETORIA = 50</code></dt>
+  
+  <dd><p>Timezone for HARARE and PRETORIA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS"><code>UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS = 59</code></dt>
+  
+  <dd><p>Timezone for HELSINKI, KYIV, RIGA, SOFIA, TALLINN and VILNIUS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_JERUSALEM"><code>UTCPLUS0200_JERUSALEM = 27</code></dt>
+  
+  <dd><p>Timezone for JERUSALEM</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_MINSK"><code>UTCPLUS0200_MINSK = 7</code></dt>
+  
+  <dd><p>Timezone for MINSK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_WINDHOEK"><code>UTCPLUS0200_WINDHOEK = 83</code></dt>
+  
+  <dd><p>Timezone for WINDHOEK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_BAGHDAD"><code>UTCPLUS0300_BAGHDAD = 26</code></dt>
+  
+  <dd><p>Timezone for BAGHDAD</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_KUWAIT_RIYADH"><code>UTCPLUS0300_KUWAIT_RIYADH = 74</code></dt>
+  
+  <dd><p>Timezone for KUWAIT and RIYADH</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD"><code>UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD = 51</code></dt>
+  
+  <dd><p>Timezone for MOSCOW, ST PETERSBURG and VOLGOGRAD</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_NAIROBI"><code>UTCPLUS0300_NAIROBI = 56</code></dt>
+  
+  <dd><p>Timezone for NAIROBI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0330_TEHRAN"><code>UTCPLUS0330_TEHRAN = 25</code></dt>
+  
+  <dd><p>Timezone for TEHRAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_ABU_DHABI_MUSCAT"><code>UTCPLUS0400_ABU_DHABI_MUSCAT = 24</code></dt>
+  
+  <dd><p>Timezone for ABU DHABI and MUSCAT</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_BAKU"><code>UTCPLUS0400_BAKU = 54</code></dt>
+  
+  <dd><p>Timezone for BAKU</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_PORT_LOUIS"><code>UTCPLUS0400_PORT_LOUIS = 89</code></dt>
+  
+  <dd><p>Timezone for PORT LOUIS</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_TBILISI"><code>UTCPLUS0400_TBILISI = 82</code></dt>
+  
+  <dd><p>Timezone for TBILISI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_YEREVAN"><code>UTCPLUS0400_YEREVAN = 84</code></dt>
+  
+  <dd><p>Timezone for YEREVAN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0430_KABUL"><code>UTCPLUS0430_KABUL = 48</code></dt>
+  
+  <dd><p>Timezone for KABUL</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_EKATERINBURG"><code>UTCPLUS0500_EKATERINBURG = 58</code></dt>
+  
+  <dd><p>Timezone for EKATERINBURG</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_ISLAMABAD_KARACHI"><code>UTCPLUS0500_ISLAMABAD_KARACHI = 87</code></dt>
+  
+  <dd><p>Timezone for ISLAMABAD and KARACHI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_TASHKENT"><code>UTCPLUS0500_TASHKENT = 47</code></dt>
+  
+  <dd><p>Timezone for TASHKENT</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI"><code>UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI = 23</code></dt>
+  
+  <dd><p>Timezone for CHENNAI, KOLKATA, MUMBAI and NEW DELHI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_SRI_JAYAWARDENEPURA"><code>UTCPLUS0530_SRI_JAYAWARDENEPURA = 66</code></dt>
+  
+  <dd><p>Timezone for SRI JAYAWARDENEPURA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0545_KATHMANDU"><code>UTCPLUS0545_KATHMANDU = 62</code></dt>
+  
+  <dd><p>Timezone for KATHMANDU</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_ASTANA_DHAKA"><code>UTCPLUS0600_ASTANA_DHAKA = 71</code></dt>
+  
+  <dd><p>Timezone for ASTANA and DHAKA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_NOVOSIBIRSK"><code>UTCPLUS0600_NOVOSIBIRSK = 46</code></dt>
+  
+  <dd><p>Timezone for NOVOSIBIRSK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0630_YANGON_RANGOON"><code>UTCPLUS0630_YANGON_RANGOON = 61</code></dt>
+  
+  <dd><p>Timezone for YANGON and RANGOON</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_BANGKOK_HANOI_JAKARTA"><code>UTCPLUS0700_BANGKOK_HANOI_JAKARTA = 22</code></dt>
+  
+  <dd><p>Timezone for BANGKOK, HANOI and JAKARTA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_KRASNOYARSK"><code>UTCPLUS0700_KRASNOYARSK = 64</code></dt>
+  
+  <dd><p>Timezone for KRASNOYARSK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI"><code>UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI = 45</code></dt>
+  
+  <dd><p>Timezone for BEIJING, CHONGQING, HONG KONG and SAR URUMQI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_IRKUTSK"><code>UTCPLUS0800_IRKUTSK = 63</code></dt>
+  
+  <dd><p>Timezone for IRKUTSK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_KUALA_LUMPUR_SINGAPORE"><code>UTCPLUS0800_KUALA_LUMPUR_SINGAPORE = 21</code></dt>
+  
+  <dd><p>Timezone for KUALA LUMPUR and SINGAPORE</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_PERTH"><code>UTCPLUS0800_PERTH = 73</code></dt>
+  
+  <dd><p>Timezone for PERTH</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_TAIPEI"><code>UTCPLUS0800_TAIPEI = 75</code></dt>
+  
+  <dd><p>Timezone for TAIPEI</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_OSAKA_SAPPORO_TOKYO"><code>UTCPLUS0900_OSAKA_SAPPORO_TOKYO = 20</code></dt>
+  
+  <dd><p>Timezone for OSAKA, SAPPORO and TOKYO</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_SEOUL"><code>UTCPLUS0900_SEOUL = 72</code></dt>
+  
+  <dd><p>Timezone for SEOUL</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_YAKUTSK"><code>UTCPLUS0900_YAKUTSK = 70</code></dt>
+  
+  <dd><p>Timezone for YAKUTSK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_ADELAIDE"><code>UTCPLUS0930_ADELAIDE = 19</code></dt>
+  
+  <dd><p>Timezone for ADELAIDE</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_DARWIN"><code>UTCPLUS0930_DARWIN = 44</code></dt>
+  
+  <dd><p>Timezone for DARWIN</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_BRISBANE"><code>UTCPLUS1000_BRISBANE = 18</code></dt>
+  
+  <dd><p>Timezone for BRISBANE</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY"><code>UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY = 76</code></dt>
+  
+  <dd><p>Timezone for CANBERRA, MELBOURNE and SYDNEY</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_GUAM_PORT_MORESBY"><code>UTCPLUS1000_GUAM_PORT_MORESBY = 43</code></dt>
+  
+  <dd><p>Timezone for GUAM and PORT MORESBY</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_HOBART"><code>UTCPLUS1000_HOBART = 42</code></dt>
+  
+  <dd><p>Timezone for HOBART</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_VLADIVOSTOK"><code>UTCPLUS1000_VLADIVOSTOK = 68</code></dt>
+  
+  <dd><p>Timezone for VLADIVOSTOK</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA"><code>UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA = 41</code></dt>
+  
+  <dd><p>Timezone for MADAGAN, SOLOMON ISLANDS and NEW CALENDONIA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_AUCKLAND_WELLINGTON"><code>UTCPLUS1200_AUCKLAND_WELLINGTON = 17</code></dt>
+  
+  <dd><p>Timezone for AUCKLAND and WELLINGTON</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS"><code>UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS = 40</code></dt>
+  
+  <dd><p>Timezone for FIJI ISLANDS and MARSHALL ISLAND</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_PETROPAVLOVSK_KACHATSKY"><code>UTCPLUS1200_PETROPAVLOVSK_KACHATSKY = 92</code></dt>
+  
+  <dd><p>Timezone for PETROPAVLOVSK and KACHATSKY</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1300_NUKU_ALOFA"><code>UTCPLUS1300_NUKU_ALOFA = 67</code></dt>
+  
+  <dd><p>Timezone for NUKU and ALOFA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_CASABLANCA"><code>UTC_CASABLANCA = 86</code></dt>
+  
+  <dd><p>Timezone for CASABLANCA</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_COORDINATED_UNIVERSAL_TIME"><code>UTC_COORDINATED_UNIVERSAL_TIME = 93</code></dt>
+  
+  <dd><p>COORDINATED UNIVERSAL TIME</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON"><code>UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON = 2</code></dt>
+  
+  <dd><p>Timezone for GREENWICH, DUBLIN, EDINBURGH, LISBON and LONDON</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_MONROVIA"><code>UTC_MONROVIA = 31</code></dt>
+  
+  <dd><p>Timezone for MONROVIA</p>
+</dd>
+  </dl>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0100_CAPE_VERDE_ISLANDS" class="collapse in">
-        <p><p>Timezone for CAPE VERDE ISLANDS</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0200_MID_ATLANTIC"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0200_MID_ATLANTIC" class="expander" data-toggle="collapse">UTCMINUS0200_MID_ATLANTIC</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0200_MID_ATLANTIC" class="collapse in">
-        <p><p>Timezone for MIDATLANTIC</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BRASILIA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BRASILIA" class="expander" data-toggle="collapse">UTCMINUS0300_BRASILIA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BRASILIA" class="collapse in">
-        <p><p>Timezone for BRASILIA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BUENOS_AIRES"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BUENOS_AIRES" class="expander" data-toggle="collapse">UTCMINUS0300_BUENOS_AIRES</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_BUENOS_AIRES" class="collapse in">
-        <p><p>Timezone for BUENOS AIRES</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_CAYENNE"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_CAYENNE" class="expander" data-toggle="collapse">UTCMINUS0300_CAYENNE</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_CAYENNE" class="collapse in">
-        <p><p>Timezone for CAYENNE</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_GREENLAND"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_GREENLAND" class="expander" data-toggle="collapse">UTCMINUS0300_GREENLAND</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_GREENLAND" class="collapse in">
-        <p><p>Timezone for GREENLAND</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_MONTEVIDEO"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_MONTEVIDEO" class="expander" data-toggle="collapse">UTCMINUS0300_MONTEVIDEO</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0300_MONTEVIDEO" class="collapse in">
-        <p><p>Timezone for MONTEVIDEO</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR" class="expander" data-toggle="collapse">UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0330_NEWFOUNDLAND_AND_LABRADOR" class="collapse in">
-        <p><p>Timezone for NEWFOUNDLAND and LABRADOR</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ASUNCION"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ASUNCION" class="expander" data-toggle="collapse">UTCMINUS0400_ASUNCION</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ASUNCION" class="collapse in">
-        <p><p>Timezone for ASUNCION</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ATLANTIC_TIME_CANADA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ATLANTIC_TIME_CANADA" class="expander" data-toggle="collapse">UTCMINUS0400_ATLANTIC_TIME_CANADA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_ATLANTIC_TIME_CANADA" class="collapse in">
-        <p><p>Timezone for ATLANTIC CANADA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN" class="expander" data-toggle="collapse">UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_GEORGETOWN_LA_PAZ_SAN_JUAN" class="collapse in">
-        <p><p>Timezone for GEORGETOWN and LA PAZ - SAN JUAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_MANAUS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_MANAUS" class="expander" data-toggle="collapse">UTCMINUS0400_MANAUS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_MANAUS" class="collapse in">
-        <p><p>Timezone for MANAUS</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_SANTIAGO"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_SANTIAGO" class="expander" data-toggle="collapse">UTCMINUS0400_SANTIAGO</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0400_SANTIAGO" class="collapse in">
-        <p><p>Timezone for SANTIAGO</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0430_CARACAS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0430_CARACAS" class="expander" data-toggle="collapse">UTCMINUS0430_CARACAS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0430_CARACAS" class="collapse in">
-        <p><p>Timezone for CARACAS</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_BOGOTA_LIMA_QUITO"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_BOGOTA_LIMA_QUITO" class="expander" data-toggle="collapse">UTCMINUS0500_BOGOTA_LIMA_QUITO</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_BOGOTA_LIMA_QUITO" class="collapse in">
-        <p><p>Timezone for BOGOTA, LIMA and QUITO</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_EASTERN_TIME_US_AND_CANADA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_EASTERN_TIME_US_AND_CANADA" class="expander" data-toggle="collapse">UTCMINUS0500_EASTERN_TIME_US_AND_CANADA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_EASTERN_TIME_US_AND_CANADA" class="collapse in">
-        <p><p>Timezone for EASTERN US and CANADA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_INDIANA_EAST"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_INDIANA_EAST" class="expander" data-toggle="collapse">UTCMINUS0500_INDIANA_EAST</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0500_INDIANA_EAST" class="collapse in">
-        <p><p>Timezone for INDIANA EAST</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_AMERICA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_AMERICA" class="expander" data-toggle="collapse">UTCMINUS0600_CENTRAL_AMERICA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_AMERICA" class="collapse in">
-        <p><p>Timezone for CENTRAL AMERICA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA" class="expander" data-toggle="collapse">UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_CENTRAL_TIME_US_AND_CANADA" class="collapse in">
-        <p><p>Timezone for CENTRAL US and CANADA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY" class="expander" data-toggle="collapse">UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_GUADALAJARA_MEXICO_CITY_MONTERREY" class="collapse in">
-        <p><p>Timezone for GUADALAJARA, MEXICO CITY and MONTERREY</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_SASKATCHEWAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_SASKATCHEWAN" class="expander" data-toggle="collapse">UTCMINUS0600_SASKATCHEWAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0600_SASKATCHEWAN" class="collapse in">
-        <p><p>Timezone for SASKATCHEWAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_ARIZONA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_ARIZONA" class="expander" data-toggle="collapse">UTCMINUS0700_ARIZONA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_ARIZONA" class="collapse in">
-        <p><p>Timezone for ARIZONA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN" class="expander" data-toggle="collapse">UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_CHIHUAHUA_LA_PAZ_MAZATLAN" class="collapse in">
-        <p><p>Timezone for CHIHUAHUA and LA PAZ - MAZATLAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA" class="expander" data-toggle="collapse">UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0700_MOUNTAIN_TIME_US_AND_CANADA" class="collapse in">
-        <p><p>Timezone for MOUNTAIN US and CANADA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA" class="expander" data-toggle="collapse">UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_PACIFIC_TIME_US_AND_CANADA" class="collapse in">
-        <p><p>Timezone for PACIFIC US and CANADA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_TIJUANA_BAJA_CALFORNIA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_TIJUANA_BAJA_CALFORNIA" class="expander" data-toggle="collapse">UTCMINUS0800_TIJUANA_BAJA_CALFORNIA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_TIJUANA_BAJA_CALFORNIA" class="collapse in">
-        <p><p>Timezone for TIJUANA, BAJA and CALFORNIA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_ULAANBAATAR"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_ULAANBAATAR" class="expander" data-toggle="collapse">UTCMINUS0800_ULAANBAATAR</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0800_ULAANBAATAR" class="collapse in">
-        <p><p>Timezone for ULAANBAATAR</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0900_ALASKA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0900_ALASKA" class="expander" data-toggle="collapse">UTCMINUS0900_ALASKA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS0900_ALASKA" class="collapse in">
-        <p><p>Timezone for ALASKA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1000_HAWAII"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1000_HAWAII" class="expander" data-toggle="collapse">UTCMINUS1000_HAWAII</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1000_HAWAII" class="collapse in">
-        <p><p>Timezone for HAWAII</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1100_MIDWAY_ISLAND_SAMOA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1100_MIDWAY_ISLAND_SAMOA" class="expander" data-toggle="collapse">UTCMINUS1100_MIDWAY_ISLAND_SAMOA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1100_MIDWAY_ISLAND_SAMOA" class="collapse in">
-        <p><p>Timezone for MIDWAY ISLAND and SAMOA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST" class="expander" data-toggle="collapse">UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCMINUS1200_INTERNATIONAL_DATE_LINE_WEST" class="collapse in">
-        <p><p>Timezone for INTERNATIONAL DATE LINE WEST</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA" class="expander" data-toggle="collapse">UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_AMSTERDAM_BERLIN_BERN_ROME_STOCKHOLM_VIENNA" class="collapse in">
-        <p><p>Timezone for AMSTERDAM, BERLIN, BERN, ROME, STOCKHOLM and VIENNA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE" class="expander" data-toggle="collapse">UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BELGRADE_BRATISLAVA_BUDAPEST_LJUBLJANA_PRAGUE" class="collapse in">
-        <p><p>Timezone for BELGRADE, BRATISLAVA, BUDAPEST, LJUBLJANA and PRAGUE</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS" class="expander" data-toggle="collapse">UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS" class="collapse in">
-        <p><p>Timezone for BRUSSELS, COPENHAGEN, MADRID and PARIS</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB" class="expander" data-toggle="collapse">UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_SARAJEVO_SKOPJE_WARSAW_ZAGREB" class="collapse in">
-        <p><p>Timezone for SARAJEVO, SKOPJE, WARSAW and ZAGREB</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_WEST_CENTRAL_AFRICA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_WEST_CENTRAL_AFRICA" class="expander" data-toggle="collapse">UTCPLUS0100_WEST_CENTRAL_AFRICA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0100_WEST_CENTRAL_AFRICA" class="collapse in">
-        <p><p>Timezone for WEST CENTRAL AFRICA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_AMMAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_AMMAN" class="expander" data-toggle="collapse">UTCPLUS0200_AMMAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_AMMAN" class="collapse in">
-        <p><p>Timezone for AMMAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL" class="expander" data-toggle="collapse">UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_ATHENS_BUCHAREST_ISTANBUL" class="collapse in">
-        <p><p>Timezone for ATHENS, BUCHAREST and ISTANBUL</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_BEIRUT"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_BEIRUT" class="expander" data-toggle="collapse">UTCPLUS0200_BEIRUT</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_BEIRUT" class="collapse in">
-        <p><p>Timezone for BEIRUT</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_CAIRO"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_CAIRO" class="expander" data-toggle="collapse">UTCPLUS0200_CAIRO</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_CAIRO" class="collapse in">
-        <p><p>Timezone for CAIRO</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HARARE_PRETORIA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HARARE_PRETORIA" class="expander" data-toggle="collapse">UTCPLUS0200_HARARE_PRETORIA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HARARE_PRETORIA" class="collapse in">
-        <p><p>Timezone for HARARE and PRETORIA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS" class="expander" data-toggle="collapse">UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_HELSINKI_KYIV_RIGA_SOFIA_TALLINN_VILNIUS" class="collapse in">
-        <p><p>Timezone for HELSINKI, KYIV, RIGA, SOFIA, TALLINN and VILNIUS</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_JERUSALEM"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_JERUSALEM" class="expander" data-toggle="collapse">UTCPLUS0200_JERUSALEM</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_JERUSALEM" class="collapse in">
-        <p><p>Timezone for JERUSALEM</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_MINSK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_MINSK" class="expander" data-toggle="collapse">UTCPLUS0200_MINSK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_MINSK" class="collapse in">
-        <p><p>Timezone for MINSK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_WINDHOEK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_WINDHOEK" class="expander" data-toggle="collapse">UTCPLUS0200_WINDHOEK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0200_WINDHOEK" class="collapse in">
-        <p><p>Timezone for WINDHOEK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_BAGHDAD"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_BAGHDAD" class="expander" data-toggle="collapse">UTCPLUS0300_BAGHDAD</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_BAGHDAD" class="collapse in">
-        <p><p>Timezone for BAGHDAD</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_KUWAIT_RIYADH"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_KUWAIT_RIYADH" class="expander" data-toggle="collapse">UTCPLUS0300_KUWAIT_RIYADH</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_KUWAIT_RIYADH" class="collapse in">
-        <p><p>Timezone for KUWAIT and RIYADH</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD" class="expander" data-toggle="collapse">UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_MOSCOW_STPETERSBURG_VOLGOGRAD" class="collapse in">
-        <p><p>Timezone for MOSCOW, ST PETERSBURG and VOLGOGRAD</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_NAIROBI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_NAIROBI" class="expander" data-toggle="collapse">UTCPLUS0300_NAIROBI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0300_NAIROBI" class="collapse in">
-        <p><p>Timezone for NAIROBI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0330_TEHRAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0330_TEHRAN" class="expander" data-toggle="collapse">UTCPLUS0330_TEHRAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0330_TEHRAN" class="collapse in">
-        <p><p>Timezone for TEHRAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_ABU_DHABI_MUSCAT"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_ABU_DHABI_MUSCAT" class="expander" data-toggle="collapse">UTCPLUS0400_ABU_DHABI_MUSCAT</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_ABU_DHABI_MUSCAT" class="collapse in">
-        <p><p>Timezone for ABU DHABI and MUSCAT</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_BAKU"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_BAKU" class="expander" data-toggle="collapse">UTCPLUS0400_BAKU</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_BAKU" class="collapse in">
-        <p><p>Timezone for BAKU</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_PORT_LOUIS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_PORT_LOUIS" class="expander" data-toggle="collapse">UTCPLUS0400_PORT_LOUIS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_PORT_LOUIS" class="collapse in">
-        <p><p>Timezone for PORT LOUIS</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_TBILISI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_TBILISI" class="expander" data-toggle="collapse">UTCPLUS0400_TBILISI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_TBILISI" class="collapse in">
-        <p><p>Timezone for TBILISI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_YEREVAN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_YEREVAN" class="expander" data-toggle="collapse">UTCPLUS0400_YEREVAN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0400_YEREVAN" class="collapse in">
-        <p><p>Timezone for YEREVAN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0430_KABUL"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0430_KABUL" class="expander" data-toggle="collapse">UTCPLUS0430_KABUL</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0430_KABUL" class="collapse in">
-        <p><p>Timezone for KABUL</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_EKATERINBURG"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_EKATERINBURG" class="expander" data-toggle="collapse">UTCPLUS0500_EKATERINBURG</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_EKATERINBURG" class="collapse in">
-        <p><p>Timezone for EKATERINBURG</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_ISLAMABAD_KARACHI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_ISLAMABAD_KARACHI" class="expander" data-toggle="collapse">UTCPLUS0500_ISLAMABAD_KARACHI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_ISLAMABAD_KARACHI" class="collapse in">
-        <p><p>Timezone for ISLAMABAD and KARACHI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_TASHKENT"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_TASHKENT" class="expander" data-toggle="collapse">UTCPLUS0500_TASHKENT</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0500_TASHKENT" class="collapse in">
-        <p><p>Timezone for TASHKENT</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI" class="expander" data-toggle="collapse">UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_CHENNAI_KOLKATA_MUMBAI_NEW_DELHI" class="collapse in">
-        <p><p>Timezone for CHENNAI, KOLKATA, MUMBAI and NEW DELHI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_SRI_JAYAWARDENEPURA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_SRI_JAYAWARDENEPURA" class="expander" data-toggle="collapse">UTCPLUS0530_SRI_JAYAWARDENEPURA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0530_SRI_JAYAWARDENEPURA" class="collapse in">
-        <p><p>Timezone for SRI JAYAWARDENEPURA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0545_KATHMANDU"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0545_KATHMANDU" class="expander" data-toggle="collapse">UTCPLUS0545_KATHMANDU</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0545_KATHMANDU" class="collapse in">
-        <p><p>Timezone for KATHMANDU</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_ASTANA_DHAKA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_ASTANA_DHAKA" class="expander" data-toggle="collapse">UTCPLUS0600_ASTANA_DHAKA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_ASTANA_DHAKA" class="collapse in">
-        <p><p>Timezone for ASTANA and DHAKA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_NOVOSIBIRSK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_NOVOSIBIRSK" class="expander" data-toggle="collapse">UTCPLUS0600_NOVOSIBIRSK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0600_NOVOSIBIRSK" class="collapse in">
-        <p><p>Timezone for NOVOSIBIRSK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0630_YANGON_RANGOON"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0630_YANGON_RANGOON" class="expander" data-toggle="collapse">UTCPLUS0630_YANGON_RANGOON</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0630_YANGON_RANGOON" class="collapse in">
-        <p><p>Timezone for YANGON and RANGOON</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_BANGKOK_HANOI_JAKARTA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_BANGKOK_HANOI_JAKARTA" class="expander" data-toggle="collapse">UTCPLUS0700_BANGKOK_HANOI_JAKARTA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_BANGKOK_HANOI_JAKARTA" class="collapse in">
-        <p><p>Timezone for BANGKOK, HANOI and JAKARTA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_KRASNOYARSK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_KRASNOYARSK" class="expander" data-toggle="collapse">UTCPLUS0700_KRASNOYARSK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0700_KRASNOYARSK" class="collapse in">
-        <p><p>Timezone for KRASNOYARSK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI" class="expander" data-toggle="collapse">UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_BEIJING_CHONGQING_HONG_KONG_SAR_URUMQI" class="collapse in">
-        <p><p>Timezone for BEIJING, CHONGQING, HONG KONG and SAR URUMQI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_IRKUTSK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_IRKUTSK" class="expander" data-toggle="collapse">UTCPLUS0800_IRKUTSK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_IRKUTSK" class="collapse in">
-        <p><p>Timezone for IRKUTSK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_KUALA_LUMPUR_SINGAPORE"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_KUALA_LUMPUR_SINGAPORE" class="expander" data-toggle="collapse">UTCPLUS0800_KUALA_LUMPUR_SINGAPORE</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_KUALA_LUMPUR_SINGAPORE" class="collapse in">
-        <p><p>Timezone for KUALA LUMPUR and SINGAPORE</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_PERTH"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_PERTH" class="expander" data-toggle="collapse">UTCPLUS0800_PERTH</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_PERTH" class="collapse in">
-        <p><p>Timezone for PERTH</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_TAIPEI"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_TAIPEI" class="expander" data-toggle="collapse">UTCPLUS0800_TAIPEI</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0800_TAIPEI" class="collapse in">
-        <p><p>Timezone for TAIPEI</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_OSAKA_SAPPORO_TOKYO"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_OSAKA_SAPPORO_TOKYO" class="expander" data-toggle="collapse">UTCPLUS0900_OSAKA_SAPPORO_TOKYO</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_OSAKA_SAPPORO_TOKYO" class="collapse in">
-        <p><p>Timezone for OSAKA, SAPPORO and TOKYO</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_SEOUL"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_SEOUL" class="expander" data-toggle="collapse">UTCPLUS0900_SEOUL</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_SEOUL" class="collapse in">
-        <p><p>Timezone for SEOUL</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_YAKUTSK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_YAKUTSK" class="expander" data-toggle="collapse">UTCPLUS0900_YAKUTSK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0900_YAKUTSK" class="collapse in">
-        <p><p>Timezone for YAKUTSK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_ADELAIDE"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_ADELAIDE" class="expander" data-toggle="collapse">UTCPLUS0930_ADELAIDE</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_ADELAIDE" class="collapse in">
-        <p><p>Timezone for ADELAIDE</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_DARWIN"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_DARWIN" class="expander" data-toggle="collapse">UTCPLUS0930_DARWIN</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS0930_DARWIN" class="collapse in">
-        <p><p>Timezone for DARWIN</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_BRISBANE"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_BRISBANE" class="expander" data-toggle="collapse">UTCPLUS1000_BRISBANE</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_BRISBANE" class="collapse in">
-        <p><p>Timezone for BRISBANE</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY" class="expander" data-toggle="collapse">UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_CANBERRA_MELBOURNE_SYDNEY" class="collapse in">
-        <p><p>Timezone for CANBERRA, MELBOURNE and SYDNEY</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_GUAM_PORT_MORESBY"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_GUAM_PORT_MORESBY" class="expander" data-toggle="collapse">UTCPLUS1000_GUAM_PORT_MORESBY</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_GUAM_PORT_MORESBY" class="collapse in">
-        <p><p>Timezone for GUAM and PORT MORESBY</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_HOBART"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_HOBART" class="expander" data-toggle="collapse">UTCPLUS1000_HOBART</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_HOBART" class="collapse in">
-        <p><p>Timezone for HOBART</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_VLADIVOSTOK"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_VLADIVOSTOK" class="expander" data-toggle="collapse">UTCPLUS1000_VLADIVOSTOK</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1000_VLADIVOSTOK" class="collapse in">
-        <p><p>Timezone for VLADIVOSTOK</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA" class="expander" data-toggle="collapse">UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1100_MADAGAN_SOLOMON_ISLANDS_NEW_CALENDONIA" class="collapse in">
-        <p><p>Timezone for MADAGAN, SOLOMON ISLANDS and NEW CALENDONIA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_AUCKLAND_WELLINGTON"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_AUCKLAND_WELLINGTON" class="expander" data-toggle="collapse">UTCPLUS1200_AUCKLAND_WELLINGTON</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_AUCKLAND_WELLINGTON" class="collapse in">
-        <p><p>Timezone for AUCKLAND and WELLINGTON</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS" class="expander" data-toggle="collapse">UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_FIJI_ISLANDS_MARSHALL_ISLANDS" class="collapse in">
-        <p><p>Timezone for FIJI ISLANDS and MARSHALL ISLAND</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_PETROPAVLOVSK_KACHATSKY"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_PETROPAVLOVSK_KACHATSKY" class="expander" data-toggle="collapse">UTCPLUS1200_PETROPAVLOVSK_KACHATSKY</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1200_PETROPAVLOVSK_KACHATSKY" class="collapse in">
-        <p><p>Timezone for PETROPAVLOVSK and KACHATSKY</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1300_NUKU_ALOFA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1300_NUKU_ALOFA" class="expander" data-toggle="collapse">UTCPLUS1300_NUKU_ALOFA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTCPLUS1300_NUKU_ALOFA" class="collapse in">
-        <p><p>Timezone for NUKU and ALOFA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_CASABLANCA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_CASABLANCA" class="expander" data-toggle="collapse">UTC_CASABLANCA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_CASABLANCA" class="collapse in">
-        <p><p>Timezone for CASABLANCA</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_COORDINATED_UNIVERSAL_TIME"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_COORDINATED_UNIVERSAL_TIME" class="expander" data-toggle="collapse">UTC_COORDINATED_UNIVERSAL_TIME</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_COORDINATED_UNIVERSAL_TIME" class="collapse in">
-        <p><p>COORDINATED UNIVERSAL TIME</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON" class="expander" data-toggle="collapse">UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_GREENWICH_MEAN_TIME_DUBLIN_EDINBURGH_LISBON_LONDON" class="collapse in">
-        <p><p>Timezone for GREENWICH, DUBLIN, EDINBURGH, LISBON and LONDON</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_MONROVIA"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_MONROVIA" class="expander" data-toggle="collapse">UTC_MONROVIA</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_TimeZone_UTC_MONROVIA" class="collapse in">
-        <p><p>Timezone for MONROVIA</p>
-
-      </div>
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/TimeZone.cs/#L7" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

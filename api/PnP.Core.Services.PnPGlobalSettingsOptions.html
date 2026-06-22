@@ -1,102 +1,126 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class PnPGlobalSettingsOptions | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class PnPGlobalSettingsOptions | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Class PnPGlobalSettingsOptions | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PnPGlobalSettingsOptions | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="PnP Core SDK settings class">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Services_PnPGlobalSettingsOptions" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions">Class PnPGlobalSettingsOptions</h1>
-  <div class="markdown level0 summary"><p>PnP Core SDK settings class</p>
-</div>
-  <div class="markdown level0 conceptual"></div>
 
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><span class="xref">PnPGlobalSettingsOptions</span></div>
+        <article data-uid="PnP.Core.Services.PnPGlobalSettingsOptions">
+
+
+
+  <h1 id="PnP_Core_Services_PnPGlobalSettingsOptions" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions" class="text-break">
+Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>PnP Core SDK settings class</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PnPGlobalSettingsOptions</code></pre>
   </div>
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">PnPGlobalSettingsOptions</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
@@ -118,43 +142,30 @@
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Services_PnPGlobalSettingsOptions_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public class PnPGlobalSettingsOptions</code></pre>
-  </div>
+  </dd></dl>
 
 
 
 
 
-  <h3 id="constructors">Constructors
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions__ctor.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L176" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions__ctor_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.#ctor*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions__ctor" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.#ctor"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions__ctor" class="expander" data-toggle="collapse">PnPGlobalSettingsOptions()</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions__ctor" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.#ctor">
+  PnPGlobalSettingsOptions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions__ctor" class="collapse in">
   <div class="markdown level1 summary"><p>Default constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public PnPGlobalSettingsOptions()</code></pre>
+    <pre><code class="lang-csharp hljs">public PnPGlobalSettingsOptions()</code></pre>
   </div>
 
 
@@ -168,45 +179,35 @@
 
 
 
-  </div>
-  <h3 id="properties">Properties
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L169" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="properties">Properties
+</h2>
+
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId" class="expander" data-toggle="collapse">AADTenantId</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId">
+  AADTenantId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId" class="collapse in">
   <div class="markdown level1 summary"><p>AAD tenant id, used for telemetry purposes. Can be customized via configuration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public Guid AADTenantId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Guid AADTenantId { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -214,43 +215,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.AzureADLoginAuthority%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L33" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AzureADLoginAuthority*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AzureADLoginAuthority"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority" class="expander" data-toggle="collapse">AzureADLoginAuthority</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AzureADLoginAuthority">
+  AzureADLoginAuthority
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string AzureADLoginAuthority { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string AzureADLoginAuthority { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -258,43 +247,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry" class="expander" data-toggle="collapse">DisableTelemetry</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry">
+  DisableTelemetry
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry" class="collapse in">
   <div class="markdown level1 summary"><p>Turns on/off telemetry, can be customized via configuration. Defaults to false.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool DisableTelemetry { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool DisableTelemetry { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -302,43 +279,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_Environment.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.Environment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_Environment_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.Environment*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_Environment" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.Environment"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_Environment" class="expander" data-toggle="collapse">Environment</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_Environment" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.Environment">
+  Environment
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_Environment" class="collapse in">
   <div class="markdown level1 summary"><p>The Microsoft 365 cloud environment that's used</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public Microsoft365Environment? Environment { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Microsoft365Environment? Environment { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -346,43 +311,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L126" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds" class="expander" data-toggle="collapse">HttpAzureActiveDirectoryDelayInSeconds</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds">
+  HttpAzureActiveDirectoryDelayInSeconds
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds" class="collapse in">
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpAzureActiveDirectoryDelayInSeconds { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpAzureActiveDirectoryDelayInSeconds { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -390,43 +343,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries" class="expander" data-toggle="collapse">HttpAzureActiveDirectoryMaxRetries</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries">
+  HttpAzureActiveDirectoryMaxRetries
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries" class="collapse in">
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpAzureActiveDirectoryMaxRetries { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpAzureActiveDirectoryMaxRetries { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -434,43 +375,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L131" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay" class="expander" data-toggle="collapse">HttpAzureActiveDirectoryUseIncrementalDelay</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay">
+  HttpAzureActiveDirectoryUseIncrementalDelay
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay" class="collapse in">
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpAzureActiveDirectoryUseIncrementalDelay { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpAzureActiveDirectoryUseIncrementalDelay { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -478,43 +407,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader" class="expander" data-toggle="collapse">HttpAzureActiveDirectoryUseRetryAfterHeader</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader">
+  HttpAzureActiveDirectoryUseRetryAfterHeader
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader" class="collapse in">
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to true</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpAzureActiveDirectoryUseRetryAfterHeader { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpAzureActiveDirectoryUseRetryAfterHeader { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -522,43 +439,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds" class="expander" data-toggle="collapse">HttpMicrosoftGraphDelayInSeconds</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds">
+  HttpMicrosoftGraphDelayInSeconds
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds" class="collapse in">
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpMicrosoftGraphDelayInSeconds { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpMicrosoftGraphDelayInSeconds { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -566,43 +471,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries" class="expander" data-toggle="collapse">HttpMicrosoftGraphMaxRetries</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries">
+  HttpMicrosoftGraphMaxRetries
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries" class="collapse in">
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpMicrosoftGraphMaxRetries { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpMicrosoftGraphMaxRetries { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -610,43 +503,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay" class="expander" data-toggle="collapse">HttpMicrosoftGraphUseIncrementalDelay</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay">
+  HttpMicrosoftGraphUseIncrementalDelay
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay" class="collapse in">
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpMicrosoftGraphUseIncrementalDelay { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpMicrosoftGraphUseIncrementalDelay { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -654,43 +535,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader" class="expander" data-toggle="collapse">HttpMicrosoftGraphUseRetryAfterHeader</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader">
+  HttpMicrosoftGraphUseRetryAfterHeader
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader" class="collapse in">
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to true</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpMicrosoftGraphUseRetryAfterHeader { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpMicrosoftGraphUseRetryAfterHeader { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -698,45 +567,33 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpRateLimiterMinimumCapacityLeft%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L138" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpRateLimiterMinimumCapacityLeft*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpRateLimiterMinimumCapacityLeft"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft" class="expander" data-toggle="collapse">HttpRateLimiterMinimumCapacityLeft</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpRateLimiterMinimumCapacityLeft">
+  HttpRateLimiterMinimumCapacityLeft
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft" class="collapse in">
   <div class="markdown level1 summary"><p>When set (e.g. to 10%) then RateLimit response headers coming from SharePoint and Graph are used: if there's less
 then the set value (e.g. 10%) capacity left before getting throttled the pending request will be delayed until
 the 1 minute window is reset. Defaults to 0 (disabled).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpRateLimiterMinimumCapacityLeft { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpRateLimiterMinimumCapacityLeft { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -744,43 +601,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize" class="expander" data-toggle="collapse">HttpSharePointRestDefaultPageSize</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize">
+  HttpSharePointRestDefaultPageSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize" class="collapse in">
   <div class="markdown level1 summary"><p>Defines the default page size for querying items in SharePoint REST</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpSharePointRestDefaultPageSize { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpSharePointRestDefaultPageSize { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -788,43 +633,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds" class="expander" data-toggle="collapse">HttpSharePointRestDelayInSeconds</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds">
+  HttpSharePointRestDelayInSeconds
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds" class="collapse in">
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpSharePointRestDelayInSeconds { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpSharePointRestDelayInSeconds { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -832,43 +665,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries" class="expander" data-toggle="collapse">HttpSharePointRestMaxRetries</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries">
+  HttpSharePointRestMaxRetries
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries" class="collapse in">
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpSharePointRestMaxRetries { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpSharePointRestMaxRetries { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -876,43 +697,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay" class="expander" data-toggle="collapse">HttpSharePointRestUseIncrementalDelay</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay">
+  HttpSharePointRestUseIncrementalDelay
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay" class="collapse in">
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpSharePointRestUseIncrementalDelay { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpSharePointRestUseIncrementalDelay { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -920,43 +729,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader" class="expander" data-toggle="collapse">HttpSharePointRestUseRetryAfterHeader</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader">
+  HttpSharePointRestUseRetryAfterHeader
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader" class="collapse in">
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to false</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HttpSharePointRestUseRetryAfterHeader { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HttpSharePointRestUseRetryAfterHeader { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -964,43 +761,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L66" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout" class="expander" data-toggle="collapse">HttpTimeout</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout">
+  HttpTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout" class="collapse in">
   <div class="markdown level1 summary"><p>Max duration of a http request in seconds. Defaults to 100 seconds, set to value -1 for an infinite timeout</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int HttpTimeout { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int HttpTimeout { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1008,43 +793,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent" class="expander" data-toggle="collapse">HttpUserAgent</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent">
+  HttpUserAgent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent" class="collapse in">
   <div class="markdown level1 summary"><p>User agent value, can be customized via configuration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string HttpUserAgent { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string HttpUserAgent { get; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1052,43 +825,31 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.MicrosoftGraphAuthority%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L28" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.MicrosoftGraphAuthority*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.MicrosoftGraphAuthority"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority" class="expander" data-toggle="collapse">MicrosoftGraphAuthority</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.MicrosoftGraphAuthority">
+  MicrosoftGraphAuthority
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string MicrosoftGraphAuthority { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string MicrosoftGraphAuthority { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1096,79 +857,62 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L153" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag_" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag*"></a>
 
-  <h4 id="PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag"><a href="#collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag" class="expander" data-toggle="collapse">VersionTag</a></h4>
+  <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag">
+  VersionTag
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag" class="collapse in">
   <div class="markdown level1 summary"><p>Version tag used in telemetry</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string VersionTag { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string VersionTag { get; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,103 +1,127 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class RenderListDataOptions | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class RenderListDataOptions | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Class RenderListDataOptions | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class RenderListDataOptions | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Options to configure the rendering of list data via the RenderListDataAsStream method of IList See https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-with-lists-and-list-items-with-rest#renderlistdataasstream-body-parameter-properties">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L12" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_RenderListDataOptions" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions">Class RenderListDataOptions</h1>
-  <div class="markdown level0 summary"><p>Options to configure the rendering of list data via the RenderListDataAsStream method of IList
+
+        <article data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_RenderListDataOptions" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions" class="text-break">
+Class RenderListDataOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Options to configure the rendering of list data via the RenderListDataAsStream method of IList
 See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-with-lists-and-list-items-with-rest#renderlistdataasstream-body-parameter-properties">https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-with-lists-and-list-items-with-rest#renderlistdataasstream-body-parameter-properties</a></p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><span class="xref">RenderListDataOptions</span></div>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class RenderListDataOptions</code></pre>
   </div>
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">RenderListDataOptions</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
@@ -119,58 +143,41 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_RenderListDataOptions_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public class RenderListDataOptions</code></pre>
-  </div>
+  </dd></dl>
 
 
 
 
 
-  <h3 id="properties">Properties
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.AddRequiredFields%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="properties">Properties
+</h2>
+
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AddRequiredFields*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AddRequiredFields"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields" class="expander" data-toggle="collapse">AddRequiredFields</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AddRequiredFields">
+  AddRequiredFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AddRequiredFields" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if required fields should be returned or not</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? AddRequiredFields { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? AddRequiredFields { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -178,43 +185,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.AllowMultipleValueFilterForTaxonomyFields%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AllowMultipleValueFilterForTaxonomyFields*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AllowMultipleValueFilterForTaxonomyFields"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields" class="expander" data-toggle="collapse">AllowMultipleValueFilterForTaxonomyFields</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AllowMultipleValueFilterForTaxonomyFields">
+  AllowMultipleValueFilterForTaxonomyFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AllowMultipleValueFilterForTaxonomyFields" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if multi value filtering is allowed for taxonomy fields or not</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? AllowMultipleValueFilterForTaxonomyFields { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? AllowMultipleValueFilterForTaxonomyFields { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -222,43 +217,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.AudienceTarget%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AudienceTarget*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AudienceTarget"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget" class="expander" data-toggle="collapse">AudienceTarget</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.AudienceTarget">
+  AudienceTarget
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_AudienceTarget" class="collapse in">
   <div class="markdown level1 summary"><p>Audience to use while processing this request</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? AudienceTarget { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? AudienceTarget { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -266,43 +249,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.DatesInUtc%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DatesInUtc*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DatesInUtc"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc" class="expander" data-toggle="collapse">DatesInUtc</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DatesInUtc">
+  DatesInUtc
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_DatesInUtc" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if we return DateTime field in UTC or local time</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? DatesInUtc { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? DatesInUtc { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -310,43 +281,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.DeferredRender%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DeferredRender*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DeferredRender"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender" class="expander" data-toggle="collapse">DeferredRender</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.DeferredRender">
+  DeferredRender
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_DeferredRender" class="collapse in">
   <div class="markdown level1 summary"><p>Use a deferred render?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? DeferredRender { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? DeferredRender { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -354,43 +313,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.ExpandGroups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ExpandGroups*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ExpandGroups"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups" class="expander" data-toggle="collapse">ExpandGroups</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ExpandGroups">
+  ExpandGroups
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ExpandGroups" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if the grouping should be expanded or not</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? ExpandGroups { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? ExpandGroups { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -398,43 +345,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.FirstGroupOnly%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FirstGroupOnly*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FirstGroupOnly"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly" class="expander" data-toggle="collapse">FirstGroupOnly</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FirstGroupOnly">
+  FirstGroupOnly
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_FirstGroupOnly" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if only the first group should be returned or not (regardless of view schema)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? FirstGroupOnly { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? FirstGroupOnly { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -442,43 +377,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.FolderServerRelativeUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FolderServerRelativeUrl*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FolderServerRelativeUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl" class="expander" data-toggle="collapse">FolderServerRelativeUrl</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.FolderServerRelativeUrl">
+  FolderServerRelativeUrl
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_FolderServerRelativeUrl" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies the url to the folder from which to return items</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string FolderServerRelativeUrl { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string FolderServerRelativeUrl { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -486,43 +409,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.ImageFieldsToTryRewriteToCdnUrls%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L57" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ImageFieldsToTryRewriteToCdnUrls*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ImageFieldsToTryRewriteToCdnUrls"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls" class="expander" data-toggle="collapse">ImageFieldsToTryRewriteToCdnUrls</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ImageFieldsToTryRewriteToCdnUrls">
+  ImageFieldsToTryRewriteToCdnUrls
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ImageFieldsToTryRewriteToCdnUrls" class="collapse in">
   <div class="markdown level1 summary"><p>Comma-separated list of field names whose values should be rewritten to CDN URLs</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string ImageFieldsToTryRewriteToCdnUrls { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string ImageFieldsToTryRewriteToCdnUrls { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -530,43 +441,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.MergeDefaultView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.MergeDefaultView*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.MergeDefaultView"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView" class="expander" data-toggle="collapse">MergeDefaultView</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.MergeDefaultView">
+  MergeDefaultView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_MergeDefaultView" class="collapse in">
   <div class="markdown level1 summary"><p>Merge with the default view?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? MergeDefaultView { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? MergeDefaultView { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -574,43 +473,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.OriginalDate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OriginalDate*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OriginalDate"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate" class="expander" data-toggle="collapse">OriginalDate</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OriginalDate">
+  OriginalDate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_OriginalDate" class="collapse in">
   <div class="markdown level1 summary"><p>Return the original date?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? OriginalDate { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? OriginalDate { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -618,43 +505,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.OverrideViewXml%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OverrideViewXml*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OverrideViewXml"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml" class="expander" data-toggle="collapse">OverrideViewXml</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.OverrideViewXml">
+  OverrideViewXml
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_OverrideViewXml" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies the override XML to be combined with the View CAML. Applies only to the Query/Where part of the View CAML</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string OverrideViewXml { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string OverrideViewXml { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -662,43 +537,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_Paging.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.Paging%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_Paging_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.Paging*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_Paging" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.Paging"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_Paging" class="expander" data-toggle="collapse">Paging</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_Paging" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.Paging">
+  Paging
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_Paging" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies the paging information</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string Paging { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string Paging { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -706,43 +569,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.RenderOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.RenderOptions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.RenderOptions"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions" class="expander" data-toggle="collapse">RenderOptions</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.RenderOptions">
+  RenderOptions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies the type of output to return</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public RenderListDataOptionsFlags? RenderOptions { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public RenderListDataOptionsFlags? RenderOptions { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html">RenderListDataOptionsFlags</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html">RenderListDataOptionsFlags</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -750,43 +601,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.ReplaceGroup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L82" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ReplaceGroup*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ReplaceGroup"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup" class="expander" data-toggle="collapse">ReplaceGroup</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ReplaceGroup">
+  ReplaceGroup
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ReplaceGroup" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies if the grouping should be replaced or not to deal with GroupBy throttling</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool? ReplaceGroup { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? ReplaceGroup { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -794,43 +633,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.ViewXml%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L92" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ViewXml*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ViewXml"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml" class="expander" data-toggle="collapse">ViewXml</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.ViewXml">
+  ViewXml
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_ViewXml" class="collapse in">
   <div class="markdown level1 summary"><p>Specifies the CAML view XML</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public string ViewXml { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string ViewXml { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -838,43 +665,32 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-  </div>
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_System_Collections_Generic_List_System_String__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.RenderListDataOptions.SetViewXmlFromFields(System.Collections.Generic.List%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L98" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.SetViewXmlFromFields*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_System_Collections_Generic_List_System_String__" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.SetViewXmlFromFields(System.Collections.Generic.List{System.String})"><a href="#collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_System_Collections_Generic_List_System_String__" class="expander" data-toggle="collapse">SetViewXmlFromFields(List&lt;string&gt;)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_System_Collections_Generic_List_System_String__" data-uid="PnP.Core.Model.SharePoint.RenderListDataOptions.SetViewXmlFromFields(System.Collections.Generic.List{System.String})">
+  SetViewXmlFromFields(List&lt;string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_RenderListDataOptions_SetViewXmlFromFields_System_Collections_Generic_List_System_String__" class="collapse in">
   <div class="markdown level1 summary"><p>Populates the needed ViewXml based upon the passed field names</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public void SetViewXmlFromFields(List&lt;string&gt; fieldInternalNames)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetViewXmlFromFields(List&lt;string&gt; fieldInternalNames)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</span>
-        <span class="parametername">fieldInternalNames</span>
-        <p><p>List of fields specified via their internal name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldInternalNames</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>List of fields specified via their internal name</p>
+</dd>
+  </dl>
 
 
 
@@ -885,36 +701,31 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Options/RenderListDataOptions.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

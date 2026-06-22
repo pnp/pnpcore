@@ -1,147 +1,150 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IPnPContextFactory | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IPnPContextFactory | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IPnPContextFactory | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IPnPContextFactory | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface for the injectable service to create an PnPContext">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services.IPnPContextFactory">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Services_IPnPContextFactory" data-uid="PnP.Core.Services.IPnPContextFactory">Interface IPnPContextFactory</h1>
-  <div class="markdown level0 summary"><p>Public interface for the injectable service to create an PnPContext</p>
+
+        <article data-uid="PnP.Core.Services.IPnPContextFactory">
+
+
+
+  <h1 id="PnP_Core_Services_IPnPContextFactory" data-uid="PnP.Core.Services.IPnPContextFactory" class="text-break">
+Interface IPnPContextFactory  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface for the injectable service to create an PnPContext</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-      <div class="level1"><a class="xref" href="PnP.Core.Services.PnPContextFactory.html">PnPContextFactory</a></div>
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Services_IPnPContextFactory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IPnPContextFactory</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IPnPContextFactory</code></pre>
   </div>
 
 
 
 
 
-  <h3 id="properties">Properties
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_EventHub.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.EventHub%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
 
   <a id="PnP_Core_Services_IPnPContextFactory_EventHub_" data-uid="PnP.Core.Services.IPnPContextFactory.EventHub*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_EventHub" data-uid="PnP.Core.Services.IPnPContextFactory.EventHub"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_EventHub" class="expander" data-toggle="collapse">EventHub</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_EventHub" data-uid="PnP.Core.Services.IPnPContextFactory.EventHub">
+  EventHub
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_EventHub" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the EventHub instance, can be used to tap into events like request retry (due to throttling)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">EventHub EventHub { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">EventHub EventHub { get; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.EventHub.html">EventHub</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.EventHub.html">EventHub</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -149,70 +152,45 @@
 
 
 
-  </div>
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Guid%2CPnP.Core.Services.IAuthenticationProvider%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Guid, IAuthenticationProvider, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)">
+  Create(Guid, IAuthenticationProvider, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -223,76 +201,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Guid%2CPnP.Core.Services.IAuthenticationProvider%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -303,60 +249,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Guid%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L134" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Guid, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.PnPContextOptions)">
+  Create(Guid, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Guid groupId, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Guid groupId, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -367,68 +291,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Guid%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L143" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Guid, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Guid,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(Guid, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -439,60 +336,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.String%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L206" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(string, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)">
+  Create(string, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(string name, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(string name, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -503,68 +378,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.String%2CSystem.Action%7BPnP.Core.Services.IAuthenticationProvider%7D%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L169" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(string, Action&lt;IAuthenticationProvider&gt;, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)">
+  Create(string, Action&lt;IAuthenticationProvider&gt;, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>initializeAuthenticationProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</dt>
+    <dd><p>The function to initialize the context</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</span>
-        <span class="parametername">initializeAuthenticationProvider</span>
-        <p><p>The function to initialize the context</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -575,76 +423,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.String%2CSystem.Action%7BPnP.Core.Services.IAuthenticationProvider%7D%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L179" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(string, Action&lt;IAuthenticationProvider&gt;, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(string, Action&lt;IAuthenticationProvider&gt;, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>initializeAuthenticationProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</dt>
+    <dd><p>The function to initialize the context</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</span>
-        <span class="parametername">initializeAuthenticationProvider</span>
-        <p><p>The function to initialize the context</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -655,68 +471,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.String%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L215" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(string, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.String,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(string, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(string name, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(string name, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -727,68 +516,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Uri%2CPnP.Core.Services.IAuthenticationProvider%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Uri, IAuthenticationProvider, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)">
+  Create(Uri, IAuthenticationProvider, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -799,76 +561,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Uri%2CPnP.Core.Services.IAuthenticationProvider%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -879,60 +609,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Uri%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Uri, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,PnP.Core.Services.PnPContextOptions)">
+  Create(Uri, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Uri url, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Uri url, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -943,68 +651,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_Create_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.Create(System.Uri%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_Create_" data-uid="PnP.Core.Services.IPnPContextFactory.Create*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">Create(Uri, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_Create_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.Create(System.Uri,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  Create(Uri, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_Create_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext Create(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext Create(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1015,68 +696,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid%2CPnP.Core.Services.IAuthenticationProvider%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Guid, IAuthenticationProvider, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Guid, IAuthenticationProvider, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1087,76 +741,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid%2CPnP.Core.Services.IAuthenticationProvider%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L126" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1167,60 +789,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L151" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Guid, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Guid, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1231,68 +831,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L160" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Guid, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Guid, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>The id of an Microsoft 365 group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The id of an Microsoft 365 group</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1303,60 +876,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L223" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(string, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(string, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(string name, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(string name, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1367,68 +918,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String%2CSystem.Action%7BPnP.Core.Services.IAuthenticationProvider%7D%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(string, Action&lt;IAuthenticationProvider&gt;, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(string, Action&lt;IAuthenticationProvider&gt;, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>initializeAuthenticationProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</dt>
+    <dd><p>The function to initialize the context</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</span>
-        <span class="parametername">initializeAuthenticationProvider</span>
-        <p><p>The function to initialize the context</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1439,76 +963,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String%2CSystem.Action%7BPnP.Core.Services.IAuthenticationProvider%7D%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L198" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(string, Action&lt;IAuthenticationProvider&gt;, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Action{PnP.Core.Services.IAuthenticationProvider},System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(string, Action&lt;IAuthenticationProvider&gt;, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Action_PnP_Core_Services_IAuthenticationProvider__System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(string name, Action&lt;IAuthenticationProvider&gt; initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>initializeAuthenticationProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</dt>
+    <dd><p>The function to initialize the context</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>&gt;</span>
-        <span class="parametername">initializeAuthenticationProvider</span>
-        <p><p>The function to initialize the context</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1519,68 +1011,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L232" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(string, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(string, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided configuration name</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(string name, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(string name, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the configuration to use</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the configuration to use</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1591,68 +1056,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri%2CPnP.Core.Services.IAuthenticationProvider%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L44" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Uri, IAuthenticationProvider, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Uri, IAuthenticationProvider, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1663,76 +1101,44 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri%2CPnP.Core.Services.IAuthenticationProvider%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>authenticationProvider</code> <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd><p>The Authentication Provider to use to authenticate within the PnPContext</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></span>
-        <span class="parametername">authenticationProvider</span>
-        <p><p>The Authentication Provider to use to authenticate within the PnPContext</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1743,60 +1149,38 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L79" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Uri, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Uri, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1807,68 +1191,41 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri%2CSystem.Threading.CancellationToken%2CPnP.Core.Services.PnPContextOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Services_IPnPContextFactory_CreateAsync_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync*"></a>
 
-  <h4 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)"><a href="#collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="expander" data-toggle="collapse">CreateAsync(Uri, CancellationToken, PnPContextOptions)</a></h4>
+  <h3 id="PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" data-uid="PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,System.Threading.CancellationToken,PnP.Core.Services.PnPContextOptions)">
+  CreateAsync(Uri, CancellationToken, PnPContextOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_Threading_CancellationToken_PnP_Core_Services_PnPContextOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; CreateAsync(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">url</span>
-        <p><p>The URL of the PnPContext as a URI</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>url</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>The URL of the PnPContext as a URI</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The cancellation token to cancel operation</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+    <dd><p>Options used to configure the created context</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
-        <span class="parametername">cancellationToken</span>
-        <p><p>The cancellation token to cancel operation</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options used to configure the created context</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>A PnPContext object based on the provided configuration name</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>A PnPContext object based on the provided configuration name</p>
+</dd>
+  </dl>
 
 
 
@@ -1878,36 +1235,31 @@
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContextFactory.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

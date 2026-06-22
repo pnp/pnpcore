@@ -1,447 +1,356 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum Language | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum Language | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Enum Language | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum Language | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="SharePoint Online languages">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_Language.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.Language%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Admin.Model.SharePoint.Language">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/Language.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_Language.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.Language%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
 
-  <h1 id="PnP_Core_Admin_Model_SharePoint_Language" data-uid="PnP.Core.Admin.Model.SharePoint.Language">Enum Language</h1>
-  <div class="markdown level0 summary"><p>SharePoint Online languages</p>
+        <article data-uid="PnP.Core.Admin.Model.SharePoint.Language">
+
+
+
+
+  <h1 id="PnP_Core_Admin_Model_SharePoint_Language" data-uid="PnP.Core.Admin.Model.SharePoint.Language" class="text-break">
+Enum Language  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/Language.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.Admin.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>SharePoint Online languages</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.Admin.dll</h6>
-
-  <h5 id="PnP_Core_Admin_Model_SharePoint_Language_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public enum Language</code></pre>
+    <pre><code class="lang-csharp hljs">public enum Language</code></pre>
   </div>
 
 
 
 
 
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Arabic"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Arabic" class="expander" data-toggle="collapse">Arabic</a></h4>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Arabic" class="collapse in">
-        <p><p>Arabic</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Azerbaijani"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Azerbaijani" class="expander" data-toggle="collapse">Azerbaijani</a></h4>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Azerbaijani" class="collapse in">
-        <p><p>Azerbaijani</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Basque"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Basque" class="expander" data-toggle="collapse">Basque</a></h4>
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Arabic"><code>Arabic = 1025</code></dt>
+  
+  <dd><p>Arabic</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Azerbaijani"><code>Azerbaijani = 1068</code></dt>
+  
+  <dd><p>Azerbaijani</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Basque"><code>Basque = 1069</code></dt>
+  
+  <dd><p>Basque</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Bosnian"><code>Bosnian = 5146</code></dt>
+  
+  <dd><p>Bosnian (Latin)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Bulgarian"><code>Bulgarian = 1026</code></dt>
+  
+  <dd><p>Bulgarian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Catalan"><code>Catalan = 1027</code></dt>
+  
+  <dd><p>Catalan</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_ChineseSimplified"><code>ChineseSimplified = 2052</code></dt>
+  
+  <dd><p>Chinese (Simplified)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_ChineseTraditional"><code>ChineseTraditional = 1028</code></dt>
+  
+  <dd><p>Chinese (Traditional)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Croatian"><code>Croatian = 1050</code></dt>
+  
+  <dd><p>Croatian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Czech"><code>Czech = 1029</code></dt>
+  
+  <dd><p>Czech</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Danish"><code>Danish = 1030</code></dt>
+  
+  <dd><p>Danish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Dari"><code>Dari = 1164</code></dt>
+  
+  <dd><p>Dari</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Default"><code>Default = 0</code></dt>
+  
+  <dd><p>Use default tenant language</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Dutch"><code>Dutch = 1043</code></dt>
+  
+  <dd><p>Dutch</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_English"><code>English = 1033</code></dt>
+  
+  <dd><p>English</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Estonian"><code>Estonian = 1061</code></dt>
+  
+  <dd><p>Estonian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Finnish"><code>Finnish = 1035</code></dt>
+  
+  <dd><p>Finnish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_French"><code>French = 1036</code></dt>
+  
+  <dd><p>French</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Galician"><code>Galician = 1110</code></dt>
+  
+  <dd><p>Galician</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_German"><code>German = 1031</code></dt>
+  
+  <dd><p>German</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Greek"><code>Greek = 1032</code></dt>
+  
+  <dd><p>Greek</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Hebrew"><code>Hebrew = 1037</code></dt>
+  
+  <dd><p>Hebrew</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Hindi"><code>Hindi = 1081</code></dt>
+  
+  <dd><p>Hindi</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Hungarian"><code>Hungarian = 1038</code></dt>
+  
+  <dd><p>Hungarian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Indonesian"><code>Indonesian = 1057</code></dt>
+  
+  <dd><p>Indonesian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Irish"><code>Irish = 2108</code></dt>
+  
+  <dd><p>Irish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Italian"><code>Italian = 1040</code></dt>
+  
+  <dd><p>Italian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Japanese"><code>Japanese = 1041</code></dt>
+  
+  <dd><p>Japanese</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Kazakh"><code>Kazakh = 1087</code></dt>
+  
+  <dd><p>Kazakh</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Korean"><code>Korean = 1042</code></dt>
+  
+  <dd><p>Korean</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Latvian"><code>Latvian = 1062</code></dt>
+  
+  <dd><p>Latvian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Lithuanian"><code>Lithuanian = 1063</code></dt>
+  
+  <dd><p>Lithuanian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Macedonian"><code>Macedonian = 1071</code></dt>
+  
+  <dd><p>Macedonian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Malay"><code>Malay = 1086</code></dt>
+  
+  <dd><p>Malay</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Norwegian"><code>Norwegian = 1044</code></dt>
+  
+  <dd><p>Norwegian (Bokmål)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Polish"><code>Polish = 1045</code></dt>
+  
+  <dd><p>Polish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_PortugueseBrazil"><code>PortugueseBrazil = 1046</code></dt>
+  
+  <dd><p>Portuguese (Brazil)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_PortuguesePortugal"><code>PortuguesePortugal = 2070</code></dt>
+  
+  <dd><p>Portuguese (Portugal)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Romanian"><code>Romanian = 1048</code></dt>
+  
+  <dd><p>Romanian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Russian"><code>Russian = 1049</code></dt>
+  
+  <dd><p>Russian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_SerbianCyrillic"><code>SerbianCyrillic = 10266</code></dt>
+  
+  <dd><p>Serbian (Cyrillic, Serbia)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_SerbianLatin"><code>SerbianLatin = 2074</code></dt>
+  
+  <dd><p>Serbian (Latin)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_SerbianLatinSerbia"><code>SerbianLatinSerbia = 9242</code></dt>
+  
+  <dd><p>Serbian (Latin, Serbia)</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Slovak"><code>Slovak = 1051</code></dt>
+  
+  <dd><p>Slovak</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Slovenian"><code>Slovenian = 1060</code></dt>
+  
+  <dd><p>Slovenian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Spanish"><code>Spanish = 3082</code></dt>
+  
+  <dd><p>Spanish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Swedish"><code>Swedish = 1053</code></dt>
+  
+  <dd><p>Swedish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Thai"><code>Thai = 1054</code></dt>
+  
+  <dd><p>Thai</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Turkish"><code>Turkish = 1055</code></dt>
+  
+  <dd><p>Turkish</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Ukrainian"><code>Ukrainian = 1058</code></dt>
+  
+  <dd><p>Ukrainian</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Vietnamese"><code>Vietnamese = 1066</code></dt>
+  
+  <dd><p>Vietnamese</p>
+</dd>
+    <dt id="PnP_Core_Admin_Model_SharePoint_Language_Welsh"><code>Welsh = 1106</code></dt>
+  
+  <dd><p>Welsh</p>
+</dd>
+  </dl>
 
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Basque" class="collapse in">
-        <p><p>Basque</p>
 
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Bosnian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Bosnian" class="expander" data-toggle="collapse">Bosnian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Bosnian" class="collapse in">
-        <p><p>Bosnian (Latin)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Bulgarian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Bulgarian" class="expander" data-toggle="collapse">Bulgarian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Bulgarian" class="collapse in">
-        <p><p>Bulgarian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Catalan"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Catalan" class="expander" data-toggle="collapse">Catalan</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Catalan" class="collapse in">
-        <p><p>Catalan</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_ChineseSimplified"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_ChineseSimplified" class="expander" data-toggle="collapse">ChineseSimplified</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_ChineseSimplified" class="collapse in">
-        <p><p>Chinese (Simplified)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_ChineseTraditional"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_ChineseTraditional" class="expander" data-toggle="collapse">ChineseTraditional</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_ChineseTraditional" class="collapse in">
-        <p><p>Chinese (Traditional)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Croatian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Croatian" class="expander" data-toggle="collapse">Croatian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Croatian" class="collapse in">
-        <p><p>Croatian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Czech"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Czech" class="expander" data-toggle="collapse">Czech</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Czech" class="collapse in">
-        <p><p>Czech</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Danish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Danish" class="expander" data-toggle="collapse">Danish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Danish" class="collapse in">
-        <p><p>Danish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Dari"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Dari" class="expander" data-toggle="collapse">Dari</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Dari" class="collapse in">
-        <p><p>Dari</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Default"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Default" class="expander" data-toggle="collapse">Default</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Default" class="collapse in">
-        <p><p>Use default tenant language</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Dutch"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Dutch" class="expander" data-toggle="collapse">Dutch</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Dutch" class="collapse in">
-        <p><p>Dutch</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_English"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_English" class="expander" data-toggle="collapse">English</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_English" class="collapse in">
-        <p><p>English</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Estonian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Estonian" class="expander" data-toggle="collapse">Estonian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Estonian" class="collapse in">
-        <p><p>Estonian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Finnish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Finnish" class="expander" data-toggle="collapse">Finnish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Finnish" class="collapse in">
-        <p><p>Finnish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_French"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_French" class="expander" data-toggle="collapse">French</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_French" class="collapse in">
-        <p><p>French</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Galician"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Galician" class="expander" data-toggle="collapse">Galician</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Galician" class="collapse in">
-        <p><p>Galician</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_German"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_German" class="expander" data-toggle="collapse">German</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_German" class="collapse in">
-        <p><p>German</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Greek"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Greek" class="expander" data-toggle="collapse">Greek</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Greek" class="collapse in">
-        <p><p>Greek</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Hebrew"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hebrew" class="expander" data-toggle="collapse">Hebrew</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hebrew" class="collapse in">
-        <p><p>Hebrew</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Hindi"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hindi" class="expander" data-toggle="collapse">Hindi</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hindi" class="collapse in">
-        <p><p>Hindi</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Hungarian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hungarian" class="expander" data-toggle="collapse">Hungarian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Hungarian" class="collapse in">
-        <p><p>Hungarian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Indonesian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Indonesian" class="expander" data-toggle="collapse">Indonesian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Indonesian" class="collapse in">
-        <p><p>Indonesian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Irish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Irish" class="expander" data-toggle="collapse">Irish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Irish" class="collapse in">
-        <p><p>Irish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Italian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Italian" class="expander" data-toggle="collapse">Italian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Italian" class="collapse in">
-        <p><p>Italian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Japanese"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Japanese" class="expander" data-toggle="collapse">Japanese</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Japanese" class="collapse in">
-        <p><p>Japanese</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Kazakh"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Kazakh" class="expander" data-toggle="collapse">Kazakh</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Kazakh" class="collapse in">
-        <p><p>Kazakh</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Korean"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Korean" class="expander" data-toggle="collapse">Korean</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Korean" class="collapse in">
-        <p><p>Korean</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Latvian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Latvian" class="expander" data-toggle="collapse">Latvian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Latvian" class="collapse in">
-        <p><p>Latvian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Lithuanian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Lithuanian" class="expander" data-toggle="collapse">Lithuanian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Lithuanian" class="collapse in">
-        <p><p>Lithuanian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Macedonian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Macedonian" class="expander" data-toggle="collapse">Macedonian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Macedonian" class="collapse in">
-        <p><p>Macedonian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Malay"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Malay" class="expander" data-toggle="collapse">Malay</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Malay" class="collapse in">
-        <p><p>Malay</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Norwegian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Norwegian" class="expander" data-toggle="collapse">Norwegian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Norwegian" class="collapse in">
-        <p><p>Norwegian (Bokmål)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Polish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Polish" class="expander" data-toggle="collapse">Polish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Polish" class="collapse in">
-        <p><p>Polish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_PortugueseBrazil"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_PortugueseBrazil" class="expander" data-toggle="collapse">PortugueseBrazil</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_PortugueseBrazil" class="collapse in">
-        <p><p>Portuguese (Brazil)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_PortuguesePortugal"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_PortuguesePortugal" class="expander" data-toggle="collapse">PortuguesePortugal</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_PortuguesePortugal" class="collapse in">
-        <p><p>Portuguese (Portugal)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Romanian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Romanian" class="expander" data-toggle="collapse">Romanian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Romanian" class="collapse in">
-        <p><p>Romanian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Russian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Russian" class="expander" data-toggle="collapse">Russian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Russian" class="collapse in">
-        <p><p>Russian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_SerbianCyrillic"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianCyrillic" class="expander" data-toggle="collapse">SerbianCyrillic</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianCyrillic" class="collapse in">
-        <p><p>Serbian (Cyrillic, Serbia)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_SerbianLatin"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianLatin" class="expander" data-toggle="collapse">SerbianLatin</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianLatin" class="collapse in">
-        <p><p>Serbian (Latin)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_SerbianLatinSerbia"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianLatinSerbia" class="expander" data-toggle="collapse">SerbianLatinSerbia</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_SerbianLatinSerbia" class="collapse in">
-        <p><p>Serbian (Latin, Serbia)</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Slovak"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Slovak" class="expander" data-toggle="collapse">Slovak</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Slovak" class="collapse in">
-        <p><p>Slovak</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Slovenian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Slovenian" class="expander" data-toggle="collapse">Slovenian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Slovenian" class="collapse in">
-        <p><p>Slovenian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Spanish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Spanish" class="expander" data-toggle="collapse">Spanish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Spanish" class="collapse in">
-        <p><p>Spanish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Swedish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Swedish" class="expander" data-toggle="collapse">Swedish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Swedish" class="collapse in">
-        <p><p>Swedish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Thai"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Thai" class="expander" data-toggle="collapse">Thai</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Thai" class="collapse in">
-        <p><p>Thai</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Turkish"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Turkish" class="expander" data-toggle="collapse">Turkish</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Turkish" class="collapse in">
-        <p><p>Turkish</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Ukrainian"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Ukrainian" class="expander" data-toggle="collapse">Ukrainian</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Ukrainian" class="collapse in">
-        <p><p>Ukrainian</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Vietnamese"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Vietnamese" class="expander" data-toggle="collapse">Vietnamese</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Vietnamese" class="collapse in">
-        <p><p>Vietnamese</p>
-
-      </div>
-      <h4 id="PnP_Core_Admin_Model_SharePoint_Language_Welsh"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_Language_Welsh" class="expander" data-toggle="collapse">Welsh</a></h4>
-
-      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_Language_Welsh" class="collapse in">
-        <p><p>Welsh</p>
-
-      </div>
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/Language.cs/#L6" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

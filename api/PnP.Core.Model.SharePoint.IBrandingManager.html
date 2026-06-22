@@ -1,144 +1,148 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IBrandingManager | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IBrandingManager | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IBrandingManager | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IBrandingManager | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Enables branding changes for the site (the options that appear under &amp;quot;change the look&amp;quot; under the gear icon in SharePoint)">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IBrandingManager">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L10" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IBrandingManager" data-uid="PnP.Core.Model.SharePoint.IBrandingManager">Interface IBrandingManager</h1>
-  <div class="markdown level0 summary"><p>Enables branding changes for the site (the options that appear under &quot;change the look&quot; under the gear icon in SharePoint)</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IBrandingManager">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IBrandingManager" data-uid="PnP.Core.Model.SharePoint.IBrandingManager" class="text-break">
+Interface IBrandingManager  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Enables branding changes for the site (the options that appear under &quot;change the look&quot; under the gear icon in SharePoint)</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IBrandingManager_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IBrandingManager</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IBrandingManager</code></pre>
   </div>
 
 
 
 
 
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes" class="expander" data-toggle="collapse">GetAvailableThemes()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes">
+  GetAvailableThemes()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">List&lt;ITheme&gt; GetAvailableThemes()</code></pre>
+    <pre><code class="lang-csharp hljs">List&lt;ITheme&gt; GetAvailableThemes()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -149,41 +153,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync" class="expander" data-toggle="collapse">GetAvailableThemesAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync">
+  GetAvailableThemesAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;List&lt;ITheme&gt;&gt; GetAvailableThemesAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;ITheme&gt;&gt; GetAvailableThemesAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -194,41 +186,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch" class="expander" data-toggle="collapse">GetAvailableThemesBatch()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch">
+  GetAvailableThemesBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IEnumerableBatchResult&lt;ITheme&gt; GetAvailableThemesBatch()</code></pre>
+    <pre><code class="lang-csharp hljs">IEnumerableBatchResult&lt;ITheme&gt; GetAvailableThemesBatch()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -239,52 +219,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetAvailableThemesBatch(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)">
+  GetAvailableThemesBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IEnumerableBatchResult&lt;ITheme&gt; GetAvailableThemesBatch(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">IEnumerableBatchResult&lt;ITheme&gt; GetAvailableThemesBatch(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -295,41 +258,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L44" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync" class="expander" data-toggle="collapse">GetAvailableThemesBatchAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync">
+  GetAvailableThemesBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IEnumerableBatchResult&lt;ITheme&gt;&gt; GetAvailableThemesBatchAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IEnumerableBatchResult&lt;ITheme&gt;&gt; GetAvailableThemesBatchAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -340,52 +291,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetAvailableThemesBatchAsync(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)">
+  GetAvailableThemesBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Lists the available themes for this web</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IEnumerableBatchResult&lt;ITheme&gt;&gt; GetAvailableThemesBatchAsync(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IEnumerableBatchResult&lt;ITheme&gt;&gt; GetAvailableThemesBatchAsync(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;
-        <p><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>&gt;&gt;</dt>
+    <dd><p>List of <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a>instances</p>
+</dd>
+  </dl>
 
 
 
@@ -396,41 +330,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L154" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptions"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions" class="expander" data-toggle="collapse">GetChromeOptions()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptions">
+  GetChromeOptions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptions" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IChromeOptions GetChromeOptions()</code></pre>
+    <pre><code class="lang-csharp hljs">IChromeOptions GetChromeOptions()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -441,41 +363,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L148" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync" class="expander" data-toggle="collapse">GetChromeOptionsAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsAsync">
+  GetChromeOptionsAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IChromeOptions&gt; GetChromeOptionsAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IChromeOptions&gt; GetChromeOptionsAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;</dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -486,41 +396,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L180" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch" class="expander" data-toggle="collapse">GetChromeOptionsBatch()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch">
+  GetChromeOptionsBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L180"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IBatchSingleResult&lt;IChromeOptions&gt; GetChromeOptionsBatch()</code></pre>
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;IChromeOptions&gt; GetChromeOptionsBatch()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;</dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -531,52 +429,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L168" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetChromeOptionsBatch(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatch(PnP.Core.Services.Batch)">
+  GetChromeOptionsBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatch_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IBatchSingleResult&lt;IChromeOptions&gt; GetChromeOptionsBatch(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;IChromeOptions&gt; GetChromeOptionsBatch(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;</dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -587,41 +468,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L174" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync" class="expander" data-toggle="collapse">GetChromeOptionsBatchAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync">
+  GetChromeOptionsBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IBatchSingleResult&lt;IChromeOptions&gt;&gt; GetChromeOptionsBatchAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;IChromeOptions&gt;&gt; GetChromeOptionsBatchAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;&gt;
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;&gt;</dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -632,52 +501,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L161" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetChromeOptionsBatchAsync(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.GetChromeOptionsBatchAsync(PnP.Core.Services.Batch)">
+  GetChromeOptionsBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_GetChromeOptionsBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IBatchSingleResult&lt;IChromeOptions&gt;&gt; GetChromeOptionsBatchAsync(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;IChromeOptions&gt;&gt; GetChromeOptionsBatchAsync(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;&gt;
-        <p><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a>&gt;&gt;</dt>
+    <dd><p>Site's <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></p>
+</dd>
+  </dl>
 
 
 
@@ -688,41 +540,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptions(PnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L194" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptions(PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptions(IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptions(PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptions(IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptions_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetChromeOptions(IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetChromeOptions(IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -734,51 +573,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsAsync(PnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L187" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsAsync(PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptionsAsync(IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsAsync(PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptionsAsync(IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsAsync_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetChromeOptionsAsync(IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetChromeOptionsAsync(IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -789,41 +611,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L224" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptionsBatch(IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptionsBatch(IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L224"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetChromeOptionsBatch(IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetChromeOptionsBatch(IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -835,49 +644,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L210" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptionsBatch(Batch, IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptionsBatch(Batch, IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetChromeOptionsBatch(Batch batch, IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetChromeOptionsBatch(Batch batch, IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -889,51 +680,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L217" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptionsBatchAsync(IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptionsBatchAsync(IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetChromeOptionsBatchAsync(IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetChromeOptionsBatchAsync(IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -944,59 +718,37 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.IChromeOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L202" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IChromeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" class="expander" data-toggle="collapse">SetChromeOptionsBatchAsync(Batch, IChromeOptions)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetChromeOptionsBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IChromeOptions)">
+  SetChromeOptionsBatchAsync(Batch, IChromeOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetChromeOptionsBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IChromeOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the site's chrome (header/footer/navigation) options</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetChromeOptionsBatchAsync(Batch batch, IChromeOptions chromeOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetChromeOptionsBatchAsync(Batch batch, IChromeOptions chromeOptions)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>chromeOptions</code> <a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></dt>
+    <dd><p>Site chrome options to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.IChromeOptions.html">IChromeOptions</a></span>
-        <span class="parametername">chromeOptions</span>
-        <p><p>Site chrome options to apply</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1007,41 +759,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L108" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetTheme(ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)">
+  SetTheme(ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetTheme(ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetTheme(ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1053,41 +792,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetTheme(SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetTheme(SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetTheme(SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetTheme(SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1099,51 +825,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetThemeAsync(ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)">
+  SetThemeAsync(ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeAsync(ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeAsync(ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1154,51 +863,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L57" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetThemeAsync(SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetThemeAsync(SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeAsync(SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeAsync(SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1209,41 +901,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L138" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetThemeBatch(ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)">
+  SetThemeBatch(ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetThemeBatch(ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetThemeBatch(ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1255,41 +934,28 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L78" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetThemeBatch(SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetThemeBatch(SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetThemeBatch(SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetThemeBatch(SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1301,49 +967,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetThemeBatch(Batch, ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)">
+  SetThemeBatch(Batch, ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetThemeBatch(Batch batch, ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetThemeBatch(Batch batch, ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1355,49 +1003,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetThemeBatch(Batch, SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetThemeBatch(Batch, SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetThemeBatch(Batch batch, SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetThemeBatch(Batch batch, SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
 
 
@@ -1409,51 +1039,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L131" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetThemeBatchAsync(ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)">
+  SetThemeBatchAsync(ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeBatchAsync(ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeBatchAsync(ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1464,51 +1077,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetThemeBatchAsync(SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetThemeBatchAsync(SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeBatchAsync(SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeBatchAsync(SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1519,59 +1115,37 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.ITheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" class="expander" data-toggle="collapse">SetThemeBatchAsync(Batch, ITheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)">
+  SetThemeBatchAsync(Batch, ITheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a custom theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeBatchAsync(Batch batch, ITheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeBatchAsync(Batch batch, ITheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.ITheme.html">ITheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1582,59 +1156,37 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.SharePointTheme)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)"><a href="#collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" class="expander" data-toggle="collapse">SetThemeBatchAsync(Batch, SharePointTheme)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" data-uid="PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)">
+  SetThemeBatchAsync(Batch, SharePointTheme)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets a an out of the box theme</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetThemeBatchAsync(Batch batch, SharePointTheme theme)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetThemeBatchAsync(Batch batch, SharePointTheme theme)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add this request to</p>
+</dd>
+    <dt><code>theme</code> <a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></dt>
+    <dd><p>Theme to apply</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.SharePointTheme.html">SharePointTheme</a></span>
-        <span class="parametername">theme</span>
-        <p><p>Theme to apply</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1644,36 +1196,31 @@
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Branding/Public/IBrandingManager.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

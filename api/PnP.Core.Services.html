@@ -1,366 +1,295 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PnP.Core.Services | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PnP.Core.Services | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Namespace PnP.Core.Services | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace PnP.Core.Services | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                  </div>
-    <h1 id="PnP_Core_Services" data-uid="PnP.Core.Services">Namespace PnP.Core.Services</h1>
+
+        <article data-uid="PnP.Core.Services">
+
+  <h1 id="PnP_Core_Services" data-uid="PnP.Core.Services" class="text-break">Namespace PnP.Core.Services</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+
     <h3 id="classes">
 Classes
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></p>
-          <p><p>Defines an API request that can be executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a></p>
-          <p><p>The response of an executed <a class="xref" href="PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_ApiRequest">ApiRequest</a></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></p>
-          <p><p>Defines a <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a> of requests to execute</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.BatchRequest.html">BatchRequest</a></p>
-          <p><p>Defines a request in a <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a></p>
-          <p><p>Holds information about the outcome of each batch request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue&lt;T&gt;</a></p>
-          <p><p>Wraps a reference or value type in an object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.EventHub.html">EventHub</a></p>
-          <p><p>Class that allows a PnP Core SDK consumer to hookup with events being triggered from within PnP Core SDK</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.FromJson.html">FromJson</a></p>
-          <p><p>Class that represents the JSON context that's being used during call outs when parsing JSON responses</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IPnPContextExtensionsImplementation.html">IPnPContextExtensionsImplementation</a></p>
-          <p><p>Extends the <a class="xref" href="PnP.Core.Services.IPnPContext.html">IPnPContext</a> with additional functionality</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.MicrosoftGraphClient.html">MicrosoftGraphClient</a></p>
-          <p><p>Client that handles all Microsoft Graph requests</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-          <p><p>PnP Context class...the glue between the model and the data stores</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextExtensions.html">PnPContextExtensions</a></p>
-          <p><p>Extends the <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> with additional functionality</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactory.html">PnPContextFactory</a></p>
-          <p><p>Public factory service to create PnPContext object instances</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryCollectionExtensions.html">PnPContextFactoryCollectionExtensions</a></p>
-          <p><p>Extension class for the IServiceCollection type to provide supporting methods for the PnPContextFactory service</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptions.html">PnPContextFactoryOptions</a></p>
-          <p><p>Defines the options to configure the PnPContextFactory object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptionsConfiguration.html">PnPContextFactoryOptionsConfiguration</a></p>
-          <p><p>PnPContext configuration options</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></p>
-          <p><p>Options used when a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> is created</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html">PnPGlobalSettingsOptions</a></p>
-          <p><p>PnP Core SDK settings class</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.RateLimitEvent.html">RateLimitEvent</a></p>
-          <p><p>Event containing information about the happened rate limit event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.RetryEvent.html">RetryEvent</a></p>
-          <p><p>Event containing information about the happened retry</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.SharePointRestClient.html">SharePointRestClient</a></p>
-          <p><p>Client that handles all SharePoint REST requests</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+      <dd><p>Defines an API request that can be executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a></dt>
+      <dd><p>The response of an executed <a class="xref" href="PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_ApiRequest">ApiRequest</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+      <dd><p>Defines a <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a> of requests to execute</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.BatchRequest.html">BatchRequest</a></dt>
+      <dd><p>Defines a request in a <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a></dt>
+      <dd><p>Holds information about the outcome of each batch request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue&lt;T&gt;</a></dt>
+      <dd><p>Wraps a reference or value type in an object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.EventHub.html">EventHub</a></dt>
+      <dd><p>Class that allows a PnP Core SDK consumer to hookup with events being triggered from within PnP Core SDK</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.FromJson.html">FromJson</a></dt>
+      <dd><p>Class that represents the JSON context that's being used during call outs when parsing JSON responses</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IPnPContextExtensionsImplementation.html">IPnPContextExtensionsImplementation</a></dt>
+      <dd><p>Extends the <a class="xref" href="PnP.Core.Services.IPnPContext.html">IPnPContext</a> with additional functionality</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.MicrosoftGraphClient.html">MicrosoftGraphClient</a></dt>
+      <dd><p>Client that handles all Microsoft Graph requests</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+      <dd><p>PnP Context class...the glue between the model and the data stores</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextExtensions.html">PnPContextExtensions</a></dt>
+      <dd><p>Extends the <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> with additional functionality</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextFactory.html">PnPContextFactory</a></dt>
+      <dd><p>Public factory service to create PnPContext object instances</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextFactoryCollectionExtensions.html">PnPContextFactoryCollectionExtensions</a></dt>
+      <dd><p>Extension class for the IServiceCollection type to provide supporting methods for the PnPContextFactory service</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptions.html">PnPContextFactoryOptions</a></dt>
+      <dd><p>Defines the options to configure the PnPContextFactory object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptionsConfiguration.html">PnPContextFactoryOptionsConfiguration</a></dt>
+      <dd><p>PnPContext configuration options</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPContextOptions.html">PnPContextOptions</a></dt>
+      <dd><p>Options used when a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> is created</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html">PnPGlobalSettingsOptions</a></dt>
+      <dd><p>PnP Core SDK settings class</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.RateLimitEvent.html">RateLimitEvent</a></dt>
+      <dd><p>Event containing information about the happened rate limit event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.RetryEvent.html">RetryEvent</a></dt>
+      <dd><p>Event containing information about the happened retry</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.SharePointRestClient.html">SharePointRestClient</a></dt>
+      <dd><p>Client that handles all SharePoint REST requests</p>
+</dd>
+    </dl>
     <h3 id="structs">
 Structs
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ApiResponse.html">ApiResponse</a></p>
-          <p><p>Defines the response of an executed API call</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.ApiResponse.html">ApiResponse</a></dt>
+      <dd><p>Defines the response of an executed API call</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></p>
-          <p><p>Defines the public interface that any Authentication Provider must implement</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ILegacyAuthenticationProvider.html">ILegacyAuthenticationProvider</a></p>
-          <p><p>Defines the interface that a legacy Authentication Provider must implement.
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+      <dd><p>Defines the public interface that any Authentication Provider must implement</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.ILegacyAuthenticationProvider.html">ILegacyAuthenticationProvider</a></dt>
+      <dd><p>Defines the interface that a legacy Authentication Provider must implement.
 Note: this is only meant to be used by PnP Framework, no 3rd party support will be provided.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IPnPContext.html">IPnPContext</a></p>
-          <p><p>PnPContext interface to support mocking (that's the only reason)</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IPnPContextExtensions.html">IPnPContextExtensions</a></p>
-          <p><p>Extends the <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> with additional functionality</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IPnPContextFactory.html">IPnPContextFactory</a></p>
-          <p><p>Public interface for the injectable service to create an PnPContext</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IRateLimitEvent.html">IRateLimitEvent</a></p>
-          <p><p>Event containing information about the happened rate limit event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IRetryEvent.html">IRetryEvent</a></p>
-          <p><p>Event containing information about the happened retry</p>
-
-        </td>
-      </tr>
-    </table>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IPnPContext.html">IPnPContext</a></dt>
+      <dd><p>PnPContext interface to support mocking (that's the only reason)</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IPnPContextExtensions.html">IPnPContextExtensions</a></dt>
+      <dd><p>Extends the <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> with additional functionality</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IPnPContextFactory.html">IPnPContextFactory</a></dt>
+      <dd><p>Public interface for the injectable service to create an PnPContext</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IRateLimitEvent.html">IRateLimitEvent</a></dt>
+      <dd><p>Event containing information about the happened rate limit event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.IRetryEvent.html">IRetryEvent</a></dt>
+      <dd><p>Event containing information about the happened retry</p>
+</dd>
+    </dl>
     <h3 id="enums">
 Enums
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ApiRequestType.html">ApiRequestType</a></p>
-          <p><p>Types of API requests that can be executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a></p>
-          <p><p>Microsoft 365 environments</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.ApiRequestType.html">ApiRequestType</a></dt>
+      <dd><p>Types of API requests that can be executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a></dt>
+      <dd><p>Microsoft 365 environments</p>
+</dd>
+    </dl>
     <h3 id="delegates">
 Delegates
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.EventHub.RequestRateLimitWaitDelegate.html">EventHub.RequestRateLimitWaitDelegate</a></p>
-          <p><p>Delegate for the <a class="xref" href="PnP.Core.Services.EventHub.html#PnP_Core_Services_EventHub_RequestRateLimitWaitAsync">RequestRateLimitWaitAsync</a> event</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Services.EventHub.RequestRateLimitWaitDelegate.html">EventHub.RequestRateLimitWaitDelegate</a></dt>
+      <dd><p>Delegate for the <a class="xref" href="PnP.Core.Services.EventHub.html#PnP_Core_Services_EventHub_RequestRateLimitWaitAsync">RequestRateLimitWaitAsync</a> event</p>
+</dd>
+    </dl>
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

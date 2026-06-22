@@ -10643,10 +10643,30 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/apple-touch-icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/apple-touch-icon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/eventhandler.png",
       "output": {
         "resource": {
           "relative_path": "images/eventhandler.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon-96x96.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon-96x96.png"
         }
       },
       "version": ""
@@ -10667,6 +10687,26 @@
       "output": {
         "resource": {
           "relative_path": "images/filter-coverage.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/icon-192.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/icon-192.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/icon-512.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/icon-512.png"
         }
       },
       "version": ""
@@ -10697,6 +10737,16 @@
       "output": {
         "resource": {
           "relative_path": "images/model overview.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/original-favicon.jpeg",
+      "output": {
+        "resource": {
+          "relative_path": "images/original-favicon.jpeg"
         }
       },
       "version": ""

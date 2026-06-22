@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IComment | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IComment | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IComment | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IComment | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface to define a comment.">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IComment">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IComment" data-uid="PnP.Core.Model.SharePoint.IComment">Interface IComment</h1>
-  <div class="markdown level0 summary"><p>Public interface to define a comment.</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IComment">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IComment" data-uid="PnP.Core.Model.SharePoint.IComment" class="text-break">
+Interface IComment  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface to define a comment.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IComment : IDataModel&lt;IComment&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IComment&gt;, IDataModelGet&lt;IComment&gt;, IDataModelLoad&lt;IComment&gt;, IDataModelDelete, IQueryableDataModel</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IComment&gt;.Requested</a>
     </div>
@@ -167,894 +189,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IComment_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IComment : IDataModel&lt;IComment&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IComment&gt;, IDataModelGet&lt;IComment&gt;, IDataModelLoad&lt;IComment&gt;, IDataModelDelete, IQueryableDataModel</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_All.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.All%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L99" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_All_" data-uid="PnP.Core.Model.SharePoint.IComment.All*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_All" data-uid="PnP.Core.Model.SharePoint.IComment.All"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_All" class="expander" data-toggle="collapse">All</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_All" class="collapse in">
-  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">object All { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Author.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Author%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Author_" data-uid="PnP.Core.Model.SharePoint.IComment.Author*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Author" data-uid="PnP.Core.Model.SharePoint.IComment.Author"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Author" class="expander" data-toggle="collapse">Author</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Author" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment author.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ISharePointSharingPrincipal Author { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.ISharePointSharingPrincipal.html">ISharePointSharingPrincipal</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_CreatedDate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.CreatedDate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_CreatedDate_" data-uid="PnP.Core.Model.SharePoint.IComment.CreatedDate*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_CreatedDate" data-uid="PnP.Core.Model.SharePoint.IComment.CreatedDate"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_CreatedDate" class="expander" data-toggle="collapse">CreatedDate</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_CreatedDate" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment creation date.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">DateTime CreatedDate { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Id_" data-uid="PnP.Core.Model.SharePoint.IComment.Id*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Id" data-uid="PnP.Core.Model.SharePoint.IComment.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Id" class="expander" data-toggle="collapse">Id</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment id.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Id { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_IsLikedByUser.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.IsLikedByUser%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L28" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_IsLikedByUser_" data-uid="PnP.Core.Model.SharePoint.IComment.IsLikedByUser*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_IsLikedByUser" data-uid="PnP.Core.Model.SharePoint.IComment.IsLikedByUser"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_IsLikedByUser" class="expander" data-toggle="collapse">IsLikedByUser</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_IsLikedByUser" class="collapse in">
-  <div class="markdown level1 summary"><p>Flag that indicates whether the user in the current context liked the comment.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool IsLikedByUser { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_IsReply.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.IsReply%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L33" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_IsReply_" data-uid="PnP.Core.Model.SharePoint.IComment.IsReply*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_IsReply" data-uid="PnP.Core.Model.SharePoint.IComment.IsReply"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_IsReply" class="expander" data-toggle="collapse">IsReply</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_IsReply" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment is a reply to another comment.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool IsReply { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_ItemId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.ItemId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_ItemId_" data-uid="PnP.Core.Model.SharePoint.IComment.ItemId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_ItemId" data-uid="PnP.Core.Model.SharePoint.IComment.ItemId"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_ItemId" class="expander" data-toggle="collapse">ItemId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_ItemId" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment item id.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">int ItemId { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_LikeCount.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.LikeCount%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_LikeCount_" data-uid="PnP.Core.Model.SharePoint.IComment.LikeCount*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_LikeCount" data-uid="PnP.Core.Model.SharePoint.IComment.LikeCount"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_LikeCount" class="expander" data-toggle="collapse">LikeCount</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_LikeCount" class="collapse in">
-  <div class="markdown level1 summary"><p>Number of likes for the comment.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">int LikeCount { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_LikedBy.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.LikedBy%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_LikedBy_" data-uid="PnP.Core.Model.SharePoint.IComment.LikedBy*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_LikedBy" data-uid="PnP.Core.Model.SharePoint.IComment.LikedBy"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_LikedBy" class="expander" data-toggle="collapse">LikedBy</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_LikedBy" class="collapse in">
-  <div class="markdown level1 summary"><p>List of users who have liked the comment.
-Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
-See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
-and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ICommentLikeUserEntityCollection LikedBy { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.html">ICommentLikeUserEntityCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_ListId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.ListId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L48" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_ListId_" data-uid="PnP.Core.Model.SharePoint.IComment.ListId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_ListId" data-uid="PnP.Core.Model.SharePoint.IComment.ListId"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_ListId" class="expander" data-toggle="collapse">ListId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_ListId" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment list id.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Guid ListId { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Mentions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Mentions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Mentions_" data-uid="PnP.Core.Model.SharePoint.IComment.Mentions*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Mentions" data-uid="PnP.Core.Model.SharePoint.IComment.Mentions"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Mentions" class="expander" data-toggle="collapse">Mentions</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Mentions" class="collapse in">
-  <div class="markdown level1 summary"><p>List of users who are at mentioned in this comment.
-Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
-See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
-and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ICommentLikeUserEntityCollection Mentions { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.html">ICommentLikeUserEntityCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_ParentId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.ParentId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_ParentId_" data-uid="PnP.Core.Model.SharePoint.IComment.ParentId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_ParentId" data-uid="PnP.Core.Model.SharePoint.IComment.ParentId"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_ParentId" class="expander" data-toggle="collapse">ParentId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_ParentId" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment parent ID (0 if not a reply).</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ParentId { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.RelativeCreatedDate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate_" data-uid="PnP.Core.Model.SharePoint.IComment.RelativeCreatedDate*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate" data-uid="PnP.Core.Model.SharePoint.IComment.RelativeCreatedDate"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate" class="expander" data-toggle="collapse">RelativeCreatedDate</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a string that represents the relative value of the comment's creation date.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string RelativeCreatedDate { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Replies.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Replies%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Replies_" data-uid="PnP.Core.Model.SharePoint.IComment.Replies*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Replies" data-uid="PnP.Core.Model.SharePoint.IComment.Replies"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Replies" class="expander" data-toggle="collapse">Replies</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Replies" class="collapse in">
-  <div class="markdown level1 summary"><p>Replies to the comment.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ICommentCollection Replies { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ICommentCollection.html">ICommentCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_ReplyCount.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.ReplyCount%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L63" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_ReplyCount_" data-uid="PnP.Core.Model.SharePoint.IComment.ReplyCount*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_ReplyCount" data-uid="PnP.Core.Model.SharePoint.IComment.ReplyCount"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_ReplyCount" class="expander" data-toggle="collapse">ReplyCount</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_ReplyCount" class="collapse in">
-  <div class="markdown level1 summary"><p>Number of replies to the comment.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">int ReplyCount { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Text.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Text%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Text_" data-uid="PnP.Core.Model.SharePoint.IComment.Text*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Text" data-uid="PnP.Core.Model.SharePoint.IComment.Text"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Text" class="expander" data-toggle="collapse">Text</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Text" class="collapse in">
-  <div class="markdown level1 summary"><p>Comment text.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Text { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Like.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Like%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Like_" data-uid="PnP.Core.Model.SharePoint.IComment.Like*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Like" data-uid="PnP.Core.Model.SharePoint.IComment.Like"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Like" class="expander" data-toggle="collapse">Like()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Like" class="collapse in">
-  <div class="markdown level1 summary"><p>Likes the comment for the user in the current context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void Like()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_LikeAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.LikeAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_LikeAsync_" data-uid="PnP.Core.Model.SharePoint.IComment.LikeAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_LikeAsync" data-uid="PnP.Core.Model.SharePoint.IComment.LikeAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_LikeAsync" class="expander" data-toggle="collapse">LikeAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_LikeAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Likes the comment for the user in the current context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task LikeAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_Unlike.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.Unlike%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L125" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_Unlike_" data-uid="PnP.Core.Model.SharePoint.IComment.Unlike*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_Unlike" data-uid="PnP.Core.Model.SharePoint.IComment.Unlike"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_Unlike" class="expander" data-toggle="collapse">Unlike()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_Unlike" class="collapse in">
-  <div class="markdown level1 summary"><p>Unlikes the comment for the user in the current context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void Unlike()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IComment_UnlikeAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IComment.UnlikeAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IComment_UnlikeAsync_" data-uid="PnP.Core.Model.SharePoint.IComment.UnlikeAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IComment_UnlikeAsync" data-uid="PnP.Core.Model.SharePoint.IComment.UnlikeAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IComment_UnlikeAsync" class="expander" data-toggle="collapse">UnlikeAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IComment_UnlikeAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Unlikes the comment for the user in the current context.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task UnlikeAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -1094,33 +233,679 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_All_" data-uid="PnP.Core.Model.SharePoint.IComment.All*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_All" data-uid="PnP.Core.Model.SharePoint.IComment.All">
+  All
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">object All { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Author_" data-uid="PnP.Core.Model.SharePoint.IComment.Author*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Author" data-uid="PnP.Core.Model.SharePoint.IComment.Author">
+  Author
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment author.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointSharingPrincipal Author { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointSharingPrincipal.html">ISharePointSharingPrincipal</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_CreatedDate_" data-uid="PnP.Core.Model.SharePoint.IComment.CreatedDate*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_CreatedDate" data-uid="PnP.Core.Model.SharePoint.IComment.CreatedDate">
+  CreatedDate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment creation date.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">DateTime CreatedDate { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Id_" data-uid="PnP.Core.Model.SharePoint.IComment.Id*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Id" data-uid="PnP.Core.Model.SharePoint.IComment.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Id { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_IsLikedByUser_" data-uid="PnP.Core.Model.SharePoint.IComment.IsLikedByUser*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_IsLikedByUser" data-uid="PnP.Core.Model.SharePoint.IComment.IsLikedByUser">
+  IsLikedByUser
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Flag that indicates whether the user in the current context liked the comment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsLikedByUser { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_IsReply_" data-uid="PnP.Core.Model.SharePoint.IComment.IsReply*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_IsReply" data-uid="PnP.Core.Model.SharePoint.IComment.IsReply">
+  IsReply
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment is a reply to another comment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsReply { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_ItemId_" data-uid="PnP.Core.Model.SharePoint.IComment.ItemId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_ItemId" data-uid="PnP.Core.Model.SharePoint.IComment.ItemId">
+  ItemId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment item id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int ItemId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_LikeCount_" data-uid="PnP.Core.Model.SharePoint.IComment.LikeCount*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_LikeCount" data-uid="PnP.Core.Model.SharePoint.IComment.LikeCount">
+  LikeCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of likes for the comment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int LikeCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_LikedBy_" data-uid="PnP.Core.Model.SharePoint.IComment.LikedBy*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_LikedBy" data-uid="PnP.Core.Model.SharePoint.IComment.LikedBy">
+  LikedBy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>List of users who have liked the comment.
+Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
+See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
+and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICommentLikeUserEntityCollection LikedBy { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.html">ICommentLikeUserEntityCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_ListId_" data-uid="PnP.Core.Model.SharePoint.IComment.ListId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_ListId" data-uid="PnP.Core.Model.SharePoint.IComment.ListId">
+  ListId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment list id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid ListId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Mentions_" data-uid="PnP.Core.Model.SharePoint.IComment.Mentions*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Mentions" data-uid="PnP.Core.Model.SharePoint.IComment.Mentions">
+  Mentions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>List of users who are at mentioned in this comment.
+Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
+See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
+and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICommentLikeUserEntityCollection Mentions { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.html">ICommentLikeUserEntityCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_ParentId_" data-uid="PnP.Core.Model.SharePoint.IComment.ParentId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_ParentId" data-uid="PnP.Core.Model.SharePoint.IComment.ParentId">
+  ParentId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment parent ID (0 if not a reply).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ParentId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate_" data-uid="PnP.Core.Model.SharePoint.IComment.RelativeCreatedDate*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_RelativeCreatedDate" data-uid="PnP.Core.Model.SharePoint.IComment.RelativeCreatedDate">
+  RelativeCreatedDate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a string that represents the relative value of the comment's creation date.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string RelativeCreatedDate { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Replies_" data-uid="PnP.Core.Model.SharePoint.IComment.Replies*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Replies" data-uid="PnP.Core.Model.SharePoint.IComment.Replies">
+  Replies
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Replies to the comment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICommentCollection Replies { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ICommentCollection.html">ICommentCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_ReplyCount_" data-uid="PnP.Core.Model.SharePoint.IComment.ReplyCount*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_ReplyCount" data-uid="PnP.Core.Model.SharePoint.IComment.ReplyCount">
+  ReplyCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of replies to the comment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int ReplyCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Text_" data-uid="PnP.Core.Model.SharePoint.IComment.Text*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Text" data-uid="PnP.Core.Model.SharePoint.IComment.Text">
+  Text
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Comment text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Text { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Like_" data-uid="PnP.Core.Model.SharePoint.IComment.Like*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Like" data-uid="PnP.Core.Model.SharePoint.IComment.Like">
+  Like()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Likes the comment for the user in the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Like()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_LikeAsync_" data-uid="PnP.Core.Model.SharePoint.IComment.LikeAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_LikeAsync" data-uid="PnP.Core.Model.SharePoint.IComment.LikeAsync">
+  LikeAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Likes the comment for the user in the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LikeAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_Unlike_" data-uid="PnP.Core.Model.SharePoint.IComment.Unlike*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_Unlike" data-uid="PnP.Core.Model.SharePoint.IComment.Unlike">
+  Unlike()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unlikes the comment for the user in the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Unlike()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IComment_UnlikeAsync_" data-uid="PnP.Core.Model.SharePoint.IComment.UnlikeAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IComment_UnlikeAsync" data-uid="PnP.Core.Model.SharePoint.IComment.UnlikeAsync">
+  UnlikeAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unlikes the comment for the user in the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UnlikeAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IComment.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

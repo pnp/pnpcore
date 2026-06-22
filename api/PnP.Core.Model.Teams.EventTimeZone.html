@@ -1,1749 +1,1493 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum EventTimeZone | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum EventTimeZone | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Enum EventTimeZone | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum EventTimeZone | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Event time zones">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_EventTimeZone.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.EventTimeZone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Teams.EventTimeZone">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/Enums/EventTimeZone.cs/#L8" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_EventTimeZone.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.EventTimeZone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
 
-  <h1 id="PnP_Core_Model_Teams_EventTimeZone" data-uid="PnP.Core.Model.Teams.EventTimeZone">Enum EventTimeZone</h1>
-  <div class="markdown level0 summary"><p>Event time zones</p>
+        <article data-uid="PnP.Core.Model.Teams.EventTimeZone">
+
+
+
+
+  <h1 id="PnP_Core_Model_Teams_EventTimeZone" data-uid="PnP.Core.Model.Teams.EventTimeZone" class="text-break">
+Enum EventTimeZone  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/Enums/EventTimeZone.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.Teams.html">Teams</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Event time zones</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.Teams.html">Teams</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_Teams_EventTimeZone_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public enum EventTimeZone</code></pre>
+    <pre><code class="lang-csharp hljs">public enum EventTimeZone</code></pre>
   </div>
 
 
 
 
 
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaCairo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaCairo" class="expander" data-toggle="collapse">AfricaCairo</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaCairo" class="collapse in">
-        <p><p>Africa/Cairo</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaCasablanca"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaCasablanca" class="expander" data-toggle="collapse">AfricaCasablanca</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaCasablanca" class="collapse in">
-        <p><p>Africa/Casablanca</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaJohannesburg"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaJohannesburg" class="expander" data-toggle="collapse">AfricaJohannesburg</a></h4>
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaCairo"><code>[EnumMember(Value = &quot; Africa/Cairo&quot;)]
+AfricaCairo = 44</code></dt>
+  
+  <dd><p>Africa/Cairo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaCasablanca"><code>[EnumMember(Value = &quot; Africa/Casablanca&quot;)]
+AfricaCasablanca = 32</code></dt>
+  
+  <dd><p>Africa/Casablanca</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaJohannesburg"><code>[EnumMember(Value = &quot; Africa/Johannesburg&quot;)]
+AfricaJohannesburg = 46</code></dt>
+  
+  <dd><p>Africa/Johannesburg</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaLagos"><code>[EnumMember(Value = &quot; Africa/Lagos&quot;)]
+AfricaLagos = 40</code></dt>
+  
+  <dd><p>Africa/Lagos</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaNairobi"><code>[EnumMember(Value = &quot; Africa/Nairobi&quot;)]
+AfricaNairobi = 54</code></dt>
+  
+  <dd><p>Africa/Nairobi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AfricaWindhoek"><code>[EnumMember(Value = &quot; Africa/Windhoek&quot;)]
+AfricaWindhoek = 41</code></dt>
+  
+  <dd><p>Africa/Windhoek</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AlaskanStandardTime"><code>[EnumMember(Value = &quot;Alaskan Standard Time&quot;)]
+AlaskanStandardTime = 104</code></dt>
+  
+  <dd><p>Alaskan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AleutianStandardTime"><code>[EnumMember(Value = &quot;Aleutian Standard Time&quot;)]
+AleutianStandardTime = 101</code></dt>
+  
+  <dd><p>Aleutian Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaAnchorage"><code>[EnumMember(Value = &quot;America/Anchorage&quot;)]
+AmericaAnchorage = 3</code></dt>
+  
+  <dd><p>America/Anchorage</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaArgentinaBuenos_Aires"><code>[EnumMember(Value = &quot; America/Argentina/Buenos_Aires&quot;)]
+AmericaArgentinaBuenos_Aires = 24</code></dt>
+  
+  <dd><p>America/Argentina/Buenos_Aires</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaAsuncion"><code>[EnumMember(Value = &quot; America/Asuncion&quot;)]
+AmericaAsuncion = 17</code></dt>
+  
+  <dd><p>America/Asuncion</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaBahia"><code>[EnumMember(Value = &quot; America/Bahia&quot;)]
+AmericaBahia = 28</code></dt>
+  
+  <dd><p>America/Bahia</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaBogota"><code>[EnumMember(Value = &quot; America/Bogota&quot;)]
+AmericaBogota = 13</code></dt>
+  
+  <dd><p>America/Bogota</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaCaracas"><code>[EnumMember(Value = &quot; America/Caracas&quot;)]
+AmericaCaracas = 16</code></dt>
+  
+  <dd><p>America/Caracas</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaCayenne"><code>[EnumMember(Value = &quot; America/Cayenne&quot;)]
+AmericaCayenne = 25</code></dt>
+  
+  <dd><p>America/Cayenne</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaChicago"><code>[EnumMember(Value = &quot; America/Chicago&quot;)]
+AmericaChicago = 10</code></dt>
+  
+  <dd><p>America/Chicago</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaChihuahua"><code>[EnumMember(Value = &quot; America/Chihuahua&quot;)]
+AmericaChihuahua = 7</code></dt>
+  
+  <dd><p>America/Chihuahua</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaCuiaba"><code>[EnumMember(Value = &quot; America/Cuiaba&quot;)]
+AmericaCuiaba = 19</code></dt>
+  
+  <dd><p>America/Cuiaba</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaDenver"><code>[EnumMember(Value = &quot; America/Denver&quot;)]
+AmericaDenver = 8</code></dt>
+  
+  <dd><p>America/Denver</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaGodthab"><code>[EnumMember(Value = &quot; America/Godthab&quot;)]
+AmericaGodthab = 26</code></dt>
+  
+  <dd><p>America/Godthab</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaGuatemala"><code>[EnumMember(Value = &quot; America/Guatemala&quot;)]
+AmericaGuatemala = 9</code></dt>
+  
+  <dd><p>America/Guatemala</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaHalifax"><code>[EnumMember(Value = &quot; America/Halifax&quot;)]
+AmericaHalifax = 18</code></dt>
+  
+  <dd><p>America/Halifax</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaIndianaIndianapolis"><code>[EnumMember(Value = &quot; America/Indiana/Indianapolis&quot;)]
+AmericaIndianaIndianapolis = 15</code></dt>
+  
+  <dd><p>America/Indiana/Indianapolis</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaLa_Paz"><code>[EnumMember(Value = &quot; America/La_Paz&quot;)]
+AmericaLa_Paz = 20</code></dt>
+  
+  <dd><p>America/La_Paz</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaLos_Angeles"><code>[EnumMember(Value = &quot;America/Los_Angeles&quot;)]
+AmericaLos_Angeles = 5</code></dt>
+  
+  <dd><p>America/Los_Angeles</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaMexico_City"><code>[EnumMember(Value = &quot; America/Mexico_City&quot;)]
+AmericaMexico_City = 11</code></dt>
+  
+  <dd><p>America/Mexico_City</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaMontevideo"><code>[EnumMember(Value = &quot; America/Montevideo&quot;)]
+AmericaMontevideo = 27</code></dt>
+  
+  <dd><p>America/Montevideo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaNew_York"><code>[EnumMember(Value = &quot; America/New_York&quot;)]
+AmericaNew_York = 14</code></dt>
+  
+  <dd><p>America/New_York</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaPhoenix"><code>[EnumMember(Value = &quot;America/Phoenix,&quot;)]
+AmericaPhoenix = 6</code></dt>
+  
+  <dd><p>America/Phoenix,</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaRegina"><code>[EnumMember(Value = &quot; America/Regina&quot;)]
+AmericaRegina = 12</code></dt>
+  
+  <dd><p>America/Regina</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaSanta_Isabel"><code>[EnumMember(Value = &quot;America/Santa_Isabel&quot;)]
+AmericaSanta_Isabel = 4</code></dt>
+  
+  <dd><p>America/Santa_Isabel</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaSantiago"><code>[EnumMember(Value = &quot; America/Santiago&quot;)]
+AmericaSantiago = 21</code></dt>
+  
+  <dd><p>America/Santiago</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaSao_Paulo"><code>[EnumMember(Value = &quot; America/Sao_Paulo&quot;)]
+AmericaSao_Paulo = 23</code></dt>
+  
+  <dd><p>America/Sao_Paulo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AmericaSt_Johns"><code>[EnumMember(Value = &quot; America/St_Johns&quot;)]
+AmericaSt_Johns = 22</code></dt>
+  
+  <dd><p>America/St_Johns</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_ArabicStandardTime"><code>[EnumMember(Value = &quot;Arabic Standard Time&quot;)]
+ArabicStandardTime = 188</code></dt>
+  
+  <dd><p>Arabic Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaAmman"><code>[EnumMember(Value = &quot; Asia/Amman&quot;)]
+AsiaAmman = 50</code></dt>
+  
+  <dd><p>Asia/Amman</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaAstanaAlmaty"><code>[EnumMember(Value = &quot; Asia/Astana (Almaty)&quot;)]
+AsiaAstanaAlmaty = 68</code></dt>
+  
+  <dd><p>Asia/Astana (Almaty)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaBaghdad"><code>[EnumMember(Value = &quot; Asia/Baghdad&quot;)]
+AsiaBaghdad = 51</code></dt>
+  
+  <dd><p>Asia/Baghdad</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaBaku"><code>[EnumMember(Value = &quot; Asia/Baku&quot;)]
+AsiaBaku = 57</code></dt>
+  
+  <dd><p>Asia/Baku</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaBangkok"><code>[EnumMember(Value = &quot; Asia/Bangkok&quot;)]
+AsiaBangkok = 72</code></dt>
+  
+  <dd><p>Asia/Bangkok</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaBeirut"><code>[EnumMember(Value = &quot; Asia/Beirut&quot;)]
+AsiaBeirut = 43</code></dt>
+  
+  <dd><p>Asia/Beirut</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaColombo"><code>[EnumMember(Value = &quot; Asia/Colombo&quot;)]
+AsiaColombo = 66</code></dt>
+  
+  <dd><p>Asia/Colombo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaDamascus"><code>[EnumMember(Value = &quot; Asia/Damascus&quot;)]
+AsiaDamascus = 45</code></dt>
+  
+  <dd><p>Asia/Damascus</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaDhaka"><code>[EnumMember(Value = &quot; Asia/Dhaka&quot;)]
+AsiaDhaka = 69</code></dt>
+  
+  <dd><p>Asia/Dhaka</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaDubai"><code>[EnumMember(Value = &quot; Asia/Dubai&quot;)]
+AsiaDubai = 56</code></dt>
+  
+  <dd><p>Asia/Dubai</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaIrkutsk"><code>[EnumMember(Value = &quot; Asia/Irkutsk&quot;)]
+AsiaIrkutsk = 80</code></dt>
+  
+  <dd><p>Asia/Irkutsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaJerusalem"><code>[EnumMember(Value = &quot; Asia/Jerusalem&quot;)]
+AsiaJerusalem = 49</code></dt>
+  
+  <dd><p>Asia/Jerusalem</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaKabul"><code>[EnumMember(Value = &quot; Asia/Kabul&quot;)]
+AsiaKabul = 62</code></dt>
+  
+  <dd><p>Asia/Kabul</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaKarachi"><code>[EnumMember(Value = &quot; Asia/Karachi&quot;)]
+AsiaKarachi = 63</code></dt>
+  
+  <dd><p>Asia/Karachi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaKathmandu"><code>[EnumMember(Value = &quot; Asia/Kathmandu&quot;)]
+AsiaKathmandu = 67</code></dt>
+  
+  <dd><p>Asia/Kathmandu</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaKolkata"><code>[EnumMember(Value = &quot; Asia/Kolkata&quot;)]
+AsiaKolkata = 65</code></dt>
+  
+  <dd><p>Asia/Kolkata</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaKrasnoyarsk"><code>[EnumMember(Value = &quot; Asia/Krasnoyarsk&quot;)]
+AsiaKrasnoyarsk = 75</code></dt>
+  
+  <dd><p>Asia/Krasnoyarsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaMagadan"><code>[EnumMember(Value = &quot; Asia/Magadan&quot;)]
+AsiaMagadan = 95</code></dt>
+  
+  <dd><p>Asia/Magadan</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaNovosibirsk"><code>[EnumMember(Value = &quot; Asia/Novosibirsk&quot;)]
+AsiaNovosibirsk = 73</code></dt>
+  
+  <dd><p>Asia/Novosibirsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaRiyadh"><code>[EnumMember(Value = &quot; Asia/Riyadh&quot;)]
+AsiaRiyadh = 53</code></dt>
+  
+  <dd><p>Asia/Riyadh</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaSeoul"><code>[EnumMember(Value = &quot; Asia/Seoul&quot;)]
+AsiaSeoul = 82</code></dt>
+  
+  <dd><p>Asia/Seoul</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaShanghai"><code>[EnumMember(Value = &quot; Asia/Shanghai&quot;)]
+AsiaShanghai = 74</code></dt>
+  
+  <dd><p>Asia/Shanghai</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaSingapore"><code>[EnumMember(Value = &quot; Asia/Singapore&quot;)]
+AsiaSingapore = 76</code></dt>
+  
+  <dd><p>Asia/Singapore</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaTaipei"><code>[EnumMember(Value = &quot; Asia/Taipei&quot;)]
+AsiaTaipei = 78</code></dt>
+  
+  <dd><p>Asia/Taipei</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaTbilisi"><code>[EnumMember(Value = &quot; Asia/Tbilisi&quot;)]
+AsiaTbilisi = 60</code></dt>
+  
+  <dd><p>Asia/Tbilisi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaTehran"><code>[EnumMember(Value = &quot; Asia/Tehran&quot;)]
+AsiaTehran = 55</code></dt>
+  
+  <dd><p>Asia/Tehran</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaTokyo"><code>[EnumMember(Value = &quot; Asia/Tokyo&quot;)]
+AsiaTokyo = 81</code></dt>
+  
+  <dd><p>Asia/Tokyo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaToshkentTashkent"><code>[EnumMember(Value = &quot; Asia/Toshkent (Tashkent)&quot;)]
+AsiaToshkentTashkent = 64</code></dt>
+  
+  <dd><p>Asia/Toshkent (Tashkent)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaUlaanbaatar"><code>[EnumMember(Value = &quot; Asia/Ulaanbaatar&quot;)]
+AsiaUlaanbaatar = 79</code></dt>
+  
+  <dd><p>Asia/Ulaanbaatar</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaVladivostok"><code>[EnumMember(Value = &quot; Asia/Vladivostok&quot;)]
+AsiaVladivostok = 91</code></dt>
+  
+  <dd><p>Asia/Vladivostok</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaYakutsk"><code>[EnumMember(Value = &quot; Asia/Yakutsk&quot;)]
+AsiaYakutsk = 89</code></dt>
+  
+  <dd><p>Asia/Yakutsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaYangonRangoon"><code>[EnumMember(Value = &quot; Asia/Yangon (Rangoon)&quot;)]
+AsiaYangonRangoon = 71</code></dt>
+  
+  <dd><p>Asia/Yangon (Rangoon)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaYekaterinburg"><code>[EnumMember(Value = &quot; Asia/Yekaterinburg&quot;)]
+AsiaYekaterinburg = 70</code></dt>
+  
+  <dd><p>Asia/Yekaterinburg</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AsiaYerevan"><code>[EnumMember(Value = &quot; Asia/Yerevan&quot;)]
+AsiaYerevan = 61</code></dt>
+  
+  <dd><p>Asia/Yerevan</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AstrakhanStandardTime"><code>[EnumMember(Value = &quot;Astrakhan Standard Time&quot;)]
+AstrakhanStandardTime = 199</code></dt>
+  
+  <dd><p>Astrakhan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AtlanticAzores"><code>[EnumMember(Value = &quot; Atlantic/Azores&quot;)]
+AtlanticAzores = 30</code></dt>
+  
+  <dd><p>Atlantic/Azores</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AtlanticCape_Verde"><code>[EnumMember(Value = &quot; Atlantic/Cape_Verde&quot;)]
+AtlanticCape_Verde = 31</code></dt>
+  
+  <dd><p>Atlantic/Cape_Verde</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AtlanticReykjavik"><code>[EnumMember(Value = &quot; Atlantic/Reykjavik&quot;)]
+AtlanticReykjavik = 35</code></dt>
+  
+  <dd><p>Atlantic/Reykjavik</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaAdelaide"><code>[EnumMember(Value = &quot; Australia/Adelaide&quot;)]
+AustraliaAdelaide = 83</code></dt>
+  
+  <dd><p>Australia/Adelaide</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaBrisbane"><code>[EnumMember(Value = &quot; Australia/Brisbane&quot;)]
+AustraliaBrisbane = 85</code></dt>
+  
+  <dd><p>Australia/Brisbane</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaDarwin"><code>[EnumMember(Value = &quot; Australia/Darwin&quot;)]
+AustraliaDarwin = 84</code></dt>
+  
+  <dd><p>Australia/Darwin</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaHobart"><code>[EnumMember(Value = &quot; Australia/Hobart&quot;)]
+AustraliaHobart = 88</code></dt>
+  
+  <dd><p>Australia/Hobart</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaPerth"><code>[EnumMember(Value = &quot; Australia/Perth&quot;)]
+AustraliaPerth = 77</code></dt>
+  
+  <dd><p>Australia/Perth</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AustraliaSydney"><code>[EnumMember(Value = &quot; Australia/Sydney&quot;)]
+AustraliaSydney = 86</code></dt>
+  
+  <dd><p>Australia/Sydney</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_AzerbaijanStandardTime"><code>[EnumMember(Value = &quot;Azerbaijan Standard Time&quot;)]
+AzerbaijanStandardTime = 200</code></dt>
+  
+  <dd><p>Azerbaijan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_BangladeshStandardTime"><code>[EnumMember(Value = &quot;Bangladesh Standard Time&quot;)]
+BangladeshStandardTime = 218</code></dt>
+  
+  <dd><p>Bangladesh Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Bern"><code>[EnumMember(Value = &quot; Bern&quot;)]
+Bern = 157</code></dt>
+  
+  <dd><p>Bern</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_BougainvilleStandardTime"><code>[EnumMember(Value = &quot;Bougainville Standard Time&quot;)]
+BougainvilleStandardTime = 253</code></dt>
+  
+  <dd><p>Bougainville Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Bratislava"><code>[EnumMember(Value = &quot; Bratislava&quot;)]
+Bratislava = 160</code></dt>
+  
+  <dd><p>Bratislava</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Bucharest"><code>[EnumMember(Value = &quot; Bucharest&quot;)]
+Bucharest = 170</code></dt>
+  
+  <dd><p>Bucharest</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CanadaCentralStandardTime"><code>[EnumMember(Value = &quot;Canada Central Standard Time&quot;)]
+CanadaCentralStandardTime = 119</code></dt>
+  
+  <dd><p>Canada Central Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralAmericaStandardTime"><code>[EnumMember(Value = &quot;Central America Standard Time&quot;)]
+CentralAmericaStandardTime = 114</code></dt>
+  
+  <dd><p>Central America Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralAsiaStandardTime"><code>[EnumMember(Value = &quot;Central Asia Standard Time&quot;)]
+CentralAsiaStandardTime = 217</code></dt>
+  
+  <dd><p>Central Asia Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralEuropeStandardTime"><code>[EnumMember(Value = &quot;Central Europe Standard Time&quot;)]
+CentralEuropeStandardTime = 162</code></dt>
+  
+  <dd><p>Central Europe Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralEuropeanStandardTime"><code>[EnumMember(Value = &quot;Central European Standard Time&quot;)]
+CentralEuropeanStandardTime = 167</code></dt>
+  
+  <dd><p>Central European Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralStandardTime"><code>[EnumMember(Value = &quot;Central Standard Time&quot;)]
+CentralStandardTime = 115</code></dt>
+  
+  <dd><p>Central Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_CentralStandardTimeMexico"><code>[EnumMember(Value = &quot;Central Standard Time (Mexico)&quot;)]
+CentralStandardTimeMexico = 118</code></dt>
+  
+  <dd><p>Central Standard Time (Mexico)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_ChinaStandardTime"><code>[EnumMember(Value = &quot;China Standard Time&quot;)]
+ChinaStandardTime = 230</code></dt>
+  
+  <dd><p>China Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Copenhagen"><code>[EnumMember(Value = &quot; Copenhagen&quot;)]
+Copenhagen = 163</code></dt>
+  
+  <dd><p>Copenhagen</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_DatelineStandardTime"><code>[EnumMember(Value = &quot;Dateline Standard Time&quot;)]
+DatelineStandardTime = 99</code></dt>
+  
+  <dd><p>Dateline Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EAfricaStandardTime"><code>[EnumMember(Value = &quot;E. Africa Standard Time&quot;)]
+EAfricaStandardTime = 194</code></dt>
+  
+  <dd><p>E. Africa Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_ESouthAmericaStandardTime"><code>[EnumMember(Value = &quot;E. South America Standard Time&quot;)]
+ESouthAmericaStandardTime = 138</code></dt>
+  
+  <dd><p>E. South America Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus11"><code>[EnumMember(Value = &quot;Etc/GMT+11&quot;)]
+ETCGMTPlus11 = 1</code></dt>
+  
+  <dd><p>Etc/GMT+11</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus12"><code>[EnumMember(Value = &quot;Etc/GMT+12&quot;)]
+ETCGMTPlus12 = 0</code></dt>
+  
+  <dd><p>Etc/GMT+12</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EasterIslandStandardTime"><code>[EnumMember(Value = &quot;Easter Island Standard Time&quot;)]
+EasterIslandStandardTime = 116</code></dt>
+  
+  <dd><p>Easter Island Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EkaterinburgStandardTime"><code>[EnumMember(Value = &quot;Ekaterinburg Standard Time&quot;)]
+EkaterinburgStandardTime = 209</code></dt>
+  
+  <dd><p>Ekaterinburg Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT"><code>[EnumMember(Value = &quot; Etc/GMT&quot;)]
+EtcGMT = 33</code></dt>
+  
+  <dd><p>Etc/GMT</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT12"><code>[EnumMember(Value = &quot; Etc/GMT-12&quot;)]
+EtcGMT12 = 93</code></dt>
+  
+  <dd><p>Etc/GMT-12</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT2"><code>[EnumMember(Value = &quot; Etc/GMT+2&quot;)]
+EtcGMT2 = 29</code></dt>
+  
+  <dd><p>Etc/GMT+2</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeBerlin"><code>[EnumMember(Value = &quot; Europe/Berlin&quot;)]
+EuropeBerlin = 36</code></dt>
+  
+  <dd><p>Europe/Berlin</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeBucharest"><code>[EnumMember(Value = &quot; Europe/Bucharest&quot;)]
+EuropeBucharest = 42</code></dt>
+  
+  <dd><p>Europe/Bucharest</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeBudapest"><code>[EnumMember(Value = &quot; Europe/Budapest&quot;)]
+EuropeBudapest = 37</code></dt>
+  
+  <dd><p>Europe/Budapest</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeIstanbul"><code>[EnumMember(Value = &quot; Europe/Istanbul&quot;)]
+EuropeIstanbul = 48</code></dt>
+  
+  <dd><p>Europe/Istanbul</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeKaliningrad"><code>[EnumMember(Value = &quot; Europe/Kaliningrad&quot;)]
+EuropeKaliningrad = 52</code></dt>
+  
+  <dd><p>Europe/Kaliningrad</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeKyivKiev"><code>[EnumMember(Value = &quot; Europe/Kyiv (Kiev)&quot;)]
+EuropeKyivKiev = 47</code></dt>
+  
+  <dd><p>Europe/Kyiv (Kiev)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeLondon"><code>[EnumMember(Value = &quot; Europe/London&quot;)]
+EuropeLondon = 34</code></dt>
+  
+  <dd><p>Europe/London</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeMoscow"><code>[EnumMember(Value = &quot; Europe/Moscow&quot;)]
+EuropeMoscow = 58</code></dt>
+  
+  <dd><p>Europe/Moscow</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeParis"><code>[EnumMember(Value = &quot; Europe/Paris&quot;)]
+EuropeParis = 38</code></dt>
+  
+  <dd><p>Europe/Paris</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_EuropeWarsaw"><code>[EnumMember(Value = &quot; Europe/Warsaw&quot;)]
+EuropeWarsaw = 39</code></dt>
+  
+  <dd><p>Europe/Warsaw</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_FLEStandardTime"><code>[EnumMember(Value = &quot;FLE Standard Time&quot;)]
+FLEStandardTime = 181</code></dt>
+  
+  <dd><p>FLE Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Fortaleza"><code>[EnumMember(Value = &quot; Fortaleza&quot;)]
+Fortaleza = 139</code></dt>
+  
+  <dd><p>Fortaleza</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_GMTStandardTime"><code>[EnumMember(Value = &quot;GMT Standard Time&quot;)]
+GMTStandardTime = 152</code></dt>
+  
+  <dd><p>GMT Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_GornoAltaysk"><code>[EnumMember(Value = &quot; Gorno-Altaysk&quot;)]
+GornoAltaysk = 223</code></dt>
+  
+  <dd><p>Gorno-Altaysk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Hanoi"><code>[EnumMember(Value = &quot; Hanoi&quot;)]
+Hanoi = 221</code></dt>
+  
+  <dd><p>Hanoi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_HawaiianStandardTime"><code>[EnumMember(Value = &quot;Hawaiian Standard Time&quot;)]
+HawaiianStandardTime = 102</code></dt>
+  
+  <dd><p>Hawaiian Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_HongKongSAR"><code>[EnumMember(Value = &quot; Hong Kong SAR&quot;)]
+HongKongSAR = 229</code></dt>
+  
+  <dd><p>Hong Kong SAR</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_IndiaStandardTime"><code>[EnumMember(Value = &quot;India Standard Time&quot;)]
+IndiaStandardTime = 214</code></dt>
+  
+  <dd><p>India Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_IndianMauritius"><code>[EnumMember(Value = &quot; Indian/Mauritius&quot;)]
+IndianMauritius = 59</code></dt>
+  
+  <dd><p>Indian/Mauritius</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_IranStandardTime"><code>[EnumMember(Value = &quot;Iran Standard Time&quot;)]
+IranStandardTime = 196</code></dt>
+  
+  <dd><p>Iran Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_IsraelStandardTime"><code>[EnumMember(Value = &quot;Israel Standard Time&quot;)]
+IsraelStandardTime = 182</code></dt>
+  
+  <dd><p>Israel Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_JordanStandardTime"><code>[EnumMember(Value = &quot;Jordan Standard Time&quot;)]
+JordanStandardTime = 169</code></dt>
+  
+  <dd><p>Jordan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_KaliningradStandardTime"><code>[EnumMember(Value = &quot;Kaliningrad Standard Time&quot;)]
+KaliningradStandardTime = 184</code></dt>
+  
+  <dd><p>Kaliningrad Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Karachi"><code>[EnumMember(Value = &quot; Karachi&quot;)]
+Karachi = 210</code></dt>
+  
+  <dd><p>Karachi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_LaPaz"><code>[EnumMember(Value = &quot; La Paz&quot;)]
+LaPaz = 110</code></dt>
+  
+  <dd><p>La Paz</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_LibyaStandardTime"><code>[EnumMember(Value = &quot;Libya Standard Time&quot;)]
+LibyaStandardTime = 186</code></dt>
+  
+  <dd><p>Libya Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Lima"><code>[EnumMember(Value = &quot; Lima&quot;)]
+Lima = 120</code></dt>
+  
+  <dd><p>Lima</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Lisbon"><code>[EnumMember(Value = &quot; Lisbon&quot;)]
+Lisbon = 151</code></dt>
+  
+  <dd><p>Lisbon</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Ljubljana"><code>[EnumMember(Value = &quot; Ljubljana&quot;)]
+Ljubljana = 161</code></dt>
+  
+  <dd><p>Ljubljana</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_LordHoweStandardTime"><code>[EnumMember(Value = &quot;Lord Howe Standard Time&quot;)]
+LordHoweStandardTime = 252</code></dt>
+  
+  <dd><p>Lord Howe Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MagadanStandardTime"><code>[EnumMember(Value = &quot;Magadan Standard Time&quot;)]
+MagadanStandardTime = 255</code></dt>
+  
+  <dd><p>Magadan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Manaus"><code>[EnumMember(Value = &quot; Manaus&quot;)]
+Manaus = 133</code></dt>
+  
+  <dd><p>Manaus</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MarquesasStandardTime"><code>[EnumMember(Value = &quot;Marquesas Standard Time&quot;)]
+MarquesasStandardTime = 103</code></dt>
+  
+  <dd><p>Marquesas Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MexicoCity"><code>[EnumMember(Value = &quot; Mexico City&quot;)]
+MexicoCity = 117</code></dt>
+  
+  <dd><p>Mexico City</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MountainStandardTime"><code>[EnumMember(Value = &quot;Mountain Standard Time&quot;)]
+MountainStandardTime = 112</code></dt>
+  
+  <dd><p>Mountain Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MountainStandardTimeMexico"><code>[EnumMember(Value = &quot;Mountain Standard Time (Mexico)&quot;)]
+MountainStandardTimeMexico = 111</code></dt>
+  
+  <dd><p>Mountain Standard Time (Mexico)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Mumbai"><code>[EnumMember(Value = &quot; Mumbai&quot;)]
+Mumbai = 213</code></dt>
+  
+  <dd><p>Mumbai</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Muscat"><code>[EnumMember(Value = &quot; Muscat&quot;)]
+Muscat = 197</code></dt>
+  
+  <dd><p>Muscat</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_MyanmarStandardTime"><code>[EnumMember(Value = &quot;Myanmar Standard Time&quot;)]
+MyanmarStandardTime = 220</code></dt>
+  
+  <dd><p>Myanmar Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NamibiaStandardTime"><code>[EnumMember(Value = &quot;Namibia Standard Time&quot;)]
+NamibiaStandardTime = 187</code></dt>
+  
+  <dd><p>Namibia Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NepalStandardTime"><code>[EnumMember(Value = &quot;Nepal Standard Time&quot;)]
+NepalStandardTime = 216</code></dt>
+  
+  <dd><p>Nepal Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NewCaledonia"><code>[EnumMember(Value = &quot; New Caledonia&quot;)]
+NewCaledonia = 258</code></dt>
+  
+  <dd><p>New Caledonia</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NewfoundlandStandardTime"><code>[EnumMember(Value = &quot;Newfoundland Standard Time&quot;)]
+NewfoundlandStandardTime = 136</code></dt>
+  
+  <dd><p>Newfoundland Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NorfolkStandardTime"><code>[EnumMember(Value = &quot;Norfolk Standard Time&quot;)]
+NorfolkStandardTime = 256</code></dt>
+  
+  <dd><p>Norfolk Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_NorthAsiaEastStandardTime"><code>[EnumMember(Value = &quot;North Asia East Standard Time&quot;)]
+NorthAsiaEastStandardTime = 231</code></dt>
+  
+  <dd><p>North Asia East Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_OmskStandardTime"><code>[EnumMember(Value = &quot;Omsk Standard Time&quot;)]
+OmskStandardTime = 219</code></dt>
+  
+  <dd><p>Omsk Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificApia"><code>[EnumMember(Value = &quot; Pacific/Apia&quot;)]
+PacificApia = 97</code></dt>
+  
+  <dd><p>Pacific/Apia</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificAuckland"><code>[EnumMember(Value = &quot; Pacific/Auckland&quot;)]
+PacificAuckland = 92</code></dt>
+  
+  <dd><p>Pacific/Auckland</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificFiji"><code>[EnumMember(Value = &quot; Pacific/Fiji&quot;)]
+PacificFiji = 94</code></dt>
+  
+  <dd><p>Pacific/Fiji</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificGuadalcanal"><code>[EnumMember(Value = &quot; Pacific/Guadalcanal&quot;)]
+PacificGuadalcanal = 90</code></dt>
+  
+  <dd><p>Pacific/Guadalcanal</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificHonolulu"><code>[EnumMember(Value = &quot;Pacific/Honolulu,&quot;)]
+PacificHonolulu = 2</code></dt>
+  
+  <dd><p>Pacific/Honolulu</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificKiritimati"><code>[EnumMember(Value = &quot; Pacific/Kiritimati&quot;)]
+PacificKiritimati = 98</code></dt>
+  
+  <dd><p>Pacific/Kiritimati</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificPort_Moresby"><code>[EnumMember(Value = &quot; Pacific/Port_Moresby&quot;)]
+PacificPort_Moresby = 87</code></dt>
+  
+  <dd><p>Pacific/Port_Moresby</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificSAStandardTime"><code>[EnumMember(Value = &quot;Pacific SA Standard Time&quot;)]
+PacificSAStandardTime = 135</code></dt>
+  
+  <dd><p>Pacific SA Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificStandardTime"><code>[EnumMember(Value = &quot;Pacific Standard Time&quot;)]
+PacificStandardTime = 108</code></dt>
+  
+  <dd><p>Pacific Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificStandardTimeMexico"><code>[EnumMember(Value = &quot;Pacific Standard Time (Mexico)&quot;)]
+PacificStandardTimeMexico = 106</code></dt>
+  
+  <dd><p>Pacific Standard Time (Mexico)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_PacificTongatapu"><code>[EnumMember(Value = &quot; Pacific/Tongatapu&quot;)]
+PacificTongatapu = 96</code></dt>
+  
+  <dd><p>Pacific/Tongatapu</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Paris"><code>[EnumMember(Value = &quot; Paris&quot;)]
+Paris = 164</code></dt>
+  
+  <dd><p>Paris</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Pretoria"><code>[EnumMember(Value = &quot; Pretoria&quot;)]
+Pretoria = 177</code></dt>
+  
+  <dd><p>Pretoria</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Reykjavik"><code>[EnumMember(Value = &quot; Reykjavik&quot;)]
+Reykjavik = 153</code></dt>
+  
+  <dd><p>Reykjavik</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Riga"><code>[EnumMember(Value = &quot; Riga&quot;)]
+Riga = 179</code></dt>
+  
+  <dd><p>Riga</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_RioBranco"><code>[EnumMember(Value = &quot; Rio Branco&quot;)]
+RioBranco = 121</code></dt>
+  
+  <dd><p>Rio Branco</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Riyadh"><code>[EnumMember(Value = &quot; Riyadh&quot;)]
+Riyadh = 190</code></dt>
+  
+  <dd><p>Riyadh</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone10"><code>[EnumMember(Value = &quot;Russia Time Zone 10&quot;)]
+RussiaTimeZone10 = 254</code></dt>
+  
+  <dd><p>Russia Time Zone 10</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone11"><code>[EnumMember(Value = &quot;Russia Time Zone 11&quot;)]
+RussiaTimeZone11 = 260</code></dt>
+  
+  <dd><p>Russia Time Zone 11</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_RussianStandardTime"><code>[EnumMember(Value = &quot;Russian Standard Time&quot;)]
+RussianStandardTime = 193</code></dt>
+  
+  <dd><p>Russian Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SAWesternStandardTime"><code>[EnumMember(Value = &quot;SA Western Standard Time&quot;)]
+SAWesternStandardTime = 134</code></dt>
+  
+  <dd><p>SA Western Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SEAsiaStandardTime"><code>[EnumMember(Value = &quot;SE Asia Standard Time&quot;)]
+SEAsiaStandardTime = 222</code></dt>
+  
+  <dd><p>SE Asia Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SakhalinStandardTime"><code>[EnumMember(Value = &quot;Sakhalin Standard Time&quot;)]
+SakhalinStandardTime = 257</code></dt>
+  
+  <dd><p>Sakhalin Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Samara"><code>[EnumMember(Value = &quot; Samara&quot;)]
+Samara = 201</code></dt>
+  
+  <dd><p>Samara</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Singapore"><code>[EnumMember(Value = &quot; Singapore&quot;)]
+Singapore = 232</code></dt>
+  
+  <dd><p>Singapore</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SouthSudanStandardTime"><code>[EnumMember(Value = &quot;South Sudan Standard Time&quot;)]
+SouthSudanStandardTime = 183</code></dt>
+  
+  <dd><p>South Sudan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SriLankaStandardTime"><code>[EnumMember(Value = &quot;Sri Lanka Standard Time&quot;)]
+SriLankaStandardTime = 215</code></dt>
+  
+  <dd><p>Sri Lanka Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Stockholm"><code>[EnumMember(Value = &quot; Stockholm&quot;)]
+Stockholm = 158</code></dt>
+  
+  <dd><p>Stockholm</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_SudanStandardTime"><code>[EnumMember(Value = &quot;Sudan Standard Time&quot;)]
+SudanStandardTime = 185</code></dt>
+  
+  <dd><p>Sudan Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Sydney"><code>[EnumMember(Value = &quot; Sydney&quot;)]
+Sydney = 247</code></dt>
+  
+  <dd><p>Sydney</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Tallinn"><code>[EnumMember(Value = &quot; Tallinn&quot;)]
+Tallinn = 180</code></dt>
+  
+  <dd><p>Tallinn</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_TasmaniaStandardTime"><code>[EnumMember(Value = &quot;Tasmania Standard Time&quot;)]
+TasmaniaStandardTime = 250</code></dt>
+  
+  <dd><p>Tasmania Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_TocantinsStandardTime"><code>[EnumMember(Value = &quot;Tocantins Standard Time&quot;)]
+TocantinsStandardTime = 137</code></dt>
+  
+  <dd><p>Tocantins Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Tokyo"><code>[EnumMember(Value = &quot; Tokyo&quot;)]
+Tokyo = 239</code></dt>
+  
+  <dd><p>Tokyo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_TurkeyStandardTime"><code>[EnumMember(Value = &quot;Turkey Standard Time&quot;)]
+TurkeyStandardTime = 189</code></dt>
+  
+  <dd><p>Turkey Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_USMountainStandardTime"><code>[EnumMember(Value = &quot;US Mountain Standard Time&quot;)]
+USMountainStandardTime = 109</code></dt>
+  
+  <dd><p>US Mountain Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0000Dublin"><code>[EnumMember(Value = &quot;(UTC+00:00) Dublin&quot;)]
+UTC0000Dublin = 150</code></dt>
+  
+  <dd><p>(UTC+00:00) Dublin</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0000SaoTome"><code>[EnumMember(Value = &quot;(UTC+00:00) Sao Tome&quot;)]
+UTC0000SaoTome = 154</code></dt>
+  
+  <dd><p>(UTC+00:00) Sao Tome</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Amsterdam"><code>[EnumMember(Value = &quot;(UTC+01:00) Amsterdam&quot;)]
+UTC0100Amsterdam = 156</code></dt>
+  
+  <dd><p>(UTC+01:00) Amsterdam</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Azores"><code>[EnumMember(Value = &quot;(UTC-01:00) Azores&quot;)]
+UTC0100Azores = 147</code></dt>
+  
+  <dd><p>(UTC-01:00) Azores</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0100CaboVerdeIs"><code>[EnumMember(Value = &quot;(UTC-01:00) Cabo Verde Is.&quot;)]
+UTC0100CaboVerdeIs = 148</code></dt>
+  
+  <dd><p>(UTC-01:00) Cabo Verde Is.</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Casablanca"><code>[EnumMember(Value = &quot;(UTC+01:00) Casablanca&quot;)]
+UTC0100Casablanca = 155</code></dt>
+  
+  <dd><p>(UTC+01:00) Casablanca</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Sarajevo"><code>[EnumMember(Value = &quot;(UTC+01:00) Sarajevo&quot;)]
+UTC0100Sarajevo = 165</code></dt>
+  
+  <dd><p>(UTC+01:00) Sarajevo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Beirut"><code>[EnumMember(Value = &quot;(UTC+02:00) Beirut&quot;)]
+UTC0200Beirut = 171</code></dt>
+  
+  <dd><p>(UTC+02:00) Beirut</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Cairo"><code>[EnumMember(Value = &quot;(UTC+02:00) Cairo&quot;)]
+UTC0200Cairo = 172</code></dt>
+  
+  <dd><p>(UTC+02:00) Cairo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Chisinau"><code>[EnumMember(Value = &quot;(UTC+02:00) Chisinau&quot;)]
+UTC0200Chisinau = 173</code></dt>
+  
+  <dd><p>(UTC+02:00) Chisinau</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200CoordinatedUniversalTime02"><code>[EnumMember(Value = &quot;(UTC-02:00) Co-ordinated Universal Time-02&quot;)]
+UTC0200CoordinatedUniversalTime02 = 146</code></dt>
+  
+  <dd><p>(UTC-02:00) Co-ordinated Universal Time-02</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Damascus"><code>[EnumMember(Value = &quot;(UTC+02:00) Damascus&quot;)]
+UTC0200Damascus = 174</code></dt>
+  
+  <dd><p>(UTC+02:00) Damascus</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Gaza"><code>[EnumMember(Value = &quot;(UTC+02:00) Gaza&quot;)]
+UTC0200Gaza = 175</code></dt>
+  
+  <dd><p>(UTC+02:00) Gaza</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Helsinki"><code>[EnumMember(Value = &quot;(UTC+02:00) Helsinki&quot;)]
+UTC0200Helsinki = 178</code></dt>
+  
+  <dd><p>(UTC+02:00) Helsinki</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300CityofBuenosAires"><code>[EnumMember(Value = &quot;(UTC-03:00) City of Buenos Aires&quot;)]
+UTC0300CityofBuenosAires = 140</code></dt>
+  
+  <dd><p>(UTC-03:00) City of Buenos Aires</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Greenland"><code>[EnumMember(Value = &quot;(UTC-03:00) Greenland&quot;)]
+UTC0300Greenland = 141</code></dt>
+  
+  <dd><p>(UTC-03:00) Greenland</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Minsk"><code>[EnumMember(Value = &quot;(UTC+03:00) Minsk&quot;)]
+UTC0300Minsk = 191</code></dt>
+  
+  <dd><p>(UTC+03:00) Minsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Montevideo"><code>[EnumMember(Value = &quot;(UTC-03:00) Montevideo&quot;)]
+UTC0300Montevideo = 142</code></dt>
+  
+  <dd><p>(UTC-03:00) Montevideo</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Moscow"><code>[EnumMember(Value = &quot;(UTC+03:00) Moscow&quot;)]
+UTC0300Moscow = 192</code></dt>
+  
+  <dd><p>(UTC+03:00) Moscow</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300PuntaArenas"><code>[EnumMember(Value = &quot;(UTC-03:00) Punta Arenas&quot;)]
+UTC0300PuntaArenas = 143</code></dt>
+  
+  <dd><p>(UTC-03:00) Punta Arenas</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300SaintPierreandMiquelon"><code>[EnumMember(Value = &quot;(UTC-03:00) Saint Pierre and Miquelon&quot;)]
+UTC0300SaintPierreandMiquelon = 144</code></dt>
+  
+  <dd><p>(UTC-03:00) Saint Pierre and Miquelon</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Salvador"><code>[EnumMember(Value = &quot;(UTC-03:00) Salvador&quot;)]
+UTC0300Salvador = 145</code></dt>
+  
+  <dd><p>(UTC-03:00) Salvador</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Astrakhan"><code>[EnumMember(Value = &quot;(UTC+04:00) Astrakhan&quot;)]
+UTC0400Astrakhan = 198</code></dt>
+  
+  <dd><p>(UTC+04:00) Astrakhan</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Asuncion"><code>[EnumMember(Value = &quot;(UTC-04:00) Asuncion&quot;)]
+UTC0400Asuncion = 128</code></dt>
+  
+  <dd><p>(UTC-04:00) Asuncion</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400AtlanticTimeCanada"><code>[EnumMember(Value = &quot;(UTC-04:00) Atlantic Time (Canada)&quot;)]
+UTC0400AtlanticTimeCanada = 129</code></dt>
+  
+  <dd><p>(UTC-04:00) Atlantic Time (Canada)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Caracas"><code>[EnumMember(Value = &quot;(UTC-04:00) Caracas&quot;)]
+UTC0400Caracas = 130</code></dt>
+  
+  <dd><p>(UTC-04:00) Caracas</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Cuiaba"><code>[EnumMember(Value = &quot;(UTC-04:00) Cuiaba&quot;)]
+UTC0400Cuiaba = 131</code></dt>
+  
+  <dd><p>(UTC-04:00) Cuiaba</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Georgetown"><code>[EnumMember(Value = &quot;(UTC-04:00) Georgetown&quot;)]
+UTC0400Georgetown = 132</code></dt>
+  
+  <dd><p>(UTC-04:00) Georgetown</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400PortLouis"><code>[EnumMember(Value = &quot;(UTC+04:00) Port Louis&quot;)]
+UTC0400PortLouis = 202</code></dt>
+  
+  <dd><p>(UTC+04:00) Port Louis</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Saratov"><code>[EnumMember(Value = &quot;(UTC+04:00) Saratov&quot;)]
+UTC0400Saratov = 203</code></dt>
+  
+  <dd><p>(UTC+04:00) Saratov</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Tbilisi"><code>[EnumMember(Value = &quot;(UTC+04:00) Tbilisi&quot;)]
+UTC0400Tbilisi = 204</code></dt>
+  
+  <dd><p>(UTC+04:00) Tbilisi</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Yerevan"><code>[EnumMember(Value = &quot;(UTC+04:00) Yerevan&quot;)]
+UTC0400Yerevan = 205</code></dt>
+  
+  <dd><p>(UTC+04:00) Yerevan</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0430Kabul"><code>[EnumMember(Value = &quot;(UTC+04:30) Kabul&quot;)]
+UTC0430Kabul = 206</code></dt>
+  
+  <dd><p>(UTC+04:30) Kabul</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Ashgabat"><code>[EnumMember(Value = &quot;(UTC+05:00) Ashgabat&quot;)]
+UTC0500Ashgabat = 207</code></dt>
+  
+  <dd><p>(UTC+05:00) Ashgabat</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Chetumal"><code>[EnumMember(Value = &quot;(UTC-05:00) Chetumal&quot;)]
+UTC0500Chetumal = 122</code></dt>
+  
+  <dd><p>(UTC-05:00) Chetumal</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500EasternTimeUSCanada"><code>[EnumMember(Value = &quot;(UTC-05:00) Eastern Time (US &amp; Canada)&quot;)]
+UTC0500EasternTimeUSCanada = 123</code></dt>
+  
+  <dd><p>(UTC-05:00) Eastern Time (US + Canada)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Haiti"><code>[EnumMember(Value = &quot;(UTC-05:00) Haiti&quot;)]
+UTC0500Haiti = 124</code></dt>
+  
+  <dd><p>(UTC-05:00) Haiti</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Havana"><code>[EnumMember(Value = &quot;(UTC-05:00) Havana&quot;)]
+UTC0500Havana = 125</code></dt>
+  
+  <dd><p>(UTC-05:00) Havana</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500IndianaEast"><code>[EnumMember(Value = &quot;(UTC-05:00) Indiana (East)&quot;)]
+UTC0500IndianaEast = 126</code></dt>
+  
+  <dd><p>(UTC-05:00) Indiana (East)</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Qyzylorda"><code>[EnumMember(Value = &quot;(UTC+05:00) Qyzylorda&quot;)]
+UTC0500Qyzylorda = 211</code></dt>
+  
+  <dd><p>(UTC+05:00) Qyzylorda</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0500TurksandCaicos"><code>[EnumMember(Value = &quot;(UTC-05:00) Turks and Caicos&quot;)]
+UTC0500TurksandCaicos = 127</code></dt>
+  
+  <dd><p>(UTC-05:00) Turks and Caicos</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0530Chennai"><code>[EnumMember(Value = &quot;(UTC+05:30) Chennai&quot;)]
+UTC0530Chennai = 212</code></dt>
+  
+  <dd><p>(UTC+05:30) Chennai</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Hovd"><code>[EnumMember(Value = &quot;(UTC+07:00) Hovd&quot;)]
+UTC0700Hovd = 224</code></dt>
+  
+  <dd><p>(UTC+07:00) Hovd</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Krasnoyarsk"><code>[EnumMember(Value = &quot;(UTC+07:00) Krasnoyarsk&quot;)]
+UTC0700Krasnoyarsk = 225</code></dt>
+  
+  <dd><p>(UTC+07:00) Krasnoyarsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Novosibirsk"><code>[EnumMember(Value = &quot;(UTC+07:00) Novosibirsk&quot;)]
+UTC0700Novosibirsk = 226</code></dt>
+  
+  <dd><p>(UTC+07:00) Novosibirsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Tomsk"><code>[EnumMember(Value = &quot;(UTC+07:00) Tomsk&quot;)]
+UTC0700Tomsk = 227</code></dt>
+  
+  <dd><p>(UTC+07:00) Tomsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC08"><code>[EnumMember(Value = &quot;UTC-08&quot;)]
+UTC08 = 107</code></dt>
+  
+  <dd><p>UTC-08</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Beijing"><code>[EnumMember(Value = &quot;(UTC+08:00) Beijing&quot;)]
+UTC0800Beijing = 228</code></dt>
+  
+  <dd><p>(UTC+08:00) Beijing</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Perth"><code>[EnumMember(Value = &quot;(UTC+08:00) Perth&quot;)]
+UTC0800Perth = 233</code></dt>
+  
+  <dd><p>(UTC+08:00) Perth</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Taipei"><code>[EnumMember(Value = &quot;(UTC+08:00) Taipei&quot;)]
+UTC0800Taipei = 234</code></dt>
+  
+  <dd><p>(UTC+08:00) Taipei</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Ulaanbaatar"><code>[EnumMember(Value = &quot;(UTC+08:00) Ulaanbaatar&quot;)]
+UTC0800Ulaanbaatar = 235</code></dt>
+  
+  <dd><p>(UTC+08:00) Ulaanbaatar</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0845Eucla"><code>[EnumMember(Value = &quot;(UTC+08:45) Eucla&quot;)]
+UTC0845Eucla = 236</code></dt>
+  
+  <dd><p>(UTC+08:45) Eucla</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC09"><code>[EnumMember(Value = &quot;UTC-09&quot;)]
+UTC09 = 105</code></dt>
+  
+  <dd><p>UTC-09</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Chita"><code>[EnumMember(Value = &quot;(UTC+09:00) Chita&quot;)]
+UTC0900Chita = 237</code></dt>
+  
+  <dd><p>(UTC+09:00) Chita</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Osaka"><code>[EnumMember(Value = &quot;(UTC+09:00) Osaka&quot;)]
+UTC0900Osaka = 238</code></dt>
+  
+  <dd><p>(UTC+09:00) Osaka</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Pyongyang"><code>[EnumMember(Value = &quot;(UTC+09:00) Pyongyang&quot;)]
+UTC0900Pyongyang = 240</code></dt>
+  
+  <dd><p>(UTC+09:00) Pyongyang</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Seoul"><code>[EnumMember(Value = &quot;(UTC+09:00) Seoul&quot;)]
+UTC0900Seoul = 241</code></dt>
+  
+  <dd><p>(UTC+09:00) Seoul</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Yakutsk"><code>[EnumMember(Value = &quot;(UTC+09:00) Yakutsk&quot;)]
+UTC0900Yakutsk = 242</code></dt>
+  
+  <dd><p>(UTC+09:00) Yakutsk</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0930Adelaide"><code>[EnumMember(Value = &quot;(UTC+09:30) Adelaide&quot;)]
+UTC0930Adelaide = 243</code></dt>
+  
+  <dd><p>(UTC+09:30) Adelaide</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC0930Darwin"><code>[EnumMember(Value = &quot;(UTC+09:30) Darwin&quot;)]
+UTC0930Darwin = 244</code></dt>
+  
+  <dd><p>(UTC+09:30) Darwin</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Brisbane"><code>[EnumMember(Value = &quot;(UTC+10:00) Brisbane&quot;)]
+UTC1000Brisbane = 245</code></dt>
+  
+  <dd><p>(UTC+10:00) Brisbane</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Canberra"><code>[EnumMember(Value = &quot;(UTC+10:00) Canberra&quot;)]
+UTC1000Canberra = 246</code></dt>
+  
+  <dd><p>(UTC+10:00) Canberra</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Guam"><code>[EnumMember(Value = &quot;(UTC+10:00) Guam&quot;)]
+UTC1000Guam = 248</code></dt>
+  
+  <dd><p>(UTC+10:00) Guam</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC11"><code>[EnumMember(Value = &quot;UTC-11&quot;)]
+UTC11 = 100</code></dt>
+  
+  <dd><p>UTC-11</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1200Anadyr"><code>[EnumMember(Value = &quot;(UTC+12:00) Anadyr&quot;)]
+UTC1200Anadyr = 259</code></dt>
+  
+  <dd><p>(UTC+12:00) Anadyr</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1200CoordinatedUniversalTime12"><code>[EnumMember(Value = &quot;(UTC+12:00) Co-ordinated Universal Time+12&quot;)]
+UTC1200CoordinatedUniversalTime12 = 262</code></dt>
+  
+  <dd><p>(UTC+12:00) Co-ordinated Universal Time+12</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1200Fiji"><code>[EnumMember(Value = &quot;(UTC+12:00) Fiji&quot;)]
+UTC1200Fiji = 263</code></dt>
+  
+  <dd><p>(UTC+12:00) Fiji</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1245ChathamIslands"><code>[EnumMember(Value = &quot;(UTC+12:45) Chatham Islands&quot;)]
+UTC1245ChathamIslands = 264</code></dt>
+  
+  <dd><p>(UTC+12:45) Chatham Islands</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1300CoordinatedUniversalTime13"><code>[EnumMember(Value = &quot;(UTC+13:00) Co-ordinated Universal Time+13&quot;)]
+UTC1300CoordinatedUniversalTime13 = 265</code></dt>
+  
+  <dd><p>(UTC+13:00) Co-ordinated Universal Time+13</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1300Nukualofa"><code>[EnumMember(Value = &quot;(UTC+13:00) Nuku&#39;alofa&quot;)]
+UTC1300Nukualofa = 266</code></dt>
+  
+  <dd><p>(UTC+13:00) Nuku'alofa</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1300Samoa"><code>[EnumMember(Value = &quot;(UTC+13:00) Samoa&quot;)]
+UTC1300Samoa = 267</code></dt>
+  
+  <dd><p>(UTC+13:00) Samoa</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTC1400KiritimatiIsland"><code>[EnumMember(Value = &quot;(UTC+14:00) Kiritimati Island&quot;)]
+UTC1400KiritimatiIsland = 268</code></dt>
+  
+  <dd><p>(UTC+14:00) Kiritimati Island</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_UTCCoordinatedUniversalTime"><code>[EnumMember(Value = &quot;(UTC) Co-ordinated Universal Time&quot;)]
+UTCCoordinatedUniversalTime = 149</code></dt>
+  
+  <dd><p>(UTC) Co-ordinated Universal Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_VladivostokStandardTime"><code>[EnumMember(Value = &quot;Vladivostok Standard Time&quot;)]
+VladivostokStandardTime = 251</code></dt>
+  
+  <dd><p>Vladivostok Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_VolgogradStandardTime"><code>[EnumMember(Value = &quot;Volgograd Standard Time&quot;)]
+VolgogradStandardTime = 195</code></dt>
+  
+  <dd><p>Volgograd Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_WCentralAfricaStandardTime"><code>[EnumMember(Value = &quot;W. Central Africa Standard Time&quot;)]
+WCentralAfricaStandardTime = 168</code></dt>
+  
+  <dd><p>W. Central Africa Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_WEuropeStandardTime"><code>[EnumMember(Value = &quot;W. Europe Standard Time&quot;)]
+WEuropeStandardTime = 159</code></dt>
+  
+  <dd><p>W. Europe Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Warsaw"><code>[EnumMember(Value = &quot; Warsaw&quot;)]
+Warsaw = 166</code></dt>
+  
+  <dd><p>Warsaw</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_Wellington"><code>[EnumMember(Value = &quot; Wellington&quot;)]
+Wellington = 261</code></dt>
+  
+  <dd><p>Wellington</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_WestAsiaStandardTime"><code>[EnumMember(Value = &quot;West Asia Standard Time&quot;)]
+WestAsiaStandardTime = 208</code></dt>
+  
+  <dd><p>West Asia Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_WestBankStandardTime"><code>[EnumMember(Value = &quot;West Bank Standard Time&quot;)]
+WestBankStandardTime = 176</code></dt>
+  
+  <dd><p>West Bank Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_WestPacificStandardTime"><code>[EnumMember(Value = &quot;West Pacific Standard Time&quot;)]
+WestPacificStandardTime = 249</code></dt>
+  
+  <dd><p>West Pacific Standard Time</p>
+</dd>
+    <dt id="PnP_Core_Model_Teams_EventTimeZone_YukonStandardTime"><code>[EnumMember(Value = &quot;Yukon Standard Time&quot;)]
+YukonStandardTime = 113</code></dt>
+  
+  <dd><p>Yukon Standard Time</p>
+</dd>
+  </dl>
 
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaJohannesburg" class="collapse in">
-        <p><p>Africa/Johannesburg</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaLagos"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaLagos" class="expander" data-toggle="collapse">AfricaLagos</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaLagos" class="collapse in">
-        <p><p>Africa/Lagos</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaNairobi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaNairobi" class="expander" data-toggle="collapse">AfricaNairobi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaNairobi" class="collapse in">
-        <p><p>Africa/Nairobi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AfricaWindhoek"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaWindhoek" class="expander" data-toggle="collapse">AfricaWindhoek</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AfricaWindhoek" class="collapse in">
-        <p><p>Africa/Windhoek</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AlaskanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AlaskanStandardTime" class="expander" data-toggle="collapse">AlaskanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AlaskanStandardTime" class="collapse in">
-        <p><p>Alaskan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AleutianStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AleutianStandardTime" class="expander" data-toggle="collapse">AleutianStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AleutianStandardTime" class="collapse in">
-        <p><p>Aleutian Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaAnchorage"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaAnchorage" class="expander" data-toggle="collapse">AmericaAnchorage</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaAnchorage" class="collapse in">
-        <p><p>America/Anchorage</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaArgentinaBuenos_Aires"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaArgentinaBuenos_Aires" class="expander" data-toggle="collapse">AmericaArgentinaBuenos_Aires</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaArgentinaBuenos_Aires" class="collapse in">
-        <p><p>America/Argentina/Buenos_Aires</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaAsuncion"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaAsuncion" class="expander" data-toggle="collapse">AmericaAsuncion</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaAsuncion" class="collapse in">
-        <p><p>America/Asuncion</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaBahia"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaBahia" class="expander" data-toggle="collapse">AmericaBahia</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaBahia" class="collapse in">
-        <p><p>America/Bahia</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaBogota"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaBogota" class="expander" data-toggle="collapse">AmericaBogota</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaBogota" class="collapse in">
-        <p><p>America/Bogota</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaCaracas"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCaracas" class="expander" data-toggle="collapse">AmericaCaracas</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCaracas" class="collapse in">
-        <p><p>America/Caracas</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaCayenne"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCayenne" class="expander" data-toggle="collapse">AmericaCayenne</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCayenne" class="collapse in">
-        <p><p>America/Cayenne</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaChicago"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaChicago" class="expander" data-toggle="collapse">AmericaChicago</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaChicago" class="collapse in">
-        <p><p>America/Chicago</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaChihuahua"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaChihuahua" class="expander" data-toggle="collapse">AmericaChihuahua</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaChihuahua" class="collapse in">
-        <p><p>America/Chihuahua</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaCuiaba"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCuiaba" class="expander" data-toggle="collapse">AmericaCuiaba</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaCuiaba" class="collapse in">
-        <p><p>America/Cuiaba</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaDenver"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaDenver" class="expander" data-toggle="collapse">AmericaDenver</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaDenver" class="collapse in">
-        <p><p>America/Denver</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaGodthab"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaGodthab" class="expander" data-toggle="collapse">AmericaGodthab</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaGodthab" class="collapse in">
-        <p><p>America/Godthab</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaGuatemala"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaGuatemala" class="expander" data-toggle="collapse">AmericaGuatemala</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaGuatemala" class="collapse in">
-        <p><p>America/Guatemala</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaHalifax"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaHalifax" class="expander" data-toggle="collapse">AmericaHalifax</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaHalifax" class="collapse in">
-        <p><p>America/Halifax</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaIndianaIndianapolis"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaIndianaIndianapolis" class="expander" data-toggle="collapse">AmericaIndianaIndianapolis</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaIndianaIndianapolis" class="collapse in">
-        <p><p>America/Indiana/Indianapolis</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaLa_Paz"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaLa_Paz" class="expander" data-toggle="collapse">AmericaLa_Paz</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaLa_Paz" class="collapse in">
-        <p><p>America/La_Paz</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaLos_Angeles"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaLos_Angeles" class="expander" data-toggle="collapse">AmericaLos_Angeles</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaLos_Angeles" class="collapse in">
-        <p><p>America/Los_Angeles</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaMexico_City"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaMexico_City" class="expander" data-toggle="collapse">AmericaMexico_City</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaMexico_City" class="collapse in">
-        <p><p>America/Mexico_City</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaMontevideo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaMontevideo" class="expander" data-toggle="collapse">AmericaMontevideo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaMontevideo" class="collapse in">
-        <p><p>America/Montevideo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaNew_York"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaNew_York" class="expander" data-toggle="collapse">AmericaNew_York</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaNew_York" class="collapse in">
-        <p><p>America/New_York</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaPhoenix"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaPhoenix" class="expander" data-toggle="collapse">AmericaPhoenix</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaPhoenix" class="collapse in">
-        <p><p>America/Phoenix,</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaRegina"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaRegina" class="expander" data-toggle="collapse">AmericaRegina</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaRegina" class="collapse in">
-        <p><p>America/Regina</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaSanta_Isabel"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSanta_Isabel" class="expander" data-toggle="collapse">AmericaSanta_Isabel</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSanta_Isabel" class="collapse in">
-        <p><p>America/Santa_Isabel</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaSantiago"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSantiago" class="expander" data-toggle="collapse">AmericaSantiago</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSantiago" class="collapse in">
-        <p><p>America/Santiago</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaSao_Paulo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSao_Paulo" class="expander" data-toggle="collapse">AmericaSao_Paulo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSao_Paulo" class="collapse in">
-        <p><p>America/Sao_Paulo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AmericaSt_Johns"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSt_Johns" class="expander" data-toggle="collapse">AmericaSt_Johns</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AmericaSt_Johns" class="collapse in">
-        <p><p>America/St_Johns</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_ArabicStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_ArabicStandardTime" class="expander" data-toggle="collapse">ArabicStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_ArabicStandardTime" class="collapse in">
-        <p><p>Arabic Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaAmman"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaAmman" class="expander" data-toggle="collapse">AsiaAmman</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaAmman" class="collapse in">
-        <p><p>Asia/Amman</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaAstanaAlmaty"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaAstanaAlmaty" class="expander" data-toggle="collapse">AsiaAstanaAlmaty</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaAstanaAlmaty" class="collapse in">
-        <p><p>Asia/Astana (Almaty)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaBaghdad"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBaghdad" class="expander" data-toggle="collapse">AsiaBaghdad</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBaghdad" class="collapse in">
-        <p><p>Asia/Baghdad</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaBaku"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBaku" class="expander" data-toggle="collapse">AsiaBaku</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBaku" class="collapse in">
-        <p><p>Asia/Baku</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaBangkok"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBangkok" class="expander" data-toggle="collapse">AsiaBangkok</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBangkok" class="collapse in">
-        <p><p>Asia/Bangkok</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaBeirut"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBeirut" class="expander" data-toggle="collapse">AsiaBeirut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaBeirut" class="collapse in">
-        <p><p>Asia/Beirut</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaColombo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaColombo" class="expander" data-toggle="collapse">AsiaColombo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaColombo" class="collapse in">
-        <p><p>Asia/Colombo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaDamascus"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDamascus" class="expander" data-toggle="collapse">AsiaDamascus</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDamascus" class="collapse in">
-        <p><p>Asia/Damascus</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaDhaka"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDhaka" class="expander" data-toggle="collapse">AsiaDhaka</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDhaka" class="collapse in">
-        <p><p>Asia/Dhaka</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaDubai"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDubai" class="expander" data-toggle="collapse">AsiaDubai</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaDubai" class="collapse in">
-        <p><p>Asia/Dubai</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaIrkutsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaIrkutsk" class="expander" data-toggle="collapse">AsiaIrkutsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaIrkutsk" class="collapse in">
-        <p><p>Asia/Irkutsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaJerusalem"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaJerusalem" class="expander" data-toggle="collapse">AsiaJerusalem</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaJerusalem" class="collapse in">
-        <p><p>Asia/Jerusalem</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaKabul"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKabul" class="expander" data-toggle="collapse">AsiaKabul</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKabul" class="collapse in">
-        <p><p>Asia/Kabul</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaKarachi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKarachi" class="expander" data-toggle="collapse">AsiaKarachi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKarachi" class="collapse in">
-        <p><p>Asia/Karachi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaKathmandu"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKathmandu" class="expander" data-toggle="collapse">AsiaKathmandu</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKathmandu" class="collapse in">
-        <p><p>Asia/Kathmandu</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaKolkata"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKolkata" class="expander" data-toggle="collapse">AsiaKolkata</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKolkata" class="collapse in">
-        <p><p>Asia/Kolkata</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaKrasnoyarsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKrasnoyarsk" class="expander" data-toggle="collapse">AsiaKrasnoyarsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaKrasnoyarsk" class="collapse in">
-        <p><p>Asia/Krasnoyarsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaMagadan"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaMagadan" class="expander" data-toggle="collapse">AsiaMagadan</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaMagadan" class="collapse in">
-        <p><p>Asia/Magadan</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaNovosibirsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaNovosibirsk" class="expander" data-toggle="collapse">AsiaNovosibirsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaNovosibirsk" class="collapse in">
-        <p><p>Asia/Novosibirsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaRiyadh"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaRiyadh" class="expander" data-toggle="collapse">AsiaRiyadh</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaRiyadh" class="collapse in">
-        <p><p>Asia/Riyadh</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaSeoul"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaSeoul" class="expander" data-toggle="collapse">AsiaSeoul</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaSeoul" class="collapse in">
-        <p><p>Asia/Seoul</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaShanghai"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaShanghai" class="expander" data-toggle="collapse">AsiaShanghai</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaShanghai" class="collapse in">
-        <p><p>Asia/Shanghai</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaSingapore"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaSingapore" class="expander" data-toggle="collapse">AsiaSingapore</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaSingapore" class="collapse in">
-        <p><p>Asia/Singapore</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaTaipei"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTaipei" class="expander" data-toggle="collapse">AsiaTaipei</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTaipei" class="collapse in">
-        <p><p>Asia/Taipei</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaTbilisi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTbilisi" class="expander" data-toggle="collapse">AsiaTbilisi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTbilisi" class="collapse in">
-        <p><p>Asia/Tbilisi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaTehran"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTehran" class="expander" data-toggle="collapse">AsiaTehran</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTehran" class="collapse in">
-        <p><p>Asia/Tehran</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaTokyo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTokyo" class="expander" data-toggle="collapse">AsiaTokyo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaTokyo" class="collapse in">
-        <p><p>Asia/Tokyo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaToshkentTashkent"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaToshkentTashkent" class="expander" data-toggle="collapse">AsiaToshkentTashkent</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaToshkentTashkent" class="collapse in">
-        <p><p>Asia/Toshkent (Tashkent)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaUlaanbaatar"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaUlaanbaatar" class="expander" data-toggle="collapse">AsiaUlaanbaatar</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaUlaanbaatar" class="collapse in">
-        <p><p>Asia/Ulaanbaatar</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaVladivostok"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaVladivostok" class="expander" data-toggle="collapse">AsiaVladivostok</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaVladivostok" class="collapse in">
-        <p><p>Asia/Vladivostok</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaYakutsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYakutsk" class="expander" data-toggle="collapse">AsiaYakutsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYakutsk" class="collapse in">
-        <p><p>Asia/Yakutsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaYangonRangoon"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYangonRangoon" class="expander" data-toggle="collapse">AsiaYangonRangoon</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYangonRangoon" class="collapse in">
-        <p><p>Asia/Yangon (Rangoon)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaYekaterinburg"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYekaterinburg" class="expander" data-toggle="collapse">AsiaYekaterinburg</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYekaterinburg" class="collapse in">
-        <p><p>Asia/Yekaterinburg</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AsiaYerevan"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYerevan" class="expander" data-toggle="collapse">AsiaYerevan</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AsiaYerevan" class="collapse in">
-        <p><p>Asia/Yerevan</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AstrakhanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AstrakhanStandardTime" class="expander" data-toggle="collapse">AstrakhanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AstrakhanStandardTime" class="collapse in">
-        <p><p>Astrakhan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AtlanticAzores"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticAzores" class="expander" data-toggle="collapse">AtlanticAzores</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticAzores" class="collapse in">
-        <p><p>Atlantic/Azores</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AtlanticCape_Verde"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticCape_Verde" class="expander" data-toggle="collapse">AtlanticCape_Verde</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticCape_Verde" class="collapse in">
-        <p><p>Atlantic/Cape_Verde</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AtlanticReykjavik"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticReykjavik" class="expander" data-toggle="collapse">AtlanticReykjavik</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AtlanticReykjavik" class="collapse in">
-        <p><p>Atlantic/Reykjavik</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaAdelaide"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaAdelaide" class="expander" data-toggle="collapse">AustraliaAdelaide</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaAdelaide" class="collapse in">
-        <p><p>Australia/Adelaide</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaBrisbane"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaBrisbane" class="expander" data-toggle="collapse">AustraliaBrisbane</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaBrisbane" class="collapse in">
-        <p><p>Australia/Brisbane</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaDarwin"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaDarwin" class="expander" data-toggle="collapse">AustraliaDarwin</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaDarwin" class="collapse in">
-        <p><p>Australia/Darwin</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaHobart"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaHobart" class="expander" data-toggle="collapse">AustraliaHobart</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaHobart" class="collapse in">
-        <p><p>Australia/Hobart</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaPerth"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaPerth" class="expander" data-toggle="collapse">AustraliaPerth</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaPerth" class="collapse in">
-        <p><p>Australia/Perth</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AustraliaSydney"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaSydney" class="expander" data-toggle="collapse">AustraliaSydney</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AustraliaSydney" class="collapse in">
-        <p><p>Australia/Sydney</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_AzerbaijanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_AzerbaijanStandardTime" class="expander" data-toggle="collapse">AzerbaijanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_AzerbaijanStandardTime" class="collapse in">
-        <p><p>Azerbaijan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_BangladeshStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_BangladeshStandardTime" class="expander" data-toggle="collapse">BangladeshStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_BangladeshStandardTime" class="collapse in">
-        <p><p>Bangladesh Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Bern"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Bern" class="expander" data-toggle="collapse">Bern</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Bern" class="collapse in">
-        <p><p>Bern</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_BougainvilleStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_BougainvilleStandardTime" class="expander" data-toggle="collapse">BougainvilleStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_BougainvilleStandardTime" class="collapse in">
-        <p><p>Bougainville Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Bratislava"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Bratislava" class="expander" data-toggle="collapse">Bratislava</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Bratislava" class="collapse in">
-        <p><p>Bratislava</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Bucharest"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Bucharest" class="expander" data-toggle="collapse">Bucharest</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Bucharest" class="collapse in">
-        <p><p>Bucharest</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CanadaCentralStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CanadaCentralStandardTime" class="expander" data-toggle="collapse">CanadaCentralStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CanadaCentralStandardTime" class="collapse in">
-        <p><p>Canada Central Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralAmericaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralAmericaStandardTime" class="expander" data-toggle="collapse">CentralAmericaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralAmericaStandardTime" class="collapse in">
-        <p><p>Central America Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralAsiaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralAsiaStandardTime" class="expander" data-toggle="collapse">CentralAsiaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralAsiaStandardTime" class="collapse in">
-        <p><p>Central Asia Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralEuropeStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralEuropeStandardTime" class="expander" data-toggle="collapse">CentralEuropeStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralEuropeStandardTime" class="collapse in">
-        <p><p>Central Europe Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralEuropeanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralEuropeanStandardTime" class="expander" data-toggle="collapse">CentralEuropeanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralEuropeanStandardTime" class="collapse in">
-        <p><p>Central European Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralStandardTime" class="expander" data-toggle="collapse">CentralStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralStandardTime" class="collapse in">
-        <p><p>Central Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_CentralStandardTimeMexico"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralStandardTimeMexico" class="expander" data-toggle="collapse">CentralStandardTimeMexico</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_CentralStandardTimeMexico" class="collapse in">
-        <p><p>Central Standard Time (Mexico)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_ChinaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_ChinaStandardTime" class="expander" data-toggle="collapse">ChinaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_ChinaStandardTime" class="collapse in">
-        <p><p>China Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Copenhagen"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Copenhagen" class="expander" data-toggle="collapse">Copenhagen</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Copenhagen" class="collapse in">
-        <p><p>Copenhagen</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_DatelineStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_DatelineStandardTime" class="expander" data-toggle="collapse">DatelineStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_DatelineStandardTime" class="collapse in">
-        <p><p>Dateline Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EAfricaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EAfricaStandardTime" class="expander" data-toggle="collapse">EAfricaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EAfricaStandardTime" class="collapse in">
-        <p><p>E. Africa Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_ESouthAmericaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_ESouthAmericaStandardTime" class="expander" data-toggle="collapse">ESouthAmericaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_ESouthAmericaStandardTime" class="collapse in">
-        <p><p>E. South America Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus11"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus11" class="expander" data-toggle="collapse">ETCGMTPlus11</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus11" class="collapse in">
-        <p><p>Etc/GMT+11</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus12"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus12" class="expander" data-toggle="collapse">ETCGMTPlus12</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_ETCGMTPlus12" class="collapse in">
-        <p><p>Etc/GMT+12</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EasterIslandStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EasterIslandStandardTime" class="expander" data-toggle="collapse">EasterIslandStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EasterIslandStandardTime" class="collapse in">
-        <p><p>Easter Island Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EkaterinburgStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EkaterinburgStandardTime" class="expander" data-toggle="collapse">EkaterinburgStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EkaterinburgStandardTime" class="collapse in">
-        <p><p>Ekaterinburg Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT" class="expander" data-toggle="collapse">EtcGMT</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT" class="collapse in">
-        <p><p>Etc/GMT</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT12"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT12" class="expander" data-toggle="collapse">EtcGMT12</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT12" class="collapse in">
-        <p><p>Etc/GMT-12</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EtcGMT2"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT2" class="expander" data-toggle="collapse">EtcGMT2</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EtcGMT2" class="collapse in">
-        <p><p>Etc/GMT+2</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeBerlin"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBerlin" class="expander" data-toggle="collapse">EuropeBerlin</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBerlin" class="collapse in">
-        <p><p>Europe/Berlin</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeBucharest"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBucharest" class="expander" data-toggle="collapse">EuropeBucharest</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBucharest" class="collapse in">
-        <p><p>Europe/Bucharest</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeBudapest"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBudapest" class="expander" data-toggle="collapse">EuropeBudapest</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeBudapest" class="collapse in">
-        <p><p>Europe/Budapest</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeIstanbul"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeIstanbul" class="expander" data-toggle="collapse">EuropeIstanbul</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeIstanbul" class="collapse in">
-        <p><p>Europe/Istanbul</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeKaliningrad"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeKaliningrad" class="expander" data-toggle="collapse">EuropeKaliningrad</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeKaliningrad" class="collapse in">
-        <p><p>Europe/Kaliningrad</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeKyivKiev"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeKyivKiev" class="expander" data-toggle="collapse">EuropeKyivKiev</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeKyivKiev" class="collapse in">
-        <p><p>Europe/Kyiv (Kiev)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeLondon"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeLondon" class="expander" data-toggle="collapse">EuropeLondon</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeLondon" class="collapse in">
-        <p><p>Europe/London</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeMoscow"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeMoscow" class="expander" data-toggle="collapse">EuropeMoscow</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeMoscow" class="collapse in">
-        <p><p>Europe/Moscow</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeParis"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeParis" class="expander" data-toggle="collapse">EuropeParis</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeParis" class="collapse in">
-        <p><p>Europe/Paris</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_EuropeWarsaw"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeWarsaw" class="expander" data-toggle="collapse">EuropeWarsaw</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_EuropeWarsaw" class="collapse in">
-        <p><p>Europe/Warsaw</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_FLEStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_FLEStandardTime" class="expander" data-toggle="collapse">FLEStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_FLEStandardTime" class="collapse in">
-        <p><p>FLE Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Fortaleza"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Fortaleza" class="expander" data-toggle="collapse">Fortaleza</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Fortaleza" class="collapse in">
-        <p><p>Fortaleza</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_GMTStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_GMTStandardTime" class="expander" data-toggle="collapse">GMTStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_GMTStandardTime" class="collapse in">
-        <p><p>GMT Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_GornoAltaysk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_GornoAltaysk" class="expander" data-toggle="collapse">GornoAltaysk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_GornoAltaysk" class="collapse in">
-        <p><p>Gorno-Altaysk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Hanoi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Hanoi" class="expander" data-toggle="collapse">Hanoi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Hanoi" class="collapse in">
-        <p><p>Hanoi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_HawaiianStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_HawaiianStandardTime" class="expander" data-toggle="collapse">HawaiianStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_HawaiianStandardTime" class="collapse in">
-        <p><p>Hawaiian Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_HongKongSAR"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_HongKongSAR" class="expander" data-toggle="collapse">HongKongSAR</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_HongKongSAR" class="collapse in">
-        <p><p>Hong Kong SAR</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_IndiaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_IndiaStandardTime" class="expander" data-toggle="collapse">IndiaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_IndiaStandardTime" class="collapse in">
-        <p><p>India Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_IndianMauritius"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_IndianMauritius" class="expander" data-toggle="collapse">IndianMauritius</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_IndianMauritius" class="collapse in">
-        <p><p>Indian/Mauritius</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_IranStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_IranStandardTime" class="expander" data-toggle="collapse">IranStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_IranStandardTime" class="collapse in">
-        <p><p>Iran Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_IsraelStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_IsraelStandardTime" class="expander" data-toggle="collapse">IsraelStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_IsraelStandardTime" class="collapse in">
-        <p><p>Israel Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_JordanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_JordanStandardTime" class="expander" data-toggle="collapse">JordanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_JordanStandardTime" class="collapse in">
-        <p><p>Jordan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_KaliningradStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_KaliningradStandardTime" class="expander" data-toggle="collapse">KaliningradStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_KaliningradStandardTime" class="collapse in">
-        <p><p>Kaliningrad Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Karachi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Karachi" class="expander" data-toggle="collapse">Karachi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Karachi" class="collapse in">
-        <p><p>Karachi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_LaPaz"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_LaPaz" class="expander" data-toggle="collapse">LaPaz</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_LaPaz" class="collapse in">
-        <p><p>La Paz</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_LibyaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_LibyaStandardTime" class="expander" data-toggle="collapse">LibyaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_LibyaStandardTime" class="collapse in">
-        <p><p>Libya Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Lima"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Lima" class="expander" data-toggle="collapse">Lima</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Lima" class="collapse in">
-        <p><p>Lima</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Lisbon"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Lisbon" class="expander" data-toggle="collapse">Lisbon</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Lisbon" class="collapse in">
-        <p><p>Lisbon</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Ljubljana"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Ljubljana" class="expander" data-toggle="collapse">Ljubljana</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Ljubljana" class="collapse in">
-        <p><p>Ljubljana</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_LordHoweStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_LordHoweStandardTime" class="expander" data-toggle="collapse">LordHoweStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_LordHoweStandardTime" class="collapse in">
-        <p><p>Lord Howe Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MagadanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MagadanStandardTime" class="expander" data-toggle="collapse">MagadanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MagadanStandardTime" class="collapse in">
-        <p><p>Magadan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Manaus"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Manaus" class="expander" data-toggle="collapse">Manaus</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Manaus" class="collapse in">
-        <p><p>Manaus</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MarquesasStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MarquesasStandardTime" class="expander" data-toggle="collapse">MarquesasStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MarquesasStandardTime" class="collapse in">
-        <p><p>Marquesas Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MexicoCity"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MexicoCity" class="expander" data-toggle="collapse">MexicoCity</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MexicoCity" class="collapse in">
-        <p><p>Mexico City</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MountainStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MountainStandardTime" class="expander" data-toggle="collapse">MountainStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MountainStandardTime" class="collapse in">
-        <p><p>Mountain Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MountainStandardTimeMexico"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MountainStandardTimeMexico" class="expander" data-toggle="collapse">MountainStandardTimeMexico</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MountainStandardTimeMexico" class="collapse in">
-        <p><p>Mountain Standard Time (Mexico)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Mumbai"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Mumbai" class="expander" data-toggle="collapse">Mumbai</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Mumbai" class="collapse in">
-        <p><p>Mumbai</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Muscat"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Muscat" class="expander" data-toggle="collapse">Muscat</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Muscat" class="collapse in">
-        <p><p>Muscat</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_MyanmarStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_MyanmarStandardTime" class="expander" data-toggle="collapse">MyanmarStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_MyanmarStandardTime" class="collapse in">
-        <p><p>Myanmar Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NamibiaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NamibiaStandardTime" class="expander" data-toggle="collapse">NamibiaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NamibiaStandardTime" class="collapse in">
-        <p><p>Namibia Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NepalStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NepalStandardTime" class="expander" data-toggle="collapse">NepalStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NepalStandardTime" class="collapse in">
-        <p><p>Nepal Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NewCaledonia"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NewCaledonia" class="expander" data-toggle="collapse">NewCaledonia</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NewCaledonia" class="collapse in">
-        <p><p>New Caledonia</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NewfoundlandStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NewfoundlandStandardTime" class="expander" data-toggle="collapse">NewfoundlandStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NewfoundlandStandardTime" class="collapse in">
-        <p><p>Newfoundland Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NorfolkStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NorfolkStandardTime" class="expander" data-toggle="collapse">NorfolkStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NorfolkStandardTime" class="collapse in">
-        <p><p>Norfolk Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_NorthAsiaEastStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_NorthAsiaEastStandardTime" class="expander" data-toggle="collapse">NorthAsiaEastStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_NorthAsiaEastStandardTime" class="collapse in">
-        <p><p>North Asia East Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_OmskStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_OmskStandardTime" class="expander" data-toggle="collapse">OmskStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_OmskStandardTime" class="collapse in">
-        <p><p>Omsk Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificApia"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificApia" class="expander" data-toggle="collapse">PacificApia</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificApia" class="collapse in">
-        <p><p>Pacific/Apia</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificAuckland"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificAuckland" class="expander" data-toggle="collapse">PacificAuckland</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificAuckland" class="collapse in">
-        <p><p>Pacific/Auckland</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificFiji"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificFiji" class="expander" data-toggle="collapse">PacificFiji</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificFiji" class="collapse in">
-        <p><p>Pacific/Fiji</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificGuadalcanal"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificGuadalcanal" class="expander" data-toggle="collapse">PacificGuadalcanal</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificGuadalcanal" class="collapse in">
-        <p><p>Pacific/Guadalcanal</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificHonolulu"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificHonolulu" class="expander" data-toggle="collapse">PacificHonolulu</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificHonolulu" class="collapse in">
-        <p><p>Pacific/Honolulu</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificKiritimati"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificKiritimati" class="expander" data-toggle="collapse">PacificKiritimati</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificKiritimati" class="collapse in">
-        <p><p>Pacific/Kiritimati</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificPort_Moresby"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificPort_Moresby" class="expander" data-toggle="collapse">PacificPort_Moresby</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificPort_Moresby" class="collapse in">
-        <p><p>Pacific/Port_Moresby</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificSAStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificSAStandardTime" class="expander" data-toggle="collapse">PacificSAStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificSAStandardTime" class="collapse in">
-        <p><p>Pacific SA Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificStandardTime" class="expander" data-toggle="collapse">PacificStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificStandardTime" class="collapse in">
-        <p><p>Pacific Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificStandardTimeMexico"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificStandardTimeMexico" class="expander" data-toggle="collapse">PacificStandardTimeMexico</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificStandardTimeMexico" class="collapse in">
-        <p><p>Pacific Standard Time (Mexico)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_PacificTongatapu"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificTongatapu" class="expander" data-toggle="collapse">PacificTongatapu</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_PacificTongatapu" class="collapse in">
-        <p><p>Pacific/Tongatapu</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Paris"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Paris" class="expander" data-toggle="collapse">Paris</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Paris" class="collapse in">
-        <p><p>Paris</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Pretoria"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Pretoria" class="expander" data-toggle="collapse">Pretoria</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Pretoria" class="collapse in">
-        <p><p>Pretoria</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Reykjavik"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Reykjavik" class="expander" data-toggle="collapse">Reykjavik</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Reykjavik" class="collapse in">
-        <p><p>Reykjavik</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Riga"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Riga" class="expander" data-toggle="collapse">Riga</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Riga" class="collapse in">
-        <p><p>Riga</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_RioBranco"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_RioBranco" class="expander" data-toggle="collapse">RioBranco</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_RioBranco" class="collapse in">
-        <p><p>Rio Branco</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Riyadh"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Riyadh" class="expander" data-toggle="collapse">Riyadh</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Riyadh" class="collapse in">
-        <p><p>Riyadh</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone10"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone10" class="expander" data-toggle="collapse">RussiaTimeZone10</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone10" class="collapse in">
-        <p><p>Russia Time Zone 10</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone11"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone11" class="expander" data-toggle="collapse">RussiaTimeZone11</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_RussiaTimeZone11" class="collapse in">
-        <p><p>Russia Time Zone 11</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_RussianStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_RussianStandardTime" class="expander" data-toggle="collapse">RussianStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_RussianStandardTime" class="collapse in">
-        <p><p>Russian Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SAWesternStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SAWesternStandardTime" class="expander" data-toggle="collapse">SAWesternStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SAWesternStandardTime" class="collapse in">
-        <p><p>SA Western Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SEAsiaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SEAsiaStandardTime" class="expander" data-toggle="collapse">SEAsiaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SEAsiaStandardTime" class="collapse in">
-        <p><p>SE Asia Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SakhalinStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SakhalinStandardTime" class="expander" data-toggle="collapse">SakhalinStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SakhalinStandardTime" class="collapse in">
-        <p><p>Sakhalin Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Samara"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Samara" class="expander" data-toggle="collapse">Samara</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Samara" class="collapse in">
-        <p><p>Samara</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Singapore"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Singapore" class="expander" data-toggle="collapse">Singapore</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Singapore" class="collapse in">
-        <p><p>Singapore</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SouthSudanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SouthSudanStandardTime" class="expander" data-toggle="collapse">SouthSudanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SouthSudanStandardTime" class="collapse in">
-        <p><p>South Sudan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SriLankaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SriLankaStandardTime" class="expander" data-toggle="collapse">SriLankaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SriLankaStandardTime" class="collapse in">
-        <p><p>Sri Lanka Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Stockholm"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Stockholm" class="expander" data-toggle="collapse">Stockholm</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Stockholm" class="collapse in">
-        <p><p>Stockholm</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_SudanStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_SudanStandardTime" class="expander" data-toggle="collapse">SudanStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_SudanStandardTime" class="collapse in">
-        <p><p>Sudan Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Sydney"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Sydney" class="expander" data-toggle="collapse">Sydney</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Sydney" class="collapse in">
-        <p><p>Sydney</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Tallinn"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Tallinn" class="expander" data-toggle="collapse">Tallinn</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Tallinn" class="collapse in">
-        <p><p>Tallinn</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_TasmaniaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_TasmaniaStandardTime" class="expander" data-toggle="collapse">TasmaniaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_TasmaniaStandardTime" class="collapse in">
-        <p><p>Tasmania Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_TocantinsStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_TocantinsStandardTime" class="expander" data-toggle="collapse">TocantinsStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_TocantinsStandardTime" class="collapse in">
-        <p><p>Tocantins Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Tokyo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Tokyo" class="expander" data-toggle="collapse">Tokyo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Tokyo" class="collapse in">
-        <p><p>Tokyo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_TurkeyStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_TurkeyStandardTime" class="expander" data-toggle="collapse">TurkeyStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_TurkeyStandardTime" class="collapse in">
-        <p><p>Turkey Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_USMountainStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_USMountainStandardTime" class="expander" data-toggle="collapse">USMountainStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_USMountainStandardTime" class="collapse in">
-        <p><p>US Mountain Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0000Dublin"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0000Dublin" class="expander" data-toggle="collapse">UTC0000Dublin</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0000Dublin" class="collapse in">
-        <p><p>(UTC+00:00) Dublin</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0000SaoTome"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0000SaoTome" class="expander" data-toggle="collapse">UTC0000SaoTome</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0000SaoTome" class="collapse in">
-        <p><p>(UTC+00:00) Sao Tome</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Amsterdam"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Amsterdam" class="expander" data-toggle="collapse">UTC0100Amsterdam</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Amsterdam" class="collapse in">
-        <p><p>(UTC+01:00) Amsterdam</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Azores"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Azores" class="expander" data-toggle="collapse">UTC0100Azores</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Azores" class="collapse in">
-        <p><p>(UTC-01:00) Azores</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0100CaboVerdeIs"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100CaboVerdeIs" class="expander" data-toggle="collapse">UTC0100CaboVerdeIs</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100CaboVerdeIs" class="collapse in">
-        <p><p>(UTC-01:00) Cabo Verde Is.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Casablanca"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Casablanca" class="expander" data-toggle="collapse">UTC0100Casablanca</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Casablanca" class="collapse in">
-        <p><p>(UTC+01:00) Casablanca</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0100Sarajevo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Sarajevo" class="expander" data-toggle="collapse">UTC0100Sarajevo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0100Sarajevo" class="collapse in">
-        <p><p>(UTC+01:00) Sarajevo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Beirut"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Beirut" class="expander" data-toggle="collapse">UTC0200Beirut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Beirut" class="collapse in">
-        <p><p>(UTC+02:00) Beirut</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Cairo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Cairo" class="expander" data-toggle="collapse">UTC0200Cairo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Cairo" class="collapse in">
-        <p><p>(UTC+02:00) Cairo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Chisinau"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Chisinau" class="expander" data-toggle="collapse">UTC0200Chisinau</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Chisinau" class="collapse in">
-        <p><p>(UTC+02:00) Chisinau</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200CoordinatedUniversalTime02"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200CoordinatedUniversalTime02" class="expander" data-toggle="collapse">UTC0200CoordinatedUniversalTime02</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200CoordinatedUniversalTime02" class="collapse in">
-        <p><p>(UTC-02:00) Co-ordinated Universal Time-02</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Damascus"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Damascus" class="expander" data-toggle="collapse">UTC0200Damascus</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Damascus" class="collapse in">
-        <p><p>(UTC+02:00) Damascus</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Gaza"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Gaza" class="expander" data-toggle="collapse">UTC0200Gaza</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Gaza" class="collapse in">
-        <p><p>(UTC+02:00) Gaza</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0200Helsinki"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Helsinki" class="expander" data-toggle="collapse">UTC0200Helsinki</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0200Helsinki" class="collapse in">
-        <p><p>(UTC+02:00) Helsinki</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300CityofBuenosAires"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300CityofBuenosAires" class="expander" data-toggle="collapse">UTC0300CityofBuenosAires</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300CityofBuenosAires" class="collapse in">
-        <p><p>(UTC-03:00) City of Buenos Aires</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Greenland"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Greenland" class="expander" data-toggle="collapse">UTC0300Greenland</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Greenland" class="collapse in">
-        <p><p>(UTC-03:00) Greenland</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Minsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Minsk" class="expander" data-toggle="collapse">UTC0300Minsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Minsk" class="collapse in">
-        <p><p>(UTC+03:00) Minsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Montevideo"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Montevideo" class="expander" data-toggle="collapse">UTC0300Montevideo</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Montevideo" class="collapse in">
-        <p><p>(UTC-03:00) Montevideo</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Moscow"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Moscow" class="expander" data-toggle="collapse">UTC0300Moscow</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Moscow" class="collapse in">
-        <p><p>(UTC+03:00) Moscow</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300PuntaArenas"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300PuntaArenas" class="expander" data-toggle="collapse">UTC0300PuntaArenas</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300PuntaArenas" class="collapse in">
-        <p><p>(UTC-03:00) Punta Arenas</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300SaintPierreandMiquelon"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300SaintPierreandMiquelon" class="expander" data-toggle="collapse">UTC0300SaintPierreandMiquelon</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300SaintPierreandMiquelon" class="collapse in">
-        <p><p>(UTC-03:00) Saint Pierre and Miquelon</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0300Salvador"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Salvador" class="expander" data-toggle="collapse">UTC0300Salvador</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0300Salvador" class="collapse in">
-        <p><p>(UTC-03:00) Salvador</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Astrakhan"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Astrakhan" class="expander" data-toggle="collapse">UTC0400Astrakhan</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Astrakhan" class="collapse in">
-        <p><p>(UTC+04:00) Astrakhan</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Asuncion"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Asuncion" class="expander" data-toggle="collapse">UTC0400Asuncion</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Asuncion" class="collapse in">
-        <p><p>(UTC-04:00) Asuncion</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400AtlanticTimeCanada"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400AtlanticTimeCanada" class="expander" data-toggle="collapse">UTC0400AtlanticTimeCanada</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400AtlanticTimeCanada" class="collapse in">
-        <p><p>(UTC-04:00) Atlantic Time (Canada)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Caracas"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Caracas" class="expander" data-toggle="collapse">UTC0400Caracas</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Caracas" class="collapse in">
-        <p><p>(UTC-04:00) Caracas</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Cuiaba"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Cuiaba" class="expander" data-toggle="collapse">UTC0400Cuiaba</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Cuiaba" class="collapse in">
-        <p><p>(UTC-04:00) Cuiaba</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Georgetown"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Georgetown" class="expander" data-toggle="collapse">UTC0400Georgetown</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Georgetown" class="collapse in">
-        <p><p>(UTC-04:00) Georgetown</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400PortLouis"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400PortLouis" class="expander" data-toggle="collapse">UTC0400PortLouis</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400PortLouis" class="collapse in">
-        <p><p>(UTC+04:00) Port Louis</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Saratov"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Saratov" class="expander" data-toggle="collapse">UTC0400Saratov</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Saratov" class="collapse in">
-        <p><p>(UTC+04:00) Saratov</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Tbilisi"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Tbilisi" class="expander" data-toggle="collapse">UTC0400Tbilisi</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Tbilisi" class="collapse in">
-        <p><p>(UTC+04:00) Tbilisi</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0400Yerevan"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Yerevan" class="expander" data-toggle="collapse">UTC0400Yerevan</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0400Yerevan" class="collapse in">
-        <p><p>(UTC+04:00) Yerevan</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0430Kabul"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0430Kabul" class="expander" data-toggle="collapse">UTC0430Kabul</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0430Kabul" class="collapse in">
-        <p><p>(UTC+04:30) Kabul</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Ashgabat"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Ashgabat" class="expander" data-toggle="collapse">UTC0500Ashgabat</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Ashgabat" class="collapse in">
-        <p><p>(UTC+05:00) Ashgabat</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Chetumal"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Chetumal" class="expander" data-toggle="collapse">UTC0500Chetumal</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Chetumal" class="collapse in">
-        <p><p>(UTC-05:00) Chetumal</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500EasternTimeUSCanada"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500EasternTimeUSCanada" class="expander" data-toggle="collapse">UTC0500EasternTimeUSCanada</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500EasternTimeUSCanada" class="collapse in">
-        <p><p>(UTC-05:00) Eastern Time (US + Canada)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Haiti"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Haiti" class="expander" data-toggle="collapse">UTC0500Haiti</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Haiti" class="collapse in">
-        <p><p>(UTC-05:00) Haiti</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Havana"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Havana" class="expander" data-toggle="collapse">UTC0500Havana</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Havana" class="collapse in">
-        <p><p>(UTC-05:00) Havana</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500IndianaEast"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500IndianaEast" class="expander" data-toggle="collapse">UTC0500IndianaEast</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500IndianaEast" class="collapse in">
-        <p><p>(UTC-05:00) Indiana (East)</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500Qyzylorda"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Qyzylorda" class="expander" data-toggle="collapse">UTC0500Qyzylorda</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500Qyzylorda" class="collapse in">
-        <p><p>(UTC+05:00) Qyzylorda</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0500TurksandCaicos"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500TurksandCaicos" class="expander" data-toggle="collapse">UTC0500TurksandCaicos</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0500TurksandCaicos" class="collapse in">
-        <p><p>(UTC-05:00) Turks and Caicos</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0530Chennai"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0530Chennai" class="expander" data-toggle="collapse">UTC0530Chennai</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0530Chennai" class="collapse in">
-        <p><p>(UTC+05:30) Chennai</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Hovd"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Hovd" class="expander" data-toggle="collapse">UTC0700Hovd</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Hovd" class="collapse in">
-        <p><p>(UTC+07:00) Hovd</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Krasnoyarsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Krasnoyarsk" class="expander" data-toggle="collapse">UTC0700Krasnoyarsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Krasnoyarsk" class="collapse in">
-        <p><p>(UTC+07:00) Krasnoyarsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Novosibirsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Novosibirsk" class="expander" data-toggle="collapse">UTC0700Novosibirsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Novosibirsk" class="collapse in">
-        <p><p>(UTC+07:00) Novosibirsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0700Tomsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Tomsk" class="expander" data-toggle="collapse">UTC0700Tomsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0700Tomsk" class="collapse in">
-        <p><p>(UTC+07:00) Tomsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC08"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC08" class="expander" data-toggle="collapse">UTC08</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC08" class="collapse in">
-        <p><p>UTC-08</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Beijing"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Beijing" class="expander" data-toggle="collapse">UTC0800Beijing</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Beijing" class="collapse in">
-        <p><p>(UTC+08:00) Beijing</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Perth"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Perth" class="expander" data-toggle="collapse">UTC0800Perth</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Perth" class="collapse in">
-        <p><p>(UTC+08:00) Perth</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Taipei"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Taipei" class="expander" data-toggle="collapse">UTC0800Taipei</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Taipei" class="collapse in">
-        <p><p>(UTC+08:00) Taipei</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0800Ulaanbaatar"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Ulaanbaatar" class="expander" data-toggle="collapse">UTC0800Ulaanbaatar</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0800Ulaanbaatar" class="collapse in">
-        <p><p>(UTC+08:00) Ulaanbaatar</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0845Eucla"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0845Eucla" class="expander" data-toggle="collapse">UTC0845Eucla</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0845Eucla" class="collapse in">
-        <p><p>(UTC+08:45) Eucla</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC09"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC09" class="expander" data-toggle="collapse">UTC09</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC09" class="collapse in">
-        <p><p>UTC-09</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Chita"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Chita" class="expander" data-toggle="collapse">UTC0900Chita</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Chita" class="collapse in">
-        <p><p>(UTC+09:00) Chita</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Osaka"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Osaka" class="expander" data-toggle="collapse">UTC0900Osaka</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Osaka" class="collapse in">
-        <p><p>(UTC+09:00) Osaka</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Pyongyang"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Pyongyang" class="expander" data-toggle="collapse">UTC0900Pyongyang</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Pyongyang" class="collapse in">
-        <p><p>(UTC+09:00) Pyongyang</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Seoul"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Seoul" class="expander" data-toggle="collapse">UTC0900Seoul</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Seoul" class="collapse in">
-        <p><p>(UTC+09:00) Seoul</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0900Yakutsk"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Yakutsk" class="expander" data-toggle="collapse">UTC0900Yakutsk</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0900Yakutsk" class="collapse in">
-        <p><p>(UTC+09:00) Yakutsk</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0930Adelaide"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0930Adelaide" class="expander" data-toggle="collapse">UTC0930Adelaide</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0930Adelaide" class="collapse in">
-        <p><p>(UTC+09:30) Adelaide</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC0930Darwin"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0930Darwin" class="expander" data-toggle="collapse">UTC0930Darwin</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC0930Darwin" class="collapse in">
-        <p><p>(UTC+09:30) Darwin</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Brisbane"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Brisbane" class="expander" data-toggle="collapse">UTC1000Brisbane</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Brisbane" class="collapse in">
-        <p><p>(UTC+10:00) Brisbane</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Canberra"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Canberra" class="expander" data-toggle="collapse">UTC1000Canberra</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Canberra" class="collapse in">
-        <p><p>(UTC+10:00) Canberra</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1000Guam"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Guam" class="expander" data-toggle="collapse">UTC1000Guam</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1000Guam" class="collapse in">
-        <p><p>(UTC+10:00) Guam</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC11"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC11" class="expander" data-toggle="collapse">UTC11</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC11" class="collapse in">
-        <p><p>UTC-11</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1200Anadyr"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200Anadyr" class="expander" data-toggle="collapse">UTC1200Anadyr</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200Anadyr" class="collapse in">
-        <p><p>(UTC+12:00) Anadyr</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1200CoordinatedUniversalTime12"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200CoordinatedUniversalTime12" class="expander" data-toggle="collapse">UTC1200CoordinatedUniversalTime12</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200CoordinatedUniversalTime12" class="collapse in">
-        <p><p>(UTC+12:00) Co-ordinated Universal Time+12</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1200Fiji"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200Fiji" class="expander" data-toggle="collapse">UTC1200Fiji</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1200Fiji" class="collapse in">
-        <p><p>(UTC+12:00) Fiji</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1245ChathamIslands"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1245ChathamIslands" class="expander" data-toggle="collapse">UTC1245ChathamIslands</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1245ChathamIslands" class="collapse in">
-        <p><p>(UTC+12:45) Chatham Islands</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1300CoordinatedUniversalTime13"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300CoordinatedUniversalTime13" class="expander" data-toggle="collapse">UTC1300CoordinatedUniversalTime13</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300CoordinatedUniversalTime13" class="collapse in">
-        <p><p>(UTC+13:00) Co-ordinated Universal Time+13</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1300Nukualofa"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300Nukualofa" class="expander" data-toggle="collapse">UTC1300Nukualofa</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300Nukualofa" class="collapse in">
-        <p><p>(UTC+13:00) Nuku'alofa</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1300Samoa"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300Samoa" class="expander" data-toggle="collapse">UTC1300Samoa</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1300Samoa" class="collapse in">
-        <p><p>(UTC+13:00) Samoa</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTC1400KiritimatiIsland"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1400KiritimatiIsland" class="expander" data-toggle="collapse">UTC1400KiritimatiIsland</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTC1400KiritimatiIsland" class="collapse in">
-        <p><p>(UTC+14:00) Kiritimati Island</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_UTCCoordinatedUniversalTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_UTCCoordinatedUniversalTime" class="expander" data-toggle="collapse">UTCCoordinatedUniversalTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_UTCCoordinatedUniversalTime" class="collapse in">
-        <p><p>(UTC) Co-ordinated Universal Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_VladivostokStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_VladivostokStandardTime" class="expander" data-toggle="collapse">VladivostokStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_VladivostokStandardTime" class="collapse in">
-        <p><p>Vladivostok Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_VolgogradStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_VolgogradStandardTime" class="expander" data-toggle="collapse">VolgogradStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_VolgogradStandardTime" class="collapse in">
-        <p><p>Volgograd Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_WCentralAfricaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_WCentralAfricaStandardTime" class="expander" data-toggle="collapse">WCentralAfricaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_WCentralAfricaStandardTime" class="collapse in">
-        <p><p>W. Central Africa Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_WEuropeStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_WEuropeStandardTime" class="expander" data-toggle="collapse">WEuropeStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_WEuropeStandardTime" class="collapse in">
-        <p><p>W. Europe Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Warsaw"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Warsaw" class="expander" data-toggle="collapse">Warsaw</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Warsaw" class="collapse in">
-        <p><p>Warsaw</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_Wellington"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_Wellington" class="expander" data-toggle="collapse">Wellington</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_Wellington" class="collapse in">
-        <p><p>Wellington</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_WestAsiaStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_WestAsiaStandardTime" class="expander" data-toggle="collapse">WestAsiaStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_WestAsiaStandardTime" class="collapse in">
-        <p><p>West Asia Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_WestBankStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_WestBankStandardTime" class="expander" data-toggle="collapse">WestBankStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_WestBankStandardTime" class="collapse in">
-        <p><p>West Bank Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_WestPacificStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_WestPacificStandardTime" class="expander" data-toggle="collapse">WestPacificStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_WestPacificStandardTime" class="collapse in">
-        <p><p>West Pacific Standard Time</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_Teams_EventTimeZone_YukonStandardTime"><a href="#collapsible-PnP_Core_Model_Teams_EventTimeZone_YukonStandardTime" class="expander" data-toggle="collapse">YukonStandardTime</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_Teams_EventTimeZone_YukonStandardTime" class="collapse in">
-        <p><p>Yukon Standard Time</p>
-
-      </div>
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/Enums/EventTimeZone.cs/#L8" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

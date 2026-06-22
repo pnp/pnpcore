@@ -1,399 +1,322 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PnP.Core.Model | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PnP.Core.Model | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Namespace PnP.Core.Model | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace PnP.Core.Model | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                  </div>
-    <h1 id="PnP_Core_Model" data-uid="PnP.Core.Model">Namespace PnP.Core.Model</h1>
+
+        <article data-uid="PnP.Core.Model">
+
+  <h1 id="PnP_Core_Model" data-uid="PnP.Core.Model" class="text-break">Namespace PnP.Core.Model</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+
     <h3 id="classes">
 Classes
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.DataModelCollectionLoadExtensions.html">DataModelCollectionLoadExtensions</a></p>
-          <p><p>Extension methods for <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html">DataModelGetExtensions</a></p>
-          <p><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelProcess</span></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html">DataModelLoadExtensions</a></p>
-          <p><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelLoad</span></p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.FollowDocumentData.html">FollowDocumentData</a></p>
-          <p><p>A follow document request metadata object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.FollowPersonData.html">FollowPersonData</a></p>
-          <p><p>A follow person request metadata object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.FollowSiteData.html">FollowSiteData</a></p>
-          <p><p>A follow site request metadata object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.FollowTagData.html">FollowTagData</a></p>
-          <p><p>A follow tag request metadata object</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html">RequestModuleExtensions</a></p>
-          <p><p>Set of extension methods used to bring request module support</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.TransientDictionary.html">TransientDictionary</a></p>
-          <p><p>Class for tracking Dictionary changes</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.DataModelCollectionLoadExtensions.html">DataModelCollectionLoadExtensions</a></dt>
+      <dd><p>Extension methods for <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html">DataModelGetExtensions</a></dt>
+      <dd><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelProcess</span></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html">DataModelLoadExtensions</a></dt>
+      <dd><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelLoad</span></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.FollowDocumentData.html">FollowDocumentData</a></dt>
+      <dd><p>A follow document request metadata object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.FollowPersonData.html">FollowPersonData</a></dt>
+      <dd><p>A follow person request metadata object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.FollowSiteData.html">FollowSiteData</a></dt>
+      <dd><p>A follow site request metadata object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.FollowTagData.html">FollowTagData</a></dt>
+      <dd><p>A follow tag request metadata object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html">RequestModuleExtensions</a></dt>
+      <dd><p>Set of extension methods used to bring request module support</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.TransientDictionary.html">TransientDictionary</a></dt>
+      <dd><p>Class for tracking Dictionary changes</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IBatchResult.html">IBatchResult</a></p>
-          <p><p>Defines the result of a batch when it is executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IBatchSingleResult.html">IBatchSingleResult</a></p>
-          <p><p>Defines a single result of a batch request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult&lt;T&gt;</a></p>
-          <p><p>Defines the result of a batch when it is executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html">IDataModelCollectionDeleteByGuidId</a></p>
-          <p><p>When implemented it provides a DeleteById method on the collection</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html">IDataModelCollectionDeleteByIntegerId</a></p>
-          <p><p>When implemented it provides a DeleteById method on the collection</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByStringId.html">IDataModelCollectionDeleteByStringId</a></p>
-          <p><p>When implemented it provides a DeleteById method on the collection</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></p>
-          <p><p>Defines the very basic interface for every collection of Domain Model objects which supports explicit load</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelCollection-1.html">IDataModelCollection&lt;TModel&gt;</a></p>
-          <p><p>Defines the very basic interface for every collection of Domain Model objects</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelDelete.html">IDataModelDelete</a></p>
-          <p><p>Defines the delete interface for Domain Model objects that need delete.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelGet-1.html">IDataModelGet&lt;TModel&gt;</a></p>
-          <p><p>Defines the read interface for Domain Model objects that can be read.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelLoad-1.html">IDataModelLoad&lt;TModel&gt;</a></p>
-          <p><p>Defines the read interface for Domain Model objects that can be loaded.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelMappingHandler.html">IDataModelMappingHandler</a></p>
-          <p><p>Interface to the define the basic behavior of Domain Model object
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IBatchResult.html">IBatchResult</a></dt>
+      <dd><p>Defines the result of a batch when it is executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult.html">IBatchSingleResult</a></dt>
+      <dd><p>Defines a single result of a batch request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult&lt;T&gt;</a></dt>
+      <dd><p>Defines the result of a batch when it is executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html">IDataModelCollectionDeleteByGuidId</a></dt>
+      <dd><p>When implemented it provides a DeleteById method on the collection</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html">IDataModelCollectionDeleteByIntegerId</a></dt>
+      <dd><p>When implemented it provides a DeleteById method on the collection</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByStringId.html">IDataModelCollectionDeleteByStringId</a></dt>
+      <dd><p>When implemented it provides a DeleteById method on the collection</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the very basic interface for every collection of Domain Model objects which supports explicit load</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelCollection-1.html">IDataModelCollection&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the very basic interface for every collection of Domain Model objects</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelDelete.html">IDataModelDelete</a></dt>
+      <dd><p>Defines the delete interface for Domain Model objects that need delete.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelGet-1.html">IDataModelGet&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the read interface for Domain Model objects that can be read.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelLoad-1.html">IDataModelLoad&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the read interface for Domain Model objects that can be loaded.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelMappingHandler.html">IDataModelMappingHandler</a></dt>
+      <dd><p>Interface to the define the basic behavior of Domain Model object
 that can be mapped from a JSON response coming out of a REST request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelParent.html">IDataModelParent</a></p>
-          <p><p>Interface to implement parent concept on all model objects</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelSupportingGetChanges.html">IDataModelSupportingGetChanges</a></p>
-          <p><p>Defines the interface for Domain Model objects that can obtain a change log.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelUpdate.html">IDataModelUpdate</a></p>
-          <p><p>Defines the update interface for Domain Model objects that need update.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelWithContext.html">IDataModelWithContext</a></p>
-          <p><p>Interface to implement PnPContext concept on all model objects</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModelWithKey.html">IDataModelWithKey</a></p>
-          <p><p>Defines the basic behavior for a Domain Model object with an identifying key</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IDataModel-1.html">IDataModel&lt;TModel&gt;</a></p>
-          <p><p>Defines the very basic interface for every Domain Model object.
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelParent.html">IDataModelParent</a></dt>
+      <dd><p>Interface to implement parent concept on all model objects</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelSupportingGetChanges.html">IDataModelSupportingGetChanges</a></dt>
+      <dd><p>Defines the interface for Domain Model objects that can obtain a change log.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelUpdate.html">IDataModelUpdate</a></dt>
+      <dd><p>Defines the update interface for Domain Model objects that need update.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelWithContext.html">IDataModelWithContext</a></dt>
+      <dd><p>Interface to implement PnPContext concept on all model objects</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModelWithKey.html">IDataModelWithKey</a></dt>
+      <dd><p>Defines the basic behavior for a Domain Model object with an identifying key</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IDataModel-1.html">IDataModel&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the very basic interface for every Domain Model object.
 Add methods are implemented in their respective model interfaces</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult.html">IEnumerableBatchResult</a></p>
-          <p><p>Provides the result of a batch when is executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult&lt;T&gt;</a></p>
-          <p><p>Provides the result of a batch when is executed</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IExpandoDataModel.html">IExpandoDataModel</a></p>
-          <p><p>Public interface to define an object extensible through a dictionary of properties</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IManageableCollection.html">IManageableCollection</a></p>
-          <p><p>Defines the behavior of a collection that can be managed
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult.html">IEnumerableBatchResult</a></dt>
+      <dd><p>Provides the result of a batch when is executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult&lt;T&gt;</a></dt>
+      <dd><p>Provides the result of a batch when is executed</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IExpandoDataModel.html">IExpandoDataModel</a></dt>
+      <dd><p>Public interface to define an object extensible through a dictionary of properties</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IManageableCollection.html">IManageableCollection</a></dt>
+      <dd><p>Defines the behavior of a collection that can be managed
 with untyped prototype methods</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IManageableCollection-1.html">IManageableCollection&lt;TModel&gt;</a></p>
-          <p><p>Defines the behavior of a collection that can be managed
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IManageableCollection-1.html">IManageableCollection&lt;TModel&gt;</a></dt>
+      <dd><p>Defines the behavior of a collection that can be managed
 with fully typed prototype methods</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IMetadataExtensible.html">IMetadataExtensible</a></p>
-          <p><p>Defines the very basic interface for every object that is provided with metadata
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IMetadataExtensible.html">IMetadataExtensible</a></dt>
+      <dd><p>Defines the very basic interface for every object that is provided with metadata
 eventually with deferred loading</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IQueryableDataModel.html">IQueryableDataModel</a></p>
-          <p><p>Interface describing a linq queryable model</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IRequestable.html">IRequestable</a></p>
-          <p><p>Defines the very basic interface for every object that is somehow requestable
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IQueryableDataModel.html">IQueryableDataModel</a></dt>
+      <dd><p>Interface describing a linq queryable model</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IRequestable.html">IRequestable</a></dt>
+      <dd><p>Defines the very basic interface for every object that is somehow requestable
 through an external querying system</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.IRequestableCollection.html">IRequestableCollection</a></p>
-          <p><p>Defines the very basic interface for every collection that is somehow requestable
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.IRequestableCollection.html">IRequestableCollection</a></dt>
+      <dd><p>Defines the very basic interface for every collection that is somehow requestable
 through an external querying system</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.ISupportModules-1.html">ISupportModules&lt;TModel&gt;</a></p>
-          <p><p>Interface used to attach module support</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.ISupportQuery-1.html">ISupportQuery&lt;TResult&gt;</a></p>
-          <p><p>Object supports explicit Query</p>
-
-        </td>
-      </tr>
-    </table>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.ISupportModules-1.html">ISupportModules&lt;TModel&gt;</a></dt>
+      <dd><p>Interface used to attach module support</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.ISupportQuery-1.html">ISupportQuery&lt;TResult&gt;</a></dt>
+      <dd><p>Object supports explicit Query</p>
+</dd>
+    </dl>
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,102 +1,133 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class PnPContext | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class PnPContext | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Class PnPContext | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PnPContext | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="PnP Context class...the glue between the model and the data stores">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services.PnPContext">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L22" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Services_PnPContext" data-uid="PnP.Core.Services.PnPContext">Class PnPContext</h1>
-  <div class="markdown level0 summary"><p>PnP Context class...the glue between the model and the data stores</p>
-</div>
-  <div class="markdown level0 conceptual"></div>
 
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><span class="xref">PnPContext</span></div>
+        <article data-uid="PnP.Core.Services.PnPContext">
+
+
+
+  <h1 id="PnP_Core_Services_PnPContext" data-uid="PnP.Core.Services.PnPContext" class="text-break">
+Class PnPContext  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>PnP Context class...the glue between the model and the data stores</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PnPContext : IPnPContext, IDisposable</code></pre>
   </div>
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">PnPContext</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html">IPnPContext</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
@@ -118,1915 +149,11 @@
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Services.html">Services</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Services_PnPContext_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public class PnPContext : IPnPContext, IDisposable</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_AuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.AuthenticationProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L173" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_AuthenticationProvider_" data-uid="PnP.Core.Services.PnPContext.AuthenticationProvider*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_AuthenticationProvider" data-uid="PnP.Core.Services.PnPContext.AuthenticationProvider"><a href="#collapsible-PnP_Core_Services_PnPContext_AuthenticationProvider" class="expander" data-toggle="collapse">AuthenticationProvider</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_AuthenticationProvider" class="collapse in">
-  <div class="markdown level1 summary"><p>Connected authentication provider</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IAuthenticationProvider AuthenticationProvider { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_AuthenticationProvider">IPnPContext.AuthenticationProvider</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_AzureADLoginAuthority.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.AzureADLoginAuthority%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L198" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_AzureADLoginAuthority_" data-uid="PnP.Core.Services.PnPContext.AzureADLoginAuthority*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_AzureADLoginAuthority" data-uid="PnP.Core.Services.PnPContext.AzureADLoginAuthority"><a href="#collapsible-PnP_Core_Services_PnPContext_AzureADLoginAuthority" class="expander" data-toggle="collapse">AzureADLoginAuthority</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_AzureADLoginAuthority" class="collapse in">
-  <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public string AzureADLoginAuthority { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_AzureADLoginAuthority">IPnPContext.AzureADLoginAuthority</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_ContentTypeHub.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.ContentTypeHub%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L433" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_ContentTypeHub_" data-uid="PnP.Core.Services.PnPContext.ContentTypeHub*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_ContentTypeHub" data-uid="PnP.Core.Services.PnPContext.ContentTypeHub"><a href="#collapsible-PnP_Core_Services_PnPContext_ContentTypeHub" class="expander" data-toggle="collapse">ContentTypeHub</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_ContentTypeHub" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the ContentTypeHub object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IContentTypeHub ContentTypeHub { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IContentTypeHub.html">IContentTypeHub</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_ContentTypeHub">IPnPContext.ContentTypeHub</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_CurrentBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.CurrentBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L315" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_CurrentBatch_" data-uid="PnP.Core.Services.PnPContext.CurrentBatch*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_CurrentBatch" data-uid="PnP.Core.Services.PnPContext.CurrentBatch"><a href="#collapsible-PnP_Core_Services_PnPContext_CurrentBatch" class="expander" data-toggle="collapse">CurrentBatch</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_CurrentBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Current batch, used for implicit batching</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Batch CurrentBatch { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_CurrentBatch">IPnPContext.CurrentBatch</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Environment.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Environment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Environment_" data-uid="PnP.Core.Services.PnPContext.Environment*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Environment" data-uid="PnP.Core.Services.PnPContext.Environment"><a href="#collapsible-PnP_Core_Services_PnPContext_Environment" class="expander" data-toggle="collapse">Environment</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Environment" class="collapse in">
-  <div class="markdown level1 summary"><p>Returns the used Microsoft 365 cloud environment</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Microsoft365Environment? Environment { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a>?
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Environment">IPnPContext.Environment</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_GraphAlwaysUseBeta.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.GraphAlwaysUseBeta%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L281" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_GraphAlwaysUseBeta_" data-uid="PnP.Core.Services.PnPContext.GraphAlwaysUseBeta*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_GraphAlwaysUseBeta" data-uid="PnP.Core.Services.PnPContext.GraphAlwaysUseBeta"><a href="#collapsible-PnP_Core_Services_PnPContext_GraphAlwaysUseBeta" class="expander" data-toggle="collapse">GraphAlwaysUseBeta</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_GraphAlwaysUseBeta" class="collapse in">
-  <div class="markdown level1 summary"><p>If true than all requests to Microsoft Graph use the beta endpoint</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool GraphAlwaysUseBeta { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_GraphAlwaysUseBeta">IPnPContext.GraphAlwaysUseBeta</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_GraphCanUseBeta.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.GraphCanUseBeta%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L286" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_GraphCanUseBeta_" data-uid="PnP.Core.Services.PnPContext.GraphCanUseBeta*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_GraphCanUseBeta" data-uid="PnP.Core.Services.PnPContext.GraphCanUseBeta"><a href="#collapsible-PnP_Core_Services_PnPContext_GraphCanUseBeta" class="expander" data-toggle="collapse">GraphCanUseBeta</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_GraphCanUseBeta" class="collapse in">
-  <div class="markdown level1 summary"><p>If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool GraphCanUseBeta { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_GraphCanUseBeta">IPnPContext.GraphCanUseBeta</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_GraphClient.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.GraphClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L183" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_GraphClient_" data-uid="PnP.Core.Services.PnPContext.GraphClient*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_GraphClient" data-uid="PnP.Core.Services.PnPContext.GraphClient"><a href="#collapsible-PnP_Core_Services_PnPContext_GraphClient" class="expander" data-toggle="collapse">GraphClient</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_GraphClient" class="collapse in">
-  <div class="markdown level1 summary"><p>Connected Microsoft Graph client</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public MicrosoftGraphClient GraphClient { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.MicrosoftGraphClient.html">MicrosoftGraphClient</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_GraphClient">IPnPContext.GraphClient</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_GraphFirst.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.GraphFirst%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L276" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_GraphFirst_" data-uid="PnP.Core.Services.PnPContext.GraphFirst*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_GraphFirst" data-uid="PnP.Core.Services.PnPContext.GraphFirst"><a href="#collapsible-PnP_Core_Services_PnPContext_GraphFirst" class="expander" data-toggle="collapse">GraphFirst</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_GraphFirst" class="collapse in">
-  <div class="markdown level1 summary"><p>Controls whether the library will try to use Microsoft Graph over REST whenever that's defined in the model</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool GraphFirst { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_GraphFirst">IPnPContext.GraphFirst</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Group.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Group%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L385" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Group_" data-uid="PnP.Core.Services.PnPContext.Group*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Group" data-uid="PnP.Core.Services.PnPContext.Group"><a href="#collapsible-PnP_Core_Services_PnPContext_Group" class="expander" data-toggle="collapse">Group</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Group" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Microsoft 365 Group Object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IGraphGroup Group { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.IGraphGroup.html">IGraphGroup</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Group">IPnPContext.Group</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_HasPendingRequests.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.HasPendingRequests%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L331" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_HasPendingRequests_" data-uid="PnP.Core.Services.PnPContext.HasPendingRequests*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_HasPendingRequests" data-uid="PnP.Core.Services.PnPContext.HasPendingRequests"><a href="#collapsible-PnP_Core_Services_PnPContext_HasPendingRequests" class="expander" data-toggle="collapse">HasPendingRequests</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_HasPendingRequests" class="collapse in">
-  <div class="markdown level1 summary"><p>Are there pending requests to execute (in the case of batching)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool HasPendingRequests { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_HasPendingRequests">IPnPContext.HasPendingRequests</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Logger.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Logger%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L168" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Logger_" data-uid="PnP.Core.Services.PnPContext.Logger*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Logger" data-uid="PnP.Core.Services.PnPContext.Logger"><a href="#collapsible-PnP_Core_Services_PnPContext_Logger" class="expander" data-toggle="collapse">Logger</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Logger" class="collapse in">
-  <div class="markdown level1 summary"><p>Connected logger</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ILogger Logger { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Logger">IPnPContext.Logger</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Me.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Me%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L421" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Me_" data-uid="PnP.Core.Services.PnPContext.Me*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Me" data-uid="PnP.Core.Services.PnPContext.Me"><a href="#collapsible-PnP_Core_Services_PnPContext_Me" class="expander" data-toggle="collapse">Me</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Me" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Me object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IMe Me { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Me.IMe.html">IMe</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Me">IPnPContext.Me</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_MicrosoftGraphAuthority.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.MicrosoftGraphAuthority%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L193" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_MicrosoftGraphAuthority_" data-uid="PnP.Core.Services.PnPContext.MicrosoftGraphAuthority*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.PnPContext.MicrosoftGraphAuthority"><a href="#collapsible-PnP_Core_Services_PnPContext_MicrosoftGraphAuthority" class="expander" data-toggle="collapse">MicrosoftGraphAuthority</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_MicrosoftGraphAuthority" class="collapse in">
-  <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public string MicrosoftGraphAuthority { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_MicrosoftGraphAuthority">IPnPContext.MicrosoftGraphAuthority</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Properties.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Properties%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L203" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Properties_" data-uid="PnP.Core.Services.PnPContext.Properties*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Properties" data-uid="PnP.Core.Services.PnPContext.Properties"><a href="#collapsible-PnP_Core_Services_PnPContext_Properties" class="expander" data-toggle="collapse">Properties</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Properties" class="collapse in">
-  <div class="markdown level1 summary"><p>Collection for custom properties that you want to attach to a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IDictionary&lt;string, object&gt; Properties { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Properties">IPnPContext.Properties</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_RestClient.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.RestClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_RestClient_" data-uid="PnP.Core.Services.PnPContext.RestClient*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_RestClient" data-uid="PnP.Core.Services.PnPContext.RestClient"><a href="#collapsible-PnP_Core_Services_PnPContext_RestClient" class="expander" data-toggle="collapse">RestClient</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_RestClient" class="collapse in">
-  <div class="markdown level1 summary"><p>Connected SharePoint REST client</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public SharePointRestClient RestClient { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.SharePointRestClient.html">SharePointRestClient</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_RestClient">IPnPContext.RestClient</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Site.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Site%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L354" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Site_" data-uid="PnP.Core.Services.PnPContext.Site*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Site" data-uid="PnP.Core.Services.PnPContext.Site"><a href="#collapsible-PnP_Core_Services_PnPContext_Site" class="expander" data-toggle="collapse">Site</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Site" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Site Object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ISite Site { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ISite.html">ISite</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Site">IPnPContext.Site</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Social.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Social%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L409" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Social_" data-uid="PnP.Core.Services.PnPContext.Social*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Social" data-uid="PnP.Core.Services.PnPContext.Social"><a href="#collapsible-PnP_Core_Services_PnPContext_Social" class="expander" data-toggle="collapse">Social</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Social" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the social-related APIs</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ISocial Social { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ISocial.html">ISocial</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Social">IPnPContext.Social</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Team.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Team%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L373" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Team_" data-uid="PnP.Core.Services.PnPContext.Team*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Team" data-uid="PnP.Core.Services.PnPContext.Team"><a href="#collapsible-PnP_Core_Services_PnPContext_Team" class="expander" data-toggle="collapse">Team</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Team" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Team Object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ITeam Team { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Teams.ITeam.html">ITeam</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Team">IPnPContext.Team</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_TermStore.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.TermStore%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L397" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_TermStore_" data-uid="PnP.Core.Services.PnPContext.TermStore*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_TermStore" data-uid="PnP.Core.Services.PnPContext.TermStore"><a href="#collapsible-PnP_Core_Services_PnPContext_TermStore" class="expander" data-toggle="collapse">TermStore</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_TermStore" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Microsoft 365 TermStore</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ITermStore TermStore { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ITermStore.html">ITermStore</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_TermStore">IPnPContext.TermStore</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Uri.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Uri%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L163" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Uri_" data-uid="PnP.Core.Services.PnPContext.Uri*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Uri" data-uid="PnP.Core.Services.PnPContext.Uri"><a href="#collapsible-PnP_Core_Services_PnPContext_Uri" class="expander" data-toggle="collapse">Uri</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Uri" class="collapse in">
-  <div class="markdown level1 summary"><p>Uri of the SharePoint site we're working against</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Uri Uri { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Uri">IPnPContext.Uri</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Web.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Web%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L342" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Web_" data-uid="PnP.Core.Services.PnPContext.Web*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Web" data-uid="PnP.Core.Services.PnPContext.Web"><a href="#collapsible-PnP_Core_Services_PnPContext_Web" class="expander" data-toggle="collapse">Web</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Web" class="collapse in">
-  <div class="markdown level1 summary"><p>Entry point for the Web Object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public IWeb Web { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Web">IPnPContext.Web</a></div>
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Clone.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Clone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L518" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Clone" data-uid="PnP.Core.Services.PnPContext.Clone"><a href="#collapsible-PnP_Core_Services_PnPContext_Clone" class="expander" data-toggle="collapse">Clone()</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Clone" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public PnPContext Clone()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Clone">IPnPContext.Clone()</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Clone_System_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Clone(System.Guid)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L603" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Clone_System_Guid_" data-uid="PnP.Core.Services.PnPContext.Clone(System.Guid)"><a href="#collapsible-PnP_Core_Services_PnPContext_Clone_System_Guid_" class="expander" data-toggle="collapse">Clone(Guid)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Clone_System_Guid_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public PnPContext Clone(Guid groupId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>Id of the other Microsoft 365 group to create a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Clone_System_Guid_">IPnPContext.Clone(Guid)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Clone_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Clone(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L537" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Clone_System_String_" data-uid="PnP.Core.Services.PnPContext.Clone(System.String)"><a href="#collapsible-PnP_Core_Services_PnPContext_Clone_System_String_" class="expander" data-toggle="collapse">Clone(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Clone_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public PnPContext Clone(string name)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the SPOContext configuration to use</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the request config</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Clone_System_String_">IPnPContext.Clone(string)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Clone_System_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Clone(System.Uri)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L568" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Clone_System_Uri_" data-uid="PnP.Core.Services.PnPContext.Clone(System.Uri)"><a href="#collapsible-PnP_Core_Services_PnPContext_Clone_System_Uri_" class="expander" data-toggle="collapse">Clone(Uri)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Clone_System_Uri_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public PnPContext Clone(Uri uri)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">uri</span>
-        <p><p>Uri of the other SharePoint site</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Clone_System_Uri_">IPnPContext.Clone(Uri)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_CloneAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.CloneAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L527" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_CloneAsync" data-uid="PnP.Core.Services.PnPContext.CloneAsync"><a href="#collapsible-PnP_Core_Services_PnPContext_CloneAsync" class="expander" data-toggle="collapse">CloneAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_CloneAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;PnPContext&gt; CloneAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_CloneAsync">IPnPContext.CloneAsync()</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_CloneAsync_System_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.CloneAsync(System.Guid)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L613" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_CloneAsync_System_Guid_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.Guid)"><a href="#collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_Guid_" class="expander" data-toggle="collapse">CloneAsync(Guid)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_Guid_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;PnPContext&gt; CloneAsync(Guid groupId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">groupId</span>
-        <p><p>Id of the other Microsoft 365 group to create a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_CloneAsync_System_Guid_">IPnPContext.CloneAsync(Guid)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_CloneAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.CloneAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L547" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_CloneAsync_System_String_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.String)"><a href="#collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_String_" class="expander" data-toggle="collapse">CloneAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;PnPContext&gt; CloneAsync(string name)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">name</span>
-        <p><p>The name of the SPOContext configuration to use</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the request config</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_CloneAsync_System_String_">IPnPContext.CloneAsync(string)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_CloneAsync_System_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.CloneAsync(System.Uri)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L578" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_CloneAsync_System_Uri_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.Uri)"><a href="#collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_Uri_" class="expander" data-toggle="collapse">CloneAsync(Uri)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_CloneAsync_System_Uri_" class="collapse in">
-  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;PnPContext&gt; CloneAsync(Uri uri)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">uri</span>
-        <p><p>Uri of the other SharePoint site</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_CloneAsync_System_Uri_">IPnPContext.CloneAsync(Uri)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Dispose.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L884" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Dispose_" data-uid="PnP.Core.Services.PnPContext.Dispose*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Dispose" data-uid="PnP.Core.Services.PnPContext.Dispose"><a href="#collapsible-PnP_Core_Services_PnPContext_Dispose" class="expander" data-toggle="collapse">Dispose()</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Dispose" class="collapse in">
-  <div class="markdown level1 summary"><p>Disposes this <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public void Dispose()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">IDisposable.Dispose()</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L894" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Dispose_" data-uid="PnP.Core.Services.PnPContext.Dispose*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Dispose_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Dispose(System.Boolean)"><a href="#collapsible-PnP_Core_Services_PnPContext_Dispose_System_Boolean_" class="expander" data-toggle="collapse">Dispose(bool)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Dispose_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"><p>Disposes this <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">protected virtual void Dispose(bool disposing)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">disposing</span>
-        <p><p>Do we need to dispose resources</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L509" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Execute_" data-uid="PnP.Core.Services.PnPContext.Execute*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)"><a href="#collapsible-PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_" class="expander" data-toggle="collapse">Execute(Batch, bool)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to execute a given batch</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public List&lt;BatchResult&gt; Execute(Batch batch, bool throwOnError = true)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to execute</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">throwOnError</span>
-        <p><p>Throw an exception on the first encountered error in the batch</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;
-        <p><p>The asynchronous task that will be executed</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_">IPnPContext.Execute(Batch, bool)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_Execute_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.Execute(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L498" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_Execute_" data-uid="PnP.Core.Services.PnPContext.Execute*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_Execute_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Execute(System.Boolean)"><a href="#collapsible-PnP_Core_Services_PnPContext_Execute_System_Boolean_" class="expander" data-toggle="collapse">Execute(bool)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_Execute_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to execute the current batch</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public List&lt;BatchResult&gt; Execute(bool throwOnError = true)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">throwOnError</span>
-        <p><p>Throw an exception on the first encountered error in the batch</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;
-        <p><p>The asynchronous task that will be executed</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Execute_System_Boolean_">IPnPContext.Execute(bool)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L482" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_ExecuteAsync_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch,System.Boolean)"><a href="#collapsible-PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_" class="expander" data-toggle="collapse">ExecuteAsync(Batch, bool)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to execute a given batch</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;List&lt;BatchResult&gt;&gt; ExecuteAsync(Batch batch, bool throwOnError = true)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to execute</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">throwOnError</span>
-        <p><p>Throw an exception on the first encountered error in the batch</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;&gt;
-        <p><p>The asynchronous task that will be executed</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_">IPnPContext.ExecuteAsync(Batch, bool)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L470" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_ExecuteAsync_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)"><a href="#collapsible-PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_" class="expander" data-toggle="collapse">ExecuteAsync(bool)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to execute the current batch</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Task&lt;List&lt;BatchResult&gt;&gt; ExecuteAsync(bool throwOnError = true)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">throwOnError</span>
-        <p><p>Throw an exception on the first encountered error in the batch</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;&gt;
-        <p><p>The asynchronous task that will be executed</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_ExecuteAsync_System_Boolean_">IPnPContext.ExecuteAsync(bool)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_GetLongRunningOperation_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.GetLongRunningOperation(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L460" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_GetLongRunningOperation_" data-uid="PnP.Core.Services.PnPContext.GetLongRunningOperation*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_GetLongRunningOperation_System_String_" data-uid="PnP.Core.Services.PnPContext.GetLongRunningOperation(System.String)"><a href="#collapsible-PnP_Core_Services_PnPContext_GetLongRunningOperation_System_String_" class="expander" data-toggle="collapse">GetLongRunningOperation(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_GetLongRunningOperation_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets an ongoing Graph long-running operation.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public ILongRunningOperation GetLongRunningOperation(string location)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">location</span>
-        <p><p>The location of the operation</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ILongRunningOperation.html">ILongRunningOperation</a>
-        <p><p>An <a class="xref" href="PnP.Core.Model.SharePoint.ILongRunningOperation.html">ILongRunningOperation</a> associated with the location</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_GetLongRunningOperation_System_String_">IPnPContext.GetLongRunningOperation(string)</a></div>
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_PnPContext_NewBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Services.PnPContext.NewBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L450" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Services_PnPContext_NewBatch_" data-uid="PnP.Core.Services.PnPContext.NewBatch*"></a>
-
-  <h4 id="PnP_Core_Services_PnPContext_NewBatch" data-uid="PnP.Core.Services.PnPContext.NewBatch"><a href="#collapsible-PnP_Core_Services_PnPContext_NewBatch" class="expander" data-toggle="collapse">NewBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Services_PnPContext_NewBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Creates a new batch</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public Batch NewBatch()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_NewBatch">IPnPContext.NewBatch()</a></div>
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetMicrosoft365Admin_PnP_Core_Services_IPnPContext_">PnPContextExtensions.GetMicrosoft365Admin(IPnPContext)</a>
   </div>
@@ -2045,33 +172,1340 @@
   <div>
       <a class="xref" href="PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetTenantAppManager_PnP_Core_Services_IPnPContext_">PnPContextExtensions.GetTenantAppManager(IPnPContext)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Services_PnPContext_AuthenticationProvider_" data-uid="PnP.Core.Services.PnPContext.AuthenticationProvider*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_AuthenticationProvider" data-uid="PnP.Core.Services.PnPContext.AuthenticationProvider">
+  AuthenticationProvider
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Connected authentication provider</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IAuthenticationProvider AuthenticationProvider { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_AzureADLoginAuthority_" data-uid="PnP.Core.Services.PnPContext.AzureADLoginAuthority*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_AzureADLoginAuthority" data-uid="PnP.Core.Services.PnPContext.AzureADLoginAuthority">
+  AzureADLoginAuthority
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AzureADLoginAuthority { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_ContentTypeHub_" data-uid="PnP.Core.Services.PnPContext.ContentTypeHub*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_ContentTypeHub" data-uid="PnP.Core.Services.PnPContext.ContentTypeHub">
+  ContentTypeHub
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L433"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the ContentTypeHub object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IContentTypeHub ContentTypeHub { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IContentTypeHub.html">IContentTypeHub</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_CurrentBatch_" data-uid="PnP.Core.Services.PnPContext.CurrentBatch*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_CurrentBatch" data-uid="PnP.Core.Services.PnPContext.CurrentBatch">
+  CurrentBatch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Current batch, used for implicit batching</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Batch CurrentBatch { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Environment_" data-uid="PnP.Core.Services.PnPContext.Environment*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Environment" data-uid="PnP.Core.Services.PnPContext.Environment">
+  Environment
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the used Microsoft 365 cloud environment</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Microsoft365Environment? Environment { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.Microsoft365Environment.html">Microsoft365Environment</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_GraphAlwaysUseBeta_" data-uid="PnP.Core.Services.PnPContext.GraphAlwaysUseBeta*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_GraphAlwaysUseBeta" data-uid="PnP.Core.Services.PnPContext.GraphAlwaysUseBeta">
+  GraphAlwaysUseBeta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>If true than all requests to Microsoft Graph use the beta endpoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GraphAlwaysUseBeta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_GraphCanUseBeta_" data-uid="PnP.Core.Services.PnPContext.GraphCanUseBeta*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_GraphCanUseBeta" data-uid="PnP.Core.Services.PnPContext.GraphCanUseBeta">
+  GraphCanUseBeta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GraphCanUseBeta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_GraphClient_" data-uid="PnP.Core.Services.PnPContext.GraphClient*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_GraphClient" data-uid="PnP.Core.Services.PnPContext.GraphClient">
+  GraphClient
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Connected Microsoft Graph client</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MicrosoftGraphClient GraphClient { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.MicrosoftGraphClient.html">MicrosoftGraphClient</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_GraphFirst_" data-uid="PnP.Core.Services.PnPContext.GraphFirst*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_GraphFirst" data-uid="PnP.Core.Services.PnPContext.GraphFirst">
+  GraphFirst
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Controls whether the library will try to use Microsoft Graph over REST whenever that's defined in the model</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GraphFirst { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Group_" data-uid="PnP.Core.Services.PnPContext.Group*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Group" data-uid="PnP.Core.Services.PnPContext.Group">
+  Group
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L385"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Microsoft 365 Group Object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IGraphGroup Group { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.IGraphGroup.html">IGraphGroup</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_HasPendingRequests_" data-uid="PnP.Core.Services.PnPContext.HasPendingRequests*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_HasPendingRequests" data-uid="PnP.Core.Services.PnPContext.HasPendingRequests">
+  HasPendingRequests
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Are there pending requests to execute (in the case of batching)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasPendingRequests { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Logger_" data-uid="PnP.Core.Services.PnPContext.Logger*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Logger" data-uid="PnP.Core.Services.PnPContext.Logger">
+  Logger
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Connected logger</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILogger Logger { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Me_" data-uid="PnP.Core.Services.PnPContext.Me*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Me" data-uid="PnP.Core.Services.PnPContext.Me">
+  Me
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L421"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Me object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMe Me { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Me.IMe.html">IMe</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_MicrosoftGraphAuthority_" data-uid="PnP.Core.Services.PnPContext.MicrosoftGraphAuthority*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.PnPContext.MicrosoftGraphAuthority">
+  MicrosoftGraphAuthority
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string MicrosoftGraphAuthority { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Properties_" data-uid="PnP.Core.Services.PnPContext.Properties*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Properties" data-uid="PnP.Core.Services.PnPContext.Properties">
+  Properties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Collection for custom properties that you want to attach to a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; Properties { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_RestClient_" data-uid="PnP.Core.Services.PnPContext.RestClient*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_RestClient" data-uid="PnP.Core.Services.PnPContext.RestClient">
+  RestClient
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Connected SharePoint REST client</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SharePointRestClient RestClient { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.SharePointRestClient.html">SharePointRestClient</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Site_" data-uid="PnP.Core.Services.PnPContext.Site*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Site" data-uid="PnP.Core.Services.PnPContext.Site">
+  Site
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Site Object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISite Site { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ISite.html">ISite</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Social_" data-uid="PnP.Core.Services.PnPContext.Social*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Social" data-uid="PnP.Core.Services.PnPContext.Social">
+  Social
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the social-related APIs</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISocial Social { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ISocial.html">ISocial</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Team_" data-uid="PnP.Core.Services.PnPContext.Team*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Team" data-uid="PnP.Core.Services.PnPContext.Team">
+  Team
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Team Object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITeam Team { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Teams.ITeam.html">ITeam</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_TermStore_" data-uid="PnP.Core.Services.PnPContext.TermStore*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_TermStore" data-uid="PnP.Core.Services.PnPContext.TermStore">
+  TermStore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L397"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Microsoft 365 TermStore</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITermStore TermStore { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ITermStore.html">ITermStore</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Uri_" data-uid="PnP.Core.Services.PnPContext.Uri*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Uri" data-uid="PnP.Core.Services.PnPContext.Uri">
+  Uri
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Uri of the SharePoint site we're working against</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Uri { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Web_" data-uid="PnP.Core.Services.PnPContext.Web*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Web" data-uid="PnP.Core.Services.PnPContext.Web">
+  Web
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for the Web Object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IWeb Web { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IWeb.html">IWeb</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Clone" data-uid="PnP.Core.Services.PnPContext.Clone">
+  Clone()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L518"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PnPContext Clone()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Clone_System_Guid_" data-uid="PnP.Core.Services.PnPContext.Clone(System.Guid)">
+  Clone(Guid)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L603"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PnPContext Clone(Guid groupId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>Id of the other Microsoft 365 group to create a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Clone_System_String_" data-uid="PnP.Core.Services.PnPContext.Clone(System.String)">
+  Clone(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PnPContext Clone(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the SPOContext configuration to use</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the request config</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Clone_" data-uid="PnP.Core.Services.PnPContext.Clone*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Clone_System_Uri_" data-uid="PnP.Core.Services.PnPContext.Clone(System.Uri)">
+  Clone(Uri)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PnPContext Clone(Uri uri)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uri</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the other SharePoint site</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_CloneAsync" data-uid="PnP.Core.Services.PnPContext.CloneAsync">
+  CloneAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L527"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;PnPContext&gt; CloneAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_CloneAsync_System_Guid_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.Guid)">
+  CloneAsync(Guid)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L613"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;PnPContext&gt; CloneAsync(Guid groupId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groupId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>Id of the other Microsoft 365 group to create a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_CloneAsync_System_String_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.String)">
+  CloneAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L547"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;PnPContext&gt; CloneAsync(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The name of the SPOContext configuration to use</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the request config</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_CloneAsync_" data-uid="PnP.Core.Services.PnPContext.CloneAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_CloneAsync_System_Uri_" data-uid="PnP.Core.Services.PnPContext.CloneAsync(System.Uri)">
+  CloneAsync(Uri)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L578"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;PnPContext&gt; CloneAsync(Uri uri)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uri</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the other SharePoint site</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p>New <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Dispose_" data-uid="PnP.Core.Services.PnPContext.Dispose*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Dispose" data-uid="PnP.Core.Services.PnPContext.Dispose">
+  Dispose()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L884"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Disposes this <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Dispose_" data-uid="PnP.Core.Services.PnPContext.Dispose*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Dispose_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Dispose(System.Boolean)">
+  Dispose(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L894"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Disposes this <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>disposing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Do we need to dispose resources</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Execute_" data-uid="PnP.Core.Services.PnPContext.Execute*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)">
+  Execute(Batch, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to execute a given batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;BatchResult&gt; Execute(Batch batch, bool throwOnError = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to execute</p>
+</dd>
+    <dt><code>throwOnError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Throw an exception on the first encountered error in the batch</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;</dt>
+    <dd><p>The asynchronous task that will be executed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_Execute_" data-uid="PnP.Core.Services.PnPContext.Execute*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_Execute_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.Execute(System.Boolean)">
+  Execute(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L498"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to execute the current batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;BatchResult&gt; Execute(bool throwOnError = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>throwOnError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Throw an exception on the first encountered error in the batch</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;</dt>
+    <dd><p>The asynchronous task that will be executed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_ExecuteAsync_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch,System.Boolean)">
+  ExecuteAsync(Batch, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L482"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to execute a given batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;List&lt;BatchResult&gt;&gt; ExecuteAsync(Batch batch, bool throwOnError = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to execute</p>
+</dd>
+    <dt><code>throwOnError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Throw an exception on the first encountered error in the batch</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;&gt;</dt>
+    <dd><p>The asynchronous task that will be executed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_ExecuteAsync_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_" data-uid="PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)">
+  ExecuteAsync(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L470"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to execute the current batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;List&lt;BatchResult&gt;&gt; ExecuteAsync(bool throwOnError = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>throwOnError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Throw an exception on the first encountered error in the batch</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a>&gt;&gt;</dt>
+    <dd><p>The asynchronous task that will be executed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_GetLongRunningOperation_" data-uid="PnP.Core.Services.PnPContext.GetLongRunningOperation*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_GetLongRunningOperation_System_String_" data-uid="PnP.Core.Services.PnPContext.GetLongRunningOperation(System.String)">
+  GetLongRunningOperation(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L460"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an ongoing Graph long-running operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILongRunningOperation GetLongRunningOperation(string location)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>location</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The location of the operation</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ILongRunningOperation.html">ILongRunningOperation</a></dt>
+    <dd><p>An <a class="xref" href="PnP.Core.Model.SharePoint.ILongRunningOperation.html">ILongRunningOperation</a> associated with the location</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Services_PnPContext_NewBatch_" data-uid="PnP.Core.Services.PnPContext.NewBatch*"></a>
+
+  <h3 id="PnP_Core_Services_PnPContext_NewBatch" data-uid="PnP.Core.Services.PnPContext.NewBatch">
+  NewBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L450"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Batch NewBatch()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPContext.cs/#L22" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

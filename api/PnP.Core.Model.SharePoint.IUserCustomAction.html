@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IUserCustomAction | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IUserCustomAction | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IUserCustomAction | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IUserCustomAction | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface to define a UserCustomAction object">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L8" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IUserCustomAction" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction">Interface IUserCustomAction</h1>
-  <div class="markdown level0 summary"><p>Public interface to define a UserCustomAction object</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IUserCustomAction">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IUserCustomAction" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction" class="text-break">
+Interface IUserCustomAction  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface to define a UserCustomAction object</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IUserCustomAction : IDataModel&lt;IUserCustomAction&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IUserCustomAction&gt;, IDataModelGet&lt;IUserCustomAction&gt;, IDataModelLoad&lt;IUserCustomAction&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IUserCustomAction&gt;.Requested</a>
     </div>
@@ -185,950 +207,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IUserCustomAction_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IUserCustomAction : IDataModel&lt;IUserCustomAction&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IUserCustomAction&gt;, IDataModelGet&lt;IUserCustomAction&gt;, IDataModelLoad&lt;IUserCustomAction&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_All.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.All%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_All_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.All*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_All" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.All"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_All" class="expander" data-toggle="collapse">All</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_All" class="collapse in">
-  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">object All { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L14" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId" class="expander" data-toggle="collapse">ClientSideComponentId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the unique identifier of the associated client side component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Guid ClientSideComponentId { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentProperties%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentProperties*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentProperties"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties" class="expander" data-toggle="collapse">ClientSideComponentProperties</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the JSON formatted properties of the associated client side component.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ClientSideComponentProperties { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.CommandUIExtension%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.CommandUIExtension*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.CommandUIExtension"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension" class="expander" data-toggle="collapse">CommandUIExtension</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies an implementation specific XML fragment that determines user interface properties of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string CommandUIExtension { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Description.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Description%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L29" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Description_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Description*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Description" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Description"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Description" class="expander" data-toggle="collapse">Description</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Description" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the description of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Description { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Group.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Group%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Group_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Group*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Group" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Group"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Group" class="expander" data-toggle="collapse">Group</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Group" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies an implementation-specific value that determines the position of the custom action in the page.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Group { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.HostProperties%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.HostProperties*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.HostProperties"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties" class="expander" data-toggle="collapse">HostProperties</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties" class="collapse in">
-  <div class="markdown level1 summary"><p>This property is only used when an application customizer is created and preallocated placeholders are specified.<br>
-It is optional. If non-empty, the string must contain a JSON object with one or two properties for the height
-amount needed to be preallocated.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string HostProperties { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Id_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Id*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Id" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Id" class="expander" data-toggle="collapse">Id</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a value that specifies the identifier of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Guid Id { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.ImageUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ImageUrl*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ImageUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl" class="expander" data-toggle="collapse">ImageUrl</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the URL of the image associated with the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ImageUrl { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Location.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Location%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Location_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Location*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Location" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Location"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Location" class="expander" data-toggle="collapse">Location</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Location" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the location of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Location { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Name.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Name%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Name_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Name*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Name" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Name"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Name" class="expander" data-toggle="collapse">Name</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Name" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the name of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Name { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L66" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationId"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId" class="expander" data-toggle="collapse">RegistrationId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the identifier of the object associated with the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string RegistrationId { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType" class="expander" data-toggle="collapse">RegistrationType</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the type of object associated with the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">UserCustomActionRegistrationType RegistrationType { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.UserCustomActionRegistrationType.html">UserCustomActionRegistrationType</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Rights.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Rights%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Rights_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Rights*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Rights" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Rights"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Rights" class="expander" data-toggle="collapse">Rights</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Rights" class="collapse in">
-  <div class="markdown level1 summary"><p>Get or sets the base permissions of the action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IBasePermissions Rights { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IBasePermissions.html">IBasePermissions</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Scope.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Scope%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Scope_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Scope*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Scope" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Scope"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Scope" class="expander" data-toggle="collapse">Scope</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Scope" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a value that specifies the scope of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">UserCustomActionScope Scope { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.UserCustomActionScope.html">UserCustomActionScope</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.ScriptBlock%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptBlock*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptBlock"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock" class="expander" data-toggle="collapse">ScriptBlock</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the ECMAScript to be executed when the custom action is performed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ScriptBlock { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.ScriptSrc%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptSrc*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptSrc"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc" class="expander" data-toggle="collapse">ScriptSrc</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the URI of a file which contains the ECMAScript to execute on the page.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ScriptSrc { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Sequence.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Sequence%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Sequence_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Sequence*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Sequence" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Sequence"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Sequence" class="expander" data-toggle="collapse">Sequence</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Sequence" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the value that specifies an implementation-specific value that determines the order of the custom action that appears on the page.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">int Sequence { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Title%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Title_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Title*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Title" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Title" class="expander" data-toggle="collapse">Title</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Title" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the display title of the custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Title { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_Url.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.Url%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Url_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Url*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_Url" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Url"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Url" class="expander" data-toggle="collapse">Url</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_Url" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the URL, URI, or ECMAScript (JScript, JavaScript) function associated with the action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Url { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IUserCustomAction.VersionOfUserCustomAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.VersionOfUserCustomAction*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.VersionOfUserCustomAction"><a href="#collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction" class="expander" data-toggle="collapse">VersionOfUserCustomAction</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction" class="collapse in">
-  <div class="markdown level1 summary"><p>Returns the version of the user custom action.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string VersionOfUserCustomAction { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -1168,33 +251,713 @@ amount needed to be preallocated.</p>
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_All_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.All*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_All" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.All">
+  All
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">object All { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId">
+  ClientSideComponentId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the unique identifier of the associated client side component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid ClientSideComponentId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentProperties*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentProperties" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentProperties">
+  ClientSideComponentProperties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the JSON formatted properties of the associated client side component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ClientSideComponentProperties { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.CommandUIExtension*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_CommandUIExtension" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.CommandUIExtension">
+  CommandUIExtension
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies an implementation specific XML fragment that determines user interface properties of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CommandUIExtension { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Description_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Description*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Description" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the description of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Group_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Group*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Group" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Group">
+  Group
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies an implementation-specific value that determines the position of the custom action in the page.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Group { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.HostProperties*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_HostProperties" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.HostProperties">
+  HostProperties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This property is only used when an application customizer is created and preallocated placeholders are specified.<br>
+It is optional. If non-empty, the string must contain a JSON object with one or two properties for the height
+amount needed to be preallocated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string HostProperties { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Id_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Id*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Id" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value that specifies the identifier of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid Id { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ImageUrl*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_ImageUrl" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ImageUrl">
+  ImageUrl
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the URL of the image associated with the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ImageUrl { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Location_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Location*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Location" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Location">
+  Location
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the location of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Location { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Name_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Name*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Name" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the name of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationId" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationId">
+  RegistrationId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the identifier of the object associated with the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string RegistrationId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_RegistrationType" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType">
+  RegistrationType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the type of object associated with the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">UserCustomActionRegistrationType RegistrationType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.UserCustomActionRegistrationType.html">UserCustomActionRegistrationType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Rights_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Rights*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Rights" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Rights">
+  Rights
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Get or sets the base permissions of the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IBasePermissions Rights { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IBasePermissions.html">IBasePermissions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Scope_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Scope*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Scope" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Scope">
+  Scope
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value that specifies the scope of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">UserCustomActionScope Scope { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.UserCustomActionScope.html">UserCustomActionScope</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptBlock*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptBlock" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptBlock">
+  ScriptBlock
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the value that specifies the ECMAScript to be executed when the custom action is performed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ScriptBlock { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptSrc*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_ScriptSrc" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.ScriptSrc">
+  ScriptSrc
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the URI of a file which contains the ECMAScript to execute on the page.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ScriptSrc { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Sequence_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Sequence*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Sequence" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Sequence">
+  Sequence
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the value that specifies an implementation-specific value that determines the order of the custom action that appears on the page.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int Sequence { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Title_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Title*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Title" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Title">
+  Title
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the display title of the custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_Url_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Url*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_Url" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.Url">
+  Url
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the URL, URI, or ECMAScript (JScript, JavaScript) function associated with the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Url { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction_" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.VersionOfUserCustomAction*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IUserCustomAction_VersionOfUserCustomAction" data-uid="PnP.Core.Model.SharePoint.IUserCustomAction.VersionOfUserCustomAction">
+  VersionOfUserCustomAction
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the version of the user custom action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string VersionOfUserCustomAction { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IUserCustomAction.cs/#L8" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

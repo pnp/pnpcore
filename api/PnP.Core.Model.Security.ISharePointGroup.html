@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ISharePointGroup | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface ISharePointGroup | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface ISharePointGroup | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISharePointGroup | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface to define a SharePoint Group">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Security.ISharePointGroup">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L10" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_Security_ISharePointGroup" data-uid="PnP.Core.Model.Security.ISharePointGroup">Interface ISharePointGroup</h1>
-  <div class="markdown level0 summary"><p>Public interface to define a SharePoint Group</p>
+
+        <article data-uid="PnP.Core.Model.Security.ISharePointGroup">
+
+
+
+  <h1 id="PnP_Core_Model_Security_ISharePointGroup" data-uid="PnP.Core.Model.Security.ISharePointGroup" class="text-break">
+Interface ISharePointGroup  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface to define a SharePoint Group</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ISharePointGroup : IDataModel&lt;ISharePointGroup&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;ISharePointGroup&gt;, IDataModelGet&lt;ISharePointGroup&gt;, IDataModelLoad&lt;ISharePointGroup&gt;, IDataModelUpdate, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;ISharePointGroup&gt;.Requested</a>
     </div>
@@ -200,1802 +222,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.Security.ISharePointPrincipal.html#PnP_Core_Model_Security_ISharePointPrincipal_Title">ISharePointPrincipal.Title</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.Security.html">Security</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_Security_ISharePointGroup_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface ISharePointGroup : IDataModel&lt;ISharePointGroup&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;ISharePointGroup&gt;, IDataModelGet&lt;ISharePointGroup&gt;, IDataModelLoad&lt;ISharePointGroup&gt;, IDataModelUpdate, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_All.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.All%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_All_" data-uid="PnP.Core.Model.Security.ISharePointGroup.All*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_All" data-uid="PnP.Core.Model.Security.ISharePointGroup.All"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_All" class="expander" data-toggle="collapse">All</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_All" class="collapse in">
-  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">object All { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership" class="expander" data-toggle="collapse">AllowMembersEditMembership</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership" class="collapse in">
-  <div class="markdown level1 summary"><p>Allow members to edit the group members</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool AllowMembersEditMembership { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AllowRequestToJoinLeave%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowRequestToJoinLeave*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowRequestToJoinLeave"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave" class="expander" data-toggle="collapse">AllowRequestToJoinLeave</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave" class="collapse in">
-  <div class="markdown level1 summary"><p>Allow requests to join or leave the group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool AllowRequestToJoinLeave { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AutoAcceptRequestToJoinLeave%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AutoAcceptRequestToJoinLeave*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave" data-uid="PnP.Core.Model.Security.ISharePointGroup.AutoAcceptRequestToJoinLeave"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave" class="expander" data-toggle="collapse">AutoAcceptRequestToJoinLeave</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave" class="collapse in">
-  <div class="markdown level1 summary"><p>Automatically accept requests to join or leave the group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool AutoAcceptRequestToJoinLeave { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserEditMembership%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserEditMembership*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserEditMembership"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership" class="expander" data-toggle="collapse">CanCurrentUserEditMembership</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership" class="collapse in">
-  <div class="markdown level1 summary"><p>Can the current user edit the group members</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool CanCurrentUserEditMembership { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserManageGroup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L36" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserManageGroup*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserManageGroup"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup" class="expander" data-toggle="collapse">CanCurrentUserManageGroup</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup" class="collapse in">
-  <div class="markdown level1 summary"><p>Can the current user manage the group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool CanCurrentUserManageGroup { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserViewMembership%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserViewMembership*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserViewMembership"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership" class="expander" data-toggle="collapse">CanCurrentUserViewMembership</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership" class="collapse in">
-  <div class="markdown level1 summary"><p>Can the current user view the group membership</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool CanCurrentUserViewMembership { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_Description.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.Description%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_Description_" data-uid="PnP.Core.Model.Security.ISharePointGroup.Description*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_Description" data-uid="PnP.Core.Model.Security.ISharePointGroup.Description"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_Description" class="expander" data-toggle="collapse">Description</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_Description" class="collapse in">
-  <div class="markdown level1 summary"><p>Group description. Note that HTML tags will be stripped and that the max length of the description will be limited to 511 characters</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Description { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership" class="expander" data-toggle="collapse">OnlyAllowMembersViewMembership</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership" class="collapse in">
-  <div class="markdown level1 summary"><p>Only members can see other group members</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool OnlyAllowMembersViewMembership { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_OwnerTitle.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.OwnerTitle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_OwnerTitle_" data-uid="PnP.Core.Model.Security.ISharePointGroup.OwnerTitle*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_OwnerTitle" data-uid="PnP.Core.Model.Security.ISharePointGroup.OwnerTitle"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_OwnerTitle" class="expander" data-toggle="collapse">OwnerTitle</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_OwnerTitle" class="collapse in">
-  <div class="markdown level1 summary"><p>Group owner title</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string OwnerTitle { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting" data-uid="PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting" class="expander" data-toggle="collapse">RequestToJoinLeaveEmailSetting</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting" class="collapse in">
-  <div class="markdown level1 summary"><p>Email configuration for the group join or leave operations</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string RequestToJoinLeaveEmailSetting { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_Users.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.Users%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_Users_" data-uid="PnP.Core.Model.Security.ISharePointGroup.Users*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_Users" data-uid="PnP.Core.Model.Security.ISharePointGroup.Users"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_Users" class="expander" data-toggle="collapse">Users</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_Users" class="collapse in">
-  <div class="markdown level1 summary"><p>Members of this group
-Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
-See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
-and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ISharePointUserCollection Users { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.ISharePointUserCollection.html">ISharePointUserCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L151" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String[])"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitions(params string[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool AddRoleDefinitions(params string[] names)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L158" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String[])"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitionsAsync(params string[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;bool&gt; AddRoleDefinitionsAsync(params string[] names)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L79" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUser_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUser*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_" class="expander" data-toggle="collapse">AddUser(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddUser(string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L84" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_" class="expander" data-toggle="collapse">AddUserAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddUserAsync(string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L99" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">AddUserBatch(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddUserBatch(Batch batch, string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L89" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_" class="expander" data-toggle="collapse">AddUserBatch(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddUserBatch(string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L104" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">AddUserBatchAsync(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddUserBatchAsync(Batch batch, string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_" class="expander" data-toggle="collapse">AddUserBatchAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddUserBatchAsync(string loginName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">loginName</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L139" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions" class="expander" data-toggle="collapse">GetRoleDefinitions()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions" class="collapse in">
-  <div class="markdown level1 summary"><p>Retrieves the role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IRoleDefinitionCollection GetRoleDefinitions()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L144" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync" class="expander" data-toggle="collapse">GetRoleDefinitionsAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Retrieves the role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IRoleDefinitionCollection&gt; GetRoleDefinitionsAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L165" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String[])"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitions(params string[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool RemoveRoleDefinitions(params string[] names)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L172" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String[])"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitionsAsync(params string[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes role definitions for this group</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;bool&gt; RemoveRoleDefinitionsAsync(params string[] names)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L109" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUser_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUser*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_" class="expander" data-toggle="collapse">RemoveUser(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveUser(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_" class="expander" data-toggle="collapse">RemoveUserAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveUserAsync(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L129" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">RemoveUserBatch(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveUserBatch(Batch batch, int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_" class="expander" data-toggle="collapse">RemoveUserBatch(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveUserBatch(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L134" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">RemoveUserBatchAsync(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveUserBatchAsync(Batch batch, int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_" class="expander" data-toggle="collapse">RemoveUserBatchAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveUserBatchAsync(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwner(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwner*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwner(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwner(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetUserAsOwner(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L184" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwnerAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetUserAsOwnerAsync(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L203" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwnerBatch(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="batch">Batch on which to execute the request
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetUserAsOwnerBatch(Batch batch, int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L190" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwnerBatch(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetUserAsOwnerBatch(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L210" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwnerBatchAsync(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="batch">Batch on which to execute the request
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetUserAsOwnerBatchAsync(Batch batch, int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L196" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_System_Int32_" class="expander" data-toggle="collapse">SetUserAsOwnerBatchAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
-<param name="userId">Id of the user to set as owner
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetUserAsOwnerBatchAsync(int userId)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">userId</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -2035,33 +266,1283 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_All_" data-uid="PnP.Core.Model.Security.ISharePointGroup.All*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_All" data-uid="PnP.Core.Model.Security.ISharePointGroup.All">
+  All
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">object All { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership">
+  AllowMembersEditMembership
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allow members to edit the group members</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AllowMembersEditMembership { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowRequestToJoinLeave*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AllowRequestToJoinLeave" data-uid="PnP.Core.Model.Security.ISharePointGroup.AllowRequestToJoinLeave">
+  AllowRequestToJoinLeave
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allow requests to join or leave the group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AllowRequestToJoinLeave { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AutoAcceptRequestToJoinLeave*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AutoAcceptRequestToJoinLeave" data-uid="PnP.Core.Model.Security.ISharePointGroup.AutoAcceptRequestToJoinLeave">
+  AutoAcceptRequestToJoinLeave
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Automatically accept requests to join or leave the group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AutoAcceptRequestToJoinLeave { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserEditMembership*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserEditMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserEditMembership">
+  CanCurrentUserEditMembership
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Can the current user edit the group members</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool CanCurrentUserEditMembership { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserManageGroup*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserManageGroup" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserManageGroup">
+  CanCurrentUserManageGroup
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Can the current user manage the group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool CanCurrentUserManageGroup { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserViewMembership*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_CanCurrentUserViewMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.CanCurrentUserViewMembership">
+  CanCurrentUserViewMembership
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Can the current user view the group membership</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool CanCurrentUserViewMembership { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_Description_" data-uid="PnP.Core.Model.Security.ISharePointGroup.Description*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_Description" data-uid="PnP.Core.Model.Security.ISharePointGroup.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Group description. Note that HTML tags will be stripped and that the max length of the description will be limited to 511 characters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership_" data-uid="PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership" data-uid="PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership">
+  OnlyAllowMembersViewMembership
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Only members can see other group members</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool OnlyAllowMembersViewMembership { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_OwnerTitle_" data-uid="PnP.Core.Model.Security.ISharePointGroup.OwnerTitle*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_OwnerTitle" data-uid="PnP.Core.Model.Security.ISharePointGroup.OwnerTitle">
+  OwnerTitle
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Group owner title</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string OwnerTitle { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting" data-uid="PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting">
+  RequestToJoinLeaveEmailSetting
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Email configuration for the group join or leave operations</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string RequestToJoinLeaveEmailSetting { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_Users_" data-uid="PnP.Core.Model.Security.ISharePointGroup.Users*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_Users" data-uid="PnP.Core.Model.Security.ISharePointGroup.Users">
+  Users
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Members of this group
+Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
+See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
+and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointUserCollection Users { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointUserCollection.html">ISharePointUserCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String[])">
+  AddRoleDefinitions(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AddRoleDefinitions(params string[] names)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String[])">
+  AddRoleDefinitionsAsync(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; AddRoleDefinitionsAsync(params string[] names)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUser_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUser*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)">
+  AddUser(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AddUser(string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)">
+  AddUserAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task AddUserAsync(string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch,System.String)">
+  AddUserBatch(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AddUserBatch(Batch batch, string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)">
+  AddUserBatch(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AddUserBatch(string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch,System.String)">
+  AddUserBatchAsync(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task AddUserBatchAsync(Batch batch, string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_" data-uid="PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)">
+  AddUserBatchAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a user to this group. Specify the full username, e.g. &quot;i:0#.f|membership|user@domain.com&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task AddUserBatchAsync(string loginName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>loginName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions">
+  GetRoleDefinitions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRoleDefinitionCollection GetRoleDefinitions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync" data-uid="PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync">
+  GetRoleDefinitionsAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieves the role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRoleDefinitionCollection&gt; GetRoleDefinitionsAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String[])">
+  RemoveRoleDefinitions(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool RemoveRoleDefinitions(params string[] names)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String[])">
+  RemoveRoleDefinitionsAsync(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes role definitions for this group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; RemoveRoleDefinitionsAsync(params string[] names)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUser_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUser*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)">
+  RemoveUser(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveUser(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)">
+  RemoveUserAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RemoveUserAsync(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch,System.Int32)">
+  RemoveUserBatch(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveUserBatch(Batch batch, int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)">
+  RemoveUserBatch(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveUserBatch(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch,System.Int32)">
+  RemoveUserBatchAsync(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RemoveUserBatchAsync(Batch batch, int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)">
+  RemoveUserBatchAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a user given its id from a group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RemoveUserBatchAsync(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwner*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwner_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwner(System.Int32)">
+  SetUserAsOwner(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetUserAsOwner(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerAsync(System.Int32)">
+  SetUserAsOwnerAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task SetUserAsOwnerAsync(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(PnP.Core.Services.Batch,System.Int32)">
+  SetUserAsOwnerBatch(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="batch">Batch on which to execute the request
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetUserAsOwnerBatch(Batch batch, int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatch(System.Int32)">
+  SetUserAsOwnerBatch(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetUserAsOwnerBatch(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(PnP.Core.Services.Batch,System.Int32)">
+  SetUserAsOwnerBatchAsync(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="batch">Batch on which to execute the request
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task SetUserAsOwnerBatchAsync(Batch batch, int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointGroup_SetUserAsOwnerBatchAsync_System_Int32_" data-uid="PnP.Core.Model.Security.ISharePointGroup.SetUserAsOwnerBatchAsync(System.Int32)">
+  SetUserAsOwnerBatchAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets a user as owner of the group.</p>
+<param name="userId">Id of the user to set as owner
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task SetUserAsOwnerBatchAsync(int userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointGroup.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

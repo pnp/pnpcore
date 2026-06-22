@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IFileVersionCollection | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IFileVersionCollection | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IFileVersionCollection | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IFileVersionCollection | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Collection of file versions">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IFileVersionCollection" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection">Interface IFileVersionCollection</h1>
-  <div class="markdown level0 summary"><p>Collection of file versions</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IFileVersionCollection" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection" class="text-break">
+Interface IFileVersionCollection  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Collection of file versions</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IFileVersionCollection : IQueryable&lt;IFileVersion&gt;, IQueryable, IAsyncEnumerable&lt;IFileVersion&gt;, IDataModelCollection&lt;IFileVersion&gt;, IEnumerable&lt;IFileVersion&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IFileVersion&gt;, ISupportModules&lt;IFileVersionCollection&gt;</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable.elementtype">IQueryable.ElementType</a>
     </div>
@@ -131,2006 +153,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html#PnP_Core_Model_IDataModelCollectionLoad_1_LoadBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelCollectionLoad&lt;IFileVersion&gt;.LoadBatchAsync(Batch, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[])</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IFileVersionCollection_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IFileVersionCollection : IQueryable&lt;IFileVersion&gt;, IQueryable, IAsyncEnumerable&lt;IFileVersion&gt;, IDataModelCollection&lt;IFileVersion&gt;, IEnumerable&lt;IFileVersion&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IFileVersion&gt;, ISupportModules&lt;IFileVersionCollection&gt;</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAll%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAll*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAll"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll" class="expander" data-toggle="collapse">DeleteAll()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAll()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L48" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync" class="expander" data-toggle="collapse">DeleteAllAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch" class="expander" data-toggle="collapse">DeleteAllBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllBatch()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllBatch(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync" class="expander" data-toggle="collapse">DeleteAllBatchAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllBatchAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllBatchAsync(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete all file versions</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteById(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L85" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteById(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_System_Int32_" class="expander" data-toggle="collapse">DeleteById(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteById(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L92" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_System_Int32_" class="expander" data-toggle="collapse">DeleteByIdAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByIdAsync(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">DeleteByIdBatch(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteByIdBatch(Batch batch, int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L99" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_System_Int32_" class="expander" data-toggle="collapse">DeleteByIdBatch(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteByIdBatch(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L122" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">DeleteByIdBatchAsync(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByIdBatchAsync(Batch batch, int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_System_Int32_" class="expander" data-toggle="collapse">DeleteByIdBatchAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByIdBatchAsync(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabel(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L133" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabel*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabel(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_System_String_" class="expander" data-toggle="collapse">DeleteByLabel(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteByLabel(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L140" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_System_String_" class="expander" data-toggle="collapse">DeleteByLabelAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByLabelAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L162" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">DeleteByLabelBatch(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteByLabelBatch(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_System_String_" class="expander" data-toggle="collapse">DeleteByLabelBatch(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteByLabelBatch(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L170" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">DeleteByLabelBatchAsync(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByLabelBatchAsync(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L154" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_System_String_" class="expander" data-toggle="collapse">DeleteByLabelBatchAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Delete the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteByLabelBatchAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to Delete</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IFileVersion%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" class="expander" data-toggle="collapse">GetById(int, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to select a file version by Id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IFileVersion GetById(int id, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>The Id to search for</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>The expressions declaring the fields to select</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>
-        <p><p>The resulting file version instance, if any</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IFileVersion%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" class="expander" data-toggle="collapse">GetByIdAsync(int, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to select a file version by Id asynchronously</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IFileVersion&gt; GetByIdAsync(int id, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>The Id to search for</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>The expressions declaring the fields to select</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>&gt;
-        <p><p>The resulting file version instance, if any</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleById(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L182" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleById(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_System_Int32_" class="expander" data-toggle="collapse">RecycleById(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleById(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L189" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_System_Int32_" class="expander" data-toggle="collapse">RecycleByIdAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByIdAsync(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L211" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">RecycleByIdBatch(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleByIdBatch(Batch batch, int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L196" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_System_Int32_" class="expander" data-toggle="collapse">RecycleByIdBatch(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleByIdBatch(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L219" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="expander" data-toggle="collapse">RecycleByIdBatchAsync(Batch, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByIdBatchAsync(Batch batch, int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L203" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_System_Int32_" class="expander" data-toggle="collapse">RecycleByIdBatchAsync(int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByIdBatchAsync(int id)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">id</span>
-        <p><p>Id of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabel(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L230" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabel*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabel(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_System_String_" class="expander" data-toggle="collapse">RecycleByLabel(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleByLabel(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L237" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_System_String_" class="expander" data-toggle="collapse">RecycleByLabelAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByLabelAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L259" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">RecycleByLabelBatch(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleByLabelBatch(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_System_String_" class="expander" data-toggle="collapse">RecycleByLabelBatch(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RecycleByLabelBatch(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L267" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">RecycleByLabelBatchAsync(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByLabelBatchAsync(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L251" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_System_String_" class="expander" data-toggle="collapse">RecycleByLabelBatchAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Recycle the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RecycleByLabelBatchAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to recycle</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabel(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L278" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabel*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabel(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_System_String_" class="expander" data-toggle="collapse">RestoreByLabel(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreByLabel(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L285" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_System_String_" class="expander" data-toggle="collapse">RestoreByLabelAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreByLabelAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L307" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">RestoreByLabelBatch(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreByLabelBatch(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_System_String_" class="expander" data-toggle="collapse">RestoreByLabelBatch(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreByLabelBatch(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L315" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">RestoreByLabelBatchAsync(Batch, string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreByLabelBatchAsync(Batch batch, string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L299" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_System_String_" class="expander" data-toggle="collapse">RestoreByLabelBatchAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restore the file version</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreByLabelBatchAsync(string label)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">label</span>
-        <p><p>Label of the file version to restore</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelCollectionLoadExtensions.html#PnP_Core_Model_DataModelCollectionLoadExtensions_LoadBatchAsync__1_PnP_Core_Model_IDataModelCollectionLoad___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelCollectionLoadExtensions.LoadBatchAsync&lt;TModel&gt;(IDataModelCollectionLoad&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -2206,33 +233,1407 @@
   <div>
       <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.ToListAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAll*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAll" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAll">
+  DeleteAll()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAll()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllAsync" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllAsync">
+  DeleteAllAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch">
+  DeleteAllBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllBatch()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatch(PnP.Core.Services.Batch)">
+  DeleteAllBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllBatch(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync">
+  DeleteAllBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllBatchAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)">
+  DeleteAllBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete all file versions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteById_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteById(System.Int32)">
+  DeleteById(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteById(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdAsync(System.Int32)">
+  DeleteByIdAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByIdAsync(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(PnP.Core.Services.Batch,System.Int32)">
+  DeleteByIdBatch(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteByIdBatch(Batch batch, int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatch(System.Int32)">
+  DeleteByIdBatch(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteByIdBatch(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)">
+  DeleteByIdBatchAsync(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByIdBatchAsync(Batch batch, int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByIdBatchAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByIdBatchAsync(System.Int32)">
+  DeleteByIdBatchAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByIdBatchAsync(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabel*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabel(System.String)">
+  DeleteByLabel(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteByLabel(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelAsync(System.String)">
+  DeleteByLabelAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByLabelAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(PnP.Core.Services.Batch,System.String)">
+  DeleteByLabelBatch(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteByLabelBatch(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatch(System.String)">
+  DeleteByLabelBatch(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteByLabelBatch(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(PnP.Core.Services.Batch,System.String)">
+  DeleteByLabelBatchAsync(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByLabelBatchAsync(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_DeleteByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.DeleteByLabelBatchAsync(System.String)">
+  DeleteByLabelBatchAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteByLabelBatchAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to Delete</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])">
+  GetById(int, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to select a file version by Id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFileVersion GetById(int id, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The Id to search for</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>The expressions declaring the fields to select</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a></dt>
+    <dd><p>The resulting file version instance, if any</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])">
+  GetByIdAsync(int, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to select a file version by Id asynchronously</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IFileVersion&gt; GetByIdAsync(int id, params Expression&lt;Func&lt;IFileVersion, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The Id to search for</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>The expressions declaring the fields to select</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFileVersion.html">IFileVersion</a>&gt;</dt>
+    <dd><p>The resulting file version instance, if any</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleById_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleById(System.Int32)">
+  RecycleById(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleById(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdAsync(System.Int32)">
+  RecycleByIdAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByIdAsync(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(PnP.Core.Services.Batch,System.Int32)">
+  RecycleByIdBatch(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleByIdBatch(Batch batch, int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatch(System.Int32)">
+  RecycleByIdBatch(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleByIdBatch(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)">
+  RecycleByIdBatchAsync(Batch, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByIdBatchAsync(Batch batch, int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByIdBatchAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByIdBatchAsync(System.Int32)">
+  RecycleByIdBatchAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByIdBatchAsync(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabel*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabel(System.String)">
+  RecycleByLabel(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleByLabel(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelAsync(System.String)">
+  RecycleByLabelAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByLabelAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(PnP.Core.Services.Batch,System.String)">
+  RecycleByLabelBatch(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleByLabelBatch(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatch(System.String)">
+  RecycleByLabelBatch(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleByLabelBatch(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(PnP.Core.Services.Batch,System.String)">
+  RecycleByLabelBatchAsync(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByLabelBatchAsync(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RecycleByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RecycleByLabelBatchAsync(System.String)">
+  RecycleByLabelBatchAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Recycle the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleByLabelBatchAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to recycle</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabel*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabel_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabel(System.String)">
+  RestoreByLabel(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreByLabel(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelAsync(System.String)">
+  RestoreByLabelAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreByLabelAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(PnP.Core.Services.Batch,System.String)">
+  RestoreByLabelBatch(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreByLabelBatch(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatch(System.String)">
+  RestoreByLabelBatch(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreByLabelBatch(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(PnP.Core.Services.Batch,System.String)">
+  RestoreByLabelBatchAsync(Batch, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreByLabelBatchAsync(Batch batch, string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch to add the request to</p>
+</dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IFileVersionCollection_RestoreByLabelBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFileVersionCollection.RestoreByLabelBatchAsync(System.String)">
+  RestoreByLabelBatchAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restore the file version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreByLabelBatchAsync(string label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Label of the file version to restore</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFileVersionCollection.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

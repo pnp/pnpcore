@@ -1,415 +1,332 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PnP.Core.Model.Security | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PnP.Core.Model.Security | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Namespace PnP.Core.Model.Security | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace PnP.Core.Model.Security | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Security">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                  </div>
-    <h1 id="PnP_Core_Model_Security" data-uid="PnP.Core.Model.Security">Namespace PnP.Core.Model.Security</h1>
+
+        <article data-uid="PnP.Core.Model.Security">
+
+  <h1 id="PnP_Core_Model_Security" data-uid="PnP.Core.Model.Security" class="text-break">Namespace PnP.Core.Model.Security</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+
     <h3 id="classes">
 Classes
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.AnonymousLinkOptions.html">AnonymousLinkOptions</a></p>
-          <p><p>Properties that can be set when creating a new Anonymous Link</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.InviteOptions.html">InviteOptions</a></p>
-          <p><p>Options that can be set when inviting users to an item</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.InviteOptionsBase.html">InviteOptionsBase</a></p>
-          <p><p>Base class for InviteOptions classes</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.MailOptions.html">MailOptions</a></p>
-          <p><p>Options containing the message and whether to save the mail to the sent items of the user or not.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.MessageAttachmentOptions.html">MessageAttachmentOptions</a></p>
-          <p><p>Options for attachments for a message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.MessageOptions.html">MessageOptions</a></p>
-          <p><p>The options for a message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.OrganizationalLinkOptions.html">OrganizationalLinkOptions</a></p>
-          <p><p>Properties that can be set when creating a new Organizational Link</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.RecipientOptions.html">RecipientOptions</a></p>
-          <p><p>Options for a recipient</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.UserLinkOptions.html">UserLinkOptions</a></p>
-          <p><p>Properties that can be set when creating a new User Link</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.AnonymousLinkOptions.html">AnonymousLinkOptions</a></dt>
+      <dd><p>Properties that can be set when creating a new Anonymous Link</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.InviteOptions.html">InviteOptions</a></dt>
+      <dd><p>Options that can be set when inviting users to an item</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.InviteOptionsBase.html">InviteOptionsBase</a></dt>
+      <dd><p>Base class for InviteOptions classes</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.MailOptions.html">MailOptions</a></dt>
+      <dd><p>Options containing the message and whether to save the mail to the sent items of the user or not.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.MessageAttachmentOptions.html">MessageAttachmentOptions</a></dt>
+      <dd><p>Options for attachments for a message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.MessageOptions.html">MessageOptions</a></dt>
+      <dd><p>The options for a message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.OrganizationalLinkOptions.html">OrganizationalLinkOptions</a></dt>
+      <dd><p>Properties that can be set when creating a new Organizational Link</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.RecipientOptions.html">RecipientOptions</a></dt>
+      <dd><p>Options for a recipient</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.UserLinkOptions.html">UserLinkOptions</a></dt>
+      <dd><p>Properties that can be set when creating a new User Link</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a></p>
-          <p><p>Represents a person, group, or other recipient to share a drive item with using the invite action.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphGroup.html">IGraphGroup</a></p>
-          <p><p>A Microsoft 365 Group</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphGroupCollection.html">IGraphGroupCollection</a></p>
-          <p><p>Public interface to define a collection of Microsoft 365 Groups</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a></p>
-          <p><p>The permission resource provides information about a sharing permission granted for a driveItem resource.
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IDriveRecipient.html">IDriveRecipient</a></dt>
+      <dd><p>Represents a person, group, or other recipient to share a drive item with using the invite action.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphGroup.html">IGraphGroup</a></dt>
+      <dd><p>A Microsoft 365 Group</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphGroupCollection.html">IGraphGroupCollection</a></dt>
+      <dd><p>Public interface to define a collection of Microsoft 365 Groups</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphPermission.html">IGraphPermission</a></dt>
+      <dd><p>The permission resource provides information about a sharing permission granted for a driveItem resource.
 Sharing permissions have a number of different forms. The permission resource represents these different forms through facets on the resource.
 Note: OneDrive for Business and SharePoint document libraries do not return the inheritedFrom property.
 grantedTo and grantedToIdentities will be deprecated going forward and the response will be migrated to grantedToV2 and grantedToIdentitiesV2 respectively under
 appropriate property names.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphPermissionCollection.html">IGraphPermissionCollection</a></p>
-          <p><p>Collection of the sharing permissions granted on a driveItem resource</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphPrincipal.html">IGraphPrincipal</a></p>
-          <p><p>Represents a Microsoft 365 user or group</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphUser.html">IGraphUser</a></p>
-          <p><p>Public interface to define a Microsoft 365 user</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IGraphUserCollection.html">IGraphUserCollection</a></p>
-          <p><p>Public interface to define a collection of Microsoft 365 users</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IIdentity.html">IIdentity</a></p>
-          <p><p>The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IIdentitySet.html">IIdentitySet</a></p>
-          <p><p>The identitySet resource is a keyed collection of identity resources.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IRoleAssignment.html">IRoleAssignment</a></p>
-          <p><p>Defines a single role definition, including a name, description, and set of rights.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IRoleAssignmentCollection.html">IRoleAssignmentCollection</a></p>
-          <p><p>Public interface to define a collection of SharePoint groups</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></p>
-          <p><p>Defines a single role definition, including a name, description, and set of rights.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a></p>
-          <p><p>Public interface to define a collection of SharePoint RoleDefinitions</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointGroup.html">ISharePointGroup</a></p>
-          <p><p>Public interface to define a SharePoint Group</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointGroupCollection.html">ISharePointGroupCollection</a></p>
-          <p><p>Public interface to define a collection of SharePoint groups</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentity.html">ISharePointIdentity</a></p>
-          <p><p>This resource extends from the identity resource to provide the ability to expose SharePoint-specific information; for example, loginName or SharePoint IDs.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentitySet.html">ISharePointIdentitySet</a></p>
-          <p><p>Represents a keyed collection of sharePointIdentity resources. This resource extends from the identitySet resource to provide the ability to expose SharePoint-specific information to the user.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointPrincipal.html">ISharePointPrincipal</a></p>
-          <p><p>Represents a SharePoint user or group that can be assigned permissions to control security.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointSharingPrincipal.html">ISharePointSharingPrincipal</a></p>
-          <p><p>Represents a SharePoint sharing principal.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
-          <p><p>Public interface to define a SharePoint User</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharePointUserCollection.html">ISharePointUserCollection</a></p>
-          <p><p>Public interface to define a collection of SharePoint users</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharingInvitation.html">ISharingInvitation</a></p>
-          <p><p>The SharingInvitation resource groups invitation-related data items into a single structure.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ISharingLink.html">ISharingLink</a></p>
-          <p><p>The sharingLink resource groups link-related data items into a single structure.</p>
-
-        </td>
-      </tr>
-    </table>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphPermissionCollection.html">IGraphPermissionCollection</a></dt>
+      <dd><p>Collection of the sharing permissions granted on a driveItem resource</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphPrincipal.html">IGraphPrincipal</a></dt>
+      <dd><p>Represents a Microsoft 365 user or group</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphUser.html">IGraphUser</a></dt>
+      <dd><p>Public interface to define a Microsoft 365 user</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IGraphUserCollection.html">IGraphUserCollection</a></dt>
+      <dd><p>Public interface to define a collection of Microsoft 365 users</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IIdentity.html">IIdentity</a></dt>
+      <dd><p>The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IIdentitySet.html">IIdentitySet</a></dt>
+      <dd><p>The identitySet resource is a keyed collection of identity resources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IRoleAssignment.html">IRoleAssignment</a></dt>
+      <dd><p>Defines a single role definition, including a name, description, and set of rights.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IRoleAssignmentCollection.html">IRoleAssignmentCollection</a></dt>
+      <dd><p>Public interface to define a collection of SharePoint groups</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+      <dd><p>Defines a single role definition, including a name, description, and set of rights.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a></dt>
+      <dd><p>Public interface to define a collection of SharePoint RoleDefinitions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointGroup.html">ISharePointGroup</a></dt>
+      <dd><p>Public interface to define a SharePoint Group</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointGroupCollection.html">ISharePointGroupCollection</a></dt>
+      <dd><p>Public interface to define a collection of SharePoint groups</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentity.html">ISharePointIdentity</a></dt>
+      <dd><p>This resource extends from the identity resource to provide the ability to expose SharePoint-specific information; for example, loginName or SharePoint IDs.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointIdentitySet.html">ISharePointIdentitySet</a></dt>
+      <dd><p>Represents a keyed collection of sharePointIdentity resources. This resource extends from the identitySet resource to provide the ability to expose SharePoint-specific information to the user.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointPrincipal.html">ISharePointPrincipal</a></dt>
+      <dd><p>Represents a SharePoint user or group that can be assigned permissions to control security.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointSharingPrincipal.html">ISharePointSharingPrincipal</a></dt>
+      <dd><p>Represents a SharePoint sharing principal.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></dt>
+      <dd><p>Public interface to define a SharePoint User</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharePointUserCollection.html">ISharePointUserCollection</a></dt>
+      <dd><p>Public interface to define a collection of SharePoint users</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharingInvitation.html">ISharingInvitation</a></dt>
+      <dd><p>The SharingInvitation resource groups invitation-related data items into a single structure.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ISharingLink.html">ISharingLink</a></dt>
+      <dd><p>The sharingLink resource groups link-related data items into a single structure.</p>
+</dd>
+    </dl>
     <h3 id="enums">
 Enums
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.GroupVisibility.html">GroupVisibility</a></p>
-          <p><p>Group visibility</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.MessageBodyContentType.html">MessageBodyContentType</a></p>
-          <p><p>Content type for the message body</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.MessageImportance.html">MessageImportance</a></p>
-          <p><p>Importance of the mail message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.PermissionRole.html">PermissionRole</a></p>
-          <p></p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.PrincipalType.html">PrincipalType</a></p>
-          <p><p>Specifies the type of a principal.
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.GroupVisibility.html">GroupVisibility</a></dt>
+      <dd><p>Group visibility</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.MessageBodyContentType.html">MessageBodyContentType</a></dt>
+      <dd><p>Content type for the message body</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.MessageImportance.html">MessageImportance</a></dt>
+      <dd><p>Importance of the mail message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.PermissionRole.html">PermissionRole</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.PrincipalType.html">PrincipalType</a></dt>
+      <dd><p>Specifies the type of a principal.
 This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ShareScope.html">ShareScope</a></p>
-          <p><p>The scope of a link</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Security.ShareType.html">ShareType</a></p>
-          <p><p>Link types</p>
-
-        </td>
-      </tr>
-    </table>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ShareScope.html">ShareScope</a></dt>
+      <dd><p>The scope of a link</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Security.ShareType.html">ShareType</a></dt>
+      <dd><p>Link types</p>
+</dd>
+    </dl>
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

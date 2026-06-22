@@ -1,103 +1,133 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class OnBehalfOfAuthenticationProvider | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class OnBehalfOfAuthenticationProvider | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Class OnBehalfOfAuthenticationProvider | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OnBehalfOfAuthenticationProvider | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Authentication Provider based on the OnBehalfOf flow">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L22" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider">Class OnBehalfOfAuthenticationProvider</h1>
-  <div class="markdown level0 summary"><p>Authentication Provider based on the OnBehalfOf flow</p>
-</div>
-  <div class="markdown level0 conceptual"></div>
 
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a></div>
-    <div class="level2"><span class="xref">OnBehalfOfAuthenticationProvider</span></div>
+        <article data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider">
+
+
+
+  <h1 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider" class="text-break">
+Class OnBehalfOfAuthenticationProvider  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Auth.html">Auth</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.Auth.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Authentication Provider based on the OnBehalfOf flow</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OnBehalfOfAuthenticationProvider : OAuthAuthenticationProvider, IAuthenticationProvider</code></pre>
   </div>
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a></div>
+      <div><span class="xref">OnBehalfOfAuthenticationProvider</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html#PnP_Core_Auth_OAuthAuthenticationProvider_ConfigurationName">OAuthAuthenticationProvider.ConfigurationName</a>
     </div>
@@ -125,67 +155,44 @@
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Auth.html">Auth</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.Auth.dll</h6>
-
-  <h5 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public sealed class OnBehalfOfAuthenticationProvider : OAuthAuthenticationProvider, IAuthenticationProvider</code></pre>
-  </div>
+  </dd></dl>
 
 
 
 
-  <h5 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_remarks"><strong>Remarks</strong></h5>
+  <h2 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_remarks">Remarks</h2>
   <div class="markdown level0 remarks"><p>You can find further details about the On-Behalf-Of flow here: <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow">https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow</a></p>
 </div>
 
-  <h3 id="constructors">Constructors
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__Microsoft_Identity_Client_IMsalHttpClientFactory_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.%23ctor(Microsoft.Extensions.Logging.ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D%2CMicrosoft.Identity.Client.IMsalHttpClientFactory)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__Microsoft_Identity_Client_IMsalHttpClientFactory_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},Microsoft.Identity.Client.IMsalHttpClientFactory)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__Microsoft_Identity_Client_IMsalHttpClientFactory_" class="expander" data-toggle="collapse">OnBehalfOfAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;, IMsalHttpClientFactory)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__Microsoft_Identity_Client_IMsalHttpClientFactory_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},Microsoft.Identity.Client.IMsalHttpClientFactory)">
+  OnBehalfOfAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;, IMsalHttpClientFactory)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__Microsoft_Identity_Client_IMsalHttpClientFactory_" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public OnBehalfOfAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger, IMsalHttpClientFactory msalHttpClientFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public OnBehalfOfAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger, IMsalHttpClientFactory msalHttpClientFactory)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a>&gt;</span>
-        <span class="parametername">logger</span>
-        <p><p>The instance of the logger service provided by DI</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.identity.client.imsalhttpclientfactory">IMsalHttpClientFactory</a></span>
-        <span class="parametername">msalHttpClientFactory</span>
-        <p><p>The instance of the Msal Http Client Factory service provided by DI</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a>&gt;</dt>
+    <dd><p>The instance of the logger service provided by DI</p>
+</dd>
+    <dt><code>msalHttpClientFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.identity.client.imsalhttpclientfactory">IMsalHttpClientFactory</a></dt>
+    <dd><p>The instance of the Msal Http Client Factory service provided by DI</p>
+</dd>
+  </dl>
 
 
 
@@ -197,73 +204,40 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_System_Func_System_String__System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CPnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions%2CSystem.Func%7BSystem.String%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions,System.Func{System.String},System.Boolean)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_System_Func_System_String__System_Boolean_" class="expander" data-toggle="collapse">OnBehalfOfAuthenticationProvider(string, string, PnPCoreAuthenticationOnBehalfOfOptions, Func&lt;string&gt;, bool)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions,System.Func{System.String},System.Boolean)">
+  OnBehalfOfAuthenticationProvider(string, string, PnPCoreAuthenticationOnBehalfOfOptions, Func&lt;string&gt;, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_System_Func_System_String__System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, PnPCoreAuthenticationOnBehalfOfOptions options, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, PnPCoreAuthenticationOnBehalfOfOptions options, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">clientId</span>
-        <p><p>The Client ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">tenantId</span>
-        <p><p>The Tenant ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html">PnPCoreAuthenticationOnBehalfOfOptions</a></span>
-        <span class="parametername">options</span>
-        <p><p>Options for the authentication provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</span>
-        <span class="parametername">userTokenProvider</span>
-        <p><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">useSharedCache</span>
-        <p><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Client ID for the Authentication Provider</p>
+</dd>
+    <dt><code>tenantId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Tenant ID for the Authentication Provider</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html">PnPCoreAuthenticationOnBehalfOfOptions</a></dt>
+    <dd><p>Options for the authentication provider</p>
+</dd>
+    <dt><code>userTokenProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
+</dd>
+    <dt><code>useSharedCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
+</dd>
+  </dl>
 
 
 
@@ -275,89 +249,46 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_StoreName_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_System_Func_System_String__System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CSystem.Security.Cryptography.X509Certificates.StoreName%2CSystem.Security.Cryptography.X509Certificates.StoreLocation%2CSystem.String%2CSystem.Func%7BSystem.String%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L103" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_StoreName_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.String,System.Func{System.String},System.Boolean)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_StoreName_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_System_Func_System_String__System_Boolean_" class="expander" data-toggle="collapse">OnBehalfOfAuthenticationProvider(string, string, StoreName, StoreLocation, string, Func&lt;string&gt;, bool)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_StoreName_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.String,System.Func{System.String},System.Boolean)">
+  OnBehalfOfAuthenticationProvider(string, string, StoreName, StoreLocation, string, Func&lt;string&gt;, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_StoreName_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_System_Func_System_String__System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, StoreName storeName, StoreLocation storeLocation, string thumbprint, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, StoreName storeName, StoreLocation storeLocation, string thumbprint, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">clientId</span>
-        <p><p>The Client ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">tenantId</span>
-        <p><p>The Tenant ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.storename">StoreName</a></span>
-        <span class="parametername">storeName</span>
-        <p><p>The Store Name to get the X.509 certificate from</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.storelocation">StoreLocation</a></span>
-        <span class="parametername">storeLocation</span>
-        <p><p>The Store Location to get the X.509 certificate from</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">thumbprint</span>
-        <p><p>The Thumbprint of the X.509 certificate</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</span>
-        <span class="parametername">userTokenProvider</span>
-        <p><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">useSharedCache</span>
-        <p><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Client ID for the Authentication Provider</p>
+</dd>
+    <dt><code>tenantId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Tenant ID for the Authentication Provider</p>
+</dd>
+    <dt><code>storeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.storename">StoreName</a></dt>
+    <dd><p>The Store Name to get the X.509 certificate from</p>
+</dd>
+    <dt><code>storeLocation</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.storelocation">StoreLocation</a></dt>
+    <dd><p>The Store Location to get the X.509 certificate from</p>
+</dd>
+    <dt><code>thumbprint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Thumbprint of the X.509 certificate</p>
+</dd>
+    <dt><code>userTokenProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
+</dd>
+    <dt><code>useSharedCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
+</dd>
+  </dl>
 
 
 
@@ -369,73 +300,40 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_System_Func_System_String__System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CSystem.Security.Cryptography.X509Certificates.X509Certificate2%2CSystem.Func%7BSystem.String%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L132" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Func{System.String},System.Boolean)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_System_Func_System_String__System_Boolean_" class="expander" data-toggle="collapse">OnBehalfOfAuthenticationProvider(string, string, X509Certificate2, Func&lt;string&gt;, bool)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Func{System.String},System.Boolean)">
+  OnBehalfOfAuthenticationProvider(string, string, X509Certificate2, Func&lt;string&gt;, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_System_Func_System_String__System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, X509Certificate2 certificate, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, X509Certificate2 certificate, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">clientId</span>
-        <p><p>The Client ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">tenantId</span>
-        <p><p>The Tenant ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2">X509Certificate2</a></span>
-        <span class="parametername">certificate</span>
-        <p><p>The X.509 certificate to use for authentication</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</span>
-        <span class="parametername">userTokenProvider</span>
-        <p><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">useSharedCache</span>
-        <p><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Client ID for the Authentication Provider</p>
+</dd>
+    <dt><code>tenantId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Tenant ID for the Authentication Provider</p>
+</dd>
+    <dt><code>certificate</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2">X509Certificate2</a></dt>
+    <dd><p>The X.509 certificate to use for authentication</p>
+</dd>
+    <dt><code>userTokenProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
+</dd>
+    <dt><code>useSharedCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
+</dd>
+  </dl>
 
 
 
@@ -447,73 +345,40 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_SecureString_System_Func_System_String__System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CSystem.Security.SecureString%2CSystem.Func%7BSystem.String%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_SecureString_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.SecureString,System.Func{System.String},System.Boolean)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_SecureString_System_Func_System_String__System_Boolean_" class="expander" data-toggle="collapse">OnBehalfOfAuthenticationProvider(string, string, SecureString, Func&lt;string&gt;, bool)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_SecureString_System_Func_System_String__System_Boolean_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,System.Security.SecureString,System.Func{System.String},System.Boolean)">
+  OnBehalfOfAuthenticationProvider(string, string, SecureString, Func&lt;string&gt;, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_System_Security_SecureString_System_Func_System_String__System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, SecureString clientSecret, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public OnBehalfOfAuthenticationProvider(string clientId, string tenantId, SecureString clientSecret, Func&lt;string&gt; userTokenProvider, bool useSharedCache = false)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">clientId</span>
-        <p><p>The Client ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">tenantId</span>
-        <p><p>The Tenant ID for the Authentication Provider</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securestring">SecureString</a></span>
-        <span class="parametername">clientSecret</span>
-        <p><p>The Client Secret of the app</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</span>
-        <span class="parametername">userTokenProvider</span>
-        <p><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">useSharedCache</span>
-        <p><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Client ID for the Authentication Provider</p>
+</dd>
+    <dt><code>tenantId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The Tenant ID for the Authentication Provider</p>
+</dd>
+    <dt><code>clientSecret</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securestring">SecureString</a></dt>
+    <dd><p>The Client Secret of the app</p>
+</dd>
+    <dt><code>userTokenProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
+</dd>
+    <dt><code>useSharedCache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false</p>
+</dd>
+  </dl>
 
 
 
@@ -525,45 +390,35 @@
 
 
 
-  </div>
-  <h3 id="properties">Properties
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="properties">Properties
+</h2>
+
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate" class="expander" data-toggle="collapse">Certificate</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate">
+  Certificate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate" class="collapse in">
   <div class="markdown level1 summary"><p>The X.509 Certificate to use for app authentication</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public X509Certificate2 Certificate { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public X509Certificate2 Certificate { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2">X509Certificate2</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2">X509Certificate2</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -571,43 +426,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.ClientSecret%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.ClientSecret*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.ClientSecret"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret" class="expander" data-toggle="collapse">ClientSecret</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.ClientSecret">
+  ClientSecret
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret" class="collapse in">
   <div class="markdown level1 summary"><p>The ClientSecret to authenticate the app with ClientId</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public SecureString ClientSecret { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public SecureString ClientSecret { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securestring">SecureString</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.securestring">SecureString</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -615,43 +458,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UseSharedCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UseSharedCache*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UseSharedCache"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache" class="expander" data-toggle="collapse">UseSharedCache</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UseSharedCache">
+  UseSharedCache
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UseSharedCache" class="collapse in">
   <div class="markdown level1 summary"><p>Share the cache between all ClientApplication objects. The cache becomes static. Defaults to false.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public bool UseSharedCache { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool UseSharedCache { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -659,43 +490,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider" class="expander" data-toggle="collapse">UserTokenProvider</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider">
+  UserTokenProvider
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider" class="collapse in">
   <div class="markdown level1 summary"><p>A function providing the consumer user access token to use for the On-Behalf-Of flow</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public Func&lt;string&gt; UserTokenProvider { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Func&lt;string&gt; UserTokenProvider { get; set; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -703,227 +522,157 @@
 
 
 
-  </div>
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync(System.Uri%2CSystem.Net.Http.HttpRequestMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L259" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync(System.Uri,System.Net.Http.HttpRequestMessage)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" class="expander" data-toggle="collapse">AuthenticateRequestAsync(Uri, HttpRequestMessage)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync(System.Uri,System.Net.Http.HttpRequestMessage)">
+  AuthenticateRequestAsync(Uri, HttpRequestMessage)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" class="collapse in">
   <div class="markdown level1 summary"><p>Authenticates the specified request message.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public override Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">resource</span>
-        <p><p>Request uri</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Request uri</p>
+</dd>
+    <dt><code>request</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a> to authenticate.</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></span>
-        <span class="parametername">request</span>
-        <p><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a> to authenticate.</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p><p>The task to await.</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>The task to await.</p>
+</dd>
+  </dl>
 
 
 
 
 
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html#PnP_Core_Auth_OAuthAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_">OAuthAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)</a></div>
 
 
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L332" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri)"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri)</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri)">
+  GetAccessTokenAsync(Uri)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets an access token for the requested resource</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public override Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">resource</span>
-        <p><p>Resource to request an access token for</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Resource to request an access token for</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;
-        <p><p>An access token</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>An access token</p>
+</dd>
+  </dl>
 
 
 
 
 
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html#PnP_Core_Auth_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_">OAuthAuthenticationProvider.GetAccessTokenAsync(Uri)</a></div>
 
 
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L281" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync*"></a>
 
-  <h4 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri,System.String[])"><a href="#collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri, string[])</a></h4>
+  <h3 id="PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" data-uid="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync(System.Uri,System.String[])">
+  GetAccessTokenAsync(Uri, string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Auth_OnBehalfOfAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Gets an access token for the requested resource and scope</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public override Task&lt;string&gt; GetAccessTokenAsync(Uri resource, string[] scopes)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;string&gt; GetAccessTokenAsync(Uri resource, string[] scopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">resource</span>
-        <p><p>Resource to request an access token for (unused)</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>resource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Resource to request an access token for (unused)</p>
+</dd>
+    <dt><code>scopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Scopes to request</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">scopes</span>
-        <p><p>Scopes to request</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;
-        <p><p>An access token</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>An access token</p>
+</dd>
+  </dl>
 
 
 
 
 
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html#PnP_Core_Auth_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___">OAuthAuthenticationProvider.GetAccessTokenAsync(Uri, string[])</a></div>
 
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Confidential/OnBehalfOfAuthenticationProvider.cs/#L22" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

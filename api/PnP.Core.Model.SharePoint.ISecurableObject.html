@@ -1,146 +1,150 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ISecurableObject | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface ISecurableObject | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface ISecurableObject | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISecurableObject | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Defines the properties and methods for securable object (Web, List, ListItem)">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.ISecurableObject">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_ISecurableObject" data-uid="PnP.Core.Model.SharePoint.ISecurableObject">Interface ISecurableObject</h1>
-  <div class="markdown level0 summary"><p>Defines the properties and methods for securable object (Web, List, ListItem)</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.ISecurableObject">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_ISecurableObject" data-uid="PnP.Core.Model.SharePoint.ISecurableObject" class="text-break">
+Interface ISecurableObject  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Defines the properties and methods for securable object (Web, List, ListItem)</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_ISecurableObject_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface ISecurableObject</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ISecurableObject</code></pre>
   </div>
 
 
 
 
 
-  <h3 id="properties">Properties
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.HasUniqueRoleAssignments%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.HasUniqueRoleAssignments*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.HasUniqueRoleAssignments"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments" class="expander" data-toggle="collapse">HasUniqueRoleAssignments</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.HasUniqueRoleAssignments">
+  HasUniqueRoleAssignments
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_HasUniqueRoleAssignments" class="collapse in">
   <div class="markdown level1 summary"><p>Returns if the securable object has unique role assignments</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">bool HasUniqueRoleAssignments { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">bool HasUniqueRoleAssignments { get; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -148,46 +152,34 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RoleAssignments%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RoleAssignments*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RoleAssignments"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments" class="expander" data-toggle="collapse">RoleAssignments</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RoleAssignments">
+  RoleAssignments
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RoleAssignments" class="collapse in">
   <div class="markdown level1 summary"><p>Role Assignments defined on this securable object
 Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a>. <br>
 See <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</a>
 and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</a> to learn more.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IRoleAssignmentCollection RoleAssignments { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">IRoleAssignmentCollection RoleAssignments { get; }</code></pre>
   </div>
 
 
 
 
 
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.IRoleAssignmentCollection.html">IRoleAssignmentCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.IRoleAssignmentCollection.html">IRoleAssignmentCollection</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -195,50 +187,34 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinition(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L145" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinition*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinition(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinition(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddRoleDefinition(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void AddRoleDefinition(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
 
 
@@ -250,58 +226,36 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionAsync(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L153" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinitionAsync(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinitionAsync(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task AddRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -312,56 +266,33 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(PnP.Core.Services.Batch%2CSystem.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L162" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinitionBatch(Batch, int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinitionBatch(Batch, int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void AddRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
 
 
@@ -373,48 +304,30 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L179" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinitionBatch(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinitionBatch(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void AddRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
 
 
@@ -426,66 +339,39 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L171" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinitionBatchAsync(Batch, int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinitionBatchAsync(Batch, int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task AddRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -496,58 +382,36 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L187" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">AddRoleDefinitionBatchAsync(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  AddRoleDefinitionBatchAsync(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task AddRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to add</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to add</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -558,59 +422,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitions(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L129" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitions(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_System_Int32_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitions(int, params string[])</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitions(System.Int32,System.String[])">
+  AddRoleDefinitions(int, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitions_System_Int32_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Adds roles for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">bool AddRoleDefinitions(int principalId, params string[] names)</code></pre>
+    <pre><code class="lang-csharp hljs">bool AddRoleDefinitions(int principalId, params string[] names)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Roles to add</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p><p>Roles to add</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -621,59 +463,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionsAsync(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L137" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionsAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionsAsync(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_System_Int32_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitionsAsync(int, params string[])</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.AddRoleDefinitionsAsync(System.Int32,System.String[])">
+  AddRoleDefinitionsAsync(int, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_AddRoleDefinitionsAsync_System_Int32_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Adds roles for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;bool&gt; AddRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; AddRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Roles to add</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p><p>Roles to add</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -684,49 +504,31 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritance(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritance*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritance(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritance(bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritance(System.Boolean,System.Boolean)">
+  BreakRoleInheritance(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritance_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
 
 
@@ -738,59 +540,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceAsync(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceAsync(bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)">
+  BreakRoleInheritanceAsync(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -801,57 +581,34 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_PnP_Core_Services_Batch_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(PnP.Core.Services.Batch%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(PnP.Core.Services.Batch,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceBatch(Batch, bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(PnP.Core.Services.Batch,System.Boolean,System.Boolean)">
+  BreakRoleInheritanceBatch(Batch, bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch add this request to</p>
+</dd>
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
 
 
@@ -863,49 +620,31 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceBatch(bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatch(System.Boolean,System.Boolean)">
+  BreakRoleInheritanceBatch(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatch_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
 
 
@@ -917,67 +656,40 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_PnP_Core_Services_Batch_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(PnP.Core.Services.Batch%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(PnP.Core.Services.Batch,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceBatchAsync(Batch, bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(PnP.Core.Services.Batch,System.Boolean,System.Boolean)">
+  BreakRoleInheritanceBatchAsync(Batch, bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_PnP_Core_Services_Batch_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>Batch add this request to</p>
+</dd>
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -988,59 +700,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceBatchAsync(bool, bool)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.BreakRoleInheritanceBatchAsync(System.Boolean,System.Boolean)">
+  BreakRoleInheritanceBatchAsync(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_BreakRoleInheritanceBatchAsync_System_Boolean_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Creates unique role assignments for this securable object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+    <pre><code class="lang-csharp hljs">Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">copyRoleAssignments</span>
-        <p><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>copyRoleAssignments</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</p>
+</dd>
+    <dt><code>clearSubscopes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></span>
-        <span class="parametername">clearSubscopes</span>
-        <p><p>If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1051,51 +741,34 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitions(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_System_Int32_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitions(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_System_Int32_" class="expander" data-toggle="collapse">GetRoleDefinitions(int)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_System_Int32_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitions(System.Int32)">
+  GetRoleDefinitions(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitions_System_Int32_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the roles for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">IRoleDefinitionCollection GetRoleDefinitions(int principalId)</code></pre>
+    <pre><code class="lang-csharp hljs">IRoleDefinitionCollection GetRoleDefinitions(int principalId)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1106,51 +779,34 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitionsAsync(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitionsAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitionsAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_System_Int32_" class="expander" data-toggle="collapse">GetRoleDefinitionsAsync(int)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.GetRoleDefinitionsAsync(System.Int32)">
+  GetRoleDefinitionsAsync(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_GetRoleDefinitionsAsync_System_Int32_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the roles for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IRoleDefinitionCollection&gt; GetRoleDefinitionsAsync(int principalId)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IRoleDefinitionCollection&gt; GetRoleDefinitionsAsync(int principalId)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1161,48 +817,30 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinition(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L211" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinition*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinition(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinition(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveRoleDefinition(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void RemoveRoleDefinition(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
 
 
@@ -1214,58 +852,36 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionAsync(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L219" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinitionAsync(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinitionAsync(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1276,56 +892,33 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch%2CSystem.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinitionBatch(Batch, int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinitionBatch(Batch, int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void RemoveRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
 
 
@@ -1337,48 +930,30 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L227" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinitionBatch(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinitionBatch(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">void RemoveRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
 
 
@@ -1390,66 +965,39 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch%2CSystem.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L253" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinitionBatchAsync(Batch, int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinitionBatchAsync(Batch, int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1460,58 +1008,36 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(System.Int32%2CPnP.Core.Model.Security.IRoleDefinition)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L235" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="expander" data-toggle="collapse">RemoveRoleDefinitionBatchAsync(int, IRoleDefinition)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)">
+  RemoveRoleDefinitionBatchAsync(int, IRoleDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
+    <pre><code class="lang-csharp hljs">Task RemoveRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></span>
-        <span class="parametername">roleDefinition</span>
-        <p><p>Role definition to remove</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>roleDefinition</code> <a class="xref" href="PnP.Core.Model.Security.IRoleDefinition.html">IRoleDefinition</a></dt>
+    <dd><p>Role definition to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1522,59 +1048,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitions(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L195" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitions*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitions(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_System_Int32_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitions(int, params string[])</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitions(System.Int32,System.String[])">
+  RemoveRoleDefinitions(int, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitions_System_Int32_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Removes roles for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">bool RemoveRoleDefinitions(int principalId, params string[] names)</code></pre>
+    <pre><code class="lang-csharp hljs">bool RemoveRoleDefinitions(int principalId, params string[] names)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Roles to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p><p>Roles to remove</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1585,59 +1089,37 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionsAsync(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L203" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionsAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionsAsync(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_System_Int32_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitionsAsync(int, params string[])</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.RemoveRoleDefinitionsAsync(System.Int32,System.String[])">
+  RemoveRoleDefinitionsAsync(int, params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_RemoveRoleDefinitionsAsync_System_Int32_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Removes role for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;bool&gt; RemoveRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; RemoveRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">principalId</span>
-        <p><p>Id of the user or group</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>principalId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Id of the user or group</p>
+</dd>
+    <dt><code>names</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Roles to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</span>
-        <span class="parametername">names</span>
-        <p><p>Roles to remove</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1648,28 +1130,20 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritance*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritance"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance" class="expander" data-toggle="collapse">ResetRoleInheritance()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritance">
+  ResetRoleInheritance()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritance" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void ResetRoleInheritance()</code></pre>
+    <pre><code class="lang-csharp hljs">void ResetRoleInheritance()</code></pre>
   </div>
 
 
@@ -1683,40 +1157,28 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync" class="expander" data-toggle="collapse">ResetRoleInheritanceAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceAsync">
+  ResetRoleInheritanceAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task ResetRoleInheritanceAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task ResetRoleInheritanceAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1727,28 +1189,20 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch" class="expander" data-toggle="collapse">ResetRoleInheritanceBatch()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch">
+  ResetRoleInheritanceBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void ResetRoleInheritanceBatch()</code></pre>
+    <pre><code class="lang-csharp hljs">void ResetRoleInheritanceBatch()</code></pre>
   </div>
 
 
@@ -1762,41 +1216,28 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">ResetRoleInheritanceBatch(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatch(PnP.Core.Services.Batch)">
+  ResetRoleInheritanceBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatch_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void ResetRoleInheritanceBatch(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">void ResetRoleInheritanceBatch(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+  </dl>
 
 
 
@@ -1808,40 +1249,28 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync" class="expander" data-toggle="collapse">ResetRoleInheritanceBatchAsync()</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync">
+  ResetRoleInheritanceBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task ResetRoleInheritanceBatchAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task ResetRoleInheritanceBatchAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1852,51 +1281,34 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L95" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync*"></a>
 
-  <h4 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">ResetRoleInheritanceBatchAsync(Batch)</a></h4>
+  <h3 id="PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.ISecurableObject.ResetRoleInheritanceBatchAsync(PnP.Core.Services.Batch)">
+  ResetRoleInheritanceBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_SharePoint_ISecurableObject_ResetRoleInheritanceBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
   <div class="markdown level1 summary"><p>Removes the local role assignments so that the web, and all its descendant objects, re-inherit role assignments from the parent object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task ResetRoleInheritanceBatchAsync(Batch batch)</code></pre>
+    <pre><code class="lang-csharp hljs">Task ResetRoleInheritanceBatchAsync(Batch batch)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>The batch to add this request to</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd><p>The batch to add this request to</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1906,36 +1318,31 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISecurableObject.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

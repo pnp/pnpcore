@@ -1,160 +1,153 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ISharePointAdmin | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface ISharePointAdmin | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface ISharePointAdmin | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISharePointAdmin | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="SharePoint Admin features">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin">Interface ISharePointAdmin</h1>
-  <div class="markdown level0 summary"><p>SharePoint Admin features</p>
+
+        <article data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin">
+
+
+
+  <h1 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin" class="text-break">
+Interface ISharePointAdmin  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.Admin.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>SharePoint Admin features</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Admin.html">Admin</a>.<a class="xref" href="PnP.Core.Admin.Model.html">Model</a>.<a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.Admin.dll</h6>
-
-  <h5 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface ISharePointAdmin</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ISharePointAdmin</code></pre>
   </div>
 
 
 
 
 
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSite(System.Uri%2CSystem.Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L175" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSite*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSite(System.Uri,System.Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">ConnectToHubSite(Uri, Uri, VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSite(System.Uri,System.Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  ConnectToHubSite(Uri, Uri, VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSite_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Connects a site collection to a hub site. This method can also connect the site collection when the hub site requires approval for connecting new sites.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void ConnectToHubSite(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">void ConnectToHubSite(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">siteCollectionUrlToConnect</span>
-        <p><p>Uri of the site collection to connect to the hub</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">hubSiteCollectionUrl</span>
-        <p><p>Uri of the hub to connect the site collection to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>siteCollectionUrlToConnect</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the site collection to connect to the hub</p>
+</dd>
+    <dt><code>hubSiteCollectionUrl</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the hub to connect the site collection to</p>
+</dd>
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
 
 
@@ -166,67 +159,40 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSiteAsync(System.Uri%2CSystem.Uri%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L166" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSiteAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSiteAsync(System.Uri,System.Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">ConnectToHubSiteAsync(Uri, Uri, VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.ConnectToHubSiteAsync(System.Uri,System.Uri,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  ConnectToHubSiteAsync(Uri, Uri, VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_ConnectToHubSiteAsync_System_Uri_System_Uri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Connects a site collection to a hub site. This method can also connect the site collection when the hub site requires approval for connecting new sites.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task ConnectToHubSiteAsync(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task ConnectToHubSiteAsync(Uri siteCollectionUrlToConnect, Uri hubSiteCollectionUrl, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">siteCollectionUrlToConnect</span>
-        <p><p>Uri of the site collection to connect to the hub</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>siteCollectionUrlToConnect</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the site collection to connect to the hub</p>
+</dd>
+    <dt><code>hubSiteCollectionUrl</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>Uri of the hub to connect the site collection to</p>
+</dd>
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></span>
-        <span class="parametername">hubSiteCollectionUrl</span>
-        <p><p>Uri of the hub to connect the site collection to</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -237,52 +203,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdminCenterContext(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdminCenterContext(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center site</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">PnPContext GetTenantAdminCenterContext(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">PnPContext GetTenantAdminCenterContext(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>
-        <p><p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></dt>
+    <dd><p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center</p>
+</dd>
+  </dl>
 
 
 
@@ -293,52 +242,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdminCenterContextAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContextAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdminCenterContextAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContextAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center site</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;PnPContext&gt; GetTenantAdminCenterContextAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;PnPContext&gt; GetTenantAdminCenterContextAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;
-        <p><p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a>&gt;</dt>
+    <dd><p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a> for the tenant's SharePoint admin center</p>
+</dd>
+  </dl>
 
 
 
@@ -349,52 +281,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdminCenterUri(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdminCenterUri(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant admin center url (e.g. <a href="https://contoso-admin.sharepoint.com">https://contoso-admin.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Uri GetTenantAdminCenterUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Uri GetTenantAdminCenterUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>
-        <p><p>SharePoint tenant admin center url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>SharePoint tenant admin center url</p>
+</dd>
+  </dl>
 
 
 
@@ -405,52 +320,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdminCenterUriAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdminCenterUriAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant admin center url (e.g. <a href="https://contoso-admin.sharepoint.com">https://contoso-admin.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;Uri&gt; GetTenantAdminCenterUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;Uri&gt; GetTenantAdminCenterUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;
-        <p><p>SharePoint tenant admin center url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;</dt>
+    <dd><p>SharePoint tenant admin center url</p>
+</dd>
+  </dl>
 
 
 
@@ -461,52 +359,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdmins(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdmins(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdmins(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdmins_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns a list of <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>s who are SharePoint Online Tenant admin</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">List&lt;ISharePointUser&gt; GetTenantAdmins(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">List&lt;ISharePointUser&gt; GetTenantAdmins(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;
-        <p><p>List of SharePoint Online Tenant admins</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;</dt>
+    <dd><p>List of SharePoint Online Tenant admins</p>
+</dd>
+  </dl>
 
 
 
@@ -517,52 +398,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantAdminsAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantAdminsAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminsAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns a list of <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>s who are SharePoint Online Tenant admin</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;List&lt;ISharePointUser&gt;&gt; GetTenantAdminsAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;ISharePointUser&gt;&gt; GetTenantAdminsAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;&gt;
-        <p><p>List of SharePoint Online Tenant admins</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;&gt;</dt>
+    <dd><p>List of SharePoint Online Tenant admins</p>
+</dd>
+  </dl>
 
 
 
@@ -573,52 +437,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantMySiteHostUri(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantMySiteHostUri(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant my site host url (e.g. <a href="https://contoso-my.sharepoint.com">https://contoso-my.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Uri GetTenantMySiteHostUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Uri GetTenantMySiteHostUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>
-        <p><p>SharePoint tenant my site host url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>SharePoint tenant my site host url</p>
+</dd>
+  </dl>
 
 
 
@@ -629,52 +476,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L48" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantMySiteHostUriAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantMySiteHostUriAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant my site host url (e.g. <a href="https://contoso-my.sharepoint.com">https://contoso-my.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;Uri&gt; GetTenantMySiteHostUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;Uri&gt; GetTenantMySiteHostUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;
-        <p><p>SharePoint tenant my site host url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;</dt>
+    <dd><p>SharePoint tenant my site host url</p>
+</dd>
+  </dl>
 
 
 
@@ -685,52 +515,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantPortalUri(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUri(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantPortalUri(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUri_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant portal url (e.g. <a href="https://contoso.sharepoint.com">https://contoso.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Uri GetTenantPortalUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Uri GetTenantPortalUri(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>
-        <p><p>SharePoint tenant portal url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>SharePoint tenant portal url</p>
+</dd>
+  </dl>
 
 
 
@@ -741,52 +554,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantPortalUriAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPortalUriAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantPortalUriAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPortalUriAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the SharePoint tenant portal url (e.g. <a href="https://contoso.sharepoint.com">https://contoso.sharepoint.com</a>)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;Uri&gt; GetTenantPortalUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;Uri&gt; GetTenantPortalUriAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;
-        <p><p>SharePoint tenant portal url</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>&gt;</dt>
+    <dd><p>SharePoint tenant portal url</p>
+</dd>
+  </dl>
 
 
 
@@ -797,52 +593,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L109" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantProperties(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantProperties(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the properties of this tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">ITenantProperties GetTenantProperties(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ITenantProperties.html">ITenantProperties</a>
-        <p><p>Properties of the tenant</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Admin.Model.SharePoint.ITenantProperties.html">ITenantProperties</a></dt>
+    <dd><p>Properties of the tenant</p>
+</dd>
+  </dl>
 
 
 
@@ -853,52 +632,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L102" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantPropertiesAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantPropertiesAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the properties of this tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ITenantProperties&gt; GetTenantPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;ITenantProperties&gt; GetTenantPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.ITenantProperties.html">ITenantProperties</a>&gt;
-        <p><p>Properties of the tenant</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.ITenantProperties.html">ITenantProperties</a>&gt;</dt>
+    <dd><p>Properties of the tenant</p>
+</dd>
+  </dl>
 
 
 
@@ -909,52 +671,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L139" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedProperties*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantSearchConfigurationManagedProperties(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedProperties(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantSearchConfigurationManagedProperties(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedProperties_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the managed properties from the search configuration of the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">List&lt;IManagedProperty&gt; GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">List&lt;IManagedProperty&gt; GetTenantSearchConfigurationManagedProperties(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IManagedProperty.html">IManagedProperty</a>&gt;
-        <p><p>List of managed properties</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IManagedProperty.html">IManagedProperty</a>&gt;</dt>
+    <dd><p>List of managed properties</p>
+</dd>
+  </dl>
 
 
 
@@ -965,52 +710,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L132" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedPropertiesAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationManagedPropertiesAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationManagedPropertiesAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the managed properties from the search configuration of the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;List&lt;IManagedProperty&gt;&gt; GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IManagedProperty&gt;&gt; GetTenantSearchConfigurationManagedPropertiesAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IManagedProperty.html">IManagedProperty</a>&gt;&gt;
-        <p><p>List of managed properties</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IManagedProperty.html">IManagedProperty</a>&gt;&gt;</dt>
+    <dd><p>List of managed properties</p>
+</dd>
+  </dl>
 
 
 
@@ -1021,52 +749,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXml(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L125" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXml*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXml(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantSearchConfigurationXml(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXml(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantSearchConfigurationXml(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the search configuration of the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">string GetTenantSearchConfigurationXml(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p><p>Search configuration XML</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Search configuration XML</p>
+</dd>
+  </dl>
 
 
 
@@ -1077,52 +788,35 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXmlAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L118" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXmlAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXmlAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">GetTenantSearchConfigurationXmlAsync(VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantSearchConfigurationXmlAsync(PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  GetTenantSearchConfigurationXmlAsync(VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXmlAsync_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets the search configuration of the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;string&gt; GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;string&gt; GetTenantSearchConfigurationXmlAsync(VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;
-        <p><p>Search configuration XML</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>Search configuration XML</p>
+</dd>
+  </dl>
 
 
 
@@ -1133,41 +827,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdmin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L95" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdmin*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdmin"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin" class="expander" data-toggle="collapse">IsCurrentUserTenantAdmin()</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdmin">
+  IsCurrentUserTenantAdmin()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdmin" class="collapse in">
   <div class="markdown level1 summary"><p>Checks if the current user is SharePoint Online tenant admin</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">bool IsCurrentUserTenantAdmin()</code></pre>
+    <pre><code class="lang-csharp hljs">bool IsCurrentUserTenantAdmin()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if the user is a SharePoint Online tenant admin, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the user is a SharePoint Online tenant admin, false otherwise</p>
+</dd>
+  </dl>
 
 
 
@@ -1178,41 +860,29 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L89" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync" class="expander" data-toggle="collapse">IsCurrentUserTenantAdminAsync()</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync">
+  IsCurrentUserTenantAdminAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_IsCurrentUserTenantAdminAsync" class="collapse in">
   <div class="markdown level1 summary"><p>Checks if the current user is SharePoint Online tenant admin</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;bool&gt; IsCurrentUserTenantAdminAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; IsCurrentUserTenantAdminAsync()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;
-        <p><p>True if the user is a SharePoint Online tenant admin, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd><p>True if the user is a SharePoint Online tenant admin, false otherwise</p>
+</dd>
+  </dl>
 
 
 
@@ -1223,49 +893,31 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXml(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L153" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXml*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXml(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">SetTenantSearchConfigurationXml(string, VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXml(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  SetTenantSearchConfigurationXml(string, VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXml_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the search configuration for the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetTenantSearchConfigurationXml(string configuration, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">configuration</span>
-        <p><p>Search configuration, obtained via <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantSearchConfigurationXml(VanityUrlOptions)</a> to apply</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Search configuration, obtained via <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantSearchConfigurationXml(VanityUrlOptions)</a> to apply</p>
+</dd>
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
 
 
@@ -1277,59 +929,37 @@
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXmlAsync(System.String%2CPnP.Core.Admin.Model.SharePoint.VanityUrlOptions)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L146" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXmlAsync*"></a>
 
-  <h4 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXmlAsync(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="expander" data-toggle="collapse">SetTenantSearchConfigurationXmlAsync(string, VanityUrlOptions)</a></h4>
+  <h3 id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.SetTenantSearchConfigurationXmlAsync(System.String,PnP.Core.Admin.Model.SharePoint.VanityUrlOptions)">
+  SetTenantSearchConfigurationXmlAsync(string, VanityUrlOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_SetTenantSearchConfigurationXmlAsync_System_String_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Sets the search configuration for the tenant</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">Task SetTenantSearchConfigurationXmlAsync(string configuration, VanityUrlOptions vanityUrlOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetTenantSearchConfigurationXmlAsync(string configuration, VanityUrlOptions vanityUrlOptions = null)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">configuration</span>
-        <p><p>Search configuration, obtained via <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantSearchConfigurationXml(VanityUrlOptions)</a> to apply</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Search configuration, obtained via <a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantSearchConfigurationXml_PnP_Core_Admin_Model_SharePoint_VanityUrlOptions_">GetTenantSearchConfigurationXml(VanityUrlOptions)</a> to apply</p>
+</dd>
+    <dt><code>vanityUrlOptions</code> <a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></dt>
+    <dd><p>Optionally specify the custom vanity URI's used by this tenant</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Admin.Model.SharePoint.VanityUrlOptions.html">VanityUrlOptions</a></span>
-        <span class="parametername">vanityUrlOptions</span>
-        <p><p>Optionally specify the custom vanity URI's used by this tenant</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -1339,36 +969,31 @@
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

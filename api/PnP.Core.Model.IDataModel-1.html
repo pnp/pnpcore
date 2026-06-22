@@ -1,886 +1,677 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IDataModel&lt;TModel&gt; | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IDataModel&lt;TModel&gt; | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IDataModel&lt;TModel&gt; | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IDataModel&lt;TModel&gt; | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Defines the very basic interface for every Domain Model object. Add methods are implemented in their respective model interfaces">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.IDataModel`1">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_IDataModel_1" data-uid="PnP.Core.Model.IDataModel`1">Interface IDataModel&lt;TModel&gt;</h1>
-  <div class="markdown level0 summary"><p>Defines the very basic interface for every Domain Model object.
+
+        <article data-uid="PnP.Core.Model.IDataModel`1">
+
+
+
+  <h1 id="PnP_Core_Model_IDataModel_1" data-uid="PnP.Core.Model.IDataModel`1" class="text-break">
+Interface IDataModel&lt;TModel&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Defines the very basic interface for every Domain Model object.
 Add methods are implemented in their respective model interfaces</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IDataModel&lt;TModel&gt; : IDataModelParent, IDataModelWithContext, ISupportModules&lt;TModel&gt;</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModel</code></dt>
+    <dd><p>The actual type of the Domain Model object</p>
+</dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
     </div>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_IDataModel_1_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IDataModel&lt;TModel&gt; : IDataModelParent, IDataModelWithContext, ISupportModules&lt;TModel&gt;</code></pre>
-  </div>
-
-
-
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="parametername">TModel</span>
-        <p><p>The actual type of the Domain Model object</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_Requested.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.Requested%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_Requested_" data-uid="PnP.Core.Model.IDataModel`1.Requested*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_Requested" data-uid="PnP.Core.Model.IDataModel`1.Requested"><a href="#collapsible-PnP_Core_Model_IDataModel_1_Requested" class="expander" data-toggle="collapse">Requested</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_Requested" class="collapse in">
-  <div class="markdown level1 summary"><p>Defines whether this model object was requested from the back-end</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool Requested { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ArePropertiesAvailable(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_" data-uid="PnP.Core.Model.IDataModel`1.ArePropertiesAvailable*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.ArePropertiesAvailable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">ArePropertiesAvailable(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if the needed properties were loaded or not</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool ArePropertiesAvailable(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">expressions</span>
-        <p><p>Expression listing the properties to check</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if properties were loaded, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_EnsureProperties_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.EnsureProperties(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_EnsureProperties_" data-uid="PnP.Core.Model.IDataModel`1.EnsureProperties*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_EnsureProperties_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.EnsureProperties(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModel_1_EnsureProperties_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">EnsureProperties(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_EnsureProperties_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if the requested properties are loaded for the given model, if not they're loaded right now</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void EnsureProperties(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">expressions</span>
-        <p><p>Expressions listing the properties to load</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.EnsurePropertiesAsync(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_" data-uid="PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">EnsurePropertiesAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if the requested properties are loaded for the given model, if not they're loaded via a GetAsync call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task EnsurePropertiesAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">expressions</span>
-        <p><p>Expressions listing the properties to load</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequest(PnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequest*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequest(PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequest(ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ApiRequestResponse ExecuteRequest(ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a>
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestAsync*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequestAsync(ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;ApiRequestResponse&gt; ExecuteRequestAsync(ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a>&gt;
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequestBatch(ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt; ExecuteRequestBatch(ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequestBatch(PnP.Core.Services.Batch%2CPnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L104" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequestBatch(Batch, ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt; ExecuteRequestBatch(Batch batch, ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequestBatchAsync(ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt;&gt; ExecuteRequestBatchAsync(ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.ExecuteRequestBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Services.ApiRequest)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" class="expander" data-toggle="collapse">ExecuteRequestBatchAsync(Batch, ApiRequest)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" class="collapse in">
-  <div class="markdown level1 summary"><p>Executes a given API call</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt;&gt; ExecuteRequestBatchAsync(Batch batch, ApiRequest request)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></span>
-        <span class="parametername">request</span>
-        <p><p>API call to execute</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;
-        <p><p>The response of the API call</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_HasChanged_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.HasChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_HasChanged_" data-uid="PnP.Core.Model.IDataModel`1.HasChanged*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_HasChanged_System_String_" data-uid="PnP.Core.Model.IDataModel`1.HasChanged(System.String)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_HasChanged_System_String_" class="expander" data-toggle="collapse">HasChanged(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_HasChanged_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if a property on this model object has changed</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool HasChanged(string propertyName = &quot;&quot;)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">propertyName</span>
-        <p><p>Property to check</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if changed, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_HasValue_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.HasValue(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_HasValue_" data-uid="PnP.Core.Model.IDataModel`1.HasValue*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_HasValue_System_String_" data-uid="PnP.Core.Model.IDataModel`1.HasValue(System.String)"><a href="#collapsible-PnP_Core_Model_IDataModel_1_HasValue_System_String_" class="expander" data-toggle="collapse">HasValue(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_HasValue_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if a property on this model object has a value set</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool HasValue(string propertyName = &quot;&quot;)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">propertyName</span>
-        <p><p>Property to check</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if set, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModel_1_IsPropertyAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModel%601.IsPropertyAvailable(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_IDataModel_1_IsPropertyAvailable_" data-uid="PnP.Core.Model.IDataModel`1.IsPropertyAvailable*"></a>
-
-  <h4 id="PnP_Core_Model_IDataModel_1_IsPropertyAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="PnP.Core.Model.IDataModel`1.IsPropertyAvailable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})"><a href="#collapsible-PnP_Core_Model_IDataModel_1_IsPropertyAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object___" class="expander" data-toggle="collapse">IsPropertyAvailable(Expression&lt;Func&lt;TModel, object&gt;&gt;)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_IDataModel_1_IsPropertyAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object___" class="collapse in">
-  <div class="markdown level1 summary"><p>Checks if a property is loaded or not</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool IsPropertyAvailable(Expression&lt;Func&lt;TModel, object&gt;&gt; expression)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</span>
-        <span class="parametername">expression</span>
-        <p><p>Expression listing the property to load</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if property was loaded, false otherwise</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders__1_PnP_Core_Model_ISupportModules___0__System_Collections_Generic_Dictionary_System_String_System_String__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Dictionary&lt;string, string&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_IDataModel_1_Requested_" data-uid="PnP.Core.Model.IDataModel`1.Requested*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_Requested" data-uid="PnP.Core.Model.IDataModel`1.Requested">
+  Requested
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Defines whether this model object was requested from the back-end</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Requested { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_" data-uid="PnP.Core.Model.IDataModel`1.ArePropertiesAvailable*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.ArePropertiesAvailable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  ArePropertiesAvailable(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if the needed properties were loaded or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ArePropertiesAvailable(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expressions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Expression listing the properties to check</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if properties were loaded, false otherwise</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_EnsureProperties_" data-uid="PnP.Core.Model.IDataModel`1.EnsureProperties*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_EnsureProperties_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.EnsureProperties(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  EnsureProperties(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if the requested properties are loaded for the given model, if not they're loaded right now</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void EnsureProperties(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expressions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Expressions listing the properties to load</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_" data-uid="PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  EnsurePropertiesAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if the requested properties are loaded for the given model, if not they're loaded via a GetAsync call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task EnsurePropertiesAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expressions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>Expressions listing the properties to load</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequest*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequest(PnP.Core.Services.ApiRequest)">
+  ExecuteRequest(ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ApiRequestResponse ExecuteRequest(ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a></dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestAsync*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)">
+  ExecuteRequestAsync(ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ApiRequestResponse&gt; ExecuteRequestAsync(ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Services.ApiRequestResponse.html">ApiRequestResponse</a>&gt;</dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)">
+  ExecuteRequestBatch(ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt; ExecuteRequestBatch(ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)">
+  ExecuteRequestBatch(Batch, ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt; ExecuteRequestBatch(Batch batch, ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)">
+  ExecuteRequestBatchAsync(ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt;&gt; ExecuteRequestBatchAsync(ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_" data-uid="PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)">
+  ExecuteRequestBatchAsync(Batch, ApiRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a given API call</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt;&gt; ExecuteRequestBatchAsync(Batch batch, ApiRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+    <dt><code>request</code> <a class="xref" href="PnP.Core.Services.ApiRequest.html">ApiRequest</a></dt>
+    <dd><p>API call to execute</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult</a>&lt;<a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The response of the API call</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_HasChanged_" data-uid="PnP.Core.Model.IDataModel`1.HasChanged*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_HasChanged_System_String_" data-uid="PnP.Core.Model.IDataModel`1.HasChanged(System.String)">
+  HasChanged(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if a property on this model object has changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HasChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>propertyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Property to check</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if changed, false otherwise</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_HasValue_" data-uid="PnP.Core.Model.IDataModel`1.HasValue*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_HasValue_System_String_" data-uid="PnP.Core.Model.IDataModel`1.HasValue(System.String)">
+  HasValue(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if a property on this model object has a value set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HasValue(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>propertyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Property to check</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if set, false otherwise</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_IDataModel_1_IsPropertyAvailable_" data-uid="PnP.Core.Model.IDataModel`1.IsPropertyAvailable*"></a>
+
+  <h3 id="PnP_Core_Model_IDataModel_1_IsPropertyAvailable_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="PnP.Core.Model.IDataModel`1.IsPropertyAvailable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  IsPropertyAvailable(Expression&lt;Func&lt;TModel, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks if a property is loaded or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsPropertyAvailable(Expression&lt;Func&lt;TModel, object&gt;&gt; expression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd><p>Expression listing the property to load</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if property was loaded, false otherwise</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModel.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

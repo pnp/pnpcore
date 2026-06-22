@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IView | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IView | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IView | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IView | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface to define a View object">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IView">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L9" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IView" data-uid="PnP.Core.Model.SharePoint.IView">Interface IView</h1>
-  <div class="markdown level0 summary"><p>Public interface to define a View object</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IView">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IView" data-uid="PnP.Core.Model.SharePoint.IView" class="text-break">
+Interface IView  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface to define a View object</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IView : IDataModel&lt;IView&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IView&gt;, IDataModelGet&lt;IView&gt;, IDataModelLoad&lt;IView&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IView&gt;.Requested</a>
     </div>
@@ -185,2417 +207,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IView_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IView : IDataModel&lt;IView&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;IView&gt;, IDataModelGet&lt;IView&gt;, IDataModelLoad&lt;IView&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="properties">Properties
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Aggregations.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Aggregations%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Aggregations_" data-uid="PnP.Core.Model.SharePoint.IView.Aggregations*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Aggregations" data-uid="PnP.Core.Model.SharePoint.IView.Aggregations"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Aggregations" class="expander" data-toggle="collapse">Aggregations</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Aggregations" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the aggregations displayed by the list view. The Aggregations property contains a CAML string.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Aggregations { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_AggregationsStatus.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.AggregationsStatus%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_AggregationsStatus_" data-uid="PnP.Core.Model.SharePoint.IView.AggregationsStatus*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_AggregationsStatus" data-uid="PnP.Core.Model.SharePoint.IView.AggregationsStatus"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_AggregationsStatus" class="expander" data-toggle="collapse">AggregationsStatus</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_AggregationsStatus" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether the aggregations are shown in the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string AggregationsStatus { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_All.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.All%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L251" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_All_" data-uid="PnP.Core.Model.SharePoint.IView.All*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_All" data-uid="PnP.Core.Model.SharePoint.IView.All"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_All" class="expander" data-toggle="collapse">All</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_All" class="collapse in">
-  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">object All { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId_" data-uid="PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId" data-uid="PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId" class="expander" data-toggle="collapse">AssociatedContentTypeId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets Associated Content Type Id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string AssociatedContentTypeId { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_BaseViewId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.BaseViewId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_BaseViewId_" data-uid="PnP.Core.Model.SharePoint.IView.BaseViewId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_BaseViewId" data-uid="PnP.Core.Model.SharePoint.IView.BaseViewId"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_BaseViewId" class="expander" data-toggle="collapse">BaseViewId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_BaseViewId" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the base view identifier of the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string BaseViewId { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_CalendarViewStyles.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.CalendarViewStyles%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_CalendarViewStyles_" data-uid="PnP.Core.Model.SharePoint.IView.CalendarViewStyles*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_CalendarViewStyles" data-uid="PnP.Core.Model.SharePoint.IView.CalendarViewStyles"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_CalendarViewStyles" class="expander" data-toggle="collapse">CalendarViewStyles</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_CalendarViewStyles" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets Calendar View Styles</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string CalendarViewStyles { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ColumnWidth.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ColumnWidth%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ColumnWidth_" data-uid="PnP.Core.Model.SharePoint.IView.ColumnWidth*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ColumnWidth" data-uid="PnP.Core.Model.SharePoint.IView.ColumnWidth"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ColumnWidth" class="expander" data-toggle="collapse">ColumnWidth</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ColumnWidth" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets Column Width</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ColumnWidth { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_CustomFormatter.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.CustomFormatter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_CustomFormatter_" data-uid="PnP.Core.Model.SharePoint.IView.CustomFormatter*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_CustomFormatter" data-uid="PnP.Core.Model.SharePoint.IView.CustomFormatter"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_CustomFormatter" class="expander" data-toggle="collapse">CustomFormatter</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_CustomFormatter" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets Custom Formatter</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string CustomFormatter { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_DefaultView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.DefaultView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_DefaultView_" data-uid="PnP.Core.Model.SharePoint.IView.DefaultView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_DefaultView" data-uid="PnP.Core.Model.SharePoint.IView.DefaultView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_DefaultView" class="expander" data-toggle="collapse">DefaultView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_DefaultView" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a Boolean value that specifies whether the view is the default view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool DefaultView { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_DefaultViewForContentType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.DefaultViewForContentType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_DefaultViewForContentType_" data-uid="PnP.Core.Model.SharePoint.IView.DefaultViewForContentType*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_DefaultViewForContentType" data-uid="PnP.Core.Model.SharePoint.IView.DefaultViewForContentType"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_DefaultViewForContentType" class="expander" data-toggle="collapse">DefaultViewForContentType</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_DefaultViewForContentType" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a Boolean value that specifies whether the view is the default view
-for the associated content type</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool DefaultViewForContentType { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_EditorModified.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.EditorModified%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L63" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_EditorModified_" data-uid="PnP.Core.Model.SharePoint.IView.EditorModified*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_EditorModified" data-uid="PnP.Core.Model.SharePoint.IView.EditorModified"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_EditorModified" class="expander" data-toggle="collapse">EditorModified</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_EditorModified" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a Boolean value that indicates whether the view was modified in an HTML editor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool EditorModified { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Formats.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Formats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Formats_" data-uid="PnP.Core.Model.SharePoint.IView.Formats*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Formats" data-uid="PnP.Core.Model.SharePoint.IView.Formats"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Formats" class="expander" data-toggle="collapse">Formats</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Formats" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the definitions for column and row formatting that are used in a datasheet view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Formats { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_GridLayout.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.GridLayout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_GridLayout_" data-uid="PnP.Core.Model.SharePoint.IView.GridLayout*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_GridLayout" data-uid="PnP.Core.Model.SharePoint.IView.GridLayout"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_GridLayout" class="expander" data-toggle="collapse">GridLayout</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_GridLayout" class="collapse in">
-  <div class="markdown level1 summary"><p>An attribute of the view, specifies the quick edit layout</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string GridLayout { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Hidden.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Hidden%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L78" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Hidden_" data-uid="PnP.Core.Model.SharePoint.IView.Hidden*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Hidden" data-uid="PnP.Core.Model.SharePoint.IView.Hidden"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Hidden" class="expander" data-toggle="collapse">Hidden</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Hidden" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets Hidden</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool Hidden { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_HtmlSchemaXml.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.HtmlSchemaXml%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_HtmlSchemaXml_" data-uid="PnP.Core.Model.SharePoint.IView.HtmlSchemaXml*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_HtmlSchemaXml" data-uid="PnP.Core.Model.SharePoint.IView.HtmlSchemaXml"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_HtmlSchemaXml" class="expander" data-toggle="collapse">HtmlSchemaXml</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_HtmlSchemaXml" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets the Html Schema Xml</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string HtmlSchemaXml { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Id_" data-uid="PnP.Core.Model.SharePoint.IView.Id*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Id" data-uid="PnP.Core.Model.SharePoint.IView.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Id" class="expander" data-toggle="collapse">Id</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets the Id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Guid Id { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ImageUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ImageUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L93" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ImageUrl_" data-uid="PnP.Core.Model.SharePoint.IView.ImageUrl*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ImageUrl" data-uid="PnP.Core.Model.SharePoint.IView.ImageUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ImageUrl" class="expander" data-toggle="collapse">ImageUrl</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ImageUrl" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the server relative or absolute URL of the Image for the List View</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ImageUrl { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_IncludeRootFolder.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.IncludeRootFolder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L98" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_IncludeRootFolder_" data-uid="PnP.Core.Model.SharePoint.IView.IncludeRootFolder*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_IncludeRootFolder" data-uid="PnP.Core.Model.SharePoint.IView.IncludeRootFolder"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_IncludeRootFolder" class="expander" data-toggle="collapse">IncludeRootFolder</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_IncludeRootFolder" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies if the Root Folder is included in the List View</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool IncludeRootFolder { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_JSLink.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.JSLink%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L108" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_JSLink_" data-uid="PnP.Core.Model.SharePoint.IView.JSLink*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_JSLink" data-uid="PnP.Core.Model.SharePoint.IView.JSLink"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_JSLink" class="expander" data-toggle="collapse">JSLink</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_JSLink" class="collapse in">
-  <div class="markdown level1 summary"><p>An attribute of the view, specifies the Javascript files used for the view.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string JSLink { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ListViewXml.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ListViewXml%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L113" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ListViewXml_" data-uid="PnP.Core.Model.SharePoint.IView.ListViewXml*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ListViewXml" data-uid="PnP.Core.Model.SharePoint.IView.ListViewXml"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ListViewXml" class="expander" data-toggle="collapse">ListViewXml</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ListViewXml" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets List View Xml</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ListViewXml { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Method.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Method%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L118" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Method_" data-uid="PnP.Core.Model.SharePoint.IView.Method*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Method" data-uid="PnP.Core.Model.SharePoint.IView.Method"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Method" class="expander" data-toggle="collapse">Method</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Method" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the view method for the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Method { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_MobileDefaultView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.MobileDefaultView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L123" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_MobileDefaultView_" data-uid="PnP.Core.Model.SharePoint.IView.MobileDefaultView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_MobileDefaultView" data-uid="PnP.Core.Model.SharePoint.IView.MobileDefaultView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_MobileDefaultView" class="expander" data-toggle="collapse">MobileDefaultView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_MobileDefaultView" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether the list view is the default for a mobile device</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool MobileDefaultView { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_MobileView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.MobileView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L128" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_MobileView_" data-uid="PnP.Core.Model.SharePoint.IView.MobileView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_MobileView" data-uid="PnP.Core.Model.SharePoint.IView.MobileView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_MobileView" class="expander" data-toggle="collapse">MobileView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_MobileView" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether the list view applies to a mobile device</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool MobileView { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ModerationType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ModerationType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L136" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ModerationType_" data-uid="PnP.Core.Model.SharePoint.IView.ModerationType*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ModerationType" data-uid="PnP.Core.Model.SharePoint.IView.ModerationType"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ModerationType" class="expander" data-toggle="collapse">ModerationType</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ModerationType" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the content approval type for the list view. A string that indicates the Content Approval type, which can be one of the following values:
-HideUnapproved -- Unapproved draft items are hidden from users who only have permission to read items.
-Contributor -- Pending and rejected items for the current user are displayed.
-Moderator -- Pending and rejected items for all users are displayed to users who have managed list permissions.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ModerationType { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_NewDocumentTemplates.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.NewDocumentTemplates%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L141" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_NewDocumentTemplates_" data-uid="PnP.Core.Model.SharePoint.IView.NewDocumentTemplates*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_NewDocumentTemplates" data-uid="PnP.Core.Model.SharePoint.IView.NewDocumentTemplates"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_NewDocumentTemplates" class="expander" data-toggle="collapse">NewDocumentTemplates</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_NewDocumentTemplates" class="collapse in">
-  <div class="markdown level1 summary"><p>An attribute of the view, indicates what documents/templates are visible in &quot;New&quot; menu of a document library</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string NewDocumentTemplates { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_OrderedView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.OrderedView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L146" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_OrderedView_" data-uid="PnP.Core.Model.SharePoint.IView.OrderedView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_OrderedView" data-uid="PnP.Core.Model.SharePoint.IView.OrderedView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_OrderedView" class="expander" data-toggle="collapse">OrderedView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_OrderedView" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether users can reorder items through the user interface</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool OrderedView { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_PageRenderType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.PageRenderType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_PageRenderType_" data-uid="PnP.Core.Model.SharePoint.IView.PageRenderType*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_PageRenderType" data-uid="PnP.Core.Model.SharePoint.IView.PageRenderType"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_PageRenderType" class="expander" data-toggle="collapse">PageRenderType</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_PageRenderType" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets the reason why the page is rendered in classic UX, or Modern if the page is in Modern UX</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ListPageRenderType PageRenderType { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListPageRenderType.html">ListPageRenderType</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Paged.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Paged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L151" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Paged_" data-uid="PnP.Core.Model.SharePoint.IView.Paged*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Paged" data-uid="PnP.Core.Model.SharePoint.IView.Paged"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Paged" class="expander" data-toggle="collapse">Paged</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Paged" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether the list view supports displaying items across multiple pages</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool Paged { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_PersonalView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.PersonalView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L161" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_PersonalView_" data-uid="PnP.Core.Model.SharePoint.IView.PersonalView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_PersonalView" data-uid="PnP.Core.Model.SharePoint.IView.PersonalView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_PersonalView" class="expander" data-toggle="collapse">PersonalView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_PersonalView" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether the view is a personal view or a public view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool PersonalView { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ReadOnlyView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ReadOnlyView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L176" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ReadOnlyView_" data-uid="PnP.Core.Model.SharePoint.IView.ReadOnlyView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ReadOnlyView" data-uid="PnP.Core.Model.SharePoint.IView.ReadOnlyView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ReadOnlyView" class="expander" data-toggle="collapse">ReadOnlyView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ReadOnlyView" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies if the view is read-only</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool ReadOnlyView { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_RequiresClientIntegration.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.RequiresClientIntegration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L181" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_RequiresClientIntegration_" data-uid="PnP.Core.Model.SharePoint.IView.RequiresClientIntegration*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_RequiresClientIntegration" data-uid="PnP.Core.Model.SharePoint.IView.RequiresClientIntegration"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_RequiresClientIntegration" class="expander" data-toggle="collapse">RequiresClientIntegration</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_RequiresClientIntegration" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies whether this view requires client integration</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool RequiresClientIntegration { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_RowLimit.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.RowLimit%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L186" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_RowLimit_" data-uid="PnP.Core.Model.SharePoint.IView.RowLimit*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_RowLimit" data-uid="PnP.Core.Model.SharePoint.IView.RowLimit"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_RowLimit" class="expander" data-toggle="collapse">RowLimit</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_RowLimit" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the limit for the number of items that the list view will return per page</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">int RowLimit { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Scope.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Scope%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L191" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Scope_" data-uid="PnP.Core.Model.SharePoint.IView.Scope*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Scope" data-uid="PnP.Core.Model.SharePoint.IView.Scope"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Scope" class="expander" data-toggle="collapse">Scope</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Scope" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the recursive scope for the list view of a document library</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ViewScope Scope { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ViewScope.html">ViewScope</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ServerRelativeUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ServerRelativeUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L196" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ServerRelativeUrl_" data-uid="PnP.Core.Model.SharePoint.IView.ServerRelativeUrl*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ServerRelativeUrl" data-uid="PnP.Core.Model.SharePoint.IView.ServerRelativeUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ServerRelativeUrl" class="expander" data-toggle="collapse">ServerRelativeUrl</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ServerRelativeUrl" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the server relative URL of the list view page</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ServerRelativeUrl { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_StyleId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.StyleId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L201" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_StyleId_" data-uid="PnP.Core.Model.SharePoint.IView.StyleId*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_StyleId" data-uid="PnP.Core.Model.SharePoint.IView.StyleId"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_StyleId" class="expander" data-toggle="collapse">StyleId</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_StyleId" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the identifier of the view style for the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string StyleId { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_TabularView.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.TabularView%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L206" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_TabularView_" data-uid="PnP.Core.Model.SharePoint.IView.TabularView*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_TabularView" data-uid="PnP.Core.Model.SharePoint.IView.TabularView"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_TabularView" class="expander" data-toggle="collapse">TabularView</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_TabularView" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the TabularView attribute in the View Schema XML</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool TabularView { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Threaded.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Threaded%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L211" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Threaded_" data-uid="PnP.Core.Model.SharePoint.IView.Threaded*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Threaded" data-uid="PnP.Core.Model.SharePoint.IView.Threaded"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Threaded" class="expander" data-toggle="collapse">Threaded</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Threaded" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a Boolean value that indicates whether the view is threaded</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">bool Threaded { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Title%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L216" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Title_" data-uid="PnP.Core.Model.SharePoint.IView.Title*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Title" data-uid="PnP.Core.Model.SharePoint.IView.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Title" class="expander" data-toggle="collapse">Title</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Title" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the Display Name of the List View</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Title { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_Toolbar.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.Toolbar%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L221" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_Toolbar_" data-uid="PnP.Core.Model.SharePoint.IView.Toolbar*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_Toolbar" data-uid="PnP.Core.Model.SharePoint.IView.Toolbar"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_Toolbar" class="expander" data-toggle="collapse">Toolbar</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_Toolbar" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the toolbar (CAML) for the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string Toolbar { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ToolbarTemplateName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ToolbarTemplateName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L226" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ToolbarTemplateName_" data-uid="PnP.Core.Model.SharePoint.IView.ToolbarTemplateName*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ToolbarTemplateName" data-uid="PnP.Core.Model.SharePoint.IView.ToolbarTemplateName"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ToolbarTemplateName" class="expander" data-toggle="collapse">ToolbarTemplateName</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ToolbarTemplateName" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the name of the toolbar template that is used for the list view toolbar</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ToolbarTemplateName { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewData.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewData%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L236" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewData_" data-uid="PnP.Core.Model.SharePoint.IView.ViewData*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewData" data-uid="PnP.Core.Model.SharePoint.IView.ViewData"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewData" class="expander" data-toggle="collapse">ViewData</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewData" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the view data for the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ViewData { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewFields.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewFields%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L246" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewFields_" data-uid="PnP.Core.Model.SharePoint.IView.ViewFields*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewFields" data-uid="PnP.Core.Model.SharePoint.IView.ViewFields"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewFields" class="expander" data-toggle="collapse">ViewFields</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewFields" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets View Fields</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IViewFieldCollection ViewFields { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IViewFieldCollection.html">IViewFieldCollection</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewJoins.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewJoins%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L103" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewJoins_" data-uid="PnP.Core.Model.SharePoint.IView.ViewJoins*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewJoins" data-uid="PnP.Core.Model.SharePoint.IView.ViewJoins"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewJoins" class="expander" data-toggle="collapse">ViewJoins</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewJoins" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the list joins that will be used by the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ViewJoins { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewProjectedFields.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewProjectedFields%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L166" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewProjectedFields_" data-uid="PnP.Core.Model.SharePoint.IView.ViewProjectedFields*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewProjectedFields" data-uid="PnP.Core.Model.SharePoint.IView.ViewProjectedFields"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewProjectedFields" class="expander" data-toggle="collapse">ViewProjectedFields</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewProjectedFields" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the projected fields that will be used by the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ViewProjectedFields { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewQuery.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewQuery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L171" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewQuery_" data-uid="PnP.Core.Model.SharePoint.IView.ViewQuery*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewQuery" data-uid="PnP.Core.Model.SharePoint.IView.ViewQuery"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewQuery" class="expander" data-toggle="collapse">ViewQuery</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewQuery" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the CAML query that will be used by the list view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">string ViewQuery { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L231" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewType_" data-uid="PnP.Core.Model.SharePoint.IView.ViewType*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewType" data-uid="PnP.Core.Model.SharePoint.IView.ViewType"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewType" class="expander" data-toggle="collapse">ViewType</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewType" class="collapse in">
-  <div class="markdown level1 summary"><p>Specifies the type of the view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ViewType ViewType { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ViewType.html">ViewType</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_ViewType2.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.ViewType2%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L241" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_ViewType2_" data-uid="PnP.Core.Model.SharePoint.IView.ViewType2*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_ViewType2" data-uid="PnP.Core.Model.SharePoint.IView.ViewType2"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_ViewType2" class="expander" data-toggle="collapse">ViewType2</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_ViewType2" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets the ViewType2</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">ViewType2 ViewType2 { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ViewType2.html">ViewType2</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-  </div>
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_AddViewField_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.AddViewField(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L285" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_AddViewField_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewField*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_AddViewField_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewField(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_AddViewField_System_String_" class="expander" data-toggle="collapse">AddViewField(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_AddViewField_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a field to the current view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddViewField(string internalFieldName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the field to add</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.AddViewFieldAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L278" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewFieldAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewFieldAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_System_String_" class="expander" data-toggle="collapse">AddViewFieldAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Adds a field to the current view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task AddViewFieldAsync(string internalFieldName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the field to add</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_System_String_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.MoveViewFieldTo(System.String%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L271" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldTo*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_System_String_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldTo(System.String,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_System_String_System_Int32_" class="expander" data-toggle="collapse">MoveViewFieldTo(string, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_System_String_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Moves a view field to a new position in the view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void MoveViewFieldTo(string internalFieldName, int newOrder)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the view field to move</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">newOrder</span>
-        <p><p>New position</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_System_String_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.MoveViewFieldToAsync(System.String%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L263" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldToAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_System_String_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldToAsync(System.String,System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_System_String_System_Int32_" class="expander" data-toggle="collapse">MoveViewFieldToAsync(string, int)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_System_String_System_Int32_" class="collapse in">
-  <div class="markdown level1 summary"><p>Moves a view field to a new position in the view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task MoveViewFieldToAsync(string internalFieldName, int newOrder)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the view field to move</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">newOrder</span>
-        <p><p>New position</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_RemoveViewField_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.RemoveViewField(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L299" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_RemoveViewField_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewField*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_RemoveViewField_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewField(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_RemoveViewField_System_String_" class="expander" data-toggle="collapse">RemoveViewField(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_RemoveViewField_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a field from the current view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RemoveViewField(string internalFieldName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the field to remove</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IView.RemoveViewFieldAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewFieldAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewFieldAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_System_String_" class="expander" data-toggle="collapse">RemoveViewFieldAsync(string)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Removes a field from the current view</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RemoveViewFieldAsync(string internalFieldName)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></span>
-        <span class="parametername">internalFieldName</span>
-        <p><p>Internal name of the field to remove</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -2635,33 +251,1770 @@ Moderator -- Pending and rejected items for all users are displayed to users who
   <div>
       <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithResponseHeaders__1_PnP_Core_Model_ISupportModules___0__System_Action_System_Collections_Generic_Dictionary_System_String_System_String___">RequestModuleExtensions.WithResponseHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Action&lt;Dictionary&lt;string, string&gt;&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Aggregations_" data-uid="PnP.Core.Model.SharePoint.IView.Aggregations*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Aggregations" data-uid="PnP.Core.Model.SharePoint.IView.Aggregations">
+  Aggregations
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the aggregations displayed by the list view. The Aggregations property contains a CAML string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Aggregations { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_AggregationsStatus_" data-uid="PnP.Core.Model.SharePoint.IView.AggregationsStatus*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_AggregationsStatus" data-uid="PnP.Core.Model.SharePoint.IView.AggregationsStatus">
+  AggregationsStatus
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether the aggregations are shown in the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string AggregationsStatus { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_All_" data-uid="PnP.Core.Model.SharePoint.IView.All*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_All" data-uid="PnP.Core.Model.SharePoint.IView.All">
+  All
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">object All { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId_" data-uid="PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId" data-uid="PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId">
+  AssociatedContentTypeId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Associated Content Type Id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string AssociatedContentTypeId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_BaseViewId_" data-uid="PnP.Core.Model.SharePoint.IView.BaseViewId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_BaseViewId" data-uid="PnP.Core.Model.SharePoint.IView.BaseViewId">
+  BaseViewId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the base view identifier of the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string BaseViewId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_CalendarViewStyles_" data-uid="PnP.Core.Model.SharePoint.IView.CalendarViewStyles*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_CalendarViewStyles" data-uid="PnP.Core.Model.SharePoint.IView.CalendarViewStyles">
+  CalendarViewStyles
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Calendar View Styles</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CalendarViewStyles { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ColumnWidth_" data-uid="PnP.Core.Model.SharePoint.IView.ColumnWidth*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ColumnWidth" data-uid="PnP.Core.Model.SharePoint.IView.ColumnWidth">
+  ColumnWidth
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Column Width</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ColumnWidth { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_CustomFormatter_" data-uid="PnP.Core.Model.SharePoint.IView.CustomFormatter*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_CustomFormatter" data-uid="PnP.Core.Model.SharePoint.IView.CustomFormatter">
+  CustomFormatter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Custom Formatter</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CustomFormatter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_DefaultView_" data-uid="PnP.Core.Model.SharePoint.IView.DefaultView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_DefaultView" data-uid="PnP.Core.Model.SharePoint.IView.DefaultView">
+  DefaultView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a Boolean value that specifies whether the view is the default view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool DefaultView { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_DefaultViewForContentType_" data-uid="PnP.Core.Model.SharePoint.IView.DefaultViewForContentType*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_DefaultViewForContentType" data-uid="PnP.Core.Model.SharePoint.IView.DefaultViewForContentType">
+  DefaultViewForContentType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a Boolean value that specifies whether the view is the default view
+for the associated content type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool DefaultViewForContentType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_EditorModified_" data-uid="PnP.Core.Model.SharePoint.IView.EditorModified*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_EditorModified" data-uid="PnP.Core.Model.SharePoint.IView.EditorModified">
+  EditorModified
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a Boolean value that indicates whether the view was modified in an HTML editor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EditorModified { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Formats_" data-uid="PnP.Core.Model.SharePoint.IView.Formats*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Formats" data-uid="PnP.Core.Model.SharePoint.IView.Formats">
+  Formats
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the definitions for column and row formatting that are used in a datasheet view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Formats { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_GridLayout_" data-uid="PnP.Core.Model.SharePoint.IView.GridLayout*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_GridLayout" data-uid="PnP.Core.Model.SharePoint.IView.GridLayout">
+  GridLayout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>An attribute of the view, specifies the quick edit layout</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string GridLayout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Hidden_" data-uid="PnP.Core.Model.SharePoint.IView.Hidden*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Hidden" data-uid="PnP.Core.Model.SharePoint.IView.Hidden">
+  Hidden
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Hidden</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Hidden { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_HtmlSchemaXml_" data-uid="PnP.Core.Model.SharePoint.IView.HtmlSchemaXml*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_HtmlSchemaXml" data-uid="PnP.Core.Model.SharePoint.IView.HtmlSchemaXml">
+  HtmlSchemaXml
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the Html Schema Xml</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string HtmlSchemaXml { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Id_" data-uid="PnP.Core.Model.SharePoint.IView.Id*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Id" data-uid="PnP.Core.Model.SharePoint.IView.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the Id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid Id { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ImageUrl_" data-uid="PnP.Core.Model.SharePoint.IView.ImageUrl*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ImageUrl" data-uid="PnP.Core.Model.SharePoint.IView.ImageUrl">
+  ImageUrl
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the server relative or absolute URL of the Image for the List View</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ImageUrl { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_IncludeRootFolder_" data-uid="PnP.Core.Model.SharePoint.IView.IncludeRootFolder*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_IncludeRootFolder" data-uid="PnP.Core.Model.SharePoint.IView.IncludeRootFolder">
+  IncludeRootFolder
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies if the Root Folder is included in the List View</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IncludeRootFolder { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_JSLink_" data-uid="PnP.Core.Model.SharePoint.IView.JSLink*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_JSLink" data-uid="PnP.Core.Model.SharePoint.IView.JSLink">
+  JSLink
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>An attribute of the view, specifies the Javascript files used for the view.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string JSLink { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ListViewXml_" data-uid="PnP.Core.Model.SharePoint.IView.ListViewXml*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ListViewXml" data-uid="PnP.Core.Model.SharePoint.IView.ListViewXml">
+  ListViewXml
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets List View Xml</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ListViewXml { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Method_" data-uid="PnP.Core.Model.SharePoint.IView.Method*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Method" data-uid="PnP.Core.Model.SharePoint.IView.Method">
+  Method
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the view method for the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Method { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_MobileDefaultView_" data-uid="PnP.Core.Model.SharePoint.IView.MobileDefaultView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_MobileDefaultView" data-uid="PnP.Core.Model.SharePoint.IView.MobileDefaultView">
+  MobileDefaultView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether the list view is the default for a mobile device</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool MobileDefaultView { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_MobileView_" data-uid="PnP.Core.Model.SharePoint.IView.MobileView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_MobileView" data-uid="PnP.Core.Model.SharePoint.IView.MobileView">
+  MobileView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether the list view applies to a mobile device</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool MobileView { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ModerationType_" data-uid="PnP.Core.Model.SharePoint.IView.ModerationType*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ModerationType" data-uid="PnP.Core.Model.SharePoint.IView.ModerationType">
+  ModerationType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the content approval type for the list view. A string that indicates the Content Approval type, which can be one of the following values:
+HideUnapproved -- Unapproved draft items are hidden from users who only have permission to read items.
+Contributor -- Pending and rejected items for the current user are displayed.
+Moderator -- Pending and rejected items for all users are displayed to users who have managed list permissions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ModerationType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_NewDocumentTemplates_" data-uid="PnP.Core.Model.SharePoint.IView.NewDocumentTemplates*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_NewDocumentTemplates" data-uid="PnP.Core.Model.SharePoint.IView.NewDocumentTemplates">
+  NewDocumentTemplates
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>An attribute of the view, indicates what documents/templates are visible in &quot;New&quot; menu of a document library</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string NewDocumentTemplates { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_OrderedView_" data-uid="PnP.Core.Model.SharePoint.IView.OrderedView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_OrderedView" data-uid="PnP.Core.Model.SharePoint.IView.OrderedView">
+  OrderedView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether users can reorder items through the user interface</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool OrderedView { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_PageRenderType_" data-uid="PnP.Core.Model.SharePoint.IView.PageRenderType*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_PageRenderType" data-uid="PnP.Core.Model.SharePoint.IView.PageRenderType">
+  PageRenderType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reason why the page is rendered in classic UX, or Modern if the page is in Modern UX</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ListPageRenderType PageRenderType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ListPageRenderType.html">ListPageRenderType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Paged_" data-uid="PnP.Core.Model.SharePoint.IView.Paged*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Paged" data-uid="PnP.Core.Model.SharePoint.IView.Paged">
+  Paged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether the list view supports displaying items across multiple pages</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Paged { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_PersonalView_" data-uid="PnP.Core.Model.SharePoint.IView.PersonalView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_PersonalView" data-uid="PnP.Core.Model.SharePoint.IView.PersonalView">
+  PersonalView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether the view is a personal view or a public view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool PersonalView { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ReadOnlyView_" data-uid="PnP.Core.Model.SharePoint.IView.ReadOnlyView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ReadOnlyView" data-uid="PnP.Core.Model.SharePoint.IView.ReadOnlyView">
+  ReadOnlyView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies if the view is read-only</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ReadOnlyView { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_RequiresClientIntegration_" data-uid="PnP.Core.Model.SharePoint.IView.RequiresClientIntegration*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_RequiresClientIntegration" data-uid="PnP.Core.Model.SharePoint.IView.RequiresClientIntegration">
+  RequiresClientIntegration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies whether this view requires client integration</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool RequiresClientIntegration { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_RowLimit_" data-uid="PnP.Core.Model.SharePoint.IView.RowLimit*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_RowLimit" data-uid="PnP.Core.Model.SharePoint.IView.RowLimit">
+  RowLimit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the limit for the number of items that the list view will return per page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int RowLimit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Scope_" data-uid="PnP.Core.Model.SharePoint.IView.Scope*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Scope" data-uid="PnP.Core.Model.SharePoint.IView.Scope">
+  Scope
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the recursive scope for the list view of a document library</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ViewScope Scope { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ViewScope.html">ViewScope</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ServerRelativeUrl_" data-uid="PnP.Core.Model.SharePoint.IView.ServerRelativeUrl*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ServerRelativeUrl" data-uid="PnP.Core.Model.SharePoint.IView.ServerRelativeUrl">
+  ServerRelativeUrl
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the server relative URL of the list view page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ServerRelativeUrl { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_StyleId_" data-uid="PnP.Core.Model.SharePoint.IView.StyleId*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_StyleId" data-uid="PnP.Core.Model.SharePoint.IView.StyleId">
+  StyleId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the identifier of the view style for the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string StyleId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_TabularView_" data-uid="PnP.Core.Model.SharePoint.IView.TabularView*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_TabularView" data-uid="PnP.Core.Model.SharePoint.IView.TabularView">
+  TabularView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the TabularView attribute in the View Schema XML</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool TabularView { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Threaded_" data-uid="PnP.Core.Model.SharePoint.IView.Threaded*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Threaded" data-uid="PnP.Core.Model.SharePoint.IView.Threaded">
+  Threaded
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a Boolean value that indicates whether the view is threaded</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Threaded { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Title_" data-uid="PnP.Core.Model.SharePoint.IView.Title*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Title" data-uid="PnP.Core.Model.SharePoint.IView.Title">
+  Title
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the Display Name of the List View</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_Toolbar_" data-uid="PnP.Core.Model.SharePoint.IView.Toolbar*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_Toolbar" data-uid="PnP.Core.Model.SharePoint.IView.Toolbar">
+  Toolbar
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the toolbar (CAML) for the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Toolbar { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ToolbarTemplateName_" data-uid="PnP.Core.Model.SharePoint.IView.ToolbarTemplateName*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ToolbarTemplateName" data-uid="PnP.Core.Model.SharePoint.IView.ToolbarTemplateName">
+  ToolbarTemplateName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the name of the toolbar template that is used for the list view toolbar</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ToolbarTemplateName { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewData_" data-uid="PnP.Core.Model.SharePoint.IView.ViewData*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewData" data-uid="PnP.Core.Model.SharePoint.IView.ViewData">
+  ViewData
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the view data for the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ViewData { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewFields_" data-uid="PnP.Core.Model.SharePoint.IView.ViewFields*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewFields" data-uid="PnP.Core.Model.SharePoint.IView.ViewFields">
+  ViewFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets View Fields</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IViewFieldCollection ViewFields { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IViewFieldCollection.html">IViewFieldCollection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewJoins_" data-uid="PnP.Core.Model.SharePoint.IView.ViewJoins*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewJoins" data-uid="PnP.Core.Model.SharePoint.IView.ViewJoins">
+  ViewJoins
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the list joins that will be used by the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ViewJoins { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewProjectedFields_" data-uid="PnP.Core.Model.SharePoint.IView.ViewProjectedFields*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewProjectedFields" data-uid="PnP.Core.Model.SharePoint.IView.ViewProjectedFields">
+  ViewProjectedFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the projected fields that will be used by the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ViewProjectedFields { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewQuery_" data-uid="PnP.Core.Model.SharePoint.IView.ViewQuery*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewQuery" data-uid="PnP.Core.Model.SharePoint.IView.ViewQuery">
+  ViewQuery
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the CAML query that will be used by the list view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ViewQuery { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewType_" data-uid="PnP.Core.Model.SharePoint.IView.ViewType*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewType" data-uid="PnP.Core.Model.SharePoint.IView.ViewType">
+  ViewType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies the type of the view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ViewType ViewType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ViewType.html">ViewType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_ViewType2_" data-uid="PnP.Core.Model.SharePoint.IView.ViewType2*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_ViewType2" data-uid="PnP.Core.Model.SharePoint.IView.ViewType2">
+  ViewType2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the ViewType2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ViewType2 ViewType2 { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ViewType2.html">ViewType2</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_AddViewField_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewField*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_AddViewField_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewField(System.String)">
+  AddViewField(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a field to the current view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AddViewField(string internalFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the field to add</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewFieldAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_AddViewFieldAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.AddViewFieldAsync(System.String)">
+  AddViewFieldAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a field to the current view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task AddViewFieldAsync(string internalFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the field to add</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldTo*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_MoveViewFieldTo_System_String_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldTo(System.String,System.Int32)">
+  MoveViewFieldTo(string, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Moves a view field to a new position in the view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveViewFieldTo(string internalFieldName, int newOrder)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the view field to move</p>
+</dd>
+    <dt><code>newOrder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>New position</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldToAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_MoveViewFieldToAsync_System_String_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IView.MoveViewFieldToAsync(System.String,System.Int32)">
+  MoveViewFieldToAsync(string, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Moves a view field to a new position in the view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveViewFieldToAsync(string internalFieldName, int newOrder)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the view field to move</p>
+</dd>
+    <dt><code>newOrder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>New position</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_RemoveViewField_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewField*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_RemoveViewField_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewField(System.String)">
+  RemoveViewField(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a field from the current view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveViewField(string internalFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the field to remove</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewFieldAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IView_RemoveViewFieldAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IView.RemoveViewFieldAsync(System.String)">
+  RemoveViewFieldAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes a field from the current view</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RemoveViewFieldAsync(string internalFieldName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>internalFieldName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Internal name of the field to remove</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IView.cs/#L9" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

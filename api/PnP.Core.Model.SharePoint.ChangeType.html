@@ -1,271 +1,242 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum ChangeType | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum ChangeType | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Enum ChangeType | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum ChangeType | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Enumeration of the possible types of changes.">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ChangeType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ChangeType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.ChangeType">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Changes/Public/Enums/ChangeType.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ChangeType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ChangeType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
 
-  <h1 id="PnP_Core_Model_SharePoint_ChangeType" data-uid="PnP.Core.Model.SharePoint.ChangeType">Enum ChangeType</h1>
-  <div class="markdown level0 summary"><p>Enumeration of the possible types of changes.</p>
+        <article data-uid="PnP.Core.Model.SharePoint.ChangeType">
+
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_ChangeType" data-uid="PnP.Core.Model.SharePoint.ChangeType" class="text-break">
+Enum ChangeType  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Changes/Public/Enums/ChangeType.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Enumeration of the possible types of changes.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_ChangeType_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public enum ChangeType</code></pre>
+    <pre><code class="lang-csharp hljs">public enum ChangeType</code></pre>
   </div>
 
 
 
 
 
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Activity"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Activity" class="expander" data-toggle="collapse">Activity</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Activity" class="collapse in">
-        <p></p>
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Add"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Add" class="expander" data-toggle="collapse">Add</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Add" class="collapse in">
-        <p><p>Enumeration whose values specify that an object has been added within the scope of a list, site, site collection, or content database.</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_AssignmentAdd"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_AssignmentAdd" class="expander" data-toggle="collapse">AssignmentAdd</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_AssignmentAdd" class="collapse in">
-        <p><p>Enumeration whose values specify that a user has been given permissions to a list.</p>
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Activity"><code>Activity = 22</code></dt>
+  <dd><p>Enumeration whose values specify that an object has had an activity</p>
+</dd>
+  
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Add"><code>Add = 1</code></dt>
+  
+  <dd><p>Enumeration whose values specify that an object has been added within the scope of a list, site, site collection, or content database.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_AssignmentAdd"><code>AssignmentAdd = 11</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a user has been given permissions to a list.</p>
 <p>The list must have unique permissions enabled.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_AssignmentDelete"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_AssignmentDelete" class="expander" data-toggle="collapse">AssignmentDelete</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_AssignmentDelete" class="collapse in">
-        <p><p>Enumeration whose values specify that a user has lost permissions to a list.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_AssignmentDelete"><code>AssignmentDelete = 12</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a user has lost permissions to a list.</p>
 <p>The list must have unique permissions enabled.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_DeleteObject"><code>DeleteObject = 3</code></dt>
+  
+  <dd><p>Enumeration whose values specify that an object has been deleted within the scope of a list, site, site collection, or content database.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Dirty"><code>Dirty = 21</code></dt>
+  <dd><p>Enumeration whose values specify that an object has a pending modification due to an operation on another item.</p>
+</dd>
+  
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_ListContentTypeAdd"><code>ListContentTypeAdd = 19</code></dt>
+  <dd><p>Enumeration whose values specify that an object has been added within the scope of a list content type.</p>
+</dd>
+  
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_ListContentTypeDelete"><code>ListContentTypeDelete = 20</code></dt>
+  <dd><p>Enumeration whose values specify that an object has been deleted within the scope of a list content type.</p>
+</dd>
+  
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_MemberAdd"><code>MemberAdd = 13</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a user has been added to a group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_MemberDelete"><code>MemberDelete = 14</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a user has been removed from a group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_MoveAway"><code>MoveAway = 5</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a non-leaf section within a URL has been renamed. The object was moved away from the location within the site specified by the change.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_MoveInto"><code>MoveInto = 6</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a non-leaf section within a URL has been renamed. The object was moved into the location within the site specified by the change.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Navigation"><code>Navigation = 16</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a change in the navigation structure of a site collection has been made.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_NoChange"><code>NoChange = 0</code></dt>
+  
+  <dd><p>Enumeration whose values indicate that no change has taken place.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Rename"><code>Rename = 4</code></dt>
+  
+  <dd><p>Enumeration whose values specify that the leaf in a URL has been renamed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Restore"><code>Restore = 7</code></dt>
+  
+  <dd><p>Enumeration whose values specify that an object has restored from a backup or from the recycle bin.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_RoleAdd"><code>RoleAdd = 8</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a role definition has been added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_RoleDelete"><code>RoleDelete = 9</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a role definition has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_RoleUpdate"><code>RoleUpdate = 10</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a role definition has been updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_ScopeAdd"><code>ScopeAdd = 17</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a change in permissions scope has been made to break inheritance from an object's parent.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_ScopeDelete"><code>ScopeDelete = 18</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a change in permissions scope has been made to revert back to inheriting permissions from an object's parent.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_SystemUpdate"><code>SystemUpdate = 15</code></dt>
+  
+  <dd><p>Enumeration whose values specify that a change has been made to an item using the SystemUpdate method.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_ChangeType_Update"><code>Update = 2</code></dt>
+  
+  <dd><p>Enumeration whose values specify that an object has been modified within the scope of a list, site, site collection, or content database.</p>
+</dd>
+  </dl>
 
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_DeleteObject"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_DeleteObject" class="expander" data-toggle="collapse">DeleteObject</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_DeleteObject" class="collapse in">
-        <p><p>Enumeration whose values specify that an object has been deleted within the scope of a list, site, site collection, or content database.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Dirty"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Dirty" class="expander" data-toggle="collapse">Dirty</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Dirty" class="collapse in">
-        <p></p>
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_ListContentTypeAdd"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_ListContentTypeAdd" class="expander" data-toggle="collapse">ListContentTypeAdd</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_ListContentTypeAdd" class="collapse in">
-        <p></p>
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_ListContentTypeDelete"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_ListContentTypeDelete" class="expander" data-toggle="collapse">ListContentTypeDelete</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_ListContentTypeDelete" class="collapse in">
-        <p></p>
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_MemberAdd"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_MemberAdd" class="expander" data-toggle="collapse">MemberAdd</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_MemberAdd" class="collapse in">
-        <p><p>Enumeration whose values specify that a user has been added to a group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_MemberDelete"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_MemberDelete" class="expander" data-toggle="collapse">MemberDelete</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_MemberDelete" class="collapse in">
-        <p><p>Enumeration whose values specify that a user has been removed from a group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_MoveAway"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_MoveAway" class="expander" data-toggle="collapse">MoveAway</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_MoveAway" class="collapse in">
-        <p><p>Enumeration whose values specify that a non-leaf section within a URL has been renamed. The object was moved away from the location within the site specified by the change.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_MoveInto"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_MoveInto" class="expander" data-toggle="collapse">MoveInto</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_MoveInto" class="collapse in">
-        <p><p>Enumeration whose values specify that a non-leaf section within a URL has been renamed. The object was moved into the location within the site specified by the change.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Navigation"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Navigation" class="expander" data-toggle="collapse">Navigation</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Navigation" class="collapse in">
-        <p><p>Enumeration whose values specify that a change in the navigation structure of a site collection has been made.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_NoChange"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_NoChange" class="expander" data-toggle="collapse">NoChange</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_NoChange" class="collapse in">
-        <p><p>Enumeration whose values indicate that no change has taken place.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Rename"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Rename" class="expander" data-toggle="collapse">Rename</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Rename" class="collapse in">
-        <p><p>Enumeration whose values specify that the leaf in a URL has been renamed.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Restore"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Restore" class="expander" data-toggle="collapse">Restore</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Restore" class="collapse in">
-        <p><p>Enumeration whose values specify that an object has restored from a backup or from the recycle bin.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_RoleAdd"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleAdd" class="expander" data-toggle="collapse">RoleAdd</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleAdd" class="collapse in">
-        <p><p>Enumeration whose values specify that a role definition has been added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_RoleDelete"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleDelete" class="expander" data-toggle="collapse">RoleDelete</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleDelete" class="collapse in">
-        <p><p>Enumeration whose values specify that a role definition has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_RoleUpdate"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleUpdate" class="expander" data-toggle="collapse">RoleUpdate</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_RoleUpdate" class="collapse in">
-        <p><p>Enumeration whose values specify that a role definition has been updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_ScopeAdd"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_ScopeAdd" class="expander" data-toggle="collapse">ScopeAdd</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_ScopeAdd" class="collapse in">
-        <p><p>Enumeration whose values specify that a change in permissions scope has been made to break inheritance from an object's parent.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_ScopeDelete"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_ScopeDelete" class="expander" data-toggle="collapse">ScopeDelete</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_ScopeDelete" class="collapse in">
-        <p><p>Enumeration whose values specify that a change in permissions scope has been made to revert back to inheriting permissions from an object's parent.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_SystemUpdate"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_SystemUpdate" class="expander" data-toggle="collapse">SystemUpdate</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_SystemUpdate" class="collapse in">
-        <p><p>Enumeration whose values specify that a change has been made to an item using the SystemUpdate method.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_ChangeType_Update"><a href="#collapsible-PnP_Core_Model_SharePoint_ChangeType_Update" class="expander" data-toggle="collapse">Update</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_ChangeType_Update" class="collapse in">
-        <p><p>Enumeration whose values specify that an object has been modified within the scope of a list, site, site collection, or content database.</p>
-
-      </div>
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Changes/Public/Enums/ChangeType.cs/#L6" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,97 +1,119 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IRecycleBinItemCollection | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IRecycleBinItemCollection | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IRecycleBinItemCollection | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IRecycleBinItemCollection | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Public interface to define a collection of RecycleBinItem objects">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection">Interface IRecycleBinItemCollection</h1>
-  <div class="markdown level0 summary"><p>Public interface to define a collection of RecycleBinItem objects</p>
+
+        <article data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection">
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection" class="text-break">
+Interface IRecycleBinItemCollection  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Public interface to define a collection of RecycleBinItem objects</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IRecycleBinItemCollection : IQueryable&lt;IRecycleBinItem&gt;, IQueryable, IAsyncEnumerable&lt;IRecycleBinItem&gt;, IDataModelCollection&lt;IRecycleBinItem&gt;, IEnumerable&lt;IRecycleBinItem&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IRecycleBinItem&gt;, IDataModelCollectionDeleteByGuidId, ISupportModules&lt;IRecycleBinItemCollection&gt;</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable.elementtype">IQueryable.ElementType</a>
     </div>
@@ -149,1180 +171,11 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Guid_">IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Batch, Guid)</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IRecycleBinItemCollection : IQueryable&lt;IRecycleBinItem&gt;, IQueryable, IAsyncEnumerable&lt;IRecycleBinItem&gt;, IDataModelCollection&lt;IRecycleBinItem&gt;, IEnumerable&lt;IRecycleBinItem&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IRecycleBinItem&gt;, IDataModelCollectionDeleteByGuidId, ISupportModules&lt;IRecycleBinItemCollection&gt;</code></pre>
-  </div>
-
-
-
-
-
-  <h3 id="methods">Methods
-</h3>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAll%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAll*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAll"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll" class="expander" data-toggle="collapse">DeleteAll()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAll()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync" class="expander" data-toggle="collapse">DeleteAllAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch" class="expander" data-toggle="collapse">DeleteAllBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllBatch()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllBatch(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync" class="expander" data-toggle="collapse">DeleteAllBatchAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllBatchAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllBatchAsync(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItems%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItems*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItems"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems" class="expander" data-toggle="collapse">DeleteAllSecondStageItems()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllSecondStageItems()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync" class="expander" data-toggle="collapse">DeleteAllSecondStageItemsAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllSecondStageItemsAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch" class="expander" data-toggle="collapse">DeleteAllSecondStageItemsBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllSecondStageItemsBatch()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllSecondStageItemsBatch(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void DeleteAllSecondStageItemsBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync" class="expander" data-toggle="collapse">DeleteAllSecondStageItemsBatchAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllSecondStageItemsBatchAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L65" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">DeleteAllSecondStageItemsBatchAsync(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task DeleteAllSecondStageItemsBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(System.Guid%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IRecycleBinItem%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L155" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" class="expander" data-toggle="collapse">GetById(Guid, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to select a recycle bin item (<code>IRecycleBinItem</code>) by id</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">IRecycleBinItem GetById(Guid id, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">id</span>
-        <p><p>The Id to search for</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>The expressions declaring the fields to select</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>
-        <p><p>The resulting recycle bin item instance, if any</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(System.Guid%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IRecycleBinItem%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L163" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" class="expander" data-toggle="collapse">GetByIdAsync(Guid, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[])</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" class="collapse in">
-  <div class="markdown level1 summary"><p>Method to select a recycle bin item (<code>IRecycleBinItem</code>) by id asynchronously</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task&lt;IRecycleBinItem&gt; GetByIdAsync(Guid id, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[] selectors)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></span>
-        <span class="parametername">id</span>
-        <p><p>The Id to search for</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</span>
-        <span class="parametername">selectors</span>
-        <p><p>The expressions declaring the fields to select</p>
-
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>&gt;
-        <p><p>The resulting recycle bin item instance, if any</p>
-
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L92" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage" class="expander" data-toggle="collapse">MoveAllToSecondStage()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void MoveAllToSecondStage()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync" class="expander" data-toggle="collapse">MoveAllToSecondStageAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task MoveAllToSecondStageAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch" class="expander" data-toggle="collapse">MoveAllToSecondStageBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void MoveAllToSecondStageBatch()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L102" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">MoveAllToSecondStageBatch(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void MoveAllToSecondStageBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync" class="expander" data-toggle="collapse">MoveAllToSecondStageBatchAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task MoveAllToSecondStageBatchAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">MoveAllToSecondStageBatchAsync(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task MoveAllToSecondStageBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAll%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAll*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAll"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll" class="expander" data-toggle="collapse">RestoreAll()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreAll()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync" class="expander" data-toggle="collapse">RestoreAllAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreAllAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L144" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch" class="expander" data-toggle="collapse">RestoreAllBatch()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreAllBatch()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L134" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">RestoreAllBatch(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">void RestoreAllBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L139" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync" class="expander" data-toggle="collapse">RestoreAllBatchAsync()</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using the current context batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreAllBatchAsync()</code></pre>
-  </div>
-
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L129" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-
-  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync*"></a>
-
-  <h4 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">RestoreAllBatchAsync(Batch)</a></h4>
-
-  <div id="collapsible-PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using a specific batch instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">Task RestoreAllBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
-        <p></p>
-      </td>
-    </tr>
-  </table>
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  <h3 id="extensionmethods">Extension Methods</h3>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelCollectionLoadExtensions.html#PnP_Core_Model_DataModelCollectionLoadExtensions_LoadBatchAsync__1_PnP_Core_Model_IDataModelCollectionLoad___0__PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelCollectionLoadExtensions.LoadBatchAsync&lt;TModel&gt;(IDataModelCollectionLoad&lt;TModel&gt;, Batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[])</a>
   </div>
@@ -1398,33 +251,871 @@
   <div>
       <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.ToListAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAll*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAll" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAll">
+  DeleteAll()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAll()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllAsync">
+  DeleteAllAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch">
+  DeleteAllBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllBatch()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatch(PnP.Core.Services.Batch)">
+  DeleteAllBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllBatch(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync">
+  DeleteAllBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllBatchAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllBatchAsync(PnP.Core.Services.Batch)">
+  DeleteAllBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItems*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItems" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItems">
+  DeleteAllSecondStageItems()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllSecondStageItems()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsAsync">
+  DeleteAllSecondStageItemsAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllSecondStageItemsAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch">
+  DeleteAllSecondStageItemsBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes all Recycle Bin items using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllSecondStageItemsBatch()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatch(PnP.Core.Services.Batch)">
+  DeleteAllSecondStageItemsBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteAllSecondStageItemsBatch(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync">
+  DeleteAllSecondStageItemsBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllSecondStageItemsBatchAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_DeleteAllSecondStageItemsBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync(PnP.Core.Services.Batch)">
+  DeleteAllSecondStageItemsBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Permanently deletes second stage Recycle Bin items using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAllSecondStageItemsBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])">
+  GetById(Guid, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L155"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to select a recycle bin item (<code>IRecycleBinItem</code>) by id</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRecycleBinItem GetById(Guid id, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The Id to search for</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>The expressions declaring the fields to select</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a></dt>
+    <dd><p>The resulting recycle bin item instance, if any</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])">
+  GetByIdAsync(Guid, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Method to select a recycle bin item (<code>IRecycleBinItem</code>) by id asynchronously</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRecycleBinItem&gt; GetByIdAsync(Guid id, params Expression&lt;Func&lt;IRecycleBinItem, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The Id to search for</p>
+</dd>
+    <dt><code>selectors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd><p>The expressions declaring the fields to select</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IRecycleBinItem.html">IRecycleBinItem</a>&gt;</dt>
+    <dd><p>The resulting recycle bin item instance, if any</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage">
+  MoveAllToSecondStage()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveAllToSecondStage()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageAsync">
+  MoveAllToSecondStageAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveAllToSecondStageAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch">
+  MoveAllToSecondStageBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveAllToSecondStageBatch()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatch(PnP.Core.Services.Batch)">
+  MoveAllToSecondStageBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveAllToSecondStageBatch(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync">
+  MoveAllToSecondStageBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveAllToSecondStageBatchAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStageBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStageBatchAsync(PnP.Core.Services.Batch)">
+  MoveAllToSecondStageBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Move all Recycle Bin items to second stage using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveAllToSecondStageBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAll*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAll" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAll">
+  RestoreAll()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreAll()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllAsync">
+  RestoreAllAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreAllAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch">
+  RestoreAllBatch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreAllBatch()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatch(PnP.Core.Services.Batch)">
+  RestoreAllBatch(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RestoreAllBatch(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync">
+  RestoreAllBatchAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using the current context batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreAllBatchAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync*"></a>
+
+  <h3 id="PnP_Core_Model_SharePoint_IRecycleBinItemCollection_RestoreAllBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync(PnP.Core.Services.Batch)">
+  RestoreAllBatchAsync(Batch)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores all Recycle Bin items to their original locations using a specific batch instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RestoreAllBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>batch</code> <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IRecycleBinItemCollection.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

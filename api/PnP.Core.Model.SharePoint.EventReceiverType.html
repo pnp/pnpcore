@@ -1,591 +1,452 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum EventReceiverType | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum EventReceiverType | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Enum EventReceiverType | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum EventReceiverType | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Specifies the type of event that is handled by the event receiver.">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_EventReceiverType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.EventReceiverType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.EventReceiverType">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Enums/EventReceiverType.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_EventReceiverType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.EventReceiverType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
 
-  <h1 id="PnP_Core_Model_SharePoint_EventReceiverType" data-uid="PnP.Core.Model.SharePoint.EventReceiverType">Enum EventReceiverType</h1>
-  <div class="markdown level0 summary"><p>Specifies the type of event that is handled by the event receiver.</p>
+        <article data-uid="PnP.Core.Model.SharePoint.EventReceiverType">
+
+
+
+
+  <h1 id="PnP_Core_Model_SharePoint_EventReceiverType" data-uid="PnP.Core.Model.SharePoint.EventReceiverType" class="text-break">
+Enum EventReceiverType  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Enums/EventReceiverType.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Specifies the type of event that is handled by the event receiver.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
 
-
-
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a>.<a class="xref" href="PnP.Core.Model.SharePoint.html">SharePoint</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_SharePoint_EventReceiverType_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public enum EventReceiverType</code></pre>
+    <pre><code class="lang-csharp hljs">public enum EventReceiverType</code></pre>
   </div>
 
 
 
 
 
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_AppInstalled"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppInstalled" class="expander" data-toggle="collapse">AppInstalled</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppInstalled" class="collapse in">
-        <p><p>Event that occurs after an app is installed.</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_AppUninstalling"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppUninstalling" class="expander" data-toggle="collapse">AppUninstalling</a></h4>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppUninstalling" class="collapse in">
-        <p><p>Event that occurs before an app is uninstalled.</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_AppUpgraded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppUpgraded" class="expander" data-toggle="collapse">AppUpgraded</a></h4>
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_AppInstalled"><code>AppInstalled = 10701</code></dt>
+  
+  <dd><p>Event that occurs after an app is installed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_AppUninstalling"><code>AppUninstalling = 10703</code></dt>
+  
+  <dd><p>Event that occurs before an app is uninstalled.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_AppUpgraded"><code>AppUpgraded = 10702</code></dt>
+  
+  <dd><p>Event that occurs after an app is upgraded.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ContextEvent"><code>ContextEvent = 32766</code></dt>
+  
+  <dd><p>Identifies workflow event receivers, and is therefore not a true event type.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_EmailReceived"><code>EmailReceived = 20000</code></dt>
+  
+  <dd><p>Event that occurs after a list receives an e-mail message.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceAdded"><code>EntityInstanceAdded = 10601</code></dt>
+  
+  <dd><p>Event that occurs when an instance of an external content type has been added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceDeleted"><code>EntityInstanceDeleted = 10603</code></dt>
+  
+  <dd><p>Event that occurs when an instance of an external content type has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceUpdated"><code>EntityInstanceUpdated = 10602</code></dt>
+  
+  <dd><p>Event that occurs when an instance of an external content type has been updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldAdded"><code>FieldAdded = 10101</code></dt>
+  
+  <dd><p>Event that occurs after a field has been added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldAdding"><code>FieldAdding = 101</code></dt>
+  
+  <dd><p>Event that occurs before a field is added to a list.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleted"><code>FieldDeleted = 10103</code></dt>
+  
+  <dd><p>Event that occurs after a field has been removed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleting"><code>FieldDeleting = 103</code></dt>
+  
+  <dd><p>Event that occurs before a field is removed from a list.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdated"><code>FieldUpdated = 10102</code></dt>
+  
+  <dd><p>Event that occurs after a field has been updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdating"><code>FieldUpdating = 102</code></dt>
+  
+  <dd><p>Event that occurs before a field is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupAdded"><code>GroupAdded = 10301</code></dt>
+  
+  <dd><p>Event that occurs happens after a security group is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupAdding"><code>GroupAdding = 301</code></dt>
+  
+  <dd><p>Event that occurs before a security group is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleted"><code>GroupDeleted = 10303</code></dt>
+  
+  <dd><p>Event that occurs after a security group is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleting"><code>GroupDeleting = 303</code></dt>
+  
+  <dd><p>Event that occurs before a security group is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdated"><code>GroupUpdated = 10302</code></dt>
+  
+  <dd><p>Event that occurs after a security group is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdating"><code>GroupUpdating = 302</code></dt>
+  
+  <dd><p>Event that occurs before a security group is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdded"><code>GroupUserAdded = 10304</code></dt>
+  
+  <dd><p>Event that occurs after a user is added to a security group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdding"><code>GroupUserAdding = 304</code></dt>
+  
+  <dd><p>Event that occurs before a user is added to a security group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleted"><code>GroupUserDeleted = 10305</code></dt>
+  
+  <dd><p>Event that occurs after a user is deleted from a security group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleting"><code>GroupUserDeleting = 305</code></dt>
+  
+  <dd><p>Event that occurs before a user is deleted from a security group.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBreaking"><code>InheritanceBreaking = 311</code></dt>
+  
+  <dd><p>Event that occurs before an inheritance is broken.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBroken"><code>InheritanceBroken = 10311</code></dt>
+  
+  <dd><p>Event that occurs after an inheritance is broken.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceReset"><code>InheritanceReset = 10312</code></dt>
+  
+  <dd><p>Event that occurs after an inheritance is restored.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceResetting"><code>InheritanceResetting = 312</code></dt>
+  
+  <dd><p>Event that occurs before an inheritance is restored.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_InvalidReceiver"><code>InvalidReceiver = -1</code></dt>
+  
+  <dd><p>Indicates that an invalid event receiver type has been specified.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAdded"><code>ItemAdded = 10001</code></dt>
+  
+  <dd><p>Event that occurs after an item has been added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAdding"><code>ItemAdding = 1</code></dt>
+  
+  <dd><p>Event that occurs before an item has been added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdded"><code>ItemAttachmentAdded = 10007</code></dt>
+  
+  <dd><p>Event that occurs after an attachment has been added to the item.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdding"><code>ItemAttachmentAdding = 7</code></dt>
+  
+  <dd><p>Event that occurs before an attachment has been added to an item.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleted"><code>ItemAttachmentDeleted = 10008</code></dt>
+  
+  <dd><p>Event that occurs after an attachment has been removed from the item.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleting"><code>ItemAttachmentDeleting = 8</code></dt>
+  
+  <dd><p>Event that occurs before an attachment has been removed from the item.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedIn"><code>ItemCheckedIn = 10004</code></dt>
+  
+  <dd><p>Event that occurs after an item has been checked in.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedOut"><code>ItemCheckedOut = 10005</code></dt>
+  
+  <dd><p>Event that occurs after an item has been checked out.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingIn"><code>ItemCheckingIn = 4</code></dt>
+  
+  <dd><p>Event that occurs before an item has been checked in.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingOut"><code>ItemCheckingOut = 5</code></dt>
+  
+  <dd><p>Event that occurs before an item is checked out.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleted"><code>ItemDeleted = 10003</code></dt>
+  
+  <dd><p>Event that occurs after an item has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleting"><code>ItemDeleting = 3</code></dt>
+  
+  <dd><p>Event that occurs before an item is deleted</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileConverted"><code>ItemFileConverted = 10010</code></dt>
+  
+  <dd><p>Event that occurs after a file is transformed from one type to another.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoved"><code>ItemFileMoved = 10009</code></dt>
+  
+  <dd><p>Event that occurs after a file has been moved.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoving"><code>ItemFileMoving = 9</code></dt>
+  
+  <dd><p>Event that occurs before a file is moved.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckedOut"><code>ItemUncheckedOut = 10006</code></dt>
+  
+  <dd><p>Event that occurs after an item has been unchecked out.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckingOut"><code>ItemUncheckingOut = 6</code></dt>
+  
+  <dd><p>Event that occurs before an item is unchecked out.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdated"><code>ItemUpdated = 10002</code></dt>
+  
+  <dd><p>Event that occurs after an item has been updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdating"><code>ItemUpdating = 2</code></dt>
+  
+  <dd><p>Event that occurs before an item is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleted"><code>ItemVersionDeleted = 10011</code></dt>
+  
+  <dd><p>Event that occurs after a document version is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleting"><code>ItemVersionDeleting = 11</code></dt>
+  
+  <dd><p>Event that occurs before a document version is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ListAdded"><code>ListAdded = 10104</code></dt>
+  
+  <dd><p>Event that occurs after a list has been created.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ListAdding"><code>ListAdding = 104</code></dt>
+  
+  <dd><p>Event that occurs before a list is created.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ListDeleted"><code>ListDeleted = 10105</code></dt>
+  
+  <dd><p>Event that occurs after a list has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_ListDeleting"><code>ListDeleting = 105</code></dt>
+  
+  <dd><p>Event that occurs before a list is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdded"><code>RoleAssignmentAdded = 10309</code></dt>
+  
+  <dd><p>Event that occurs after a role assignment is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdding"><code>RoleAssignmentAdding = 309</code></dt>
+  
+  <dd><p>Event that occurs before a role assignment is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleted"><code>RoleAssignmentDeleted = 10310</code></dt>
+  
+  <dd><p>Event that occurs after a role definition is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleting"><code>RoleAssignmentDeleting = 310</code></dt>
+  
+  <dd><p>Event that occurs before a role assignment is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdded"><code>RoleDefinitionAdded = 10306</code></dt>
+  
+  <dd><p>Event that occurs after a role definition is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdding"><code>RoleDefinitionAdding = 306</code></dt>
+  
+  <dd><p>Event that occurs before a role definition is added.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleted"><code>RoleDefinitionDeleted = 10308</code></dt>
+  
+  <dd><p>Event that occurs after a role definition is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleting"><code>RoleDefinitionDeleting = 308</code></dt>
+  
+  <dd><p>Event that occurs before a role definition is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdated"><code>RoleDefinitionUpdated = 10307</code></dt>
+  
+  <dd><p>Event that occurs after a role definition is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdating"><code>RoleDefinitionUpdating = 307</code></dt>
+  
+  <dd><p>Event that occurs before a role definition is updated.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleted"><code>SiteDeleted = 10201</code></dt>
+  
+  <dd><p>Event that occurs after a site collection has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleting"><code>SiteDeleting = 106</code></dt>
+  
+  <dd><p>Event that occurs before a site collection is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebAdding"><code>WebAdding = 204</code></dt>
+  
+  <dd><p>Event that occurs before a new site is created.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebDeleted"><code>WebDeleted = 10202</code></dt>
+  
+  <dd><p>Event that occurs after a site has been deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebDeleting"><code>WebDeleting = 202</code></dt>
+  
+  <dd><p>Event that occurs before a site is deleted.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebMoved"><code>WebMoved = 10203</code></dt>
+  
+  <dd><p>Event that occurs after a site URL has been changed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebMoving"><code>WebMoving = 203</code></dt>
+  
+  <dd><p>Event that occurs before a site URL has been changed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WebProvisioned"><code>WebProvisioned = 10204</code></dt>
+  
+  <dd><p>Event that occurs after a new site has been created, but before that new site is provisioned.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowCompleted"><code>WorkflowCompleted = 10503</code></dt>
+  
+  <dd><p>Event that occurs after a workflow has completed running.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowPostponed"><code>WorkflowPostponed = 10502</code></dt>
+  
+  <dd><p>Event that occurs after a workflow has been postponed.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarted"><code>WorkflowStarted = 10501</code></dt>
+  
+  <dd><p>Event that occurs after a workflow has started running.</p>
+</dd>
+    <dt id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarting"><code>WorkflowStarting = 501</code></dt>
+  
+  <dd><p>Event that occurs before a workflow starts running</p>
+</dd>
+  </dl>
 
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_AppUpgraded" class="collapse in">
-        <p><p>Event that occurs after an app is upgraded.</p>
 
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ContextEvent"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ContextEvent" class="expander" data-toggle="collapse">ContextEvent</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ContextEvent" class="collapse in">
-        <p><p>Identifies workflow event receivers, and is therefore not a true event type.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_EmailReceived"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EmailReceived" class="expander" data-toggle="collapse">EmailReceived</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EmailReceived" class="collapse in">
-        <p><p>Event that occurs after a list receives an e-mail message.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceAdded" class="expander" data-toggle="collapse">EntityInstanceAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceAdded" class="collapse in">
-        <p><p>Event that occurs when an instance of an external content type has been added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceDeleted" class="expander" data-toggle="collapse">EntityInstanceDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceDeleted" class="collapse in">
-        <p><p>Event that occurs when an instance of an external content type has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceUpdated"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceUpdated" class="expander" data-toggle="collapse">EntityInstanceUpdated</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_EntityInstanceUpdated" class="collapse in">
-        <p><p>Event that occurs when an instance of an external content type has been updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldAdded" class="expander" data-toggle="collapse">FieldAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldAdded" class="collapse in">
-        <p><p>Event that occurs after a field has been added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldAdding" class="expander" data-toggle="collapse">FieldAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldAdding" class="collapse in">
-        <p><p>Event that occurs before a field is added to a list.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleted" class="expander" data-toggle="collapse">FieldDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleted" class="collapse in">
-        <p><p>Event that occurs after a field has been removed.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleting" class="expander" data-toggle="collapse">FieldDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldDeleting" class="collapse in">
-        <p><p>Event that occurs before a field is removed from a list.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdated"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdated" class="expander" data-toggle="collapse">FieldUpdated</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdated" class="collapse in">
-        <p><p>Event that occurs after a field has been updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdating"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdating" class="expander" data-toggle="collapse">FieldUpdating</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_FieldUpdating" class="collapse in">
-        <p><p>Event that occurs before a field is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupAdded" class="expander" data-toggle="collapse">GroupAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupAdded" class="collapse in">
-        <p><p>Event that occurs happens after a security group is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupAdding" class="expander" data-toggle="collapse">GroupAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupAdding" class="collapse in">
-        <p><p>Event that occurs before a security group is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleted" class="expander" data-toggle="collapse">GroupDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleted" class="collapse in">
-        <p><p>Event that occurs after a security group is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleting" class="expander" data-toggle="collapse">GroupDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupDeleting" class="collapse in">
-        <p><p>Event that occurs before a security group is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdated"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdated" class="expander" data-toggle="collapse">GroupUpdated</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdated" class="collapse in">
-        <p><p>Event that occurs after a security group is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdating"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdating" class="expander" data-toggle="collapse">GroupUpdating</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUpdating" class="collapse in">
-        <p><p>Event that occurs before a security group is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdded" class="expander" data-toggle="collapse">GroupUserAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdded" class="collapse in">
-        <p><p>Event that occurs after a user is added to a security group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdding" class="expander" data-toggle="collapse">GroupUserAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserAdding" class="collapse in">
-        <p><p>Event that occurs before a user is added to a security group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleted" class="expander" data-toggle="collapse">GroupUserDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleted" class="collapse in">
-        <p><p>Event that occurs after a user is deleted from a security group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleting" class="expander" data-toggle="collapse">GroupUserDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_GroupUserDeleting" class="collapse in">
-        <p><p>Event that occurs before a user is deleted from a security group.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBreaking"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBreaking" class="expander" data-toggle="collapse">InheritanceBreaking</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBreaking" class="collapse in">
-        <p><p>Event that occurs before an inheritance is broken.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBroken"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBroken" class="expander" data-toggle="collapse">InheritanceBroken</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceBroken" class="collapse in">
-        <p><p>Event that occurs after an inheritance is broken.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceReset"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceReset" class="expander" data-toggle="collapse">InheritanceReset</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceReset" class="collapse in">
-        <p><p>Event that occurs after an inheritance is restored.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_InheritanceResetting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceResetting" class="expander" data-toggle="collapse">InheritanceResetting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InheritanceResetting" class="collapse in">
-        <p><p>Event that occurs before an inheritance is restored.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_InvalidReceiver"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InvalidReceiver" class="expander" data-toggle="collapse">InvalidReceiver</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_InvalidReceiver" class="collapse in">
-        <p><p>Indicates that an invalid event receiver type has been specified.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAdded" class="expander" data-toggle="collapse">ItemAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAdded" class="collapse in">
-        <p><p>Event that occurs after an item has been added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAdding" class="expander" data-toggle="collapse">ItemAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAdding" class="collapse in">
-        <p><p>Event that occurs before an item has been added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdded" class="expander" data-toggle="collapse">ItemAttachmentAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdded" class="collapse in">
-        <p><p>Event that occurs after an attachment has been added to the item.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdding" class="expander" data-toggle="collapse">ItemAttachmentAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentAdding" class="collapse in">
-        <p><p>Event that occurs before an attachment has been added to an item.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleted" class="expander" data-toggle="collapse">ItemAttachmentDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleted" class="collapse in">
-        <p><p>Event that occurs after an attachment has been removed from the item.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleting" class="expander" data-toggle="collapse">ItemAttachmentDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemAttachmentDeleting" class="collapse in">
-        <p><p>Event that occurs before an attachment has been removed from the item.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedIn"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedIn" class="expander" data-toggle="collapse">ItemCheckedIn</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedIn" class="collapse in">
-        <p><p>Event that occurs after an item has been checked in.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedOut"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedOut" class="expander" data-toggle="collapse">ItemCheckedOut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckedOut" class="collapse in">
-        <p><p>Event that occurs after an item has been checked out.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingIn"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingIn" class="expander" data-toggle="collapse">ItemCheckingIn</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingIn" class="collapse in">
-        <p><p>Event that occurs before an item has been checked in.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingOut"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingOut" class="expander" data-toggle="collapse">ItemCheckingOut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemCheckingOut" class="collapse in">
-        <p><p>Event that occurs before an item is checked out.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleted" class="expander" data-toggle="collapse">ItemDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleted" class="collapse in">
-        <p><p>Event that occurs after an item has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleting" class="expander" data-toggle="collapse">ItemDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemDeleting" class="collapse in">
-        <p><p>Event that occurs before an item is deleted</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileConverted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileConverted" class="expander" data-toggle="collapse">ItemFileConverted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileConverted" class="collapse in">
-        <p><p>Event that occurs after a file is transformed from one type to another.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoved"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoved" class="expander" data-toggle="collapse">ItemFileMoved</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoved" class="collapse in">
-        <p><p>Event that occurs after a file has been moved.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoving"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoving" class="expander" data-toggle="collapse">ItemFileMoving</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemFileMoving" class="collapse in">
-        <p><p>Event that occurs before a file is moved.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckedOut"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckedOut" class="expander" data-toggle="collapse">ItemUncheckedOut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckedOut" class="collapse in">
-        <p><p>Event that occurs after an item has been unchecked out.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckingOut"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckingOut" class="expander" data-toggle="collapse">ItemUncheckingOut</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUncheckingOut" class="collapse in">
-        <p><p>Event that occurs before an item is unchecked out.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdated"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdated" class="expander" data-toggle="collapse">ItemUpdated</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdated" class="collapse in">
-        <p><p>Event that occurs after an item has been updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdating"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdating" class="expander" data-toggle="collapse">ItemUpdating</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemUpdating" class="collapse in">
-        <p><p>Event that occurs before an item is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleted" class="expander" data-toggle="collapse">ItemVersionDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleted" class="collapse in">
-        <p><p>Event that occurs after a document version is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleting" class="expander" data-toggle="collapse">ItemVersionDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ItemVersionDeleting" class="collapse in">
-        <p><p>Event that occurs before a document version is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ListAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListAdded" class="expander" data-toggle="collapse">ListAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListAdded" class="collapse in">
-        <p><p>Event that occurs after a list has been created.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ListAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListAdding" class="expander" data-toggle="collapse">ListAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListAdding" class="collapse in">
-        <p><p>Event that occurs before a list is created.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ListDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListDeleted" class="expander" data-toggle="collapse">ListDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListDeleted" class="collapse in">
-        <p><p>Event that occurs after a list has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_ListDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListDeleting" class="expander" data-toggle="collapse">ListDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_ListDeleting" class="collapse in">
-        <p><p>Event that occurs before a list is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdded" class="expander" data-toggle="collapse">RoleAssignmentAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdded" class="collapse in">
-        <p><p>Event that occurs after a role assignment is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdding" class="expander" data-toggle="collapse">RoleAssignmentAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentAdding" class="collapse in">
-        <p><p>Event that occurs before a role assignment is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleted" class="expander" data-toggle="collapse">RoleAssignmentDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleted" class="collapse in">
-        <p><p>Event that occurs after a role definition is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleting" class="expander" data-toggle="collapse">RoleAssignmentDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleAssignmentDeleting" class="collapse in">
-        <p><p>Event that occurs before a role assignment is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdded"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdded" class="expander" data-toggle="collapse">RoleDefinitionAdded</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdded" class="collapse in">
-        <p><p>Event that occurs after a role definition is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdding" class="expander" data-toggle="collapse">RoleDefinitionAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionAdding" class="collapse in">
-        <p><p>Event that occurs before a role definition is added.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleted" class="expander" data-toggle="collapse">RoleDefinitionDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleted" class="collapse in">
-        <p><p>Event that occurs after a role definition is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleting" class="expander" data-toggle="collapse">RoleDefinitionDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionDeleting" class="collapse in">
-        <p><p>Event that occurs before a role definition is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdated"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdated" class="expander" data-toggle="collapse">RoleDefinitionUpdated</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdated" class="collapse in">
-        <p><p>Event that occurs after a role definition is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdating"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdating" class="expander" data-toggle="collapse">RoleDefinitionUpdating</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_RoleDefinitionUpdating" class="collapse in">
-        <p><p>Event that occurs before a role definition is updated.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleted" class="expander" data-toggle="collapse">SiteDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleted" class="collapse in">
-        <p><p>Event that occurs after a site collection has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleting" class="expander" data-toggle="collapse">SiteDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_SiteDeleting" class="collapse in">
-        <p><p>Event that occurs before a site collection is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebAdding"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebAdding" class="expander" data-toggle="collapse">WebAdding</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebAdding" class="collapse in">
-        <p><p>Event that occurs before a new site is created.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebDeleted" class="expander" data-toggle="collapse">WebDeleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebDeleted" class="collapse in">
-        <p><p>Event that occurs after a site has been deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebDeleting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebDeleting" class="expander" data-toggle="collapse">WebDeleting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebDeleting" class="collapse in">
-        <p><p>Event that occurs before a site is deleted.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebMoved"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebMoved" class="expander" data-toggle="collapse">WebMoved</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebMoved" class="collapse in">
-        <p><p>Event that occurs after a site URL has been changed.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebMoving"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebMoving" class="expander" data-toggle="collapse">WebMoving</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebMoving" class="collapse in">
-        <p><p>Event that occurs before a site URL has been changed.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WebProvisioned"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebProvisioned" class="expander" data-toggle="collapse">WebProvisioned</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WebProvisioned" class="collapse in">
-        <p><p>Event that occurs after a new site has been created, but before that new site is provisioned.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowCompleted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowCompleted" class="expander" data-toggle="collapse">WorkflowCompleted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowCompleted" class="collapse in">
-        <p><p>Event that occurs after a workflow has completed running.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowPostponed"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowPostponed" class="expander" data-toggle="collapse">WorkflowPostponed</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowPostponed" class="collapse in">
-        <p><p>Event that occurs after a workflow has been postponed.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarted"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarted" class="expander" data-toggle="collapse">WorkflowStarted</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarted" class="collapse in">
-        <p><p>Event that occurs after a workflow has started running.</p>
-
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarting"><a href="#collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarting" class="expander" data-toggle="collapse">WorkflowStarting</a></h4>
-
-      <div id="collapsible-PnP_Core_Model_SharePoint_EventReceiverType_WorkflowStarting" class="collapse in">
-        <p><p>Event that occurs before a workflow starts running</p>
-
-      </div>
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/Enums/EventReceiverType.cs/#L6" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

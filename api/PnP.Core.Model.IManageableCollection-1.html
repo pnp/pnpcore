@@ -1,98 +1,125 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IManageableCollection&lt;TModel&gt; | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IManageableCollection&lt;TModel&gt; | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Interface IManageableCollection&lt;TModel&gt; | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IManageableCollection&lt;TModel&gt; | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      <meta name="description" content="Defines the behavior of a collection that can be managed with fully typed prototype methods">
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.IManageableCollection`1">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L57" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
-                  </div>
-  
-  <h1 id="PnP_Core_Model_IManageableCollection_1" data-uid="PnP.Core.Model.IManageableCollection`1">Interface IManageableCollection&lt;TModel&gt;</h1>
-  <div class="markdown level0 summary"><p>Defines the behavior of a collection that can be managed
+
+        <article data-uid="PnP.Core.Model.IManageableCollection`1">
+
+
+
+  <h1 id="PnP_Core_Model_IManageableCollection_1" data-uid="PnP.Core.Model.IManageableCollection`1" class="text-break">
+Interface IManageableCollection&lt;TModel&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PnP.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Defines the behavior of a collection that can be managed
 with fully typed prototype methods</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IManageableCollection&lt;TModel&gt; : IManageableCollection</code></pre>
+  </div>
 
 
 
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModel</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="PnP.Core.Model.IManageableCollection.html#PnP_Core_Model_IManageableCollection_Add_System_Object_">IManageableCollection.Add(object)</a>
     </div>
@@ -105,65 +132,38 @@ with fully typed prototype methods</p>
     <div>
       <a class="xref" href="PnP.Core.Model.IManageableCollection.html#PnP_Core_Model_IManageableCollection_Replace_System_Int32_System_Object_">IManageableCollection.Replace(int, object)</a>
     </div>
-  </div>
-
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.html">PnP</a>.<a class="xref" href="PnP.Core.html">Core</a>.<a class="xref" href="PnP.Core.Model.html">Model</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-
-  <h5 id="PnP_Core_Model_IManageableCollection_1_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang- hljs">public interface IManageableCollection&lt;TModel&gt; : IManageableCollection</code></pre>
-  </div>
+  </dd></dl>
 
 
 
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="parametername">TModel</span>
-        <p></p>
-      </td>
-    </tr>
-  </table>
 
 
-  <h3 id="methods">Methods
-</h3>
 
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_Add__0_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.Add(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
+  <h2 class="section" id="methods">Methods
+</h2>
+
 
   <a id="PnP_Core_Model_IManageableCollection_1_Add_" data-uid="PnP.Core.Model.IManageableCollection`1.Add*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_Add__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Add(`0)"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_Add__0_" class="expander" data-toggle="collapse">Add(TModel)</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_Add__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Add(`0)">
+  Add(TModel)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_Add__0_" class="collapse in">
   <div class="markdown level1 summary"><p>Method to add a new item to the collection</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void Add(TModel item)</code></pre>
+    <pre><code class="lang-csharp hljs">void Add(TModel item)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><span class="xref">TModel</span></span>
-        <span class="parametername">item</span>
-        <p><p>The untyped item to add</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <span class="xref">TModel</span></dt>
+    <dd><p>The untyped item to add</p>
+</dd>
+  </dl>
 
 
 
@@ -175,50 +175,32 @@ with fully typed prototype methods</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_AddOrUpdate__0_System_Predicate__0__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.AddOrUpdate(%600%2CSystem.Predicate%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L84" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_IManageableCollection_1_AddOrUpdate_" data-uid="PnP.Core.Model.IManageableCollection`1.AddOrUpdate*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_AddOrUpdate__0_System_Predicate__0__" data-uid="PnP.Core.Model.IManageableCollection`1.AddOrUpdate(`0,System.Predicate{`0})"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_AddOrUpdate__0_System_Predicate__0__" class="expander" data-toggle="collapse">AddOrUpdate(TModel, Predicate&lt;TModel&gt;)</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_AddOrUpdate__0_System_Predicate__0__" data-uid="PnP.Core.Model.IManageableCollection`1.AddOrUpdate(`0,System.Predicate{`0})">
+  AddOrUpdate(TModel, Predicate&lt;TModel&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_AddOrUpdate__0_System_Predicate__0__" class="collapse in">
   <div class="markdown level1 summary"><p>Method to add a new fully typed item or update an already existing one
 based on a selection predicate</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void AddOrUpdate(TModel newItem, Predicate&lt;TModel&gt; selector)</code></pre>
+    <pre><code class="lang-csharp hljs">void AddOrUpdate(TModel newItem, Predicate&lt;TModel&gt; selector)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><span class="xref">TModel</span></span>
-        <span class="parametername">newItem</span>
-        <p><p>The fully typed item to add</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.predicate-1">Predicate</a>&lt;TModel&gt;</span>
-        <span class="parametername">selector</span>
-        <p><p>The selection predicate for the already existing item, if any</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newItem</code> <span class="xref">TModel</span></dt>
+    <dd><p>The fully typed item to add</p>
+</dd>
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.predicate-1">Predicate</a>&lt;TModel&gt;</dt>
+    <dd><p>The selection predicate for the already existing item, if any</p>
+</dd>
+  </dl>
 
 
 
@@ -230,42 +212,30 @@ based on a selection predicate</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_CreateNew.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.CreateNew%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_IManageableCollection_1_CreateNew_" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNew*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_CreateNew" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNew"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_CreateNew" class="expander" data-toggle="collapse">CreateNew()</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_CreateNew" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNew">
+  CreateNew()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_CreateNew" class="collapse in">
   <div class="markdown level1 summary"><p>Method to create a new typed item of the collection,
 ready to be added to the same collection</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">TModel CreateNew()</code></pre>
+    <pre><code class="lang-csharp hljs">TModel CreateNew()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <span class="xref">TModel</span>
-        <p><p>The new item, ready to be added to the current collection</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TModel</span></dt>
+    <dd><p>The new item, ready to be added to the current collection</p>
+</dd>
+  </dl>
 
 
 
@@ -276,41 +246,29 @@ ready to be added to the same collection</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.CreateNewAndAdd%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd_" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd" class="expander" data-toggle="collapse">CreateNewAndAdd()</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd" data-uid="PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd">
+  CreateNewAndAdd()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd" class="collapse in">
   <div class="markdown level1 summary"><p>Method to create a new typed item of the collection and immediately add it the collection</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">TModel CreateNewAndAdd()</code></pre>
+    <pre><code class="lang-csharp hljs">TModel CreateNewAndAdd()</code></pre>
   </div>
 
 
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <span class="xref">TModel</span>
-        <p><p>The new item, added to the collection</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TModel</span></dt>
+    <dd><p>The new item, added to the collection</p>
+</dd>
+  </dl>
 
 
 
@@ -321,52 +279,35 @@ ready to be added to the same collection</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_Remove__0_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.Remove(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_IManageableCollection_1_Remove_" data-uid="PnP.Core.Model.IManageableCollection`1.Remove*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_Remove__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Remove(`0)"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_Remove__0_" class="expander" data-toggle="collapse">Remove(TModel)</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_Remove__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Remove(`0)">
+  Remove(TModel)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_Remove__0_" class="collapse in">
   <div class="markdown level1 summary"><p>Method to remove an fully typed item from the collection</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">bool Remove(TModel item)</code></pre>
+    <pre><code class="lang-csharp hljs">bool Remove(TModel item)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><span class="xref">TModel</span></span>
-        <span class="parametername">item</span>
-        <p><p>The fully typed item to remove</p>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <span class="xref">TModel</span></dt>
+    <dd><p>The fully typed item to remove</p>
+</dd>
+  </dl>
 
-      </td>
-    </tr>
-  </table>
-
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>
-        <p><p>True if the removal is successful</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the removal is successful</p>
+</dd>
+  </dl>
 
 
 
@@ -377,49 +318,31 @@ ready to be added to the same collection</p>
 
 
 
-  </div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IManageableCollection_1_Replace_System_Int32__0_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IManageableCollection%601.Replace(System.Int32%2C%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Edit this page"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L98" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
 
   <a id="PnP_Core_Model_IManageableCollection_1_Replace_" data-uid="PnP.Core.Model.IManageableCollection`1.Replace*"></a>
 
-  <h4 id="PnP_Core_Model_IManageableCollection_1_Replace_System_Int32__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Replace(System.Int32,`0)"><a href="#collapsible-PnP_Core_Model_IManageableCollection_1_Replace_System_Int32__0_" class="expander" data-toggle="collapse">Replace(int, TModel)</a></h4>
+  <h3 id="PnP_Core_Model_IManageableCollection_1_Replace_System_Int32__0_" data-uid="PnP.Core.Model.IManageableCollection`1.Replace(System.Int32,`0)">
+  Replace(int, TModel)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
 
-  <div id="collapsible-PnP_Core_Model_IManageableCollection_1_Replace_System_Int32__0_" class="collapse in">
   <div class="markdown level1 summary"><p>Replaces an item in the collection with a new one</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">void Replace(int itemIndex, TModel newItem)</code></pre>
+    <pre><code class="lang-csharp hljs">void Replace(int itemIndex, TModel newItem)</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></span>
-        <span class="parametername">itemIndex</span>
-        <p><p>The index of the item to replace within the collection</p>
-
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><span class="xref">TModel</span></span>
-        <span class="parametername">newItem</span>
-        <p><p>New item to replace the old one with</p>
-
-      </td>
-    </tr>
-  </table>
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>itemIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The index of the item to replace within the collection</p>
+</dd>
+    <dt><code>newItem</code> <span class="xref">TModel</span></dt>
+    <dd><p>New item to replace the old one with</p>
+</dd>
+  </dl>
 
 
 
@@ -430,36 +353,31 @@ ready to be added to the same collection</p>
 
 
 
-
-  </div>
 
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IManageableCollection.cs/#L57" class="edit-link">Edit this page</a>
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

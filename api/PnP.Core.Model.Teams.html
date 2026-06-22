@@ -1,853 +1,646 @@
 <!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html lang="en">
-
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PnP.Core.Model.Teams | PnP Core SDK </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PnP.Core.Model.Teams | PnP Core SDK ">
-    <meta name="generator" content="docfx ">
-  <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
-    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
-    <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-  
-  <meta property="docfx:rel" content="../">
-  <meta property="docfx:newtab" content="true">
-  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
+      <title>Namespace PnP.Core.Model.Teams | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace PnP.Core.Model.Teams | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+      <script type="module" src="./../public/docfx.min.js"></script>
 
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../images/logo.svg" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <label class="glyphicon glyphicon-search" for="search-query"></label>
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Teams">
-                
-                  <div class="contribution-panel mobile-hide pull-right">
-                  </div>
-    <h1 id="PnP_Core_Model_Teams" data-uid="PnP.Core.Model.Teams">Namespace PnP.Core.Model.Teams</h1>
+
+        <article data-uid="PnP.Core.Model.Teams">
+
+  <h1 id="PnP_Core_Model_Teams" data-uid="PnP.Core.Model.Teams" class="text-break">Namespace PnP.Core.Model.Teams</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+
     <h3 id="classes">
 Classes
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageAttachmentOptions.html">ChatMessageAttachmentOptions</a></p>
-          <p><p>Chat message attachment</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageHostedContentOptions.html">ChatMessageHostedContentOptions</a></p>
-          <p><p>Chat Message Hosted Content options</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageMentionOptions.html">ChatMessageMentionOptions</a></p>
-          <p><p>Chat message mention options</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></p>
-          <p><p>Chat Message options</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventAddressOptions.html">EventAddressOptions</a></p>
-          <p><p>Options that can be set when creating an address location for a meeting request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventAttendeeOptions.html">EventAttendeeOptions</a></p>
-          <p><p>Options that can be set for the attendees</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventCoordinateOptions.html">EventCoordinateOptions</a></p>
-          <p><p>Options that can be set when creating a coordinate location for a meeting request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventCreateOptions.html">EventCreateOptions</a></p>
-          <p><p>Options that can be set when creating a meeting request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventLocationOptions.html">EventLocationOptions</a></p>
-          <p><p>Options that can be set when creating a location for a meeting request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecipientOptions.html">EventRecipientOptions</a></p>
-          <p><p>Options that can be set for a recipient</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceOptions.html">EventRecurrenceOptions</a></p>
-          <p><p>Options that can be set for the recurrence</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecurrencePatternOptions.html">EventRecurrencePatternOptions</a></p>
-          <p><p>Options that can be set for the recurrence pattern</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceRangeOptions.html">EventRecurrenceRangeOptions</a></p>
-          <p><p>Options that can be set for the recurrence range</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventUpdateOptions.html">EventUpdateOptions</a></p>
-          <p><p>Options that can be set when creating a meeting request</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamChannelOptions.html">TeamChannelOptions</a></p>
-          <p><p>Available options for Teams channel</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamChannelTabConstants.html">TeamChannelTabConstants</a></p>
-          <p><p>Team channel tab constants</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamTagOptions.html">TeamTagOptions</a></p>
-          <p><p>Options for the team tag</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamTagUserOptions.html">TeamTagUserOptions</a></p>
-          <p><p>Options for the team tag members</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageAttachmentOptions.html">ChatMessageAttachmentOptions</a></dt>
+      <dd><p>Chat message attachment</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageHostedContentOptions.html">ChatMessageHostedContentOptions</a></dt>
+      <dd><p>Chat Message Hosted Content options</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageMentionOptions.html">ChatMessageMentionOptions</a></dt>
+      <dd><p>Chat message mention options</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></dt>
+      <dd><p>Chat Message options</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventAddressOptions.html">EventAddressOptions</a></dt>
+      <dd><p>Options that can be set when creating an address location for a meeting request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventAttendeeOptions.html">EventAttendeeOptions</a></dt>
+      <dd><p>Options that can be set for the attendees</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventCoordinateOptions.html">EventCoordinateOptions</a></dt>
+      <dd><p>Options that can be set when creating a coordinate location for a meeting request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventCreateOptions.html">EventCreateOptions</a></dt>
+      <dd><p>Options that can be set when creating a meeting request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventLocationOptions.html">EventLocationOptions</a></dt>
+      <dd><p>Options that can be set when creating a location for a meeting request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecipientOptions.html">EventRecipientOptions</a></dt>
+      <dd><p>Options that can be set for a recipient</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceOptions.html">EventRecurrenceOptions</a></dt>
+      <dd><p>Options that can be set for the recurrence</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecurrencePatternOptions.html">EventRecurrencePatternOptions</a></dt>
+      <dd><p>Options that can be set for the recurrence pattern</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceRangeOptions.html">EventRecurrenceRangeOptions</a></dt>
+      <dd><p>Options that can be set for the recurrence range</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventUpdateOptions.html">EventUpdateOptions</a></dt>
+      <dd><p>Options that can be set when creating a meeting request</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamChannelOptions.html">TeamChannelOptions</a></dt>
+      <dd><p>Available options for Teams channel</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamChannelTabConstants.html">TeamChannelTabConstants</a></dt>
+      <dd><p>Team channel tab constants</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamTagOptions.html">TeamTagOptions</a></dt>
+      <dd><p>Options for the team tag</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamTagUserOptions.html">TeamTagUserOptions</a></dt>
+      <dd><p>Options for the team tag members</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphDateTimeTimeZone.html">IGraphDateTimeTimeZone</a></p>
-          <p><p>Describes the date, time, and time zone of a point in time.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEmailAddress.html">IGraphEmailAddress</a></p>
-          <p><p>The name and email address of a contact or message recipient.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEvent.html">IGraphEvent</a></p>
-          <p><p>Defines an event in a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEventAttendee.html">IGraphEventAttendee</a></p>
-          <p><p>Represents properties of the attendee of an event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEventAttendeeCollection.html">IGraphEventAttendeeCollection</a></p>
-          <p><p>Public interface to define a collection of attendees for an event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEventCollection.html">IGraphEventCollection</a></p>
-          <p><p>Public interface to define a collection of events for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphEventResponseStatus.html">IGraphEventResponseStatus</a></p>
-          <p><p>The response status of an attendee or organizer for a meeting request.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphItemBody.html">IGraphItemBody</a></p>
-          <p><p>Represents properties of the body of an item, such as a message, event or group post.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphLocation.html">IGraphLocation</a></p>
-          <p><p>Represents location information of an event.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphLocationCollection.html">IGraphLocationCollection</a></p>
-          <p><p>Public interface to define a collection of events for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphOnlineMeetingInfo.html">IGraphOnlineMeetingInfo</a></p>
-          <p><p>Details for an attendee to join the meeting online.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphOutlookGeoCoordinates.html">IGraphOutlookGeoCoordinates</a></p>
-          <p><p>The geographic coordinates, elevation, and their degree of accuracy for a physical location.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphPatternedRecurrence.html">IGraphPatternedRecurrence</a></p>
-          <p><p>The recurrence pattern and range. This shared object is used to define the recurrence of the following objects:</p>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphDateTimeTimeZone.html">IGraphDateTimeTimeZone</a></dt>
+      <dd><p>Describes the date, time, and time zone of a point in time.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEmailAddress.html">IGraphEmailAddress</a></dt>
+      <dd><p>The name and email address of a contact or message recipient.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEvent.html">IGraphEvent</a></dt>
+      <dd><p>Defines an event in a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEventAttendee.html">IGraphEventAttendee</a></dt>
+      <dd><p>Represents properties of the attendee of an event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEventAttendeeCollection.html">IGraphEventAttendeeCollection</a></dt>
+      <dd><p>Public interface to define a collection of attendees for an event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEventCollection.html">IGraphEventCollection</a></dt>
+      <dd><p>Public interface to define a collection of events for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphEventResponseStatus.html">IGraphEventResponseStatus</a></dt>
+      <dd><p>The response status of an attendee or organizer for a meeting request.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphItemBody.html">IGraphItemBody</a></dt>
+      <dd><p>Represents properties of the body of an item, such as a message, event or group post.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphLocation.html">IGraphLocation</a></dt>
+      <dd><p>Represents location information of an event.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphLocationCollection.html">IGraphLocationCollection</a></dt>
+      <dd><p>Public interface to define a collection of events for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphOnlineMeetingInfo.html">IGraphOnlineMeetingInfo</a></dt>
+      <dd><p>Details for an attendee to join the meeting online.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphOutlookGeoCoordinates.html">IGraphOutlookGeoCoordinates</a></dt>
+      <dd><p>The geographic coordinates, elevation, and their degree of accuracy for a physical location.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphPatternedRecurrence.html">IGraphPatternedRecurrence</a></dt>
+      <dd><p>The recurrence pattern and range. This shared object is used to define the recurrence of the following objects:</p>
 <ul>
 <li>accessReviewScheduleDefinition objects in Azure AD access reviews APIs</li>
 <li>event objects in the calendar API</li>
 <li>unifiedRoleAssignmentScheduleRequest and unifiedRoleEligibilityScheduleRequest objects in PIM</li>
 <li>accessPackageAssignment objects in Azure AD entitlement management</li>
 </ul>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphPhone.html">IGraphPhone</a></p>
-          <p><p>Represents a phone number.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphPhoneCollection.html">IGraphPhoneCollection</a></p>
-          <p><p>Public interface to define a collection of phones for an event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphPhysicalAddress.html">IGraphPhysicalAddress</a></p>
-          <p><p>Represents the street address of a resource such as a contact or event.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphRecipient.html">IGraphRecipient</a></p>
-          <p><p>Represents information about a user in the sending or receiving end of an event, message or group post.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphRecipientCollection.html">IGraphRecipientCollection</a></p>
-          <p><p>Public interface to define a collection of recipients for an event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphRecurrencePattern.html">IGraphRecurrencePattern</a></p>
-          <p><p>Describes the frequency by which a recurring event repeats.
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphPhone.html">IGraphPhone</a></dt>
+      <dd><p>Represents a phone number.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphPhoneCollection.html">IGraphPhoneCollection</a></dt>
+      <dd><p>Public interface to define a collection of phones for an event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphPhysicalAddress.html">IGraphPhysicalAddress</a></dt>
+      <dd><p>Represents the street address of a resource such as a contact or event.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphRecipient.html">IGraphRecipient</a></dt>
+      <dd><p>Represents information about a user in the sending or receiving end of an event, message or group post.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphRecipientCollection.html">IGraphRecipientCollection</a></dt>
+      <dd><p>Public interface to define a collection of recipients for an event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphRecurrencePattern.html">IGraphRecurrencePattern</a></dt>
+      <dd><p>Describes the frequency by which a recurring event repeats.
 This shared object is used to define the recurrence of access reviews, calendar events, and access package assignments in Azure AD.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphRecurrenceRange.html">IGraphRecurrenceRange</a></p>
-          <p><p>Describes a date range over which a recurring event. This shared object is used to define the recurrence of access reviews, calendar events, and access package assignments in Azure AD.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.IGraphTimeSlot.html">IGraphTimeSlot</a></p>
-          <p><p>Represents a time slot for a meeting.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeam.html">ITeam</a></p>
-          <p><p>Public interface to define a Team object of Microsoft Teams</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamApp.html">ITeamApp</a></p>
-          <p><p>Defines a Microsoft Teams App installation</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamAppCollection.html">ITeamAppCollection</a></p>
-          <p><p>Public interface to define a collection of TeamApp objects of Microsoft Teams</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamAsyncOperation.html">ITeamAsyncOperation</a></p>
-          <p><p>Represents a Microsoft Teams async operation</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannel.html">ITeamChannel</a></p>
-          <p><p>Defines a Channel of Microsoft Teams</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelCollection.html">ITeamChannelCollection</a></p>
-          <p><p>Public interface to define a collection of Team Channels</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelIdentity.html">ITeamChannelIdentity</a></p>
-          <p><p>Defines the channel reference of the message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTab.html">ITeamChannelTab</a></p>
-          <p><p>Defines the tab in a Team channel</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTabCollection.html">ITeamChannelTabCollection</a></p>
-          <p><p>Public interface to define a collection of Tabs for a Team Channel</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html">ITeamChannelTabConfiguration</a></p>
-          <p><p>Public interface to define the configuration settings for a Team tab</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a></p>
-          <p><p>Represents an individual chat message within a channel or chat. The chat message can be a root chat message or
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphRecurrenceRange.html">IGraphRecurrenceRange</a></dt>
+      <dd><p>Describes a date range over which a recurring event. This shared object is used to define the recurrence of access reviews, calendar events, and access package assignments in Azure AD.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.IGraphTimeSlot.html">IGraphTimeSlot</a></dt>
+      <dd><p>Represents a time slot for a meeting.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeam.html">ITeam</a></dt>
+      <dd><p>Public interface to define a Team object of Microsoft Teams</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamApp.html">ITeamApp</a></dt>
+      <dd><p>Defines a Microsoft Teams App installation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamAppCollection.html">ITeamAppCollection</a></dt>
+      <dd><p>Public interface to define a collection of TeamApp objects of Microsoft Teams</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamAsyncOperation.html">ITeamAsyncOperation</a></dt>
+      <dd><p>Represents a Microsoft Teams async operation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannel.html">ITeamChannel</a></dt>
+      <dd><p>Defines a Channel of Microsoft Teams</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelCollection.html">ITeamChannelCollection</a></dt>
+      <dd><p>Public interface to define a collection of Team Channels</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelIdentity.html">ITeamChannelIdentity</a></dt>
+      <dd><p>Defines the channel reference of the message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTab.html">ITeamChannelTab</a></dt>
+      <dd><p>Defines the tab in a Team channel</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTabCollection.html">ITeamChannelTabCollection</a></dt>
+      <dd><p>Public interface to define a collection of Tabs for a Team Channel</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html">ITeamChannelTabConfiguration</a></dt>
+      <dd><p>Public interface to define the configuration settings for a Team tab</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a></dt>
+      <dd><p>Represents an individual chat message within a channel or chat. The chat message can be a root chat message or
 part of a reply thread that is defined by the replyToId property in the chat message.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachment.html">ITeamChatMessageAttachment</a></p>
-          <p><p>Attachments connected to a chat message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></p>
-          <p><p>Collection of chat messages</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageCollection.html">ITeamChatMessageCollection</a></p>
-          <p><p>A chat is a collection of chatMessages between one or more participants. Participants can be users or apps.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageContent.html">ITeamChatMessageContent</a></p>
-          <p><p>Public interface to define the content of a chat message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html">ITeamChatMessageHostedContent</a></p>
-          <p><p>Attachments connected to a chat message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></p>
-          <p><p>Collection of chat messages</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMention.html">ITeamChatMessageMention</a></p>
-          <p><p>Represents a mention in a chatMessage entity. The mention can be to a user, team, bot, or channel.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMentionCollection.html">ITeamChatMessageMentionCollection</a></p>
-          <p><p>Chat mentions</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMentionedIdentitySet.html">ITeamChatMessageMentionedIdentitySet</a></p>
-          <p><p>Represents the resource (user, application, or conversation) @mentioned in a message in a chat or a channel.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReaction.html">ITeamChatMessageReaction</a></p>
-          <p><p>Represents a reaction to a chatMessage entity.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReactionCollection.html">ITeamChatMessageReactionCollection</a></p>
-          <p><p>Reactions on this chat</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReply.html">ITeamChatMessageReply</a></p>
-          <p><p>Represents an individual Reply on a chat message.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReplyCollection.html">ITeamChatMessageReplyCollection</a></p>
-          <p><p>A collection of the replies on a chat</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamClassSettings.html">ITeamClassSettings</a></p>
-          <p><p>Public interface to define the settings for a classroom</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamConversationIdentity.html">ITeamConversationIdentity</a></p>
-          <p><p>Represents a tag in Microsoft Teams. Tags allow users to quickly connect to subset of users in a team.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamDiscoverySettings.html">ITeamDiscoverySettings</a></p>
-          <p><p>Public interface to define the discovery settings for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamFunSettings.html">ITeamFunSettings</a></p>
-          <p><p>Public interface to define the fun settings for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamGuestSettings.html">ITeamGuestSettings</a></p>
-          <p><p>Public interface to define the guest settings for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamIdentitySet.html">ITeamIdentitySet</a></p>
-          <p><p>Identity information about a Teams element</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamMembersSettings.html">ITeamMembersSettings</a></p>
-          <p><p>Public interface to define the memebers settings for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamMessagingSettings.html">ITeamMessagingSettings</a></p>
-          <p><p>Public interface to define the messaging settings for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamTag.html">ITeamTag</a></p>
-          <p><p>Represents a tag associated with a team.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamTagCollection.html">ITeamTagCollection</a></p>
-          <p><p>Tags on the team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamTagIdentity.html">ITeamTagIdentity</a></p>
-          <p><p>Represents a tag in Microsoft Teams. Tags allow users to quickly connect to subset of users in a team.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamTagMember.html">ITeamTagMember</a></p>
-          <p><p>Represents a tag associated with a team.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ITeamTagMemberCollection.html">ITeamTagMemberCollection</a></p>
-          <p><p>Members on this team tag</p>
-
-        </td>
-      </tr>
-    </table>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachment.html">ITeamChatMessageAttachment</a></dt>
+      <dd><p>Attachments connected to a chat message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></dt>
+      <dd><p>Collection of chat messages</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageCollection.html">ITeamChatMessageCollection</a></dt>
+      <dd><p>A chat is a collection of chatMessages between one or more participants. Participants can be users or apps.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageContent.html">ITeamChatMessageContent</a></dt>
+      <dd><p>Public interface to define the content of a chat message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html">ITeamChatMessageHostedContent</a></dt>
+      <dd><p>Attachments connected to a chat message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></dt>
+      <dd><p>Collection of chat messages</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMention.html">ITeamChatMessageMention</a></dt>
+      <dd><p>Represents a mention in a chatMessage entity. The mention can be to a user, team, bot, or channel.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMentionCollection.html">ITeamChatMessageMentionCollection</a></dt>
+      <dd><p>Chat mentions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMentionedIdentitySet.html">ITeamChatMessageMentionedIdentitySet</a></dt>
+      <dd><p>Represents the resource (user, application, or conversation) @mentioned in a message in a chat or a channel.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReaction.html">ITeamChatMessageReaction</a></dt>
+      <dd><p>Represents a reaction to a chatMessage entity.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReactionCollection.html">ITeamChatMessageReactionCollection</a></dt>
+      <dd><p>Reactions on this chat</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReply.html">ITeamChatMessageReply</a></dt>
+      <dd><p>Represents an individual Reply on a chat message.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReplyCollection.html">ITeamChatMessageReplyCollection</a></dt>
+      <dd><p>A collection of the replies on a chat</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamClassSettings.html">ITeamClassSettings</a></dt>
+      <dd><p>Public interface to define the settings for a classroom</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamConversationIdentity.html">ITeamConversationIdentity</a></dt>
+      <dd><p>Represents a tag in Microsoft Teams. Tags allow users to quickly connect to subset of users in a team.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamDiscoverySettings.html">ITeamDiscoverySettings</a></dt>
+      <dd><p>Public interface to define the discovery settings for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamFunSettings.html">ITeamFunSettings</a></dt>
+      <dd><p>Public interface to define the fun settings for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamGuestSettings.html">ITeamGuestSettings</a></dt>
+      <dd><p>Public interface to define the guest settings for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamIdentitySet.html">ITeamIdentitySet</a></dt>
+      <dd><p>Identity information about a Teams element</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamMembersSettings.html">ITeamMembersSettings</a></dt>
+      <dd><p>Public interface to define the memebers settings for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamMessagingSettings.html">ITeamMessagingSettings</a></dt>
+      <dd><p>Public interface to define the messaging settings for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamTag.html">ITeamTag</a></dt>
+      <dd><p>Represents a tag associated with a team.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamTagCollection.html">ITeamTagCollection</a></dt>
+      <dd><p>Tags on the team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamTagIdentity.html">ITeamTagIdentity</a></dt>
+      <dd><p>Represents a tag in Microsoft Teams. Tags allow users to quickly connect to subset of users in a team.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamTagMember.html">ITeamTagMember</a></dt>
+      <dd><p>Represents a tag associated with a team.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ITeamTagMemberCollection.html">ITeamTagMemberCollection</a></dt>
+      <dd><p>Members on this team tag</p>
+</dd>
+    </dl>
     <h3 id="enums">
 Enums
 </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></p>
-          <p><p>Chat message content types</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageImportance.html">ChatMessageImportance</a></p>
-          <p><p>The importance of the chat message.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageReactionType.html">ChatMessageReactionType</a></p>
-          <p><p>Types of reactions to a chat message</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.ChatMessageType.html">ChatMessageType</a></p>
-          <p><p>Types of chat messages</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventAttendeeType.html">EventAttendeeType</a></p>
-          <p><p>The type of attendee</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventBodyType.html">EventBodyType</a></p>
-          <p><p>Event body type of content</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventImportance.html">EventImportance</a></p>
-          <p><p>Event Importance Types</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventLocationType.html">EventLocationType</a></p>
-          <p><p>Event location Types</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventOnlineMeetingProvider.html">EventOnlineMeetingProvider</a></p>
-          <p><p>Meeting providers for an online meeting</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventPhoneType.html">EventPhoneType</a></p>
-          <p><p>Type of phone</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceRangeType.html">EventRecurrenceRangeType</a></p>
-          <p><p>The recurrence range.</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceType.html">EventRecurrenceType</a></p>
-          <p><p>Recurrence type</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventResponse.html">EventResponse</a></p>
-          <p><p>Response of an event invite</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventSensitivity.html">EventSensitivity</a></p>
-          <p><p>Sensitivty of the event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventShowAs.html">EventShowAs</a></p>
-          <p><p>Defines the status of the event in the calendar</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventTimeZone.html">EventTimeZone</a></p>
-          <p><p>Event time zones</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventType.html">EventType</a></p>
-          <p><p>Defines the type of event</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.EventWeekIndex.html">EventWeekIndex</a></p>
-          <p><p>Week index</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamChannelMembershipType.html">TeamChannelMembershipType</a></p>
-          <p><p>Defines the Membership Type for a Team Channel</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamConversationIdentityType.html">TeamConversationIdentityType</a></p>
-          <p><p>Type of conversation</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamGiphyContentRating.html">TeamGiphyContentRating</a></p>
-          <p><p>Giphy content rating for giphies being used in a team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamSpecialization.html">TeamSpecialization</a></p>
-          <p><p>Defines the Specialization options for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamTagType.html">TeamTagType</a></p>
-          <p><p>The type of tag</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamUserIdentityType.html">TeamUserIdentityType</a></p>
-          <p><p>The user identity type</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamVisibility.html">TeamVisibility</a></p>
-          <p><p>Defines the Visibility for a Team</p>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Model.Teams.TeamsAppDistributionMethod.html">TeamsAppDistributionMethod</a></p>
-          <p><p>Distribution method of the team app</p>
-
-        </td>
-      </tr>
-    </table>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></dt>
+      <dd><p>Chat message content types</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageImportance.html">ChatMessageImportance</a></dt>
+      <dd><p>The importance of the chat message.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageReactionType.html">ChatMessageReactionType</a></dt>
+      <dd><p>Types of reactions to a chat message</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.ChatMessageType.html">ChatMessageType</a></dt>
+      <dd><p>Types of chat messages</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventAttendeeType.html">EventAttendeeType</a></dt>
+      <dd><p>The type of attendee</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventBodyType.html">EventBodyType</a></dt>
+      <dd><p>Event body type of content</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventImportance.html">EventImportance</a></dt>
+      <dd><p>Event Importance Types</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventLocationType.html">EventLocationType</a></dt>
+      <dd><p>Event location Types</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventOnlineMeetingProvider.html">EventOnlineMeetingProvider</a></dt>
+      <dd><p>Meeting providers for an online meeting</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventPhoneType.html">EventPhoneType</a></dt>
+      <dd><p>Type of phone</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceRangeType.html">EventRecurrenceRangeType</a></dt>
+      <dd><p>The recurrence range.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventRecurrenceType.html">EventRecurrenceType</a></dt>
+      <dd><p>Recurrence type</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventResponse.html">EventResponse</a></dt>
+      <dd><p>Response of an event invite</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventSensitivity.html">EventSensitivity</a></dt>
+      <dd><p>Sensitivty of the event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventShowAs.html">EventShowAs</a></dt>
+      <dd><p>Defines the status of the event in the calendar</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventTimeZone.html">EventTimeZone</a></dt>
+      <dd><p>Event time zones</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventType.html">EventType</a></dt>
+      <dd><p>Defines the type of event</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.EventWeekIndex.html">EventWeekIndex</a></dt>
+      <dd><p>Week index</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamChannelMembershipType.html">TeamChannelMembershipType</a></dt>
+      <dd><p>Defines the Membership Type for a Team Channel</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamConversationIdentityType.html">TeamConversationIdentityType</a></dt>
+      <dd><p>Type of conversation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamGiphyContentRating.html">TeamGiphyContentRating</a></dt>
+      <dd><p>Giphy content rating for giphies being used in a team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamSpecialization.html">TeamSpecialization</a></dt>
+      <dd><p>Defines the Specialization options for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamTagType.html">TeamTagType</a></dt>
+      <dd><p>The type of tag</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamUserIdentityType.html">TeamUserIdentityType</a></dt>
+      <dd><p>The user identity type</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamVisibility.html">TeamVisibility</a></dt>
+      <dd><p>Defines the Visibility for a Team</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PnP.Core.Model.Teams.TeamsAppDistributionMethod.html">TeamsAppDistributionMethod</a></dt>
+      <dd><p>Distribution method of the team app</p>
+</dd>
+    </dl>
 
 
 </article>
-          </div>
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              </nav>
-            </div>
-          </div>        </div>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
-      
-            <img src="https://m365-visitor-stats.azurewebsites.net/pnpcoresdk/docs" alt="spacer">
-          </div>
-        </div>
-      </footer>    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
