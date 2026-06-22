@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
 - Updated setup test env script #1769 [adam-it - Adam Wójcik]
+- Updates to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
 
 ## [1.16]
 
