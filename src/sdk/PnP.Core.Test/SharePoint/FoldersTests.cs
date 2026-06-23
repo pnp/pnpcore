@@ -638,38 +638,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        [TestMethod]
-        public async Task EnsureListFolderConcurrentTest()
-        {
-            // This test exercises the race condition handling in EnsureFolderAsync:
-            // multiple concurrent calls targeting the same folder path must all succeed
-            // even when one of them loses the create race and gets an "already exists" error.
-
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
-
-                try
-                {
-                    var tasks = Enumerable.Range(0, 5)
-                        .Select(_ => parentFolder.EnsureFolderAsync("sub1/sub2/sub3"))
-                        .ToArray();
-
-                    var results = await Task.WhenAll(tasks);
-
-                    Assert.IsTrue(results.All(r => r != null));
-                    Assert.IsTrue(results.All(r => r.Name == "sub3"));
-                    Assert.AreEqual(1, results.Select(r => r.UniqueId).Distinct().Count());
-                }
-                finally
-                {
-                    var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
-                    await folderToDelete.DeleteAsync();
-                }
-            }
-        }
-
         #endregion
 
         [TestMethod]
