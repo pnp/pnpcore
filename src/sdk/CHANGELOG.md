@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Updated setup test env script #1769 [adam-it - Adam Wójcik]
 - Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
 - Fixed folder race condition #1770 [aramB - Aram B]
+- Added support for new sovereign cloud environments #1727 [gautamdsheth - Gautam Sheth]
+- Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
+- Improved repo security #1785 [adam-it - Adam Wójcik]
 
 ## [1.16]
 
