@@ -72850,6 +72850,12 @@ references:
   commentId: T:PnP.Core.Services.Microsoft365Environment
   fullName: PnP.Core.Services.Microsoft365Environment
   nameWithType: Microsoft365Environment
+- uid: PnP.Core.Services.Microsoft365Environment.BleuCloud
+  name: BleuCloud
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_BleuCloud
+  commentId: F:PnP.Core.Services.Microsoft365Environment.BleuCloud
+  fullName: PnP.Core.Services.Microsoft365Environment.BleuCloud
+  nameWithType: Microsoft365Environment.BleuCloud
 - uid: PnP.Core.Services.Microsoft365Environment.China
   name: China
   href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_China
@@ -72862,24 +72868,18 @@ references:
   commentId: F:PnP.Core.Services.Microsoft365Environment.Custom
   fullName: PnP.Core.Services.Microsoft365Environment.Custom
   nameWithType: Microsoft365Environment.Custom
-- uid: PnP.Core.Services.Microsoft365Environment.GovDe
-  name: GovDe
-  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovDe
-  commentId: F:PnP.Core.Services.Microsoft365Environment.GovDe
-  fullName: PnP.Core.Services.Microsoft365Environment.GovDe
-  nameWithType: Microsoft365Environment.GovDe
-- uid: PnP.Core.Services.Microsoft365Environment.GovFr
-  name: GovFr
-  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovFr
-  commentId: F:PnP.Core.Services.Microsoft365Environment.GovFr
-  fullName: PnP.Core.Services.Microsoft365Environment.GovFr
-  nameWithType: Microsoft365Environment.GovFr
-- uid: PnP.Core.Services.Microsoft365Environment.GovSg
-  name: GovSg
-  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovSg
-  commentId: F:PnP.Core.Services.Microsoft365Environment.GovSg
-  fullName: PnP.Core.Services.Microsoft365Environment.GovSg
-  nameWithType: Microsoft365Environment.GovSg
+- uid: PnP.Core.Services.Microsoft365Environment.DelosCloud
+  name: DelosCloud
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_DelosCloud
+  commentId: F:PnP.Core.Services.Microsoft365Environment.DelosCloud
+  fullName: PnP.Core.Services.Microsoft365Environment.DelosCloud
+  nameWithType: Microsoft365Environment.DelosCloud
+- uid: PnP.Core.Services.Microsoft365Environment.GovSGCloud
+  name: GovSGCloud
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovSGCloud
+  commentId: F:PnP.Core.Services.Microsoft365Environment.GovSGCloud
+  fullName: PnP.Core.Services.Microsoft365Environment.GovSGCloud
+  nameWithType: Microsoft365Environment.GovSGCloud
 - uid: PnP.Core.Services.Microsoft365Environment.PreProduction
   name: PreProduction
   href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_PreProduction
