@@ -11,15 +11,18 @@ jobs:
     if: github.repository_owner == 'pnp'
     # The type of runner that the job will run on
     runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    permissions:
+      contents: read
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with: 
         ref: dev
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
       with:
         dotnet-version: '10.0.x'
     - name: Unlist nightly nuget packages
