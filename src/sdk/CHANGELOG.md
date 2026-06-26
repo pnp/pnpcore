@@ -10,12 +10,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added 
 
+- Added sovereign cloud support for `BleuCloud`, `DelosCloud` and `GovSGCloud` environments to allow usage inside sovereign partner cloud environment #1727 & #1787 [gautamdsheth- Gautam Sheth]
+
 ### Changed 
 
 - Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
 - Updated setup test env script #1769 [adam-it - Adam Wójcik]
 - Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
 - Fixed folder race condition #1770 [aramB - Aram B]
+- Changed MSAL.NET version to 4.85.2 #1727 [gautamdsheth - Gautam Sheth]
 
 ## [1.16]
 
