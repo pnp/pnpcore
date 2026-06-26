@@ -40,7 +40,7 @@ namespace PnP.Core.Test.Misc
         [DataRow("dod-graph.microsoft.us", Microsoft365Environment.USGovernmentDoD)]
         [DataRow("graph.svc.sovcloud.fr", Microsoft365Environment.GovFr)]
         [DataRow("graph.svc.sovcloud.de", Microsoft365Environment.GovDe)]
-        [DataRow("graph.svc.sovcloud.sg", Microsoft365Environment.GovSGCloud)]
+        [DataRow("graph.svc.sovcloud.sg", Microsoft365Environment.GovSg)]
         public void Microsoft365EnvironmentToGraph(string graph, Microsoft365Environment env)
         {
             Assert.AreEqual(graph, CloudManager.GetMicrosoftGraphAuthority(env));
@@ -55,7 +55,7 @@ namespace PnP.Core.Test.Misc
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentDoD)]
         [DataRow("login.sovcloud-identity.fr", Microsoft365Environment.GovFr)]
         [DataRow("login.sovcloud-identity.de", Microsoft365Environment.GovDe)]
-        [DataRow("login.sovcloud-identity.sg", Microsoft365Environment.GovSGCloud)]
+        [DataRow("login.sovcloud-identity.sg", Microsoft365Environment.GovSg)]
         public void Microsoft365EnvironmentToAzureADLogin(string azureADLogin, Microsoft365Environment env)
         {
             Assert.AreEqual(azureADLogin, CloudManager.GetAzureADLoginAuthority(env));
@@ -95,7 +95,7 @@ namespace PnP.Core.Test.Misc
                 context.Environment = Microsoft365Environment.GovDe;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.de"));
 
-                context.Environment = Microsoft365Environment.GovSGCloud;
+                context.Environment = Microsoft365Environment.GovSg;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.sg"));
 
                 context.Environment = Microsoft365Environment.Custom;

@@ -15,7 +15,7 @@ namespace PnP.Core.Services
                 "de" => Microsoft365Environment.GovDe,
                 "cn" => Microsoft365Environment.China,
                 "fr" => Microsoft365Environment.GovFr,
-                "sg" => Microsoft365Environment.GovSGCloud,                
+                "sg" => Microsoft365Environment.GovSg,                
                 _ => Microsoft365Environment.Production,
             };
         }
@@ -38,7 +38,7 @@ namespace PnP.Core.Services
                 Microsoft365Environment.China => "microsoftgraph.chinacloudapi.cn",
                 Microsoft365Environment.GovFr => "graph.svc.sovcloud.fr",
                 Microsoft365Environment.GovDe => "graph.svc.sovcloud.de",
-                Microsoft365Environment.GovSGCloud => "graph.svc.sovcloud.sg",
+                Microsoft365Environment.GovSg => "graph.svc.sovcloud.sg",
                 _ => "graph.microsoft.com"
             };
         }
@@ -61,7 +61,7 @@ namespace PnP.Core.Services
                 Microsoft365Environment.China => "login.chinacloudapi.cn",
                 Microsoft365Environment.GovFr => "login.sovcloud-identity.fr",
                 Microsoft365Environment.GovDe => "login.sovcloud-identity.de",
-                Microsoft365Environment.GovSGCloud => "login.sovcloud-identity.sg",
+                Microsoft365Environment.GovSg => "login.sovcloud-identity.sg",
                 _ => "login.microsoftonline.com"
             };
         }

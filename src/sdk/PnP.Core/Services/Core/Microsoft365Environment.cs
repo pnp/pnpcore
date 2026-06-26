@@ -48,7 +48,7 @@
         /// <summary>
         /// Represents the GovSG Cloud environment option. Operated by a Singaporean government-owned company and aligned with Singapore's Sovereign Cloud Framework. See https://learn.microsoft.com/en-us/industry/sovereign-cloud/national-partner-clouds/overview-national-partner-clouds
         /// </summary>
-        GovSGCloud = 9,
+        GovSg = 9,
 
         /// <summary>
         /// Custom cloud configuration, specify the endpoints manually
