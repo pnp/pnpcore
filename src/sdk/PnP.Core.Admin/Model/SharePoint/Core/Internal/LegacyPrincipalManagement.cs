@@ -485,10 +485,16 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                                 if (includeExpiredPrincipals || endDate >= DateTime.Now.ToUniversalTime())
                                 {
+                                    // Skip if the appId is not a valid GUID
+                                    if (!Guid.TryParse(legacyServicePrincipal.GetProperty("appId").GetString(), out Guid appIdGuid))
+                                    {
+                                        break;
+                                    }
+
                                     servicePrincipals.Add(new LegacyServicePrincipal
                                     {
-                                        AppId = legacyServicePrincipal.GetProperty("appId").GetGuid(),
-                                        AppIdentifier = $"i:0i.t|ms.sp.ext|{legacyServicePrincipal.GetProperty("appId").GetGuid()}@{tenantId}",
+                                        AppId = appIdGuid,
+                                        AppIdentifier = $"i:0i.t|ms.sp.ext|{appIdGuid}@{tenantId}",
                                         Name = legacyServicePrincipal.GetProperty("displayName").GetString(),
                                         ValidUntil = endDate
                                     });
@@ -531,11 +537,16 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         foreach (var addInPrincipal in addInPrincipals.EnumerateArray())
                         {
-                            Guid appId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString()));
+                            string appIdString = AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString());
 
-                            if (appId == Guid.Parse("00000003-0000-0ff1-ce00-000000000000"))
+                            // Skip if the appId is not a valid GUID
+                            if (!Guid.TryParse(appIdString, out Guid appId))
                             {
+                                continue;
+                            }
 
+                            if (appId == spoAppId)
+                            {
                                // Skip the SharePoint Online principal
                                 continue;
                             }
@@ -548,7 +559,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                             servicePrincipals.Add(new LegacyServicePrincipal()
                             {
-                                AppId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString())),
+                                AppId = appId,
                                 AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
                                 Name = addInPrincipal.GetProperty("title").GetString(),
                                 // We don't know 

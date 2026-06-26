@@ -6,7 +6,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## 1.17 - Unreleased
+
+### Added 
+
+### Changed 
+
+- Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
+- Updated setup test env script #1769 [adam-it - Adam Wójcik]
+- Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
+- Fixed folder race condition #1770 [aramB - Aram B]
+
+## [1.16]
 
 ### Added
 
@@ -32,6 +43,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Admin library: Apps and service principals that were used with sites.selected scopes/roles were wrongly flagged as ACS principals
 - Fix File.Approve method to work properly. It was doing the checkin operation instead. #1712 [gautamdsheth - Gautam Sheth]
 - Fixed folder not found errors to DirectoryNotFoundException. #1725 [ejazhussain - Ejaz Hussain]
+- Updated console minimal sample for latest .Net and PnP.Core version. #1713 [adam-it - Adam Wójcik]
+- Improved stability when handling guids in GetValidLegacyServicePrincipalAppIdsAsync [jansenbe - Bert Jansen]
+- Added a attribute name for the internal ID property. #1761 [adam-it - Adam Wójcik]
 
 ## [1.15]
 

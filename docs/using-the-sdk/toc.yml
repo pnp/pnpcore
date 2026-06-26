@@ -204,10 +204,6 @@
     href: teams-channel-tabs.md
   - name: Tags
     href: teams-tags.md
-- name: "Transformation Framework"
-  items:
-  - name: Getting started
-    href: transformation-getting-started.md
 - name: Webs
   items:
   - name: Overview
