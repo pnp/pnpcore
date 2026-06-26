@@ -72862,12 +72862,24 @@ references:
   commentId: F:PnP.Core.Services.Microsoft365Environment.Custom
   fullName: PnP.Core.Services.Microsoft365Environment.Custom
   nameWithType: Microsoft365Environment.Custom
-- uid: PnP.Core.Services.Microsoft365Environment.Germany
-  name: Germany
-  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Germany
-  commentId: F:PnP.Core.Services.Microsoft365Environment.Germany
-  fullName: PnP.Core.Services.Microsoft365Environment.Germany
-  nameWithType: Microsoft365Environment.Germany
+- uid: PnP.Core.Services.Microsoft365Environment.GovDe
+  name: GovDe
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovDe
+  commentId: F:PnP.Core.Services.Microsoft365Environment.GovDe
+  fullName: PnP.Core.Services.Microsoft365Environment.GovDe
+  nameWithType: Microsoft365Environment.GovDe
+- uid: PnP.Core.Services.Microsoft365Environment.GovFr
+  name: GovFr
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovFr
+  commentId: F:PnP.Core.Services.Microsoft365Environment.GovFr
+  fullName: PnP.Core.Services.Microsoft365Environment.GovFr
+  nameWithType: Microsoft365Environment.GovFr
+- uid: PnP.Core.Services.Microsoft365Environment.GovSg
+  name: GovSg
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_GovSg
+  commentId: F:PnP.Core.Services.Microsoft365Environment.GovSg
+  fullName: PnP.Core.Services.Microsoft365Environment.GovSg
+  nameWithType: Microsoft365Environment.GovSg
 - uid: PnP.Core.Services.Microsoft365Environment.PreProduction
   name: PreProduction
   href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_PreProduction
