@@ -12,9 +12,9 @@ namespace PnP.Core.Services
             {
                 "com" => Microsoft365Environment.Production,
                 "us" => Microsoft365Environment.USGovernment,
-                "de" => Microsoft365Environment.DelosCloud,
+                "de" => Microsoft365Environment.GovDe,
                 "cn" => Microsoft365Environment.China,
-                "fr" => Microsoft365Environment.BleuCloud,
+                "fr" => Microsoft365Environment.GovFr,
                 "sg" => Microsoft365Environment.GovSGCloud,                
                 _ => Microsoft365Environment.Production,
             };
@@ -36,8 +36,8 @@ namespace PnP.Core.Services
                 Microsoft365Environment.USGovernmentHigh => "graph.microsoft.us",
                 Microsoft365Environment.USGovernmentDoD => "dod-graph.microsoft.us",                
                 Microsoft365Environment.China => "microsoftgraph.chinacloudapi.cn",
-                Microsoft365Environment.BleuCloud => "graph.svc.sovcloud.fr",
-                Microsoft365Environment.DelosCloud => "graph.svc.sovcloud.de",
+                Microsoft365Environment.GovFr => "graph.svc.sovcloud.fr",
+                Microsoft365Environment.GovDe => "graph.svc.sovcloud.de",
                 Microsoft365Environment.GovSGCloud => "graph.svc.sovcloud.sg",
                 _ => "graph.microsoft.com"
             };
@@ -59,8 +59,8 @@ namespace PnP.Core.Services
                 Microsoft365Environment.USGovernmentHigh => "login.microsoftonline.us",
                 Microsoft365Environment.USGovernmentDoD => "login.microsoftonline.us",                
                 Microsoft365Environment.China => "login.chinacloudapi.cn",
-                Microsoft365Environment.BleuCloud => "login.sovcloud-identity.fr",
-                Microsoft365Environment.DelosCloud => "login.sovcloud-identity.de",
+                Microsoft365Environment.GovFr => "login.sovcloud-identity.fr",
+                Microsoft365Environment.GovDe => "login.sovcloud-identity.de",
                 Microsoft365Environment.GovSGCloud => "login.sovcloud-identity.sg",
                 _ => "login.microsoftonline.com"
             };

@@ -21,7 +21,8 @@ namespace PnP.Core.Test.Misc
 
         [TestMethod()]
         [DataRow("https://bertonline.sharepoint.com/sites/prov-2", Microsoft365Environment.Production)]
-        [DataRow("https://bertonline.sharepoint.de/sites/prov-2", Microsoft365Environment.DelosCloud)]
+        [DataRow("https://bertonline.sharepoint.de/sites/prov-2", Microsoft365Environment.GovDe)]
+        [DataRow("https://bertonline.sharepoint.fr/sites/prov-2", Microsoft365Environment.GovFr)]
         [DataRow("https://bertonline.sharepoint.cn/sites/prov-2", Microsoft365Environment.China)]
         [DataRow("https://bertonline.sharepoint.us/sites/prov-2", Microsoft365Environment.USGovernment)]
         [DataRow("https://bertonline.sharepoint.oops/sites/prov-2", Microsoft365Environment.Production)]
@@ -37,8 +38,8 @@ namespace PnP.Core.Test.Misc
         [DataRow("microsoftgraph.chinacloudapi.cn", Microsoft365Environment.China)]
         [DataRow("graph.microsoft.us", Microsoft365Environment.USGovernmentHigh)]
         [DataRow("dod-graph.microsoft.us", Microsoft365Environment.USGovernmentDoD)]
-        [DataRow("graph.svc.sovcloud.fr", Microsoft365Environment.BleuCloud)]
-        [DataRow("graph.svc.sovcloud.de", Microsoft365Environment.DelosCloud)]
+        [DataRow("graph.svc.sovcloud.fr", Microsoft365Environment.GovFr)]
+        [DataRow("graph.svc.sovcloud.de", Microsoft365Environment.GovDe)]
         [DataRow("graph.svc.sovcloud.sg", Microsoft365Environment.GovSGCloud)]
         public void Microsoft365EnvironmentToGraph(string graph, Microsoft365Environment env)
         {
@@ -52,8 +53,8 @@ namespace PnP.Core.Test.Misc
         [DataRow("login.chinacloudapi.cn", Microsoft365Environment.China)]
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentHigh)]
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentDoD)]
-        [DataRow("login.sovcloud-identity.fr", Microsoft365Environment.BleuCloud)]
-        [DataRow("login.sovcloud-identity.de", Microsoft365Environment.DelosCloud)]
+        [DataRow("login.sovcloud-identity.fr", Microsoft365Environment.GovFr)]
+        [DataRow("login.sovcloud-identity.de", Microsoft365Environment.GovDe)]
         [DataRow("login.sovcloud-identity.sg", Microsoft365Environment.GovSGCloud)]
         public void Microsoft365EnvironmentToAzureADLogin(string azureADLogin, Microsoft365Environment env)
         {
@@ -88,10 +89,10 @@ namespace PnP.Core.Test.Misc
                 context.Environment = Microsoft365Environment.USGovernmentDoD;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://dod-graph.microsoft.us"));
 
-                context.Environment = Microsoft365Environment.BleuCloud;
+                context.Environment = Microsoft365Environment.GovFr;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.fr"));
 
-                context.Environment = Microsoft365Environment.DelosCloud;
+                context.Environment = Microsoft365Environment.GovDe;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.de"));
 
                 context.Environment = Microsoft365Environment.GovSGCloud;
