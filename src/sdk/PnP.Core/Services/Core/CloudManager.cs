@@ -12,8 +12,10 @@ namespace PnP.Core.Services
             {
                 "com" => Microsoft365Environment.Production,
                 "us" => Microsoft365Environment.USGovernment,
-                "de" => Microsoft365Environment.Germany,
+                "de" => Microsoft365Environment.GovDe,
                 "cn" => Microsoft365Environment.China,
+                "fr" => Microsoft365Environment.GovFr,
+                "sg" => Microsoft365Environment.GovSg,                
                 _ => Microsoft365Environment.Production,
             };
         }
@@ -32,9 +34,11 @@ namespace PnP.Core.Services
                 Microsoft365Environment.PreProduction => "graph.microsoft.com",
                 Microsoft365Environment.USGovernment => "graph.microsoft.com",
                 Microsoft365Environment.USGovernmentHigh => "graph.microsoft.us",
-                Microsoft365Environment.USGovernmentDoD => "dod-graph.microsoft.us",
-                Microsoft365Environment.Germany => "graph.microsoft.de",
+                Microsoft365Environment.USGovernmentDoD => "dod-graph.microsoft.us",                
                 Microsoft365Environment.China => "microsoftgraph.chinacloudapi.cn",
+                Microsoft365Environment.GovFr => "graph.svc.sovcloud.fr",
+                Microsoft365Environment.GovDe => "graph.svc.sovcloud.de",
+                Microsoft365Environment.GovSg => "graph.svc.sovcloud.sg",
                 _ => "graph.microsoft.com"
             };
         }
@@ -53,9 +57,11 @@ namespace PnP.Core.Services
                 Microsoft365Environment.PreProduction => "login.windows-ppe.net",
                 Microsoft365Environment.USGovernment => "login.microsoftonline.com",
                 Microsoft365Environment.USGovernmentHigh => "login.microsoftonline.us",
-                Microsoft365Environment.USGovernmentDoD => "login.microsoftonline.us",
-                Microsoft365Environment.Germany => "login.microsoftonline.de",
+                Microsoft365Environment.USGovernmentDoD => "login.microsoftonline.us",                
                 Microsoft365Environment.China => "login.chinacloudapi.cn",
+                Microsoft365Environment.GovFr => "login.sovcloud-identity.fr",
+                Microsoft365Environment.GovDe => "login.sovcloud-identity.de",
+                Microsoft365Environment.GovSg => "login.sovcloud-identity.sg",
                 _ => "login.microsoftonline.com"
             };
         }

@@ -21,7 +21,8 @@ namespace PnP.Core.Test.Misc
 
         [TestMethod()]
         [DataRow("https://bertonline.sharepoint.com/sites/prov-2", Microsoft365Environment.Production)]
-        [DataRow("https://bertonline.sharepoint.de/sites/prov-2", Microsoft365Environment.Germany)]
+        [DataRow("https://bertonline.sharepoint.de/sites/prov-2", Microsoft365Environment.GovDe)]
+        [DataRow("https://bertonline.sharepoint.fr/sites/prov-2", Microsoft365Environment.GovFr)]
         [DataRow("https://bertonline.sharepoint.cn/sites/prov-2", Microsoft365Environment.China)]
         [DataRow("https://bertonline.sharepoint.us/sites/prov-2", Microsoft365Environment.USGovernment)]
         [DataRow("https://bertonline.sharepoint.oops/sites/prov-2", Microsoft365Environment.Production)]
@@ -33,11 +34,13 @@ namespace PnP.Core.Test.Misc
         [TestMethod()]
         [DataRow("graph.microsoft.com", Microsoft365Environment.Production)]
         [DataRow("graph.microsoft.com", Microsoft365Environment.PreProduction)]
-        [DataRow("graph.microsoft.com", Microsoft365Environment.USGovernment)]
-        [DataRow("graph.microsoft.de", Microsoft365Environment.Germany)]
+        [DataRow("graph.microsoft.com", Microsoft365Environment.USGovernment)]        
         [DataRow("microsoftgraph.chinacloudapi.cn", Microsoft365Environment.China)]
         [DataRow("graph.microsoft.us", Microsoft365Environment.USGovernmentHigh)]
         [DataRow("dod-graph.microsoft.us", Microsoft365Environment.USGovernmentDoD)]
+        [DataRow("graph.svc.sovcloud.fr", Microsoft365Environment.GovFr)]
+        [DataRow("graph.svc.sovcloud.de", Microsoft365Environment.GovDe)]
+        [DataRow("graph.svc.sovcloud.sg", Microsoft365Environment.GovSg)]
         public void Microsoft365EnvironmentToGraph(string graph, Microsoft365Environment env)
         {
             Assert.AreEqual(graph, CloudManager.GetMicrosoftGraphAuthority(env));
@@ -46,11 +49,13 @@ namespace PnP.Core.Test.Misc
         [TestMethod()]
         [DataRow("login.microsoftonline.com", Microsoft365Environment.Production)]
         [DataRow("login.windows-ppe.net", Microsoft365Environment.PreProduction)]
-        [DataRow("login.microsoftonline.com", Microsoft365Environment.USGovernment)]
-        [DataRow("login.microsoftonline.de", Microsoft365Environment.Germany)]
+        [DataRow("login.microsoftonline.com", Microsoft365Environment.USGovernment)]        
         [DataRow("login.chinacloudapi.cn", Microsoft365Environment.China)]
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentHigh)]
         [DataRow("login.microsoftonline.us", Microsoft365Environment.USGovernmentDoD)]
+        [DataRow("login.sovcloud-identity.fr", Microsoft365Environment.GovFr)]
+        [DataRow("login.sovcloud-identity.de", Microsoft365Environment.GovDe)]
+        [DataRow("login.sovcloud-identity.sg", Microsoft365Environment.GovSg)]
         public void Microsoft365EnvironmentToAzureADLogin(string azureADLogin, Microsoft365Environment env)
         {
             Assert.AreEqual(azureADLogin, CloudManager.GetAzureADLoginAuthority(env));
@@ -73,10 +78,7 @@ namespace PnP.Core.Test.Misc
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.microsoft.com"));
 
                 context.Environment = Microsoft365Environment.USGovernment;
-                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.microsoft.com"));
-
-                context.Environment = Microsoft365Environment.Germany;
-                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.microsoft.de"));
+                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.microsoft.com"));                
 
                 context.Environment = Microsoft365Environment.China;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://microsoftgraph.chinacloudapi.cn"));
@@ -86,6 +88,15 @@ namespace PnP.Core.Test.Misc
 
                 context.Environment = Microsoft365Environment.USGovernmentDoD;
                 Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://dod-graph.microsoft.us"));
+
+                context.Environment = Microsoft365Environment.GovFr;
+                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.fr"));
+
+                context.Environment = Microsoft365Environment.GovDe;
+                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.de"));
+
+                context.Environment = Microsoft365Environment.GovSg;
+                Assert.AreEqual(CloudManager.GetGraphBaseUri(context), new Uri($"https://graph.svc.sovcloud.sg"));
 
                 context.Environment = Microsoft365Environment.Custom;
                 context.MicrosoftGraphAuthority = "graph.microsoft.be";
