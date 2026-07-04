@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for new sovereign cloud environments #1727 [gautamdsheth - Gautam Sheth]
 - Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
 - Improved repo security #1785 [adam-it - Adam Wójcik]
+- Separated QuickLaunchEnabled call from batch in branding manager #1789 [patrikhellgren - Patrik Hellgren]
 
 ## [1.16]
 
