@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
 - Improved repo security #1785 [adam-it - Adam Wójcik]
 - Separated QuickLaunchEnabled call from batch in branding manager #1789 [patrikhellgren - Patrik Hellgren]
+- Fixed news page thumbnail that does not appear in the news web parts #1782 [PedroMordeP - Pedro Monte]
 
 ## [1.16]
 
