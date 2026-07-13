@@ -354,3 +354,4 @@ MigrationBackup/
 /samples/Demo.ASPNetCore/appsettings.officedevpnp.json
 /samples/Demo.AzureFunction/Certificates
 /samples/Demo.AzureFunction/Properties/ServiceDependencies
+src/sdk/.idea

@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -8,6 +10,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -34,6 +37,34 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(!string.IsNullOrEmpty(initProps["AADTenantId"]));
             Assert.IsTrue(initProps.ContainsKey("OS"));
             Assert.IsTrue(!string.IsNullOrEmpty(initProps["OS"]));
+        }
+
+        [TestMethod]
+        public void TelemetryClientFactoryConfiguresConnectionString()
+        {
+            FieldInfo configurationField = typeof(TelemetryClientFactory).GetField("telemetryConfiguration", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo clientField = typeof(TelemetryClientFactory).GetField("telemetryClient", BindingFlags.Static | BindingFlags.NonPublic);
+            TelemetryConfiguration originalConfiguration = (TelemetryConfiguration)configurationField.GetValue(null);
+            TelemetryClient originalClient = (TelemetryClient)clientField.GetValue(null);
+
+            try
+            {
+                configurationField.SetValue(null, null);
+                clientField.SetValue(null, null);
+
+                const string instrumentationKey = "00000000-0000-0000-0000-000000000000";
+
+                Tuple<TelemetryConfiguration, TelemetryClient> telemetry = TelemetryClientFactory.GetTelemetryClientAndConfiguration(instrumentationKey);
+
+                Assert.IsNotNull(telemetry.Item1);
+                Assert.IsNotNull(telemetry.Item2);
+                Assert.AreEqual($"InstrumentationKey={instrumentationKey}", telemetry.Item1.ConnectionString);
+            }
+            finally
+            {
+                configurationField.SetValue(null, originalConfiguration);
+                clientField.SetValue(null, originalClient);
+            }
         }
 
         [TestMethod]

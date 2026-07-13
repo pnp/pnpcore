@@ -14,12 +14,15 @@ namespace PnP.Core.Services
 
         internal static Tuple<TelemetryConfiguration, TelemetryClient> GetTelemetryClientAndConfiguration(string instrumentationKey)
         {
+            if (instrumentationKey == null)
+            {
+                throw new ArgumentNullException(nameof(instrumentationKey));
+            }
+
             if (telemetryConfiguration == null)
             {
-                telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-#pragma warning disable CS0618 // Type or member is obsolete
-                telemetryConfiguration.InstrumentationKey = instrumentationKey;
-#pragma warning restore CS0618 // Type or member is obsolete
+                telemetryConfiguration = new TelemetryConfiguration();
+                telemetryConfiguration.ConnectionString = $"InstrumentationKey={instrumentationKey}";
             }
 
             if (telemetryClient == null)
