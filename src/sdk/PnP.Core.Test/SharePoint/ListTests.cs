@@ -759,6 +759,108 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetItemsByCAMLQueryViaCsomWithJoins()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create the list that will be joined via a lookup field
+                var lookupListTitle = TestCommon.GetPnPSdkTestAssetName("CamlCsomJoinLookupList");
+                var lookupList = await context.Web.Lists.AddAsync(lookupListTitle, ListTemplateType.GenericList);
+
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CamlCsomJoinList");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                try
+                {
+                    // Text field on the lookup list that the CAML query will project into the main list results
+                    await lookupList.Fields.AddTextAsync("ProjectedSourceText", new FieldTextOptions()
+                    {
+                        AddToDefaultView = true,
+                    });
+
+                    var lookupItem = await lookupList.Items.AddAsync(new Dictionary<string, object>()
+                    {
+                        { "Title", "Lookup item" },
+                        { "ProjectedSourceText", "Projected text" }
+                    });
+
+                    // Lookup field on the main list pointing to the lookup list
+                    IField lookupField = await list.Fields.AddLookupAsync("JoinLookup", new FieldLookupOptions()
+                    {
+                        AddToDefaultView = true,
+                        LookupListId = lookupList.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    // Three items, so a page size of 2 forces paging
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        await list.Items.AddAsync(new Dictionary<string, object>()
+                        {
+                            { "Title", $"Item{i}" },
+                            { "JoinLookup", lookupField.NewFieldLookupValue(lookupItem.Id) }
+                        });
+                    }
+
+                    string viewXml = "<View>" +
+                        "<ViewFields><FieldRef Name='Title'/><FieldRef Name='ID'/><FieldRef Name='JoinLookup'/><FieldRef Name='ProjectedText'/></ViewFields>" +
+                        "<Joins><Join Type='LEFT' ListAlias='JoinedList'><Eq><FieldRef Name='JoinLookup' RefType='Id'/><FieldRef List='JoinedList' Name='Id'/></Eq></Join></Joins>" +
+                        "<ProjectedFields><Field Name='ProjectedText' Type='Lookup' List='JoinedList' ShowField='ProjectedSourceText'/></ProjectedFields>" +
+                        "<Query><OrderBy><FieldRef Name='ID'/></OrderBy></Query>" +
+                        "<RowLimit Paged='TRUE'>2</RowLimit>" +
+                        "</View>";
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+
+                        var page1 = await list2.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = viewXml,
+                            DatesInUtc = true
+                        });
+
+                        Assert.AreEqual(2, page1.Items.Count);
+                        Assert.IsNotNull(page1.PagingInfo);
+
+                        // The field projected from the joined list must be returned and typed as a lookup value
+                        var firstItem = page1.Items[0];
+                        Assert.AreEqual("Item1", firstItem.Title);
+                        Assert.IsTrue(firstItem.Values.ContainsKey("ProjectedText"));
+                        Assert.IsTrue(firstItem["ProjectedText"] is IFieldLookupValue);
+                        Assert.AreEqual("Projected text", (firstItem["ProjectedText"] as IFieldLookupValue).LookupValue);
+
+                        // The regular lookup field is typed as well
+                        Assert.IsTrue(firstItem["JoinLookup"] is IFieldLookupValue);
+                        Assert.AreEqual(lookupItem.Id, (firstItem["JoinLookup"] as IFieldLookupValue).LookupId);
+
+                        // Load the second (and last) page
+                        var page2 = await list2.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = viewXml,
+                            DatesInUtc = true,
+                            PagingInfo = page1.PagingInfo
+                        });
+
+                        Assert.AreEqual(1, page2.Items.Count);
+                        Assert.IsNull(page2.PagingInfo);
+                        Assert.AreEqual("Item3", page2.Items[0].Title);
+
+                        // All loaded items were merged into the list's Items collection
+                        Assert.AreEqual(3, list2.Items.AsRequested().Count());
+                    }
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                    await lookupList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task RecycleList()
         {
             //TestCommon.Instance.Mocking = false;
