@@ -7,7 +7,7 @@
       <meta name="title" content="Getting started with the PnP Core SDK | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -87,7 +87,7 @@
         <article data-uid="">
 <h1 id="getting-started-with-the-pnp-core-sdk">Getting started with the PnP Core SDK</h1>
 
-<p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code> and start using the library.</p>
+<p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-10.0">generic host</a>) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code> and start using the library.</p>
 <h2 id="where-is-the-code">Where is the code?</h2>
 <p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
 <ul>
@@ -96,12 +96,10 @@
 <li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
 </ul>
 <h2 id="i-dont-have-access-to-a-microsoft-365-tenant">I don't have access to a Microsoft 365 tenant</h2>
-<p>If you don't have a Microsoft 365 tenant you can, for developer purposes, always request <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">a free developer tenant</a> and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">free developer tenant</a>.</p>
-<h2 id="learning-from-live-code-via-polyglot-notebooks">Learning from live code via Polyglot notebooks</h2>
-<p>If you want to read about PnP Core SDK, see the needed code and even execute the code against your tenant then checkout our Polyglot notebooks! Using Visual Studio Code you interactively use PnP Core SDK with your tenant, the available notebooks can be found <a href="https://github.com/pnp/pnpcore/tree/dev/docs/polyglot#readme">here</a>.</p>
+<p>If you don't have a Microsoft 365 tenant you can, for developer purposes, always request <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">a free developer tenant</a> and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">developer tenant</a>.</p>
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
-<p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
-Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.</p>
+<p>The recommended approach is to use the <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Entra ID.
+Each night these packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <ul>
@@ -178,7 +176,7 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <h5>Note</h5>
 <p>Ensure you've set &quot;Copy to output directory&quot; to &quot;Copy always&quot; for the <code>appsettings.json</code> file as otherwise the config file is not used.</p>
 </div>
-<p>You should provide the <code>ClientId</code> and <code>TenantId</code> for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:</p>
+<p>You should provide the <code>ClientId</code> and <code>TenantId</code> for an application registered in Entra ID and configured with proper permissions, accordingly to your needs. For example, you could register an app in Entra ID with delegated permission for:</p>
 <ul>
 <li>Microsoft Graph: <code>Group.ReadWrite.All</code></li>
 <li>Microsoft Graph: <code>User.ReadWrite.All</code></li>
@@ -187,7 +185,6 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <li>SharePoint Online: <code>User.ReadWrite.All</code></li>
 </ul>
 <p>As the Redirect URI, in Web platform enter <strong>http://localhost</strong>.</p>
-<p>If you don't want to register a custom app in your target Azure Active Directory, you can skip the <code>ClientId</code> and <code>TenantId</code> properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.</p>
 <p>In the above example, the authentication will rely on the <code>InteractiveAuthenticationProvider</code> (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.</p>
 <p>If you like to configure the .Net Core console app in code, without relying on the <code>appsettings.json</code> file, you can also use the following syntax:</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
@@ -314,8 +311,7 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <p>To learn more about how to setup authentication check the <a href="configuring%20authentication.html">Configuring authentication</a> article.</p>
 </div>
 <h2 id="advanced-configuration-of-pnpcontext-services">Advanced Configuration of PnPContext Services</h2>
-<p>For more fine grained control over the setup of the internally used <code>SharePointRestClient</code> and <code>MicrosoftGraphClient</code> used in <code>PnPContext</code>,
-there are optional actions to enable configuring the <code>IHttpClientBuilder</code> of each in the <code>AddPnPCore</code> extension method.</p>
+<p>For more fine grained control over the setup of the internally used <code>SharePointRestClient</code> and <code>MicrosoftGraphClient</code> used in <code>PnPContext</code>, there are optional actions to enable configuring the <code>IHttpClientBuilder</code> of each in the <code>AddPnPCore</code> extension method.</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
 // Configure logging
 .ConfigureServices((hostingContext, services) =&gt;

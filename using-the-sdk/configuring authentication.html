@@ -7,7 +7,7 @@
       <meta name="title" content="Configuring authentication | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -87,14 +87,14 @@
         <article data-uid="">
 <h1 id="configuring-authentication">Configuring authentication</h1>
 
-<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use a multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
-<h2 id="i-want-to-configure-my-own-azure-ad-application-recommended">I want to configure my own Azure AD application (recommended)</h2>
-<p>When configuring your Azure AD application you'll need to also defined which delegated and/or application permissions your application needs. <strong>It's recommended to use the minimal permissions needed for the application at hand</strong>, for example if your app is not using the managed metadata features of the SDK, then there's no need to request TermStore permissions. In below setup instructions we assume your app wants to use the main features of PnP Core SDK, but the list of shown permissions can be to narrow or to wide depending on your actual application needs. When you want to experiment with the needed permissions then this will be the easiest on a tenant you're admin of, for example a <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">free Microsoft 365 developer tenant</a> is ideal for developing and testing.</p>
+<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Entra ID (previously known as Entra ID), using Entra ID you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...</p>
+<h2 id="configuring-your-own-entra-id-application">Configuring your own Entra ID application</h2>
+<p>When configuring your Entra ID application you'll need to also defined which delegated and/or application permissions your application needs. <strong>It's recommended to use the minimal permissions needed for the application at hand</strong>, for example if your app is not using the managed metadata features of the SDK, then there's no need to request TermStore permissions. In below setup instructions we assume your app wants to use the main features of PnP Core SDK, but the list of shown permissions can be to narrow or to wide depending on your actual application needs. When you want to experiment with the needed permissions then this will be the easiest on a tenant you're admin of, for example a <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">free Microsoft 365 developer tenant</a> is ideal for developing and testing.</p>
 <h3 id="delegated-permissions-acting-in-the-name-of-the-user">Delegated Permissions (acting in the name of the user)</h3>
-<p>In this section you can learn how to register an application in Azure Active Directory and how to use it in your .NET code, in order to use the PnP Core SDK with interactive login in a Console application, running your requests in the name of the authenticated user.</p>
-<h4 id="configuring-the-application-in-azure-ad">Configuring the application in Azure AD</h4>
-<p>In this step by step guide you will register an application in Azure Active Directory, in order to consume the PnP Core SDK in the name of the user connected to your app (i.e. with a delegated access token) from within a .NET Core Console application.
-Follow below steps to configure an application in Azure AD:</p>
+<p>In this section you can learn how to register an application in Entra ID and how to use it in your .NET code, in order to use the PnP Core SDK with interactive login in a Console application, running your requests in the name of the authenticated user.</p>
+<h4 id="configuring-the-application-in-entra-id">Configuring the application in Entra ID</h4>
+<p>In this step by step guide you will register an application in Entra ID, in order to consume the PnP Core SDK in the name of the user connected to your app (i.e. with a delegated access token) from within a .NET Core Console application.
+Follow below steps to configure an application in Entra ID:</p>
 <ol>
 <li>Navigate to <a href="https://entra.microsoft.com">https://entra.microsoft.com</a></li>
 <li>Click on <strong>Identity</strong> from the left navigation</li>
@@ -131,7 +131,7 @@ Follow below steps to configure an application in Azure AD:</p>
 <p>It's recommended to align the actually required permissions with the needs of your application.</p>
 </div>
 <h4 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h4>
-<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory. The value for the <code>CredentialManagerName</code> property is the name of the item stored in the Windows Credential Manager.</p>
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Entra ID. The value for the <code>CredentialManagerName</code> property is the name of the item stored in the Windows Credential Manager.</p>
 <pre><code class="lang-csharp">// Add the PnP Core SDK library
 services.AddPnPCore(options =&gt; {
     options.PnPContext.GraphFirst = true;
@@ -169,19 +169,16 @@ services.AddPnPCoreAuthentication(
 });
 </code></pre>
 <h3 id="application-permissions-acting-as-an-app-account-with-app-only-permissions">Application Permissions (acting as an app account with app-only permissions)</h3>
-<p>In this section you can learn how to register an application in Azure Active Directory and how to use it in your .NET code, in order to use the PnP Core SDK within a background job/service/function, running your requests with an app account.</p>
-<h4 id="configuring-the-application-in-azure-ad-1">Configuring the application in Azure AD</h4>
-<p>The easiest way to register an application in Azure Active Directory for app-only is to use the <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps">PnP PowerShell</a> cmdlets. Specifically you can use the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/register-pnpazureadapp?view=sharepoint-ps"><code>Register-PnPAzureADApp</code> command</a> with the following syntax:</p>
-<pre><code class="lang-powershell">$app = Register-PnPAzureADApp -ApplicationName &quot;PnP.Core.SDK.Consumer&quot; -Tenant contoso.onmicrosoft.com -OutPath c:\temp -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -Scopes &quot;MSGraph.Group.ReadWrite.All&quot;,&quot;MSGraph.User.ReadWrite.All&quot;,&quot;SPO.Sites.FullControl.All&quot;,&quot;SPO.TermStore.ReadWrite.All&quot;,&quot;SPO.User.ReadWrite.All&quot; -Store CurrentUser -Interactive
-</code></pre>
-<p>With SharePoint PnP PowerShell Online cmdlets version 3.29.2101.0 and higher.</p>
-<pre><code class="lang-powershell">$app = Register-PnPAzureADApp -Interactive -ApplicationName &quot;PnP.Core.SDK.Consumer&quot; -Tenant contoso.onmicrosoft.com -OutPath d:\temp -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -GraphApplicationPermissions &quot;Group.ReadWrite.All, User.ReadWrite.All&quot; -SharePointApplicationPermissions &quot;Sites.FullControl.All, TermStore.ReadWrite.All, User.ReadWrite.All&quot; -Store CurrentUser
+<p>In this section you can learn how to register an application in Entra ID and how to use it in your .NET code, in order to use the PnP Core SDK within a background job/service/function, running your requests with an app account.</p>
+<h4 id="configuring-the-application-in-entra-id-1">Configuring the application in Entra ID</h4>
+<p>The easiest way to register an application in Entra ID for app-only is to use the <a href="https://pnp.github.io/powershell/">PnP PowerShell</a> cmdlets. Specifically you can use the <a href="https://pnp.github.io/powershell/cmdlets/Register-PnPEntraIDApp.html"><code>Register-PnPEntraIDApp</code> command</a> with the following syntax:</p>
+<pre><code class="lang-powershell">$app = Register-PnPEntraIDApp -ApplicationName &quot;PnP.Core.SDK.Consumer&quot; -Tenant contoso.onmicrosoft.com -OutPath d:\temp -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -GraphApplicationPermissions &quot;Group.ReadWrite.All, User.ReadWrite.All&quot; -SharePointApplicationPermissions &quot;Sites.FullControl.All, TermStore.ReadWrite.All, User.ReadWrite.All&quot; -Store CurrentUser
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
 <p>It's recommended to align the actually required permissions with the needs of your application.</p>
 </div>
-<p>The above command will register for you in Azure Active Directory an app with name <code>PnP.Core.SDK.Consumer</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Azure AD tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
+<p>The above command will register for you in Entra ID an app with name <code>PnP.Core.SDK.Consumer</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Entra ID tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
 <ul>
 <li>SharePoint -&gt; Application Permissions -&gt; Sites -&gt; Sites.FullControl.All</li>
 <li>SharePoint -&gt; Application Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
@@ -190,7 +187,7 @@ services.AddPnPCoreAuthentication(
 <li>Microsoft Graph -&gt; Application Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
 </ul>
 <p>Executing the command you will first have to authenticate against the target tenant, providing the credentials of a Global Tenant Admin. Then you will see a message like the following one:</p>
-<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Azure AD is able to initialize all required artifacts.........
+<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Entra ID is able to initialize all required artifacts.........
 </code></pre>
 <p>Almost 60 seconds later, the command will prompt you for authentication again and to grant the selected permissions to the app you are registering. Once you have done that, in the <code>$app</code> variable you will find information about the just registered app. You can copy in your clipboard the <strong>Application ID</strong> (Client ID) executing the following command:</p>
 <pre><code class="lang-powershell">$app.'AzureAppId/ClientId'| clip
@@ -205,7 +202,7 @@ In the <code>c:\temp</code> folder (or whatever else folder you will choose) the
 <p>If you can't use PowerShell to generate a self-signed certificate then checkout <a href="https://docs.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide">Generate self-signed certificates with the .NET CLI</a>. It for example shows how to use OpenSSL on Linux to create a self-signed certificate.</p>
 </div>
 <h4 id="configuring-pnp-core-sdk-to-use-the-configured-application-1">Configuring PnP Core SDK to use the configured application</h4>
-<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory..</p>
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Entra ID..</p>
 <pre><code class="lang-csharp">// Add the PnP Core SDK library
 services.AddPnPCore(options =&gt; {
     options.PnPContext.GraphFirst = true;
@@ -248,64 +245,8 @@ services.AddPnPCoreAuthentication(
 <h5>Note</h5>
 <p>If you're using PnP Core SDK on Linux you can use <a href="https://github.com/gsoft-inc/dotnet-certificate-tool">https://github.com/gsoft-inc/dotnet-certificate-tool</a> as tool to import your certificate.</p>
 </div>
-<h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
-<p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.</p>
-<h3 id="step-1-consent-to-the-pnp-office-365-management-shell-application">Step 1: Consent to the PnP Office 365 Management Shell application</h3>
-<p>To consent permissions to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD tenant name, which typically is company.onmicrosoft.com.</p>
-<pre><code>https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&amp;state=12345&amp;redirect_uri=https://aka.ms/sppnp
-</code></pre>
-<p>Login to your Microsoft 365 tenant (e.g. by browsing to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will eventually ask you to login, and then it will prompt you to consent permissions to the app:</p>
-<p><img src="../images/PnP%20admin%20consent.png" alt="PnP Multi-tenant app admin consent"></p>
-<p>Click on <strong>Accept</strong> to accept the requested permissions. At that point you will be redirected to the PnP Site (<a href="https://aka.ms/sppnp">https://aka.ms/sppnp</a>). You've now successfully registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application, then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.</p>
-</div>
-<h3 id="step-2-configure-your-project-authentication-settings">Step 2: Configure your project authentication settings</h3>
-<p>If you're using the PnP Management Shell Azure AD application then you can leave out the application id and tenant id from your authentication setup. Below samples show how to use the <code>InteractiveAuthenticationProvider</code> in combination with the PnP Management Shell Azure AD application. Using code you can configure authentication like this:</p>
-<pre><code class="lang-csharp">var host = 
-    Host.CreateDefaultBuilder()                
-        // Configure logging
-        .ConfigureLogging((hostingContext, logging) =&gt;
-        {
-            logging.AddEventSourceLogger();
-            logging.AddConsole();
-        })
-        .ConfigureServices((hostingContext, services) =&gt;
-        {                
-            // Add the PnP Core SDK library services
-            services.AddPnPCore();
-            // Add the PnP Core SDK library services configuration from the appsettings.json file
-            services.Configure&lt;PnPCoreOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
-            // Add the PnP Core SDK Authentication Providers
-            services.AddPnPCoreAuthentication(options =&gt;
-            {
-                options.Credentials.Configurations.Add(&quot;Default&quot;, new PnPCoreAuthenticationCredentialConfigurationOptions
-                {
-                    Interactive = new PnPCoreAuthenticationInteractiveOptions { },
-                });
-                options.Credentials.DefaultConfiguration = &quot;Default&quot;;
-            });
-        })
-        // Let the builder know we're running in a console
-        .UseConsoleLifetime()
-        // Add services to the container
-        .Build();
-</code></pre>
-<p>This snippet show the JSON authentication section to use:</p>
-<pre><code class="lang-json">&quot;Credentials&quot;: {
-    &quot;DefaultConfiguration&quot;: &quot;myAuthConfig&quot;,
-        &quot;Configurations&quot;: {
-            &quot;myAuthConfig&quot;: {
-                &quot;Interactive&quot;: {
-                &quot;RedirectUri&quot;: &quot;http://localhost&quot;
-                }
-            }
-    }
-}
-</code></pre>
 <h2 id="using-the-credential-manager">Using the credential manager</h2>
-<p>Another supported option to authenticate to a created Azure AD application, configured for delegated permissions, is via username and password, through the <code>UsernamePasswordAuthenticationProvider</code>. To configure this in a secure way it's recommended to setup a credential manager entry and to use the <code>CredentialManagerAuthenticationProvider</code>. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
+<p>Another supported option to authenticate to a created Entra ID application, configured for delegated permissions, is via username and password, through the <code>UsernamePasswordAuthenticationProvider</code>. To configure this in a secure way it's recommended to setup a credential manager entry and to use the <code>CredentialManagerAuthenticationProvider</code>. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
 <ol>
 <li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong>.</li>
 <li>Click on the <strong>Credential Manager</strong> link.</li>

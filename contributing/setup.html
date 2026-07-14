@@ -7,7 +7,7 @@
       <meta name="title" content="Setting up your environment for developing | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -101,24 +101,24 @@
 </ul>
 </li>
 </ul>
-<p>If you want to update your forked repo then you can either use the GitHub UI or command line, check out <a href="https://medium.com/@sahoosunilkumar/how-to-update-a-fork-in-git-95a7daadc14e">https://medium.com/@sahoosunilkumar/how-to-update-a-fork-in-git-95a7daadc14e</a> for more instructions</p>
+<p>If you want to update your forked repo then you can either use the GitHub UI or command line.</p>
 <h2 id="setting-up-your-development-environment">Setting up your development environment</h2>
 <h3 id="i-want-to-use-visual-studio-for-development">I want to use Visual Studio for development</h3>
 <p>Using Visual Studio requires you to:</p>
 <ul>
-<li>Download and install Visual Studio 2019: <a href="https://visualstudio.microsoft.com/free-developer-offers/">https://visualstudio.microsoft.com/free-developer-offers/</a>, ensure that you install at least Visual Studio 2019 version <strong>16.8.0</strong> upwards as PnP Core depends on .NET 5.0</li>
-<li>Ensure you've installed the <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.NET 5.0 SDK</a></li>
+<li>Download and install Visual Studio 2019: <a href="https://visualstudio.microsoft.com/free-developer-offers/">https://visualstudio.microsoft.com/free-developer-offers/</a>, ensure that you install at least Visual Studio</li>
+<li>Ensure you've installed the <a href="https://dotnet.microsoft.com/download/dotnet/10.0">.NET 10.0 SDK</a></li>
 <li>Navigate to the <code>./src/sdk</code> folder and open the <strong>PnP.Core.sln</strong> solution</li>
 </ul>
 <h3 id="i-want-to-use-visual-studio-code-for-development">I want to use Visual Studio Code for development</h3>
 <p>Using Visual Studio Code requires you to:</p>
 <ul>
 <li>Download and install Visual Studio Code: <a href="https://visualstudio.microsoft.com/free-developer-offers/">https://visualstudio.microsoft.com/free-developer-offers/</a></li>
-<li>Ensure you've installed the <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.NET 5.0 SDK</a></li>
+<li>Ensure you've installed the <a href="https://dotnet.microsoft.com/download/dotnet/10.0">.NET 10.0 SDK</a></li>
 <li>Open Visual Studio Code and install these extensions (click on the <strong>Extensions</strong> button in the vertical toolbar and search for it, then click on the <strong>Install</strong> link) and close it again once done
 <ul>
-<li>The <strong>C#</strong> extension (mandatory): this extension brings support for compiling and debugging C#</li>
-<li>The <strong>.NET Core Test Explorer</strong> (optional): this extension always you to easily navigate the test cases and run a group of test cases</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">C#</a></li>
 </ul>
 </li>
 <li>Navigate to the <code>./src/sdk</code> folder, right click and choose <strong>Open with Code</strong> or alternatively when using command line type <code>code .</code></li>
@@ -128,7 +128,7 @@
 <h2 id="create-a-pr-with-your-changes">Create a PR with your changes</h2>
 <div class="NOTE">
 <h5>Note</h5>
-<p>When you want to make changes it's recommended to isolate each change in a separate PR and that's best done by creating a branch per change. Having a branch per change allows you to work on multiple changes while you still can submit them as individual PR's. To create a new branch starting from the dev branch you can use <code>git checkout -b mybranch dev</code>. To push this branch to GitHub you can use <code>git push -u mybranch</code>.</p>
+<p>When you want to make changes it's recommended to isolate each change in a separate PR and that's best done by creating a feature branch per change. Having a branch per change allows you to work on multiple changes while you still can submit them as individual PR's. To create a new branch starting from the dev branch you can use <code>git checkout -b mybranch dev</code>. To push this branch to GitHub you can use <code>git push -u mybranch</code>.</p>
 </div>
 <p>Once you've coded and tested your contribution you'll need to create a pull request (PR) again the dev branch of the <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a> repository:</p>
 <ul>
@@ -140,6 +140,10 @@
 <li>Click on <strong>Create pull request</strong>, provide a descriptive title and description and click on <strong>Create pull request</strong></li>
 <li>Ensure all <strong>checks</strong> have passed</li>
 </ul>
+<blockquote>
+<p>[!Note]
+Do NOT surprise us with PRs. Instead, file an issue and start a discussion so we can agree on a direction, then get assigned to an issue and only then start coding before you invest a large amount of time. For more information see the <a href="../index.html#best-practices-when-contributing">Best practices when contributing</a> section.</p>
+</blockquote>
 
 </article>
 

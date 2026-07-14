@@ -7,7 +7,7 @@
       <meta name="title" content="Minimal PnP Core SDK sample | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="../..//images/favicon.ico">
+      <link rel="icon" href="../../images/favicon.ico">
       <link rel="stylesheet" href="../../public/docfx.min.css">
       <link rel="stylesheet" href="../../public/main.css">
       <meta name="docfx:navrel" content="../../toc.html">
@@ -87,17 +87,17 @@
         <article data-uid="">
 <h1 id="minimal-pnp-core-sdk-sample">Minimal PnP Core SDK sample</h1>
 
-<p>PnP Core SDK works great in .NET console applications and this tutorial will walk you through the needed steps to create a minimal <a href="https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio?pivots=dotnet-6-0">.NET 6.0 console application</a>.</p>
+<p>PnP Core SDK works great in .NET console applications and this tutorial will walk you through the needed steps to create a minimal <a href="https://learn.microsoft.com/en-us/dotnet/core/tutorials/create-console-app">.NET console application</a>.</p>
 <h2 id="pre-requisites">Pre-requisites</h2>
 <p>Before you start this tutorial your development environment needs to be correctly setup and you do need to have a Microsoft 365 tenant available. If you don't have one, you can get a Microsoft 365 developer subscription when you join the <a href="https://developer.microsoft.com/office/dev-program">Microsoft 365 Developer Program</a>. See the <a href="https://docs.microsoft.com/en-us/office/developer-program/office-365-developer-program">Microsoft 365 Developer Program documentation</a> for step-by-step instructions about how to join the Microsoft 365 Developer Program and sign up and configure your subscription.</p>
-<p>As development environment this tutorial uses Visual Studio 2022, you can either use the free community edition or subscription based professional or enterprise editions. See the <a href="https://visualstudio.microsoft.com/vs/">Microsoft Visual Studio site</a> to learn more about Visual Studio and how to install and use it.</p>
+<p>As development environment this tutorial uses Visual Studio, you can either use the free community edition or subscription based professional or enterprise editions. See the <a href="https://visualstudio.microsoft.com/vs/">Microsoft Visual Studio site</a> to learn more about Visual Studio and how to install and use it.</p>
 <h2 id="tutorial-source-code">Tutorial source code</h2>
 <p>If you follow this tutorial you end up with a working console application that uses PnP Core SDK. This same tutorial is also available as a <a href="https://pnp.github.io/pnpcore/demos/Demo.Console.Minimal/readme.html">sample containing the source code and brief setup instructions</a>.</p>
-<h2 id="create-and-configure-the-azure-ad-application">Create and configure the Azure AD application</h2>
-<p>PnP Core SDK requires an Azure AD application to authenticate to SharePoint:</p>
+<h2 id="create-and-configure-the-entra-id-application">Create and configure the Entra ID application</h2>
+<p>PnP Core SDK requires an Entra ID application to authenticate to SharePoint:</p>
 <ol>
-<li>Navigate to <a href="https://aad.portal.azure.com">https://aad.portal.azure.com</a></li>
-<li>Click on <strong>Azure Active Directory</strong>, followed by navigating to <strong>App registrations</strong></li>
+<li>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></li>
+<li>Click on <strong>Entra ID</strong>, followed by navigating to <strong>App registrations</strong></li>
 <li>Add a new application via the <strong>New registration</strong> link</li>
 <li>Give your application a name, e.g. PnPCoreSDKConsoleDemo and add <strong>http://localhost</strong> as redirect URI. Clicking on <strong>Register</strong> will create the application and open it</li>
 <li>Take note of the <strong>Application (client) ID</strong> value, you'll need it in the next step</li>
@@ -110,9 +110,9 @@
 <li>Consent the application permissions by clicking on <strong>Grant admin consent</strong></li>
 </ol>
 <h2 id="create-the-console-application">Create the console application</h2>
-<p>Open up Visual Studio 2022 and choose the <strong>Create a new project</strong> option, select <strong>Console</strong> in the project types dropdown, pick <strong>c#</strong> in the languages dropdown and then choose <strong>Console App</strong> and click <strong>Next</strong>.</p>
-<p><img src="../images/consolesimple-1.png" alt="Create console app in VS 2022"></p>
-<p>Enter a <strong>Project name</strong> and <strong>Location</strong> and click on <strong>Create</strong>. In the <strong>Additional information</strong> dialog choose <strong>.NET 6.0 (Long-term support)</strong> and click on <strong>Create</strong>.</p>
+<p>Open up Visual Studio and choose the <strong>Create a new project</strong> option, select <strong>Console</strong> in the project types dropdown, pick <strong>c#</strong> in the languages dropdown and then choose <strong>Console App</strong> and click <strong>Next</strong>.</p>
+<p><img src="../images/consolesimple-1.png" alt="Create console app in VS"></p>
+<p>Enter a <strong>Project name</strong> and <strong>Location</strong> and click on <strong>Create</strong>. In the <strong>Additional information</strong> dialog choose <strong>.NET 10.0 (Long-term support)</strong> and click on <strong>Create</strong>.</p>
 <p>Right click the project, choose <strong>Manage Nuget Packages...</strong>, ensure <strong>Include prerelease</strong> is checked, click on the <strong>Browse</strong> tab and enter <strong>PnP.Core</strong> in the search box. Select <strong>PnP.Core.Auth</strong> and click on <strong>Install</strong>. A <strong>Preview Changes</strong> dialog appears, click <strong>OK</strong> to continue. In the <strong>License Acceptance</strong> dialog click <strong>I Accept</strong>. Now repeat the same process for the <strong>Microsoft.Extensions.Hosting</strong> package. Clicking on the <strong>Installed</strong> tab should then show this:</p>
 <p><img src="../images/consolesimple-2.png" alt="Installed nuget packages"></p>
 <p>Now continue with opening <strong>Program.cs</strong> and completely replace the code with below snippet:</p>
@@ -162,7 +162,7 @@ using (var scope = host.Services.CreateScope())
 <h2 id="configure-the-console-application">Configure the console application</h2>
 <p>Before the console application can be tested there are two variables that have to be set:</p>
 <ul>
-<li>Update <code>clientId</code> to match the client id of the Azure AD application you've created previously</li>
+<li>Update <code>clientId</code> to match the client id of the Entra ID application you've created previously</li>
 <li>Set <code>siteUrl</code> to a site in your tenant</li>
 </ul>
 <h2 id="test-the-console-application">Test the console application</h2>

@@ -7,7 +7,7 @@
       <meta name="title" content="PnP Core SDK | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="/images/favicon.ico">
+      <link rel="icon" href="images/favicon.ico">
       <link rel="stylesheet" href="public/docfx.min.css">
       <link rel="stylesheet" href="public/main.css">
       <meta name="docfx:navrel" content="toc.html">
@@ -75,31 +75,35 @@
 
 <h2 id="intro">Intro</h2>
 <p>The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.</p>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<ul>
-<li>If you've used PnP Core SDK in a version before Beta3 then please check <a href="https://pnp.github.io/pnpcore/using-the-sdk/upgrade-to-beta3.html">these instructions</a> on how to upgrade your code to the current version.</li>
-</ul>
-</div>
 <h2 id="getting-started-using-this-library">Getting started using this library</h2>
 <p>Using the PnP Core SDK is simple, check out the <a href="using-the-sdk/readme.html">getting started</a> guide.</p>
+<h2 id="how-this-project-relates-to-pnp-framework">How this project relates to PnP Framework</h2>
+<p>The PnP Framework is a .Net Framework based library that has been around for many years and has been used in many production scenarios. The PnP Core SDK is a new library that is designed to be used in modern .Net development. Currently PnP Core SDK is a dependency of the PnP Framework. In Future we plan to deprecate the PnP Framework and have the PnP Core SDK as the main library for working with Microsoft 365 workloads.</p>
 <h2 id="where-is-the-code">Where is the code?</h2>
 <p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>.</p>
 <h2 id="supportability-and-sla">Supportability and SLA</h2>
 <p>This library is open-source and community provided component with active community providing support for it. This is not Microsoft provided component so there's no SLA or direct support for this open-source component from Microsoft. Please report any issues using the <a href="https://github.com/pnp/pnpcore/issues">issues list</a>.</p>
 <h2 id="how-can-you-help">How can you help?</h2>
-<p>The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:</p>
+<p>If you want to help, there are several ways to do so:</p>
 <ul>
 <li><strong>Extending the model</strong> via the creation of new model, complex type and collection classes. Check out the <a href="contributing/readme.html">Extending the model</a> article to learn how to do this.</li>
 <li><strong>Adding &quot;functionalities&quot;</strong> to the model: after extending the model, the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionalities by adding methods on top of the model classes. Check out the <a href="contributing/readme.html">Extending the model</a> article to learn how to do this.</li>
-<li><strong>Writing sample programs</strong> that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as  mobile OS's like Android and iOS. With the rise of <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>, this library can also be used to build .Net based apps running in the browser. Samples can be added in the <a href="https://github.com/pnp/pnpcore/tree/dev/samples">samples</a> folder.</li>
+<li><strong>Writing sample programs</strong> that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as mobile OS's like Android and iOS. With the rise of <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>, this library can also be used to build .Net based apps running in the browser. Samples can be added in the <a href="https://github.com/pnp/pnpcore/tree/dev/samples">samples</a> folder.</li>
 <li><strong>Working on documentation</strong>: good documentation is critical to help developers work with this library, either by using it or by extending it. See the <a href="contributing/writing%20documentation.html">Writing documentation</a> article for more details.</li>
 </ul>
 <h3 id="best-practices-when-contributing">Best practices when contributing</h3>
+<p>We love to accept contributions. If you want to get involved in helping us grow the PnP Core SDK we would love to hear from you.</p>
+<p>Before you submit your first PR, please follow the below best practices. We'd hate to see you work on something that someone else is already working on, something that we agreed not to do, or something that doesn't match the project.</p>
+<p>We're here to help, don't hesitate to reach out with your questions and feedback via <a href="https://github.com/pnp/pnpcore/issues">our issue list</a> or <a href="https://github.com/pnp/pnpcore/discussions">our discussions</a>.</p>
+<p>To avoid overlapping efforts let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner) If you are extending the model and you need to update the model base logic then please reach out, we want to align and agree on those changes first as these need to fit into our model approach</p>
+<p><strong>DO's &amp; DON'Ts</strong></p>
 <ul>
-<li>This is all new and we're here to help, don't hesitate to reach out with your questions and feedback via <a href="https://github.com/pnp/pnpcore/issues">our issue list</a> or <a href="https://github.com/pnp/pnpcore/discussions">our discussions</a>.</li>
-<li>To avoid overlapping efforts in the startup phase please let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner)</li>
-<li>If you are extending the model and you need to update the model base logic then please reach out, we want to align and agree on those changes first as these need to fit into our model approach</li>
+<li><strong>DO</strong> follow the same project and test structure as the existing project.</li>
+<li><strong>DO</strong> include tests when adding new functionality and features. When fixing bugs, start by adding a test that highlights how the current behavior is broken.</li>
+<li><strong>DO</strong> keep discussions focused. When a new or related topic comes up, it's often better to create a new issue than to side-track the conversation.</li>
+<li><strong>DO NOT</strong> submit PRs for coding style changes. These changes can cause unnecessary conflicts and make the review process more complicated.</li>
+<li><strong>DO NOT</strong> surprise us with big PRs. Instead, file an issue and start a discussion so we can agree on a direction before you invest a large amount of time.</li>
+<li><strong>DO NOT</strong> commit code you didn't write. We encourage you to contribute your own work to maintain project quality and integrity.</li>
 </ul>
 <div class="NOTE">
 <h5>Note</h5>

@@ -7,7 +7,7 @@
       <meta name="title" content="Configuring the environment to run PnP.Core.Auth tests | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
-      <link rel="icon" href="..//images/favicon.ico">
+      <link rel="icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -90,19 +90,19 @@
 <p>The PnP.Core.Auth library has some requirements in order to properly execute its automated tests (PnP.Core.Auth.Test).
 Specifically, you need to:</p>
 <ul>
-<li>Register in Azure Active Directory a generic test application for authentication tests</li>
-<li>Register in Azure Active Directory a frontend application for the OnBehalfOf authentication tests</li>
-<li>Register in Azure Active Directory a backend application for the OnBehalfOf authentication tests</li>
+<li>Register in Entra ID a generic test application for authentication tests</li>
+<li>Register in Entra ID a frontend application for the OnBehalfOf authentication tests</li>
+<li>Register in Entra ID a backend application for the OnBehalfOf authentication tests</li>
 <li>Enable the frontend application to consume the backend application</li>
 <li>Configure a set of credentials in the Windows Credential Manager</li>
 <li>Configure the appsettings.json file of the PnP.Core.Auth.Test project</li>
 </ul>
-<h2 id="register-in-aad-a-generic-test-application-for-authentication-tests">Register in AAD a generic test application for authentication tests</h2>
-<p>In order to execute both tests with application and delegated access tokens, you will need to register an application in AAD both as app-only and delegated.
-The easiest way to register an application in Azure Active Directory for app-only is to use the <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps">PnP PowerShell</a> cmdlets. Specifically you can use the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/register-pnpazureadapp?view=sharepoint-ps"><code>Register-PnPAzureADApp</code> command</a> with the following syntax:</p>
-<pre><code class="lang-powershell">$app = Register-PnPAzureADApp -ApplicationName &quot;PnP.Core.Test&quot; -Tenant contoso.onmicrosoft.com -OutPath c:\temp  -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -Scopes &quot;MSGraph.Group.ReadWrite.All&quot;,&quot;MSGraph.Directory.ReadWrite.All&quot;,&quot;SPO.Sites.FullControl.All&quot;,&quot;SPO.TermStore.ReadWrite.All&quot;,&quot;SPO.User.ReadWrite.All&quot; -Store CurrentUser
+<h2 id="register-in-entra-id-a-generic-test-application-for-authentication-tests">Register in Entra ID a generic test application for authentication tests</h2>
+<p>In order to execute both tests with application and delegated access tokens, you will need to register an application in Entra ID both as app-only and delegated.
+The easiest way to register an application in Entra ID for app-only is to use the <a href="https://pnp.github.io/powershell/">PnP PowerShell</a> cmdlets. Specifically you can use the <a href="https://pnp.github.io/powershell/cmdlets/Register-PnPEntraIDApp.html"><code>Register-PnPEntraIDApp</code> command</a> with the following syntax:</p>
+<pre><code class="lang-powershell">$app = Register-PnPEntraIDApp -ApplicationName &quot;PnP.Core.Test&quot; -Tenant contoso.onmicrosoft.com -OutPath c:\temp  -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -Scopes &quot;MSGraph.Group.ReadWrite.All&quot;,&quot;MSGraph.Directory.ReadWrite.All&quot;,&quot;SPO.Sites.FullControl.All&quot;,&quot;SPO.TermStore.ReadWrite.All&quot;,&quot;SPO.User.ReadWrite.All&quot; -Store CurrentUser
 </code></pre>
-<p>The above command will register for you in Azure Active Directory an app with name <code>PnP.Core.Test</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Azure AD tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
+<p>The above command will register for you in Entra ID an app with name <code>PnP.Core.Test</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Entra ID tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
 <ul>
 <li>SharePoint -&gt; Application Permissions -&gt; Sites -&gt; Sites.FullControl.All</li>
 <li>SharePoint -&gt; Application Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
@@ -111,7 +111,7 @@ The easiest way to register an application in Azure Active Directory for app-onl
 <li>Microsoft Graph -&gt; Application Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
 </ul>
 <p>Executing the command you will first have to authenticate against the target tenant, providing the credentials of a Global Tenant Admin. Then you will see a message like the following one:</p>
-<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Azure AD is able to initialize all required artifacts.........
+<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Entra ID is able to initialize all required artifacts.........
 </code></pre>
 <p>Almost 60 seconds later, the command will prompt you for authentication again and to grant the selected permissions to the app you are registering. Once you have done that, in the <code>$app</code> variable you will find information about the just registered app. You can copy in your clipboard the <strong>Application ID</strong> (Client ID) executing the following command:</p>
 <pre><code class="lang-powershell">$app.'AzureAppId/ClientId' | clip
@@ -122,9 +122,9 @@ The easiest way to register an application in Azure Active Directory for app-onl
 <p>Paste this copied values in a safe place, because you will need them soon.
 Now, configure the same application also for delegated access tokens following the below steps:</p>
 <ol>
-<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
+<li><p>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></p>
 </li>
-<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
+<li><p>Click on <strong>Entra ID</strong> from the left navigation</p>
 </li>
 <li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
 </li>
@@ -165,12 +165,12 @@ Now, configure the same application also for delegated access tokens following t
 <li>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong></li>
 <li>Click on <strong>Authentication</strong> and then click on <strong>Add a platform</strong>, choose <strong>Mobile and desktop applications</strong> and provide http://localhost as the <strong>Redirect URI</strong></li>
 </ol>
-<h2 id="register-in-aad-a-frontend-application-for-the-onbehalfof-authentication-tests">Register in AAD a frontend application for the OnBehalfOf authentication tests</h2>
+<h2 id="register-in-entra-id-a-frontend-application-for-the-onbehalfof-authentication-tests">Register in Entra ID a frontend application for the OnBehalfOf authentication tests</h2>
 <p>You need to register an application that will be the frontend for the OnBehalfOf flow.
 Follow the below steps:</p>
 <ol>
-<li>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></li>
-<li>Click on <strong>Azure Active Directory</strong> from the left navigation</li>
+<li>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></li>
+<li>Click on <strong>Entra ID</strong> from the left navigation</li>
 <li>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</li>
 <li>Click on <strong>New registration</strong></li>
 <li>Give the application a name (e.g. <code>PnP.Core.Test.OnBehalfOf.Frontend</code>) and click on <strong>Register</strong></li>
@@ -178,13 +178,13 @@ Follow the below steps:</p>
 <li>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</li>
 <li>Click on <strong>Authentication</strong> and then click on <strong>Add a platform</strong>, choose <strong>Mobile and desktop applications</strong> and provide http://localhost as the <strong>Redirect URI</strong></li>
 </ol>
-<h2 id="register-in-aad-a-backend-application-for-the-onbehalfof-authentication-tests">Register in AAD a backend application for the OnBehalfOf authentication tests</h2>
+<h2 id="register-in-entra-id-a-backend-application-for-the-onbehalfof-authentication-tests">Register in Entra ID a backend application for the OnBehalfOf authentication tests</h2>
 <p>You need to register an application that will be the backend for the OnBehalfOf flow.
 Follow the below steps:</p>
 <ol>
-<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
+<li><p>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></p>
 </li>
-<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
+<li><p>Click on <strong>Entra ID</strong> from the left navigation</p>
 </li>
 <li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
 </li>
@@ -229,8 +229,8 @@ Follow the below steps:</p>
 <h2 id="enable-the-frontend-application-to-consume-the-backend-application">Enable the frontend application to consume the backend application</h2>
 <p>Now, you need to go back to the application registered with name <code>PnP.Core.Test.OnBehalfOf.Frontend</code> and update its setting accordingly to the following steps:</p>
 <ol>
-<li>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></li>
-<li>Click on <strong>Azure Active Directory</strong> from the left navigation</li>
+<li>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></li>
+<li>Click on <strong>Entra ID</strong> from the left navigation</li>
 <li>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</li>
 <li>Write <code>PnP.Core.Test.OnBehalfOf.Frontend</code> in the search box</li>
 <li>Select the application with name <code>PnP.Core.Test.OnBehalfOf.Frontend</code> in the list of results</li>

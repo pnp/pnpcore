@@ -11892,16 +11892,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "using-the-sdk/upgrade-to-beta3.md",
-      "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/upgrade-to-beta3.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/vivaconnections-intro.md",
       "output": {
         ".html": {
