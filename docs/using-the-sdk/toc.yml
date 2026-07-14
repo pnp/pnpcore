@@ -38,8 +38,6 @@
     href: basics-responseheaders.md
   - name: SharePoint CSOM vs PnP Core SDK
     href: basics-csom-vs-pnp.md
-  - name: Upgrade to beta3 or later
-    href: upgrade-to-beta3.md
 - name: "Admin: Microsoft 365"
   items:
   - name: Information Protection

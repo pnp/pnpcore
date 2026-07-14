@@ -1,48 +1,48 @@
 # Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions
 
-PnP Core SDK works great in Azure functions and this tutorial will walk you through the needed steps to create an [.NET 6.0 Azure V4 function which runs as an isolated process](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process). Process isolation is a feature in Azure Functions that will ensure your function code will not collide with the code already loaded by the Azure Function host process.
+PnP Core SDK works great in Azure functions and this tutorial will walk you through the needed steps to create an [.NET Azure V4 function which runs as an isolated process](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process). Process isolation is a feature in Azure Functions that will ensure your function code will not collide with the code already loaded by the Azure Function host process.
 
 ## Pre-requisites
 
 Before you start this tutorial your development environment needs to be correctly setup and you do need to have a Microsoft 365 tenant available. If you don't have one, you can get a Microsoft 365 developer subscription when you join the [Microsoft 365 Developer Program](https://developer.microsoft.com/office/dev-program). See the [Microsoft 365 Developer Program documentation](https://docs.microsoft.com/en-us/office/developer-program/office-365-developer-program) for step-by-step instructions about how to join the Microsoft 365 Developer Program and sign up and configure your subscription.
 
-As development environment this tutorial uses Visual Studio 2022, you can either use the free community edition or subscription based professional or enterprise editions. See the [Microsoft Visual Studio site](https://visualstudio.microsoft.com/vs/) to learn more about Visual Studio and how to install and use it.
+As development environment this tutorial uses Visual Studio, you can either use the free community edition or subscription based professional or enterprise editions. See the [Microsoft Visual Studio site](https://visualstudio.microsoft.com/vs/) to learn more about Visual Studio and how to install and use it.
 
 ## Tutorial source code
 
 If you follow this tutorial you end up with a working Azure Function that uses PnP Core SDK. This same tutorial is also available as a [sample containing the source code and brief setup instructions](https://pnp.github.io/pnpcore/demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html).
 
-## Create and configure the Azure AD application
+## Create and configure the Entra ID application
 
 ### Install PnP PowerShell
 
-To configure the Azure AD application with the needed permissions and configured with a certificate (needed for application permissions) we're using [PnP.PowerShell](https://pnp.github.io/powershell/). If you already have [PnP.PowerShell](https://pnp.github.io/powershell/) installed you can skip this step, if not run below command from a PowerShell prompt:
+To configure the Entra ID application with the needed permissions and configured with a certificate (needed for application permissions) we're using [PnP.PowerShell](https://pnp.github.io/powershell/). If you already have [PnP.PowerShell](https://pnp.github.io/powershell/) installed you can skip this step, if not run below command from a PowerShell prompt:
 
 ```PowerShell
 Install-Module -Name PnP.PowerShell
 ```
 
-### Create the Azure AD application
+### Create the Entra ID application
 
-Using PnP PowerShell this becomes really simple. Running cmdlet will create a new Azure AD application, will create a new self-signed certificate and will configure that certificate with the Azure AD application. Finally the right permissions are configured and you're prompted to consent these permissions.
+Using PnP PowerShell this becomes really simple. Running cmdlet will create a new Entra ID application, will create a new self-signed certificate and will configure that certificate with the Entra ID application. Finally the right permissions are configured and you're prompted to consent these permissions.
 
 > [!Important]
 >
-> Approving application permissions requires you to use a user which is Azure AD admin or global admin in your tenant
+> Approving application permissions requires you to use a user which is Entra ID admin or global admin in your tenant
 
 ```powershell
-# Ensure you replace contoso.onmicrosoft.com with your Azure AD tenant name
-# Ensure you replace joe@contoso.onmicrosoft.com with the user id that's an Azure AD admin (or global admin)
+# Ensure you replace contoso.onmicrosoft.com with your Entra ID tenant name
+# Ensure you replace joe@contoso.onmicrosoft.com with the user id that's an Entra ID admin (or global admin)
 
-Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant contoso.onmicrosoft.com -Store CurrentUser -GraphApplicationPermissions "Sites.FullControl.All" -SharePointApplicationPermissions "Sites.FullControl.All" -Username "joe@contoso.onmicrosoft.com" -Interactive
+Register-PnPEntraIDApp -ApplicationName FunctionDemoSiteProvisiong -Tenant contoso.onmicrosoft.com -Store CurrentUser -GraphApplicationPermissions "Sites.FullControl.All" -SharePointApplicationPermissions "Sites.FullControl.All" -Username "joe@contoso.onmicrosoft.com" -Interactive
 ```
 
-![Register-PnPAzureADApp](../images/azfuncv4apponly-1.png)
+![Register-PnPEntraIDApp](../images/azfuncv4apponly-1.png)
 
 ![Consent](../images/azfuncv4apponly-2.png)
 
 > [!Important]
-> Once this cmdlet is done you do need to to copy **Certificate Thumbprint** and **AzureAppID/ClientId** values from the cmdlet output as these will be needed later in this tutorial.
+> Once this cmdlet is done you do need to to copy **Certificate Thumbprint** and **EntraIDAppID/ClientId** values from the cmdlet output as these will be needed later in this tutorial.
 
 ![Copy ID and thumbprint](../images/azfuncv4apponly-3.png)
 
@@ -50,11 +50,11 @@ Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant conto
 
 ### Scaffold a new Azure Function project
 
-Open up Visual Studio 2022 and choose the **Create a new project** option, select **Azure** in the platforms dropdown and then pick **Azure Functions** and click **Next**.
+Open up Visual Studio and choose the **Create a new project** option, select **Azure** in the platforms dropdown and then pick **Azure Functions** and click **Next**.
 
 ![Create Azure Function](../images/azfuncv4apponly-4.png)
 
-Enter a **Project name** and **Location** and click on **Create**. In the **Create a new Azure Functions application** choose **.NET 6 isolated** in the drop down and then pick **Http trigger** and click on **Create**.
+Enter a **Project name** and **Location** and click on **Create**. In the **Create a new Azure Functions application** choose **.NET 8 isolated** in the drop down and then pick **Http trigger** and click on **Create**.
 
 ![Create Azure Function](../images/azfuncv4apponly-5.png)
 

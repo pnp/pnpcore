@@ -14,9 +14,8 @@ If you want to use and extend these unit tests then you'll need to do a simple o
 
 3. Copy env.sample to env.txt
 4. Open env.txt and put as content the value **xxx** (xxx identifies your test environment)
-5. Ensure that you have the **PnP O365 Management Shell** multi-tenant app registered in Azure AD and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:
-    * Use PnP PowerShell to [configure the **PnP Management Shell** application](https://pnp.github.io/powershell/articles/authentication.html#setting-up-access) as mentioned
-    * Refer to the User documentation article [Using the multi-tenant PnP Azure AD application](../using-the-sdk/configuring%20authentication.md)
+5. Ensure that you have an app registered in Entra ID and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:
+    * Use PnP PowerShell to [Register an Entra ID Application](https://pnp.github.io/powershell/articles/registerapplication.html)
 6. If you want run the taxonomy tests live you need to configure your term store:
     * Ensure your account is a term store administrator. Go to your SharePoint admin center (e.g. https://contoso-admin.sharepoint.com), under **Content services** select **Term store** and add your account as admin
     * Ensure you've added Dutch as working language for your term store. Go to your SharePoint admin center (e.g. https://contoso-admin.sharepoint.com), under **Content services** select **Term store** and ensure Dutch is in the list of working languages
@@ -36,7 +35,7 @@ All test cases belong to the PnP.Core.Test project and generally speaking the te
 
 - SharePoint model tests go into the **SharePoint** folder. You either create a new file with test cases or add your test into an existing file.
 - Teams model tests go into the **Teams** folder. You either create a new file with test cases or add your test into an existing file.
-- Azure Active Directory model tests go into the **AzureActiveDirectory** folder. You either create a new file with test cases or add your test into an existing file
+- Entra ID model tests go into the **AzureActiveDirectory** folder. You either create a new file with test cases or add your test into an existing file
 
 If your test extends an already tested model then most likely you'll be able to add your test to one of the existing test classes.
 

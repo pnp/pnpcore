@@ -15,7 +15,7 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## Setting up your environment for building the PnP Core SDK
 
-Starting to code is simple, pull down the code from GitHub and then use either Visual Studio 2019 or Visual Studio Code. More details can be found in our [setup](setup.md) article.
+Starting to code is simple, pull down the code from GitHub and then use either Visual Studio or Visual Studio Code. More details can be found in our [setup](setup.md) article.
 
 ## General model principles
 
