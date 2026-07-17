@@ -19,6 +19,8 @@ namespace PnP.Core.Test.Common.Utilities
     {
         internal const string PnPCoreSDKTestPrefix = "PNP_SDK_TEST_";
 
+        internal const string TestInstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
+
         protected const string AsyncSuffix = "_Async";
         protected const string PnPCoreSDKTestSite = "pnpcoresdktestsite";
         protected const string PnPCoreSDKTestUser = "pnpcoresdktestuser";
@@ -432,6 +434,20 @@ namespace PnP.Core.Test.Common.Utilities
             }
         }
 
+
+        /// <summary>
+        /// Points the SDK telemetry at the test Azure AppInsights instance instead of the production one.
+        /// Must run before the first TelemetryManager is created: Application Insights v3 freezes a
+        /// TelemetryConfiguration as soon as a TelemetryClient is built from it, so the key cannot be
+        /// changed afterwards. Call this from an [AssemblyInitialize] method.
+        /// </summary>
+        internal static void UseTestTelemetryInstance()
+        {
+            if (!RunningInGitHubWorkflow())
+            {
+                TelemetryManager.InstrumentationKey = TestInstrumentationKey;
+            }
+        }
 
         internal static bool RunningInGitHubWorkflow()
         {

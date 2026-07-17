@@ -10,7 +10,6 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -40,17 +39,23 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public void TestRunsUseTheTestAppInsightsInstance()
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("CI runs keep the default instrumentation key as telemetry is disabled there");
+
+            Assert.AreEqual("6073339d-9e70-4004-9ff7-1345316ade97", TelemetryManager.InstrumentationKey);
+        }
+
+        [TestMethod]
         public void TelemetryClientFactoryConfiguresConnectionString()
         {
-            FieldInfo configurationField = typeof(TelemetryClientFactory).GetField("telemetryConfiguration", BindingFlags.Static | BindingFlags.NonPublic);
-            FieldInfo clientField = typeof(TelemetryClientFactory).GetField("telemetryClient", BindingFlags.Static | BindingFlags.NonPublic);
-            TelemetryConfiguration originalConfiguration = (TelemetryConfiguration)configurationField.GetValue(null);
-            TelemetryClient originalClient = (TelemetryClient)clientField.GetValue(null);
+            TelemetryConfiguration originalConfiguration = TelemetryClientFactory.telemetryConfiguration;
+            TelemetryClient originalClient = TelemetryClientFactory.telemetryClient;
 
             try
             {
-                configurationField.SetValue(null, null);
-                clientField.SetValue(null, null);
+                TelemetryClientFactory.telemetryConfiguration = null;
+                TelemetryClientFactory.telemetryClient = null;
 
                 const string instrumentationKey = "00000000-0000-0000-0000-000000000000";
 
@@ -62,8 +67,8 @@ namespace PnP.Core.Test.Base
             }
             finally
             {
-                configurationField.SetValue(null, originalConfiguration);
-                clientField.SetValue(null, originalClient);
+                TelemetryClientFactory.telemetryConfiguration = originalConfiguration;
+                TelemetryClientFactory.telemetryClient = originalClient;
             }
         }
 
