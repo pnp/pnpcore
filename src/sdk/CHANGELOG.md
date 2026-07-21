@@ -6,6 +6,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.17]
+
+### Added 
+
+### Changed 
+
+- Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
+- Updated setup test env script #1769 [adam-it - Adam Wójcik]
+- Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
+- Fixed folder race condition #1770 [aramB - Aram B]
+- Added support for new sovereign cloud environments #1727 [gautamdsheth - Gautam Sheth]
+- Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
+- Improved repo security #1785 [adam-it - Adam Wójcik]
+- Separated QuickLaunchEnabled call from batch in branding manager #1789 [patrikhellgren - Patrik Hellgren]
+- Fixed news page thumbnail that does not appear in the news web parts #1782 [PedroMordeP - Pedro Monte]
+
 ## [1.16]
 
 ### Added

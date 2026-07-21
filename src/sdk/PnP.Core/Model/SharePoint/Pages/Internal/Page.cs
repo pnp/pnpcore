@@ -1999,13 +1999,16 @@ namespace PnP.Core.Model.SharePoint
                       bannerImageUrlFieldValue.Url.Contains("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     string previewImageServerRelativeUrl = "";
+                    bool previewImageFromCustomHeader = false;
+
                     if (pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(pageHeader.ImageServerRelativeUrl))
                     {
                         previewImageServerRelativeUrl = pageHeader.ImageServerRelativeUrl;
+                        previewImageFromCustomHeader = true;
                     }
                     else
                     {
-                        // iterate the web parts...if we find an unique id then let's grab that information
+                        // iterate the web parts...if we find one with preview image then let's use that information
                         foreach (var control in Controls)
                         {
                             if (control is PageWebPart webPart)
@@ -2020,13 +2023,19 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     // Validate the found preview image url
-                    if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) &&
-                        !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) && !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
                     {
-                        await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
-                        await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                        if (previewImageFromCustomHeader && pageHeader.HeaderImageId != Guid.Empty)
+                        {
+                            await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                            await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
 
-                        SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
+                            SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
+                        }
+                        else
+                        {
+                            SetBannerImageUrlField(previewImageServerRelativeUrl);
+                        }
                     }
                 }
             }

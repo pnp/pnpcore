@@ -11,30 +11,32 @@ jobs:
     if: github.repository_owner == 'pnp'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     permissions:
       contents: write
+      actions: read
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # prevent parallel executions
     - name: Wait for actions to finish
-      uses: softprops/turnstyle@v3
+      uses: softprops/turnstyle@fa86562458e34a9067f0dc1316a76b3975b1c413 # v3.3.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
     # Checks-out dev branch
     - name: Checkout dev branch
-      uses: actions/checkout@v6
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with: 
         ref: dev
         path: dev
     # Checks-out gh-pages branch
     - name: Checkout gh-pages branch
-      uses: actions/checkout@v6
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       with: 
         ref: gh-pages
         path: gh-pages
     # Setup .NET (required for DocFx)
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
       with:
         dotnet-version: 8.x
     # Install docfx as a .NET global tool

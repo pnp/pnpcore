@@ -1,6 +1,6 @@
 # Getting started with the PnP Core SDK
 
-The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1)) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory` and start using the library.
+The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-10.0)) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory` and start using the library.
 
 ## Where is the code?
 
@@ -12,16 +12,12 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## I don't have access to a Microsoft 365 tenant
 
-If you don't have a Microsoft 365 tenant you can, for developer purposes, always request [a free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program) and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the [free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
-
-## Learning from live code via Polyglot notebooks
-
-If you want to read about PnP Core SDK, see the needed code and even execute the code against your tenant then checkout our Polyglot notebooks! Using Visual Studio Code you interactively use PnP Core SDK with your tenant, the available notebooks can be found [here](https://github.com/pnp/pnpcore/tree/dev/docs/polyglot#readme).
+If you don't have a Microsoft 365 tenant you can, for developer purposes, always request [a free developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program) and use that for developing and testing your applications. When your organization already uses Microsoft 365 it's still a good practice to develop and test your applications on a non production tenant, such as the [developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
 ## Referencing the PnP Core SDK in your project
 
-The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
-Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.
+The recommended approach is to use the [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Entra ID.
+Each night these packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.
 
 > [!Note]
 >
@@ -103,7 +99,7 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 > [!Note]
 > Ensure you've set "Copy to output directory" to "Copy always" for the `appsettings.json` file as otherwise the config file is not used.
 
-You should provide the `ClientId` and `TenantId` for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:
+You should provide the `ClientId` and `TenantId` for an application registered in Entra ID and configured with proper permissions, accordingly to your needs. For example, you could register an app in Entra ID with delegated permission for:
 
 - Microsoft Graph: `Group.ReadWrite.All`
 - Microsoft Graph: `User.ReadWrite.All`
@@ -112,8 +108,6 @@ You should provide the `ClientId` and `TenantId` for an application registered i
 - SharePoint Online: `User.ReadWrite.All`
 
 As the Redirect URI, in Web platform enter __http://localhost__.
-
-If you don't want to register a custom app in your target Azure Active Directory, you can skip the `ClientId` and `TenantId` properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.
 
 In the above example, the authentication will rely on the `InteractiveAuthenticationProvider` (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.
 
@@ -251,8 +245,7 @@ In above sample the following configuration file is used: `appsettings.demo.json
 
 ## Advanced Configuration of PnPContext Services
 
-For more fine grained control over the setup of the internally used `SharePointRestClient` and `MicrosoftGraphClient` used in `PnPContext`, 
-there are optional actions to enable configuring the `IHttpClientBuilder` of each in the `AddPnPCore` extension method.
+For more fine grained control over the setup of the internally used `SharePointRestClient` and `MicrosoftGraphClient` used in `PnPContext`, there are optional actions to enable configuring the `IHttpClientBuilder` of each in the `AddPnPCore` extension method.
 
 ```csharp
 var host = Host.CreateDefaultBuilder()

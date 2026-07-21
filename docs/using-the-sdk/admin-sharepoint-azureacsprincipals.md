@@ -4,6 +4,9 @@ The Core SDK Admin library contains APIs to enumerate the Azure ACS principals t
 
 [!INCLUDE [SharePoint Admin setup](fragments/setup-admin-sharepoint.md)]
 
+> [!Important]
+> The SharePoint Add-In model in SharePoint Online has been deprecated on November 27, 2023 and fully retired on April 2, 2026. For more information, see [SharePoint Add-In retirement in Microsoft 365](https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/retirement-announcement-for-add-ins).
+
 > [!Note]
 > If your tenant is using vanity URL's then you'll need to populate the `VanityUrlOptions` class and pass it to any method that allows it.
 
