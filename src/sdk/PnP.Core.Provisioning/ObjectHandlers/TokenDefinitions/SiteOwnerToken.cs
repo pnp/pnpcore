@@ -1,0 +1,48 @@
+using PnP.Core.Provisioning.Attributes;
+using PnP.Core.Services;
+using System.Text.Json;
+using System.Threading.Tasks;
+using PnP.Core.Model.SharePoint;
+
+namespace PnP.Core.Provisioning.ObjectHandlers.TokenDefinitions
+{
+    [TokenDefinitionDescription(
+      Token = "{siteowner}",
+      Description = "Returns the login name of the site collection owner",
+      Example = "{siteowner}",
+      Returns = "i:0#.f|membership|user@contoso.onmicrosoft.com")]
+    internal class SiteOwnerToken : VolatileTokenDefinition
+    {
+        public SiteOwnerToken(PnPContext context)
+            : base(context, "{siteowner}")
+        {
+        }
+
+        public override async Task<string> GetReplaceValueAsync()
+        {
+            if (CacheValue == null)
+            {
+                // ISite has no Owner property (PnP Core models the site owner only through
+                // PnP.Core.Admin's site collection admin APIs, which need tenant admin rights).
+                // The REST endpoint CSOM's Site.Owner maps onto needs no elevation, so use it
+                // directly rather than pulling an admin dependency into token resolution.
+                ApiRequestResponse response = await Context.Web.ExecuteRequestAsync(
+                    new ApiRequest(ApiRequestType.SPORest, "_api/site/owner?$select=LoginName")).ConfigureAwait(false);
+
+                CacheValue = string.Empty;
+                if (!string.IsNullOrEmpty(response.Response))
+                {
+                    using (JsonDocument document = JsonDocument.Parse(response.Response))
+                    {
+                        if (document.RootElement.TryGetProperty("LoginName", out JsonElement loginName)
+                            && loginName.ValueKind == JsonValueKind.String)
+                        {
+                            CacheValue = loginName.GetString();
+                        }
+                    }
+                }
+            }
+            return CacheValue;
+        }
+    }
+}

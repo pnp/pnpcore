@@ -1,0 +1,1 @@
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"8ff430a2-8021-e000-d682-dfb7d18fb52b","SPClientServiceRequestDuration":"21","X-SharePointHealthScore":"2","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":"{\u0022AuditLogTrimmingRetention\u0022:90,\u0022Id\u0022:\u0022bda9e435-511c-44fb-86b3-18197ec3171a\u0022,\u0022TrimAuditLog\u0022:true}"}
