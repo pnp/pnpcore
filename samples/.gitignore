@@ -1,2 +1,5 @@
 # Ignore user specific appsettings 
 **/appsettings.*.json
+
+# Ignore file that specifies which environment to load
+**/env.txt
