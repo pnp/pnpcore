@@ -6,38 +6,48 @@ This solution demonstrates how the PnP Core SDK can be used in a WPF application
 
 You can find the sample source code here: [/samples/Demo.WPF](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.WPF)
 
-# Run the sample
+## System requirements
 
-## Register and configure an AAD app
+- Even though .NET is a cross-platform technology, **WPF only runs on Windows**.
 
-In order for the user to authenticate on the App, A new app registration should be created on Azure Portal
+## Prerequisites
 
-- Go to [Azure Active Directory Portal](https://aad.portal.azure.com)
+- .NET 10.0 SDK or higher installed. You can download it from https://dotnet.microsoft.com/download
 
-- In App registrations, click __New registration__
+### Additional prerequisites for Visual Studio Code
 
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in the *Mobile and desktop applications* platform enter __http://localhost__ (only needed if you want use an interactive authentication flow)
+In order to run and debug this sample in Visual Studio Code you need to install the following extensions:
 
-- Under __Implicit grant__ section, check __ID tokens__ and __Access tokens__
+- [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+- [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
-- Under __Advanced settings__ section, set __Allow public client flows__ to __yes__
 
-- Go to __API permissions__ section , click __Add a permission__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Directory.Read.All__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __User.Read__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __ChannelMessage.Read.All__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
+## Sample configuration
 
-- Click __Grant admin consent for {tenant}__
+### Step 1) Create an Azure AD application
 
-- From __Overview__,
--- copy the value of __Directory (tenant) ID__
--- copy the value of __Application (client) ID__
+The one thing to configure before you can use this sample is an Azure AD application:
 
-## Configure your application
+1. Navigate to https://entra.microsoft.com/
+2. Click on **Entra ID**, followed by navigating to **App registrations**
+3. Add a new application via the **New registration** link
+4. Give your application a name, e.g. PnPCoreSDKWPFDemo, make sure *Accounts in this organizational directory only* is selected and add **http://localhost** as redirect URI (only needed if you want use an interactive authentication flow). Clicking on **Register** will create the application and open it
+5. Take note of the **Application (client) ID** value, you'll need it in the next step
+6. Click on **API permissions** and add these **delegated** permissions
+   1. Microsoft Graph -> Directory.Read.All
+   2. Microsoft Graph -> User.Read
+   3. Microsoft Graph -> ChannelMessage.Read.All
+   4. Microsoft Graph -> ChannelMessage.Send
+   5. Microsoft Graph -> TeamSettings.ReadWrite.All
+   6. Microsoft Graph -> TeamsTab.ReadWrite.All
+   7. Microsoft Graph -> Sites.Manage.All
+   8. SharePoint -> AllSites.Manage
+7. Consent the application permissions by clicking on **Grant admin consent**
+8. From **Overview**,
+    1. copy the value of **Directory (tenant) ID**
+    2. copy the value of **Application (client) ID**
 
+### Step 2) Configure the application
 The application can be used with different authentication providers, see https://pnp.github.io/pnpcore/articles/consumer/configuring%20authentication.html for more details on the options.
 
 In this the sample uses an interactive flow, so you need to:
@@ -46,11 +56,27 @@ In this the sample uses an interactive flow, so you need to:
 - Configure the Client ID of your app as the value of `PnPCore:Credentials:InteractiveFlow:ClientId` in appsettings.json setting
 - Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of `PnPCore:Credentials:Sites:DemoSite:SiteUrl` in appsettings.json setting
 
+Using an environment specific appsettings.{DOTNET_ENVIRONMENT}.json file is supported also.
+The DOTNET_ENVIRONMENT default value for debugging is set to `Development`, so you can create an appsettings.Development.json file and add your configuration there.
+To set a different environment for debugging you can use the env.txt file in the root of the project. 
+You can use env.sample and appsettings.copyme.json as templates for env.txt and appsettings.{DOTNET_ENVIRONMENT}.json respectively and replace the placeholders ({ClientId}, {TenantId}, {TenantName}).
+                                                                                                                                                                 
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 
-## Execute
 
-  Hit F5 in Visual studio to execute the WPF app.
-  When clicking on one of the buttons to load data, the applications prompts you for signing in via your browser.
+## Step 3) Run the sample
+### Visual Studio Code and Visual Studio
+Press **F5** to launch the sample. 
+
+When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account. 
+Depending on the button you clicked, the application will execute the action and displays the results.
+
+### Terminal
+
+First you will need to build the project by running `dotnet build` in the project folder. Once the build is successful you can run the sample by executing `dotnet run` in the same folder. 
+Use `dotnet run --environment DOTNET_ENVIRONMENT={EnvironmentName}` to specify the desired environment.
+Default environment is `Production`. The default environment will be overwritten by launchSettings.json file if present. If there is no appsettings file for the specified environment, the setttings from appsettings.json will not be overwritten and will be used.
+When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account.
+
 
   ![preview image of the running app](preview.png)
