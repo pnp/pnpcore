@@ -416,6 +416,10 @@ namespace PnP.Core.Test.SharePoint
                     var errors = await context.ExecuteAsync(batch, false);
 
                     Assert.IsTrue(errors.Count == 2);
+                    var error = errors[0].Error as SharePointRestError;
+                    Assert.IsNotNull(error);
+                    Assert.AreEqual(0, error.ServerErrorCode);
+                    Assert.AreEqual("abc", error.Message);
                 }
                 finally
                 {
