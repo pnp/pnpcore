@@ -56,10 +56,10 @@ In this the sample uses an interactive flow, so you need to:
 - Configure the Client ID of your app as the value of `PnPCore:Credentials:InteractiveFlow:ClientId` in appsettings.json setting
 - Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of `PnPCore:Credentials:Sites:DemoSite:SiteUrl` in appsettings.json setting
 
-Using an environment specific appsettings.`DOTNET_ENVIRONMENT`.json file is supported also.
+Using an environment specific appsettings.`{DOTNET_ENVIRONMENT}`.json file is supported also.
 The DOTNET_ENVIRONMENT default value for debugging is set to `Development`, so you can create an appsettings.Development.json file and add your configuration there.
 To set a different environment for debugging you can use the env.txt file in the root of the project. 
-You can use env.sample and appsettings.copyme.json as templates for env.txt and appsettings.`DOTNET_ENVIRONMENT`.json respectively and replace the placeholders (`ClientId`, `TenantId`, `TenantName`}).
+You can use env.sample and appsettings.copyme.json as templates for env.txt and appsettings.`{DOTNET_ENVIRONMENT}`.json respectively and replace the placeholders (`{ClientId}`, `{TenantId}`, `{TenantName}`).
                                                                                                                                                                  
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 
@@ -74,7 +74,7 @@ Depending on the button you clicked, the application will execute the action and
 ### Terminal
 
 First you will need to build the project by running `dotnet build` in the project folder. Once the build is successful you can run the sample by executing `dotnet run` in the same folder. 
-Use `dotnet run --environment DOTNET_ENVIRONMENT=<EnvironmentName>` to specify the desired environment.
+Use `dotnet run --environment DOTNET_ENVIRONMENT={EnvironmentName}` to specify the desired environment.
 Default environment is `Production`. The default environment will be overwritten by launchSettings.json file if present. If there is no appsettings file for the specified environment, the setttings from appsettings.json will not be overwritten and will be used.
 When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account.
 
