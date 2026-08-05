@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace Demo.Blazor
             {
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
                 // Provide a default scope, need to get Msal.js to work
-                options.ProviderOptions.DefaultAccessTokenScopes = new List<string>() { "https://graph.microsoft.com/.default" };
+                options.ProviderOptions.DefaultAccessTokenScopes = ["https://graph.microsoft.com/.default"];
 
                 //https://github.com/dotnet/aspnetcore/issues/39104#issuecomment-1117082810
                 // Temp workaround for now...the auth popup otherwise doesn't close
@@ -34,6 +35,7 @@ namespace Demo.Blazor
             builder.Services.AddPnPCore();
 
             var config = new ConfigurationBuilder().Build();
+
             builder.Services
                 // Add our custom IAuthenticationProvider implementation
                 .AddScoped<IAuthenticationProvider, MsalWrappedTokenProvider>()
@@ -42,8 +44,9 @@ namespace Demo.Blazor
                 // Load our context factory
                 .AddScoped<IMyPnPContextFactory, MyContextFactory>();
 
-            await builder.Build().RunAsync();
+            var host = builder.Build();
+                
+            await host.RunAsync();
         }
-
     }
 }

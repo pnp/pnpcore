@@ -26,16 +26,16 @@ namespace Demo.Blazor
         private const string MicrosoftGraphScope = "Sites.FullControl.All";
         private const string SharePointOnlineScope = "AllSites.FullControl";
 
-        private string[] GetRelevantScopes(Uri resourceUri)
+        private static string[] GetRelevantScopes(Uri resourceUri)
         {
             if (resourceUri.ToString() == "https://graph.microsoft.com")
             {
-                return new[] { $"{resourceUri}/{MicrosoftGraphScope}" };
+                return [$"{resourceUri}/{MicrosoftGraphScope}"];
             }
             else
             {
                 string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
-                return new[] { $"{resource}/{SharePointOnlineScope}" };
+                return [$"{resource}/{SharePointOnlineScope}"];
             }
         }
 
@@ -47,18 +47,11 @@ namespace Demo.Blazor
         /// <returns></returns>
         public async Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
+            ArgumentNullException.ThrowIfNull(request, nameof(request));
+            ArgumentNullException.ThrowIfNull(resource, nameof(resource));
 
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("bearer",
-                await GetAccessTokenAsync(resource).ConfigureAwait(false));
+            var accessToken = await GetAccessTokenAsync(resource, GetRelevantScopes(resource));
+            request.Headers.Authorization = new ("bearer", accessToken);
         }
 
         /// <summary>
@@ -69,15 +62,8 @@ namespace Demo.Blazor
         /// <returns>Obtained access token</returns>
         public async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
-
-            if (scopes == null)
-            {
-                throw new ArgumentNullException(nameof(scopes));
-            }
+            ArgumentNullException.ThrowIfNull(resource, nameof(resource));
+            ArgumentNullException.ThrowIfNull(scopes, nameof(scopes));
 
             var tokenResult = await _accessTokenProvider.RequestAccessToken(new AccessTokenRequestOptions()
             {
@@ -85,7 +71,7 @@ namespace Demo.Blazor
                 Scopes = scopes,
             }).ConfigureAwait(false);
 
-            if (!tokenResult.TryGetToken(out AccessToken accessToken))
+            if (!tokenResult.TryGetToken(out AccessToken? accessToken))
             {
                 throw new Exception("An error occured while trying to acquire the access token...");
             }
@@ -100,10 +86,7 @@ namespace Demo.Blazor
         /// <returns>Obtained access token</returns>
         public async Task<string> GetAccessTokenAsync(Uri resource)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
+            ArgumentNullException.ThrowIfNull(resource, nameof(resource));
 
             return await GetAccessTokenAsync(resource, GetRelevantScopes(resource));
         }
