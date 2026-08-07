@@ -164,6 +164,12 @@ namespace PnP.Core.Model.SharePoint
                             }
                         }
 
+                        if (fieldValueCollection == null && stringValues == null && field != null &&
+                            (field.TypeAsString == "LookupMulti" || field.TypeAsString == "UserMulti" || field.TypeAsString == "TaxonomyFieldTypeMulti"))
+                        {
+                            return new FieldValueCollection(field, propertyName);
+                        }
+
                         return (object)fieldValueCollection ?? stringValues ?? new List<string>();
                     }
                 default:
