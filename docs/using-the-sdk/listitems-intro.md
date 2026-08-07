@@ -33,6 +33,7 @@ Requirements | Recommended approach
 -------------|---------------------
 You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
 You want to have more details on the list item properties (e.g. author name instead of only the author id, lookup column values) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
+You want to pull fields from another list into your results via the CAML `Joins` and `ProjectedFields` elements | [Option E](#e-getting-list-items-with-caml-joins-and-projectedfields): use a CAML query via the `LoadItemsByCamlQueryViaCsom` methods
 
 ### A. Getting list items (max 100 items)
 
@@ -458,6 +459,119 @@ while (paging)
     {
     }
 }
+```
+
+### E. Getting list items with CAML Joins and ProjectedFields
+
+CAML supports pulling fields from another list into your results via the `Joins` and `ProjectedFields` elements. The REST `GetItems` endpoint used by [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach) does not serialize those projected fields, so they are missing from the results. The [LoadItemsByCamlQueryViaCsom methods](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) run the same CAML query through the CSOM `List.GetItems(CamlQuery)` method instead, which does return them.
+
+Projected fields are returned as an [IFieldLookupValue](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html), where `LookupValue` holds the value coming from the joined list.
+
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
+                                                     p => p.Fields.QueryProperties(p => p.InternalName,
+                                                                                   p => p.FieldTypeKind,
+                                                                                   p => p.TypeAsString,
+                                                                                   p => p.Title));
+
+// "JoinLookup" is a lookup field on My List pointing at the joined list,
+// "ProjectedSourceText" is a text field living on that joined list
+string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='Title' />
+                      <FieldRef Name='ID' />
+                      <FieldRef Name='JoinLookup' />
+                      <FieldRef Name='ProjectedText' />
+                    </ViewFields>
+                    <Joins>
+                      <Join Type='LEFT' ListAlias='JoinedList'>
+                        <Eq>
+                          <FieldRef Name='JoinLookup' RefType='Id' />
+                          <FieldRef List='JoinedList' Name='Id' />
+                        </Eq>
+                      </Join>
+                    </Joins>
+                    <ProjectedFields>
+                      <Field Name='ProjectedText' Type='Lookup' List='JoinedList' ShowField='ProjectedSourceText' />
+                    </ProjectedFields>
+                    <Query>
+                      <OrderBy><FieldRef Name='ID' /></OrderBy>
+                    </Query>
+                   </View>";
+
+// Execute the query
+var result = await myList.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+{
+    ViewXml = viewXml,
+    DatesInUtc = true
+});
+
+// The returned items are also merged into myList.Items
+foreach (var listItem in result.Items)
+{
+    // The field projected from the joined list
+    var projected = listItem["ProjectedText"] as IFieldLookupValue;
+    Console.WriteLine($"{listItem.Title}: {projected?.LookupValue}");
+}
+```
+
+> [!Note]
+>
+> - Only use these methods when you actually need `Joins`/`ProjectedFields`, for all other CAML scenarios [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach) and [Option D](#d-using-the-listdataasstream-approach) are the better fit.
+> - The projected field is not part of your list's schema, which is why it is returned as an `IFieldLookupValue` rather than as the field type it has on the joined list.
+> - When a `LEFT` join finds no matching row, fields that belong to your list still come back as an empty typed value (an `IFieldLookupValue` with `LookupId` `-1`), but a *projected* field comes back as `null`, because SharePoint returns no type information for it in that case. Null check projected fields before casting.
+> - When referencing a field keep in mind that you need to use the field's `InternalName` and that the casing has to match.
+> - When you want to reuse a `PnPContext` which you've previously used to load items you first need to clear the loaded items via `myList.Items.Clear()`
+
+#### Using paging with LoadItemsByCamlQueryViaCsom
+
+Add a `RowLimit` with `Paged='TRUE'` to the CAML query and the returned `PagingInfo` tells you how to request the next page. Feed it back via `CamlQueryOptions.PagingInfo`, there is no need to assemble the paging string yourself. `PagingInfo` is `null` once the last page has been loaded.
+
+```csharp
+string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='Title' />
+                      <FieldRef Name='ID' />
+                      <FieldRef Name='ProjectedText' />
+                    </ViewFields>
+                    <Joins>
+                      <Join Type='LEFT' ListAlias='JoinedList'>
+                        <Eq>
+                          <FieldRef Name='JoinLookup' RefType='Id' />
+                          <FieldRef List='JoinedList' Name='Id' />
+                        </Eq>
+                      </Join>
+                    </Joins>
+                    <ProjectedFields>
+                      <Field Name='ProjectedText' Type='Lookup' List='JoinedList' ShowField='ProjectedSourceText' />
+                    </ProjectedFields>
+                    <Query>
+                      <OrderBy><FieldRef Name='ID' /></OrderBy>
+                    </Query>
+                    <RowLimit Paged='TRUE'>100</RowLimit>
+                   </View>";
+
+// Load all the needed data using paged requests
+string nextPage = null;
+do
+{
+    var page = await myList.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    });
+
+    // Process this page of list items
+    foreach (var listItem in page.Items)
+    {
+        // Do something with the list item
+    }
+
+    nextPage = page.PagingInfo;
+}
+while (nextPage != null);
 ```
 
 ## Adding list items

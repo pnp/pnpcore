@@ -469,7 +469,7 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
             {
-                Commit = true,
+                // Deliberately no Commit, this is a read and committing clears pending changes on the list
                 Request = PnPContext.Uri.ToString(),
                 // Ensure loading a next page does not clear the previously loaded items
                 SkipCollectionClearing = true

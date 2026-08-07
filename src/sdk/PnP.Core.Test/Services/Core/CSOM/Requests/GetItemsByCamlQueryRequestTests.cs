@@ -119,5 +119,50 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
             Assert.AreEqual(0, request.Result.Items.Count);
             Assert.IsNull(request.Result.PagingInfo);
         }
+
+        [TestMethod]
+        public void GetItemsByCamlQueryRequest_Test_ProcessResponse_ActionIdIsLastElement()
+        {
+            var request = new GetItemsByCamlQueryRequest(SiteId, WebId, ListId, new CamlQueryOptions { ViewXml = "<View/>" });
+            request.GetRequest(new IteratorIdProvider());
+
+            // A truncated response where the SP.ListItemCollection following the query action id is missing
+            request.ProcessResponse(
+                "[{\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.23019.12004\",\"ErrorInfo\":null,\"TraceCorrelationId\":\"x\"}," +
+                "3,{\"IsNull\":false},4]");
+
+            Assert.AreEqual(0, request.Result.Items.Count);
+            Assert.IsNull(request.Result.PagingInfo);
+        }
+
+        [TestMethod]
+        public void GetItemsByCamlQueryRequest_Test_ProcessResponse_ItemCollectionNotAnObject()
+        {
+            var request = new GetItemsByCamlQueryRequest(SiteId, WebId, ListId, new CamlQueryOptions { ViewXml = "<View/>" });
+            request.GetRequest(new IteratorIdProvider());
+
+            request.ProcessResponse(
+                "[{\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.23019.12004\",\"ErrorInfo\":null,\"TraceCorrelationId\":\"x\"}," +
+                "3,{\"IsNull\":false},4,null]");
+
+            Assert.AreEqual(0, request.Result.Items.Count);
+            Assert.IsNull(request.Result.PagingInfo);
+        }
+
+        [TestMethod]
+        public void GetItemsByCamlQueryRequest_Test_ProcessResponse_PagingInfoNotAString()
+        {
+            var request = new GetItemsByCamlQueryRequest(SiteId, WebId, ListId, new CamlQueryOptions { ViewXml = "<View/>" });
+            request.GetRequest(new IteratorIdProvider());
+
+            request.ProcessResponse(
+                "[{\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.23019.12004\",\"ErrorInfo\":null,\"TraceCorrelationId\":\"x\"}," +
+                "3,{\"IsNull\":false}," +
+                "4,{\"_ObjectType_\":\"SP.ListItemCollection\",\"_Child_Items_\":[{\"_ObjectType_\":\"SP.ListItem\",\"Id\":1,\"Title\":\"Item1\"}]," +
+                "\"ListItemCollectionPosition\":{\"_ObjectType_\":\"SP.ListItemCollectionPosition\",\"PagingInfo\":42}}]");
+
+            Assert.AreEqual(1, request.Result.Items.Count);
+            Assert.IsNull(request.Result.PagingInfo);
+        }
     }
 }

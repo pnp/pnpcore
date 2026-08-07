@@ -105,13 +105,18 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 
             int idIndex = results.FindIndex(r => CSOMResponseHelper.CompareIdElement(r, QueryActionId));
 
-            if (idIndex < 0)
+            // The element following the query action id holds the SP.ListItemCollection
+            if (idIndex < 0 || idIndex + 1 >= results.Count)
             {
                 return;
             }
 
-            // The element following the query action id holds the SP.ListItemCollection
             JsonElement itemCollection = results[idIndex + 1];
+
+            if (itemCollection.ValueKind != JsonValueKind.Object)
+            {
+                return;
+            }
 
             if (itemCollection.TryGetProperty("_Child_Items_", out JsonElement childItems) && childItems.ValueKind == JsonValueKind.Array)
             {
@@ -123,7 +128,8 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 
             if (itemCollection.TryGetProperty("ListItemCollectionPosition", out JsonElement position) &&
                 position.ValueKind == JsonValueKind.Object &&
-                position.TryGetProperty("PagingInfo", out JsonElement pagingInfo))
+                position.TryGetProperty("PagingInfo", out JsonElement pagingInfo) &&
+                pagingInfo.ValueKind == JsonValueKind.String)
             {
                 Result.PagingInfo = pagingInfo.GetString();
             }
