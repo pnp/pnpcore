@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added 
 
+- Added CSOM-based GetItems support #1802 [Jeppe Mastrup Spanggaard - jeppesc11]
+
 ### Changed 
 
 - Fixed negative currency values returned by LoadListDataAsStreamAsync #1818 [mateusz-sintel - mateusz-sintel]
