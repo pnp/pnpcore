@@ -4702,6 +4702,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.ICamlQueryCsomResult",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.yml\" sourcestartlinenumber=\"1\">Result of a CAML query executed via CSOM, see LoadItemsByCamlQueryViaCsomAsync on <xref href=\"PnP.Core.Model.SharePoint.IList\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.ICanvasColumn.yml",
       "output": {
         ".html": {

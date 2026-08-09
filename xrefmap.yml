@@ -27008,6 +27008,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync
   nameWithType: IBrandingManager.SetThemeBatchAsync
+- uid: PnP.Core.Model.SharePoint.ICamlQueryCsomResult
+  name: ICamlQueryCsomResult
+  href: api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html
+  commentId: T:PnP.Core.Model.SharePoint.ICamlQueryCsomResult
+  fullName: PnP.Core.Model.SharePoint.ICamlQueryCsomResult
+  nameWithType: ICamlQueryCsomResult
+- uid: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items
+  name: Items
+  href: api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html#PnP_Core_Model_SharePoint_ICamlQueryCsomResult_Items
+  commentId: P:PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items
+  fullName: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items
+  nameWithType: ICamlQueryCsomResult.Items
+- uid: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items*
+  name: Items
+  href: api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html#PnP_Core_Model_SharePoint_ICamlQueryCsomResult_Items_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.Items
+  nameWithType: ICamlQueryCsomResult.Items
+- uid: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo
+  name: PagingInfo
+  href: api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html#PnP_Core_Model_SharePoint_ICamlQueryCsomResult_PagingInfo
+  commentId: P:PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo
+  fullName: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo
+  nameWithType: ICamlQueryCsomResult.PagingInfo
+- uid: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo*
+  name: PagingInfo
+  href: api/PnP.Core.Model.SharePoint.ICamlQueryCsomResult.html#PnP_Core_Model_SharePoint_ICamlQueryCsomResult_PagingInfo_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICamlQueryCsomResult.PagingInfo
+  nameWithType: ICamlQueryCsomResult.PagingInfo
 - uid: PnP.Core.Model.SharePoint.ICanvasColumn
   name: ICanvasColumn
   href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html
@@ -40336,6 +40368,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync
   nameWithType: IList.LoadItemsByCamlQueryBatchAsync
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  name: LoadItemsByCamlQueryViaCsom(CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryViaCsom_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  nameWithType: IList.LoadItemsByCamlQueryViaCsom(CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom*
+  name: LoadItemsByCamlQueryViaCsom
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryViaCsom_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsom
+  nameWithType: IList.LoadItemsByCamlQueryViaCsom
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  name: LoadItemsByCamlQueryViaCsomAsync(CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryViaCsomAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  nameWithType: IList.LoadItemsByCamlQueryViaCsomAsync(CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync*
+  name: LoadItemsByCamlQueryViaCsomAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryViaCsomAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryViaCsomAsync
+  nameWithType: IList.LoadItemsByCamlQueryViaCsomAsync
 - uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStream(PnP.Core.Model.SharePoint.RenderListDataOptions)
   name: LoadListDataAsStream(RenderListDataOptions)
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_
