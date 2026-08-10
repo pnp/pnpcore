@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C#: Demo.WPF Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}//Demo.WPF/Demo.WPF.csproj",
+            "preLaunchTask": "build"
+        }
+    ]
+}

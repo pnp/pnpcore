@@ -2,6 +2,7 @@
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests.ListItems;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -455,6 +456,35 @@ namespace PnP.Core.Model.SharePoint
             {
                 SkipCollectionClearing = true
             };
+        }
+
+        public async Task<ICamlQueryCsomResult> LoadItemsByCamlQueryViaCsomAsync(CamlQueryOptions queryOptions)
+        {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
+            var request = new GetItemsByCamlQueryRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), Id.ToString(), queryOptions);
+
+            var apiCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+            {
+                // Deliberately no Commit, this is a read and committing clears pending changes on the list
+                Request = PnPContext.Uri.ToString(),
+                // Ensure loading a next page does not clear the previously loaded items
+                SkipCollectionClearing = true
+            };
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            var items = await CsomListItemsHandler.ProcessItemsAsync(this, request.Result.Items).ConfigureAwait(false);
+
+            return new CamlQueryCsomResult(items, request.Result.PagingInfo);
+        }
+
+        public ICamlQueryCsomResult LoadItemsByCamlQueryViaCsom(CamlQueryOptions queryOptions)
+        {
+            return LoadItemsByCamlQueryViaCsomAsync(queryOptions).GetAwaiter().GetResult();
         }
 
         internal static string RewriteGetItemsQueryString(string viewXml, string query)
