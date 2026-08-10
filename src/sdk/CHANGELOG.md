@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Fixed negative currency values returned by LoadListDataAsStreamAsync #1818 [mateusz-sintel - mateusz-sintel]
 - Fixed MC791596 banner migration incorrectly adding a banner header on pages with no header #1758 [nicolaor - Rene Nicolao]
+- Updated Demo.WPF sample #1829 [gszdev - gszdev]
 
 ## [1.17]
 
