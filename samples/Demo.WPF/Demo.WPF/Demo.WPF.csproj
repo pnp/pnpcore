@@ -24,7 +24,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.*" />
     <PackageReference Include="PnP.Core.Auth" Version="1.17.*" Condition="'$(UsePnPCoreProjectRef)' != 'true'" />
-    <!--<PackageReference Include="PnP.Core.Auth" Version="1.17.*-*" Condition="'$(UsePnPCoreProjectRef)' != 'true'" />-->
     <ProjectReference Include="..\..\..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj" Condition="'$(UsePnPCoreProjectRef)' == 'true'" />
   </ItemGroup>
 

@@ -79,8 +79,6 @@ namespace Demo.WPF
             }
         }
 
-        
-
         internal async Task ListInfoAsync()
         {
             using (var context = await pnpContextFactory.CreateAsync("DemoSite"))

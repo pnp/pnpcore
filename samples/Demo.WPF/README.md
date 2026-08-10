@@ -21,7 +21,6 @@ In order to run and debug this sample in Visual Studio Code you need to install 
 - [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
-
 ## Sample configuration
 
 ### Step 1) Create an Azure AD application
@@ -48,6 +47,7 @@ The one thing to configure before you can use this sample is an Azure AD applica
     2. copy the value of **Application (client) ID**
 
 ### Step 2) Configure the application
+
 The application can be used with different authentication providers, see https://pnp.github.io/pnpcore/articles/consumer/configuring%20authentication.html for more details on the options.
 
 In this the sample uses an interactive flow, so you need to:
@@ -63,9 +63,10 @@ You can use env.sample and appsettings.copyme.json as templates for env.txt and 
                                                                                                                                                                  
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 
-
 ## Step 3) Run the sample
+
 ### Visual Studio Code and Visual Studio
+
 Press **F5** to launch the sample. 
 
 When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account. 
@@ -78,5 +79,4 @@ Use `dotnet run --environment DOTNET_ENVIRONMENT={EnvironmentName}` to specify t
 Default environment is `Production`. The default environment will be overwritten by launchSettings.json file if present. If there is no appsettings file for the specified environment, the setttings from appsettings.json will not be overwritten and will be used.
 When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account.
 
-
-  ![preview image of the running app](preview.png)
+![preview image of the running app](preview.png)
