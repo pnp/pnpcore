@@ -90,38 +90,50 @@
 <p>This solution demonstrates how the PnP Core SDK can be used in a WPF application</p>
 <h2 id="source-code">Source code</h2>
 <p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.WPF">/samples/Demo.WPF</a></p>
-<h1 id="run-the-sample">Run the sample</h1>
-<h2 id="register-and-configure-an-aad-app">Register and configure an AAD app</h2>
-<p>In order for the user to authenticate on the App, A new app registration should be created on Azure Portal</p>
+<h2 id="system-requirements">System requirements</h2>
 <ul>
-<li><p>Go to <a href="https://aad.portal.azure.com">Azure Active Directory Portal</a></p>
-</li>
-<li><p>In App registrations, click <strong>New registration</strong></p>
-</li>
-<li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected. As the Redirect URI, in the <em>Mobile and desktop applications</em> platform enter <strong>http://localhost</strong> (only needed if you want use an interactive authentication flow)</p>
-</li>
-<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong> and <strong>Access tokens</strong></p>
-</li>
-<li><p>Under <strong>Advanced settings</strong> section, set <strong>Allow public client flows</strong> to <strong>yes</strong></p>
-</li>
-<li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong></p>
+<li>Even though .NET is a cross-platform technology, <strong>WPF only runs on Windows</strong>.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Directory.Read.All</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Read.All</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Send</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamSettings.ReadWrite.All</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamsTab.ReadWrite.All</strong></li>
+<li>.NET 10.0 SDK or higher installed. You can download it from <a href="https://dotnet.microsoft.com/download">https://dotnet.microsoft.com/download</a></li>
 </ul>
-</li>
-<li><p>Click <strong>Grant admin consent for {tenant}</strong></p>
-</li>
-<li><p>From <strong>Overview</strong>,
--- copy the value of <strong>Directory (tenant) ID</strong>
--- copy the value of <strong>Application (client) ID</strong></p>
-</li>
+<h3 id="additional-prerequisites-for-visual-studio-code">Additional prerequisites for Visual Studio Code</h3>
+<p>In order to run and debug this sample in Visual Studio Code you need to install the following extensions:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">C#</a></li>
 </ul>
-<h2 id="configure-your-application">Configure your application</h2>
+<h2 id="sample-configuration">Sample configuration</h2>
+<h3 id="step-1-create-an-azure-ad-application">Step 1) Create an Azure AD application</h3>
+<p>The one thing to configure before you can use this sample is an Azure AD application:</p>
+<ol>
+<li>Navigate to <a href="https://entra.microsoft.com/">https://entra.microsoft.com/</a></li>
+<li>Click on <strong>Entra ID</strong>, followed by navigating to <strong>App registrations</strong></li>
+<li>Add a new application via the <strong>New registration</strong> link</li>
+<li>Give your application a name, e.g. PnPCoreSDKWPFDemo, make sure <em>Accounts in this organizational directory only</em> is selected and add <strong>http://localhost</strong> as redirect URI (only needed if you want use an interactive authentication flow). Clicking on <strong>Register</strong> will create the application and open it</li>
+<li>Take note of the <strong>Application (client) ID</strong> value, you'll need it in the next step</li>
+<li>Click on <strong>API permissions</strong> and add these <strong>delegated</strong> permissions
+<ol>
+<li>Microsoft Graph -&gt; Directory.Read.All</li>
+<li>Microsoft Graph -&gt; User.Read</li>
+<li>Microsoft Graph -&gt; ChannelMessage.Read.All</li>
+<li>Microsoft Graph -&gt; ChannelMessage.Send</li>
+<li>Microsoft Graph -&gt; TeamSettings.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; TeamsTab.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Sites.Manage.All</li>
+<li>SharePoint -&gt; AllSites.Manage</li>
+</ol>
+</li>
+<li>Consent the application permissions by clicking on <strong>Grant admin consent</strong></li>
+<li>From <strong>Overview</strong>,
+<ol>
+<li>copy the value of <strong>Directory (tenant) ID</strong></li>
+<li>copy the value of <strong>Application (client) ID</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="step-2-configure-the-application">Step 2) Configure the application</h3>
 <p>The application can be used with different authentication providers, see <a href="https://pnp.github.io/pnpcore/articles/consumer/configuring%20authentication.html">https://pnp.github.io/pnpcore/articles/consumer/configuring%20authentication.html</a> for more details on the options.</p>
 <p>In this the sample uses an interactive flow, so you need to:</p>
 <ul>
@@ -129,10 +141,21 @@
 <li>Configure the Client ID of your app as the value of <code>PnPCore:Credentials:InteractiveFlow:ClientId</code> in appsettings.json setting</li>
 <li>Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of <code>PnPCore:Credentials:Sites:DemoSite:SiteUrl</code> in appsettings.json setting</li>
 </ul>
+<p>Using an environment specific appsettings.<code>{DOTNET_ENVIRONMENT}</code>.json file is supported also.
+The DOTNET_ENVIRONMENT default value for debugging is set to <code>Development</code>, so you can create an appsettings.Development.json file and add your configuration there.
+To set a different environment for debugging you can use the env.txt file in the root of the project.
+You can use env.sample and appsettings.copyme.json as templates for env.txt and appsettings.<code>{DOTNET_ENVIRONMENT}</code>.json respectively and replace the placeholders (<code>{ClientId}</code>, <code>{TenantId}</code>, <code>{TenantName}</code>).</p>
 <p>Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection</p>
-<h2 id="execute">Execute</h2>
-<p>Hit F5 in Visual studio to execute the WPF app.
-When clicking on one of the buttons to load data, the applications prompts you for signing in via your browser.</p>
+<h2 id="step-3-run-the-sample">Step 3) Run the sample</h2>
+<h3 id="visual-studio-code-and-visual-studio">Visual Studio Code and Visual Studio</h3>
+<p>Press <strong>F5</strong> to launch the sample.</p>
+<p>When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account.
+Depending on the button you clicked, the application will execute the action and displays the results.</p>
+<h3 id="terminal">Terminal</h3>
+<p>First you will need to build the project by running <code>dotnet build</code> in the project folder. Once the build is successful you can run the sample by executing <code>dotnet run</code> in the same folder.
+Use <code>dotnet run --environment DOTNET_ENVIRONMENT={EnvironmentName}</code> to specify the desired environment.
+Default environment is <code>Production</code>. The default environment will be overwritten by launchSettings.json file if present. If there is no appsettings file for the specified environment, the setttings from appsettings.json will not be overwritten and will be used.
+When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account.</p>
 <p><img src="preview.png" alt="preview image of the running app"></p>
 
 </article>
