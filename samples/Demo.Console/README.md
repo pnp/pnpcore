@@ -10,14 +10,12 @@ You can find the sample source code here: [/samples/Demo.Console](https://github
 
 - .NET 10.0 SDK or higher installed. You can download it from https://dotnet.microsoft.com/download
 
-
 ### Additional prerequisites for Visual Studio Code
 
 In order to run and debug this sample in Visual Studio Code you need to install the following extensions:
 
 - [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-
 
 ## Sample configuration
 
@@ -45,6 +43,7 @@ The one thing to configure before you can use this sample is an Azure AD applica
     2. copy the value of **Application (client) ID**
 
 ### Step 2) Configure the application
+
 - This demo application comes with code for 2 different authentication providers, the `CredentialManagerAuthenticationProvider` or the `InteractiveAuthenticationProvider` can be used. The latter is the default value. To configure the app update the `appsettings.json` file with:
 
 - Configure the Tenant ID of your app as the value of `CustomSettings:TenantId` in appsettings.json setting
@@ -60,7 +59,9 @@ You can use env.sample and appsettings.copyme.json as templates for env.txt and 
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 
 ## Step 3) Run the sample
+
 ### Visual Studio Code and Visual Studio
+
 Press **F5** to launch the sample. 
 
 When clicking on one of the buttons a new browser window/tab will open asking you to authenticate with your Microsoft 365 account. 
