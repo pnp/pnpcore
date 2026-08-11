@@ -17,7 +17,6 @@ In order to run and debug this sample in Visual Studio Code you need to install 
 - [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
-
 ### Step 1) Create an Azure AD application
 
 The one thing to configure before you can use this sample is an Azure AD application:
@@ -52,7 +51,9 @@ The `ASPNETCORE_ENVIRONMENT` default value for debugging is set to `Development`
 For more details about runtime environments see: [ASP.NET Core runtime environments](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments)
 
 ## Step 3) Run the sample
+
 ### Visual Studio Code and Visual Studio
+
 Press **F5** to launch the sample. 
 
 ### Terminal
