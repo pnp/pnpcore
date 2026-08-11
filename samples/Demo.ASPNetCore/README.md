@@ -6,7 +6,6 @@ This solution demonstrates how the PnP Core SDK can be used in a ASP.NET Core we
 
 You can find the sample source code here: [/samples/Demo.ASPNetCore](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.ASPNetCore)
 
-
 ## Prerequisites
 
 - .NET 10.0 SDK or higher installed. You can download it from https://dotnet.microsoft.com/download
@@ -17,7 +16,6 @@ In order to run and debug this sample in Visual Studio Code you need to install 
 
 - [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-
 
 ### Step 1) Create an Azure AD application
 
@@ -42,6 +40,7 @@ The one thing to configure before you can use this sample is an Azure AD applica
     2. copy the value of **Application (client) ID**
 
 ## Configure your application
+
 - Configure the name of your tenant as the value of `AzureAd:Domain` in appsettings.json setting
 - Configure the Tenant ID of your app as the value of `AzureAd:TenantId` in appsettings.json setting
 - Configure the Client ID of your app as the value of `AzureAd:ClientId` in appsettings.json setting
@@ -55,7 +54,9 @@ For more details about runtime environments see: [ASP.NET Core runtime environme
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 
 ## Step 3) Run the sample
+
 ### Visual Studio Code and Visual Studio
+
 Press **F5** to launch the sample. 
 
 ### Terminal
