@@ -118,12 +118,6 @@ namespace Demo.ConsoleApp
                     });
             });
 
-
-            // Ensure you do consent to the PnP App when using another tenant (update below url to match your aad domain): 
-            // https://login.microsoftonline.com/a830edad9050849523e17050400.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&state=12345&redirect_uri=https://www.pnp.com
-            // .UseEnvironment("officedevpnp")
-
-
             // Add services to the container
 
             var host = builder.Build();
