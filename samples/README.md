@@ -33,4 +33,4 @@ Sample | Description | .NET version | PnP Core version | Authentication Type
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 7 | v1.8.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 10 | v1.17.* | Interactive login (`InteractiveAuthenticationProvider`)

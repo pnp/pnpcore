@@ -482,6 +482,20 @@ namespace PnP.Core.Model.SharePoint
         public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
+        /// Loads list items based up on a CAML query executed via CSOM, which also returns fields projected from a joined list (CAML Joins/ProjectedFields)
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns>The loaded items and the paging information to get the next page</returns>
+        public Task<ICamlQueryCsomResult> LoadItemsByCamlQueryViaCsomAsync(CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query executed via CSOM, which also returns fields projected from a joined list (CAML Joins/ProjectedFields)
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns>The loaded items and the paging information to get the next page</returns>
+        public ICamlQueryCsomResult LoadItemsByCamlQueryViaCsom(CamlQueryOptions queryOptions);
+
+        /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
         /// </summary>
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
