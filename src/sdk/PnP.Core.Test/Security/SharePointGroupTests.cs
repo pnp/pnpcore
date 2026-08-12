@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -475,6 +476,25 @@ namespace PnP.Core.Test.Security
                         await siteGroup.DeleteAsync();
                     }
                 }
+            }
+        }
+
+        [TestMethod]
+        public async Task SharePointGroupEndpointDependsOnParent()
+        {
+            // Offline test: mocked responses are replayed per request sequence, so only asserting on the
+            // generated endpoint catches a group collection that is loaded from the wrong scope
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var user = new SharePointUser { PnPContext = context, Parent = context.Web, Id = 12 };
+
+                var fromWeb = EntityManager.GetClassInfo<ISharePointGroup>(typeof(SharePointGroup), null, parent: context.Web as IDataModelParent);
+                var fromSite = EntityManager.GetClassInfo<ISharePointGroup>(typeof(SharePointGroup), null, parent: context.Site as IDataModelParent);
+                var fromUser = EntityManager.GetClassInfo<ISharePointGroup>(typeof(SharePointGroup), null, parent: user);
+
+                Assert.AreEqual("_api/Web/SiteGroups", fromWeb.SharePointLinqGet);
+                Assert.AreEqual("_api/Web/SiteGroups", fromSite.SharePointLinqGet);
+                Assert.AreEqual("_api/Web/GetUserById({Parent.Id})/Groups", fromUser.SharePointLinqGet);
             }
         }
     }

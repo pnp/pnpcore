@@ -1,4 +1,5 @@
-﻿using PnP.Core.QueryModel;
+﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
+    [SharePointType("SP.Group", Target = typeof(Web), Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
+    [SharePointType("SP.Group", Target = typeof(Site), Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
+    [SharePointType("SP.Group", Target = typeof(SharePointUser), Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/GetUserById({Parent.Id})/Groups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
     internal sealed class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
     {
         #region Construction
