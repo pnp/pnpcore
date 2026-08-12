@@ -1486,5 +1486,25 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Endpoint mapping
+
+        [TestMethod]
+        public async Task SubFolderIsReadFromItsOwnEndpoint()
+        {
+            // Offline test: mocked responses are replayed per request sequence, so only asserting on the
+            // generated endpoint catches a sub folder that is read from its parent's url
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var parentFolder = new Folder { PnPContext = context, Parent = context.Web };
+
+                var entityInfo = EntityManager.GetClassInfo<IFolder>(typeof(Folder), null, parent: parentFolder);
+
+                Assert.AreEqual("_api/Web/getFolderById('{Id}')", entityInfo.SharePointGet);
+                Assert.AreEqual("_api/Web/getFolderById('{Parent.Id}')/Folders", entityInfo.SharePointLinqGet);
+            }
+        }
+
+        #endregion
     }
 }

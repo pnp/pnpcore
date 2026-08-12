@@ -19,11 +19,13 @@ namespace PnP.Core.Model.SharePoint
     /// Folder class, write your custom code here
     /// </summary>
     [SharePointType("SP.Folder", Target = typeof(Web), Uri = "_api/Web/getFolderById('{Id}')", LinqGet = "_api/Web/Folders")]
-    [SharePointType("SP.Folder", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Folders")]
+    [SharePointType("SP.Folder", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Folders")]
     [SharePointType("SP.Folder", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/rootFolder", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Folders")]
     [SharePointType("SP.Folder", Target = typeof(ListItem), Uri = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/Folder")]
     internal sealed class Folder : BaseDataModel<IFolder>, IFolder
     {
+        private const string ParentFolderApiCall = "_api/Web/getFolderById('{Parent.Id}')";
+
         #region Construction
         public Folder()
         {
@@ -42,8 +44,12 @@ namespace PnP.Core.Model.SharePoint
                 //throw new ClientException(ErrorType.Unsupported, OnPCoreResources.Exception_Unsupported_AddingContentTypeToList);
                 //}
 
+                // A folder is added to its container, so when the container is a folder the add call has to
+                // target the parent folder. The Get of a folder points to the folder itself.
+                string containerApiCall = entity.Target == typeof(Folder) ? ParentFolderApiCall : entity.SharePointGet;
+
                 string encodedPath = WebUtility.UrlEncode(Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
-                return new ApiCall($"{entity.SharePointGet}/Folders/AddUsingPath(decodedurl='{encodedPath}')", ApiType.SPORest);
+                return new ApiCall($"{containerApiCall}/Folders/AddUsingPath(decodedurl='{encodedPath}')", ApiType.SPORest);
             };
         }
         #endregion
