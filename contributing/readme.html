@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>The PnP Core SDK model | PnP Core SDK </title>
+      <title>Contributing to PnP Core SDK | PnP Core SDK </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="The PnP Core SDK model | PnP Core SDK ">
+      <meta name="title" content="Contributing to PnP Core SDK | PnP Core SDK ">
       <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
       
       <link rel="icon" href="../images/favicon.ico">
@@ -85,8 +85,13 @@
         </div>
 
         <article data-uid="">
-<h1 id="the-pnp-core-sdk-model">The PnP Core SDK model</h1>
+<h1 id="contributing-to-pnp-core-sdk">Contributing to PnP Core SDK</h1>
 
+<p>We appreciate that you're interested in helping with moving the project forward. Before you submit your first PR, please read the following guide.
+If you have a idea for a new feature, have a suggestion for improving an existing feature or you've found a bug, please first check if there is no similar idea already listed in the <a href="https://github.com/pnp/pnpcore/issues">issue list</a>. If not, please create a new issue describing your idea. Once we agree on the feature scope and architecture, the feature will be ready for building. Don't hesitate to mention in the issue if you'd like to build the feature yourself.
+Before you start working on an issue, please check if someone else is already working on it. If not, please comment on the issue that you want to work on it to get assigned. This will help us avoid duplicate work and will make sure that your work is not wasted.
+Pick only the issues that are labeled with &quot;help wanted&quot;. If you are a first time contributor look for &quot;good first issue&quot; label to get started. If you are not sure if you can solve the issue, please ask for help in the issue comments.</p>
+<h2 id="the-pnp-core-sdk-model">The PnP Core SDK model</h2>
 <p>The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and their operations (e.g. GetAsync or Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. <strong>As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK</strong>.</p>
 <p><img src="../images/sdk%20overview.png" alt="SDK overview"></p>
 <h2 id="where-is-the-code">Where is the code?</h2>
