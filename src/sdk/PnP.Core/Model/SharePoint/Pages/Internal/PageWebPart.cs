@@ -724,6 +724,14 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
+            // A custom web part declares full bleed support in its manifest and that manifest is not part of the
+            // page markup. When SharePoint stored the web part in a one column full width section (section factor 0)
+            // then it does support full bleed, so keep it writable to that section.
+            if (!SupportsFullBleed && SpControlData?.Position != null && SpControlData.Position.SectionFactor == 0)
+            {
+                SupportsFullBleed = true;
+            }
+
             // Store the server processed content as that's needed for full fidelity
             if (wpJObject.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
             {
@@ -878,6 +886,15 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Properties = parsedJson;
                 }
+            }
+
+            // Setting isFullWidth is the documented way to tell the SDK that a web part can be hosted in a one
+            // column full width section, so honor it here as well and not only when reading a page
+            if (Properties.ValueKind == JsonValueKind.Object &&
+                Properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth) &&
+                isFullWidth.ValueKind == JsonValueKind.True)
+            {
+                SupportsFullBleed = true;
             }
 
             if (wpConfigRoot.TryGetProperty("dataVersion", out JsonElement dataVersion))

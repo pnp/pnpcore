@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -3631,6 +3632,87 @@ namespace PnP.Core.Test.SharePoint
             string input = "data-config-json=\\\"{\\\"key\\\":\\\"value\\\"}\\\"";
             string result = CallEscapeJsonValues(input);
             Assert.AreEqual(input, result);
+        }
+        #endregion
+
+        #region Full width sections
+        // A custom web part declares full bleed support in its manifest, but the manifest is not part of the page
+        // markup. These offline tests cover the two other ways such a web part can be recognized as full bleed
+        // capable, both needed to update a custom web part living in a one column full width section.
+
+        [TestMethod]
+        public async Task IsFullWidthPropertyMakesAWebPartFullBleedCapable()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+
+                var webPart = page.NewWebPart() as PageWebPart;
+                webPart.WebPartId = customWebPartId;
+                webPart.PropertiesJson = "{\"isFullWidth\": true}";
+
+                Assert.IsTrue(webPart.SupportsFullBleed);
+
+                page.AddControl(webPart, page.Sections[0]);
+
+                // Throws when the isFullWidth property is not honored
+                Assert.IsTrue(webPart.ToHtml(1).Contains(customWebPartId));
+            }
+        }
+
+        [TestMethod]
+        public async Task WebPartLoadedFromAFullWidthSectionStaysFullBleedCapable()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                LoadFromHtml(page, FullWidthSectionPageHtml());
+
+                var webPart = page.Controls.Cast<PageWebPart>().Single();
+                Assert.AreEqual(CanvasSectionTemplate.OneColumnFullWidth, webPart.Section.Type);
+                Assert.IsTrue(webPart.SupportsFullBleed);
+
+                // Throws when a web part SharePoint stored in a full width section cannot be written back
+                Assert.IsTrue(webPart.ToHtml(1).Contains(customWebPartId));
+            }
+        }
+
+        private const string customWebPartId = "7f1fb168-1990-4bbc-b283-8386d64d1878";
+
+        private static void LoadFromHtml(Page page, string html)
+        {
+            var method = typeof(Page).GetMethod("LoadFromHtml", BindingFlags.NonPublic | BindingFlags.Instance);
+            method.Invoke(page, new object[] { html, null });
+        }
+
+        private static string FullWidthSectionPageHtml()
+        {
+            string controlData = JsonSerializer.Serialize(new
+            {
+                controlType = 3,
+                id = "d1a2f0bb-2b0f-4a29-9b12-64d1e0f3b7c5",
+                webPartId = customWebPartId,
+                // Section factor 0 is how SharePoint persists a one column full width section
+                position = new { zoneIndex = 1, sectionIndex = 1, sectionFactor = 0, controlIndex = 1 }
+            });
+
+            string webPartData = JsonSerializer.Serialize(new
+            {
+                id = customWebPartId,
+                instanceId = "d1a2f0bb-2b0f-4a29-9b12-64d1e0f3b7c5",
+                title = "Custom full bleed web part",
+                description = "",
+                dataVersion = "1.0",
+                properties = new { someProperty = "someValue" }
+            });
+
+            return $"<div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" " +
+                   $"data-sp-controldata=\"{WebUtility.HtmlEncode(controlData)}\">" +
+                   $"<div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.0\" " +
+                   $"data-sp-webpartdata=\"{WebUtility.HtmlEncode(webPartData)}\">" +
+                   $"<div data-sp-componentid=\"\">{customWebPartId}</div>" +
+                   $"<div data-sp-htmlproperties=\"\"></div></div></div>";
         }
         #endregion
 
