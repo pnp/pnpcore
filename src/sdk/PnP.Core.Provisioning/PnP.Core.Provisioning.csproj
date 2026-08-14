@@ -1,0 +1,158 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<RootNamespace>PnP.Core.Provisioning</RootNamespace>
+		<AssemblyName>PnP.Core.Provisioning</AssemblyName>
+		<Version>1.17.0</Version>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Copyright>PnP 2025</Copyright>
+		<Company>PnP</Company>
+		<Authors>PnP</Authors>
+		<Description>This library adds the PnP Provisioning Engine to PnP Core SDK</Description>
+		<PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<!-- Generate symbol packages (.snupkg) -->
+		<!-- You must publish both packages, the package that contains the dll (.nupkg) and the one that contains the symbols (.snupkg) -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<Deterministic>true</Deterministic>
+		<Configurations>Debug;Release</Configurations>
+		<PackageIcon>nugeticon.png</PackageIcon>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
+		<!--
+		  CS1591 = missing XML doc comment on a publicly visible member.
+
+		  PnP.Core and PnP.Core.Admin are fully documented and do not need this. The provisioning
+		  engine is ported wholesale from PnP.Framework, which suppresses CS1591 in its own csproj,
+		  so a large part of the ported public surface has never carried doc comments - roughly 640
+		  members at the end of the model port. Writing those by hand mid-port would bury the actual
+		  migration diff in unrelated churn.
+
+		  Documenting the public surface is tracked as a migration phase 10 task; remove this
+		  suppression then. New code written for this project should still be documented - the
+		  suppression is a concession to the ported code, not a licence for it.
+		-->
+		<NoWarn>CS1591</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile>obj\Debug\PnP.Core.Provisioning.xml</DocumentationFile>
+		<InformationalVersion>Nightly</InformationalVersion>
+		<!-- Uncomment if you build using GitHub Actions -->
+		<!-- https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->
+		<ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>obj\Debug\PnP.Core.Provisioning.xml</DocumentationFile>
+		<ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.0-*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+		<!--
+		  Portable.Xaml backs the .pnp OpenXML package manifest, which is stored as XAML
+		  (Connectors\OpenXML\PnPPackage.cs). Carried over from PnP.Framework, which pins the same
+		  version. Only the .pnp package format needs it.
+		-->
+		<PackageReference Include="Portable.Xaml" Version="0.26.0" />
+	</ItemGroup>
+
+	<!-- System.IO.Packaging is required by the OpenXML (.pnp) template package connector, see Connectors\OpenXML.
+	     Pinned per target framework, matching how PnP.Core pins Microsoft.Extensions.* and how PnP.Framework
+	     pins this same package. -->
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="System.IO.Packaging" Version="4.7.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+		<PackageReference Include="System.IO.Packaging" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+		<PackageReference Include="System.IO.Packaging" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
+		<PackageReference Include="System.IO.Packaging" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="nugeticon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+		<ProjectReference Include="..\PnP.Core.Admin\PnP.Core.Admin.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--
+		  The provisioning XML schemas ship as embedded resources: each XMLPnPSchemaV*Serializer loads its
+		  own .xsd by manifest resource name to validate templates. The resource name is derived from the
+		  root namespace plus the folder path, e.g.
+		    PnP.Core.Provisioning.Providers.Xml.ProvisioningSchema-2022-09.xsd
+		  so moving these files means updating the corresponding serializer.
+
+		  The matching .cs files are generated from these schemas with the .NET Framework xsd tool:
+		    xsd.exe ProvisioningSchema-2022-09.xsd /c /l:CS /n:PnP.Core.Provisioning.Providers.Xml.V202209
+		  See Providers\Xml\readme.md and migration doc 04-schema-and-serializers.md.
+		-->
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2019-03.xsd" />
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2019-09.xsd" />
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2020-02.xsd" />
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2021-03.xsd" />
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2022-09.xsd" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--
+		  The out-of-the-box site templates, one per web template plus configuration. BaseTemplateManager
+		  loads these by manifest resource name to work out what a freshly created site of the same kind
+		  looks like, so extraction can report only the differences.
+
+		  Only the SPO set ships. PnP Framework also had _2010/_2013/_2016/_2019 prefixes in its resource
+		  naming, but never any files behind them - see BaseTemplates\BaseTemplateManager.cs.
+
+		  These are ~4.3 MB of XML. That cost exists in PnP Framework today too; whether to keep carrying
+		  it in the package is open question Q3 in the migration docs.
+		-->
+		<EmbeddedResource Include="BaseTemplates\SPO\*.xml" />
+		<EmbeddedResource Include="BaseTemplates\Common\*.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="PnPCoreProvisioningResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>PnPCoreProvisioningResources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="PnPCoreProvisioningResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>PnPCoreProvisioningResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>
