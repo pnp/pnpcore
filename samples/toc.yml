@@ -17,6 +17,8 @@
     href: Demo.Console.Minimal/readme.md
   - name: Console App
     href: Demo.Console/README.md
+  - name: Provisioning App
+    href: Demo.Console.Provisioning/README.md
   - name: Persistent token cache demo
     href: Demo.PersistentTokenCache/README.md
   - name: Raspberry Pi
