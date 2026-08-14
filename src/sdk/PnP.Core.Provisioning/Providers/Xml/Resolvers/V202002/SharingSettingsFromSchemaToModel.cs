@@ -1,0 +1,42 @@
+﻿using PnP.Core.Provisioning.Utilities;
+using System;
+using System.Collections.Generic;
+
+namespace PnP.Core.Provisioning.Providers.Xml.Resolvers.V202002
+{
+    /// <summary>
+    /// Type resolver for SharingSettings from Schema to Model
+    /// </summary>
+    internal class SharingSettingsFromSchemaToModel : ITypeResolver
+    {
+        public string Name => this.GetType().Name;
+        public bool CustomCollectionResolver => false;
+
+
+        public object Resolve(object source, Dictionary<string, IResolver> resolvers = null, bool recursive = false)
+        {
+            var settings = source.GetPublicInstancePropertyValue("SharingSettings");
+
+            if (null != settings)
+            {
+                Model.SharingSettings result = new Model.SharingSettings();
+                PnPObjectsMapper.MapProperties(settings, result, resolvers, recursive);
+
+                var allowedDomainList = (String)settings.GetPublicInstancePropertyValue("AllowedDomainList");
+                if (!String.IsNullOrEmpty(allowedDomainList))
+                {
+                    result.AllowedDomainList.AddRange(allowedDomainList.Split(','));
+                }
+                var blockedDomainList = (String)settings.GetPublicInstancePropertyValue("BlockedDomainList");
+                if (!String.IsNullOrEmpty(blockedDomainList))
+                {
+                    result.BlockedDomainList.AddRange(blockedDomainList.Split(','));
+                }
+
+                return result;
+            }
+
+            return null;
+        }
+    }
+}
