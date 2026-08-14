@@ -34,3 +34,4 @@ CleanPackage "PnP.Core" 10 $ApiKey
 CleanPackage "PnP.Core.Auth" 10 $ApiKey
 CleanPackage "PnP.Core.Admin" 10 $ApiKey
 CleanPackage "PnP.Framework" 10 $ApiKey
+#CleanPackage "PnP.Core.Provisioning" 10 $ApiKey
