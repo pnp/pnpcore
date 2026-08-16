@@ -500,6 +500,13 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                     continue;
                 }
 
+                // Exporting a column the apply cannot write produces a template that fails on its
+                // own output. ReadOnlyField was already being read here and not used.
+                if (ObjectContentHandlerBase.FieldsToExclude.Contains(value.Key) || field.ReadOnlyField)
+                {
+                    continue;
+                }
+
                 if (queryConfig?.ViewFields != null && queryConfig.ViewFields.Count > 0
                     && !queryConfig.ViewFields.Contains(value.Key))
                 {
@@ -598,8 +605,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return displayName;
             }
 
-            int lookupId = Safe(() => user.LookupId);
-            return lookupId > 0 ? lookupId.ToString(CultureInfo.InvariantCulture) : string.Empty;
+            // Deliberately not the lookup id. A user id belongs to the site it was read from, so
+            // writing it into a template gives an item that names a different person on the target
+            // site, or nobody at all - and the caller drops an empty value, which is the honest
+            // outcome when there is no portable way to say who this was.
+            return string.Empty;
         }
 
         /// <summary>

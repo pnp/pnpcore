@@ -54,7 +54,13 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
                     continue;
                 }
 
-                if (field.InternalName.Equals("ID", StringComparison.OrdinalIgnoreCase))
+                // Only ID was skipped here, and ReadOnlyField was read from the server and then
+                // ignored. Anything SharePoint maintains itself fails the write - Attachments was
+                // the one that surfaced it, with "There was an exception while writing field
+                // Attachments", which sounds like a wrong internal name rather than a column that
+                // is not writable at all.
+                if (ObjectContentHandlerBase.FieldsToExclude.Contains(field.InternalName)
+                    || field.ReadOnlyField)
                 {
                     continue;
                 }
@@ -63,7 +69,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
 
                 try
                 {
-                    object coerced = await CoerceAsync(context, field, value).ConfigureAwait(false);
+                    object coerced = await CoerceAsync(context, field, value, reportWarning).ConfigureAwait(false);
                     if (coerced != NoValue)
                     {
                         result[field.InternalName] = coerced;
@@ -86,13 +92,14 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         /// </summary>
         private static readonly object NoValue = new object();
 
-        private static async Task<object> CoerceAsync(PnPContext context, IField field, string value)
+        private static async Task<object> CoerceAsync(PnPContext context, IField field, string value,
+            Action<string> reportWarning)
         {
             switch (field.TypeAsString)
             {
                 case "User":
                 case "UserMulti":
-                    return await CoerceUserAsync(context, field, value).ConfigureAwait(false);
+                    return await CoerceUserAsync(context, field, value, reportWarning).ConfigureAwait(false);
 
                 case "Lookup":
                 case "LookupMulti":
@@ -152,7 +159,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             }
         }
 
-        private static async Task<object> CoerceUserAsync(PnPContext context, IField field, string value)
+        private static async Task<object> CoerceUserAsync(PnPContext context, IField field, string value,
+            Action<string> reportWarning)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -165,7 +173,27 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             {
                 if (int.TryParse(part, NumberStyles.Integer, CultureInfo.InvariantCulture, out int userId))
                 {
-                    entries.Add(field.NewFieldUserValue(userId));
+                    // A bare id has to be turned into a principal before it can be written. PnP Core
+                    // refuses a user value carrying only a LookupId on Add and on the Update methods
+                    // - "You need to provide the user via it's principal" - because the REST payload
+                    // it builds needs the login name.
+                    //
+                    // The id is also site specific, so one taken from another site names a different
+                    // person here, or nobody. Resolving it is what makes that visible: a warning and
+                    // a missing value beats writing the wrong person's name into the item.
+                    ISharePointUser byId = await ResolveUserByIdAsync(context, userId).ConfigureAwait(false);
+
+                    if (byId == null)
+                    {
+                        string message = $"Column '{field.InternalName}' names user id {userId}, which this site " +
+                            "does not have - user ids belong to the site they came from. The value was skipped.";
+
+                        context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                        reportWarning?.Invoke(message);
+                        continue;
+                    }
+
+                    entries.Add(field.NewFieldUserValue(byId));
                     continue;
                 }
 
@@ -181,6 +209,24 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             return field.TypeAsString == "UserMulti"
                 ? (object)field.NewFieldValueCollection(entries)
                 : entries[0];
+        }
+
+        /// <summary>
+        /// The site user with this id, or null when the site has no such user.
+        /// </summary>
+        private static async Task<ISharePointUser> ResolveUserByIdAsync(PnPContext context, int userId)
+        {
+            try
+            {
+                return await context.Web.GetUserByIdAsync(userId).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                context.Logger?.LogDebug(ex, "{Source}: user id {UserId} could not be resolved on this site.",
+                    Constants.LOGGING_SOURCE, userId);
+
+                return null;
+            }
         }
 
         private static object CoerceLookup(IField field, string value)
