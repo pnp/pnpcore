@@ -75,6 +75,34 @@ one site and applying to another does not mean editing a settings file in betwee
 
 ---
 
+## Extracting from the command line
+
+```
+dotnet run -- extract <site-url> <output.xml> [options]
+```
+
+A template is **structure only** by default — columns, content types, lists, security,
+navigation, branding, but none of the content sitting in them. Content is the expensive part
+of an extract, so you opt into it:
+
+| Option | |
+|---|---|
+| `--items` | Include the items of **every** list on the site |
+| `--items=A,B` | Include the items of these lists only |
+| `--pages` | Include the site's client side pages and their contents |
+| `--hidden-lists` | Include hidden lists in the structure |
+
+```powershell
+# structure only
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml
+
+# structure, every list's items, and the pages
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items --pages
+
+# just the two lists you care about
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items="Tasks,Announcements"
+```
+
 ## Applying from the command line
 
 ```
@@ -129,6 +157,13 @@ Choose **1**, then paste a site url:
 ```
 Extract from which site? (full url, blank to cancel): https://contoso.sharepoint.com/sites/marketing
 Save as (file name, blank for an automatic one):
+
+Structure - columns, content types, lists, security - is always included.
+Include list items as well? (y/N): y
+  Which lists (comma separated, blank for all):
+  Document libraries are skipped - see the note after the extract.
+Include the site's pages and their contents? (y/N): y
+Include hidden lists? (y/N): n
 ```
 
 A browser window opens for sign in. Then:
