@@ -3,10 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Model.Configuration;
 using PnP.Core.Provisioning.ObjectHandlers;
 using PnP.Core.Provisioning.Providers.Xml;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -79,7 +81,11 @@ namespace Demo.Console.Provisioning
             {
                 contextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
 
-                if (command.IsApply)
+                if (command.IsExtract)
+                {
+                    exitCode = await RunExtractCommandAsync(command).ConfigureAwait(false);
+                }
+                else if (command.IsApply)
                 {
                     exitCode = await RunApplyCommandAsync(command).ConfigureAwait(false);
                 }
@@ -242,6 +248,58 @@ namespace Demo.Console.Provisioning
             }
         }
 
+        #region Non-interactive extract
+
+        private static async Task<int> RunExtractCommandAsync(CommandLine command)
+        {
+            var problems = new List<string>();
+
+            try
+            {
+                System.Console.WriteLine($"Extracting {command.SiteUrl}");
+                System.Console.WriteLine("Connecting - a sign in window may appear...");
+
+                using (PnPContext context = await contextFactory.CreateAsync(command.SiteUrl).ConfigureAwait(false))
+                {
+                    ExtractConfiguration configuration = BuildExtractConfiguration(problems);
+
+                    await ApplyContentOptionsAsync(context, configuration, command.IncludeItems,
+                        command.ItemLists, command.IncludePages, command.IncludeHiddenLists).ConfigureAwait(false);
+
+                    System.Console.WriteLine("Extracting...");
+
+                    ProvisioningTemplate template = await context.GetProvisioningManager()
+                        .GetTemplateAsync(configuration).ConfigureAwait(false);
+
+                    System.IO.Directory.CreateDirectory(
+                        Path.GetDirectoryName(Path.GetFullPath(command.TemplatePath)));
+
+                    using (Stream stream = XMLPnPSchemaFormatter.LatestFormatter.ToFormattedTemplate(template))
+                    using (var file = System.IO.File.Create(command.TemplatePath))
+                    {
+                        stream.CopyTo(file);
+                    }
+
+                    System.Console.WriteLine();
+                    System.Console.WriteLine($"Saved {Path.GetFullPath(command.TemplatePath)}");
+                    Summarise(template);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine();
+                System.Console.WriteLine("The extract failed:");
+                System.Console.WriteLine();
+                System.Console.WriteLine(ErrorReport.Describe(ex));
+
+                return 1;
+            }
+
+            return problems.Count == 0 ? 0 : 2;
+        }
+
+        #endregion
+
         #region Extract
 
         private static async Task ExtractAsync()
@@ -256,26 +314,39 @@ namespace Demo.Console.Provisioning
             System.Console.Write("Save as (file name, blank for an automatic one): ");
             string name = System.Console.ReadLine()?.Trim();
 
+            // A template is structure only unless asked otherwise, because content is the expensive
+            // part - every item of every list, and every page read and rewritten.
+            System.Console.WriteLine();
+            System.Console.WriteLine("Structure - columns, content types, lists, security - is always included.");
+
+            bool includeItems = AskYesNo("Include list items as well?");
+            var itemLists = new List<string>();
+
+            if (includeItems)
+            {
+                System.Console.Write("  Which lists (comma separated, blank for all): ");
+                string lists = System.Console.ReadLine()?.Trim();
+
+                if (!string.IsNullOrWhiteSpace(lists))
+                {
+                    itemLists.AddRange(lists.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0));
+                }
+
+                System.Console.WriteLine("  Document libraries are skipped - see the note after the extract.");
+            }
+
+            bool includePages = AskYesNo("Include the site's pages and their contents?");
+            bool includeHidden = AskYesNo("Include hidden lists?");
+
             System.Console.WriteLine();
             System.Console.WriteLine("Connecting - a sign in window may appear...");
 
             using (PnPContext context = await contextFactory.CreateAsync(siteUrl).ConfigureAwait(false))
             {
-                var configuration = new ExtractConfiguration
-                {
-                    // Reported as it goes. An extract of a real site is not fast, and a console that
-                    // prints nothing for two minutes looks like a console that has hung.
-                    MessagesDelegate = (message, type) =>
-                    {
-                        if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)
-                        {
-                            System.Console.WriteLine($"  [{type}] {message}");
-                        }
-                    },
+                ExtractConfiguration configuration = BuildExtractConfiguration(null);
 
-                    ProgressDelegate = (step, current, total) =>
-                        System.Console.WriteLine($"  {current}/{total}  {step}"),
-                };
+                await ApplyContentOptionsAsync(context, configuration, includeItems, itemLists,
+                    includePages, includeHidden).ConfigureAwait(false);
 
                 System.Console.WriteLine("Extracting...");
 
@@ -290,6 +361,88 @@ namespace Demo.Console.Provisioning
                 System.Console.WriteLine($"Saved {path}");
                 Summarise(template);
             }
+        }
+
+        private static ExtractConfiguration BuildExtractConfiguration(List<string> problems)
+        {
+            return new ExtractConfiguration
+            {
+                // Reported as it goes. An extract of a real site is not fast, and a console that
+                // prints nothing for two minutes looks like a console that has hung.
+                MessagesDelegate = (message, type) =>
+                {
+                    if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)
+                    {
+                        System.Console.WriteLine($"  [{type}] {message}");
+                        problems?.Add(message);
+                    }
+                },
+
+                ProgressDelegate = (step, current, total) =>
+                    System.Console.WriteLine($"  {current}/{total}  {step}"),
+            };
+        }
+
+        /// <summary>
+        /// Turns the "include content as well" answers into extract configuration.
+        /// </summary>
+        private static async Task ApplyContentOptionsAsync(PnPContext context, ExtractConfiguration configuration,
+            bool includeItems, List<string> itemLists, bool includePages, bool includeHiddenLists)
+        {
+            configuration.Lists.IncludeHiddenLists = includeHiddenLists;
+
+            // Pages are read by ObjectClientSidePageContents, which needs telling: without this the
+            // extract records the library and none of the pages in it.
+            configuration.Pages.IncludeAllClientSidePages = includePages;
+
+            if (!includeItems)
+            {
+                return;
+            }
+
+            // Items are opted into per list, so "all lists" means enumerating them. Document
+            // libraries are left out on purpose: ObjectListInstanceDataRows refuses them, and
+            // asking anyway would produce a warning per library and nothing else.
+            List<string> titles = itemLists != null && itemLists.Count > 0
+                ? itemLists
+                : await ListsWithItemsAsync(context, includeHiddenLists).ConfigureAwait(false);
+
+            foreach (string title in titles)
+            {
+                configuration.Lists.Lists.Add(new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
+                {
+                    Title = title,
+                    IncludeItems = true,
+                    Query = new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsQueryConfiguration
+                    {
+                        IncludeAttachments = true,
+                    },
+                });
+            }
+
+            System.Console.WriteLine($"Including the items of {titles.Count} list(s): {string.Join(", ", titles)}");
+        }
+
+        private static async Task<List<string>> ListsWithItemsAsync(PnPContext context, bool includeHidden)
+        {
+            await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                l => l.Title, l => l.Hidden, l => l.BaseType)).ConfigureAwait(false);
+
+            return context.Web.Lists.AsRequested()
+                .Where(l => l.BaseType != ListBaseType.DocumentLibrary)
+                .Where(l => includeHidden || !l.Hidden)
+                .Select(l => l.Title)
+                .OrderBy(t => t, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private static bool AskYesNo(string question)
+        {
+            System.Console.Write($"{question} (y/N): ");
+            string answer = System.Console.ReadLine()?.Trim();
+
+            return string.Equals(answer, "y", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(answer, "yes", StringComparison.OrdinalIgnoreCase);
         }
 
         private static string Save(ProvisioningTemplate template, string fileName)

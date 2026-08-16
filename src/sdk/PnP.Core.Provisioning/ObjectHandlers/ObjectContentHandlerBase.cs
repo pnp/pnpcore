@@ -23,8 +23,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// Fields that describe SharePoint's own bookkeeping rather than the file, and so are
         /// never written into a template.
         /// </summary>
-        private static readonly HashSet<string> FieldsToExclude = new HashSet<string>(StringComparer.Ordinal)
+        /// <summary>
+        /// Columns SharePoint maintains itself, which cannot be written back.
+        /// </summary>
+        internal static readonly HashSet<string> FieldsToExclude = new HashSet<string>(StringComparer.Ordinal)
         {
+            // Attachments has its own <Attachments> element in the template and is applied through
+            // it. Sent as a column value, ValidateUpdateListItem answers "There was an exception
+            // while writing field Attachments", which reads like a bad internal name and is not.
+            "Attachments",
             "ID", "GUID", "Author", "Editor", "FileLeafRef", "FileRef", "File_x0020_Type",
             "Modified_x0020_By", "Created_x0020_By", "Created", "Modified", "FileDirRef",
             "Last_x0020_Modified", "Created_x0020_Date", "File_x0020_Size", "FSObjType",
