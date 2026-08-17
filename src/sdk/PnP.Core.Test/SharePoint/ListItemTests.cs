@@ -107,6 +107,133 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #region Currency field negative value tests
+
+        /// <summary>
+        /// Regression test for reading Currency fields via LoadListDataAsStreamAsync (RenderListData).
+        /// Negative currency values (e.g. -1) must keep their sign and match the values returned by GetByIdAsync.
+        /// </summary>
+        [TestMethod]
+        public async Task CurrencyFieldNegativeValuesViaLoadListDataAsStreamTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("CurrencyFieldNegativeValuesViaLoadListDataAsStreamTest");
+
+                IList myList = null;
+
+                try
+                {
+                    myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add two currency fields using different currency locales
+                    string fldCurrency1 = "MyCurrency";
+                    await myList.Fields.AddCurrencyAsync(fldCurrency1, new FieldCurrencyOptions()
+                    {
+                        Group = "TEST GROUP",
+                        CurrencyLocaleId = 1033, // $123,456.00 (United States)
+                        AddToDefaultView = true,
+                    });
+
+                    string fldCurrency2 = "MyCurrency2";
+                    await myList.Fields.AddCurrencyAsync(fldCurrency2, new FieldCurrencyOptions()
+                    {
+                        Group = "TEST GROUP",
+                        CurrencyLocaleId = 1059, // 123,456.00 Br (Belarus)
+                        AddToDefaultView = true,
+                    });
+
+                    var negativeSmallItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "NegativeSmall" },
+                        { fldCurrency1, -1 },
+                        { fldCurrency2, -1 }
+                    });
+
+                    var negativeLargeItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "NegativeLarge" },
+                        { fldCurrency1, -1234.56 },
+                        { fldCurrency2, -1234.56 }
+                    });
+
+                    var positiveItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "Positive" },
+                        { fldCurrency1, 67.67 },
+                        { fldCurrency2, 67.67 }
+                    });
+
+                    var zeroItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "Zero" },
+                        { fldCurrency1, 0 },
+                        { fldCurrency2, 0 }
+                    });
+
+                    var negativeSmallViaGet = await myList.Items.GetByIdAsync(negativeSmallItem.Id);
+                    var negativeLargeViaGet = await myList.Items.GetByIdAsync(negativeLargeItem.Id);
+                    var positiveViaGet = await myList.Items.GetByIdAsync(positiveItem.Id);
+                    var zeroViaGet = await myList.Items.GetByIdAsync(zeroItem.Id);
+
+                    Assert.AreEqual(-1d, Convert.ToDouble(negativeSmallViaGet[fldCurrency1]));
+                    Assert.AreEqual(-1234.56, Convert.ToDouble(negativeLargeViaGet[fldCurrency1]));
+                    Assert.AreEqual(67.67, Convert.ToDouble(positiveViaGet[fldCurrency1]));
+                    Assert.AreEqual(0d, Convert.ToDouble(zeroViaGet[fldCurrency1]));
+
+                    Assert.AreEqual(-1d, Convert.ToDouble(negativeSmallViaGet[fldCurrency2]));
+                    Assert.AreEqual(-1234.56, Convert.ToDouble(negativeLargeViaGet[fldCurrency2]));
+                    Assert.AreEqual(67.67, Convert.ToDouble(positiveViaGet[fldCurrency2]));
+                    Assert.AreEqual(0d, Convert.ToDouble(zeroViaGet[fldCurrency2]));
+
+                    myList.Items.Clear();
+                    await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
+                    {
+                        RenderOptions = RenderListDataOptionsFlags.ListData,
+                        ViewXml = $"<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='{fldCurrency1}' /><FieldRef Name='{fldCurrency2}' /></ViewFields><RowLimit>10</RowLimit></View>"
+                    });
+
+                    var streamItems = myList.Items.AsRequested().ToList();
+                    Assert.AreEqual(4, streamItems.Count);
+
+                    var negativeSmallViaStream = streamItems.First(p => p.Id == negativeSmallItem.Id);
+                    var negativeLargeViaStream = streamItems.First(p => p.Id == negativeLargeItem.Id);
+                    var positiveViaStream = streamItems.First(p => p.Id == positiveItem.Id);
+                    var zeroViaStream = streamItems.First(p => p.Id == zeroItem.Id);
+
+                    Assert.AreEqual(-1d, Convert.ToDouble(negativeSmallViaStream[fldCurrency1]));
+                    Assert.AreEqual(-1234.56, Convert.ToDouble(negativeLargeViaStream[fldCurrency1]));
+                    Assert.AreEqual(67.67, Convert.ToDouble(positiveViaStream[fldCurrency1]));
+                    Assert.AreEqual(0d, Convert.ToDouble(zeroViaStream[fldCurrency1]));
+
+                    Assert.AreEqual(-1d, Convert.ToDouble(negativeSmallViaStream[fldCurrency2]));
+                    Assert.AreEqual(-1234.56, Convert.ToDouble(negativeLargeViaStream[fldCurrency2]));
+                    Assert.AreEqual(67.67, Convert.ToDouble(positiveViaStream[fldCurrency2]));
+                    Assert.AreEqual(0d, Convert.ToDouble(zeroViaStream[fldCurrency2]));
+                }
+                finally
+                {
+                    if (myList != null)
+                    {
+                        await myList.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         [TestMethod]
         public async Task AddListItemWithFolderTest()
         {
@@ -1495,7 +1622,7 @@ namespace PnP.Core.Test.SharePoint
                 #region Test Setup
 
                 // Create a new list
-                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -1537,7 +1664,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList2 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context2.Web.Lists, p => p.Title == listTitle);
                 await myList2.LoadAsync(p => p.Items);
 
                 var first2 = myList2.Items.AsRequested().First();
@@ -1552,7 +1679,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList3 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context3.Web.Lists, p => p.Title == listTitle);
                 await myList3.LoadAsync(p => p.Items);
 
                 var first3 = myList3.Items.AsRequested().First();
@@ -1569,7 +1696,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList4 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context4.Web.Lists, p => p.Title == listTitle);
                 await myList4.LoadAsync(p => p.Items);
 
                 var first4 = myList4.Items.AsRequested().First();
@@ -1585,7 +1712,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var myList5 = await context5.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList5 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context5.Web.Lists, p => p.Title == listTitle);
                 await myList5.LoadAsync(p => p.Items);
 
                 var first5 = myList5.Items.AsRequested().First();
@@ -1597,7 +1724,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(contextFinal.Web.Lists, p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -1614,7 +1741,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 #region Test Setup
 
-                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -1656,7 +1783,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList2 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context2.Web.Lists, p => p.Title == listTitle);
                 await myList2.LoadAsync(p => p.Items);
 
                 var first2 = myList2.Items.AsRequested().First();
@@ -1670,7 +1797,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList3 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context3.Web.Lists, p => p.Title == listTitle);
                 await myList3.LoadAsync(p => p.Items);
 
                 var first3 = myList3.Items.AsRequested().First();
@@ -1685,7 +1812,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList4 = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context4.Web.Lists, p => p.Title == listTitle);
                 await myList4.LoadAsync(p => p.Items);
 
                 var first4 = myList4.Items.AsRequested().First();
@@ -1698,7 +1825,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
-                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                var myList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(contextFinal.Web.Lists, p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -5600,7 +5727,7 @@ namespace PnP.Core.Test.SharePoint
                     list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
 
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                     var basePermissions = await item.GetUserEffectivePermissionsAsync(siteUser.UserPrincipalName);
 
@@ -5629,7 +5756,7 @@ namespace PnP.Core.Test.SharePoint
                     list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "This is an item" } });
 
-                    var siteUser = await context.Web.SiteUsers.FirstOrDefaultAsync(y => y.PrincipalType == Model.Security.PrincipalType.User);
+                    var siteUser = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.SiteUsers, y => y.PrincipalType == Model.Security.PrincipalType.User);
 
                     var hasPermissions = await item.CheckIfUserHasPermissionsAsync(siteUser.UserPrincipalName, PermissionKind.AddListItems);
 

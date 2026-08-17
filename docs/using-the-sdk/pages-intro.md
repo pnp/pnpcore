@@ -84,7 +84,6 @@ When you create a new page the default will be an **Article** page, but you can 
 - **Article page**: this is typical page you'd create using the SharePoint user interface
 - **Repost page**: this page is a re-posting of existing content where existing content can be a link to a resource on the internet or an other page in your SharePoint environment
 - **Home page**: this is a page created with as purpose to become the home page of the site, this page has no page header by design and has no page commenting
-- **Spaces page**: [SharePoint Spaces](https://www.exploresharepointspaces.com/) pages can host mixed reality content
 
 To pick another page type during creation specify the type as input of the [NewPageAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NewPageAsync_PnP_Core_Model_SharePoint_PageLayoutType_):
 
@@ -224,7 +223,7 @@ await page.SaveAsync("MyPage.aspx");
 A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties of a page, which is allowed via the `UpdateOverWriteVersion` methods.
 
 > [!Note]
-> The Azure AD application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
+> The Entra ID application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
 
 ```csharp
 // Load the page you want to update

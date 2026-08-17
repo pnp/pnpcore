@@ -620,16 +620,19 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SetChromeOptionsAsync(IChromeOptions chromeOptions)
         {
-            // Setting chrome options takes two calls, so batch them for performance reasons
             var batch = context.NewBatch();
-
             await BuildSetChromeOptionsRequests(chromeOptions, batch).ConfigureAwait(false);
-
-            // Execute the batch
             await context.ExecuteAsync(batch).ConfigureAwait(false);
 
-            // Update the chrome updates in the current web
-            ReflectChromeUpdatesInCurrentWeb(context, chromeOptions);
+            // PATCH _api/web (QuickLaunchEnabled) cannot be included in the same $batch as
+            // SetChromeOptions: SharePoint returns 403 when both operations target the same
+            // web resource in the same batch round-trip.
+            // Execute it as a separate interactive call after the batch succeeds.
+            if (chromeOptions.Navigation != null)
+            {
+                await (context.Web as Web).RawRequestAsync(
+                    BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH")).ConfigureAwait(false);
+            }
         }
 
         private async Task BuildSetChromeOptionsRequests(IChromeOptions chromeOptions, Batch batch)
@@ -637,16 +640,10 @@ namespace PnP.Core.Model.SharePoint
             // Update chrome options
             await (context.Web as Web).RawRequestBatchAsync(batch, BuildSetChromeOptionsApiCall(chromeOptions), HttpMethod.Post, "SetChromeOptions").ConfigureAwait(false);
 
-            if (chromeOptions.Navigation != null)
+            // Update the footer displayName
+            if (chromeOptions.Navigation != null && chromeOptions.Footer != null)
             {
-                // Update the navigation visibility
-                await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
-
-                // Update the footer displayName
-                if (chromeOptions.Footer != null)
-                {
-                    await BuildAndAddSaveMenuStateRequestAsync(chromeOptions.Footer as FooterOptions, null, batch).ConfigureAwait(false);
-                }
+                await BuildAndAddSaveMenuStateRequestAsync(chromeOptions.Footer as FooterOptions, null, batch).ConfigureAwait(false);
             }
 
             // Get notified when the batch is processed so that 

@@ -63,6 +63,11 @@ namespace PnP.Core.Model.SharePoint
         string DisplayName { get; set; }
 
         /// <summary>
+        /// HeadingLevel of the collapsible section. 2, 3, or 4 corresponding to h2, h3, and h4. Default is 2.
+        /// </summary>
+        int HeadingLevel { get; set; }
+
+        /// <summary>
         /// Sets the alignment of the collaps icon, left/right or not configured
         /// </summary>
         IconAlignment? IconAlignment { get; set; }

@@ -27,7 +27,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder folder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
             }
         }
@@ -38,7 +38,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder folder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
                 Assert.IsTrue(folder.Exists);
                 Assert.IsFalse(folder.IsWOPIEnabled);
@@ -210,7 +210,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
 
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
@@ -248,7 +248,7 @@ namespace PnP.Core.Test.SharePoint
                 IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST");
 
-                List<IFolder> folders = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders.ToListAsync();
+                List<IFolder> folders = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders).ConfigureAwait(false);
 
                 Assert.AreNotEqual(0, folders.Count);
 
@@ -270,7 +270,7 @@ namespace PnP.Core.Test.SharePoint
                 //IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
 
-                IFolder foundFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == "TEST_QUERY");
+                IFolder foundFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocsRootFolder.Folders, f => f.Name == "TEST_QUERY");
 
                 Assert.IsNotNull(foundFolder);
                 Assert.AreNotEqual(default, foundFolder.UniqueId);
@@ -606,7 +606,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(folderToDelete.Name == "sub1");
                 Assert.IsFalse(folderToDelete.IsPropertyAvailable(p => p.StorageMetrics));
 
-                var folderToLoadWithExpression = await parentFolder.EnsureFolderAsync("sub1/sub2", p => p.Name, p => p.StorageMetrics); 
+                var folderToLoadWithExpression = await parentFolder.EnsureFolderAsync("sub1/sub2", p => p.Name, p => p.StorageMetrics);
                 Assert.IsTrue(folderToLoadWithExpression != null);
                 Assert.IsTrue(folderToLoadWithExpression.Name == "sub2");
                 Assert.IsTrue(folderToLoadWithExpression.IsPropertyAvailable(p => p.StorageMetrics));
@@ -614,6 +614,30 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task EnsureListFolderIdempotentTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsNotNull(addedFolder);
+                Assert.IsTrue(addedFolder.Name == "sub2");
+
+                // Calling EnsureFolderAsync again for the same path must succeed and return the same folder
+                var ensuredFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsNotNull(ensuredFolder);
+                Assert.IsTrue(ensuredFolder.Name == "sub2");
+                Assert.AreEqual(addedFolder.UniqueId, ensuredFolder.UniqueId);
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                await folderToDelete.DeleteAsync();
+            }
+        }
+
         #endregion
 
         [TestMethod]
@@ -683,8 +707,8 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders
-                                        .FirstOrDefaultAsync(ct => ct.Name == "TO DELETE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders,
+                                        ct => ct.Name == "TO DELETE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
             }
@@ -834,7 +858,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
-                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundCopiedFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocsRootFolder.Folders, f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
 
@@ -866,7 +890,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
-                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundCopiedFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocsRootFolder.Folders, f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
 
@@ -1035,7 +1059,7 @@ namespace PnP.Core.Test.SharePoint
                 });
 
                 IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
-                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundMovedFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocsRootFolder.Folders, f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
 
@@ -1066,7 +1090,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
-                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundMovedFolder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(sharedDocsRootFolder.Folders, f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
 
@@ -1093,9 +1117,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1120,9 +1142,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1149,9 +1169,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(Guid.Empty, batchRecycle.Result.Value);
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1176,9 +1194,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1202,9 +1218,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync(batch);
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1228,9 +1242,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync(batch);
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder
-                    .Folders
-                    .FirstOrDefaultAsync(ct => ct.Name == "TO RECYCLE FOLDER");
+                IFolder folderToFind = await QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders, ct => ct.Name == "TO RECYCLE FOLDER").ConfigureAwait(false);
 
                 Assert.IsNull(folderToFind);
 
@@ -1250,7 +1262,7 @@ namespace PnP.Core.Test.SharePoint
                 var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
                 Assert.IsNotNull(addedFolder);
                 Assert.AreEqual("sub2", addedFolder.Name);
-                
+
                 IFolder folder1ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(addedFolder.ServerRelativeUrl);
                 Guid recycleBin1Id = folder1ToDelete.Recycle();
                 Assert.AreNotEqual(Guid.Empty, recycleBin1Id);
@@ -1264,13 +1276,13 @@ namespace PnP.Core.Test.SharePoint
                     var error = e.Error as SharePointRestError;
                     Assert.AreEqual(404, error.HttpResponseCode);
                 }
-                
+
                 await CleanupMockFolderFromRecycleBin(context, recycleBin1Id);
-                
+
                 var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
                 Assert.IsNotNull(folderToDelete);
                 Assert.AreEqual("sub1", folderToDelete.Name);
-                
+
                 IFolder folder2ToDelete = await context.Web.GetFolderByServerRelativeUrlAsync(folderToDelete.ServerRelativeUrl);
                 Guid recycleBin2Id = folder2ToDelete.Recycle();
                 Assert.AreNotEqual(Guid.Empty, recycleBin2Id);
@@ -1284,11 +1296,11 @@ namespace PnP.Core.Test.SharePoint
                     var error = e.Error as SharePointRestError;
                     Assert.AreEqual(404, error.HttpResponseCode);
                 }
-                
+
                 await CleanupMockFolderFromRecycleBin(context, recycleBin2Id);
             }
         }
-        
+
         #endregion
 
         [TestMethod]
@@ -1298,7 +1310,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                var folder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 var changes = await folder.GetChangesAsync(new ChangeQueryOptions(true, true)
                 {
                     FetchLimit = 5,
@@ -1346,7 +1358,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get folder from web
-                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder folder = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Folders, f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
 
                 (string driveId, string driveItemId) = await (folder as Folder).GetGraphIdsAsync();
@@ -1404,8 +1416,73 @@ namespace PnP.Core.Test.SharePoint
         private async Task CleanupMockFolderFromRecycleBin(PnPContext context, Guid recycleBinId,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
-            IRecycleBinItem recycleBinItem = await context.Site.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinId);
+            IRecycleBinItem recycleBinItem = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Site.RecycleBin, item => item.Id == recycleBinId);
             await recycleBinItem.DeleteAsync();
+        }
+
+        #endregion
+
+        #region Issue 1722 - GetFolder* methods throw wrong error
+
+        [TestMethod]
+        [ExpectedException(typeof(SharePointRestServiceException))]
+        public async Task GetFolderByServerRelativeUrl_NonExistentFolder_ShouldThrowCorrectException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                string nonExistentFolderUrl = $"{context.Uri.PathAndQuery}/NonExistentFolder12345";
+
+                try
+                {
+                    // This should throw an exception because the folder doesn't exist
+                    var folder = await context.Web.GetFolderByServerRelativeUrlAsync(nonExistentFolderUrl);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception Type: {ex.GetType().FullName}");
+                    Console.WriteLine($"Exception Message: {ex.Message}");
+                    if (ex is PnPException pnpEx && pnpEx.Error is SharePointRestError spError)
+                    {
+                        Console.WriteLine($"Error Message: {spError.Message}");
+                        Console.WriteLine($"Error Code: {spError.Code}");
+                        Console.WriteLine($"Server Error Code: {spError.ServerErrorCode}");
+                        Console.WriteLine($"HTTP Response Code: {spError.HttpResponseCode}");
+                    }
+                    throw;
+                }
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SharePointRestServiceException))]
+        public async Task GetFolderById_NonExistentFolder_ShouldThrowCorrectException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                // Use a random GUID that doesn't exist
+                Guid nonExistentFolderId = Guid.NewGuid();
+
+                try
+                {
+                    // This should throw an exception because the folder doesn't exist
+                    var folder = await context.Web.GetFolderByIdAsync(nonExistentFolderId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception Type: {ex.GetType().FullName}");
+                    Console.WriteLine($"Exception Message: {ex.Message}");
+                    if (ex is PnPException pnpEx && pnpEx.Error is SharePointRestError spError)
+                    {
+                        Console.WriteLine($"Error Message: {spError.Message}");
+                        Console.WriteLine($"Error Code: {spError.Code}");
+                        Console.WriteLine($"Server Error Code: {spError.ServerErrorCode}");
+                        Console.WriteLine($"HTTP Response Code: {spError.HttpResponseCode}");
+                    }
+                    throw;
+                }
+            }
         }
 
         #endregion

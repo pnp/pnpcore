@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
@@ -420,7 +420,7 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.Where(
+                var foundLists = await System.Linq.Queryable.Where(context.Web.Lists,
                             p => p.TemplateType == ListTemplateType.GenericList)
                         .QueryProperties(
                             p => p.Title, p => p.TemplateType,
@@ -456,8 +456,7 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var result = await context.Web.Lists
-                    .Where(p => p.TemplateType == ListTemplateType.GenericList)
+                var result = await System.Linq.Queryable.Where(context.Web.Lists, p => p.TemplateType == ListTemplateType.GenericList)
                     .QueryProperties(
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(
@@ -492,7 +491,7 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.GenericList).ToArrayAsync();
+                var foundLists = await System.Linq.Queryable.Where(context.Web.Lists, p => p.TemplateType == ListTemplateType.GenericList).ToArrayAsync();
 
                 Assert.IsTrue(foundLists.Length > 0);
 
@@ -649,7 +648,7 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == "Site Assets");
+                var foundList = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.Lists, p => p.Title == "Site Assets");
 
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(foundList.Title == "Site Assets");

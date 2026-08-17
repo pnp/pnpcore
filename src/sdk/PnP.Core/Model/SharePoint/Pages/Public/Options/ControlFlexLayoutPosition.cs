@@ -12,22 +12,22 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the X-coordinate position of the object.
         /// </summary>
-        public int XPos { get; set; }
+        public double XPos { get; set; }
         
         /// <summary>
         /// Gets or sets the vertical position of an object.
         /// </summary>
-        public int YPos { get; set; }
+        public double YPos { get; set; }
         
         /// <summary>
         /// Gets or sets the width of the object, typically measured in pixels.
         /// </summary>
-        public int Width { get; set; }
+        public double Width { get; set; }
         
         /// <summary>
         /// Gets or sets the height of the object.
         /// </summary>
-        public int Height { get; set; }
+        public double Height { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the web part group associated with the entity.

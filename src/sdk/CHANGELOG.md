@@ -6,7 +6,35 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## 1.18 - Unreleased
+
+### Added 
+
+- Added CSOM-based GetItems support #1802 [Jeppe Mastrup Spanggaard - jeppesc11]
+
+### Changed 
+
+- Fixed negative currency values returned by LoadListDataAsStreamAsync #1818 [mateusz-sintel - mateusz-sintel]
+- Fixed MC791596 banner migration incorrectly adding a banner header on pages with no header #1758 [nicolaor - Rene Nicolao]
+- Updated Demo.WPF sample #1829 [gszdev - gszdev]
+
+## [1.17]
+
+### Added 
+
+### Changed 
+
+- Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
+- Updated setup test env script #1769 [adam-it - Adam Wójcik]
+- Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
+- Fixed folder race condition #1770 [aramB - Aram B]
+- Added support for new sovereign cloud environments #1727 [gautamdsheth - Gautam Sheth]
+- Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
+- Improved repo security #1785 [adam-it - Adam Wójcik]
+- Separated QuickLaunchEnabled call from batch in branding manager #1789 [patrikhellgren - Patrik Hellgren]
+- Fixed news page thumbnail that does not appear in the news web parts #1782 [PedroMordeP - Pedro Monte]
+
+## [1.16]
 
 ### Added
 
@@ -15,6 +43,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page API: support for flexible sections! #1682 [czullu - Christian Zuellig]
 - Page API: fix to retain empty, collapsible sections #1682 [czullu - Christian Zuellig]
 - Page API: fix to retain NoImage setting on custom page header #1682 [czullu - Christian Zuellig]
+- Page API: support for setting the header size of collapsible sections #1687 [shunsaker - Shayne Hunsaker]
+- Support for setting and getting the DisableCommenting property of a list #1695 [RafalUrbanski - Rafal Urbanski]
 
 ### Changed
 
@@ -25,6 +55,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page API: Escape JSON from the Property value #1674 [PedroMordeP - Pedro Monte]
 - Fix #1656: IList.ReIndexAsync() has no effect. #1677 [lucmoco - Luc Mo Costabella]
 - Fix: Detecting disabled users added to ValidateUsers and ValidateAndEnsureUsersAsync #1671 [kkazala - Kinga]
+- Page API fix: changed flexible layout position from int to double #1688 [czullu - Christian Zuellig]
+- Page API fix: Load Page Type correctly to fix page header removal #1692 [A-Murchison - Adam Murchison]
+- Admin library: Apps and service principals that were used with sites.selected scopes/roles were wrongly flagged as ACS principals
+- Fix File.Approve method to work properly. It was doing the checkin operation instead. #1712 [gautamdsheth - Gautam Sheth]
+- Fixed folder not found errors to DirectoryNotFoundException. #1725 [ejazhussain - Ejaz Hussain]
+- Updated console minimal sample for latest .Net and PnP.Core version. #1713 [adam-it - Adam Wójcik]
+- Improved stability when handling guids in GetValidLegacyServicePrincipalAppIdsAsync [jansenbe - Bert Jansen]
+- Added a attribute name for the internal ID property. #1761 [adam-it - Adam Wójcik]
 
 ## [1.15]
 

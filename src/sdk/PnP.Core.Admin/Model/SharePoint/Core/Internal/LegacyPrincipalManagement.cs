@@ -16,6 +16,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         private static readonly int MaxServerRelativeUrls = 500;
         private static readonly int MaxPermissions = 500;
         private static readonly int MaxAppIds = 500;
+        private static readonly Guid graphAppId = Guid.Parse("00000003-0000-0000-c000-000000000000");
+        private static readonly Guid spoAppId = Guid.Parse("00000003-0000-0ff1-ce00-000000000000");
 
         internal async static Task<List<SharePointAddIn>> GetSharePointAddInsAsync(PnPContext context, bool includeSubsites, VanityUrlOptions vanityUrlOptions, bool loadLegacyPrincipalData = true)
         {
@@ -178,7 +180,11 @@ namespace PnP.Core.Admin.Model.SharePoint
                     string appIdToAdd = AppIdFromAppIdentifier(app.AppIdentifier);
                     if (appIdToAdd != null && !appIds.Contains(appIdToAdd))
                     {
-                        appIds.Add(appIdToAdd);
+                        // Only add appids that are valid GUIDs as these are used to build the payload for the GetACSServicePrincipals call which only accepts GUIDs
+                        if (Guid.TryParse(appIdToAdd, out Guid appIdGuid))
+                        {
+                            appIds.Add(appIdToAdd);
+                        }
                     }
                 }
 
@@ -224,7 +230,15 @@ namespace PnP.Core.Admin.Model.SharePoint
                                 // The principal was not retrieved as part of the legacy service principals, this can happen because
                                 // since end of 2024 we're creating ACS principals as regular Entra app which do not have the
                                 // legacyServicePrincipal type set to Legacy
-                                await UpdateACSPrincipalDataWithEntraAppPropertiesAsync(context, tempACSPrincipal).ConfigureAwait(false);
+                                //
+                                // This method also checks for principals that show up due to sites.selected usage, these we want to skip
+                                //
+                                // Also any principal which is a servicePrincipal and not of the type Legacy is skipped, this will ensure that
+                                // Managed Identity which are granted sites.selected permissions are not showing up here
+                                if (await UpdateACSPrincipalDataWithEntraAppPropertiesAsync(context, tempACSPrincipal).ConfigureAwait(false))
+                                {
+                                    continue;
+                                }
                             }
 
                             if (acsPrincipal.TryGetProperty("appDomains", out JsonElement appDomains) && appDomains.ValueKind == JsonValueKind.Array)
@@ -334,15 +348,64 @@ namespace PnP.Core.Admin.Model.SharePoint
             return acsPrincipals;
         }
 
-        private static async Task UpdateACSPrincipalDataWithEntraAppPropertiesAsync(PnPContext context, ACSPrincipal tempACSPrincipal)
+        private static async Task<bool> UpdateACSPrincipalDataWithEntraAppPropertiesAsync(PnPContext context, ACSPrincipal tempACSPrincipal)
         {
-            var response = await (context.Web as Web).RawRequestAsync(new ApiCall(string.Format("applications?$filter=appid eq '{0}'&$select=id,appId,passwordCredentials,displayName", tempACSPrincipal.AppId), ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+            var response = await (context.Web as Web).RawRequestAsync(new ApiCall(string.Format("applications?$filter=appid eq '{0}'&$select=id,appId,passwordCredentials,displayName,requiredResourceAccess", tempACSPrincipal.AppId), ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
             var jsonResponse2 = JsonSerializer.Deserialize<JsonElement>(response.Json);
             if (jsonResponse2.TryGetProperty("value", out JsonElement appArray) && appArray.ValueKind == JsonValueKind.Array)
             {
                 foreach (var acsApp in appArray.EnumerateArray())
                 {
+                    // Check if the app has sites.selected or xx.selectedoperations.selected permission scopes or roles ==> if so, this app is wrongly showing up due to it's being used
+                    // with sites.selected and therefore should be ignored
+                    if (acsApp.TryGetProperty("requiredResourceAccess", out JsonElement requiredResourceAccess) && requiredResourceAccess.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var resourceAccesses in requiredResourceAccess.EnumerateArray())
+                        {
+                            // Check if the resourceAccess has the Microsoft Graph sites.selected or xx.selectedoperations.selected permission scopes
+                            if (resourceAccesses.TryGetProperty("resourceAppId", out JsonElement resourceAppId) && resourceAppId.GetGuid() == graphAppId)
+                            {
+                                if (resourceAccesses.TryGetProperty("resourceAccess", out JsonElement resourceAccess) && resourceAccess.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (var access in resourceAccess.EnumerateArray())
+                                    {
+                                        if (access.TryGetProperty("id", out JsonElement accessId))
+                                        {
+                                            // sites.selected: f89c84ef-20d0-4b54-87e9-02e856d66d53 (delegated), 883ea226-0bf2-4a8f-9f9d-92c9162a727d (application)
+                                            if (accessId.GetGuid() == Guid.Parse("f89c84ef-20d0-4b54-87e9-02e856d66d53") ||
+                                                accessId.GetGuid() == Guid.Parse("883ea226-0bf2-4a8f-9f9d-92c9162a727d"))
+                                            {
+
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Check if the resourceAccess has the SharePoint Online sites.selected permission scopes
+                            if (resourceAccesses.TryGetProperty("resourceAppId", out JsonElement resourceAppId2) && resourceAppId2.GetGuid() == spoAppId)
+                            {
+                                if (resourceAccesses.TryGetProperty("resourceAccess", out JsonElement resourceAccess2) && resourceAccess2.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (var access in resourceAccess2.EnumerateArray())
+                                    {
+                                        if (access.TryGetProperty("id", out JsonElement accessId))
+                                        {
+                                            // sites.selected: 9ac4404a-0323-446d-b334-b4ae4d18b38a (delegated), 20d37865-089c-4dee-8c41-6967602d4ac8 (application)
+                                            if (accessId.GetGuid() == Guid.Parse("9ac4404a-0323-446d-b334-b4ae4d18b38a") ||
+                                                accessId.GetGuid() == Guid.Parse("20d37865-089c-4dee-8c41-6967602d4ac8"))
+                                            {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     if (acsApp.TryGetProperty("passwordCredentials", out JsonElement keyCredentials) && keyCredentials.ValueKind == JsonValueKind.Array)
                     {
                         // Only include service principals which are still valid
@@ -351,12 +414,33 @@ namespace PnP.Core.Admin.Model.SharePoint
                             if (keyCredential.TryGetProperty("endDateTime", out JsonElement endDateTime))
                             {
                                 tempACSPrincipal.ValidUntil = endDateTime.GetDateTime();
-                                return;
+                                return false;
                             }
                         }
                     }
                 }
             }
+
+            // Check is this is a Managed Identity service principal, these are never ACS principals
+            response = await (context.Web as Web).RawRequestAsync(new ApiCall(string.Format("serviceprincipals?$filter=appid eq '{0}'&$select=id,appId,servicePrincipalType", tempACSPrincipal.AppId), ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+
+            var jsonResponse3 = JsonSerializer.Deserialize<JsonElement>(response.Json);
+            if (jsonResponse3.TryGetProperty("value", out JsonElement spnArray) && spnArray.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var spn in spnArray.EnumerateArray())
+                {
+                    if (spn.TryGetProperty("servicePrincipalType", out JsonElement servicePrincipalType))
+                    {
+                        // Only legacy service principals can be considered ACS principals
+                        if (!servicePrincipalType.GetString().Equals("Legacy", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         internal static async Task<List<ILegacyServicePrincipal>> GetValidLegacyServicePrincipalAppIdsAsync(PnPContext context, bool includeExpiredPrincipals, VanityUrlOptions vanityUrlOptions)
@@ -401,10 +485,16 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                                 if (includeExpiredPrincipals || endDate >= DateTime.Now.ToUniversalTime())
                                 {
+                                    // Skip if the appId is not a valid GUID
+                                    if (!Guid.TryParse(legacyServicePrincipal.GetProperty("appId").GetString(), out Guid appIdGuid))
+                                    {
+                                        break;
+                                    }
+
                                     servicePrincipals.Add(new LegacyServicePrincipal
                                     {
-                                        AppId = legacyServicePrincipal.GetProperty("appId").GetGuid(),
-                                        AppIdentifier = $"i:0i.t|ms.sp.ext|{legacyServicePrincipal.GetProperty("appId").GetGuid()}@{tenantId}",
+                                        AppId = appIdGuid,
+                                        AppIdentifier = $"i:0i.t|ms.sp.ext|{appIdGuid}@{tenantId}",
                                         Name = legacyServicePrincipal.GetProperty("displayName").GetString(),
                                         ValidUntil = endDate
                                     });
@@ -447,11 +537,16 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         foreach (var addInPrincipal in addInPrincipals.EnumerateArray())
                         {
-                            Guid appId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString()));
+                            string appIdString = AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString());
 
-                            if (appId == Guid.Parse("00000003-0000-0ff1-ce00-000000000000"))
+                            // Skip if the appId is not a valid GUID
+                            if (!Guid.TryParse(appIdString, out Guid appId))
                             {
+                                continue;
+                            }
 
+                            if (appId == spoAppId)
+                            {
                                // Skip the SharePoint Online principal
                                 continue;
                             }
@@ -464,7 +559,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                             servicePrincipals.Add(new LegacyServicePrincipal()
                             {
-                                AppId = Guid.Parse(AppIdFromAppIdentifier(addInPrincipal.GetProperty("appIdentifier").GetString())),
+                                AppId = appId,
                                 AppIdentifier = addInPrincipal.GetProperty("appIdentifier").GetString(),
                                 Name = addInPrincipal.GetProperty("title").GetString(),
                                 // We don't know 

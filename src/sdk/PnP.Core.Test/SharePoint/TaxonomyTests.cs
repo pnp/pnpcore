@@ -136,7 +136,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.TermStore.Groups.AddAsync(newGroupName, "pnp group description");
 
                 // Get group via Linq filter
-                var addedGroup = await context.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefaultAsync();
+                var addedGroup = await System.Linq.Queryable.Where(context.TermStore.Groups, p => p.Name == newGroupName).FirstOrDefaultAsync();
                 Assert.IsTrue(addedGroup.Name == newGroupName);
 
                 // Delete the created group
@@ -969,7 +969,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = await context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefaultAsync();
+                    var group2 = await System.Linq.Queryable.Where(context2.TermStore.Groups, p => p.Name == newGroupName).FirstOrDefaultAsync();
                     if (group2 != null)
                     {
                         var groupWithSets = await group2.GetAsync(p => p.Sets);
@@ -1052,7 +1052,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    var group2 = System.Linq.Queryable.Where(context2.TermStore.Groups, p => p.Name == newGroupName).FirstOrDefault();
                     if (group2 != null)
                     {
                         var groupWithSets = group2.Get(p => p.Sets);
@@ -1130,7 +1130,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    var group2 = System.Linq.Queryable.Where(context2.TermStore.Groups, p => p.Name == newGroupName).FirstOrDefault();
                     if (group2 != null)
                     {
                         var groupWithSets = group2.Get(p => p.Sets);
@@ -1230,7 +1230,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    var group2 = System.Linq.Queryable.Where(context2.TermStore.Groups, p => p.Name == newGroupName).FirstOrDefault();
                     if (group2 != null)
                     {
                         var groupWithSets = group2.Get(p => p.Sets);

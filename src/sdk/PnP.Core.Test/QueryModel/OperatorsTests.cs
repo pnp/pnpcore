@@ -13,8 +13,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Title eq 'title'";
 
-            var query = new ListItemCollection(null, null)
-                    .Where(i => i.Title == "title");
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title == "title");
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -25,8 +24,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Title ne 'title'";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Title != "title");
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Title != "title");
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -37,8 +35,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Number lt 0";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => (int)i.Values["Number"] < 0);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => (int)i.Values["Number"] < 0);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -49,8 +46,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Number gt 0";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => (int)i.Values["Number"] > 0);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => (int)i.Values["Number"] > 0);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -61,8 +57,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Number ge 0";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => (int)i.Values["Number"] >= 0);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => (int)i.Values["Number"] >= 0);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -73,8 +68,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=Number le 0";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => (int)i.Values["Number"] <= 0);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => (int)i.Values["Number"] <= 0);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual);
@@ -85,8 +79,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=(id eq 1 or Title eq 'title')";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Id == 1 || i.Title == "title");
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Id == 1 || i.Title == "title");
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual, true);
@@ -97,8 +90,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=(id eq 1 and Title eq 'title')";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Id == 1 && i.Title == "title");
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Id == 1 && i.Title == "title");
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual, true);
@@ -110,8 +102,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=((id eq 1 or Title eq 'title') or Number eq 0)";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual, true);
@@ -122,8 +113,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=(((id eq 1 or Title eq 'title') or Number eq 0) or Number2 eq 1)";
 
-            var query = new ListItemCollection(null, null)
-                .Where(i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0 || (int)i.Values["Number2"] == 1);
+            var query = System.Linq.Queryable.Where(new ListItemCollection(null, null), i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0 || (int)i.Values["Number2"] == 1);
 
             var actual = query.ToString();
             Assert.AreEqual(expected, actual, true);

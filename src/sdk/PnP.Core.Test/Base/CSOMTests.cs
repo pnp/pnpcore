@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -284,7 +284,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // update first 4 items
-                var firstItems = list.Items.Take(4).ToList();
+                var firstItems = System.Linq.Queryable.Take(list.Items, 4).ToList();
                 foreach (var item in firstItems)
                 {
                     item.Title = "Updated!";
@@ -295,7 +295,7 @@ namespace PnP.Core.Test.Base
                 // Execute the batch
                 await context.ExecuteAsync();
 
-                firstItems = list.Items.Take(4).ToList();
+                firstItems = System.Linq.Queryable.Take(list.Items, 4).ToList();
                 foreach (var item in firstItems)
                 {
                     Assert.AreEqual(item.Title, "Updated!");

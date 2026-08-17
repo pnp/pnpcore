@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -166,7 +166,7 @@ namespace PnP.Core.Test.Security
                 var currentUser = await context.Web.GetCurrentUserAsync();
 
                 // Get role definition to add
-                var roleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Full Control");
+                var roleDefinition = await PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(context.Web.RoleDefinitions, d => d.Name == "Full Control");
 
                 // Batching approach to break role inheritance and apply custom roles for given users
                 await last.BreakRoleInheritanceBatchAsync(false, false);

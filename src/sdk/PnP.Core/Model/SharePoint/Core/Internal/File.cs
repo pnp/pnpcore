@@ -583,7 +583,7 @@ namespace PnP.Core.Model.SharePoint
 
         public void Approve(string comment = null)
         {
-            CheckinAsync(comment).GetAwaiter().GetResult();
+            ApproveAsync(comment).GetAwaiter().GetResult();
         }
 
         public void ApproveBatch(string comment = null)

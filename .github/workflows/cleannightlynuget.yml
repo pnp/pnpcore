@@ -8,20 +8,23 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    if: github.repository_owner == 'pnp'
     # The type of runner that the job will run on
     runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    permissions:
+      contents: read
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with: 
         ref: dev
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
       with:
-        dotnet-version: '6.0.x'
-        include-prerelease: false    
+        dotnet-version: '10.0.x'
     - name: Unlist nightly nuget packages
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

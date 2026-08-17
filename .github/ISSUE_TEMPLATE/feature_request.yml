@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest an idea for this project
+title: "💡 [Feature]: "
+labels: ["needs peer review"]
+type: "Feature"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature. You Rock! 🤩
+        
+        Please complete the below form to ensure we have the necessary details to get started.
+  - type: textarea
+    id: description
+    attributes:
+      label: 🎯 Aim of the feature
+      description: Provide a clear & concise description of what the feature should do. Use screenshots, code snippets, external links, etc to add clarity.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Describe the solution
+      description: Provide a clear & concise description of what you want to happen. Use screenshots, code snippets, external links, etc to add clarity.
+    validations:
+      required: true
+  - type: textarea
+    id: more-info
+    attributes:
+      label: 🤔 Additional remarks or comments
+      description: Add any other context or screenshots about the feature request here.
+    validations:
+      required: false

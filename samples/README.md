@@ -24,7 +24,7 @@ Sample | Description | .NET version | PnP Core version | Authentication Type
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[Minimal Console demo](Demo.Console.Minimal/readme.md) | Most simplistic console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 6 | v1.8.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[Minimal Console demo](Demo.Console.Minimal/readme.md) | Most simplistic console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 10 | v1.15.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Console demo](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 6 | v1.8.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Persistent TokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | .NET 7 | v1.8.0 | Custom `IAuthenticationProvider` implementation
 [Pi demo](Demo.RPi/README.md) | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | .NET 7 | v1.8.0 | Username password login (`UsernamePasswordAuthenticationProvider`)
@@ -33,4 +33,4 @@ Sample | Description | .NET version | PnP Core version | Authentication Type
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 7 | v1.8.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 10 | v1.17.* | Interactive login (`InteractiveAuthenticationProvider`)

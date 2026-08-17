@@ -1486,15 +1486,19 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else if (section.Columns.Count == 3)
                     {
-                        if (section.Columns[0].ColumnFactor == 6)
+                        // Use the first non-vertical-section column for type detection,
+                        // as the vertical column (layoutIndex=2) may appear first in the list
+                        var firstMainColumn = section.Columns.Where(c => c.LayoutIndex != 2).OrderBy(c => c.Order).FirstOrDefault();
+                        var mainColumnFactor = firstMainColumn?.ColumnFactor ?? 0;
+                        if (mainColumnFactor == 6)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnVerticalSection;
                         }
-                        else if (section.Columns[0].ColumnFactor == 4)
+                        else if (mainColumnFactor == 4)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnRightVerticalSection;
                         }
-                        else if (section.Columns[0].ColumnFactor == 8)
+                        else if (mainColumnFactor == 8)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnLeftVerticalSection;
                         }
@@ -1655,6 +1659,7 @@ namespace PnP.Core.Model.SharePoint
                 currentSection.Collapsible = zoneGroupMetadata.Type == 1;
                 currentSection.SectionType = zoneGroupMetadata.Type;
                 currentSection.DisplayName = zoneGroupMetadata.DisplayName;
+                currentSection.HeadingLevel = zoneGroupMetadata.HeadingLevel != 0 ? zoneGroupMetadata.HeadingLevel : (int)CollapsibleSectionHeadingLevel.Heading2;
                 currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
                 currentSection.ShowDividerLine = zoneGroupMetadata.ShowDividerLine;
                 if (zoneGroupMetadata.IconAlignment != null)
@@ -1930,54 +1935,60 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            // Persist the page header
-            if (pageHeader.Type == PageHeaderType.None)
+            // Persist the page header (Home layout pages do not support a banner header, so skip entirely)
+            if (LayoutType != PageLayoutType.Home)
             {
-                // Only set the page header to "old" empty page header when there's no one column full width section present. A one column full width section
-                // with a banner web part is considered to be a page header
-                if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth) == false)
+                if (pageHeader.Type == PageHeaderType.None)
                 {
-                    PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.NoHeader(pageTitle);
-                }
+                    // For pages with no header, write an empty LayoutWebpartsContent instead of the legacy NoHeader() HTML.
+                    // Writing NoHeader() triggers SharePoint's MC791596 Page Title Web Part migration: when the page is
+                    // first opened in the browser SharePoint converts the old header HTML into a Banner web part in
+                    // CanvasContent1, resulting in an unwanted full-width title section appearing on the page.
+                    // An empty string correctly signals "no header" without triggering the migration.
+                    if (sections.Any(s => s.Type == CanvasSectionTemplate.OneColumnFullWidth) == false)
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = string.Empty;
+                    }
 
-                if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
-                {
-                    PageListItem[PageConstants._AuthorByline] = null;
-                }
-                if (PageListItem.Values.ContainsKey(PageConstants._TopicHeader))
-                {
-                    PageListItem[PageConstants._TopicHeader] = null;
-                }
-            }
-            else
-            {
-                if (pageHeader.Type == PageHeaderType.PageTitleWebPart)
-                {
-                    PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.PageTitleWebPartHeader();
+                    if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
+                    {
+                        PageListItem[PageConstants._AuthorByline] = null;
+                    }
+                    if (PageListItem.Values.ContainsKey(PageConstants._TopicHeader))
+                    {
+                        PageListItem[PageConstants._TopicHeader] = null;
+                    }
                 }
                 else
                 {
-                    PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
-                }
+                    if (pageHeader.Type == PageHeaderType.PageTitleWebPart)
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.PageTitleWebPartHeader();
+                    }
+                    else
+                    {
+                        PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
+                    }
 
-                // AuthorByline depends on a field holding the author values
-                var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
-                if (pageHeader.AuthorByLineId > -1)
-                {
-                    var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
-                    fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
-                    PageListItem[PageConstants._AuthorByline] = fieldUsers;
-                }
-                else
-                {
-                    // Ensure there's an empty collection set
-                    PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField);
-                }
+                    // AuthorByline depends on a field holding the author values
+                    var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                    if (pageHeader.AuthorByLineId > -1)
+                    {
+                        var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
+                        fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
+                        PageListItem[PageConstants._AuthorByline] = fieldUsers;
+                    }
+                    else
+                    {
+                        // Ensure there's an empty collection set
+                        PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField);
+                    }
 
-                // Topic header needs to be persisted in a field
-                if (!string.IsNullOrEmpty(pageHeader.TopicHeader))
-                {
-                    PageListItem[PageConstants._TopicHeader] = PageHeader.TopicHeader;
+                    // Topic header needs to be persisted in a field
+                    if (!string.IsNullOrEmpty(pageHeader.TopicHeader))
+                    {
+                        PageListItem[PageConstants._TopicHeader] = PageHeader.TopicHeader;
+                    }
                 }
             }
 
@@ -1994,13 +2005,16 @@ namespace PnP.Core.Model.SharePoint
                       bannerImageUrlFieldValue.Url.Contains("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     string previewImageServerRelativeUrl = "";
+                    bool previewImageFromCustomHeader = false;
+
                     if (pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(pageHeader.ImageServerRelativeUrl))
                     {
                         previewImageServerRelativeUrl = pageHeader.ImageServerRelativeUrl;
+                        previewImageFromCustomHeader = true;
                     }
                     else
                     {
-                        // iterate the web parts...if we find an unique id then let's grab that information
+                        // iterate the web parts...if we find one with preview image then let's use that information
                         foreach (var control in Controls)
                         {
                             if (control is PageWebPart webPart)
@@ -2015,13 +2029,19 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     // Validate the found preview image url
-                    if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) &&
-                        !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) && !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
                     {
-                        await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
-                        await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                        if (previewImageFromCustomHeader && pageHeader.HeaderImageId != Guid.Empty)
+                        {
+                            await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                            await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
 
-                        SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
+                            SetBannerImageUrlField($"{PnPContext.Uri.Scheme}://{PnPContext.Uri.DnsSafeHost}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
+                        }
+                        else
+                        {
+                            SetBannerImageUrlField(previewImageServerRelativeUrl);
+                        }
                     }
                 }
             }

@@ -1,4 +1,11 @@
-# The PnP Core SDK model
+# Contributing to PnP Core SDK
+
+We appreciate that you're interested in helping with moving the project forward. Before you submit your first PR, please read the following guide. 
+If you have a idea for a new feature, have a suggestion for improving an existing feature or you've found a bug, please first check if there is no similar idea already listed in the [issue list](https://github.com/pnp/pnpcore/issues). If not, please create a new issue describing your idea. Once we agree on the feature scope and architecture, the feature will be ready for building. Don't hesitate to mention in the issue if you'd like to build the feature yourself.
+Before you start working on an issue, please check if someone else is already working on it. If not, please comment on the issue that you want to work on it to get assigned. This will help us avoid duplicate work and will make sure that your work is not wasted. 
+Pick only the issues that are labeled with "help wanted". If you are a first time contributor look for "good first issue" label to get started. If you are not sure if you can solve the issue, please ask for help in the issue comments.
+
+## The PnP Core SDK model
 
 The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and their operations (e.g. GetAsync or Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. **As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK**.
 
@@ -15,7 +22,7 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## Setting up your environment for building the PnP Core SDK
 
-Starting to code is simple, pull down the code from GitHub and then use either Visual Studio 2019 or Visual Studio Code. More details can be found in our [setup](setup.md) article.
+Starting to code is simple, pull down the code from GitHub and then use either Visual Studio or Visual Studio Code. More details can be found in our [setup](setup.md) article.
 
 ## General model principles
 

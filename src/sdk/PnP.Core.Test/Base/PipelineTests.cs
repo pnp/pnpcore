@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -248,7 +248,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.MasterUrl));
                 Assert.IsTrue(context.RequestModules.Any() == false);
 
-                var lists = await context.Web.Lists.WithHeaders(extraHeaders).WithModule(testModule).Where(p => p.Title == "Site Pages").ToListAsync();
+                var lists = await System.Linq.Queryable.Where(context.Web.Lists.WithHeaders(extraHeaders).WithModule(testModule), p => p.Title == "Site Pages").ToListAsync();
                 Assert.IsTrue(lists.Count == 1);
                 Assert.IsTrue(context.RequestModules.Any() == false);
 

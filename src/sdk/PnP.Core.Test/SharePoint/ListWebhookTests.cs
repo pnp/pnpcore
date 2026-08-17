@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -342,7 +342,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = context.Web.Lists.GetByServerRelativeUrl($"{context.Uri.LocalPath}/Shared Documents");
                 var webhook = list.Webhooks.Add($"{webhookHost}/api/HandleEvent", DateTime.UtcNow.AddDays(1), "state");
-                var wh = list.Webhooks.Where(w => w.ClientState.Contains("state")).ToList();
+                var wh = System.Linq.Queryable.Where(list.Webhooks, w => w.ClientState.Contains("state")).ToList();
 
                 Assert.IsTrue(wh.Count > 0);
             }
@@ -357,7 +357,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = context.Web.Lists.GetByServerRelativeUrl($"{context.Uri.LocalPath}/Shared Documents");
                 var webhook = list.Webhooks.Add($"{webhookHost}/api/HandleEvent", DateTime.UtcNow.AddDays(1), "state");
-                var wh = list.Webhooks.Where(w => w.NotificationUrl.Contains("pnpcoresdkwebhooktest")).ToList();
+                var wh = System.Linq.Queryable.Where(list.Webhooks, w => w.NotificationUrl.Contains("pnpcoresdkwebhooktest")).ToList();
 
                 Assert.IsTrue(wh.Count > 0);
             }

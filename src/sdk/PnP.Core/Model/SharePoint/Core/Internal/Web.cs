@@ -404,7 +404,24 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            try
+            {
+                await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                // SharePoint returns FileNotFoundException for missing folders; normalize to DirectoryNotFoundException
+                if (Folder.ErrorIndicatesFolderDoesNotExists(error))
+                {
+                    error.Code = "System.IO.DirectoryNotFoundException";
+                    if (error.Message == "File Not Found.")
+                    {
+                        error.Message = "Folder not found.";
+                    }
+                }
+                throw;
+            }
 
             return folder;
         }
@@ -464,7 +481,24 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            try
+            {
+                await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                // SharePoint returns FileNotFoundException for missing folders; normalize to DirectoryNotFoundException
+                if (Folder.ErrorIndicatesFolderDoesNotExists(error))
+                {
+                    error.Code = "System.IO.DirectoryNotFoundException";
+                    if (error.Message == "File Not Found.")
+                    {
+                        error.Message = "Folder not found.";
+                    }
+                }
+                throw;
+            }
 
             return folder;
         }
@@ -1561,7 +1595,7 @@ namespace PnP.Core.Model.SharePoint
                 return false;
             }
 
-            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var roleDefinitions = await PnP.Core.QueryModel.QueryableExtensions.ToListAsync(PnPContext.Web.RoleDefinitions).ConfigureAwait(false);
             var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
