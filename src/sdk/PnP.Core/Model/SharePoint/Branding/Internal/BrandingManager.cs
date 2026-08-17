@@ -453,17 +453,17 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Modern Header Feature MC1098935
-            if (web.AllProperties.Values.TryGetValue("HeaderOverlayColor", out var HeaderOverlayColor) && int.TryParse(HeaderOverlayColor.ToString(), out var headerOverlayColor) && Enum.IsDefined(typeof(OverlayColorType), headerOverlayColor))
+            if (TryGetEnumValue(web.AllProperties.Values, "HeaderOverlayColor", out OverlayColorType headerOverlayColor))
             {
-                chromeOptions.Header.OverlayColor = (OverlayColorType)headerOverlayColor;
+                chromeOptions.Header.OverlayColor = headerOverlayColor;
             }
             if (web.AllProperties.Values.TryGetValue("HeaderOverlayOpacity", out var HeaderOverlayOpacity) && int.TryParse(HeaderOverlayOpacity.ToString(), out var headerOverlayOpacity))
             {
                 chromeOptions.Header.OverlayOpacity = headerOverlayOpacity;
             }
-            if (web.AllProperties.Values.TryGetValue("HeaderOverlayGradientDirection", out var HeaderOverlayGradientDirection) && int.TryParse(HeaderOverlayGradientDirection.ToString(), out var headerOverlayGradientDirection) && Enum.IsDefined(typeof(OverlayGradientDirectionType), headerOverlayGradientDirection))
+            if (TryGetEnumValue(web.AllProperties.Values, "HeaderOverlayGradientDirection", out OverlayGradientDirectionType headerOverlayGradientDirection))
             {
-                chromeOptions.Header.OverlayGradientDirection = (OverlayGradientDirectionType)headerOverlayGradientDirection;
+                chromeOptions.Header.OverlayGradientDirection = headerOverlayGradientDirection;
             }
             if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInLightMode", out var HeaderColorIndexInLightMode) && int.TryParse(HeaderColorIndexInLightMode.ToString(), out var headerColorIndexInLightMode))
             {
@@ -491,21 +491,21 @@ namespace PnP.Core.Model.SharePoint
                 };
 
                 // Modern Footer Feature MC1098935
-                if (web.AllProperties.Values.TryGetValue("FooterAlignment", out var FooterAlignment) && int.TryParse(FooterAlignment.ToString(), out var footerAlignment) && Enum.IsDefined(typeof(FooterLinkAlignment), footerAlignment))
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterAlignment", out FooterLinkAlignment footerAlignment))
                 {
-                    chromeOptions.Footer.LinkAlignment = (FooterLinkAlignment)footerAlignment;
+                    chromeOptions.Footer.LinkAlignment = footerAlignment;
                 }
-                if (web.AllProperties.Values.TryGetValue("FooterOverlayColor", out var FooterOverlayColor) && int.TryParse(FooterOverlayColor.ToString(), out var footerOverlayColor) && Enum.IsDefined(typeof(OverlayColorType), footerOverlayColor))
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterOverlayColor", out OverlayColorType footerOverlayColor))
                 {
-                    chromeOptions.Footer.OverlayColor = (OverlayColorType)footerOverlayColor;
+                    chromeOptions.Footer.OverlayColor = footerOverlayColor;
                 }
                 if (web.AllProperties.Values.TryGetValue("FooterOverlayOpacity", out var FooterOverlayOpacity) && int.TryParse(FooterOverlayOpacity.ToString(), out var footerOverlayOpacity))
                 {
                     chromeOptions.Footer.OverlayOpacity = footerOverlayOpacity;
                 }
-                if (web.AllProperties.Values.TryGetValue("FooterOverlayGradientDirection", out var FooterOverlayGradientDirection) && int.TryParse(FooterOverlayGradientDirection.ToString(), out var footerOverlayGradientDirection) && Enum.IsDefined(typeof(OverlayGradientDirectionType), footerOverlayGradientDirection))
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterOverlayGradientDirection", out OverlayGradientDirectionType footerOverlayGradientDirection))
                 {
-                    chromeOptions.Footer.OverlayGradientDirection = (OverlayGradientDirectionType)footerOverlayGradientDirection;
+                    chromeOptions.Footer.OverlayGradientDirection = footerOverlayGradientDirection;
                 }
 
                 if (web.AllProperties.Values.TryGetValue("FooterColorIndexInLightMode", out var FooterColorIndexInLightMode) && int.TryParse(FooterColorIndexInLightMode.ToString(), out var footerColorIndexInLightMode))
@@ -558,6 +558,22 @@ namespace PnP.Core.Model.SharePoint
                     chromeOptions.Font.SiteFooterNav = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteFooterNav.ToString());
                 }
             }
+        }
+
+        private static bool TryGetEnumValue<TEnum>(IDictionary<string, object> properties, string propertyName, out TEnum value)
+            where TEnum : struct, Enum
+        {
+            value = default;
+
+            if (!properties.TryGetValue(propertyName, out var propertyValue)
+                || !int.TryParse(propertyValue?.ToString(), out var numericValue)
+                || !Enum.IsDefined(typeof(TEnum), numericValue))
+            {
+                return false;
+            }
+
+            value = (TEnum)Enum.ToObject(typeof(TEnum), numericValue);
+            return true;
         }
 
         public IChromeOptions GetChromeOptions()
@@ -845,7 +861,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task SetOutOfBoxFontPackageAsync(string fontId)
         {
             var batch = context.NewBatch();
-            SetOutOfBoxFontPackageBatch(batch, fontId);
+            await SetOutOfBoxFontPackageBatchAsync(batch, fontId).ConfigureAwait(false);
             await context.ExecuteAsync(batch).ConfigureAwait(false);
         }
 
@@ -854,10 +870,9 @@ namespace PnP.Core.Model.SharePoint
             SetOutOfBoxFontPackageBatchAsync(batch, fontId).GetAwaiter().GetResult();
         }
 
-        public Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId)
+        public async Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId)
         {
-            BuildAndSetOutOfBoxFontPackageApiCall(batch, fontId).Wait();
-            return Task.CompletedTask;
+            await BuildAndSetOutOfBoxFontPackageApiCall(batch, fontId).ConfigureAwait(false);
         }
 
         private static ApiCall BuildGetOutOfBoxFontPackagesApiCall()
