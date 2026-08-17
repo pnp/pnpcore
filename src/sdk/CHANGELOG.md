@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## 1.18 - Unreleased
+
+### Added 
+
+- Added CSOM-based GetItems support #1802 [Jeppe Mastrup Spanggaard - jeppesc11]
+
+### Changed 
+
+- Fixed negative currency values returned by LoadListDataAsStreamAsync #1818 [mateusz-sintel - mateusz-sintel]
+- Fixed MC791596 banner migration incorrectly adding a banner header on pages with no header #1758 [nicolaor - Rene Nicolao]
+- Updated Demo.WPF sample #1829 [gszdev - gszdev]
+
 ## [1.17]
 
 ### Added 

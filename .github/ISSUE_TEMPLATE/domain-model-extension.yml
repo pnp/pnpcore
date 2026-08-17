@@ -1,0 +1,66 @@
+name: Domain model extension
+description: Describe how you would like to see the domain model extended
+title: "🧩 [Domain model]: "
+labels: ["area: model 📐", "needs peer review"]
+type: "Feature"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an improvement to the domain model.
+
+        Please complete the below form to ensure we have the necessary details to assess and implement your request.
+  - type: textarea
+    id: domain-model-description
+    attributes:
+      label: 🎯 Describe the domain model extension
+      description: Provide a short description of what this extension addresses.
+      placeholder: e.g. Get list content types
+    validations:
+      required: true
+  - type: textarea
+    id: domain-model-entities
+    attributes:
+      label: 🧱 Model and properties
+      description: Define the model entity and the properties involved in this extension.
+      value: |
+        Model:
+        Properties:
+      placeholder: |
+        Model: List, ContentType
+        Properties: List.ContentTypes
+    validations:
+      required: true
+  - type: dropdown
+    id: domain-model-api-type
+    attributes:
+      label: 🔌 API type
+      description: Select the preferred API family for this extension.
+      options:
+        - SharePoint REST
+        - Microsoft Graph v1.0
+        - Microsoft Graph beta
+        - Multiple APIs
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: domain-model-api-endpoint
+    attributes:
+      label: 🌐 API endpoint(s)
+      description: Provide the absolute API endpoint(s) that should be used.
+      placeholder: |
+        https://graph.microsoft.com/v1.0/sites/<siteId>/lists/<listId>/contentTypes
+        or
+        https://<tenant>.sharepoint.com/sites/<site>/_api/web/lists(guid'<listId>')/contentTypes
+    validations:
+      required: false
+  - type: textarea
+    id: domain-model-additional-info
+    attributes:
+      label: 🤔 Additional information
+      description: Add links, references, constraints, and any context that helps with implementation.
+      placeholder: e.g. https://learn.microsoft.com/graph/api/resources/contenttype
+    validations:
+      required: false
+

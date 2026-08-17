@@ -759,6 +759,238 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetItemsByCAMLQueryViaCsomWithJoins()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create the list that will be joined via a lookup field
+                var lookupListTitle = TestCommon.GetPnPSdkTestAssetName("CamlCsomJoinLookupList");
+                var lookupList = await context.Web.Lists.AddAsync(lookupListTitle, ListTemplateType.GenericList);
+
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("CamlCsomJoinList");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                try
+                {
+                    // Text field on the lookup list that the CAML query will project into the main list results
+                    await lookupList.Fields.AddTextAsync("ProjectedSourceText", new FieldTextOptions()
+                    {
+                        AddToDefaultView = true,
+                    });
+
+                    var lookupItem = await lookupList.Items.AddAsync(new Dictionary<string, object>()
+                    {
+                        { "Title", "Lookup item" },
+                        { "ProjectedSourceText", "Projected text" }
+                    });
+
+                    // Second row so the multi value lookup field can hold more than one value
+                    var secondLookupItem = await lookupList.Items.AddAsync(new Dictionary<string, object>()
+                    {
+                        { "Title", "Second lookup item" },
+                        { "ProjectedSourceText", "Second projected text" }
+                    });
+
+                    // Lookup field on the main list pointing to the lookup list
+                    IField lookupField = await list.Fields.AddLookupAsync("JoinLookup", new FieldLookupOptions()
+                    {
+                        AddToDefaultView = true,
+                        LookupListId = lookupList.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    // Numeric and boolean fields, to verify they are typed as the REST based loaders type them
+                    await list.Fields.AddNumberAsync("CamlCsomNumber", new FieldNumberOptions()
+                    {
+                        AddToDefaultView = true,
+                    });
+
+                    await list.Fields.AddCurrencyAsync("CamlCsomCurrency", new FieldCurrencyOptions()
+                    {
+                        AddToDefaultView = true,
+                        CurrencyLocaleId = 1033,
+                    });
+
+                    await list.Fields.AddBooleanAsync("CamlCsomBool", new FieldBooleanOptions()
+                    {
+                        AddToDefaultView = true,
+                    });
+
+                    // Multi value fields, these come back as json arrays
+                    IField lookupMultiField = await list.Fields.AddLookupMultiAsync("CamlCsomLookupMulti", new FieldLookupOptions()
+                    {
+                        AddToDefaultView = true,
+                        LookupListId = lookupList.Id,
+                        LookupFieldName = "Title",
+                    });
+
+                    await list.Fields.AddChoiceMultiAsync("CamlCsomChoiceMulti", new FieldChoiceMultiOptions()
+                    {
+                        AddToDefaultView = true,
+                        Choices = new string[] { "ChoiceA", "ChoiceB", "ChoiceC" },
+                    });
+
+                    // Three items, so a page size of 2 forces paging. Items 1 and 2 have all values set,
+                    // item 3 deliberately has no lookup value so the LEFT join does not match for it
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        var newItem = new Dictionary<string, object>()
+                        {
+                            { "Title", $"Item{i}" },
+                            // A whole number, this is the case that returns int when the json shape decides the type
+                            { "CamlCsomNumber", 5 },
+                            { "CamlCsomCurrency", 12.5 },
+                            { "CamlCsomBool", true }
+                        };
+
+                        if (i < 3)
+                        {
+                            newItem.Add("JoinLookup", lookupField.NewFieldLookupValue(lookupItem.Id));
+
+                            var lookupValues = lookupMultiField.NewFieldValueCollection();
+                            lookupValues.Values.Add(lookupMultiField.NewFieldLookupValue(lookupItem.Id));
+                            lookupValues.Values.Add(lookupMultiField.NewFieldLookupValue(secondLookupItem.Id));
+                            newItem.Add("CamlCsomLookupMulti", lookupValues);
+
+                            newItem.Add("CamlCsomChoiceMulti", new List<string>() { "ChoiceA", "ChoiceB" });
+                        }
+
+                        await list.Items.AddAsync(newItem);
+                    }
+
+                    string viewFields = "<ViewFields><FieldRef Name='Title'/><FieldRef Name='ID'/><FieldRef Name='JoinLookup'/>" +
+                        "<FieldRef Name='CamlCsomNumber'/><FieldRef Name='CamlCsomCurrency'/><FieldRef Name='CamlCsomBool'/>" +
+                        "<FieldRef Name='CamlCsomLookupMulti'/><FieldRef Name='CamlCsomChoiceMulti'/>";
+
+                    string viewXml = "<View>" +
+                        viewFields + "<FieldRef Name='ProjectedText'/></ViewFields>" +
+                        "<Joins><Join Type='LEFT' ListAlias='JoinedList'><Eq><FieldRef Name='JoinLookup' RefType='Id'/><FieldRef List='JoinedList' Name='Id'/></Eq></Join></Joins>" +
+                        "<ProjectedFields><Field Name='ProjectedText' Type='Lookup' List='JoinedList' ShowField='ProjectedSourceText'/></ProjectedFields>" +
+                        "<Query><OrderBy><FieldRef Name='ID'/></OrderBy></Query>" +
+                        "<RowLimit Paged='TRUE'>2</RowLimit>" +
+                        "</View>";
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+
+                        var page1 = await list2.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = viewXml,
+                            DatesInUtc = true
+                        });
+
+                        Assert.AreEqual(2, page1.Items.Count);
+                        Assert.IsNotNull(page1.PagingInfo);
+
+                        // The field projected from the joined list must be returned and typed as a lookup value
+                        var firstItem = page1.Items[0];
+                        Assert.AreEqual("Item1", firstItem.Title);
+                        Assert.IsTrue(firstItem.Values.ContainsKey("ProjectedText"));
+                        Assert.IsTrue(firstItem["ProjectedText"] is IFieldLookupValue);
+                        Assert.AreEqual("Projected text", (firstItem["ProjectedText"] as IFieldLookupValue).LookupValue);
+
+                        // The regular lookup field is typed as well
+                        Assert.IsTrue(firstItem["JoinLookup"] is IFieldLookupValue);
+                        Assert.AreEqual(lookupItem.Id, (firstItem["JoinLookup"] as IFieldLookupValue).LookupId);
+
+                        // A Number field holding the whole number 5 must come back as double, not as int
+                        Assert.IsInstanceOfType(firstItem["CamlCsomNumber"], typeof(double));
+                        Assert.AreEqual(5d, (double)firstItem["CamlCsomNumber"]);
+                        Assert.IsInstanceOfType(firstItem["CamlCsomCurrency"], typeof(double));
+                        Assert.AreEqual(12.5d, (double)firstItem["CamlCsomCurrency"]);
+                        Assert.IsInstanceOfType(firstItem["CamlCsomBool"], typeof(bool));
+                        Assert.IsTrue((bool)firstItem["CamlCsomBool"]);
+
+                        // Objects materialize into a typed collection, multi choice values into a list of strings
+                        Assert.IsInstanceOfType(firstItem["CamlCsomLookupMulti"], typeof(IFieldValueCollection));
+                        var lookupMultiValues = (firstItem["CamlCsomLookupMulti"] as IFieldValueCollection).Values;
+                        Assert.AreEqual(2, lookupMultiValues.Count);
+                        CollectionAssert.AreEquivalent(
+                            new[] { lookupItem.Id, secondLookupItem.Id },
+                            lookupMultiValues.Cast<IFieldLookupValue>().Select(p => p.LookupId).ToArray());
+
+                        Assert.IsInstanceOfType(firstItem["CamlCsomChoiceMulti"], typeof(List<string>));
+                        CollectionAssert.AreEquivalent(
+                            new[] { "ChoiceA", "ChoiceB" },
+                            (firstItem["CamlCsomChoiceMulti"] as List<string>).ToArray());
+
+                        // System properties live in the model backing store, not in the Values dictionary
+                        Assert.IsTrue(firstItem.IsPropertyAvailable(p => p.UniqueId));
+                        Assert.AreNotEqual(Guid.Empty, firstItem.UniqueId);
+                        Assert.IsTrue(firstItem.IsPropertyAvailable(p => p.FileSystemObjectType));
+                        Assert.AreEqual(FileSystemObjectType.File, firstItem.FileSystemObjectType);
+
+                        // Loading items is a read, it must not commit pending changes on the list itself
+                        list2.Description = "Pending change that must survive the read";
+
+                        // Load the second (and last) page
+                        var page2 = await list2.LoadItemsByCamlQueryViaCsomAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = viewXml,
+                            DatesInUtc = true,
+                            PagingInfo = page1.PagingInfo
+                        });
+
+                        Assert.IsTrue((list2 as PnP.Core.Model.SharePoint.List).HasChanges);
+
+                        Assert.AreEqual(1, page2.Items.Count);
+                        Assert.IsNull(page2.PagingInfo);
+
+                        // Item3 has no lookup value, so the LEFT join does not match for it
+                        var unmatchedItem = page2.Items[0];
+                        Assert.AreEqual("Item3", unmatchedItem.Title);
+
+                        // A field from the list schema stays typed when it has no value, keeping LookupId == -1 usable
+                        Assert.IsInstanceOfType(unmatchedItem["JoinLookup"], typeof(IFieldLookupValue));
+                        Assert.AreEqual(-1, (unmatchedItem["JoinLookup"] as IFieldLookupValue).LookupId);
+
+                        // A projected field is not in the list schema and CSOM returns a bare null for it,
+                        // so there is no type information left to materialize
+                        Assert.IsNull(unmatchedItem["ProjectedText"]);
+
+                        // An empty multi value field stays a typed empty collection, it must not degrade to a List<string>
+                        Assert.IsInstanceOfType(unmatchedItem["CamlCsomLookupMulti"], typeof(IFieldValueCollection));
+                        Assert.AreEqual(0, (unmatchedItem["CamlCsomLookupMulti"] as IFieldValueCollection).Values.Count);
+
+                        // All loaded items were merged into the list's Items collection
+                        Assert.AreEqual(3, list2.Items.AsRequested().Count());
+
+                        // The sync overload shares the async implementation, this also covers the null guard
+                        Assert.ThrowsException<ArgumentNullException>(() => list2.LoadItemsByCamlQueryViaCsom(null));
+
+                        // The REST based CAML method must yield the same .NET types, otherwise
+                        // (double)item["CamlCsomNumber"] throws depending on which loader was used
+                        using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                        {
+                            var list3 = await context3.Web.Lists.GetByTitleAsync(listTitle);
+
+                            await list3.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+                            {
+                                ViewXml = "<View>" + viewFields + "</ViewFields>" +
+                                          "<Query><OrderBy><FieldRef Name='ID'/></OrderBy></Query></View>",
+                                DatesInUtc = true
+                            });
+
+                            var restItem = list3.Items.AsRequested().First(p => p.Title == "Item1");
+
+                            Assert.AreEqual(restItem["CamlCsomNumber"].GetType(), firstItem["CamlCsomNumber"].GetType());
+                            Assert.AreEqual(restItem["CamlCsomCurrency"].GetType(), firstItem["CamlCsomCurrency"].GetType());
+                            Assert.AreEqual(restItem["CamlCsomBool"].GetType(), firstItem["CamlCsomBool"].GetType());
+                        }
+                    }
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                    await lookupList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task RecycleList()
         {
             //TestCommon.Instance.Mocking = false;

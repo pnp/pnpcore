@@ -4,15 +4,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal static class ListDataAsStreamHandler
     {
-        internal static readonly Regex currencyRegex = new Regex(@"([\d,.]+)", RegexOptions.Compiled);
-
         internal static async Task<Dictionary<string, object>> Deserialize(string json, List list)
         {
             if (list == null)
@@ -669,15 +666,11 @@ namespace PnP.Core.Model.SharePoint
                             string currencyString = propertyValue.GetString();
                             if (!string.IsNullOrEmpty(currencyString))
                             {
-                                // trim currency chars
-                                var match = currencyRegex.Match(currencyString);
-                                if (match.Success)
+                                // Numbers and currency are provided in US format. Use NumberStyles.Currency so
+                                // currency symbols, negative signs and accounting formats (e.g. ($67.67)) are handled.
+                                if (double.TryParse(currencyString, NumberStyles.Currency, CultureInfo.CreateSpecificCulture("en-US"), out double parsedCurrency))
                                 {
-                                    // Numbers and currency are provided in US format
-                                    if (double.TryParse(match.Groups[1].Value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double parsedCurrency))
-                                    {
-                                        return parsedCurrency;
-                                    }
+                                    return parsedCurrency;
                                 }
                             }
                             else

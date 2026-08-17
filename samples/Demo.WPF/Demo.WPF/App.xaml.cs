@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services.Builder.Configuration;
 using System;
@@ -13,44 +15,74 @@ namespace Demo.WPF
     /// </summary>
     public partial class App : Application
     {
+        private static IHost? _host = null;
 
-        public IServiceProvider ServiceProvider { get; private set; }
-
-        public IConfiguration Configuration { get; private set; }
-
-        /// <summary>
-        /// See https://marcominerva.wordpress.com/2019/03/06/using-net-core-3-0-dependency-injection-and-service-provider-with-wpf/ for the inspiration on this approach
-        /// </summary>
-        /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
-            var builder = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                var environmentNameFromEnvFile = GetEnvironmentNameFromEnvFile();
 
-            Configuration = builder.Build();
+                if (!string.IsNullOrEmpty(environmentNameFromEnvFile))
+                {
+                    var currentEnvironment = System.Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+                    if (!string.Equals(currentEnvironment, environmentNameFromEnvFile, StringComparison.OrdinalIgnoreCase))
+                    {
+                        System.Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", environmentNameFromEnvFile);
+                    }
+                }
+            }
 
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
+            // Use ApplicationBuilder to support multiple environments
+            //var args = Environment.GetCommandLineArgs();
+            var builder = Host.CreateApplicationBuilder(e.Args);
 
-            ServiceProvider = serviceCollection.BuildServiceProvider();
+            builder.Configuration.AddUserSecrets<App>();
 
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            
+            // Add the PnP Core SDK library services
+            builder.Services.AddPnPCore();
+            // Add the PnP Core SDK library services configuration from the appsettings.json file
+            builder.Services.Configure<PnPCoreOptions>(builder.Configuration.GetSection("PnPCore"));
+            // Add the PnP Core SDK Authentication Providers
+            builder.Services.AddPnPCoreAuthentication();
+            // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
+            builder.Services.Configure<PnPCoreAuthenticationOptions>(builder.Configuration.GetSection("PnPCore"));
+
+
+            builder.Services.AddTransient<MainWindow>();
+
+            _host = builder.Build();
+
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
-        private void ConfigureServices(IServiceCollection services)
+        protected override async void OnExit(ExitEventArgs e)
         {
-            // Add the PnP Core SDK library services
-            services.AddPnPCore();
-            // Add the PnP Core SDK library services configuration from the appsettings.json file
-            services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
-            // Add the PnP Core SDK Authentication Providers
-            services.AddPnPCoreAuthentication();
-            // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
-            services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
+          if (_host != null)
+          {
+            await _host.StopAsync();
+            _host.Dispose();
+            _host = null;
+          }
+          base.OnExit(e);
+        }
 
-            services.AddTransient(typeof(MainWindow));
+        public static string? GetEnvironmentNameFromEnvFile()
+        {
+            var testEnvironmentFile = Path.Combine("..", "..", "..", "env.txt");
+
+            if (File.Exists(testEnvironmentFile))
+            {
+                var content = File.ReadAllText(testEnvironmentFile);
+                if (!string.IsNullOrEmpty(content))
+                {
+                    return content.Trim();
+                }
+            }
+
+            return null;
         }
     }
 }
