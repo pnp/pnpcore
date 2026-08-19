@@ -24,17 +24,19 @@ The one thing to configure before you can use this sample is an Azure AD applica
 1. Navigate to https://entra.microsoft.com/
 2. Click on **Entra ID**, followed by navigating to **App registrations**
 3. Add a new application via the **New registration** link
-4. Give your application a name, e.g. PnPCoreSDKBlazorWasmDemo, make sure *Accounts in this organizational directory only* is selected and add **https://localhost:44349/authentication/login-callback** (The port may vary according to dev environment) as redirect URI (only needed if you want use an interactive authentication flow). Clicking on **Register** will create the application and open it
-5. Take note of the **Application (client) ID** value, you'll need it in the next step
-6. Click on **API permissions** and add these **delegated** permissions
+4. Give your application a name, e.g. PnPCoreSDKBlazorWasmDemo, make sure *Accounts in this organizational directory only* is selected and click on **Register**
+5. Open the **Authentication** page, click on **Add a platform** and pick **Single-page application**. Add **https://localhost:5001/authentication/login-callback** (the port may vary according to your dev environment) as redirect URI and click **Configure**
+    > Blazor WebAssembly signs in from the browser using the authorization code flow with PKCE, which is only allowed for the *Single-page application* platform. Registering the redirect URI under the **Web** platform results in the error *AADSTS9002326: Cross-origin token redemption is permitted only for the 'Single-Page Application' client-type*.
+6. Take note of the **Application (client) ID** value, you'll need it in the next step
+7. Click on **API permissions** and add these **delegated** permissions
    1. Microsoft Graph  
         1. email
         2. openid
         3. Sites.FullControl.All
    2. SharePoint
         1. AllSites.FullControl
-7. Consent the application permissions by clicking on **Grant admin consent**
-8. From **Overview**,
+8. Consent the application permissions by clicking on **Grant admin consent**
+9. From **Overview**,
     1. copy the value of **Directory (tenant) ID**
     2. copy the value of **Application (client) ID**
 

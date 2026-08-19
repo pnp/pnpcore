@@ -28,15 +28,14 @@ namespace Demo.Blazor
 
         private static string[] GetRelevantScopes(Uri resourceUri)
         {
-            if (resourceUri.ToString() == "https://graph.microsoft.com")
+            string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
+
+            if (resourceUri.DnsSafeHost.Equals("graph.microsoft.com", StringComparison.OrdinalIgnoreCase))
             {
-                return [$"{resourceUri}/{MicrosoftGraphScope}"];
+                return [$"{resource}/{MicrosoftGraphScope}"];
             }
-            else
-            {
-                string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
-                return [$"{resource}/{SharePointOnlineScope}"];
-            }
+
+            return [$"{resource}/{SharePointOnlineScope}"];
         }
 
         /// <summary>
@@ -73,7 +72,9 @@ namespace Demo.Blazor
 
             if (!tokenResult.TryGetToken(out AccessToken? accessToken))
             {
-                throw new Exception("An error occured while trying to acquire the access token...");
+                throw new InvalidOperationException(
+                    $"Could not acquire an access token for {resource} using scopes '{string.Join(", ", scopes)}'. " +
+                    $"Status: {tokenResult.Status}, interactive request url: {tokenResult.InteractiveRequestUrl ?? "none"}.");
             }
 
             return accessToken.Value;
