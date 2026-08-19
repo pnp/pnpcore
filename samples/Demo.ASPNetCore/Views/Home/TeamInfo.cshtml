@@ -15,12 +15,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var channel in Model.Channels)
+            @if (Model.Channels is not null)
             {
-                <tr>
-                    <td>@channel.DisplayName</td>
-                    <td>@channel.Id</td>
-                </tr>
+                @foreach (var channel in Model.Channels)
+                {
+                    <tr>
+                        <td>@channel.DisplayName</td>
+                        <td>@channel.Id</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
