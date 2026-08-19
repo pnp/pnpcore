@@ -38,6 +38,7 @@ The one thing to configure before you can use this sample is an Azure AD applica
 8. From **Overview**,
     1. copy the value of **Directory (tenant) ID**
     2. copy the value of **Application (client) ID**
+9. Generate **ClientSecret** and copy its value 
 
 ## Configure your application
 
