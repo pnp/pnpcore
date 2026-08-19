@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Updated Demo.ConsoleApp Sample #1833 [gszdev - gszdev]
+- Updated Demo.Blazor Sample #1834 [gszdev - gszdev]
 
 ## [1.18]
 
