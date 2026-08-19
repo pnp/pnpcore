@@ -6,40 +6,76 @@ This solution demonstrates how the PnP Core SDK can be used in a Blazor WebAssem
 
 You can find the sample source code here: [/samples/Demo.Blazor](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Blazor)
 
-# Run the sample
+## Prerequisites
 
-## Register and configure an AAD app
+- .NET 10.0 SDK or higher installed. You can download it from https://dotnet.microsoft.com/download
 
-In order for the user to authenticate on the App, A new app registration should be created on Azure Portal
+### Additional prerequisites for Visual Studio Code
 
-- Go to [Azure Active Directory Portal](https://aad.portal.azure.com)
+In order to run and debug this sample in Visual Studio Code you need to install the following extensions:
 
-- In App registrations, click __New registration__
+- [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+- [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __https://localhost:44349/authentication/login-callback__ (The port may vary according to your Visual Studio)
+### Step 1) Create an Azure AD application
 
-- Make sure that the added Redirect URI is for a Single-Page Application
+The one thing to configure before you can use this sample is an Azure AD application:
 
-- Under __Implicit grant__ section, check __Access tokens__ and __ID tokens__
+1. Navigate to https://entra.microsoft.com/
+2. Click on **Entra ID**, followed by navigating to **App registrations**
+3. Add a new application via the **New registration** link
+4. Give your application a name, e.g. PnPCoreSDKBlazorWasmDemo, make sure *Accounts in this organizational directory only* is selected and click on **Register**
+5. Open the **Authentication** page, click on **Add a platform** and pick **Single-page application**. Add **https://localhost:5001/authentication/login-callback** (the port may vary according to your dev environment) as redirect URI and click **Configure**
+    > Blazor WebAssembly signs in from the browser using the authorization code flow with PKCE, which is only allowed for the *Single-page application* platform. Registering the redirect URI under the **Web** platform results in the error *AADSTS9002326: Cross-origin token redemption is permitted only for the 'Single-Page Application' client-type*.
+6. Take note of the **Application (client) ID** value, you'll need it in the next step
+7. Click on **API permissions** and add these **delegated** permissions
+   1. Microsoft Graph  
+        1. email
+        2. openid
+        3. Sites.FullControl.All
+   2. SharePoint
+        1. AllSites.FullControl
+8. Consent the application permissions by clicking on **Grant admin consent**
+9. From **Overview**,
+    1. copy the value of **Directory (tenant) ID**
+    2. copy the value of **Application (client) ID**
 
-- Go to __API permissions__ section , click __Add a permission__
--- Select __SharePoint__ > __Delegated permissions__ > select __AllSites.FullControl__
--- Select __Microsoft Graph__ > __Delegated permissions__ > select __email__, __openid__ and __Sites.FullControl.All__
 
-- Click __Grant admin consent for {tenant}__
+### Step 2) Configure the application
 
-- From __Overview__,
--- copy the value of __Directory (tenant) ID__
--- copy the value of __Application (client) ID__
+appsettings (`wwwroot/appsettings.json`)
+- Replace Client ID as the value of `{client_id}` in appsettings
+- Replace Tenant ID as the value of `{tenant_id}` in appsettings
+- Replace URL of your SharePoint site as the value of `{sharepoint_url}` in appsettings
 
-## Configure your application
+Using an environment specific appsettings.`{ASPNETCORE_ENVIRONMENT}`.json file is supported also.
+The `ASPNETCORE_ENVIRONMENT` default value for debugging is set to `Development`, so you can create an `wwwroot/appsettings.Development.json` file and add your configuration there.
+For more details about runtime environments see: [ASP.NET Core runtime environments](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments)
 
-- Replace `{sharepoint_url}` the URL of your SharePoint site in app setting
-- in the file `wwwroot/appsettings.json`, replace the `{client_id}` and the `{tenant_id}` accordingly with the values from above
+## Step 3) Run the sample
 
-## Execute
+### Visual Studio Code and Visual Studio
 
-  Hit F5 in Visual studio to execute the Blazor app.
-  When trying to access one of the sections, the applications prompts you for signing in
+Press **F5** to launch the sample. 
 
-  ![preview image of the running app](preview.png)
+### Terminal
+
+First you will need to build the project by running `dotnet build` in the project folder. 
+Ensure the ASP.NET Core developer certificate is trusted. If you see the following message, you will need to trust the certificate before running the sample.
+
+Message
+
+`The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert`
+
+CLI 
+
+`dotnet dev-certs https --trust`
+
+Once the build is successful you can run the sample by executing `dotnet run` in the same folder. 
+Use `dotnet run --environment ASPNETCORE_ENVIRONMENT=<EnvironmentName>` to specify the desired environment.
+Default environment is `Production`. The default environment will be overwritten by launchSettings.json file if present. If there is no appsettings file for the specified environment, the setttings from appsettings.json will not be overwritten and will be used.
+For more details about runtime environments see: [ASP.NET Core runtime environments](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments)
+
+When trying to access one of the sections, the applications prompts you for signing in
+
+![preview image of the running app](preview.png)
