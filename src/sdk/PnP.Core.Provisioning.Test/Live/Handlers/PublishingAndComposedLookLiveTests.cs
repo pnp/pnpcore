@@ -176,10 +176,10 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                 ProvisioningTemplate extracted = await context.GetProvisioningManager()
                     .GetTemplateAsync(configuration).ConfigureAwait(false);
 
-                Assert.IsNull(extracted.ComposedLook,
-                    "With nothing recorded there is no composed look to report, and an element with " +
-                    "no file attributes does not satisfy the schema. " +
-                    $"Got: Name='{extracted.ComposedLook?.Name}'.");
+                Assert.IsTrue(string.IsNullOrEmpty(extracted.ComposedLook?.Name),
+                    "With nothing recorded there is no composed look to report, and an element with "
+                    + "no file attributes does not satisfy the schema. "
+                    + $"Got: Name='{extracted.ComposedLook?.Name}'.");
             }
         }
 

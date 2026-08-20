@@ -76,6 +76,7 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                             Title = $"{TestPrefix}Sequence",
                             Description = "Created by the PnP Core provisioning tests",
                             Language = 1033,
+                            Owner = await SiteOwnerAsync(context).ConfigureAwait(false),
                             ProvisioningId = "SEQ-SITE",
                         };
 
