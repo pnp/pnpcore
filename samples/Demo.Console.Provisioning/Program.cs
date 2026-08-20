@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,18 +57,35 @@ namespace Demo.Console.Provisioning
 
                     services.AddPnPCoreAuthentication(options =>
                     {
-                        options.Credentials.Configurations.Add("interactive",
-                            new PnPCoreAuthenticationCredentialConfigurationOptions
-                            {
-                                ClientId = settings.ClientId,
-                                TenantId = settings.TenantId,
-                                Interactive = new PnPCoreAuthenticationInteractiveOptions
-                                {
-                                    RedirectUri = new Uri(settings.RedirectUri),
-                                },
-                            });
+                        var credential = new PnPCoreAuthenticationCredentialConfigurationOptions
+                        {
+                            ClientId = settings.ClientId,
+                            TenantId = settings.TenantId,
+                        };
 
-                        options.Credentials.DefaultConfiguration = "interactive";
+                        if (!string.IsNullOrWhiteSpace(settings.CertificateThumbprint))
+                        {
+                            credential.X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
+                            {
+                                Thumbprint = settings.CertificateThumbprint,
+                                StoreName = Enum.TryParse(settings.CertificateStoreName, true, out StoreName storeName)
+                                    ? storeName
+                                    : StoreName.My,
+                                StoreLocation = Enum.TryParse(settings.CertificateStoreLocation, true, out StoreLocation storeLocation)
+                                    ? storeLocation
+                                    : StoreLocation.CurrentUser,
+                            };
+                        }
+                        else
+                        {
+                            credential.Interactive = new PnPCoreAuthenticationInteractiveOptions
+                            {
+                                RedirectUri = new Uri(settings.RedirectUri),
+                            };
+                        }
+
+                        options.Credentials.Configurations.Add("default", credential);
+                        options.Credentials.DefaultConfiguration = "default";
                     });
                 })
                 .UseConsoleLifetime()
@@ -264,7 +282,9 @@ namespace Demo.Console.Provisioning
                     ExtractConfiguration configuration = BuildExtractConfiguration(problems);
 
                     await ApplyContentOptionsAsync(context, configuration, command.IncludeItems,
-                        command.ItemLists, command.IncludePages, command.IncludeHiddenLists).ConfigureAwait(false);
+                        command.ItemLists, command.IncludePages, command.IncludeHiddenLists,
+                        command.IncludeFiles, command.FileLibraries,
+                        Path.GetDirectoryName(Path.GetFullPath(command.TemplatePath))).ConfigureAwait(false);
 
                     System.Console.WriteLine("Extracting...");
 
@@ -332,7 +352,21 @@ namespace Demo.Console.Provisioning
                     itemLists.AddRange(lists.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0));
                 }
 
-                System.Console.WriteLine("  Document libraries are skipped - see the note after the extract.");
+                System.Console.WriteLine("  Document libraries are skipped here - use the files question below.");
+            }
+
+            bool includeFiles = AskYesNo("Export the files held in document libraries?");
+            var fileLibraries = new List<string>();
+
+            if (includeFiles)
+            {
+                System.Console.Write("  Which libraries (comma separated, blank for all): ");
+                string libraries = System.Console.ReadLine()?.Trim();
+
+                if (!string.IsNullOrWhiteSpace(libraries))
+                {
+                    fileLibraries.AddRange(libraries.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0));
+                }
             }
 
             bool includePages = AskYesNo("Include the site's pages and their contents?");
@@ -346,7 +380,7 @@ namespace Demo.Console.Provisioning
                 ExtractConfiguration configuration = BuildExtractConfiguration(null);
 
                 await ApplyContentOptionsAsync(context, configuration, includeItems, itemLists,
-                    includePages, includeHidden).ConfigureAwait(false);
+                    includePages, includeHidden, includeFiles, fileLibraries, TemplateFolder).ConfigureAwait(false);
 
                 System.Console.WriteLine("Extracting...");
 
@@ -387,40 +421,82 @@ namespace Demo.Console.Provisioning
         /// Turns the "include content as well" answers into extract configuration.
         /// </summary>
         private static async Task ApplyContentOptionsAsync(PnPContext context, ExtractConfiguration configuration,
-            bool includeItems, List<string> itemLists, bool includePages, bool includeHiddenLists)
+            bool includeItems, List<string> itemLists, bool includePages, bool includeHiddenLists,
+            bool includeFiles, List<string> fileLibraries, string outputFolder)
         {
             configuration.Lists.IncludeHiddenLists = includeHiddenLists;
-
-            // Pages are read by ObjectClientSidePageContents, which needs telling: without this the
-            // extract records the library and none of the pages in it.
             configuration.Pages.IncludeAllClientSidePages = includePages;
 
-            if (!includeItems)
+            if (includeItems)
             {
-                return;
+                List<string> titles = itemLists != null && itemLists.Count > 0
+                    ? itemLists
+                    : await ListsWithItemsAsync(context, includeHiddenLists).ConfigureAwait(false);
+
+                foreach (string title in titles)
+                {
+                    ListConfig(configuration, title).IncludeItems = true;
+                    ListConfig(configuration, title).Query =
+                        new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsQueryConfiguration
+                        {
+                            IncludeAttachments = true,
+                        };
+                }
+
+                System.Console.WriteLine($"Including the items of {titles.Count} list(s): {string.Join(", ", titles)}");
             }
 
-            // Items are opted into per list, so "all lists" means enumerating them. Document
-            // libraries are left out on purpose: ObjectListInstanceDataRows refuses them, and
-            // asking anyway would produce a warning per library and nothing else.
-            List<string> titles = itemLists != null && itemLists.Count > 0
-                ? itemLists
-                : await ListsWithItemsAsync(context, includeHiddenLists).ConfigureAwait(false);
-
-            foreach (string title in titles)
+            if (includeFiles)
             {
-                configuration.Lists.Lists.Add(new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
+                List<string> libraries = fileLibraries != null && fileLibraries.Count > 0
+                    ? fileLibraries
+                    : await DocumentLibrariesAsync(context, includeHiddenLists).ConfigureAwait(false);
+
+                foreach (string library in libraries)
+                {
+                    ListConfig(configuration, library).IncludeFiles = true;
+                }
+
+                System.IO.Directory.CreateDirectory(outputFolder);
+                configuration.FileConnector = new PnP.Core.Provisioning.Connectors.FileSystemConnector(
+                    outputFolder, string.Empty);
+
+                System.Console.WriteLine($"Exporting the files of {libraries.Count} document library(ies): {string.Join(", ", libraries)}");
+                System.Console.WriteLine($"Files are written next to the template, under {outputFolder}");
+            }
+        }
+
+        private static PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsListsConfiguration ListConfig(
+            ExtractConfiguration configuration, string title)
+        {
+            PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsListsConfiguration entry =
+                configuration.Lists.Lists.FirstOrDefault(l =>
+                    string.Equals(l.Title, title, StringComparison.OrdinalIgnoreCase));
+
+            if (entry == null)
+            {
+                entry = new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
                 {
                     Title = title,
-                    IncludeItems = true,
-                    Query = new PnP.Core.Provisioning.Model.Configuration.Lists.Lists.ExtractListsQueryConfiguration
-                    {
-                        IncludeAttachments = true,
-                    },
-                });
+                };
+
+                configuration.Lists.Lists.Add(entry);
             }
 
-            System.Console.WriteLine($"Including the items of {titles.Count} list(s): {string.Join(", ", titles)}");
+            return entry;
+        }
+
+        private static async Task<List<string>> DocumentLibrariesAsync(PnPContext context, bool includeHidden)
+        {
+            await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                l => l.Title, l => l.Hidden, l => l.BaseType)).ConfigureAwait(false);
+
+            return context.Web.Lists.AsRequested()
+                .Where(l => l.BaseType == ListBaseType.DocumentLibrary)
+                .Where(l => includeHidden || !l.Hidden)
+                .Select(l => l.Title)
+                .OrderBy(t => t, StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
 
         private static async Task<List<string>> ListsWithItemsAsync(PnPContext context, bool includeHidden)

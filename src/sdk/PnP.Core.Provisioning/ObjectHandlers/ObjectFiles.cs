@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreFile = PnP.Core.Model.SharePoint.IFile;
+using CoreList = PnP.Core.Model.SharePoint.IList;
 using FileLevelModel = PnP.Core.Provisioning.Model.FileLevel;
 using FileModel = PnP.Core.Provisioning.Model.File;
 
@@ -55,7 +56,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         public override bool WillExtract(PnPContext context, ProvisioningTemplate template, ExtractConfiguration configuration)
         {
-            _willExtract ??= false;
+            _willExtract ??= configuration?.Lists?.Lists?.Any(l => l.IncludeFiles) == true;
             return _willExtract.Value;
         }
 
@@ -74,6 +75,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
             string webUrl = web.ServerRelativeUrl.TrimEnd('/');
             bool isNoScriptSite = await web.IsNoScriptSiteAsync().ConfigureAwait(false);
+            await LoadMinorVersionSupportAsync(context).ConfigureAwait(false);
+
 
             List<FileModel> files = template.Files
                 .Concat(TemplateFileUtilities.ExpandDirectories(template))
@@ -266,6 +269,72 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             }
         }
 
+
+        private static FileLevelModel LevelOf(CoreFile file)
+        {
+            try
+            {
+                switch (file.Level)
+                {
+                    case PublishedStatus.Draft:
+                        return FileLevelModel.Draft;
+
+                    case PublishedStatus.Checkout:
+                        return FileLevelModel.Checkout;
+
+                    default:
+                        return FileLevelModel.Published;
+                }
+            }
+            catch (Exception)
+            {
+                return FileLevelModel.Published;
+            }
+        }
+        private Dictionary<string, bool> _minorVersionsByLibrary;
+
+        private async Task LoadMinorVersionSupportAsync(PnPContext context)
+        {
+            _minorVersionsByLibrary = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+
+            try
+            {
+                await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                    l => l.BaseType, l => l.EnableMinorVersions,
+                    l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl))).ConfigureAwait(false);
+
+                foreach (CoreList list in context.Web.Lists.AsRequested())
+                {
+                    string root = list.RootFolder?.ServerRelativeUrl;
+
+                    if (!string.IsNullOrEmpty(root))
+                    {
+                        _minorVersionsByLibrary[root.TrimEnd('/')] = list.EnableMinorVersions;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                context.Logger?.LogDebug(ex, "{Source}: the libraries' versioning settings could not be read.",
+                    Constants.LOGGING_SOURCE);
+            }
+        }
+
+        private bool SupportsPublishing(string fileServerRelativeUrl)
+        {
+            if (_minorVersionsByLibrary == null || string.IsNullOrEmpty(fileServerRelativeUrl))
+            {
+                return false;
+            }
+
+            string match = _minorVersionsByLibrary.Keys
+                .Where(root => fileServerRelativeUrl.StartsWith(root + "/", StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(root => root.Length)
+                .FirstOrDefault();
+
+            return match != null && _minorVersionsByLibrary[match];
+        }
+
         private async Task ApplyLevelAsync(PnPContext context, CoreFile targetFile, FileModel file, bool checkedOut)
         {
             try
@@ -278,7 +347,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                             await targetFile.CheckinAsync(string.Empty, CheckinType.MajorCheckIn).ConfigureAwait(false);
                         }
 
-                        await targetFile.PublishAsync().ConfigureAwait(false);
+                        if (SupportsPublishing(targetFile.ServerRelativeUrl))
+                        {
+                            await targetFile.PublishAsync().ConfigureAwait(false);
+                        }
+
                         break;
 
                     case FileLevelModel.Draft:
@@ -355,14 +428,131 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         #endregion
 
         #region Extract
-
-        /// <summary>
-        /// Not implemented, matching PnP Framework.
-        /// </summary>
-        public override Task<ProvisioningTemplate> ExtractObjectsAsync(PnPContext context, ProvisioningTemplate template,
+        public override async Task<ProvisioningTemplate> ExtractObjectsAsync(PnPContext context, ProvisioningTemplate template,
             ExtractConfiguration configuration)
         {
-            return Task.FromResult(template);
+            List<string> wanted = configuration?.Lists?.Lists?
+                .Where(l => l.IncludeFiles && !string.IsNullOrWhiteSpace(l.Title))
+                .Select(l => l.Title)
+                .ToList() ?? new List<string>();
+
+            if (wanted.Count == 0)
+            {
+                return template;
+            }
+
+            if (configuration.FileConnector == null)
+            {
+                const string message = "Files were requested but no FileConnector was configured, so there is "
+                    + "nowhere to write them. Set ExtractConfiguration.FileConnector.";
+
+                context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                WriteMessage(message, ProvisioningMessageType.Warning);
+
+                return template;
+            }
+
+            IWeb web = context.Web;
+            await web.LoadAsync(w => w.ServerRelativeUrl,
+                w => w.Lists.QueryProperties(l => l.Title, l => l.BaseType,
+                    l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl, f => f.Name))).ConfigureAwait(false);
+
+            string webUrl = web.ServerRelativeUrl.TrimEnd('/');
+            List<CoreList> lists = web.Lists.AsRequested().ToList();
+
+            int index = 0;
+
+            foreach (string title in wanted)
+            {
+                index++;
+
+                CoreList library = lists.FirstOrDefault(l =>
+                    string.Equals(l.Title, title, StringComparison.OrdinalIgnoreCase));
+
+                if (library == null)
+                {
+                    string warning = $"This site has no list called '{title}', so no files were exported from it.";
+                    context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                    WriteMessage(warning, ProvisioningMessageType.Warning);
+                    continue;
+                }
+
+                if (library.BaseType != ListBaseType.DocumentLibrary)
+                {
+                    string warning = $"The list '{title}' is not a document library, so it holds no files to export. "
+                        + "Use IncludeItems for its items instead.";
+                    context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                    WriteMessage(warning, ProvisioningMessageType.Warning);
+                    continue;
+                }
+
+                WriteSubProgress("Library", title, index, wanted.Count);
+
+                await ExtractLibraryFilesAsync(context, template, configuration, library, webUrl).ConfigureAwait(false);
+            }
+
+            WriteMessage("Done processing files", ProvisioningMessageType.Completed);
+
+            return template;
+        }
+
+        private async Task ExtractLibraryFilesAsync(PnPContext context, ProvisioningTemplate template,
+            ExtractConfiguration configuration, CoreList library, string webUrl)
+        {
+            IFolder root = await library.RootFolder.GetAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+
+            await ExtractFolderAsync(context, template, configuration, root, webUrl, library.Title).ConfigureAwait(false);
+        }
+
+        private async Task ExtractFolderAsync(PnPContext context, ProvisioningTemplate template,
+            ExtractConfiguration configuration, IFolder folder, string webUrl, string libraryTitle)
+        {
+            await folder.LoadAsync(
+                f => f.Files.QueryProperties(file => file.Name, file => file.ServerRelativeUrl, file => file.Level),
+                f => f.Folders.QueryProperties(sub => sub.Name, sub => sub.ServerRelativeUrl)).ConfigureAwait(false);
+
+            string folderPath = folder.ServerRelativeUrl.StartsWith(webUrl, StringComparison.OrdinalIgnoreCase)
+                ? folder.ServerRelativeUrl.Substring(webUrl.Length).TrimStart('/')
+                : folder.ServerRelativeUrl.TrimStart('/');
+
+            foreach (CoreFile file in folder.Files.AsRequested())
+            {
+                try
+                {
+                    byte[] bytes = await file.GetContentBytesAsync().ConfigureAwait(false);
+
+                    string container = folderPath.Replace(Convert.ToChar(47), Convert.ToChar(92));
+
+                    using (var stream = new MemoryStream(bytes))
+                    {
+                        configuration.FileConnector.SaveFileStream(file.Name, container, stream);
+                    }
+
+                    template.Files.Add(new FileModel
+                    {
+                        Src = string.IsNullOrEmpty(folderPath) ? file.Name : $"{folderPath}/{file.Name}",
+                        Folder = $"{{site}}/{folderPath}",
+                        Overwrite = true,
+                        Level = LevelOf(file),
+                    });
+                }
+                catch (Exception ex)
+                {
+                    string warning = $"The file '{file.ServerRelativeUrl}' could not be exported: {ErrorText.Describe(ex)}";
+                    context.Logger?.LogWarning(ex, "{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                    WriteMessage(warning, ProvisioningMessageType.Warning);
+                }
+            }
+
+            foreach (IFolder child in folder.Folders.AsRequested())
+            {
+                if (string.Equals(child.Name, "Forms", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                await ExtractFolderAsync(context, template, configuration, child, webUrl, libraryTitle).ConfigureAwait(false);
+            }
         }
 
         #endregion

@@ -453,6 +453,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 objectHandlers.Add(new ObjectListInstanceDataRows());
             }
 
+            if (all || configuration.Handlers.Contains(ConfigurationHandler.Files))
+            {
+                objectHandlers.Add(new ObjectFiles());
+            }
+
             if (all || configuration.Handlers.Contains(ConfigurationHandler.CustomActions))
             {
                 objectHandlers.Add(new ObjectCustomActions());
