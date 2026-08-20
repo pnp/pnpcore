@@ -206,7 +206,7 @@ namespace PnP.Core.Provisioning.Test.Live.BaseTemplates
 
                 using (admin)
                 {
-                    string owner = (await seed.Web.GetCurrentUserAsync().ConfigureAwait(false)).LoginName;
+                    string owner = await SiteOwnerAsync(seed).ConfigureAwait(false);
                     string host = seed.Uri.DnsSafeHost;
 
                     sourceUrl = new Uri($"https://{host}/sites/pnpbase{slug}src{fixture}");
@@ -286,11 +286,7 @@ namespace PnP.Core.Provisioning.Test.Live.BaseTemplates
                 try
                 {
                     using (PnPContext created = await manager
-                        .CreateSiteCollectionAsync(options, new SiteCreationOptions
-                        {
-                            UsingApplicationPermissions = false,
-                            WaitForAsyncProvisioning = true,
-                        }).ConfigureAwait(false))
+                        .CreateSiteCollectionAsync(options, CreationOptions(admin)).ConfigureAwait(false))
                     {
                         Console.WriteLine($"  created {created.Uri}");
                     }

@@ -62,7 +62,8 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                     try
                     {
                         ProvisioningHierarchy hierarchy = BuildHierarchy(
-                            siteUrl, themeName, termGroupName, termGroupId, listTitle);
+                            siteUrl, themeName, termGroupName, termGroupId, listTitle,
+                            await SiteOwnerAsync(context).ConfigureAwait(false));
 
                         var problems = new List<string>();
 
@@ -116,7 +117,7 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
         }
 
         private static ProvisioningHierarchy BuildHierarchy(Uri siteUrl, string themeName, string termGroupName,
-            Guid termGroupId, string listTitle)
+            Guid termGroupId, string listTitle, string owner)
         {
             var hierarchy = new ProvisioningHierarchy
             {
@@ -161,6 +162,7 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                 Title = $"{TestPrefix}Hierarchy",
                 Description = "Created by the PnP Core provisioning tests",
                 Language = 1033,
+                Owner = owner,
                 ProvisioningId = "HIER-SITE",
             };
 
