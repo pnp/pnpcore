@@ -19,6 +19,21 @@
         /// Where the interactive sign in returns to. Must match the application's registration.
         /// </summary>
         public string RedirectUri { get; set; }
+        /// <summary>
+        /// Thumbprint of a certificate in the certificate store. When set, the sample authenticates
+        /// as the application instead of signing a user in.
+        /// </summary>
+        public string CertificateThumbprint { get; set; }
+
+        /// <summary>
+        /// Certificate store name holding the certificate. Defaults to My.
+        /// </summary>
+        public string CertificateStoreName { get; set; }
+
+        /// <summary>
+        /// Certificate store location holding the certificate. Defaults to CurrentUser.
+        /// </summary>
+        public string CertificateStoreLocation { get; set; }
 
         /// <summary>
         /// Where extracted templates are written, relative to the executable.

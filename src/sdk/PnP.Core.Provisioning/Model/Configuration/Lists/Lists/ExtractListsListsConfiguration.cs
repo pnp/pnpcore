@@ -10,6 +10,9 @@ namespace PnP.Core.Provisioning.Model.Configuration.Lists.Lists
         [JsonPropertyName("includeItems")]
         public bool IncludeItems { get; set; }
 
+        [JsonPropertyName("includeFiles")]
+        public bool IncludeFiles { get; set; }
+
         [JsonPropertyName("keyColumn")]
         public string KeyColumn { get; set; }
 

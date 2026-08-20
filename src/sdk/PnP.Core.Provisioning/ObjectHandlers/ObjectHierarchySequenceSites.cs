@@ -177,8 +177,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
             var creationOptions = new SiteCreationOptions
             {
-                UsingApplicationPermissions = false,
-
                 WaitForAsyncProvisioning = true,
             };
 
