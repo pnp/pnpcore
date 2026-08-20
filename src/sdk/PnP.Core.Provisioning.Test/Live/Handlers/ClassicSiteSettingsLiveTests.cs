@@ -29,6 +29,13 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
         {
             using (PnPContext context = await GetClassicContextAsync().ConfigureAwait(false))
             {
+                if (await IsNoScriptAsync(context).ConfigureAwait(false))
+                {
+                    Assert.Inconclusive(
+                        "The audit handler declines a NoScript site, so applying audit settings cannot be "
+                        + "verified here. Turn scripting on for the classic test site to exercise this.");
+                }
+
                 await context.Site.LoadAsync(s => s.AuditLogTrimmingRetention, s => s.TrimAuditLog).ConfigureAwait(false);
 
                 int originalRetention = context.Site.AuditLogTrimmingRetention;

@@ -104,7 +104,7 @@ namespace PnP.Core.Provisioning.Test.Scenarios
         {
             Console.WriteLine($"Creating {siteUrl}");
 
-            string owner = (await seed.Web.GetCurrentUserAsync().ConfigureAwait(false)).LoginName;
+            string owner = await SiteOwnerAsync(seed).ConfigureAwait(false);
 
             var options = new CommunicationSiteOptions(siteUrl, $"{TestPrefix}Scenario_{name}")
             {
@@ -114,11 +114,7 @@ namespace PnP.Core.Provisioning.Test.Scenarios
             };
 
             using (PnPContext created = await admin.GetSiteCollectionManager()
-                .CreateSiteCollectionAsync(options, new SiteCreationOptions
-                {
-                    UsingApplicationPermissions = false,
-                    WaitForAsyncProvisioning = true,
-                }).ConfigureAwait(false))
+                .CreateSiteCollectionAsync(options, CreationOptions(seed)).ConfigureAwait(false))
             {
                 Console.WriteLine($"Created {created.Uri}");
             }

@@ -1,7 +1,10 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Test.Utilities;
+using PnP.Core.Test.Common.Utilities;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -21,6 +24,58 @@ namespace PnP.Core.Provisioning.Test.Live
         /// swept up by hand.
         /// </summary>
         protected const string TestPrefix = "PnPCoreProvisioningTest_";
+
+        /// <summary>
+        /// Whether the run is authenticating as an application rather than as a user.
+        /// </summary>
+        /// <remarks>
+        /// Read from the context rather than configured separately, so it cannot disagree with the
+        /// credentials actually in use. App-only changes what the tests may assume: there is no
+        /// current user to own a site, and several handlers behave differently.
+        /// </remarks>
+        protected static async Task<bool> IsAppOnlyAsync(PnPContext context)
+        {
+            return await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// The login name to make the owner of a site this suite creates.
+        /// </summary>
+        /// <remarks>
+        /// App-only has no current user, so the owner has to come from configuration. A site
+        /// created with no owner is a site nobody can administer, so a missing setting stops the
+        /// test with a reason rather than creating one.
+        /// </remarks>
+        protected static async Task<string> SiteOwnerAsync(PnPContext seed)
+        {
+            if (!await IsAppOnlyAsync(seed).ConfigureAwait(false))
+            {
+                return (await seed.Web.GetCurrentUserAsync().ConfigureAwait(false)).LoginName;
+            }
+
+            string owner = TestCommonBase.GetConfigurationSettings()["AppOnly:SiteOwner"];
+
+            if (string.IsNullOrWhiteSpace(owner) || owner.StartsWith("<", StringComparison.Ordinal))
+            {
+                Assert.Inconclusive(
+                    "This run authenticates as an application, which has no current user to own a site. "
+                    + "Set \"AppOnly\": { \"SiteOwner\": \"someone@yourtenant.onmicrosoft.com\" } in the "
+                    + "appsettings file named by env.txt.");
+            }
+
+            return owner;
+        }
+
+        /// <summary>
+        /// The site creation options for this run, so app-only creation is not attempted as a user.
+        /// </summary>
+        protected static SiteCreationOptions CreationOptions(PnPContext seed)
+        {
+            return new SiteCreationOptions
+            {
+                WaitForAsyncProvisioning = true,
+            };
+        }
 
         /// <summary>
         /// Skips the test with a clear reason rather than failing it, for the capabilities a

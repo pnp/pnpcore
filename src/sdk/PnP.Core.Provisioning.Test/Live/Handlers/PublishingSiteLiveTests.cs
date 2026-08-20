@@ -47,7 +47,7 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
             {
                 using (PnPContext seed = await GetContextAsync().ConfigureAwait(false))
                 {
-                    string owner = (await seed.Web.GetCurrentUserAsync().ConfigureAwait(false)).LoginName;
+                    string owner = await SiteOwnerAsync(seed).ConfigureAwait(false);
 
                     siteUrl = new Uri($"https://{seed.Uri.DnsSafeHost}/sites/" +
                         $"pnpcoreprovisioningtestpub{Guid.NewGuid():N}");
@@ -61,10 +61,7 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                             owner, Language.English, TimeZone.UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS);
 
                         using (PnPContext created = await admin.GetSiteCollectionManager()
-                            .CreateSiteCollectionAsync(options, new SiteCreationOptions
-                            {
-                                UsingApplicationPermissions = false,
-                            }).ConfigureAwait(false))
+                            .CreateSiteCollectionAsync(options, CreationOptions(seed)).ConfigureAwait(false))
                         {
                             Console.WriteLine($"Created {created.Uri}");
                         }
