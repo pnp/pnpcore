@@ -22,6 +22,10 @@ namespace Demo.Console.Provisioning
 
         public bool IncludeItems { get; private set; }
 
+        public bool IncludeFiles { get; private set; }
+
+        public List<string> FileLibraries { get; } = new List<string>();
+
         public List<string> ItemLists { get; } = new List<string>();
 
         public bool IncludePages { get; private set; }
@@ -43,6 +47,16 @@ namespace Demo.Console.Provisioning
             foreach (string arg in args)
             {
                 string lower = arg.ToLowerInvariant();
+
+                if (lower.StartsWith("--files=", StringComparison.Ordinal))
+                {
+                    command.IncludeFiles = true;
+                    command.FileLibraries.AddRange(arg.Substring("--files=".Length)
+                        .Split(',')
+                        .Select(t => t.Trim())
+                        .Where(t => t.Length > 0));
+                    continue;
+                }
 
                 if (lower.StartsWith("--items=", StringComparison.Ordinal))
                 {
@@ -70,6 +84,10 @@ namespace Demo.Console.Provisioning
 
                     case "--items":
                         command.IncludeItems = true;
+                        break;
+
+                    case "--files":
+                        command.IncludeFiles = true;
                         break;
 
                     case "--pages":
@@ -133,9 +151,9 @@ namespace Demo.Console.Provisioning
 
             // The content options only mean something on an extract. Silently ignoring them on an
             // apply would let a mistyped command look like it did what was asked.
-            if (!extractVerb && (command.IncludeItems || command.IncludePages || command.IncludeHiddenLists))
+            if (!extractVerb && (command.IncludeItems || command.IncludePages || command.IncludeHiddenLists || command.IncludeFiles))
             {
-                System.Console.Error.WriteLine("--items, --pages and --hidden-lists apply to 'extract', not 'apply'.");
+                System.Console.Error.WriteLine("--items, --files, --pages and --hidden-lists apply to 'extract', not 'apply'.");
 
                 command.ShowHelp = true;
                 command.IsValid = false;
@@ -163,11 +181,12 @@ namespace Demo.Console.Provisioning
             System.Console.WriteLine("Extract options (structure only, unless you ask for more):");
             System.Console.WriteLine("  --items              include the items of every list on the site");
             System.Console.WriteLine("  --items=A,B          include the items of these lists only");
+            System.Console.WriteLine("  --files              export the files of every document library");
+            System.Console.WriteLine("  --files=A,B          export the files of these document libraries only");
             System.Console.WriteLine("  --pages              include the site's client side pages and their contents");
             System.Console.WriteLine("  --hidden-lists       include hidden lists in the structure");
             System.Console.WriteLine();
-            System.Console.WriteLine("  Document libraries are skipped by --items and their files are not");
-            System.Console.WriteLine("  exported: the engine has no file extraction yet.");
+            System.Console.WriteLine("  --items skips document libraries; use --files for their contents.");
             System.Console.WriteLine();
             System.Console.WriteLine("Options:");
             System.Console.WriteLine("  -v, --verbose   log the SDK's own requests as well");

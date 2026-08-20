@@ -204,6 +204,77 @@ Type the site's name to confirm, or anything else to cancel: marketing-copy
 **Applying changes a real site and there is no undo**, which is why it asks you to type the name
 rather than press y. The previous prompt was a url, and urls are easy to mistype.
 
+
+---
+
+## Running as the application (app-only)
+
+Everything above signs a **user** in. For unattended use — a build agent, a scheduled job — the
+sample can authenticate as the **application** instead. Set a certificate thumbprint in
+`appsettings.json` and no browser window appears:
+
+```json
+{
+  "CustomSettings": {
+    "ClientId": "<client id of the app registration>",
+    "TenantId": "<tenant id>",
+    "CertificateThumbprint": "DF5450F6FB23838465128BBFC95C86091504B16B",
+    "CertificateStoreName": "My",
+    "CertificateStoreLocation": "CurrentUser",
+    "TemplateFolder": "Templates"
+  }
+}
+```
+
+Leave `CertificateThumbprint` empty and the sample signs a user in interactively as before.
+`CertificateStoreName` and `CertificateStoreLocation` are optional and default to `My` and
+`CurrentUser`.
+
+### A certificate is required — a client secret will not work
+
+Azure AD app-only against SharePoint **must** use a certificate. SharePoint rejects app-only
+tokens obtained with a client secret, and PnP Core ships no client-secret provider.
+
+```powershell
+$c = New-SelfSignedCertificate -Subject "CN=PnPProvisioningAppOnly" `
+    -CertStoreLocation "Cert:\CurrentUser\My" -KeyExportPolicy Exportable `
+    -KeySpec Signature -NotAfter (Get-Date).AddYears(2)
+Export-Certificate -Cert $c -FilePath "$env:USERPROFILE\Desktop\PnPProvisioningAppOnly.cer"
+$c.Thumbprint
+```
+
+Upload the `.cer` under **Certificates & secrets → Certificates** on the app registration.
+
+### Application permissions
+
+These are **Application** permissions, not Delegated, and they need **Grant admin consent**:
+
+| API | Permission | Needed for |
+|---|---|---|
+| SharePoint | `Sites.FullControl.All` | applying templates, creating sites |
+| SharePoint | `User.Read.All` | resolving users in security and list items |
+| Microsoft Graph | `Sites.FullControl.All` | modern sites |
+| Microsoft Graph | `Group.ReadWrite.All` | group connected sites |
+| Microsoft Graph | `User.Read.All` | user lookup |
+| Microsoft Graph | `TermStore.ReadWrite.All` | term groups, term sets, taxonomy columns |
+
+**The Graph term store permission is the one people miss.** SharePoint has a permission with the
+same name, and picking that one instead leaves every taxonomy operation failing with
+`HTTP 403 accessDenied` — term groups, labels and custom properties, while term sets and terms
+keep working, because those go through a different path.
+
+### What behaves differently app-only
+
+**There is no current user**, and two things follow from that:
+
+- **`Owner` becomes mandatory** on any site a template creates. Under a signed-in user the owner
+  defaults to that user; as an application there is nobody to default to, and site creation fails
+  with *"You need to set an owner when using Application permissions to create a communication
+  site"*. Set `Owner` on the site collection in hierarchy and sequence templates.
+- Anything resolving "me" — a template using the current user as a value — has nothing to resolve.
+
+Templates that apply cleanly interactively can fail unattended for exactly these reasons, so it is
+worth applying a template app-only once before relying on it in automation.
 ---
 
 ## Configuration
@@ -230,6 +301,9 @@ rather than press y. The previous prompt was a url, and urls are easy to mistype
 | `TenantId` | `common` asks which tenant at sign in. Set a tenant id to skip that. |
 | `RedirectUri` | Where sign in returns to. **Must match the application's registration** — leave it alone unless you changed `ClientId`. |
 | `TemplateFolder` | Where extracted templates are written, relative to the executable. |
+| `CertificateThumbprint` | Set it to authenticate as the application instead of signing a user in. See [Running as the application](#running-as-the-application-app-only). Leave empty for interactive sign in. |
+| `CertificateStoreName` | Optional, defaults to `My`. |
+| `CertificateStoreLocation` | Optional, defaults to `CurrentUser`. |
 
 Raise `Logging:LogLevel:Default` to `Information` to see what the engine is doing underneath. It is
 verbose — the sample prints its own progress precisely so you do not need to.
