@@ -827,6 +827,101 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region brandcenter
+
+        public async Task<IBrandcenterConfiguration> GetBrandcenterConfigurationAsync()
+        {
+            var batch = context.NewBatch();
+            var brandcenterConfiguration = await GetBrandcenterConfigurationBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return brandcenterConfiguration.Result;
+        }
+
+        public IBrandcenterConfiguration GetBrandcenterConfiguration()
+        {
+            return GetBrandcenterConfigurationAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetBrandcenterConfigurationApiCall();
+            return await GetBrandcenterConfigurationBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IBrandcenterConfiguration> GetBrandcenterConfigurationBatch(Batch batch)
+        {
+            return GetBrandcenterConfigurationBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetBrandcenterConfigurationApiCall()
+        {
+            return new ApiCall("_api/brandcenter/configuration", ApiType.SPORest);
+        }
+
+        public async Task<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationAsync()
+        {
+            var batch = context.NewBatch();
+            var brandcenterConfiguration = await GetCurrentBrandcenterConfigurationBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return brandcenterConfiguration.Result;
+        }
+
+        public IBrandcenterConfiguration GetCurrentBrandcenterConfiguration()
+        {
+            return GetCurrentBrandcenterConfigurationAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetCurrentBrandcenterConfigurationBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetCurrentBrandcenterConfigurationApiCall();
+            return await GetBrandcenterConfigurationBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationBatch(Batch batch)
+        {
+            return GetCurrentBrandcenterConfigurationBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetCurrentBrandcenterConfigurationApiCall()
+        {
+            return new ApiCall("_api/brandcenter/currentbrandingconfiguration", ApiType.SPORest);
+        }
+
+
+        private async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch, ApiCall apiCall)
+        {
+            // Since we're doing a raw batch request the processing of the batch response needs be implemented
+            apiCall.RawSingleResult = new BrandcenterConfiguration();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessBrandcenterConfigurationResponse(json, (IBrandcenterConfiguration)apiCall.RawSingleResult);
+            };
+
+            // Add the request to the batch
+            var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchSingleResult<IBrandcenterConfiguration>(batch, batchRequest.Id, (IBrandcenterConfiguration)apiCall.RawSingleResult);
+        }
+
+        private static void ProcessBrandcenterConfigurationResponse(string jsonString, IBrandcenterConfiguration brandcenterConfiguration)
+        {
+            var jsonBrandcenterConfiguration = JsonSerializer.Deserialize<BrandcenterConfiguration>(jsonString);
+            brandcenterConfiguration.BrandColorsListId = jsonBrandcenterConfiguration.BrandColorsListId;
+            brandcenterConfiguration.BrandColorsListUrl = jsonBrandcenterConfiguration.BrandColorsListUrl;
+            brandcenterConfiguration.BrandFontLibraryId = jsonBrandcenterConfiguration.BrandFontLibraryId;
+            brandcenterConfiguration.BrandFontLibraryUrl = jsonBrandcenterConfiguration.BrandFontLibraryUrl;
+            brandcenterConfiguration.IsBrandCenterSiteFeatureEnabled = jsonBrandcenterConfiguration.IsBrandCenterSiteFeatureEnabled;
+            brandcenterConfiguration.IsPublicCdnEnabled = jsonBrandcenterConfiguration.IsPublicCdnEnabled;
+            brandcenterConfiguration.OrgSkillsLibraryId = jsonBrandcenterConfiguration.OrgSkillsLibraryId;
+            brandcenterConfiguration.OrgSkillsLibraryUrl = jsonBrandcenterConfiguration.OrgSkillsLibraryUrl;
+            brandcenterConfiguration.SiteId = jsonBrandcenterConfiguration.SiteId;
+            brandcenterConfiguration.SiteUrl = jsonBrandcenterConfiguration.SiteUrl;
+            brandcenterConfiguration.OrgAssets = jsonBrandcenterConfiguration.OrgAssets;
+        }
+
+        #endregion brandcenter
+
         #region OutOfBoxFontPackages
 
         public async Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync()

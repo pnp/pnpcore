@@ -224,13 +224,69 @@ namespace PnP.Core.Model.SharePoint
         void SetChromeOptionsBatch(IChromeOptions chromeOptions);
         #endregion
 
+        #region brandcenter
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBrandcenterConfiguration> GetBrandcenterConfigurationAsync();
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBrandcenterConfiguration GetBrandcenterConfiguration();
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBatchSingleResult<IBrandcenterConfiguration> GetBrandcenterConfigurationBatch(Batch batch);
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationAsync();
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBrandcenterConfiguration GetCurrentBrandcenterConfiguration();
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBatchSingleResult<IBrandcenterConfiguration>> GetCurrentBrandcenterConfigurationBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBatchSingleResult<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationBatch(Batch batch);
+
+        #endregion
+
         #region OutOfBoxFontPackages
 
         /// <summary>
         /// Gets the out of the box fonts available
         /// </summary>
         /// <returns>Site's <see cref="IFontPackage"/></returns>
-        Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync();
+        Task <List<IFontPackage>> GetOutOfBoxFontPackagesAsync();
 
         /// <summary>
         /// Gets the out of the box fonts available

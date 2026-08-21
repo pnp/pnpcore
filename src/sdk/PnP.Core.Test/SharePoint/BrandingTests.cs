@@ -198,10 +198,32 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Navigation.HorizontalQuickLaunch = true;
                 chrome.Navigation.MegaMenuEnabled = true;
 
+                var orginalFontSiteTitle = chrome.Font.SiteTitle;
+                chrome.Font.SiteTitle = new Model.SharePoint.FontOption
+                {
+                    FamilyKey = "Aptos Display Bold",
+                };
+
+                var orginalFontSiteNav = chrome.Font.SiteNav;
+                chrome.Font.SiteNav = new Model.SharePoint.FontOption
+                {
+                    FamilyKey = "Aptos Serif Regular",
+                };
+                var orginalFontSiteFooterTitle = chrome.Font.SiteFooterTitle;
+                chrome.Font.SiteFooterTitle = new Model.SharePoint.FontOption
+                {
+                    FamilyKey = "Aptos Display Bold",
+                };
+                var orginalFontSiteFooterNav = chrome.Font.SiteFooterNav;
+                chrome.Font.SiteFooterNav = new Model.SharePoint.FontOption
+                {
+                    FamilyKey = "Aptos Serif Regular",
+                };
+
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
 
                 chrome = context.Web.GetBrandingManager().GetChromeOptions();
-                
+
                 Assert.IsTrue(chrome != null);
                 Assert.IsTrue(chrome.Header.Emphasis == Model.SharePoint.VariantThemeType.Strong);
                 Assert.IsTrue(chrome.Header.HideTitle == true);
@@ -217,6 +239,20 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(context.Web.HeaderLayout == Model.SharePoint.HeaderLayoutType.Extended);
                 Assert.IsTrue(context.Web.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
 
+                // verify if font settings are applied with the chrome settings
+                // Complete sequence of font settings is:
+                // GET /_api/OutOfBoxFontPackages
+                // GET /_api/SiteFontPackages/
+                // POST _api/web/SetChromeOptions
+                // POST _api/ThemeManager/ApplyTheme
+                // either of the following two calls are made to apply the font settings
+                // POST /_api/OutOfBoxFontPackages/GetById('59148df6-fea6-4bed-9a1e-de7652b2feb2')/Apply
+                // POST /_api/FontPackages/GetById('21fae38a-8f48-4a7a-bf9f-0df507beb39f')/Apply
+                Assert.IsTrue(chrome.Font.SiteTitle.FamilyKey == "Aptos Display Bold");
+                Assert.IsTrue(chrome.Font.SiteNav.FamilyKey == "Aptos Serif Regular");
+                Assert.IsTrue(chrome.Font.SiteFooterTitle.FamilyKey == "Aptos Display Bold");
+                Assert.IsTrue(chrome.Font.SiteFooterNav.FamilyKey == "Aptos Serif Regular");
+
                 // Reset chrome options again
                 chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
                 chrome.Header.HideTitle = false;
@@ -225,9 +261,128 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Navigation.HorizontalQuickLaunch = false;
                 chrome.Navigation.MegaMenuEnabled = false;
 
+                //reset Font settings to original values
+                chrome.Font.SiteTitle = orginalFontSiteTitle;
+                chrome.Font.SiteNav = orginalFontSiteNav;
+                chrome.Font.SiteFooterTitle = orginalFontSiteFooterTitle;
+                chrome.Font.SiteFooterNav = orginalFontSiteFooterNav;
+
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
             }
         }
+
+        [TestMethod]
+        public void GetBrandcenterConfiguration()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var brandcenterConfig = context.Web.GetBrandingManager().GetBrandcenterConfiguration();
+
+                Assert.IsTrue(brandcenterConfig != null);
+            }
+        }
+
+        [TestMethod]
+        public void GetCurrentBrandcenterConfiguration()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var currentbrandcenterConfig = context.Web.GetBrandingManager().GetCurrentBrandcenterConfiguration();
+
+                Assert.IsTrue(currentbrandcenterConfig != null);
+            }
+        }
+
+
+        [TestMethod]
+        public void GetOutOfBoxFontPackages()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var oobFonts = context.Web.GetBrandingManager().GetOutOfBoxFontPackages();
+
+                Assert.IsTrue(oobFonts != null);
+                Assert.IsTrue(oobFonts.Count() > 0);
+            }
+        }
+
+
+        [TestMethod]
+        public void SetOutOfBoxFontPackages()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var oobFonts = context.Web.GetBrandingManager().GetOutOfBoxFontPackages();
+                Assert.IsTrue(oobFonts != null);
+                Assert.IsTrue(oobFonts.Count() > 0);
+
+                //Get the font package currently set on the site from web properties fontpackageid
+                context.Web.EnsureProperties(w => w.AllProperties);
+                var currentFontPackageId = context.Web.AllProperties.Values.TryGetValue("fontpackageid", out var fontPackageId) ? fontPackageId?.ToString() : null;
+
+                var voobFont = oobFonts.FirstOrDefault(p => p.Title == "Aptos-Aptos Serif");
+                Assert.IsTrue(voobFont != null);
+
+                context.Web.GetBrandingManager().SetOutOfBoxFontPackage(voobFont.ID);
+                var refreshWeb = context.Web.GetAsync(w => w.AllProperties).GetAwaiter().GetResult();
+                var newFontPackageId = refreshWeb.AllProperties.Values.TryGetValue("fontpackageid", out var fontPackageIdNew) ? fontPackageIdNew?.ToString() : null;
+                var newFontPackageIdParts = newFontPackageId.Split('|');
+
+                Assert.IsTrue(newFontPackageIdParts.Length == 2);
+                Assert.IsTrue("outofbox" == newFontPackageIdParts.FirstOrDefault());
+                Assert.IsTrue(voobFont.ID == newFontPackageIdParts.LastOrDefault());
+
+                if(currentFontPackageId != null)
+                {
+                    // Reset to original font package
+                    var fontPackageIdParts = currentFontPackageId.Split('|');
+                    currentFontPackageId = fontPackageIdParts.LastOrDefault();
+                    if (fontPackageIdParts.FirstOrDefault() == "outofbox")
+                    {
+                        context.Web.GetBrandingManager().SetOutOfBoxFontPackage(currentFontPackageId);
+                    }
+                    else
+                    {
+                        context.Web.GetBrandingManager().SetFontPackage(currentFontPackageId);
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public void GetSiteFontPackages()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var siteFonts = context.Web.GetBrandingManager().GetSiteFontPackages();
+
+                Assert.IsTrue(siteFonts != null);
+            }
+        }
+
+        [TestMethod]
+        public void GetFontPackages()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var fonts = context.Web.GetBrandingManager().GetFontPackages();
+
+                Assert.IsTrue(fonts != null);
+            }
+        }
+
 
         [TestMethod]
         public void SetChromeOptionsForTeamSiteBatch()
