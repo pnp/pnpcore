@@ -2,6 +2,9 @@
 
 namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// JsonPropertyName are defined to match the property names in the JSON when deserializing the WebProperties in BrandingManager.cs
+    /// </summary>
     internal sealed class FontOption : IFontOption
     {
         /// <summary>

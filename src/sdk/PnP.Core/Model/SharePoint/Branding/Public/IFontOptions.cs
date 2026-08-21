@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Options to configure a the site font chrome.
+    /// Options to configure a the site font in ChromeOptions.
     /// </summary>
     public interface IFontOptions
     {

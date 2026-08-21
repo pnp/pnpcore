@@ -4,6 +4,7 @@ namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// specify font to use for header / footer
+    /// JsonPropertyName is used to match the property names in the JSON when serializing ChromeOptions in BrandingManager.cs
     /// </summary>
     public interface IFontOption
     {
