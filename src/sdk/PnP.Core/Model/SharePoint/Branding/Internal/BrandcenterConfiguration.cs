@@ -16,13 +16,7 @@ namespace PnP.Core.Model.SharePoint
             OrgSkillsLibraryUrl = null;
             SiteId = Guid.Empty;
             SiteUrl = null;
-            OrgAssets = new BrandcenterOrgAssets
-            {
-                Domain = null,
-                SiteId = Guid.Empty,
-                WebId = Guid.Empty,
-                Url = null
-            };
+            OrgAssets = new BrandcenterOrgAssets();
         }
 
         public Guid BrandColorsListId { get; set; }

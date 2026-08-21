@@ -8,6 +8,18 @@ namespace PnP.Core.Model.SharePoint
     public class BrandcenterOrgAssets
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="BrandcenterOrgAssets"/> class.
+        /// </summary>
+        public BrandcenterOrgAssets()
+        {
+            Domain = null;
+            Url = null;
+            SiteId = Guid.Empty;
+            WebId = Guid.Empty;
+            OrgAssetsLibraries = new BrandcenterOrgAssetsLibraryCollection();
+        }
+
+        /// <summary>
         /// Gets the domain of the organizational assets.
         /// </summary>
         public BrandcenterSPResourcePath Domain { get; set; }
