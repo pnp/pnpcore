@@ -191,7 +191,6 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
                     "GuestSharingGroupAllowListInTenantByPrincipalIdentity": null,
                     "HasAdminCompletedCUConfiguration": true,
                     "HasIntelligentContentServicesCapability": false,
-                    "HasTopicExperiencesCapability": true,
                     "HideSyncButtonOnDocLib": false,
                     "HideSyncButtonOnODB": false,
                     "IBImplicitGroupBased": false,

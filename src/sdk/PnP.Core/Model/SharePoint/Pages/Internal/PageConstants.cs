@@ -42,12 +42,6 @@
         internal const string SpacesLayoutType = "d39ad2cb-84bd-48a0-9daa-4aea9f644cd4";
         internal const string SpaceContentField = "SpaceContent";
 
-        // Topic pages
-        internal const string TopicLayoutType = "Topic";
-        internal const string TopicEntityId = "_EntityId";
-        internal const string TopicEntityRelations = "_EntityRelations";
-        internal const string TopicEntityType = "_EntityType";
-
         // Syntex models
         internal const string ModelExplanations = "ModelExplanations";
         internal const string ModelDescription = "ModelDescription";

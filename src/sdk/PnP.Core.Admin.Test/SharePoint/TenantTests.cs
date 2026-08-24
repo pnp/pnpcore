@@ -250,7 +250,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(tenantProperties.FilePickerExternalImageSearchEnabled.Test());
                 Assert.IsTrue(tenantProperties.HasAdminCompletedCUConfiguration.Test());
                 Assert.IsTrue(tenantProperties.HasIntelligentContentServicesCapability.Test());
-                Assert.IsTrue(tenantProperties.HasTopicExperiencesCapability.Test());
                 Assert.IsTrue(tenantProperties.HideSyncButtonOnDocLib.Test());
                 Assert.IsTrue(tenantProperties.HideSyncButtonOnODB.Test());
                 Assert.IsTrue(tenantProperties.IncludeAtAGlanceInShareEmails.Test());
