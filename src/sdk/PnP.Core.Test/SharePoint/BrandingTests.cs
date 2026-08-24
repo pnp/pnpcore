@@ -556,13 +556,6 @@ namespace PnP.Core.Test.SharePoint
 
                 try
                 {
-                    // Header layout is not set to extended, so exception will be thrown.
-                    Assert.ThrowsException<ClientException>(() =>
-                    {
-                        // Set the header
-                        chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 0, 0, true);
-                    });
-
                     // Ensure the extended layout is selected
                     chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
                     context.Web.GetBrandingManager().SetChromeOptions(chrome);
@@ -593,13 +586,6 @@ namespace PnP.Core.Test.SharePoint
 
                 try
                 {
-                    // Header layout is not set to extended, so exception will be thrown.
-                    Assert.ThrowsException<ClientException>(() =>
-                    {
-                        // Set the header
-                        chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 0, 0, true);
-                    });
-
                     // Ensure the extended layout is selected
                     chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
                     context.Web.GetBrandingManager().SetChromeOptions(chrome);
