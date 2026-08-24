@@ -7961,19 +7961,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasIntelligentContentServicesCapability
   nameWithType: ITenantProperties.HasIntelligentContentServicesCapability
-- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability
-  name: HasTopicExperiencesCapability
-  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_HasTopicExperiencesCapability
-  commentId: P:PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability
-  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability
-  nameWithType: ITenantProperties.HasTopicExperiencesCapability
-- uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability*
-  name: HasTopicExperiencesCapability
-  href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_HasTopicExperiencesCapability_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HasTopicExperiencesCapability
-  nameWithType: ITenantProperties.HasTopicExperiencesCapability
 - uid: PnP.Core.Admin.Model.SharePoint.ITenantProperties.HideSyncButtonOnDocLib
   name: HideSyncButtonOnDocLib
   href: api/PnP.Core.Admin.Model.SharePoint.ITenantProperties.html#PnP_Core_Admin_Model_SharePoint_ITenantProperties_HideSyncButtonOnDocLib
@@ -43818,45 +43805,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync
   nameWithType: IPage.EnableCommentsAsync
-- uid: PnP.Core.Model.SharePoint.IPage.EntityId
-  name: EntityId
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityId
-  commentId: P:PnP.Core.Model.SharePoint.IPage.EntityId
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityId
-  nameWithType: IPage.EntityId
-- uid: PnP.Core.Model.SharePoint.IPage.EntityId*
-  name: EntityId
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityId_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.EntityId
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityId
-  nameWithType: IPage.EntityId
-- uid: PnP.Core.Model.SharePoint.IPage.EntityRelations
-  name: EntityRelations
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityRelations
-  commentId: P:PnP.Core.Model.SharePoint.IPage.EntityRelations
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityRelations
-  nameWithType: IPage.EntityRelations
-- uid: PnP.Core.Model.SharePoint.IPage.EntityRelations*
-  name: EntityRelations
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityRelations_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.EntityRelations
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityRelations
-  nameWithType: IPage.EntityRelations
-- uid: PnP.Core.Model.SharePoint.IPage.EntityType
-  name: EntityType
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityType
-  commentId: P:PnP.Core.Model.SharePoint.IPage.EntityType
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityType
-  nameWithType: IPage.EntityType
-- uid: PnP.Core.Model.SharePoint.IPage.EntityType*
-  name: EntityType
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityType_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.EntityType
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.EntityType
-  nameWithType: IPage.EntityType
 - uid: PnP.Core.Model.SharePoint.IPage.Folder
   name: Folder
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Folder
@@ -57666,12 +57614,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.PageLayoutType.Spaces
   fullName: PnP.Core.Model.SharePoint.PageLayoutType.Spaces
   nameWithType: PageLayoutType.Spaces
-- uid: PnP.Core.Model.SharePoint.PageLayoutType.Topic
-  name: Topic
-  href: api/PnP.Core.Model.SharePoint.PageLayoutType.html#PnP_Core_Model_SharePoint_PageLayoutType_Topic
-  commentId: F:PnP.Core.Model.SharePoint.PageLayoutType.Topic
-  fullName: PnP.Core.Model.SharePoint.PageLayoutType.Topic
-  nameWithType: PageLayoutType.Topic
 - uid: PnP.Core.Model.SharePoint.PageTranslationOptions
   name: PageTranslationOptions
   href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html
