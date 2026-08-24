@@ -50,10 +50,10 @@
 
 	<ItemGroup>
 		<None Update="appsettings.mcagzuc.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 		<None Update="env.txt">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 		<None Update="TestAssets\pageheader.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
