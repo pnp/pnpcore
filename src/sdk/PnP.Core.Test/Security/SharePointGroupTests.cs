@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
@@ -476,6 +478,50 @@ namespace PnP.Core.Test.Security
                     }
                 }
             }
+        }
+
+        [TestMethod]
+        public async Task SharePointGroupLinqGetIsScopedToItsParent()
+        {
+            // Offline by design. Mocked responses are replayed per request sequence rather than per url, so a
+            // wrongly scoped query still replays the right payload. Asserting the generated request url is what
+            // actually catches user.Groups enumerating every site group.
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Enumerating from the web or the site returns the groups of the whole site
+                Assert.IsTrue((await BuildGroupLinqGetRequestAsync(context, context.Web)).Contains("/_api/Web/SiteGroups"));
+                Assert.IsTrue((await BuildGroupLinqGetRequestAsync(context, context.Site)).Contains("/_api/Web/SiteGroups"));
+
+                // Enumerating from a user returns only the groups that user belongs to
+                var user = new SharePointUser { PnPContext = context, Parent = context.Web, Id = 12 };
+                (user as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, "12");
+
+                var userRequest = await BuildGroupLinqGetRequestAsync(context, user);
+
+                Assert.IsTrue(userRequest.Contains("/_api/Web/GetUserById(12)/Groups"), $"Expected a user scoped query, got: {userRequest}");
+                Assert.IsFalse(userRequest.Contains("/_api/Web/SiteGroups"), $"Expected a user scoped query, got: {userRequest}");
+            }
+        }
+
+        /// <summary>
+        /// Builds the request that backs groups.ToListAsync(), mirroring DataModelQueryService.AddToBatchAsync
+        /// so that both the resolved SharePointLinqGet and the {Parent.Id} token are covered.
+        /// </summary>
+        private static async Task<string> BuildGroupLinqGetRequestAsync(PnPContext context, IDataModelParent parent)
+        {
+            var entityInfo = EntityManager.GetClassInfo<ISharePointGroup>(typeof(ISharePointGroup), null, parent);
+
+            var batchParent = EntityManager.ReplicateParentHierarchy(parent, context);
+            entityInfo.Target = batchParent.GetType();
+
+            var concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(ISharePointGroup), batchParent) as BaseDataModel<ISharePointGroup>;
+            concreteEntity.PnPContext = context;
+
+            var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ODataQuery<ISharePointGroup>(), default, false, true);
+
+            return apiCallRequest.ApiCall.Request;
         }
     }
 }
