@@ -2,7 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Security
@@ -477,5 +479,35 @@ namespace PnP.Core.Test.Security
                 }
             }
         }
+
+        [TestMethod]
+        public async Task DeleteSiteGroupByIdGeneratesTheRemoveByIdCall()
+        {
+            // Offline by design, see the note on the user equivalent in UserTests
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+
+                await context.Web.SiteGroups.DeleteByIdBatchAsync(batch, 12);
+
+                Assert.AreEqual(1, batch.Requests.Count);
+                var request = batch.Requests.First().Value;
+                Assert.AreEqual(HttpMethod.Delete, request.Method);
+                Assert.IsTrue(request.ApiCall.Request.EndsWith("/_api/Web/SiteGroups/RemoveById(12)"), $"Unexpected request: {request.ApiCall.Request}");
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteSiteGroupByIdRejectsAnInvalidId()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+                {
+                    await context.Web.SiteGroups.DeleteByIdAsync(0);
+                });
+            }
+        }
+
     }
 }
