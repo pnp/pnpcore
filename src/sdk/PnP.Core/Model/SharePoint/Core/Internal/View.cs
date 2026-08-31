@@ -181,6 +181,29 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension Methods
 
+        public async Task SetViewXmlAsync(string viewXml)
+        {
+            var apiCall = GetSetViewXmlApiCall(viewXml);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        internal static ApiCall GetSetViewXmlApiCall(string viewXml)
+        {
+            var body = new
+            {
+                viewXml
+            };
+
+            var bodyString = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')/SetViewXml", ApiType.SPORest, bodyString);
+        }
+
+        public void SetViewXml(string viewXml)
+        {
+            SetViewXmlAsync(viewXml).GetAwaiter().GetResult();
+        }
+
         public async Task MoveViewFieldToAsync(string internalFieldName, int newOrder)
         {
             var apiCall = GetMoveViewFieldToApiCall(internalFieldName, newOrder);
