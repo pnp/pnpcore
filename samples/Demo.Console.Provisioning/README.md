@@ -67,6 +67,8 @@ dotnet run
   2  List saved templates
   3  Show what a saved template contains
   4  Apply a saved template to a site
+  5  Export a site to a .pnp package
+  6  Apply a .pnp package to a site
   0  Exit
 ```
 
@@ -79,6 +81,7 @@ one site and applying to another does not mean editing a settings file in betwee
 
 ```
 dotnet run -- extract <site-url> <output.xml> [options]
+dotnet run -- extract <site-url> <output.pnp> [options]    as a package, see Packages (.pnp)
 ```
 
 A template is **structure only** by default — columns, content types, lists, security,
@@ -89,6 +92,8 @@ of an extract, so you opt into it:
 |---|---|
 | `--items` | Include the items of **every** list on the site |
 | `--items=A,B` | Include the items of these lists only |
+| `--files` | Export the files held in **every** document library |
+| `--files=A,B` | Export the files of these document libraries only |
 | `--pages` | Include the site's client side pages and their contents |
 | `--hidden-lists` | Include hidden lists in the structure |
 
@@ -203,6 +208,85 @@ Type the site's name to confirm, or anything else to cancel: marketing-copy
 
 **Applying changes a real site and there is no undo**, which is why it asks you to type the name
 rather than press y. The previous prompt was a url, and urls are easy to mistype.
+
+### 4. Export a site as a .pnp package
+
+Choose **5**. It asks the same questions as option 1, but writes a single **`.pnp` package**
+instead of an `.xml` file:
+
+```
+Extract from which site? (full url, blank to cancel): https://contoso.sharepoint.com/sites/marketing
+Save as (package file name, blank for an automatic one): marketing
+
+Structure - columns, content types, lists, security - is always included.
+Include list items as well? (y/N): y
+Export the files held in document libraries? (y/N): y
+  Which libraries (comma separated, blank for all): Documents
+Include the site's pages and their contents? (y/N): y
+```
+
+```
+Saved Templates\marketing.pnp
+```
+
+### 5. Apply a .pnp package
+
+Choose **6**. It lists the `.pnp` files in the template folder rather than the `.xml` ones, then
+asks for the target site and confirms exactly as option 4 does.
+
+---
+
+## Packages (.pnp)
+
+A `.pnp` package is a **single file holding the template and everything it references** — the
+provisioning XML plus the documents exported from libraries. It is an OPC package, the same
+container format as `.docx`, so it can be copied, versioned and handed over as one artefact.
+
+**Use a package when the template ships content.** An `.xml` template records file entries but
+leaves the bytes beside it on disk, so moving the template to another machine without its
+neighbouring files silently produces an apply that creates empty libraries. A `.pnp` cannot come
+apart that way.
+
+### From the command line
+
+The **file extension decides the format** — there is no separate switch:
+
+```powershell
+# export a site as a package, with the items and the documents in it
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing marketing.pnp --items --files
+
+# apply that package to another site
+dotnet run -- apply https://contoso.sharepoint.com/sites/marketing-copy marketing.pnp
+```
+
+```powershell
+# the same thing as loose files
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing marketing.xml --items --files
+dotnet run -- apply https://contoso.sharepoint.com/sites/marketing-copy marketing.xml
+```
+
+Everything that works for `.xml` works for `.pnp` — `--items`, `--files`, `--pages`,
+`--hidden-lists`, the exit codes, and the warning output are all unchanged.
+
+### What ends up inside
+
+| | |
+|---|---|
+| `template.xml` | the provisioning template |
+| exported library files | under the folder path they came from |
+| package properties | author (your Windows user name) and generator |
+
+When `--files` is combined with a `.pnp` output, the file connector points **at the package**, so
+the documents are written into it as they are exported rather than to the folder next to it.
+
+### Reading a package back
+
+Applying a `.pnp` opens the package, reads `template.xml` out of it, and points the template's
+connector at the package — so file uploads resolve from inside it. Nothing has to be unzipped.
+
+> **Note:** the `.pnp` support in `PnP.Core.Provisioning` is a direct port of PnP Framework's
+> OpenXML connector and has no automated test coverage yet. Check the result of a package round
+> trip before relying on it for anything you cannot repeat.
 
 
 ---

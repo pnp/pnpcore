@@ -7,6 +7,8 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Model.Configuration;
 using PnP.Core.Provisioning.ObjectHandlers;
+using PnP.Core.Provisioning.Connectors;
+using PnP.Core.Provisioning.Connectors.OpenXML;
 using PnP.Core.Provisioning.Providers.Xml;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -220,6 +222,8 @@ namespace Demo.Console.Provisioning
                 System.Console.WriteLine("  2  List saved templates");
                 System.Console.WriteLine("  3  Show what a saved template contains");
                 System.Console.WriteLine("  4  Apply a saved template to a site");
+                System.Console.WriteLine("  5  Export a site to a .pnp package");
+                System.Console.WriteLine("  6  Apply a .pnp package to a site");
                 System.Console.WriteLine("  0  Exit");
                 System.Console.WriteLine();
                 System.Console.Write("Choose: ");
@@ -241,6 +245,12 @@ namespace Demo.Console.Provisioning
                             break;
                         case "4":
                             await ApplyAsync().ConfigureAwait(false);
+                            break;
+                        case "5":
+                            await ExtractAsync(asPackage: true).ConfigureAwait(false);
+                            break;
+                        case "6":
+                            await ApplyAsync(packages: true).ConfigureAwait(false);
                             break;
                         case "0":
                         case null:
@@ -281,10 +291,19 @@ namespace Demo.Console.Provisioning
                 {
                     ExtractConfiguration configuration = BuildExtractConfiguration(problems);
 
+                    OpenXMLConnector package = IsPackage(command.TemplatePath)
+                        ? OpenPackage(command.TemplatePath)
+                        : null;
+
                     await ApplyContentOptionsAsync(context, configuration, command.IncludeItems,
                         command.ItemLists, command.IncludePages, command.IncludeHiddenLists,
                         command.IncludeFiles, command.FileLibraries,
                         Path.GetDirectoryName(Path.GetFullPath(command.TemplatePath))).ConfigureAwait(false);
+
+                    if (package != null)
+                    {
+                        configuration.FileConnector = package;
+                    }
 
                     System.Console.WriteLine("Extracting...");
 
@@ -294,15 +313,25 @@ namespace Demo.Console.Provisioning
                     System.IO.Directory.CreateDirectory(
                         Path.GetDirectoryName(Path.GetFullPath(command.TemplatePath)));
 
-                    using (Stream stream = XMLPnPSchemaFormatter.LatestFormatter.ToFormattedTemplate(template))
-                    using (var file = System.IO.File.Create(command.TemplatePath))
+                    string saved;
+
+                    if (package != null)
                     {
-                        stream.CopyTo(file);
+                        saved = SavePackage(template, package, command.TemplatePath);
+                    }
+                    else
+                    {
+                        using (Stream stream = XMLPnPSchemaFormatter.LatestFormatter.ToFormattedTemplate(template))
+                        using (var file = System.IO.File.Create(command.TemplatePath))
+                        {
+                            stream.CopyTo(file);
+                        }
+
+                        saved = Path.GetFullPath(command.TemplatePath);
                     }
 
                     System.Console.WriteLine();
-                    System.Console.WriteLine($"Saved {Path.GetFullPath(command.TemplatePath)}");
-                    Summarise(template);
+                    System.Console.WriteLine($"Saved {saved}");
                 }
             }
             catch (Exception ex)
@@ -322,7 +351,7 @@ namespace Demo.Console.Provisioning
 
         #region Extract
 
-        private static async Task ExtractAsync()
+        private static async Task ExtractAsync(bool asPackage = false)
         {
             Uri siteUrl = AskForSite("Extract from which site?");
 
@@ -331,7 +360,9 @@ namespace Demo.Console.Provisioning
                 return;
             }
 
-            System.Console.Write("Save as (file name, blank for an automatic one): ");
+            System.Console.Write(asPackage
+                ? "Save as (package file name, blank for an automatic one): "
+                : "Save as (file name, blank for an automatic one): ");
             string name = System.Console.ReadLine()?.Trim();
 
             // A template is structure only unless asked otherwise, because content is the expensive
@@ -377,19 +408,44 @@ namespace Demo.Console.Provisioning
 
             using (PnPContext context = await contextFactory.CreateAsync(siteUrl).ConfigureAwait(false))
             {
+                string fileName = string.IsNullOrWhiteSpace(name)
+                    ? $"{SafeName(siteUrl)}-{DateTime.Now:yyyyMMdd-HHmmss}{(asPackage ? ".pnp" : ".xml")}"
+                    : (asPackage ? EnsurePnp(name) : EnsureXml(name));
+
+                System.IO.Directory.CreateDirectory(TemplateFolder);
+
+                OpenXMLConnector package = asPackage
+                    ? OpenPackage(Path.Combine(TemplateFolder, fileName))
+                    : null;
+
                 ExtractConfiguration configuration = BuildExtractConfiguration(null);
+
 
                 await ApplyContentOptionsAsync(context, configuration, includeItems, itemLists,
                     includePages, includeHidden, includeFiles, fileLibraries, TemplateFolder).ConfigureAwait(false);
+
+                if (package != null)
+                {
+                    configuration.FileConnector = package;
+                }
 
                 System.Console.WriteLine("Extracting...");
 
                 ProvisioningTemplate template = await context.GetProvisioningManager()
                     .GetTemplateAsync(configuration).ConfigureAwait(false);
 
-                string path = Save(template, string.IsNullOrWhiteSpace(name)
-                    ? $"{SafeName(siteUrl)}-{DateTime.Now:yyyyMMdd-HHmmss}.xml"
-                    : EnsureXml(name));
+
+                string path;
+
+                if (asPackage)
+                {
+                    System.IO.Directory.CreateDirectory(TemplateFolder);
+                    path = SavePackage(template, package, Path.Combine(TemplateFolder, fileName));
+                }
+                else
+                {
+                    path = Save(template, fileName);
+                }
 
                 System.Console.WriteLine();
                 System.Console.WriteLine($"Saved {path}");
@@ -540,9 +596,9 @@ namespace Demo.Console.Provisioning
 
         #region Apply
 
-        private static async Task ApplyAsync()
+        private static async Task ApplyAsync(bool packages = false)
         {
-            string path = AskForTemplate();
+            string path = AskForTemplate(packages ? "*.pnp" : "*.xml");
 
             if (path == null)
             {
@@ -600,8 +656,61 @@ namespace Demo.Console.Provisioning
             }
         }
 
+
+        private const string PackageTemplateName = "template.xml";
+
+        private static bool IsPackage(string path)
+        {
+            return !string.IsNullOrWhiteSpace(path)
+                && path.EndsWith(".pnp", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static OpenXMLConnector OpenPackage(string path)
+        {
+            string full = Path.GetFullPath(path);
+            string folder = Path.GetDirectoryName(full);
+
+            System.IO.Directory.CreateDirectory(folder);
+
+            return new OpenXMLConnector(
+                Path.GetFileName(full),
+                new FileSystemConnector(folder, string.Empty),
+                Environment.UserName,
+                null,
+                PackageTemplateName);
+        }
+
+        private static string SavePackage(ProvisioningTemplate template, OpenXMLConnector package, string path)
+        {
+            string inner = string.IsNullOrEmpty(package.Info?.Properties?.TemplateFileName)
+                ? PackageTemplateName
+                : package.Info.Properties.TemplateFileName;
+
+            new XMLOpenXMLTemplateProvider(package).SaveAs(template, inner);
+
+            return Path.GetFullPath(path);
+        }
+
+        private static ProvisioningTemplate LoadPackage(string path)
+        {
+            OpenXMLConnector package = OpenPackage(path);
+
+            string inner = string.IsNullOrEmpty(package.Info?.Properties?.TemplateFileName)
+                ? PackageTemplateName
+                : package.Info.Properties.TemplateFileName;
+
+            ProvisioningTemplate template = new XMLOpenXMLTemplateProvider(package).GetTemplate(inner);
+            template.Connector = package;
+
+            return template;
+        }
         private static ProvisioningTemplate Load(string path)
         {
+            if (IsPackage(path))
+            {
+                return LoadPackage(path);
+            }
+
             using (Stream stream = System.IO.File.OpenRead(path))
             {
                 ProvisioningTemplate template = XMLPnPSchemaFormatter.LatestFormatter.ToProvisioningTemplate(stream);
@@ -620,9 +729,9 @@ namespace Demo.Console.Provisioning
 
         #region Browsing
 
-        private static void ListTemplates()
+        private static void ListTemplates(string pattern = "*.xml")
         {
-            List<string> files = TemplateFiles();
+            List<string> files = TemplateFiles(pattern);
 
             if (files.Count == 0)
             {
@@ -725,9 +834,9 @@ namespace Demo.Console.Provisioning
             return url;
         }
 
-        private static string AskForTemplate()
+        private static string AskForTemplate(string pattern = "*.xml")
         {
-            List<string> files = TemplateFiles();
+            List<string> files = TemplateFiles(pattern);
 
             if (files.Count == 0)
             {
@@ -735,7 +844,7 @@ namespace Demo.Console.Provisioning
                 return null;
             }
 
-            ListTemplates();
+            ListTemplates(pattern);
 
             System.Console.Write("Which one? (number, blank to cancel): ");
 
@@ -762,18 +871,23 @@ namespace Demo.Console.Provisioning
         private static string TemplateFolder =>
             string.IsNullOrWhiteSpace(settings?.TemplateFolder) ? "Templates" : settings.TemplateFolder;
 
-        private static List<string> TemplateFiles()
+        private static List<string> TemplateFiles(string pattern = "*.xml")
         {
             if (!System.IO.Directory.Exists(TemplateFolder))
             {
                 return new List<string>();
             }
 
-            return System.IO.Directory.GetFiles(TemplateFolder, "*.xml")
+            return System.IO.Directory.GetFiles(TemplateFolder, pattern)
                 .OrderByDescending(f => new FileInfo(f).LastWriteTime)
                 .ToList();
         }
 
+
+        private static string EnsurePnp(string name)
+        {
+            return name.EndsWith(".pnp", StringComparison.OrdinalIgnoreCase) ? name : $"{name}.pnp";
+        }
         private static string EnsureXml(string name)
         {
             return name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase) ? name : $"{name}.xml";
