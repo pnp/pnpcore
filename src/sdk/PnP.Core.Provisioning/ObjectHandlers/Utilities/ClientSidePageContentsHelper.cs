@@ -31,9 +31,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
     {
         internal const string PromotedStateField = "PromotedState";
         internal const string SpaceContentField = "SpaceContent";
-        internal const string TopicEntityId = "_EntityId";
-        internal const string TopicEntityRelations = "_EntityRelations";
-        internal const string TopicEntityType = "_EntityType";
 
         private const string ContentTypeIdField = "ContentTypeId";
 
@@ -113,16 +110,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
                 extractedPage.FieldValues.Add(SpaceContentField, pageToExtract.SpaceContent);
             }
 
-            if (pageToExtract.LayoutType == PageLayoutType.Topic)
-            {
-                await AddTopicHeaderControlsAsync(context, template, configuration, pageToExtract, extractedPage,
-                    errorneousOrNonImageFileGuids, persistFiles).ConfigureAwait(false);
-
-                extractedPage.FieldValues.Add(TopicEntityId, pageToExtract.EntityId ?? "");
-                extractedPage.FieldValues.Add(TopicEntityType, pageToExtract.EntityType ?? "");
-                extractedPage.FieldValues.Add(TopicEntityRelations, pageToExtract.EntityRelations ?? "");
-            }
-
             AddToTemplate(context, template, page, extractedPage);
 
             _ = messagesDelegate;
@@ -187,7 +174,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         private async Task AddHeaderAsync(PnPContext context, ProvisioningTemplate template, ExtractConfiguration configuration,
             IPage pageToExtract, BaseClientSidePage extractedPage, bool excludeAuthorInformation, bool persistFiles)
         {
-            if (pageToExtract.PageHeader == null || pageToExtract.LayoutType == PageLayoutType.Topic)
+            if (pageToExtract.PageHeader == null)
             {
                 return;
             }
@@ -364,66 +351,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
 
             return controlInstance;
         }
-
-        /// <summary>
-        /// Extracts a topic page's header controls into a section with a sentinel order.
-        /// </summary>
-        private async Task AddTopicHeaderControlsAsync(PnPContext context, ProvisioningTemplate template,
-            ExtractConfiguration configuration, IPage pageToExtract, BaseClientSidePage extractedPage,
-            List<string> errorneousOrNonImageFileGuids, bool persistFiles)
-        {
-            var sectionInstance = new CanvasSectionModel
-            {
-                Order = ObjectHandlers.ObjectClientSidePages.TopicHeaderControlSectionOrder,
-                Type = CanvasSectionType.OneColumn,
-            };
-
-            foreach (ICanvasControl headerControl in pageToExtract.HeaderControls)
-            {
-                if (!(headerControl is IPageWebPart webPart))
-                {
-                    continue;
-                }
-
-                var controlInstance = new CanvasControlModel
-                {
-                    Column = 1,
-                    Order = headerControl.Order,
-                    ControlId = Guid.TryParse(webPart.WebPartId, out Guid webPartId) ? webPartId : headerControl.InstanceId,
-                    Type = WebPartType.Custom,
-                };
-
-                var json = new JsonObject
-                {
-                    ["id"] = webPart.WebPartId,
-                    ["instanceId"] = webPart.InstanceId.ToString(),
-                    ["title"] = webPart.Title,
-                    ["description"] = webPart.Description,
-                    ["dataVersion"] = webPart.DataVersion,
-                };
-
-                AddRawJson(json, "properties", webPart.PropertiesJson);
-
-                if (HasValue(webPart.ServerProcessedContent))
-                {
-                    AddRawJson(json, "serverProcessedContent", webPart.ServerProcessedContent.ToString());
-                }
-
-                string untokenized = json.ToJsonString();
-                controlInstance.JsonControlData = await TokenizeJsonControlDataAsync(context, untokenized).ConfigureAwait(false);
-
-                if (persistFiles)
-                {
-                    await TokenizeBeforeExportAsync(context, template, configuration, errorneousOrNonImageFileGuids,
-                        controlInstance, untokenized).ConfigureAwait(false);
-                }
-
-                sectionInstance.Controls.Add(controlInstance);
-            }
-
-            extractedPage.Sections.Add(sectionInstance);
-        }
-
         private static void AddToTemplate(PnPContext context, ProvisioningTemplate template, PageToExport page, BaseClientSidePage extractedPage)
         {
             if (page.IsTranslation)

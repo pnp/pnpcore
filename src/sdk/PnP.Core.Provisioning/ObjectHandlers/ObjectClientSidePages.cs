@@ -374,11 +374,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 await ApplySectionsAsync(context, page, clientSidePage, parser).ConfigureAwait(false);
             }
 
-            if (page.LayoutType == PageLayoutType.Topic)
-            {
-                await ApplyTopicHeaderControlsAsync(context, page, clientSidePage, parser).ConfigureAwait(false);
-            }
-
             if (IsPageTemplate(clientSidePage))
             {
                 await page.SaveAsTemplateAsync(pageName.Replace($"{templatesFolder}/", "")).ConfigureAwait(false);
@@ -401,7 +396,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         private void ApplyHeader(IPage page, BaseClientSidePage clientSidePage, TokenParser parser)
         {
-            if (clientSidePage.Header == null || page.LayoutType == PageLayoutType.Topic)
+            if (clientSidePage.Header == null)
             {
                 return;
             }
@@ -710,70 +705,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
             System.Reflection.PropertyInfo property = webPart.GetType().GetProperty("WebPartId");
             property?.SetValue(webPart, webPartId.ToString());
-        }
-
-        private async Task ApplyTopicHeaderControlsAsync(PnPContext context, IPage page, BaseClientSidePage clientSidePage, TokenParser parser)
-        {
-            CanvasSectionModel headerSection = clientSidePage.Sections
-                .FirstOrDefault(s => s.Order == TopicHeaderControlSectionOrder);
-
-            if (headerSection == null)
-            {
-                return;
-            }
-
-            if (!page.Sections.Any())
-            {
-                page.AddSection(CanvasSectionTemplate.OneColumn, 0);
-            }
-
-            page.HeaderControls.Clear();
-
-            IEnumerable<IPageComponent> availableComponents = await page.AvailablePageComponentsAsync().ConfigureAwait(false);
-            int order = 1;
-
-            foreach (CanvasControlModel headerControl in headerSection.Controls.Where(c => c.Type == WebPartType.Custom))
-            {
-                headerControl.JsonControlData = parser.ParseString(headerControl.JsonControlData);
-
-                IPageComponent baseControl =
-                    availableComponents.FirstOrDefault(c => c.Id.Equals($"{{{headerControl.ControlId}}}", StringComparison.CurrentCultureIgnoreCase))
-                    ?? availableComponents.FirstOrDefault(c => c.Id.Equals(headerControl.ControlId.ToString(), StringComparison.InvariantCultureIgnoreCase));
-
-                if (baseControl == null)
-                {
-                    string message = $"The web part '{headerControl.CustomWebPartName ?? headerControl.ControlId.ToString()}' is not installed on this site, so it was not added to the topic page header.";
-                    context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
-                    WriteMessage(message, ProvisioningMessageType.Warning);
-                    continue;
-                }
-
-                IPageWebPart webPart = page.NewWebPart(baseControl);
-                webPart.IsHeaderControl = true;
-
-                if (!string.IsNullOrEmpty(headerControl.JsonControlData))
-                {
-                    JsonObject json = TryParseObject(context, headerControl.JsonControlData);
-
-                    if (json != null)
-                    {
-                        if (json.TryGetPropertyValue("instanceId", out JsonNode instanceNode)
-                            && Guid.TryParse(instanceNode?.ToString(), out Guid instanceId))
-                        {
-                            webPart.InstanceId = instanceId;
-                        }
-
-                        if (json.TryGetPropertyValue("dataVersion", out JsonNode dataVersionNode) && dataVersionNode != null)
-                        {
-                            webPart.DataVersion = dataVersionNode.ToString();
-                        }
-                    }
-
-                    webPart.PropertiesJson = headerControl.JsonControlData;
-                }
-
-                page.AddHeaderControl(webPart, order++);
-            }
         }
 
         #endregion
