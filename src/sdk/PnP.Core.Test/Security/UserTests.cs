@@ -7,6 +7,7 @@ using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Security
@@ -324,5 +325,37 @@ namespace PnP.Core.Test.Security
         }
 
         #endregion
+
+        [TestMethod]
+        public async Task DeleteSiteUserByIdGeneratesTheRemoveCall()
+        {
+            // Offline by design. The delete is added to a batch and the generated request is inspected rather
+            // than executed, which covers the full public path from IWeb.SiteUsers.DeleteByIdBatchAsync down to
+            // the resolved rest url without needing recorded responses.
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+
+                await context.Web.SiteUsers.DeleteByIdBatchAsync(batch, 12);
+
+                Assert.AreEqual(1, batch.Requests.Count);
+                var request = batch.Requests.First().Value;
+                Assert.AreEqual(HttpMethod.Delete, request.Method);
+                Assert.IsTrue(request.ApiCall.Request.EndsWith("/_api/Web/GetUserById(12)"), $"Unexpected request: {request.ApiCall.Request}");
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteSiteUserByIdRejectsAnInvalidId()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+                {
+                    await context.Web.SiteUsers.DeleteByIdAsync(0);
+                });
+            }
+        }
+
     }
 }
