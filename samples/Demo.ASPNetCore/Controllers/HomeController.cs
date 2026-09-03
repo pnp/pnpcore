@@ -1,53 +1,61 @@
-﻿using System;
+﻿using Demo.ASPNetCore.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.Identity.Web;
+using PnP.Core.Auth;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Demo.ASPNetCore.Models;
-using PnP.Core.Services;
-using PnP.Core.Model;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
-using Microsoft.Identity.Web;
-using PnP.Core.Auth;
-using Microsoft.Extensions.Options;
-using PnP.Core.Services.Builder.Configuration;
 
 namespace Demo.ASPNetCore.Controllers
 {
     [Authorize]
     public class HomeController : Controller
-    {
+    {        
         private readonly ILogger<HomeController> _logger;
         private readonly IPnPContextFactory _pnpContextFactory;
         private readonly ITokenAcquisition _tokenAcquisition;
         private readonly PnPCoreOptions _pnpCoreOptions;
+        private readonly IServiceProvider _serviceProvider;
 
-        public HomeController(IPnPContextFactory pnpContextFactory, 
+        public HomeController(
+            IServiceProvider serviceProvider,
+            IPnPContextFactory pnpContextFactory, 
             ILogger<HomeController> logger,
             ITokenAcquisition tokenAcquisition,
             IOptions<PnPCoreOptions> pnpCoreOptions)
         {
+            _serviceProvider = serviceProvider;
             _pnpContextFactory = pnpContextFactory;
             _logger = logger;
             _tokenAcquisition = tokenAcquisition;
             _pnpCoreOptions = pnpCoreOptions?.Value;
         }
+        
 
         public IActionResult Index()
         {
             return View();
         }
 
-        [AuthorizeForScopes(Scopes = new[] { "https://officedevpnp.sharepoint.com/.default" })]
+        
+        //[AuthorizeForScopes(Scopes = new[] { "https://officedevpnp.sharepoint.com/.default" })]
         public async Task<IActionResult> SiteInfo()
         {
             var model = new SiteInfoViewModel();
 
-            using (var context = await createSiteContext())
+            using (var context = await CreateSiteContext())
             {
                 // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
                 var web = await context.Web.GetAsync(w => w.Title, w => w.Description, w => w.MasterUrl);
@@ -55,8 +63,9 @@ namespace Demo.ASPNetCore.Controllers
                 model.Title = web.Title;
                 model.Description = web.Description;
                 model.MasterUrl = web.MasterUrl;
+                
             }
-
+            
             return View("SiteInfo", model);
         }
 
@@ -64,7 +73,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new ListInfoViewModel();
 
-            using (var context = await createSiteContext())
+            using (var context = await CreateSiteContext())
             {
                 // Retrieving lists of the target web using Microsoft Graph
                 var web = await context.Web.GetAsync(w => w.Title, 
@@ -81,7 +90,7 @@ namespace Demo.ASPNetCore.Controllers
                 model.SiteTitle = web.Title;
                 model.Lists = lists.ToList();
             }
-
+            
             return View("ListInfo", model);
         }
 
@@ -89,7 +98,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new ListItemsViewModel();
 
-            using (var context = await createSiteContext())
+            using (var context = await CreateSiteContext())
             {
                 // Retrieving lists of the target web
                 var items = (from i in context.Web.Lists.GetByTitle(listTitle).Items.QueryProperties(i => i.Id, i => i.Title)
@@ -102,9 +111,9 @@ namespace Demo.ASPNetCore.Controllers
                                           {
                                               Id = i.Id,
                                               Title = i.Title
-                                          });
+                                          });                
             }
-
+            
             return View("ListItems", model);
         }
 
@@ -112,7 +121,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new TeamInfoViewModel();
 
-            using (var context = await createSiteContext())
+            using (var context = await CreateSiteContext())
             {
                 // Retrieving lists of the target web
                 var team = await context.Team.GetAsync(t => t.DisplayName, t => t.Description, 
@@ -127,11 +136,11 @@ namespace Demo.ASPNetCore.Controllers
                                                                 Id = c.Id
                                                             });
             }
-
+            
             return View("TeamInfo", model);
         }
 
-        private async Task<PnPContext> createSiteContext()
+        private async Task<PnPContext> CreateSiteContext()
         {
             var siteUrl = new Uri(_pnpCoreOptions.Sites["DemoSite"].SiteUrl);
 
@@ -142,12 +151,19 @@ namespace Demo.ASPNetCore.Controllers
                             }
                             ));
         }
-
+        
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-        {
+        {            
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public override ViewResult View(string? viewName, object? model)
+        {
+            var view = base.View(viewName, model);
+            view.ViewData["EnvironmentName"] = _serviceProvider.GetKeyedService<string>("EnvironmentName");
+            return view;
         }
     }
 }

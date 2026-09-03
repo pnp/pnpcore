@@ -8,36 +8,40 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   docfx:
+    if: github.repository_owner == 'pnp'
     # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+      actions: read
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # prevent parallel executions
     - name: Wait for actions to finish
-      uses: softprops/turnstyle@v1
+      uses: softprops/turnstyle@afaccda0f3c0136fb7cb4a734b9b96be03599948 # v3.3.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
     # Checks-out dev branch
     - name: Checkout dev branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with: 
         ref: dev
         path: dev
     # Checks-out gh-pages branch
-    - name: Checkout dev branch
-      uses: actions/checkout@v2
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with: 
         ref: gh-pages
         path: gh-pages
-    # Install docfx, stick with version 2.51 as higher versions result in https://github.com/dotnet/docfx/issues/5785 > fixed in 2.56.4+
+    # Setup .NET (required for DocFx)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      with:
+        dotnet-version: 8.x
+    # Install docfx as a .NET global tool
     - name: Install dependencies
-      run: |
-        wget https://github.com/dotnet/docfx/releases/download/v2.59.2/docfx.zip
-        sudo unzip docfx.zip -d /usr/local/lib/docfx
-        rm docfx.zip
-        echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx
-        echo 'exec `which mono` $MONO_OPTIONS /usr/local/lib/docfx/docfx.exe "$@"' | sudo tee -a /usr/local/bin/docfx
-        sudo chmod +x /usr/local/bin/docfx
+      run: dotnet tool install -g docfx --version 2.78.5
     # Build docs
     - name: Build docs
       shell: pwsh
@@ -45,10 +49,9 @@ jobs:
         ./dev/docs/build.ps1
     # Add, commit and push the changes
     - name: Add & Commit & Push
-      uses: EndBug/add-and-commit@v9
+      uses: EndBug/add-and-commit@v10
       with:
         # The directory where your repository is located. You should use actions/checkout first to set it up
         cwd: ./gh-pages
-        branch: gh-pages
         push: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}

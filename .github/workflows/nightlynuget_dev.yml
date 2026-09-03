@@ -6,38 +6,24 @@ on:
     - cron: '0 1 * * *'
     
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    if: github.repository_owner == 'pnp'
     runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Wait for actions to finish
-      uses: softprops/turnstyle@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with: 
         ref: dev
-        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
       with:
         dotnet-version: '10.0.x'    
-        include-prerelease: false
-    - name: Create and publish nuget 
+    - name: publish nuget 
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       shell: pwsh
       run: |
-        ./build/build.ps1
-    # Add, commit and push changes
-    - name: Add & Commit & Push
-      uses: EndBug/add-and-commit@v9
-      with:
-        message: 'Nightly PnP Framework release'
-        push: true
-        branch: dev
-        token: ${{ secrets.GITHUB_TOKEN }}    
+        ./build/publish-nightly.ps1

@@ -6,7 +6,47 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## 1.19 - Unreleased
+
+### Added 
+
+### Changed
+
+- Updated Demo.ConsoleApp Sample #1833 [gszdev - gszdev]
+- Updated Demo.Blazor Sample #1834 [gszdev - gszdev]
+- Fixed Web.NewPage() freezes application #1827 [gszdev - gszdev]
+- Updated Demo.ASPNetCore Sample #1835 [gszdev - gszdev]
+- Fixed tenant hidden list url change #1855 [gszdev - gszdev] [czullu - Christian Zuellig]
+
+## [1.18]
+
+### Added 
+
+- Added CSOM-based GetItems support #1802 [Jeppe Mastrup Spanggaard - jeppesc11]
+
+### Changed 
+
+- Fixed negative currency values returned by LoadListDataAsStreamAsync #1818 [mateusz-sintel - mateusz-sintel]
+- Fixed MC791596 banner migration incorrectly adding a banner header on pages with no header #1758 [nicolaor - Rene Nicolao]
+- Updated Demo.WPF sample #1829 [gszdev - gszdev]
+
+## [1.17]
+
+### Added 
+
+### Changed 
+
+- Fixed vertical section type detection and add regression test for save/reload #1772 [nicolaor - Rene Nicolao]
+- Updated setup test env script #1769 [adam-it - Adam Wójcik]
+- Updated to Modern DocFx Theme and adds dark mode #1773 [pkbullock - Paul Bullock]
+- Fixed folder race condition #1770 [aramB - Aram B]
+- Added support for new sovereign cloud environments #1727 [gautamdsheth - Gautam Sheth]
+- Renamed sovereign cloud environments in CloudManager and Microsoft365Environment #1787 [gautamdsheth - Gautam Sheth]
+- Improved repo security #1785 [adam-it - Adam Wójcik]
+- Separated QuickLaunchEnabled call from batch in branding manager #1789 [patrikhellgren - Patrik Hellgren]
+- Fixed news page thumbnail that does not appear in the news web parts #1782 [PedroMordeP - Pedro Monte]
+
+## [1.16]
 
 ### Added
 
@@ -34,6 +74,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed folder not found errors to DirectoryNotFoundException. #1725 [ejazhussain - Ejaz Hussain]
 - Updated console minimal sample for latest .Net and PnP.Core version. #1713 [adam-it - Adam Wójcik]
 - Improved stability when handling guids in GetValidLegacyServicePrincipalAppIdsAsync [jansenbe - Bert Jansen]
+- Added a attribute name for the internal ID property. #1761 [adam-it - Adam Wójcik]
 
 ## [1.15]
 

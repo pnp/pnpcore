@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "npm"
+    directories:
+      - "/src"                 # Scan /src root only, no real projects here
+      - "/src/assets/scopes-app-1"
+      - "/src/assets/scopes-app-2"
+      - "/src/assets/pnpcoresdk-test-app"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 0   # Disable version-update PRs for these test/asset apps
+    ignore:
+      - dependency-name: "*"       # Also honored by security updates within this block

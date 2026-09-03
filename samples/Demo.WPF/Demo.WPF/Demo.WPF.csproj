@@ -2,22 +2,38 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RollForward>Major</RollForward>
+
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+
+    <!-- 
+        Use UsePnPCoreProjectRef to enable PnP.Core.Auth.csproj usage for debugging purposes. 
+        Before enabling this, make sure the project PnP.Core and PnP.Core.Auth are added to the Visual Studio solution (sln|slnx).
+        You can add PnP.Core and PnP.Core.Auth to the SDK solution folder.
+        -->
+    <!--<UsePnPCoreProjectRef>true</UsePnPCoreProjectRef>-->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
-    <PackageReference Include="PnP.Core.Auth" Version="1.8.0" />
-	  
-	  
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="10.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.*" />
+    <PackageReference Include="PnP.Core.Auth" Version="1.17.*" Condition="'$(UsePnPCoreProjectRef)' != 'true'" />
+    <ProjectReference Include="..\..\..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj" Condition="'$(UsePnPCoreProjectRef)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
     </None>
   </ItemGroup>
 

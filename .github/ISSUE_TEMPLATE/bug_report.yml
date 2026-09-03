@@ -1,0 +1,73 @@
+name: Bug/Error report
+description: Submit a bug or error report.
+title: "🐞 Bug report: "
+labels: ["bug", "needs peer review"]
+type: "Bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting the issue you are facing.
+        
+        Please complete the below form to ensure we have the necessary details to assist you.
+  - type: dropdown
+    id: bug-priority
+    attributes:
+      label: ⭐ Priority
+      description: Let us know how this issue is affecting you
+      options:
+        - (Low)☹️ Something is a little off
+        - (Medium)😢 I'm annoyed but I'll live
+        - (Urgent)⚠️😱 I can't use the extension
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 📝 Describe the bug
+      description: Provide a clear & concise description of what the bug/error is.
+    validations:
+      required: true
+  - type: textarea
+    id: bug-repro-steps
+    attributes:
+      label: 👣 Steps To Reproduce
+      description: Provide steps to reproduce the behavior
+    validations:
+      required: true
+  - type: textarea
+    id: bug-expected-behavior
+    attributes:
+      label: 📜 Expected behavior
+      description: Provide clear & concise description of what you expected to happen
+    validations:
+      required: true
+  - type: textarea
+    id: bug-image
+    attributes:
+      label: 📷 Screenshots
+      description: If applicable, add screenshots to help explain your problem
+    validations:
+      required: false
+  - type: textarea
+    id: bug-environment-details
+    attributes:
+      label: ❓ Environment details
+      description: Provide the requested environment and tooling details.
+      value: |
+        - **SDK version**: [e.g. 0.1.2005.0 ]
+        - **OS**: [e.g. Windows 10 | MacOS 10.15.x]
+        - **SDK used in**: [e.g. Console App | ASP.Net Web app | Blazor WebAssembly]
+        - **Framework**: [e.g. .NET Framework v3.x | .NET Core v3.x ]
+        - **Browser(s)**: [e.g. Chrome v79 | Safari v22 | FireFox v31 | Chromium Edge v79]
+        - **Tooling**: [e.g. VS Code | Visual Studio 2019]
+        - **Additional details**: *The more context you can provide, the easier it is (and therefore quicker) to help.*
+    validations:
+      required: false
+  - type: textarea
+    id: bug-more-info
+    attributes:
+      label: 🤔 Additional context
+      description: Add any other context or information about the problem here
+    validations:
+      required: false

@@ -1,10 +1,10 @@
 @page "/siteInfo"
 @attribute [Authorize]
 @using PnP.Core.Model.SharePoint;
-@using PnP.Core.Services;
 @inject IMyPnPContextFactory pnpContextFactory
 
 <h1>SharePoint Site Info</h1>
+
 
 @if (isLoading)
 {
@@ -12,12 +12,12 @@
 }
 else
 {
-    <h1>@web.Title</h1>
-    <h3>@web.Description</h3>
+    <h1>@web?.Title</h1>
+    <h3>@web?.Description</h3>
 }
 
 @code {
-    private IWeb web;
+    private IWeb? web;
     private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
