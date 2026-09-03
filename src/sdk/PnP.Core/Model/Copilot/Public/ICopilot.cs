@@ -15,6 +15,6 @@ namespace PnP.Core.Model.Copilot.Public
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<RetrievalResponse> Retrive(RetrievalRequest request);
+        public Task<RetrievalResponse> RetrieveAsync(RetrievalRequest request);
     }
 }
