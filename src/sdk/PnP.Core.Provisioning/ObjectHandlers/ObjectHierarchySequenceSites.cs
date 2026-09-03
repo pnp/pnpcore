@@ -180,7 +180,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 WaitForAsyncProvisioning = true,
             };
 
-            CommonSiteOptions options = BuildOptions(siteCollection, parser);
+            CommonSiteOptions options = BuildOptions(context, siteCollection, parser);
 
             return options == null
                 ? null
@@ -190,7 +190,24 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// <summary>
         /// Turns a template's site collection into the options PnP Core creates from.
         /// </summary>
-        private static CommonSiteOptions BuildOptions(SiteCollectionModel siteCollection, TokenParser parser)
+        private static Uri AbsoluteUrl(PnPContext context, string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new ArgumentException("A site collection in the template has no url.", nameof(url));
+            }
+
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri absolute))
+            {
+                return absolute;
+            }
+
+            var root = new Uri($"{context.Uri.Scheme}://{context.Uri.Host}");
+
+            return new Uri(root, url.StartsWith("/", StringComparison.Ordinal) ? url : $"/{url}");
+        }
+
+        private static CommonSiteOptions BuildOptions(PnPContext context, SiteCollectionModel siteCollection, TokenParser parser)
         {
             string title = parser.ParseString(siteCollection.Title);
             string description = parser.ParseString(siteCollection.Description);
@@ -218,7 +235,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 case CommunicationSiteCollectionModel communication:
                 {
                     var options = new CommunicationSiteOptions(
-                        new Uri(parser.ParseString(communication.Url)), title)
+                        AbsoluteUrl(context, parser.ParseString(communication.Url)), title)
                     {
                         Description = description,
                         Classification = parser.ParseString(communication.Classification),
@@ -244,7 +261,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 case TeamNoGroupSiteCollectionModel noGroup:
                 {
                     return new TeamSiteWithoutGroupOptions(
-                        new Uri(parser.ParseString(noGroup.Url)), title)
+                        AbsoluteUrl(context, parser.ParseString(noGroup.Url)), title)
                     {
                         Description = description,
                         Classification = parser.ParseString(noGroup.Classification),
@@ -257,7 +274,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 case ClassicSiteCollectionModel classic:
                 {
                     return new ClassicSiteOptions(
-                        new Uri(parser.ParseString(classic.Url)),
+                        AbsoluteUrl(context, parser.ParseString(classic.Url)),
                         title,
                         parser.ParseString(classic.WebTemplate),
                         parser.ParseString(classic.Owner),
@@ -404,6 +421,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                     WriteMessage($"Applying template {id} to {site.Context.Uri}", ProvisioningMessageType.Progress);
 
                     template.Connector ??= hierarchy.Connector;
+
+                    await parser.RebaseAsync(site.Context, template, configuration?.ToApplyingInformation()).ConfigureAwait(false);
 
                     var manager = (ProvisioningManager)site.Context.GetProvisioningManager();
 

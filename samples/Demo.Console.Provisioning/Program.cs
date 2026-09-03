@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Admin.Model.Microsoft365;
+using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Model.Configuration;
@@ -126,9 +128,9 @@ namespace Demo.Console.Provisioning
         {
             string path = Path.GetFullPath(command.TemplatePath);
 
-            if (!System.IO.File.Exists(path))
+            if (!System.IO.File.Exists(path) && !System.IO.Directory.Exists(path))
             {
-                System.Console.Error.WriteLine($"No template at {path}");
+                System.Console.Error.WriteLine($"No template or template folder at {path}");
                 return 1;
             }
 
@@ -140,7 +142,7 @@ namespace Demo.Console.Provisioning
 
             try
             {
-                ProvisioningTemplate template = Load(path);
+                ProvisioningTemplate template = TemplateSource.Load(path).Template;
 
                 Summarise(template);
 
@@ -596,6 +598,238 @@ namespace Demo.Console.Provisioning
 
         #region Apply
 
+
+        private static void DescribeSource(TemplateSource source)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine($"Loaded {source.DisplayName}");
+
+            if (!string.IsNullOrWhiteSpace(source.Settings?.Abstract))
+            {
+                System.Console.WriteLine($"  {source.Settings.Abstract}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(source.Settings?.MatchingSiteBaseTemplateId))
+            {
+                System.Console.WriteLine($"  Intended for a {source.Settings.MatchingSiteBaseTemplateId} site.");
+            }
+
+            List<string> parameters = source.ParameterNames().ToList();
+
+            if (parameters.Count > 0)
+            {
+                System.Console.WriteLine($"  Template parameters: {string.Join(", ", parameters)}");
+            }
+
+            if (source.CreatesItsOwnSite)
+            {
+                System.Console.WriteLine("  This template carries a site collection definition, so it can create its own site.");
+            }
+        }
+
+        private static async Task<Uri> ChooseTargetSiteAsync(TemplateSource source)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Apply to:");
+            System.Console.WriteLine("  1  an existing site");
+            System.Console.WriteLine("  2  a new communication site");
+            System.Console.WriteLine();
+            System.Console.Write("Choose (blank to cancel): ");
+
+            string choice = System.Console.ReadLine()?.Trim();
+
+            if (choice == "1")
+            {
+                return AskForSite("Apply to which site?");
+            }
+
+            if (choice != "2")
+            {
+                return null;
+            }
+
+            return await CreateCommunicationSiteAsync(source).ConfigureAwait(false);
+        }
+
+        private static async Task<Uri> CreateCommunicationSiteAsync(TemplateSource source)
+        {
+            System.Console.Write("Site title: ");
+            string title = System.Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                System.Console.WriteLine("A title is needed.");
+                return null;
+            }
+
+            System.Console.Write("Tenant url (for example https://contoso.sharepoint.com): ");
+            string tenant = System.Console.ReadLine()?.Trim();
+
+            if (!Uri.TryCreate(tenant, UriKind.Absolute, out Uri tenantUrl))
+            {
+                System.Console.WriteLine("That is not a url.");
+                return null;
+            }
+
+            System.Console.Write($"Relative url (blank for /sites/{SlugOf(title)}): ");
+            string relative = System.Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrWhiteSpace(relative))
+            {
+                relative = $"/sites/{SlugOf(title)}";
+            }
+
+            if (!relative.StartsWith("/", StringComparison.Ordinal))
+            {
+                relative = $"/{relative}";
+            }
+
+            var siteUrl = new Uri($"{tenantUrl.Scheme}://{tenantUrl.Host}{relative}");
+
+            System.Console.WriteLine();
+            System.Console.WriteLine($"Creating a communication site '{title}' at {siteUrl}");
+            System.Console.WriteLine("Connecting - a sign in window may appear...");
+
+            using (PnPContext context = await contextFactory.CreateAsync(tenantUrl).ConfigureAwait(false))
+            {
+                var options = new CommunicationSiteOptions(siteUrl, title)
+                {
+                    Language = Language.English,
+                };
+
+                if (await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+                {
+                    System.Console.Write("Owner (login name, required when running app-only): ");
+                    string owner = System.Console.ReadLine()?.Trim();
+
+                    if (string.IsNullOrWhiteSpace(owner))
+                    {
+                        System.Console.WriteLine("An owner is needed when authenticating as the application.");
+                        return null;
+                    }
+
+                    options.Owner = owner;
+                }
+
+                using (PnPContext created = await context.GetSiteCollectionManager()
+                    .CreateSiteCollectionAsync(options, new SiteCreationOptions { WaitForAsyncProvisioning = true })
+                    .ConfigureAwait(false))
+                {
+                    System.Console.WriteLine($"Created {created.Uri}");
+                    return created.Uri;
+                }
+            }
+        }
+
+        private static string SlugOf(string title)
+        {
+            var slug = new StringBuilder();
+
+            foreach (char c in title.ToLowerInvariant())
+            {
+                if (char.IsLetterOrDigit(c))
+                {
+                    slug.Append(c);
+                }
+                else if (slug.Length > 0 && slug[slug.Length - 1] != '-')
+                {
+                    slug.Append('-');
+                }
+            }
+
+            return slug.ToString().Trim('-');
+        }
+
+        private static Task<bool> AskUseHierarchyAsync(TemplateSource source)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("This template defines its own site collection.");
+            System.Console.WriteLine("  1  let the template create the site (uses its sequence)");
+            System.Console.WriteLine("  2  apply only the template, to a site you pick");
+            System.Console.WriteLine();
+            System.Console.Write("Choose: ");
+
+            return Task.FromResult(System.Console.ReadLine()?.Trim() == "1");
+        }
+
+        private static async Task ApplyHierarchyAsync(TemplateSource source)
+        {
+            var parameters = new Dictionary<string, string>();
+
+            foreach (KeyValuePair<string, string> declared in source.Template.Parameters)
+            {
+                System.Console.Write($"{declared.Key} (blank for '{declared.Value}'): ");
+                string entered = System.Console.ReadLine()?.Trim();
+
+                parameters[declared.Key] = string.IsNullOrWhiteSpace(entered) ? declared.Value : entered;
+            }
+
+            System.Console.Write("Tenant url (for example https://contoso.sharepoint.com): ");
+            string tenant = System.Console.ReadLine()?.Trim();
+
+            if (!Uri.TryCreate(tenant, UriKind.Absolute, out Uri tenantUrl))
+            {
+                System.Console.WriteLine("That is not a url.");
+                return;
+            }
+
+            string sequenceId = source.SequenceId();
+
+            System.Console.WriteLine();
+            System.Console.WriteLine($"About to apply {source.DisplayName} as a tenant template against {tenantUrl}");
+
+            foreach (KeyValuePair<string, string> parameter in parameters)
+            {
+                System.Console.WriteLine($"  {parameter.Key} = {parameter.Value}");
+            }
+
+            System.Console.WriteLine();
+            System.Console.Write("Type yes to go ahead: ");
+
+            if (!string.Equals(System.Console.ReadLine()?.Trim(), "yes", StringComparison.OrdinalIgnoreCase))
+            {
+                System.Console.WriteLine("Cancelled.");
+                return;
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("Connecting - a sign in window may appear...");
+
+            using (PnPContext context = await contextFactory.CreateAsync(tenantUrl).ConfigureAwait(false))
+            {
+                var warnings = new List<string>();
+
+                var configuration = new ApplyConfiguration
+                {
+                    MessagesDelegate = (message, type) =>
+                    {
+                        if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)
+                        {
+                            warnings.Add($"[{type}] {message}");
+                            System.Console.WriteLine($"  [{type}] {message}");
+                        }
+                    },
+
+                    ProgressDelegate = (step, current, total) =>
+                        System.Console.WriteLine($"  {current}/{total}  {step}"),
+                };
+
+                foreach (KeyValuePair<string, string> parameter in parameters)
+                {
+                    configuration.Parameters[parameter.Key] = parameter.Value;
+                }
+
+                System.Console.WriteLine("Applying the hierarchy - this creates the site and can take several minutes...");
+
+                await context.GetProvisioningManager()
+                    .ApplyTenantTemplateAsync(source.Hierarchy, sequenceId, configuration).ConfigureAwait(false);
+
+                System.Console.WriteLine();
+                System.Console.WriteLine(warnings.Count == 0
+                    ? "Applied, with nothing reported."
+                    : $"Applied, but {warnings.Count} thing(s) were reported above.");
+            }
+        }
         private static async Task ApplyAsync(bool packages = false)
         {
             string path = AskForTemplate(packages ? "*.pnp" : "*.xml");
@@ -605,18 +839,34 @@ namespace Demo.Console.Provisioning
                 return;
             }
 
-            Uri siteUrl = AskForSite("Apply to which site?");
+            TemplateSource source = TemplateSource.Load(path);
+            ProvisioningTemplate template = source.Template;
+
+            if (template == null)
+            {
+                System.Console.WriteLine("That file holds no provisioning template.");
+                return;
+            }
+
+            DescribeSource(source);
+
+            if (source.CreatesItsOwnSite && await AskUseHierarchyAsync(source).ConfigureAwait(false))
+            {
+                await ApplyHierarchyAsync(source).ConfigureAwait(false);
+                return;
+            }
+
+            Uri siteUrl = await ChooseTargetSiteAsync(source).ConfigureAwait(false);
 
             if (siteUrl == null)
             {
                 return;
             }
 
-            ProvisioningTemplate template = Load(path);
-
             System.Console.WriteLine();
-            System.Console.WriteLine($"About to apply {Path.GetFileName(path)} to {siteUrl}");
+            System.Console.WriteLine($"About to apply {source.DisplayName} to {siteUrl}");
             Summarise(template);
+
 
             System.Console.WriteLine();
             System.Console.WriteLine("Connecting - a sign in window may appear...");
@@ -743,8 +993,16 @@ namespace Demo.Console.Provisioning
 
             for (int i = 0; i < files.Count; i++)
             {
-                var info = new FileInfo(files[i]);
-                System.Console.WriteLine($"  {i + 1,2}  {info.Name}  ({info.Length / 1024} KB, {info.LastWriteTime:g})");
+                if (System.IO.Directory.Exists(files[i]))
+                {
+                    string resolved = TemplateSource.Resolve(files[i]);
+                    System.Console.WriteLine($"  {i + 1,2}  {new DirectoryInfo(files[i]).Name}  (folder -> {Path.GetFileName(resolved)})");
+                }
+                else
+                {
+                    var info = new FileInfo(files[i]);
+                    System.Console.WriteLine($"  {i + 1,2}  {info.Name}  ({info.Length / 1024} KB, {info.LastWriteTime:g})");
+                }
             }
         }
 
@@ -757,7 +1015,7 @@ namespace Demo.Console.Provisioning
                 return;
             }
 
-            Summarise(Load(path));
+            Summarise(TemplateSource.Load(path).Template);
 
             System.Console.Write("Show the raw XML? (y/N): ");
 
@@ -878,9 +1136,15 @@ namespace Demo.Console.Provisioning
                 return new List<string>();
             }
 
-            return System.IO.Directory.GetFiles(TemplateFolder, pattern)
+            List<string> entries = System.IO.Directory.GetFiles(TemplateFolder, pattern)
                 .OrderByDescending(f => new FileInfo(f).LastWriteTime)
                 .ToList();
+
+            entries.AddRange(System.IO.Directory.GetDirectories(TemplateFolder)
+                .Where(d => TemplateSource.Resolve(d) != null)
+                .OrderBy(d => d, StringComparer.OrdinalIgnoreCase));
+
+            return entries;
         }
 
 
