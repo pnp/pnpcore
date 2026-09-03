@@ -485,22 +485,41 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
                 if (logoPath.IndexOf("_api/groupservice/getgroupimage", StringComparison.OrdinalIgnoreCase) < 0)
                 {
-                    changed |= await UploadLogoAsync(context, template, logoPath,
-                        (name, stream) => chrome.Header.SetSiteLogoAsync(name, stream, true)).ConfigureAwait(false);
+                    if (PointsAtTheSite(logoPath))
+                    {
+                        context.Web.SiteLogoUrl = logoPath;
+                        await context.Web.UpdateAsync().ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        changed |= await UploadLogoAsync(context, template, logoPath,
+                            (name, stream) => chrome.Header.SetSiteLogoAsync(name, stream, true)).ConfigureAwait(false);
+                    }
                 }
             }
 
             if (!string.IsNullOrEmpty(webSettings.SiteLogoThumbnail))
             {
                 string thumbnailPath = parser.ParseString(webSettings.SiteLogoThumbnail);
-                changed |= await UploadLogoAsync(context, template, thumbnailPath,
-                    (name, stream) => chrome.Header.SetSiteLogoThumbnailAsync(name, stream, true)).ConfigureAwait(false);
+
+                if (!PointsAtTheSite(thumbnailPath))
+                {
+                    changed |= await UploadLogoAsync(context, template, thumbnailPath,
+                        (name, stream) => chrome.Header.SetSiteLogoThumbnailAsync(name, stream, true)).ConfigureAwait(false);
+                }
             }
 
             if (changed)
             {
                 await context.Web.GetBrandingManager().SetChromeOptionsAsync(chrome).ConfigureAwait(false);
             }
+        }
+
+        private static bool PointsAtTheSite(string path)
+        {
+            return !string.IsNullOrEmpty(path)
+                && (path.StartsWith("http", StringComparison.OrdinalIgnoreCase)
+                    || path.StartsWith("/", StringComparison.Ordinal));
         }
 
         private async Task<bool> UploadLogoAsync(PnPContext context, ProvisioningTemplate template, string path, Func<string, Stream, Task> upload)

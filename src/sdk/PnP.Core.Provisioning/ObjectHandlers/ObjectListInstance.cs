@@ -652,7 +652,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 }
             }
 
-            await ApplyContentTypeOrderAsync(context, list, defaultContentType, visible, hidden).ConfigureAwait(false);
+            await ApplyContentTypeOrderAsync(context, list, defaultContentType, visible, hidden, listContentTypes).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -660,8 +660,13 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// expressed.
         /// </summary>
         private async Task ApplyContentTypeOrderAsync(PnPContext context, CoreList list, IContentType defaultContentType,
-            List<IContentType> visible, List<IContentType> hidden)
+            List<IContentType> visible, List<IContentType> hidden, List<IContentType> listContentTypes)
         {
+            if (step != FieldAndListProvisioningStepHelper.Step.ListSettings)
+            {
+                return;
+            }
+
             if (visible.Count == 0 && hidden.Count == 0)
             {
                 return;
@@ -677,6 +682,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             foreach (IContentType contentType in visible)
             {
                 if (!order.Contains(contentType.StringId))
+                {
+                    order.Add(contentType.StringId);
+                }
+            }
+
+            foreach (IContentType contentType in listContentTypes)
+            {
+                if (!order.Contains(contentType.StringId)
+                    && !hidden.Any(h => h.StringId == contentType.StringId))
                 {
                     order.Add(contentType.StringId);
                 }
@@ -821,6 +835,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         private async Task ApplyWebhooksAsync(PnPContext context, CoreList list, ListInstance templateList, TokenParser parser)
         {
+            if (step != FieldAndListProvisioningStepHelper.Step.ListSettings)
+            {
+                return;
+            }
+
             if (templateList.Webhooks == null || templateList.Webhooks.Count == 0)
             {
                 return;
