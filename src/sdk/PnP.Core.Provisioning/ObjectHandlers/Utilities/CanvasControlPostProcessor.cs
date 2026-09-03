@@ -49,11 +49,21 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
                 return;
             }
 
+            string target = TargetOf(properties);
+
+            if (string.IsNullOrEmpty(target))
+            {
+                context.Logger?.LogDebug("{Source}: a List web part names no list, so there was nothing to repoint.",
+                    Constants.LOGGING_SOURCE);
+                return;
+            }
+
             IList list = await ResolveListAsync(context, properties).ConfigureAwait(false);
             if (list == null)
             {
-                context.Logger?.LogWarning("{Source}: the list a List web part points at was not found on this site - the web part will render empty.",
-                    Constants.LOGGING_SOURCE);
+                context.Logger?.LogWarning(
+                    "{Source}: the List web part points at {Target}, which is not on this site - it will render empty.",
+                    Constants.LOGGING_SOURCE, target);
                 return;
             }
 
@@ -69,6 +79,27 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         /// <summary>
         /// Finds the list a List web part refers to, trying url, then id, then title.
         /// </summary>
+
+        private static string TargetOf(JsonObject properties)
+        {
+            string listUrl = GetString(properties, SelectedListUrlProperty);
+
+            if (!string.IsNullOrWhiteSpace(listUrl))
+            {
+                return $"the list at '{listUrl}'";
+            }
+
+            string listId = GetString(properties, SelectedListIdProperty);
+
+            if (Guid.TryParse(listId, out Guid id) && id != Guid.Empty)
+            {
+                return $"list id {id}";
+            }
+
+            string listTitle = GetString(properties, ListTitleProperty);
+
+            return string.IsNullOrWhiteSpace(listTitle) ? null : $"the list called '{listTitle}'";
+        }
         private static async Task<IList> ResolveListAsync(PnPContext context, JsonObject properties)
         {
             string listUrl = GetString(properties, SelectedListUrlProperty);
