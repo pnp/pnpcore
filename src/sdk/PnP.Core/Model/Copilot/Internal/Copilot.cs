@@ -23,7 +23,7 @@ namespace PnP.Core.Model.Copilot.Internal
         /// <returns>A task that represents the asynchronous operation. The task result contains the deserialized retrieval
         /// response from the MS Graph API.</returns>
         /// <exception cref="HttpRequestException">Thrown if the HTTP request fails or the response indicates an unsuccessful status code.</exception>
-        public async Task<RetrievalResponse> Retrive(RetrievalRequest request)
+        public async Task<RetrievalResponse> RetrieveAsync(RetrievalRequest request)
         {
             var apiCall = new ApiCall($"copilot/retrieval", ApiType.Graph, JsonSerializer.Serialize(request, PnPConstants.JsonSerializer_IgnoreNullValues));
             apiCall.ExecuteRequestApiCall = true;

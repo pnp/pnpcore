@@ -25,7 +25,7 @@ namespace PnP.Core.Test.Copilot
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var response = await context.Copilot.Retrive(new RetrievalRequest
+                var response = await context.Copilot.RetrieveAsync(new RetrievalRequest
                 {
                     DataSource = "sharePoint",
                     QueryString = "Find me documents about test project",
