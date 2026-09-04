@@ -38,7 +38,7 @@ namespace PnP.Core.Provisioning.Test.Offline.ObjectHandlers
             Assert.AreEqual("/sites/my site",
                 ObjectHandlerBase.ServerRelativePathOf("https://contoso.sharepoint.com/sites/my%20site"));
 
-            Assert.AreEqual("/sites/my%20site",
+            Assert.AreEqual("/sites/my site",
                 ObjectHandlerBase.ServerRelativePathOf("/sites/my%20site"));
         }
 
