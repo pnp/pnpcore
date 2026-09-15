@@ -89,7 +89,7 @@
 
 
   <h1 id="PnP_Core_Services_IPnPContext" data-uid="PnP.Core.Services.IPnPContext" class="text-break">
-Interface IPnPContext  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L15"><i class="bi bi-code-slash"></i></a>
+Interface IPnPContext  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -154,7 +154,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_AuthenticationProvider" data-uid="PnP.Core.Services.IPnPContext.AuthenticationProvider">
   AuthenticationProvider
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L76"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connected authentication provider</p>
@@ -186,7 +186,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_AzureADLoginAuthority" data-uid="PnP.Core.Services.IPnPContext.AzureADLoginAuthority">
   AzureADLoginAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L101"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -218,7 +218,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_ContentTypeHub" data-uid="PnP.Core.Services.IPnPContext.ContentTypeHub">
   ContentTypeHub
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L61"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the ContentTypeHub Object</p>
@@ -246,11 +246,43 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
 
 
+  <a id="PnP_Core_Services_IPnPContext_Copilot_" data-uid="PnP.Core.Services.IPnPContext.Copilot*"></a>
+
+  <h3 id="PnP_Core_Services_IPnPContext_Copilot" data-uid="PnP.Core.Services.IPnPContext.Copilot">
+  Copilot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Entry point for Copilot functionality</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICopilot Copilot { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PnP.Core.Model.Copilot.Public.ICopilot.html">ICopilot</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="PnP_Core_Services_IPnPContext_CurrentBatch_" data-uid="PnP.Core.Services.IPnPContext.CurrentBatch*"></a>
 
   <h3 id="PnP_Core_Services_IPnPContext_CurrentBatch" data-uid="PnP.Core.Services.IPnPContext.CurrentBatch">
   CurrentBatch
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L131"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Current batch, used for implicit batching</p>
@@ -282,7 +314,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Environment" data-uid="PnP.Core.Services.IPnPContext.Environment">
   Environment
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L91"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the used Microsoft 365 cloud environment</p>
@@ -314,7 +346,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_GraphAlwaysUseBeta" data-uid="PnP.Core.Services.IPnPContext.GraphAlwaysUseBeta">
   GraphAlwaysUseBeta
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L116"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>If true than all requests to Microsoft Graph use the beta endpoint</p>
@@ -346,7 +378,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_GraphCanUseBeta" data-uid="PnP.Core.Services.IPnPContext.GraphCanUseBeta">
   GraphCanUseBeta
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint</p>
@@ -378,7 +410,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_GraphClient" data-uid="PnP.Core.Services.IPnPContext.GraphClient">
   GraphClient
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L86"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connected Microsoft Graph client</p>
@@ -410,7 +442,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_GraphFirst" data-uid="PnP.Core.Services.IPnPContext.GraphFirst">
   GraphFirst
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L111"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Controls whether the library will try to use Microsoft Graph over REST whenever that's defined in the model</p>
@@ -442,7 +474,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Group" data-uid="PnP.Core.Services.IPnPContext.Group">
   Group
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L36"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Group Object</p>
@@ -474,7 +506,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_HasPendingRequests" data-uid="PnP.Core.Services.IPnPContext.HasPendingRequests">
   HasPendingRequests
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L126"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Are there pending requests to execute (in the case of batching)</p>
@@ -506,7 +538,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Logger" data-uid="PnP.Core.Services.IPnPContext.Logger">
   Logger
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L71"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connected logger</p>
@@ -538,7 +570,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Me" data-uid="PnP.Core.Services.IPnPContext.Me">
   Me
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L51"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Me Object</p>
@@ -570,7 +602,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.IPnPContext.MicrosoftGraphAuthority">
   MicrosoftGraphAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L96"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.IPnPContext.html#PnP_Core_Services_IPnPContext_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -602,7 +634,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Properties" data-uid="PnP.Core.Services.IPnPContext.Properties">
   Properties
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Collection for custom properties that you want to attach to a <a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
@@ -634,7 +666,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_RestClient" data-uid="PnP.Core.Services.IPnPContext.RestClient">
   RestClient
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L81"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connected SharePoint REST client</p>
@@ -666,7 +698,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Site" data-uid="PnP.Core.Services.IPnPContext.Site">
   Site
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Site Object</p>
@@ -698,7 +730,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Social" data-uid="PnP.Core.Services.IPnPContext.Social">
   Social
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Social Object</p>
@@ -730,7 +762,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Team" data-uid="PnP.Core.Services.IPnPContext.Team">
   Team
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Team Object</p>
@@ -762,7 +794,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_TermStore" data-uid="PnP.Core.Services.IPnPContext.TermStore">
   TermStore
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the TermStore Object</p>
@@ -794,7 +826,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Uri" data-uid="PnP.Core.Services.IPnPContext.Uri">
   Uri
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Uri of the SharePoint site we're working against</p>
@@ -826,7 +858,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Web" data-uid="PnP.Core.Services.IPnPContext.Web">
   Web
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Entry point for the Web Object</p>
@@ -862,7 +894,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Clone" data-uid="PnP.Core.Services.IPnPContext.Clone">
   Clone()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L180"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
@@ -895,7 +927,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Clone_System_Guid_" data-uid="PnP.Core.Services.IPnPContext.Clone(System.Guid)">
   Clone(Guid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L221"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
@@ -934,7 +966,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Clone_System_String_" data-uid="PnP.Core.Services.IPnPContext.Clone(System.String)">
   Clone(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L193"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
@@ -973,7 +1005,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Clone_System_Uri_" data-uid="PnP.Core.Services.IPnPContext.Clone(System.Uri)">
   Clone(Uri)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L207"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
@@ -1012,7 +1044,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_CloneAsync" data-uid="PnP.Core.Services.IPnPContext.CloneAsync">
   CloneAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L180"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L186"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context into a new context for the same SharePoint site</p>
@@ -1045,7 +1077,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_CloneAsync_System_Guid_" data-uid="PnP.Core.Services.IPnPContext.CloneAsync(System.Guid)">
   CloneAsync(Guid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L228"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
@@ -1084,7 +1116,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_CloneAsync_System_String_" data-uid="PnP.Core.Services.IPnPContext.CloneAsync(System.String)">
   CloneAsync(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L200"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site provided as configuration</p>
@@ -1123,7 +1155,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_CloneAsync_System_Uri_" data-uid="PnP.Core.Services.IPnPContext.CloneAsync(System.Uri)">
   CloneAsync(Uri)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L214"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clones this context for another SharePoint site</p>
@@ -1162,7 +1194,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.IPnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)">
   Execute(Batch, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L174"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Method to execute a given batch</p>
@@ -1204,7 +1236,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_Execute_System_Boolean_" data-uid="PnP.Core.Services.IPnPContext.Execute(System.Boolean)">
   Execute(bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L166"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Method to execute the current batch</p>
@@ -1243,7 +1275,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_" data-uid="PnP.Core.Services.IPnPContext.ExecuteAsync(PnP.Core.Services.Batch,System.Boolean)">
   ExecuteAsync(Batch, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L159"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Method to execute a given batch</p>
@@ -1285,7 +1317,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_ExecuteAsync_System_Boolean_" data-uid="PnP.Core.Services.IPnPContext.ExecuteAsync(System.Boolean)">
   ExecuteAsync(bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L151"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Method to execute the current batch</p>
@@ -1324,7 +1356,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_GetLongRunningOperation_System_String_" data-uid="PnP.Core.Services.IPnPContext.GetLongRunningOperation(System.String)">
   GetLongRunningOperation(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L144"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets an ongoing Graph long-running operation.</p>
@@ -1363,7 +1395,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="PnP_Core_Services_IPnPContext_NewBatch" data-uid="PnP.Core.Services.IPnPContext.NewBatch">
   NewBatch()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L137"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Creates a new batch</p>
@@ -1396,7 +1428,7 @@ Interface IPnPContext  <a class="header-action link-secondary" title="View sourc
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L15" class="edit-link">Edit this page</a>
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/IPnPContext.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
 

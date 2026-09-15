@@ -1888,6 +1888,160 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.DataSourceConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.DataSourceConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.DataSourceConfiguration",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.DataSourceConfiguration.yml\" sourcestartlinenumber=\"1\">Represents the data source configuration</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.ExternalItemConfiguration",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConfiguration.yml\" sourcestartlinenumber=\"1\">Represents configuration options for retrieving data from Copilot connectors</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConnection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.ExternalItemConnection",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.ExternalItemConnection.yml\" sourcestartlinenumber=\"1\">Represents a Copilot connector to include in retrieval operations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalExtract.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalExtract.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.RetrievalExtract",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.RetrievalExtract.yml\" sourcestartlinenumber=\"1\">Represents a single extract within the list of retrieval extracts.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalHit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalHit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.RetrievalHit",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.RetrievalHit.yml\" sourcestartlinenumber=\"1\">Represents a single result within the list of retrieval results.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.RetrievalRequest",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.RetrievalRequest.yml\" sourcestartlinenumber=\"1\">Represents a request to retrieve relevant text extracts from specified data sources using a natural language\nquery and optional filtering or configuration parameters.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.RetrievalResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.RetrievalResponse",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.RetrievalResponse.yml\" sourcestartlinenumber=\"1\">Represents results from a retrieval query.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.SensitivityLabelInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.SensitivityLabelInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO.SensitivityLabelInfo",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.DTO.SensitivityLabelInfo.yml\" sourcestartlinenumber=\"1\">Describes the information protection label that details how to properly apply a sensitivity label to information.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.DTO.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.DTO",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.ICopilot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.ICopilot.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public.ICopilot",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.Copilot.Public.ICopilot.yml\" sourcestartlinenumber=\"1\">Represents MS Graph API endpoint under Copilot path.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Copilot.Public.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Copilot.Public.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.Copilot.Public",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.DataModelCollectionLoadExtensions.yml",
       "output": {
         ".html": {
