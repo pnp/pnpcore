@@ -324,14 +324,13 @@ namespace PnP.Core.Test.Security
             }
         }
 
-        #endregion
-
         [TestMethod]
         public async Task DeleteSiteUserByIdGeneratesTheRemoveCall()
         {
             // Offline by design. The delete is added to a batch and the generated request is inspected rather
             // than executed, which covers the full public path from IWeb.SiteUsers.DeleteByIdBatchAsync down to
             // the resolved rest url without needing recorded responses.
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
                 var batch = context.NewBatch();
@@ -348,6 +347,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task DeleteSiteUserByIdRejectsAnInvalidId()
         {
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
                 await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
@@ -357,5 +357,6 @@ namespace PnP.Core.Test.Security
             }
         }
 
+         #endregion
     }
 }

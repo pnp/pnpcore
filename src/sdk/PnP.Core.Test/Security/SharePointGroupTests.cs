@@ -486,6 +486,7 @@ namespace PnP.Core.Test.Security
         public async Task DeleteSiteGroupByIdGeneratesTheRemoveByIdCall()
         {
             // Offline by design, see the note on the user equivalent in UserTests
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
                 var batch = context.NewBatch();
@@ -502,6 +503,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task DeleteSiteGroupByIdRejectsAnInvalidId()
         {
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
                 await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
