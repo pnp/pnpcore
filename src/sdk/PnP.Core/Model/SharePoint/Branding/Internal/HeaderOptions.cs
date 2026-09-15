@@ -25,6 +25,11 @@ namespace PnP.Core.Model.SharePoint
         public bool HideTitle { get; set; }
 
         public LogoAlignment LogoAlignment { get; set; }
+        public OverlayColorType OverlayColor { get; set; } = OverlayColorType.None;
+        public int OverlayOpacity { get; set; } = 0;
+        public OverlayGradientDirectionType OverlayGradientDirection { get; set; } = OverlayGradientDirectionType.TopToBottom;
+        public int ColorIndexInLightMode { get; set; } = -1;
+        public int ColorIndexInDarkMode { get; set; } = -1;
 
         public async Task SetSiteLogoAsync(string fileName, Stream content, bool overwrite = false)
         {
@@ -145,11 +150,6 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SetHeaderBackgroundImageAsync(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
         {
-            if (Layout != HeaderLayoutType.Extended)
-            {
-                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended);
-            }
-
             // Upload the image
             IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
             // Set the uploaded file as header background
