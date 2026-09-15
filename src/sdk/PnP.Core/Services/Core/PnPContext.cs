@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model.Copilot.Internal;
+using PnP.Core.Model.Copilot.Public;
 using PnP.Core.Model.Me;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
@@ -60,7 +62,7 @@ namespace PnP.Core.Services
             return new Social();
         }, true);
 
-        private readonly Lazy<IMe> me= new Lazy<IMe>(() =>
+        private readonly Lazy<IMe> me = new Lazy<IMe>(() =>
         {
             return new Me();
         }, true);
@@ -68,6 +70,11 @@ namespace PnP.Core.Services
         private readonly Lazy<IContentTypeHub> contentTypeHub = new Lazy<IContentTypeHub>(() =>
         {
             return new ContentTypeHub();
+        }, true);
+
+        private readonly Lazy<ICopilot> copilot = new Lazy<ICopilot>(() =>
+        {
+            return new Copilot();
         }, true);
 
         #endregion
@@ -140,7 +147,7 @@ namespace PnP.Core.Services
                 {
                     MicrosoftGraphAuthority = globalOptions.MicrosoftGraphAuthority;
                     AzureADLoginAuthority = globalOptions.AzureADLoginAuthority;
-                    
+
                     // Ensure the Microsoft Graph URL is set depending on the used cloud environment
                     GraphClient.UpdateBaseAddress(MicrosoftGraphAuthority);
                 }
@@ -428,6 +435,17 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Entry point for Copilot functionality
+        /// </summary>
+        public ICopilot Copilot
+        {
+            get
+            {
+                (copilot.Value as Copilot).PnPContext = this;
+                return copilot.Value;
+            }
+        }
+        /// <summary>
         /// Entry point for the ContentTypeHub object
         /// </summary>
         public IContentTypeHub ContentTypeHub
@@ -451,7 +469,7 @@ namespace PnP.Core.Services
         {
             return BatchClient.EnsureBatch();
         }
-        
+
         /// <summary>
         /// Gets an ongoing Graph long-running operation.
         /// </summary>
@@ -601,7 +619,7 @@ namespace PnP.Core.Services
         /// <param name="groupId">Id of the other Microsoft 365 group to create a <see cref="PnPContext"/> for</param>
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Guid groupId)
-        { 
+        {
             return CloneAsync(groupId).GetAwaiter().GetResult();
         }
 
