@@ -26,6 +26,7 @@ Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
 [Minimal Console demo](Demo.Console.Minimal/readme.md) | Most simplistic console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 10 | v1.15.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Console demo](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 10 | v1.17.* | Interactive login (`InteractiveAuthenticationProvider`)
+[Provisioning demo](Demo.Console.Provisioning/README.md) | Interactive console for the provisioning engine: extract a template from a site, inspect what it captured, and apply it to a different site | .NET 10 | v1.17.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Persistent TokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | .NET 7 | v1.8.0 | Custom `IAuthenticationProvider` implementation
 [Pi demo](Demo.RPi/README.md) | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | .NET 7 | v1.8.0 | Username password login (`UsernamePasswordAuthenticationProvider`)
 
