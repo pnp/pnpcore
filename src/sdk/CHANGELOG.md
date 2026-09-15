@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Updated Demo.ASPNetCore Sample #1835 [gszdev - gszdev]
 - Fixed tenant hidden list url change #1855 [gszdev - gszdev] [czullu - Christian Zuellig]
 - Removed Viva Topics Support #1784 [adam-it - Adam Wójcik]
+- Updated ISharePointUser.Groups to the groups the user belongs to #1863 [svermaak - svermaak]
 
 ## [1.18]
 
