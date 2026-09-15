@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added 
 
+- Added retrieval API implementation #1744 [mgwojciech - Marcin Wojciechowski]
+
 ### Changed
 
 - Fixed PnP Core telemetry to work with Application Insights SDK v3 #1798 [lockerbill - lockerbill]
