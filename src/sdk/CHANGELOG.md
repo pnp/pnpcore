@@ -10,14 +10,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added 
 
+- Added retrieval API implementation #1744 [mgwojciech - Marcin Wojciechowski]
+
 ### Changed
 
+- Fixed PnP Core telemetry to work with Application Insights SDK v3 #1798 [lockerbill - lockerbill]
 - Updated Demo.ConsoleApp Sample #1833 [gszdev - gszdev]
 - Updated Demo.Blazor Sample #1834 [gszdev - gszdev]
 - Fixed Web.NewPage() freezes application #1827 [gszdev - gszdev]
 - Updated Demo.ASPNetCore Sample #1835 [gszdev - gszdev]
 - Fixed tenant hidden list url change #1855 [gszdev - gszdev] [czullu - Christian Zuellig]
 - Removed Viva Topics Support #1784 [adam-it - Adam Wójcik]
+- Updated ISharePointUser.Groups to the groups the user belongs to #1863 [svermaak - svermaak]
 
 ## [1.18]
 

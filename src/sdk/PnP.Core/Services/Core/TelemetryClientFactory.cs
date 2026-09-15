@@ -9,17 +9,25 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class TelemetryClientFactory
     {
-        private static TelemetryConfiguration telemetryConfiguration;
-        private static TelemetryClient telemetryClient;
+        internal static TelemetryConfiguration telemetryConfiguration;
+        internal static TelemetryClient telemetryClient;
 
         internal static Tuple<TelemetryConfiguration, TelemetryClient> GetTelemetryClientAndConfiguration(string instrumentationKey)
         {
+            if (instrumentationKey == null)
+            {
+                throw new ArgumentNullException(nameof(instrumentationKey));
+            }
+
             if (telemetryConfiguration == null)
             {
-                telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-#pragma warning disable CS0618 // Type or member is obsolete
-                telemetryConfiguration.InstrumentationKey = instrumentationKey;
-#pragma warning restore CS0618 // Type or member is obsolete
+                // Deliberately not TelemetryConfiguration.CreateDefault(): on Application Insights v3 that
+                // returns a process wide shared instance, so setting the connection string on it would point
+                // the hosting application's telemetry at the PnP instrumentation key, and would throw once
+                // anything else in the process has built a TelemetryClient from it. A library needs its own
+                // isolated configuration.
+                telemetryConfiguration = new TelemetryConfiguration();
+                telemetryConfiguration.ConnectionString = $"InstrumentationKey={instrumentationKey}";
             }
 
             if (telemetryClient == null)

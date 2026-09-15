@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.ApplicationInsights" Version="3.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
@@ -36,6 +37,7 @@
 
 	<ItemGroup>
 		<Folder Include="Base\MockData\GraphRestTransitionTests\" />
+		<Folder Include="Copilot\MockData\RetrievalTests\" />
 		<Folder Include="QueryModel\MockData\" />
 		<Folder Include="Security\MockData\ListItemSecurityTests\" />
 		<Folder Include="Security\MockData\UserTests\" />

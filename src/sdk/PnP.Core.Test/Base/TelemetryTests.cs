@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -34,6 +36,40 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(!string.IsNullOrEmpty(initProps["AADTenantId"]));
             Assert.IsTrue(initProps.ContainsKey("OS"));
             Assert.IsTrue(!string.IsNullOrEmpty(initProps["OS"]));
+        }
+
+        [TestMethod]
+        public void TestRunsUseTheTestAppInsightsInstance()
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("CI runs keep the default instrumentation key as telemetry is disabled there");
+
+            Assert.AreEqual("6073339d-9e70-4004-9ff7-1345316ade97", TelemetryManager.InstrumentationKey);
+        }
+
+        [TestMethod]
+        public void TelemetryClientFactoryConfiguresConnectionString()
+        {
+            TelemetryConfiguration originalConfiguration = TelemetryClientFactory.telemetryConfiguration;
+            TelemetryClient originalClient = TelemetryClientFactory.telemetryClient;
+
+            try
+            {
+                TelemetryClientFactory.telemetryConfiguration = null;
+                TelemetryClientFactory.telemetryClient = null;
+
+                const string instrumentationKey = "00000000-0000-0000-0000-000000000000";
+
+                Tuple<TelemetryConfiguration, TelemetryClient> telemetry = TelemetryClientFactory.GetTelemetryClientAndConfiguration(instrumentationKey);
+
+                Assert.IsNotNull(telemetry.Item1);
+                Assert.IsNotNull(telemetry.Item2);
+                Assert.AreEqual($"InstrumentationKey={instrumentationKey}", telemetry.Item1.ConnectionString);
+            }
+            finally
+            {
+                TelemetryClientFactory.telemetryConfiguration = originalConfiguration;
+                TelemetryClientFactory.telemetryClient = originalClient;
+            }
         }
 
         [TestMethod]

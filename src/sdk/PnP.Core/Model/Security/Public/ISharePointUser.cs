@@ -52,7 +52,9 @@ namespace PnP.Core.Model.Security
         public bool IsSiteAdmin { get; }
 
         /// <summary>
-        /// Returns the collection of <see cref="ISharePointGroup"/> for this user
+        /// Returns the collection of <see cref="ISharePointGroup"/> this user is a direct member of.
+        /// Membership obtained indirectly, by being part of a Microsoft Entra ID group that is itself a member
+        /// of the SharePoint group, is not expanded and therefore not returned.
         /// </summary>
         public ISharePointGroupCollection Groups { get; }
 
