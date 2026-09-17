@@ -9,7 +9,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint users
     /// </summary>
     [ConcreteType(typeof(SharePointUserCollection))]
-    public interface ISharePointUserCollection : IQueryable<ISharePointUser>, IAsyncEnumerable<ISharePointUser>, IDataModelCollection<ISharePointUser>, IDataModelCollectionLoad<ISharePointUser>, ISupportModules<ISharePointUserCollection>
+    public interface ISharePointUserCollection : IQueryable<ISharePointUser>, IAsyncEnumerable<ISharePointUser>, IDataModelCollection<ISharePointUser>, IDataModelCollectionLoad<ISharePointUser>, IDataModelCollectionDeleteByIntegerId, ISupportModules<ISharePointUserCollection>
     {
 
         /// <summary>

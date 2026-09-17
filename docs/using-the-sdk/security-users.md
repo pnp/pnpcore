@@ -93,6 +93,19 @@ var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
 > [!Important]
 > Disabled users cannot be added as members to a SharePoint site. The  `ValidateUsers` and `ValidateAndEnsureUsers` methods verify the 'Enabled' or 'Disabled' status of users in Azure Active Directory (Azure AD), treating disabled users as non-existing. To access the 'enabled' property of a user, the application executing this method must be granted the `User.ReadBasic.All` API permission."
 
+## Removing a user
+
+Removing a user from the site's user table is done using the `DeleteById` methods on the web's `SiteUsers` collection, or by calling `Delete` on a loaded user. Removing a user from a single SharePoint group instead is explained in the [groups article](./security-groups.md#removing-usersgroups-from-a-group).
+
+```csharp
+// Remove the user: Option A, when only the user id is known
+await context.Web.SiteUsers.DeleteByIdAsync(userId);
+
+// Remove the user: Option B, when the user is already loaded
+var user = await context.Web.GetUserByIdAsync(userId);
+await user.DeleteAsync();
+```
+
 ## Granting permissions for a user at web level
 
 Once a user is added you can directly permission the user by granting it one or more role definitions via one of the `AddRoleDefinitions` methods. You can also enumerate the roles a user has via the `GetRoleDefinitions` methods and remove granted roles via the `RemoveRoleDefinitions` methods. These methods are equivalent to using the methods provided via the `ISecurableObject` interface on `IWeb`.
