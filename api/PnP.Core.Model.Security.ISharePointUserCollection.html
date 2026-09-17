@@ -102,7 +102,7 @@ Interface ISharePointUserCollection  <a class="header-action link-secondary" tit
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ISharePointUserCollection : IQueryable&lt;ISharePointUser&gt;, IQueryable, IAsyncEnumerable&lt;ISharePointUser&gt;, IDataModelCollection&lt;ISharePointUser&gt;, IEnumerable&lt;ISharePointUser&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;ISharePointUser&gt;, ISupportModules&lt;ISharePointUserCollection&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ISharePointUserCollection : IQueryable&lt;ISharePointUser&gt;, IQueryable, IAsyncEnumerable&lt;ISharePointUser&gt;, IDataModelCollection&lt;ISharePointUser&gt;, IEnumerable&lt;ISharePointUser&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;ISharePointUser&gt;, IDataModelCollectionDeleteByIntegerId, ISupportModules&lt;ISharePointUserCollection&gt;</code></pre>
   </div>
 
 
@@ -152,6 +152,24 @@ Interface ISharePointUserCollection  <a class="header-action link-secondary" tit
     </div>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html#PnP_Core_Model_IDataModelCollectionLoad_1_LoadBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelCollectionLoad&lt;ISharePointUser&gt;.LoadBatchAsync(Batch, params Expression&lt;Func&lt;ISharePointUser, object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteById_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteById(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdAsync_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatch_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatchAsync_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(Batch, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_">IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(Batch, int)</a>
     </div>
   </dd></dl>
 
