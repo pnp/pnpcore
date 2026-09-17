@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed tenant hidden list url change #1855 [gszdev - gszdev] [czullu - Christian Zuellig]
 - Removed Viva Topics Support #1784 [adam-it - Adam Wójcik]
 - Updated ISharePointUser.Groups to the groups the user belongs to #1863 [svermaak - svermaak]
+- Updated delete by id on IWeb.SiteUsers and IWeb.SiteGroups #1864 [svermaak - svermaak]
 
 ## [1.18]
 
