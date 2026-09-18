@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Blazor" />
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="Demo.Blazor.csproj">
+    <BuildType Solution="Blazor|*" Project="Debug" />
+  </Project>
+</Solution>
