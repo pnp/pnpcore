@@ -321,6 +321,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return null;
             }
 
+            if (url.StartsWith("/", StringComparison.Ordinal))
+            {
+                return Uri.UnescapeDataString(url);
+            }
+
             return Uri.TryCreate(url, UriKind.Absolute, out Uri absolute)
                 ? Uri.UnescapeDataString(absolute.AbsolutePath)
                 : Uri.UnescapeDataString(url);
