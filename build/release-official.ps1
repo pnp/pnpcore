@@ -45,7 +45,7 @@ if ($apiKey.Length -gt 0)
     nuget push q:\github\pnpcore\src\sdk\PnP.Core\bin\release\PnP.Core.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
     nuget push q:\github\pnpcore\src\sdk\PnP.Core.Auth\bin\release\PnP.Core.Auth.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
     nuget push q:\github\pnpcore\src\sdk\PnP.Core.Admin\bin\release\PnP.Core.Admin.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
-    #nuget push q:\github\pnpcore\src\sdk\PnP.Core.Provisioning\bin\release\PnP.Core.Provisioning.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
+    nuget push q:\github\pnpcore\src\sdk\PnP.Core.Provisioning\bin\release\PnP.Core.Provisioning.$version.nupkg -ApiKey $apiKey -source https://api.nuget.org/v3/index.json
 
     # Persist last used version
     Write-Host "Writing $version to git"

@@ -46,7 +46,7 @@ Write-Host "Publishing to nuget"
 $nupkg = $("./src/sdk/PnP.Core/bin/Release/PnP.Core.$version.nupkg")
 $authNupkg = $("./src/sdk/PnP.Core.Auth/bin/Release/PnP.Core.Auth.$version.nupkg")
 $adminNupkg = $("./src/sdk/PnP.Core.Admin/bin/Release/PnP.Core.Admin.$version.nupkg")
-#$provisioningNupkg = $("./src/sdk/PnP.Core.Provisioning/bin/Release/PnP.Core.Provisioning.$version.nupkg")
+$provisioningNupkg = $("./src/sdk/PnP.Core.Provisioning/bin/Release/PnP.Core.Provisioning.$version.nupkg")
 $apiKey = $("$env:NUGET_API_KEY")
 
 #Write-Host "API Key starts with:" $apiKey.Substring(0,10)
@@ -54,7 +54,7 @@ $apiKey = $("$env:NUGET_API_KEY")
 dotnet nuget push $nupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
 dotnet nuget push $authNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
 dotnet nuget push $adminNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
-#dotnet nuget push $provisioningNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
+dotnet nuget push $provisioningNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
 
 Write-Host "Writing $version to git"
 Set-Content -Path ./build/version.debug.increment -Value $versionIncrement
