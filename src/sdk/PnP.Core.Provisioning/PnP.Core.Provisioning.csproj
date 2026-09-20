@@ -23,6 +23,7 @@
 		<Deterministic>true</Deterministic>
 		<Configurations>Debug;Release</Configurations>
 		<PackageIcon>nugeticon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
@@ -91,6 +92,10 @@
 
 	<ItemGroup>
 		<None Include="nugeticon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="README.md">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>

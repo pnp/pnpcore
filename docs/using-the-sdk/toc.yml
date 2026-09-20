@@ -38,6 +38,10 @@
     href: basics-responseheaders.md
   - name: SharePoint CSOM vs PnP Core SDK
     href: basics-csom-vs-pnp.md
+- name: Provisioning
+  items:
+  - name: Overview
+    href: provisioning-intro.md
 - name: "Admin: Microsoft 365"
   items:
   - name: Information Protection

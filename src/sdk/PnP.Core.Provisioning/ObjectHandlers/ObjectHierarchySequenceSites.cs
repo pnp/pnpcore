@@ -160,7 +160,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return match == null ? null : await context.CloneAsync(match.Url).ConfigureAwait(false);
             }
 
-            Uri url = UrlOf(siteCollection, parser);
+            Uri url = UrlOf(context, siteCollection, parser);
 
             if (url == null || !await manager.SiteExistsAsync(url).ConfigureAwait(false))
             {
@@ -195,6 +195,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             if (string.IsNullOrWhiteSpace(url))
             {
                 throw new ArgumentException("A site collection in the template has no url.", nameof(url));
+            }
+
+            if (url.StartsWith("/", StringComparison.Ordinal))
+            {
+                return new Uri(new Uri($"{context.Uri.Scheme}://{context.Uri.Host}"), url);
             }
 
             if (Uri.TryCreate(url, UriKind.Absolute, out Uri absolute))
@@ -455,7 +460,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 : hierarchy.Sequences.FirstOrDefault(s => s.ID == sequenceId);
         }
 
-        private static Uri UrlOf(SiteCollectionModel siteCollection, TokenParser parser)
+        private static Uri UrlOf(PnPContext context, SiteCollectionModel siteCollection, TokenParser parser)
         {
             string url = siteCollection switch
             {
@@ -467,7 +472,19 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
             url = parser.ParseString(url);
 
-            return Uri.TryCreate(url, UriKind.Absolute, out Uri parsed) ? parsed : null;
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return null;
+            }
+
+            try
+            {
+                return AbsoluteUrl(context, url);
+            }
+            catch (ArgumentException)
+            {
+                return null;
+            }
         }
 
         /// <summary>

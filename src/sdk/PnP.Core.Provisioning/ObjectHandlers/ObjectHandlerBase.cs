@@ -326,14 +326,17 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return null;
             }
 
+            if (webUrl.StartsWith("/", StringComparison.Ordinal))
+            {
+                return Uri.UnescapeDataString(webUrl);
+            }
+
             if (Uri.TryCreate(webUrl, UriKind.Absolute, out Uri absolute))
             {
                 return Uri.UnescapeDataString(absolute.PathAndQuery);
             }
 
-            string path = Uri.UnescapeDataString(webUrl);
-
-            return path.StartsWith("/", StringComparison.Ordinal) ? path : null;
+            return null;
         }
 
         /// <summary>
