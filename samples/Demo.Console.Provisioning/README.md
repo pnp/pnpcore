@@ -129,8 +129,8 @@ dotnet run -- apply <site-url> <template.xml>    the same, spelled out
 | `1` | Failed |
 
 `0` and `2` are genuinely different. The engine reports a problem and carries on rather than
-stopping, so a run can finish having quietly skipped part of the template — see
-[Reading the output](#reading-the-output).
+stopping, so a run can finish having quietly skipped part of the template — the reported
+problems are printed at the end of the run, as in the example below.
 
 Example:
 
