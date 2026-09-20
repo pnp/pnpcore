@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added 
 
 - Added retrieval API implementation #1744 [mgwojciech - Marcin Wojciechowski]
+- Added Provisioning engine #1847, #1848, #1849 [adam-it - Adam Wójcik]
 
 ### Changed
 
