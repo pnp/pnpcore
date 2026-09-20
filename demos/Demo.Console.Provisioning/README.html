@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Demo.Console.Provisioning | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Demo.Console.Provisioning | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.Console.Provisioning/README.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="democonsoleprovisioning">Demo.Console.Provisioning</h1>
+
+<p>An interactive console for the <strong>PnP Core provisioning engine</strong>: extract a template from a SharePoint
+site, look at what it captured, and apply it to a different site.</p>
+<hr>
+<h2 id="before-you-start">Before you start</h2>
+<p>You need:</p>
+<ul>
+<li><strong>.NET 10 SDK</strong> or later</li>
+<li>A SharePoint Online site you can administer — <strong>two</strong> if you want to try the full round trip</li>
+<li>An account that can sign in interactively (a browser window opens; there is no stored password)</li>
+</ul>
+<h2 id="app-registration">App registration</h2>
+<p>In order to use this app you will need to register an app in Azure AD and grant it the following permissions:</p>
+<ul>
+<li><p>Go to <a href="https://aad.portal.azure.com">Azure Active Directory Portal</a></p>
+</li>
+<li><p>In App registrations, click <strong>New registration</strong></p>
+</li>
+<li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected. As the Redirect URI, change from Web Platform to &quot;Mobile and Desktop Applications&quot; use <strong>http://localhost</strong> for the redirect URI (only needed if you want use an interactive authentication flow)</p>
+</li>
+<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong> and <strong>Access tokens</strong></p>
+</li>
+<li><p>Under <strong>Advanced settings</strong> section, set <strong>Allow public client flows</strong> to <strong>yes</strong></p>
+</li>
+<li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong></p>
+<ul>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Group.ReadWrite.All</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>openid</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>profile</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Sites.Manage.All</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read.All</strong></li>
+<li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>AllSites.FullControl</strong></li>
+<li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>AllSites.Manage</strong></li>
+<li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TermStore.ReadWrite.All</strong></li>
+<li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read.All</strong></li>
+</ul>
+</li>
+<li><p>Click <strong>Grant admin consent for {tenant}</strong></p>
+</li>
+<li><p>From <strong>Overview</strong>,</p>
+<ul>
+<li>copy the value of <strong>Directory (tenant) ID</strong></li>
+<li>copy the value of <strong>Application (client) ID</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="running-it">Running it</h2>
+<p>There are two ways in. <strong>Apply one template and exit:</strong></p>
+<pre><code class="lang-powershell">cd pnpcore/samples/Demo.Console.Provisioning
+dotnet run -- https://contoso.sharepoint.com/sites/target Templates/site.xml
+</code></pre>
+<p><strong>Or with no arguments, for the menu:</strong></p>
+<pre><code class="lang-powershell">dotnet run
+</code></pre>
+<pre><code>=== PnP Core provisioning ===
+  1  Extract a template from a site
+  2  List saved templates
+  3  Show what a saved template contains
+  4  Apply a saved template to a site
+  5  Export a site to a .pnp package
+  6  Apply a .pnp package to a site
+  0  Exit
+</code></pre>
+<p>Site urls are typed in when they are needed rather than configured, precisely so that extracting from
+one site and applying to another does not mean editing a settings file in between.</p>
+<hr>
+<h2 id="extracting-from-the-command-line">Extracting from the command line</h2>
+<pre><code>dotnet run -- extract &lt;site-url&gt; &lt;output.xml&gt; [options]
+dotnet run -- extract &lt;site-url&gt; &lt;output.pnp&gt; [options]    as a package, see Packages (.pnp)
+</code></pre>
+<p>A template is <strong>structure only</strong> by default — columns, content types, lists, security,
+navigation, branding, but none of the content sitting in them. Content is the expensive part
+of an extract, so you opt into it:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--items</code></td>
+<td>Include the items of <strong>every</strong> list on the site</td>
+</tr>
+<tr>
+<td><code>--items=A,B</code></td>
+<td>Include the items of these lists only</td>
+</tr>
+<tr>
+<td><code>--files</code></td>
+<td>Export the files held in <strong>every</strong> document library</td>
+</tr>
+<tr>
+<td><code>--files=A,B</code></td>
+<td>Export the files of these document libraries only</td>
+</tr>
+<tr>
+<td><code>--pages</code></td>
+<td>Include the site's client side pages and their contents</td>
+</tr>
+<tr>
+<td><code>--hidden-lists</code></td>
+<td>Include hidden lists in the structure</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="lang-powershell"># structure only
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml
+
+# structure, every list's items, and the pages
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items --pages
+
+# just the two lists you care about
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items=&quot;Tasks,Announcements&quot;
+</code></pre>
+<h2 id="applying-from-the-command-line">Applying from the command line</h2>
+<pre><code>dotnet run -- &lt;site-url&gt; &lt;template.xml&gt;
+dotnet run -- apply &lt;site-url&gt; &lt;template.xml&gt;    the same, spelled out
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-v</code>, <code>--verbose</code></td>
+<td>Log the SDK's own requests as well. Reach for this when a failure needs the traffic behind it.</td>
+</tr>
+<tr>
+<td><code>-h</code>, <code>--help</code></td>
+<td>Usage.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exit codes</strong>, so a script can tell the three outcomes apart:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Applied, nothing reported</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Applied, <strong>but warnings or errors were reported</strong></td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Failed</td>
+</tr>
+</tbody>
+</table>
+<p><code>0</code> and <code>2</code> are genuinely different. The engine reports a problem and carries on rather than
+stopping, so a run can finish having quietly skipped part of the template — the reported
+problems are printed at the end of the run, as in the example below.</p>
+<p>Example:</p>
+<pre><code>Template: D:\templates\marketing.xml
+Target:   https://contoso.sharepoint.com/sites/target
+
+  Contains: 14 site columns, 3 content types, 6 lists
+
+Connecting - a sign in window may appear...
+Applying...
+  1/20  Initializing engine
+  [Warning] ListInstance Style Library is a Style Library of a site with NoScript enabled and will be skipped
+  2/20  Regional Settings
+  ...
+
+Applied, but 1 thing(s) were reported:
+  [Warning] ListInstance Style Library is a Style Library of a site with NoScript enabled and will be skipped
+</code></pre>
+<hr>
+<h2 id="how-to-use-the-menu">How to use the menu</h2>
+<h3 id="1-extract">1. Extract</h3>
+<p>Choose <strong>1</strong>, then paste a site url:</p>
+<pre><code>Extract from which site? (full url, blank to cancel): https://contoso.sharepoint.com/sites/marketing
+Save as (file name, blank for an automatic one):
+
+Structure - columns, content types, lists, security - is always included.
+Include list items as well? (y/N): y
+  Which lists (comma separated, blank for all):
+  Document libraries are skipped - see the note after the extract.
+Include the site's pages and their contents? (y/N): y
+Include hidden lists? (y/N): n
+</code></pre>
+<p>A browser window opens for sign in. Then:</p>
+<pre><code>Extracting...
+  1/12  Initializing engine
+  2/12  Site Fields
+  ...
+Saved Templates\sites-marketing-20260811-142233.xml
+
+  Contains: 14 site columns, 3 content types, 6 lists, 1 client side page, 2 property bag entries
+</code></pre>
+<p>Templates land in a <code>Templates</code> folder beside the executable.</p>
+<h3 id="2-look-at-it">2. Look at it</h3>
+<p>Choose <strong>3</strong> and pick the file. You get the same summary, and can print the raw XML.</p>
+<p><strong>This is worth doing before you apply anything.</strong> An extract captures what a site <em>has</em>, which is
+usually more than you meant to copy — and the summary is the quickest way to notice that.</p>
+<h3 id="3-apply">3. Apply</h3>
+<p>Choose <strong>4</strong>, pick the template, then give a <strong>different</strong> site:</p>
+<pre><code>Apply to which site? (full url, blank to cancel): https://contoso.sharepoint.com/sites/marketing-copy
+
+About to apply sites-marketing-20260811-142233.xml to https://contoso.sharepoint.com/sites/marketing-copy
+
+  Contains: 14 site columns, 3 content types, 6 lists, 1 client side page, 2 property bag entries
+
+Type the site's name to confirm, or anything else to cancel: marketing-copy
+</code></pre>
+<p><strong>Applying changes a real site and there is no undo</strong>, which is why it asks you to type the name
+rather than press y. The previous prompt was a url, and urls are easy to mistype.</p>
+<h3 id="4-export-a-site-as-a-pnp-package">4. Export a site as a .pnp package</h3>
+<p>Choose <strong>5</strong>. It asks the same questions as option 1, but writes a single <strong><code>.pnp</code> package</strong>
+instead of an <code>.xml</code> file:</p>
+<pre><code>Extract from which site? (full url, blank to cancel): https://contoso.sharepoint.com/sites/marketing
+Save as (package file name, blank for an automatic one): marketing
+
+Structure - columns, content types, lists, security - is always included.
+Include list items as well? (y/N): y
+Export the files held in document libraries? (y/N): y
+  Which libraries (comma separated, blank for all): Documents
+Include the site's pages and their contents? (y/N): y
+</code></pre>
+<pre><code>Saved Templates\marketing.pnp
+</code></pre>
+<h3 id="5-apply-a-pnp-package">5. Apply a .pnp package</h3>
+<p>Choose <strong>6</strong>. It lists the <code>.pnp</code> files in the template folder rather than the <code>.xml</code> ones, then
+asks for the target site and confirms exactly as option 4 does.</p>
+<hr>
+<h2 id="packages-pnp">Packages (.pnp)</h2>
+<p>A <code>.pnp</code> package is a <strong>single file holding the template and everything it references</strong> — the
+provisioning XML plus the documents exported from libraries. It is an OPC package, the same
+container format as <code>.docx</code>, so it can be copied, versioned and handed over as one artefact.</p>
+<p><strong>Use a package when the template ships content.</strong> An <code>.xml</code> template records file entries but
+leaves the bytes beside it on disk, so moving the template to another machine without its
+neighbouring files silently produces an apply that creates empty libraries. A <code>.pnp</code> cannot come
+apart that way.</p>
+<h3 id="from-the-command-line">From the command line</h3>
+<p>The <strong>file extension decides the format</strong> — there is no separate switch:</p>
+<pre><code class="lang-powershell"># export a site as a package, with the items and the documents in it
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing marketing.pnp --items --files
+
+# apply that package to another site
+dotnet run -- apply https://contoso.sharepoint.com/sites/marketing-copy marketing.pnp
+</code></pre>
+<pre><code class="lang-powershell"># the same thing as loose files
+dotnet run -- extract https://contoso.sharepoint.com/sites/marketing marketing.xml --items --files
+dotnet run -- apply https://contoso.sharepoint.com/sites/marketing-copy marketing.xml
+</code></pre>
+<p>Everything that works for <code>.xml</code> works for <code>.pnp</code> — <code>--items</code>, <code>--files</code>, <code>--pages</code>,
+<code>--hidden-lists</code>, the exit codes, and the warning output are all unchanged.</p>
+<h3 id="what-ends-up-inside">What ends up inside</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>template.xml</code></td>
+<td>the provisioning template</td>
+</tr>
+<tr>
+<td>exported library files</td>
+<td>under the folder path they came from</td>
+</tr>
+<tr>
+<td>package properties</td>
+<td>author (your Windows user name) and generator</td>
+</tr>
+</tbody>
+</table>
+<p>When <code>--files</code> is combined with a <code>.pnp</code> output, the file connector points <strong>at the package</strong>, so
+the documents are written into it as they are exported rather than to the folder next to it.</p>
+<h3 id="reading-a-package-back">Reading a package back</h3>
+<p>Applying a <code>.pnp</code> opens the package, reads <code>template.xml</code> out of it, and points the template's
+connector at the package — so file uploads resolve from inside it. Nothing has to be unzipped.</p>
+<blockquote>
+<p><strong>Note:</strong> the <code>.pnp</code> support in <code>PnP.Core.Provisioning</code> is a direct port of PnP Framework's
+OpenXML connector and has no automated test coverage yet. Check the result of a package round
+trip before relying on it for anything you cannot repeat.</p>
+</blockquote>
+<hr>
+<h2 id="running-as-the-application-app-only">Running as the application (app-only)</h2>
+<p>Everything above signs a <strong>user</strong> in. For unattended use — a build agent, a scheduled job — the
+sample can authenticate as the <strong>application</strong> instead. Set a certificate thumbprint in
+<code>appsettings.json</code> and no browser window appears:</p>
+<pre><code class="lang-json">{
+  &quot;CustomSettings&quot;: {
+    &quot;ClientId&quot;: &quot;&lt;client id of the app registration&gt;&quot;,
+    &quot;TenantId&quot;: &quot;&lt;tenant id&gt;&quot;,
+    &quot;CertificateThumbprint&quot;: &quot;DF5450F6FB23838465128BBFC95C86091504B16B&quot;,
+    &quot;CertificateStoreName&quot;: &quot;My&quot;,
+    &quot;CertificateStoreLocation&quot;: &quot;CurrentUser&quot;,
+    &quot;TemplateFolder&quot;: &quot;Templates&quot;
+  }
+}
+</code></pre>
+<p>Leave <code>CertificateThumbprint</code> empty and the sample signs a user in interactively as before.
+<code>CertificateStoreName</code> and <code>CertificateStoreLocation</code> are optional and default to <code>My</code> and
+<code>CurrentUser</code>.</p>
+<h3 id="a-certificate-is-required--a-client-secret-will-not-work">A certificate is required — a client secret will not work</h3>
+<p>Azure AD app-only against SharePoint <strong>must</strong> use a certificate. SharePoint rejects app-only
+tokens obtained with a client secret, and PnP Core ships no client-secret provider.</p>
+<pre><code class="lang-powershell">$c = New-SelfSignedCertificate -Subject &quot;CN=PnPProvisioningAppOnly&quot; `
+    -CertStoreLocation &quot;Cert:\CurrentUser\My&quot; -KeyExportPolicy Exportable `
+    -KeySpec Signature -NotAfter (Get-Date).AddYears(2)
+Export-Certificate -Cert $c -FilePath &quot;$env:USERPROFILE\Desktop\PnPProvisioningAppOnly.cer&quot;
+$c.Thumbprint
+</code></pre>
+<p>Upload the <code>.cer</code> under <strong>Certificates &amp; secrets → Certificates</strong> on the app registration.</p>
+<h3 id="application-permissions">Application permissions</h3>
+<p>These are <strong>Application</strong> permissions, not Delegated, and they need <strong>Grant admin consent</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Permission</th>
+<th>Needed for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SharePoint</td>
+<td><code>Sites.FullControl.All</code></td>
+<td>applying templates, creating sites</td>
+</tr>
+<tr>
+<td>SharePoint</td>
+<td><code>User.Read.All</code></td>
+<td>resolving users in security and list items</td>
+</tr>
+<tr>
+<td>Microsoft Graph</td>
+<td><code>Sites.FullControl.All</code></td>
+<td>modern sites</td>
+</tr>
+<tr>
+<td>Microsoft Graph</td>
+<td><code>Group.ReadWrite.All</code></td>
+<td>group connected sites</td>
+</tr>
+<tr>
+<td>Microsoft Graph</td>
+<td><code>User.Read.All</code></td>
+<td>user lookup</td>
+</tr>
+<tr>
+<td>Microsoft Graph</td>
+<td><code>TermStore.ReadWrite.All</code></td>
+<td>term groups, term sets, taxonomy columns</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The Graph term store permission is the one people miss.</strong> SharePoint has a permission with the
+same name, and picking that one instead leaves every taxonomy operation failing with
+<code>HTTP 403 accessDenied</code> — term groups, labels and custom properties, while term sets and terms
+keep working, because those go through a different path.</p>
+<h3 id="what-behaves-differently-app-only">What behaves differently app-only</h3>
+<p><strong>There is no current user</strong>, and two things follow from that:</p>
+<ul>
+<li><strong><code>Owner</code> becomes mandatory</strong> on any site a template creates. Under a signed-in user the owner
+defaults to that user; as an application there is nobody to default to, and site creation fails
+with <em>&quot;You need to set an owner when using Application permissions to create a communication
+site&quot;</em>. Set <code>Owner</code> on the site collection in hierarchy and sequence templates.</li>
+<li>Anything resolving &quot;me&quot; — a template using the current user as a value — has nothing to resolve.</li>
+</ul>
+<h2 id="templates-that-apply-cleanly-interactively-can-fail-unattended-for-exactly-these-reasons-so-it-isworth-applying-a-template-app-only-once-before-relying-on-it-in-automation">Templates that apply cleanly interactively can fail unattended for exactly these reasons, so it is
+worth applying a template app-only once before relying on it in automation.</h2>
+<h2 id="configuration">Configuration</h2>
+<p><code>appsettings.json</code>:</p>
+<pre><code class="lang-json">{
+  &quot;CustomSettings&quot;: {
+    &quot;ClientId&quot;: &quot;31359c7f-bd7e-475c-86db-fdb8c937548e&quot;,
+    &quot;TenantId&quot;: &quot;common&quot;,
+    &quot;RedirectUri&quot;: &quot;http://localhost&quot;,
+    &quot;TemplateFolder&quot;: &quot;Templates&quot;
+  },
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: { &quot;Default&quot;: &quot;Warning&quot; }
+  }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ClientId</code></td>
+<td>The Entra application to sign in with. Replace with your own registration if you have one.</td>
+</tr>
+<tr>
+<td><code>TenantId</code></td>
+<td><code>common</code> asks which tenant at sign in. Set a tenant id to skip that.</td>
+</tr>
+<tr>
+<td><code>RedirectUri</code></td>
+<td>Where sign in returns to. <strong>Must match the application's registration</strong> — leave it alone unless you changed <code>ClientId</code>.</td>
+</tr>
+<tr>
+<td><code>TemplateFolder</code></td>
+<td>Where extracted templates are written, relative to the executable.</td>
+</tr>
+<tr>
+<td><code>CertificateThumbprint</code></td>
+<td>Set it to authenticate as the application instead of signing a user in. See <a href="#running-as-the-application-app-only">Running as the application</a>. Leave empty for interactive sign in.</td>
+</tr>
+<tr>
+<td><code>CertificateStoreName</code></td>
+<td>Optional, defaults to <code>My</code>.</td>
+</tr>
+<tr>
+<td><code>CertificateStoreLocation</code></td>
+<td>Optional, defaults to <code>CurrentUser</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Raise <code>Logging:LogLevel:Default</code> to <code>Information</code> to see what the engine is doing underneath. It is
+verbose — the sample prints its own progress precisely so you do not need to.</p>
+<p><a href="../README.html">back to samples</a></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.Console.Provisioning/README.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

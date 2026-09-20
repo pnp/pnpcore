@@ -10708,6 +10708,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "demos/Demo.Console.Provisioning/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.Console.Provisioning/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "demos/Demo.Console/README.md",
       "output": {
         ".html": {
@@ -11781,6 +11791,16 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-webparts.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/provisioning-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/provisioning-intro.html"
         }
       },
       "version": ""

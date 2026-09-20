@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Provisioning sites with templates | PnP Core SDK </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Provisioning sites with templates | PnP Core SDK ">
+      <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called.">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/provisioning-intro.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="provisioning-sites-with-templates">Provisioning sites with templates</h1>
+
+<p>The <strong>PnP Provisioning Engine</strong> describes a SharePoint site as XML — its columns, content types, lists, pages, files, security, navigation and branding — so that you can <strong>extract</strong> that description from one site and <strong>apply</strong> it to another. It is the engine behind PnP provisioning templates and <code>.pnp</code> packages.</p>
+<p>The engine lives in its own NuGet package, <strong><code>PnP.Core.Provisioning</code></strong>, which builds on <code>PnP.Core</code> and <code>PnP.Core.Admin</code>. Install all three at matching versions:</p>
+<pre><code class="lang-shell">dotnet add package PnP.Core.Provisioning
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p><strong>This package is experimental and should be treated as a beta.</strong> It is a migration of the PnP Provisioning Engine from <a href="https://github.com/pnp/pnpframework">PnP Framework</a>, where it is built on CSOM, onto the async REST and Microsoft Graph based PnP Core SDK. The API surface may still change and not every handler has equivalent coverage to PnP Framework yet. Test a template against a site you can afford to lose before relying on it, and please report what you find.</p>
+</div>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and shown below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapters on how to use the PnPContext for provisioning
+}
+</code></pre>
+<p>The provisioning features shown in this article are used via the <code>GetProvisioningManager()</code> method on your <code>PnPContext</code> instance.</p>
+<h2 id="what-a-template-contains">What a template contains</h2>
+<p>A template is a declarative description of a site, made up of the things the engine knows how to read and write:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Information architecture</strong></td>
+<td>site columns, content types, lists and libraries, views</td>
+</tr>
+<tr>
+<td><strong>Content</strong></td>
+<td>list items, files in libraries, client side pages and their web parts</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>security and groups, navigation, property bags, custom actions, features</td>
+</tr>
+<tr>
+<td><strong>Branding</strong></td>
+<td>site header and footer, chrome, themes, site logo</td>
+</tr>
+<tr>
+<td><strong>Taxonomy</strong></td>
+<td>term groups, term sets and terms</td>
+</tr>
+</tbody>
+</table>
+<p>Each of these is handled by an <em>object handler</em>, and handlers run in a fixed order because they depend on each other — a lookup column cannot resolve a list that does not exist yet, and a taxonomy column cannot bind to a term set that has not been created.</p>
+<h2 id="extracting-a-template-from-a-site">Extracting a template from a site</h2>
+<p>An extract captures <strong>structure only</strong> by default. Content is the expensive part of an extract, so you opt into it rather than get it by accident:</p>
+<pre><code class="lang-csharp">var manager = context.GetProvisioningManager();
+
+var template = await manager.GetTemplateAsync(new ExtractConfiguration
+{
+    ProgressDelegate = (step, current, total) =&gt; Console.WriteLine($&quot;{current}/{total} {step}&quot;),
+    MessagesDelegate = (message, type) =&gt; Console.WriteLine($&quot;[{type}] {message}&quot;)
+});
+</code></pre>
+<p>Content is opted into per list. This asks for the items of one list, the files of a document library, and the site's pages:</p>
+<pre><code class="lang-csharp">var configuration = new ExtractConfiguration();
+
+configuration.Lists.Lists.Add(new ExtractListsListsConfiguration
+{
+    Title = &quot;Announcements&quot;,
+    IncludeItems = true
+});
+
+configuration.Lists.Lists.Add(new ExtractListsListsConfiguration
+{
+    Title = &quot;Documents&quot;,
+    IncludeFiles = true
+});
+
+configuration.Pages.IncludeAllClientSidePages = true;
+
+// Exported files are written through this connector, so it must be set when asking for files
+configuration.FileConnector = new FileSystemConnector(@&quot;C:\templates&quot;, string.Empty);
+
+var template = await manager.GetTemplateAsync(configuration);
+</code></pre>
+<h2 id="saving-a-template">Saving a template</h2>
+<p>A template can be saved as XML, or as a <code>.pnp</code> package that holds the XML <strong>and the files it references</strong> in a single file:</p>
+<pre><code class="lang-csharp">// As XML
+using (var stream = XMLPnPSchemaFormatter.LatestFormatter.ToFormattedTemplate(template))
+using (var file = File.Create(@&quot;C:\templates\marketing.xml&quot;))
+{
+    stream.CopyTo(file);
+}
+</code></pre>
+<pre><code class="lang-csharp">// As a .pnp package
+var package = new OpenXMLConnector(
+    &quot;marketing.pnp&quot;,
+    new FileSystemConnector(@&quot;C:\templates&quot;, string.Empty),
+    author: &quot;Contoso&quot;,
+    signingCertificate: null,
+    templateFileName: &quot;template.xml&quot;);
+
+// Point the extract at the package so exported files land inside it
+configuration.FileConnector = package;
+
+var template = await manager.GetTemplateAsync(configuration);
+
+new XMLOpenXMLTemplateProvider(package).SaveAs(template, &quot;template.xml&quot;);
+</code></pre>
+<p>Prefer a <code>.pnp</code> package whenever the template ships content. An <code>.xml</code> template records its files but leaves the bytes on disk beside it, and moving the XML without them produces an apply that silently creates empty libraries.</p>
+<h2 id="applying-a-template-to-a-site">Applying a template to a site</h2>
+<pre><code class="lang-csharp">ProvisioningTemplate template;
+
+using (var stream = File.OpenRead(@&quot;C:\templates\marketing.xml&quot;))
+{
+    template = XMLPnPSchemaFormatter.LatestFormatter.ToProvisioningTemplate(stream);
+}
+
+// The connector is how the template reaches the files next to it
+template.Connector = new FileSystemConnector(@&quot;C:\templates&quot;, string.Empty);
+
+await context.GetProvisioningManager().ApplyTemplateAsync(template, new ApplyConfiguration
+{
+    ProgressDelegate = (step, current, total) =&gt; Console.WriteLine($&quot;{current}/{total} {step}&quot;),
+    MessagesDelegate = (message, type) =&gt; Console.WriteLine($&quot;[{type}] {message}&quot;)
+});
+</code></pre>
+<p>Applying a <code>.pnp</code> package reads the template out of it and points the connector at the package, so the files come along:</p>
+<pre><code class="lang-csharp">var package = new OpenXMLConnector(
+    &quot;marketing.pnp&quot;,
+    new FileSystemConnector(@&quot;C:\templates&quot;, string.Empty));
+
+var template = new XMLOpenXMLTemplateProvider(package).GetTemplate(&quot;template.xml&quot;);
+template.Connector = package;
+
+await context.GetProvisioningManager().ApplyTemplateAsync(template);
+</code></pre>
+<h2 id="reading-what-the-engine-reports">Reading what the engine reports</h2>
+<p><strong>Wire up <code>MessagesDelegate</code>.</strong> The engine reports a problem and carries on rather than stopping at the first one, so a run can finish having quietly skipped part of the template: a sealed content type it may not update, an artefact a NoScript site refuses, a webhook from another tenant that cannot be re-registered.</p>
+<p>&quot;It finished&quot; and &quot;it all worked&quot; are different claims, and the reported messages are how you tell them apart. A console app built on this engine should make that distinction visible — for example by exiting with a different code when anything was reported.</p>
+<h2 id="tenant-templates">Tenant templates</h2>
+<p>A template can also describe <strong>the site collections to create</strong>, in a sequence. Applying such a hierarchy creates the sites and then applies the templates attached to them:</p>
+<pre><code class="lang-csharp">var hierarchy = new XMLOpenXMLTemplateProvider(package).GetHierarchy();
+
+await context.GetProvisioningManager().ApplyTenantTemplateAsync(
+    hierarchy,
+    hierarchy.Sequences.First().ID,
+    new ApplyConfiguration
+    {
+        Parameters =
+        {
+            [&quot;SiteTitle&quot;] = &quot;Marketing&quot;,
+            [&quot;SiteUrl&quot;] = &quot;/sites/marketing&quot;
+        }
+    });
+</code></pre>
+<p>Two things to know:</p>
+<ul>
+<li>Site urls may be <strong>relative</strong> (<code>/sites/marketing</code>) and are resolved against the tenant of the context you apply with.</li>
+<li>A site collection needs an explicit <strong><code>Owner</code></strong> when you authenticate as an application. With a signed-in user the owner defaults to that user; app-only has no current user to fall back on, and site creation fails without it.</li>
+</ul>
+<h2 id="sample">Sample</h2>
+<p><strong><a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Console.Provisioning">Demo.Console.Provisioning</a></strong> is a console application built on this package. It extracts templates with or without content, saves them as <code>.xml</code> or <code>.pnp</code>, shows what a template contains, and applies one to an existing site or to a new communication site it creates for you — with both interactive and app-only authentication. It is the quickest way to see the engine work end to end.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/provisioning-intro.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>PnP Core SDK - Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material Modern UI</a></strong></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
