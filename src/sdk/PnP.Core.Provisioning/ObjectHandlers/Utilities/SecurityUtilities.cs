@@ -85,56 +85,89 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         }
 
         /// <summary>
-        /// Reads a securable object's unique permissions back into a template element, or returns
-        /// null when it still inherits.
+        /// Reads the unique permissions of objects of one site back into template elements. The site's users and
+        /// groups are loaded once, on first use, however many objects are read.
         /// </summary>
-        internal static async Task<ObjectSecurity> ExtractAsync(PnPContext context, ISecurableObject securable)
+        internal sealed class PermissionsReader
         {
-            if (securable == null || !securable.HasUniqueRoleAssignments)
+            private readonly PnPContext context;
+            private PrincipalDirectory directory;
+
+            internal PermissionsReader(PnPContext context)
             {
-                return null;
+                this.context = context;
             }
 
-            if (securable is IDataModelLoad<IList> list)
+            /// <summary>
+            /// Reads a list's or list item's unique permissions, or returns null when it still inherits.
+            /// </summary>
+            internal async Task<ObjectSecurity> ReadAsync(ISecurableObject securable)
             {
-                await list.LoadAsync(l => l.RoleAssignments.QueryProperties(r => r.PrincipalId,
-                    r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
-                    .ConfigureAwait(false);
-            }
-
-            PrincipalDirectory directory = await PrincipalDirectory.LoadAsync(context).ConfigureAwait(false);
-            await directory.LoadAssociatedGroupTokensAsync(context).ConfigureAwait(false);
-
-            var security = new ObjectSecurity
-            {
-                CopyRoleAssignments = false,
-                ClearSubscopes = false,
-            };
-
-            foreach (IRoleAssignment assignment in securable.RoleAssignments.AsRequested())
-            {
-                string principal = directory.TemplateNameOf(assignment.PrincipalId);
-                if (string.IsNullOrEmpty(principal))
+                if (securable == null || !securable.HasUniqueRoleAssignments)
                 {
-                    continue;
+                    return null;
                 }
 
-                foreach (IRoleDefinition roleDefinition in assignment.RoleDefinitions.AsRequested())
+                if (securable is IDataModelLoad<IList> list)
                 {
-                    if (roleDefinition.RoleTypeKind == RoleType.Guest)
+                    await list.LoadAsync(l => l.RoleAssignments.QueryProperties(r => r.PrincipalId,
+                        r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
+                        .ConfigureAwait(false);
+                }
+                else if (securable is IDataModelLoad<IListItem> item)
+                {
+                    await item.LoadAsync(i => i.RoleAssignments.QueryProperties(r => r.PrincipalId,
+                        r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
+                        .ConfigureAwait(false);
+                }
+
+                if (directory == null)
+                {
+                    directory = await PrincipalDirectory.LoadAsync(context).ConfigureAwait(false);
+                    await directory.LoadAssociatedGroupTokensAsync(context).ConfigureAwait(false);
+                }
+
+                var security = new ObjectSecurity
+                {
+                    CopyRoleAssignments = false,
+                    ClearSubscopes = false,
+                };
+
+                foreach (IRoleAssignment assignment in securable.RoleAssignments.AsRequested())
+                {
+                    string principal = directory.TemplateNameOf(assignment.PrincipalId);
+                    if (string.IsNullOrEmpty(principal))
                     {
                         continue;
                     }
 
-                    security.RoleAssignments.Add(new RoleAssignmentModel
+                    foreach (IRoleDefinition roleDefinition in assignment.RoleDefinitions.AsRequested())
                     {
-                        Principal = principal,
-                        RoleDefinition = roleDefinition.Name,
-                    });
-                }
-            }
+                        if (roleDefinition.RoleTypeKind == RoleType.Guest)
+                        {
+                            continue;
+                        }
 
-            return security;
+                        security.RoleAssignments.Add(new RoleAssignmentModel
+                        {
+                            Principal = principal,
+                            RoleDefinition = roleDefinition.Name,
+                        });
+                    }
+                }
+
+                return security;
+            }
+        }
+
+        /// <summary>
+        /// Copies extracted permissions into the security element a folder or data row already carries.
+        /// </summary>
+        internal static void CopyInto(ObjectSecurity source, ObjectSecurity target)
+        {
+            target.CopyRoleAssignments = source.CopyRoleAssignments;
+            target.ClearSubscopes = source.ClearSubscopes;
+            target.RoleAssignments.AddRange(source.RoleAssignments);
         }
 
         private static void Warn(PnPContext context, Action<string> reportWarning, string message)

@@ -80,6 +80,25 @@ namespace PnP.Core.Provisioning.Test.Offline.Model
         }
 
         [TestMethod]
+        public void TheListOptionsForFoldersSecurityAndUrlsAreReadFromJson()
+        {
+            ExtractConfiguration configuration = ExtractConfiguration.FromString(
+                "{ \"lists\": { \"lists\": [ { \"title\": \"Projects\", \"includeItems\": true, \"includeFolders\": true, " +
+                "\"maxFolderDepth\": 2, \"includeSecurity\": true, \"tokenizeUrls\": true }, { \"title\": \"Tasks\" } ] } }");
+
+            var projects = configuration.Lists.Lists[0];
+            Assert.IsTrue(projects.IncludeFolders);
+            Assert.AreEqual(2, projects.MaxFolderDepth);
+            Assert.IsTrue(projects.IncludeSecurity);
+            Assert.IsTrue(projects.TokenizeUrls);
+
+            var tasks = configuration.Lists.Lists[1];
+            Assert.IsFalse(tasks.IncludeFolders || tasks.IncludeSecurity || tasks.TokenizeUrls,
+                "Folders, permissions and url tokens cost extra requests or change values, so they are opt in.");
+            Assert.AreEqual(0, tasks.MaxFolderDepth);
+        }
+
+        [TestMethod]
         public void FromCreationInformation_KeepsTheCallersBaseTemplate()
         {
             ProvisioningTemplate baseTemplate = CommunicationSiteBaseTemplate();

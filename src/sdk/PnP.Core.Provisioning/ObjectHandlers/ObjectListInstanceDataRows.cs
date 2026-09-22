@@ -368,6 +368,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             string webUrl = web.ServerRelativeUrl.TrimEnd('/');
             List<CoreList> lists = web.Lists.AsRequested().ToList();
 
+            var permissions = new SecurityUtilities.PermissionsReader(context);
+            SiteUrlTokenizer tokenizer = configuration.Lists.Lists.Any(l => l.IncludeItems && l.TokenizeUrls)
+                ? await SiteUrlTokenizer.CreateAsync(context).ConfigureAwait(false)
+                : null;
+
             foreach (Model.Configuration.Lists.Lists.ExtractListsListsConfiguration listConfig
                 in configuration.Lists.Lists.Where(l => l.IncludeItems))
             {
@@ -404,7 +409,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                     continue;
                 }
 
-                await ExtractRowsAsync(context, siteList, listInstance, listConfig).ConfigureAwait(false);
+                await ExtractRowsAsync(context, siteList, listInstance, listConfig, permissions,
+                    listConfig.TokenizeUrls ? tokenizer : null).ConfigureAwait(false);
             }
 
             WriteMessage("Done processing list data rows", ProvisioningMessageType.Completed);
@@ -413,7 +419,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         }
 
         private async Task ExtractRowsAsync(PnPContext context, CoreList siteList, ListInstance listInstance,
-            Model.Configuration.Lists.Lists.ExtractListsListsConfiguration listConfig)
+            Model.Configuration.Lists.Lists.ExtractListsListsConfiguration listConfig,
+            SecurityUtilities.PermissionsReader permissions, SiteUrlTokenizer tokenizer)
         {
             if (!string.IsNullOrEmpty(listConfig.KeyColumn))
             {
@@ -442,7 +449,10 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return;
             }
 
-            List<IListItem> items = siteList.Items.AsRequested().ToList();
+            // A folder is not a row: it would come back as an item with the folder's name. Folders are
+            // extracted into the list instance's folders instead.
+            List<IListItem> items = siteList.Items.AsRequested().Where(i => !IsFolder(i)).ToList();
+            var rows = new List<(IListItem Item, DataRow Row)>();
             int index = 0;
 
             foreach (IListItem item in items)
@@ -450,8 +460,60 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 index++;
                 WriteSubProgress($"Data rows of list {siteList.Title}", $"{index}", index, items.Count);
 
-                listInstance.DataRows.Add(BuildDataRow(context, item, fields, listConfig, queryConfig));
+                DataRow dataRow = BuildDataRow(context, item, fields, listConfig, queryConfig, tokenizer);
+                listInstance.DataRows.Add(dataRow);
+                rows.Add((item, dataRow));
             }
+
+            if (listConfig.IncludeSecurity && rows.Count > 0)
+            {
+                await ExtractItemSecurityAsync(context, siteList, rows, permissions).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Fills in the security of the rows whose items have permissions of their own.
+        /// </summary>
+        private async Task ExtractItemSecurityAsync(PnPContext context, CoreList siteList,
+            List<(IListItem Item, DataRow Row)> rows, SecurityUtilities.PermissionsReader permissions)
+        {
+            try
+            {
+                // Batched, so finding the items that break inheritance costs a round trip per hundred items.
+                Batch batch = context.NewBatch();
+
+                foreach ((IListItem item, DataRow _) in rows)
+                {
+                    await item.LoadBatchAsync(batch, i => i.HasUniqueRoleAssignments).ConfigureAwait(false);
+                }
+
+                await context.ExecuteAsync(batch).ConfigureAwait(false);
+
+                foreach ((IListItem item, DataRow row) in rows.Where(r => r.Item.HasUniqueRoleAssignments))
+                {
+                    ObjectSecurity security = await permissions.ReadAsync(item).ConfigureAwait(false);
+                    if (security == null)
+                    {
+                        continue;
+                    }
+
+                    security.ClearSubscopes = true;
+                    SecurityUtilities.CopyInto(security, row.Security);
+                }
+            }
+            catch (Exception ex)
+            {
+                string warning = $"The permissions of the items of list '{siteList.Title}' could not be read, so " +
+                    $"their data rows carry none: {ErrorText.Describe(ex)}";
+
+                context.Logger?.LogWarning(ex, "{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                WriteMessage(warning, ProvisioningMessageType.Warning);
+            }
+        }
+
+        private static bool IsFolder(IListItem item)
+        {
+            return Safe(() => item.FileSystemObjectType) == FileSystemObjectType.Folder;
         }
 
         /// <summary>
@@ -489,7 +551,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         private static DataRow BuildDataRow(PnPContext context, IListItem item, Dictionary<string, IField> fields,
             Model.Configuration.Lists.Lists.ExtractListsListsConfiguration listConfig,
-            Model.Configuration.Lists.Lists.ExtractListsQueryConfiguration queryConfig)
+            Model.Configuration.Lists.Lists.ExtractListsQueryConfiguration queryConfig, SiteUrlTokenizer tokenizer)
         {
             var dataRow = new DataRow();
 
@@ -519,6 +581,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 }
 
                 string text = RenderValue(context, field, value.Value);
+
+                if (tokenizer != null)
+                {
+                    text = tokenizer.Tokenize(text);
+                }
 
                 if (listConfig.SkipEmptyFields && string.IsNullOrEmpty(text))
                 {

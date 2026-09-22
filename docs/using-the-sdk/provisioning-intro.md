@@ -84,6 +84,23 @@ configuration.FileConnector = new FileSystemConnector(@"C:\templates", string.Em
 var template = await manager.GetTemplateAsync(configuration);
 ```
 
+A list's entry can ask for more of its structure and content too. They all cost extra requests, so they are off by default:
+
+- `IncludeFolders` adds the list's folders to the template, each with its property bag. `MaxFolderDepth` limits how many levels are read: 1 takes only the folders at the root of the list, and 0, the default, takes every level.
+- `IncludeSecurity` adds the unique permissions of the list's folders and items, so that one that breaks inheritance still does once the template is applied.
+- `TokenizeUrls` replaces the urls and ids of the site in the extracted item values with tokens, so that links in the rows point at the site the template is applied to rather than back at the one it came from.
+
+```csharp
+configuration.Lists.Lists.Add(new ExtractListsListsConfiguration
+{
+    Title = "Projects",
+    IncludeItems = true,
+    IncludeFolders = true,
+    IncludeSecurity = true,
+    TokenizeUrls = true
+});
+```
+
 ## Saving a template
 
 A template can be saved as XML, or as a `.pnp` package that holds the XML **and the files it references** in a single file:

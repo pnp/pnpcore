@@ -226,6 +226,23 @@
                 "description": "If set the 'RemoveExistingContentTypes' attribute on the list instance in the template will be set to true",
                 "type": "boolean"
               },
+              "includeFolders": {
+                "description": "If set to true the folders of the list will be included in the template, each with its property bag.",
+                "type": "boolean"
+              },
+              "maxFolderDepth": {
+                "description": "How many levels of folders includeFolders takes: 1 takes only the folders at the root of the list. 0, the default, takes every level.",
+                "type": "integer",
+                "minimum": 0
+              },
+              "includeSecurity": {
+                "description": "If set to true the unique permissions of the list's items and folders will be included in the template.",
+                "type": "boolean"
+              },
+              "tokenizeUrls": {
+                "description": "If set to true the urls and ids of the site and site collection in the extracted item values will be replaced with tokens.",
+                "type": "boolean"
+              },
               "query": {
                 "type": "object",
                 "additionalProperties": false,
