@@ -25,7 +25,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             {
                 if (current is ServiceException serviceException && serviceException.Error is ServiceError error)
                 {
-                    string rendered = error.ToString();
+                    string rendered = error.ToString()?.Trim();
 
                     if (!string.IsNullOrEmpty(rendered))
                     {

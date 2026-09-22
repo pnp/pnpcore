@@ -50,6 +50,15 @@ var template = await manager.GetTemplateAsync(new ExtractConfiguration
 });
 ```
 
+An extract also leaves out what every site of the same kind already has. The site is compared against the out of the box template of its own web template, for example `SITEPAGEPUBLISHING#0` for a communication site, and SharePoint's own site columns and content types, and the custom actions, property bag entries and settings a fresh site starts with, are not written to the template. A template carrying them would re-apply SharePoint's own columns, which is redundant at best and refused outright for some of them. To extract everything regardless, turn the comparison off:
+
+```csharp
+var template = await manager.GetTemplateAsync(new ExtractConfiguration
+{
+    CompareWithBaseTemplate = false
+});
+```
+
 Content is opted into per list. This asks for the items of one list, the files of a document library, and the site's pages:
 
 ```csharp

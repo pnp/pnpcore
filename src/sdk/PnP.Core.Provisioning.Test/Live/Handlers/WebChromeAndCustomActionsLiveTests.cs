@@ -288,6 +288,8 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                     .GetTemplateAsync(new ExtractConfiguration
                     {
                         Handlers = { ConfigurationHandler.WebSettings },
+                        // Settings equal to the base template's are otherwise left out.
+                        CompareWithBaseTemplate = false,
                     }).ConfigureAwait(false);
 
                 Assert.IsNotNull(template.WebSettings, "The web settings handler produced nothing at all.");
