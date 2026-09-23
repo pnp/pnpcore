@@ -50,6 +50,15 @@ var template = await manager.GetTemplateAsync(new ExtractConfiguration
 });
 ```
 
+An extract also leaves out what every site of the same kind already has. The site is compared against the out of the box template of its own web template, for example `SITEPAGEPUBLISHING#0` for a communication site, and SharePoint's own site columns and content types, and the custom actions, property bag entries and settings a fresh site starts with, are not written to the template. A template carrying them would re-apply SharePoint's own columns, which is redundant at best and refused outright for some of them. To extract everything regardless, turn the comparison off:
+
+```csharp
+var template = await manager.GetTemplateAsync(new ExtractConfiguration
+{
+    CompareWithBaseTemplate = false
+});
+```
+
 Content is opted into per list. This asks for the items of one list, the files of a document library, and the site's pages:
 
 ```csharp
@@ -73,6 +82,23 @@ configuration.Pages.IncludeAllClientSidePages = true;
 configuration.FileConnector = new FileSystemConnector(@"C:\templates", string.Empty);
 
 var template = await manager.GetTemplateAsync(configuration);
+```
+
+A list's entry can ask for more of its structure and content too. They all cost extra requests, so they are off by default:
+
+- `IncludeFolders` adds the list's folders to the template, each with its property bag. `MaxFolderDepth` limits how many levels are read: 1 takes only the folders at the root of the list, and 0, the default, takes every level.
+- `IncludeSecurity` adds the unique permissions of the list's folders and items, so that one that breaks inheritance still does once the template is applied.
+- `TokenizeUrls` replaces the urls and ids of the site in the extracted item values with tokens, so that links in the rows point at the site the template is applied to rather than back at the one it came from.
+
+```csharp
+configuration.Lists.Lists.Add(new ExtractListsListsConfiguration
+{
+    Title = "Projects",
+    IncludeItems = true,
+    IncludeFolders = true,
+    IncludeSecurity = true,
+    TokenizeUrls = true
+});
 ```
 
 ## Saving a template
@@ -148,7 +174,48 @@ await context.GetProvisioningManager().ApplyTemplateAsync(template);
 
 ## Tenant templates
 
-A template can also describe **the site collections to create**, in a sequence. Applying such a hierarchy creates the sites and then applies the templates attached to them:
+A tenant template, also called a hierarchy, describes **site collections** rather than a single site: the sites to create, in a sequence, each with the templates to apply to it, and optionally the Microsoft Teams to create alongside them.
+
+### Extracting a tenant template
+
+Name the site collections to extract under `Tenant.Sequence`. Each one is described in the sequence and gets a template of its own:
+
+```csharp
+var configuration = new ExtractConfiguration
+{
+    MessagesDelegate = (message, type) => Console.WriteLine($"[{type}] {message}")
+};
+
+configuration.Tenant.Sequence = new ExtractSequenceConfiguration
+{
+    SiteUrls = { "https://contoso.sharepoint.com/sites/hub" },
+    IncludeJoinedSites = true, // the sites joined to a hub site
+    IncludeSubsites = true,    // each subsite, with a template of its own
+    MaxSubsiteDepth = 1        // 1 takes only the first level, 0, the default, every level
+};
+
+// The teams behind the group connected sites of the sequence. Name the sites whose teams to take
+// with TeamSiteUrls instead, or take every team in the tenant with IncludeAllTeams.
+configuration.Tenant.Teams = new ExtractTeamsConfiguration();
+
+var hierarchy = await context.GetProvisioningManager().GetTenantTemplateAsync(configuration);
+
+new XMLFileSystemTemplateProvider(@"C:\templates", string.Empty).SaveAs(hierarchy, "tenant.xml");
+```
+
+The rest of the configuration, such as the handlers, the lists and the comparison with the base template, applies to the template of every site extracted. Without a `Tenant.Sequence` or `Tenant.Teams` nothing is extracted, which is reported through `MessagesDelegate`.
+
+Things to know:
+
+- A site collection's properties are read from the SharePoint admin center, so extracting one needs a SharePoint administrator. The sites joined to a hub are found through the admin center too.
+- The url and title of each site are written as **parameters of the hierarchy** — `SITECOLLECTION_<site id>_URL`, `SITECOLLECTION_<site id>_TITLE`, and `SITECOLLECTION_<site id>_ALIAS` for a group connected site — which the sequence refers to as `{parameter:...}`. Left alone they point at the sites the template came from, so set them in `ApplyConfiguration.Parameters` to apply the template as a copy.
+- A site that cannot be read is reported and left out, rather than stopping the extract.
+- Teams are read through Microsoft Graph. A channel's messages, which `IncludeMessages` asks for, are extracted as the html of each message, leaving out the events Teams records in a channel. Team photos are not extracted.
+- Applying a tenant template does not create subsites yet: they are reported and skipped.
+
+### Applying a tenant template
+
+A hierarchy with a sequence creates the site collections it describes and then applies the templates attached to them:
 
 ```csharp
 var hierarchy = new XMLOpenXMLTemplateProvider(package).GetHierarchy();
@@ -173,4 +240,4 @@ Two things to know:
 
 ## Sample
 
-**[Demo.Console.Provisioning](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Console.Provisioning)** is a console application built on this package. It extracts templates with or without content, saves them as `.xml` or `.pnp`, shows what a template contains, and applies one to an existing site or to a new communication site it creates for you — with both interactive and app-only authentication. It is the quickest way to see the engine work end to end.
+**[Demo.Console.Provisioning](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Console.Provisioning)** is a console application built on this package. It extracts templates with or without content, and tenant templates of a site collection with its joined sites, subsites and teams, saves them as `.xml` or `.pnp`, shows what a template contains, and applies one to an existing site or to a new communication site it creates for you — with both interactive and app-only authentication. It is the quickest way to see the engine work end to end.

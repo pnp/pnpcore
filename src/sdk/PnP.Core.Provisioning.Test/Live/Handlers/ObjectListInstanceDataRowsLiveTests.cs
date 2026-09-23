@@ -197,6 +197,69 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
             }
         }
 
+        // Online test - requires a tenant
+        [Ignore]
+        [TestMethod]
+        [TestCategory("Live")]
+        [TestCategory("Handlers")]
+        public async Task DataRows_ExtractsItemPermissionsAndTokenizedUrls()
+        {
+            using (PnPContext context = await GetContextAsync().ConfigureAwait(false))
+            {
+                try
+                {
+                    ProvisioningTemplate template = TemplateWithRows(
+                        Row("Alpha", "See {site}/Lists/Events and {siteid}"),
+                        Row("Beta", "Second"));
+
+                    DataRowModel beta = template.Lists[0].DataRows[1];
+                    beta.Security.ClearSubscopes = true;
+                    beta.Security.RoleAssignments.Add(new Model.RoleAssignment { Principal = "{associatedvisitorgroupid}", RoleDefinition = "Read" });
+
+                    await context.GetProvisioningManager().ApplyTemplateAsync(template, Reporting()).ConfigureAwait(false);
+
+                    using (PnPContext fresh = await GetContextAsync(1).ConfigureAwait(false))
+                    {
+                        var configuration = new ExtractConfiguration();
+                        configuration.Handlers.Add(ConfigurationHandler.Lists);
+                        configuration.Lists.Lists.Add(new Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
+                        {
+                            Title = ListTitle,
+                            IncludeItems = true,
+                            KeyColumn = "Title",
+                            IncludeSecurity = true,
+                            TokenizeUrls = true,
+                        });
+
+                        ProvisioningTemplate extracted = await fresh.GetProvisioningManager()
+                            .GetTemplateAsync(configuration).ConfigureAwait(false);
+
+                        ListInstance list = extracted.Lists.FirstOrDefault(l => l.Title == ListTitle);
+                        Assert.IsNotNull(list, "The list was not extracted, so its rows had nowhere to go.");
+
+                        DataRowModel alpha = list.DataRows.FirstOrDefault(r => r.Values.TryGetValue("Title", out string t) && t == "Alpha");
+                        DataRowModel extractedBeta = list.DataRows.FirstOrDefault(r => r.Values.TryGetValue("Title", out string t) && t == "Beta");
+                        Assert.IsNotNull(alpha, "The 'Alpha' row was not extracted.");
+                        Assert.IsNotNull(extractedBeta, "The 'Beta' row was not extracted.");
+
+                        Console.WriteLine($"Alpha's note: {alpha.Values[$"{TestPrefix}Note"]}");
+                        Assert.AreEqual("See {site}/Lists/Events and {siteid}", alpha.Values[$"{TestPrefix}Note"],
+                            "The site's url and id were not turned back into tokens.");
+
+                        Assert.AreEqual(0, alpha.Security.RoleAssignments.Count, "An item that inherits was given permissions.");
+                        Assert.IsTrue(extractedBeta.Security.ClearSubscopes, "Item permissions should clear sub scopes, as PnP Framework writes them.");
+                        Assert.IsTrue(extractedBeta.Security.RoleAssignments.Any(r =>
+                            r.Principal == "{associatedvisitorgroupid}" && r.RoleDefinition == "Read"),
+                            "The item's permissions were not extracted, or not by group token.");
+                    }
+                }
+                finally
+                {
+                    await SweepAsync().ConfigureAwait(false);
+                }
+            }
+        }
+
         #endregion
 
         #region Helpers

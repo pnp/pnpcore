@@ -62,7 +62,12 @@ namespace PnP.Core.Provisioning.Services.Core.CSOM
                 throw new ArgumentException("At least one request is required.", nameof(requests));
             }
 
-            var apiCall = new ApiCall(new List<IRequest<object>> { new CompositeRequest(requests) });
+            var apiCall = new ApiCall(new List<IRequest<object>> { new CompositeRequest(requests) })
+            {
+                // The web only carries the request. Without this, PnP Core empties the collections loaded
+                // on the web - its columns, content types and lists - every time a request is sent through it.
+                SkipCollectionClearing = true,
+            };
 
             await SendWithSaveConflictRetryAsync(context, apiCall).ConfigureAwait(false);
         }

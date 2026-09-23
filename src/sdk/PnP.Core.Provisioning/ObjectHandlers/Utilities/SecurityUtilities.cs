@@ -7,6 +7,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using RoleAssignmentModel = PnP.Core.Provisioning.Model.RoleAssignment;
@@ -84,55 +85,89 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         }
 
         /// <summary>
-        /// Reads a securable object's unique permissions back into a template element, or returns
-        /// null when it still inherits.
+        /// Reads the unique permissions of objects of one site back into template elements. The site's users and
+        /// groups are loaded once, on first use, however many objects are read.
         /// </summary>
-        internal static async Task<ObjectSecurity> ExtractAsync(PnPContext context, ISecurableObject securable)
+        internal sealed class PermissionsReader
         {
-            if (securable == null || !securable.HasUniqueRoleAssignments)
+            private readonly PnPContext context;
+            private PrincipalDirectory directory;
+
+            internal PermissionsReader(PnPContext context)
             {
-                return null;
+                this.context = context;
             }
 
-            if (securable is IDataModelLoad<IList> list)
+            /// <summary>
+            /// Reads a list's or list item's unique permissions, or returns null when it still inherits.
+            /// </summary>
+            internal async Task<ObjectSecurity> ReadAsync(ISecurableObject securable)
             {
-                await list.LoadAsync(l => l.RoleAssignments.QueryProperties(r => r.PrincipalId,
-                    r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
-                    .ConfigureAwait(false);
-            }
-
-            PrincipalDirectory directory = await PrincipalDirectory.LoadAsync(context).ConfigureAwait(false);
-
-            var security = new ObjectSecurity
-            {
-                CopyRoleAssignments = false,
-                ClearSubscopes = false,
-            };
-
-            foreach (IRoleAssignment assignment in securable.RoleAssignments.AsRequested())
-            {
-                string principal = directory.NameOf(assignment.PrincipalId);
-                if (string.IsNullOrEmpty(principal))
+                if (securable == null || !securable.HasUniqueRoleAssignments)
                 {
-                    continue;
+                    return null;
                 }
 
-                foreach (IRoleDefinition roleDefinition in assignment.RoleDefinitions.AsRequested())
+                if (securable is IDataModelLoad<IList> list)
                 {
-                    if (roleDefinition.RoleTypeKind == RoleType.Guest)
+                    await list.LoadAsync(l => l.RoleAssignments.QueryProperties(r => r.PrincipalId,
+                        r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
+                        .ConfigureAwait(false);
+                }
+                else if (securable is IDataModelLoad<IListItem> item)
+                {
+                    await item.LoadAsync(i => i.RoleAssignments.QueryProperties(r => r.PrincipalId,
+                        r => r.RoleDefinitions.QueryProperties(d => d.Id, d => d.Name, d => d.RoleTypeKind)))
+                        .ConfigureAwait(false);
+                }
+
+                if (directory == null)
+                {
+                    directory = await PrincipalDirectory.LoadAsync(context).ConfigureAwait(false);
+                    await directory.LoadAssociatedGroupTokensAsync(context).ConfigureAwait(false);
+                }
+
+                var security = new ObjectSecurity
+                {
+                    CopyRoleAssignments = false,
+                    ClearSubscopes = false,
+                };
+
+                foreach (IRoleAssignment assignment in securable.RoleAssignments.AsRequested())
+                {
+                    string principal = directory.TemplateNameOf(assignment.PrincipalId);
+                    if (string.IsNullOrEmpty(principal))
                     {
                         continue;
                     }
 
-                    security.RoleAssignments.Add(new RoleAssignmentModel
+                    foreach (IRoleDefinition roleDefinition in assignment.RoleDefinitions.AsRequested())
                     {
-                        Principal = principal,
-                        RoleDefinition = roleDefinition.Name,
-                    });
-                }
-            }
+                        if (roleDefinition.RoleTypeKind == RoleType.Guest)
+                        {
+                            continue;
+                        }
 
-            return security;
+                        security.RoleAssignments.Add(new RoleAssignmentModel
+                        {
+                            Principal = principal,
+                            RoleDefinition = roleDefinition.Name,
+                        });
+                    }
+                }
+
+                return security;
+            }
+        }
+
+        /// <summary>
+        /// Copies extracted permissions into the security element a folder or data row already carries.
+        /// </summary>
+        internal static void CopyInto(ObjectSecurity source, ObjectSecurity target)
+        {
+            target.CopyRoleAssignments = source.CopyRoleAssignments;
+            target.ClearSubscopes = source.ClearSubscopes;
+            target.RoleAssignments.AddRange(source.RoleAssignments);
         }
 
         private static void Warn(PnPContext context, Action<string> reportWarning, string message)
@@ -148,6 +183,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
         {
             private readonly Dictionary<int, string> namesById = new Dictionary<int, string>();
             private readonly Dictionary<string, int> idsByName = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<int, string> tokensById = new Dictionary<int, string>();
 
             internal static async Task<PrincipalDirectory> LoadAsync(PnPContext context)
             {
@@ -188,6 +224,57 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             }
 
             /// <summary>
+            /// Reads which of the site's groups are its associated owners, members and visitors, so a
+            /// template refers to them by token rather than by the source site's group names.
+            /// </summary>
+            internal async Task LoadAssociatedGroupTokensAsync(PnPContext context)
+            {
+                IWeb web = context.Web;
+
+                try
+                {
+                    await web.LoadAsync(
+                        w => w.AssociatedOwnerGroup.QueryProperties(g => g.Id),
+                        w => w.AssociatedMemberGroup.QueryProperties(g => g.Id),
+                        w => w.AssociatedVisitorGroup.QueryProperties(g => g.Id)).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    context.Logger?.LogDebug(ex, "{Source}: the associated groups could not be read, so they are named as they are.",
+                        Constants.LOGGING_SOURCE);
+                    return;
+                }
+
+                AddToken(() => web.AssociatedOwnerGroup, "{associatedownergroupid}");
+                AddToken(() => web.AssociatedMemberGroup, "{associatedmembergroupid}");
+                AddToken(() => web.AssociatedVisitorGroup, "{associatedvisitorgroupid}");
+            }
+
+            private void AddToken(Func<ISharePointGroup> read, string token)
+            {
+                try
+                {
+                    ISharePointGroup group = read();
+                    if (group != null && group.Id > 0)
+                    {
+                        tokensById[group.Id] = token;
+                    }
+                }
+                catch (Exception)
+                {
+                    // The site has no such associated group.
+                }
+            }
+
+            /// <summary>
+            /// The name a template records a principal under: a token for an associated group, otherwise its name.
+            /// </summary>
+            internal string TemplateNameOf(int principalId)
+            {
+                return tokensById.TryGetValue(principalId, out string token) ? token : NameOf(principalId);
+            }
+
+            /// <summary>
             /// Finds a principal by name, falling back to provisioning the user if the name looks
             /// like one and the site has not seen it yet.
             /// </summary>
@@ -201,6 +288,13 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
                 if (idsByName.TryGetValue(principalName, out int id))
                 {
                     return id;
+                }
+
+                // What {associatedownergroupid} and the other group id tokens resolve to.
+                if (int.TryParse(principalName, NumberStyles.None, CultureInfo.InvariantCulture, out int principalId)
+                    && namesById.ContainsKey(principalId))
+                {
+                    return principalId;
                 }
 
                 try

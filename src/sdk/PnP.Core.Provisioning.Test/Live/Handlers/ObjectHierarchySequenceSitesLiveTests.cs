@@ -3,6 +3,8 @@ using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Model.Configuration;
+using PnP.Core.Provisioning.Model.Configuration.Tenant.Sequence;
+using PnP.Core.Provisioning.Model.Configuration.Tenant.Teams;
 using PnP.Core.Provisioning.ObjectHandlers;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -134,6 +136,88 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
                     {
                         await DeleteSiteAsync(siteUrl).ConfigureAwait(false);
                     }
+                }
+            }
+        }
+
+        // Online test - requires a tenant
+        [Ignore]
+        [TestMethod]
+        [TestCategory("Live")]
+        [TestCategory("Handlers")]
+        public async Task Sequence_ExtractsTheSiteAsASiteCollectionWithItsTemplateAndTeam()
+        {
+            using (PnPContext context = await GetContextAsync().ConfigureAwait(false))
+            {
+                try
+                {
+                    using (await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+                    {
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SkipIfUnavailable("The tenant admin site", ex);
+                    return;
+                }
+
+                await context.Site.LoadAsync(s => s.Id, s => s.GroupId).ConfigureAwait(false);
+
+                var problems = new List<string>();
+
+                var configuration = new ExtractConfiguration
+                {
+                    // Only what the sequence needs from the site's own template, to keep the run short.
+                    Handlers = { ConfigurationHandler.WebSettings },
+                    MessagesDelegate = (message, type) =>
+                    {
+                        Console.WriteLine($"[{type}] {message}");
+
+                        if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)
+                        {
+                            problems.Add(message);
+                        }
+                    },
+                };
+
+                configuration.Tenant.Sequence = new ExtractSequenceConfiguration { SiteUrls = { context.Uri.ToString() } };
+                configuration.Tenant.Teams = new ExtractTeamsConfiguration();
+
+                ProvisioningHierarchy hierarchy = await context.GetProvisioningManager()
+                    .GetTenantTemplateAsync(configuration).ConfigureAwait(false);
+
+                Assert.AreEqual(0, problems.Count,
+                    $"The extract reported problems:{Environment.NewLine}{string.Join(Environment.NewLine, problems)}");
+
+                string id = context.Site.Id.ToString("N");
+
+                ProvisioningSequence sequence = hierarchy.Sequences.Single();
+                Assert.AreEqual("TENANTSEQUENCE", sequence.ID);
+
+                SiteCollection siteCollection = sequence.SiteCollections.Single();
+                Assert.AreEqual($"{{parameter:SITECOLLECTION_{id}_TITLE}}", siteCollection.Title);
+                CollectionAssert.Contains(siteCollection.Templates, $"TEMPLATE-{id}");
+                Assert.IsTrue(hierarchy.Templates.Any(t => t.Id == $"TEMPLATE-{id}"),
+                    "The site collection refers to a template the hierarchy does not have.");
+
+                if (context.Site.GroupId == Guid.Empty)
+                {
+                    Assert.IsTrue(hierarchy.Parameters.ContainsKey($"SITECOLLECTION_{id}_URL"), "The url parameter is missing.");
+                    Assert.AreEqual(0, hierarchy.Teams.Teams.Count, "A site without a group has no team.");
+                    return;
+                }
+
+                Assert.IsInstanceOfType(siteCollection, typeof(TeamSiteCollection));
+                Assert.IsTrue(hierarchy.Parameters.TryGetValue($"SITECOLLECTION_{id}_ALIAS", out string alias),
+                    "The alias parameter is missing.");
+
+                foreach (PnP.Core.Provisioning.Model.Teams.Team team in hierarchy.Teams.Teams)
+                {
+                    Console.WriteLine($"Extracted team {team.DisplayName} ({team.MailNickname}), {team.Channels.Count} channel(s)");
+
+                    Assert.AreEqual(alias, team.MailNickname, true,
+                        "The team taken for the site is not the one behind the site's group.");
+                    Assert.IsTrue(team.Channels.Any(), "A team always has a channel.");
                 }
             }
         }
