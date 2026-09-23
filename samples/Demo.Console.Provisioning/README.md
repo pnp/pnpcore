@@ -69,6 +69,7 @@ dotnet run
   4  Apply a saved template to a site
   5  Export a site to a .pnp package
   6  Apply a .pnp package to a site
+  7  Extract a tenant template (site collections, subsites and teams)
   0  Exit
 ```
 
@@ -107,6 +108,34 @@ dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --i
 # just the two lists you care about
 dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items="Tasks,Announcements"
 ```
+
+## Extracting a tenant template from the command line
+
+```
+dotnet run -- extract-tenant <site-url> <output.xml> [options]
+```
+
+A tenant template describes the **site collection itself** — its kind, url, title, owner, language and
+hub settings — in a sequence, alongside the template of its root web. It is what you apply to create
+a copy of the site rather than to fill an existing one.
+
+| Option | |
+|---|---|
+| `--joined-sites` | If the site is a hub site, also take the sites joined to it |
+| `--subsites` | Also take its subsites, each with a template of its own |
+| `--teams` | Also take the Microsoft Team behind each group connected site |
+| `--pages` | Include the pages of each site and their contents |
+| `--hidden-lists` | Include hidden lists in each site's structure |
+
+```powershell
+# a hub site, the sites joined to it, and their teams
+dotnet run -- extract-tenant https://contoso.sharepoint.com/sites/hub tenant.xml --joined-sites --teams
+```
+
+Reading a site collection's properties goes through the SharePoint admin center, so this needs an
+account that is a **SharePoint administrator**. The url and title of each site are saved as parameters
+of the template; applying it from the menu asks for a new value for each, so that the copy does not land
+on the sites it came from. Applying a tenant template does not create subsites yet.
 
 ## Applying from the command line
 
@@ -233,6 +262,35 @@ Saved Templates\marketing.pnp
 
 Choose **6**. It lists the `.pnp` files in the template folder rather than the `.xml` ones, then
 asks for the target site and confirms exactly as option 4 does.
+
+### 6. Extract a tenant template
+
+Choose **7**, paste the url of a site collection, and answer whether to take the sites joined to it
+if it is a hub, its subsites, and the teams behind group connected sites:
+
+```
+Extract which site collection? (full url, blank to cancel): https://contoso.sharepoint.com/sites/hub
+Save as (file name, blank for an automatic one):
+
+The site collection and the template of its root web are always included.
+If it is a hub site, include the sites joined to it? (y/N): y
+Include its subsites, each with a template of its own? (y/N): n
+Include the team behind each group connected site? (y/N): y
+Include the pages of each site and their contents? (y/N): n
+```
+
+```
+Saved Templates\tenant-sites-hub-20260811-142233.xml
+
+  Sequence TENANTSEQUENCE:
+    CommunicationSiteCollection Hub (hub)
+    TeamSiteCollection Marketing
+  2 site template(s), 5 parameter(s)
+  Team Marketing: 3 channel(s), 12 app(s)
+```
+
+Applying it with option **4** asks whether the template should create its own sites, and then for a
+value for each parameter — the url and title of every site among them.
 
 ---
 

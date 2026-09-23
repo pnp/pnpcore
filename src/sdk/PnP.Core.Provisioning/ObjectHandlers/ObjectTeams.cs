@@ -15,7 +15,8 @@ using TeamTemplateModel = PnP.Core.Provisioning.Model.Teams.TeamTemplate;
 namespace PnP.Core.Provisioning.ObjectHandlers
 {
     /// <summary>
-    /// Creates and configures the Microsoft Teams a tenant template declares.
+    /// Creates and configures the Microsoft Teams a tenant template declares. Reading existing teams
+    /// into a template is in ObjectTeams.Extract.cs.
     /// </summary>
     internal partial class ObjectTeams : ObjectHierarchyHandlerBase
     {
@@ -33,19 +34,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 || hierarchy?.Teams?.TeamTemplates?.Count > 0;
 
             return _willProvision.Value;
-        }
-
-        public override bool WillExtract(PnPContext context, ProvisioningHierarchy hierarchy, string sequenceId,
-            ExtractConfiguration configuration)
-        {
-            _willExtract ??= false;
-            return _willExtract.Value;
-        }
-
-        public override Task<ProvisioningHierarchy> ExtractObjectsAsync(PnPContext context, ProvisioningHierarchy hierarchy,
-            ExtractConfiguration configuration)
-        {
-            return Task.FromResult(hierarchy);
         }
 
         #region Apply

@@ -107,6 +107,10 @@ namespace Demo.Console.Provisioning
                 {
                     exitCode = await RunExtractCommandAsync(command).ConfigureAwait(false);
                 }
+                else if (command.IsExtractTenant)
+                {
+                    exitCode = await RunExtractTenantCommandAsync(command).ConfigureAwait(false);
+                }
                 else if (command.IsApply)
                 {
                     exitCode = await RunApplyCommandAsync(command).ConfigureAwait(false);
@@ -226,6 +230,7 @@ namespace Demo.Console.Provisioning
                 System.Console.WriteLine("  4  Apply a saved template to a site");
                 System.Console.WriteLine("  5  Export a site to a .pnp package");
                 System.Console.WriteLine("  6  Apply a .pnp package to a site");
+                System.Console.WriteLine("  7  Extract a tenant template (site collections, subsites and teams)");
                 System.Console.WriteLine("  0  Exit");
                 System.Console.WriteLine();
                 System.Console.Write("Choose: ");
@@ -253,6 +258,9 @@ namespace Demo.Console.Provisioning
                             break;
                         case "6":
                             await ApplyAsync(packages: true).ConfigureAwait(false);
+                            break;
+                        case "7":
+                            await ExtractTenantAsync().ConfigureAwait(false);
                             break;
                         case "0":
                         case null:
@@ -347,6 +355,200 @@ namespace Demo.Console.Provisioning
             }
 
             return problems.Count == 0 ? 0 : 2;
+        }
+
+        private static async Task<int> RunExtractTenantCommandAsync(CommandLine command)
+        {
+            var problems = new List<string>();
+
+            try
+            {
+                System.Console.WriteLine($"Extracting a tenant template of {command.SiteUrl}");
+                System.Console.WriteLine("Connecting - a sign in window may appear...");
+
+                using (PnPContext context = await contextFactory.CreateAsync(command.SiteUrl).ConfigureAwait(false))
+                {
+                    string path = Path.GetFullPath(command.TemplatePath);
+
+                    ExtractConfiguration configuration = BuildTenantExtractConfiguration(problems, command.SiteUrl,
+                        command.IncludeJoinedSites, command.IncludeSubsites, command.IncludeTeams,
+                        command.IncludePages, command.IncludeHiddenLists, Path.GetDirectoryName(path));
+
+                    System.Console.WriteLine("Extracting...");
+
+                    ProvisioningHierarchy hierarchy = await context.GetProvisioningManager()
+                        .GetTenantTemplateAsync(configuration).ConfigureAwait(false);
+
+                    if (hierarchy.Sequences.Count == 0 && hierarchy.Teams.Teams.Count == 0)
+                    {
+                        System.Console.WriteLine();
+                        System.Console.WriteLine("Nothing could be extracted - the warnings above say why.");
+                        return 1;
+                    }
+
+                    SaveHierarchy(hierarchy, path);
+
+                    System.Console.WriteLine();
+                    System.Console.WriteLine($"Saved {path}");
+                    SummariseHierarchy(hierarchy);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine();
+                System.Console.WriteLine("The extract failed:");
+                System.Console.WriteLine();
+                System.Console.WriteLine(ErrorReport.Describe(ex));
+
+                return 1;
+            }
+
+            return problems.Count == 0 ? 0 : 2;
+        }
+
+        #endregion
+
+        #region Extract a tenant template
+
+        private static async Task ExtractTenantAsync()
+        {
+            Uri siteUrl = AskForSite("Extract which site collection?");
+
+            if (siteUrl == null)
+            {
+                return;
+            }
+
+            System.Console.Write("Save as (file name, blank for an automatic one): ");
+            string name = System.Console.ReadLine()?.Trim();
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("The site collection and the template of its root web are always included.");
+
+            bool joinedSites = AskYesNo("If it is a hub site, include the sites joined to it?");
+            bool subsites = AskYesNo("Include its subsites, each with a template of its own?");
+            bool teams = AskYesNo("Include the team behind each group connected site?");
+            bool pages = AskYesNo("Include the pages of each site and their contents?");
+
+            string fileName = string.IsNullOrWhiteSpace(name)
+                ? $"tenant-{SafeName(siteUrl)}-{DateTime.Now:yyyyMMdd-HHmmss}.xml"
+                : EnsureXml(name);
+
+            string path = Path.GetFullPath(Path.Combine(TemplateFolder, fileName));
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("Connecting - a sign in window may appear...");
+
+            using (PnPContext context = await contextFactory.CreateAsync(siteUrl).ConfigureAwait(false))
+            {
+                ExtractConfiguration configuration = BuildTenantExtractConfiguration(null, siteUrl, joinedSites,
+                    subsites, teams, pages, includeHiddenLists: false, Path.GetDirectoryName(path));
+
+                System.Console.WriteLine("Extracting - every site is extracted in full, so this takes a while...");
+
+                ProvisioningHierarchy hierarchy = await context.GetProvisioningManager()
+                    .GetTenantTemplateAsync(configuration).ConfigureAwait(false);
+
+                if (hierarchy.Sequences.Count == 0 && hierarchy.Teams.Teams.Count == 0)
+                {
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("Nothing could be extracted - the warnings above say why.");
+                    return;
+                }
+
+                SaveHierarchy(hierarchy, path);
+
+                System.Console.WriteLine();
+                System.Console.WriteLine($"Saved {path}");
+                SummariseHierarchy(hierarchy);
+            }
+        }
+
+        /// <summary>
+        /// A tenant extract names what it takes in its Tenant section: the site collections under
+        /// Sequence, and the teams under Teams. Everything else in the configuration applies to the
+        /// template of each site, as it does to a single site's extract.
+        /// </summary>
+        private static ExtractConfiguration BuildTenantExtractConfiguration(List<string> problems, Uri siteUrl,
+            bool includeJoinedSites, bool includeSubsites, bool includeTeams, bool includePages, bool includeHiddenLists,
+            string outputFolder)
+        {
+            ExtractConfiguration configuration = BuildExtractConfiguration(problems);
+
+            configuration.Tenant.Sequence = new PnP.Core.Provisioning.Model.Configuration.Tenant.Sequence.ExtractSequenceConfiguration
+            {
+                IncludeJoinedSites = includeJoinedSites,
+                IncludeSubsites = includeSubsites,
+            };
+
+            configuration.Tenant.Sequence.SiteUrls.Add(siteUrl.ToString());
+
+            if (includeTeams)
+            {
+                // Naming no team sites takes the teams behind the site collections the sequence extracts.
+                configuration.Tenant.Teams = new PnP.Core.Provisioning.Model.Configuration.Tenant.Teams.ExtractTeamsConfiguration();
+            }
+
+            configuration.Pages.IncludeAllClientSidePages = includePages;
+            configuration.Lists.IncludeHiddenLists = includeHiddenLists;
+
+            // Anything a site's template exports, such as the assets of its pages, is written beside the template.
+            System.IO.Directory.CreateDirectory(outputFolder);
+            configuration.FileConnector = new FileSystemConnector(outputFolder, string.Empty);
+
+            return configuration;
+        }
+
+        private static void SaveHierarchy(ProvisioningHierarchy hierarchy, string path)
+        {
+            string folder = Path.GetDirectoryName(path);
+
+            System.IO.Directory.CreateDirectory(folder);
+
+            new XMLFileSystemTemplateProvider(folder, string.Empty).SaveAs(hierarchy, Path.GetFileName(path));
+        }
+
+        private static void SummariseHierarchy(ProvisioningHierarchy hierarchy)
+        {
+            System.Console.WriteLine();
+
+            foreach (ProvisioningSequence sequence in hierarchy.Sequences)
+            {
+                System.Console.WriteLine($"  Sequence {sequence.ID}:");
+
+                foreach (PnP.Core.Provisioning.Model.SiteCollection siteCollection in sequence.SiteCollections)
+                {
+                    System.Console.WriteLine($"    {siteCollection.GetType().Name} {WithParameters(hierarchy, siteCollection.Title)}" +
+                        $"{(siteCollection.IsHubSite ? " (hub)" : string.Empty)}" +
+                        $"{(siteCollection.Sites.Count > 0 ? $", {siteCollection.Sites.Count} subsite(s)" : string.Empty)}");
+                }
+            }
+
+            System.Console.WriteLine($"  {hierarchy.Templates.Count} site template(s), {hierarchy.Parameters.Count} parameter(s)");
+
+            foreach (PnP.Core.Provisioning.Model.Teams.Team team in hierarchy.Teams.Teams)
+            {
+                System.Console.WriteLine($"  Team {team.DisplayName}: {team.Channels.Count} channel(s), {team.Apps.Count} app(s)");
+            }
+        }
+
+        /// <summary>
+        /// Fills in the hierarchy's own parameters, which is how an extracted tenant template records
+        /// the url and title of each site.
+        /// </summary>
+        private static string WithParameters(ProvisioningHierarchy hierarchy, string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            foreach (KeyValuePair<string, string> parameter in hierarchy.Parameters)
+            {
+                value = value.Replace($"{{parameter:{parameter.Key}}}", parameter.Value, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return value;
         }
 
         #endregion
@@ -756,7 +958,11 @@ namespace Demo.Console.Provisioning
         {
             var parameters = new Dictionary<string, string>();
 
-            foreach (KeyValuePair<string, string> declared in source.Template.Parameters)
+            // An extracted tenant template carries the url and title of each site as a parameter of the
+            // hierarchy. Left as they are, they point at the sites it was extracted from.
+            foreach (KeyValuePair<string, string> declared in source.Hierarchy.Parameters
+                .Concat(source.Template.Parameters)
+                .Where(p => !parameters.ContainsKey(p.Key)))
             {
                 System.Console.Write($"{declared.Key} (blank for '{declared.Value}'): ");
                 string entered = System.Console.ReadLine()?.Trim();
@@ -1015,7 +1221,16 @@ namespace Demo.Console.Provisioning
                 return;
             }
 
-            Summarise(TemplateSource.Load(path).Template);
+            TemplateSource source = TemplateSource.Load(path);
+
+            if (source.Hierarchy != null && (source.Hierarchy.Sequences.Count > 0 || source.Hierarchy.Teams.Teams.Count > 0))
+            {
+                SummariseHierarchy(source.Hierarchy);
+            }
+            else
+            {
+                Summarise(source.Template);
+            }
 
             System.Console.Write("Show the raw XML? (y/N): ");
 

@@ -21,9 +21,10 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 {
     /// <summary>
     /// Creates the site collections a tenant template's sequence declares, and applies the templates
-    /// each of them names.
+    /// each of them names. The extract half, which describes existing site collections as a sequence,
+    /// is in ObjectHierarchySequenceSites.Extract.cs.
     /// </summary>
-    internal class ObjectHierarchySequenceSites : ObjectHierarchyHandlerBase
+    internal partial class ObjectHierarchySequenceSites : ObjectHierarchyHandlerBase
     {
         public override string Name => "Sequences";
 
@@ -32,19 +33,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         {
             _willProvision ??= SequenceOf(hierarchy, sequenceId)?.SiteCollections?.Count > 0;
             return _willProvision.Value;
-        }
-
-        public override bool WillExtract(PnPContext context, ProvisioningHierarchy hierarchy, string sequenceId,
-            ExtractConfiguration configuration)
-        {
-            _willExtract ??= false;
-            return _willExtract.Value;
-        }
-
-        public override Task<ProvisioningHierarchy> ExtractObjectsAsync(PnPContext context, ProvisioningHierarchy hierarchy,
-            ExtractConfiguration configuration)
-        {
-            return Task.FromResult(hierarchy);
         }
 
         #region Apply
@@ -83,6 +71,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             foreach (ProvisionedSite site in created)
             {
                 await ApplyTemplatesAsync(hierarchy, site, parser, configuration).ConfigureAwait(false);
+
+                ReportSubsites(site);
             }
 
             foreach (ProvisionedSite site in created)
@@ -91,6 +81,25 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             }
 
             return parser;
+        }
+
+        /// <summary>
+        /// Reports the subsites a site collection declares, which this engine does not create yet, so
+        /// that they are not skipped without a word.
+        /// </summary>
+        private void ReportSubsites(ProvisionedSite site)
+        {
+            int count = site.Model.Sites?.Count ?? 0;
+
+            if (count == 0)
+            {
+                return;
+            }
+
+            string warning = $"The sequence declares {count} subsite(s) under {site.Context.Uri}, which this " +
+                "engine does not create yet, so they and the templates attached to them were skipped.";
+            site.Context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+            WriteMessage(warning, ProvisioningMessageType.Warning);
         }
 
         /// <summary>

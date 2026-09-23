@@ -707,6 +707,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 int step = 1;
                 int count = objectHandlers.Count(o => o.ReportProgress && o.WillExtract(context, tenantTemplate, null, configuration));
 
+                if (!objectHandlers.Any(o => o.WillExtract(context, tenantTemplate, null, configuration)))
+                {
+                    string message = "Nothing was extracted: the extract configuration names no site collections under " +
+                        "Tenant.Sequence.SiteUrls and no teams under Tenant.Teams, so the tenant template is empty.";
+
+                    logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                    configuration.MessagesDelegate?.Invoke(message, ProvisioningMessageType.Warning);
+                }
+
                 foreach (ObjectHierarchyHandlerBase handler in objectHandlers)
                 {
                     if (!handler.WillExtract(context, tenantTemplate, null, configuration))
@@ -750,10 +759,29 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             };
         }
 
-        private static List<ObjectHierarchyHandlerBase> BuildHierarchyExtractHandlers(ExtractConfiguration configuration)
+        /// <summary>
+        /// Builds the handler list for a tenant extract, in execution order: a handler runs only when the
+        /// configuration has a section for it.
+        /// </summary>
+        internal static List<ObjectHierarchyHandlerBase> BuildHierarchyExtractHandlers(ExtractConfiguration configuration)
         {
-            _ = configuration;
-            return new List<ObjectHierarchyHandlerBase>();
+            var objectHandlers = new List<ObjectHierarchyHandlerBase>();
+
+            ObjectHierarchySequenceSites sequenceSites = null;
+
+            if (configuration?.Tenant?.Sequence != null)
+            {
+                sequenceSites = new ObjectHierarchySequenceSites();
+                objectHandlers.Add(sequenceSites);
+            }
+
+            if (configuration?.Tenant?.Teams != null)
+            {
+                // Runs after the sites, so that it can fall back on the teams behind them.
+                objectHandlers.Add(new ObjectTeams { SequenceSites = sequenceSites });
+            }
+
+            return objectHandlers;
         }
 
         #endregion
