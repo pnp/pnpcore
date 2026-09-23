@@ -148,6 +148,7 @@ dotnet run -- https://contoso.sharepoint.com/sites/target Templates/site.xml
   4  Apply a saved template to a site
   5  Export a site to a .pnp package
   6  Apply a .pnp package to a site
+  7  Extract a tenant template (site collections, subsites and teams)
   0  Exit
 </code></pre>
 <p>Site urls are typed in when they are needed rather than configured, precisely so that extracting from
@@ -203,6 +204,49 @@ dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --i
 # just the two lists you care about
 dotnet run -- extract https://contoso.sharepoint.com/sites/marketing out.xml --items=&quot;Tasks,Announcements&quot;
 </code></pre>
+<h2 id="extracting-a-tenant-template-from-the-command-line">Extracting a tenant template from the command line</h2>
+<pre><code>dotnet run -- extract-tenant &lt;site-url&gt; &lt;output.xml&gt; [options]
+</code></pre>
+<p>A tenant template describes the <strong>site collection itself</strong> — its kind, url, title, owner, language and
+hub settings — in a sequence, alongside the template of its root web. It is what you apply to create
+a copy of the site rather than to fill an existing one.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--joined-sites</code></td>
+<td>If the site is a hub site, also take the sites joined to it</td>
+</tr>
+<tr>
+<td><code>--subsites</code></td>
+<td>Also take its subsites, each with a template of its own</td>
+</tr>
+<tr>
+<td><code>--teams</code></td>
+<td>Also take the Microsoft Team behind each group connected site</td>
+</tr>
+<tr>
+<td><code>--pages</code></td>
+<td>Include the pages of each site and their contents</td>
+</tr>
+<tr>
+<td><code>--hidden-lists</code></td>
+<td>Include hidden lists in each site's structure</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="lang-powershell"># a hub site, the sites joined to it, and their teams
+dotnet run -- extract-tenant https://contoso.sharepoint.com/sites/hub tenant.xml --joined-sites --teams
+</code></pre>
+<p>Reading a site collection's properties goes through the SharePoint admin center, so this needs an
+account that is a <strong>SharePoint administrator</strong>. The url and title of each site are saved as parameters
+of the template; applying it from the menu asks for a new value for each, so that the copy does not land
+on the sites it came from. Applying a tenant template does not create subsites yet.</p>
 <h2 id="applying-from-the-command-line">Applying from the command line</h2>
 <pre><code>dotnet run -- &lt;site-url&gt; &lt;template.xml&gt;
 dotnet run -- apply &lt;site-url&gt; &lt;template.xml&gt;    the same, spelled out
@@ -324,6 +368,28 @@ Include the site's pages and their contents? (y/N): y
 <h3 id="5-apply-a-pnp-package">5. Apply a .pnp package</h3>
 <p>Choose <strong>6</strong>. It lists the <code>.pnp</code> files in the template folder rather than the <code>.xml</code> ones, then
 asks for the target site and confirms exactly as option 4 does.</p>
+<h3 id="6-extract-a-tenant-template">6. Extract a tenant template</h3>
+<p>Choose <strong>7</strong>, paste the url of a site collection, and answer whether to take the sites joined to it
+if it is a hub, its subsites, and the teams behind group connected sites:</p>
+<pre><code>Extract which site collection? (full url, blank to cancel): https://contoso.sharepoint.com/sites/hub
+Save as (file name, blank for an automatic one):
+
+The site collection and the template of its root web are always included.
+If it is a hub site, include the sites joined to it? (y/N): y
+Include its subsites, each with a template of its own? (y/N): n
+Include the team behind each group connected site? (y/N): y
+Include the pages of each site and their contents? (y/N): n
+</code></pre>
+<pre><code>Saved Templates\tenant-sites-hub-20260811-142233.xml
+
+  Sequence TENANTSEQUENCE:
+    CommunicationSiteCollection Hub (hub)
+    TeamSiteCollection Marketing
+  2 site template(s), 5 parameter(s)
+  Team Marketing: 3 channel(s), 12 app(s)
+</code></pre>
+<p>Applying it with option <strong>4</strong> asks whether the template should create its own sites, and then for a
+value for each parameter — the url and title of every site among them.</p>
 <hr>
 <h2 id="packages-pnp">Packages (.pnp)</h2>
 <p>A <code>.pnp</code> package is a <strong>single file holding the template and everything it references</strong> — the
