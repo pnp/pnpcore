@@ -40,15 +40,6 @@ namespace PnP.Core.Test.Utilities
             }
         }
 
-        internal static void SharePointSyntexTestSetup()
-        {
-            var configuration = GetConfigurationSettings();
-            if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
-            {
-                Assert.Inconclusive("No Syntex Content Center setup for live testing");
-            }
-        }
-
         internal static void ClassicSTS0TestSetup()
         {
             var configuration = GetConfigurationSettings();
