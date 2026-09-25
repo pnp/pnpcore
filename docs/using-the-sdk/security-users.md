@@ -50,6 +50,23 @@ To verify if a specific user exists you can use the `GetUserById` methods:
 var foundUser = await context.Web.GetUserByIdAsync(userId);
 ```
 
+### Getting the groups a user is a member of
+
+A user's `Groups` property returns the SharePoint groups the user is a direct member of. A user can also be a member of a SharePoint group through a Microsoft Entra ID security group (including nested groups) or a Microsoft 365 group that was added to it, to include those use the `GetTransitiveGroups` methods.
+
+```csharp
+var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
+
+// Groups the user was directly added to
+var directGroups = await user.Groups.ToListAsync();
+
+// Groups the user was directly added to, plus the ones reached via Entra ID or Microsoft 365 groups
+var allGroups = await user.GetTransitiveGroupsAsync();
+```
+
+> [!Important]
+> Whenever the site's groups contain a Microsoft Entra ID or Microsoft 365 group, `GetTransitiveGroups` uses Microsoft Graph to resolve the membership. This requires the `GroupMember.Read.All` permission next to the permission to read the principal itself, so `User.ReadBasic.All` and `GroupMember.Read.All` for a user. The special "Everyone" and "Everyone except external users" users are not taken into account.
+
 ## Adding/ensuring a user
 
 Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` and `EnsureEveryoneExceptExternalUsers` methods. The latter method is needed for the "Everyone except external users" user as that string is different for sites created in other languages. Other "special" users are language neutral.
