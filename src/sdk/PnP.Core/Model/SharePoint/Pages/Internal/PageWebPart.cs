@@ -622,6 +622,13 @@ namespace PnP.Core.Model.SharePoint
             controlType = SpControlData.ControlType;
             RichTextEditorInstanceId = SpControlData.RteInstanceId;
 
+            // A web part declares full bleed support in its manifest, which is not part of the page markup. When SharePoint
+            // stored the web part in a one column full width section (section factor 0) then it does support full bleed
+            if (SpControlData.Position?.SectionFactor == 0)
+            {
+                SupportsFullBleed = true;
+            }
+
             IElement wpDiv = null;
             string decodedWebPart = null;
 
@@ -707,21 +714,14 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = dataVersionValue.GetString();
             }
 
-            // Check for fullbleed supporting web parts
-            if (wpJObject.TryGetProperty("properties", out JsonElement properties))
+            // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag, the isFullWidth
+            // property was already handled when setting the PropertiesJson
+            if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
+                Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
+                Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
+                Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
             {
-                if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
-                {
-                    SupportsFullBleed = isFullWidth.GetBoolean();
-                }
-                // Ensure that for first party web parts that support full bleed we set the SupportsFullBleed flag
-                else if (Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.PageTitle || //Message ID: MC791596 / Roadmap ID: 386904
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Image ||
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.Hero ||
-                         Page.IdToDefaultWebPart(WebPartId) == DefaultWebPart.CountDown)
-                {
-                    SupportsFullBleed = true;
-                }
+                SupportsFullBleed = true;
             }
 
             // Store the server processed content as that's needed for full fidelity
@@ -878,6 +878,16 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Properties = parsedJson;
                 }
+            }
+
+            // Setting isFullWidth marks a web part as full bleed capable, honor it whenever the properties are set so that
+            // web parts hosted in a one column full width section can be added or updated. Never revoke full bleed support
+            // here as that might have been set based on the web part manifest or the section the web part was loaded from
+            if (Properties.ValueKind == JsonValueKind.Object &&
+                Properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth) &&
+                isFullWidth.ValueKind == JsonValueKind.True)
+            {
+                SupportsFullBleed = true;
             }
 
             if (wpConfigRoot.TryGetProperty("dataVersion", out JsonElement dataVersion))
