@@ -3603,5 +3603,124 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Full width sections (issue #1801)
+        // A web part declares full bleed support in its manifest, but the manifest is not part of the page markup.
+        // These offline tests cover the other ways such a web part is recognized as full bleed capable, which are
+        // needed to save a page having such a web part in a one column full width section.
+
+        // Planner web part: declares full bleed support in its manifest but is not a known full bleed web part
+        private const string fullBleedWebPartId = "39c4c1c2-63fa-41be-8cc2-f6c0b49b253d";
+
+        [TestMethod]
+        public async Task FullWidthSection_WebPartLoadedFromFullWidthSectionCanBeSaved()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                LoadFromHtml(page, FullBleedWebPartHtml(sectionFactor: 0, properties: "{\"planId\":\"\",\"isFullScreen\":false}"));
+
+                var webPart = page.Controls.Cast<PageWebPart>().Single();
+                Assert.AreEqual(CanvasSectionTemplate.OneColumnFullWidth, webPart.Section.Type);
+                Assert.IsTrue(webPart.SupportsFullBleed);
+
+                // Update the properties the way Set-PnPPageWebPart does, the page must still be writable
+                webPart.PropertiesJson = "{\"planId\":\"123\",\"isFullScreen\":false}";
+                Assert.IsTrue(webPart.SupportsFullBleed);
+                Assert.IsTrue(webPart.ToHtml(1).Contains(fullBleedWebPartId));
+            }
+        }
+
+        [TestMethod]
+        public async Task FullWidthSection_IsFullWidthFalseDoesNotRevokeFullBleedSupport()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                LoadFromHtml(page, FullBleedWebPartHtml(sectionFactor: 0, properties: "{\"isFullWidth\":false}"));
+
+                var webPart = page.Controls.Cast<PageWebPart>().Single();
+                Assert.IsTrue(webPart.SupportsFullBleed);
+                Assert.IsTrue(webPart.ToHtml(1).Contains(fullBleedWebPartId));
+            }
+        }
+
+        [TestMethod]
+        public async Task FullWidthSection_WebPartLoadedFromRegularSectionIsNotFullBleedCapable()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                LoadFromHtml(page, FullBleedWebPartHtml(sectionFactor: 12, properties: "{\"planId\":\"\"}"));
+
+                var webPart = page.Controls.Cast<PageWebPart>().Single();
+                Assert.AreEqual(CanvasSectionTemplate.OneColumn, webPart.Section.Type);
+                Assert.IsFalse(webPart.SupportsFullBleed);
+            }
+        }
+
+        [TestMethod]
+        public async Task FullWidthSection_IsFullWidthPropertyMakesWebPartFullBleedCapable()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+
+                var webPart = page.NewWebPart() as PageWebPart;
+                webPart.WebPartId = fullBleedWebPartId;
+                Assert.IsFalse(webPart.SupportsFullBleed);
+
+                webPart.PropertiesJson = "{\"isFullWidth\": true}";
+                Assert.IsTrue(webPart.SupportsFullBleed);
+
+                page.AddControl(webPart, page.Sections[0]);
+                Assert.IsTrue(webPart.ToHtml(1).Contains(fullBleedWebPartId));
+            }
+        }
+
+        [TestMethod]
+        public async Task FullWidthSection_WebPartWithoutFullBleedSupportIsRejected()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var page = new Page(context, null, null);
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+
+                var webPart = page.NewWebPart() as PageWebPart;
+                webPart.WebPartId = fullBleedWebPartId;
+                webPart.PropertiesJson = "{\"isFullWidth\": false}";
+                page.AddControl(webPart, page.Sections[0]);
+
+                Assert.IsFalse(webPart.SupportsFullBleed);
+                Assert.ThrowsException<ClientException>(() => webPart.ToHtml(1));
+            }
+        }
+
+        private static void LoadFromHtml(Page page, string html)
+        {
+            var method = typeof(Page).GetMethod("LoadFromHtml", BindingFlags.NonPublic | BindingFlags.Instance);
+            method.Invoke(page, new object[] { html, null });
+        }
+
+        // Markup as SharePoint stores it after the web part was saved in the page editor
+        private static string FullBleedWebPartHtml(int sectionFactor, string properties)
+        {
+            const string instanceId = "2ec1ac96-a6fb-4eff-a02e-8b33b926338d";
+
+            string controlData = $"{{\"position\":{{\"layoutIndex\":1,\"zoneIndex\":1,\"zoneId\":\"4b716503-1c3f-48ad-8785-3078a01547a0\",\"sectionIndex\":1,\"sectionFactor\":{sectionFactor},\"controlIndex\":1}}," +
+                                 $"\"emphasis\":{{\"zoneEmphasis\":0}},\"id\":\"{instanceId}\",\"controlType\":3,\"isFromSectionTemplate\":false,\"addedFromPersistedData\":true," +
+                                 $"\"webPartId\":\"{fullBleedWebPartId}\",\"reservedWidth\":1552,\"reservedHeight\":148}}";
+
+            string webPartData = $"{{\"id\":\"{fullBleedWebPartId}\",\"instanceId\":\"{instanceId}\",\"title\":\"Planner\",\"description\":\"Planner\",\"audiences\":[]," +
+                                 $"\"hideOn\":{{\"mobile\":false}},\"serverProcessedContent\":{{\"htmlStrings\":{{}},\"searchablePlainTexts\":{{}},\"imageSources\":{{}},\"links\":{{}}}}," +
+                                 $"\"dataVersion\":\"2.0\",\"properties\":{properties},\"containsDynamicDataSource\":false}}";
+
+            return $"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"{System.Net.WebUtility.HtmlEncode(controlData)}\">" +
+                   $"<div data-sp-webpart=\"\" data-sp-webpartdataversion=\"2.0\" data-sp-webpartdata=\"{System.Net.WebUtility.HtmlEncode(webPartData)}\">" +
+                   $"<div data-sp-componentid=\"\">{fullBleedWebPartId}</div>" +
+                   $"<div data-sp-htmlproperties=\"\"></div></div></div></div>";
+        }
+        #endregion
+
     }
 }
