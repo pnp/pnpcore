@@ -149,7 +149,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             extractedPage.PromoteAsNewsArticle = isNews;
             extractedPage.PromoteAsTemplate = page.IsTemplate;
             extractedPage.Overwrite = true;
-            extractedPage.Publish = true;
+            extractedPage.Publish = configuration.Publishing.ExtractPageAsPublished;
             extractedPage.Layout = pageToExtract.LayoutType.ToString();
             extractedPage.EnableComments = !await pageToExtract.AreCommentsDisabledAsync().ConfigureAwait(false);
             extractedPage.Title = pageToExtract.PageTitle;
