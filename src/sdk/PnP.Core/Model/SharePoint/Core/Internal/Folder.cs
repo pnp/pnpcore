@@ -24,6 +24,8 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.Folder", Target = typeof(ListItem), Uri = "_api/Web/Lists(guid'{List.Id}')/Items({Parent.Id})/Folder")]
     internal sealed class Folder : BaseDataModel<IFolder>, IFolder
     {
+        private ApiCall addFolderGetApiCall;
+
         #region Construction
         public Folder()
         {
@@ -43,6 +45,30 @@ namespace PnP.Core.Model.SharePoint
                 //}
 
                 string encodedPath = WebUtility.UrlEncode(Name.Replace("'", "''").Replace("%20", " ")).Replace("+", "%20");
+
+                if (GetParentByType(typeof(List)) is List parentList)
+                {
+                    // Keep custom headers and response callbacks on the folder creation request.
+                    var requestModules = PnPContext.RequestModules;
+                    try
+                    {
+                        PnPContext.RequestModules = null;
+                        await parentList.EnsurePropertiesAsync(p => p.BaseType).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        PnPContext.RequestModules = requestModules;
+                    }
+
+                    if (parentList.BaseType != ListBaseType.DocumentLibrary)
+                    {
+                        // List folders need a backing list item to be visible in the SharePoint UI.
+                        // AddSubFolderUsingPath returns no folder, so load it after creation.
+                        addFolderGetApiCall = new ApiCall($"{entity.SharePointGet}/Folders/GetByPath(DecodedUrl='{encodedPath}')", ApiType.SPORest);
+                        return new ApiCall($"{entity.SharePointGet}/AddSubFolderUsingPath(DecodedUrl='{encodedPath}')", ApiType.SPORest);
+                    }
+                }
+
                 return new ApiCall($"{entity.SharePointGet}/Folders/AddUsingPath(decodedurl='{encodedPath}')", ApiType.SPORest);
             };
         }
@@ -95,6 +121,27 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Extension methods
+
+        internal override async Task BaseAdd(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            await base.BaseAdd(postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+
+            if (!addFolderGetApiCall.Equals(default(ApiCall)))
+            {
+                await BaseRetrieveAsync(addFolderGetApiCall).ConfigureAwait(false);
+            }
+        }
+
+        internal override async Task BaseAddBatchAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            await base.BaseAddBatchAsync(batch, postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+
+            if (!addFolderGetApiCall.Equals(default(ApiCall)))
+            {
+                // Keep the read after the create in the same batch, without executing it early.
+                await BaseBatchRetrieveAsync(batch, addFolderGetApiCall).ConfigureAwait(false);
+            }
+        }
 
         #region Add sub folder
         /// <summary>
@@ -400,6 +447,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var folderName in childFolderNames)
             {
+                var parentFolder = currentFolder;
                 currentUrl = $"{currentUrl}/{folderName}";
 
                 if (!currentFolderWasCreated)
@@ -418,6 +466,10 @@ namespace PnP.Core.Model.SharePoint
                 {
                     currentFolder = await AddFolderHandleRaceAsync(currentFolder, folderName, currentUrl, expressions).ConfigureAwait(false);
                 }
+
+                // URL lookups (including race recovery) attach folders to the web. Retain the
+                // folder hierarchy so subsequent additions can still find the owning list.
+                currentFolder.Parent = parentFolder.Folders;
             }
 
             return currentFolder;

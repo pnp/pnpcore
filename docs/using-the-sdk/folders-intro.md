@@ -70,6 +70,17 @@ var folder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFo
 var subFolder = await folder.Folders.AddAsync("My folder");
 ```
 
+For folders in a regular list, start from the list's `RootFolder` so the SDK can identify the owning list and select the endpoint that creates the folder's list item. Folders retrieved directly through `context.Web.GetFolderByServerRelativeUrlAsync` do not carry this list context.
+
+Creating a folder in a regular list also requires a follow-up read because SharePoint's creation endpoint does not return the folder. The SDK loads the returned folder automatically. For batched additions, both requests are queued in the same batch.
+
+The SDK loads the owning list's `BaseType` if it is missing and reuses it for subsequent additions through the same list instance. This lookup can happen while preparing a batched addition; it does not execute other pending batch requests. To avoid the additional lookup, include `p => p.BaseType` when retrieving the list:
+
+```csharp
+var list = await context.Web.Lists.GetByTitleAsync("My list", p => p.RootFolder, p => p.BaseType);
+var subFolder = await list.RootFolder.Folders.AddAsync("My folder");
+```
+
 ### Ensure a folder path
 
 When adding folders a very convenient method to use is the [EnsureFolderAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_) method as this one can take a folder path and verify each part of the path and create it if needed.
