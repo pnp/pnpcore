@@ -363,51 +363,89 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             {
                 configuration ??= new ExtractConfiguration();
 
-                ProvisioningTemplateCreationInformation creationInfo = configuration.ToCreationInformation();
+                ProvisioningTemplate callersBaseTemplate = configuration.BaseTemplate;
+                configuration.ResetCreationInformation();
 
-                if (creationInfo.BaseTemplate != null)
+                try
                 {
-                    logger?.LogDebug(PnPCoreProvisioningResources.SiteToTemplateConversion_Base_template_available___0_, creationInfo.BaseTemplate.Id);
+                    ProvisioningProgressDelegate progressDelegate = configuration.ProgressDelegate;
+                    ProvisioningMessagesDelegate messagesDelegate = configuration.MessagesDelegate;
+
+                    if (configuration.CompareWithBaseTemplate && configuration.BaseTemplate == null)
+                    {
+                        configuration.BaseTemplate = await GetBaseTemplateAsync(messagesDelegate).ConfigureAwait(false);
+                    }
+
+                    ProvisioningTemplateCreationInformation creationInfo = configuration.ToCreationInformation();
+
+                    if (creationInfo.BaseTemplate != null)
+                    {
+                        logger?.LogDebug(PnPCoreProvisioningResources.SiteToTemplateConversion_Base_template_available___0_, creationInfo.BaseTemplate.Id);
+                    }
+
+                    var template = new ProvisioningTemplate
+                    {
+                        Connector = configuration.FileConnector
+                    };
+
+                    List<ObjectHandlerBase> objectHandlers = BuildExtractHandlers(configuration);
+
+                    await context.Web.LoadAsync(w => w.Url).ConfigureAwait(false);
+
+                    int step = 1;
+                    int count = objectHandlers.Count(o => o.ReportProgress && o.WillExtract(context, template, configuration));
+
+                    foreach (ObjectHandlerBase handler in objectHandlers)
+                    {
+                        if (!handler.WillExtract(context, template, configuration))
+                        {
+                            continue;
+                        }
+
+                        if (messagesDelegate != null)
+                        {
+                            handler.MessagesDelegate = messagesDelegate;
+                        }
+
+                        if (handler.ReportProgress && progressDelegate != null)
+                        {
+                            progressDelegate(handler.Name, step, count);
+                            step++;
+                        }
+
+                        template = await handler.ExtractObjectsAsync(context, template, configuration).ConfigureAwait(false);
+                    }
+
+                    return template;
                 }
-
-                ProvisioningProgressDelegate progressDelegate = configuration.ProgressDelegate;
-                ProvisioningMessagesDelegate messagesDelegate = configuration.MessagesDelegate;
-
-                var template = new ProvisioningTemplate
+                finally
                 {
-                    Connector = configuration.FileConnector
-                };
-
-                List<ObjectHandlerBase> objectHandlers = BuildExtractHandlers(configuration);
-
-                await context.Web.LoadAsync(w => w.Url).ConfigureAwait(false);
-
-                int step = 1;
-                int count = objectHandlers.Count(o => o.ReportProgress && o.WillExtract(context, template, configuration));
-
-                foreach (ObjectHandlerBase handler in objectHandlers)
-                {
-                    if (!handler.WillExtract(context, template, configuration))
-                    {
-                        continue;
-                    }
-
-                    if (messagesDelegate != null)
-                    {
-                        handler.MessagesDelegate = messagesDelegate;
-                    }
-
-                    if (handler.ReportProgress && progressDelegate != null)
-                    {
-                        progressDelegate(handler.Name, step, count);
-                        step++;
-                    }
-
-                    template = await handler.ExtractObjectsAsync(context, template, configuration).ConfigureAwait(false);
+                    configuration.BaseTemplate = callersBaseTemplate;
+                    configuration.ResetCreationInformation();
                 }
-
-                return template;
             }
+        }
+
+        /// <summary>
+        /// Loads the out of the box template of the site's own web template, which the extraction is diffed
+        /// against so that it only carries what was added to the site.
+        /// </summary>
+        /// <returns>The base template, or <c>null</c> when none ships for the site's web template</returns>
+        private async Task<ProvisioningTemplate> GetBaseTemplateAsync(ProvisioningMessagesDelegate messagesDelegate)
+        {
+            ProvisioningTemplate baseTemplate = await BaseTemplates.BaseTemplateManager.GetBaseTemplateAsync(context.Web).ConfigureAwait(false);
+
+            if (baseTemplate == null)
+            {
+                string webTemplate = $"{context.Web.WebTemplate}#{BaseTemplates.BaseTemplateManager.GetConfiguration(context.Web.WebTemplateConfiguration)}";
+                string message = $"There is no base template for the web template '{webTemplate}', so the extracted template " +
+                    "also contains the columns, content types and settings every site of that kind has out of the box.";
+
+                context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                messagesDelegate?.Invoke(message, ProvisioningMessageType.Warning);
+            }
+
+            return baseTemplate;
         }
 
         /// <inheritdoc/>
@@ -669,6 +707,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 int step = 1;
                 int count = objectHandlers.Count(o => o.ReportProgress && o.WillExtract(context, tenantTemplate, null, configuration));
 
+                if (!objectHandlers.Any(o => o.WillExtract(context, tenantTemplate, null, configuration)))
+                {
+                    string message = "Nothing was extracted: the extract configuration names no site collections under " +
+                        "Tenant.Sequence.SiteUrls and no teams under Tenant.Teams, so the tenant template is empty.";
+
+                    logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                    configuration.MessagesDelegate?.Invoke(message, ProvisioningMessageType.Warning);
+                }
+
                 foreach (ObjectHierarchyHandlerBase handler in objectHandlers)
                 {
                     if (!handler.WillExtract(context, tenantTemplate, null, configuration))
@@ -712,10 +759,29 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             };
         }
 
-        private static List<ObjectHierarchyHandlerBase> BuildHierarchyExtractHandlers(ExtractConfiguration configuration)
+        /// <summary>
+        /// Builds the handler list for a tenant extract, in execution order: a handler runs only when the
+        /// configuration has a section for it.
+        /// </summary>
+        internal static List<ObjectHierarchyHandlerBase> BuildHierarchyExtractHandlers(ExtractConfiguration configuration)
         {
-            _ = configuration;
-            return new List<ObjectHierarchyHandlerBase>();
+            var objectHandlers = new List<ObjectHierarchyHandlerBase>();
+
+            ObjectHierarchySequenceSites sequenceSites = null;
+
+            if (configuration?.Tenant?.Sequence != null)
+            {
+                sequenceSites = new ObjectHierarchySequenceSites();
+                objectHandlers.Add(sequenceSites);
+            }
+
+            if (configuration?.Tenant?.Teams != null)
+            {
+                // Runs after the sites, so that it can fall back on the teams behind them.
+                objectHandlers.Add(new ObjectTeams { SequenceSites = sequenceSites });
+            }
+
+            return objectHandlers;
         }
 
         #endregion

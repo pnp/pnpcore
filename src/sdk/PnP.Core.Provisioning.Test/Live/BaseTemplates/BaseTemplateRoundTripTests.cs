@@ -365,6 +365,10 @@ namespace PnP.Core.Provisioning.Test.Live.BaseTemplates
 
                 var configuration = new ExtractConfiguration
                 {
+                    // A fresh site differs from its base template in next to nothing, so the diffed
+                    // extraction would leave little to round trip. Take everything, out of the box
+                    // columns and content types included.
+                    CompareWithBaseTemplate = false,
                     MessagesDelegate = (message, type) =>
                     {
                         if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)

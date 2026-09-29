@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Model.Configuration;
+using PnP.Core.Provisioning.Model.Configuration.Lists.Lists;
 using PnP.Core.Provisioning.ObjectHandlers.Utilities;
 using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.UserResources;
@@ -10,11 +11,15 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using CoreList = PnP.Core.Model.SharePoint.IList;
 using FieldModel = PnP.Core.Provisioning.Model.Field;
+using FolderCollectionModel = PnP.Core.Provisioning.Model.FolderCollection;
+using FolderModel = PnP.Core.Provisioning.Model.Folder;
 using CoreListExperience = PnP.Core.Model.SharePoint.ListExperience;
 using CoreListReadingDirection = PnP.Core.Model.SharePoint.ListReadingDirection;
 using ListExperienceModel = PnP.Core.Provisioning.Model.ListExperience;
@@ -107,6 +112,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 .ToList();
 
             HashSet<string> siteContentTypeIds = await ReadSiteContentTypeIdsAsync(context).ConfigureAwait(false);
+            var permissions = new SecurityUtilities.PermissionsReader(context);
 
             int listCount = 0;
             int totalCount = toProcess.Count;
@@ -121,8 +127,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 listCount++;
                 WriteSubProgress("List", siteList.Title, listCount, totalCount);
 
-                ListInstance list = await ExtractListAsync(context, template, creationInfo, siteList, allLists, webUrl, siteContentTypeIds)
-                    .ConfigureAwait(false);
+                ListInstance list = await ExtractListAsync(context, template, configuration, creationInfo, siteList, allLists, webUrl,
+                    siteContentTypeIds, permissions).ConfigureAwait(false);
 
                 ListInstance baseTemplateList = FindInBaseTemplate(creationInfo, siteList, webUrl);
 
@@ -141,8 +147,9 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         }
 
         private async Task<ListInstance> ExtractListAsync(PnPContext context, ProvisioningTemplate template,
-            ProvisioningTemplateCreationInformation creationInfo, CoreList siteList, List<CoreList> allLists, string webUrl,
-            HashSet<string> siteContentTypeIds)
+            ExtractConfiguration configuration, ProvisioningTemplateCreationInformation creationInfo, CoreList siteList,
+            List<CoreList> allLists, string webUrl, HashSet<string> siteContentTypeIds,
+            SecurityUtilities.PermissionsReader permissions)
         {
             var list = new ListInstance
             {
@@ -191,7 +198,13 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             await ExtractIrmSettingsAsync(context, siteList, list).ConfigureAwait(false);
             await ExtractPropertyBagEntriesAsync(context, siteList, list).ConfigureAwait(false);
 
-            list.Security = await SecurityUtilities.ExtractAsync(context, siteList).ConfigureAwait(false);
+            list.Security = await permissions.ReadAsync(siteList).ConfigureAwait(false);
+
+            ExtractListsListsConfiguration listConfig = FindListConfiguration(configuration, siteList);
+            if (listConfig?.IncludeFolders == true)
+            {
+                await ExtractFoldersAsync(context, siteList, list, listConfig, permissions).ConfigureAwait(false);
+            }
 
             return list;
         }
@@ -631,6 +644,120 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         #endregion
 
+        #region Extract folders
+
+        /// <summary>
+        /// What is loaded of a folder's children to decide which of them to extract.
+        /// </summary>
+        private static readonly Expression<Func<IFolder, object>> ChildFolders = f => f.Folders.QueryProperties(
+            c => c.Name, c => c.UniqueId, c => c.ServerRelativeUrl,
+            c => c.ListItemAllFields.QueryProperties(i => i.Id, i => i.HasUniqueRoleAssignments));
+
+        /// <summary>
+        /// Property bag keys SharePoint maintains on a folder by itself.
+        /// </summary>
+        private static readonly string[] SystemFolderPropertyPrefixes = { "vti_", "docset_" };
+
+        /// <summary>
+        /// Reads the folders below the list's root folder into <see cref="ListInstance.Folders"/>, each with its
+        /// property bag and, when asked for, its unique permissions.
+        /// </summary>
+        /// <remarks>
+        /// This costs a request per folder, which is why it only runs for lists that ask for it.
+        /// </remarks>
+        private async Task ExtractFoldersAsync(PnPContext context, CoreList siteList, ListInstance list,
+            ExtractListsListsConfiguration listConfig, SecurityUtilities.PermissionsReader permissions)
+        {
+            try
+            {
+                await siteList.RootFolder.LoadAsync(ChildFolders).ConfigureAwait(false);
+
+                await AddFoldersAsync(context, siteList.RootFolder, list.Folders, 1, listConfig, permissions).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                string warning = $"Not all folders of list '{siteList.Title}' could be read, so the template may miss " +
+                    $"some of them: {ErrorText.Describe(ex)}";
+
+                context.Logger?.LogWarning(ex, "{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                WriteMessage(warning, ProvisioningMessageType.Warning);
+            }
+        }
+
+        /// <summary>
+        /// Adds the list folders among a folder's loaded children, and below them down to the configured depth.
+        /// </summary>
+        private async Task AddFoldersAsync(PnPContext context, IFolder parent, FolderCollectionModel target, int depth,
+            ExtractListsListsConfiguration listConfig, SecurityUtilities.PermissionsReader permissions)
+        {
+            bool descend = listConfig.MaxFolderDepth <= 0 || depth < listConfig.MaxFolderDepth;
+
+            foreach (IFolder child in parent.Folders.AsRequested().Where(IsListFolder).ToList())
+            {
+                // Read by its own id: loading a folder reached through its parent's folders reads the parent.
+                IFolder loaded = descend
+                    ? await context.Web.GetFolderByIdAsync(child.UniqueId, f => f.Properties, ChildFolders).ConfigureAwait(false)
+                    : await context.Web.GetFolderByIdAsync(child.UniqueId, f => f.Properties).ConfigureAwait(false);
+
+                var folder = new FolderModel { Name = child.Name };
+
+                AddPropertyBagEntries(loaded, folder);
+
+                if (listConfig.IncludeSecurity && child.ListItemAllFields.HasUniqueRoleAssignments)
+                {
+                    // Left with ClearSubscopes off: the folders below are created, with their own permissions,
+                    // before this one's are applied, and clearing the sub scopes would reset theirs.
+                    ObjectSecurity security = await permissions.ReadAsync(child.ListItemAllFields).ConfigureAwait(false);
+                    if (security != null)
+                    {
+                        SecurityUtilities.CopyInto(security, folder.Security);
+                    }
+                }
+
+                if (descend)
+                {
+                    await AddFoldersAsync(context, loaded, folder.Folders, depth + 1, listConfig, permissions).ConfigureAwait(false);
+                }
+
+                target.Add(folder);
+            }
+        }
+
+        private static void AddPropertyBagEntries(IFolder source, FolderModel folder)
+        {
+            foreach (KeyValuePair<string, object> property in source.Properties.Values)
+            {
+                if (SystemFolderPropertyPrefixes.Any(p => property.Key.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
+                {
+                    continue;
+                }
+
+                folder.PropertyBagEntries.Add(new PropertyBagEntry
+                {
+                    Key = property.Key,
+                    Value = Convert.ToString(property.Value, CultureInfo.InvariantCulture),
+                });
+            }
+        }
+
+        /// <summary>
+        /// Whether a folder holds list content. The folders SharePoint keeps for itself, such as a library's Forms
+        /// folder or a list's Attachments folder, have no list item.
+        /// </summary>
+        private static bool IsListFolder(IFolder folder)
+        {
+            try
+            {
+                return folder.ListItemAllFields != null && folder.ListItemAllFields.Id > 0;
+            }
+            catch (ClientException)
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
         #region Extract filtering
 
         private static bool IncludesHiddenLists(ExtractConfiguration configuration, ProvisioningTemplateCreationInformation creationInfo)
@@ -656,20 +783,25 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 }
             }
 
-            if (configuration?.Lists != null && configuration.Lists.HasLists)
+            if (configuration?.Lists != null && configuration.Lists.HasLists
+                && FindListConfiguration(configuration, siteList) == null)
             {
-                bool selected = configuration.Lists.Lists.Any(entry =>
-                    (Guid.TryParse(entry.Title, out Guid id) && id == siteList.Id)
-                    || string.Equals(entry.Title, siteList.Title, StringComparison.Ordinal)
-                    || siteList.RootFolder.ServerRelativeUrl.EndsWith(entry.Title, StringComparison.OrdinalIgnoreCase));
-
-                if (!selected)
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// The entry of the lists configuration that names this list - by id, title or url - if any.
+        /// </summary>
+        private static ExtractListsListsConfiguration FindListConfiguration(ExtractConfiguration configuration, CoreList siteList)
+        {
+            return configuration?.Lists?.Lists?.FirstOrDefault(entry =>
+                !string.IsNullOrEmpty(entry?.Title)
+                && ((Guid.TryParse(entry.Title, out Guid id) && id == siteList.Id)
+                    || string.Equals(entry.Title, siteList.Title, StringComparison.Ordinal)
+                    || siteList.RootFolder.ServerRelativeUrl.EndsWith(entry.Title, StringComparison.OrdinalIgnoreCase)));
         }
 
         private static ListInstance FindInBaseTemplate(ProvisioningTemplateCreationInformation creationInfo,

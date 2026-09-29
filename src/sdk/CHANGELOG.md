@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Removed Viva Topics Support #1784 [adam-it - Adam Wójcik]
 - Updated ISharePointUser.Groups to the groups the user belongs to #1863 [svermaak - svermaak]
 - Updated delete by id on IWeb.SiteUsers and IWeb.SiteGroups #1864 [svermaak - svermaak]
+- Improved pnp core provisioning #1874 [adam-it - Adam Wójcik]
 
 ## [1.18]
 

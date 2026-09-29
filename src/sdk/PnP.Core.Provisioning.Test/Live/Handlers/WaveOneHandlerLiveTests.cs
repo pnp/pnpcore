@@ -32,10 +32,13 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
         {
             using (PnPContext context = await GetContextAsync().ConfigureAwait(false))
             {
-                ProvisioningTemplate template = await context.GetProvisioningManager()
-                    .GetTemplateAsync().ConfigureAwait(false);
+                var configuration = new ExtractConfiguration();
+                configuration.SearchSettings.Include = true;
 
-                Console.WriteLine($"SiteSearchSettings: {(string.IsNullOrEmpty(template.SiteSearchSettings) ? "<none>" : $"{template.SiteSearchSettings.Length} chars")}");
+                ProvisioningTemplate template = await context.GetProvisioningManager()
+                    .GetTemplateAsync(configuration).ConfigureAwait(false);
+
+                Console.WriteLine($"SiteSearchSettings:{(string.IsNullOrEmpty(template.SiteSearchSettings) ? "<none>" : $"{template.SiteSearchSettings.Length} chars")}");
                 Console.WriteLine($"WebSearchSettings : {(string.IsNullOrEmpty(template.WebSearchSettings) ? "<none>" : $"{template.WebSearchSettings.Length} chars")}");
 
                 Assert.IsNotNull(template);

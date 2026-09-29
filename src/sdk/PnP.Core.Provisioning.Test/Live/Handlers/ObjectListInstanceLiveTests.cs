@@ -388,6 +388,87 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
             }
         }
 
+        // Online test - requires a tenant
+        [Ignore]
+        [TestMethod]
+        [TestCategory("Live")]
+        [TestCategory("Handlers")]
+        public async Task Lists_ExtractsFoldersWithTheirPropertiesAndPermissions()
+        {
+            using (PnPContext context = await GetContextAsync().ConfigureAwait(false))
+            {
+                try
+                {
+                    var list = new ListInstance
+                    {
+                        Title = SourceListTitle,
+                        Url = $"Lists/{TestPrefix}Source",
+                        TemplateType = (int)ListTemplateType.GenericList,
+                        EnableFolderCreation = true,
+                    };
+
+                    var parent = new Model.Folder($"{TestPrefix}Parent")
+                    {
+                        Folders = { new Model.Folder($"{TestPrefix}Child") },
+                        PropertyBagEntries = { new PropertyBagEntry { Key = $"{TestPrefix}Property", Value = "parent" } },
+                    };
+                    parent.Security.RoleAssignments.Add(new Model.RoleAssignment
+                    {
+                        Principal = "{associatedmembergroupid}",
+                        RoleDefinition = "Contribute",
+                    });
+
+                    list.Folders.Add(parent);
+                    list.Folders.Add(new Model.Folder($"{TestPrefix}Sibling"));
+
+                    await context.GetProvisioningManager().ApplyTemplateAsync(TemplateWith(list), Reporting()).ConfigureAwait(false);
+
+                    using (PnPContext fresh = await GetContextAsync(1).ConfigureAwait(false))
+                    {
+                        ListInstance everything = await ExtractFoldersAsync(fresh, new Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
+                        {
+                            Title = SourceListTitle,
+                            IncludeFolders = true,
+                            IncludeSecurity = true,
+                        }).ConfigureAwait(false);
+
+                        Assert.AreEqual(2, everything.Folders.Count,
+                            $"Expected the two folders at the root and none of SharePoint's own, got: {string.Join(", ", everything.Folders.Select(f => f.Name))}");
+
+                        Model.Folder extractedParent = everything.Folders.FirstOrDefault(f => f.Name == $"{TestPrefix}Parent");
+                        Assert.IsNotNull(extractedParent, "The parent folder was not extracted.");
+                        Assert.IsTrue(extractedParent.Folders.Any(f => f.Name == $"{TestPrefix}Child"), "The nested folder was not extracted.");
+
+                        Assert.IsTrue(extractedParent.PropertyBagEntries.Any(p => p.Key == $"{TestPrefix}Property" && p.Value == "parent"),
+                            "The folder's property bag entry was not extracted.");
+                        Assert.IsFalse(extractedParent.PropertyBagEntries.Any(p => p.Key.StartsWith("vti_", StringComparison.OrdinalIgnoreCase)),
+                            "SharePoint's own folder properties were extracted.");
+
+                        Assert.IsTrue(extractedParent.Security.RoleAssignments.Any(r =>
+                            r.Principal == "{associatedmembergroupid}" && r.RoleDefinition == "Contribute"),
+                            "The folder's permissions were not extracted, or not by group token.");
+                        Assert.AreEqual(0, extractedParent.Folders.First().Security.RoleAssignments.Count,
+                            "The nested folder inherits, so it should carry no permissions.");
+
+                        ListInstance topLevel = await ExtractFoldersAsync(fresh, new Model.Configuration.Lists.Lists.ExtractListsListsConfiguration
+                        {
+                            Title = SourceListTitle,
+                            IncludeFolders = true,
+                            MaxFolderDepth = 1,
+                        }).ConfigureAwait(false);
+
+                        Assert.IsTrue(topLevel.Folders.All(f => f.Folders.Count == 0), "MaxFolderDepth 1 read below the root folders.");
+                        Assert.IsTrue(topLevel.Folders.All(f => f.Security.RoleAssignments.Count == 0),
+                            "Permissions were extracted without IncludeSecurity.");
+                    }
+                }
+                finally
+                {
+                    await SweepListsAsync().ConfigureAwait(false);
+                }
+            }
+        }
+
         #endregion
 
         #region Helpers
@@ -397,6 +478,32 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
             var template = new ProvisioningTemplate();
             template.Lists.Add(list);
             return template;
+        }
+
+        /// <summary>
+        /// Extracts the one list a configuration entry names.
+        /// </summary>
+        private static async Task<ListInstance> ExtractFoldersAsync(PnPContext context,
+            Model.Configuration.Lists.Lists.ExtractListsListsConfiguration listConfiguration)
+        {
+            var configuration = new ExtractConfiguration();
+            configuration.Handlers.Add(ConfigurationHandler.Lists);
+            configuration.Lists.Lists.Add(listConfiguration);
+            configuration.MessagesDelegate = (message, type) =>
+            {
+                if (type == ProvisioningMessageType.Warning || type == ProvisioningMessageType.Error)
+                {
+                    Console.WriteLine($"[{type}] {message}");
+                }
+            };
+
+            ProvisioningTemplate extracted = await context.GetProvisioningManager()
+                .GetTemplateAsync(configuration).ConfigureAwait(false);
+
+            ListInstance list = extracted.Lists.FirstOrDefault(l => l.Title == listConfiguration.Title);
+            Assert.IsNotNull(list, $"The list '{listConfiguration.Title}' was not extracted.");
+
+            return list;
         }
 
         /// <summary>

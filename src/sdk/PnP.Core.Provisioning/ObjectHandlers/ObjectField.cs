@@ -108,33 +108,32 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                     }
                     catch (Exception ex)
                     {
-                        string what = existingFieldIds.Contains(id) ? "Updating" : "Creating";
                         string named = string.IsNullOrWhiteSpace(internalName) ? fieldId : $"{internalName} ({fieldId})";
+                        bool updating = existingFieldIds.Contains(id);
+                        Exception failure = ex;
 
-                        
-                        if (SaysDuplicateFieldName(ex) && !string.IsNullOrWhiteSpace(internalName))
+                        if (!updating)
                         {
-                            IField existing = await FindFieldByNameAsync(context, internalName).ConfigureAwait(false);
-
-                            if (existing != null)
+                            try
                             {
-                                string note = $"The site column '{named}' already existed on this site" +
-                                    (existing.Id == id ? string.Empty : $" under id {existing.Id}") +
-                                    ", so it was updated rather than created.";
-
-                                context.Logger?.LogInformation("{Source}: {Message}", Constants.LOGGING_SOURCE, note);
-
-                                await UpdateFieldAsync(context, existing.Id, schema, parser, field.SchemaXml)
-                                    .ConfigureAwait(false);
-
-                                continue;
+                                if (await TryUpdateInsteadOfCreateAsync(context, ex, id, internalName, named, schema, parser, field.SchemaXml).ConfigureAwait(false))
+                                {
+                                    continue;
+                                }
+                            }
+                            catch (Exception updateEx)
+                            {
+                                failure = updateEx;
+                                updating = true;
                             }
                         }
 
-                        context.Logger?.LogError(ex, "{Source}: {What} the site column '{Field}' failed.",
-                            Constants.LOGGING_SOURCE, what, named);
+                        string warning = updating
+                            ? $"The site column '{named}' could not be updated, so it was left as it is: {ErrorText.Describe(failure)}"
+                            : $"The site column '{named}' could not be created, so it and anything depending on it were skipped: {ErrorText.Describe(failure)}";
 
-                        throw new Exception($"{what} the site column '{named}' failed.", ex);
+                        context.Logger?.LogWarning(failure, "{Source}: {Message}", Constants.LOGGING_SOURCE, warning);
+                        WriteMessage(warning, ProvisioningMessageType.Warning);
                     }
                 }
 
@@ -145,8 +144,35 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         }
 
         /// <summary>
-        /// The template's fields that belong to this pass, ordered by the field they reference.
+        /// Updates the site's own column when creating one failed because that name is already taken.
         /// </summary>
+        /// <returns>Whether the column was found and updated</returns>
+        private async Task<bool> TryUpdateInsteadOfCreateAsync(PnPContext context, Exception createFailure, Guid id,
+            string internalName, string named, XElement schema, TokenParser parser, string originalFieldXml)
+        {
+            if (!SaysDuplicateFieldName(createFailure) || string.IsNullOrWhiteSpace(internalName))
+            {
+                return false;
+            }
+
+            IField existing = await FindFieldByNameAsync(context, internalName).ConfigureAwait(false);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            string note = $"The site column '{named}' already existed on this site" +
+                (existing.Id == id ? string.Empty : $" under id {existing.Id}") +
+                ", so it was updated rather than created.";
+
+            context.Logger?.LogInformation("{Source}: {Message}", Constants.LOGGING_SOURCE, note);
+
+            await UpdateFieldAsync(context, existing.Id, schema, parser, originalFieldXml).ConfigureAwait(false);
+
+            return true;
+        }
+
         /// <summary>
         /// Whether SharePoint refused a column because one of that name is already there.
         /// </summary>
@@ -189,6 +215,9 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             }
         }
 
+        /// <summary>
+        /// The template's fields that belong to this pass, ordered by the field they reference.
+        /// </summary>
         private List<FieldModel> OrderFieldsForThisStep(ProvisioningTemplate template, TokenParser parser)
         {
             var forThisStep = new List<(string FieldRef, FieldModel Field)>();
@@ -291,6 +320,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
             existingSchema.Attributes("Version").Remove();
 
+            if (SchemasMatch(schemaBeforeMerge, existingSchema))
+            {
+                context.Logger?.LogDebug("{Source}: the site column {Field} already has everything the template sets, so it was not updated.",
+                    Constants.LOGGING_SOURCE, existingField.InternalName);
+
+                await LocalizeAsync(context, existingField, originalFieldXml, parser).ConfigureAwait(false);
+                return;
+            }
+
             existingField.SchemaXml = parser.ParseXmlString(existingSchema.ToString());
 
             try
@@ -318,7 +356,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// <summary>
         /// Copies the template's attributes and elements onto the existing field's schema.
         /// </summary>
-        private static void MergeInto(XElement existingSchema, XElement templateSchema)
+        internal static void MergeInto(XElement existingSchema, XElement templateSchema)
         {
             foreach (XAttribute attribute in templateSchema.Attributes())
             {
@@ -338,6 +376,30 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 existingSchema.Element(element.Name)?.Remove();
                 existingSchema.Add(element);
             }
+        }
+
+        /// <summary>
+        /// Whether merging the template into a field's schema changed nothing, so that writing it back would
+        /// only bump the field's version - or be refused, as SharePoint does for some of its own columns.
+        /// </summary>
+        internal static bool SchemasMatch(XElement current, XElement merged)
+        {
+            return XNode.DeepEquals(Normalize(current), Normalize(merged));
+        }
+
+        /// <summary>
+        /// A copy of a field's schema without its version, with the top level attributes and elements in name
+        /// order and every id attribute in one format.
+        /// </summary>
+        private static XElement Normalize(XElement schema)
+        {
+            return new XElement(schema.Name,
+                schema.Attributes()
+                    .Where(a => a.Name != "Version")
+                    .OrderBy(a => a.Name.ToString(), StringComparer.Ordinal)
+                    .Select(a => Guid.TryParse(a.Value, out Guid id) ? new XAttribute(a.Name, id.ToString("B")) : new XAttribute(a)),
+                schema.Elements()
+                    .OrderBy(e => e.Name.ToString(), StringComparer.Ordinal));
         }
 
         /// <summary>

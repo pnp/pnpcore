@@ -44,8 +44,9 @@ namespace PnP.Core.Provisioning.Test.Live.Handlers
             {
                 Console.WriteLine($"NoScript site: {await context.Web.IsNoScriptSiteAsync().ConfigureAwait(false)}");
 
+                // Diffed against the base template, an untouched web can legitimately come back empty.
                 ProvisioningTemplate template = await context.GetProvisioningManager()
-                    .GetTemplateAsync().ConfigureAwait(false);
+                    .GetTemplateAsync(new ExtractConfiguration { CompareWithBaseTemplate = false }).ConfigureAwait(false);
 
                 Assert.IsTrue(template.PropertyBagEntries.Count > 0,
                     "Every web has property bag entries - an empty result means extraction did not read them.");

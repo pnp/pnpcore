@@ -11,8 +11,20 @@ namespace PnP.Core.Provisioning.Model.Configuration
     public partial class ExtractConfiguration
     {
 
+        /// <summary>
+        /// The out of the box template the extracted template is compared against. When <c>null</c>, the
+        /// engine uses the base template matching the site's own web template for the duration of a run.
+        /// </summary>
         [JsonIgnore]
         internal ProvisioningTemplate BaseTemplate { get; set; }
+
+        /// <summary>
+        /// Whether the extracted template is compared against the out of the box template of the site's web
+        /// template, leaving out the columns, content types, custom actions and settings that every site of
+        /// that kind already has.
+        /// </summary>
+        [JsonIgnore]
+        public bool CompareWithBaseTemplate { get; set; } = true;
 
         [JsonIgnore]
         public FileConnectorBase FileConnector { get; set; }
@@ -145,11 +157,14 @@ namespace PnP.Core.Provisioning.Model.Configuration
         /// Converts the Configuration to a ProvisioningTemplateCreationInformation object for backwards compatibility
         /// </summary>
         /// <param name="baseTemplate">
-        /// The out of the box base template to diff the extracted template against, or null to extract everything.
+        /// The out of the box base template to diff the extracted template against. When null, the base template
+        /// of the extraction in progress is used, unless <see cref="CompareWithBaseTemplate"/> is off.
         /// </param>
         /// <returns>The equivalent <see cref="ProvisioningTemplateCreationInformation"/></returns>
         public ProvisioningTemplateCreationInformation ToCreationInformation(ProvisioningTemplate baseTemplate = null)
         {
+            baseTemplate ??= CompareWithBaseTemplate ? BaseTemplate : null;
+
             if (creationInformationCache.TryGetValue(baseTemplate ?? NoBaseTemplate, out ProvisioningTemplateCreationInformation cached))
             {
                 return cached;
@@ -225,6 +240,15 @@ namespace PnP.Core.Provisioning.Model.Configuration
             creationInformationCache[baseTemplate ?? NoBaseTemplate] = ci;
 
             return ci;
+        }
+
+        /// <summary>
+        /// Forgets the creation information handed out so far, so an extraction does not inherit the resource
+        /// tokens or base template of an earlier one run with the same configuration.
+        /// </summary>
+        internal void ResetCreationInformation()
+        {
+            creationInformationCache.Clear();
         }
 
         /// <summary>

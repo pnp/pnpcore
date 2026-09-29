@@ -56,14 +56,24 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// <summary>
         /// Extracts a tenant template - a hierarchy of sites and tenant level settings.
         /// </summary>
-        /// <param name="configuration">What to extract and how, or <c>null</c> for everything</param>
+        /// <remarks>
+        /// The site collections to extract are named by <c>configuration.Tenant.Sequence</c> and the teams by
+        /// <c>configuration.Tenant.Teams</c>; without either nothing is extracted. The rest of the
+        /// configuration decides how the template of each site is extracted.
+        /// </remarks>
+        /// <param name="configuration">Which sites and teams to extract, and how</param>
         /// <returns>The extracted hierarchy</returns>
         Task<ProvisioningHierarchy> GetTenantTemplateAsync(ExtractConfiguration configuration = null);
 
         /// <summary>
         /// Extracts a tenant template - a hierarchy of sites and tenant level settings.
         /// </summary>
-        /// <param name="configuration">What to extract and how, or <c>null</c> for everything</param>
+        /// <remarks>
+        /// The site collections to extract are named by <c>configuration.Tenant.Sequence</c> and the teams by
+        /// <c>configuration.Tenant.Teams</c>; without either nothing is extracted. The rest of the
+        /// configuration decides how the template of each site is extracted.
+        /// </remarks>
+        /// <param name="configuration">Which sites and teams to extract, and how</param>
         /// <returns>The extracted hierarchy</returns>
         ProvisioningHierarchy GetTenantTemplate(ExtractConfiguration configuration = null);
     }
