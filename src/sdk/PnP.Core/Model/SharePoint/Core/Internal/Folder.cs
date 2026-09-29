@@ -122,14 +122,41 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
+        internal override Task BaseRetrieveAsync(ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return base.BaseRetrieveAsync(GetFolderReadApiCall(apiOverride), fromJsonCasting, postMappingJson, expressions);
+        }
+
+        internal override Task<IBatchSingleResult<IFolder>> BaseBatchRetrieveAsync(Batch batch, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<IFolder, object>>[] selectors)
+        {
+            return base.BaseBatchRetrieveAsync(batch, GetFolderReadApiCall(apiOverride), fromJsonCasting, postMappingJson, selectors);
+        }
+
+        private ApiCall GetFolderReadApiCall(ApiCall apiOverride)
+        {
+            if (apiOverride.Equals(default(ApiCall)) && IsPropertyAvailable(p => p.UniqueId) &&
+                TokenHandler.GetParentDataModel(this) is Folder)
+            {
+                // A loaded child is read by its own ID. Keep explicit paths used during creation
+                // and the parent-based mapping used before the child has been loaded.
+                return new ApiCall(GetClassInfo().SharePointUri, ApiType.SPORest);
+            }
+
+            return apiOverride;
+        }
+
         internal override async Task BaseAdd(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            await base.BaseAdd(postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
-
-            if (!addFolderGetApiCall.Equals(default(ApiCall)))
+            if (addFolderGetApiCall.Equals(default(ApiCall)))
             {
-                await BaseRetrieveAsync(addFolderGetApiCall).ConfigureAwait(false);
+                await base.BaseAdd(postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                return;
             }
+
+            // Execute creation and hydration in one round trip, leaving pending requests alone.
+            var batch = PnPContext.NewBatch();
+            await BaseAddBatchAsync(batch, postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+            await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
         internal override async Task BaseAddBatchAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
