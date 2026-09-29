@@ -67,6 +67,11 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 template.PropertyBagEntries.Clear();
                 template.PropertyBagEntries.AddRange(entries);
 
+                ProvisioningTemplateCreationInformation creationInformation = configuration?.ToCreationInformation();
+                if (creationInformation?.BaseTemplate != null)
+                {
+                    RemoveBaseTemplateEntries(template, creationInformation);
+                }
 
                 foreach (PropertyBagEntryModel entry in template.PropertyBagEntries)
                 {
@@ -75,6 +80,25 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
                 return template;
             }
+        }
+
+        /// <summary>
+        /// Drops the entries the base template already has, and the ones SharePoint owns unless they were
+        /// asked to be kept, so the extracted template carries only what was added to the site.
+        /// </summary>
+        internal static void RemoveBaseTemplateEntries(ProvisioningTemplate template, ProvisioningTemplateCreationInformation creationInformation)
+        {
+            foreach (PropertyBagEntryModel entry in creationInformation.BaseTemplate.PropertyBagEntries)
+            {
+                template.PropertyBagEntries.RemoveAll(e => string.Equals(e.Key, entry.Key, StringComparison.Ordinal));
+            }
+
+            var keep = new List<string> { "_PnP_" };
+            keep.AddRange(creationInformation.PropertyBagPropertiesToPreserve ?? new List<string>());
+
+            template.PropertyBagEntries.RemoveAll(e =>
+                SystemPropertyPrefixes.Any(p => e.Key.StartsWith(p, StringComparison.OrdinalIgnoreCase))
+                && !keep.Any(k => e.Key.StartsWith(k, StringComparison.OrdinalIgnoreCase)));
         }
 
         public override async Task<TokenParser> ProvisionObjectsAsync(PnPContext context, ProvisioningTemplate template, TokenParser parser, ApplyConfiguration configuration)

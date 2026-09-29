@@ -20,7 +20,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
         public override bool WillExtract(PnPContext context, ProvisioningTemplate template, ExtractConfiguration configuration)
         {
-            return true;
+            _willExtract ??= configuration?.ToCreationInformation()?.IncludeSearchConfiguration ?? false;
+            return _willExtract.Value;
         }
 
         public override bool WillProvision(PnPContext context, ProvisioningTemplate template, ApplyConfiguration configuration)

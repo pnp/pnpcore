@@ -413,7 +413,8 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 IField field = context.Web.Fields.AsRequested().FirstOrDefault(f => f.Id == fieldRef.Id)
                     ?? (!string.IsNullOrEmpty(fieldRef.Name)
                         ? context.Web.Fields.AsRequested().FirstOrDefault(f => f.InternalName == fieldRef.Name)
-                        : null);
+                        : null)
+                    ?? await FindFieldOnServerAsync(context, fieldRef.Id).ConfigureAwait(false);
 
                 if (field == null)
                 {
