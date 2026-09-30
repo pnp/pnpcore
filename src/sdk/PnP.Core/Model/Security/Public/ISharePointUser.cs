@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
@@ -54,7 +55,7 @@ namespace PnP.Core.Model.Security
         /// <summary>
         /// Returns the collection of <see cref="ISharePointGroup"/> this user is a direct member of.
         /// Membership obtained indirectly, by being part of a Microsoft Entra ID group that is itself a member
-        /// of the SharePoint group, is not expanded and therefore not returned.
+        /// of the SharePoint group, is not expanded and therefore not returned. Use <see cref="GetTransitiveGroupsAsync"/> for that.
         /// </summary>
         public ISharePointGroupCollection Groups { get; }
 
@@ -74,6 +75,26 @@ namespace PnP.Core.Model.Security
         /// </summary>
         /// <returns></returns>
         public IGraphUser AsGraphUser();
+
+        /// <summary>
+        /// Returns the SharePoint groups of the current site this user is a member of, either directly or through a
+        /// Microsoft Entra ID security group (including nested groups) or Microsoft 365 group that is a member of the SharePoint group.
+        /// Whenever the site groups contain such a group this uses Microsoft Graph, which requires the
+        /// GroupMember.Read.All permission next to permission to read the principal itself.
+        /// The special "Everyone" and "Everyone except external users" claims are not taken into account.
+        /// </summary>
+        /// <returns>The SharePoint groups this user is a direct or transitive member of</returns>
+        public Task<IList<ISharePointGroup>> GetTransitiveGroupsAsync();
+
+        /// <summary>
+        /// Returns the SharePoint groups of the current site this user is a member of, either directly or through a
+        /// Microsoft Entra ID security group (including nested groups) or Microsoft 365 group that is a member of the SharePoint group.
+        /// Whenever the site groups contain such a group this uses Microsoft Graph, which requires the
+        /// GroupMember.Read.All permission next to permission to read the principal itself.
+        /// The special "Everyone" and "Everyone except external users" claims are not taken into account.
+        /// </summary>
+        /// <returns>The SharePoint groups this user is a direct or transitive member of</returns>
+        public IList<ISharePointGroup> GetTransitiveGroups();
 
         /// <summary>
         /// Retrieves the role definitions for this user

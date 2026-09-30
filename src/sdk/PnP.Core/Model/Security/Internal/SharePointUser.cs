@@ -2,6 +2,7 @@
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -91,12 +92,7 @@ namespace PnP.Core.Model.Security
                     PnPCoreResources.Exception_Unsupported_GraphUserOnSharePoint);
             }
 
-            if (!IsPropertyAvailable(p => p.AadObjectId))
-            {
-                // Try loading the current user again with the aadobjectid property also loaded next all other user properties
-                var apiCall = new ApiCall($"_api/Web/GetUserById({Id})?$select=id,ishiddeninUI,loginname,title,principaltype,aadobjectid,email,expiration,IsEmailAuthenticationGuestUser,IsShareByEmailGuestUser,userprincipalname,issiteadmin,userid", ApiType.SPORest);
-                await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-            }
+            await EnsureIdentityPropertiesAsync().ConfigureAwait(false);
 
             // Check again for principal type
             if (PrincipalType != PrincipalType.User && PrincipalType != PrincipalType.SecurityGroup)
@@ -129,6 +125,155 @@ namespace PnP.Core.Model.Security
         public IGraphUser AsGraphUser()
         {
             return AsGraphUserAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IList<ISharePointGroup>> GetTransitiveGroupsAsync()
+        {
+            // One request for all site groups and their members: SharePoint groups cannot be nested, so every
+            // indirect membership has to come from an Entra ID or Microsoft 365 group claim inside one of them
+            var siteGroups = await PnPContext.Web.SiteGroups
+                .QueryProperties(g => g.All,
+                                 g => g.Users.QueryProperties(u => u.Id, u => u.LoginName, u => u.PrincipalType, u => u.AadObjectId))
+                .ToListAsync().ConfigureAwait(false);
+
+            var groupMembers = siteGroups
+                .Select(group => (Group: group, Members: group.Users.AsRequested()
+                    .Select(member =>
+                    {
+                        // Special claims such as "Everyone except external users" do not return an object id at all
+                        var aadObjectId = member.IsPropertyAvailable(m => m.AadObjectId) ? member.AadObjectId : null;
+                        return (member.Id, Claim: SharePointGroupMembership.Classify(member.PrincipalType, member.LoginName, aadObjectId), AadObjectId: aadObjectId);
+                    })
+                    .ToList()))
+                .ToList();
+
+            var memberOfGroupIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var ownedGroupIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            await EnsureIdentityPropertiesAsync().ConfigureAwait(false);
+
+            // Principals without an Entra ID object (e.g. system accounts) can only be direct members
+            if (Guid.TryParse(AadObjectId, out _))
+            {
+                var claims = groupMembers.SelectMany(g => g.Members).ToList();
+
+                var memberClaimIds = DistinctGroupIds(claims, SharePointGroupMembership.GroupClaim.Members);
+                if (memberClaimIds.Count > 0)
+                {
+                    memberOfGroupIds.UnionWith(await CheckMemberGroupsAsync(memberClaimIds).ConfigureAwait(false));
+                }
+
+                // Ownership is only looked up when the site actually uses a Microsoft 365 group owners claim,
+                // and only users can own a Microsoft 365 group
+                var ownerClaimIds = DistinctGroupIds(claims, SharePointGroupMembership.GroupClaim.Owners);
+                if (PrincipalType == PrincipalType.User && ownerClaimIds.Count > 0)
+                {
+                    ownedGroupIds.UnionWith(await GetOwnedGroupIdsAsync(ownerClaimIds).ConfigureAwait(false));
+                }
+            }
+
+            return groupMembers
+                .Where(g => SharePointGroupMembership.GrantsMembership(Id, g.Members, memberOfGroupIds, ownedGroupIds))
+                .Select(g => g.Group)
+                .ToList();
+        }
+
+        public IList<ISharePointGroup> GetTransitiveGroups()
+        {
+            return GetTransitiveGroupsAsync().GetAwaiter().GetResult();
+        }
+
+        private static List<string> DistinctGroupIds(IEnumerable<(int Id, SharePointGroupMembership.GroupClaim Claim, string AadObjectId)> claims, SharePointGroupMembership.GroupClaim claim)
+        {
+            return claims
+                .Where(c => c.Claim == claim)
+                .Select(c => c.AadObjectId)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private async Task<IEnumerable<string>> CheckMemberGroupsAsync(List<string> groupIds)
+        {
+            // The resource specific endpoint is used rather than /directoryObjects, because the latter requires
+            // Directory.Read.All while these only need GroupMember.Read.All next to reading the principal itself
+            var resource = PrincipalType == PrincipalType.SecurityGroup ? "groups" : "users";
+
+            // checkMemberGroups is transitive, so a group nested inside another group is covered as well
+            var requests = new List<BatchRequest>();
+            var batch = PnPContext.NewBatch();
+            foreach (var chunk in SharePointGroupMembership.ToBatches(groupIds, SharePointGroupMembership.CheckMemberGroupsBatchSize))
+            {
+                var body = JsonSerializer.Serialize(new { groupIds = chunk });
+                requests.Add(await RawRequestBatchAsync(batch, new ApiCall($"{resource}/{AadObjectId}/checkMemberGroups", ApiType.Graph, body), HttpMethod.Post, "CheckMemberGroups").ConfigureAwait(false));
+            }
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return requests.SelectMany(request => ReadStringValues(request.ResponseJson)).ToList();
+        }
+
+        private async Task<IEnumerable<string>> GetOwnedGroupIdsAsync(List<string> groupIds)
+        {
+            // Reading the owners of each group rather than the user's ownedObjects, as the latter does not
+            // support application permissions
+            var ownedGroupIds = new List<string>();
+            foreach (var groupId in groupIds)
+            {
+                if (await IsOwnerAsync(groupId).ConfigureAwait(false))
+                {
+                    ownedGroupIds.Add(groupId);
+                }
+            }
+            return ownedGroupIds;
+        }
+
+        private async Task<bool> IsOwnerAsync(string groupId)
+        {
+            var graphRoot = $"{CloudManager.GetGraphBaseUrl(PnPContext)}{PnPConstants.GraphV1Endpoint}/";
+            string request = $"groups/{groupId}/owners?$select=id";
+
+            while (!string.IsNullOrEmpty(request))
+            {
+                var response = await RawRequestAsync(new ApiCall(request, ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("value", out JsonElement value)
+                    && value.EnumerateArray().Any(owner => owner.TryGetProperty("id", out JsonElement id)
+                                                           && id.GetString().Equals(AadObjectId, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return true;
+                }
+
+                // The next link is absolute, while ApiCall expects a url relative to the Graph version root
+                request = json.TryGetProperty(PnPConstants.GraphNextLink, out JsonElement nextLink)
+                    ? nextLink.GetString().Replace(graphRoot, "")
+                    : null;
+            }
+
+            return false;
+        }
+
+        private static IEnumerable<string> ReadStringValues(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            var parsed = JsonSerializer.Deserialize<JsonElement>(json);
+            return parsed.TryGetProperty("value", out JsonElement value)
+                ? value.EnumerateArray().Select(id => id.GetString()).ToList()
+                : Enumerable.Empty<string>();
+        }
+
+        private async Task EnsureIdentityPropertiesAsync()
+        {
+            // Callers may have loaded the user with a partial property set, e.g. only UserPrincipalName and AadObjectId
+            if (!IsPropertyAvailable(p => p.AadObjectId) || !IsPropertyAvailable(p => p.PrincipalType))
+            {
+                // Try loading the current user again with the aadobjectid property also loaded next all other user properties
+                var apiCall = new ApiCall($"_api/Web/GetUserById({Id})?$select=id,ishiddeninUI,loginname,title,principaltype,aadobjectid,email,expiration,IsEmailAuthenticationGuestUser,IsShareByEmailGuestUser,userprincipalname,issiteadmin,userid", ApiType.SPORest);
+                await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            }
         }
 
         public IRoleDefinitionCollection GetRoleDefinitions()
