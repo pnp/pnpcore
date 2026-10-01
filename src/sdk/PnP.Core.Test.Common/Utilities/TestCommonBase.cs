@@ -55,11 +55,6 @@ namespace PnP.Core.Test.Common.Utilities
         internal static string TenantAdminCenterSite { get { return "TenantAdminCenterSite"; } }
 
         /// <summary>
-        /// Name of the default Syntex Content Center test site confguration
-        /// </summary>
-        internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
-
-        /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
@@ -124,14 +119,10 @@ namespace PnP.Core.Test.Common.Utilities
         private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
         {
             if (Mocking &&
-                configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == HomeTestSite)
+                configurationName == ClassicSTS0TestSite || configurationName == HomeTestSite)
             {
                 var configuration = GetConfigurationSettings();
-                if (configurationName == SyntexContentCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
-                {
-                    configurationName = TestSite;
-                }
-                else if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
+                if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
                 {
                     configurationName = TestSite;
                 }
@@ -304,7 +295,6 @@ namespace PnP.Core.Test.Common.Utilities
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
                 string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
                 string tenantAdminCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TenantAdminCenterSite:SiteUrl");
-                string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
                 string homeSiteUrl = configuration.GetValue<string>("PnPCore:Sites:HomeTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
@@ -314,7 +304,6 @@ namespace PnP.Core.Test.Common.Utilities
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
                     classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
                     tenantAdminCenterSiteUrl = "https://bertonline-admin.sharepoint.com";
-                    syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
                     homeSiteUrl = "https://bertonline.sharepoint.com";
                 }
 
@@ -351,11 +340,6 @@ namespace PnP.Core.Test.Common.Utilities
                 if (!string.IsNullOrEmpty(tenantAdminCenterSiteUrl))
                 {
                     TestUris.Add("TenantAdminCenterSite", new Uri(tenantAdminCenterSiteUrl));
-                }
-
-                if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
-                {
-                    TestUris.Add("SyntexContentCenterTestSite", new Uri(syntexContentCenterSiteUrl));
                 }
 
                 if (!string.IsNullOrEmpty(homeSiteUrl))

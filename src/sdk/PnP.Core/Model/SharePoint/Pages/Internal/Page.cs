@@ -2129,9 +2129,7 @@ namespace PnP.Core.Model.SharePoint
                     !PnPContext.Web.WebTemplate.Equals("STS", StringComparison.InvariantCultureIgnoreCase) &&
                     !PnPContext.Web.WebTemplate.Equals("GROUP", StringComparison.InvariantCultureIgnoreCase) &&
                     !PnPContext.Web.WebTemplate.Equals("TEAMCHANNEL", StringComparison.InvariantCultureIgnoreCase) &&
-                    !PnPContext.Web.WebTemplate.Equals("EHS", StringComparison.InvariantCultureIgnoreCase) &&
-                    // SharePoint Syntex Content Center sites can also have full width sections
-                    !PnPContext.Web.WebTemplate.Equals("CONTENTCTR", StringComparison.InvariantCultureIgnoreCase))
+                    !PnPContext.Web.WebTemplate.Equals("EHS", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_CantUseFullWidthSection, PnPContext.Web.WebTemplate));
                 }
