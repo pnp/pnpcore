@@ -115,11 +115,11 @@
 		  The provisioning XML schemas ship as embedded resources: each XMLPnPSchemaV*Serializer loads its
 		  own .xsd by manifest resource name to validate templates. The resource name is derived from the
 		  root namespace plus the folder path, e.g.
-		    PnP.Core.Provisioning.Providers.Xml.ProvisioningSchema-2022-09.xsd
+		    PnP.Core.Provisioning.Providers.Xml.ProvisioningSchema-2026-09.xsd
 		  so moving these files means updating the corresponding serializer.
 
 		  The matching .cs files are generated from these schemas with the .NET Framework xsd tool:
-		    xsd.exe ProvisioningSchema-2022-09.xsd /c /l:CS /n:PnP.Core.Provisioning.Providers.Xml.V202209
+		    xsd.exe ProvisioningSchema-2026-09.xsd /c /l:CS /n:PnP.Core.Provisioning.Providers.Xml.V202609
 		  See Providers\Xml\readme.md and migration doc 04-schema-and-serializers.md.
 		-->
 		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2019-03.xsd" />
@@ -127,6 +127,7 @@
 		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2020-02.xsd" />
 		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2021-03.xsd" />
 		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2022-09.xsd" />
+		<EmbeddedResource Include="Providers\Xml\ProvisioningSchema-2026-09.xsd" />
 	</ItemGroup>
 
 	<ItemGroup>
