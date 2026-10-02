@@ -29,6 +29,31 @@ namespace PnP.Core.Model.SharePoint
         public LogoAlignment LogoAlignment { get; set; }
 
         /// <summary>
+        /// Specifies the available overlay color types that can be applied to header or footer.
+        /// </summary>
+        public OverlayColorType OverlayColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the opacity level of the overlay [0-100].
+        /// </summary>
+        public int OverlayOpacity { get; set; }
+
+        /// <summary>
+        /// Defines the possible directions for an overlay gradient layout.
+        /// </summary>
+        public OverlayGradientDirectionType OverlayGradientDirection { get; set; }
+
+        /// <summary>
+        /// seesm to be always -1
+        /// </summary>
+        public int ColorIndexInLightMode { get; set; }
+
+        /// <summary>
+        /// seems to be always -1
+        /// </summary>
+        public int ColorIndexInDarkMode { get; set; }
+
+        /// <summary>
         /// Sets the site's logo to the provided image.  For group connected sites calling this method is 
         /// equal to calling SetSiteLogoThumbnail as logo and logo thumbnail are both set the same.
         /// </summary>
