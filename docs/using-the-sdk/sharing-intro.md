@@ -45,7 +45,7 @@ foreach(var share in sharingLinks)
 
 ## Sharing content with your organization
 
-To share content within your tenant (your organization) you need to use one of the `CreateOrganizationalSharingLink` methods in combination with a configured `OrganizationalLinkOptions` instance. The only property to set here is the `Type` of share: do you want to enable people in your organization to view the shared content or also edit the content?
+To share content within your tenant (your organization) you need to use one of the `CreateOrganizationalSharingLink` methods in combination with a configured `OrganizationalLinkOptions` instance. The key property to set here is the `Type` of share: do you want to enable people in your organization to view the shared content or also edit the content? Optionally you can set an `ExpirationDateTime` defining how long the share will stay valid.
 
 ```csharp
 var file = await context.Web.GetFileByServerRelativeUrlAsync("/sites/demo/docs/fileA.docx");
@@ -60,7 +60,7 @@ var share = await file.CreateOrganizationalSharingLinkAsync(shareLinkRequestOpti
 
 ## Share content with certain users
 
-If you want to selectively share content with one or more users you can use one of the `CreateUserSharingLink` methods in combination with a configured `UserLinkOptions` instance. Key properties to set are the `Recipients` (people you're sharing to) and `Type` of share. Below example shows this:
+If you want to selectively share content with one or more users you can use one of the `CreateUserSharingLink` methods in combination with a configured `UserLinkOptions` instance. Key properties to set are the `Recipients` (people you're sharing to) and `Type` of share, optionally you can set an `ExpirationDateTime` defining how long the share will stay valid. Below example shows this:
 
 ```csharp
 var file = await context.Web.GetFileByServerRelativeUrlAsync("/sites/demo/docs/fileA.docx");
@@ -76,7 +76,9 @@ var shareLinkRequestOptions = new UserLinkOptions()
 {
     // Users can see and edit the file online, but not download it
     Type = ShareType.BlocksDownload,
-    Recipients = driveRecipients
+    Recipients = driveRecipients,
+    // Optional: the sharing link stops working after this date
+    ExpirationDateTime = DateTime.Now.AddDays(30)
 };
 
 var share = await file.CreateUserSharingLinkAsync(shareLinkRequestOptions);
