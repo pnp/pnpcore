@@ -3,7 +3,6 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -167,7 +166,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (organizationalLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = organizationalLinkOptions.ExpirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(organizationalLinkOptions.ExpirationDateTime);
             }
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
             
@@ -193,7 +192,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(anonymousLinkOptions.ExpirationDateTime);
             }
 
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
@@ -247,7 +246,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (userLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = userLinkOptions.ExpirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(userLinkOptions.ExpirationDateTime);
             }
 
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
@@ -275,7 +274,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (inviteOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = inviteOptions.ExpirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(inviteOptions.ExpirationDateTime);
             }
 
             var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
