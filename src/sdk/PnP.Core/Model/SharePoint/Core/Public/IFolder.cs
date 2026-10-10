@@ -112,6 +112,12 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public object All { get; }
 
+        /// <summary>
+        /// Gets the library id of the folder
+        /// </summary>
+        /// <returns>Guid of the parent library</returns>
+        public Task<Guid> GetLibraryIdFromFolderAsync();
+
         #region Add Folder
         /// <summary>
         /// Add a folder to the current folder.

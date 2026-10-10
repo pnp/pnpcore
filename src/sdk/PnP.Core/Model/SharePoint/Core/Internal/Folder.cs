@@ -615,7 +615,7 @@ namespace PnP.Core.Model.SharePoint
             return (driveId, driveItemId);
         }
 
-        internal async Task<Guid> GetLibraryIdFromFolderAsync()
+        public async Task<Guid> GetLibraryIdFromFolderAsync()
         {
             // Option A: try walking the parent tree to see if there's an IList
             Guid docLibId = GetListIdFromFolder(this);
