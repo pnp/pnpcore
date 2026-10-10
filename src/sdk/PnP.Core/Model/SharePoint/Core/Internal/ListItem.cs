@@ -1497,6 +1497,11 @@ namespace PnP.Core.Model.SharePoint
             body.scope = ShareScope.Organization;
             body.type = organizationalLinkOptions.Type;
 
+            if (organizationalLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(organizationalLinkOptions.ExpirationDateTime);
+            }
+
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
 
         }
@@ -1521,7 +1526,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(anonymousLinkOptions.ExpirationDateTime);
             }
 
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
@@ -1572,6 +1577,11 @@ namespace PnP.Core.Model.SharePoint
             body.scope = ShareScope.Users;
             body.type = userLinkOptions.Type;
             body.recipients = userLinkOptions.Recipients;
+
+            if (userLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(userLinkOptions.ExpirationDateTime);
+            }
 
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
         }

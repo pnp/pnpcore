@@ -317,6 +317,47 @@ namespace PnP.Core.Test.Security
         }
 
         [TestMethod]
+        public async Task ShareFileUsingLinkUsersWithExpirationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+                    var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                    var expirationDateUtc = GetExpirationDateUtc(context);
+
+                    var shareLinkRequestOptions = new UserLinkOptions()
+                    {
+                        Type = ShareType.View,
+                        Recipients = new List<IDriveRecipient>()
+                        {
+                            UserLinkOptions.CreateDriveRecipient(testUser.Mail)
+                        },
+                        // Pass a local time, the SDK has to send it as UTC
+                        ExpirationDateTime = expirationDateUtc.ToLocalTime()
+                    };
+
+                    var permission = await file.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+
+                    Assert.IsNotNull(permission.Id);
+                    Assert.AreEqual(ShareScope.Users, permission.Link.Scope);
+                    AssertExpirationDateTime(expirationDateUtc, permission);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
         public async Task ShareFileUsingInvitationTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1052,6 +1093,48 @@ namespace PnP.Core.Test.Security
         }
 
         [TestMethod]
+        public async Task ShareFolderUsingLinkUsersWithExpirationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                await list.LoadAsync(y => y.RootFolder);
+
+                var folder = await list.RootFolder.AddFolderAsync("ShareFolderUsingLinkUsersWithExpirationTest");
+
+                try
+                {
+                    var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                    var expirationDateUtc = GetExpirationDateUtc(context);
+
+                    var shareLinkRequestOptions = new UserLinkOptions()
+                    {
+                        Type = ShareType.View,
+                        Recipients = new List<IDriveRecipient>()
+                        {
+                            UserLinkOptions.CreateDriveRecipient(testUser.Mail)
+                        },
+                        // Pass a local time, the SDK has to send it as UTC
+                        ExpirationDateTime = expirationDateUtc.ToLocalTime()
+                    };
+
+                    var permission = await folder.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+
+                    Assert.IsNotNull(permission.Id);
+                    Assert.AreEqual(ShareScope.Users, permission.Link.Scope);
+                    AssertExpirationDateTime(expirationDateUtc, permission);
+                }
+                finally
+                {
+                    await folder.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task ShareFolderUsingLinkUsersReadPermissionsAndRevokePermissionsTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1469,6 +1552,110 @@ namespace PnP.Core.Test.Security
                     await myList.DeleteAsync();
                 }
             }
+        }
+
+        [TestMethod]
+        public async Task CreateListItemUserSharingLinksWithExpirationTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            IList myList = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                try
+                {
+                    string listTitle = TestCommon.GetPnPSdkTestAssetName("CreateListItemUserSharingLinksWithExpirationTest");
+
+                    myList = context.Web.Lists.GetByTitle(listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    var listItem = await myList.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "Item 1" }
+                    });
+
+                    var testUser = context.Web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+
+                    var expirationDateUtc = GetExpirationDateUtc(context);
+
+                    var shareLinkRequestOptions = new UserLinkOptions()
+                    {
+                        Type = ShareType.View,
+                        Recipients = new List<IDriveRecipient>()
+                        {
+                            UserLinkOptions.CreateDriveRecipient(testUser.Mail)
+                        },
+                        // Pass a local time, the SDK has to send it as UTC
+                        ExpirationDateTime = expirationDateUtc.ToLocalTime()
+                    };
+
+                    var permission = await listItem.CreateUserSharingLinkAsync(shareLinkRequestOptions);
+
+                    Assert.IsNotNull(permission.Id);
+                    Assert.AreEqual(ShareScope.Users, permission.Link.Scope);
+                    AssertExpirationDateTime(expirationDateUtc, permission);
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Expiration tests
+
+        [TestMethod]
+        public void FormatExpirationDateTimeConvertsToUtcTest()
+        {
+            var expirationDateUtc = new DateTime(2030, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+
+            // A UTC value is sent as is
+            Assert.AreEqual("2030-01-15T10:30:00Z", SharingManager.FormatExpirationDateTime(expirationDateUtc));
+
+            // A local value, like DateTime.Now.AddDays(5), is converted to UTC
+            Assert.AreEqual("2030-01-15T10:30:00Z", SharingManager.FormatExpirationDateTime(expirationDateUtc.ToLocalTime()));
+
+            // An unspecified value, like new DateTime(2030, 1, 15), is treated as local time
+            Assert.AreEqual("2030-01-15T10:30:00Z", SharingManager.FormatExpirationDateTime(DateTime.SpecifyKind(expirationDateUtc.ToLocalTime(), DateTimeKind.Unspecified)));
+        }
+
+        /// <summary>
+        /// Returns an expiration date in UTC. The value is saved while recording so the offline run uses the same value, whatever the time zone of the machine running the test.
+        /// </summary>
+        private static DateTime GetExpirationDateUtc(PnPContext context)
+        {
+            if (!TestCommon.Instance.Mocking)
+            {
+                var expirationDateUtc = DateTime.UtcNow.AddDays(5);
+                Dictionary<string, string> properties = new Dictionary<string, string>
+                {
+                    { "Ticks", expirationDateUtc.Ticks.ToString() },
+                };
+                TestManager.SaveProperties(context, properties);
+                return expirationDateUtc;
+            }
+            else
+            {
+                var properties = TestManager.GetProperties(context);
+                return new DateTime(long.Parse(properties["Ticks"]), DateTimeKind.Utc);
+            }
+        }
+
+        private static void AssertExpirationDateTime(DateTime expectedExpirationDateUtc, IGraphPermission permission)
+        {
+            Assert.AreEqual(expectedExpirationDateUtc.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture), permission.ExpirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
         }
 
         #endregion

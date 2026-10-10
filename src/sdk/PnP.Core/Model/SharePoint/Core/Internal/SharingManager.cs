@@ -2,12 +2,24 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal static class SharingManager
     {
+        /// <summary>
+        /// Formats an expiration date for the Graph createLink and invite requests. The trailing Z marks the value as UTC,
+        /// so local and unspecified dates are converted to UTC first.
+        /// </summary>
+        /// <param name="expirationDateTime">Expiration date to format</param>
+        /// <returns>The expiration date in UTC, formatted as yyyy-MM-ddTHH:mm:ssZ</returns>
+        internal static string FormatExpirationDateTime(DateTime expirationDateTime)
+        {
+            return expirationDateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+        }
+
         internal static IGraphPermissionCollection DeserializeGraphPermissionsResponse(string responseJson, PnPContext context, IDataModelParent parent)
         {
             var graphPermissions = new GraphPermissionCollection(context, parent);
