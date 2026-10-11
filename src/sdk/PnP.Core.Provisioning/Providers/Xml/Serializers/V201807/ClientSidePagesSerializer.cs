@@ -73,6 +73,8 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                 var clientSidePageType = Type.GetType(clientSidePageTypeName, true);
                 var canvasSectionTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSection, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasSectionType = Type.GetType(canvasSectionTypeName, true);
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
                 var canvasControlTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControl, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasControlType = Type.GetType(canvasControlTypeName, true);
                 var canvasControlWebPartTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControlWebPartType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
@@ -90,6 +92,12 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                     { $"{canvasSectionType}.OrderSpecified", new ExpressionValueResolver((s, p) => true) },
 
                     { $"{canvasSectionType}.TypeSpecified", new ExpressionValueResolver((s, p) => true) },
+
+                    {
+                        $"{canvasSectionType}.Type",
+                        new ExpressionValueResolver(
+                        (s, p) => CanvasSectionTypeMapper.ToSchemaValue((CanvasSectionType)p, canvasSectionTypeType))
+                    },
 
                     {
                         $"{canvasControlType}.WebPartType",
