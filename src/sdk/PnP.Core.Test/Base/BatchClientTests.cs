@@ -676,5 +676,51 @@ namespace PnP.Core.Test.Base
 
         #endregion
 
+        #region Duplicate key GETs in one batch
+
+        [TestMethod]
+        public async Task PageLoadingSkipsModelsConsolidatedAwayInTheSameBatch()
+        {
+            // Offline by design. When two GETs in one batch resolve to the same key, MergeBatchResultsWithModel
+            // merges the later model into the first and marks it deleted. The page loading pass must skip it:
+            // its collections live on the surviving instance, and reading its properties throws.
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var request = BuildListGetRequest(context, loadPages: true);
+                Assert.IsTrue(BatchClient.NeedsPageLoading(request));
+
+                // this is what the consolidation does to the duplicate
+                request.Model.RemoveFromParentCollection();
+
+                Assert.IsTrue(request.Model.Deleted);
+                Assert.IsFalse(BatchClient.NeedsPageLoading(request));
+            }
+        }
+
+        [TestMethod]
+        public async Task PageLoadingIsSkippedForRequestsThatDoNotPage()
+        {
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                Assert.IsFalse(BatchClient.NeedsPageLoading(BuildListGetRequest(context, loadPages: false)));
+            }
+        }
+
+        private static BatchRequest BuildListGetRequest(PnPContext context, bool loadPages)
+        {
+            var list = new List
+            {
+                PnPContext = context,
+                Parent = context.Web.Lists,
+                Id = Guid.NewGuid()
+            };
+
+            var entityInfo = EntityManager.GetClassInfo(list.GetType(), list);
+            var apiCall = new ApiCall($"_api/web/lists(guid'{list.Id}')", ApiType.SPORest, loadPages: loadPages);
+
+            return new BatchRequest(list, entityInfo, HttpMethod.Get, apiCall, default, null, null, "Get", 0);
+        }
+
+        #endregion
     }
 }
