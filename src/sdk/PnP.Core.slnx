@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="CHANGELOG.md" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Project Path="PnP.Core.Admin.Test/PnP.Core.Admin.Test.csproj" />
+  <Project Path="PnP.Core.Admin/PnP.Core.Admin.csproj" />
+  <Project Path="PnP.Core.Auth.Test/PnP.Core.Auth.Test.csproj" />
+  <Project Path="PnP.Core.Auth/PnP.Core.Auth.csproj" />
+  <Project Path="PnP.Core.Perf/PnP.Core.Perf.csproj" />
+  <Project Path="PnP.Core.Test.Common/PnP.Core.Test.Common.csproj" />
+  <Project Path="PnP.Core.Test/PnP.Core.Test.csproj" />
+  <Project Path="PnP.Core/PnP.Core.csproj" />
+</Solution>
