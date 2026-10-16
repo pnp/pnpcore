@@ -48,29 +48,26 @@ param (
 
 $ErrorActionPreference = 'Stop'
 
-begin {
-  # Resolve credentials
-  $credentials = $null
-  $UPN = $null
+# Resolve credentials
+$credentials = $null
+$UPN = $null
 
-  if (![String]::IsNullOrEmpty($CredentialManagerCredentialToUse) -and (Get-PnPStoredCredential -Name $CredentialManagerCredentialToUse) -ne $null) {
-    Write-Host "Using credentials from Credential Manager entry: $CredentialManagerCredentialToUse"
+if (![String]::IsNullOrEmpty($CredentialManagerCredentialToUse) -and (Get-PnPStoredCredential -Name $CredentialManagerCredentialToUse) -ne $null) {
+  Write-Host "Using credentials from Credential Manager entry: $CredentialManagerCredentialToUse"
 
-    $UPN = (Get-PnPStoredCredential -Name $CredentialManagerCredentialToUse).UserName
-    $credentials = $CredentialManagerCredentialToUse
+  $UPN = (Get-PnPStoredCredential -Name $CredentialManagerCredentialToUse).UserName
+  $credentials = $CredentialManagerCredentialToUse
    
-    if ($credentials -eq $null) {
-      Write-Error "Error: No credentials supplied." -ForegroundColor Red
-      exit 1
-    }
+  if ($credentials -eq $null) {
+    Write-Error "Error: No credentials supplied." -ForegroundColor Red
+    exit 1
   }
-
-  # Tenant admin url
-  $tenantUrl = "https://$TenantName.sharepoint.com"
 }
 
-process {
-  if (![String]::IsNullOrEmpty($CredentialManagerCredentialToUse)) {
+# Tenant admin url
+$tenantUrl = "https://$TenantName.sharepoint.com"
+
+if (![String]::IsNullOrEmpty($CredentialManagerCredentialToUse)) {
     Write-Host "Connecting to tenant admin site with credentials from Credential Manager entry: $CredentialManagerCredentialToUse"
 
     $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -ClientId $ClientId -ReturnConnection
@@ -234,9 +231,6 @@ process {
   else {
     Write-Host "App '$($app.Title)' is already installed on communication site, skipping"
   }
-}
 
-end {
-  Write-Host "All sites are created, next step is updating your test configuration file with the created urls"
-  Disconnect-PnPOnline
-}
+Write-Host "All sites are created, next step is updating your test configuration file with the created urls"
+Disconnect-PnPOnline

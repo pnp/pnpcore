@@ -425,7 +425,8 @@ namespace PnP.Core.Model.SharePoint
                                         p => p.HorizontalQuickLaunch,
                                         // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                         p => p.WebTemplate,
-                                        p => p.Features).ConfigureAwait(false);
+                                        p => p.Features,
+                                        p => p.AllProperties).ConfigureAwait(false);
 
             var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
 
@@ -451,6 +452,28 @@ namespace PnP.Core.Model.SharePoint
                 Emphasis = web.HeaderEmphasis
             };
 
+            // Modern Header Feature MC1098935
+            if (TryGetEnumValue(web.AllProperties.Values, "HeaderOverlayColor", out OverlayColorType headerOverlayColor))
+            {
+                chromeOptions.Header.OverlayColor = headerOverlayColor;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderOverlayOpacity", out var HeaderOverlayOpacity) && int.TryParse(HeaderOverlayOpacity.ToString(), out var headerOverlayOpacity))
+            {
+                chromeOptions.Header.OverlayOpacity = headerOverlayOpacity;
+            }
+            if (TryGetEnumValue(web.AllProperties.Values, "HeaderOverlayGradientDirection", out OverlayGradientDirectionType headerOverlayGradientDirection))
+            {
+                chromeOptions.Header.OverlayGradientDirection = headerOverlayGradientDirection;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInLightMode", out var HeaderColorIndexInLightMode) && int.TryParse(HeaderColorIndexInLightMode.ToString(), out var headerColorIndexInLightMode))
+            {
+                chromeOptions.Header.ColorIndexInLightMode = headerColorIndexInLightMode;
+            }
+            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInDarkMode", out var HeaderColorIndexInDarkMode) && int.TryParse(HeaderColorIndexInDarkMode.ToString(), out var headerColorIndexInDarkMode))
+            {
+                chromeOptions.Header.ColorIndexInDarkMode = headerColorIndexInDarkMode;
+            }
+
             chromeOptions.Navigation = new NavigationOptions
             {
                 MegaMenuEnabled = web.MegaMenuEnabled,
@@ -467,6 +490,34 @@ namespace PnP.Core.Model.SharePoint
                     Enabled = web.FooterEnabled
                 };
 
+                // Modern Footer Feature MC1098935
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterAlignment", out FooterLinkAlignment footerAlignment))
+                {
+                    chromeOptions.Footer.LinkAlignment = footerAlignment;
+                }
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterOverlayColor", out OverlayColorType footerOverlayColor))
+                {
+                    chromeOptions.Footer.OverlayColor = footerOverlayColor;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterOverlayOpacity", out var FooterOverlayOpacity) && int.TryParse(FooterOverlayOpacity.ToString(), out var footerOverlayOpacity))
+                {
+                    chromeOptions.Footer.OverlayOpacity = footerOverlayOpacity;
+                }
+                if (TryGetEnumValue(web.AllProperties.Values, "FooterOverlayGradientDirection", out OverlayGradientDirectionType footerOverlayGradientDirection))
+                {
+                    chromeOptions.Footer.OverlayGradientDirection = footerOverlayGradientDirection;
+                }
+
+                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInLightMode", out var FooterColorIndexInLightMode) && int.TryParse(FooterColorIndexInLightMode.ToString(), out var footerColorIndexInLightMode))
+                {
+                    chromeOptions.Footer.ColorIndexInLightMode = footerColorIndexInLightMode;
+                }
+                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInDarkMode", out var FooterColorIndexInDarkMode) && int.TryParse(FooterColorIndexInDarkMode.ToString(), out var footerColorIndexInDarkMode))
+                {
+                    chromeOptions.Footer.ColorIndexInDarkMode = footerColorIndexInDarkMode;
+                }
+
+
                 if (menuState != null)
                 {
                     (chromeOptions.Footer as FooterOptions).MenuState = menuState;
@@ -482,6 +533,47 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
             }
+
+            chromeOptions.Font = new FontOptions();
+            //Font Options
+            if (web.AllProperties.Values.TryGetValue("FontOptionForSiteTitle", out var FontOptionForSiteTitle) 
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteNav", out var FontOptionForSiteNav)
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterTitle", out var FontOptionForSiteFooterTitle)
+                | web.AllProperties.Values.TryGetValue("FontOptionForSiteFooterNav", out var FontOptionForSiteFooterNav))
+            {
+                if(!string.IsNullOrWhiteSpace(FontOptionForSiteTitle?.ToString()))
+                {
+                    chromeOptions.Font.SiteTitle = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteTitle.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteNav?.ToString()))
+                {
+                    chromeOptions.Font.SiteNav = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteNav.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteFooterTitle?.ToString()))
+                {
+                    chromeOptions.Font.SiteFooterTitle = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteFooterTitle.ToString());
+                }
+                if (!string.IsNullOrWhiteSpace(FontOptionForSiteFooterNav?.ToString()))
+                {
+                    chromeOptions.Font.SiteFooterNav = JsonSerializer.Deserialize<FontOption>(FontOptionForSiteFooterNav.ToString());
+                }
+            }
+        }
+
+        private static bool TryGetEnumValue<TEnum>(IDictionary<string, object> properties, string propertyName, out TEnum value)
+            where TEnum : struct, Enum
+        {
+            value = default;
+
+            if (!properties.TryGetValue(propertyName, out var propertyValue)
+                || !int.TryParse(propertyValue?.ToString(), out var numericValue)
+                || !Enum.IsDefined(typeof(TEnum), numericValue))
+            {
+                return false;
+            }
+
+            value = (TEnum)Enum.ToObject(typeof(TEnum), numericValue);
+            return true;
         }
 
         public IChromeOptions GetChromeOptions()
@@ -504,7 +596,8 @@ namespace PnP.Core.Model.SharePoint
                                                 p => p.HorizontalQuickLaunch,
                                                 // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
                                                 p => p.WebTemplate,
-                                                p => p.Features).ConfigureAwait(false);
+                                                p => p.Features,
+                                                p => p.AllProperties).ConfigureAwait(false);
             
             var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
 
@@ -590,13 +683,28 @@ namespace PnP.Core.Model.SharePoint
             {
                 headerLayout = chromeOptions.Header.Layout,
                 headerEmphasis = chromeOptions.Header.Emphasis,
+                headerOverlayColor = chromeOptions.Header.OverlayColor,
+                headerOverlayOpacity = chromeOptions.Header.OverlayOpacity,
+                headerOverlayGradientDirection = chromeOptions.Header.OverlayGradientDirection,
+                headerColorIndexInLightMode = chromeOptions.Header.ColorIndexInLightMode,
+                headerColorIndexInDarkMode = chromeOptions.Header.ColorIndexInDarkMode,
                 hideTitleInHeader = chromeOptions.Header.HideTitle,
                 logoAlignment = chromeOptions.Header.LogoAlignment,
                 megaMenuEnabled = chromeOptions.Navigation != null ? chromeOptions.Navigation.MegaMenuEnabled : false,
                 horizontalQuickLaunch = chromeOptions.Navigation != null ? chromeOptions.Navigation.HorizontalQuickLaunch : false,
                 footerEnabled = chromeOptions.Footer != null ? chromeOptions.Footer.Enabled : false,
                 footerLayout = chromeOptions.Footer != null ? chromeOptions.Footer.Layout : FooterLayoutType.Simple,
-                footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong
+                footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong,
+                footerAlignment = chromeOptions.Footer != null ? chromeOptions.Footer.LinkAlignment: FooterLinkAlignment.Right,
+                footerOverlayColor = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayColor : OverlayColorType.None,
+                footerOverlayOpacity = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayOpacity : 0,
+                footerOverlayGradientDirection = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayGradientDirection : OverlayGradientDirectionType.TopToBottom,
+                footerColorIndexInLightMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInLightMode : -1,
+                footerColorIndexInDarkMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInDarkMode : -1,
+                fontOptionForSiteTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteTitle : null,
+                fontOptionForSiteNav = chromeOptions.Font != null ? chromeOptions.Font.SiteNav : null,
+                fontOptionForSiteFooterTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterTitle : null,
+                fontOptionForSiteFooterNav = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterNav : null,
             };
 
             string jsonBody = JsonSerializer.Serialize(body);
@@ -717,7 +825,304 @@ namespace PnP.Core.Model.SharePoint
                 context.Web.SetSystemProperty(p => p.FooterLayout, chromeOptions.Footer.Layout);
             }
         }
-
         #endregion
+
+        #region brandcenter
+
+        public async Task<IBrandcenterConfiguration> GetBrandcenterConfigurationAsync()
+        {
+            var batch = context.NewBatch();
+            var brandcenterConfiguration = await GetBrandcenterConfigurationBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return brandcenterConfiguration.Result;
+        }
+
+        public IBrandcenterConfiguration GetBrandcenterConfiguration()
+        {
+            return GetBrandcenterConfigurationAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetBrandcenterConfigurationApiCall();
+            return await GetBrandcenterConfigurationBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IBrandcenterConfiguration> GetBrandcenterConfigurationBatch(Batch batch)
+        {
+            return GetBrandcenterConfigurationBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetBrandcenterConfigurationApiCall()
+        {
+            return new ApiCall("_api/brandcenter/configuration", ApiType.SPORest);
+        }
+
+        public async Task<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationAsync()
+        {
+            var batch = context.NewBatch();
+            var brandcenterConfiguration = await GetCurrentBrandcenterConfigurationBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return brandcenterConfiguration.Result;
+        }
+
+        public IBrandcenterConfiguration GetCurrentBrandcenterConfiguration()
+        {
+            return GetCurrentBrandcenterConfigurationAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetCurrentBrandcenterConfigurationBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetCurrentBrandcenterConfigurationApiCall();
+            return await GetBrandcenterConfigurationBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationBatch(Batch batch)
+        {
+            return GetCurrentBrandcenterConfigurationBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetCurrentBrandcenterConfigurationApiCall()
+        {
+            return new ApiCall("_api/brandcenter/currentbrandingconfiguration", ApiType.SPORest);
+        }
+
+
+        private async Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch, ApiCall apiCall)
+        {
+            // Since we're doing a raw batch request the processing of the batch response needs be implemented
+            apiCall.RawSingleResult = new BrandcenterConfiguration();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessBrandcenterConfigurationResponse(json, (IBrandcenterConfiguration)apiCall.RawSingleResult);
+            };
+
+            // Add the request to the batch
+            var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchSingleResult<IBrandcenterConfiguration>(batch, batchRequest.Id, (IBrandcenterConfiguration)apiCall.RawSingleResult);
+        }
+
+        private static void ProcessBrandcenterConfigurationResponse(string jsonString, IBrandcenterConfiguration brandcenterConfiguration)
+        {
+            var jsonBrandcenterConfiguration = JsonSerializer.Deserialize<BrandcenterConfiguration>(jsonString);
+            brandcenterConfiguration.BrandColorsListId = jsonBrandcenterConfiguration.BrandColorsListId;
+            brandcenterConfiguration.BrandColorsListUrl = jsonBrandcenterConfiguration.BrandColorsListUrl;
+            brandcenterConfiguration.BrandFontLibraryId = jsonBrandcenterConfiguration.BrandFontLibraryId;
+            brandcenterConfiguration.BrandFontLibraryUrl = jsonBrandcenterConfiguration.BrandFontLibraryUrl;
+            brandcenterConfiguration.IsBrandCenterSiteFeatureEnabled = jsonBrandcenterConfiguration.IsBrandCenterSiteFeatureEnabled;
+            brandcenterConfiguration.IsPublicCdnEnabled = jsonBrandcenterConfiguration.IsPublicCdnEnabled;
+            brandcenterConfiguration.OrgSkillsLibraryId = jsonBrandcenterConfiguration.OrgSkillsLibraryId;
+            brandcenterConfiguration.OrgSkillsLibraryUrl = jsonBrandcenterConfiguration.OrgSkillsLibraryUrl;
+            brandcenterConfiguration.SiteId = jsonBrandcenterConfiguration.SiteId;
+            brandcenterConfiguration.SiteUrl = jsonBrandcenterConfiguration.SiteUrl;
+            brandcenterConfiguration.OrgAssets = jsonBrandcenterConfiguration.OrgAssets;
+        }
+
+        #endregion brandcenter
+
+        #region OutOfBoxFontPackages
+
+        public async Task<List<IFontPackage>> GetOutOfBoxFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetOutOfBoxFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public List<IFontPackage> GetOutOfBoxFontPackages()
+        {
+            return GetOutOfBoxFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetOutOfBoxFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch)
+        {
+            return GetOutOfBoxFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public void SetOutOfBoxFontPackage(string fontId)
+        {
+            SetOutOfBoxFontPackageAsync(fontId).Wait();
+        }
+
+        public async Task SetOutOfBoxFontPackageAsync(string fontId)
+        {
+            var batch = context.NewBatch();
+            await SetOutOfBoxFontPackageBatchAsync(batch, fontId).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        public void SetOutOfBoxFontPackageBatch(Batch batch, string fontId)
+        {
+            SetOutOfBoxFontPackageBatchAsync(batch, fontId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId)
+        {
+            await BuildAndSetOutOfBoxFontPackageApiCall(batch, fontId).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildGetOutOfBoxFontPackagesApiCall()
+        {
+            return new ApiCall("_api/OutOfBoxFontPackages", ApiType.SPORest);
+        }
+
+        private async Task BuildAndSetOutOfBoxFontPackageApiCall(Batch batch,string fontId)
+        {
+            var apiCall = new ApiCall($"_api/OutOfBoxFontPackages/GetById('{fontId}')/Apply", ApiType.SPORest)
+            {   // The provided JSON is of the minimal odata type
+                Headers = new Dictionary<string, string>
+                {
+                    { "Content-Type", "application/json;odata.metadata=nometadata" },
+                }
+            };
+
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SetOutOfBoxFontPackage").ConfigureAwait(false);
+        }
+
+        #endregion OutOfBoxFontPackages
+
+        #region Branding Center FontPackages
+        public async Task<List<IFontPackage>> GetFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public List<IFontPackage> GetFontPackages()
+        {
+            return GetFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch)
+        {
+            return GetFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IFontPackage>> GetSiteFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetSiteFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.Result;
+        }
+
+        public void SetFontPackage(string fontId)
+        {
+            SetFontPackageAsync(fontId).GetAwaiter().GetResult();
+        }
+
+        public async Task SetFontPackageAsync(string fontId)
+        {
+            var batch = context.NewBatch();
+            SetFontPackageBatch(batch, fontId);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        public void SetFontPackageBatch(Batch batch, string fontId)
+        {
+            SetPackageBatchAsync(batch,fontId).GetAwaiter().GetResult();
+        }
+
+        public Task SetPackageBatchAsync(Batch batch, string fontId)
+        {
+            BuildAndSetFontPackageApiCall(batch, fontId).Wait();
+            return Task.CompletedTask;
+        }
+
+        private static ApiCall BuildGetFontPackagesApiCall()
+        {
+            return new ApiCall("_api/FontPackages", ApiType.SPORest);
+        }
+
+        private async Task BuildAndSetFontPackageApiCall(Batch batch, string fontId)
+        {
+            var apiCall = new ApiCall($"_api/FontPackages/GetById('{fontId}')/Apply", ApiType.SPORest)
+            {   // The provided JSON is of the minimal odata type
+                Headers = new Dictionary<string, string>
+                {
+                    { "Content-Type", "application/json;odata.metadata=nometadata" },
+                }
+            };
+
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SetFontPackages").ConfigureAwait(false);
+        }
+
+        #endregion Branding Center FontPackages
+
+        #region SiteFontPackages
+        public List<IFontPackage> GetSiteFontPackages()
+        {
+            return GetSiteFontPackagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<List<IFontPackage>>> GetSiteFontPackagesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetSiteFontPackagesApiCall();
+            return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch)
+        {
+            return GetSiteFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetSiteFontPackagesApiCall()
+        {
+            return new ApiCall("_api/SiteFontPackages", ApiType.SPORest);
+        }
+        #endregion SiteFontPackages
+
+        private async Task SetFontPackageBatchAsync(Batch batch, ApiCall apiCall)
+        {
+            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SaveMenuState").ConfigureAwait(false);
+        }
+
+
+        internal async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch, ApiCall apiCall)
+        {
+            // Since we're doing a raw batch request the processing of the batch response needs be implemented
+            apiCall.RawSingleResult = new List<IFontPackage>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessGetFontPackagesResponse(json, (List<IFontPackage>)apiCall.RawSingleResult);
+            };
+
+            // Add the request to the batch
+            var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchSingleResult<List<IFontPackage>>(batch, batchRequest.Id, (List<IFontPackage>)apiCall.RawSingleResult);
+        }
+
+
+        internal static void ProcessGetFontPackagesResponse(string jsonString, List<IFontPackage> fontPackageList)
+        {
+            var jDoc = JsonSerializer.Deserialize<JsonElement>(jsonString);
+            var results = jDoc.GetProperty("value").ValueKind == JsonValueKind.Null ? "[]" : jDoc.GetProperty("value").GetRawText();
+
+            var jsonFontPackageList = JsonSerializer.Deserialize<List<FontPackage>>(results);
+
+            foreach (var fontPackage in jsonFontPackageList)
+            {
+                fontPackageList.Add(fontPackage);
+            }
+        }
     }
 }
