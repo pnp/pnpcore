@@ -149,6 +149,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
             config.MultiLanguage.ResourceFilePrefix = information.ResourceFilePrefix;
             config.Publishing.Persist = information.PersistPublishingFiles;
             config.Publishing.IncludeNativePublishingFiles = information.IncludeNativePublishingFiles;
+            config.Publishing.ExtractPageAsPublished = information.ExtractPageAsPublished;
             config.SearchSettings.Include = information.IncludeSearchConfiguration;
             return config;
         }
