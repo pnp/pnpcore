@@ -20091,6 +20091,19 @@ references:
   commentId: T:PnP.Core.Model.Security.UserLinkOptions
   fullName: PnP.Core.Model.Security.UserLinkOptions
   nameWithType: UserLinkOptions
+- uid: PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime
+  name: ExpirationDateTime
+  href: api/PnP.Core.Model.Security.UserLinkOptions.html#PnP_Core_Model_Security_UserLinkOptions_ExpirationDateTime
+  commentId: P:PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime
+  fullName: PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime
+  nameWithType: UserLinkOptions.ExpirationDateTime
+- uid: PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime*
+  name: ExpirationDateTime
+  href: api/PnP.Core.Model.Security.UserLinkOptions.html#PnP_Core_Model_Security_UserLinkOptions_ExpirationDateTime_
+  commentId: Overload:PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.UserLinkOptions.ExpirationDateTime
+  nameWithType: UserLinkOptions.ExpirationDateTime
 - uid: PnP.Core.Model.Security.UserLinkOptions.Recipients
   name: Recipients
   href: api/PnP.Core.Model.Security.UserLinkOptions.html#PnP_Core_Model_Security_UserLinkOptions_Recipients

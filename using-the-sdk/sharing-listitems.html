@@ -108,7 +108,7 @@
 <p>You can also programmatically verify and alter site collection sharing settings via the <a href="https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-sites.html#getting-and-setting-site-collection-properties">PnP Core SDK Admin component</a>.</p>
 </div>
 <h2 id="sharing-list-items-with-your-organization">Sharing list items with your organization</h2>
-<p>To share list items within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the list item?</p>
+<p>To share list items within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The key property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the list item? Optionally you can set an <code>ExpirationDateTime</code> defining how long the share will stay valid.</p>
 <pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, 
                                           p =&gt; p.Title, p =&gt; p.Items, 
                                           p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
@@ -131,7 +131,7 @@ var share = await listItem.CreateOrganizationalSharingLinkAsync(shareLinkRequest
 <p>The supported share types for a list item are <code>View</code>, <code>Edit</code> and <code>Embed</code></p>
 </div>
 <h2 id="share-list-items-with-certain-users">Share list items with certain users</h2>
-<p>If you want to selectively share a list item with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share. Below example shows this:</p>
+<p>If you want to selectively share a list item with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share, optionally you can set an <code>ExpirationDateTime</code> defining how long the share will stay valid. Below example shows this:</p>
 <pre><code class="lang-csharp">var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, 
                                           p =&gt; p.Title, p =&gt; p.Items, 
                                           p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
@@ -158,7 +158,9 @@ var shareLinkRequestOptions = new UserLinkOptions()
 {
     // Selected users can see the list item online
     Type = ShareType.View,
-    Recipients = recipients
+    Recipients = recipients,
+    // Optional: the sharing link stops working after this date
+    ExpirationDateTime = DateTime.Now.AddDays(30)
 };
 
 var share = await listItem.CreateUserSharingLinkAsync(shareLinkRequestOptions);

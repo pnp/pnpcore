@@ -122,7 +122,7 @@ foreach(var share in sharingLinks)
 }
 </code></pre>
 <h2 id="sharing-content-with-your-organization">Sharing content with your organization</h2>
-<p>To share content within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The only property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the content?</p>
+<p>To share content within your tenant (your organization) you need to use one of the <code>CreateOrganizationalSharingLink</code> methods in combination with a configured <code>OrganizationalLinkOptions</code> instance. The key property to set here is the <code>Type</code> of share: do you want to enable people in your organization to view the shared content or also edit the content? Optionally you can set an <code>ExpirationDateTime</code> defining how long the share will stay valid.</p>
 <pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
 var shareLinkRequestOptions = new OrganizationalLinkOptions()
 {
@@ -133,7 +133,7 @@ var shareLinkRequestOptions = new OrganizationalLinkOptions()
 var share = await file.CreateOrganizationalSharingLinkAsync(shareLinkRequestOptions);
 </code></pre>
 <h2 id="share-content-with-certain-users">Share content with certain users</h2>
-<p>If you want to selectively share content with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share. Below example shows this:</p>
+<p>If you want to selectively share content with one or more users you can use one of the <code>CreateUserSharingLink</code> methods in combination with a configured <code>UserLinkOptions</code> instance. Key properties to set are the <code>Recipients</code> (people you're sharing to) and <code>Type</code> of share, optionally you can set an <code>ExpirationDateTime</code> defining how long the share will stay valid. Below example shows this:</p>
 <pre><code class="lang-csharp">var file = await context.Web.GetFileByServerRelativeUrlAsync(&quot;/sites/demo/docs/fileA.docx&quot;);
 
 // List of users to share the file/folder with
@@ -147,7 +147,9 @@ var shareLinkRequestOptions = new UserLinkOptions()
 {
     // Users can see and edit the file online, but not download it
     Type = ShareType.BlocksDownload,
-    Recipients = driveRecipients
+    Recipients = driveRecipients,
+    // Optional: the sharing link stops working after this date
+    ExpirationDateTime = DateTime.Now.AddDays(30)
 };
 
 var share = await file.CreateUserSharingLinkAsync(shareLinkRequestOptions);
