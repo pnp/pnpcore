@@ -89,7 +89,7 @@
 
 
   <h1 id="PnP_Core_Model_Security_ISharePointUser" data-uid="PnP.Core.Model.Security.ISharePointUser" class="text-break">
-Interface ISharePointUser  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L8"><i class="bi bi-code-slash"></i></a>
+Interface ISharePointUser  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -262,7 +262,7 @@ Interface ISharePointUser  <a class="header-action link-secondary" title="View s
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_AadObjectId" data-uid="PnP.Core.Model.Security.ISharePointUser.AadObjectId">
   AadObjectId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Id of the underlying graph object (if any)</p>
@@ -294,7 +294,7 @@ Interface ISharePointUser  <a class="header-action link-secondary" title="View s
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_All" data-uid="PnP.Core.Model.Security.ISharePointUser.All">
   All
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>A special property used to add an asterisk to a $select statement</p>
@@ -326,7 +326,7 @@ Interface ISharePointUser  <a class="header-action link-secondary" title="View s
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_Department" data-uid="PnP.Core.Model.Security.ISharePointUser.Department">
   Department
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Department of the user</p>
@@ -358,7 +358,7 @@ Interface ISharePointUser  <a class="header-action link-secondary" title="View s
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_Expiration" data-uid="PnP.Core.Model.Security.ISharePointUser.Expiration">
   Expiration
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L38"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>A date/time string for which the format conforms to the ISO8601 time format YYYY-MM-DDTHH:MM:SSZ and
@@ -392,12 +392,12 @@ A null value indicates no expiry.</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_Groups" data-uid="PnP.Core.Model.Security.ISharePointUser.Groups">
   Groups
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L60"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the collection of <a class="xref" href="PnP.Core.Model.Security.ISharePointGroup.html">ISharePointGroup</a> this user is a direct member of.
 Membership obtained indirectly, by being part of a Microsoft Entra ID group that is itself a member
-of the SharePoint group, is not expanded and therefore not returned.</p>
+of the SharePoint group, is not expanded and therefore not returned. Use <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroupsAsync">GetTransitiveGroupsAsync()</a> for that.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -426,7 +426,7 @@ of the SharePoint group, is not expanded and therefore not returned.</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_IsEmailAuthenticationGuestUser" data-uid="PnP.Core.Model.Security.ISharePointUser.IsEmailAuthenticationGuestUser">
   IsEmailAuthenticationGuestUser
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Indicates whether the user is a guest user authenticated via an e-mail address</p>
@@ -458,7 +458,7 @@ of the SharePoint group, is not expanded and therefore not returned.</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_IsShareByEmailGuestUser" data-uid="PnP.Core.Model.Security.ISharePointUser.IsShareByEmailGuestUser">
   IsShareByEmailGuestUser
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L48"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Indicates whether the user is a guest user shared by e-mail</p>
@@ -490,7 +490,7 @@ of the SharePoint group, is not expanded and therefore not returned.</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_IsSiteAdmin" data-uid="PnP.Core.Model.Security.ISharePointUser.IsSiteAdmin">
   IsSiteAdmin
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L53"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Indicates whether the user is a site collection administrator</p>
@@ -522,7 +522,7 @@ of the SharePoint group, is not expanded and therefore not returned.</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_Mail" data-uid="PnP.Core.Model.Security.ISharePointUser.Mail">
   Mail
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>E-mail address of the user.
@@ -555,7 +555,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_UserPrincipalName" data-uid="PnP.Core.Model.Security.ISharePointUser.UserPrincipalName">
   UserPrincipalName
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>User principle name (UPN) of the user</p>
@@ -591,7 +591,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_AddRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointUser.AddRoleDefinitions(System.String[])">
   AddRoleDefinitions(params string[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L114"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds role definitions for this user</p>
@@ -628,7 +628,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_AddRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointUser.AddRoleDefinitionsAsync(System.String[])">
   AddRoleDefinitionsAsync(params string[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds role definitions for this user</p>
@@ -665,7 +665,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_AsGraphUser" data-uid="PnP.Core.Model.Security.ISharePointUser.AsGraphUser">
   AsGraphUser()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L77"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns this SharePoint user as a Graph user</p>
@@ -697,7 +697,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_AsGraphUserAsync" data-uid="PnP.Core.Model.Security.ISharePointUser.AsGraphUserAsync">
   AsGraphUserAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L71"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns this SharePoint user as a Graph user</p>
@@ -729,7 +729,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_GetRoleDefinitions" data-uid="PnP.Core.Model.Security.ISharePointUser.GetRoleDefinitions">
   GetRoleDefinitions()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves the role definitions for this user</p>
@@ -761,7 +761,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_GetRoleDefinitionsAsync" data-uid="PnP.Core.Model.Security.ISharePointUser.GetRoleDefinitionsAsync">
   GetRoleDefinitionsAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L107"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves the role definitions for this user</p>
@@ -789,11 +789,85 @@ SP REST property name: Email</p>
 
 
 
+  <a id="PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroups_" data-uid="PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroups" data-uid="PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups">
+  GetTransitiveGroups()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the SharePoint groups of the current site this user is a member of, either directly or through a
+Microsoft Entra ID security group (including nested groups) or Microsoft 365 group that is a member of the SharePoint group.
+Whenever the site groups contain such a group this uses Microsoft Graph, which requires the
+GroupMember.Read.All permission next to permission to read the principal itself.
+The special &quot;Everyone&quot; and &quot;Everyone except external users&quot; claims are not taken into account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IList&lt;ISharePointGroup&gt; GetTransitiveGroups()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointGroup.html">ISharePointGroup</a>&gt;</dt>
+    <dd><p>The SharePoint groups this user is a direct or transitive member of</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroupsAsync_" data-uid="PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync*"></a>
+
+  <h3 id="PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroupsAsync" data-uid="PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync">
+  GetTransitiveGroupsAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the SharePoint groups of the current site this user is a member of, either directly or through a
+Microsoft Entra ID security group (including nested groups) or Microsoft 365 group that is a member of the SharePoint group.
+Whenever the site groups contain such a group this uses Microsoft Graph, which requires the
+GroupMember.Read.All permission next to permission to read the principal itself.
+The special &quot;Everyone&quot; and &quot;Everyone except external users&quot; claims are not taken into account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IList&lt;ISharePointGroup&gt;&gt; GetTransitiveGroupsAsync()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointGroup.html">ISharePointGroup</a>&gt;&gt;</dt>
+    <dd><p>The SharePoint groups this user is a direct or transitive member of</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="PnP_Core_Model_Security_ISharePointUser_RemoveRoleDefinitions_" data-uid="PnP.Core.Model.Security.ISharePointUser.RemoveRoleDefinitions*"></a>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_RemoveRoleDefinitions_System_String___" data-uid="PnP.Core.Model.Security.ISharePointUser.RemoveRoleDefinitions(System.String[])">
   RemoveRoleDefinitions(params string[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L128"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes role definitions for this user</p>
@@ -830,7 +904,7 @@ SP REST property name: Email</p>
 
   <h3 id="PnP_Core_Model_Security_ISharePointUser_RemoveRoleDefinitionsAsync_System_String___" data-uid="PnP.Core.Model.Security.ISharePointUser.RemoveRoleDefinitionsAsync(System.String[])">
   RemoveRoleDefinitionsAsync(params string[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L135"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes role definitions for this user</p>
@@ -867,7 +941,7 @@ SP REST property name: Email</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L8" class="edit-link">Edit this page</a>
+          <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/ISharePointUser.cs/#L9" class="edit-link">Edit this page</a>
         </div>
 
 

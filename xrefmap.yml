@@ -19202,6 +19202,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointUser.GetRoleDefinitionsAsync
   nameWithType: ISharePointUser.GetRoleDefinitionsAsync
+- uid: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups
+  name: GetTransitiveGroups()
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroups
+  commentId: M:PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups
+  fullName: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups()
+  nameWithType: ISharePointUser.GetTransitiveGroups()
+- uid: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups*
+  name: GetTransitiveGroups
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroups_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroups
+  nameWithType: ISharePointUser.GetTransitiveGroups
+- uid: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync
+  name: GetTransitiveGroupsAsync()
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroupsAsync
+  commentId: M:PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync
+  fullName: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync()
+  nameWithType: ISharePointUser.GetTransitiveGroupsAsync()
+- uid: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync*
+  name: GetTransitiveGroupsAsync
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_GetTransitiveGroupsAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointUser.GetTransitiveGroupsAsync
+  nameWithType: ISharePointUser.GetTransitiveGroupsAsync
 - uid: PnP.Core.Model.Security.ISharePointUser.Groups
   name: Groups
   href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_Groups

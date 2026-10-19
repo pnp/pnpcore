@@ -148,6 +148,20 @@ foreach(var group in context.Web.SiteUsers.AsRequested())
 <p>To verify if a specific user exists you can use the <code>GetUserById</code> methods:</p>
 <pre><code class="lang-csharp">var foundUser = await context.Web.GetUserByIdAsync(userId);
 </code></pre>
+<h3 id="getting-the-groups-a-user-is-a-member-of">Getting the groups a user is a member of</h3>
+<p>A user's <code>Groups</code> property returns the SharePoint groups the user is a direct member of. A user can also be a member of a SharePoint group through a Microsoft Entra ID security group (including nested groups) or a Microsoft 365 group that was added to it, to include those use the <code>GetTransitiveGroups</code> methods.</p>
+<pre><code class="lang-csharp">var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
+
+// Groups the user was directly added to
+var directGroups = await user.Groups.ToListAsync();
+
+// Groups the user was directly added to, plus the ones reached via Entra ID or Microsoft 365 groups
+var allGroups = await user.GetTransitiveGroupsAsync();
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Whenever the site's groups contain a Microsoft Entra ID or Microsoft 365 group, <code>GetTransitiveGroups</code> uses Microsoft Graph to resolve the membership. This requires the <code>GroupMember.Read.All</code> permission next to the permission to read the principal itself, so <code>User.ReadBasic.All</code> and <code>GroupMember.Read.All</code> for a user. The special &quot;Everyone&quot; and &quot;Everyone except external users&quot; users are not taken into account.</p>
+</div>
 <h2 id="addingensuring-a-user">Adding/ensuring a user</h2>
 <p>Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the <code>EnsureUser</code> and <code>EnsureEveryoneExceptExternalUsers</code> methods. The latter method is needed for the &quot;Everyone except external users&quot; user as that string is different for sites created in other languages. Other &quot;special&quot; users are language neutral.</p>
 <pre><code class="lang-csharp">// Regular user
