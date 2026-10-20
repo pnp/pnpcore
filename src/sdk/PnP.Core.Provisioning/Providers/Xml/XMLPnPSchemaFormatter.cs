@@ -51,8 +51,9 @@ namespace PnP.Core.Provisioning.Providers.Xml
                 case XMLPnPSchemaVersion.V202209:
                     return (new XMLPnPSchemaV202209Serializer());
                 case XMLPnPSchemaVersion.V202609:
-                default:
                     return (new XMLPnPSchemaV202609Serializer());
+                default:
+                    return (new XMLPnPSchemaV202209Serializer());
             }
         }
 
