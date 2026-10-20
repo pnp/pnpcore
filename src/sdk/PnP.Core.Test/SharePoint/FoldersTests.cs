@@ -281,6 +281,152 @@ namespace PnP.Core.Test.SharePoint
 
         #region Folder Tests
 
+        [DataTestMethod]
+        [DataRow(false, 0)]
+        [DataRow(true, 2)]
+        public async Task AddRegularListFolderTest(bool batched, int contextId)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName($"AddRegularListFolderTest_{contextId}");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                try
+                {
+                    list.EnableFolderCreation = true;
+                    await list.UpdateAsync();
+
+                    // Each data row has its own pair of contexts and recorded responses.
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId + 1))
+                    {
+                        var reloadedList = await context2.Web.Lists.GetByTitleAsync(listTitle, p => p.RootFolder);
+                        Assert.IsFalse(reloadedList.IsPropertyAvailable(p => p.BaseType));
+
+                        var pendingBatch = context2.CurrentBatch;
+                        await context2.Web.LoadBatchAsync(pendingBatch, p => p.Title);
+                        Batch creationBatch;
+                        int responseCallbacks = 0;
+                        var parentFolder = reloadedList.RootFolder.WithHeaders(
+                            new Dictionary<string, string> { { "X-PnP-Folder-Test", "creation" } },
+                            _ => responseCallbacks++);
+                        const string folderName = "O'Brien # & + 100%";
+                        IFolder folder;
+                        if (batched)
+                        {
+                            creationBatch = context2.NewBatch();
+                            folder = await parentFolder.Folders.AddBatchAsync(creationBatch, folderName);
+                            Assert.IsFalse(creationBatch.Executed);
+                            Assert.AreEqual(0, responseCallbacks);
+                            Assert.IsFalse(folder.IsPropertyAvailable(p => p.UniqueId));
+                            await context2.ExecuteAsync(creationBatch);
+                        }
+                        else
+                        {
+                            folder = await parentFolder.Folders.AddAsync(folderName);
+                            creationBatch = context2.BatchClient.GetBatchByBatchRequestId(((Folder)folder).BatchRequestId);
+                        }
+
+                        // Creation and hydration share one batch and leave unrelated work queued.
+                        Assert.AreEqual(2, creationBatch.Requests.Count);
+                        Assert.AreEqual(1, responseCallbacks);
+                        Assert.IsFalse(pendingBatch.Executed);
+                        Assert.AreSame(pendingBatch, context2.CurrentBatch);
+                        Assert.AreEqual(1, pendingBatch.Requests.Count);
+                        Assert.AreEqual(ListBaseType.GenericList, reloadedList.BaseType);
+                        Assert.IsTrue(folder.Exists);
+                        Assert.AreNotEqual(Guid.Empty, folder.UniqueId);
+                        Assert.AreEqual(folderName, folder.Name);
+                        Assert.AreEqual($"{reloadedList.RootFolder.ServerRelativeUrl}/{folderName}", folder.ServerRelativeUrl);
+
+                        // Both folders need backing items to appear in the regular list.
+                        var child = await folder.AddFolderAsync("child");
+                        Assert.AreEqual("child", child.Name);
+                        foreach (var createdFolder in new[] { folder, child })
+                        {
+                            await createdFolder.LoadAsync(p => p.ListItemAllFields);
+                            var item = await reloadedList.Items.GetByIdAsync(createdFolder.ListItemAllFields.Id);
+                            Assert.IsTrue(item.Id > 0);
+                            Assert.IsTrue(item.IsFolder());
+                        }
+                    }
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(false, false, 0)]
+        [DataRow(false, true, 1)]
+        [DataRow(true, false, 2)]
+        [DataRow(true, true, 3)]
+        public async Task EnsureRegularListFolderReadTest(bool batched, bool get, int contextId)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName($"EnsureRegularListFolderReadTest_{contextId}");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                try
+                {
+                    list.EnableFolderCreation = true;
+                    await list.UpdateAsync();
+                    await list.EnsurePropertiesAsync(p => p.RootFolder);
+                    await list.AddListFolderAsync("existing");
+
+                    var folder = await list.RootFolder.EnsureFolderAsync("existing");
+                    var folderId = folder.UniqueId;
+                    if (batched)
+                    {
+                        var batch = context.NewBatch();
+                        IBatchSingleResult<IFolder> result = null;
+                        if (get)
+                        {
+                            result = await folder.GetBatchAsync(batch, p => p.Name, p => p.StorageMetrics);
+                        }
+                        else
+                        {
+                            await folder.LoadBatchAsync(batch, p => p.Name, p => p.StorageMetrics);
+                        }
+                        await context.ExecuteAsync(batch);
+                        if (get)
+                        {
+                            folder = result.Result;
+                        }
+                    }
+                    else if (get)
+                    {
+                        folder = await folder.GetAsync(p => p.Name, p => p.StorageMetrics);
+                    }
+                    else
+                    {
+                        await folder.LoadAsync(p => p.Name, p => p.StorageMetrics);
+                    }
+
+                    // Reading an ensured child must not return its parent's properties.
+                    // Offline responses are replayed by sequence, so also check the target URL.
+                    var readBatch = context.BatchClient.GetBatchByBatchRequestId(((Folder)folder).BatchRequestId);
+                    StringAssert.Contains(readBatch.Requests.Single().Value.ApiCall.Request,
+                        $"getFolderById('{folderId}')?");
+                    Assert.AreEqual(folderId, folder.UniqueId);
+                    Assert.AreEqual("existing", folder.Name);
+                    Assert.IsTrue(folder.IsPropertyAvailable(p => p.StorageMetrics));
+
+                    var child = await folder.EnsureFolderAsync("child/grandchild");
+                    Assert.AreEqual("grandchild", child.Name);
+                    await child.LoadAsync(p => p.ListItemAllFields);
+                    var item = await list.Items.GetByIdAsync(child.ListItemAllFields.Id);
+                    Assert.IsTrue(item.IsFolder());
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
         [TestMethod]
         public async Task AddListFolderAsyncTest()
         {
