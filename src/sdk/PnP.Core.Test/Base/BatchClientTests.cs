@@ -681,6 +681,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task PageLoadingSkipsModelsConsolidatedAwayInTheSameBatch()
         {
+            //TestCommon.Instance.Mocking = false;
             // Offline by design. When two GETs in one batch resolve to the same key, MergeBatchResultsWithModel
             // merges the later model into the first and marks it deleted. The page loading pass must skip it:
             // its collections live on the surviving instance, and reading its properties throws.
@@ -700,6 +701,8 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task PageLoadingIsSkippedForRequestsThatDoNotPage()
         {
+            //TestCommon.Instance.Mocking = false;
+            
             using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(BatchClient.NeedsPageLoading(BuildListGetRequest(context, loadPages: false)));
