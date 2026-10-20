@@ -142,6 +142,12 @@ var folder = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =
 // Add a folder 
 var subFolder = await folder.Folders.AddAsync(&quot;My folder&quot;);
 </code></pre>
+<p>For folders in a regular list, start from the list's <code>RootFolder</code> so the SDK can identify the owning list and select the endpoint that creates the folder's list item. Folders retrieved directly through <code>context.Web.GetFolderByServerRelativeUrlAsync</code> do not carry this list context.</p>
+<p>SharePoint's creation endpoint for regular lists does not return the folder. For <code>Add</code> and <code>AddAsync</code>, the SDK sends creation and a follow-up read in one HTTP batch request and returns the loaded folder. For <code>AddBatch</code> and <code>AddBatchAsync</code>, both operations are queued in the specified batch (or the current batch when none is supplied); the returned folder is populated when that batch is executed.</p>
+<p>The SDK makes a separate read to load the owning list's <code>BaseType</code> if it is missing and reuses it for subsequent additions through the same list instance. This lookup can happen while preparing a batched addition; it does not execute other pending batch requests. To avoid the additional lookup, include <code>p =&gt; p.BaseType</code> when retrieving the list:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My list&quot;, p =&gt; p.RootFolder, p =&gt; p.BaseType);
+var subFolder = await list.RootFolder.Folders.AddAsync(&quot;My folder&quot;);
+</code></pre>
 <h3 id="ensure-a-folder-path">Ensure a folder path</h3>
 <p>When adding folders a very convenient method to use is the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_">EnsureFolderAsync</a> method as this one can take a folder path and verify each part of the path and create it if needed.</p>
 <pre><code class="lang-csharp">// Get the root folder of the Site Pages library
