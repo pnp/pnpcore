@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added GetTransitiveGroups for membership via Entra ID and Microsoft 365 groups #1872 [svermaak - svermaak]
 - Added ExpirationDateTime support for sharing links #1896 [gautamdsheth - Gautam Sheth]
 - Added handling of unpublished News pages at template extraction #1881 [Magnus-K-work - Magnus-K-work]
+- Skipped consolidated away models when loading extra pages in a batch #1887 [svermaak - svermaak]
 
 ## [1.18]
 
