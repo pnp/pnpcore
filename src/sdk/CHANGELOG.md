@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added ExpirationDateTime support for sharing links #1896 [gautamdsheth - Gautam Sheth]
 - Added handling of unpublished News pages at template extraction #1881 [Magnus-K-work - Magnus-K-work]
 - Skipped consolidated away models when loading extra pages in a batch #1887 [svermaak - svermaak]
+- Fixed folder creation in SharePoint lists #1884 [nicolaor - Rene Nicolao]
 
 ## [1.18]
 
