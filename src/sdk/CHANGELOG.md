@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Updated delete by id on IWeb.SiteUsers and IWeb.SiteGroups #1864 [svermaak - svermaak]
 - Improved pnp core provisioning #1874 [adam-it - Adam Wójcik]
 - Added GetTransitiveGroups for membership via Entra ID and Microsoft 365 groups #1872 [svermaak - svermaak]
+- Added ExpirationDateTime support for sharing links #1896 [gautamdsheth - Gautam Sheth]
 
 ## [1.18]
 
