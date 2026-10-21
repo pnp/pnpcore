@@ -145,9 +145,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 return true;
             }
 
+            var fieldName = fieldElement.Attribute("Name")?.Value;
+
             XElement termStoreIdElement = fieldElement.XPathSelectElement("//ArrayOfProperty/Property[Name='SspId']/Value");
             if (termStoreIdElement == null)
             {
+                context.Logger?.LogWarning("{Source}: {Message}", 
+                    Constants.LOGGING_SOURCE, 
+                    string.Format(PnPCoreProvisioningResources.TaxonomyField_TermStoreIdMissing, fieldName));
+
                 return false;
             }
 
@@ -158,12 +164,25 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 {
                     return true;
                 }
-
+                
                 (_, ITermSet termSet) = await TaxonomyLookup.FindTermSetAsync(context, termSetIdElement.Value).ConfigureAwait(false);
-                return termSet != null;
+
+                var isTermSetFound = termSet != null;
+                if (!isTermSetFound)
+                {
+                    context.Logger?.LogWarning("{Source}: {Message}",
+                        Constants.LOGGING_SOURCE,
+                        string.Format(PnPCoreProvisioningResources.TaxonomyField_TermSetNotFound, fieldName, termSetIdElement.Value));
+                }
+
+                return isTermSetFound;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                context.Logger?.LogWarning("{Source}: {Message}",
+                    Constants.LOGGING_SOURCE,
+                    string.Format(PnPCoreProvisioningResources.TaxonomyField_ValidationException, fieldName, ex.Message));
+
                 return false;
             }
         }
@@ -429,8 +448,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// </summary>
         internal static async Task<bool> IsSubSiteAsync(PnPContext context)
         {
-            await context.Site.LoadAsync(s => s.RootWeb.QueryProperties(w => w.Id)).ConfigureAwait(false);
-            await context.Web.LoadAsync(w => w.Id).ConfigureAwait(false);
+            if (context.Site?.RootWeb?.IsPropertyAvailable(s => s.Id) is false)
+            {
+                await context.Site.LoadAsync(s => s.RootWeb.QueryProperties(w => w.Id)).ConfigureAwait(false);
+            }
+
+            if (context.Web?.IsPropertyAvailable(w => w.Id) == false)
+            {
+                await context.Web.LoadAsync(w => w.Id).ConfigureAwait(false);
+            }
 
             return context.Site.RootWeb.Id != context.Web.Id;
         }
