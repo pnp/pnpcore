@@ -735,47 +735,6 @@ namespace PnP.Core.Model.SharePoint
         IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
         #endregion
 
-        #region Syntex
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <returns>Information about the classify and extract request</returns>
-        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractAsync();
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <returns>Information about the classify and extract request</returns>
-        ISyntexClassifyAndExtractResult ClassifyAndExtract();
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <param name="batch">Batch to add this request to</param>
-        /// <returns>Information about the classify and extract request</returns>
-        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync(Batch batch);
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <param name="batch">Batch to add this request to</param>
-        /// <returns>Information about the classify and extract request</returns>
-        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch(Batch batch);
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <returns>Information about the classify and extract request</returns>
-        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync();
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <returns>Information about the classify and extract request</returns>
-        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch();
-        #endregion
-
         #region Thumbnails
         /// <summary>
         /// Returns a list of thumbnails for this file
