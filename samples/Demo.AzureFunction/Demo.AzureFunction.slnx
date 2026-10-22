@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Blazor" />
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="Demo.AzureFunction.csproj">
+    <BuildType Solution="Blazor|*" Project="Release" />
+  </Project>
+</Solution>
