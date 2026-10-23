@@ -1,4 +1,6 @@
+using AngleSharp.Html.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -9,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -1812,6 +1815,257 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Page Header handling
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("Engineer")]
+        public async Task NoImagePageHeaderFromHtmlWithAuthorTest(string role)
+        {
+            //TestCommon.Instance.Mocking = false;
+            var original = new PageHeader(null, PageHeaderType.Default, null)
+            {
+                LayoutType = PageHeaderLayoutType.NoImage,
+                Authors = JsonSerializer.Serialize(new[]
+                {
+                    new { id = "i:0#.f|membership|author@contoso.com", upn = "author@contoso.com", name = "Example Author", role }
+                }),
+                AuthorByLine = "[\"author@contoso.com\"]"
+            };
+            string html = await original.ToHtmlAsync("No-image author regression");
+            using (var document = new HtmlParser().ParseDocument(html))
+            {
+                Assert.AreEqual("", document.QuerySelector("[data-sp-controldata]").InnerHtml);
+            }
+
+            var loaded = new PageHeader(null, PageHeaderType.Default, null);
+            loaded.FromHtml(html);
+
+            Assert.AreEqual(PageHeaderType.Default, loaded.Type);
+            Assert.AreEqual(PageHeaderLayoutType.NoImage, loaded.LayoutType);
+            Assert.AreEqual(original.Authors, loaded.Authors);
+            Assert.AreEqual(original.AuthorByLine, loaded.AuthorByLine);
+            Assert.AreEqual(role, JsonSerializer.Deserialize<JsonElement>(loaded.Authors)[0].GetProperty("role").GetString());
+            Assert.AreEqual(html, await loaded.ToHtmlAsync("No-image author regression"));
+        }
+
+        [DataTestMethod]
+        [DataRow(true, true, "", PageHeaderType.Default)]
+        [DataRow(true, false, "", PageHeaderType.Default)]
+        [DataRow(false, true, "", PageHeaderType.Default)]
+        [DataRow(false, false, "", PageHeaderType.None)]
+        [DataRow(false, false, "<span>Legacy title</span>", PageHeaderType.Custom)]
+        [DataRow(true, true, "<span>Visible title</span>", PageHeaderType.Custom)]
+        public void NoImagePageHeaderFromHtmlContractTest(bool includeAuthors, bool includeByline, string innerHtml, PageHeaderType expectedType)
+        {
+            //TestCommon.Instance.Mocking = false;
+            var properties = new Dictionary<string, object>
+            {
+                ["title"] = "A title alone does not indicate a visible header",
+                ["imageSourceType"] = 4,
+                ["layoutType"] = "NoImage",
+                ["textAlignment"] = "Left"
+            };
+            if (includeAuthors)
+            {
+                properties["authors"] = Array.Empty<object>();
+            }
+            if (includeByline)
+            {
+                properties["authorByline"] = Array.Empty<string>();
+            }
+
+            string controlData = JsonSerializer.Serialize(new
+            {
+                id = "cbe7b0a9-3504-44dd-a3a3-0e5cacd07788",
+                dataVersion = "1.4",
+                serverProcessedContent = new { imageSources = new { } },
+                properties
+            });
+            foreach (string encoded in new[] { WebUtility.HtmlEncode(controlData), WebUtility.UrlEncode(controlData) })
+            {
+                var header = new PageHeader(null, PageHeaderType.Default, null);
+                header.FromHtml($"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"{encoded}\">{innerHtml}</div></div>");
+
+                Assert.AreEqual(expectedType, header.Type);
+                Assert.AreEqual(PageHeaderLayoutType.NoImage, header.LayoutType);
+            }
+        }
+
+        [TestMethod]
+        public async Task NoImagePageHeaderFromDefaultAndLegacyTemplatesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var original = new PageHeader(null, PageHeaderType.Default, null) { LayoutType = PageHeaderLayoutType.NoImage };
+            var loaded = new PageHeader(null, PageHeaderType.Default, null);
+            loaded.FromHtml(await original.ToHtmlAsync("Visible header"));
+            Assert.AreEqual(PageHeaderType.Default, loaded.Type);
+            Assert.AreEqual("[]", loaded.Authors);
+            Assert.AreEqual("[]", loaded.AuthorByLine);
+
+            loaded.FromHtml(PageHeader.NoHeader("Legacy no header"));
+            Assert.AreEqual(PageHeaderType.None, loaded.Type);
+            Assert.AreEqual(PageHeaderLayoutType.NoImage, loaded.LayoutType);
+        }
+
+        [DataTestMethod]
+        [DataRow(null, PageHeaderType.Default)]
+        [DataRow("", PageHeaderType.Default)]
+        [DataRow("<div></div>", PageHeaderType.None)]
+        public void EmptyPageHeaderFromHtmlTest(string html, PageHeaderType expectedType)
+        {
+            //TestCommon.Instance.Mocking = false;
+            var header = new PageHeader(null, PageHeaderType.None, null);
+            header.FromHtml(html);
+            Assert.AreEqual(expectedType, header.Type);
+        }
+
+        [DataTestMethod]
+        [DataRow(PageHeaderLayoutType.FullWidthImage)]
+        [DataRow(PageHeaderLayoutType.ColorBlock)]
+        public async Task DefaultPageHeaderLayoutRoundTripTest(PageHeaderLayoutType layout)
+        {
+            //TestCommon.Instance.Mocking = false;
+            var original = new PageHeader(null, PageHeaderType.Default, null) { LayoutType = layout };
+            var loaded = new PageHeader(null, PageHeaderType.None, null);
+            loaded.FromHtml(await original.ToHtmlAsync("Visible header"));
+            Assert.AreEqual(PageHeaderType.Default, loaded.Type);
+            Assert.AreEqual(layout, loaded.LayoutType);
+        }
+
+        [DataTestMethod]
+        [DataRow(null, 0)]
+        [DataRow("Engineer", 1)]
+        public async Task NoImagePageHeaderRoundTripTest(string role, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName($"NoImagePageHeaderRoundTripTest-{id}.aspx");
+                // Use a person rather than the current principal, which can be an app-only identity.
+                var user = role == null ? null : await context.Web.SiteUsers
+                    .QueryProperties(p => p.Id, p => p.LoginName)
+                    .FirstOrDefaultAsync(p => p.LoginName.StartsWith("i:0#.f|membership|") && p.Mail != "");
+                if (role != null)
+                {
+                    Assert.IsNotNull(user, "The test site must contain a user with a UPN.");
+                }
+                string upn = user?.LoginName.Split('|').Last();
+                int userId = user?.Id ?? -1;
+                page.LayoutType = PageLayoutType.Article;
+                page.PageTitle = "No-image author regression";
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("Body content must survive."), page.Sections[0].Columns[0]);
+                page.SetDefaultPageHeader();
+                page.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
+                page.PageHeader.TopicHeader = "Topic to remove";
+                page.PageHeader.Authors = role == null ? "[]" : JsonSerializer.Serialize(new[]
+                {
+                    new { id = user.LoginName, upn, name = "Example Author", role }
+                });
+                page.PageHeader.AuthorByLine = role == null ? "[]" : JsonSerializer.Serialize(new[] { upn });
+                page.PageHeader.AuthorByLineId = userId;
+
+                await page.SaveAsync(pageName);
+                try
+                {
+                    // Check values written by SaveAsync as well as independent persisted responses.
+                    AssertNoImagePageHeaderFields(((Page)page).PageListItem, role, upn, userId);
+                    string pageUrl = $"{page.PagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}";
+                    var persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
+                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                            l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
+                    AssertNoImagePageHeaderFields(persisted.ListItemAllFields, role, upn, userId);
+
+                    var loaded = (await context.Web.GetPagesAsync(pageName)).Single();
+                    Assert.AreNotSame(page, loaded);
+                    AssertNoImagePageHeader(loaded.PageHeader, role, upn, userId);
+                    Assert.AreEqual(PageLayoutType.Article, loaded.LayoutType);
+
+                    await loaded.SaveAsync();
+                    AssertNoImagePageHeaderFields(((Page)loaded).PageListItem, role, upn, userId);
+                    persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
+                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                            l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
+                    AssertNoImagePageHeaderFields(persisted.ListItemAllFields, role, upn, userId);
+
+                    var reloaded = (await context.Web.GetPagesAsync(pageName)).Single();
+                    Assert.AreNotSame(loaded, reloaded);
+                    AssertNoImagePageHeader(reloaded.PageHeader, role, upn, userId);
+                    Assert.AreEqual("No-image author regression", reloaded.PageTitle);
+                    Assert.AreEqual("Body content must survive.", ((IPageText)reloaded.Controls.Single()).Text);
+
+                    if (role != null)
+                    {
+                        reloaded.RemovePageHeader();
+                        Assert.AreEqual(PageHeaderType.None, reloaded.PageHeader.Type);
+                        await reloaded.SaveAsync();
+                        var removedItem = ((Page)reloaded).PageListItem;
+                        Assert.AreEqual("", removedItem[PageConstants.PageLayoutContentField]);
+                        Assert.IsTrue(!removedItem.Values.TryGetValue(PageConstants._AuthorByline, out object removedByline) || removedByline == null);
+                        Assert.IsNull(removedItem[PageConstants._TopicHeader]);
+
+                        persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
+                            p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                                l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
+                        Assert.IsTrue(string.IsNullOrEmpty(persisted.ListItemAllFields[PageConstants.PageLayoutContentField]?.ToString()));
+                        Assert.IsTrue(!persisted.ListItemAllFields.Values.TryGetValue(PageConstants._AuthorByline, out object persistedByline) || persistedByline == null);
+                        Assert.IsTrue(string.IsNullOrEmpty(persisted.ListItemAllFields[PageConstants._TopicHeader]?.ToString()));
+                        StringAssert.Contains(persisted.ListItemAllFields[PageConstants.CanvasField].ToString(), "Body content must survive.");
+                    }
+                }
+                finally
+                {
+                    await page.DeleteAsync();
+                }
+            }
+        }
+
+        private static void AssertNoImagePageHeader(IPageHeader header, string role, string upn, int userId)
+        {
+            Assert.AreEqual(PageHeaderType.Default, header.Type);
+            Assert.AreEqual(PageHeaderLayoutType.NoImage, header.LayoutType);
+            var authors = JsonSerializer.Deserialize<JsonElement>(header.Authors);
+            var byline = JsonSerializer.Deserialize<JsonElement>(header.AuthorByLine);
+            Assert.AreEqual(role == null ? 0 : 1, authors.GetArrayLength());
+            Assert.AreEqual(role == null ? 0 : 1, byline.GetArrayLength());
+            if (role != null)
+            {
+                Assert.AreEqual($"i:0#.f|membership|{upn}", authors[0].GetProperty("id").GetString());
+                Assert.AreEqual(upn, authors[0].GetProperty("upn").GetString());
+                Assert.AreEqual("Example Author", authors[0].GetProperty("name").GetString());
+                Assert.AreEqual(role, authors[0].GetProperty("role").GetString());
+                Assert.AreEqual(upn, byline[0].GetString());
+                Assert.AreEqual(userId, header.AuthorByLineId);
+            }
+        }
+
+        private static void AssertNoImagePageHeaderFields(IListItem item, string role, string upn, int userId)
+        {
+            Assert.AreEqual("No-image author regression", item[PageConstants.Title]);
+            StringAssert.Contains(item[PageConstants.CanvasField].ToString(), "Body content must survive.");
+            Assert.AreEqual("Topic to remove", item[PageConstants._TopicHeader]);
+            var header = new PageHeader(null, PageHeaderType.None, null);
+            header.FromHtml(item[PageConstants.PageLayoutContentField].ToString());
+            item.Values.TryGetValue(PageConstants._AuthorByline, out object bylineValue);
+            var users = bylineValue as IFieldValueCollection;
+            if (role != null)
+            {
+                Assert.IsNotNull(users);
+                Assert.AreEqual(1, users.Values.Count);
+                header.AuthorByLineId = ((IFieldUserValue)users.Values.Single()).LookupId;
+            }
+            else
+            {
+                Assert.IsTrue(users == null || users.Values.Count == 0);
+            }
+            AssertNoImagePageHeader(header, role, upn, userId);
+            using (var document = new HtmlParser().ParseDocument(item[PageConstants.PageLayoutContentField].ToString()))
+            {
+                var data = JsonSerializer.Deserialize<JsonElement>(document.QuerySelector("[data-sp-controldata]").GetAttribute("data-sp-controldata"));
+                Assert.AreEqual("No-image author regression", data.GetProperty("properties").GetProperty("title").GetString());
+            }
+        }
+
         [TestMethod]
         public async Task NoPageHeaderTest()
         {
@@ -2022,6 +2276,7 @@ namespace PnP.Core.Test.SharePoint
                 page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.ImageServerRelativeUrl == headerImage.ServerRelativeUrl);
+                Assert.AreEqual(PageHeaderType.Custom, page.PageHeader.Type);
                 Assert.IsTrue(page.PageHeader.TranslateX.HasValue == false);
                 Assert.IsTrue(page.PageHeader.TranslateY.HasValue == false);
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.ColorBlock);
@@ -2075,6 +2330,7 @@ namespace PnP.Core.Test.SharePoint
                 page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.ImageServerRelativeUrl == headerImage.ServerRelativeUrl);
+                Assert.AreEqual(PageHeaderType.Custom, page.PageHeader.Type);
                 Assert.IsTrue(page.PageHeader.TranslateX.HasValue == true);
                 Assert.IsTrue(page.PageHeader.TranslateX.Value == 5.3);
                 Assert.IsTrue(page.PageHeader.TranslateY.HasValue == true);
@@ -2120,6 +2376,7 @@ namespace PnP.Core.Test.SharePoint
                     var page = pages.AsEnumerable().First();
 
                     Assert.IsTrue(pages.Count == 1);
+                    Assert.AreEqual(PageHeaderType.Default, page.PageHeader.Type);
                     Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
 
                     newPage = pages.AsEnumerable().First();
@@ -3481,11 +3738,17 @@ namespace PnP.Core.Test.SharePoint
                 var newPage = await context.Web.NewPageAsync(PageLayoutType.Home);
                 string pageName = TestCommon.GetPnPSdkTestAssetName("HomePageCreate.aspx");
 
+                newPage.SetDefaultPageHeader();
+                newPage.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
+                newPage.PageHeader.TopicHeader = "Home must not persist a normal header";
+
                 // A simple section and text control to the page                
                 newPage.AddControl(newPage.NewTextPart("PnP"), newPage.DefaultSection.DefaultColumn);
 
                 // Save the page
                 await newPage.SaveAsync(pageName);
+                Assert.IsTrue(string.IsNullOrEmpty(((Page)newPage).PageListItem[PageConstants.PageLayoutContentField]?.ToString()));
+                Assert.IsTrue(string.IsNullOrEmpty(((Page)newPage).PageListItem[PageConstants._TopicHeader]?.ToString()));
 
                 // Load the page again
                 pages = await context.Web.GetPagesAsync(pageName);
