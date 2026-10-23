@@ -223,5 +223,198 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         void SetChromeOptionsBatch(IChromeOptions chromeOptions);
         #endregion
+
+        #region brandcenter
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBrandcenterConfiguration> GetBrandcenterConfigurationAsync();
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBrandcenterConfiguration GetBrandcenterConfiguration();
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBatchSingleResult<IBrandcenterConfiguration>> GetBrandcenterConfigurationBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBatchSingleResult<IBrandcenterConfiguration> GetBrandcenterConfigurationBatch(Batch batch);
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationAsync();
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBrandcenterConfiguration GetCurrentBrandcenterConfiguration();
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        Task<IBatchSingleResult<IBrandcenterConfiguration>> GetCurrentBrandcenterConfigurationBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the current branding center configuration
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IBrandcenterConfiguration"/></returns>
+        IBatchSingleResult<IBrandcenterConfiguration> GetCurrentBrandcenterConfigurationBatch(Batch batch);
+
+        #endregion
+
+        #region OutOfBoxFontPackages
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        Task <List<IFontPackage>> GetOutOfBoxFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        List<IFontPackage> GetOutOfBoxFontPackages();
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <returns>Site's <see cref="IFontPackage"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the out of the box fonts available
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        void SetOutOfBoxFontPackage(string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        Task SetOutOfBoxFontPackageAsync(string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        void SetOutOfBoxFontPackageBatch(Batch batch, string fontId);
+
+        /// <summary>
+        /// Sets the out of the box font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        Task SetOutOfBoxFontPackageBatchAsync(Batch batch, string fontId);
+
+        #endregion OutOfBoxFontPackages
+
+        #region Branding Center FontPackages
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<List<IFontPackage>> GetFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        List<IFontPackage> GetFontPackages();
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts available in branding center
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        void SetFontPackage(string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="fontId"></param>
+        Task SetFontPackageAsync(string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        void SetFontPackageBatch(Batch batch, string fontId);
+
+        /// <summary>
+        /// Sets the branding center font with the given id on the Site
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="fontId"></param>
+        Task SetPackageBatchAsync(Batch batch, string fontId);
+
+        #endregion Branding Center FontPackages
+
+        #region SiteFontPackages
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<List<IFontPackage>> GetSiteFontPackagesAsync();
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        List<IFontPackage> GetSiteFontPackages();
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        Task<IBatchSingleResult<List<IFontPackage>>> GetSiteFontPackagesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the fonts installed on the site
+        /// </summary>
+        /// <returns>Site's <see cref="System.Collections.Generic.List{IFontPackage}"/></returns>
+        IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch);
+
+        #endregion SiteFontPackages
     }
 }
