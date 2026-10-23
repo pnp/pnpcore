@@ -134,7 +134,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
             }
 
             bool isNews = pageToExtract.LayoutType != PageLayoutType.Home
-                && promotedState == (int)PromotedState.Promoted;
+                && (promotedState == (int)PromotedState.PromoteOnPublish || promotedState == (int)PromotedState.Promoted);
 
             BaseClientSidePage extractedPage;
             if (page.IsTranslation)

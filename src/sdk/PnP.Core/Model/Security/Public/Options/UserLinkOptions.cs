@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.Security
 {
@@ -16,5 +17,10 @@ namespace PnP.Core.Model.Security
         /// A collection of recipients who will receive access to the sharing link.
         /// </summary>
         public List<IDriveRecipient> Recipients { get; set; }
+
+        /// <summary>
+        /// Indicates the expiration datetime of the permission.
+        /// </summary>
+        public DateTime ExpirationDateTime { get; set; }
     }
 }
