@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Skipped consolidated away models when loading extra pages in a batch #1887 [svermaak - svermaak]
 - Fixed folder creation in SharePoint lists #1884 [nicolaor - Rene Nicolao]
 - Fixed loss of visible no-image page headers on load/save #1908 [YifengMao - Yifeng]
+- Fixed handling ListInstance content type binding #1907 [gszdev - gszdev]
 
 ## [1.18]
 
