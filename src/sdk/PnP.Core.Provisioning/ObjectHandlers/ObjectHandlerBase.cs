@@ -179,9 +179,9 @@ namespace PnP.Core.Provisioning.ObjectHandlers
             }
             catch (Exception ex)
             {
-                context.Logger?.LogWarning("{Source}: {Message}",
+                context.Logger?.LogWarning(ex, "{Source}: {Message}",
                     Constants.LOGGING_SOURCE,
-                    string.Format(PnPCoreProvisioningResources.TaxonomyField_ValidationException, fieldName, ex.Message));
+                    string.Format(PnPCoreProvisioningResources.TaxonomyField_ValidationException, fieldName));
 
                 return false;
             }
@@ -448,7 +448,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// </summary>
         internal static async Task<bool> IsSubSiteAsync(PnPContext context)
         {
-            if (context.Site?.RootWeb?.IsPropertyAvailable(s => s.Id) is false)
+            if (context.Site?.RootWeb?.IsPropertyAvailable(s => s.Id) == false)
             {
                 await context.Site.LoadAsync(s => s.RootWeb.QueryProperties(w => w.Id)).ConfigureAwait(false);
             }

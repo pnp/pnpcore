@@ -646,6 +646,6 @@
     <value>TaxonomyField: TermSet not found (Field: {0}, TermSetId {1}).</value>
   </data>
   <data name="TaxonomyField_ValidationException" xml:space="preserve">
-    <value>TaxonomyField: Field definition (XML) validation failed (Message: {0}). </value>
+    <value>TaxonomyField: Field definition (XML) validation failed (Field: {0}). </value>
   </data>
 </root>

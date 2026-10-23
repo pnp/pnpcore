@@ -1649,7 +1649,7 @@ namespace PnP.Core.Provisioning {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TaxonomyField: TermSet for not found (Field: {0}, TermSetId {1})..
+        ///   Looks up a localized string similar to TaxonomyField: TermSet not found (Field: {0}, TermSetId {1})..
         /// </summary>
         internal static string TaxonomyField_TermSetNotFound {
             get {
@@ -1658,7 +1658,7 @@ namespace PnP.Core.Provisioning {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TaxonomyField: Missing TermStoreId (SSpi) in TaxnomyField definition (Field: {0})..
+        ///   Looks up a localized string similar to TaxonomyField: Missing TermStoreId (SspId) in TaxonomyField definition (Field: {0})..
         /// </summary>
         internal static string TaxonomyField_TermStoreIdMissing {
             get {
@@ -1667,7 +1667,7 @@ namespace PnP.Core.Provisioning {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TaxonomyField: Field definition (XML) validation failed (Message: {0}). .
+        ///   Looks up a localized string similar to TaxonomyField: Field definition (XML) validation failed (Field: {0}). .
         /// </summary>
         internal static string TaxonomyField_ValidationException {
             get {
