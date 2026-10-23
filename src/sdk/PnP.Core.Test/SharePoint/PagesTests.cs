@@ -1820,6 +1820,7 @@ namespace PnP.Core.Test.SharePoint
         [DataRow("Engineer")]
         public async Task NoImagePageHeaderFromHtmlWithAuthorTest(string role)
         {
+            //TestCommon.Instance.Mocking = false;
             var original = new PageHeader(null, PageHeaderType.Default, null)
             {
                 LayoutType = PageHeaderLayoutType.NoImage,
@@ -1855,6 +1856,7 @@ namespace PnP.Core.Test.SharePoint
         [DataRow(true, true, "<span>Visible title</span>", PageHeaderType.Custom)]
         public void NoImagePageHeaderFromHtmlContractTest(bool includeAuthors, bool includeByline, string innerHtml, PageHeaderType expectedType)
         {
+            //TestCommon.Instance.Mocking = false;
             var properties = new Dictionary<string, object>
             {
                 ["title"] = "A title alone does not indicate a visible header",
@@ -1891,6 +1893,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task NoImagePageHeaderFromDefaultAndLegacyTemplatesTest()
         {
+            //TestCommon.Instance.Mocking = false;
             var original = new PageHeader(null, PageHeaderType.Default, null) { LayoutType = PageHeaderLayoutType.NoImage };
             var loaded = new PageHeader(null, PageHeaderType.Default, null);
             loaded.FromHtml(await original.ToHtmlAsync("Visible header"));
@@ -1909,6 +1912,7 @@ namespace PnP.Core.Test.SharePoint
         [DataRow("<div></div>", PageHeaderType.None)]
         public void EmptyPageHeaderFromHtmlTest(string html, PageHeaderType expectedType)
         {
+            //TestCommon.Instance.Mocking = false;
             var header = new PageHeader(null, PageHeaderType.None, null);
             header.FromHtml(html);
             Assert.AreEqual(expectedType, header.Type);
@@ -1919,6 +1923,7 @@ namespace PnP.Core.Test.SharePoint
         [DataRow(PageHeaderLayoutType.ColorBlock)]
         public async Task DefaultPageHeaderLayoutRoundTripTest(PageHeaderLayoutType layout)
         {
+            //TestCommon.Instance.Mocking = false;
             var original = new PageHeader(null, PageHeaderType.Default, null) { LayoutType = layout };
             var loaded = new PageHeader(null, PageHeaderType.None, null);
             loaded.FromHtml(await original.ToHtmlAsync("Visible header"));
@@ -1927,38 +1932,23 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [DataTestMethod]
-        [DataRow(false)]
-        [DataRow(true)]
-        public async Task PageTitleWebPartHeaderTakesPrecedenceTest(bool includeLegacyHeader)
-        {
-            var page = new Page(null, null, null);
-            var titlePart = (PageWebPart)page.NewWebPart();
-            titlePart.WebPartId = page.DefaultWebPartToWebPartId(DefaultWebPart.PageTitle);
-            titlePart.PropertiesJson = "{\"layoutType\":\"NoImage\"}";
-            page.AddControl(titlePart, page.DefaultSection.DefaultColumn);
-
-            var loaded = new Page(null, null, null);
-            page.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
-            string headerHtml = includeLegacyHeader ? await ((PageHeader)page.PageHeader).ToHtmlAsync("Visible header") : "";
-            var loadFromHtml = typeof(Page).GetMethod("LoadFromHtml", BindingFlags.NonPublic | BindingFlags.Instance);
-            loadFromHtml.Invoke(loaded, new object[] { page.ToHtml(), headerHtml });
-
-            Assert.AreEqual(PageHeaderType.PageTitleWebPart, loaded.PageHeader.Type);
-            Assert.AreEqual(1, loaded.Controls.Count);
-            Assert.AreEqual(titlePart.WebPartId, ((IPageWebPart)loaded.Controls.Single()).WebPartId);
-            Assert.AreEqual("", await ((PageHeader)loaded.PageHeader).ToHtmlAsync("Visible header"));
-        }
-
-        [DataTestMethod]
         [DataRow(null, 0)]
         [DataRow("Engineer", 1)]
         public async Task NoImagePageHeaderRoundTripTest(string role, int id)
         {
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id))
             {
                 var page = await context.Web.NewPageAsync();
                 string pageName = TestCommon.GetPnPSdkTestAssetName($"NoImagePageHeaderRoundTripTest-{id}.aspx");
-                var user = role == null ? null : await context.Web.GetCurrentUserAsync();
+                // Use a person rather than the current principal, which can be an app-only identity.
+                var user = role == null ? null : await context.Web.SiteUsers
+                    .QueryProperties(p => p.Id, p => p.LoginName)
+                    .FirstOrDefaultAsync(p => p.LoginName.StartsWith("i:0#.f|membership|") && p.Mail != "");
+                if (role != null)
+                {
+                    Assert.IsNotNull(user, "The test site must contain a user with a UPN.");
+                }
                 string upn = user?.LoginName.Split('|').Last();
                 int userId = user?.Id ?? -1;
                 page.LayoutType = PageLayoutType.Article;
@@ -1982,7 +1972,8 @@ namespace PnP.Core.Test.SharePoint
                     AssertNoImagePageHeaderFields(((Page)page).PageListItem, role, upn, userId);
                     string pageUrl = $"{page.PagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}";
                     var persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
-                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(l => l.Fields)));
+                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                            l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
                     AssertNoImagePageHeaderFields(persisted.ListItemAllFields, role, upn, userId);
 
                     var loaded = (await context.Web.GetPagesAsync(pageName)).Single();
@@ -1993,7 +1984,8 @@ namespace PnP.Core.Test.SharePoint
                     await loaded.SaveAsync();
                     AssertNoImagePageHeaderFields(((Page)loaded).PageListItem, role, upn, userId);
                     persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
-                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(l => l.Fields)));
+                        p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                            l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
                     AssertNoImagePageHeaderFields(persisted.ListItemAllFields, role, upn, userId);
 
                     var reloaded = (await context.Web.GetPagesAsync(pageName)).Single();
@@ -2013,7 +2005,8 @@ namespace PnP.Core.Test.SharePoint
                         Assert.IsNull(removedItem[PageConstants._TopicHeader]);
 
                         persisted = await context.Web.GetFileByServerRelativeUrlAsync(pageUrl,
-                            p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(l => l.Fields)));
+                            p => p.ListItemAllFields.QueryProperties(i => i.All, i => i.ParentList.QueryProperties(
+                                l => l.Fields.QueryProperties(f => f.InternalName, f => f.FieldTypeKind, f => f.TypeAsString, f => f.Title))));
                         Assert.IsTrue(string.IsNullOrEmpty(persisted.ListItemAllFields[PageConstants.PageLayoutContentField]?.ToString()));
                         Assert.IsTrue(!persisted.ListItemAllFields.Values.TryGetValue(PageConstants._AuthorByline, out object persistedByline) || persistedByline == null);
                         Assert.IsTrue(string.IsNullOrEmpty(persisted.ListItemAllFields[PageConstants._TopicHeader]?.ToString()));

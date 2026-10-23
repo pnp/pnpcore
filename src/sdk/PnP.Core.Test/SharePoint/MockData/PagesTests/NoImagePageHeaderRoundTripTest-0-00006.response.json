@@ -1,1 +1,1 @@
-{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{},"Response":"[{\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.0.0\",\"ErrorInfo\":null}]"}
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"959947a2-f0bf-0000-1e8f-f9b29290fdc3","SPClientServiceRequestDuration":"345","X-SharePointHealthScore":"3","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":"[\r{\r\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.27822.12758\",\"ErrorInfo\":null,\"TraceCorrelationId\":\"959947a2-f0bf-0000-1e8f-f9b29290fdc3\"\r}\r]"}

@@ -1,1 +1,1 @@
-{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{},"Response":"{\"Id\":\"55555555-5555-4555-8555-555555555555\",\"GroupId\":\"00000000-0000-0000-0000-000000000000\"}"}
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"959947a2-6029-0000-1e8f-fc159fbc9da6","SPClientServiceRequestDuration":"17","X-SharePointHealthScore":"0","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":"{\"GroupId\":\"00000000-0000-0000-0000-000000000000\",\"Id\":\"97af5633-c204-502f-bc5a-7eb2ffd9f0c8\"}"}
