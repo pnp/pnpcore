@@ -348,7 +348,11 @@ namespace PnP.Core.Model.SharePoint
                                 {
                                     if (string.IsNullOrEmpty(pageHeaderControl.InnerHtml))
                                     {
-                                        Type = PageHeaderType.None;
+                                        // Visible headers serialize author properties even when their arrays are empty.
+                                        // The legacy no-header template omits them.
+                                        Type = properties.TryGetProperty("authors", out _) || properties.TryGetProperty("authorByline", out _)
+                                            ? PageHeaderType.Default
+                                            : PageHeaderType.None;
                                     }
                                     else
                                     {

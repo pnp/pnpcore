@@ -48,6 +48,15 @@ await page.SaveAsync("PageWithCustomizedDefaultHeader.aspx");
 
 Above sample will switch the header to use the Cut in Shape layout option with a topic header. We're also changing the page title alignment to be centered versus the default left alignment and we're showing the date when the page was published in the header.
 
+To keep a visible header without a background image on an Article-layout page, use:
+
+```csharp
+page.SetDefaultPageHeader();
+page.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
+```
+
+`NoImage` is a header layout, not header removal. The header and its author/byline data are retained when loading and saving the page, including when the author arrays are empty. Use `RemovePageHeader()` to intentionally remove the header and its associated byline and topic fields. Home-layout pages do not persist the normal page header.
+
 ## Configuring a custom header
 
 The previous section already showed some cool page header features, but we can do better 😊 You can also use a full custom header, which next to the options presented in the previous example, also allows you to configure the background image of the header. To configure a header with an image you can use the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__) which takes the server relative url to the image to use as input.

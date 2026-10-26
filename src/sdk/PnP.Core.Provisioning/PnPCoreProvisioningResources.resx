@@ -639,4 +639,13 @@
   <data name="TermGroup_No_Access" xml:space="preserve">
     <value>Login context does not have access to the TermGroup. If using app context, add app@sharepoint to the term group access list.</value>
   </data>
+  <data name="TaxonomyField_TermStoreIdMissing" xml:space="preserve">
+    <value>TaxonomyField: Missing TermStoreId (SspId) in TaxonomyField definition (Field: {0}).</value>
+  </data>
+  <data name="TaxonomyField_TermSetNotFound" xml:space="preserve">
+    <value>TaxonomyField: TermSet not found (Field: {0}, TermSetId {1}).</value>
+  </data>
+  <data name="TaxonomyField_ValidationException" xml:space="preserve">
+    <value>TaxonomyField: Field definition (XML) validation failed (Field: {0}). </value>
+  </data>
 </root>

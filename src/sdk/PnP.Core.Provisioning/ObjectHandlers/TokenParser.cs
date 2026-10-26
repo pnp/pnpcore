@@ -548,12 +548,12 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
                 if (tokenIds.Contains("termsetid"))
                 {
-                    await context.TermStore.LoadAsync(t => t.Groups.QueryProperties(
-                        g => g.Name,
-                        g => g.Sets.QueryProperties(s => s.Id, s => s.LocalizedNames))).ConfigureAwait(false);
+                    await context.TermStore.LoadAsync(t => t.Groups.QueryProperties(g => g.Name)).ConfigureAwait(false);
 
                     foreach (ITermGroup termGroup in context.TermStore.Groups.AsRequested())
                     {
+                        await termGroup.LoadAsync(g => g.Sets.QueryProperties(s => s.Id, s => s.LocalizedNames)).ConfigureAwait(false);
+
                         foreach (ITermSet termSet in termGroup.Sets.AsRequested())
                         {
                             string name = termSet.LocalizedNames?.FirstOrDefault()?.Name;
