@@ -6312,76 +6312,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.yml\" sourcestartlinenumber=\"1\">Result of a classify and extract operation requested for a file</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.ISyntexContentCenter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.ISyntexContentCenter",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ISyntexContentCenter.yml\" sourcestartlinenumber=\"1\">Syntex Content Center site</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModel.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.ISyntexModel",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ISyntexModel.yml\" sourcestartlinenumber=\"1\">Syntex model</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModelPublication.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.ISyntexModelPublication",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ISyntexModelPublication.yml\" sourcestartlinenumber=\"1\">Defines a model publication</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.ISyntexModelPublicationResult",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.yml\" sourcestartlinenumber=\"1\">The result of a SharePoint Syntex model publication</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.ITerm.yml",
       "output": {
         ".html": {
@@ -6970,20 +6900,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.yml\" sourcestartlinenumber=\"1\">Options that define how adding a classifier will impact the library's views</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.MigrationJobState.yml",
       "output": {
         ".html": {
@@ -7569,34 +7485,6 @@
       "IsMRef": true,
       "Title": "PnP.Core.Model.SharePoint.SortOption",
       "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.SortOption.yml\" sourcestartlinenumber=\"1\">Defines a field to be used for sorting search query results</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.SyntexModelPublishOptions",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.yml\" sourcestartlinenumber=\"1\">Information about the library to publish a Syntex model to</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions",
-      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.yml\" sourcestartlinenumber=\"1\">Information about the library to unpublish a Syntex model from</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -11941,16 +11829,6 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/social-user-profiles.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "using-the-sdk/syntex-intro.md",
-      "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/syntex-intro.html"
         }
       },
       "version": ""

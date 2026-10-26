@@ -2553,7 +2553,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_CheckIfUserHasPermissions_System_String_PnP_Core_Model_SharePoint_PermissionKind_" data-uid="PnP.Core.Model.SharePoint.IList.CheckIfUserHasPermissions(System.String,PnP.Core.Model.SharePoint.PermissionKind)">
   CheckIfUserHasPermissions(string, PermissionKind)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L812"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L784"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Checks if a user has a specific kind of permissions to a list</p>
@@ -2595,7 +2595,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_CheckIfUserHasPermissionsAsync_System_String_PnP_Core_Model_SharePoint_PermissionKind_" data-uid="PnP.Core.Model.SharePoint.IList.CheckIfUserHasPermissionsAsync(System.String,PnP.Core.Model.SharePoint.PermissionKind)">
   CheckIfUserHasPermissionsAsync(string, PermissionKind)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L820"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L792"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Checks if a user has a specific kind of permissions to a list</p>
@@ -2633,161 +2633,11 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
 
 
-  <a id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtract_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtract*"></a>
-
-  <h3 id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtract_System_Boolean_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtract(System.Boolean,System.Int32)">
-  ClassifyAndExtract(bool, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L700"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Classifies and extracts all unprocessed files in the list</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;ISyntexClassifyAndExtractResult&gt; ClassifyAndExtract(bool force = false, int pageSize = 500)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>force</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Also classify and extract files that were processed before</p>
-</dd>
-    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Page size used when loading the files in this library</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.html">ISyntexClassifyAndExtractResult</a>&gt;</dt>
-    <dd><p>Information about the created classify and extract requests</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractAsync_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractAsync*"></a>
-
-  <h3 id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractAsync_System_Boolean_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractAsync(System.Boolean,System.Int32)">
-  ClassifyAndExtractAsync(bool, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L692"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Classifies and extracts all unprocessed files in the list</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;List&lt;ISyntexClassifyAndExtractResult&gt;&gt; ClassifyAndExtractAsync(bool force = false, int pageSize = 500)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>force</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Also classify and extract files that were processed before</p>
-</dd>
-    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Page size used when loading the files in this library</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.html">ISyntexClassifyAndExtractResult</a>&gt;&gt;</dt>
-    <dd><p>Information about the created classify and extract requests</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeak_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak*"></a>
-
-  <h3 id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeak" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak">
-  ClassifyAndExtractOffPeak()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L712"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.html">ISyntexClassifyAndExtractResult</a></dt>
-    <dd><p>Information about the created classify and extract requests</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeakAsync_" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync*"></a>
-
-  <h3 id="PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeakAsync" data-uid="PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync">
-  ClassifyAndExtractOffPeakAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L706"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ISyntexClassifyAndExtractResult&gt; ClassifyAndExtractOffPeakAsync()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ISyntexClassifyAndExtractResult.html">ISyntexClassifyAndExtractResult</a>&gt;</dt>
-    <dd><p>Information about the created classify and extract requests</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
   <a id="PnP_Core_Model_SharePoint_IList_ClearDefaultColumnValues_" data-uid="PnP.Core.Model.SharePoint.IList.ClearDefaultColumnValues*"></a>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ClearDefaultColumnValues" data-uid="PnP.Core.Model.SharePoint.IList.ClearDefaultColumnValues">
   ClearDefaultColumnValues()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L844"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L816"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears the default column values set (at folder level) for this library</p>
@@ -2814,7 +2664,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ClearDefaultColumnValuesAsync" data-uid="PnP.Core.Model.SharePoint.IList.ClearDefaultColumnValuesAsync">
   ClearDefaultColumnValuesAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L838"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L810"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears the default column values set (at folder level) for this library</p>
@@ -2846,7 +2696,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_EnableAudienceTargeting" data-uid="PnP.Core.Model.SharePoint.IList.EnableAudienceTargeting">
   EnableAudienceTargeting()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L882"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L854"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Enable audience targeting for a list</p>
@@ -2873,7 +2723,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_EnableAudienceTargetingAsync" data-uid="PnP.Core.Model.SharePoint.IList.EnableAudienceTargetingAsync">
   EnableAudienceTargetingAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L876"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L848"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Enable audience targeting for a list</p>
@@ -2905,7 +2755,7 @@ and <a href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html"
 
   <h3 id="PnP_Core_Model_SharePoint_IList_FindFiles_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.FindFiles(System.String)">
   FindFiles(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L783"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L755"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Find files in the list, can be slow as it iterates over all the files in the list. If performance
@@ -2944,7 +2794,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_FindFilesAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.FindFilesAsync(System.String)">
   FindFilesAsync(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L790"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L762"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Find files in the list, can be slow as it iterates over all the files in the list. If performance
@@ -3187,7 +3037,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetContentTypeOrder" data-uid="PnP.Core.Model.SharePoint.IList.GetContentTypeOrder">
   GetContentTypeOrder()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L776"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L748"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the current list or content types in the current order</p>
@@ -3220,7 +3070,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetContentTypeOrderAsync" data-uid="PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync">
   GetContentTypeOrderAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L770"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L742"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the current list or content types in the current order</p>
@@ -3253,7 +3103,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetDefaultColumnValues" data-uid="PnP.Core.Model.SharePoint.IList.GetDefaultColumnValues">
   GetDefaultColumnValues()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L832"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L804"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets a list of default column values set (at folder level) for this library</p>
@@ -3286,7 +3136,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetDefaultColumnValuesAsync" data-uid="PnP.Core.Model.SharePoint.IList.GetDefaultColumnValuesAsync">
   GetDefaultColumnValuesAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L798"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets a list of default column values set (at folder level) for this library</p>
@@ -3319,7 +3169,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstances" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstances">
   GetFlowInstances()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L696"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3352,7 +3202,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstancesAsync" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync">
   GetFlowInstancesAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L718"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L690"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3385,7 +3235,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatch" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch">
   GetFlowInstancesBatch()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L750"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L722"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3418,7 +3268,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch(PnP.Core.Services.Batch)">
   GetFlowInstancesBatch(Batch)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L738"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L710"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3457,7 +3307,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatchAsync" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync">
   GetFlowInstancesBatchAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L744"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L716"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3490,7 +3340,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync(PnP.Core.Services.Batch)">
   GetFlowInstancesBatchAsync(Batch)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L731"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L703"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a list of flow instances connected to this list</p>
@@ -3529,7 +3379,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetUserEffectivePermissions_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetUserEffectivePermissions(System.String)">
   GetUserEffectivePermissions(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L797"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L769"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets the user effective permissions of a user for a list</p>
@@ -3568,7 +3418,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_GetUserEffectivePermissionsAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetUserEffectivePermissionsAsync(System.String)">
   GetUserEffectivePermissionsAsync(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L776"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Gets the user effective permissions of a user for a list</p>
@@ -4393,7 +4243,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ReIndex" data-uid="PnP.Core.Model.SharePoint.IList.ReIndex">
   ReIndex()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L870"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L842"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Reindexes this list</p>
@@ -4420,7 +4270,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ReIndexAsync" data-uid="PnP.Core.Model.SharePoint.IList.ReIndexAsync">
   ReIndexAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L864"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L836"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Reindexes this list</p>
@@ -4662,7 +4512,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ReorderContentTypes_System_Collections_Generic_List_System_String__" data-uid="PnP.Core.Model.SharePoint.IList.ReorderContentTypes(System.Collections.Generic.List{System.String})">
   ReorderContentTypes(List&lt;string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L764"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L736"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Reorders the content types on the list. This controls the order of content types in the &quot;New&quot; menu and &quot;List Settings&quot; page</p>
@@ -4695,7 +4545,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_ReorderContentTypesAsync_System_Collections_Generic_List_System_String__" data-uid="PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync(System.Collections.Generic.List{System.String})">
   ReorderContentTypesAsync(List&lt;string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L757"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L729"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Reorders the content types on the list. This controls the order of content types in the &quot;New&quot; menu and &quot;List Settings&quot; page</p>
@@ -5006,7 +4856,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_SetDefaultColumnValues_System_Collections_Generic_List_PnP_Core_Model_SharePoint_DefaultColumnValueOptions__" data-uid="PnP.Core.Model.SharePoint.IList.SetDefaultColumnValues(System.Collections.Generic.List{PnP.Core.Model.SharePoint.DefaultColumnValueOptions})">
   SetDefaultColumnValues(List&lt;DefaultColumnValueOptions&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L858"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L830"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the default column value settings (at folder level) for this library</p>
@@ -5039,7 +4889,7 @@ is key, then try using a search based solution</p>
 
   <h3 id="PnP_Core_Model_SharePoint_IList_SetDefaultColumnValuesAsync_System_Collections_Generic_List_PnP_Core_Model_SharePoint_DefaultColumnValueOptions__" data-uid="PnP.Core.Model.SharePoint.IList.SetDefaultColumnValuesAsync(System.Collections.Generic.List{PnP.Core.Model.SharePoint.DefaultColumnValueOptions})">
   SetDefaultColumnValuesAsync(List&lt;DefaultColumnValueOptions&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L851"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L823"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the default column value settings (at folder level) for this library</p>
