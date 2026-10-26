@@ -685,13 +685,14 @@ namespace PnP.Core.Model.SharePoint
             {
                 field.FieldValue = DateTimeToSharePointWebDateTimeString(context, dateValue);
             }
-            else if (changedProp.Value != null && (changedProp.Value is int))
+            else if (changedProp.Value != null && (changedProp.Value is int || changedProp.Value is long))
             {
                 field.FieldValue = changedProp.Value.ToString();
             }
-            else if (changedProp.Value != null && (changedProp.Value is double doubleValue))
+            else if (changedProp.Value != null && (changedProp.Value is double || changedProp.Value is float || changedProp.Value is decimal))
             {
-                field.FieldValue = DoubleToSharePointString(context, doubleValue);
+                // Format float and decimal as they are: casting a float to double turns 0.1f into 0.100000001490116
+                field.FieldValue = NumberToSharePointString(context, (IFormattable)changedProp.Value);
             }
             else if (changedProp.Value != null && (changedProp.Value is bool boolValue))
             {
@@ -715,14 +716,14 @@ namespace PnP.Core.Model.SharePoint
             return (localDateTime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
-        private static string DoubleToSharePointString(PnPContext context, double input)
+        private static string NumberToSharePointString(PnPContext context, IFormattable input)
         {
             NumberFormatInfo nfi = new NumberFormatInfo
             {
                 NumberDecimalSeparator = context.Web.RegionalSettings.DecimalSeparator
             };
 
-            return input.ToString(nfi);
+            return input.ToString(null, nfi);
         }
 
         #endregion

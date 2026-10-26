@@ -234,6 +234,126 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region Long, float and decimal value tests
+
+        /// <summary>
+        /// Regression test for https://github.com/pnp/pnpcore/issues/1888: long, float and decimal values were sent to
+        /// AddValidateUpdateItemUsingPath and ValidateUpdateListItem as JSON numbers, which SharePoint rejects with
+        /// "Cannot convert a primitive value to the expected type 'Edm.String'".
+        /// </summary>
+        [TestMethod]
+        public async Task AddAndUpdateLongFloatDecimalValuesBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            string listTitle = TestCommon.GetPnPSdkTestAssetName("AddAndUpdateLongFloatDecimalValuesBatchTest");
+            string fldText = "NotesField";
+            string fldNumber = "AmountField";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                if (!TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                try
+                {
+                    await myList.Fields.AddTextAsync(fldText, new FieldTextOptions()
+                    {
+                        Group = "TEST GROUP",
+                        AddToDefaultView = true,
+                    });
+
+                    await myList.Fields.AddNumberAsync(fldNumber, new FieldNumberOptions()
+                    {
+                        Group = "TEST GROUP",
+                        AddToDefaultView = true,
+                    });
+
+                    // Both the text and the number field must accept each value type
+                    var addValues = new Dictionary<string, object>
+                    {
+                        { "long", 5000000000L },
+                        { "float", 0.1f },
+                        { "decimal", 5.5m },
+                    };
+
+                    var addedItems = new Dictionary<string, IListItem>();
+                    foreach (var addValue in addValues)
+                    {
+                        addedItems.Add(addValue.Key, await myList.Items.AddBatchAsync(new Dictionary<string, object>
+                        {
+                            { "Title", addValue.Key },
+                            { fldText, addValue.Value },
+                            { fldNumber, addValue.Value }
+                        }));
+                    }
+                    await context.ExecuteAsync();
+
+                    string separator = context.Web.RegionalSettings.DecimalSeparator;
+
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                        await myList2.LoadAsync(p => p.Items);
+                        var items = myList2.Items.AsRequested().ToList();
+
+                        Assert.AreEqual(3, items.Count);
+                        AssertItemValues(items, "long", "5000000000", 5000000000d);
+                        AssertItemValues(items, "float", $"0{separator}1", 0.1d);
+                        AssertItemValues(items, "decimal", $"5{separator}5", 5.5d);
+                    }
+
+                    var updateValues = new Dictionary<string, object>
+                    {
+                        { "long", -42L },
+                        { "float", 0.7f },
+                        { "decimal", 6.75m },
+                    };
+
+                    foreach (var updateValue in updateValues)
+                    {
+                        var item = addedItems[updateValue.Key];
+                        item[fldText] = updateValue.Value;
+                        item[fldNumber] = updateValue.Value;
+                        await item.UpdateBatchAsync();
+                    }
+                    await context.ExecuteAsync();
+
+                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                        await myList3.LoadAsync(p => p.Items);
+                        var items = myList3.Items.AsRequested().ToList();
+
+                        AssertItemValues(items, "long", "-42", -42d);
+                        AssertItemValues(items, "float", $"0{separator}7", 0.7d);
+                        AssertItemValues(items, "decimal", $"6{separator}75", 6.75d);
+                    }
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+
+            void AssertItemValues(List<IListItem> items, string title, string expectedText, double expectedNumber)
+            {
+                var item = items.First(p => p.Title == title);
+                Assert.AreEqual(expectedText, item[fldText]);
+                Assert.AreEqual(expectedNumber, Convert.ToDouble(item[fldNumber]));
+            }
+        }
+
+        #endregion
+
         [TestMethod]
         public async Task AddListItemWithFolderTest()
         {
