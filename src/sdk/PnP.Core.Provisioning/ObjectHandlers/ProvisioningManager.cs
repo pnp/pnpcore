@@ -581,11 +581,6 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 objectHandlers.Add(new ObjectSiteSettings());
             }
 
-            if (all || configuration.Handlers.Contains(ConfigurationHandler.SyntexModels))
-            {
-                objectHandlers.Add(new ObjectSyntexModels());
-            }
-
             if (all || configuration.Handlers.Contains(ConfigurationHandler.ApplicationLifecycleManagement))
             {
                 objectHandlers.Add(new ObjectApplicationLifecycleManagement());
