@@ -193,18 +193,15 @@ namespace PnP.Core.Model.SharePoint
             // not be added which is indicated via the HasException property on the field. If so then throw an error.
             if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
             {
-                var errorMessage = field.TryGetProperty("ErrorMessage", out JsonElement errorMessageProperty)
+                var errorMessage = string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName);
+                var serverErrorMessage = field.TryGetProperty("ErrorMessage", out JsonElement errorMessageProperty)
                     && errorMessageProperty.ValueKind == JsonValueKind.String
                     ? errorMessageProperty.GetString()
                     : null;
-                if (string.IsNullOrEmpty(errorMessage))
-                {
-                    errorMessage = string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName);
-                }
-                var errorCode = field.TryGetProperty("ErrorCode", out JsonElement errorCodeProperty)
+                var serverErrorCode = field.TryGetProperty("ErrorCode", out JsonElement errorCodeProperty)
                     && errorCodeProperty.ValueKind == JsonValueKind.Number
                     && errorCodeProperty.TryGetInt64(out long parsedErrorCode) ? parsedErrorCode : 0;
-                var error = new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, errorCode, errorMessage);
+                var error = new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, errorMessage, serverErrorCode, serverErrorMessage);
 
                 bool handled = false;
                 if (batchRequestId != Guid.Empty)

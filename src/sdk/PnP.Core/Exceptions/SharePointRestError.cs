@@ -48,10 +48,15 @@ namespace PnP.Core
             }
         }
 
-        internal SharePointRestError(ErrorType type, int httpResponseCode, long serverErrorCode, string message) : base(type, httpResponseCode)
+        internal SharePointRestError(ErrorType type, int httpResponseCode, string message, long serverErrorCode, string serverErrorMessage) : base(type, httpResponseCode)
         {
-            ServerErrorCode = serverErrorCode;
             Message = message;
+            ServerErrorCode = serverErrorCode;
+
+            if (!string.IsNullOrEmpty(serverErrorMessage))
+            {
+                AddAdditionalData("ErrorMessage", serverErrorMessage);
+            }
         }
 
         /// <summary>

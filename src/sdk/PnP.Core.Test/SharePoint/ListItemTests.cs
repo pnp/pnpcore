@@ -437,8 +437,10 @@ namespace PnP.Core.Test.SharePoint
 
                 var error = exception.Error as SharePointRestError;
                 Assert.IsNotNull(error);
+                Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), exception.Message);
+                Assert.AreEqual(exception.Message, error.Message);
                 Assert.AreEqual(0, error.ServerErrorCode);
-                Assert.AreEqual("abc", error.Message);
+                Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
 
                 await list.DeleteAsync();
             }
@@ -488,8 +490,9 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(errors.Count == 2);
                     var error = errors[0].Error as SharePointRestError;
                     Assert.IsNotNull(error);
+                    Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), error.Message);
                     Assert.AreEqual(0, error.ServerErrorCode);
-                    Assert.AreEqual("abc", error.Message);
+                    Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
                 }
                 finally
                 {
@@ -545,8 +548,9 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(errors.Count == 2);
                     var error = errors[0].Error as SharePointRestError;
                     Assert.IsNotNull(error);
+                    Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), error.Message);
                     Assert.AreEqual(0, error.ServerErrorCode);
-                    Assert.AreEqual("abc", error.Message);
+                    Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
                 }
                 finally
                 {
