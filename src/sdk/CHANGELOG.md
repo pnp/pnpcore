@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed loss of visible no-image page headers on load/save #1908 [YifengMao - Yifeng]
 - Fixed handling ListInstance content type binding #1907 [gszdev - gszdev]
 - Fixed TokenParser - Taxonomy, TermStore (nested QueryProperties using Graph) #1906 [gszdev - gszdev]
+- Removed SharePoint Syntex support #1875 [adam-it - Adam Wójcik]
 
 ## [1.18]
 
