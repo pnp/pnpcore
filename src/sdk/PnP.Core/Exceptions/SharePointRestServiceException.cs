@@ -17,6 +17,11 @@ namespace PnP.Core
         {
         }
 
+        internal SharePointRestServiceException(string message, SharePointRestError error) : base(message)
+        {
+            Error = error;
+        }
+
         internal SharePointRestServiceException()
         {
         }
