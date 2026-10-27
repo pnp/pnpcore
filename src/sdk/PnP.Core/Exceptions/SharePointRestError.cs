@@ -48,6 +48,17 @@ namespace PnP.Core
             }
         }
 
+        internal SharePointRestError(ErrorType type, int httpResponseCode, string message, long serverErrorCode, string serverErrorMessage) : base(type, httpResponseCode)
+        {
+            Message = message;
+            ServerErrorCode = serverErrorCode;
+
+            if (!string.IsNullOrEmpty(serverErrorMessage))
+            {
+                AddAdditionalData("ErrorMessage", serverErrorMessage);
+            }
+        }
+
         /// <summary>
         /// SharePoint server error code
         /// </summary>
