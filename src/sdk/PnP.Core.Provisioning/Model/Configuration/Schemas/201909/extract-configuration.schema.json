@@ -31,10 +31,6 @@
         "excludeAuthorInformation": {
           "description": "set to true to remove author information from webparts and modern clientside pages",
           "type": "boolean"
-        },
-        "extractPageAsPublished": {
-          "description": "If set to true page will be extracted as a published page.",
-          "type": "boolean"
         }
       }
     },

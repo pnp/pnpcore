@@ -180,6 +180,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
                 BaseTemplate = baseTemplate,
                 FileConnector = this.FileConnector,
                 IncludeAllClientSidePages = this.Pages.IncludeAllClientSidePages,
+                ExtractPageAsPublished = this.Pages.ExtractPageAsPublished,
                 IncludeHiddenLists = this.Lists.IncludeHiddenLists,
                 IncludeSiteGroups = this.SiteSecurity.IncludeSiteGroups,
                 ContentTypeGroupsToInclude = this.ContentTypes.Groups,
