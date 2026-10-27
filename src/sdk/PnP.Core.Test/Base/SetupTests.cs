@@ -47,7 +47,6 @@ namespace PnP.Core.Test.Base
             var services = new ServiceCollection();
             services.AddPnPCore((options) =>
             {
-                options.DisableTelemetry = false;
                 options.Environment = "China";
                 options.Sites.Add("DemoSite", new PnPCoreSiteOptions
                   {

@@ -454,7 +454,7 @@ namespace PnP.Core.Test.Base
         {
             PnPContextFactoryOptions options = new PnPContextFactoryOptions();
             PnPGlobalSettingsOptions globalOptions = new PnPGlobalSettingsOptions();
-            using (var context = new PnPContext(logger: null, authenticationProvider: null, sharePointRestClient: null, microsoftGraphClient: null, contextOptions: options, globalOptions: globalOptions, telemetryManager: null))
+            using (var context = new PnPContext(logger: null, authenticationProvider: null, sharePointRestClient: null, microsoftGraphClient: null, contextOptions: options, globalOptions: globalOptions))
             {
                 context.Uri = new Uri("https://officedevpnp.sharepoint.com/sites/PnPCoreSDKDoNotDelete");
 

@@ -39,7 +39,6 @@ namespace PnP.Core.Services.Builder.Configuration
 
         public void Configure(PnPGlobalSettingsOptions options)
         {
-            options.DisableTelemetry = pnpCoreOptions.Value.DisableTelemetry;
             options.AADTenantId = pnpCoreOptions.Value.AADTenantId;
 
             if (!string.IsNullOrEmpty(pnpCoreOptions.Value.Environment))

@@ -161,7 +161,6 @@ Open the `appsettings.yourname.json` file, it will look like the following one.
 ```json
 {
   "PnPCore": {
-    "DisableTelemetry": "true",
     "PnPContext": {
       "GraphFirst": "true",
       "GraphCanUseBeta": "true",

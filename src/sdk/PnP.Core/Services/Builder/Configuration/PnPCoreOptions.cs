@@ -9,8 +9,9 @@ namespace PnP.Core.Services.Builder.Configuration
     public class PnPCoreOptions
     {
         /// <summary>
-        /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
+        /// No longer used, PnP Core SDK does not send telemetry anymore. Will be removed in a future release.
         /// </summary>
+        [Obsolete("PnP Core SDK does not send telemetry anymore, this setting has no effect and will be removed in a future release.")]
         public bool DisableTelemetry { get; set; }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace PnP.Core.Services.Builder.Configuration
         public string AzureADLoginAuthority { get; set; }
 
         /// <summary>
-        /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
+        /// AAD tenant id, resolved automatically when not set. Can be customized via configuration
         /// </summary>
         public Guid AADTenantId { get; set; }
 

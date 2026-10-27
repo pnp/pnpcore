@@ -52,7 +52,6 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 ```json
 {
   "PnPCore": {
-    "DisableTelemetry": "false",
     "HttpRequests": {
       "UserAgent": "ISV|Contoso|ProductX",
       "Timeout": "100",

@@ -19,8 +19,6 @@ namespace PnP.Core.Test.Common.Utilities
     {
         internal const string PnPCoreSDKTestPrefix = "PNP_SDK_TEST_";
 
-        internal const string TestInstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
-
         protected const string AsyncSuffix = "_Async";
         protected const string PnPCoreSDKTestSite = "pnpcoresdktestsite";
         protected const string PnPCoreSDKTestUser = "pnpcoresdktestuser";
@@ -133,26 +131,6 @@ namespace PnP.Core.Test.Common.Utilities
             }
 
             return configurationName;
-        }
-
-        internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
-            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
-            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
-        {
-            // Obtain factory (cached)
-            var factory = BuildContextFactory();
-
-            // Remove Async suffix
-            if (testName.EndsWith(AsyncSuffix))
-            {
-                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
-            }
-
-
-            // Configure the factory for our testing mode
-            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
-
-            return await (factory as TestPnPContextFactory).CreateWithTelemetryManagerAsync(configurationName, telemetryManager).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> GetContextWithoutInitializationAsync(string configurationName, int id = 0,
@@ -403,20 +381,6 @@ namespace PnP.Core.Test.Common.Utilities
             }
         }
 
-
-        /// <summary>
-        /// Points the SDK telemetry at the test Azure AppInsights instance instead of the production one.
-        /// Must run before the first TelemetryManager is created: Application Insights v3 freezes a
-        /// TelemetryConfiguration as soon as a TelemetryClient is built from it, so the key cannot be
-        /// changed afterwards. Call this from an [AssemblyInitialize] method.
-        /// </summary>
-        internal static void UseTestTelemetryInstance()
-        {
-            if (!RunningInGitHubWorkflow())
-            {
-                TelemetryManager.InstrumentationKey = TestInstrumentationKey;
-            }
-        }
 
         internal static bool RunningInGitHubWorkflow()
         {

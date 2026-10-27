@@ -88,7 +88,6 @@ namespace PnP.Core.Services
 
         #region Private properties
 
-        private readonly TelemetryManager telemetry;
         private Batch currentBatch;
 
         #endregion
@@ -99,15 +98,13 @@ namespace PnP.Core.Services
                            SharePointRestClient sharePointRestClient,
                            MicrosoftGraphClient microsoftGraphClient,
                            IOptions<PnPContextFactoryOptions> contextOptions,
-                           IOptions<PnPGlobalSettingsOptions> globalOptions,
-                           TelemetryManager telemetryManager) :
+                           IOptions<PnPGlobalSettingsOptions> globalOptions) :
             this(logger,
                 authenticationProvider,
                 sharePointRestClient,
                 microsoftGraphClient,
                 contextOptions?.Value,
-                globalOptions?.Value,
-                telemetryManager)
+                globalOptions?.Value)
         {
         }
 
@@ -116,8 +113,7 @@ namespace PnP.Core.Services
                            SharePointRestClient sharePointRestClient,
                            MicrosoftGraphClient microsoftGraphClient,
                            PnPContextFactoryOptions contextOptions,
-                           PnPGlobalSettingsOptions globalOptions,
-                           TelemetryManager telemetryManager)
+                           PnPGlobalSettingsOptions globalOptions)
         {
             Id = Guid.NewGuid();
             Logger = logger;
@@ -130,7 +126,6 @@ namespace PnP.Core.Services
             GraphClient = microsoftGraphClient;
             GlobalOptions = globalOptions;
             ContextOptions = contextOptions;
-            telemetry = telemetryManager;
 
             if (ContextOptions != null)
             {
@@ -158,7 +153,7 @@ namespace PnP.Core.Services
                 }
             }
 
-            BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
+            BatchClient = new BatchClient(this, GlobalOptions);
         }
         #endregion
 
@@ -696,7 +691,7 @@ namespace PnP.Core.Services
 
         private PnPContext PrepareClonedContext()
         {
-            using (PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
+            using (PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
@@ -715,7 +710,7 @@ namespace PnP.Core.Services
 
         internal async Task<Guid> GetTenantIdAsync()
         {
-            // in case telemetry is configured, the globaloptions already has a populated tenantid value
+            // the tenant id is resolved once and then cached in the global options
             if (GlobalOptions.AADTenantId == Guid.Empty)
             {
                 var useOpenIdConfiguration = false;
@@ -917,7 +912,6 @@ namespace PnP.Core.Services
             if (disposing)
             {
                 // Future, lightweight, custom logic comes here
-                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a lot of contexts
             }
 
             disposed = true;
