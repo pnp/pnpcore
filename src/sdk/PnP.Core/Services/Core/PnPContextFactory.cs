@@ -10,11 +10,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading;
-#if NET5_0_OR_GREATER
-using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Reflection;
-#endif
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -27,11 +22,6 @@ namespace PnP.Core.Services
         private static readonly Expression<Func<IWeb, object>>[] defaultWebProps = { w => w.Id, w => w.Url,
                                                                                      w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
         private static readonly Expression<Func<ISite, object>>[] defaultSiteProps = { s => s.Id, s => s.GroupId };
-
-#if NET5_0_OR_GREATER
-        private static readonly HttpClient httpClient = new HttpClient();
-#endif
-        private bool telemetryInitialized;
 
         /// <summary>
         /// Default constructor for <see cref="PnPContextFactory"/>
@@ -57,8 +47,6 @@ namespace PnP.Core.Services
             ContextOptions = contextOptions?.Value;
             GlobalOptions = globalOptions?.Value;
             EventHub = eventHub;
-
-            ConnectTelemetry();
         }
 
         /// <summary>
@@ -80,11 +68,6 @@ namespace PnP.Core.Services
         /// Connected Microsoft Graph http client
         /// </summary>
         protected MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
-
-        /// <summary>
-        /// Connected Telemetry client
-        /// </summary>
-        internal TelemetryManager TelemetryManager { get; set; }
 
         /// <summary>
         /// Options used to configure this <see cref="PnPContext"/>
@@ -309,14 +292,11 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of PnPContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions)
             {
                 Uri = url,
                 CancellationToken = cancellationToken,
             };
-
-            // Configure telemetry, if enabled
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             // Perform context initialization
             await InitializeContextAsync(context, options).ConfigureAwait(false);
@@ -387,13 +367,10 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of PnPContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions)
             {
                 CancellationToken = cancellationToken,
             };
-
-            // Configure telemetry, if enabled
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             // Load the group to find out what the SharePoint site url is
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
@@ -695,132 +672,6 @@ namespace PnP.Core.Services
             // If the group has a linked SharePoint site then WebUrl is populated
             context.Uri = context.Group.WebUrl;
         }
-
-        internal void ConnectTelemetry()
-        {
-            bool connectTelemetry = true;
-
-            if (GlobalOptions != null && GlobalOptions.DisableTelemetry)
-            {
-                connectTelemetry = false;
-            }
-
-            // Second option to turn of telemetry is the PnP wide PNP_DISABLETELEMETRY environment variable
-            if (connectTelemetry && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PNP_DISABLETELEMETRY")))
-            {
-                connectTelemetry = false;
-            }
-
-#if NET5_0_OR_GREATER
-            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
-            {
-                connectTelemetry = false;
-            }
-#endif
-
-            if (connectTelemetry)
-            {
-                TelemetryManager = new TelemetryManager(GlobalOptions);
-            }
-        }
-
-        internal async Task ConfigureTelemetry(PnPContext context)
-        {
-            // We only configure telemetry and send the init event once per created PnPContextFactory
-            if (telemetryInitialized)
-            {
-                return;
-            }
-
-#if NET5_0_OR_GREATER
-            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
-            {
-                // Blazor WASM cannot handle the AppInsights NuGet package way of working,
-                // hence we're sending just one event to track WASM usage via a manual post
-                await SendBlazorInitEventAsync(context).ConfigureAwait(false);
-                telemetryInitialized = true;
-                return;
-            }
-#endif
-
-            // Populate the Azure AD tenant id
-            if (TelemetryManager != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
-            {
-                await context.SetAADTenantId().ConfigureAwait(false);
-
-                // Send a one time "Init" event
-                TelemetryManager.LogInitRequest();
-            }
-
-            telemetryInitialized = true;
-        }
-
-#if NET5_0_OR_GREATER
-        private async Task SendBlazorInitEventAsync(PnPContext context)
-        {
-            try
-            {
-                // Ensure the tenant id was fetched
-                await context.SetAADTenantId(true).ConfigureAwait(false);
-
-                using (var request = new HttpRequestMessage(HttpMethod.Post, $"https://dc.services.visualstudio.com/v2/track"))
-                {
-                    Assembly coreAssembly = Assembly.GetExecutingAssembly();
-                    // Build payload
-                    var body = new
-                    {
-                        name = "AppEvents",
-                        time = DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffZ"),
-                        iKey = TelemetryManager.InstrumentationKey,
-                        data = new
-                        {
-                            baseType = "EventData",
-                            baseData = new
-                            {
-                                ver = 2,
-                                name = "PnPCoreInit",
-                                properties = new
-                                {
-                                    PnPCoreSDKVersion = ((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version,
-                                    AADTenantId = GlobalOptions.AADTenantId.ToString(),
-                                    OS = "WASM"
-                                }
-                            }
-                        }
-                    };
-
-                    var jsonBody = JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues);
-
-                    using (StringContent content = new StringContent(jsonBody))
-                    {
-                        // Remove the default Content-Type content header
-                        if (content.Headers.Contains("Content-Type"))
-                        {
-                            content.Headers.Remove("Content-Type");
-                        }
-                        // Add the batch Content-Type header
-                        content.Headers.Add($"Content-Type", "application/x-json-stream");
-
-                        // Connect content to request
-                        request.Content = content;
-
-                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            Log.LogDebug($"Blazor telemetry failure: {await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
-                        }
-                    }
-                }
-            }
-            // Never fail if telemetry is failing
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
-            {
-                Log.LogDebug($"Blazor telemetry failure: {ex}");
-            }
-        }
-#endif
 
     }
 }
