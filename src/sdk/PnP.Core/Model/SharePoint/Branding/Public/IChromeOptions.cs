@@ -20,5 +20,9 @@
         /// </summary>
         IFooterOptions Footer { get; }
 
+        /// <summary>
+        /// Site font chrome configuration
+        /// </summary>
+        IFontOptions Font { get; }
     }
 }
