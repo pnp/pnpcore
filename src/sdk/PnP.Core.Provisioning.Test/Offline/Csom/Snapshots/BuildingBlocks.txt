@@ -1,0 +1,2 @@
+<StaticMethod Id="7" Name="SnapshotMethod" TypeId="{16f43e7e-bf35-475d-b677-9dc61e549339}"><Parameters><Parameter ObjectPathId="3" /><Parameter Type="Array"><Object ObjectPathId="4" /><Object ObjectPathId="5" /><Object ObjectPathId="6" /></Parameter><Parameter Type="String">literal</Parameter></Parameters></StaticMethod>
+<StaticMethod Id="8" Name="SnapshotMethodWithoutParameters" TypeId="{268004ae-ef6b-4e9b-8425-127220d84719}"></StaticMethod>

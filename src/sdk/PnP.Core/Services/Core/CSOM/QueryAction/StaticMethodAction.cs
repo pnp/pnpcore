@@ -2,7 +2,7 @@ using PnP.Core.Services.Core.CSOM.QueryAction;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
     /// <summary>
     /// Invokes a void-returning static CSOM method as an action.
