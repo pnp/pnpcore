@@ -146,6 +146,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
             config.MultiLanguage.ResourceFilePrefix = information.ResourceFilePrefix;
             config.Publishing.Persist = information.PersistPublishingFiles;
             config.Publishing.IncludeNativePublishingFiles = information.IncludeNativePublishingFiles;
+            config.Pages.ExtractPageAsPublished = information.ExtractPageAsPublished;
             config.SearchSettings.Include = information.IncludeSearchConfiguration;
             return config;
         }
@@ -176,6 +177,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
                 BaseTemplate = baseTemplate,
                 FileConnector = this.FileConnector,
                 IncludeAllClientSidePages = this.Pages.IncludeAllClientSidePages,
+                ExtractPageAsPublished = this.Pages.ExtractPageAsPublished,
                 IncludeHiddenLists = this.Lists.IncludeHiddenLists,
                 IncludeSiteGroups = this.SiteSecurity.IncludeSiteGroups,
                 ContentTypeGroupsToInclude = this.ContentTypes.Groups,
