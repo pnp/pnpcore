@@ -35,7 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed TokenParser - Taxonomy, TermStore (nested QueryProperties using Graph) #1906 [gszdev - gszdev]
 - Removed SharePoint Syntex support #1875 [adam-it - Adam Wójcik]
 - Updated the HandleValidateAddAndUpdateResponse in the ListItem to pass on the error code and error message if present #1819 [Guflly - Guflly]
-
+- Added flag to handle page published status #1885 [Magnus-K-work - Magnus-K-work]
 
 ## [1.18]
 
