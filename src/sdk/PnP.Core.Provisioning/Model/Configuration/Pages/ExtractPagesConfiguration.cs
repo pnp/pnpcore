@@ -10,7 +10,6 @@ namespace PnP.Core.Provisioning.Model.Configuration.Pages
         [JsonPropertyName("includeAllClientSidePages")]
         public bool IncludeAllClientSidePages { get; set; }
 
-
         [JsonPropertyName("extractPageAsPublished")]
         public bool ExtractPageAsPublished { get; set; } = true;
     }
