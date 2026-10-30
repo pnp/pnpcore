@@ -806,9 +806,9 @@ namespace PnP.Core.Provisioning.ObjectHandlers.Utilities
                     return CanvasSectionType.ThreeColumnVerticalSection;
 
                 case CanvasSectionTemplate.FlexibleLayoutSection:
-                    return CanvasSectionType.OneColumn;
+                    return CanvasSectionType.FlexibleLayoutSection;
                 case CanvasSectionTemplate.FlexibleLayoutVerticalSection:
-                    return CanvasSectionType.OneColumnVerticalSection;
+                    return CanvasSectionType.FlexibleLayoutVerticalSection;
 
                 default:
                     return CanvasSectionType.OneColumn;

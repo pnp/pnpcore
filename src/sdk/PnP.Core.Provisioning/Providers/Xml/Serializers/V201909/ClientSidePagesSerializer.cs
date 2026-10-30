@@ -3,7 +3,6 @@ using PnP.Core.Provisioning.Model;
 using PnP.Core.Provisioning.Providers.Xml.Resolvers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201909
@@ -63,20 +62,6 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201909
                             expressions,
                             recursive: true)
                         as IEnumerable<ClientSidePage>);
-
-                foreach (var page in template.ClientSidePages)
-                {
-                    if (page.Sections != null && page.Sections.Count > 0)
-                    {
-                        foreach (var section in page.Sections.Where(s=>s.Type == CanvasSectionType.OneColumn || s.Type == CanvasSectionType.OneColumnVerticalSection))
-                        {
-                            if (section.Controls != null && section.Controls.Any(c => !string.IsNullOrWhiteSpace(c.JsonControlData) && c.JsonControlData.Contains("\"sectionFactor\":100")))
-                            {
-                                section.Type = section.Type == CanvasSectionType.OneColumn ? CanvasSectionType.FlexibleLayoutSection : CanvasSectionType.FlexibleLayoutVerticalSection;
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -90,6 +75,8 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201909
                 var clientSidePageType = Type.GetType(clientSidePageTypeName, true);
                 var canvasSectionTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSection, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasSectionType = Type.GetType(canvasSectionTypeName, true);
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
                 var canvasControlTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControl, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasControlType = Type.GetType(canvasControlTypeName, true);
                 var canvasControlWebPartTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControlWebPartType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
@@ -107,6 +94,12 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201909
                     { $"{canvasSectionType}.OrderSpecified", new ExpressionValueResolver((s, p) => true) },
 
                     { $"{canvasSectionType}.TypeSpecified", new ExpressionValueResolver((s, p) => true) },
+
+                    {
+                        $"{canvasSectionType}.Type",
+                        new ExpressionValueResolver(
+                        (s, p) => CanvasSectionTypeMapper.ToSchemaValue((CanvasSectionType)p, canvasSectionTypeType))
+                    },
 
                     {
                         $"{canvasControlType}.WebPartType",
