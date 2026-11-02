@@ -66,7 +66,10 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                
+                // The request is typed SP.Field, which rejects properties of derived field types (e.g. TaxonomyField.AnchorId).
+                // Without __metadata SharePoint resolves the field's real type.
+                api.ApiCall = RemoveMetadata(api.ApiCall);
+
                 return api;
             };
 
@@ -90,6 +93,25 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 return api;
+            };
+        }
+        internal static ApiCall RemoveMetadata(ApiCall call)
+        {
+            if (string.IsNullOrEmpty(call.JsonBody))
+            {
+                return call;
+            }
+
+            var body = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(call.JsonBody);
+            if (body == null || !body.Remove("__metadata"))
+            {
+                return call;
+            }
+
+            return new ApiCall(call.Request, call.Type, JsonSerializer.Serialize(body), call.ReceivingProperty)
+            {
+                Commit = call.Commit,
+                AddedViaBatchMethod = call.AddedViaBatchMethod
             };
         }
         #endregion
