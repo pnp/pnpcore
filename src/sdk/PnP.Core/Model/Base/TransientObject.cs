@@ -330,8 +330,12 @@ namespace PnP.Core.Model
             {
                 // A model that was consolidated away inside a batch was never deleted in SharePoint, so saying
                 // it was deleted sends the caller looking in the wrong place
-                throw new ClientException(ErrorType.InstanceWasDeleted,
-                    ConsolidatedInBatch ? PnPCoreResources.Exception_InstanceWasConsolidatedInBatch : PnPCoreResources.Exception_InstanceWasDeleted);
+                if (ConsolidatedInBatch)
+                {
+                    throw new ClientException(ErrorType.InstanceWasConsolidatedInBatch, PnPCoreResources.Exception_InstanceWasConsolidatedInBatch);
+                }
+
+                throw new ClientException(ErrorType.InstanceWasDeleted, PnPCoreResources.Exception_InstanceWasDeleted);
             }
         }
 

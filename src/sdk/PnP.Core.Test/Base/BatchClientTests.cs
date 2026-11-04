@@ -723,7 +723,7 @@ namespace PnP.Core.Test.Base
                 list.RemoveFromParentCollection(consolidatedInBatch: true);
 
                 var exception = Assert.ThrowsException<ClientException>(() => _ = list.Title);
-                Assert.AreEqual(ErrorType.InstanceWasDeleted, exception.Error.Type);
+                Assert.AreEqual(ErrorType.InstanceWasConsolidatedInBatch, exception.Error.Type);
                 Assert.AreEqual(PnPCoreResources.Exception_InstanceWasConsolidatedInBatch, exception.Message);
             }
         }
