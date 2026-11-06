@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
         public OverlayGradientDirectionType OverlayGradientDirection { get; set; }
 
         /// <summary>
-        /// seesm to be always -1
+        /// seems to be always -1
         /// </summary>
         public int ColorIndexInLightMode { get; set; }
 

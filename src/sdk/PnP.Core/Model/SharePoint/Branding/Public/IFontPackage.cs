@@ -14,7 +14,7 @@
         string ID { get; set; }
 
         /// <summary>
-        /// dont show this font in the font picker
+        /// Don't show this font in the font picker
         /// </summary>
         bool IsHidden { get; set; }
         
@@ -24,7 +24,7 @@
         bool IsValid { get; set; }
 
         /// <summary>
-        /// json-string containg settings for the font package
+        /// json-string containing settings for the font package
         /// </summary>
         string PackageJson { get; set; }
 

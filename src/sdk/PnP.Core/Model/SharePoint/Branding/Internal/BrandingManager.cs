@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -457,7 +458,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 chromeOptions.Header.OverlayColor = headerOverlayColor;
             }
-            if (web.AllProperties.Values.TryGetValue("HeaderOverlayOpacity", out var HeaderOverlayOpacity) && int.TryParse(HeaderOverlayOpacity.ToString(), out var headerOverlayOpacity))
+            if (TryGetIntValue(web.AllProperties.Values, "HeaderOverlayOpacity", out var headerOverlayOpacity))
             {
                 chromeOptions.Header.OverlayOpacity = headerOverlayOpacity;
             }
@@ -465,11 +466,11 @@ namespace PnP.Core.Model.SharePoint
             {
                 chromeOptions.Header.OverlayGradientDirection = headerOverlayGradientDirection;
             }
-            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInLightMode", out var HeaderColorIndexInLightMode) && int.TryParse(HeaderColorIndexInLightMode.ToString(), out var headerColorIndexInLightMode))
+            if (TryGetIntValue(web.AllProperties.Values, "HeaderColorIndexInLightMode", out var headerColorIndexInLightMode))
             {
                 chromeOptions.Header.ColorIndexInLightMode = headerColorIndexInLightMode;
             }
-            if (web.AllProperties.Values.TryGetValue("HeaderColorIndexInDarkMode", out var HeaderColorIndexInDarkMode) && int.TryParse(HeaderColorIndexInDarkMode.ToString(), out var headerColorIndexInDarkMode))
+            if (TryGetIntValue(web.AllProperties.Values, "HeaderColorIndexInDarkMode", out var headerColorIndexInDarkMode))
             {
                 chromeOptions.Header.ColorIndexInDarkMode = headerColorIndexInDarkMode;
             }
@@ -499,7 +500,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     chromeOptions.Footer.OverlayColor = footerOverlayColor;
                 }
-                if (web.AllProperties.Values.TryGetValue("FooterOverlayOpacity", out var FooterOverlayOpacity) && int.TryParse(FooterOverlayOpacity.ToString(), out var footerOverlayOpacity))
+                if (TryGetIntValue(web.AllProperties.Values, "FooterOverlayOpacity", out var footerOverlayOpacity))
                 {
                     chromeOptions.Footer.OverlayOpacity = footerOverlayOpacity;
                 }
@@ -508,11 +509,11 @@ namespace PnP.Core.Model.SharePoint
                     chromeOptions.Footer.OverlayGradientDirection = footerOverlayGradientDirection;
                 }
 
-                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInLightMode", out var FooterColorIndexInLightMode) && int.TryParse(FooterColorIndexInLightMode.ToString(), out var footerColorIndexInLightMode))
+                if (TryGetIntValue(web.AllProperties.Values, "FooterColorIndexInLightMode", out var footerColorIndexInLightMode))
                 {
                     chromeOptions.Footer.ColorIndexInLightMode = footerColorIndexInLightMode;
                 }
-                if (web.AllProperties.Values.TryGetValue("FooterColorIndexInDarkMode", out var FooterColorIndexInDarkMode) && int.TryParse(FooterColorIndexInDarkMode.ToString(), out var footerColorIndexInDarkMode))
+                if (TryGetIntValue(web.AllProperties.Values, "FooterColorIndexInDarkMode", out var footerColorIndexInDarkMode))
                 {
                     chromeOptions.Footer.ColorIndexInDarkMode = footerColorIndexInDarkMode;
                 }
@@ -574,6 +575,14 @@ namespace PnP.Core.Model.SharePoint
 
             value = (TEnum)Enum.ToObject(typeof(TEnum), numericValue);
             return true;
+        }
+
+        private static bool TryGetIntValue(IDictionary<string, object> properties, string propertyName, out int value)
+        {
+            value = default;
+
+            return properties.TryGetValue(propertyName, out var propertyValue)
+                && int.TryParse(propertyValue?.ToString(), out value);
         }
 
         public IChromeOptions GetChromeOptions()
@@ -701,15 +710,30 @@ namespace PnP.Core.Model.SharePoint
                 footerOverlayGradientDirection = chromeOptions.Footer != null ? chromeOptions.Footer.OverlayGradientDirection : OverlayGradientDirectionType.TopToBottom,
                 footerColorIndexInLightMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInLightMode : -1,
                 footerColorIndexInDarkMode = chromeOptions.Footer != null ? chromeOptions.Footer.ColorIndexInDarkMode : -1,
-                fontOptionForSiteTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteTitle : null,
-                fontOptionForSiteNav = chromeOptions.Font != null ? chromeOptions.Font.SiteNav : null,
-                fontOptionForSiteFooterTitle = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterTitle : null,
-                fontOptionForSiteFooterNav = chromeOptions.Font != null ? chromeOptions.Font.SiteFooterNav : null,
+                fontOptionForSiteTitle = ToFontOption(chromeOptions.Font?.SiteTitle),
+                fontOptionForSiteNav = ToFontOption(chromeOptions.Font?.SiteNav),
+                fontOptionForSiteFooterTitle = ToFontOption(chromeOptions.Font?.SiteFooterTitle),
+                fontOptionForSiteFooterNav = ToFontOption(chromeOptions.Font?.SiteFooterNav),
             };
 
             string jsonBody = JsonSerializer.Serialize(body);
 
             return new ApiCall("_api/web/SetChromeOptions", ApiType.SPORest, jsonBody);
+        }
+
+        private static FontOption ToFontOption(IFontOption fontOption)
+        {
+            if (fontOption == null)
+            {
+                return null;
+            }
+
+            return new FontOption
+            {
+                FamilyKey = fontOption.FamilyKey,
+                Face = fontOption.Face,
+                VariantWeight = fontOption.VariantWeight
+            };
         }
 
         private static ApiCall BuildQuickLaunchEnabledApiCall(IChromeOptions chromeOptions)
@@ -825,6 +849,39 @@ namespace PnP.Core.Model.SharePoint
                 context.Web.SetSystemProperty(p => p.FooterLayout, chromeOptions.Footer.Layout);
             }
         }
+
+        internal static async Task<IFile> UploadImageToSiteAssetsAsync(PnPContext context, string fileName, Stream content, bool overwrite)
+        {
+            var siteAssetsLibrary = await context.Web.Lists.EnsureSiteAssetsLibraryAsync(p => p.RootFolder).ConfigureAwait(false);
+            return await siteAssetsLibrary.RootFolder.Files.AddAsync(fileName, content, overwrite).ConfigureAwait(false);
+        }
+
+        internal static ApiCall BuildSetSiteLogoApiCall(string serverRelativeUrl, SiteLogoType type, SiteLogoAspect aspect, double focalX = 0, double focalY = 0)
+        {
+            string jsonBody;
+            if (type == SiteLogoType.HeaderBackground || type == SiteLogoType.FooterBackground)
+            {
+                jsonBody = JsonSerializer.Serialize(new
+                {
+                    relativeLogoUrl = serverRelativeUrl,
+                    type = (int)type,
+                    aspect = (int)aspect,
+                    focalx = focalX,
+                    focaly = focalY
+                });
+            }
+            else
+            {
+                jsonBody = JsonSerializer.Serialize(new
+                {
+                    relativeLogoUrl = serverRelativeUrl,
+                    type = (int)type,
+                    aspect = (int)aspect
+                });
+            }
+
+            return new ApiCall("_api/siteiconmanager/setsitelogo", ApiType.SPORest, jsonBody);
+        }
         #endregion
 
         #region brandcenter
@@ -929,7 +986,7 @@ namespace PnP.Core.Model.SharePoint
             var batch = context.NewBatch();
             var fontPackages = await GetOutOfBoxFontPackagesBatchAsync(batch).ConfigureAwait(false);
             await context.ExecuteAsync(batch).ConfigureAwait(false);
-            return fontPackages.Result;
+            return fontPackages.ToList();
         }
 
         public List<IFontPackage> GetOutOfBoxFontPackages()
@@ -937,20 +994,20 @@ namespace PnP.Core.Model.SharePoint
             return GetOutOfBoxFontPackagesAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IBatchSingleResult<List<IFontPackage>>> GetOutOfBoxFontPackagesBatchAsync(Batch batch)
+        public async Task<IEnumerableBatchResult<IFontPackage>> GetOutOfBoxFontPackagesBatchAsync(Batch batch)
         {
             ApiCall apiCall = BuildGetOutOfBoxFontPackagesApiCall();
             return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
         }
 
-        public IBatchSingleResult<List<IFontPackage>> GetOutOfBoxFontPackagesBatch(Batch batch)
+        public IEnumerableBatchResult<IFontPackage> GetOutOfBoxFontPackagesBatch(Batch batch)
         {
             return GetOutOfBoxFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
         }
 
         public void SetOutOfBoxFontPackage(string fontId)
         {
-            SetOutOfBoxFontPackageAsync(fontId).Wait();
+            SetOutOfBoxFontPackageAsync(fontId).GetAwaiter().GetResult();
         }
 
         public async Task SetOutOfBoxFontPackageAsync(string fontId)
@@ -996,7 +1053,7 @@ namespace PnP.Core.Model.SharePoint
             var batch = context.NewBatch();
             var fontPackages = await GetFontPackagesBatchAsync(batch).ConfigureAwait(false);
             await context.ExecuteAsync(batch).ConfigureAwait(false);
-            return fontPackages.Result;
+            return fontPackages.ToList();
         }
 
         public List<IFontPackage> GetFontPackages()
@@ -1004,23 +1061,15 @@ namespace PnP.Core.Model.SharePoint
             return GetFontPackagesAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch)
+        public async Task<IEnumerableBatchResult<IFontPackage>> GetFontPackagesBatchAsync(Batch batch)
         {
             ApiCall apiCall = BuildGetFontPackagesApiCall();
             return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
         }
 
-        public IBatchSingleResult<List<IFontPackage>> GetFontPackagesBatch(Batch batch)
+        public IEnumerableBatchResult<IFontPackage> GetFontPackagesBatch(Batch batch)
         {
             return GetFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        public async Task<List<IFontPackage>> GetSiteFontPackagesAsync()
-        {
-            var batch = context.NewBatch();
-            var fontPackages = await GetSiteFontPackagesBatchAsync(batch).ConfigureAwait(false);
-            await context.ExecuteAsync(batch).ConfigureAwait(false);
-            return fontPackages.Result;
         }
 
         public void SetFontPackage(string fontId)
@@ -1031,19 +1080,18 @@ namespace PnP.Core.Model.SharePoint
         public async Task SetFontPackageAsync(string fontId)
         {
             var batch = context.NewBatch();
-            SetFontPackageBatch(batch, fontId);
+            await SetFontPackageBatchAsync(batch, fontId).ConfigureAwait(false);
             await context.ExecuteAsync(batch).ConfigureAwait(false);
         }
 
         public void SetFontPackageBatch(Batch batch, string fontId)
         {
-            SetPackageBatchAsync(batch,fontId).GetAwaiter().GetResult();
+            SetFontPackageBatchAsync(batch, fontId).GetAwaiter().GetResult();
         }
 
-        public Task SetPackageBatchAsync(Batch batch, string fontId)
+        public async Task SetFontPackageBatchAsync(Batch batch, string fontId)
         {
-            BuildAndSetFontPackageApiCall(batch, fontId).Wait();
-            return Task.CompletedTask;
+            await BuildAndSetFontPackageApiCall(batch, fontId).ConfigureAwait(false);
         }
 
         private static ApiCall BuildGetFontPackagesApiCall()
@@ -1067,18 +1115,26 @@ namespace PnP.Core.Model.SharePoint
         #endregion Branding Center FontPackages
 
         #region SiteFontPackages
+        public async Task<List<IFontPackage>> GetSiteFontPackagesAsync()
+        {
+            var batch = context.NewBatch();
+            var fontPackages = await GetSiteFontPackagesBatchAsync(batch).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+            return fontPackages.ToList();
+        }
+
         public List<IFontPackage> GetSiteFontPackages()
         {
             return GetSiteFontPackagesAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IBatchSingleResult<List<IFontPackage>>> GetSiteFontPackagesBatchAsync(Batch batch)
+        public async Task<IEnumerableBatchResult<IFontPackage>> GetSiteFontPackagesBatchAsync(Batch batch)
         {
             ApiCall apiCall = BuildGetSiteFontPackagesApiCall();
             return await GetFontPackagesBatchAsync(batch, apiCall).ConfigureAwait(false);
         }
 
-        public IBatchSingleResult<List<IFontPackage>> GetSiteFontPackagesBatch(Batch batch)
+        public IEnumerableBatchResult<IFontPackage> GetSiteFontPackagesBatch(Batch batch)
         {
             return GetSiteFontPackagesBatchAsync(batch).GetAwaiter().GetResult();
         }
@@ -1089,28 +1145,23 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion SiteFontPackages
 
-        private async Task SetFontPackageBatchAsync(Batch batch, ApiCall apiCall)
-        {
-            await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post, "SaveMenuState").ConfigureAwait(false);
-        }
+        #region Font package helpers
 
-
-        internal async Task<IBatchSingleResult<List<IFontPackage>>> GetFontPackagesBatchAsync(Batch batch, ApiCall apiCall)
+        internal async Task<IEnumerableBatchResult<IFontPackage>> GetFontPackagesBatchAsync(Batch batch, ApiCall apiCall)
         {
             // Since we're doing a raw batch request the processing of the batch response needs be implemented
-            apiCall.RawSingleResult = new List<IFontPackage>();
+            apiCall.RawEnumerableResult = new List<IFontPackage>();
             apiCall.RawResultsHandler = (json, apiCall) =>
             {
-                ProcessGetFontPackagesResponse(json, (List<IFontPackage>)apiCall.RawSingleResult);
+                ProcessGetFontPackagesResponse(json, (List<IFontPackage>)apiCall.RawEnumerableResult);
             };
 
             // Add the request to the batch
             var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             // Return the batch result as Enumerable
-            return new BatchSingleResult<List<IFontPackage>>(batch, batchRequest.Id, (List<IFontPackage>)apiCall.RawSingleResult);
+            return new BatchEnumerableBatchResult<IFontPackage>(batch, batchRequest.Id, (IReadOnlyList<IFontPackage>)apiCall.RawEnumerableResult);
         }
-
 
         internal static void ProcessGetFontPackagesResponse(string jsonString, List<IFontPackage> fontPackageList)
         {
@@ -1124,5 +1175,7 @@ namespace PnP.Core.Model.SharePoint
                 fontPackageList.Add(fontPackage);
             }
         }
+
+        #endregion Font package helpers
     }
 }

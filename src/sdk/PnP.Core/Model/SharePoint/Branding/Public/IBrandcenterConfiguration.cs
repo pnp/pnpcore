@@ -15,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Brand Colors List Url
         /// </summary>
-        public BrandcenterSPResourcePath BrandColorsListUrl { get; internal set; }
+        public IBrandcenterSPResourcePath BrandColorsListUrl { get; internal set; }
 
         /// <summary>
         /// Gets the Brand Font Library Id
@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Brand Font Library Url
         /// </summary>
-        public BrandcenterSPResourcePath BrandFontLibraryUrl { get; internal set; }
+        public IBrandcenterSPResourcePath BrandFontLibraryUrl { get; internal set; }
 
         /// <summary>
         /// Gets a value indicating whether the Brand Center Site Feature is enabled
@@ -45,7 +45,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Org Skills Library Url
         /// </summary>
-        public BrandcenterSPResourcePath OrgSkillsLibraryUrl { get; internal set; }
+        public IBrandcenterSPResourcePath OrgSkillsLibraryUrl { get; internal set; }
 
         /// <summary>
         /// Gets the Site Id
@@ -61,6 +61,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the organizational assets
         /// </summary>
-        public BrandcenterOrgAssets OrgAssets { get; internal set; }    
+        public IBrandcenterOrgAssets OrgAssets { get; internal set; }    
     }
 }

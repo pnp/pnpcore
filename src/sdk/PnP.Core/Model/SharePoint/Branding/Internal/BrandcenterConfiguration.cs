@@ -40,5 +40,29 @@ namespace PnP.Core.Model.SharePoint
         public string SiteUrl { get; set; }
 
         public BrandcenterOrgAssets OrgAssets { get; set; }
+
+        IBrandcenterSPResourcePath IBrandcenterConfiguration.BrandColorsListUrl
+        {
+            get => BrandColorsListUrl;
+            set => BrandColorsListUrl = (BrandcenterSPResourcePath)value;
+        }
+
+        IBrandcenterSPResourcePath IBrandcenterConfiguration.BrandFontLibraryUrl
+        {
+            get => BrandFontLibraryUrl;
+            set => BrandFontLibraryUrl = (BrandcenterSPResourcePath)value;
+        }
+
+        IBrandcenterSPResourcePath IBrandcenterConfiguration.OrgSkillsLibraryUrl
+        {
+            get => OrgSkillsLibraryUrl;
+            set => OrgSkillsLibraryUrl = (BrandcenterSPResourcePath)value;
+        }
+
+        IBrandcenterOrgAssets IBrandcenterConfiguration.OrgAssets
+        {
+            get => OrgAssets;
+            set => OrgAssets = (BrandcenterOrgAssets)value;
+        }
     }
 }

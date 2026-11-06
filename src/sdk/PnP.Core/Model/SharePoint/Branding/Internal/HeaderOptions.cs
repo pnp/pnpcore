@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -36,9 +35,9 @@ namespace PnP.Core.Model.SharePoint
             if (PnPContext.Site.GroupId == Guid.Empty)
             {
                 // Upload the image
-                IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
+                IFile siteLogo = await BrandingManager.UploadImageToSiteAssetsAsync(PnPContext, fileName, content, overwrite).ConfigureAwait(false);
                 // Set the uploaded file as site logo
-                await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.WebLogo, SiteLogoAspect.Rectangular), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+                await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.WebLogo, SiteLogoAspect.Rectangular), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
             }
             else
             {
@@ -55,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PnPContext.Site.GroupId == Guid.Empty)
             {
-                await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall("", SiteLogoType.WebLogo, SiteLogoAspect.Rectangular), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+                await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall("", SiteLogoType.WebLogo, SiteLogoAspect.Rectangular), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
             }
             else
             {
@@ -73,9 +72,9 @@ namespace PnP.Core.Model.SharePoint
             if (PnPContext.Site.GroupId == Guid.Empty)
             {
                 // Upload the image
-                IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
+                IFile siteLogo = await BrandingManager.UploadImageToSiteAssetsAsync(PnPContext, fileName, content, overwrite).ConfigureAwait(false);
                 // Set the uploaded file as site logo
-                await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.WebLogo, SiteLogoAspect.Square), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+                await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.WebLogo, SiteLogoAspect.Square), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
             }
             else
             {
@@ -114,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PnPContext.Site.GroupId == Guid.Empty)
             {
-                await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall("", SiteLogoType.WebLogo, SiteLogoAspect.Square), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+                await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall("", SiteLogoType.WebLogo, SiteLogoAspect.Square), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
             }
             else
             {
@@ -151,9 +150,9 @@ namespace PnP.Core.Model.SharePoint
         public async Task SetHeaderBackgroundImageAsync(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
         {
             // Upload the image
-            IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
+            IFile siteLogo = await BrandingManager.UploadImageToSiteAssetsAsync(PnPContext, fileName, content, overwrite).ConfigureAwait(false);
             // Set the uploaded file as header background
-            await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.HeaderBackground, SiteLogoAspect.Square, focalX, focalY), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+            await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.HeaderBackground, SiteLogoAspect.Square, focalX, focalY), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
         }
 
         public void SetHeaderBackgroundImage(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
@@ -163,47 +162,12 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task ClearHeaderBackgroundImageAsync()
         {
-            await (PnPContext.Web as Web).RawRequestAsync(BuildSetSiteLogoApiCall("", SiteLogoType.HeaderBackground, SiteLogoAspect.Square, 0, 0), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+            await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall("", SiteLogoType.HeaderBackground, SiteLogoAspect.Square, 0, 0), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
         }
 
         public void ClearHeaderBackgroundImage()
         {
             ClearHeaderBackgroundImageAsync().GetAwaiter().GetResult();
-        }
-
-        private async Task<IFile> UploadImageToSiteAssetsAsync(string fileName, Stream content, bool overwrite)
-        {
-            // Ensure there's a site assets library
-            var siteAssetsLibrary = await PnPContext.Web.Lists.EnsureSiteAssetsLibraryAsync(p => p.RootFolder).ConfigureAwait(false);
-            // Upload the image file
-            var siteLogo = await siteAssetsLibrary.RootFolder.Files.AddAsync(fileName, content, overwrite).ConfigureAwait(false);
-            return siteLogo;
-        }
-
-        private static ApiCall BuildSetSiteLogoApiCall(string serverRelativeUrl, SiteLogoType type, SiteLogoAspect aspect, double focalX = 0, double focalY = 0)
-        {
-            string jsonBody;
-            if (type == SiteLogoType.HeaderBackground)
-            {
-                jsonBody = JsonSerializer.Serialize(new
-                {
-                    relativeLogoUrl = serverRelativeUrl,
-                    type = (int)type,
-                    aspect = (int)aspect,
-                    focalx = focalX,
-                    focaly = focalY
-                });
-            }
-            else
-            {
-                jsonBody = JsonSerializer.Serialize(new
-                {
-                    relativeLogoUrl = serverRelativeUrl,
-                    type = (int)type,
-                    aspect = (int)aspect
-                });
-            }
-            return new ApiCall("_api/siteiconmanager/setsitelogo", ApiType.SPORest, jsonBody);
         }
 
         private static byte[] ToByteArray(Stream source)

@@ -43,12 +43,12 @@ namespace PnP.Core.Model.SharePoint
         OverlayGradientDirectionType OverlayGradientDirection { get; set; }
 
         /// <summary>
-        /// seesm to be alays -1
+        /// seems to be always -1
         /// </summary>
         int ColorIndexInLightMode { get; set; }
 
         /// <summary>
-        /// seesm to be alays -1
+        /// seems to be always -1
         /// </summary>
         int ColorIndexInDarkMode { get; set; }
 
