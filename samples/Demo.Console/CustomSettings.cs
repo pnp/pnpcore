@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Consumer
+namespace Demo.ConsoleApp
 {
     public class CustomSettings
     {

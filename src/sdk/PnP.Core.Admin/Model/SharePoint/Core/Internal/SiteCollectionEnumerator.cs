@@ -89,23 +89,23 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, VanityUrlOptions vanityUrlOptions, bool allSites = true, int pageSize = 500)
         {
-            string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
-            string sitesInformationListUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO";
+            const string sitesInformationListAllTitle = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGATED_SITECOLLECTIONS";
+            const string sitesInformationListTitle = "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECOLLECTIONS";
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync(vanityUrlOptions).ConfigureAwait(false))
             {
-                string listToQuery;
+                string listTitleToQuery;
                 if (allSites)
                 {
-                    listToQuery = sitesInformationListAllUrl;
+                    listTitleToQuery = sitesInformationListAllTitle;
                 }
                 else
                 {
-                    listToQuery = sitesInformationListUrl;
+                    listTitleToQuery = sitesInformationListTitle;
                 }
 
-                var myList = await tenantAdminContext.Web.Lists.GetByServerRelativeUrlAsync(
-                                $"Lists/{listToQuery}",
+                var myList = await tenantAdminContext.Web.Lists.GetByTitleAsync(
+                                listTitleToQuery,
                                 p => p.Title,
                                 p => p.Fields.QueryProperties(p => p.InternalName,
                                                               p => p.FieldTypeKind,

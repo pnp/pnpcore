@@ -8,18 +8,22 @@ on:
     - 'src/sdk/PnP.Core/**'
     - 'src/sdk/PnP.Core.Auth/**'
     - 'src/sdk/PnP.Core.Admin/**'
+    - 'src/sdk/PnP.Core.Provisioning/**'
     - 'src/sdk/PnP.Core.Test/**'
     - 'src/sdk/PnP.Core.Auth.Test/**'
     - 'src/sdk/PnP.Core.Admin.Test/**'
+    - 'src/sdk/PnP.Core.Provisioning.Test/**'
   pull_request:
     branches: [ dev ]
     paths:
     - 'src/sdk/PnP.Core/**'
     - 'src/sdk/PnP.Core.Auth/**'
     - 'src/sdk/PnP.Core.Admin/**'
+    - 'src/sdk/PnP.Core.Provisioning/**'
     - 'src/sdk/PnP.Core.Test/**'
     - 'src/sdk/PnP.Core.Auth.Test/**'
     - 'src/sdk/PnP.Core.Admin.Test/**'
+    - 'src/sdk/PnP.Core.Provisioning.Test/**'
 
 jobs:
   build:
@@ -32,7 +36,7 @@ jobs:
 
     steps:
     - name: Wait for actions to finish
-      uses: softprops/turnstyle@afaccda0f3c0136fb7cb4a734b9b96be03599948 # v3.3.2
+      uses: softprops/turnstyle@3805450be63b8c80577dc253e8c17e9132036df4 # v3.3.3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}              
     - name: Checkout
@@ -57,9 +61,10 @@ jobs:
         dotnet test ./PnP.Core.Test/PnP.Core.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
         dotnet test ./PnP.Core.Auth.Test/PnP.Core.Auth.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
         dotnet test ./PnP.Core.Admin.Test/PnP.Core.Admin.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-      working-directory: src/sdk    
+        dotnet test ./PnP.Core.Provisioning.Test/PnP.Core.Provisioning.Test.csproj --no-restore --verbosity normal --filter TestCategory=Offline --collect:"XPlat Code Coverage"
+      working-directory: src/sdk
     - name: Upload coverage to Codecov 📝
-      uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+      uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: src/sdk/**/coverage.cobertura.xml        

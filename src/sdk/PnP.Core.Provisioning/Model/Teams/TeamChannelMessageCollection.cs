@@ -1,0 +1,17 @@
+﻿namespace PnP.Core.Provisioning.Model.Teams
+{
+    /// <summary>
+    /// Collection of Messages for a Team Channel
+    /// </summary>
+    public partial class TeamChannelMessageCollection : BaseProvisioningTemplateObjectCollection<TeamChannelMessage>
+    {
+        /// <summary>
+        /// Constructor for TeamChannelMessageCollection class
+        /// </summary>
+        /// <param name="parentTemplate">Parent provisioning template</param>
+        public TeamChannelMessageCollection(ProvisioningTemplate parentTemplate) :
+            base(parentTemplate)
+        {
+        }
+    }
+}

@@ -25,7 +25,13 @@ namespace Demo.Blazor.Services
 
         public async Task<PnPContext> GetContextAsync()
         {
-            string siteUrl = _configuration.GetValue<string>("SharePoint:SiteUrl");
+            var siteUrl = _configuration.GetValue<string>("SharePoint:SiteUrl");
+            
+            if (string.IsNullOrEmpty(siteUrl))
+            {
+                throw new InvalidOperationException("SharePoint site URL is not configured. Please set the 'SharePoint:SiteUrl' configuration value.");
+            }
+
             return await _contextFactory.CreateAsync(new Uri(siteUrl), _msalAuthProvider);
         }
     }

@@ -1,7 +1,16 @@
 ﻿@page "/"
 
-    <h1>Welcome PnP Core SDK demo app with Blazor !</h1>
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
 
-    <div>
-        Here you can write .NET Code and manipulate Microsoft 365 data from one unified .NET SDK
-    </div>
+<h1>Welcome PnP Core SDK demo app with Blazor!</h1>
+<div><span><b>Environment: @HostEnvironment.Environment</b></span></div>
+<div>
+    <br />
+    <p>
+        <span>Here you can write .NET Code and manipulate Microsoft 365 data from one unified .NET SDK</span>
+    </p>
+</div>
+
+@code {
+}

@@ -1,8 +1,6 @@
 @page "/pageInfo"
 @attribute [Authorize]
 @using PnP.Core.Model.SharePoint;
-@using PnP.Core.Model;
-@using PnP.Core.QueryModel;
 @inject IMyPnPContextFactory pnpContextFactory
 
 <h1>SharePoint Page info</h1>
@@ -33,7 +31,7 @@ else
 }
 
 @code {
-    private List<IPage> pages;
+    private List<IPage>? pages;
     private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()

@@ -6,7 +6,38 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## 1.18 - Unreleased
+## [1.19]
+
+### Added 
+
+- Added retrieval API implementation #1744 [mgwojciech - Marcin Wojciechowski]
+- Added Provisioning engine #1847, #1848, #1849 [adam-it - Adam Wójcik]
+
+### Changed
+
+- Fixed PnP Core telemetry to work with Application Insights SDK v3 #1798 [lockerbill - lockerbill]
+- Updated Demo.ConsoleApp Sample #1833 [gszdev - gszdev]
+- Updated Demo.Blazor Sample #1834 [gszdev - gszdev]
+- Fixed Web.NewPage() freezes application #1827 [gszdev - gszdev]
+- Updated Demo.ASPNetCore Sample #1835 [gszdev - gszdev]
+- Fixed tenant hidden list url change #1855 [gszdev - gszdev] [czullu - Christian Zuellig]
+- Removed Viva Topics Support #1784 [adam-it - Adam Wójcik]
+- Updated ISharePointUser.Groups to the groups the user belongs to #1863 [svermaak - svermaak]
+- Updated delete by id on IWeb.SiteUsers and IWeb.SiteGroups #1864 [svermaak - svermaak]
+- Improved pnp core provisioning #1874 [adam-it - Adam Wójcik]
+- Added GetTransitiveGroups for membership via Entra ID and Microsoft 365 groups #1872 [svermaak - svermaak]
+- Added ExpirationDateTime support for sharing links #1896 [gautamdsheth - Gautam Sheth]
+- Added handling of unpublished News pages at template extraction #1881 [Magnus-K-work - Magnus-K-work]
+- Skipped consolidated away models when loading extra pages in a batch #1887 [svermaak - svermaak]
+- Fixed folder creation in SharePoint lists #1884 [nicolaor - Rene Nicolao]
+- Fixed loss of visible no-image page headers on load/save #1908 [YifengMao - Yifeng]
+- Fixed handling ListInstance content type binding #1907 [gszdev - gszdev]
+- Fixed TokenParser - Taxonomy, TermStore (nested QueryProperties using Graph) #1906 [gszdev - gszdev]
+- Removed SharePoint Syntex support #1875 [adam-it - Adam Wójcik]
+- Updated the HandleValidateAddAndUpdateResponse in the ListItem to pass on the error code and error message if present #1819 [Guflly - Guflly]
+- Added flag to handle page published status #1885 [Magnus-K-work - Magnus-K-work]
+
+## [1.18]
 
 ### Added 
 

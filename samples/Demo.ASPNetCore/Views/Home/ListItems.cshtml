@@ -13,12 +13,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Items)
+            @if (Model.Items is not null)
             {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Title</td>
-                </tr>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

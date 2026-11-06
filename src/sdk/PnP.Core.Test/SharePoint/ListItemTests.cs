@@ -430,10 +430,17 @@ namespace PnP.Core.Test.SharePoint
                     await list.Items.AddBatchAsync(propItem);
                 }
 
-                await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
+                var exception = await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
                 {
                     await context.ExecuteAsync();
                 });
+
+                var error = exception.Error as SharePointRestError;
+                Assert.IsNotNull(error);
+                Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), exception.Message);
+                Assert.AreEqual(exception.Message, error.Message);
+                Assert.AreEqual(0, error.ServerErrorCode);
+                Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
 
                 await list.DeleteAsync();
             }
@@ -481,6 +488,11 @@ namespace PnP.Core.Test.SharePoint
                     var errors = await context.ExecuteAsync(false);
 
                     Assert.IsTrue(errors.Count == 2);
+                    var error = errors[0].Error as SharePointRestError;
+                    Assert.IsNotNull(error);
+                    Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), error.Message);
+                    Assert.AreEqual(0, error.ServerErrorCode);
+                    Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
                 }
                 finally
                 {
@@ -534,6 +546,11 @@ namespace PnP.Core.Test.SharePoint
                     var errors = await context.ExecuteAsync(batch, false);
 
                     Assert.IsTrue(errors.Count == 2);
+                    var error = errors[0].Error as SharePointRestError;
+                    Assert.IsNotNull(error);
+                    Assert.AreEqual(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, "MetaInfo"), error.Message);
+                    Assert.AreEqual(0, error.ServerErrorCode);
+                    Assert.AreEqual("abc", error.AdditionalData["ErrorMessage"]);
                 }
                 finally
                 {

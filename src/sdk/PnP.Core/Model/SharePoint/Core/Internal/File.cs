@@ -3,7 +3,6 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -167,7 +166,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (organizationalLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = organizationalLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(organizationalLinkOptions.ExpirationDateTime);
             }
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
             
@@ -193,7 +192,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (anonymousLinkOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = anonymousLinkOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(anonymousLinkOptions.ExpirationDateTime);
             }
 
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
@@ -245,6 +244,11 @@ namespace PnP.Core.Model.SharePoint
             body.type = userLinkOptions.Type;
             body.recipients = userLinkOptions.Recipients;
 
+            if (userLinkOptions.ExpirationDateTime != DateTime.MinValue)
+            {
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(userLinkOptions.ExpirationDateTime);
+            }
+
             return await CreateSharingLinkAsync(body).ConfigureAwait(false);
         }
 
@@ -270,7 +274,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (inviteOptions.ExpirationDateTime != DateTime.MinValue)
             {
-                body.expirationDateTime = inviteOptions.ExpirationDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
+                body.expirationDateTime = SharingManager.FormatExpirationDateTime(inviteOptions.ExpirationDateTime);
             }
 
             var apiCall = new ApiCall($"sites/{SiteId}/drives/{VroomDriveID}/items/{VroomItemID}/invite", ApiType.GraphBeta, jsonBody: JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase));
@@ -866,96 +870,6 @@ namespace PnP.Core.Model.SharePoint
         public void MoveToBatch(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
             MoveToBatchAsync(destinationUrl, moveOperations, options).GetAwaiter().GetResult();
-        }
-        #endregion
-
-        #region Syntex
-        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractAsync()
-        {
-            ApiCall apiCall = CreateClassifyAndExtractApiCall();
-            var apiResult = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            // Process response
-            return ProcessClassifyAndExtractResponse(apiResult.Json);
-        }
-
-        public ISyntexClassifyAndExtractResult ClassifyAndExtract()
-        {
-            return ClassifyAndExtractAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync(Batch batch)
-        {
-            ApiCall apiCall = CreateClassifyAndExtractApiCall();
-            apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
-            apiCall.RawResultsHandler = (json, apiCall) =>
-            {
-                var result = ProcessClassifyAndExtractResponse(json);
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
-                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
-            };
-
-            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            return new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult);
-        }
-
-        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch(Batch batch)
-        {
-            return ClassifyAndExtractBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync()
-        {
-            return await ClassifyAndExtractBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch()
-        {
-            return ClassifyAndExtractBatchAsync().GetAwaiter().GetResult();
-        }
-
-        private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
-        {
-            var root = JsonSerializer.Deserialize<JsonElement>(json);
-            return new SyntexClassifyAndExtractResult
-            {
-                Created = root.GetProperty("Created").GetDateTime(),
-                DeliverDate = root.GetProperty("DeliverDate").GetDateTime(),
-                ErrorMessage = root.GetProperty("ErrorMessage").GetString(),
-                StatusCode = root.GetProperty("StatusCode").GetInt32(),
-                Id = root.GetProperty("ID").GetGuid(),
-                Status = root.GetProperty("Status").GetString(),
-                WorkItemType = root.GetProperty("Type").GetGuid(),
-                TargetServerRelativeUrl = root.GetProperty("TargetServerRelativeUrl").GetString(),
-                TargetSiteUrl = root.GetProperty("TargetSiteUrl").GetString(),
-                TargetWebServerRelativeUrl = root.GetProperty("TargetWebServerRelativeUrl").GetString()
-            };
-        }
-
-        private ApiCall CreateClassifyAndExtractApiCall()
-        {
-            var classifyAndExtractFile = new
-            {
-                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItemEntityData" },
-                Type = "AE9D4F24-EE84-4C0C-A972-A74CFFE939A1",
-                TargetSiteId = PnPContext.Site.Id,
-                TargetWebId = PnPContext.Web.Id,
-                TargetUniqueId = UniqueId
-            }.AsExpando();
-
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
-
-            var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
-            return apiCall;
         }
         #endregion
 

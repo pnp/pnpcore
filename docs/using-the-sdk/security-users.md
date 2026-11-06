@@ -50,6 +50,23 @@ To verify if a specific user exists you can use the `GetUserById` methods:
 var foundUser = await context.Web.GetUserByIdAsync(userId);
 ```
 
+### Getting the groups a user is a member of
+
+A user's `Groups` property returns the SharePoint groups the user is a direct member of. A user can also be a member of a SharePoint group through a Microsoft Entra ID security group (including nested groups) or a Microsoft 365 group that was added to it, to include those use the `GetTransitiveGroups` methods.
+
+```csharp
+var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
+
+// Groups the user was directly added to
+var directGroups = await user.Groups.ToListAsync();
+
+// Groups the user was directly added to, plus the ones reached via Entra ID or Microsoft 365 groups
+var allGroups = await user.GetTransitiveGroupsAsync();
+```
+
+> [!Important]
+> Whenever the site's groups contain a Microsoft Entra ID or Microsoft 365 group, `GetTransitiveGroups` uses Microsoft Graph to resolve the membership. This requires the `GroupMember.Read.All` permission next to the permission to read the principal itself, so `User.ReadBasic.All` and `GroupMember.Read.All` for a user. The special "Everyone" and "Everyone except external users" users are not taken into account.
+
 ## Adding/ensuring a user
 
 Before a user can be used the user needs to exist and the best way to ensure a user exists is by using the `EnsureUser` and `EnsureEveryoneExceptExternalUsers` methods. The latter method is needed for the "Everyone except external users" user as that string is different for sites created in other languages. Other "special" users are language neutral.
@@ -92,6 +109,19 @@ var existingUserList = await context.Web.ValidateAndEnsureUsersAsync(userList);
 
 > [!Important]
 > Disabled users cannot be added as members to a SharePoint site. The  `ValidateUsers` and `ValidateAndEnsureUsers` methods verify the 'Enabled' or 'Disabled' status of users in Azure Active Directory (Azure AD), treating disabled users as non-existing. To access the 'enabled' property of a user, the application executing this method must be granted the `User.ReadBasic.All` API permission."
+
+## Removing a user
+
+Removing a user from the site's user table is done using the `DeleteById` methods on the web's `SiteUsers` collection, or by calling `Delete` on a loaded user. Removing a user from a single SharePoint group instead is explained in the [groups article](./security-groups.md#removing-usersgroups-from-a-group).
+
+```csharp
+// Remove the user: Option A, when only the user id is known
+await context.Web.SiteUsers.DeleteByIdAsync(userId);
+
+// Remove the user: Option B, when the user is already loaded
+var user = await context.Web.GetUserByIdAsync(userId);
+await user.DeleteAsync();
+```
 
 ## Granting permissions for a user at web level
 

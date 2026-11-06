@@ -1083,56 +1083,6 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        #region Syntex support
-        /// <summary>
-        /// Is the tenant enabled for SharePoint Syntex
-        /// </summary>
-        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
-        Task<bool> IsSyntexEnabledAsync();
-
-        /// <summary>
-        /// Is the tenant enabled for SharePoint Syntex
-        /// </summary>
-        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
-        bool IsSyntexEnabled();
-
-        /// <summary>
-        /// Is SharePoint Syntex enabled for the current user
-        /// </summary>
-        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
-        Task<bool> IsSyntexEnabledForCurrentUserAsync();
-
-        /// <summary>
-        /// Is SharePoint Syntex enabled for the current user
-        /// </summary>
-        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
-        bool IsSyntexEnabledForCurrentUser();
-
-        /// <summary>
-        /// Is this web a Syntex Content Center
-        /// </summary>
-        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
-        Task<bool> IsSyntexContentCenterAsync();
-
-        /// <summary>
-        /// Is this web a Syntex Content Center
-        /// </summary>
-        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
-        bool IsSyntexContentCenter();
-
-        /// <summary>
-        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
-        /// </summary>
-        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
-        Task<ISyntexContentCenter> AsSyntexContentCenterAsync();
-
-        /// <summary>
-        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
-        /// </summary>
-        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
-        ISyntexContentCenter AsSyntexContentCenter();
-        #endregion
-
         #region Hub Site
 
         /// <summary>

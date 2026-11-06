@@ -57,21 +57,6 @@ namespace PnP.Core.Model.SharePoint
         string SpaceContent { get; set; }
 
         /// <summary>
-        /// Entity id field for topic pages
-        /// </summary>
-        string EntityId { get; set; }
-
-        /// <summary>
-        /// Entity relations field for topic pages
-        /// </summary>
-        string EntityRelations { get; set; }
-
-        /// <summary>
-        /// Entity type field for topic pages
-        /// </summary>
-        string EntityType { get; set; }
-
-        /// <summary>
         /// Url being reposted using the repost page
         /// </summary>
         public string RepostSourceUrl { get; set; }
@@ -260,7 +245,7 @@ namespace PnP.Core.Model.SharePoint
         public void SetPageTitleWebPartPageHeader();
 
         /// <summary>
-        /// Adds a new header control to your client side page with a given order. Used for topic page creation
+        /// Adds a new header control to your client side page with a given order.
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="order">Order of the control in the given section</param>

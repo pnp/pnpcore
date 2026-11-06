@@ -15,6 +15,9 @@ dotnet build ..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --no-incremental /p:V
 Write-Host "Building PnP.Core.Admin versions $version"
 dotnet build ..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --no-incremental /p:Version=$version
 
+Write-Host "Building PnP.Core.Provisioning versions $version"
+dotnet build ..\src\sdk\PnP.Core.Provisioning\PnP.Core.Provisioning.csproj --no-incremental /p:Version=$version
+
 #Write-Host "Writing $version to git"
 #Set-Content -Path .\version.debug.increment -Value $versionIncrement
 

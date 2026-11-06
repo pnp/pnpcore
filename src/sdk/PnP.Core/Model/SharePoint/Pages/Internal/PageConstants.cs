@@ -42,24 +42,6 @@
         internal const string SpacesLayoutType = "d39ad2cb-84bd-48a0-9daa-4aea9f644cd4";
         internal const string SpaceContentField = "SpaceContent";
 
-        // Topic pages
-        internal const string TopicLayoutType = "Topic";
-        internal const string TopicEntityId = "_EntityId";
-        internal const string TopicEntityRelations = "_EntityRelations";
-        internal const string TopicEntityType = "_EntityType";
-
-        // Syntex models
-        internal const string ModelExplanations = "ModelExplanations";
-        internal const string ModelDescription = "ModelDescription";
-        internal const string ModelSchemas = "ModelSchemas";
-        internal const string ModelMappedClassifierName = "ModelMappedClassifierName";
-        internal const string ModelLastTrained = "ModelLastTrained";
-        internal const string ModelSettings = "ModelSettings";
-        internal const string ModelConfidenceScore = "ModelConfidenceScore";
-        internal const string ModelAccuracy = "ModelAccuracy";
-        internal const string ModelClassifiedItemCount = "ModelClassifiedItemCount";
-        internal const string ModelMismatchedItemCount = "ModelMismatchedItemCount";
-
         /// <summary>
         /// Contains the content identifier (ID) for content types used in the modern page infrastructure
         /// </summary>

@@ -1,0 +1,17 @@
+﻿namespace PnP.Core.Provisioning.Model
+{
+    /// <summary>
+    /// Collection of FieldRef objects
+    /// </summary>
+    public partial class FieldRefCollection : BaseProvisioningTemplateObjectCollection<FieldRef>
+    {
+        /// <summary>
+        /// Constructor for FieldRefCollection class
+        /// </summary>
+        /// <param name="parentTemplate">Parent provisioning template</param>
+        public FieldRefCollection(ProvisioningTemplate parentTemplate) : base(parentTemplate)
+        {
+
+        }
+    }
+}

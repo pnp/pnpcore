@@ -450,7 +450,8 @@ namespace PnP.Core.QueryModel
             }
 
             var d = new Dictionary<TKey, TElement>(comparer);
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            var elements = source.AsAsyncEnumerable().ConfigureAwait(false);
+            await foreach (var element in elements.WithCancellation(cancellationToken))
             {
                 d.Add(keySelector(element), elementSelector(element));
             }
@@ -492,7 +493,8 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentNullException(nameof(action));
             }
 
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            var elements = source.AsAsyncEnumerable().ConfigureAwait(false);
+            await foreach (var element in elements.WithCancellation(cancellationToken))
             {
                 action(element);
             }
@@ -523,8 +525,9 @@ namespace PnP.Core.QueryModel
             this IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
         {
-            var list = new List<TSource>();
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            var list = new List<TSource>();            
+            var elements = source.AsAsyncEnumerable().ConfigureAwait(false);
+            await foreach (var element in elements.WithCancellation(cancellationToken))
             {
                 list.Add(element);
             }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Copilot.Public;
 using PnP.Core.Model.Me;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
@@ -48,6 +49,11 @@ namespace PnP.Core.Services
         /// Entry point for the Me Object
         /// </summary>
         IMe Me { get; }
+
+        /// <summary>
+        /// Entry point for Copilot functionality
+        /// </summary>
+        ICopilot Copilot { get; }
 
         /// <summary>
         /// Entry point for the ContentTypeHub Object

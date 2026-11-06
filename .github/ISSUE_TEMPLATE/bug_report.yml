@@ -18,7 +18,7 @@ body:
       options:
         - (Low)☹️ Something is a little off
         - (Medium)😢 I'm annoyed but I'll live
-        - (Urgent)⚠️😱 I can't use the extension
+        - (Urgent)⚠️😱 I can't use the library
     validations:
       required: true
   - type: textarea

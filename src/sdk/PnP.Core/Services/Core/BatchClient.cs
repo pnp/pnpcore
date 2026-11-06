@@ -370,7 +370,7 @@ namespace PnP.Core.Services
                 anyPageToLoad = false;
 
                 // Make a copy of requests which need to load also other pages
-                var requestWithLoadPages = batch.Requests.Values.Where(r => r.ApiCall.LoadPages).ToArray();
+                var requestWithLoadPages = batch.Requests.Values.Where(NeedsPageLoading).ToArray();
 
                 // Temporary keep requests into a final list
                 doneRequests.AddRange(batch.Requests.Values);
@@ -2651,6 +2651,17 @@ namespace PnP.Core.Services
 
                 request.Model.RemoveFromParentCollection();
             }
+        }
+
+        /// <summary>
+        /// Whether the result of a batch request still has pages to load. Models that were consolidated away by
+        /// <see cref="MergeBatchResultsWithModel"/>, because another request in the same batch loaded the same
+        /// key, are skipped: their collections were merged into the surviving instance so there is nothing left
+        /// to page, and reading their properties throws because they are marked as deleted.
+        /// </summary>
+        internal static bool NeedsPageLoading(BatchRequest request)
+        {
+            return request.ApiCall.LoadPages && !request.Model.Deleted;
         }
 
         private static bool HttpRequestSucceeded(HttpStatusCode httpStatusCode)

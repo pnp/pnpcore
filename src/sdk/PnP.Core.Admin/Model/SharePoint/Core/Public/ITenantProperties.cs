@@ -462,11 +462,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         bool HasIntelligentContentServicesCapability { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the tenant has Topic Experiences Capability or not
-        /// </summary>
-        bool HasTopicExperiencesCapability { get; set; }
-
-        /// <summary>
         /// Gets or sets a value to specify whether the sync button on team sites and other ODBs is hidden.
         /// (Basically this hides the sync button on all document libraries except the OneDrive for Business that the user owns.)
         /// </summary>

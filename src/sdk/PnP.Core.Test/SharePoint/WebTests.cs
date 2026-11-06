@@ -1650,16 +1650,6 @@ namespace PnP.Core.Test.SharePoint
             {
                 Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
             }
-
-            using (var context = TestCommon.Instance.GetContext(TestCommon.SyntexContentCenterTestSite, 2))
-            {
-                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
-            }
-
-            using (var context = TestCommon.Instance.GetContext(TestCommon.VivaTopicCenterTestSite, 3))
-            {
-                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
-            }
         }
 
         [TestMethod]
