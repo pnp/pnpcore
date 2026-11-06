@@ -2630,8 +2630,10 @@ namespace PnP.Core.Services
                         // Merge properties/collections
                         firstRequest.Model.Merge(request.Model);
 
-                        // Mark deleted objects as deleted and remove from their respective parent collection
-                        request.Model.RemoveFromParentCollection();
+                        // Mark deleted objects as deleted and remove from their respective parent collection.
+                        // Flagged as consolidated so using this instance afterwards explains what happened
+                        // instead of claiming it was deleted
+                        request.Model.RemoveFromParentCollection(consolidatedInBatch: true);
                     }
                     else
                     {

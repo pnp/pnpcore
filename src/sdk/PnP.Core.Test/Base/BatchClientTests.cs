@@ -709,6 +709,42 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task ConsolidatedInBatchInstanceExplainsItWasConsolidated()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // Offline by design. The duplicate instance was never deleted in SharePoint, so the exception has to
+            // point the caller at the instance returned by the first request instead of claiming a delete happened.
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var list = (List)BuildListGetRequest(context, loadPages: false).Model;
+
+                // this is what the consolidation does to the duplicate
+                list.RemoveFromParentCollection(consolidatedInBatch: true);
+
+                var exception = Assert.ThrowsException<ClientException>(() => _ = list.Title);
+                Assert.AreEqual(ErrorType.InstanceWasConsolidatedInBatch, exception.Error.Type);
+                Assert.AreEqual(PnPCoreResources.Exception_InstanceWasConsolidatedInBatch, exception.Message);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeletedInstanceStillExplainsItWasDeleted()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // The consolidation message must not leak into the regular delete path
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var list = (List)BuildListGetRequest(context, loadPages: false).Model;
+
+                list.RemoveFromParentCollection();
+
+                var exception = Assert.ThrowsException<ClientException>(() => _ = list.Title);
+                Assert.AreEqual(ErrorType.InstanceWasDeleted, exception.Error.Type);
+                Assert.AreEqual(PnPCoreResources.Exception_InstanceWasDeleted, exception.Message);
+            }
+        }
+
         private static BatchRequest BuildListGetRequest(PnPContext context, bool loadPages)
         {
             var list = new List
