@@ -2,7 +2,7 @@ using PnP.Core.Services.Core.CSOM.QueryAction;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
     /// <summary>
     /// An array parameter whose elements are references to other object paths in the same request.

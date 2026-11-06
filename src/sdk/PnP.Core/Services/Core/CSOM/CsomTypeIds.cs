@@ -1,4 +1,4 @@
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM
 {
     /// <summary>
     /// CSOM server type ids - the GUIDs a <c>StaticMethod</c> or <c>Constructor</c> object path is
