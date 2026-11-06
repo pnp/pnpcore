@@ -13,6 +13,7 @@ namespace PnP.Core.Provisioning.Providers.Xml
         public const String PROVISIONING_SCHEMA_NAMESPACE_2020_02 = "http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema";
         public const String PROVISIONING_SCHEMA_NAMESPACE_2021_03 = "http://schemas.dev.office.com/PnP/2021/03/ProvisioningSchema";
         public const String PROVISIONING_SCHEMA_NAMESPACE_2022_09 = "http://schemas.dev.office.com/PnP/2022/09/ProvisioningSchema";
+        public const String PROVISIONING_SCHEMA_NAMESPACE_2026_09 = "http://schemas.dev.office.com/PnP/2026/09/ProvisioningSchema";
     }
 }
 

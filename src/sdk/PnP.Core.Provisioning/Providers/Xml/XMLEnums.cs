@@ -31,5 +31,6 @@ namespace PnP.Core.Provisioning.Providers.Xml
         V202002 = 12,
         V202103 = 13,
         V202209 = 14,
+        V202609 = 15,
     }
 }
