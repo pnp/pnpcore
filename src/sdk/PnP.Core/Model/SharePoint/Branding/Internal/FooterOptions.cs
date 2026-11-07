@@ -25,10 +25,17 @@ namespace PnP.Core.Model.SharePoint
 
         public string DisplayName { get; set; }
 
+        public FooterLinkAlignment LinkAlignment { get; set; }
+        public OverlayColorType OverlayColor { get; set; } = OverlayColorType.None;
+        public int OverlayOpacity { get; set; } = 0;
+        public OverlayGradientDirectionType OverlayGradientDirection { get; set; } = OverlayGradientDirectionType.TopToBottom;
+        public int ColorIndexInLightMode { get; set; } = -1;
+        public int ColorIndexInDarkMode { get; set; } = -1;
+
         public async Task SetLogoAsync(string fileName, Stream content, bool overwrite = false)
         {
             // Upload the image
-            IFile siteLogo = await UploadImageToSiteAssetsAsync(fileName, content, overwrite).ConfigureAwait(false);
+            IFile siteLogo = await BrandingManager.UploadImageToSiteAssetsAsync(PnPContext, fileName, content, overwrite).ConfigureAwait(false);
             // Set the uploaded file as header background
             await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSaveMenuStateApiCall(this, siteLogo.ServerRelativeUrl), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
         }
@@ -46,15 +53,6 @@ namespace PnP.Core.Model.SharePoint
         public void ClearLogo()
         {
             ClearLogoAsync().GetAwaiter().GetResult();
-        }
-
-        private async Task<IFile> UploadImageToSiteAssetsAsync(string fileName, Stream content, bool overwrite)
-        {
-            // Ensure there's a site assets library
-            var siteAssetsLibrary = await PnPContext.Web.Lists.EnsureSiteAssetsLibraryAsync(p => p.RootFolder).ConfigureAwait(false);
-            // Upload the image file
-            var siteLogo = await siteAssetsLibrary.RootFolder.Files.AddAsync(fileName, content, overwrite).ConfigureAwait(false);
-            return siteLogo;
         }
 
         internal MenuStateWrapper GetMenuStateToPersist(string serverRelativeUrl)
@@ -99,5 +97,27 @@ namespace PnP.Core.Model.SharePoint
             return menuStateWrapper;
         }
 
+        public async Task SetFooterBackgroundImageAsync(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
+        {
+            // Upload the image
+            IFile siteLogo = await BrandingManager.UploadImageToSiteAssetsAsync(PnPContext, fileName, content, overwrite).ConfigureAwait(false);
+            // Set the uploaded file as footer background
+            await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall(siteLogo.ServerRelativeUrl, SiteLogoType.FooterBackground, SiteLogoAspect.Square, focalX, focalY), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+        }
+
+        public void SetFooterBackgroundImage(string fileName, Stream content, double focalX = 0, double focalY = 0, bool overwrite = false)
+        {
+            SetFooterBackgroundImageAsync(fileName, content, focalX, focalY, overwrite).GetAwaiter().GetResult();
+        }
+
+        public async Task ClearFooterBackgroundImageAsync()
+        {
+            await (PnPContext.Web as Web).RawRequestAsync(BrandingManager.BuildSetSiteLogoApiCall("", SiteLogoType.FooterBackground, SiteLogoAspect.Square, 0, 0), HttpMethod.Post, "SetSiteLogo").ConfigureAwait(false);
+        }
+
+        public void ClearFooterBackgroundImage()
+        {
+            ClearFooterBackgroundImageAsync().GetAwaiter().GetResult();
+        }
     }
 }
