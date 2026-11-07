@@ -54,7 +54,7 @@ Open up Visual Studio and choose the **Create a new project** option, select **A
 
 ![Create Azure Function](../images/azfuncv4apponly-4.png)
 
-Enter a **Project name** and **Location** and click on **Create**. In the **Create a new Azure Functions application** choose **.NET 8 isolated** in the drop down and then pick **Http trigger** and click on **Create**.
+Enter a **Project name** and **Location** and click on **Create**. In the **Create a new Azure Functions application** choose **.NET 10 isolated** in the drop down and then pick **Http trigger** and click on **Create**.
 
 ![Create Azure Function](../images/azfuncv4apponly-5.png)
 

@@ -6,7 +6,6 @@ using PnP.Core.Provisioning.Providers.Xml.Resolvers.V201805;
 using PnP.Core.Provisioning.Providers.Xml.Resolvers.V201903;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201903
@@ -44,10 +43,10 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201903
 
  if (s != null)
  {
-     String[] text = s.GetPublicInstancePropertyValue("Text") as String[];
+     String text = s.GetPublicInstancePropertyValue("Text") as String;
      if (text != null && text.Length > 0)
      {
-         result = text.Aggregate(String.Empty, (acc, next) => acc += (next != null ? next : String.Empty));
+         result = text;
      }
  }
 
@@ -104,7 +103,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201903
                         resolvers.Add($"{themeType}.Text",
                             new ExpressionValueResolver((s, v) =>
                             {
-                                return (new String[] { (String)s.GetPublicInstancePropertyValue("Palette") });
+                                return ((String)s.GetPublicInstancePropertyValue("Palette"));
                             }));
                     }
 

@@ -32,7 +32,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers
                         t => t.TeamTemplates[0].JsonTemplate,
                         new ExpressionValueResolver((s, v) =>
 {
-                    return ((s.GetPublicInstancePropertyValue("Text") as String[])?.Aggregate(String.Empty, (acc, next) => acc += (next != null ? next : String.Empty)));
+                    return (s.GetPublicInstancePropertyValue("Text") as String);
 })
                     },
 
@@ -116,7 +116,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers
                             $"{teamTemplateType}.Text",
                             new ExpressionValueResolver((s, v) =>
 {
-                        return (new String[1] { (s as TeamTemplate)?.JsonTemplate });
+                        return ((s as TeamTemplate)?.JsonTemplate);
 })
                         },
 
