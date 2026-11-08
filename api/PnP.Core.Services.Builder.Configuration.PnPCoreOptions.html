@@ -157,10 +157,10 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_AADTenantId" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId">
   AADTenantId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L35"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>AAD tenant id, used for telemetry purposes. Can be customized via configuration</p>
+  <div class="markdown level1 summary"><p>AAD tenant id, resolved automatically when not set. Can be customized via configuration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -189,7 +189,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_AzureADLoginAuthority" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AzureADLoginAuthority">
   AzureADLoginAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -221,7 +221,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_DefaultAuthenticationProvider" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DefaultAuthenticationProvider">
   DefaultAuthenticationProvider
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L55"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The default Authentication Provider for the sites</p>
@@ -256,12 +256,13 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
   <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Turns on/off telemetry, can be customized via configuration. Defaults to false.</p>
+  <div class="markdown level1 summary"><p>No longer used, PnP Core SDK does not send telemetry anymore. Will be removed in a future release.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool DisableTelemetry { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;PnP Core SDK does not send telemetry anymore, this setting has no effect and will be removed in a future release.&quot;)]
+public bool DisableTelemetry { get; set; }</code></pre>
   </div>
 
 
@@ -285,7 +286,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Environment" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment">
   Environment
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The Microsoft 365 cloud environment that's used</p>
@@ -317,7 +318,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_HttpRequests" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests">
   HttpRequests
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L40"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The global HTTP requests settings</p>
@@ -349,7 +350,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.MicrosoftGraphAuthority">
   MicrosoftGraphAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -381,7 +382,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_PnPContext" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext">
   PnPContext
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L45"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The global PnPContext options</p>
@@ -413,7 +414,7 @@ Class PnPCoreOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Sites" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Sites">
   Sites
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L50"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The sites options</p>

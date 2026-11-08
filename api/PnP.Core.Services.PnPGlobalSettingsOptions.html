@@ -157,7 +157,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions__ctor" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.#ctor">
   PnPGlobalSettingsOptions()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L177"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Default constructor</p>
@@ -188,10 +188,10 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId">
   AADTenantId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L170"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>AAD tenant id, used for telemetry purposes. Can be customized via configuration</p>
+  <div class="markdown level1 summary"><p>AAD tenant id, resolved automatically when not set. Can be customized via configuration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -220,7 +220,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_AzureADLoginAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.AzureADLoginAuthority">
   AzureADLoginAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Azure AD Login authority (e.g. login.microsoftonline.com) to use when <a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -255,12 +255,13 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
   <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L18"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Turns on/off telemetry, can be customized via configuration. Defaults to false.</p>
+  <div class="markdown level1 summary"><p>No longer used, PnP Core SDK does not send telemetry anymore. Will be removed in a future release.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool DisableTelemetry { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;PnP Core SDK does not send telemetry anymore, this setting has no effect and will be removed in a future release.&quot;)]
+public bool DisableTelemetry { get; set; }</code></pre>
   </div>
 
 
@@ -284,7 +285,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_Environment" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.Environment">
   Environment
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The Microsoft 365 cloud environment that's used</p>
@@ -316,7 +317,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds">
   HttpAzureActiveDirectoryDelayInSeconds
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L127"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
@@ -348,7 +349,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries">
   HttpAzureActiveDirectoryMaxRetries
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L122"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
@@ -380,7 +381,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay">
   HttpAzureActiveDirectoryUseIncrementalDelay
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L132"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
@@ -412,7 +413,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader">
   HttpAzureActiveDirectoryUseRetryAfterHeader
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L117"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to true</p>
@@ -444,7 +445,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds">
   HttpMicrosoftGraphDelayInSeconds
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L107"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
@@ -476,7 +477,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries">
   HttpMicrosoftGraphMaxRetries
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
@@ -508,7 +509,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay">
   HttpMicrosoftGraphUseIncrementalDelay
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L112"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
@@ -540,7 +541,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader">
   HttpMicrosoftGraphUseRetryAfterHeader
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L97"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to true</p>
@@ -572,7 +573,7 @@ Class PnPGlobalSettingsOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpRateLimiterMinimumCapacityLeft" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpRateLimiterMinimumCapacityLeft">
   HttpRateLimiterMinimumCapacityLeft
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L139"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When set (e.g. to 10%) then RateLimit response headers coming from SharePoint and Graph are used: if there's less
@@ -606,7 +607,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize">
   HttpSharePointRestDefaultPageSize
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L77"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Defines the default page size for querying items in SharePoint REST</p>
@@ -638,7 +639,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds">
   HttpSharePointRestDelayInSeconds
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L87"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>How many seconds to wait for the next retry attempt. Defaults to 3</p>
@@ -670,7 +671,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries">
   HttpSharePointRestMaxRetries
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L82"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When not using retry-after, how many times can a retry be made. Defaults to 10</p>
@@ -702,7 +703,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay">
   HttpSharePointRestUseIncrementalDelay
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L92"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true</p>
@@ -734,7 +735,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader">
   HttpSharePointRestUseRetryAfterHeader
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Use the Retry-After header for calculating the delay in case of a retry. Defaults to false</p>
@@ -766,7 +767,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout">
   HttpTimeout
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L67"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Max duration of a http request in seconds. Defaults to 100 seconds, set to value -1 for an infinite timeout</p>
@@ -798,7 +799,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent">
   HttpUserAgent
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>User agent value, can be customized via configuration</p>
@@ -830,7 +831,7 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_MicrosoftGraphAuthority" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.MicrosoftGraphAuthority">
   MicrosoftGraphAuthority
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the Microsoft Graph authority (e.g. graph.microsoft.com) to use when <a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment">Environment</a> is set to <a class="xref" href="PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Custom">Custom</a></p>
@@ -862,10 +863,10 @@ the 1 minute window is reset. Defaults to 0 (disabled).</p>
 
   <h3 id="PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag" data-uid="PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag">
   VersionTag
-  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/PnPGlobalSettingsOptions.cs/#L154"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Version tag used in telemetry</p>
+  <div class="markdown level1 summary"><p>Version tag sent as client tag on SharePoint REST requests</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
