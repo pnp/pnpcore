@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
+- Removed application insights #1915 [adam-it - Adam Wójcik]
 
 ## [1.19]
 
