@@ -398,5 +398,20 @@ namespace PnP.Core.Test.SharePoint
 
             }
         }
+
+        [TestMethod]
+        public void SetViewXmlApiCall()
+        {
+            const string viewXml = "<View><ColumnWidth><FieldRef Name=\"Modified\" width=\"370\" /></ColumnWidth></View>";
+
+            var apiCall = View.GetSetViewXmlApiCall(viewXml);
+
+            Assert.AreEqual(PnP.Core.Services.ApiType.SPORest, apiCall.Type);
+            Assert.AreEqual("_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')/SetViewXml", apiCall.Request);
+
+            using var body = System.Text.Json.JsonDocument.Parse(apiCall.JsonBody);
+            Assert.AreEqual(1, body.RootElement.EnumerateObject().Count());
+            Assert.AreEqual(viewXml, body.RootElement.GetProperty("viewXml").GetString());
+        }
     }
 }
