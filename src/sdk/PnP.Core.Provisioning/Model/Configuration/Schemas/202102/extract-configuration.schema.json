@@ -144,6 +144,14 @@
         "extractPageAsPublished": {
           "description": "If set to true page will be extracted as a published page.",
           "type": "boolean"
+        },
+        "pageNames": {
+          "description": "If specified only these client side pages (and their translations) will be included in the template, and includeAllClientSidePages is ignored. Names are relative to the pages library, e.g. 'News.aspx', 'Folder/News.aspx' or 'Templates/Page.aspx' for page templates.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
