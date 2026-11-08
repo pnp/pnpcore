@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## 1.20
+
+### Added
+
+### Changed
+
+- Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
+
 ## [1.19]
 
 ### Added 
