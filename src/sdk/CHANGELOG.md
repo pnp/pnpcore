@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## 1.20 - Unreleased
+## 1.20
 
 ### Added
 
@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
+- Removed application insights #1915 [adam-it - Adam Wójcik]
 - Removed support for .NET 8 and .NET 9 as they are out of support #1925 [gautamdsheth - Gautam Sheth]
 - Fixed provisioning losing whitespace in template parameters, theme palettes and Teams templates when reading XML templates on .NET 11. The `Text` property of the `PreferencesParameter`, `TeamTemplate` and `Theme` XML schema classes is now a `string` instead of a `string[]` (breaking for code that uses these classes directly) #1925 [gautamdsheth - Gautam Sheth]
 
