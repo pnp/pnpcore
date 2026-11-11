@@ -12,11 +12,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="3.1.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0-rc.3.26522.148" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.85.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.6.3" />

@@ -70,15 +70,15 @@
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.23.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="System.Configuration.ConfigurationManager" Version="11.0.0-rc.3.26522.148" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="11.0.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="11.0.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
-		<PackageReference Include="System.Text.Json" Version="11.0.0-rc.3.26522.148" />
+		<PackageReference Include="System.Text.Json" Version="11.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

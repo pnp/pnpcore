@@ -13,12 +13,12 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0-rc.3.26522.148" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="11.0.0-rc.3.26522.148" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="11.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.6.3" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.6.3" />
