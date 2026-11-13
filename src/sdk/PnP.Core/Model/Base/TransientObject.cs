@@ -79,6 +79,14 @@ namespace PnP.Core.Model
         internal bool Deleted { get; set; }
 
         /// <summary>
+        /// Indication that this object was consolidated with another request for the same key in the same batch,
+        /// rather than deleted in SharePoint
+        /// </summary>
+        [Browsable(false)]
+        [SystemProperty]
+        internal bool ConsolidatedInBatch { get; set; }
+
+        /// <summary>
         /// Id if the batch request that loaded this mode instance
         /// </summary>
         [SystemProperty]
@@ -301,11 +309,13 @@ namespace PnP.Core.Model
         /// <summary>
         /// Marks a model as removed and removes it from it's parent collection
         /// </summary>
-        internal void RemoveFromParentCollection()
+        /// <param name="consolidatedInBatch">Set when the model is removed because another request in the same batch loaded the same key</param>
+        internal void RemoveFromParentCollection(bool consolidatedInBatch = false)
         {
             // Mark object as to be removed,
             // needed for variables that point to this model object
             Deleted = true;
+            ConsolidatedInBatch = consolidatedInBatch;
 
             // Remove model object from collection
             if (((IDataModelParent)this).Parent is IManageableCollection parent)
@@ -318,8 +328,14 @@ namespace PnP.Core.Model
         {
             if (Deleted)
             {
-                throw new ClientException(ErrorType.InstanceWasDeleted,
-                    PnPCoreResources.Exception_InstanceWasDeleted);
+                // A model that was consolidated away inside a batch was never deleted in SharePoint, so saying
+                // it was deleted sends the caller looking in the wrong place
+                if (ConsolidatedInBatch)
+                {
+                    throw new ClientException(ErrorType.InstanceWasConsolidatedInBatch, PnPCoreResources.Exception_InstanceWasConsolidatedInBatch);
+                }
+
+                throw new ClientException(ErrorType.InstanceWasDeleted, PnPCoreResources.Exception_InstanceWasDeleted);
             }
         }
 

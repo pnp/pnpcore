@@ -232,6 +232,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This model instance was consolidated with another request for the same key in the same batch, use the instance returned by the first request for that key instead.
+        /// </summary>
+        internal static string Exception_InstanceWasConsolidatedInBatch {
+            get {
+                return ResourceManager.GetString("Exception_InstanceWasConsolidatedInBatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to This model instance was deleted, you can&apos;t use it anymore.
         /// </summary>
         internal static string Exception_InstanceWasDeleted {
