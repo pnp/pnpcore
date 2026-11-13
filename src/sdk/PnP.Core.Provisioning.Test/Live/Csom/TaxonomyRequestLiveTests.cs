@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Provisioning.Model;
-using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.Taxonomy;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Linq;

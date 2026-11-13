@@ -12,7 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM
 {
     /// <summary>
     /// Sends CSOM requests through PnP Core's batching pipeline.
@@ -95,7 +95,7 @@ namespace PnP.Core.Provisioning.Services.Core.CSOM
 
                     context.Logger?.LogInformation(
                         "{Source}: the term store reported a save conflict; retrying in {Delay}ms (attempt {Attempt} of {Total}).",
-                        Constants.LOGGING_SOURCE, delay, attempt, SaveConflictAttempts);
+                        "PnP.Core", delay, attempt, SaveConflictAttempts);
 
                     await Task.Delay(delay).ConfigureAwait(false);
                 }

@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
-using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.Web;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
