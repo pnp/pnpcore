@@ -17,5 +17,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IFooterOptions Footer { get; internal set; }
 
+        public IFontOptions Font { get; internal set; }
+
     }
 }
