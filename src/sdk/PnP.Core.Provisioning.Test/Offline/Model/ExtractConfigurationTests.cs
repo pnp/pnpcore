@@ -99,6 +99,24 @@ namespace PnP.Core.Provisioning.Test.Offline.Model
         }
 
         [TestMethod]
+        public void PageNames_IsEmptyByDefault()
+        {
+            Assert.IsNotNull(new ExtractConfiguration().Pages.PageNames);
+            Assert.AreEqual(0, new ExtractConfiguration().Pages.PageNames.Count);
+            Assert.AreEqual(0, ExtractConfiguration.FromString("{}").Pages.PageNames.Count,
+                "Without page names the extraction must fall back to the home page / all pages behaviour.");
+        }
+
+        [TestMethod]
+        public void PageNames_AreReadFromJson()
+        {
+            ExtractConfiguration configuration = ExtractConfiguration.FromString(
+                "{ \"pages\": { \"pageNames\": [ \"News.aspx\", \"Templates/Page.aspx\" ] } }");
+
+            CollectionAssert.AreEqual(new[] { "News.aspx", "Templates/Page.aspx" }, configuration.Pages.PageNames);
+        }
+
+        [TestMethod]
         public void FromCreationInformation_KeepsTheCallersBaseTemplate()
         {
             ProvisioningTemplate baseTemplate = CommunicationSiteBaseTemplate();
