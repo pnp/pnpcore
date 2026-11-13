@@ -21,7 +21,7 @@ If you want to update your forked repo then you can either use the GitHub UI or 
 Using Visual Studio requires you to:
 
 - Download and install Visual Studio 2019: https://visualstudio.microsoft.com/free-developer-offers/, ensure that you install at least Visual Studio
-- Ensure you've installed the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- Ensure you've installed the [.NET 11.0 SDK](https://dotnet.microsoft.com/download/dotnet/11.0)
 - Navigate to the `./src/sdk` folder and open the **PnP.Core.sln** solution
 
 ### I want to use Visual Studio Code for development
@@ -29,7 +29,7 @@ Using Visual Studio requires you to:
 Using Visual Studio Code requires you to:
 
 - Download and install Visual Studio Code: https://visualstudio.microsoft.com/free-developer-offers/
-- Ensure you've installed the [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- Ensure you've installed the [.NET 11.0 SDK](https://dotnet.microsoft.com/download/dotnet/11.0)
 - Open Visual Studio Code and install these extensions (click on the **Extensions** button in the vertical toolbar and search for it, then click on the **Install** link) and close it again once done
   - [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
   - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)

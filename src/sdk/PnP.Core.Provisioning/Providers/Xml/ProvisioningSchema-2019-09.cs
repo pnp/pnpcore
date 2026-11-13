@@ -267,7 +267,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V201909 {
         
         private bool requiredField;
         
-        private string[] textField;
+        private string textField;
         
         public PreferencesParameter() {
             this.requiredField = false;
@@ -294,8 +294,9 @@ namespace PnP.Core.Provisioning.Providers.Xml.V201909 {
             }
         }
         
+        // Hand-edited from the xsd.exe output (string[] -> string), see Providers\Xml\readme.md.
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }
@@ -1785,10 +1786,11 @@ namespace PnP.Core.Provisioning.Providers.Xml.V201909 {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2019/09/ProvisioningSchema")]
     public partial class TeamTemplate : BaseTeam {
         
-        private string[] textField;
+        private string textField;
         
+        // Hand-edited from the xsd.exe output (string[] -> string), see Providers\Xml\readme.md.
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }
@@ -11032,7 +11034,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V201909 {
         
         private bool overwriteField;
         
-        private string[] textField;
+        private string textField;
         
         public Theme() {
             this.isInvertedField = false;
@@ -11071,8 +11073,9 @@ namespace PnP.Core.Provisioning.Providers.Xml.V201909 {
             }
         }
         
+        // Hand-edited from the xsd.exe output (string[] -> string), see Providers\Xml\readme.md.
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }

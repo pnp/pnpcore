@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Provisioning.Model;
+using PnP.Core.Provisioning.Model.Teams;
 using PnP.Core.Provisioning.Providers;
 using PnP.Core.Provisioning.Providers.Xml;
 using System;
@@ -159,6 +160,83 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
             Assert.AreEqual(original.Security?.SiteGroups?.Count, roundTripped.Security?.SiteGroups?.Count, "SiteGroups");
             Assert.AreEqual(original.Security?.SiteSecurityPermissions?.RoleDefinitions?.Count,
                             roundTripped.Security?.SiteSecurityPermissions?.RoleDefinitions?.Count, "RoleDefinitions");
+        }
+
+        // Parameter values, theme palettes and team templates are stored as XML text. Starting with .NET 11, XmlSerializer
+        // splits an [XmlText] string[] member on whitespace, so the schema classes keep that text as a plain string
+        // (see Providers\Xml\readme.md). These tests also fail if a regenerated schema file brings the string[] back.
+
+        [TestMethod]
+        [TestCategory("Offline")]
+        [DynamicData(nameof(SchemaVersions), DynamicDataSourceType.Method)]
+        public void RoundTrip_ParametersAndThemesKeepTheirWhitespace(string fileName, string namespaceUri)
+        {
+            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(namespaceUri);
+
+            List<string> expectedPalettes;
+            using (Stream fixture = OpenFixture(fileName))
+            {
+                expectedPalettes = XDocument.Load(fixture).Descendants()
+                    .Where(e => e.Name.LocalName == "Theme" && e.Parent?.Name.LocalName == "Themes")
+                    .Select(e => e.Value.Trim())
+                    .ToList();
+            }
+
+            Assert.IsTrue(expectedPalettes.Count > 0, "The fixture has no tenant themes to check.");
+
+            ProvisioningTemplate original;
+            using (Stream fixture = OpenFixture(fileName))
+            {
+                original = formatter.ToProvisioningTemplate(fixture);
+            }
+
+            ProvisioningTemplate roundTripped;
+            using (Stream serialized = formatter.ToFormattedTemplate(original))
+            {
+                roundTripped = formatter.ToProvisioningTemplate(serialized);
+            }
+
+            foreach (var (stage, template) in new[] { ("read", original), ("round trip", roundTripped) })
+            {
+                Assert.AreEqual("Contoso Inc.", template.Parameters["CompanyName"], $"The parameter value changed ({stage}).");
+                CollectionAssert.AreEqual(expectedPalettes, template.Tenant.Themes.Select(t => t.Palette?.Trim()).ToList(),
+                    $"The theme palettes changed ({stage}).");
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
+        public void RoundTrip_HierarchyKeepsWhitespaceInParametersThemesAndTeamTemplates()
+        {
+            const string palette = "{\n  \"themePrimary\": \"#ecb534\",\n  \"name\": \"My orange theme\"\n}";
+            const string teamTemplate = "{ \"displayName\": \"My team\", \"description\": \"Two  spaces\" }";
+            var parameters = new Dictionary<string, string>
+            {
+                ["Spaced"] = "a  b   c",
+                ["Edges"] = " leading and trailing ",
+                ["MultiLine"] = "line 1\nline 2",
+            };
+
+            var hierarchy = new ProvisioningHierarchy();
+            foreach (var parameter in parameters)
+            {
+                hierarchy.Parameters[parameter.Key] = parameter.Value;
+            }
+            hierarchy.Tenant.Themes.Add(new Theme { Name = "Orange", Palette = palette });
+            hierarchy.Teams.TeamTemplates.Add(new TeamTemplate { DisplayName = "My team", Description = "A team template", JsonTemplate = teamTemplate });
+            hierarchy.Templates.Add(new ProvisioningTemplate { Id = "TEMPLATE-1" });
+
+            var formatter = (IProvisioningHierarchyFormatter)XMLPnPSchemaFormatter.LatestFormatter;
+
+            ProvisioningHierarchy read;
+            using (Stream saved = formatter.ToFormattedHierarchy(hierarchy))
+            {
+                read = formatter.ToProvisioningHierarchy(saved);
+            }
+
+            CollectionAssert.AreEquivalent(parameters.ToList(), read.Parameters.ToList(), "The parameter values changed.");
+            Assert.AreEqual(palette, read.Tenant.Themes.Single().Palette?.Trim(), "The theme palette changed.");
+            Assert.AreEqual(teamTemplate, read.Teams.TeamTemplates.Single().JsonTemplate, "The team template changed.");
         }
 
         [TestMethod]
