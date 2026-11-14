@@ -293,7 +293,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
-                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
+                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{WebUtility.HtmlEncode(JsonWebPartData)}"">");
                 html.Append($@"<div {WebPartComponentIdAttribute}=""{WebPartId}""></div>");
                 html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
                 RenderHtmlProperties(ref html);
@@ -640,8 +640,7 @@ namespace PnP.Core.Model.SharePoint
                     // This is a valid web part
                     WebPartData = wpDiv.GetAttribute(WebPartAttribute);
 
-                    // Decode the html encoded string
-                    decodedWebPart = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
+                    decodedWebPart = wpDiv.GetAttribute(WebPartDataAttribute);
                 }
                 else
                 {
@@ -667,12 +666,36 @@ namespace PnP.Core.Model.SharePoint
                 return;
             }
 
-            decodedWebPart = EscapeJsonValues(decodedWebPart);
-
-            if (!SafeDeserializeDecoded(decodedWebPart, out var wpJObject))
+            JsonElement wpJObject = default;
+            bool parsedWebPartData = false;
+            if (wpDiv != null)
             {
-                Title = "Failed to deserialize WebPart";
-                return;
+                try
+                {
+                    wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
+                    parsedWebPartData = true;
+                }
+                catch (JsonException)
+                {
+                    // Retry malformed web part data using the existing recovery path below.
+                }
+            }
+
+            if (!parsedWebPartData)
+            {
+                if (wpDiv != null)
+                {
+                    // The HTML parser already decodes attribute entities. Preserve the legacy recovery path for payloads that need additional decoding.
+                    decodedWebPart = WebUtility.HtmlDecode(decodedWebPart);
+                }
+
+                decodedWebPart = EscapeJsonValues(decodedWebPart);
+
+                if (!SafeDeserializeDecoded(decodedWebPart, out wpJObject))
+                {
+                    Title = "Failed to deserialize WebPart";
+                    return;
+                }
             }
 
             if (wpJObject.TryGetProperty("title", out JsonElement titleProperty))
