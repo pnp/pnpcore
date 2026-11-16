@@ -255,6 +255,20 @@ namespace PnP.Core.Model.SharePoint
         #region Methods
 
         /// <summary>
+        /// Sets the XML schema for the current view
+        /// </summary>
+        /// <param name="viewXml">XML schema to apply to the view</param>
+        /// <returns></returns>
+        Task SetViewXmlAsync(string viewXml);
+
+        /// <summary>
+        /// Sets the XML schema for the current view
+        /// </summary>
+        /// <param name="viewXml">XML schema to apply to the view</param>
+        /// <returns></returns>
+        void SetViewXml(string viewXml);
+
+        /// <summary>
         /// Moves a view field to a new position in the view
         /// </summary>
         /// <param name="internalFieldName">Internal name of the view field to move</param>
