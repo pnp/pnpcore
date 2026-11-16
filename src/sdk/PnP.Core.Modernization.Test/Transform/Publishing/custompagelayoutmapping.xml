@@ -1,0 +1,104 @@
+﻿<PublishingPageTransformation xmlns="http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema">
+  <AddOns>
+    <!-- Assembly can contain either a fully qualified path or just the dll name. In the latter case we depend on .Net assembly resolving to find the assembly -->
+    <!-- <AddOn Name="Custom" Type="PnP.Core.Modernization.SampleAddOn.MyCustomFunctions" Assembly="PnP.Core.Modernization.SampleAddOn.dll" />-->
+  </AddOns>
+  <PageLayouts>
+    <!-- To test contentype handling, set AssociatedContentType to CustomPage1 + adjust the metadata -->
+    <PageLayout Name="VolvoArticleLeftXXX" AlsoAppliesTo="VolvoArticle1;VolvoArticleLeft;VolvoArticle2;ArticleLeft;ArticleRight" AssociatedContentType="CustomPage1" PageLayoutTemplate="AutoDetect" IncludeVerticalColumn="true" PageHeader="Custom">
+      <SectionEmphasis VerticalColumnEmphasis="Soft">
+        <Section Row="3" Emphasis="Neutral" />
+      </SectionEmphasis>
+      <Header Type="FullWidthImage" Alignment="Left" ShowPublishedDate="true">
+        <Field Name="PublishingRollupImage;PublishingPageImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({@name})" />
+        <!--<Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PublishingRollupImage})" />-->
+        <!--<Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="StaticString('/sites/ModernizationTarget/SiteAssets/sitepages/Michael-Freedman/ms-stories-station-q-freedman-michael-12-1024x683.jpg')" />-->
+        <!--<Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="StaticString('/sites/devPortal/publishingiMages/Page-travel-instructions.jpg')" />-->
+        <!--<Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PreviewImage})" />-->
+        <Field Name="ArticleByLine" HeaderProperty="TopicHeader" Functions=""/>
+        <Field Name="Comments" HeaderProperty="AlternativeText"/>
+        <!-- To ensure the right person is shown in the header is shown you need to populate the PublishingContact field. Any User field can act as source -->
+        <Field Name="PublishingContact" HeaderProperty="Authors" Functions="ToAuthors({PublishingContact})"/>
+        <!--<Field Name="PublishingContact" HeaderProperty="Authors" Functions="ToAuthors({Editor})"/>-->
+      </Header>
+      <MetaData ShowPageProperties="true" PagePropertiesRow="1" PagePropertiesColumn="4" PagePropertiesOrder="1">
+        <!-- Use Custom1 field when AssociatedContentType is set to CustomPage1 -->
+        <!--<Field Name="PublishingContactEmail" TargetFieldName="BannerImageUrl" Functions="StaticString('https://bertonline.sharepoint.com/_layouts/15/getpreview.ashx?guidSite=88eebac1710b464cb6816639340fac55&amp;guidWeb=277fe40db9d24da5bbc6827714184958&amp;guidFile=91bf17fd54e849149a3ad6b4f006304e&amp;ext=jpg')" />-->
+        <!--<Field Name="PreviewImage" TargetFieldName="BannerImageUrl" Functions="ToPreviewImageUrl({PreviewImage})" />-->
+        <Field Name="PublishingContactName;PublishingContactEmail" TargetFieldName="Custom1" Functions="" />
+        <!--<Field Name="PublishingContactEmail" TargetFieldName="Custom2" Functions="" />-->
+        <Field Name="TaxField1" TargetFieldName="Metadata1" Functions="" ShowInPageProperties="true" />
+        <!--<Field Name="TaxField1" TargetFieldName="Metadata1" Functions="DefaultTaxonomyFieldValue({TaxField1},'ed5449ec-4a4f-4102-8f07-5a207c438571','false')" ShowInPageProperties="true" />-->
+        <Field Name="TaxField2" TargetFieldName="Metadata2" Functions="DefaultTaxonomyFieldValue({TaxField2},'a65537e8-aa27-4b3a-bad6-f0f61f84b9f7|69524923-a5a0-44d1-b5ec-7f7c6d0ec160','true')" ShowInPageProperties="true"/>
+        <Field Name="Person" TargetFieldName="Person" Functions="" ShowInPageProperties="true"/>
+        
+        <!-- OBSOLETE: please use the new KeepPageCreationModificationInformation option-->
+        <!-- Use below 4 fields to retain user created/date created, user modified/date modified will be overwritten afterwards, but you need to include them to make this "override" work -->
+        <!--<Field Name="Created" TargetFieldName="Created" Functions="" />
+        <Field Name="Author" TargetFieldName="Author" Functions="" />
+        <Field Name="Modified" TargetFieldName="Modified" Functions="" />
+        <Field Name="Editor" TargetFieldName="Editor" Functions="" />-->
+        
+        <!-- OBSOLETE: please use the new PostNews option-->
+        <!-- If you want to publish the article as news then set populate the FirstPublishedDate with either the Modified, ArticleStartDate or PublishingStartDate source field (check what's filled in your case) -->
+        <!--<Field Name="ArticleStartDate" TargetFieldName="FirstPublishedDate" Functions=""/>-->
+        <!--<Field Name="Modified" TargetFieldName="FirstPublishedDate" Functions=""/>
+        <Field Name="ID" TargetFieldName="PromotedState" Functions="StaticString('2')" />-->
+      </MetaData>
+      <WebParts>
+        <Field Name="PublishingPageImage" TargetWebPart="SharePointPnP.Modernization.WikiImagePart" Row="1" Column="1" Order="1">
+          <Property Name="ImageUrl" Type="string" Functions="ToImageUrl({PublishingPageImage})"/>
+          <Property Name="AlternativeText" Type="string" Functions="ToImageAltText({PublishingPageImage})" />
+          <Property Name="Anchor" Type="string" Functions="ToImageAnchor({PublishingPageImage})" />
+          <Property Name="Caption" Type="string" Functions="ToImageCaption({PublishingImageCaption})" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="2">
+          <Property Name="Text" Type="string" Functions="PrefixAndSuffix('&lt;H1&gt;Prefix some extra text&lt;/H1&gt;','&lt;H1&gt;Suffix some extra text&lt;/H1&gt;',{PublishingPageContent},'false')" />
+        </Field>
+        <!--
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="2">
+          <Property Name="Text" Type="string" Functions="" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="2">
+          <Property Name="Text" Type="string" Functions="Prefix('&lt;H1&gt;Prefix some extra text&lt;/H1&gt;', {PublishingPageContent}, 'false')" />
+        </Field>
+        -->
+        <!-- Add some extra 'hard coded' text in row 1 column 3 -->
+        <Field Name="ID" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="3">
+          <Property Name="Text" Type="string" Functions="StaticString('&lt;H1&gt;This is some extra text&lt;/H1&gt;')" />
+        </Field>
+        <!-- Add an extra web part on the page -->
+        <!--<Field Name="ID"  TargetWebPart="SharePointPnP.Demo.HelloWorld" Row="4" Column="1" Order="1">
+          <Property Name="HelloWorld" Type="string" Functions="StaticString('Hi bert')"/>
+        </Field>-->
+        <Field Name="SummaryLinks" TargetWebPart="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart, Microsoft.SharePoint.Publishing, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="1" Column="4" Order="2">
+          <Property Name="SummaryLinkStore" Type="string" />
+          <Property Name="Title" Type="string" Functions="StaticString('Hi there')" />
+        </Field>
+      </WebParts>
+      <WebPartZones>
+        <WebPartZone Row="2" Column="1" ZoneId="g_0C7F16935FAC4709915E2D77092A90DE" ZoneIndex="0">
+          <WebPartZoneLayout>
+            <WebPartOccurrence Type="Microsoft.SharePoint.WebPartPages.ContentEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="3" Column="2"/>
+            <WebPartOccurrence Type="Microsoft.SharePoint.WebPartPages.ContentEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="3" Column="1" Order="2"/>
+            <WebPartOccurrence Type="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="3" Column="1" Order="1"/>
+          </WebPartZoneLayout>
+        </WebPartZone>
+      </WebPartZones>
+      <FixedWebParts>
+        <WebPart Row="1" Column="2" Order="1" Type="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+          <Property Name="Description" Type="string" Value="$Resources:core,ScriptEditorWebPartDescription;"/>
+          <Property Name="Title" Type="string" Value="$Resources:core,ScriptEditorWebPartTitle;"/>
+          <Property Name="Content" Type="string" Value="&lt;script type='text/javascript'&gt;function Hello() {alert('Hello World');}&lt;/script&gt;&lt;input type='button' value='Submit' onclick='Hello();'/&gt;"/>
+          <Property Name="__designer:IsClosed" Type="bool" Value="false"/>
+        </WebPart>
+        <!--
+        <WebPart Row="1" Column="2" Order="2" Type="Microsoft.SharePoint.WebPartPages.ContentEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+          <Property Name="Title" Type="string" Value="Example Embedded Web Content Editor"/>
+          <Property Name="CONTENT" Type="string" Value="Welcome to the home of all SharePoint modernization tools and solutions. Modernization means transforming current classic SharePoint usage into modern usage, e.g. using modern site pages instead of classic wiki pages or Office 365 Group connecting of classic sites. In this repository you'll find all the SharePoint PnP open source scripts, tools and solutions that will help you modernize your SharePoint environment."/>
+        </WebPart>
+        -->
+      </FixedWebParts>    
+    </PageLayout>
+  </PageLayouts>
+</PublishingPageTransformation>

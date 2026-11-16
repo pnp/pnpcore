@@ -13,6 +13,8 @@ on:
     - 'src/sdk/PnP.Core.Auth.Test/**'
     - 'src/sdk/PnP.Core.Admin.Test/**'
     - 'src/sdk/PnP.Core.Provisioning.Test/**'
+    - 'src/sdk/PnP.Core.Modernization/**'
+    - 'src/sdk/PnP.Core.Modernization.Test/**'
   pull_request:
     branches: [ dev ]
     paths:
@@ -24,6 +26,8 @@ on:
     - 'src/sdk/PnP.Core.Auth.Test/**'
     - 'src/sdk/PnP.Core.Admin.Test/**'
     - 'src/sdk/PnP.Core.Provisioning.Test/**'
+    - 'src/sdk/PnP.Core.Modernization/**'
+    - 'src/sdk/PnP.Core.Modernization.Test/**'
 
 jobs:
   build:
@@ -62,6 +66,7 @@ jobs:
         dotnet test ./PnP.Core.Auth.Test/PnP.Core.Auth.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
         dotnet test ./PnP.Core.Admin.Test/PnP.Core.Admin.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
         dotnet test ./PnP.Core.Provisioning.Test/PnP.Core.Provisioning.Test.csproj --no-restore --verbosity normal --filter TestCategory=Offline --collect:"XPlat Code Coverage"
+        dotnet test ./PnP.Core.Modernization.Test/PnP.Core.Modernization.Test.csproj --no-restore --verbosity normal --filter TestCategory=Offline --collect:"XPlat Code Coverage"
       working-directory: src/sdk
     - name: Upload coverage to Codecov 📝
       uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1

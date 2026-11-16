@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PublishingPageTransformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema">
+  <PageLayouts>
+    <PageLayout Name="ContosoLinksBelow" AssociatedContentType="" PageLayoutTemplate="AutoDetect" PageHeader="Custom">
+      <Header Type="FullWidthImage" Alignment="Left" ShowPublishedDate="false">
+        <Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PublishingRollupImage})" />
+        <Field Name="ArticleByLine" HeaderProperty="TopicHeader" Functions="" />
+        <Field Name="PublishingContact" HeaderProperty="Authors" Functions="ToAuthors({PublishingContact})" />
+      </Header>
+      <MetaData>
+        <Field Name="Title" TargetFieldName="" Functions="" />
+        <Field Name="Comments" TargetFieldName="" Functions="" />
+        <Field Name="PublishingStartDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingExpirationDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactEmail" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactName" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactPicture" TargetFieldName="" Functions="" />
+        <Field Name="PublishingIsFurlPage" TargetFieldName="" Functions="" />
+      </MetaData>
+      <WebParts>
+        <Field Name="PublishingPageImage" TargetWebPart="SharePointPnP.Modernization.WikiImagePart" Row="1" Column="1">
+          <Property Name="ImageUrl" Type="string" Functions="ToImageUrl({PublishingPageImage})" />
+          <Property Name="AlternativeText" Type="string" Functions="ToImageAltText({PublishingPageImage})" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="1">
+          <Property Name="Text" Type="string" />
+        </Field>
+        <Field Name="SummaryLinks" TargetWebPart="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart, Microsoft.SharePoint.Publishing, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="1" Column="1">
+          <Property Name="SummaryLinkStore" Type="string" />
+          <Property Name="Title" Type="string" Functions="EmptyString()" />
+        </Field>
+        <Field Name="SummaryLinks2" TargetWebPart="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart, Microsoft.SharePoint.Publishing, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="1" Column="1">
+          <Property Name="SummaryLinkStore" Type="string" />
+          <Property Name="Title" Type="string" Functions="EmptyString()" />
+        </Field>
+      </WebParts>
+      <WebPartZones>
+        <WebPartZone ZoneIndex="0" ZoneId="TopColumnZone" Row="1" Column="1" />
+        <WebPartZone ZoneIndex="0" ZoneId="LeftColumnZone" Row="1" Column="1" />
+        <WebPartZone ZoneIndex="0" ZoneId="RightColumnZone" Row="1" Column="1" />
+      </WebPartZones>
+    </PageLayout>
+    <PageLayout Name="ContosoLinksRight" AssociatedContentType="" PageLayoutTemplate="AutoDetect" PageHeader="Custom">
+      <Header Type="FullWidthImage" Alignment="Left" ShowPublishedDate="false">
+        <Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PublishingRollupImage})" />
+        <Field Name="ArticleByLine" HeaderProperty="TopicHeader" Functions="" />
+        <Field Name="PublishingContact" HeaderProperty="Authors" Functions="ToAuthors({PublishingContact})" />
+      </Header>
+      <MetaData>
+        <Field Name="Title" TargetFieldName="" Functions="" />
+        <Field Name="Comments" TargetFieldName="" Functions="" />
+        <Field Name="PublishingStartDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingExpirationDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactEmail" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactName" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactPicture" TargetFieldName="" Functions="" />
+        <Field Name="PublishingIsFurlPage" TargetFieldName="" Functions="" />
+      </MetaData>
+      <WebParts>
+        <Field Name="SummaryLinks" TargetWebPart="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart, Microsoft.SharePoint.Publishing, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="1" Column="1">
+          <Property Name="SummaryLinkStore" Type="string" />
+          <Property Name="Title" Type="string" Functions="EmptyString()" />
+        </Field>
+        <Field Name="PublishingPageImage" TargetWebPart="SharePointPnP.Modernization.WikiImagePart" Row="1" Column="1">
+          <Property Name="ImageUrl" Type="string" Functions="ToImageUrl({PublishingPageImage})" />
+          <Property Name="AlternativeText" Type="string" Functions="ToImageAltText({PublishingPageImage})" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="1">
+          <Property Name="Text" Type="string" />
+        </Field>
+      </WebParts>
+      <WebPartZones>
+        <WebPartZone ZoneIndex="0" ZoneId="TopColumnZone" Row="1" Column="1" />
+        <WebPartZone ZoneIndex="0" ZoneId="LeftColumnZone" Row="1" Column="1" />
+        <WebPartZone ZoneIndex="0" ZoneId="RightColumnZone" Row="1" Column="1" />
+      </WebPartZones>
+    </PageLayout>
+    <PageLayout Name="VolvoArticleLeft" AssociatedContentType="" PageLayoutTemplate="AutoDetect" PageHeader="Custom">
+      <Header Type="FullWidthImage" Alignment="Left" ShowPublishedDate="false">
+        <Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PublishingRollupImage})" />
+        <Field Name="ArticleByLine" HeaderProperty="TopicHeader" Functions="" />
+        <Field Name="PublishingContact" HeaderProperty="Authors" Functions="ToAuthors({PublishingContact})" />
+      </Header>
+      <MetaData>
+        <Field Name="Title" TargetFieldName="" Functions="" />
+        <Field Name="Comments" TargetFieldName="" Functions="" />
+        <Field Name="PublishingStartDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingExpirationDate" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactEmail" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactName" TargetFieldName="" Functions="" />
+        <Field Name="PublishingContactPicture" TargetFieldName="" Functions="" />
+        <Field Name="PublishingIsFurlPage" TargetFieldName="" Functions="" />
+        <Field Name="ArticleStartDate" TargetFieldName="" Functions="" />
+      </MetaData>
+      <WebParts>
+        <Field Name="PublishingPageImage" TargetWebPart="SharePointPnP.Modernization.WikiImagePart" Row="1" Column="1">
+          <Property Name="ImageUrl" Type="string" Functions="ToImageUrl({PublishingPageImage})" />
+          <Property Name="AlternativeText" Type="string" Functions="ToImageAltText({PublishingPageImage})" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="1">
+          <Property Name="Text" Type="string" />
+        </Field>
+      </WebParts>
+      <WebPartZones>
+        <WebPartZone ZoneIndex="0" ZoneId="g_0C7F16935FAC4709915E2D77092A90DE" Row="1" Column="1" />
+      </WebPartZones>
+      <FixedWebParts>
+        <WebPart Type="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" Row="1" Column="1">
+          <Property Name="runat" Type="string" Value="server" />
+          <Property Name="chrometype" Type="string" Value="None" />
+          <Property Name="description" Type="string" Value="$Resources:core,ScriptEditorWebPartDescription;" />
+          <Property Name="content" Type="string" Value="&lt;script type='text/javascript'&gt;function Hello() {alert('Hello World');}&lt;/script&gt;&lt;input type='button' value='Submit' onclick='Hello();'/&gt;" />
+          <Property Name="importerrormessage" Type="string" Value="$Resources:core,ImportErrorMessage;" />
+          <Property Name="title" Type="string" Value="$Resources:core,ScriptEditorWebPartTitle;" />
+          <Property Name="__markuptype" Type="string" Value="vsattributemarkup" />
+          <Property Name="__webpartid" Type="string" Value="{aeb5f1b7-0ecb-4283-93e9-4d6177b1d42f}" />
+          <Property Name="webpart" Type="string" Value="true" />
+          <Property Name="__designer:isclosed" Type="string" Value="false" />
+          <Property Name="id" Type="string" Value="g_aeb5f1b7_0ecb_4283_93e9_4d6177b1d42f" />
+        </WebPart>
+      </FixedWebParts>
+    </PageLayout>
+  </PageLayouts>
+</PublishingPageTransformation>

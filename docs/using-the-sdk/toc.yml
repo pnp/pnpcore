@@ -42,6 +42,10 @@
   items:
   - name: Overview
     href: provisioning-intro.md
+- name: Page modernization
+  items:
+  - name: Migration-first port
+    href: modernization-intro.md
 - name: "Admin: Microsoft 365"
   items:
   - name: Information Protection

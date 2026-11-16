@@ -30,6 +30,9 @@ dotnet build ./src/sdk/PnP.Core.Admin/PnP.Core.Admin.csproj --configuration Rele
 Write-Host "Building PnP.Core.Provisioning version $version"
 dotnet build ./src/sdk/PnP.Core.Provisioning/PnP.Core.Provisioning.csproj --configuration Release --no-incremental /p:Version=$version
 
+Write-Host "Building PnP.Core.Modernization version $version"
+dotnet build ./src/sdk/PnP.Core.Modernization/PnP.Core.Modernization.csproj --configuration Release --no-incremental /p:Version=$version
+
 Write-Host "Packinging PnP.Core version $version"
 dotnet pack ./src/sdk/PnP.Core/PnP.Core.csproj --configuration Release --no-build /p:PackageVersion=$version
 
@@ -41,6 +44,9 @@ dotnet pack ./src/sdk/PnP.Core.Admin/PnP.Core.Admin.csproj --configuration Relea
 
 Write-Host "Packinging PnP.Core.Provisioning version $version"
 dotnet pack ./src/sdk/PnP.Core.Provisioning/PnP.Core.Provisioning.csproj --configuration Release --no-build /p:PackageVersion=$version
+
+Write-Host "Packing transitional PnP.Core.Modernization version $version (not published)"
+dotnet pack ./src/sdk/PnP.Core.Modernization/PnP.Core.Modernization.csproj --configuration Release --no-build /p:PackageVersion=$version
 
 Write-Host "Publishing to nuget"
 $nupkg = $("./src/sdk/PnP.Core/bin/Release/PnP.Core.$version.nupkg")
