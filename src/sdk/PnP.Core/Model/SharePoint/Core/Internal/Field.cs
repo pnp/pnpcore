@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Fields;
+using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -21,10 +22,29 @@ namespace PnP.Core.Model.SharePoint
     internal sealed class Field : BaseDataModel<IField>, IField
     {
         internal const string FieldOptionsAdditionalInformationKey = "FieldOptions";
+        internal bool HasConcreteMetadataType { get; private set; }
 
         #region Construction
         public Field()
         {
+            PostMappingHandler = (json) =>
+            {
+                if (IsPropertyAvailable(x => x.TypeAsString)
+                    && !string.IsNullOrEmpty(TypeAsString)
+                    && FieldTypeAsStringMap.TryGetFieldEntityType(TypeAsString, out var targetFieldMetadataType))
+                {
+                    if (!Metadata.ContainsKey(PnPConstants.MetaDataType))
+                    {
+                        Metadata.Add(PnPConstants.MetaDataType, targetFieldMetadataType);
+                        HasConcreteMetadataType = true;
+                    }
+                    else if (!string.Equals(Metadata[PnPConstants.MetaDataType], targetFieldMetadataType, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Metadata[PnPConstants.MetaDataType] = targetFieldMetadataType;
+                        HasConcreteMetadataType = true;
+                    }
+                }
+            };
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
@@ -41,6 +61,12 @@ namespace PnP.Core.Model.SharePoint
                         var request = ContentTypeHub.SwitchToContentTypeHubUrl(PnPContext.Uri, api.ApiCall.Request);
                         api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
                     }
+                }
+
+                if (!HasConcreteMetadataType)
+                {
+                    // Drop the "SP.Field" type and let SharePoint use the field's real type
+                    RemoveMetadata(api); 
                 }
 
                 return api;
@@ -66,7 +92,12 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                
+                if (!HasConcreteMetadataType)
+                {
+                    // Drop the "SP.Field" type and let SharePoint use the field's real type
+                    RemoveMetadata(api);
+                }
+
                 return api;
             };
 
@@ -92,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
                 return api;
             };
         }
-        #endregion
+#endregion
 
         #region Properties
         public bool AutoIndexed { get => GetValue<bool>(); set => SetValue(value); }
@@ -602,6 +633,28 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Drop the "SP.Field" type and let SharePoint use the field's real type
+        /// </summary>
+        /// <param name="api"></param>
+        private static void RemoveMetadata(ApiCallRequest api)
+        {
+            var body = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(api.ApiCall.JsonBody);
+            if (body != null && body.Remove("__metadata"))
+            {
+                var newCall = new ApiCall(api.ApiCall.Request, api.ApiCall.Type, JsonSerializer.Serialize(body), api.ApiCall.ReceivingProperty)
+                {
+                    Commit = api.ApiCall.Commit,
+                    AddedViaBatchMethod = api.ApiCall.AddedViaBatchMethod,
+                    Headers = new Dictionary<string, string>
+                    {
+                        ["Content-Type"] = "application/json;odata=nometadata"
+                    }
+                };
+                api.ApiCall = newCall;
+            }
         }
         #endregion
     }
