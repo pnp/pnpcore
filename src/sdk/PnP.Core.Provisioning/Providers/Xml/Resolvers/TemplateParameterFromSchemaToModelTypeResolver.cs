@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PnP.Core.Provisioning.Providers.Xml.Resolvers
 {
@@ -24,8 +23,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.Resolvers
                 foreach (var l in (IEnumerable)source)
                 {
                     var key = (String)l.GetType().GetProperty("Key").GetValue(l);
-                    var value = ((String[])l.GetType().GetProperty("Text").GetValue(l))?
-                        .Aggregate(String.Empty, (s, v) => s += v);
+                    var value = (String)l.GetType().GetProperty("Text").GetValue(l);
                     result.Add(key, value);
                 }
             }
