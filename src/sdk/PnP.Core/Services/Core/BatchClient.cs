@@ -28,9 +28,6 @@ namespace PnP.Core.Services
         private int testUseCounter;
 #endif
 
-        // Handles sending telemetry events
-        private readonly TelemetryManager telemetryManager;
-
         // Collection of current batches, ensure thread safety via a concurrent dictionary
         private readonly ConcurrentDictionary<Guid, Batch> batches = new ConcurrentDictionary<Guid, Batch>();
 
@@ -126,11 +123,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context">PnP Context</param>
         /// <param name="globalOptions">Global settings to use</param>
-        /// <param name="telemetry">Telemetry manager</param>
-        internal BatchClient(PnPContext context, PnPGlobalSettingsOptions globalOptions, TelemetryManager telemetry)
+        internal BatchClient(PnPContext context, PnPGlobalSettingsOptions globalOptions)
         {
             PnPContext = context;
-            telemetryManager = telemetry;
 
             HttpMicrosoftGraphMaxRetries = globalOptions.HttpMicrosoftGraphMaxRetries;
             HttpMicrosoftGraphDelayInSeconds = globalOptions.HttpMicrosoftGraphDelayInSeconds;
@@ -872,8 +867,6 @@ namespace PnP.Core.Services
                 }
 
                 counter++;
-
-                telemetryManager?.LogServiceRequest(request, PnPContext);
             }
 
             string stringContent = JsonSerializer.Serialize(graphRequests, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
@@ -1009,8 +1002,6 @@ namespace PnP.Core.Services
                             request.Headers.Add(extraHeader.Key, extraHeader.Value);
                         }
                     }
-
-                    telemetryManager?.LogServiceRequest(graphRequest, PnPContext);
 
 #if DEBUG
                     string batchKey = null;
@@ -1559,8 +1550,6 @@ namespace PnP.Core.Services
                     batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
                 }
 #endif
-
-                telemetryManager?.LogServiceRequest(request, PnPContext);
             }
 
             // Batch closing
@@ -1929,8 +1918,6 @@ namespace PnP.Core.Services
                         }
                     }
 
-                    telemetryManager?.LogServiceRequest(restRequest, PnPContext);
-
 #if DEBUG
                     string batchKey = null;
                     if (PnPContext.Mode != TestMode.Default)
@@ -2185,8 +2172,6 @@ namespace PnP.Core.Services
                         {
                             csomAPICallBuilder.AddRequest(request);
                         }
-
-                        telemetryManager?.LogServiceRequest(csomAPICall, PnPContext);
                     }
                     requestBody = csomAPICallBuilder.SerializeCSOMRequests();
 
