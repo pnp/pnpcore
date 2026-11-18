@@ -1,12 +1,9 @@
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Publishing;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -193,34 +190,16 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
             const string html = "<h2 style='text-decoration:line-through'>Retired heading</h2>" +
                 "<ul style='text-decoration-line:underline line-through'><li>Retired step</li></ul>" +
                 "<p>Current guidance</p>";
-            const string siteUrl = "https://example.org/sites/source";
-            var provider = new MockEntryResponseProvider();
-            foreach (var property in new[] { "Site", "Web" })
-            {
-                provider.ResponseEntries.Add(new MockResponseEntry<object>
-                {
-                    Url = siteUrl,
-                    PropertyName = property,
-                    ReturnValue = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP." + property,
-                        ["Url"] = siteUrl,
-                        ["ServerRelativeUrl"] = "/sites/source"
-                    }
-                });
-            }
-            using (var context = new ClientContext(siteUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider)
-            })
+            const string siteUrl = "https://contoso.sharepoint.com/sites/source";
+            using (var context = CoreTestContext.Create(siteUrl))
             {
                 BaseTransformationInformation information = publishing
                     ? new PublishingPageTransformationInformation(null)
                     : new PageTransformationInformation(null);
                 information.SkipUrlRewrite = true;
                 var builtIn = new BuiltIn(information, context);
-                context.ExecutingWebRequest += (_, __) =>
-                    throw new AssertFailedException("HTML cleanup must not access a tenant.");
+                CoreTestContext.SetResponse(context, (_, _) =>
+                    throw new AssertFailedException("HTML cleanup must not access a tenant."));
                 using (var result = new HtmlParser().ParseDocument(builtIn.TextCleanup(html, usePlaceHolders)))
                 {
                     AssertDecoration(result.QuerySelector("h3"), "s", true);

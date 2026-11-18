@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
@@ -40,9 +39,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(sourceClientContext);
                 pageTransformator.RegisterObserver(new UnitTestLogObserver()); // Example of registering an observer, this can be anything really.
 
-                var pages = sourceClientContext.Web.GetPages("wk").Take(1);
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wk").AsRequested().Take(1);
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

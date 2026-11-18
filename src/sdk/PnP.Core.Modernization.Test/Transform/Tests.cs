@@ -1,6 +1,6 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Entities;
+using PnP.Core.Modernization.Pages;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace PnP.Core.Modernization.Tests.Transform
     {
         class TestLayout : ILayoutTransformator
         {
-            public void Transform(Tuple<Pages.PageLayout, List<WebPartEntity>> pageData)
+            public void Transform(Tuple<PageLayout, List<WebPartEntity>> pageData)
             {
                 throw new NotImplementedException();
             }
@@ -60,9 +60,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("meta2");
+                var pages = WebExtensions.GetPages(cc.Web,"meta2");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -95,9 +95,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("d95");
+                var pages = WebExtensions.GetPages(cc.Web,"d95");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -126,9 +126,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("page", "Folder1/Sub1");
+                var pages = WebExtensions.GetPages(cc.Web,"page","Folder1/Sub1");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -155,8 +155,8 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(cc);
 
                 var fileToModernize = cc.Web.GetFileByServerRelativeUrl("/sites/projectsitetest/default.aspx");
-                cc.Load(fileToModernize);
-                cc.ExecuteQueryRetry();
+                fileToModernize.LoadBatch();
+                cc.Execute();
 
                 PageTransformationInformation pti = new PageTransformationInformation(null)
                 {
@@ -188,9 +188,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(cc);
 
                 //webparts
-                var pages = cc.Web.GetPages("webparts");
+                var pages = WebExtensions.GetPages(cc.Web,"webparts");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -219,9 +219,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("table_1");
+                var pages = WebExtensions.GetPages(cc.Web,"table_1");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -241,9 +241,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("demo5");
+                var pages = WebExtensions.GetPages(cc.Web,"demo5");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -291,9 +291,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 //webparts.aspx
                 //contentbyquery1.aspx
                 //how to use this library.aspx
-                var pages = cc.Web.GetPages("w");
+                var pages = WebExtensions.GetPages(cc.Web,"w");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

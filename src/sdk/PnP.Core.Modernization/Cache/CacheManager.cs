@@ -1,12 +1,15 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.Taxonomy;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Publishing;
+using PnP.Core.Modernization.Services.Core.CSOM;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using PnP.Core.Modernization.Utilities;
+using PnP.Core.Provisioning;
+using PnP.Core.Provisioning.BaseTemplates;
+using PnP.Core.Provisioning.Model;
+using PageLayout = PnP.Core.Modernization.Publishing.PageLayout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using PnPCore = PnP.Core.Model.SharePoint;
+using System.Threading.Tasks;
+
 
 namespace PnP.Core.Modernization.Cache
 {
@@ -26,7 +30,7 @@ namespace PnP.Core.Modernization.Cache
     {
         private static readonly Lazy<CacheManager> _lazyInstance = new Lazy<CacheManager>(() => new CacheManager());
         // baseTemplate will be loaded from local assembly and will be the same for any "caller"
-        private Provisioning.Model.ProvisioningTemplate baseTemplate;
+        private ProvisioningTemplate baseTemplate;
         // Needs to be refactored together with the logging system
         private BasePageTransformator lastUsedTransformator;
 
@@ -208,12 +212,18 @@ namespace PnP.Core.Modernization.Cache
         /// <summary>
         /// Gets the clientside components from cache or if needed retrieves and caches them
         /// </summary>
-        /// <param name="targetClientContext"></param>
+        /// <param name="web">Target web from the page's Core context</param>
         /// <param name="page">Page to grab the components for</param>
         /// <returns></returns>
-        internal List<PnPCore.PageComponent> GetClientSideComponents(ClientContext targetClientContext, PnPCore.IPage page)
+        internal List<PageComponent> GetClientSideComponents(IWeb web, IPage page)
         {
-            Guid webId = targetClientContext.Web.EnsureProperty(o => o.Id);
+            return GetClientSideComponentsAsync(web, page).GetAwaiter().GetResult();
+        }
+
+        internal async Task<List<PageComponent>> GetClientSideComponentsAsync(IWeb web, IPage page)
+        {
+            await web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+            Guid webId = web.Id;
 
             var siteToComponentMapping = Store.GetAndInitialize<Dictionary<Guid, string>>(StoreOptions.GetKey(keySiteToComponentMapping));
 
@@ -225,17 +235,16 @@ namespace PnP.Core.Modernization.Cache
                     var clientSideComponents2 = Store.GetAndInitialize<Dictionary<string, string>>(StoreOptions.GetKey(keyClientSideComponents));
                     if (clientSideComponents2.TryGetValue(componentKey, out string componentList))
                     {
-                        return JsonSerializer.Deserialize<List<PnPCore.PageComponent>>(componentList);
+                        return JsonSerializer.Deserialize<List<PageComponent>>(componentList);
                     }
                 }
             }
 
             // Ok, so nothing in cache so it seems, so let's get the components
-            //var componentsToAdd = page.AvailablePageComponents().Cast<PnPCore.IPageComponent>().ToList();
-            List<PnPCore.PageComponent> componentsToAdd = new List<PnPCore.PageComponent>();
-            foreach (var component in page.AvailablePageComponents())
+            List<PageComponent> componentsToAdd = new List<PageComponent>();
+            foreach (var component in await page.AvailablePageComponentsAsync().ConfigureAwait(false))
             {
-                componentsToAdd.Add(new PnPCore.PageComponent()
+                componentsToAdd.Add(new PageComponent()
                 {
                     ComponentType = component.ComponentType,
                     Id = component.Id,
@@ -281,11 +290,12 @@ namespace PnP.Core.Modernization.Cache
         /// </summary>
         /// <param name="web">web to operate against</param>
         /// <returns>Provisioning template of the base template of STS#0</returns>
-        public Provisioning.Model.ProvisioningTemplate GetBaseTemplate(Web web)
+        public ProvisioningTemplate GetBaseTemplate(IWeb web)
         {
             if (this.baseTemplate == null)
             {
-                this.baseTemplate = web.GetBaseTemplate("STS", 0);
+                this.baseTemplate = BaseTemplateManager.GetBaseTemplate(web.PnPContext, "STS", 0)
+                    ?? throw new InvalidOperationException("The SharePoint Online STS#0 base template could not be loaded.");
 
                 // Ensure certain new fields are there
                 var sitePagesInBaseTemplate = baseTemplate.Lists.Where(p => p.Url == "SitePages").FirstOrDefault();
@@ -323,7 +333,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="sourceLibrary">Pages library instance</param>
         /// <param name="pageType">Type of page</param>
         /// <returns>List of fields that need to be copied</returns>
-        public List<FieldData> GetFieldsToCopy(Web web, List sourceLibrary, string pageType)
+        public List<FieldData> GetFieldsToCopy(IWeb web, IList sourceLibrary, string pageType)
         {
             List<FieldData> fieldsToCopyRetrieved = new List<FieldData>();
 
@@ -346,7 +356,7 @@ namespace PnP.Core.Modernization.Cache
                     var sitePagesInBaseTemplate = baseTemplate.Lists.Where(p => p.Url == "SitePages").FirstOrDefault();
 
                     // Compare site pages list fields
-                    foreach (var sourceField in sourceLibrary.Fields.Where(p => p.Hidden == false).ToList())
+                    foreach (IField sourceField in sourceLibrary.Fields.AsRequested().Where(p => p.Hidden == false).ToList())
                     {
                         // Skip OOB fields
                         if (!IsBuiltInField(pageType.Equals("BlogPage", StringComparison.InvariantCultureIgnoreCase), sourceField.Id))
@@ -389,7 +399,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="contentTypeId">ID of the content type</param>
         /// <param name="fieldName">Name of the field to get information from</param>
         /// <returns>FieldData object holding field information</returns>
-        public FieldData GetPublishingContentTypeField(List pagesLibrary, string contentTypeId, string fieldName)
+        public FieldData GetPublishingContentTypeField(IList pagesLibrary, string contentTypeId, string fieldName)
         {
             // Try to get from cache
             var publishingContentTypeFields = Store.GetAndInitialize<Dictionary<string, List<FieldData>>>(StoreOptions.GetKey(keyPublishingContentTypeFields));
@@ -399,15 +409,15 @@ namespace PnP.Core.Modernization.Cache
                 return fieldsFromCache.Where(p => p.FieldName.Equals(fieldName, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
             }
 
-            ClientContext context = pagesLibrary.Context as ClientContext;
+            PnPContext context = pagesLibrary.PnPContext as PnPContext;
 
             // Load all fields of the list
-            FieldCollection fields = pagesLibrary.Fields;
-            context.Load(fields, fs => fs.Include(f => f.Id, f => f.TypeAsString, f => f.InternalName));
-            context.ExecuteQueryRetry();
+            IFieldCollection fields = pagesLibrary.Fields;
+            fields.LoadBatch(f => f.Id,f => f.TypeAsString,f => f.InternalName);
+            context.Execute();
 
             List<FieldData> contentTypeFieldsInList = new List<FieldData>();
-            foreach (var field in fields)
+            foreach (IField field in fields)
             {
                 contentTypeFieldsInList.Add(new FieldData()
                 {
@@ -541,7 +551,7 @@ namespace PnP.Core.Modernization.Cache
         /// </summary>
         /// <param name="context">Context of the site</param>
         /// <returns>Translated name of the pages library</returns>
-        public string GetPublishingPagesLibraryName(ClientContext context)
+        public string GetPublishingPagesLibraryName(PnPContext context)
         {
             // Simplier implementation - Get the Pages library then get the relative URL of the rootfolder of the library
 
@@ -580,7 +590,7 @@ namespace PnP.Core.Modernization.Cache
                     var keyVal = context.Web.GetPropertyBagValueString(propertyBagKey, string.Empty);
                     if (!string.IsNullOrEmpty(keyVal))
                     {
-                        var list = context.Web.GetListById(Guid.Parse(keyVal), o => o.RootFolder.ServerRelativeUrl);
+                        IList list = context.Web.GetListById(Guid.Parse(keyVal), o => o.RootFolder.ServerRelativeUrl);
                         var webServerRelativeUrl = context.Web.EnsureProperty(w => w.ServerRelativeUrl);
 
                         pagesLibraryName = list.RootFolder.ServerRelativeUrl.Replace(webServerRelativeUrl, "").Trim('/').ToLower();
@@ -595,10 +605,8 @@ namespace PnP.Core.Modernization.Cache
                 else
                 {
                     // Fall back to older logic
-                    ClientResult<string> result = Microsoft.SharePoint.Client.Utilities.Utility.GetLocalizedString(context, "$Resources:List_Pages_UrlName", "osrvcore", int.Parse(lcid.ToString()));
-                    context.ExecuteQueryRetry();
-
-                    var altPagesLibraryName = new Regex(@"['´`]").Replace(result.Value, "");
+                    var result = SharePointRest.GetLocalizedString(context, "$Resources:List_Pages_UrlName", "osrvcore", lcid);
+                    var altPagesLibraryName = new Regex(@"['´`]").Replace(result, "");
 
                     if (string.IsNullOrEmpty(altPagesLibraryName))
                     {
@@ -624,7 +632,7 @@ namespace PnP.Core.Modernization.Cache
         /// </summary>
         /// <param name="context">Context of the site</param>
         /// <returns>Translated name of the blog list</returns>
-        public string GetBlogListName(ClientContext context)
+        public string GetBlogListName(PnPContext context)
         {
             string blogListName = "posts";
 
@@ -653,9 +661,8 @@ namespace PnP.Core.Modernization.Cache
                 string altBlogListName = null;
                 try
                 {
-                    ClientResult<string> result = Microsoft.SharePoint.Client.Utilities.Utility.GetLocalizedString(context, "$Resources:blogpost_Folder", "core", int.Parse(lcid.ToString()));
-                    context.ExecuteQueryRetry();
-                    altBlogListName = new Regex(@"['´`]").Replace(result.Value, "");
+                    var result = SharePointRest.GetLocalizedString(context, "$Resources:blogpost_Folder", "core", lcid);
+                    altBlogListName = new Regex(@"['´`]").Replace(result, "");
                 }
                 catch
                 {
@@ -684,7 +691,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context">Context of the site</param>
         /// <param name="resource">Key of the resource (e.g. $Resources:core,ScriptEditorWebPartDescription;) </param>
         /// <returns>Translated string</returns>
-        public string GetResourceString(ClientContext context, string resource)
+        public string GetResourceString(PnPContext context, string resource)
         {
             int lcid = (int)context.Web.EnsureProperty(p => p.Language);
 
@@ -719,8 +726,7 @@ namespace PnP.Core.Modernization.Cache
                 resourceKey = splitResourceString[0];
             }
 
-            ClientResult<string> result = Microsoft.SharePoint.Client.Utilities.Utility.GetLocalizedString(context, $"$Resources:{resourceKey}", resourceFile, int.Parse(lcid.ToString()));
-            context.ExecuteQueryRetry();
+            var result = SharePointRest.GetLocalizedString(context, $"$Resources:{resourceKey}", resourceFile, lcid);
 
             if (result == null)
             {
@@ -736,7 +742,7 @@ namespace PnP.Core.Modernization.Cache
                         // Add translations in existing array
                         Dictionary<int, string> newResourceValues = new Dictionary<int, string>(resourceValues)
                         {
-                            { lcid, result.Value }
+                            { lcid, result }
                         };
                         resourceStrings[resource] = newResourceValues;
                         Store.Set(StoreOptions.GetKey(keyResourceStrings), resourceStrings, StoreOptions.EntryOptions);
@@ -748,14 +754,14 @@ namespace PnP.Core.Modernization.Cache
                 // No translations were already retrieved in this language
                 Dictionary<int, string> translations = new Dictionary<int, string>
                 {
-                    { lcid, result.Value }
+                    { lcid, result }
                 };
 
                 resourceStrings.Add(resource, translations);
                 Store.Set(StoreOptions.GetKey(keyResourceStrings), resourceStrings, StoreOptions.EntryOptions);
             }
 
-            return result.Value;
+            return result;
         }
         #endregion
 
@@ -765,7 +771,7 @@ namespace PnP.Core.Modernization.Cache
         /// </summary>
         /// <param name="page">Publishing page</param>
         /// <returns>Page layout mapping model</returns>
-        public PageLayout GetPageLayoutMapping(ListItem page)
+        public PageLayout GetPageLayoutMapping(IListItem page)
         {
             string key = page.PageLayoutFile();
 
@@ -776,7 +782,7 @@ namespace PnP.Core.Modernization.Cache
                 return pageLayoutFromCache;
             }
 
-            PageLayoutAnalyser pageLayoutAnalyzer = new PageLayoutAnalyser(page.Context as ClientContext);
+            PageLayoutAnalyser pageLayoutAnalyzer = new PageLayoutAnalyser(page.PnPContext as PnPContext);
 
             // Let's try to generate a 'basic' model and use that...not optimal, but better than bailing out.
             var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(page);
@@ -862,7 +868,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context">ClientContext to operate on</param>
         /// <param name="userValue">User name of user to ensure</param>
         /// <returns>ResolvedUser instance holding information about the ensured user</returns>
-        public ResolvedUser GetEnsuredUser(ClientContext context, string userValue)
+        public ResolvedUser GetEnsuredUser(PnPContext context, string userValue)
         {
             if (string.IsNullOrEmpty(userValue))
             {
@@ -882,11 +888,11 @@ namespace PnP.Core.Modernization.Cache
 
             try
             {
-                using (var clonedContext = context.Clone(context.Web.GetUrl()))
+                using (PnPContext clonedContext = context.Clone(new Uri(context.Web.GetUrl())))
                 {
-                    var userToResolve = clonedContext.Web.EnsureUser(userValue);
-                    clonedContext.Load(userToResolve);
-                    clonedContext.ExecuteQueryRetry();
+                    ISharePointUser userToResolve = clonedContext.Web.EnsureUser(userValue);
+                    userToResolve.LoadBatch();
+                    clonedContext.Execute();
 
                     ResolvedUser resolvedUser = new ResolvedUser()
                     {
@@ -935,7 +941,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context">Context of the web holding the user list</param>
         /// <param name="userUpn">Upn of the user to fetch</param>
         /// <returns>A UserEntity instance holding information about the user</returns>
-        public UserEntity GetUserFromUserList(ClientContext context, string userUpn)
+        public UserEntity GetUserFromUserList(PnPContext context, string userUpn)
         {
             if (string.IsNullOrEmpty(userUpn))
             {
@@ -972,18 +978,18 @@ namespace PnP.Core.Modernization.Cache
                   </Query>
                 </View>";
 
-                List siteUserInfoList = context.Web.SiteUserInfoList;
-                CamlQuery query = new CamlQuery
+                IList siteUserInfoList = context.Web.GetSiteUserInfoList();
+                CamlQueryOptions query = new CamlQueryOptions
                 {
                     ViewXml = string.Format(CAMLQueryByName, userUpn)
                 };
-                var loadedUsers = context.LoadQuery(siteUserInfoList.GetItems(query));
-                context.ExecuteQueryRetry();
+                var loadedUsers = siteUserInfoList.GetItems(query).AsRequested().ToList();
+                context.Execute();
 
                 UserEntity author = null;
                 if (loadedUsers != null)
                 {
-                    var loadedUser = loadedUsers.FirstOrDefault();
+                    IListItem loadedUser = loadedUsers.FirstOrDefault();
                     if (loadedUser != null)
                     {
                         // Does not work for groups
@@ -1049,7 +1055,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context">Context of the web holding the user list</param>
         /// <param name="userListId">Id of the user to fetch</param>
         /// <returns>A UserEntity instance holding information about the user</returns>
-        public UserEntity GetUserFromUserList(ClientContext context, int userListId)
+        public UserEntity GetUserFromUserList(PnPContext context, int userListId)
         {
             string key = context.Web.GetUrl();
 
@@ -1076,18 +1082,18 @@ namespace PnP.Core.Modernization.Cache
                   </Query>
                 </View>";
 
-                List siteUserInfoList = context.Web.SiteUserInfoList;
-                CamlQuery query = new CamlQuery
+                IList siteUserInfoList = context.Web.GetSiteUserInfoList();
+                CamlQueryOptions query = new CamlQueryOptions
                 {
                     ViewXml = string.Format(CAMLQueryByName, userListId)
                 };
-                var loadedUsers = context.LoadQuery(siteUserInfoList.GetItems(query));
-                context.ExecuteQueryRetry();
+                var loadedUsers = siteUserInfoList.GetItems(query).AsRequested().ToList();
+                context.Execute();
 
                 UserEntity author = null;
                 if (loadedUsers != null)
                 {
-                    var loadedUser = loadedUsers.FirstOrDefault();
+                    IListItem loadedUser = loadedUsers.FirstOrDefault();
                     if (loadedUser != null)
                     {
                         if (loadedUser["Name"] == null)
@@ -1154,7 +1160,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="pagesLibrary">Pages library holding the content type</param>
         /// <param name="contentTypeName">Name of the content type</param>
         /// <returns>ID of the content type</returns>
-        public string GetContentTypeId(List pagesLibrary, string contentTypeName)
+        public string GetContentTypeId(IList pagesLibrary, string contentTypeName)
         {
             string contentTypeId = null;
 
@@ -1167,9 +1173,9 @@ namespace PnP.Core.Modernization.Cache
             }
 
             // Load content type
-            var ctCol = pagesLibrary.ContentTypes;
-            var results = pagesLibrary.Context.LoadQuery(ctCol.Where(item => item.Name == contentTypeName));
-            pagesLibrary.Context.ExecuteQueryRetry();
+            IContentTypeCollection ctCol = pagesLibrary.ContentTypes;
+            var results = ctCol.AsQueryable().Where(item => item.Name == contentTypeName).ToList();
+            pagesLibrary.PnPContext.Execute();
 
             if (results.FirstOrDefault() != null)
             {
@@ -1197,7 +1203,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context">ClientContext object to operate on</param>
         /// <param name="termId">Id of the term to lookup</param>
         /// <returns>Term label</returns>
-        public string GetTermFromId(ClientContext context, Guid termId)
+        public string GetTermFromId(PnPContext context, Guid termId)
         {
             string termInfo = null;
 
@@ -1209,14 +1215,10 @@ namespace PnP.Core.Modernization.Cache
             }
 
             // Lookup the provided term
-            TaxonomySession taxSession = TaxonomySession.GetTaxonomySession(context);
-            var loadedTerm = taxSession.GetTerm(termId);
-            context.Load(loadedTerm, p => p.Name);
-            context.ExecuteQueryRetry();
-
-            if (loadedTerm != null)
+            var termLabel = TaxonomyLookup.GetLabel(context, termId);
+            if (termLabel != null)
             {
-                termInfo = loadedTerm.Name;
+                termInfo = termLabel;
                 
                 // add to cache
                 termCache.Add(termId, termInfo);
@@ -1237,14 +1239,18 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="isSP2010"></param>
         /// <param name="isSourceTerm"></param>
         /// <returns></returns>
-        public void StoreTermSetTerms(ClientContext context, Guid termSetId, Guid sourceSspId, bool isSP2010, bool isSourceTerm)
+        public void StoreTermSetTerms(PnPContext context, Guid termSetId, Guid sourceSspId, bool isSP2010, bool isSourceTerm)
         {
+            SharePointOnlineSupport.Validate(context);
+            if (isSP2010)
+            {
+                throw new NotSupportedException("On-premises SharePoint taxonomy sources are not supported.");
+            }
             var termsAlreadyInCache = GetTransformTermCacheTermsByTermSet(context, termSetId);
             if(termsAlreadyInCache == default)
             {
                 var termCache = Store.GetAndInitialize<Dictionary<Guid, TermData>>(StoreOptions.GetKey(keyTermTransformatorCache));
-                var termSetTerms = isSP2010 ? TermTransformator.CallTaxonomyWebServiceFindTermSetId(context, sourceSspId, termSetId) 
-                    : TermTransformator.GetAllTermsFromTermSet(termSetId, context);
+                var termSetTerms = TermTransformator.GetAllTermsFromTermSet(termSetId, context);
 
                 foreach (var termSetTerm in termSetTerms)
                 {
@@ -1262,7 +1268,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context"></param>
         /// <param name="termId"></param>
         /// <returns></returns>
-        public TermData GetTransformTermCacheTermById(ClientContext context, Guid termId)
+        public TermData GetTransformTermCacheTermById(PnPContext context, Guid termId)
         {
             var termCache = Store.GetAndInitialize<Dictionary<Guid, TermData>>(StoreOptions.GetKey(keyTermTransformatorCache));
             termCache.TryGetValue(termId, out TermData termInfoFromCache);
@@ -1281,7 +1287,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="termLabel"></param>
         /// <param name="termPath"></param>
         /// <returns></returns>
-        public List<TermData> GetTransformTermCacheTermByName(ClientContext context, string termLabel = "", string termPath = "")
+        public List<TermData> GetTransformTermCacheTermByName(PnPContext context, string termLabel = "", string termPath = "")
         {
             var termCache = Store.GetAndInitialize<Dictionary<Guid, TermData>>(StoreOptions.GetKey(keyTermTransformatorCache));
 
@@ -1300,7 +1306,7 @@ namespace PnP.Core.Modernization.Cache
         /// <param name="context"></param>
         /// <param name="termSetId"></param>
         /// <returns></returns>
-        public Dictionary<Guid, TermData> GetTransformTermCacheTermsByTermSet(ClientContext context, Guid termSetId)
+        public Dictionary<Guid, TermData> GetTransformTermCacheTermsByTermSet(PnPContext context, Guid termSetId)
         {
             var termCache = Store.GetAndInitialize<Dictionary<Guid, TermData>>(StoreOptions.GetKey(keyTermTransformatorCache));
 
@@ -1474,17 +1480,17 @@ namespace PnP.Core.Modernization.Cache
             }
         }
 
-        private void AddFieldRef(Provisioning.Model.FieldRefCollection fieldRefs, Guid Id, string name)
+        private void AddFieldRef(FieldRefCollection fieldRefs, Guid Id, string name)
         {
             if (fieldRefs.Where(p => p.Id.Equals(Id)).FirstOrDefault() == null)
             {
-                fieldRefs.Add(new Provisioning.Model.FieldRef(name) { Id = Id });
+                fieldRefs.Add(new FieldRef(name) { Id = Id });
             }
         }
 
         private bool IsBuiltInField(bool isBlog, Guid fieldId)
         {
-            if (Enums.BuiltInFieldId.Contains(fieldId))
+            if (BuiltInFieldId.Contains(fieldId))
             {
                 if (isBlog)
                 {

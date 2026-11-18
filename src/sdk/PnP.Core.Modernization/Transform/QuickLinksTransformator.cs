@@ -1,9 +1,9 @@
-﻿using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web;
 
 namespace PnP.Core.Modernization.Transform
@@ -463,7 +463,7 @@ namespace PnP.Core.Modernization.Transform
     public class QuickLinksTransformator: BaseTransform
     {
         private QuickLinksWebPartProperties properties;
-        private ClientContext clientContext;
+        private PnPContext clientContext;
 
         #region Construction
         /// <summary>
@@ -471,7 +471,7 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="cc">Client context for the web holding the source page</param>
         /// <param name="logObservers"></param>
-        public QuickLinksTransformator(ClientContext cc, IList<ILogObserver> logObservers = null): base()
+        public QuickLinksTransformator(PnPContext cc, IList<ILogObserver> logObservers = null): base()
         {
             if (logObservers != null)
             {
@@ -592,7 +592,7 @@ namespace PnP.Core.Modernization.Transform
                     if (linkInfo != null && !string.IsNullOrEmpty(linkInfo["FileListId"]) && !string.IsNullOrEmpty(linkInfo["FileUniqueId"]))
                     {
                         q.SourceItem.ItemType = QuickLinkType.File;
-                        q.SourceItem.FileExtension = System.IO.Path.GetExtension(link.Url);
+                        q.SourceItem.FileExtension = Path.GetExtension(link.Url);
                     }
                 }
 
@@ -780,9 +780,9 @@ namespace PnP.Core.Modernization.Transform
 
             try
             {
-                var file = this.clientContext.Web.GetFileByServerRelativeUrl(serverRelativeFilePath);
-                this.clientContext.Load(file, p => p.UniqueId, p => p.ListId);
-                this.clientContext.ExecuteQueryRetry();
+                IFile file = this.clientContext.Web.GetFileByServerRelativeUrl(serverRelativeFilePath);
+                file.LoadBatch(p => p.UniqueId,p => p.ListId);
+                this.clientContext.Execute();
 
                 results.Add("FileListId", $"{{{file.ListId.ToString()}}}");
                 results.Add("FileUniqueId", file.UniqueId.ToString());
@@ -790,9 +790,9 @@ namespace PnP.Core.Modernization.Transform
                 results.Add("FileSiteId", this.properties.SiteId);
                 return results;
             }
-            catch (ServerException ex)
+            catch (ServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (ex.IsNotFound())
                 {
                     // Provided image was not found, should not happen
                     return null;

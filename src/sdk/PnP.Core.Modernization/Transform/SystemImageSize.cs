@@ -1,4 +1,3 @@
-using PnP.Framework.Http;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -14,7 +13,7 @@ namespace PnP.Core.Modernization.Transform
         internal static (int Width, int Height) Get(Uri imageUrl)
         {
             // Layout images are static resources, not library files. Do not send site credentials.
-            using (var client = PnPHttpClient.Instance.GetHttpClient())
+            using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Get, imageUrl))
             {
                 request.Headers.Range = new RangeHeaderValue(0, HeaderLimit - 1);

@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
 
@@ -43,10 +42,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Wp
                 pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose:true, includeDebugEntries:true));
                 pageTransformator.RegisterObserver(new ConsoleObserver());
 
-                var pages = cc.Web.GetPages("wp_");
+                var pages = WebExtensions.GetPages(cc.Web,"wp_");
                 //var pages = cc.Web.GetPages("pagein", "folder1/sub1");
                 //var pages = cc.Web.GetPagesFromList("SiteAssets", "loc_", "Folder1");
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

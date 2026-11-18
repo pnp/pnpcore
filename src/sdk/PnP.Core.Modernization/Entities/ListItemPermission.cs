@@ -1,4 +1,3 @@
-﻿using Microsoft.SharePoint.Client;
 using System.Collections.Generic;
 
 namespace PnP.Core.Modernization.Entities
@@ -11,12 +10,12 @@ namespace PnP.Core.Modernization.Entities
         /// <summary>
         /// Roles assigned to the list item
         /// </summary>
-        public RoleAssignmentCollection RoleAssignments { get; set; }
+        public IRoleAssignmentCollection RoleAssignments { get; set; }
 
         /// <summary>
         /// Resolved principals used in those roles, kept for performance reasons
         /// </summary>
-        public Dictionary<string, Principal> Principals { get; set; }
+        public Dictionary<string, ISharePointPrincipal> Principals { get; set; }
 
     }
 }

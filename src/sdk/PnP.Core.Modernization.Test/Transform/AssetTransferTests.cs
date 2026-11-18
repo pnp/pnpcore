@@ -1,10 +1,81 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
+using PnP.Core.Modernization.Cache;
 using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 
 namespace PnP.Core.Modernization.Tests.Transform
 {
+    [TestClass]
+    [TestCategory("Offline")]
+    public class AssetTransferCoreTests
+    {
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void DownloadsFromOwningWebAndRejectsIncorrectPayloadLength(bool incorrectPayload)
+        {
+            const string root = "https://contoso.sharepoint.com/sites/source";
+            const string owner = root + "/wiki";
+            const string destination = "https://contoso.sharepoint.com/sites/target";
+            const string sourcePath = "/sites/source/wiki/SiteAssets/nested/image.png";
+            const string targetFolder = "/sites/target/SiteAssets/page";
+            var fileId = Guid.NewGuid();
+            var content = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
+            byte[] uploaded = null;
+            Uri downloadedFrom = null;
+            CacheManager.Instance.SetSharePointVersion(new Uri(root), SPVersion.SPO);
+            using var source = CoreTestContext.Create(root, (request, _) =>
+            {
+                var path = request.RequestUri.AbsolutePath;
+                if (path.Contains("GetWebUrlFromPageUrl", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = owner });
+                if (path.EndsWith("/_api/web", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { Id = fileId, Url = owner, ServerRelativeUrl = "/sites/source/wiki", WebTemplate = "STS" });
+                if (path.EndsWith("/_api/site", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { Id = fileId, Url = root, ServerRelativeUrl = "/sites/source" });
+                if (path.Contains("GetFileBy", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { UniqueId = fileId, Name = "image.png", ServerRelativeUrl = sourcePath, Length = content.Length });
+                if (path.EndsWith("/download.aspx", StringComparison.OrdinalIgnoreCase))
+                {
+                    downloadedFrom = request.RequestUri;
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ByteArrayContent(incorrectPayload ? Encoding.UTF8.GetBytes("<html>error page</html>") : content)
+                    };
+                }
+                throw new InvalidOperationException("Unexpected source request: " + request.RequestUri);
+            });
+            using var target = CoreTestContext.Create(destination, (request, _) =>
+            {
+                if (request.Method == HttpMethod.Post)
+                {
+                    uploaded = request.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+                    return CoreTestContext.Json(new { UniqueId = fileId, Name = "image.png", ServerRelativeUrl = targetFolder + "/image.png" });
+                }
+                if (request.RequestUri.AbsolutePath.Contains("GetFolderBy", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { UniqueId = fileId, ServerRelativeUrl = targetFolder });
+                throw new InvalidOperationException("Unexpected target request: " + request.RequestUri);
+            });
+
+            var transfer = new AssetTransfer(source, target);
+            if (incorrectPayload)
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidOperationException>(() =>
+                    transfer.CopyAssetToTargetLocation(sourcePath, targetFolder)).Message, "length");
+                Assert.IsNull(uploaded);
+            }
+            else
+            {
+                Assert.AreEqual(targetFolder + "/image.png", transfer.CopyAssetToTargetLocation(sourcePath, targetFolder));
+                CollectionAssert.AreEqual(content, uploaded);
+            }
+            Assert.AreEqual(owner + "/_layouts/15/download.aspx", downloadedFrom.GetLeftPart(UriPartial.Path));
+        }
+    }
+
     [TestClass]
     [TestCategory("Integration")]
     public class AssetTransferTests
@@ -81,9 +152,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 {
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
 
-                    var pages = sourceClientContext.Web.GetPages("WPP_Image-Asset");
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"WPP_Image-Asset");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -256,9 +327,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 {
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
 
-                    var pages = sourceClientContext.Web.GetPages("WPP_Image-Asset-MultipleImages-Test");
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"WPP_Image-Asset-MultipleImages-Test");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -294,9 +365,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 {
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
 
-                    var pages = sourceClientContext.Web.GetPages("WPP_Image-Asset");
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"WPP_Image-Asset");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -332,9 +403,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 {
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
 
-                    var pages = sourceClientContext.Web.GetPages("p");
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"p");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -372,7 +443,7 @@ namespace PnP.Core.Modernization.Tests.Transform
                     assetTransfer.EnsureSiteAssetsLibrary();
 
                     // Validate the site assets works
-                    var siteAssetsExist = targetClientContext.Web.ListExists("Site Assets");
+                    var siteAssetsExist = targetClientContext.Web.Lists.GetByTitle("Site Assets") != null;
                     Assert.IsTrue(siteAssetsExist);
                     // Clean up the test target site
 
@@ -428,70 +499,6 @@ namespace PnP.Core.Modernization.Tests.Transform
 
                     var result = assetTransfer.TransferAsset(sourceFileServerRelativeUrl, "This is a unit test page.aspx"); //Page shouldnt need to exist at this point
                     var expected = $"{targetWebUrl}/SiteAssets/SitePages/This-is-a-unit-test-page/extra8_500x500.jpg";
-
-                    Assert.AreEqual(expected, result);
-                }
-            }
-        }
-
-        /// <summary>
-        /// This test validates with SharePoint the entire operation
-        /// </summary>
-        [TestMethod]
-        public void AssetTransfer_TransferAsset_OnPrem_Test()
-        {
-            //Note: This is more of a system test rather than unit given its dependency on SharePoint
-
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext())
-                {
-                    // Needs valid client contexts as they are part of the checks.
-                    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, targetClientContext);
-
-                    var targetWebUrl = targetClientContext.Web.EnsureProperty(o => o.ServerRelativeUrl);
-                    var sourceWebUrl = sourceClientContext.Web.EnsureProperty(o => o.ServerRelativeUrl);
-
-                    var sourceFile = "shutterstock_113327035.jpg";
-
-                    // Very crude test - ensure the site is setup for this ahead of the test
-                    var sourceFileServerRelativeUrl = $"{sourceWebUrl}PublishingImages/{sourceFile}";
-                    var targetLocation = $"{targetWebUrl}/Shared%20Documents"; //Shared Documents for example, Site Assets may not exist on vanilla sites
-
-                    var result = assetTransfer.TransferAsset(sourceFileServerRelativeUrl, "This is a unit test page.aspx"); //Page shouldnt need to exist at this point
-                    var expected = $"{targetWebUrl}/SiteAssets/SitePages/This-is-a-unit-test-page/{sourceFile}";
-
-                    Assert.AreEqual(expected, result);
-                }
-            }
-        }
-
-        /// <summary>
-        /// This test validates with SharePoint the entire operation
-        /// </summary>
-        [TestMethod]
-        public void AssetTransfer_TransferAsset_OnPrem_Large_Test()
-        {
-            //Note: This is more of a system test rather than unit given its dependency on SharePoint
-
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext())
-                {
-                    // Needs valid client contexts as they are part of the checks.
-                    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, targetClientContext);
-
-                    var targetWebUrl = targetClientContext.Web.EnsureProperty(o => o.ServerRelativeUrl);
-                    var sourceWebUrl = sourceClientContext.Web.EnsureProperty(o => o.ServerRelativeUrl);
-
-                    var sourceFile = "shutterstock_171790418.jpg";
-
-                    // Very crude test - ensure the site is setup for this ahead of the test
-                    var sourceFileServerRelativeUrl = $"{sourceWebUrl}PublishingImages/{sourceFile}";
-                    var targetLocation = $"{targetWebUrl}/Shared%20Documents"; //Shared Documents for example, Site Assets may not exist on vanilla sites
-
-                    var result = assetTransfer.TransferAsset(sourceFileServerRelativeUrl, "This is a unit test page.aspx"); //Page shouldnt need to exist at this point
-                    var expected = $"{targetWebUrl}/SiteAssets/SitePages/This-is-a-unit-test-page/{sourceFile}";
 
                     Assert.AreEqual(expected, result);
                 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Transform;
 using System.Linq;
-using Microsoft.SharePoint.Client.Workflow;
 using System.IO;
 using AngleSharp.Html.Parser;
 
@@ -68,9 +66,9 @@ namespace PnP.Core.Modernization.Tests
         {
             using (var cc = TestCommon.CreateClientContext())
             {
-                var pages = cc.Web.GetPages("Header");
+                var pages = WebExtensions.GetPages(cc.Web,"Header");
 
-                Assert.IsTrue(pages.Count > 0);
+                Assert.IsTrue(pages.AsRequested().Any());
 
             }
         }
@@ -134,7 +132,7 @@ namespace PnP.Core.Modernization.Tests
         [TestMethod]
         public void WikiSplitTest()
         {
-            string text = System.IO.File.ReadAllText(@"C:\temp\htmlsplittest.html");
+            string text = File.ReadAllText(@"C:\temp\htmlsplittest.html");
 
             string[] split = text.Split(new string[] { "<span class=\"split\"></span>" }, StringSplitOptions.RemoveEmptyEntries);
             HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });

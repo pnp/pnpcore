@@ -1,5 +1,4 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -8,10 +7,9 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -30,6 +28,60 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
         private const string Slideshow = "Microsoft.SharePoint.WebPartPages.PictureLibrarySlideshowWebPart";
         private static readonly Guid SourceLibraryId = Guid.Parse("8f0bd5a1-7466-49b1-b210-07d49cbdd91a");
         private static readonly Guid TargetLibraryId = Guid.Parse("00b93254-042b-4815-8c62-2b16c7269c51");
+
+        [DataTestMethod]
+        [DataRow("contact")]
+        [DataRow("cached-upn")]
+        [DataRow("cached-id")]
+        public void UserLookup_LoadsTheUserInformationListBeforeQuerying(string lookup)
+        {
+            var userListId = Guid.Parse("24fe29d8-6ab7-44b5-b43e-a4d1f6a68251");
+            var listLoads = 0;
+            using (var context = CoreTestContext.Create(SourceUrl + "/" + lookup, (request, body) =>
+            {
+                var path = request.RequestUri.AbsolutePath;
+                if (path.EndsWith("/_api/web", StringComparison.OrdinalIgnoreCase))
+                {
+                    Assert.IsTrue(Uri.UnescapeDataString(request.RequestUri.Query).Contains("SiteUserInfoList"));
+                    listLoads++;
+                    return CoreTestContext.Json(new { SiteUserInfoList = new { Id = userListId } });
+                }
+                if (path.EndsWith("/GetItems", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = new[] { new
+                    {
+                        Id = 7, Name = "i:0#.f|membership|lookup@contoso.com", Title = "Test contact",
+                        UserName = "lookup@contoso.com", EMail = "lookup@contoso.com",
+                        JobTitle = "Coordinator", Department = "Workplace", WorkPhone = "555-0100", SipAddress = ""
+                    } } });
+                }
+                if (path.Contains("/lists", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { Id = userListId, Fields = Array.Empty<object>() });
+                }
+                throw new InvalidOperationException($"Unexpected user lookup request: {request.Method} {request.RequestUri}");
+            }))
+            {
+                Assert.IsFalse(context.Web.SiteUserInfoList.IsPropertyAvailable(list => list.Id));
+                if (lookup == "contact")
+                {
+                    var functions = new BuiltIn(new PageTransformationInformation(null) { SkipUserMapping = true }, context);
+                    var person = functions.LookupPerson("i:0#.f|membership|lookup@contoso.com");
+                    Assert.AreEqual("lookup@contoso.com", person["PersonEmail"]);
+                    Assert.AreEqual("Coordinator", person["PersonRole"]);
+                }
+                else
+                {
+                    var person = lookup == "cached-upn"
+                        ? CacheManager.Instance.GetUserFromUserList(context, "lookup@contoso.com")
+                        : CacheManager.Instance.GetUserFromUserList(context, 7);
+                    Assert.IsNotNull(person);
+                    Assert.AreEqual("Test contact", person.Name);
+                    Assert.AreEqual("lookup@contoso.com", person.Upn);
+                }
+                Assert.AreEqual(1, listLoads);
+            }
+        }
 
         [DataTestMethod]
         [DataRow("https://example.org/embed?p=1&other=2#anchor", "4", "https://example.org/embed?p=1&other=2#anchor")]
@@ -134,11 +186,11 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 var observer = new Mock<ILogObserver>();
                 var values = SlideshowProperties();
                 const string title = "Pictures \"Summer\" &quot; <tag> {Title} $0";
-                values["Speed"] = speed.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                values["Speed"] = speed.ToString(CultureInfo.InvariantCulture);
                 values["Layout"] = layout;
                 values["ShowToolbar"] = toolbar.ToString();
                 values["Title"] = title;
-                values["ChromeType"] = chromeType.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                values["ChromeType"] = chromeType.ToString(CultureInfo.InvariantCulture);
                 var data = Transform(source, target, Slideshow, values, observer.Object);
                 var properties = data["properties"];
                 var carousel = properties["carouselSettings"];
@@ -218,7 +270,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             };
         }
 
-        private static JObject Transform(ClientContext source, ClientContext target, string type,
+        private static JObject Transform(PnPContext source, PnPContext target, string type,
             Dictionary<string, string> values, ILogObserver observer = null, bool skipRewrite = false)
         {
             var assembly = typeof(BuiltIn).Assembly;
@@ -254,46 +306,28 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 result.ClientSideWebPart.Single().JsonControlData, webPart)));
         }
 
-        private static ClientContext CreateContext(string url)
+        private static PnPContext CreateContext(string url)
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(url), SPVersion.SPO);
-            var provider = new MockEntryResponseProvider();
-            foreach (var property in new[] { "Site", "Web" })
-            {
-                provider.ResponseEntries.Add(new MockResponseEntry<object>
-                {
-                    Url = url, PropertyName = property,
-                    ReturnValue = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP." + property,
-                        ["ServerRelativeUrl"] = new Uri(url).AbsolutePath, ["Url"] = url
-                    }
-                });
-            }
             var library = new Dictionary<string, object>
             {
-                ["_ObjectType_"] = "SP.List",
-                ["Id"] = $"/Guid({(url == SourceUrl ? SourceLibraryId : TargetLibraryId)})/",
+                ["Id"] = url == SourceUrl ? SourceLibraryId : TargetLibraryId,
                 ["Title"] = "Pictures",
                 ["RootFolder"] = new Dictionary<string, object>
                 {
-                    ["_ObjectType_"] = "SP.Folder", ["ServerRelativeUrl"] = LibraryUrl
+                    ["ServerRelativeUrl"] = LibraryUrl
                 }
             };
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
+            return CoreTestContext.Create(url, (request, _) =>
             {
-                Url = url, Method = "GetListByTitle", ReturnValue = library
+                var path = request.RequestUri.AbsolutePath;
+                if (path.EndsWith("/lists", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = new[] { library } });
+                if (path.Contains("/lists/", StringComparison.OrdinalIgnoreCase) ||
+                    path.Contains("/GetList", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(library);
+                throw new InvalidOperationException($"Unexpected list request: {request.RequestUri}");
             });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = url, PropertyName = "Lists",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.ListCollection",
-                    ["_Child_Items_"] = new[] { library }
-                }
-            });
-            return new ClientContext(url) { WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider) };
         }
     }
 }

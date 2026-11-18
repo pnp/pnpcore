@@ -1,6 +1,5 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Transform;
 using System;
@@ -161,11 +160,11 @@ namespace PnP.Core.Modernization.Telemetry
         }
 
         #region Helper methods
-        internal Guid LoadAADTenantId(ClientContext context)
+        internal Guid LoadAADTenantId(PnPContext context)
         {
             
             // Load from cache if possible, if not obtain aad tenant id
-            Uri spSiteUri = new Uri(context.Url);
+            Uri spSiteUri = new Uri(context.Uri.AbsoluteUri);
             Uri urlUri = new Uri($"{spSiteUri.Scheme}://{spSiteUri.DnsSafeHost}");
 
             var tenantIdFromCache = CacheManager.Instance.GetAADTenantId(urlUri);
@@ -174,39 +173,16 @@ namespace PnP.Core.Modernization.Telemetry
                 this.aadTenantId = tenantIdFromCache;
                 return tenantIdFromCache;
             }
-            else
+            try
             {
-                WebRequest request = WebRequest.Create(new Uri(context.Web.GetUrl()) + "/_vti_bin/client.svc");
-                request.Headers.Add("Authorization: Bearer ");
-
-                try
-                {
-                    using (request.GetResponse())
-                    {
-                    }
-                }
-                catch (WebException e)
-                {
-                    var bearerResponseHeader = e.Response.Headers["WWW-Authenticate"];
-
-                    const string bearer = "Bearer realm=\"";
-                    var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
-
-                    var realmIndex = bearerIndex + bearer.Length;
-
-                    if (bearerResponseHeader.Length >= realmIndex + 36)
-                    {
-                        var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
-
-                        if (Guid.TryParse(targetRealm, out Guid realmGuid))
-                        {
-                            CacheManager.Instance.SetAADTenantId(realmGuid, urlUri);
-                            this.aadTenantId = realmGuid;
-
-                            return realmGuid;
-                        }
-                    }
-                }
+                var realm = context.Web.GetAuthenticationRealm();
+                CacheManager.Instance.SetAADTenantId(realm, urlUri);
+                this.aadTenantId = realm;
+                return realm;
+            }
+            catch (Exception)
+            {
+                // Telemetry must not prevent a page transformation.
             }
 
             return Guid.Empty;

@@ -6,7 +6,7 @@
     <AssemblyName>PnP.Core.Modernization</AssemblyName>
     <Version>1.19.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Description>The PnP page modernization engine for PnP Core SDK. This transitional port retains its CSOM and PnP Framework dependencies.</Description>
+    <Description>The SharePoint Online page modernization engine for PnP Core SDK.</Description>
     <Authors>PnP</Authors>
     <Company>PnP</Company>
     <Copyright>PnP 2025</Copyright>
@@ -30,11 +30,10 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
-    <!-- Transitional: shared CSOM extensions, authentication, base templates, and test fixtures. -->
-    <PackageReference Include="PnP.Framework" Version="1.22.0" />
-    <PackageReference Include="Microsoft.SharePointOnline.CSOM" Version="16.1.27814.12015" />
+    <ProjectReference Include="..\PnP.Core.Provisioning\PnP.Core.Provisioning.csproj" />
     <PackageReference Include="AngleSharp.Css" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.0-*">
       <PrivateAssets>all</PrivateAssets>

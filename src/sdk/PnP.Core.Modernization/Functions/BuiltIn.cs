@@ -1,7 +1,6 @@
 ﻿using AngleSharp;
 using AngleSharp.Html.Parser;
 using AngleSharp.Io;
-using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.Telemetry;
@@ -11,8 +10,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Xml.Linq;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Functions
 {
@@ -21,9 +21,9 @@ namespace PnP.Core.Modernization.Functions
     /// </summary>
     public partial class BuiltIn : FunctionsBase
     {
-        private ClientContext sourceClientContext;
-        private ClientContext targetClientContext;
-        private PnPCore.IPage clientSidePage;
+        private PnPContext sourceClientContext;
+        private PnPContext targetClientContext;
+        private IPage clientSidePage;
         private BaseTransformationInformation baseTransformationInformation;
         private UrlTransformator urlTransformator;
         private UserTransformator userTransformator;
@@ -38,7 +38,7 @@ namespace PnP.Core.Modernization.Functions
         /// <param name="sourceClientContext">The ClientContext for the source </param>
         /// <param name="clientSidePage">Reference to the client side page</param>
         /// <param name="logObservers"></param>
-        public BuiltIn(BaseTransformationInformation baseTransformationInformation, ClientContext pageClientContext, ClientContext sourceClientContext = null, PnPCore.IPage clientSidePage = null, IList<ILogObserver> logObservers = null) : base(pageClientContext)
+        public BuiltIn(BaseTransformationInformation baseTransformationInformation, PnPContext pageClientContext, PnPContext sourceClientContext = null, IPage clientSidePage = null, IList<ILogObserver> logObservers = null) : base(pageClientContext)
         {
             if (logObservers != null)
             {
@@ -78,7 +78,7 @@ namespace PnP.Core.Modernization.Functions
                 return "";
             }
 
-            return System.Web.HttpUtility.HtmlEncode(text);
+            return HttpUtility.HtmlEncode(text);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace PnP.Core.Modernization.Functions
                 return "";
             }
 
-            return System.Web.HttpUtility.HtmlEncode(text).Replace("&quot;", @"\&quot;").Replace(":", "&#58;").Replace("@", "%40");
+            return HttpUtility.HtmlEncode(text).Replace("&quot;", @"\&quot;").Replace(":", "&#58;").Replace("@", "%40");
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace PnP.Core.Modernization.Functions
         [OutputDocumentation(Name = "{EncodedText}", Description = "Escaped JSON string content")]
         public string JsonEncode(string text)
         {
-            return System.Web.HttpUtility.JavaScriptStringEncode(text);
+            return HttpUtility.JavaScriptStringEncode(text);
         }
 
         /// <summary>
@@ -321,10 +321,9 @@ namespace PnP.Core.Modernization.Functions
         {
             if (!sourceThemeColors.TryGetValue(shadeName, out var color))
             {
-                var context = sourceClientContext ?? targetClientContext;
-                var shade = context.Web.ThemeInfo.GetThemeShadeByName(shadeName);
-                context.ExecuteQueryRetry();
-                var value = shade.Value;
+                PnPContext context = sourceClientContext ?? targetClientContext;
+                var value = SharePointRest.Request(context,
+                    "_api/web/ThemeInfo/GetThemeShadeByName(shadeName='" + SharePointRest.Escape(shadeName) + "')").GetProperty("value").GetString();
                 if (string.IsNullOrEmpty(value) || (value.Length != 6 && value.Length != 8) ||
                     !value.All(Uri.IsHexDigit))
                 {
@@ -340,9 +339,9 @@ namespace PnP.Core.Modernization.Functions
 
         internal string TransformInlineImages(string text, bool externalImagesOnly = false, Func<Uri, string> importExternalImage = null)
         {
-            var sourceUrl = new Uri((sourceClientContext ?? targetClientContext).Url.TrimEnd('/') + "/");
+            var sourceUrl = new Uri((sourceClientContext ?? targetClientContext).Uri.AbsoluteUri.TrimEnd('/') + "/");
             if (baseTransformationInformation.SourcePage != null &&
-                baseTransformationInformation.SourcePage.FieldValues.TryGetValue(Constants.FileRefField, out var fileRef) &&
+                baseTransformationInformation.SourcePage.Values.TryGetValue(Constants.FileRefField, out var fileRef) &&
                 fileRef is string pagePath && !string.IsNullOrEmpty(pagePath))
             {
                 sourceUrl = new Uri(sourceUrl, pagePath);
@@ -350,10 +349,10 @@ namespace PnP.Core.Modernization.Functions
 
             var sourceOrigins = new[]
             {
-                new Uri((sourceClientContext ?? targetClientContext).Url),
+                new Uri((sourceClientContext ?? targetClientContext).Uri.AbsoluteUri),
                 new Uri((sourceClientContext ?? targetClientContext).Web.GetUrl())
             };
-            var targetOrigins = new[] { new Uri(targetClientContext.Url), new Uri(targetClientContext.Web.GetUrl()) };
+            var targetOrigins = new[] { new Uri(targetClientContext.Uri.AbsoluteUri), new Uri(targetClientContext.Web.GetUrl()) };
             return new InlineImageTransformator(clientSidePage, sourceUrl,
                 image => targetOrigins.Any(origin => origin.Authority.Equals(image.Authority, StringComparison.OrdinalIgnoreCase)) &&
                          !sourceOrigins.Any(origin => origin.Authority.Equals(image.Authority, StringComparison.OrdinalIgnoreCase))
@@ -436,37 +435,37 @@ namespace PnP.Core.Modernization.Functions
                     }
                 }
 
-                var list = this.clientContext.Web.GetListById(listId);
-                list.EnsureProperties(p => p.BaseType, p => p.BaseTemplate);
+                IList list = this.clientContext.Web.GetListById(listId);
+                list.EnsureProperties(p => p.BaseType, p => p.TemplateType);
 
                 // "Detailed" inspection based on template
-                if (list.BaseTemplate == (int)ListTemplateType.Tasks || list.BaseTemplate == (int)ListTemplateType.TasksWithTimelineAndHierarchy)
+                if (list.TemplateType == ListTemplateType.Tasks || list.TemplateType == ListTemplateType.TasksWithTimelineAndHierarchy)
                 {
                     return "TaskList";
                 }
-                else if (list.BaseTemplate == (int)ListTemplateType.DiscussionBoard)
+                else if (list.TemplateType == ListTemplateType.DiscussionBoard)
                 {
                     return "DiscussionBoard";
                 }
 
                 // "Generic" inspection based on type
-                if (list.BaseType == BaseType.DocumentLibrary)
+                if (list.BaseType == ListBaseType.DocumentLibrary)
                 {
                     return "Library";
                 }
-                else if (list.BaseType == BaseType.GenericList)
+                else if (list.BaseType == ListBaseType.GenericList)
                 {
                     return "List";
                 }
-                else if (list.BaseType == BaseType.Issue)
+                else if (list.BaseType == ListBaseType.Issue)
                 {
                     return "Issue";
                 }
-                else if (list.BaseType == BaseType.DiscussionBoard)
+                else if (list.BaseType == ListBaseType.DiscussionBoard)
                 {
                     return "DiscussionBoard";
                 }
-                else if (list.BaseType == BaseType.Survey)
+                else if (list.BaseType == ListBaseType.Survey)
                 {
                     return "Survey";
                 }
@@ -492,11 +491,11 @@ namespace PnP.Core.Modernization.Functions
             }
             else
             {
-                var sourceList = this.sourceClientContext.Web.GetListById(listId);
+                IList sourceList = this.sourceClientContext.Web.GetListById(listId);
                 sourceList.EnsureProperty(p=>p.Title);
                 string listTitleToCheck = sourceList.Title;
 
-                List targetlist = null;
+                IList targetlist = null;
                 try
                 {
                     
@@ -541,7 +540,7 @@ namespace PnP.Core.Modernization.Functions
             }
             else
             {
-                var list = this.clientContext.Web.GetListById(listId);
+                IList list = this.clientContext.Web.GetListById(listId);
                 list.EnsureProperty(p => p.RootFolder).EnsureProperty(p => p.ServerRelativeUrl);
                 return list.RootFolder.ServerRelativeUrl;
             }
@@ -564,7 +563,7 @@ namespace PnP.Core.Modernization.Functions
             }
             else
             {
-                var list = this.clientContext.Web.GetListById(listId);
+                IList list = this.clientContext.Web.GetListById(listId);
                 list.EnsureProperty(p => p.RootFolder).EnsureProperty(p => p.ServerRelativeUrl);
                 this.clientContext.Web.EnsureProperty(p => p.ServerRelativeUrl);
 
@@ -635,14 +634,14 @@ namespace PnP.Core.Modernization.Functions
             }
 
             // Grab the list and the needed properties
-            var list = this.clientContext.Web.GetListById(listId);
-            list.EnsureProperties(l => l.DefaultView, l => l.Views.Include(v => v.Hidden, v => v.Id, v => v.ListViewXml));
+            IList list = this.clientContext.Web.GetListById(listId);
+            list.EnsureProperties(l => l.Views.QueryProperties(v => v.DefaultView, v => v.Hidden, v => v.Id, v => v.ListViewXml));
 
             // Get the "identifying" elements from the webpart view xml definition
             var webPartViewElement = XElement.Parse(xmlDefinition);
 
             // Analyze the views in the list to determine a possible mapping
-            foreach (var view in list.Views.AsEnumerable().Where(view => !view.Hidden && view.ListViewXml != null))
+            foreach (IView view in list.Views.AsEnumerable().Where(view => !view.Hidden && view.ListViewXml != null))
             {
                 var viewElement = XElement.Parse(view.ListViewXml);
 
@@ -702,7 +701,7 @@ namespace PnP.Core.Modernization.Functions
             }
 
             // No matching view found, so proceed with the default view
-            return list.DefaultView.Id.ToString();
+            return list.Views.AsRequested().Single(v => v.DefaultView).Id.ToString();
         }
 
         #endregion
@@ -751,9 +750,9 @@ namespace PnP.Core.Modernization.Functions
 
             try
             {
-                var pageHeaderImage = this.clientContext.Web.GetFileByServerRelativeUrl(serverRelativeImagePath);
-                this.clientContext.Load(pageHeaderImage, p => p.UniqueId, p => p.ListId, p => p.Properties);
-                this.clientContext.ExecuteQueryRetry();
+                IFile pageHeaderImage = this.clientContext.Web.GetFileByServerRelativeUrl(serverRelativeImagePath);
+                pageHeaderImage.LoadBatch(p => p.UniqueId,p => p.ListId,p => p.Properties);
+                this.clientContext.Execute();
 
                 results.Add("ImageListId", pageHeaderImage.ListId.ToString());
                 results.Add("ImageUniqueId", pageHeaderImage.UniqueId.ToString());
@@ -764,7 +763,7 @@ namespace PnP.Core.Modernization.Functions
                 results.Add("ImageHeight", "-1");
                 results.Add("ImageWidth", "-1");
 
-                if (pageHeaderImage.Properties.FieldValues.TryGetValue("vti_lastheight", out var heightValue))
+                if (pageHeaderImage.Properties.Values.TryGetValue("vti_lastheight", out var heightValue))
                 {
                     var height = heightValue?.ToString();
                     if (!string.IsNullOrEmpty(height) && height != "0")
@@ -772,7 +771,7 @@ namespace PnP.Core.Modernization.Functions
                         results["ImageHeight"] = height;
                     }
                 }
-                if (pageHeaderImage.Properties.FieldValues.TryGetValue("vti_lastwidth", out var widthValue))
+                if (pageHeaderImage.Properties.Values.TryGetValue("vti_lastwidth", out var widthValue))
                 {
                     var width = widthValue?.ToString();
                     if (!string.IsNullOrEmpty(width) && width != "0")
@@ -784,9 +783,9 @@ namespace PnP.Core.Modernization.Functions
 
                 return results;
             }
-            catch (ServerException ex)
+            catch (ServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (ex.IsNotFound())
                 {
                     // Keep the original image URL when its file is missing, but still resolve
                     // the required numeric tokens in the modern Image web part mapping.
@@ -935,7 +934,7 @@ namespace PnP.Core.Modernization.Functions
             }
 
             // Assume document lives in current web
-            ClientContext contextToUse = this.clientContext;
+            PnPContext contextToUse = this.clientContext;
 
             this.clientContext.Web.EnsureProperty(p => p.ServerRelativeUrl);
             if (!serverRelativeUrl.StartsWith(this.clientContext.Web.ServerRelativeUrl, StringComparison.InvariantCultureIgnoreCase))
@@ -946,14 +945,12 @@ namespace PnP.Core.Modernization.Functions
                     Uri hostUri = new Uri(this.clientContext.Web.GetUrl());
 
                     // Find the web url hosting the content file
-                    var webUrlResult = Web.GetWebUrlFromPageUrl(this.clientContext, $"{hostUri.Scheme}://{hostUri.DnsSafeHost}{serverRelativeUrl}");
-                    this.clientContext.ExecuteQueryRetry();
-
-                    contextToUse = this.clientContext.Clone(webUrlResult.Value);
+                    var webUrlResult = SharePointRest.GetWebUrlFromPageUrl(this.clientContext, new Uri(hostUri, serverRelativeUrl));
+                    contextToUse = this.clientContext.Clone(new Uri(webUrlResult));
                 }
-                catch (ServerException ex) when (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                catch (ServiceException ex) when (ex.IsNotFound())
                 {
-                    LogWarning(string.Format(LogStrings.Warning_DocumentEmbedLookupFileNotFound, serverRelativeUrl, this.clientContext.Url), LogStrings.Heading_BuiltInFunctions);
+                    LogWarning(string.Format(LogStrings.Warning_DocumentEmbedLookupFileNotFound, serverRelativeUrl, this.clientContext.Uri.AbsoluteUri), LogStrings.Heading_BuiltInFunctions);
                     return results;
                 }
                 catch (Exception ex)
@@ -966,10 +963,10 @@ namespace PnP.Core.Modernization.Functions
 
             try
             {
-                var document = contextToUse.Web.GetFileByServerRelativeUrl(serverRelativeUrl);
-                contextToUse.Load(document, p => p.UniqueId, p => p.ListId, p => p.Author);
-                contextToUse.Load(contextToUse.Web, p => p.ServerRelativeUrl);
-                contextToUse.ExecuteQueryRetry();
+                IFile document = contextToUse.Web.GetFileByServerRelativeUrl(serverRelativeUrl);
+                document.LoadBatch(p => p.UniqueId,p => p.ListId,p => p.Author);
+                contextToUse.Web.LoadBatch(p => p.ServerRelativeUrl);
+                contextToUse.Execute();
 
                 string[] authorParts = document.Author.LoginName.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -981,11 +978,11 @@ namespace PnP.Core.Modernization.Functions
 
                 return results;
             }
-            catch (ServerException ex)
+            catch (ServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (ex.IsNotFound())
                 {
-                    LogWarning(string.Format(LogStrings.Warning_DocumentEmbedLookupFileNotFound, serverRelativeUrl, contextToUse.Url), LogStrings.Heading_BuiltInFunctions);
+                    LogWarning(string.Format(LogStrings.Warning_DocumentEmbedLookupFileNotFound, serverRelativeUrl, contextToUse.Uri.AbsoluteUri), LogStrings.Heading_BuiltInFunctions);
                     return results;
                 }
                 else
@@ -1048,7 +1045,7 @@ namespace PnP.Core.Modernization.Functions
                 throw new NotAvailableAtTargetException("The picture library slideshow has no configured destination library. This web part will be skipped.");
             }
 
-            var library = this.clientContext.Web.GetListById(libraryGuid);
+            IList library = this.clientContext.Web.GetListById(libraryGuid);
             if (library == null)
             {
                 throw new NotAvailableAtTargetException($"The picture library slideshow destination library {libraryGuid} was not found. This web part will be skipped.");
@@ -1310,10 +1307,8 @@ namespace PnP.Core.Modernization.Functions
                     Uri hostUri = new Uri(this.clientContext.Web.GetUrl());
 
                     // Find the web url hosting the content file
-                    var webUrlResult = Web.GetWebUrlFromPageUrl(this.clientContext, $"{hostUri.Scheme}://{hostUri.DnsSafeHost}{contentLink}");
-                    this.clientContext.ExecuteQueryRetry();
-
-                    using (var cc = this.clientContext.Clone(webUrlResult.Value))
+                    var webUrlResult = SharePointRest.GetWebUrlFromPageUrl(this.clientContext, new Uri(hostUri, contentLink));
+                    using (PnPContext cc = this.clientContext.Clone(new Uri(webUrlResult)))
                     {
                         return cc.Web.GetFileAsString(contentLink);
                     }
@@ -1330,9 +1325,9 @@ namespace PnP.Core.Modernization.Functions
                 {
                     return this.sourceClientContext.Web.GetFileAsString(contentLink);
                 }
-                catch (ServerException ex)
+                catch (ServiceException ex)
                 {
-                    if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                    if (ex.IsNotFound())
                     {
                         // Provided html was not found, should not happen but if it happens we're not stopping the transformation
                         LogError(LogStrings.Error_LoadContentFromFileContentLink, LogStrings.Heading_BuiltInFunctions, ex);
@@ -1540,7 +1535,7 @@ namespace PnP.Core.Modernization.Functions
             if (!string.IsNullOrEmpty(listName) || listId != Guid.Empty)
             {
                 // Scope to list
-                List list = null;
+                IList list = null;
                 if (listId != Guid.Empty)
                 {
                     list = this.clientContext.Web.GetListById(listId);
@@ -1550,10 +1545,10 @@ namespace PnP.Core.Modernization.Functions
                     list = this.clientContext.Web.GetListByTitle(listName);
                 }
 
-                this.clientContext.Load(list, p => p.BaseType);
-                this.clientContext.ExecuteQueryRetry();
+                list.LoadBatch(p => p.BaseType);
+                this.clientContext.Execute();
 
-                if (list.BaseType != BaseType.DocumentLibrary)
+                if (list.BaseType != ListBaseType.DocumentLibrary)
                 {
                     return "NoTransformation";
                 }
@@ -1789,7 +1784,7 @@ namespace PnP.Core.Modernization.Functions
                   </Query>
                 </View>";
 
-            ClientContext context;
+            PnPContext context;
             if (this.targetClientContext != null)
             {
                 context = this.targetClientContext;
@@ -1799,18 +1794,18 @@ namespace PnP.Core.Modernization.Functions
                 context = this.sourceClientContext;
             }
 
-            List siteUserInfoList = context.Web.SiteUserInfoList;
-            CamlQuery query = new CamlQuery
+            IList siteUserInfoList = context.Web.GetSiteUserInfoList();
+            CamlQueryOptions query = new CamlQueryOptions
             {
                 ViewXml = string.Format(CAMLQueryByName, person)
             };
-            var loadedUsers = context.LoadQuery(siteUserInfoList.GetItems(query));
-            context.ExecuteQueryRetry();
+            var loadedUsers = siteUserInfoList.GetItems(query).AsRequested().ToList();
+            context.Execute();
 
             bool handled = false;
             if (loadedUsers != null)
             {
-                var loadedUser = loadedUsers.FirstOrDefault();
+                IListItem loadedUser = loadedUsers.FirstOrDefault();
                 if (loadedUser != null)
                 {
                     result.Add("PersonUPN", loadedUser["UserName"] != null ? loadedUser["UserName"].ToString() : "");

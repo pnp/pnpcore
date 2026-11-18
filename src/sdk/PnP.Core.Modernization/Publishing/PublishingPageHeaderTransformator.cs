@@ -1,10 +1,10 @@
-﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Publishing
 {
@@ -16,11 +16,11 @@ namespace PnP.Core.Modernization.Publishing
         private PublishingPageTransformationInformation publishingPageTransformationInformation;
         private PublishingPageTransformation publishingPageTransformation;
         private PublishingFunctionProcessor functionProcessor;
-        private ClientContext sourceClientContext;
-        private ClientContext targetClientContext;
+        private PnPContext sourceClientContext;
+        private PnPContext targetClientContext;
 
         #region Construction
-        public PublishingPageHeaderTransformator(PublishingPageTransformationInformation publishingPageTransformationInformation, ClientContext sourceClientContext, ClientContext targetClientContext, PublishingPageTransformation publishingPageTransformation, IList<ILogObserver> logObservers = null)
+        public PublishingPageHeaderTransformator(PublishingPageTransformationInformation publishingPageTransformationInformation, PnPContext sourceClientContext, PnPContext targetClientContext, PublishingPageTransformation publishingPageTransformation, IList<ILogObserver> logObservers = null)
         {
             // Register observers
             if (logObservers != null)
@@ -44,7 +44,7 @@ namespace PnP.Core.Modernization.Publishing
         /// Builds the header for the modern page
         /// </summary>
         /// <param name="targetPage">Modern page instance</param>
-        public void TransformHeader(ref PnPCore.IPage targetPage)
+        public void TransformHeader(ref IPage targetPage)
         {
             // Get the mapping model to use as it describes how the page header needs to be generated
             var publishingPageTransformationModel = new PageLayoutManager(this.RegisteredLogObservers).GetPageLayoutMappingModel(this.publishingPageTransformation, publishingPageTransformationInformation.SourcePage);
@@ -80,7 +80,7 @@ namespace PnP.Core.Modernization.Publishing
                     {
                         // Integrate asset transformator
                         AssetTransfer assetTransfer = new AssetTransfer(this.sourceClientContext, this.targetClientContext, base.RegisteredLogObservers);
-                        newHeaderImageServerRelativeUrl = assetTransfer.TransferAsset(imageServerRelativeUrl, System.IO.Path.GetFileNameWithoutExtension(publishingPageTransformationInformation.SourcePage[Constants.FileLeafRefField].ToString()));
+                        newHeaderImageServerRelativeUrl = assetTransfer.TransferAsset(imageServerRelativeUrl, Path.GetFileNameWithoutExtension(publishingPageTransformationInformation.SourcePage[Constants.FileLeafRefField].ToString()));
                     }
                     catch (Exception ex)
                     {
@@ -104,17 +104,17 @@ namespace PnP.Core.Modernization.Publishing
                 // Header type handling
                 switch (publishingPageTransformationModel.Header.Type)
                 {
-                    case HeaderType.ColorBlock: targetPage.PageHeader.LayoutType = PnPCore.PageHeaderLayoutType.ColorBlock; break;
-                    case HeaderType.CutInShape: targetPage.PageHeader.LayoutType = PnPCore.PageHeaderLayoutType.CutInShape; break;
-                    case HeaderType.NoImage: targetPage.PageHeader.LayoutType = PnPCore.PageHeaderLayoutType.NoImage; break;
-                    case HeaderType.FullWidthImage: targetPage.PageHeader.LayoutType = PnPCore.PageHeaderLayoutType.FullWidthImage; break;
+                    case HeaderType.ColorBlock: targetPage.PageHeader.LayoutType = PageHeaderLayoutType.ColorBlock; break;
+                    case HeaderType.CutInShape: targetPage.PageHeader.LayoutType = PageHeaderLayoutType.CutInShape; break;
+                    case HeaderType.NoImage: targetPage.PageHeader.LayoutType = PageHeaderLayoutType.NoImage; break;
+                    case HeaderType.FullWidthImage: targetPage.PageHeader.LayoutType = PageHeaderLayoutType.FullWidthImage; break;
                 }
 
                 // Alignment handling
                 switch (publishingPageTransformationModel.Header.Alignment)
                 {
-                    case HeaderAlignment.Left: targetPage.PageHeader.TextAlignment = PnPCore.PageHeaderTitleAlignment.Left; break;
-                    case HeaderAlignment.Center: targetPage.PageHeader.TextAlignment = PnPCore.PageHeaderTitleAlignment.Center; break;
+                    case HeaderAlignment.Left: targetPage.PageHeader.TextAlignment = PageHeaderTitleAlignment.Left; break;
+                    case HeaderAlignment.Center: targetPage.PageHeader.TextAlignment = PageHeaderTitleAlignment.Center; break;
                 }
 
                 // Show published date
@@ -183,7 +183,7 @@ namespace PnP.Core.Modernization.Publishing
                 }
                 else
                 {
-                    fieldValue = this.publishingPageTransformationInformation.SourcePage.FieldValues[headerField.Name]?.ToString().Trim();
+                    fieldValue = this.publishingPageTransformationInformation.SourcePage.Values[headerField.Name]?.ToString().Trim();
                 }
 
                 return fieldValue;

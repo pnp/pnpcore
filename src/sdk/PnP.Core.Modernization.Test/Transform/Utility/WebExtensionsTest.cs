@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PnP.Core.Modernization.Tests.Transform.Utility

@@ -1,17 +1,16 @@
-﻿using PnP.Framework.Entities;
+﻿using PnP.Core.Modernization.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PnP.Framework.Utilities;
+using PnP.Core.Provisioning.Utilities;
 using PnP.Core.Modernization.Transform;
 using PnP.Core.Modernization;
 
-using Microsoft.SharePoint.Client;
 
 namespace PnP.Core.Modernization
 {
     /// <summary>
-    /// Class holding extension methods for the Microsoft.SharePoint.Client.Web object
+    /// SharePoint Online modernization extensions for Core webs.
     /// </summary>
     public static partial class WebExtensions
     {
@@ -22,30 +21,30 @@ namespace PnP.Core.Modernization
         /// <param name="pageNameStartsWith">Filter to get all pages starting with</param>
         /// <param name="folder"></param>
         /// <returns>A list of pages (ListItem instances)</returns>
-        public static ListItemCollection GetPages(this Web web, string pageNameStartsWith = null, string folder = null)
+        public static IListItemCollection GetPages(this IWeb web, string pageNameStartsWith = null, string folder = null)
         {
             // Get pages library
-            ListCollection listCollection = web.Lists;
-            listCollection.EnsureProperties(coll => coll.Include(li => li.BaseTemplate, li => li.RootFolder, li => li.ListItemEntityTypeFullName));
-            var sitePagesLibrary = listCollection
-                .Where(p => p.BaseTemplate == (int)ListTemplateType.WebPageLibrary)
+            IListCollection listCollection = web.Lists;
+            listCollection.Load(li => li.TemplateType, li => li.RootFolder, li => li.ListItemEntityTypeFullName);
+            IList sitePagesLibrary = listCollection.AsRequested()
+                .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
                 // Verify this is the "real" pages library, sites supporting Viva Connections have a second pages library (named Announcements) used to
                 // store Viva Connections announcements
                 .Where(p => p.IsPropertyAvailable(p => p.ListItemEntityTypeFullName) && p.ListItemEntityTypeFullName == "SP.Data.SitePagesItem")
                 .FirstOrDefault();
             if (sitePagesLibrary != null)
             {
-                CamlQuery query = null;
+                CamlQueryOptions query = null;
                 if (!string.IsNullOrEmpty(pageNameStartsWith))
                 {
-                    query = new CamlQuery
+                    query = new CamlQueryOptions
                     {
                         ViewXml = string.Format(Constants.CAMLQueryByExtensionAndName, pageNameStartsWith)
                     };
                 }
                 else
                 {
-                    query = new CamlQuery
+                    query = new CamlQueryOptions
                     {
                         ViewXml = Constants.CAMLQueryByExtension
                     };
@@ -57,9 +56,7 @@ namespace PnP.Core.Modernization
                     query.FolderServerRelativeUrl = $"{web.ServerRelativeUrl}/SitePages/{folder}";
                 }
 
-                var pages = sitePagesLibrary.GetItems(query);
-                web.Context.Load(pages);
-                web.Context.ExecuteQueryRetry();
+                IListItemCollection pages = sitePagesLibrary.GetItems(query);
 
                 return pages;
             }
@@ -75,24 +72,24 @@ namespace PnP.Core.Modernization
         /// <param name="pageNameStartsWith">Filter to get all pages starting with</param>
         /// <param name="folder">Folder to search in</param>
         /// <returns>A list of pages (ListItem instances)</returns>
-        public static ListItemCollection GetPagesFromList(this Web web, string webRelativeListName, string pageNameStartsWith = null, string folder = null)
+        public static IListItemCollection GetPagesFromList(this IWeb web, string webRelativeListName, string pageNameStartsWith = null, string folder = null)
         {
             // Load selected list
-            List listHoldingPages = null;
+            IList listHoldingPages = null;
             try
             {
                 web.EnsureProperty(p => p.ServerRelativeUrl);
                 string listRelativeUrl = $"{web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/{webRelativeListName}";
                 
                 // ByPass for 2010 onwards support
-                listHoldingPages = web.Lists.GetByTitle(webRelativeListName);
+                listHoldingPages = web.Lists.GetByServerRelativeUrl(listRelativeUrl);
 
-                web.Context.Load(listHoldingPages, p => p.RootFolder);
-                web.Context.ExecuteQueryRetry();
+                listHoldingPages.LoadBatch(p => p.RootFolder);
+                web.PnPContext.Execute();
             }
-            catch (ServerException ex)
+            catch (ServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (ex.IsNotFound())
                 {
                     listHoldingPages = null;
                 }
@@ -104,17 +101,17 @@ namespace PnP.Core.Modernization
 
             if (listHoldingPages != null)
             {
-                CamlQuery query = null;
+                CamlQueryOptions query = null;
                 if (!string.IsNullOrEmpty(pageNameStartsWith))
                 {
-                    query = new CamlQuery
+                    query = new CamlQueryOptions
                     {
                         ViewXml = string.Format(Constants.CAMLQueryByExtensionAndName, pageNameStartsWith)
                     };
                 }
                 else
                 {
-                    query = new CamlQuery
+                    query = new CamlQueryOptions
                     {
                         ViewXml = Constants.CAMLQueryByExtension
                     };
@@ -126,9 +123,7 @@ namespace PnP.Core.Modernization
                     query.FolderServerRelativeUrl = $"{listHoldingPages.RootFolder.ServerRelativeUrl}/{folder}";
                 }
 
-                var pages = listHoldingPages.GetItems(query);
-                web.Context.Load(pages);
-                web.Context.ExecuteQueryRetry();
+                IListItemCollection pages = listHoldingPages.GetItems(query);
 
                 return pages;
             }
@@ -144,24 +139,24 @@ namespace PnP.Core.Modernization
         /// <param name="pageNameStartsWith">Filter to get all blogs starting with</param>
         /// <param name="folder">Folder to search in</param>
         /// <returns>A list of pages (ListItem instances)</returns>
-        public static ListItemCollection GetBlogsFromList(this Web web, string webRelativeListName, string pageNameStartsWith = null, string folder = null)
+        public static IListItemCollection GetBlogsFromList(this IWeb web, string webRelativeListName, string pageNameStartsWith = null, string folder = null)
         {
             // Load selected list
-            List listHoldingPages = null;
+            IList listHoldingPages = null;
             try
             {
                 web.EnsureProperty(p => p.ServerRelativeUrl);
                 string listRelativeUrl = $"{web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/{webRelativeListName}";
 
                 // ByPass for 2010 onwards support
-                listHoldingPages = web.Lists.GetByTitle(webRelativeListName);
+                listHoldingPages = web.Lists.GetByServerRelativeUrl(listRelativeUrl);
 
-                web.Context.Load(listHoldingPages, p => p.RootFolder);
-                web.Context.ExecuteQueryRetry();
+                listHoldingPages.LoadBatch(p => p.RootFolder);
+                web.PnPContext.Execute();
             }
-            catch (ServerException ex)
+            catch (ServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (ex.IsNotFound())
                 {
                     listHoldingPages = null;
                 }
@@ -173,17 +168,17 @@ namespace PnP.Core.Modernization
 
             if (listHoldingPages != null)
             {
-                CamlQuery query = null;
+                CamlQueryOptions query = null;
                 if (!string.IsNullOrEmpty(pageNameStartsWith))
                 {
-                    query = new CamlQuery
+                    query = new CamlQueryOptions
                     {
                         ViewXml = string.Format(Constants.CAMLQueryByNameForBlog, pageNameStartsWith)
                     };
                 }
                 else
                 {
-                    query = CamlQuery.CreateAllItemsQuery();
+                    query = new CamlQueryOptions { ViewXml = "<View Scope='RecursiveAll'><Query /></View>" };
                 }
 
                 if (!string.IsNullOrEmpty(folder))
@@ -192,9 +187,7 @@ namespace PnP.Core.Modernization
                     query.FolderServerRelativeUrl = $"{listHoldingPages.RootFolder.ServerRelativeUrl}/{folder}";
                 }
 
-                var pages = listHoldingPages.GetItems(query);
-                web.Context.Load(pages);
-                web.Context.ExecuteQueryRetry();
+                IListItemCollection pages = listHoldingPages.GetItems(query);
 
                 return pages;
             }
@@ -207,17 +200,17 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Site to scan</param>
         /// <returns>List of admins</returns>
-        public static List<UserEntity> GetAdmins(this Web web)
+        public static List<UserEntity> GetAdmins(this IWeb web)
         {
             List<UserEntity> adminList = new List<UserEntity>(2);
             web.EnsureProperty(p => p.SiteUsers);
 
-            var admins = web.SiteUsers.Where(p => p.IsSiteAdmin);
+            var admins = web.SiteUsers.AsRequested().Where(p => p.IsSiteAdmin);
             if (admins != null && admins.Any())
             {
-                foreach (var admin in admins)
+                foreach (ISharePointUser admin in admins)
                 {
-                    adminList.Add(new UserEntity() { LoginName = admin.LoginName, Email = admin.Email, Title = admin.Title });
+                    adminList.Add(new UserEntity() { LoginName = admin.LoginName, Email = admin.Mail, Title = admin.Title });
                 }
             }
 
@@ -229,17 +222,17 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Web to scan</param>
         /// <returns>List of owners</returns>
-        public static List<UserEntity> GetOwners(this Web web)
+        public static List<UserEntity> GetOwners(this IWeb web)
         {
             List<UserEntity> ownerList = new List<UserEntity>();
             web.EnsureProperty(p => p.AssociatedOwnerGroup);
 
-            if (web.AssociatedOwnerGroup != null && !(web.AssociatedOwnerGroup.ServerObjectIsNull == null) && !web.AssociatedOwnerGroup.ServerObjectIsNull.Value)
+            if (web.AssociatedOwnerGroup?.Requested == true)
             {
                 web.AssociatedOwnerGroup.EnsureProperty(p => p.Users);
-                foreach (var owner in web.AssociatedOwnerGroup.Users)
+                foreach (ISharePointUser owner in web.AssociatedOwnerGroup.Users)
                 {
-                    ownerList.Add(new UserEntity() { LoginName = owner.LoginName, Email = owner.Email, Title = owner.Title });
+                    ownerList.Add(new UserEntity() { LoginName = owner.LoginName, Email = owner.Mail, Title = owner.Title });
                 }
             }
             return ownerList;
@@ -250,17 +243,17 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Web to scan</param>
         /// <returns>Members of this web</returns>
-        public static List<UserEntity> GetMembers(this Web web)
+        public static List<UserEntity> GetMembers(this IWeb web)
         {
             List<UserEntity> memberList = new List<UserEntity>();
             web.EnsureProperty(p => p.AssociatedMemberGroup);
 
-            if (web.AssociatedMemberGroup != null && !(web.AssociatedMemberGroup.ServerObjectIsNull == null) && !web.AssociatedMemberGroup.ServerObjectIsNull.Value)
+            if (web.AssociatedMemberGroup?.Requested == true)
             {
                 web.AssociatedMemberGroup.EnsureProperty(p => p.Users);
-                foreach (var member in web.AssociatedMemberGroup.Users)
+                foreach (ISharePointUser member in web.AssociatedMemberGroup.Users)
                 {
-                    memberList.Add(new UserEntity() { LoginName = member.LoginName, Email = member.Email, Title = member.Title });
+                    memberList.Add(new UserEntity() { LoginName = member.LoginName, Email = member.Mail, Title = member.Title });
                 }
             }
             return memberList;
@@ -271,17 +264,17 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Web to scan</param>
         /// <returns>Visitors of this web</returns>
-        public static List<UserEntity> GetVisitors(this Web web)
+        public static List<UserEntity> GetVisitors(this IWeb web)
         {
             List<UserEntity> visitorList = new List<UserEntity>();
             web.EnsureProperty(p => p.AssociatedVisitorGroup);
 
-            if (web.AssociatedVisitorGroup != null && !(web.AssociatedVisitorGroup.ServerObjectIsNull == null) && !web.AssociatedVisitorGroup.ServerObjectIsNull.Value)
+            if (web.AssociatedVisitorGroup?.Requested == true)
             {
                 web.AssociatedVisitorGroup.EnsureProperty(p => p.Users);
-                foreach (var visitor in web.AssociatedVisitorGroup.Users)
+                foreach (ISharePointUser visitor in web.AssociatedVisitorGroup.Users)
                 {
-                    visitorList.Add(new UserEntity() { LoginName = visitor.LoginName, Email = visitor.Email, Title = visitor.Title });
+                    visitorList.Add(new UserEntity() { LoginName = visitor.LoginName, Email = visitor.Mail, Title = visitor.Title });
                 }
             }
             return visitorList;
@@ -294,14 +287,14 @@ namespace PnP.Core.Modernization
         /// <param name="claim1">Claim to check</param>
         /// <param name="claim2">Claim to check</param>
         /// <returns>True if claim1 or claim2 has a role</returns>
-        public static bool ClaimsHaveRoleAssignment(this Web web, string claim1, string claim2)
+        public static bool ClaimsHaveRoleAssignment(this IWeb web, string claim1, string claim2)
         {
             web.EnsureProperties(p => p.SiteUsers, p => p.SiteGroups);
 
             bool usersAreInstantiated = true;
-            foreach (var group in web.SiteGroups)
+            foreach (ISharePointGroup group in web.SiteGroups)
             {
-                if (!group.IsObjectPropertyInstantiated("Users"))
+                if (!group.Users.Requested)
                 {
                     usersAreInstantiated = false;
                     break;
@@ -310,13 +303,13 @@ namespace PnP.Core.Modernization
 
             if (!usersAreInstantiated)
             {
-                web.SiteGroups.EnsureProperty(p => p.Include(s => s.Users));
+                web.SiteGroups.Load(s => s.Users);
             }
 
             // Check grants via SharePoint groups
-            foreach (var group in web.SiteGroups)
+            foreach (ISharePointGroup group in web.SiteGroups)
             {
-                var everyoneClaimsInGroups = group.Users.Where(p => p.LoginName.Equals(claim1, StringComparison.InvariantCultureIgnoreCase) || p.LoginName.Equals(claim2, StringComparison.InvariantCultureIgnoreCase));
+                var everyoneClaimsInGroups = group.Users.AsRequested().Where(p => p.LoginName.Equals(claim1, StringComparison.InvariantCultureIgnoreCase) || p.LoginName.Equals(claim2, StringComparison.InvariantCultureIgnoreCase));
                 if (everyoneClaimsInGroups != null && everyoneClaimsInGroups.Any())
                 {
                     return true;
@@ -324,14 +317,14 @@ namespace PnP.Core.Modernization
             }
 
             // Check direct grants
-            var everyoneClaims = web.SiteUsers.Where(p => p.LoginName.Equals(claim1, StringComparison.InvariantCultureIgnoreCase) || p.LoginName.Equals(claim2, StringComparison.InvariantCultureIgnoreCase));
+            var everyoneClaims = web.SiteUsers.AsRequested().Where(p => p.LoginName.Equals(claim1, StringComparison.InvariantCultureIgnoreCase) || p.LoginName.Equals(claim2, StringComparison.InvariantCultureIgnoreCase));
             if (everyoneClaims != null && everyoneClaims.Any())
             {
                 web.EnsureProperty(p => p.RoleAssignments);
 
-                foreach (var claim in everyoneClaims)
+                foreach (ISharePointUser claim in everyoneClaims)
                 {
-                    var found = web.RoleAssignments.Where(p => p.PrincipalId == claim.Id).Any();
+                    var found = web.RoleAssignments.AsRequested().Any(p => p.PrincipalId == claim.Id);
                     if (found)
                     {
                         return true;
@@ -346,25 +339,25 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">web to use for the resolving</param>
         /// <returns>Loginname for the "Everyone Except External Users" claim</returns>
-        public static string GetEveryoneExceptExternalUsersClaim(this Web web)
+        public static string GetEveryoneExceptExternalUsersClaim(this IWeb web)
         {
-            User spReader = null;
+            ISharePointUser spReader = null;
             try
             {
                 // New tenant
                 string userIdentity = $"c:0-.f|rolemanager|spo-grid-all-users/{web.GetAuthenticationRealm()}";
                 spReader = web.EnsureUser(userIdentity);
-                web.Context.Load(spReader);
-                web.Context.ExecuteQueryRetry();
+                spReader.LoadBatch();
+                web.PnPContext.Execute();
                 return spReader.LoginName;
             }
-            catch (ServerException)
+            catch (ServiceException)
             {
                 // old tenant?
                 string userIdentity = string.Empty;
 
-                web.Context.Load(web, w => w.Language);
-                web.Context.ExecuteQueryRetry();
+                web.LoadBatch(w => w.Language);
+                web.PnPContext.Execute();
 
                 switch (web.Language)
                 {
@@ -504,8 +497,8 @@ namespace PnP.Core.Modernization
                 if (!string.IsNullOrEmpty(userIdentity))
                 {
                     spReader = web.EnsureUser(userIdentity);
-                    web.Context.Load(spReader);
-                    web.Context.ExecuteQueryRetry();
+                    spReader.LoadBatch();
+                    web.PnPContext.Execute();
                     return spReader.LoginName;
                 }
                 else
@@ -521,25 +514,10 @@ namespace PnP.Core.Modernization
         /// <param name="web">Web to operate on</param>
         /// <remarks>Only required on source contexts</remarks>
         /// <returns>web url</returns>
-        public static string GetUrl(this Web web)
+        public static string GetUrl(this IWeb web)
         {
-            if (BaseTransform.GetVersion(web.Context) == SPVersion.SP2010)
-            {
-                var siteCtx = web.Context.GetSiteCollectionContext();
-                siteCtx.Site.EnsureProperties(p => p.ServerRelativeUrl, p => p.Url);
-                web.EnsureProperty(p => p.ServerRelativeUrl);
-
-                var siteUri = new Uri(siteCtx.Site.Url);
-                string host = $"{siteUri.Scheme}://{siteUri.DnsSafeHost}";
-
-                var serverRelativeUrl = web.ServerRelativeUrl;
-
-                return UrlUtility.Combine(host, serverRelativeUrl);
-            }
-            else
-            {
-                return web.EnsureProperty(p => p.Url);
-            }
+            SharePointOnlineSupport.Validate(web.PnPContext);
+            return web.EnsureProperty(p => p.Url).AbsoluteUri;
         }
 
         /// <summary>
@@ -547,7 +525,7 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Web to operate on</param>
         /// <returns>ID of the pages library</returns>
-        public static string GetPagesLibraryId(this Web web)
+        public static string GetPagesLibraryId(this IWeb web)
         {
             if (web.PropertyBagContainsKey(Constants.WebPropertyKeyPagesListId))
             {
@@ -566,46 +544,46 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="web">Web to operate on</param>
         /// <returns>Site pages library instance</returns>
-        public static List GetSitePagesLibrary(this Web web)
+        public static IList GetSitePagesLibrary(this IWeb web)
         {
             //TemplateFeatureId - 00bfea71-c796-4402-9f2f-0eb9a6e71b18
-            var lists = web.Lists;
-            web.Context.Load(lists, list => list.Where(l => l.RootFolder.Name == "SitePages").Include(l => l.Id));
-            web.Context.ExecuteQueryRetry();
+            IListCollection lists = web.Lists;
+            lists.LoadBatch(l => l.Id, l => l.RootFolder.QueryProperties(f => f.Name));
+            web.PnPContext.Execute();
 
-            return lists.SingleOrDefault();
+            return lists.AsRequested().SingleOrDefault(l => l.RootFolder.Name == "SitePages");
         }
 
         /// <summary>
-        /// Gets blog post library in an SP2010 compatible fashion
+        /// Gets the SharePoint Online blog post library.
         /// </summary>
         /// <param name="web">Web to operate on</param>
         /// <returns>Blog post library</returns>
-        public static List GetPostsLibrary(this Web web)
+        public static IList GetPostsLibrary(this IWeb web)
         {
-            var lists = web.Lists;
-            web.Context.Load(lists, list => list.Where(l => l.BaseTemplate == (int)ListTemplateType.Posts).Include(l => l.Id, l => l.Fields));
-            web.Context.ExecuteQueryRetry();
+            IListCollection lists = web.Lists;
+            lists.LoadBatch(l => l.Id,l => l.Fields, l => l.TemplateType);
+            web.PnPContext.Execute();
 
-            return lists.SingleOrDefault();
+            return lists.AsRequested().SingleOrDefault(l => l.TemplateType == ListTemplateType.Posts);
         }
 
         /// <summary>
-        /// Gets list from web in an SP2010 compatible fashion
+        /// Gets a list by its root folder name.
         /// </summary>
         /// <param name="web">Web to operate on</param>
         /// <param name="listName">List to lookup</param>
         /// <returns>List instance</returns>
-        public static List GetListByName(this Web web, string listName)
+        public static IList GetListByName(this IWeb web, string listName)
         {
-            var lists = web.Lists;
-            web.Context.Load(web.Lists, list => list.Include(l => l.Id, o => o.RootFolder.Name));
-            web.Context.ExecuteQueryRetry();
+            IListCollection lists = web.Lists;
+            web.Lists.LoadBatch(l => l.Id,o => o.RootFolder.QueryProperties(f => f.Name));
+            web.PnPContext.Execute();
 
             //Need to load all lists, server cannot process "Equals" or "ToLower" statements - generates CSOM error.
             //Its not ideal, but passes unit tests
 
-            return lists.SingleOrDefault(o => o.RootFolder.Name.Equals(listName,StringComparison.InvariantCultureIgnoreCase));
+            return lists.AsRequested().SingleOrDefault(o => o.RootFolder.Name.Equals(listName,StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +13,9 @@ namespace PnP.Core.Modernization
         /// Fail test if collection has no items
         /// </summary>
         /// <param name="collection"></param>
-        public static void FailTestIfZero(this ListItemCollection collection)
+        public static void FailTestIfZero(this IListItemCollection collection)
         {
-            if (collection == null || collection.Count == 0)
+            if (collection == null || !collection.AsRequested().Any())
             {
                 Assert.Fail("No pages found");
             }

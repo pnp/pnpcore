@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
 using PnP.Core.Modernization.Telemetry.Observers;
-using Microsoft.SharePoint.Client;
 
 namespace PnP.Core.Modernization.Tests.Transform.CommonTests
 {
@@ -41,68 +40,14 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         }
 
         #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
         #endregion
-
         #region SharePoint 2010 Tests
-
-        [TestCategory(TestCategories.SP2010)]
-        [TestMethod]
-        public void AllCommonWebPartPages_SP2010()
-        {
-            TransformPage(SPPlatformVersion.SP2010);
-        }
-
         #endregion
-
         #region SharePoint 2013 Tests
-
-        [TestCategory(TestCategories.SP2013)]
-        [TestMethod]
-        public void AllCommonWebPartPages_SP2013()
-        {
-            TransformPage(SPPlatformVersion.SP2013);
-        }
-
         #endregion
-
         #region SharePoint 2016 Tests
-
-        [TestCategory(TestCategories.SP2016)]
-        [TestMethod]
-        public void AllCommonWebPartPages_SP2016()
-        {
-            TransformPage(SPPlatformVersion.SP2016);
-        }
-
         #endregion
-
         #region SharePoint 2019 Tests
-
-        [TestCategory(TestCategories.SP2019)]
-        [TestMethod]
-        public void AllCommonWebPartPages_SP2019()
-        {
-            TransformPage(SPPlatformVersion.SP2019);
-        }
 
         #endregion
 
@@ -134,13 +79,13 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
                     pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose: true));
                     pageTransformator.RegisterObserver(new UnitTestLogObserver());
 
-                    var pages = sourceClientContext.Web.GetPages(pageNameStartsWith);
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,pageNameStartsWith);
 
                     pages.FailTestIfZero();
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
-                        var pageName = page.FieldValues["FileLeafRef"].ToString();
+                        var pageName = page.Values["FileLeafRef"].ToString();
 
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {

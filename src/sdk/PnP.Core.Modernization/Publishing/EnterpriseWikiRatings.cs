@@ -1,8 +1,8 @@
-using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace PnP.Core.Modernization.Publishing
 {
@@ -10,7 +10,7 @@ namespace PnP.Core.Modernization.Publishing
     {
         private static readonly string[] FieldNames = { "RatedBy", "Ratings", "RatingCount", "AverageRating" };
 
-        internal FieldUserValue[] Voters { get; private set; }
+        internal IFieldUserValue[] Voters { get; private set; }
         internal string Ratings { get; private set; }
         internal int[] Scores { get; private set; }
         internal int Count { get; private set; }
@@ -25,16 +25,42 @@ namespace PnP.Core.Modernization.Publishing
 
         internal static bool IsRatingField(string name) => FieldNames.Contains(name);
 
-        internal static EnterpriseWikiRatings Read(ListItem source)
+        internal static EnterpriseWikiRatings Read(IListItem source)
         {
-            if (FieldNames.Any(name => !source.FieldValues.ContainsKey(name)))
+            if (FieldNames.Any(name => !source.Values.ContainsKey(name)))
             {
-                // Refresh the complete group so unloaded fields cannot become an empty history.
-                source.Context.Load(source, item => item["RatedBy"], item => item["Ratings"],
-                    item => item["RatingCount"], item => item["AverageRating"]);
-                source.Context.ExecuteQueryRetry();
+                source = Reload(source);
             }
-            return Read(source.FieldValues);
+            return Read(source.Values);
+        }
+
+        private static IListItem Reload(IListItem item)
+        {
+            // Core merges returned fields, so stale values must not mask fields omitted by the server.
+            foreach (var name in FieldNames)
+            {
+                item.Values.Remove(name);
+            }
+            item.LoadBatch(value => value["RatedBy"], value => value["Ratings"],
+                value => value["RatingCount"], value => value["AverageRating"]);
+            item.PnPContext.Execute();
+            if (FieldNames.All(item.Values.ContainsKey))
+            {
+                return item;
+            }
+
+            // REST can omit native hidden rating fields even when explicitly requested.
+            item.EnsureProperties(value => value.ParentList.QueryProperties(list => list.Id));
+            var view = new XElement("View", new XAttribute("Scope", "RecursiveAll"),
+                new XElement("Query", new XElement("Where", new XElement("Eq",
+                    new XElement("FieldRef", new XAttribute("Name", "ID")),
+                    new XElement("Value", new XAttribute("Type", "Counter"), item.Id)))),
+                new XElement("ViewFields", FieldNames.Select(name => new XElement("FieldRef", new XAttribute("Name", name)))),
+                new XElement("RowLimit", 1));
+            return item.ParentList.LoadItemsByCamlQueryViaCsom(new CamlQueryOptions
+            {
+                ViewXml = view.ToString(SaveOptions.DisableFormatting), DatesInUtc = true
+            }).Items.Single();
         }
 
         internal static EnterpriseWikiRatings Read(IDictionary<string, object> fields)
@@ -46,11 +72,24 @@ namespace PnP.Core.Modernization.Publishing
                     $"Enterprise Wiki rating history cannot be migrated because rating fields are missing or not loaded: {string.Join(", ", missing)}.");
             }
             var votersValue = fields["RatedBy"];
-            if (votersValue != null && !(votersValue is FieldUserValue[]))
+            // Core represents a null CAML user value as a single lookup with the empty-value sentinel.
+            if (votersValue is IFieldUserValue emptyUser && emptyUser.LookupId == -1)
+            {
+                votersValue = null;
+            }
+            if (votersValue is IFieldValueCollection collection)
+            {
+                if (collection.Values.Any(v => !(v is IFieldUserValue)))
+                {
+                    throw InvalidHistory("RatedBy contains a non-user value.");
+                }
+                votersValue = collection.Values.Cast<IFieldUserValue>().ToArray();
+            }
+            if (votersValue != null && !(votersValue is IFieldUserValue[]))
             {
                 throw InvalidHistory("RatedBy is not a multi-user value.");
             }
-            var voters = (FieldUserValue[])votersValue ?? Array.Empty<FieldUserValue>();
+            var voters = (IFieldUserValue[])votersValue ?? Array.Empty<IFieldUserValue>();
             var ratingsValue = fields["Ratings"];
             var ratings = Convert.ToString(ratingsValue, CultureInfo.InvariantCulture);
             var parts = string.IsNullOrWhiteSpace(ratings) ? Array.Empty<string>() : ratings.Trim().Split(',');
@@ -90,7 +129,7 @@ namespace PnP.Core.Modernization.Publishing
             };
         }
 
-        internal EnterpriseWikiRatings MapVoters(Func<FieldUserValue, FieldUserValue> resolve)
+        internal EnterpriseWikiRatings MapVoters(Func<IFieldUserValue, IFieldUserValue> resolve)
         {
             var mapped = Voters.Select(resolve).ToArray();
             if (mapped.Any(v => v == null || v.LookupId <= 0) ||
@@ -101,18 +140,17 @@ namespace PnP.Core.Modernization.Publishing
             return new EnterpriseWikiRatings { Voters = mapped, Ratings = Ratings, Scores = Scores, Count = Count, Average = Average };
         }
 
-        internal void CopyTo(ListItem target)
+        internal void CopyTo(IListItem target)
         {
             // Persist the user/score pairs and aggregates together, never as independent field updates.
-            target["RatedBy"] = Voters.Length == 0 ? null : Voters;
+            var ratedBy = target.ParentList.Fields.GetByInternalNameOrTitle("RatedBy");
+            target["RatedBy"] = Voters.Length == 0 ? null :
+                ratedBy.NewFieldValueCollection(Voters.Select(voter => ratedBy.NewFieldUserValue(voter.LookupId)));
             target["Ratings"] = string.IsNullOrEmpty(Ratings) ? null : Ratings;
             target["RatingCount"] = Count;
             target["AverageRating"] = Average;
             target.SystemUpdate();
-            target.Context.Load(target);
-            target.Context.ExecuteQueryRetry();
-
-            var saved = Read(target.FieldValues);
+            var saved = Read(Reload(target).Values);
             if (!saved.Voters.Select(v => v.LookupId).SequenceEqual(Voters.Select(v => v.LookupId)) ||
                 !saved.Scores.SequenceEqual(Scores) || Math.Abs(saved.Average - Average) > 0.0001)
             {

@@ -1,6 +1,4 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.WebParts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PnP.Core.Modernization.Cache;
@@ -8,8 +6,6 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Pages;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,15 +28,15 @@ namespace PnP.Core.Modernization.Tests.Transform.Wp
         private readonly Mock<ILogObserver> observer = new Mock<ILogObserver>();
         private readonly List<WebPartEntity> parts = new List<WebPartEntity>();
         private readonly List<BasePage.WebPartPlaceHolder> pending = new List<BasePage.WebPartPlaceHolder>();
-        private ClientContext context;
+        private PnPContext context;
         private WikiPage page;
 
         [TestInitialize]
         public void Initialize()
         {
-            context = new ClientContext("https://contoso.sharepoint.com/sites/example");
-            var item = context.Web.Lists.GetByTitle("Site Pages").GetItemById(1);
-            item.FieldValues[Constants.FileRefField] = PageUrl;
+            context = CoreTestContext.Create("https://contoso.sharepoint.com/sites/example");
+            var item = CoreTestContext.Item(context);
+            item.Values[Constants.FileRefField] = PageUrl;
             page = new WikiPage(item, BasePageTransformator.LoadDefaultWebPartMapping(), new[] { observer.Object });
         }
 
@@ -122,26 +118,17 @@ namespace PnP.Core.Modernization.Tests.Transform.Wp
             }
         }
 
-        [DataTestMethod]
-        [DataRow(false)]
-        [DataRow(true)]
-        public void MissingRegistrationPreservesRenderedHtml(bool onPremises)
+        [TestMethod]
+        public void MissingRegistrationPreservesRenderedHtml()
         {
             ConfigureLookup(null);
-            CacheManager.Instance.SetSharePointVersion(new Uri(context.Url), onPremises ? SPVersion.SP2013Legacy : SPVersion.SPO);
+            CacheManager.Instance.SetSharePointVersion(context.Uri, SPVersion.SPO);
             Analyze("<p>Before</p>" + Box(Links, "id='div_" + FirstId + "'") + "<p>After</p>");
             var placeholder = pending.Single();
             observer.Verify(log => log.Warning(It.IsAny<LogEntry>()), Times.Never);
 
             var file = context.Web.GetFileByServerRelativeUrl(PageUrl);
-            if (onPremises)
-            {
-                page.LoadWebPartsInWikiContentFromOnPremisesServer(parts, file, pending);
-            }
-            else
-            {
-                page.LoadWebPartsInWikiContentFromServer(parts, file, pending);
-            }
+            page.LoadWebPartsInWikiContentFromServer(parts, file, pending);
 
             Assert.AreEqual(3, parts.Count);
             var fallback = parts.Single(part => part.Order == placeholder.Order);
@@ -157,13 +144,13 @@ namespace PnP.Core.Modernization.Tests.Transform.Wp
         {
             ConfigureLookup(new Dictionary<string, object>
             {
-                ["_ObjectType_"] = "SP.WebParts.WebPartDefinition", ["Id"] = "/Guid(" + FirstId + ")/",
+                ["Id"] = FirstId, ["ZoneId"] = "",
                 ["WebPart"] = new Dictionary<string, object>
                 {
-                    ["_ObjectType_"] = "SP.WebParts.WebPart", ["Title"] = "Custom part",
-                    ["ExportMode"] = (int)WebPartExportMode.None, ["ZoneIndex"] = 0,
+                    ["Title"] = "Custom part",
+                    ["ExportMode"] = 0, ["ZoneIndex"] = 0,
                     ["Hidden"] = hidden, ["IsClosed"] = hidden,
-                    ["Properties"] = new Dictionary<string, object> { ["_ObjectType_"] = "SP.PropertyValues" }
+                    ["Properties"] = new Dictionary<string, object>()
                 }
             });
             Analyze(Box(Links, "id='div_" + FirstId + "'"));
@@ -197,27 +184,15 @@ namespace PnP.Core.Modernization.Tests.Transform.Wp
 
         private void ConfigureLookup(object definition)
         {
-            var provider = new MockEntryResponseProvider();
-            provider.ResponseEntries.Add(new MockResponseEntry
+            CoreTestContext.SetResponse(context, (request, _) =>
             {
-                Url = context.Url, Method = "GetLimitedWebPartManager",
-                ReturnValue = new Dictionary<string, object> { ["_ObjectType_"] = "SP.WebParts.LimitedWebPartManager" }
+                var path = request.RequestUri.AbsolutePath;
+                if (path.EndsWith("/WebParts", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = definition == null ? Array.Empty<object>() : new[] { definition } });
+                if (path.Contains("/GetFileBy", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { Name = "test.aspx", ServerRelativeUrl = PageUrl, Exists = true });
+                throw new InvalidOperationException($"Unexpected web-part request: {request.RequestUri}");
             });
-            provider.ResponseEntries.Add(new MockResponseEntry { Url = context.Url, Method = "GetByControlId", ReturnValue = definition });
-            var scopedProvider = new Mock<IMockResponseProvider>();
-            scopedProvider.Setup(value => value.GetResponse(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string url, string verb, string body) =>
-                {
-                    // The shared mock only understands top-level actions, not CSOM exception scopes.
-                    var request = XDocument.Parse(body);
-                    var ns = request.Root.Name.Namespace;
-                    foreach (var scope in request.Descendants(ns + "ExceptionHandlingScope").ToList())
-                    {
-                        scope.ReplaceWith(scope.Element(ns + "TryScope").Elements().ToArray());
-                    }
-                    return provider.GetResponse(url, verb, request.ToString());
-                });
-            context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(scopedProvider.Object);
         }
 
         private static string Box(string html, string attributes = "")

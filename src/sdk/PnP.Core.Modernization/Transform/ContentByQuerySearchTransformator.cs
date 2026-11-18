@@ -1,5 +1,4 @@
 ﻿using PnP.Core.Modernization.Caml;
-using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.KQL;
@@ -422,20 +421,20 @@ namespace PnP.Core.Modernization.Transform
     public class ContentByQuerySearchTransformator
     {
         private ContentRollupWebPartProperties properties;
-        private ClientContext clientContext;
+        private PnPContext clientContext;
         private const string displayMapJson = "{\"1\":{\"headingText\":{\"sources\":[\"SiteTitle\"]},\"headingUrl\":{\"sources\":[\"SitePath\"]},\"title\":{\"sources\":[\"UserName\",\"Title\"]},\"personImageUrl\":{\"sources\":[\"ProfileImageSrc\"]},\"name\":{\"sources\":[\"Name\"]},\"initials\":{\"sources\":[\"Initials\"]},\"itemUrl\":{\"sources\":[\"WebPath\"]},\"activity\":{\"sources\":[\"ModifiedDate\"]},\"previewUrl\":{\"sources\":[\"PreviewUrl\",\"PictureThumbnailURL\"]},\"iconUrl\":{\"sources\":[\"IconUrl\"]},\"accentColor\":{\"sources\":[\"AccentColor\"]},\"cardType\":{\"sources\":[\"CardType\"]},\"tipActionLabel\":{\"sources\":[\"TipActionLabel\"]},\"tipActionButtonIcon\":{\"sources\":[\"TipActionButtonIcon\"]},\"className\":{\"sources\":[\"ClassName\"]}},\"2\":{\"column1\":{\"heading\":\"\",\"sources\":[\"FileExtension\"],\"width\":34},\"column2\":{\"heading\":\"Title\",\"sources\":[\"Title\"],\"linkUrls\":[\"WebPath\"],\"width\":250},\"column3\":{\"heading\":\"Modified\",\"sources\":[\"ModifiedDate\"],\"width\":100},\"column4\":{\"heading\":\"Modified By\",\"sources\":[\"Name\"],\"width\":150}},\"3\":{\"id\":{\"sources\":[\"UniqueID\"]},\"edit\":{\"sources\":[\"edit\"]},\"DefaultEncodingURL\":{\"sources\":[\"DefaultEncodingURL\"]},\"FileExtension\":{\"sources\":[\"FileExtension\"]},\"FileType\":{\"sources\":[\"FileType\"]},\"Path\":{\"sources\":[\"Path\"]},\"PictureThumbnailURL\":{\"sources\":[\"PictureThumbnailURL\"]},\"SiteID\":{\"sources\":[\"SiteID\"]},\"SiteTitle\":{\"sources\":[\"SiteTitle\"]},\"Title\":{\"sources\":[\"Title\"]},\"UniqueID\":{\"sources\":[\"UniqueID\"]},\"WebId\":{\"sources\":[\"WebId\"]},\"WebPath\":{\"sources\":[\"WebPath\"]},\"PreviewUrl\":{\"sources\":[\"PreviewUrl\"]}},\"4\":{\"headingText\":{\"sources\":[\"SiteTitle\"]},\"headingUrl\":{\"sources\":[\"SitePath\"]},\"title\":{\"sources\":[\"UserName\",\"Title\"]},\"personImageUrl\":{\"sources\":[\"ProfileImageSrc\"]},\"name\":{\"sources\":[\"Name\"]},\"initials\":{\"sources\":[\"Initials\"]},\"itemUrl\":{\"sources\":[\"WebPath\"]},\"activity\":{\"sources\":[\"ModifiedDate\"]},\"previewUrl\":{\"sources\":[\"PreviewUrl\",\"PictureThumbnailURL\"]},\"iconUrl\":{\"sources\":[\"IconUrl\"]},\"accentColor\":{\"sources\":[\"AccentColor\"]},\"cardType\":{\"sources\":[\"CardType\"]},\"tipActionLabel\":{\"sources\":[\"TipActionLabel\"]},\"tipActionButtonIcon\":{\"sources\":[\"TipActionButtonIcon\"]},\"className\":{\"sources\":[\"ClassName\"]}}}";
-        private List<Field> queryFields;
+        private List<IField> queryFields;
 
         #region Construction
         /// <summary>
         /// Instantiates the class
         /// </summary>
         /// <param name="cc">Client context for the web holding the source page</param>
-        public ContentByQuerySearchTransformator(ClientContext cc)
+        public ContentByQuerySearchTransformator(PnPContext cc)
         {
             this.clientContext = cc;
             this.properties = new ContentRollupWebPartProperties();
-            this.queryFields = new List<Field>();
+            this.queryFields = new List<IField>();
 
             cc.Web.EnsureProperties(p => p.Id, p => p.Url);
             cc.Site.EnsureProperties(p => p.Id, p => p.RootWeb);
@@ -472,7 +471,7 @@ namespace PnP.Core.Modernization.Transform
             // construct query
             SearchQuery query = new SearchQuery
             {
-                ContentLocation = MapToContentLocation(this.clientContext.Web.EnsureProperty(p => p.Url)),
+                ContentLocation = MapToContentLocation(this.clientContext.Web.EnsureProperty(p => p.Url).AbsoluteUri),
             };
 
             query.ContentTypes.Add(ContentType.Page);
@@ -651,7 +650,7 @@ namespace PnP.Core.Modernization.Transform
             if (!string.IsNullOrEmpty(cbq.ListName) || listId != Guid.Empty)
             {
                 // Scope to list
-                List list = null;
+                IList list = null;
                 if (listId != Guid.Empty)
                 {
                     list = this.clientContext.Web.GetListById(listId);
@@ -661,10 +660,10 @@ namespace PnP.Core.Modernization.Transform
                     list = this.clientContext.Web.GetListByTitle(cbq.ListName);
                 }
 
-                var defaultDocLib = this.clientContext.Web.DefaultDocumentLibrary();
-                this.clientContext.Load(defaultDocLib, p => p.Id);
-                this.clientContext.Load(list, p => p.BaseType, p => p.Title, p => p.Id, p => p.Fields);
-                this.clientContext.ExecuteQueryRetry();
+                var defaultDocLib = this.clientContext.Web.Lists.AsQueryable().First(l => l.IsDefaultDocumentLibrary);
+                defaultDocLib.LoadBatch(p => p.Id);
+                list.LoadBatch(p => p.BaseType,p => p.Title,p => p.Id,p => p.Fields);
+                this.clientContext.Execute();
 
                 // Set basic list properties
                 this.properties.ListId = list.Id.ToString();
@@ -694,7 +693,7 @@ namespace PnP.Core.Modernization.Transform
                 // construct query
                 SearchQuery query = new SearchQuery();
 
-                if (list.BaseTemplate == (int)ListTemplateType.WebPageLibrary)
+                if (list.TemplateType == ListTemplateType.WebPageLibrary)
                 {
                     // for SitePages library we only support the Page content type, document types are not relevant here
                     query.ContentLocation = ContentLocation.CurrentSitePageLibrary;
@@ -888,7 +887,7 @@ namespace PnP.Core.Modernization.Transform
         #region Helper methods
 
         #region CAML Query Builder
-        private string CamlQueryBuilder(List list, ContentByQuery cbq)
+        private string CamlQueryBuilder(IList list, ContentByQuery cbq)
         {
             // Copy the CBQW filters
             List<SearchQueryFilter> filters = new List<SearchQueryFilter>();
@@ -962,7 +961,7 @@ namespace PnP.Core.Modernization.Transform
             // default to Text
             string value = fieldValue;
 
-            var field = this.queryFields.Where(p => p.InternalName == fieldName).FirstOrDefault();
+            IField field = this.queryFields.Where(p => p.InternalName == fieldName).FirstOrDefault();
             if (field != null)
             {
                 if (field.FieldTypeKind == FieldType.User)
@@ -988,35 +987,35 @@ namespace PnP.Core.Modernization.Transform
             return value;
         }
 
-        private PnP.Core.Modernization.Caml.ValueType CamlFilterValueTypeBuilder(string fieldName, string fieldValue)
+        private Caml.ValueType CamlFilterValueTypeBuilder(string fieldName, string fieldValue)
         {
             // default to Text
-            PnP.Core.Modernization.Caml.ValueType valueType = PnP.Core.Modernization.Caml.ValueType.Text;
+            Caml.ValueType valueType = Caml.ValueType.Text;
 
-            var field = this.queryFields.Where(p => p.InternalName == fieldName).FirstOrDefault();
+            IField field = this.queryFields.Where(p => p.InternalName == fieldName).FirstOrDefault();
             if (field != null)
             {
                 if (field.FieldTypeKind == FieldType.User)
                 {
                     if (fieldValue.Equals("[me]", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        valueType = PnP.Core.Modernization.Caml.ValueType.Integer;
+                        valueType = Caml.ValueType.Integer;
                     }
                     else
                     {
-                        valueType = PnP.Core.Modernization.Caml.ValueType.User;
+                        valueType = Caml.ValueType.User;
                     }
                 }
                 else if (field.FieldTypeKind == FieldType.DateTime && fieldValue.StartsWith("[today]", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    valueType = PnP.Core.Modernization.Caml.ValueType.DateTime;
+                    valueType = Caml.ValueType.DateTime;
                 }
             }
 
             // Special case
             if (fieldName == "FSObjType")
             {
-                valueType = PnP.Core.Modernization.Caml.ValueType.Integer;
+                valueType = Caml.ValueType.Integer;
             }
 
             return valueType;
@@ -1088,7 +1087,7 @@ namespace PnP.Core.Modernization.Transform
                 this.clientContext.Site.RootWeb.EnsureProperties(p => p.Id, p => p.Url, p => p.ServerRelativeUrl);
 
                 string subSiteUrlToClone = $"{this.clientContext.Site.RootWeb.Url}/{subSiteUrl}";
-                using (var subSiteContext = this.clientContext.Clone(subSiteUrlToClone))
+                using (PnPContext subSiteContext = this.clientContext.Clone(new Uri(subSiteUrlToClone)))
                 {
                     subSiteContext.Web.EnsureProperties(p => p.Id, p => p.Url, p => p.ServerRelativeUrl, p => p.Title);
 
@@ -1431,16 +1430,16 @@ namespace PnP.Core.Modernization.Transform
                 return null;
             }
 
-            IEnumerable<Field> foundFields = null;
+            IEnumerable<IField> foundFields = null;
             this.clientContext.Web.EnsureProperty(p => p.Fields);
 
             if (Guid.TryParse(sortField, out Guid fieldId))
             {
-                foundFields = this.clientContext.Web.Fields.Where(item => item.Id.Equals(fieldId));
+                foundFields = this.clientContext.Web.Fields.AsRequested().Where(item => item.Id.Equals(fieldId));
             }
             else
             {
-                foundFields = this.clientContext.Web.Fields.Where(item => item.InternalName == sortField);
+                foundFields = this.clientContext.Web.Fields.AsRequested().Where(item => item.InternalName == sortField);
             }
 
             if (foundFields.FirstOrDefault() != null)
@@ -1451,19 +1450,19 @@ namespace PnP.Core.Modernization.Transform
             return null;
         }
 
-        private SearchQueryFilter MapToFilter(List list, FilterFieldQueryOperator filterOperator, string filterField, string filterFieldValue, FilterChainingOperator? chainingOperatorUsedInCQWP, FilterType filterType = FilterType.Field)
+        private SearchQueryFilter MapToFilter(IList list, FilterFieldQueryOperator filterOperator, string filterField, string filterFieldValue, FilterChainingOperator? chainingOperatorUsedInCQWP, FilterType filterType = FilterType.Field)
         {
             if (string.IsNullOrEmpty(filterField))
             {
                 return null;
             }
 
-            IEnumerable<Field> foundFields = null;
+            IEnumerable<IField> foundFields = null;
 
             if (list != null)
             {
-                foundFields = list.Context.LoadQuery(list.Fields.Where(item => item.InternalName == filterField));
-                list.Context.ExecuteQueryRetry();
+                foundFields = list.Fields.AsQueryable().Where(item => item.InternalName == filterField).ToList();
+                list.PnPContext.Execute();
             }
             else
             {
@@ -1471,11 +1470,11 @@ namespace PnP.Core.Modernization.Transform
 
                 if (Guid.TryParse(filterField, out Guid fieldId))
                 {
-                    foundFields = this.clientContext.Web.Fields.Where(item => item.Id.Equals(fieldId));
+                    foundFields = this.clientContext.Web.Fields.AsRequested().Where(item => item.Id.Equals(fieldId));
                 }
                 else
                 {
-                    foundFields = this.clientContext.Web.Fields.Where(item => item.InternalName == filterField);
+                    foundFields = this.clientContext.Web.Fields.AsRequested().Where(item => item.InternalName == filterField);
                 }
             }
 
@@ -1495,9 +1494,9 @@ namespace PnP.Core.Modernization.Transform
                         //string upn = accountParts[accountParts.Length - 1];
                         if (int.TryParse(accountParts[0], out int userId))
                         {
-                            var user = this.clientContext.Web.GetUserById(userId);
-                            this.clientContext.Load(user, p => p.Title);
-                            this.clientContext.ExecuteQueryRetry();
+                            ISharePointUser user = this.clientContext.Web.GetUserById(userId);
+                            user.LoadBatch(p => p.Title);
+                            this.clientContext.Execute();
                             filterFieldValue = user.Title;
                         }
                     }

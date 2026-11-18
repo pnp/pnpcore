@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
@@ -45,10 +44,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Bullets
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("bullets_");
+                var pages = WebExtensions.GetPages(cc.Web,"bullets_");
                 //var pages = cc.Web.GetPages("temp2");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

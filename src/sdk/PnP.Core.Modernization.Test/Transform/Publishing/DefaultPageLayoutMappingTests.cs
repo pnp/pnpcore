@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using PnP.Core.Model.SharePoint;
+
 using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Publishing;
 using System;

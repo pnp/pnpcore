@@ -1,14 +1,23 @@
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Auth;
 using PnP.Core.Modernization.Publishing;
+using PnP.Core.Modernization.Telemetry;
+using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
+
+
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Modernization.Tests
 {
     [TestClass]
     [TestCategory("Live")]
+    [DoNotParallelize]
     public class MigrationLiveTests
     {
         public TestContext TestContext { get; set; }
@@ -26,21 +35,18 @@ namespace PnP.Core.Modernization.Tests
             var sourceUrl = Setting($"PNP_MODERNIZATION_{scenario}_SOURCE");
             var sourcePageUrl = Setting($"PNP_MODERNIZATION_{scenario}_PAGE");
             var targetUrl = publishing ? sourceUrl : Setting("PNP_MODERNIZATION_WIKI_TARGET");
-            using var authentication = new AuthenticationManager(
-                Setting("PNP_MODERNIZATION_CLIENT_ID"), StoreName.My, StoreLocation.CurrentUser,
-                Setting("PNP_MODERNIZATION_CERTIFICATE_THUMBPRINT"), Setting("PNP_MODERNIZATION_TENANT_ID"));
-            using var source = authentication.GetContext(sourceUrl);
-            using var target = authentication.GetContext(targetUrl);
+            using var source = TestCommon.CreateClientContext(sourceUrl);
+            using var target = TestCommon.CreateClientContext(targetUrl);
 
             TestContext.WriteLine($"Modernization assembly: {typeof(PageTransformator).Assembly.Location}");
-            TestContext.WriteLine($"Core assembly: {typeof(PnP.Core.Services.PnPContext).Assembly.Location}");
-            TestContext.WriteLine($"Framework assembly: {typeof(AuthenticationManager).Assembly.Location}");
+            TestContext.WriteLine($"Core assembly: {typeof(PnPContext).Assembly.Location}");
+            TestContext.WriteLine($"Core authentication assembly: {typeof(X509CertificateAuthenticationProvider).Assembly.Location}");
 
             var sourceFile = source.Web.GetFileByServerRelativeUrl(sourcePageUrl);
-            source.Load(sourceFile, file => file.TimeLastModified, file => file.ListItemAllFields);
-            target.Load(target.Web, web => web.ServerRelativeUrl);
-            source.ExecuteQueryRetry();
-            target.ExecuteQueryRetry();
+            sourceFile.LoadBatch(file => file.TimeLastModified, file => file.ListItemAllFields.QueryProperties(item => item.All));
+            target.Web.LoadBatch(web => web.ServerRelativeUrl);
+            source.Execute();
+            target.Execute();
             var modified = sourceFile.TimeLastModified;
             var item = sourceFile.ListItemAllFields;
             var sourceContentField = publishing ? "PublishingPageContent" : "WikiField";
@@ -80,16 +86,20 @@ namespace PnP.Core.Modernization.Tests
                 }
 
                 var result = target.Web.GetFileByServerRelativeUrl(targetPath);
-                target.Load(result, file => file.ListItemAllFields, file => file.Level);
-                target.ExecuteQueryRetry();
-                Assert.AreEqual(name, result.ListItemAllFields["Title"]);
+                result.LoadBatch(file => file.ListItemAllFields.QueryProperties(item => item.All), file => file.Level);
+                target.Execute();
+                var response = target.Web.ExecuteRequest(new ApiRequest(HttpMethod.Get, ApiRequestType.SPORest,
+                    $"_api/web/GetFileByServerRelativePath(decodedUrl='{Uri.EscapeDataString(targetPath.Replace("'", "''"))}')/ListItemAllFields?$select=Title,ClientSideApplicationId,CanvasContent1",
+                    null, new Dictionary<string, string> { ["Accept"] = "application/json;odata=nometadata" }));
+                using var resultFields = JsonDocument.Parse(response.Response);
+                Assert.AreEqual(name, resultFields.RootElement.GetProperty("Title").GetString());
                 Assert.AreEqual(Constants.FeatureId_Web_ModernPage.ToString(),
-                    result.ListItemAllFields["ClientSideApplicationId"].ToString());
-                Assert.IsFalse(string.IsNullOrWhiteSpace(result.ListItemAllFields["CanvasContent1"]?.ToString()));
-                Assert.AreEqual(FileLevel.Draft, result.Level);
+                    resultFields.RootElement.GetProperty("ClientSideApplicationId").GetString());
+                Assert.IsFalse(string.IsNullOrWhiteSpace(resultFields.RootElement.GetProperty("CanvasContent1").GetString()));
+                Assert.AreEqual(PublishedStatus.Draft, result.Level);
 
-                source.Load(sourceFile, file => file.TimeLastModified, file => file.ListItemAllFields);
-                source.ExecuteQueryRetry();
+                sourceFile.LoadBatch(file => file.TimeLastModified, file => file.ListItemAllFields.QueryProperties(item => item.All));
+                source.Execute();
                 Assert.AreEqual(modified, sourceFile.TimeLastModified, "The existing source must not be modified.");
                 Assert.AreEqual(sourceContent, sourceFile.ListItemAllFields[sourceContentField]?.ToString());
             }
@@ -97,10 +107,56 @@ namespace PnP.Core.Modernization.Tests
             {
                 if (Exists(target, targetPath))
                 {
-                    target.Web.GetFileByServerRelativeUrl(targetPath).DeleteObject();
-                    target.ExecuteQueryRetry();
+                    target.Web.GetFileByServerRelativeUrl(targetPath).Delete();
                 }
                 Assert.IsFalse(Exists(target, targetPath), "The run-owned destination must be cleaned up.");
+            }
+        }
+
+        [TestMethod]
+        public async Task CoreReportCreatesModernPageAndCleansUpOwnedFolder()
+        {
+            if (Environment.GetEnvironmentVariable("PNP_MODERNIZATION_LIVE") != "1")
+            {
+                Assert.Inconclusive("Set PNP_MODERNIZATION_LIVE=1 to allow scoped report creation and cleanup.");
+            }
+
+            var targetUrl = Setting("PNP_MODERNIZATION_WIKI_TARGET");
+            using var context = TestCommon.CreateClientContext(targetUrl);
+            var pagesPath = $"{new Uri(targetUrl).AbsolutePath.TrimEnd('/')}/SitePages";
+            var pages = await context.Web.Lists.GetByServerRelativeUrlAsync(pagesPath, p => p.RootFolder).ConfigureAwait(false);
+            var folderName = $"pnpcore-report-smoke-{Guid.NewGuid():N}";
+            var folderPath = $"{pagesPath}/{folderName}";
+            Assert.IsNull(await pages.RootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderName).ConfigureAwait(false),
+                "The run-owned folder must not already exist.");
+            TestContext.WriteLine($"Modernization assembly: {typeof(MarkdownToSharePointObserver).Assembly.Location}");
+            TestContext.WriteLine($"Core assembly: {typeof(PnPContext).Assembly.Location}");
+            TestContext.WriteLine($"Owned report folder: {folderPath}");
+            var report = new MarkdownToSharePointObserver(context.Web, folderName);
+            try
+            {
+                var name = await report.FlushAsync(clearLogData: false).ConfigureAwait(false);
+                var file = await context.Web.GetFileByServerRelativeUrlAsync($"{pagesPath}/{name}",
+                    f => f.ListItemAllFields).ConfigureAwait(false);
+                var response = await context.Web.ExecuteRequestAsync(new ApiRequest(HttpMethod.Get, ApiRequestType.SPORest,
+                    $"_api/web/lists(guid'{pages.Id}')/items({file.ListItemAllFields.Id})?$select=Title,ClientSideApplicationId,CanvasContent1",
+                    null, new Dictionary<string, string> { ["Accept"] = "application/json;odata=nometadata" })).ConfigureAwait(false);
+                using var fields = JsonDocument.Parse(response.Response);
+                var item = fields.RootElement;
+                Assert.AreEqual(LogStrings.Report_ModernisationSummaryReport, item.GetProperty("Title").GetString());
+                Assert.AreEqual(Constants.FeatureId_Web_ModernPage.ToString(),
+                    item.GetProperty("ClientSideApplicationId").GetString());
+                StringAssert.Contains(item.GetProperty("CanvasContent1").GetString(), "Markdown");
+            }
+            finally
+            {
+                var folder = await pages.RootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderName).ConfigureAwait(false);
+                if (folder != null)
+                {
+                    await folder.DeleteAsync().ConfigureAwait(false);
+                }
+                Assert.IsNull(await pages.RootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderName).ConfigureAwait(false),
+                    "The exact run-owned report folder must be cleaned up.");
             }
         }
 
@@ -114,19 +170,9 @@ namespace PnP.Core.Modernization.Tests
             return value;
         }
 
-        private static bool Exists(ClientContext context, string path)
+        private static bool Exists(PnPContext context, string path)
         {
-            var file = context.Web.GetFileByServerRelativeUrl(path);
-            try
-            {
-                context.Load(file, value => value.Exists);
-                context.ExecuteQueryRetry();
-                return file.Exists;
-            }
-            catch (ServerException exception) when (exception.ServerErrorTypeName == "System.IO.FileNotFoundException")
-            {
-                return false;
-            }
+            return context.Web.GetFileByServerRelativeUrlOrDefault(path, file => file.UniqueId) != null;
         }
     }
 }

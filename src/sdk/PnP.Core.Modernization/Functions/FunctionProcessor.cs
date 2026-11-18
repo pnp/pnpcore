@@ -1,14 +1,14 @@
-﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Functions
 {
@@ -17,7 +17,7 @@ namespace PnP.Core.Modernization.Functions
     /// </summary>
     public class FunctionProcessor : BaseFunctionProcessor
     {
-        private PnPCore.IPage page;
+        private IPage page;
         private PageTransformation pageTransformation;
         private List<AddOnType> addOnTypes;
         private object builtInFunctions;
@@ -32,7 +32,7 @@ namespace PnP.Core.Modernization.Functions
         /// <param name="pageTransformation">Webpart mapping information</param>
         /// <param name="baseTransformationInformation">Page transformation information</param>
         /// <param name="logObservers"></param>
-        public FunctionProcessor(ClientContext sourceClientContext, ClientContext targetClientContext, PnPCore.IPage page, PageTransformation pageTransformation, BaseTransformationInformation baseTransformationInformation, IList<ILogObserver> logObservers = null)
+        public FunctionProcessor(PnPContext sourceClientContext, PnPContext targetClientContext, IPage page, PageTransformation pageTransformation, BaseTransformationInformation baseTransformationInformation, IList<ILogObserver> logObservers = null)
         {
             this.page = page;
             this.pageTransformation = pageTransformation;
@@ -56,13 +56,13 @@ namespace PnP.Core.Modernization.Functions
                 try
                 {
                     string path = "";
-                    if (addOn.Assembly.Contains("\\") && System.IO.File.Exists(addOn.Assembly))
+                    if (addOn.Assembly.Contains("\\") && File.Exists(addOn.Assembly))
                     {
                         path = addOn.Assembly; 
                     }
                     else
                     {
-                        path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addOn.Assembly);
+                        path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addOn.Assembly);
                     }
                     
                     var assembly = Assembly.LoadFile(path);

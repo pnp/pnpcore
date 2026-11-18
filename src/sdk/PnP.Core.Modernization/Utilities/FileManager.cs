@@ -3,6 +3,7 @@ using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PnP.Core.Modernization.Utilities
@@ -42,9 +43,9 @@ namespace PnP.Core.Modernization.Utilities
 
             LogInfo(string.Format(LogStrings.LoadingUrlMappingFile, mappingFile), LogStrings.Heading_UrlRewriter);
 
-            if (System.IO.File.Exists(mappingFile))
+            if (File.Exists(mappingFile))
             {
-                var lines = System.IO.File.ReadLines(mappingFile);
+                var lines = File.ReadLines(mappingFile);
 
                 if (lines.Any())
                 {
@@ -89,9 +90,9 @@ namespace PnP.Core.Modernization.Utilities
 
             LogInfo(string.Format(LogStrings.Term_LoadingMappingFile, mappingFile), LogStrings.Heading_TermMapping);
 
-            if (System.IO.File.Exists(mappingFile))
+            if (File.Exists(mappingFile))
             {
-                var lines = System.IO.File.ReadLines(mappingFile);
+                var lines = File.ReadLines(mappingFile);
 
                 if (lines.Any())
                 {
@@ -135,9 +136,9 @@ namespace PnP.Core.Modernization.Utilities
 
             LogInfo(string.Format(LogStrings.LoadingUserMappingFile, mappingFile), LogStrings.Heading_UserMapping);
 
-            if (System.IO.File.Exists(mappingFile))
+            if (File.Exists(mappingFile))
             {
-                var lines = System.IO.File.ReadLines(mappingFile);
+                var lines = File.ReadLines(mappingFile);
 
                 if (lines.Any())
                 {

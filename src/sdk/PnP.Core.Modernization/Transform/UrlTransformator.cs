@@ -1,8 +1,7 @@
-﻿using Microsoft.SharePoint.Client;
-using PnP.Framework.Utilities;
+using PnP.Core.Provisioning.Utilities;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
@@ -15,8 +14,8 @@ namespace PnP.Core.Modernization.Transform
     /// </summary>
     public class UrlTransformator : BaseTransform
     {
-        private ClientContext sourceContext;
-        private ClientContext targetContext;
+        private PnPContext sourceContext;
+        private PnPContext targetContext;
         private string sourceSiteUrl;
         private string sourceWebUrl;
         private string targetWebUrl;
@@ -32,7 +31,7 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="sourceContext">ClientContext of the source page</param>
         /// <param name="targetContext">ClientContext of the target page</param>
         /// <param name="logObservers">Connected loggers</param>
-        public UrlTransformator(BaseTransformationInformation baseTransformationInformation, ClientContext sourceContext, ClientContext targetContext, IList<ILogObserver> logObservers = null)
+        public UrlTransformator(BaseTransformationInformation baseTransformationInformation, PnPContext sourceContext, PnPContext targetContext, IList<ILogObserver> logObservers = null)
         {
             // Hookup logging
             if (logObservers != null)
@@ -60,7 +59,7 @@ namespace PnP.Core.Modernization.Transform
 
             sourceContext.Site.EnsureProperties(p => p.ServerRelativeUrl, p => p.Url);
 
-            this.sourceSiteUrl = sourceContext.Site.Url;
+            this.sourceSiteUrl = sourceContext.Site.Url.AbsoluteUri;
             this.sourceWebUrl = sourceContext.Web.GetUrl();
 
             if (CacheManager.Instance.IsPublishingWeb(this.sourceWebUrl))

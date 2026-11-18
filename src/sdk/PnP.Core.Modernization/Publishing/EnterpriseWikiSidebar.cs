@@ -1,7 +1,9 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
-using PnPCore = PnP.Core.Model.SharePoint;
+using System.Text.Json;
+
 
 namespace PnP.Core.Modernization.Publishing
 {
@@ -10,9 +12,9 @@ namespace PnP.Core.Modernization.Publishing
         internal const string ComponentId = "2b190945-b52f-4130-9deb-6d949f08660c";
         internal const string ControlKind = "publishing.enterpriseWikiSidebar";
 
-        internal static void Ensure(PnPCore.IPage page)
+        internal static void Ensure(IPage page)
         {
-            var existing = page.Controls.OfType<PnPCore.IPageWebPart>().Where(IsSidebar).ToList();
+            var existing = page.Controls.OfType<IPageWebPart>().Where(IsSidebar).ToList();
             if (existing.Count > 1)
             {
                 throw new InvalidOperationException("The target page already contains multiple Enterprise Wiki sidebars.");
@@ -36,7 +38,7 @@ namespace PnP.Core.Modernization.Publishing
                 ["contractVersion"] = 1,
                 ["settings"] = new JObject { ["showRating"] = true, ["showCategories"] = true }
             };
-            var component = new PnPCore.PageComponent
+            var component = new PageComponent
             {
                 Id = ComponentId,
                 Name = "Modernized control host",
@@ -47,7 +49,7 @@ namespace PnP.Core.Modernization.Publishing
                         ["title"] = new JObject { ["default"] = "Enterprise Wiki sidebar" },
                         ["properties"] = properties
                     })
-                }.ToString(Newtonsoft.Json.Formatting.None)
+                }.ToString(Formatting.None)
             };
             var sidebar = page.NewWebPart(component);
             sidebar.InstanceId = Guid.NewGuid();
@@ -55,25 +57,25 @@ namespace PnP.Core.Modernization.Publishing
             page.AddControl(sidebar, column, order);
         }
 
-        internal static bool IsSidebar(PnPCore.IPageWebPart part)
+        internal static bool IsSidebar(IPageWebPart part)
         {
             return string.Equals(part.WebPartId, ComponentId, StringComparison.OrdinalIgnoreCase) &&
-                part.Properties.ValueKind == System.Text.Json.JsonValueKind.Object &&
+                part.Properties.ValueKind == JsonValueKind.Object &&
                 part.Properties.TryGetProperty("controlKind", out var kind) && kind.GetString() == ControlKind;
         }
 
-        private static PnPCore.ICanvasColumn EnsureVerticalColumn(PnPCore.IPage page)
+        private static ICanvasColumn EnsureVerticalColumn(IPage page)
         {
             var column = page.Sections.SelectMany(s => s.Columns).FirstOrDefault(c => c.IsVerticalSectionColumn);
             if (column != null)
             {
                 return column;
             }
-            var original = page.Sections.OrderBy(s => s.Order).FirstOrDefault(s => s.Type != PnPCore.CanvasSectionTemplate.OneColumnFullWidth);
+            var original = page.Sections.OrderBy(s => s.Order).FirstOrDefault(s => s.Type != CanvasSectionTemplate.OneColumnFullWidth);
             if (original == null)
             {
                 var order = page.Sections.Count == 0 ? 1 : page.Sections.Max(s => s.Order) + 1;
-                page.AddSection(PnPCore.CanvasSectionTemplate.OneColumnVerticalSection, order);
+                page.AddSection(CanvasSectionTemplate.OneColumnVerticalSection, order);
                 return page.Sections.Last().VerticalSectionColumn;
             }
 
@@ -103,15 +105,15 @@ namespace PnP.Core.Modernization.Publishing
             return replacement.VerticalSectionColumn;
         }
 
-        internal static PnPCore.CanvasSectionTemplate GetVerticalTemplate(PnPCore.CanvasSectionTemplate template)
+        internal static CanvasSectionTemplate GetVerticalTemplate(CanvasSectionTemplate template)
         {
             switch (template)
             {
-                case PnPCore.CanvasSectionTemplate.OneColumn: return PnPCore.CanvasSectionTemplate.OneColumnVerticalSection;
-                case PnPCore.CanvasSectionTemplate.TwoColumn: return PnPCore.CanvasSectionTemplate.TwoColumnVerticalSection;
-                case PnPCore.CanvasSectionTemplate.TwoColumnLeft: return PnPCore.CanvasSectionTemplate.TwoColumnLeftVerticalSection;
-                case PnPCore.CanvasSectionTemplate.TwoColumnRight: return PnPCore.CanvasSectionTemplate.TwoColumnRightVerticalSection;
-                case PnPCore.CanvasSectionTemplate.ThreeColumn: return PnPCore.CanvasSectionTemplate.ThreeColumnVerticalSection;
+                case CanvasSectionTemplate.OneColumn: return CanvasSectionTemplate.OneColumnVerticalSection;
+                case CanvasSectionTemplate.TwoColumn: return CanvasSectionTemplate.TwoColumnVerticalSection;
+                case CanvasSectionTemplate.TwoColumnLeft: return CanvasSectionTemplate.TwoColumnLeftVerticalSection;
+                case CanvasSectionTemplate.TwoColumnRight: return CanvasSectionTemplate.TwoColumnRightVerticalSection;
+                case CanvasSectionTemplate.ThreeColumn: return CanvasSectionTemplate.ThreeColumnVerticalSection;
                 default: throw new InvalidOperationException($"The layout '{template}' cannot be converted to an Enterprise Wiki sidebar layout.");
             }
         }

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using Microsoft.SharePoint.Client;
 
 namespace PnP.Core.Modernization
 {
@@ -23,7 +22,7 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>Type of page</returns>
-        public static string PageType(this ListItem item)
+        public static string PageType(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.HtmlFileTypeField) && !String.IsNullOrEmpty(item[Constants.HtmlFileTypeField].ToString()))
             {
@@ -48,7 +47,8 @@ namespace PnP.Core.Modernization
                 return "ClientSidePage";
             }
 
-            if (FieldExists(item, Constants.PublishingRollupImageField) && FieldExists(item, Constants.AudienceField))
+            if (FieldExistsAndUsed(item, Constants.PublishingPageLayoutField) ||
+                FieldExists(item, Constants.PublishingRollupImageField) && FieldExists(item, Constants.AudienceField))
             {
                 return "PublishingPage";
             }
@@ -75,7 +75,7 @@ namespace PnP.Core.Modernization
         /// <param name="item">Page list item</param>
         /// <param name="pageTransformation">PageTransformation model loaded from XML</param>
         /// <returns>Page layout + collection of web parts on the page</returns>
-        public static Tuple<PageLayout, List<WebPartEntity>> WebParts(this ListItem item, PageTransformation pageTransformation)
+        public static Tuple<PageLayout, List<WebPartEntity>> WebParts(this IListItem item, PageTransformation pageTransformation)
         {
             string pageType = item.PageType();
 
@@ -102,7 +102,7 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>DateTime of the last modification</returns>
-        public static DateTime LastModifiedDateTime(this ListItem item)
+        public static DateTime LastModifiedDateTime(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.ModifiedField) && !String.IsNullOrEmpty(item[Constants.ModifiedField].ToString()))
             {
@@ -121,14 +121,14 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>Last modified by user/account</returns>
-        public static string LastModifiedBy(this ListItem item)
+        public static string LastModifiedBy(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.ModifiedByField) && !String.IsNullOrEmpty(item[Constants.ModifiedByField].ToString()))
             {
-                string lastModifiedBy = ((FieldUserValue)item[Constants.ModifiedByField]).Email;
+                string lastModifiedBy = ((IFieldUserValue)item[Constants.ModifiedByField]).Email;
                 if (string.IsNullOrEmpty(lastModifiedBy))
                 {
-                    lastModifiedBy = ((FieldUserValue)item[Constants.ModifiedByField]).LookupValue;
+                    lastModifiedBy = ((IFieldUserValue)item[Constants.ModifiedByField]).LookupValue;
                 }
                 return lastModifiedBy;
             }
@@ -143,7 +143,7 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>DateTime of the last modification</returns>
-        public static DateTime LastPublishedDateTime(this ListItem item)
+        public static DateTime LastPublishedDateTime(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.PublishedDateField) && !String.IsNullOrEmpty(item[Constants.PublishedDateField].ToString()))
             {
@@ -164,11 +164,11 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>Page layout file defined for this page</returns>
-        public static string PageLayoutFile(this ListItem item)
+        public static string PageLayoutFile(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.PublishingPageLayoutField) && !String.IsNullOrEmpty(item[Constants.PublishingPageLayoutField].ToString()))
             {
-                string pageLayoutUrl = ((FieldUrlValue)item[Constants.PublishingPageLayoutField]).Url;
+                string pageLayoutUrl = ((IFieldUrlValue)item[Constants.PublishingPageLayoutField]).Url;
                 if (string.IsNullOrEmpty(pageLayoutUrl))
                 {
                     pageLayoutUrl = "";
@@ -184,11 +184,11 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>Page layout defined for this page</returns>
-        public static string PageLayout(this ListItem item)
+        public static string PageLayout(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.PublishingPageLayoutField) && !String.IsNullOrEmpty(item[Constants.PublishingPageLayoutField].ToString()))
             {
-                string pageLayoutName = ((FieldUrlValue)item[Constants.PublishingPageLayoutField]).Description;
+                string pageLayoutName = ((IFieldUrlValue)item[Constants.PublishingPageLayoutField]).Description;
                 if (string.IsNullOrEmpty(pageLayoutName))
                 {
                     return "";
@@ -207,7 +207,7 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="item">Page list item</param>
         /// <returns>Page layout defined for this page</returns>
-        public static AudienceEntity Audiences(this ListItem item)
+        public static AudienceEntity Audiences(this IListItem item)
         {
             if (FieldExistsAndUsed(item, Constants.AudienceField) && !String.IsNullOrEmpty(item[Constants.AudienceField].ToString()))
             {
@@ -235,7 +235,7 @@ namespace PnP.Core.Modernization
         /// <param name="item">List item to get the field from</param>
         /// <param name="fieldName">Name of the field to get the value from</param>
         /// <returns>Value of the field in the requested type or null if unable to cast</returns>
-        public static T GetFieldValueAs<T>(this ListItem item, string fieldName)
+        public static T GetFieldValueAs<T>(this IListItem item, string fieldName)
         {
             if (item.FieldExistsAndUsed(fieldName))
             {
@@ -265,10 +265,10 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="sourcePage">ListItem for the classic wiki/webpart page</param>
         /// <param name="pageTransformationInformation">Information to drive the page transformation process</param>
-        public static void Transform(this ListItem sourcePage, PageTransformationInformation pageTransformationInformation)
+        public static void Transform(this IListItem sourcePage, PageTransformationInformation pageTransformationInformation)
         {
             pageTransformationInformation.SourcePage = sourcePage;
-            new PageTransformator(sourcePage.Context as ClientContext).Transform(pageTransformationInformation);
+            new PageTransformator(sourcePage.PnPContext as PnPContext).Transform(pageTransformationInformation);
         }
 
         /// <summary>
@@ -277,10 +277,10 @@ namespace PnP.Core.Modernization
         /// <param name="sourcePage">ListItem for the classic wiki/webpart page</param>
         /// <param name="pageTransformationInformation">Information to drive the page transformation process</param>
         /// <param name="pageTransformationFile">Page transformation model to be used</param>
-        public static void Transform(this ListItem sourcePage, PageTransformationInformation pageTransformationInformation, string pageTransformationFile)
+        public static void Transform(this IListItem sourcePage, PageTransformationInformation pageTransformationInformation, string pageTransformationFile)
         {
             pageTransformationInformation.SourcePage = sourcePage;
-            new PageTransformator(sourcePage.Context as ClientContext, pageTransformationFile).Transform(pageTransformationInformation);
+            new PageTransformator(sourcePage.PnPContext as PnPContext, pageTransformationFile).Transform(pageTransformationInformation);
         }
         #endregion
 
@@ -291,9 +291,9 @@ namespace PnP.Core.Modernization
         /// <param name="item">List item to check</param>
         /// <param name="fieldName">Name of the field to check</param>
         /// <returns></returns>
-        public static bool FieldExistsAndUsed(this ListItem item, string fieldName)
+        public static bool FieldExistsAndUsed(this IListItem item, string fieldName)
         {
-            return (item.FieldValues.ContainsKey(fieldName) && item[fieldName] != null);
+            return (item.Values.ContainsKey(fieldName) && item[fieldName] != null);
         }
 
         /// <summary>
@@ -302,9 +302,9 @@ namespace PnP.Core.Modernization
         /// <param name="item">List item to check</param>
         /// <param name="fieldName">Name of the field to check</param>
         /// <returns></returns>
-        public static bool FieldExists(this ListItem item, string fieldName)
+        public static bool FieldExists(this IListItem item, string fieldName)
         {
-            return item.FieldValues.ContainsKey(fieldName);
+            return item.Values.ContainsKey(fieldName);
         }
         #endregion
 

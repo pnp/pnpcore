@@ -1,15 +1,15 @@
-﻿using Microsoft.SharePoint.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Transform
 {
@@ -18,12 +18,12 @@ namespace PnP.Core.Modernization.Transform
     /// </summary>
     public class ContentTransformator: BaseTransform, IContentTransformator
     {
-        private PnPCore.IPage page;
+        private IPage page;
         private PageTransformation pageTransformation;
         private FunctionProcessor functionProcessor;
         private List<CombinedMapping> combinedMappinglist;
-        private ClientContext sourceClientContext;
-        private ClientContext targetClientContext;
+        private PnPContext sourceClientContext;
+        private PnPContext targetClientContext;
         private Dictionary<string, string> globalTokens;
         private bool isCrossSiteTransfer;
         private BaseTransformationInformation transformationInformation;
@@ -46,7 +46,7 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="pageTransformation">Transformation information</param>
         /// <param name="transformationInformation"></param>
         /// <param name="logObservers"></param>
-        public ContentTransformator(ClientContext sourceClientContext, ClientContext targetClientContext, PnPCore.IPage page, PageTransformation pageTransformation, BaseTransformationInformation transformationInformation, IList<ILogObserver> logObservers = null) : base()
+        public ContentTransformator(PnPContext sourceClientContext, PnPContext targetClientContext, IPage page, PageTransformation pageTransformation, BaseTransformationInformation transformationInformation, IList<ILogObserver> logObservers = null) : base()
         {
             
             //Register any existing observers
@@ -101,7 +101,7 @@ namespace PnP.Core.Modernization.Transform
             }
 
             // Load existing available controls
-            var componentsToAdd = CacheManager.Instance.GetClientSideComponents(targetClientContext, page);
+            var componentsToAdd = CacheManager.Instance.GetClientSideComponents(page.PnPContext.Web, page);
 
             if (this.transformationInformation.SourcePage != null && !this.transformationInformation.SourcePage.PageType().Equals("WebPartPage", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -272,10 +272,6 @@ namespace PnP.Core.Modernization.Transform
                     if (map.ClientSideText != null)
                     {
                         // Insert a Text control
-                        //PnP.Framework.Pages.ClientSideText text = new PnP.Framework.Pages.ClientSideText()
-                        //{
-                        //    Text = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart)
-                        //};
 
                         var text = page.NewTextPart();
                         text.Text = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart);
@@ -294,7 +290,7 @@ namespace PnP.Core.Modernization.Transform
                     {
                         // Insert a web part
                         //ClientSideComponent baseControl = null;
-                        PnPCore.IPageComponent baseControl = null;
+                        IPageComponent baseControl = null;
 
                         if (map.ClientSideWebPart.Type == ClientSideWebPartType.Custom)
                         {
@@ -316,223 +312,223 @@ namespace PnP.Core.Modernization.Transform
                                 case ClientSideWebPartType.List:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.List);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.List);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.List);
                                         break;
                                     }
                                 case ClientSideWebPartType.Image:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Image);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Image);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Image);
                                         break;
                                     }
                                 case ClientSideWebPartType.ContentRollup:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ContentRollup);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ContentRollup);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.ContentRollup);
                                         break;
                                     }
                                 case ClientSideWebPartType.BingMap:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.BingMap);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.BingMap);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.BingMap);
                                         break;
                                     }
                                 case ClientSideWebPartType.ContentEmbed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ContentEmbed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ContentEmbed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.ContentEmbed);
                                         break;
                                     }
                                 case ClientSideWebPartType.DocumentEmbed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.DocumentEmbed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.DocumentEmbed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.DocumentEmbed);
                                         break;
                                     }
                                 case ClientSideWebPartType.ImageGallery:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ImageGallery);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ImageGallery);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.ImageGallery);
                                         break;
                                     }
                                 case ClientSideWebPartType.LinkPreview:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.LinkPreview);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.LinkPreview);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.LinkPreview);
                                         break;
                                     }
                                 case ClientSideWebPartType.NewsFeed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.NewsFeed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.NewsFeed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.NewsFeed);
                                         break;
                                     }
                                 case ClientSideWebPartType.NewsReel:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.NewsReel);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.NewsReel);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.NewsReel);
                                         break;
                                     }
                                 case ClientSideWebPartType.News:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.News);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.News);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.News);
                                         break;
                                     }
                                 case ClientSideWebPartType.PowerBIReportEmbed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PowerBIReportEmbed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PowerBIReportEmbed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.PowerBIReportEmbed);
                                         break;
                                     }
                                 case ClientSideWebPartType.QuickChart:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.QuickChart);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.QuickChart);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.QuickChart);
                                         break;
                                     }
                                 case ClientSideWebPartType.SiteActivity:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.SiteActivity);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.SiteActivity);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.SiteActivity);
                                         break;
                                     }
                                 case ClientSideWebPartType.VideoEmbed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.VideoEmbed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.VideoEmbed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.VideoEmbed);
                                         break;
                                     }
                                 case ClientSideWebPartType.YammerEmbed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YammerEmbed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YammerEmbed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.YammerEmbed);
                                         break;
                                     }
                                 case ClientSideWebPartType.Events:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Events);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Events);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Events);
                                         break;
                                     }
                                 case ClientSideWebPartType.GroupCalendar:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.GroupCalendar);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.GroupCalendar);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.GroupCalendar);
                                         break;
                                     }
                                 case ClientSideWebPartType.Hero:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Hero);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Hero);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Hero);
                                         break;
                                     }
                                 case ClientSideWebPartType.PageTitle:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PageTitle);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PageTitle);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.PageTitle);
                                         break;
                                     }
                                 case ClientSideWebPartType.People:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.People);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.People);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.People);
                                         break;
                                     }
                                 case ClientSideWebPartType.QuickLinks:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.QuickLinks);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.QuickLinks);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.QuickLinks);
                                         break;
                                     }
                                 case ClientSideWebPartType.Divider:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Divider);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Divider);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Divider);
                                         break;
                                     }
                                 case ClientSideWebPartType.MicrosoftForms:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MicrosoftForms);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MicrosoftForms);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.MicrosoftForms);
                                         break;
                                     }
                                 case ClientSideWebPartType.Spacer:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Spacer);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Spacer);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Spacer);
                                         break;
                                     }
                                 case ClientSideWebPartType.ClientWebPart:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ClientWebPart);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ClientWebPart);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.ClientWebPart);
                                         break;
                                     }
                                 case ClientSideWebPartType.PowerApps:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PowerApps);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PowerApps);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.PowerApps);
                                         break;
                                     }
                                 case ClientSideWebPartType.CodeSnippet:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.CodeSnippet);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.CodeSnippet);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.CodeSnippet);
                                         break;
                                     }
                                 case ClientSideWebPartType.PageFields:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PageFields);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PageFields);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.PageFields);
                                         break;
                                     }
                                 case ClientSideWebPartType.Weather:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Weather);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Weather);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Weather);
                                         break;
                                     }
                                 case ClientSideWebPartType.YouTube:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YouTube);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YouTube);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.YouTube);
                                         break;
                                     }
                                 case ClientSideWebPartType.MyDocuments:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MyDocuments);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MyDocuments);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.MyDocuments);
                                         break;
                                     }
                                 case ClientSideWebPartType.YammerFullFeed:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YammerFullFeed);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YammerFullFeed);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.YammerFullFeed);
                                         break;
                                     }
                                 case ClientSideWebPartType.CountDown:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.CountDown);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.CountDown);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.CountDown);
                                         break;
                                     }
                                 case ClientSideWebPartType.ListProperties:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ListProperties);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ListProperties);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.ListProperties);
                                         break;
                                     }
                                 case ClientSideWebPartType.MarkDown:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MarkDown);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MarkDown);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.MarkDown);
                                         break;
                                     }
                                 case ClientSideWebPartType.Planner:
                                     {
                                         //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Planner);
-                                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Planner);
+                                        webPartName = page.DefaultWebPartToWebPartId(DefaultWebPart.Planner);
                                         break;
                                     }
                                 default:
@@ -564,7 +560,7 @@ namespace PnP.Core.Modernization.Transform
                                             jsonProperties = PopulateAddInProperties(jsonProperties, webPart);
 
                                             // Override the JSON data we read from the model as this is fully dynamic due to the nature of the add-in client part
-                                            map.ClientSideWebPart.JsonControlData = jsonProperties.ToString(Newtonsoft.Json.Formatting.None);
+                                            map.ClientSideWebPart.JsonControlData = jsonProperties.ToString(Formatting.None);
 
                                             LogInfo($"{LogStrings.ContentUsingAddinWebPart} '{baseControl.Name}' ", LogStrings.Heading_AddingWebPartsToPage);
                                             break;
@@ -583,11 +579,6 @@ namespace PnP.Core.Modernization.Transform
                         if (baseControl != null)
                         {
                             var jsonDecoded = WebUtility.HtmlDecode(TokenParser.ReplaceTokens(map.ClientSideWebPart.JsonControlData, webPart));
-                            //PnP.Framework.Pages.ClientSideWebPart myWebPart = new PnP.Framework.Pages.ClientSideWebPart(baseControl)
-                            //{
-                            //    Order = map.Order,
-                            //    PropertiesJson = jsonDecoded
-                            //};
 
                             var myWebPart = page.NewWebPart(baseControl);
                             myWebPart.Order = map.Order;
@@ -701,7 +692,7 @@ namespace PnP.Core.Modernization.Transform
             return jsonProperties;
         }
 
-        private Dictionary<string, string> CreateGlobalTokenList(ClientContext cc, Dictionary<string, string> mappingProperties)
+        private Dictionary<string, string> CreateGlobalTokenList(PnPContext cc, Dictionary<string, string> mappingProperties)
         {
             Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
 

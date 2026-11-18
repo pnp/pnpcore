@@ -1,5 +1,4 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -8,13 +7,11 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Test.Transform.Functions
 {
@@ -194,7 +191,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             }
         }
 
-        private static string ProcessMapping(ClientContext source, ClientContext target, Mock<ILogObserver> observer,
+        private static string ProcessMapping(PnPContext source, PnPContext target, Mock<ILogObserver> observer,
             string html, bool useQuickLinks, bool skipUrlRewrite)
         {
             var transformation = BasePageTransformator.LoadDefaultWebPartMapping();
@@ -207,7 +204,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             var additionalProperties = new Dictionary<string, string>
             {
                 ["SummaryLinkStore"] = html, ["ChromeType"] = "1", ["Title"] = "Summary links",
-                ["Host"] = Host, ["Web"] = new Uri(target.Url).AbsolutePath,
+                ["Host"] = Host, ["Web"] = new Uri(target.Uri.AbsoluteUri).AbsolutePath,
                 ["SummaryLinksToQuickLinks"] = useQuickLinks.ToString()
             };
             foreach (var property in additionalProperties)
@@ -221,7 +218,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                     }).ToArray();
                 }
             }
-            var page = new Mock<PnPCore.IPage>();
+            var page = new Mock<IPage>();
             page.SetupGet(value => value.PageTitle).Returns("summary-links-test");
             var information = new PageTransformationInformation(null) { SkipTelemetry = true, SkipUrlRewrite = skipUrlRewrite };
             var processor = new FunctionProcessor(source, target, page.Object, transformation, information, new[] { observer.Object });
@@ -236,37 +233,22 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 : TokenParser.ReplaceTokens(selectedMapping.ClientSideText.Single().Text, webPart);
         }
 
-        private static ClientContext CreateContext(string siteUrl)
+        private static PnPContext CreateContext(string siteUrl)
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(siteUrl), SPVersion.SPO);
-            var provider = new MockEntryResponseProvider();
             var web = new Dictionary<string, object>
             {
-                ["_ObjectType_"] = "SP.Web", ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
-                ["Id"] = "/Guid(9d03e0aa-cb94-4463-b885-15a55d03ed52)/"
+                ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
+                ["Id"] = "9d03e0aa-cb94-4463-b885-15a55d03ed52"
             };
-            provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = siteUrl, PropertyName = "Web", ReturnValue = web });
-            provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = siteUrl, PropertyName = "RootWeb", ReturnValue = web });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
+            return CoreTestContext.WithFile(siteUrl, new
             {
-                Url = siteUrl, PropertyName = "Site",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.Site", ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
-                    ["Id"] = "/Guid(c6815669-f27c-4ff6-b937-0825b2cdfa93)/", ["RootWeb"] = web
-                }
-            });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
+                ListId = "f266cd97-f155-4360-b802-47bb9f0d9b55",
+                UniqueId = "a9b5b53e-2014-47d9-b26c-fc8d52047d1e"
+            }, web, new Dictionary<string, object>
             {
-                Url = siteUrl, Method = "GetFileByServerRelativeUrl",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.File",
-                    ["ListId"] = "/Guid(f266cd97-f155-4360-b802-47bb9f0d9b55)/",
-                    ["UniqueId"] = "/Guid(a9b5b53e-2014-47d9-b26c-fc8d52047d1e)/"
-                }
+                ["Id"] = "c6815669-f27c-4ff6-b937-0825b2cdfa93", ["RootWeb"] = web
             });
-            return new ClientContext(siteUrl) { WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider) };
         }
 
         private static void VerifyWarning(Mock<ILogObserver> observer, string title, string action)

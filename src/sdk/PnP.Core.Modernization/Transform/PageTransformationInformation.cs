@@ -1,6 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
 using System.Collections.Generic;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Transform
 {
@@ -14,7 +13,7 @@ namespace PnP.Core.Modernization.Transform
         /// Instantiates the page transformation class
         /// </summary>
         /// <param name="sourcePage">Page we want to transform</param>
-        public PageTransformationInformation(ListItem sourcePage) : this(sourcePage, null, false)
+        public PageTransformationInformation(IListItem sourcePage) : this(sourcePage, null, false)
         {
         }
 
@@ -23,7 +22,7 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="sourcePage">Page we want to transform</param>
         /// <param name="targetPageName">Name of the target page</param>
-        public PageTransformationInformation(ListItem sourcePage, string targetPageName) : this(sourcePage, targetPageName, false)
+        public PageTransformationInformation(IListItem sourcePage, string targetPageName) : this(sourcePage, targetPageName, false)
         {
         }
 
@@ -33,7 +32,7 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="sourcePage">Page we want to transform</param>
         /// <param name="targetPageName">Name of the target page</param>
         /// <param name="overwrite">Do we overwrite the target page if it already exists</param>
-        public PageTransformationInformation(ListItem sourcePage, string targetPageName, bool overwrite)
+        public PageTransformationInformation(IListItem sourcePage, string targetPageName, bool overwrite)
         {
             SourcePage = sourcePage;
             TargetPageName = targetPageName;
@@ -86,7 +85,7 @@ namespace PnP.Core.Modernization.Transform
         /// <summary>
         /// Configuration of the page header to apply
         /// </summary>
-        public PnPCore.IPageHeader PageHeader { get; set; }
+        public IPageHeader PageHeader { get; set; }
 
         /// <summary>
         /// Sets the page author in the page header similar to the original page author

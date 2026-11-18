@@ -1,4 +1,3 @@
-﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
@@ -48,7 +47,7 @@ namespace PnP.Core.Modernization.Publishing
         {
             LogInfo(string.Format(LogStrings.CustomPageLayoutMappingFileProvided, pageLayoutMappingFile));
 
-            if (!System.IO.File.Exists(pageLayoutMappingFile))
+            if (!File.Exists(pageLayoutMappingFile))
             {
                 LogError(string.Format(LogStrings.Error_PageLayoutMappingFileDoesNotExist, pageLayoutMappingFile), LogStrings.Heading_PageLayoutManager);
                 throw new ArgumentException(string.Format(LogStrings.Error_PageLayoutMappingFileDoesNotExist, pageLayoutMappingFile));
@@ -112,7 +111,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="publishingPageTransformation">Publishing page transformation data to get the correct page layout mapping from</param>
         /// <param name="page">Page for which we're looking for a mapping</param>
         /// <returns>The page layout mapping that will be used for the passed page</returns>
-        public PageLayout GetPageLayoutMappingModel(PublishingPageTransformation publishingPageTransformation, ListItem page)
+        public PageLayout GetPageLayoutMappingModel(PublishingPageTransformation publishingPageTransformation, IListItem page)
         {
             // Load relevant model data for the used page layout
             string usedPageLayout = Path.GetFileNameWithoutExtension(page.PageLayoutFile());

@@ -1,4 +1,3 @@
-﻿using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.Transform;
@@ -12,14 +11,14 @@ namespace PnP.Core.Modernization.Functions
     /// </summary>
     public abstract class FunctionsBase: BaseTransform
     {
-        protected ClientContext clientContext;
+        protected PnPContext clientContext;
 
         #region Construction
         /// <summary>
         /// Instantiates a function library class
         /// </summary>
         /// <param name="clientContext">ClientContext object for the site holding the page being transformed</param>
-        public FunctionsBase(ClientContext clientContext)
+        public FunctionsBase(PnPContext clientContext)
         {
             this.clientContext = clientContext;
         }

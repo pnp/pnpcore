@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Publishing.Layouts;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
@@ -11,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Xml.Serialization;
 
 namespace PnP.Core.Modernization.Publishing
@@ -34,11 +34,11 @@ namespace PnP.Core.Modernization.Publishing
             internal List<FixedWebPart> FixedWebParts { get; set; }
         }
 
-        private ClientContext _siteCollContext;
+        private PnPContext _siteCollContext;
         private PublishingPageTransformation _mapping;
         private string _defaultFileName = "PageLayoutMapping.xml";
         private HtmlParser parser;
-        private Dictionary<string, FieldCollection> _contentTypeFieldCache;
+        private Dictionary<string, IFieldCollection> _contentTypeFieldCache;
         private Dictionary<string, string> _pageLayoutFileCache;
 
         #region Construction
@@ -47,7 +47,7 @@ namespace PnP.Core.Modernization.Publishing
         /// </summary>
         /// <param name="sourceContext">This should be the context of the source web</param>
         /// <param name="logObservers">List of log observers</param>
-        public PageLayoutAnalyser(ClientContext sourceContext, IList<ILogObserver> logObservers = null)
+        public PageLayoutAnalyser(PnPContext sourceContext, IList<ILogObserver> logObservers = null)
         {
             // Register observers
             if (logObservers != null)
@@ -59,7 +59,7 @@ namespace PnP.Core.Modernization.Publishing
             }
 
             _mapping = new PublishingPageTransformation();
-            _contentTypeFieldCache = new Dictionary<string, FieldCollection>();
+            _contentTypeFieldCache = new Dictionary<string, IFieldCollection>();
             _pageLayoutFileCache = new Dictionary<string, string>();
 
             EnsureSiteCollectionContext(sourceContext);
@@ -82,11 +82,11 @@ namespace PnP.Core.Modernization.Publishing
             // part can be used in point 2 for customers to generate a starting layout mapping file which they then can edit
             // Don't assume that you are in a top level site, you maybe in a sub site
 
-            var spPageLayouts = GetAllPageLayouts();
+            IListItemCollection spPageLayouts = GetAllPageLayouts();
 
             if (spPageLayouts != null)
             {
-                foreach (ListItem layout in spPageLayouts)
+                foreach (IListItem layout in spPageLayouts)
                 {
                     try
                     {
@@ -121,7 +121,7 @@ namespace PnP.Core.Modernization.Publishing
         /// Analyses a single page layout from a provided file
         /// </summary>
         /// <param name="pageLayoutItem">Page layout list item</param>
-        public PageLayout AnalysePageLayout(ListItem pageLayoutItem)
+        public PageLayout AnalysePageLayout(IListItem pageLayoutItem)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace PnP.Core.Modernization.Publishing
                 var assocContentTypeParts = assocContentType.Split(new string[] { ";#" }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Load content type fields in memory once
-                var contentTypeFields = LoadContentTypeFields(assocContentTypeParts[1]);
+                IFieldCollection contentTypeFields = LoadContentTypeFields(assocContentTypeParts[1]);
 
                 // Extact page header
                 var extractedHeader = ExtractPageHeaderFromPageLayoutAssociatedContentType(contentTypeFields);
@@ -205,7 +205,7 @@ namespace PnP.Core.Modernization.Publishing
         /// Determine the page layout from a publishing page
         /// </summary>
         /// <param name="publishingPage">Publishing page to analyze the page layout for</param>
-        public PageLayout AnalysePageLayoutFromPublishingPage(ListItem publishingPage)
+        public PageLayout AnalysePageLayoutFromPublishingPage(IListItem publishingPage)
         {
             //Note: ListItemExtensions class contains this logic - reuse.
             //TODO: Make more defensive, this could represent the wrong item 
@@ -217,9 +217,9 @@ namespace PnP.Core.Modernization.Publishing
                 var host = $"{uri.Scheme}://{uri.Host}";
                 var path = pageLayoutFileUrl.Replace(host, "");
 
-                var file = _siteCollContext.Web.GetFileByServerRelativeUrl(path);
-                _siteCollContext.Load(file, o => o.ListItemAllFields);
-                _siteCollContext.ExecuteQueryRetry();
+                IFile file = _siteCollContext.Web.GetFileByServerRelativeUrl(path);
+                file.LoadBatch(o => o.ListItemAllFields);
+                _siteCollContext.Execute();
 
                 return AnalysePageLayout(file.ListItemAllFields);
             }
@@ -286,14 +286,14 @@ namespace PnP.Core.Modernization.Publishing
         /// <summary>
         /// Determines the page layouts in the current web
         /// </summary>
-        internal ListItemCollection GetAllPageLayouts()
+        internal IListItemCollection GetAllPageLayouts()
         {
             try
             {
-                var masterPageGallery = _siteCollContext.Web.GetCatalog((int)ListTemplateType.MasterPageCatalog);
-                _siteCollContext.Load(masterPageGallery, x => x.RootFolder.ServerRelativeUrl);
+                var masterPageGallery = _siteCollContext.Web.Lists.AsQueryable().First(l => l.TemplateType == ListTemplateType.MasterPageCatalog);
+                masterPageGallery.LoadBatch(x => x.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
 
-                var query = new CamlQuery
+                CamlQueryOptions query = new CamlQueryOptions
                 {
                     // Use query Scope='RecursiveAll' to iterate through sub folders of Master page library because we might have file in folder hierarchy
                     // Ensure that we are getting layouts with at least one published version, not hidden layouts
@@ -334,16 +334,16 @@ namespace PnP.Core.Modernization.Publishing
                       $"</View>"
                 };
 
-                var galleryItems = masterPageGallery.GetItems(query);
-                _siteCollContext.Load(masterPageGallery);
-                _siteCollContext.Load(galleryItems);
-                _siteCollContext.Load(galleryItems, i => i.Include(o => o.DisplayName),
-                    i => i.Include(o => o.File),
-                    i => i.Include(o => o.File.ServerRelativeUrl));
+                IListItemCollection galleryItems = masterPageGallery.GetItems(query);
+                masterPageGallery.LoadBatch();
+                foreach (var item in galleryItems.AsRequested())
+                {
+                    item.LoadBatch(i => i.File.QueryProperties(f => f.ServerRelativeUrl));
+                }
 
-                _siteCollContext.ExecuteQueryRetry();
+                _siteCollContext.Execute();
 
-                var galleryItemsCount = galleryItems.Count;
+                var galleryItemsCount = galleryItems.Length;
                 LogInfo(String.Format(LogStrings.AnalyserFoundItems, galleryItemsCount), LogStrings.Heading_PageLayoutAnalyser);
 
                 return galleryItemsCount > 0 ? galleryItems : null;
@@ -359,7 +359,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <summary>
         /// Get Metadata mapping from the page layout associated content type
         /// </summary>
-        internal MetaDataField[] ExtractMetaDataFromPageLayoutAssociatedContentType(FieldCollection spFields, List<WebPartField> webPartFields, Header extractedHeader)
+        internal MetaDataField[] ExtractMetaDataFromPageLayoutAssociatedContentType(IFieldCollection spFields, List<WebPartField> webPartFields, Header extractedHeader)
         {
             List<MetaDataField> fields = new List<MetaDataField>();
 
@@ -377,7 +377,7 @@ namespace PnP.Core.Modernization.Publishing
                 }
 
                 // Skip hidden fields by default
-                foreach (var spField in spFields.Where(o => o.Hidden == false))
+                foreach (IField spField in spFields.AsRequested().Where(o => o.Hidden == false))
                 {
                     if (!PublishingDefaults.IgnoreMetadataFields.Any(o => o.Equals(spField.InternalName, StringComparison.InvariantCultureIgnoreCase)))
                     {
@@ -430,13 +430,13 @@ namespace PnP.Core.Modernization.Publishing
         ///     Item1 = tagprefix
         ///     Item2 = Namespace
         /// </returns>
-        internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(ListItem pageLayout)
+        internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(IListItem pageLayout)
         {
             var tagPrefixes = new List<Tuple<string, string>>();
 
             try
             {
-                pageLayout.EnsureProperties(o => o.File, o => o.File.ServerRelativeUrl);
+                pageLayout.EnsureProperties(o => o.File.QueryProperties(f => f.ServerRelativeUrl));
                 var fileUrl = pageLayout.File.ServerRelativeUrl;
                 string fileHtml = LoadPageLayoutFile(fileUrl);
 
@@ -480,7 +480,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <summary>
         /// Extract the web parts from the page layout HTML outside of web part zones
         /// </summary>
-        internal ExtractedHtmlBlocksEntity ExtractControlsFromPageLayoutHtml(ListItem pageLayout)
+        internal ExtractedHtmlBlocksEntity ExtractControlsFromPageLayoutHtml(IListItem pageLayout)
         {
             /*Plan
              * Scan through the file to find the web parts by the tags
@@ -492,7 +492,7 @@ namespace PnP.Core.Modernization.Publishing
             try
             {
                 // Data from SharePoint
-                pageLayout.EnsureProperties(o => o.File, o => o.File.ServerRelativeUrl);
+                pageLayout.EnsureProperties(o => o.File.QueryProperties(f => f.ServerRelativeUrl));
                 var fileUrl = pageLayout.File.ServerRelativeUrl;
                 var fileHtml = LoadPageLayoutFile(fileUrl);
 
@@ -675,7 +675,7 @@ namespace PnP.Core.Modernization.Publishing
             }
             else
             {
-                return System.Web.HttpUtility.HtmlEncode(content);
+                return HttpUtility.HtmlEncode(content);
             }
         }
 
@@ -705,18 +705,18 @@ namespace PnP.Core.Modernization.Publishing
         /// </summary>
         /// <param name="contentTypeId"></param>
         /// <returns></returns>
-        private FieldCollection LoadContentTypeFields(string contentTypeId)
+        private IFieldCollection LoadContentTypeFields(string contentTypeId)
         {
             try
             {
                 // Try loading from cache first
-                if (_contentTypeFieldCache.TryGetValue(contentTypeId, out FieldCollection spFieldsFromCache))
+                if (_contentTypeFieldCache.TryGetValue(contentTypeId, out IFieldCollection spFieldsFromCache))
                 {
                     return spFieldsFromCache;
                 }
 
-                var cType = _siteCollContext.Web.ContentTypes.GetById(contentTypeId);
-                var spFields = cType.EnsureProperty(o => o.Fields);
+                IContentType cType = _siteCollContext.Web.ContentTypes.GetById(contentTypeId);
+                IFieldCollection spFields = cType.EnsureProperty(o => o.Fields);
 
                 // Add to cache
                 _contentTypeFieldCache.Add(contentTypeId, spFields);
@@ -736,7 +736,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="webPartFields">List of extracted web parts</param>
         /// <param name="spFields">Collection of fields</param>
         /// <returns></returns>
-        private List<WebPartField> CleanExtractedWebPartFields(List<WebPartField> webPartFields, FieldCollection spFields)
+        private List<WebPartField> CleanExtractedWebPartFields(List<WebPartField> webPartFields, IFieldCollection spFields)
         {
             List<WebPartField> cleanedWebPartFields = new List<WebPartField>();
 
@@ -755,7 +755,7 @@ namespace PnP.Core.Modernization.Publishing
                     Guid.TryParse(webPartField.Name, out fieldId);
 
                     // Find the field, we'll use the field's type to get the 'default' transformation behaviour
-                    var spField = spFields.Where(p => p.StaticName.Equals(webPartField.Name, StringComparison.InvariantCultureIgnoreCase) || p.Id == fieldId).FirstOrDefault();
+                    IField spField = spFields.AsRequested().FirstOrDefault(p => p.StaticName.Equals(webPartField.Name, StringComparison.InvariantCultureIgnoreCase) || p.Id == fieldId);
                     if (spField != null)
                     {
                         var webPartFieldDefaults = PublishingDefaults.WebPartFieldProperties.Where(p => p.FieldType.Equals(spField.TypeAsString));
@@ -812,13 +812,13 @@ namespace PnP.Core.Modernization.Publishing
         /// Sets the page layout header field defaults
         /// </summary>
         /// <param name="spFields"></param>
-        private Header ExtractPageHeaderFromPageLayoutAssociatedContentType(FieldCollection spFields)
+        private Header ExtractPageHeaderFromPageLayoutAssociatedContentType(IFieldCollection spFields)
         {
             try
             {
                 // If we've a publishing rollup image then let's try to use that as page header image...at conversion time we'll still switch back to no header in case there
                 // was no publishing rollup image set at content level
-                if (spFields.Where(p => p.InternalName.Equals("PublishingRollupImage", StringComparison.InvariantCultureIgnoreCase)).Any())
+                if (spFields.AsRequested().Any(p => p.InternalName.Equals("PublishingRollupImage", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     var pageLayoutHeaderFields = PublishingDefaults.PageLayoutHeaderMetadata.Where(o => o.Type.Equals("FullWidthImage", StringComparison.InvariantCultureIgnoreCase));
                     var header = new Header()
@@ -861,14 +861,14 @@ namespace PnP.Core.Modernization.Publishing
         /// Ensures that we have context of the source site collection
         /// </summary>
         /// <param name="context">Connection to SharePoint</param>
-        private void EnsureSiteCollectionContext(ClientContext context)
+        private void EnsureSiteCollectionContext(PnPContext context)
         {
             try
             {
                 if (context.Web.IsSubSite())
                 {
-                    string siteCollectionUrl = context.Site.EnsureProperty(o => o.Url);
-                    _siteCollContext = context.Clone(siteCollectionUrl);
+                    string siteCollectionUrl = context.Site.EnsureProperty(o => o.Url).AbsoluteUri;
+                    _siteCollContext = context.Clone(new Uri(siteCollectionUrl));
                 }
                 else
                 {

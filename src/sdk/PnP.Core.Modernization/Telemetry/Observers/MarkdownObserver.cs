@@ -1,5 +1,5 @@
 ﻿using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,7 +43,7 @@ namespace PnP.Core.Modernization.Telemetry.Observers
             }
 
             // Drop possible file extension as we want to ensure we have a .md extension
-            _reportFileName = System.IO.Path.GetFileNameWithoutExtension(fileName);
+            _reportFileName = Path.GetFileNameWithoutExtension(fileName);
 
 #if DEBUG && MEASURE && MEASURE
            _includeDebugEntries = true; //Override for debugging locally

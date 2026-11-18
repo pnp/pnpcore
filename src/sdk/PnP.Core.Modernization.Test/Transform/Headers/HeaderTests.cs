@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
@@ -45,9 +44,9 @@ namespace PnP.Core.Modernization.Tests.Transform.Headers
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("header_");
+                var pages = WebExtensions.GetPages(cc.Web,"header_");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

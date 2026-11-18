@@ -1,4 +1,3 @@
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PnP.Core.Modernization.Cache;
@@ -6,8 +5,6 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,11 +87,8 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 var builtIn = CreateBuiltIn(context, observer.Object);
                 SetErrorResponse(context, type, message, code);
 
-                ServerException exception = type == "System.UnauthorizedAccessException"
-                    ? Assert.ThrowsException<ServerUnauthorizedAccessException>(() => builtIn.DocumentEmbedLookup(DocumentUrl))
-                    : Assert.ThrowsException<ServerException>(() => builtIn.DocumentEmbedLookup(DocumentUrl));
-
-                Assert.AreEqual(type, exception.ServerErrorTypeName);
+                var exception = Assert.ThrowsException<SharePointRestServiceException>(() => builtIn.DocumentEmbedLookup(DocumentUrl));
+                Assert.AreEqual(type, ((SharePointRestError)exception.Error).Code);
                 observer.Verify(log => log.Error(It.Is<LogEntry>(entry =>
                     entry.Message.Contains(DocumentUrl) && entry.Exception == exception)), Times.Once);
                 observer.Verify(log => log.Warning(It.IsAny<LogEntry>()), Times.Never);
@@ -166,70 +160,32 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             }
         }
 
-        private static BuiltIn CreateBuiltIn(ClientContext context, ILogObserver observer = null)
+        private static BuiltIn CreateBuiltIn(PnPContext context, ILogObserver observer = null)
         {
             return new BuiltIn(new PageTransformationInformation(null) { SkipTelemetry = true }, context,
                 logObservers: observer == null ? null : new[] { observer });
         }
 
-        private static ClientContext CreateContext()
+        private static PnPContext CreateContext()
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(SiteUrl), SPVersion.SPO);
-            var provider = new MockEntryResponseProvider();
-            foreach (var property in new[] { "Site", "Web" })
+            return CoreTestContext.WithFile(SiteUrl, new
             {
-                provider.ResponseEntries.Add(new MockResponseEntry<object>
+                ListId = DocumentListId,
+                UniqueId = DocumentUniqueId,
+                Author = new
                 {
-                    Url = SiteUrl,
-                    PropertyName = property,
-                    ReturnValue = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP." + property,
-                        ["ServerRelativeUrl"] = WebServerRelativeUrl,
-                        ["Url"] = SiteUrl
-                    }
-                });
-            }
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = SiteUrl,
-                Method = "GetFileByServerRelativeUrl",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.File",
-                    ["ListId"] = $"/Guid({DocumentListId})/",
-                    ["UniqueId"] = $"/Guid({DocumentUniqueId})/",
-                    ["Author"] = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP.User",
-                        ["LoginName"] = "i:0#.f|membership|author@contoso.com",
-                        ["Title"] = "Document Author"
-                    }
+                    Id = 1, LoginName = "i:0#.f|membership|author@contoso.com",
+                    Title = "Document Author"
                 }
             });
-            return new ClientContext(SiteUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider)
-            };
         }
 
-        private static void SetErrorResponse(ClientContext context, string type, string message, int code)
+        private static void SetErrorResponse(PnPContext context, string type, string message, int code)
         {
-            context.Load(context.Web, web => web.ServerRelativeUrl);
-            context.ExecuteQuery();
-            var provider = new Mock<IMockResponseProvider>();
-            provider.Setup(response => response.GetResponse(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(JsonSerializer.Serialize(new[]
-                {
-                    new
-                    {
-                        SchemaVersion = "15.0.0.0",
-                        LibraryVersion = "16.0.0.0",
-                        ErrorInfo = new { ErrorMessage = message, ErrorValue = (string)null, ErrorCode = code, ErrorTypeName = type },
-                        TraceCorrelationId = "d991e178-2b53-4ff8-b77f-6bb73516962a"
-                    }
-                }));
-            context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider.Object);
+            context.Web.LoadBatch(web => web.ServerRelativeUrl);
+            context.Execute();
+            CoreTestContext.SetResponse(context, (_, _) => CoreTestContext.Error(type, message, code));
         }
 
         private static PageTransformation LoadMapping()

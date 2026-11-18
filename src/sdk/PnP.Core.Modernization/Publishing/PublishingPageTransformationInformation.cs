@@ -1,4 +1,3 @@
-﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Transform;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace PnP.Core.Modernization.Publishing
         /// Instantiates the page transformation class
         /// </summary>
         /// <param name="sourcePage">Page we want to transform</param>
-        public PublishingPageTransformationInformation(ListItem sourcePage) : this(sourcePage, false)
+        public PublishingPageTransformationInformation(IListItem sourcePage) : this(sourcePage, false)
         {
         }
 
@@ -32,7 +31,7 @@ namespace PnP.Core.Modernization.Publishing
         /// </summary>
         /// <param name="sourcePage">Page we want to transform</param>
         /// <param name="overwrite">Do we overwrite the target page if it already exists</param>
-        public PublishingPageTransformationInformation(ListItem sourcePage, bool overwrite)
+        public PublishingPageTransformationInformation(IListItem sourcePage, bool overwrite)
         {
             SourcePage = sourcePage;
             Overwrite = overwrite;

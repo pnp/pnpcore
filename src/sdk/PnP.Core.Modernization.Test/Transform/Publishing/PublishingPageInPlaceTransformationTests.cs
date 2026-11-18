@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Publishing;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
+using System.Net.Http;
 
 namespace PnP.Core.Modernization.Tests.Transform.Publishing
 {
@@ -40,7 +38,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         {
             Directory.CreateDirectory(TestContext.TestResultsDirectory);
             var mappingPath = Path.Combine(TestContext.TestResultsDirectory, $"webpartmapping-{Guid.NewGuid():N}.xml");
-            System.IO.File.WriteAllText(mappingPath, BasePageTransformator.LoadDefaultWebPartMappingFile());
+            File.WriteAllText(mappingPath, BasePageTransformator.LoadDefaultWebPartMappingFile());
 
             try
             {
@@ -54,7 +52,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             }
             finally
             {
-                System.IO.File.Delete(mappingPath);
+                File.Delete(mappingPath);
             }
         }
 
@@ -72,7 +70,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         {
             Directory.CreateDirectory(TestContext.TestResultsDirectory);
             var mappingPath = Path.Combine(TestContext.TestResultsDirectory, $"webpartmapping-{Guid.NewGuid():N}.xml");
-            System.IO.File.WriteAllText(mappingPath, BasePageTransformator.LoadDefaultWebPartMappingFile());
+            File.WriteAllText(mappingPath, BasePageTransformator.LoadDefaultWebPartMappingFile());
 
             try
             {
@@ -84,7 +82,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             }
             finally
             {
-                System.IO.File.Delete(mappingPath);
+                File.Delete(mappingPath);
             }
         }
 
@@ -157,11 +155,11 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                     transformator.EnsureSitePagesFeatureEnabled(PublishingPageTransformationTarget.SameWeb));
 
                 StringAssert.Contains(exception.Message, LogStrings.Error_InPlacePublishingPageSitePagesFeatureNotEnabled);
-                StringAssert.Contains(exception.Message, context.Url);
-                StringAssert.Contains(exception.Message, Modernization.Constants.FeatureId_Web_ModernPage.ToString());
+                StringAssert.Contains(exception.Message, context.Uri.AbsoluteUri);
+                StringAssert.Contains(exception.Message, Constants.FeatureId_Web_ModernPage.ToString());
                 StringAssert.Contains(exception.Message, "Manage site features");
                 Assert.AreEqual(1, fixture.RequestCount);
-                Assert.IsFalse(context.HasPendingRequest);
+                Assert.IsFalse(context.HasPendingRequests);
             }
         }
 
@@ -169,14 +167,14 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         public void SitePagesFeaturePreflightAcceptsEnabledFeatureWithoutWrites()
         {
             var fixture = new SitePagesFeatureFixture();
-            fixture.AddFeature(Modernization.Constants.FeatureId_Web_ModernPage);
+            fixture.AddFeature(Constants.FeatureId_Web_ModernPage);
 
             using (var context = fixture.CreateContext())
             {
                 CreateTransformator(context, context).EnsureSitePagesFeatureEnabled(PublishingPageTransformationTarget.SameWeb);
 
                 Assert.AreEqual(1, fixture.RequestCount);
-                Assert.IsFalse(context.HasPendingRequest);
+                Assert.IsFalse(context.HasPendingRequests);
             }
         }
 
@@ -188,7 +186,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var fixture = new SitePagesFeatureFixture();
             if (initiallyEnabled)
             {
-                fixture.AddFeature(Modernization.Constants.FeatureId_Web_ModernPage);
+                fixture.AddFeature(Constants.FeatureId_Web_ModernPage);
             }
 
             using (var context = fixture.CreateContext())
@@ -204,7 +202,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 else
                 {
                     Assert.ThrowsException<InvalidOperationException>(preflight);
-                    fixture.AddFeature(Modernization.Constants.FeatureId_Web_ModernPage);
+                    fixture.AddFeature(Constants.FeatureId_Web_ModernPage);
                     preflight();
                 }
 
@@ -221,7 +219,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 CreateTransformator(context, context).EnsureSitePagesFeatureEnabled(PublishingPageTransformationTarget.CrossSiteCollection);
 
                 Assert.AreEqual(0, fixture.RequestCount);
-                Assert.IsFalse(context.HasPendingRequest);
+                Assert.IsFalse(context.HasPendingRequests);
             }
         }
 
@@ -231,10 +229,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var fixture = new SitePagesFeatureFixture { FailRequests = true };
             using (var context = fixture.CreateContext())
             {
-                var exception = Assert.ThrowsException<ClientRequestException>(() =>
+                var exception = Assert.ThrowsException<SharePointRestServiceException>(() =>
                     CreateTransformator(context, context).EnsureSitePagesFeatureEnabled(PublishingPageTransformationTarget.SameWeb));
 
-                StringAssert.Contains(exception.Message, "InternalServerError");
+                StringAssert.Contains(((SharePointRestError)exception.Error).Message, "Feature query failed");
                 Assert.IsFalse(exception.ToString().Contains(LogStrings.Error_InPlacePublishingPageSitePagesFeatureNotEnabled));
                 Assert.AreEqual(1, fixture.RequestCount);
             }
@@ -303,7 +301,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             {
                 var information = CreateInPlaceInformation(sourceContext, overwrite: true);
                 var sourceBefore = SnapshotSource(information.SourcePage);
-                var sourceHadPendingRequest = sourceContext.HasPendingRequest;
+                var sourceHadPendingRequest = sourceContext.HasPendingRequests;
                 var addCalls = 0;
                 var transformator = CreateTransformator(sourceContext, targetContext);
 
@@ -320,7 +318,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
 
                 Assert.AreEqual(0, addCalls, "AddClientSidePage seam must not run for a known in-place collision.");
                 AssertSourceUnchanged(sourceBefore, information.SourcePage);
-                Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequest, "The source context request state changed.");
+                Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequests, "The source context request state changed.");
             }
         }
 
@@ -332,7 +330,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             {
                 var information = CreateInPlaceInformation(sourceContext, overwrite: true);
                 var sourceBefore = SnapshotSource(information.SourcePage);
-                var sourceHadPendingRequest = sourceContext.HasPendingRequest;
+                var sourceHadPendingRequest = sourceContext.HasPendingRequests;
                 var transformator = CreateTransformator(sourceContext, targetContext);
 
                 foreach (var rejectedTarget in new[]
@@ -367,7 +365,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                     Assert.AreEqual(0, probeCalls, $"Target probe ran for rejected target '{rejectedTarget}'.");
                     Assert.AreEqual(0, addCalls, $"AddClientSidePage seam ran for rejected target '{rejectedTarget}'.");
                     AssertSourceUnchanged(sourceBefore, information.SourcePage);
-                    Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequest, "The source context request state changed.");
+                    Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequests, "The source context request state changed.");
                 }
             }
         }
@@ -380,7 +378,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             {
                 var information = CreateInPlaceInformation(sourceContext, overwrite: true);
                 var sourceBefore = SnapshotSource(information.SourcePage);
-                var sourceHadPendingRequest = sourceContext.HasPendingRequest;
+                var sourceHadPendingRequest = sourceContext.HasPendingRequests;
                 var addCalls = 0;
                 var transformator = CreateTransformator(sourceContext, targetContext);
 
@@ -398,7 +396,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 Assert.AreEqual("target probe inconclusive", exception.Message);
                 Assert.AreEqual(0, addCalls, "AddClientSidePage seam must not run after an inconclusive in-place probe.");
                 AssertSourceUnchanged(sourceBefore, information.SourcePage);
-                Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequest, "The source context request state changed.");
+                Assert.AreEqual(sourceHadPendingRequest, sourceContext.HasPendingRequests, "The source context request state changed.");
             }
         }
 
@@ -477,14 +475,14 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 hasWritableSitePages);
         }
 
-        private static PublishingPageTransformator CreateTransformator(ClientContext sourceContext, ClientContext targetContext)
+        private static PublishingPageTransformator CreateTransformator(PnPContext sourceContext, PnPContext targetContext)
         {
             return new PublishingPageTransformator(sourceContext, targetContext, new PageTransformation(), null);
         }
 
-        private static PublishingPageTransformationInformation CreateInPlaceInformation(ClientContext sourceContext, bool overwrite)
+        private static PublishingPageTransformationInformation CreateInPlaceInformation(PnPContext sourceContext, bool overwrite)
         {
-            var sourcePage = sourceContext.Web.Lists.GetByTitle("Pages").GetItemById(7);
+            var sourcePage = CoreTestContext.Item(sourceContext, 7);
             sourcePage["CCD_SourceIdentity"] = "Pages/7/v3";
             sourcePage["CCD_SourceDigest"] = "sha256:unchanged";
 
@@ -495,14 +493,14 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             };
         }
 
-        private static Dictionary<string, string> SnapshotSource(ListItem sourcePage)
+        private static Dictionary<string, string> SnapshotSource(IListItem sourcePage)
         {
-            return sourcePage.FieldValues.ToDictionary(
+            return sourcePage.Values.ToDictionary(
                 pair => pair.Key,
                 pair => pair.Value?.ToString());
         }
 
-        private static void AssertSourceUnchanged(Dictionary<string, string> expected, ListItem actual)
+        private static void AssertSourceUnchanged(Dictionary<string, string> expected, IListItem actual)
         {
             var actualSnapshot = SnapshotSource(actual);
             CollectionAssert.AreEquivalent(expected.Keys.ToArray(), actualSnapshot.Keys.ToArray());
@@ -513,78 +511,49 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             }
         }
 
-        private sealed class SitePagesFeatureFixture : IMockResponseProvider
+        private sealed class SitePagesFeatureFixture
         {
             private const string WebUrl = "https://contoso.sharepoint.com/sites/enterprise-wiki";
-            private readonly MockEntryResponseProvider provider = new MockEntryResponseProvider();
             internal readonly List<object> Features = new List<object>();
             internal bool FailRequests { get; set; }
             internal int RequestCount { get; private set; }
 
             internal void AddFeature(Guid id)
             {
-                Features.Add(new { _ObjectType_ = "SP.Feature", DefinitionId = $"/Guid({id})/" });
+                Features.Add(new { DefinitionId = id });
             }
 
-            internal ClientContext CreateContext()
+            internal PnPContext CreateContext()
             {
-                provider.ResponseEntries.Add(new MockResponseEntry<object>
-                {
-                    Url = WebUrl,
-                    PropertyName = "Features",
-                    ReturnValue = new { _Child_Items_ = Features },
-                });
-                var context = PublishingPageInPlaceTransformationTests.CreateContext(WebUrl, provider);
-                context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(this);
+                var context = PublishingPageInPlaceTransformationTests.CreateContext(WebUrl);
+                CoreTestContext.SetResponse(context, Respond);
                 return context;
             }
 
-            public string GetResponse(string url, string verb, string body)
+            private HttpResponseMessage Respond(HttpRequestMessage request, string body)
             {
                 RequestCount++;
-                var request = XDocument.Parse(body);
-                Assert.IsFalse(request.Descendants().Any(element =>
-                    element.Name.LocalName == "Method" || element.Name.LocalName == "SetProperty"),
+                Assert.AreEqual(HttpMethod.Get, request.Method,
                     "The Site Pages preflight must only read the active feature collection.");
+                var expanded = request.RequestUri.AbsolutePath.EndsWith("/_api/web", StringComparison.OrdinalIgnoreCase);
+                Assert.IsTrue(expanded
+                    ? Uri.UnescapeDataString(request.RequestUri.Query).Contains("Features", StringComparison.OrdinalIgnoreCase)
+                    : request.RequestUri.AbsolutePath.EndsWith("/features", StringComparison.OrdinalIgnoreCase));
                 if (FailRequests)
                 {
-                    throw new InvalidOperationException("Feature query failed");
+                    return CoreTestContext.Error("System.UnauthorizedAccessException", "Feature query failed", -2147024891);
                 }
-                return provider.GetResponse(url, verb, body);
+                return expanded
+                    ? CoreTestContext.Json(new { Features })
+                    : CoreTestContext.Json(new { value = Features });
             }
         }
 
-        private static ClientContext CreateContext(string webUrl, MockEntryResponseProvider responseProvider = null)
+        private static PnPContext CreateContext(string webUrl)
         {
-            responseProvider = responseProvider ?? new MockEntryResponseProvider();
-            responseProvider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = webUrl,
-                PropertyName = "Web",
-                ReturnValue = new
-                {
-                    Url = webUrl,
-                    ServerRelativeUrl = "/sites/enterprise-wiki",
-                },
-            });
-            responseProvider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = webUrl,
-                PropertyName = "Site",
-                ReturnValue = new
-                {
-                    Url = webUrl,
-                    ServerRelativeUrl = "/sites/enterprise-wiki",
-                },
-            });
-
             CacheManager.Instance.SetSharePointVersion(new Uri(webUrl), SPVersion.SPO);
             CacheManager.Instance.SetExactSharePointVersion(new Uri(webUrl), "16.0.0.26000");
-
-            return new ClientContext(webUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(responseProvider),
-            };
+            return CoreTestContext.Create(webUrl);
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Transform
 {
@@ -15,12 +14,12 @@ namespace PnP.Core.Modernization.Transform
         /// <summary>
         /// Source wiki/webpart page we want to transform
         /// </summary>
-        public ListItem SourcePage { get; set; }
+        public IListItem SourcePage { get; set; }
 
         /// <summary>
         /// File to convert - used for web part pages living outside a library as these pages do not have an associated list item
         /// </summary>
-        public File SourceFile { get; set; }
+        public IFile SourceFile { get; set; }
 
         /// <summary>
         /// Overwrite the target page if it already exists?
@@ -138,7 +137,8 @@ namespace PnP.Core.Modernization.Transform
         public string UserMappingFile { get; set; }
 
         /// <summary>
-        /// Searches for users within a specific LDAP Connection String, if not specified domain LDAP will be calculated
+        /// Legacy option retained for source compatibility. Nonempty values are rejected:
+        /// modernization supports SharePoint Online only; use UserMappingFile instead.
         /// </summary>
         /// <example>
         /// LDAP://OU=Test,DC=ALPHADELTA,DC=LOCAL
@@ -154,11 +154,11 @@ namespace PnP.Core.Modernization.Transform
         /// <summary>
         /// Custom layout transformator to be used for this page
         /// </summary>
-        public Func<PnPCore.IPage, ILayoutTransformator> LayoutTransformatorOverride { get; set; }
+        public Func<IPage, ILayoutTransformator> LayoutTransformatorOverride { get; set; }
         /// <summary>
         /// Custom content transformator to be used for this page
         /// </summary>
-        public Func<PnPCore.IPage, PageTransformation, IContentTransformator> ContentTransformatorOverride { get; set; }
+        public Func<IPage, PageTransformation, IContentTransformator> ContentTransformatorOverride { get; set; }
         #endregion
 
         #region General properties

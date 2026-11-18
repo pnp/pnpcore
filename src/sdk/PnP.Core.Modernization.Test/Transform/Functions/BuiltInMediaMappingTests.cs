@@ -1,5 +1,4 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -8,8 +7,6 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +43,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             }, requests, observer: observer.Object);
             AssertEmbed(json);
             Assert.IsFalse(requests.Concat(targetRequests).Any(request =>
-                request.Contains("GetListItem") || request.Contains("GetFile") || request.Contains("EnsureSiteAssets")));
+                request.Contains("listitemallfields",StringComparison.OrdinalIgnoreCase)|| request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)|| request.Contains("EnsureSiteAssets",StringComparison.OrdinalIgnoreCase)));
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry =>
                 entry.Message.Contains("HTML Field Security") && entry.Message.Contains("framing"))), Times.Once);
         }
@@ -67,19 +64,18 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             {
                 fields["VideoSetUserOverrideEncoding"] = new Dictionary<string, object>
                 {
-                    ["_ObjectType_"] = "SP.FieldUrlValue", ["Url"] = SourceUrl + "/Assets/clip.mp4",
+                    ["odata.type"] = "SP.FieldUrlValue", ["Url"] = SourceUrl + "/Assets/clip.mp4",
                     ["Description"] = "Video"
                 };
                 fields["VideoSetDefaultEncoding"] = SourceUrl + "/incorrect.mp4";
                 fields["VideoSetExternalLink"] = "https://external.example/incorrect.mp4";
             }
             using var context = CreateContext(SourceUrl, out var requests, fields);
-            ListItem page = null;
+            IListItem page = null;
             if (fromContext)
             {
-                page = context.Web.GetListItem(SourcePath);
-                context.Load(page);
-                context.ExecuteQuery();
+                page = CoreTestContext.Item(context);
+                foreach (var field in fields) page[field.Key] = field.Value;
             }
             var data = Transform(context, context, new Dictionary<string, string>
             {
@@ -89,12 +85,12 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             if (useEmbed)
             {
                 AssertEmbed(data);
-                Assert.IsFalse(requests.Any(request => request.Contains("GetFile")));
+                Assert.IsFalse(requests.Any(request => request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)));
             }
             else
             {
                 AssertFile(data, SourceUrl, SourcePath, SourceId);
-                Assert.IsTrue(requests.Any(request => request.Contains("GetFileByServerRelativePath")));
+                Assert.IsTrue(requests.Any(request => request.Contains("GetFileBy",StringComparison.OrdinalIgnoreCase)));
             }
         }
 
@@ -106,7 +102,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             {
                 ["MediaSource"] = "Assets/clip.mp4", ["VideoSetSource"] = "/missing-video-set"
             }, requests), SourceUrl, SourcePath, SourceId);
-            Assert.IsFalse(requests.Any(request => request.Contains("GetListItem")));
+            Assert.IsFalse(requests.Any(request => request.Contains("listitemallfields",StringComparison.OrdinalIgnoreCase)));
         }
 
         [TestMethod]
@@ -121,11 +117,14 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             {
                 using var source = CreateContext(SourceUrl, out var requests);
                 using var target = CreateContext(TargetUrl, out var targetRequests);
+                var observer = new Mock<ILogObserver>();
+                observer.Setup(log => log.Error(It.IsAny<LogEntry>()))
+                    .Callback<LogEntry>(entry => Assert.Fail(entry.Exception?.ToString() ?? entry.Message));
                 AssertFile(Transform(source, target, new Dictionary<string, string> { ["MediaSource"] = SourcePath },
-                    requests), TargetUrl, TargetPath, TargetId);
-                Assert.IsFalse(requests.Any(request => request.Contains("GetFile")));
-                Assert.IsTrue(targetRequests.Any(request => request.Contains("EnsureSiteAssetsLibrary")));
-                Assert.IsTrue(targetRequests.Any(request => request.Contains("GetFileByServerRelativePath")));
+                    requests, observer: observer.Object), TargetUrl, TargetPath, TargetId);
+                Assert.IsFalse(requests.Any(request => request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)));
+                Assert.IsTrue(targetRequests.Any(request => request.Contains("EnsureSiteAssetsLibrary",StringComparison.OrdinalIgnoreCase)));
+                Assert.IsTrue(targetRequests.Any(request => request.Contains("GetFileBy",StringComparison.OrdinalIgnoreCase)));
             }
             finally
             {
@@ -142,7 +141,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             var observer = new Mock<ILogObserver>();
             AssertFile(Transform(source, target, new Dictionary<string, string> { ["MediaSource"] = path },
                 requests, observer: observer.Object), SourceUrl, path, SourceId);
-            Assert.IsFalse(targetRequests.Any(request => request.Contains("GetFile")));
+            Assert.IsFalse(targetRequests.Any(request => request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)));
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry =>
                 entry.Message.Contains("retaining its source location and identities"))), Times.Once);
         }
@@ -163,7 +162,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 new Dictionary<string, string> { ["MediaSource"] = media, ["VideoSetEmbedCode"] = embed }, requests,
                 observer: observer.Object));
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry => entry.Message.Contains("skipped"))), Times.Once);
-            Assert.IsFalse(requests.Any(request => request.Contains("GetFile")));
+            Assert.IsFalse(requests.Any(request => request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)));
         }
 
         [TestMethod]
@@ -216,8 +215,8 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             Assert.AreEqual(path.Split('/').Last(), (string)data["serverProcessedContent"]["searchablePlainTexts"]["title"]);
         }
 
-        private static JObject Transform(ClientContext source, ClientContext target, Dictionary<string, string> values,
-            List<string> requests, ListItem page = null, ILogObserver observer = null)
+        private static JObject Transform(PnPContext source, PnPContext target, Dictionary<string, string> values,
+            List<string> requests, IListItem page = null, ILogObserver observer = null)
         {
             var assembly = typeof(BuiltIn).Assembly;
             var resource = assembly.GetManifestResourceNames().Single(name => name.EndsWith("Modernization.webpartmapping.xml", StringComparison.Ordinal));
@@ -237,7 +236,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 new PageTransformationInformation(page) { SkipTelemetry = true }, observer == null ? null : new[] { observer });
             var before = requests.Count;
             var selected = processor.Process(ref mapping, part);
-            Assert.IsFalse(requests.Skip(before).Any(request => request.Contains("GetFile") || request.Contains("EnsureSiteAssets")));
+            Assert.IsFalse(requests.Skip(before).Any(request => request.Contains("GetFile",StringComparison.OrdinalIgnoreCase)|| request.Contains("EnsureSiteAssets",StringComparison.OrdinalIgnoreCase)));
             var branch = mapping.Mappings.Mapping.Single(item => item.Name == selected);
             processor.ProcessMappingFunctions(ref mapping, part, branch);
             Assert.AreEqual(selected == "EMBED" ? ClientSideWebPartType.ContentEmbed : ClientSideWebPartType.DocumentEmbed,
@@ -245,83 +244,61 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             return JObject.Parse(WebUtility.HtmlDecode(TokenParser.ReplaceTokens(branch.ClientSideWebPart.Single().JsonControlData, part)));
         }
 
-        private static ClientContext CreateContext(string url, out List<string> requests,
+        private static PnPContext CreateContext(string url, out List<string> requests,
             Dictionary<string, object> fields = null, bool exists = true, string filePath = null)
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(url), SPVersion.SPO);
-            var responses = new MockEntryResponseProvider();
             var identity = url == SourceUrl ? SourceId : TargetId;
             filePath ??= url == SourceUrl ? SourcePath : TargetPath;
-            foreach (var property in new[] { "Site", "Web" })
+            var file = new
             {
-                responses.ResponseEntries.Add(new MockResponseEntry<object>
-                {
-                    Url = url, PropertyName = property,
-                    ReturnValue = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP." + property, ["Id"] = $"/Guid({identity})/",
-                        ["ServerRelativeUrl"] = new Uri(url).AbsolutePath, ["Url"] = url
-                    }
-                });
-            }
-            responses.ResponseEntries.Add(new MockResponseEntry<object>
+                Exists = exists, Name = filePath.Split('/').Last(), ServerRelativeUrl = filePath,
+                ListId = identity, UniqueId = identity,
+                Author = new { Id = 1, Title = "Author \"name\" &quot; {Title}" }
+            };
+            var library = new
             {
-                Url = url, Method = "GetFileByServerRelativePath",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.File", ["Exists"] = exists, ["Name"] = filePath.Split('/').Last(),
-                    ["ServerRelativeUrl"] = filePath, ["ListId"] = $"/Guid({identity})/", ["UniqueId"] = $"/Guid({identity})/",
-                    ["Author"] = new Dictionary<string, object> { ["_ObjectType_"] = "SP.User", ["Title"] = "Author \"name\" &quot; {Title}" }
-                }
-            });
-            if (fields != null)
+                Id = TargetId, Title = "Site Assets",
+                RootFolder = new { UniqueId = TargetId, ServerRelativeUrl = "/sites/media-target/SiteAssets" }
+            };
+            var folders = new[]
             {
-                fields["_ObjectType_"] = "SP.ListItem";
-                responses.ResponseEntries.Add(new MockResponseEntry<object> { Url = url, Method = "GetListItem", ReturnValue = fields });
-            }
-            responses.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = url, Method = "EnsureSiteAssetsLibrary",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.List", ["_ObjectIdentity_"] = "list:assets", ["Id"] = $"/Guid({TargetId})/", ["Title"] = "Site Assets",
-                    ["RootFolder"] = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP.Folder", ["_ObjectIdentity_"] = "folder:assets", ["ServerRelativeUrl"] = "/sites/media-target/SiteAssets"
-                    }
-                }
-            });
-            responses.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = url, PropertyName = "Folders",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.FolderCollection",
-                    ["_Child_Items_"] = new[]
-                    {
-                        new Dictionary<string, object> { ["_ObjectType_"] = "SP.Folder", ["_ObjectIdentity_"] = "folder:sitepages", ["Name"] = "SitePages", ["ServerRelativeUrl"] = "/sites/media-target/SiteAssets/SitePages" },
-                        new Dictionary<string, object> { ["_ObjectType_"] = "SP.Folder", ["_ObjectIdentity_"] = "folder:clip", ["Name"] = "clip", ["ServerRelativeUrl"] = TargetFolder }
-                    }
-                }
-            });
+                new { UniqueId = SourceId, Name = "SitePages", ServerRelativeUrl = "/sites/media-target/SiteAssets/SitePages" },
+                new { UniqueId = TargetId, Name = "clip", ServerRelativeUrl = TargetFolder }
+            };
             var recorded = new List<string>();
             requests = recorded;
-            var provider = new Mock<IMockResponseProvider>();
-            provider.Setup(value => value.GetResponse(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string requestUrl, string verb, string body) =>
+            return CoreTestContext.Create(url, (request, body) =>
+            {
+                var path = request.RequestUri.AbsolutePath;
+                recorded.Add(request.RequestUri + " " + body);
+                if (path.Contains("GetWebUrlFromPageUrl", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = url });
+                if (path.EndsWith("/listitemallfields", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(fields);
+                if (path.Contains("GetFileBy", StringComparison.OrdinalIgnoreCase))
+                    return exists ? CoreTestContext.Json(file) :
+                        CoreTestContext.Error("System.IO.FileNotFoundException", "File Not Found.", -2147024894);
+                if (path.EndsWith("/folders", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = folders });
+                if (path.Contains("GetFolderBy", StringComparison.OrdinalIgnoreCase))
                 {
-                    recorded.Add(body);
-                    var result = JArray.Parse(responses.GetResponse(requestUrl, verb, body));
-                    foreach (var method in XDocument.Parse(body).Descendants().Where(element =>
-                        element.Name.LocalName == "StaticMethod" && (string)element.Attribute("Name") == "GetWebUrlFromPageUrl"))
+                    var address = Uri.UnescapeDataString(request.RequestUri.AbsoluteUri);
+                    var existing = folders.OrderByDescending(folder => folder.ServerRelativeUrl.Length)
+                        .FirstOrDefault(folder => address.Contains(folder.ServerRelativeUrl, StringComparison.OrdinalIgnoreCase));
+                    if (existing != null) return CoreTestContext.Json(existing);
+                    return CoreTestContext.Json(new
                     {
-                        var id = (int)method.Attribute("Id");
-                        result.Add(id);
-                        result.Add(url);
-                    }
-                    return result.ToString();
-                });
-            return new ClientContext(url) { WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider.Object) };
+                        UniqueId = identity, Name = "video-set", ServerRelativeUrl = new Uri(url).AbsolutePath + "/Assets/video-set",
+                        ListItemAllFields = fields
+                    });
+                }
+                if (path.EndsWith("/lists", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(new { value = new[] { library } });
+                if (path.Contains("/lists", StringComparison.OrdinalIgnoreCase))
+                    return CoreTestContext.Json(library);
+                throw new InvalidOperationException($"Unexpected media fixture request: {request.Method} {request.RequestUri}");
+            }, new Dictionary<string, object> { ["Id"] = identity }, new Dictionary<string, object> { ["Id"] = identity });
         }
     }
 }

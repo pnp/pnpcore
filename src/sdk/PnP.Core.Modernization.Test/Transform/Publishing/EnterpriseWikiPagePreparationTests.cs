@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 using System.Xml.Linq;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core;
 using PnP.Core.Modernization.Publishing;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
+
+using BuiltInContentTypeId = PnP.Core.Provisioning.BuiltInContentTypeId;
 
 namespace PnP.Core.Modernization.Tests.Transform.Publishing
 {
@@ -151,7 +153,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         {
             var fixture = new PreparationFixture();
             var field = fixture.ListFields.First(f => f["InternalName"].ToString() == "AverageRating");
-            field["SchemaXmlWithResourceTokens"] = field["SchemaXmlWithResourceTokens"].ToString().Replace("Type='AverageRating'", "Type='Number'");
+            field["SchemaXml"] = field["SchemaXml"].ToString().Replace("Type='AverageRating'", "Type='Number'");
             field["TypeAsString"] = "Number";
             using (var context = fixture.CreateContext())
             {
@@ -172,19 +174,18 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             {
                 fixture.Features.Add(new
                 {
-                    _ObjectType_ = "SP.Feature",
-                    DefinitionId = "/Guid(94c94ca6-b32f-4da9-a9e3-1f3d343d7ecb)/"
+                    DefinitionId = new Guid("94c94ca6-b32f-4da9-a9e3-1f3d343d7ecb")
                 });
             }
             using (var context = fixture.CreateContext())
             {
                 var exception = Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiPagePreparation.Prepare(context));
                 StringAssert.Contains(exception.Message, "Site Pages feature is not enabled");
-                StringAssert.Contains(exception.Message, context.Url);
+                StringAssert.Contains(exception.Message, context.Uri.AbsoluteUri);
                 StringAssert.Contains(exception.Message, EnterpriseWikiPagePreparation.SitePagesFeatureId.ToString());
                 StringAssert.Contains(exception.Message, "Manage site features");
             }
-            Assert.AreEqual(1, fixture.RequestCount);
+            Assert.AreEqual(1, fixture.FeatureQueryCount);
             Assert.AreEqual(0, fixture.WriteCount);
             Assert.AreEqual(hasUnrelatedFeature ? 1 : 0, fixture.Features.Count);
         }
@@ -200,7 +201,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 var exception = Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiPagePreparation.Prepare(context));
                 StringAssert.Contains(exception.Message, "Site Pages feature is not enabled");
             }
-            Assert.AreEqual(1, fixture.RequestCount);
+            Assert.AreEqual(1, fixture.FeatureQueryCount);
             Assert.AreEqual(0, fixture.WriteCount);
         }
 
@@ -220,7 +221,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                         () => EnterpriseWikiPagePreparation.Prepare(context)));
                 StringAssert.Contains(exception.Message, "Site Pages feature is not enabled");
             }
-            Assert.AreEqual(1, fixture.RequestCount);
+            Assert.AreEqual(1, fixture.FeatureQueryCount);
             Assert.AreEqual(0, fixture.WriteCount);
         }
 
@@ -259,10 +260,11 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var fixture = new PreparationFixture { FailRequests = true };
             using (var context = fixture.CreateContext())
             {
-                var exception = Assert.ThrowsException<ClientRequestException>(() => EnterpriseWikiPagePreparation.Prepare(context));
+                var exception = Assert.ThrowsException<SharePointRestServiceException>(() => EnterpriseWikiPagePreparation.Prepare(context));
+                StringAssert.Contains(((SharePointRestError)exception.Error).Message, "Feature query failed");
                 Assert.IsFalse(exception.Message.Contains("Site Pages feature is not enabled"));
             }
-            Assert.AreEqual(1, fixture.RequestCount);
+            Assert.AreEqual(1, fixture.FeatureQueryCount);
             Assert.AreEqual(0, fixture.WriteCount);
         }
 
@@ -281,16 +283,19 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             Assert.AreEqual(1, fixture.ListFields.Count(f => f["InternalName"].ToString() == "CategoryBacking"));
         }
 
-        private sealed class PreparationFixture : IMockResponseProvider
+        private sealed class PreparationFixture
         {
             private const string WebUrl = "https://contoso.sharepoint.com/sites/wiki";
-            private readonly MockEntryResponseProvider provider = new MockEntryResponseProvider();
+            private readonly Guid libraryId = Guid.NewGuid();
+            private readonly string contentTypeId = BuiltInContentTypeId.ModernArticlePage + "00" + Guid.NewGuid().ToString("N");
+            private readonly List<Dictionary<string, object>> fieldLinks = new List<Dictionary<string, object>>();
             internal readonly List<Dictionary<string, object>> SiteFields = new List<Dictionary<string, object>>();
             internal readonly List<Dictionary<string, object>> ListFields = new List<Dictionary<string, object>>();
             internal readonly List<object> Features = new List<object>();
             internal bool FailRequests { get; set; }
             internal bool AddBackingField { get; set; }
             internal int RequestCount { get; private set; }
+            internal int FeatureQueryCount { get; private set; }
             internal int WriteCount { get; private set; }
 
             internal PreparationFixture()
@@ -308,6 +313,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 {
                     var schema = id == WebId ? CategorySchema() : $"<Field ID='{id}' Name='{name}' Type='{type}'/>";
                     var element = XElement.Parse(schema);
+                    element.SetAttributeValue("Hidden", hidden ? "TRUE" : "FALSE");
                     if (!hidden)
                     {
                         element.SetAttributeValue("ShowInEditForm", id == WebId ? "TRUE" : "FALSE");
@@ -315,123 +321,183 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                     }
                     var field = new Dictionary<string, object>
                     {
-                        ["_ObjectType_"] = "SP.Field",
-                        ["_ObjectIdentity_"] = $"Field:{id}",
-                        ["Id"] = $"/Guid({id})/",
+                        ["odata.id"] = $"{WebUrl}/_api/Web/Fields(guid'{id}')",
+                        ["Id"] = id,
+                        ["Title"] = name,
                         ["InternalName"] = name,
                         ["TypeAsString"] = type,
-                        ["SchemaXmlWithResourceTokens"] = element.ToString().Replace('"', '\''),
+                        ["SchemaXml"] = element.ToString().Replace('"', '\''),
                         ["Hidden"] = hidden,
                         ["ReadOnlyField"] = false
                     };
                     SiteFields.Add(field);
-                    ListFields.Add(new Dictionary<string, object>(field));
-                }
-
-                var library = new
-                {
-                    _ObjectType_ = "SP.List",
-                    _ObjectIdentity_ = "TargetLibrary",
-                    Id = $"/Guid({Guid.NewGuid()})/",
-                    BaseTemplate = 119,
-                    EffectiveBasePermissions = new { _ObjectType_ = "SP.BasePermissions", High = 2147483647U, Low = 4294967295U },
-                    RootFolder = new { _ObjectType_ = "SP.Folder", ServerRelativeUrl = "/sites/wiki/SitePages" }
-                };
-                AddProperty("Web", new { ServerRelativeUrl = "/sites/wiki" });
-                AddProperty("AvailableFields", new { _Child_Items_ = SiteFields });
-                AddProperty("Fields", new { _Child_Items_ = ListFields });
-                Features.Add(FeatureResponse());
-                AddProperty("Features", new { _Child_Items_ = Features });
-                AddProperty("Lists", new { _Child_Items_ = new[] { library } });
-                AddProperty("TargetLibrary", library);
-                AddProperty("ContentTypes", new
-                {
-                    _Child_Items_ = new[]
+                    var listField = new Dictionary<string, object>(field)
                     {
-                        new
-                        {
-                            _ObjectType_ = "SP.ContentType",
-                            _ObjectIdentity_ = "SitePageContentType",
-                            Id = new { _ObjectType_ = "SP.ContentTypeId", StringValue = BuiltInContentTypeId.ModernArticlePage + "00" + Guid.NewGuid().ToString("N") },
-                            Parent = new
-                            {
-                                _ObjectType_ = "SP.ContentType",
-                                Id = new { _ObjectType_ = "SP.ContentTypeId", StringValue = BuiltInContentTypeId.ModernArticlePage }
-                            }
-                        }
-                    }
-                });
-                AddProperty("FieldLinks", new
-                {
-                    _Child_Items_ = fields.Select(f => new
+                        ["odata.id"] = $"{WebUrl}/_api/Web/Lists(guid'{libraryId}')/Fields(guid'{id}')"
+                    };
+                    ListFields.Add(listField);
+                    fieldLinks.Add(new Dictionary<string, object>
                     {
-                        _ObjectType_ = "SP.FieldLink",
-                        Id = $"/Guid({f.Item1})/",
+                        ["Id"] = id,
                         // A native backing field is hidden on the list, not necessarily on its link.
-                        Hidden = f.Item1 != SiteId && f.Item4,
-                        ReadOnly = false
-                    }).ToArray()
-                });
-                provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = WebUrl, Method = "GetList", ReturnValue = library });
-                provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = WebUrl, Method = "Add", ReturnValue = FeatureResponse() });
+                        ["Hidden"] = id != SiteId && hidden,
+                        ["ReadOnly"] = false,
+                        ["Name"] = name
+                    });
+                }
+                Features.Add(FeatureResponse());
             }
 
-            internal static object FeatureResponse()
+            internal static object FeatureResponse() => new { DefinitionId = EnterpriseWikiPagePreparation.SitePagesFeatureId };
+
+            internal PnPContext CreateContext() => CoreTestContext.Create(WebUrl, Respond,
+                webProperties: new Dictionary<string, object>
+                {
+                    ["Id"] = WebId,
+                    ["Features"] = Features
+                },
+                siteProperties: new Dictionary<string, object> { ["Id"] = SiteId });
+
+            private Dictionary<string, object> Library(string query)
             {
-                return new { _ObjectType_ = "SP.Feature", DefinitionId = $"/Guid({EnterpriseWikiPagePreparation.SitePagesFeatureId})/" };
+                var result = new Dictionary<string, object>
+                {
+                    ["Id"] = libraryId,
+                    ["Title"] = "SitePages",
+                    ["BaseTemplate"] = 119,
+                    ["ListItemEntityTypeFullName"] = "SP.Data.SitePagesItem",
+                    ["RootFolder"] = new { Name = "SitePages", ServerRelativeUrl = "/sites/wiki/SitePages" }
+                };
+                if (query.Contains("Fields", StringComparison.OrdinalIgnoreCase)) result["Fields"] = ListFields;
+                if (query.Contains("ContentTypes", StringComparison.OrdinalIgnoreCase))
+                    result["ContentTypes"] = new[] { ContentType(query) };
+                return result;
             }
 
-            private void AddProperty(string name, object value)
+            private Dictionary<string, object> ContentType(string query)
             {
-                provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = WebUrl, PropertyName = name, ReturnValue = value });
+                var result = new Dictionary<string, object>
+                {
+                    ["StringId"] = contentTypeId,
+                    ["Id"] = new { StringValue = contentTypeId },
+                    ["Name"] = "Site Page"
+                };
+                if (query.Contains("FieldLinks", StringComparison.OrdinalIgnoreCase)) result["FieldLinks"] = FieldLinks(query);
+                return result;
             }
 
-            internal ClientContext CreateContext()
+            private Dictionary<string, object>[] FieldLinks(string query)
             {
-                return new ClientContext(WebUrl) { WebRequestExecutorFactory = new MockWebRequestExecutorFactory(this) };
+                // REST omits ReadOnly unless it is explicitly selected.
+                var selected = query.Contains("ReadOnly", StringComparison.Ordinal);
+                return fieldLinks.Select(link =>
+                {
+                    var result = new Dictionary<string, object>(link);
+                    if (!selected) result.Remove("ReadOnly");
+                    return result;
+                }).ToArray();
             }
 
-            public string GetResponse(string url, string verb, string body)
+            private HttpResponseMessage Respond(HttpRequestMessage request, string body)
             {
                 RequestCount++;
-                if (FailRequests)
+                var path = Uri.UnescapeDataString(request.RequestUri.AbsolutePath);
+                var query = Uri.UnescapeDataString(request.RequestUri.Query);
+                if (request.Method != HttpMethod.Get)
                 {
-                    throw new InvalidOperationException("Feature query failed.");
+                    return Write(request, body, path);
                 }
-                var request = XElement.Parse(body);
-                var writes = request.Descendants().Where(e =>
-                    (e.Name.LocalName == "Method" && e.Parent.Name.LocalName == "Actions") ||
-                    e.Name.LocalName == "SetProperty" ||
-                    (e.Name.LocalName == "Method" && (string)e.Attribute("Name") == "Add")).ToList();
-                WriteCount += writes.Count;
-                if (writes.Count > 0)
+
+                if (path.EndsWith("/features", StringComparison.OrdinalIgnoreCase) ||
+                    path.EndsWith("/_api/web", StringComparison.OrdinalIgnoreCase) &&
+                    query.Contains("Features", StringComparison.OrdinalIgnoreCase))
                 {
-                    var write = writes[0];
-                    var parent = request.Descendants().FirstOrDefault(e =>
-                        (string)e.Attribute("Id") == (string)write.Attribute("ParentId"));
-                    if (AddBackingField && writes.Count == 1 && (string)write.Attribute("Name") == "Add" &&
-                        (string)parent?.Attribute("Name") == "Fields")
+                    FeatureQueryCount++;
+                    StringAssert.Contains(query, "DefinitionId");
+                    if (FailRequests)
                     {
-                        var parameter = write.Descendants().Single(e => e.Name.LocalName == "Parameter");
-                        var source = request.Descendants().Single(e =>
-                            (string)e.Attribute("Id") == (string)parameter.Attribute("ObjectPathId"));
-                        Assert.AreEqual($"Field:{SiteId}", (string)source.Attribute("Name"));
-                        var field = new Dictionary<string, object>(SiteFields.Single(f => f["InternalName"].ToString() == "CategoryBacking"));
-                        ListFields.Add(field);
-                        provider.ResponseEntries.Single(e => e.Method == "Add").ReturnValue = field;
+                        return CoreTestContext.Error("System.UnauthorizedAccessException", "Feature query failed.", -2147024891);
                     }
-                    else
-                    {
-                        throw new InvalidOperationException("Unexpected server write: " + writes[0]);
-                    }
+                    if (path.EndsWith("/features", StringComparison.OrdinalIgnoreCase))
+                        return CoreTestContext.Json(new { value = Features });
                 }
-                var response = provider.GetResponse(url, verb, body);
-                // SharePoint does not include FieldLink.ReadOnly in the default property set.
-                if (!request.Descendants().Any(e => e.Name.LocalName == "Property" && (string)e.Attribute("Name") == "ReadOnly"))
+                if (path.EndsWith("/_api/web", StringComparison.OrdinalIgnoreCase))
                 {
-                    response = response.Replace(",\"ReadOnly\":false", string.Empty);
+                    var web = new Dictionary<string, object>
+                    {
+                        ["Id"] = WebId,
+                        ["ServerRelativeUrl"] = "/sites/wiki"
+                    };
+                    if (query.Contains("Features", StringComparison.OrdinalIgnoreCase)) web["Features"] = Features;
+                    if (query.Contains("AvailableFields", StringComparison.OrdinalIgnoreCase)) web["AvailableFields"] = SiteFields;
+                    if (query.Contains("Lists", StringComparison.OrdinalIgnoreCase)) web["Lists"] = new[] { Library(query) };
+                    return CoreTestContext.Json(web);
                 }
-                return response;
+                if (path.EndsWith("/availablefields", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = SiteFields });
+                }
+                if (path.EndsWith("/effectivebasepermissions", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { High = "2147483647", Low = "4294967295" });
+                }
+                if (path.EndsWith("/fieldlinks", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = FieldLinks(query) });
+                }
+                if (path.EndsWith("/fields", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new
+                    {
+                        value = path.Contains("/lists(", StringComparison.OrdinalIgnoreCase) ||
+                            path.Contains("/getlist(", StringComparison.OrdinalIgnoreCase) ? ListFields : SiteFields
+                    });
+                }
+                if (path.EndsWith("/contenttypes", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = new[] { ContentType(query) } });
+                }
+                if (path.Contains("/contenttypes(", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(ContentType(query));
+                }
+                if (path.EndsWith("/lists", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = new[] { Library(query) } });
+                }
+                if (path.Contains("/lists(", StringComparison.OrdinalIgnoreCase) ||
+                    path.Contains("/getlist(", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(Library(query));
+                }
+                throw new InvalidOperationException($"Unexpected preparation fixture request: {request.Method} {request.RequestUri}");
+            }
+
+            private HttpResponseMessage Write(HttpRequestMessage request, string body, string path)
+            {
+                WriteCount++;
+                if (AddBackingField && request.Method == HttpMethod.Post &&
+                    path.EndsWith("/fields/createfieldasxml", StringComparison.OrdinalIgnoreCase))
+                {
+                    StringAssert.Contains(path.ToLowerInvariant(), libraryId.ToString().ToLowerInvariant());
+                    using var json = JsonDocument.Parse(body);
+                    var submittedSchema = XElement.Parse(json.RootElement.GetProperty("parameters").GetProperty("SchemaXml").GetString());
+                    var source = SiteFields.Single(field => field["InternalName"].ToString() == "CategoryBacking");
+                    Assert.AreEqual(SiteId, Guid.Parse((string)submittedSchema.Attribute("ID")));
+                    Assert.AreEqual("CategoryBacking", (string)submittedSchema.Attribute("Name"));
+                    Assert.AreEqual("Note", (string)submittedSchema.Attribute("Type"));
+                    Assert.IsTrue(XNode.DeepEquals(XElement.Parse(source["SchemaXml"].ToString()), submittedSchema),
+                        "The backing column must retain its source site-column schema.");
+                    Assert.IsFalse(ListFields.Any(field => (Guid)field["Id"] == SiteId),
+                        "The backing column must only be provisioned once.");
+                    var field = new Dictionary<string, object>(source)
+                    {
+                        ["odata.id"] = $"{WebUrl}/_api/Web/Lists(guid'{libraryId}')/Fields(guid'{SiteId}')"
+                    };
+                    ListFields.Add(field);
+                    return CoreTestContext.Json(field);
+                }
+                throw new InvalidOperationException($"Unexpected server write: {request.Method} {request.RequestUri}");
             }
         }
 

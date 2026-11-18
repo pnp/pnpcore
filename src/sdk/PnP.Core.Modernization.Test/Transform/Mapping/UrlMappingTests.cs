@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Publishing;
 using PnP.Core.Modernization.Telemetry.Observers;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Transform;
 using Microsoft.SqlServer.Server;
 
@@ -44,11 +43,12 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
                 {
                     var pageTransformator = new PublishingPageTransformator(sourceClientContext, targetClientContext);
                     pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose: true));
-                    //pageTransformator.RegisterObserver(new MarkdownToSharePointObserver(targetClientContext, includeVerbose: true));
+                    //using var reportContext = PnP.Framework.PnPCoreSdk.Instance.GetPnPContext(targetClientContext);
+                    //pageTransformator.RegisterObserver(new MarkdownToSharePointObserver(reportContext.Web, includeVerbose: true));
 
                     var pages = sourceClientContext.Web.GetPagesFromList("Pages", folder: "News", pageNameStartsWith: "Hot-Off-The-Press");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PublishingPageTransformationInformation pti = new PublishingPageTransformationInformation(page)
                         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
 
@@ -17,22 +16,22 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(sourceClientContext);
 
-                var pages = sourceClientContext.Web.GetPages("WPP_Image-Asset-MultipleImages");
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"WPP_Image-Asset-MultipleImages");
 
                 var pageItem = pages.FirstOrDefault();
 
-                if (pageItem != default(ListItem))
+                if (pageItem != default(IListItem))
                 {
 
-                    sourceClientContext.Load(pageItem.File, p => p.ServerRelativeUrl);
-                    sourceClientContext.ExecuteQueryRetry();
+                    pageItem.File.LoadBatch(p => p.ServerRelativeUrl);
+                    sourceClientContext.Execute();
 
                     var pageFile = sourceClientContext.Web.GetFileByServerRelativeUrl(pageItem.File.ServerRelativeUrl);
-                    sourceClientContext.Load(pageFile, p => p.Properties);
+                    pageFile.LoadBatch(p => p.Properties);
                     pageFile.Properties["vti_setuppath"] = "1033\\STS\\doctemp\\smartpgs\\spstd2.aspx";
                     pageFile.Properties["fixing_layout"] = "1033\\STS\\doctemp\\smartpgs\\spstd2.aspx";
                     pageFile.Update();
-                    sourceClientContext.ExecuteQueryRetry();
+                    sourceClientContext.Execute();
 
                     // Try both
                     //page.Properties["vti_setuppath"] = @"1033\STS\doctemp\smartpgs\spstd2.aspx";

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Modernization.Extensions;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

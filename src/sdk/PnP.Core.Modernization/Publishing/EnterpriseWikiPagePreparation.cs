@@ -1,6 +1,5 @@
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Cache;
-using PnP.Framework.Utilities;
+using PnP.Core.Provisioning.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,44 +60,44 @@ namespace PnP.Core.Modernization.Publishing
             }
         }
 
-        internal static void Prepare(ClientContext context)
+        internal static void Prepare(PnPContext context)
         {
-            var web = context.Web;
-            web.Features.ClearObjectData();
-            context.Load(web, w => w.ServerRelativeUrl);
-            context.Load(web.AvailableFields, fields => fields.Include(
-                f => f.Id, f => f.InternalName, f => f.TypeAsString, f => f.SchemaXmlWithResourceTokens));
-            context.Load(web.Features, features => features.Include(f => f.DefinitionId));
-            context.ExecuteQueryRetry();
+            IWeb web = context.Web;
+            web.Features.Clear();
+            web.LoadBatch(w => w.ServerRelativeUrl);
+            web.LoadBatch(w => w.AvailableFields.QueryProperties(
+                f => f.Id, f => f.InternalName, f => f.TypeAsString, f => f.SchemaXml));
+            web.LoadBatch(w => w.Features.QueryProperties(f => f.DefinitionId));
+            context.Execute();
 
-            if (!web.Features.Any(f => f.DefinitionId == SitePagesFeatureId))
+            if (!web.Features.AsRequested().Any(f => f.DefinitionId == SitePagesFeatureId))
             {
                 throw new InvalidOperationException(
-                    $"Enterprise Wiki preparation cannot continue because the Site Pages feature is not enabled on destination web '{context.Url}'. " +
+                    $"Enterprise Wiki preparation cannot continue because the Site Pages feature is not enabled on destination web '{context.Uri.AbsoluteUri}'. " +
                     $"Enable Site Pages ({SitePagesFeatureId}) under Site Settings > Manage site features, then retry.");
             }
 
-            var category = web.AvailableFields.FirstOrDefault(
+            IField category = web.AvailableFields.AsRequested().FirstOrDefault(
                 f => string.Equals(f.InternalName, CategoryFieldName, StringComparison.OrdinalIgnoreCase));
             if (category == null || category.TypeAsString != "TaxonomyFieldTypeMulti")
             {
                 throw new InvalidOperationException($"The destination requires an existing multi-value taxonomy site column '{CategoryFieldName}'.");
             }
 
-            var categorySchema = XElement.Parse(category.SchemaXmlWithResourceTokens);
-            ValidateFieldSchema(category.SchemaXmlWithResourceTokens, category.SchemaXmlWithResourceTokens);
+            var categorySchema = XElement.Parse(category.SchemaXml);
+            ValidateFieldSchema(category.SchemaXml, category.SchemaXml);
             var textFieldId = RequireTaxonomyGuid(categorySchema, "TextField");
-            var backingField = web.AvailableFields.FirstOrDefault(f => f.Id == textFieldId);
+            IField backingField = web.AvailableFields.AsRequested().FirstOrDefault(f => f.Id == textFieldId);
             if (backingField == null || backingField.TypeAsString != "Note")
             {
                 throw new InvalidOperationException($"The category site column requires its native hidden Note backing field '{textFieldId}'.");
             }
 
             // Preflight every definition before adding any list columns.
-            var requiredFields = new List<Field> { backingField };
+            var requiredFields = new List<IField> { backingField };
             foreach (var definition in RatingFields)
             {
-                var field = web.AvailableFields.FirstOrDefault(f => f.Id == definition.Id);
+                IField field = web.AvailableFields.AsRequested().FirstOrDefault(f => f.Id == definition.Id);
                 if (field == null || field.InternalName != definition.Name || field.TypeAsString != definition.Type)
                 {
                     throw new InvalidOperationException(
@@ -110,9 +109,9 @@ namespace PnP.Core.Modernization.Publishing
             requiredFields.Add(category);
 
             var libraryUrl = UrlUtility.Combine(web.ServerRelativeUrl, "SitePages");
-            context.Load(web.Lists, lists => lists.Include(l => l.Id, l => l.RootFolder.ServerRelativeUrl));
-            context.ExecuteQueryRetry();
-            var library = web.Lists.FirstOrDefault(l =>
+            web.Lists.LoadBatch(l => l.Id,l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+            context.Execute();
+            IList library = web.Lists.AsRequested().FirstOrDefault(l =>
                 string.Equals(l.RootFolder.ServerRelativeUrl, libraryUrl, StringComparison.OrdinalIgnoreCase));
             if (library != null)
             {
@@ -126,34 +125,32 @@ namespace PnP.Core.Modernization.Publishing
                 LoadLibrary(context, library);
                 ValidateExistingFields(library, requiredFields);
                 GetSitePageContentType(library);
-                var missingFields = requiredFields.Where(source => !library.Fields.Any(f => f.Id == source.Id)).ToList();
-                foreach (var source in missingFields)
+                var missingFields = requiredFields.Where(source => !library.Fields.AsRequested().Any(f => f.Id == source.Id)).ToList();
+                foreach (IField source in missingFields)
                 {
                     // Reuse the site column rather than recreating a similarly named field.
-                    library.Fields.Add(source);
-                    context.ExecuteQueryRetry();
+                    library.Fields.AddFieldAsXml(source.SchemaXml);
+                    context.Execute();
                 }
 
                 LoadLibrary(context, library);
-                var sitePageContentType = GetSitePageContentType(library);
-                context.Load(sitePageContentType.FieldLinks, links => links.Include(l => l.Id, l => l.Hidden, l => l.ReadOnly));
-                context.ExecuteQueryRetry();
+                IContentType sitePageContentType = GetSitePageContentType(library);
+                sitePageContentType.FieldLinks.LoadBatch(l => l.Id,l => l.Hidden,l => l.ReadOnly);
+                context.Execute();
 
                 var linksChanged = false;
-                var existingLinks = sitePageContentType.FieldLinks.ToDictionary(link => link.Id);
-                foreach (var source in requiredFields.Where(f => f.Id != backingField.Id))
+                var existingLinks = sitePageContentType.FieldLinks.AsRequested().ToDictionary(link => link.Id);
+                foreach (IField source in requiredFields.Where(f => f.Id != backingField.Id))
                 {
-                    if (!existingLinks.TryGetValue(source.Id, out var link))
+                    if (!existingLinks.TryGetValue(source.Id, out IFieldLink link))
                     {
-                        link = sitePageContentType.FieldLinks.Add(new FieldLinkCreationInformation
-                        {
-                            Field = library.Fields.First(f => f.Id == source.Id)
-                        });
+                        link = sitePageContentType.FieldLinks.Add(library.Fields.AsRequested().First(f => f.Id == source.Id));
                         link.Hidden = source.InternalName == "RatedBy" || source.InternalName == "Ratings";
                         if (source.Id == category.Id)
                         {
                             link.ReadOnly = false;
                         }
+                        link.Update();
                         linksChanged = true;
                     }
                     else
@@ -166,17 +163,18 @@ namespace PnP.Core.Modernization.Publishing
                             {
                                 link.ReadOnly = false;
                             }
+                            link.Update();
                             linksChanged = true;
                         }
                     }
                 }
                 if (linksChanged)
                 {
-                    sitePageContentType.Update(false);
-                    context.ExecuteQueryRetry();
+                    sitePageContentType.Update();
+                    context.Execute();
                 }
 
-                foreach (var field in library.Fields.Where(f => requiredFields.Any(source => source.Id == f.Id)))
+                foreach (IField field in library.Fields.AsRequested().Where(f => requiredFields.Any(source => source.Id == f.Id)))
                 {
                     var isCategory = field.Id == category.Id;
                     var hidden = field.Id == backingField.Id || field.InternalName == "RatedBy" || field.InternalName == "Ratings";
@@ -192,7 +190,7 @@ namespace PnP.Core.Modernization.Publishing
                         field.ReadOnlyField = false;
                         changed = true;
                     }
-                    if (!hidden && !HasExpectedFormVisibility(field.SchemaXmlWithResourceTokens, isCategory))
+                    if (!hidden && !HasExpectedFormVisibility(field.SchemaXml, isCategory))
                     {
                         field.SetShowInEditForm(isCategory);
                         field.SetShowInNewForm(isCategory);
@@ -201,29 +199,29 @@ namespace PnP.Core.Modernization.Publishing
                     if (changed)
                     {
                         field.Update();
-                        context.ExecuteQueryRetry();
+                        context.Execute();
                     }
                 }
 
                 LoadLibrary(context, library);
                 ValidateExistingFields(library, requiredFields);
                 sitePageContentType = GetSitePageContentType(library);
-                context.Load(sitePageContentType.FieldLinks, links => links.Include(l => l.Id, l => l.Hidden, l => l.ReadOnly));
-                context.ExecuteQueryRetry();
+                sitePageContentType.FieldLinks.LoadBatch(l => l.Id,l => l.Hidden,l => l.ReadOnly);
+                context.Execute();
 
-                foreach (var source in requiredFields)
+                foreach (IField source in requiredFields)
                 {
-                    var field = library.Fields.FirstOrDefault(f => f.Id == source.Id);
+                    IField field = library.Fields.AsRequested().FirstOrDefault(f => f.Id == source.Id);
                     if (field == null || (source.Id != backingField.Id &&
-                        !sitePageContentType.FieldLinks.Any(link => link.Id == source.Id)))
+                        !sitePageContentType.FieldLinks.AsRequested().Any(link => link.Id == source.Id)))
                     {
                         throw new InvalidOperationException($"SitePages preparation did not provision '{source.InternalName}' and its Site Page content-type link.");
                     }
 
                     var isCategory = field.Id == category.Id;
                     var hidden = field.Id == backingField.Id || field.InternalName == "RatedBy" || field.InternalName == "Ratings";
-                    var link = sitePageContentType.FieldLinks.FirstOrDefault(l => l.Id == field.Id);
-                    if (field.Hidden != hidden || (!hidden && !HasExpectedFormVisibility(field.SchemaXmlWithResourceTokens, isCategory)) ||
+                    IFieldLink link = sitePageContentType.FieldLinks.AsRequested().FirstOrDefault(l => l.Id == field.Id);
+                    if (field.Hidden != hidden || (!hidden && !HasExpectedFormVisibility(field.SchemaXml, isCategory)) ||
                         (isCategory && (field.ReadOnlyField || link.ReadOnly)) ||
                         (source.Id != backingField.Id && link.Hidden != hidden))
                     {
@@ -238,37 +236,35 @@ namespace PnP.Core.Modernization.Publishing
             }
         }
 
-        private static void LoadLibrary(ClientContext context, List library)
+        private static void LoadLibrary(PnPContext context, IList library)
         {
-            context.Load(library, l => l.BaseTemplate, l => l.EffectiveBasePermissions);
-            context.Load(library.Fields, fields => fields.Include(f => f.Id, f => f.InternalName,
-                f => f.TypeAsString, f => f.SchemaXmlWithResourceTokens, f => f.Hidden, f => f.ReadOnlyField));
-            context.Load(library.ContentTypes, types => types.Include(c => c.Id, c => c.Parent.Id));
-            context.ExecuteQueryRetry();
-            if (library.BaseTemplate != (int)ListTemplateType.WebPageLibrary ||
-                !library.EffectiveBasePermissions.Has(PermissionKind.AddListItems) ||
-                !library.EffectiveBasePermissions.Has(PermissionKind.EditListItems))
+            library.LoadBatch(l => l.TemplateType);
+            library.Fields.LoadBatch(f => f.Id,f => f.InternalName, f => f.TypeAsString,f => f.SchemaXml,f => f.Hidden,f => f.ReadOnlyField);
+            library.ContentTypes.LoadBatch(c => c.Id);
+            context.Execute();
+            if (library.TemplateType != ListTemplateType.WebPageLibrary ||
+                !library.HasPermissions(PermissionKind.AddListItems,
+                    PermissionKind.EditListItems))
             {
                 throw new InvalidOperationException("Enterprise Wiki preparation requires a writable SitePages Web Page Library.");
             }
         }
 
-        private static ContentType GetSitePageContentType(List library)
+        private static IContentType GetSitePageContentType(IList library)
         {
-            var contentType = library.ContentTypes.FirstOrDefault(c =>
-                string.Equals(c.Id.StringValue, Constants.ModernPageContentTypeId, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(c.Parent.Id.StringValue, Constants.ModernPageContentTypeId, StringComparison.OrdinalIgnoreCase));
+            IContentType contentType = library.ContentTypes.AsRequested().FirstOrDefault(c =>
+                c.Id.StartsWith(Constants.ModernPageContentTypeId, StringComparison.OrdinalIgnoreCase));
             return contentType ?? throw new InvalidOperationException("SitePages must contain the native modern Site Page content type.");
         }
 
-        private static void ValidateExistingFields(List library, IEnumerable<Field> requiredFields)
+        private static void ValidateExistingFields(IList library, IEnumerable<IField> requiredFields)
         {
-            foreach (var source in requiredFields)
+            foreach (IField source in requiredFields)
             {
-                foreach (var existing in library.Fields.Where(f => f.Id == source.Id ||
+                foreach (IField existing in library.Fields.AsRequested().Where(f => f.Id == source.Id ||
                     string.Equals(f.InternalName, source.InternalName, StringComparison.OrdinalIgnoreCase)))
                 {
-                    ValidateFieldSchema(source.SchemaXmlWithResourceTokens, existing.SchemaXmlWithResourceTokens);
+                    ValidateFieldSchema(source.SchemaXml, existing.SchemaXml);
                 }
             }
         }

@@ -1,10 +1,10 @@
-﻿using Microsoft.SharePoint.Client;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -42,9 +42,9 @@ namespace PnP.Core.Modernization.Publishing
         private PublishingPageTransformation publishingPageTransformation;
         private List<AddOnType> addOnTypes;
         private object builtInFunctions;
-        private ClientContext sourceClientContext;
-        private ClientContext targetClientContext;
-        private ListItem page;
+        private PnPContext sourceClientContext;
+        private PnPContext targetClientContext;
+        private IListItem page;
         private BaseTransformationInformation baseTransformationInformation;
 
         #region Construction
@@ -57,7 +57,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="publishingPageTransformation">Publishing page layout mapping</param>
         /// <param name="baseTransformationInformation">Page transformation information</param>
         /// <param name="logObservers">Connected loggers</param>
-        public PublishingFunctionProcessor(ListItem page, ClientContext sourceClientContext, ClientContext targetClientContext, PublishingPageTransformation publishingPageTransformation, BaseTransformationInformation baseTransformationInformation, IList<ILogObserver> logObservers = null)
+        public PublishingFunctionProcessor(IListItem page, PnPContext sourceClientContext, PnPContext targetClientContext, PublishingPageTransformation publishingPageTransformation, BaseTransformationInformation baseTransformationInformation, IList<ILogObserver> logObservers = null)
         {
             //Register any existing observers
             if (logObservers != null)
@@ -154,7 +154,7 @@ namespace PnP.Core.Modernization.Publishing
         #endregion
 
         #region Helper methods
-        private static FunctionDefinition ParseFunctionDefinition(string function, string propertyName, FieldType propertyType, ListItem page)
+        private static FunctionDefinition ParseFunctionDefinition(string function, string propertyName, FieldType propertyType, IListItem page)
         {
             // Supported function syntax: 
             // - EncodeGuid()
@@ -277,7 +277,7 @@ namespace PnP.Core.Modernization.Publishing
                     {
                         if (page.FieldExistsAndUsed(input.Name))
                         {
-                            input.Value = ((FieldUserValue)page[input.Name]).LookupId.ToString();
+                            input.Value = ((IFieldUserValue)page[input.Name]).LookupId.ToString();
                         }
                     }
                 }
@@ -301,13 +301,13 @@ namespace PnP.Core.Modernization.Publishing
                     try
                     {
                         string path = "";
-                        if (addOn.Assembly.Contains("\\") && System.IO.File.Exists(addOn.Assembly))
+                        if (addOn.Assembly.Contains("\\") && File.Exists(addOn.Assembly))
                         {
                             path = addOn.Assembly;
                         }
                         else
                         {
-                            path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addOn.Assembly);
+                            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addOn.Assembly);
                         }
 
                         var assembly = Assembly.LoadFile(path);

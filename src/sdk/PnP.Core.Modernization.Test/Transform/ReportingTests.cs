@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
@@ -63,9 +62,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(sourceClientContext);
                 pageTransformator.RegisterObserver(new UnitTestLogObserver()); //Registers the unit test observer to log details for testing
 
-                var pages = sourceClientContext.Web.GetPages("wpp");
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -107,9 +106,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(sourceClientContext);
                 // This test will use only the default observer
 
-                var pages = sourceClientContext.Web.GetPages("wpp").Take(1);
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp").AsRequested().Take(1);
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -153,9 +152,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
                     pageTransformator.RegisterObserver(new MarkdownObserver());
 
-                    var pages = sourceClientContext.Web.GetPages("wpp").Take(1);
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp").AsRequested().Take(1);
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -189,11 +188,12 @@ namespace PnP.Core.Modernization.Tests.Transform
                 using (var sourceClientContext = TestCommon.CreateClientContext())
                 {
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
-                    pageTransformator.RegisterObserver(new MarkdownToSharePointObserver(targetClientContext));
+                    var reportContext = targetClientContext;
+                    pageTransformator.RegisterObserver(new MarkdownToSharePointObserver(reportContext.Web));
 
-                    var pages = sourceClientContext.Web.GetPages("wpp").Take(1);
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp").AsRequested().Take(1);
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -230,9 +230,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
                     pageTransformator.RegisterObserver(new ConsoleObserver());
 
-                    var pages = sourceClientContext.Web.GetPages("wpp").Take(1);
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp").AsRequested().Take(1);
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -268,7 +268,8 @@ namespace PnP.Core.Modernization.Tests.Transform
                 List<LogEntry> warnLogs = GetExampleWarnLogs();
                 List<LogEntry> errorLogs = GetExampleErrorLogs();
 
-                var markdownObserver = new MarkdownToSharePointObserver(targetClientContext);
+                var reportContext = targetClientContext;
+                var markdownObserver = new MarkdownToSharePointObserver(reportContext.Web);
                 infoLogs.ForEach(o => { markdownObserver.Info(o); });
                 warnLogs.ForEach(o => { markdownObserver.Info(o); });
                 errorLogs.ForEach(o => { markdownObserver.Info(o); });

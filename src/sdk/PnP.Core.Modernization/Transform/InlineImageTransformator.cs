@@ -2,7 +2,6 @@ using AngleSharp;
 using AngleSharp.Css.Dom;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
@@ -11,13 +10,13 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Transform
 {
     internal sealed class InlineImageTransformator : BaseTransform
     {
-        private readonly PnPCore.IPage page;
+        private readonly IPage page;
         private readonly Uri sourcePageUrl;
         private readonly Func<Uri, string> transferImage;
         private readonly Func<string, string> rewriteUrl;
@@ -28,7 +27,7 @@ namespace PnP.Core.Modernization.Transform
         private readonly HtmlParser parser = new HtmlParser(new HtmlParserOptions { IsEmbedded = true },
             BrowsingContext.New(Configuration.Default.WithCss()));
 
-        internal InlineImageTransformator(PnPCore.IPage page, Uri sourcePageUrl,
+        internal InlineImageTransformator(IPage page, Uri sourcePageUrl,
             Func<Uri, string> transferImage, Func<string, string> rewriteUrl,
             IList<ILogObserver> logObservers = null, Func<string, Dictionary<string, string>> imageLookup = null,
             Func<Uri, string> importExternalImage = null, IEnumerable<Uri> internalOrigins = null,
@@ -97,7 +96,7 @@ namespace PnP.Core.Modernization.Transform
                     return html;
                 }
 
-                if (page.EditorType != PnPCore.EditorType.CK5)
+                if (page.EditorType != EditorType.CK5)
                 {
                     const string message = "Rich-text inline image transformation requires a CK5 target page.";
                     LogError(message, LogStrings.Heading_ContentTransform);
@@ -190,9 +189,9 @@ namespace PnP.Core.Modernization.Transform
                             inlineImage.SetAttribute("data-linkurl", GetImageLink(image, source, imageUrl, targetUrl));
                         }
                     }
-                    catch (Exception ex) when (ex is PnP.Core.ServiceException ||
-                                               ex is ServerException ||
-                                               ex is ClientRequestException ||
+                    catch (Exception ex) when (ex is ServiceException ||
+                                               ex is ServiceException ||
+                                               ex is PnPException ||
                                                ex is HttpRequestException ||
                                                ex is WebException ||
                                                ex is IOException ||
@@ -205,7 +204,7 @@ namespace PnP.Core.Modernization.Transform
                             continue;
                         }
                         inlineImage = CreateUrlImage(document, image, imageUrl);
-                        var reason = ex is PnP.Core.ServiceException serviceException && serviceException.Error is PnP.Core.ServiceError serviceError
+                        var reason = ex is ServiceException serviceException && serviceException.Error is ServiceError serviceError
                             ? $"HTTP {serviceError.HttpResponseCode}"
                             : ex.GetType().Name;
                         LogWarning($"Could not import external image '{imageUrl.GetLeftPart(UriPartial.Path)}' ({reason}). Retaining its URL in a native external CK5 image.",
@@ -270,7 +269,7 @@ namespace PnP.Core.Modernization.Transform
             }
         }
 
-        private IElement CreateUrlImage(IDocument document, IElement image, Uri imageUrl, PnPCore.PageImageOptions options = null)
+        private IElement CreateUrlImage(IDocument document, IElement image, Uri imageUrl, PageImageOptions options = null)
         {
             options ??= GetOptions(image);
             var plugin = document.CreateElement("div");
@@ -316,7 +315,7 @@ namespace PnP.Core.Modernization.Transform
             return link;
         }
 
-        private static PnPCore.PageImageOptions GetOptions(IElement image)
+        private static PageImageOptions GetOptions(IElement image)
         {
             var style = image.GetStyle();
             var width = style.GetPropertyValue("width");
@@ -331,11 +330,11 @@ namespace PnP.Core.Modernization.Transform
                 alignment = parent.GetStyle().GetTextAlign();
             }
 
-            var options = new PnPCore.PageImageOptions
+            var options = new PageImageOptions
             {
                 Width = PixelSize(width) ?? PixelSize(image.GetAttribute("width")),
                 Height = PixelSize(height) ?? PixelSize(image.GetAttribute("height")),
-                Alignment = PnPCore.PageImageAlignment.Left
+                Alignment = PageImageAlignment.Left
             };
 
             if (string.IsNullOrEmpty(width))
@@ -351,11 +350,11 @@ namespace PnP.Core.Modernization.Transform
 
             if (string.Equals(alignment, "right", StringComparison.OrdinalIgnoreCase))
             {
-                options.Alignment = PnPCore.PageImageAlignment.Right;
+                options.Alignment = PageImageAlignment.Right;
             }
             else if (string.Equals(alignment, "center", StringComparison.OrdinalIgnoreCase))
             {
-                options.Alignment = PnPCore.PageImageAlignment.Center;
+                options.Alignment = PageImageAlignment.Center;
             }
             return options;
         }
@@ -375,7 +374,7 @@ namespace PnP.Core.Modernization.Transform
                 ? size : (int?)null;
         }
 
-        private void CompleteDimensions(PnPCore.PageImageOptions options, string imageUrl)
+        private void CompleteDimensions(PageImageOptions options, string imageUrl)
         {
             if (imageLookup == null || (options.Width.HasValue && options.Height.HasValue))
             {

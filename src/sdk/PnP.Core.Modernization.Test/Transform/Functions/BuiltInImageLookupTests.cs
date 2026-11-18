@@ -1,13 +1,12 @@
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Cache;
+using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Xml.Linq;
 
@@ -93,10 +92,10 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             using (var context = CreateContext(CreateProvider(false, null, false, null)))
             {
                 var builtIn = CreateBuiltIn(context);
-                context.Load(context.Web, web => web.ServerRelativeUrl);
-                context.ExecuteQuery();
-                context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(new StaticResponseProvider(
-                    "[{\"SchemaVersion\":\"15.0.0.0\",\"LibraryVersion\":\"16.0.0.0\",\"ErrorInfo\":{\"ErrorMessage\":\"File Not Found.\",\"ErrorValue\":null,\"ErrorCode\":-2147024894,\"ErrorTypeName\":\"System.IO.FileNotFoundException\"},\"TraceCorrelationId\":\"d991e178-2b53-4ff8-b77f-6bb73516962a\"}]"));
+                context.Web.LoadBatch(web => web.ServerRelativeUrl);
+                context.Execute();
+                CoreTestContext.SetResponse(context, (_, _) =>
+                    CoreTestContext.Error("System.IO.FileNotFoundException", "File Not Found.", -2147024894));
 
                 var result = builtIn.ImageLookup(ImageServerRelativeUrl);
 
@@ -139,7 +138,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             {
                 var model = BasePageTransformator.LoadDefaultWebPartMapping();
                 var mapping = model.WebParts.Single(part => part.Type == "SharePointPnP.Modernization.WikiImagePart");
-                var data = new PnP.Core.Modernization.Entities.WebPartEntity
+                var data = new WebPartEntity
                 {
                     Properties = new Dictionary<string, string>
                     {
@@ -155,7 +154,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                     new PageTransformationInformation(null) { SkipTelemetry = true });
 
                 processor.Process(ref mapping, data);
-                var json = System.Net.WebUtility.HtmlDecode(TokenParser.ReplaceTokens(
+                var json = WebUtility.HtmlDecode(TokenParser.ReplaceTokens(
                     mapping.Mappings.Mapping.Single().ClientSideWebPart.Single().JsonControlData, data));
 
                 using (var document = JsonDocument.Parse(json))
@@ -211,15 +210,16 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             }
         }
 
-        private static ClientContext CreateContext(IMockResponseProvider provider)
+        private static PnPContext CreateContext(Dictionary<string, object> properties)
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(SiteUrl), SPVersion.SPO);
-            var context = new ClientContext(SiteUrl);
-            context.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider);
-            return context;
+            return CoreTestContext.WithFile(SiteUrl, new
+            {
+                ListId = ImageListId, UniqueId = ImageUniqueId, Properties = properties
+            });
         }
 
-        private static BuiltIn CreateBuiltIn(ClientContext context)
+        private static BuiltIn CreateBuiltIn(PnPContext context)
         {
             return new BuiltIn(new PageTransformationInformation(null)
             {
@@ -227,12 +227,9 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             }, context);
         }
 
-        private static MockEntryResponseProvider CreateProvider(bool includeWidth, object width, bool includeHeight, object height)
+        private static Dictionary<string, object> CreateProvider(bool includeWidth, object width, bool includeHeight, object height)
         {
-            var properties = new Dictionary<string, object>
-            {
-                ["_ObjectType_"] = "SP.PropertyValues"
-            };
+            var properties = new Dictionary<string, object>();
             if (includeWidth)
             {
                 properties["vti_lastwidth"] = width;
@@ -242,42 +239,7 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
                 properties["vti_lastheight"] = height;
             }
 
-            var provider = new MockEntryResponseProvider();
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = SiteUrl,
-                PropertyName = "Site",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.Site",
-                    ["ServerRelativeUrl"] = WebServerRelativeUrl,
-                    ["Url"] = SiteUrl
-                }
-            });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = SiteUrl,
-                PropertyName = "Web",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.Web",
-                    ["ServerRelativeUrl"] = WebServerRelativeUrl,
-                    ["Url"] = SiteUrl
-                }
-            });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = SiteUrl,
-                Method = "GetFileByServerRelativeUrl",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.File",
-                    ["ListId"] = $"/Guid({ImageListId})/",
-                    ["UniqueId"] = $"/Guid({ImageUniqueId})/",
-                    ["Properties"] = properties
-                }
-            });
-            return provider;
+            return properties;
         }
 
         private static string LoadImageJsonControlData(string webPartType)
@@ -307,19 +269,5 @@ namespace PnP.Core.Modernization.Test.Transform.Functions
             Assert.AreEqual(expectedHeight, result["ImageHeight"]);
         }
 
-        private sealed class StaticResponseProvider : IMockResponseProvider
-        {
-            private readonly string response;
-
-            public StaticResponseProvider(string response)
-            {
-                this.response = response;
-            }
-
-            public string GetResponse(string url, string verb, string body)
-            {
-                return response;
-            }
-        }
     }
 }

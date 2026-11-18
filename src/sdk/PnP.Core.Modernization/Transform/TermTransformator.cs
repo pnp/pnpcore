@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.Taxonomy;
+﻿
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Telemetry;
@@ -15,8 +14,8 @@ namespace PnP.Core.Modernization.Transform
 {
     public class TermTransformator : BaseTransform
     {
-        private ClientContext _sourceContext;
-        private ClientContext _targetContext;
+        private PnPContext _sourceContext;
+        private PnPContext _targetContext;
         private List<TermMapping> termMappings;
         private bool skipTermStoreMapping;
         private BaseTransformationInformation _baseTransformationInformation;
@@ -32,7 +31,7 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="sourceContext"></param>
         /// <param name="targetContext"></param>
         /// <param name="logObservers"></param>
-        public TermTransformator(BaseTransformationInformation baseTransformationInformation, ClientContext sourceContext, ClientContext targetContext, IList<ILogObserver> logObservers = null)
+        public TermTransformator(BaseTransformationInformation baseTransformationInformation, PnPContext sourceContext, PnPContext targetContext, IList<ILogObserver> logObservers = null)
         {
             // Hookup logging
             if (logObservers != null)
@@ -56,6 +55,8 @@ namespace PnP.Core.Modernization.Transform
 
             this._sourceContext = sourceContext;
             this._targetContext = targetContext;
+            if (sourceContext != null) SharePointOnlineSupport.Validate(sourceContext);
+            if (targetContext != null) SharePointOnlineSupport.Validate(targetContext);
 
             // Load the Term mapping file
             if (!string.IsNullOrEmpty(baseTransformationInformation?.TermMappingFile))
@@ -80,17 +81,17 @@ namespace PnP.Core.Modernization.Transform
         ///     TaxonomyFieldValueCollection - Original Array
         ///     List&lt;TaxonomyFieldValue&gt; - Items to remove as they are not resolved
         /// </returns>
-        public Tuple<TaxonomyFieldValueCollection,List<TaxonomyFieldValue>>  TransformCollection(TaxonomyFieldValueCollection taxonomyFieldValueCollection)
+        public Tuple<IFieldValueCollection, List<IFieldTaxonomyValue>>  TransformCollection(IFieldValueCollection taxonomyFieldValueCollection)
         {
-            List<TaxonomyFieldValue> exceptFields = new List<TaxonomyFieldValue>();
+            List<IFieldTaxonomyValue> exceptFields = new List<IFieldTaxonomyValue>();
             
-            foreach (var fieldValue in taxonomyFieldValueCollection)
+            foreach (IFieldTaxonomyValue fieldValue in taxonomyFieldValueCollection.Values)
             {
-                var result = this.Transform(new TermData() { TermGuid = Guid.Parse(fieldValue.TermGuid), TermLabel = fieldValue.Label });
+                var result = this.Transform(new TermData() { TermGuid = fieldValue.TermId, TermLabel = fieldValue.Label });
                 if (result.IsTermResolved)
                 {
                     fieldValue.Label = result.TermLabel;
-                    fieldValue.TermGuid = result.TermGuid.ToString();
+                    fieldValue.TermId = result.TermGuid;
                 }
                 else
                 {
@@ -99,7 +100,7 @@ namespace PnP.Core.Modernization.Transform
             }
             
             // Return fields to remove by calling code.
-            return new Tuple<TaxonomyFieldValueCollection, List<TaxonomyFieldValue>>(taxonomyFieldValueCollection, exceptFields);
+            return new Tuple<IFieldValueCollection, List<IFieldTaxonomyValue>>(taxonomyFieldValueCollection, exceptFields);
         }
 
         /// <summary>
@@ -237,12 +238,12 @@ namespace PnP.Core.Modernization.Transform
             // Collect source terms
             if (sourceTermSetId != Guid.Empty)
             {
-                Cache.CacheManager.Instance.StoreTermSetTerms(this._sourceContext, sourceTermSetId, sourceSspId, isSP2010, true);
+                CacheManager.Instance.StoreTermSetTerms(this._sourceContext, sourceTermSetId, sourceSspId, isSP2010, true);
             }
 
             if (targetTermSetId != Guid.Empty)
             {
-                Cache.CacheManager.Instance.StoreTermSetTerms(this._targetContext, targetTermSetId, sourceSspId, false, false);
+                CacheManager.Instance.StoreTermSetTerms(this._targetContext, targetTermSetId, sourceSspId, false, false);
             }
 
         }
@@ -255,49 +256,47 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="termSetId"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static Dictionary<Guid, TermData> GetAllTermsFromTermSet(Guid termSetId, ClientContext context)
+        public static Dictionary<Guid, TermData> GetAllTermsFromTermSet(Guid termSetId, PnPContext context)
         {
+            SharePointOnlineSupport.Validate(context);
             //Use a source and target Dictionary<guid,string>
             //Key = Id, Value = Path(e.g.termgroup | termset | term)
             var termsCache = new Dictionary<Guid, TermData>();
 
             try
             {
-                using (var clonedContext = context.Clone(context.Web.GetUrl()))
+                using (PnPContext clonedContext = context.Clone(new Uri(context.Web.GetUrl())))
                 {
-                    TaxonomySession session = TaxonomySession.GetTaxonomySession(clonedContext);
-                    TermStore termStore = session.GetDefaultSiteCollectionTermStore();
-                    var termSet = termStore.GetTermSet(termSetId);
+                    clonedContext.TermStore.EnsureProperties(store => store.DefaultLanguage);
+                    var language = clonedContext.TermStore.DefaultLanguage;
+                    var termSet = clonedContext.TermStore.GetTermSetById(termSetId.ToString(),
+                        t => t.Terms.QueryProperties(x => x.Labels), t => t.LocalizedNames, t => t.Group);
                     var termGroup = termSet.Group;
-                    clonedContext.Load(termSet, t => t.Terms, t => t.Name);
-                    clonedContext.Load(termGroup, g => g.Name);
-                    clonedContext.ExecuteQueryRetry();
+                    termGroup.LoadBatch(g => g.Name);
+                    clonedContext.Execute();
 
                     var termGroupName = termGroup.Name;
-                    var setName = termSet.Name;
+                    var setName = termSet.LocalizedNames.AsRequested().FirstOrDefault(n => n.LanguageTag == language)?.Name ??
+                        termSet.LocalizedNames.AsRequested().First().Name;
                     var termSetPath = $"{termGroupName}{TermTransformator.TermNodeDelimiter}{setName}";
                     foreach (var term in termSet.Terms)
                     {
-                        var termName = term.Name;
+                        var termName = GetTermLabel(term, language);
                         var termPath = $"{termSetPath}{TermNodeDelimiter}{termName}";
-                        termsCache.Add(term.Id,
-                            new TermData() { TermGuid = term.Id, TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
+                        termsCache.Add(Guid.Parse(term.Id),
+                            new TermData() { TermGuid = Guid.Parse(term.Id), TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
 
-                        if (term.TermsCount > 0)
+                        var subTerms = ParseSubTerms(termPath, term, termSetId, clonedContext);
+                        foreach (var foundTerm in subTerms)
                         {
-                            var subTerms = ParseSubTerms(termPath, term, termSetId, clonedContext);
-                            //termsCache
-                            foreach (var foundTerm in subTerms)
-                            {
-                                termsCache.Add(foundTerm.Key, foundTerm.Value);
-                            }
+                            termsCache.Add(foundTerm.Key, foundTerm.Value);
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: Record any failure
+                throw new InvalidOperationException($"Could not read term set '{termSetId}' from '{context.Uri}'. No partial term mapping will be cached.", ex);
             }
 
             return termsCache;
@@ -312,34 +311,32 @@ namespace PnP.Core.Modernization.Transform
         /// <param name="clientContext"></param>
         /// <returns></returns>
         /// Reference: https://github.com/SharePoint/PnP-Sites-Core/blob/master/Core/OfficeDevPnP.Core/Extensions/TaxonomyExtensions.cs
-        public static Dictionary<Guid, TermData> ParseSubTerms(string subTermPath, Term term, Guid termSetId, ClientRuntimeContext clientContext)
+        public static Dictionary<Guid, TermData> ParseSubTerms(string subTermPath, ITerm term, Guid termSetId, PnPContext clientContext)
         {
             var items = new Dictionary<Guid, TermData>();
-            if (term.ServerObjectIsNull == null || term.ServerObjectIsNull == false)
-            {
-                clientContext.Load(term.Terms);
-                clientContext.ExecuteQueryRetry();
-            }
+            clientContext.TermStore.EnsureProperties(store => store.DefaultLanguage);
+            term.Load(t => t.Terms.QueryProperties(child => child.Labels));
 
             foreach (var subTerm in term.Terms)
             {
-                var termName = subTerm.Name;
+                var termName = GetTermLabel(subTerm, clientContext.TermStore.DefaultLanguage);
                 var termPath = $"{subTermPath}{TermTransformator.TermNodeDelimiter}{termName}";
 
-                items.Add(subTerm.Id, new TermData() { TermGuid = subTerm.Id, TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
+                items.Add(Guid.Parse(subTerm.Id), new TermData() { TermGuid = Guid.Parse(subTerm.Id), TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
 
-                if (term.TermsCount > 0)
+                var moreSubTerms = ParseSubTerms(termPath, subTerm, termSetId, clientContext);
+                foreach (var foundTerm in moreSubTerms)
                 {
-                    var moreSubTerms = ParseSubTerms(termPath, subTerm, termSetId, clientContext);
-                    foreach (var foundTerm in moreSubTerms)
-                    {
-                        items.Add(foundTerm.Key, foundTerm.Value);
-                    }
+                    items.Add(foundTerm.Key, foundTerm.Value);
                 }
 
             }
             return items;
         }
+
+        private static string GetTermLabel(ITerm term, string language) =>
+            term.Labels.AsRequested().FirstOrDefault(l => l.IsDefault && l.LanguageTag == language)?.Name ??
+            term.Labels.AsRequested().FirstOrDefault(l => l.IsDefault)?.Name ?? term.Labels.AsRequested().First().Name;
 
         #endregion
 
@@ -348,7 +345,7 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="context"></param>
         /// <param name="termPath"></param>
-        public TermData ResolveTermInCache(ClientContext context, string termPath)
+        public TermData ResolveTermInCache(PnPContext context, string termPath)
         {
             //Use the cache
             var result = CacheManager.Instance.GetTransformTermCacheTermByName(context, termPath:termPath);
@@ -367,7 +364,7 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="context"></param>
         /// <param name="termId"></param>
-        public TermData ResolveTermInCache(ClientContext context, Guid termId)
+        public TermData ResolveTermInCache(PnPContext context, Guid termId)
         {
             //Use the cache
             var cachedTerm = CacheManager.Instance.GetTransformTermCacheTermById(context, termId);
@@ -417,308 +414,6 @@ namespace PnP.Core.Modernization.Transform
             }
 
             return string.Empty;
-        }
-
-        /// <summary>
-        /// Calls the web services to get the termset details
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="sspId"></param>
-        /// <param name="termSetId"></param>
-        /// <returns></returns>
-        public static Dictionary<Guid, TermData> CallTaxonomyWebServiceFindTermSetId(ClientContext context, Guid sspId, Guid termSetId)
-        {
-            var termsCache = new Dictionary<Guid, TermData>();
-
-            try
-            {
-                //LogInfo("", LogStrings.Heading_ContentTransform);
-
-                #region Web Service Call
-
-                string webUrl = context.Web.GetUrl();
-                string webServiceUrl = webUrl + "/_vti_bin/taxonomyclientservice.asmx";
-
-                StringBuilder soapEnvelope = new StringBuilder();
-
-                soapEnvelope.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-                soapEnvelope.Append("<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
-                soapEnvelope.Append(String.Format(
-                 "<soap:Body>" +
-                     "<GetChildTermsInTermSet xmlns=\"http://schemas.microsoft.com/sharepoint/taxonomy/soap/\">" +
-                       "<sspId>{0}</sspId>" +
-                       "<termSetId>{1}</termSetId> "+
-                       "<lcid>{2}</lcid>" +
-                     "</GetChildTermsInTermSet>" +
-                 "</soap:Body>", sspId.ToString(), termSetId.ToString(),1033));
-
-                soapEnvelope.Append("</soap:Envelope>");
-
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(webServiceUrl);
-                request.AddAuthenticationData(context);
-                request.Method = "POST";
-                request.ContentType = "text/xml; charset=\"utf-8\"";
-                request.Accept = "text/xml";
-                request.Headers.Add("SOAPAction", "\"http://schemas.microsoft.com/sharepoint/taxonomy/soap/GetChildTermsInTermSet\"");
-
-                using (System.IO.Stream stream = request.GetRequestStream())
-                {
-                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(stream))
-                    {
-                        writer.Write(soapEnvelope.ToString());
-                    }
-                }
-
-                #endregion
-
-                #region Web Service Response
-
-                var response = request.GetResponse();
-                using (var dataStream = response.GetResponseStream())
-                {
-                    XmlDocument xDoc = new XmlDocument();
-                    xDoc.Load(dataStream);
-
-                    if (xDoc.DocumentElement != null && xDoc.DocumentElement.InnerText.Length > 0)
-                    {
-                        #region Process Xml
-
-                        /*
-                            Response Example from WS Key:                            
-
-                            T = Term
-                            TMS = TermSet
-                            TM = Term
-                            TL = Term Label
-
-                            a31 = default label
-                            a9 / a45 = term id
-                            a32 = label
-                            a12 = term set label
-                            a24 = term set id
-                            a1000/a69 = hasChildren ?
-
-                       */
-
-                        XElement queryXml = XElement.Parse(xDoc.DocumentElement.InnerText);
-                        var xmlTermSetId = termSetId.ToString().Trim('{','}');
-                        var xmlTermSetLabel = "";
-                        var foundTermSetName = false;
-                        var listOfTerms = new List<XmlTermSetTerm>();
-
-                        //Term Details
-                        foreach (XElement property in queryXml.Descendants("T"))
-                        {
-                            var term = new XmlTermSetTerm();
-
-                            var queryTermId = property.Attribute("a9");
-                            term.TermGuid = queryTermId?.Value;
-
-                            var queryDefaultLabel = property.Descendants("TL").FirstOrDefault(desc => desc.Attribute("a31").Value == "true"); //Default Labels
-                            term.TermLabel = queryDefaultLabel.Attribute("a32").Value;
-
-                            var queryTermSetName = property.Descendants("TM").FirstOrDefault(tsn => tsn.Attribute("a24").Value == xmlTermSetId);
-                            if (queryTermSetName != null)
-                            {
-                                term.HasChildren = (queryTermSetName.Attribute("a69")?.Value == "true");
-
-                                if (!foundTermSetName)
-                                {
-                                    xmlTermSetLabel = queryTermSetName.Attribute("a12")?.Value;
-                                    foundTermSetName = true;
-                                }
-                            }
-
-                            listOfTerms.Add(term);
-
-                            
-                        }
-
-                        //Term Set Details
-
-                        #endregion
-
-                        #region Process Data
-
-                        var termSetPath = $"{TermTransformator.TermGroupUnknownName}{TermTransformator.TermNodeDelimiter}{xmlTermSetLabel}";
-                        foreach (var term in listOfTerms)
-                        {
-                            var termName = term.TermLabel;
-                            var termPath = $"{termSetPath}{TermNodeDelimiter}{termName}";
-                            termsCache.Add(new Guid(term.TermGuid),
-                                new TermData() { TermGuid = new Guid(term.TermGuid), TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
-
-                            if (term.HasChildren)
-                            {
-                                var moreSubTerms = TermTransformator.CallTaxonomyWebServiceFindChildTerms(context, sspId, termSetId, Guid.Parse(term.TermGuid), termPath);
-                                foreach (var foundTerm in moreSubTerms)
-                                {
-                                    termsCache.Add(foundTerm.Key, foundTerm.Value);
-                                }
-                            }
-                        }
-
-                        #endregion
-                    }
-                }
-
-                #endregion
-            }
-            catch (WebException)
-            {
-                //LogError("An error occurred calling the web services", LogStrings.Heading_ContentTransform, ex);
-
-            }
-
-            return termsCache;
-        }
-
-        /// <summary>
-        /// Finds the child terms using the fall back web services
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="sspId"></param>
-        /// <param name="termSetId"></param>
-        /// <param name="termId"></param>
-        /// <param name="subTermPath"></param>
-        /// <returns></returns>
-        public static Dictionary<Guid, TermData> CallTaxonomyWebServiceFindChildTerms(ClientContext context, Guid sspId, Guid termSetId, Guid termId, string subTermPath)
-        {
-            var termsCache = new Dictionary<Guid, TermData>();
-
-            try
-            {
-                //LogInfo("", LogStrings.Heading_ContentTransform);
-
-                #region Web Service Call
-
-                string webUrl = context.Web.GetUrl();
-                string webServiceUrl = webUrl + "/_vti_bin/taxonomyclientservice.asmx";
-
-                StringBuilder soapEnvelope = new StringBuilder();
-
-                soapEnvelope.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-                soapEnvelope.Append("<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
-                soapEnvelope.Append(String.Format(
-                 "<soap:Body>" +
-                     "<GetChildTermsInTerm xmlns=\"http://schemas.microsoft.com/sharepoint/taxonomy/soap/\">" +
-                       "<sspId>{0}</sspId>" +
-                       "<termSetId>{1}</termSetId> " +
-                       "<lcid>{2}</lcid>" +
-                       "<termId>{3}</termId>" +
-                     "</GetChildTermsInTerm>" +
-                 "</soap:Body>", sspId.ToString(), termSetId.ToString(), 1033, termId.ToString()));
-
-                soapEnvelope.Append("</soap:Envelope>");
-
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(webServiceUrl);
-                request.AddAuthenticationData(context);
-                request.Method = "POST";
-                request.ContentType = "text/xml; charset=\"utf-8\"";
-                request.Accept = "text/xml";
-                request.Headers.Add("SOAPAction", "\"http://schemas.microsoft.com/sharepoint/taxonomy/soap/GetChildTermsInTerm\"");
-
-                using (System.IO.Stream stream = request.GetRequestStream())
-                {
-                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(stream))
-                    {
-                        writer.Write(soapEnvelope.ToString());
-                    }
-                }
-
-                #endregion
-
-                #region Web Service Response
-
-                var response = request.GetResponse();
-                using (var dataStream = response.GetResponseStream())
-                {
-                    XmlDocument xDoc = new XmlDocument();
-                    xDoc.Load(dataStream);
-
-                    if (xDoc.DocumentElement != null && xDoc.DocumentElement.InnerText.Length > 0)
-                    {
-                        #region Process Xml
-
-                        /*
-                            Response Example from WS Key:                            
-
-                            T = Term
-                            TMS = TermSet
-                            TM = Term
-                            TL = Term Label
-
-                            a31 = default label
-                            a9  = term id
-                            a45 = term path ids
-                            a32 = label
-                            a12 = term set label
-                            a24 = term set id
-                            a25 = parent term id
-                            a40 = parent term/term set
-                            a1000/a69 = hasChildren ?
-
-                       */
-
-                        XElement queryXml = XElement.Parse(xDoc.DocumentElement.InnerText);
-                        var xmlTermSetId = termSetId.ToString().Trim('{', '}');
-                        var listOfTerms = new List<XmlTermSetTerm>();
-
-                        ////Term Details
-                        foreach (XElement property in queryXml.Descendants("T"))
-                        {
-                            var term = new XmlTermSetTerm();
-
-                            var queryTermId = property.Attribute("a9");
-                            term.TermGuid = queryTermId?.Value;
-
-                            var queryDefaultLabel = property.Descendants("TL").FirstOrDefault(desc => desc.Attribute("a31").Value == "true"); //Default Labels
-                            term.TermLabel = queryDefaultLabel.Attribute("a32").Value;
-
-                            var queryTermSetName = property.Descendants("TM").FirstOrDefault(tsn => tsn.Attribute("a24").Value == xmlTermSetId);
-                            if (queryTermSetName != null)
-                            {
-                                term.HasChildren = (queryTermSetName.Attribute("a69")?.Value == "true");
-                            }
-
-                            listOfTerms.Add(term);
-                        }
-
-                        #endregion
-
-                        #region Process Data
-
-                        foreach (var term in listOfTerms)
-                        {
-                            var termName = term.TermLabel;
-                            var termPath = $"{subTermPath}{TermTransformator.TermNodeDelimiter}{termName}";
-
-                            termsCache.Add(new Guid(term.TermGuid),
-                                new TermData() { TermGuid = new Guid(term.TermGuid), TermLabel = termName, TermPath = termPath, TermSetId = termSetId });
-
-                            if (term.HasChildren)
-                            {
-                                var moreSubTerms = CallTaxonomyWebServiceFindChildTerms(context, sspId, termSetId, Guid.Parse(term.TermGuid), termPath);
-                                foreach (var foundTerm in moreSubTerms)
-                                {
-                                    termsCache.Add(foundTerm.Key, foundTerm.Value);
-                                }
-                            }
-                        }
-
-                        #endregion
-                    }
-                }
-
-                #endregion
-            }
-            catch (WebException)
-            {
-                //LogError("An error occurred calling the web services", LogStrings.Heading_ContentTransform, ex);
-
-            }
-
-            return termsCache;
         }
 
     }

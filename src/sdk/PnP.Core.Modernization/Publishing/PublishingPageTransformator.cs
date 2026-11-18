@@ -1,8 +1,7 @@
-﻿using Microsoft.SharePoint.Client;
-using PnP.Framework.Utilities;
+using PnP.Core.Provisioning.Utilities;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Pages;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
@@ -11,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Publishing
 {
@@ -27,15 +26,15 @@ namespace PnP.Core.Modernization.Publishing
         private readonly EnterpriseWikiPagePreparation enterpriseWikiPreparation = new EnterpriseWikiPagePreparation();
 
         #region Construction
-        public PublishingPageTransformator(ClientContext sourceClientContext, ClientContext targetClientContext) : this(sourceClientContext, targetClientContext, "webpartmapping.xml", null)
+        public PublishingPageTransformator(PnPContext sourceClientContext, PnPContext targetClientContext) : this(sourceClientContext, targetClientContext, "webpartmapping.xml", null)
         {
         }
 
-        public PublishingPageTransformator(ClientContext sourceClientContext, ClientContext targetClientContext, string publishingPageTransformationFile) : this(sourceClientContext, targetClientContext, "webpartmapping.xml", publishingPageTransformationFile)
+        public PublishingPageTransformator(PnPContext sourceClientContext, PnPContext targetClientContext, string publishingPageTransformationFile) : this(sourceClientContext, targetClientContext, "webpartmapping.xml", publishingPageTransformationFile)
         {
         }
 
-        public PublishingPageTransformator(ClientContext sourceClientContext, ClientContext targetClientContext, string pageTransformationFile, string publishingPageTransformationFile)
+        public PublishingPageTransformator(PnPContext sourceClientContext, PnPContext targetClientContext, string pageTransformationFile, string publishingPageTransformationFile)
         {
 #if DEBUG && MEASURE
             InitMeasurement();
@@ -43,6 +42,8 @@ namespace PnP.Core.Modernization.Publishing
 
             this.sourceClientContext = sourceClientContext ?? throw new ArgumentException("sourceClientContext must be provided.");
             this.targetClientContext = targetClientContext ?? throw new ArgumentException("targetClientContext must be provided.");
+            SharePointOnlineSupport.Validate(sourceClientContext);
+            SharePointOnlineSupport.Validate(targetClientContext);
 
             this.version = GetVersion();
             this.pageTelemetry = new PageTelemetry(version);
@@ -50,7 +51,7 @@ namespace PnP.Core.Modernization.Publishing
 
             // Load xml mapping data
             var fileToLoad = pageTransformationFile;
-            if (!System.IO.File.Exists(pageTransformationFile))
+            if (!File.Exists(pageTransformationFile))
             {
                 fileToLoad = "Modernization" + Path.AltDirectorySeparatorChar + pageTransformationFile;
             }
@@ -76,7 +77,7 @@ namespace PnP.Core.Modernization.Publishing
             }
         }
 
-        public PublishingPageTransformator(ClientContext sourceClientContext, ClientContext targetClientContext, PageTransformation pageTransformationModel, PublishingPageTransformation customPublishingPageTransformationModel)
+        public PublishingPageTransformator(PnPContext sourceClientContext, PnPContext targetClientContext, PageTransformation pageTransformationModel, PublishingPageTransformation customPublishingPageTransformationModel)
         {
 #if DEBUG && MEASURE
             InitMeasurement();
@@ -84,6 +85,8 @@ namespace PnP.Core.Modernization.Publishing
 
             this.sourceClientContext = sourceClientContext ?? throw new ArgumentException("sourceClientContext must be provided.");
             this.targetClientContext = targetClientContext ?? throw new ArgumentException("targetClientContext must be provided.");
+            SharePointOnlineSupport.Validate(sourceClientContext);
+            SharePointOnlineSupport.Validate(targetClientContext);
 
             this.version = GetVersion();
             this.pageTelemetry = new PageTelemetry(version);
@@ -108,7 +111,7 @@ namespace PnP.Core.Modernization.Publishing
         /// </summary>
         /// <param name="sourceClientContext">Client context of the Web holding the publishing page</param>
         /// <returns>A transformator configured for in-place transformation</returns>
-        public static PublishingPageTransformator CreateInPlace(ClientContext sourceClientContext)
+        public static PublishingPageTransformator CreateInPlace(PnPContext sourceClientContext)
         {
             return new PublishingPageTransformator(sourceClientContext, sourceClientContext);
         }
@@ -119,7 +122,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="sourceClientContext">Client context of the Web holding the publishing page</param>
         /// <param name="publishingPageTransformationFile">Page layout mapping file</param>
         /// <returns>A transformator configured for in-place transformation</returns>
-        public static PublishingPageTransformator CreateInPlace(ClientContext sourceClientContext, string publishingPageTransformationFile)
+        public static PublishingPageTransformator CreateInPlace(PnPContext sourceClientContext, string publishingPageTransformationFile)
         {
             return new PublishingPageTransformator(sourceClientContext, sourceClientContext, publishingPageTransformationFile);
         }
@@ -131,7 +134,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="pageTransformationFile">Web part mapping file</param>
         /// <param name="publishingPageTransformationFile">Page layout mapping file</param>
         /// <returns>A transformator configured for in-place transformation</returns>
-        public static PublishingPageTransformator CreateInPlace(ClientContext sourceClientContext, string pageTransformationFile, string publishingPageTransformationFile)
+        public static PublishingPageTransformator CreateInPlace(PnPContext sourceClientContext, string pageTransformationFile, string publishingPageTransformationFile)
         {
             return new PublishingPageTransformator(sourceClientContext, sourceClientContext, pageTransformationFile, publishingPageTransformationFile);
         }
@@ -143,7 +146,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="pageTransformationModel">Web part mapping model</param>
         /// <param name="customPublishingPageTransformationModel">Page layout mapping model</param>
         /// <returns>A transformator configured for in-place transformation</returns>
-        public static PublishingPageTransformator CreateInPlace(ClientContext sourceClientContext, PageTransformation pageTransformationModel, PublishingPageTransformation customPublishingPageTransformationModel)
+        public static PublishingPageTransformator CreateInPlace(PnPContext sourceClientContext, PageTransformation pageTransformationModel, PublishingPageTransformation customPublishingPageTransformationModel)
         {
             return new PublishingPageTransformator(sourceClientContext, sourceClientContext, pageTransformationModel, customPublishingPageTransformationModel);
         }
@@ -171,6 +174,8 @@ namespace PnP.Core.Modernization.Publishing
                 LogError(LogStrings.Error_SourcePageNotFound, LogStrings.Heading_InputValidation);
                 throw new ArgumentNullException(LogStrings.Error_SourcePageNotFound);
             }
+
+            publishingPageTransformationInformation.SourcePage = LoadSourcePageFields(publishingPageTransformationInformation.SourcePage);
 
             // Validate page and it's eligibility for transformation
             if (!publishingPageTransformationInformation.SourcePage.FieldExistsAndUsed(Constants.FileRefField) || !publishingPageTransformationInformation.SourcePage.FieldExistsAndUsed(Constants.FileLeafRefField))
@@ -388,18 +393,18 @@ namespace PnP.Core.Modernization.Publishing
 #if DEBUG && MEASURE
             Start();
 #endif
-                PnPCore.IPage targetPage = null;
-                List pagesLibrary = null;
-                Microsoft.SharePoint.Client.File existingFile = null;
+                IPage targetPage = null;
+                IList pagesLibrary = null;
+                IFile existingFile = null;
 
                 //The determines of the target client context has been specified and use that to generate the target page
-                var context = targetClientContext;
+                PnPContext context = targetClientContext;
 
                 targetPage = CreateTargetPageAfterCollisionProbe(
                     transformationTarget,
                     publishingPageTransformationInformation,
                     () => Load(sourceClientContext, targetClientContext, publishingPageTransformationInformation, out pagesLibrary),
-                    pageName => context.Web.AddClientSidePage(pageName),
+                    pageName => context.Web.NewPage(),
                     out existingFile);
 
 #if DEBUG && MEASURE
@@ -425,14 +430,7 @@ namespace PnP.Core.Modernization.Publishing
                 var pageLayoutMappingModel = new PageLayoutManager(this.RegisteredLogObservers).GetPageLayoutMappingModel(publishingModel, publishingPageTransformationInformation.SourcePage);
                 var enterpriseWikiRatings = PrepareEnterpriseWikiRatings(publishingPageTransformationInformation, pageLayoutMappingModel, sameSiteCollection);
                
-                if (spVersion == SPVersion.SP2010 || spVersion == SPVersion.SP2013Legacy || spVersion == SPVersion.SP2016Legacy)
-                {
-                    pageData = new PublishingPageOnPremises(publishingPageTransformationInformation.SourcePage, pageTransformation, publishingModel, publishingPageTransformationInformation as BaseTransformationInformation, targetContext: targetClientContext, logObservers: base.RegisteredLogObservers).Analyze(pageLayoutMappingModel);
-                }
-                else
-                {
-                    pageData = new PublishingPage(publishingPageTransformationInformation.SourcePage, pageTransformation, publishingModel, publishingPageTransformationInformation as BaseTransformationInformation, targetContext: targetClientContext, logObservers: base.RegisteredLogObservers).Analyze(pageLayoutMappingModel);
-                }
+                pageData = new PublishingPage(publishingPageTransformationInformation.SourcePage, pageTransformation, publishingModel, publishingPageTransformationInformation as BaseTransformationInformation, targetContext: targetClientContext, logObservers: base.RegisteredLogObservers).Analyze(pageLayoutMappingModel);
 
 
                 // Images stay inline; embedded iframes are handled as separate video web parts.
@@ -569,9 +567,10 @@ namespace PnP.Core.Modernization.Publishing
                 {
                     pageNameToLoad = pageNameToLoad.Substring(1);
                 }
-                var savedTargetPage = targetClientContext.Web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl($"{targetPage.PagesLibrary.RootFolder.ServerRelativeUrl}/{pageNameToLoad}"));
-                targetClientContext.Web.Context.Load(savedTargetPage, p => p.ListItemAllFields);
-                targetClientContext.Web.Context.ExecuteQueryRetry();
+                IFile savedTargetPage = targetClientContext.Web.GetFileByServerRelativeUrl($"{targetPage.PagesLibrary.RootFolder.ServerRelativeUrl}/{pageNameToLoad}");
+                savedTargetPage.LoadBatch(p => p.ListItemAllFields);
+                targetClientContext.Web.PnPContext.Execute();
+                savedTargetPage.ListItemAllFields.EnsureProperties(item => item.ParentList.QueryProperties(list => list.Id));
 
 #if DEBUG && MEASURE
             Stop("Persist page");
@@ -607,12 +606,12 @@ namespace PnP.Core.Modernization.Publishing
 
                 #region Page Publishing
                 // Tag the file with a page modernization version stamp
-                string serverRelativePathForModernPage = savedTargetPage.ListItemAllFields[Constants.FileRefField].ToString();
+                string serverRelativePathForModernPage = savedTargetPage.ServerRelativeUrl;
                 bool pageListItemWasReloaded = false;
                 try
                 {
-                    var targetPageFile = context.Web.GetFileByServerRelativeUrl(serverRelativePathForModernPage);
-                    context.Load(targetPageFile, p => p.Properties);
+                    IFile targetPageFile = context.Web.GetFileByServerRelativeUrl(serverRelativePathForModernPage);
+                    targetPageFile.LoadBatch(p => p.Properties);
                     targetPageFile.Properties["sharepointpnp_pagemodernization"] = this.version;
                     targetPageFile.Update();
 
@@ -626,9 +625,9 @@ namespace PnP.Core.Modernization.Publishing
                     }
 
                     // Ensure we've the most recent page list item loaded, must be last statement before calling ExecuteQuery
-                    context.Load(savedTargetPage.ListItemAllFields);
+                    savedTargetPage.ListItemAllFields.LoadBatch();
                     // Send both the property update and publish as a single operation to SharePoint
-                    context.ExecuteQueryRetry();
+                    context.Execute();
                     pageListItemWasReloaded = true;
                 }
                 catch (Exception)
@@ -643,8 +642,8 @@ namespace PnP.Core.Modernization.Publishing
                     // If for some reason the reload batched with the previous request did not finish then do it again
                     if (!pageListItemWasReloaded)
                     {
-                        context.Load(savedTargetPage.ListItemAllFields);
-                        context.ExecuteQueryRetry();
+                        savedTargetPage.ListItemAllFields.LoadBatch();
+                        context.Execute();
                     }
 
                     // Only perform the update when the field was not yet set
@@ -660,8 +659,8 @@ namespace PnP.Core.Modernization.Publishing
                         // Don't use UpdateOverWriteVersion as the listitem already exists 
                         // resulting in an "Additions to this Web site have been blocked" error
                         savedTargetPage.ListItemAllFields.SystemUpdate();
-                        context.Load(savedTargetPage.ListItemAllFields);
-                        context.ExecuteQueryRetry();
+                        savedTargetPage.ListItemAllFields.LoadBatch();
+                        context.Execute();
                     }
                 }
                 catch (Exception)
@@ -742,15 +741,15 @@ namespace PnP.Core.Modernization.Publishing
                 return;
             }
             string contentTypeId;
-            if (information.SourcePage.FieldValues.TryGetValue(Constants.ContentTypeIdField, out var contentTypeValue) &&
+            if (information.SourcePage.Values.TryGetValue(Constants.ContentTypeIdField, out var contentTypeValue) &&
                 contentTypeValue != null)
             {
                 contentTypeId = contentTypeValue.ToString();
             }
             else
             {
-                var contentType = information.SourcePage.EnsureProperty(p => p.ContentType);
-                contentTypeId = contentType.EnsureProperty(c => c.Id).StringValue;
+                IContentType contentType = information.SourcePage.EnsureProperty(p => p.ContentType);
+                contentTypeId = contentType.EnsureProperty(c => c.Id);
             }
             var isEnterpriseWikiPage = EnterpriseWikiPagePreparation.IsEnterpriseWikiPage(
                 contentTypeId, information.SourcePage.PageLayoutFile());
@@ -762,14 +761,14 @@ namespace PnP.Core.Modernization.Publishing
                     targetClientContext.Site.Id, targetClientContext.Web.Id, targetClientContext.Web.WebTemplate,
                     isEnterpriseWikiPage, information.EnableEnterpriseWikiCapabilities, () =>
                     {
-                        LogInfo($"Preparing destination web '{targetClientContext.Url}'.", LogStrings.Heading_EnterpriseWikiPreparation);
+                        LogInfo($"Preparing destination web '{targetClientContext.Uri.AbsoluteUri}'.", LogStrings.Heading_EnterpriseWikiPreparation);
                         EnterpriseWikiPagePreparation.Prepare(targetClientContext);
                         LogInfo("Enterprise Wiki SitePages prerequisites verified.", LogStrings.Heading_EnterpriseWikiPreparation);
                     });
             }
             catch (Exception ex)
             {
-                LogError($"Enterprise Wiki preparation failed for '{targetClientContext.Url}'.",
+                LogError($"Enterprise Wiki preparation failed for '{targetClientContext.Uri.AbsoluteUri}'.",
                     LogStrings.Heading_EnterpriseWikiPreparation, ex);
                 throw;
             }
@@ -786,14 +785,14 @@ namespace PnP.Core.Modernization.Publishing
             {
                 return ratings;
             }
-            using (var sourceContext = sourceClientContext.Clone(sourceClientContext.Url))
+            using (PnPContext sourceContext = sourceClientContext.Clone(sourceClientContext.Uri))
             {
                 var users = ratings.Voters.ToDictionary(v => v.LookupId, v => sourceContext.Web.SiteUsers.GetById(v.LookupId));
-                foreach (var user in users.Values)
+                foreach (ISharePointUser user in users.Values)
                 {
-                    sourceContext.Load(user, u => u.LoginName);
+                    user.LoadBatch(u => u.LoginName);
                 }
-                sourceContext.ExecuteQueryRetry();
+                sourceContext.Execute();
                 return ratings.MapVoters(voter =>
                 {
                     var principal = userTransformator.RemapPrincipal(users[voter.LookupId].LoginName);
@@ -806,7 +805,7 @@ namespace PnP.Core.Modernization.Publishing
                     {
                         throw new InvalidOperationException("An Enterprise Wiki voter could not be resolved on the destination.");
                     }
-                    return new FieldUserValue { LookupId = user.Id };
+                    return targetClientContext.Web.AvailableFields.GetByInternalNameOrTitle("RatedBy").NewFieldUserValue(user.Id);
                 });
             }
         }
@@ -814,12 +813,12 @@ namespace PnP.Core.Modernization.Publishing
         /// <summary>
         /// Production seam that keeps the collision probe and the first target-page operation in one fail-closed flow.
         /// </summary>
-        internal PnPCore.IPage CreateTargetPageAfterCollisionProbe(
+        internal IPage CreateTargetPageAfterCollisionProbe(
             PublishingPageTransformationTarget transformationTarget,
             PublishingPageTransformationInformation publishingPageTransformationInformation,
-            Func<Microsoft.SharePoint.Client.File> targetPageProbe,
-            Func<string, PnPCore.IPage> addClientSidePage,
-            out Microsoft.SharePoint.Client.File existingFile)
+            Func<IFile> targetPageProbe,
+            Func<string, IPage> addClientSidePage,
+            out IFile existingFile)
         {
             // Keep the first target operation fail-closed even if a future caller bypasses the earlier routing guard.
             EnsureTransformationTargetAllowed(transformationTarget);
@@ -895,31 +894,28 @@ namespace PnP.Core.Modernization.Publishing
             }
 
             // Reload the collection: a reused context must not retain a feature that was deactivated.
-            var features = sourceClientContext.Web.Features;
-            features.ClearObjectData();
-            sourceClientContext.Load(features, collection => collection.Include(feature => feature.DefinitionId));
-            sourceClientContext.ExecuteQueryRetry();
+            IFeatureCollection features = sourceClientContext.Web.Features;
+            features.Clear();
+            sourceClientContext.Web.LoadBatch(w => w.Features.QueryProperties(feature => feature.DefinitionId));
+            sourceClientContext.Execute();
 
-            if (!features.Any(feature => feature.DefinitionId == Constants.FeatureId_Web_ModernPage))
+            if (!features.AsRequested().Any(feature => feature.DefinitionId == Constants.FeatureId_Web_ModernPage))
             {
-                var message = $"{LogStrings.Error_InPlacePublishingPageSitePagesFeatureNotEnabled} Web: {sourceClientContext.Url}; Feature ID: {Constants.FeatureId_Web_ModernPage}.";
+                var message = $"{LogStrings.Error_InPlacePublishingPageSitePagesFeatureNotEnabled} Web: {sourceClientContext.Uri.AbsoluteUri}; Feature ID: {Constants.FeatureId_Web_ModernPage}.";
                 LogError(message, LogStrings.Heading_SharePointConnection);
                 throw new InvalidOperationException(message);
             }
         }
 
-        private bool HasWritableSitePagesLibrary(ClientContext context)
+        private bool HasWritableSitePagesLibrary(PnPContext context)
         {
             var sitePagesServerRelativeUrl = UrlUtility.Combine(context.Web.ServerRelativeUrl, "SitePages");
 
             try
             {
-                var sitePagesLibrary = context.Web.GetList(sitePagesServerRelativeUrl);
-                context.Load(sitePagesLibrary,
-                    p => p.Id,
-                    p => p.BaseTemplate,
-                    p => p.EffectiveBasePermissions);
-                context.ExecuteQueryRetry();
+                IList sitePagesLibrary = context.Web.GetList(sitePagesServerRelativeUrl);
+                sitePagesLibrary.LoadBatch(p => p.Id, p => p.TemplateType);
+                context.Execute();
 
                 if (sitePagesLibrary.Id == Guid.Empty)
                 {
@@ -927,14 +923,14 @@ namespace PnP.Core.Modernization.Publishing
                     return false;
                 }
 
-                if (sitePagesLibrary.BaseTemplate != (int)ListTemplateType.WebPageLibrary)
+                if (sitePagesLibrary.TemplateType != ListTemplateType.WebPageLibrary)
                 {
-                    LogError($"{LogStrings.Error_InPlacePublishingPageSitePagesInvalidTemplate} Path: {sitePagesServerRelativeUrl}; BaseTemplate: {sitePagesLibrary.BaseTemplate}.", LogStrings.Heading_SharePointConnection);
+                    LogError($"{LogStrings.Error_InPlacePublishingPageSitePagesInvalidTemplate} Path: {sitePagesServerRelativeUrl}; BaseTemplate: {sitePagesLibrary.TemplateType}.", LogStrings.Heading_SharePointConnection);
                     return false;
                 }
 
-                var canAdd = sitePagesLibrary.EffectiveBasePermissions.Has(PermissionKind.AddListItems);
-                var canEdit = sitePagesLibrary.EffectiveBasePermissions.Has(PermissionKind.EditListItems);
+                var canAdd = sitePagesLibrary.HasPermissions(PermissionKind.AddListItems);
+                var canEdit = sitePagesLibrary.HasPermissions(PermissionKind.EditListItems);
                 if (!canAdd || !canEdit)
                 {
                     LogError($"{LogStrings.Error_InPlacePublishingPageSitePagesInsufficientPermissions} Path: {sitePagesServerRelativeUrl}; AddListItems: {canAdd}; EditListItems: {canEdit}.", LogStrings.Heading_SharePointConnection);
@@ -943,12 +939,12 @@ namespace PnP.Core.Modernization.Publishing
 
                 return true;
             }
-            catch (ServerUnauthorizedAccessException ex)
+            catch (ServiceException ex) when (ex.Error is ServiceError error && (error.HttpResponseCode == 401 || error.HttpResponseCode == 403))
             {
                 LogError($"{LogStrings.Error_InPlacePublishingPageSitePagesProbeUnauthorized} Path: {sitePagesServerRelativeUrl}; {ex.Message}", LogStrings.Heading_SharePointConnection);
                 return false;
             }
-            catch (ServerException ex) when (string.Equals(ex.ServerErrorTypeName, "System.IO.FileNotFoundException", StringComparison.Ordinal))
+            catch (ServiceException ex) when (ex.IsNotFound())
             {
                 LogError($"{LogStrings.Error_InPlacePublishingPageSitePagesNotFound} Path: {sitePagesServerRelativeUrl}; {ex.Message}", LogStrings.Heading_SharePointConnection);
                 return false;
@@ -961,7 +957,7 @@ namespace PnP.Core.Modernization.Publishing
             }
         }
 
-        private void SetPageTitle(PublishingPageTransformationInformation publishingPageTransformationInformation, PnPCore.IPage targetPage)
+        private void SetPageTitle(PublishingPageTransformationInformation publishingPageTransformationInformation, IPage targetPage)
         {
             string titleValue = "";
             if (publishingPageTransformationInformation.SourcePage.FieldExistsAndUsed(Constants.TitleField))
@@ -981,7 +977,7 @@ namespace PnP.Core.Modernization.Publishing
             }
         }
 
-        private Microsoft.SharePoint.Client.File Load(ClientContext sourceContext, ClientContext targetContext, PublishingPageTransformationInformation publishingPageTransformationInformation, out List pagesLibrary)
+        private IFile Load(PnPContext sourceContext, PnPContext targetContext, PublishingPageTransformationInformation publishingPageTransformationInformation, out IList pagesLibrary)
         {
             sourceContext.Web.EnsureProperty(w => w.ServerRelativeUrl);
             sourceContext.Site.EnsureProperty(w => w.Url); 
@@ -990,20 +986,19 @@ namespace PnP.Core.Modernization.Publishing
             // Load the pages library and page file (if exists) in one go 
             pagesLibrary = sourceContext.Web.GetListById(Guid.Parse(sourceContext.Web.GetPagesLibraryId())); 
 
-            sourceContext.Web.Context.Load(pagesLibrary, l => l.DefaultViewUrl, l => l.Id, l => l.BaseTemplate, l => l.OnQuickLaunch, l => l.DefaultViewUrl, l => l.Title,
-                                              l => l.Hidden, l => l.EffectiveBasePermissions, l => l.RootFolder, l => l.RootFolder.ServerRelativeUrl);
+            pagesLibrary.LoadBatch(l => l.DefaultViewUrl,l => l.Id,l => l.TemplateType,l => l.OnQuickLaunch,l => l.Title, l => l.Hidden,l => l.RootFolder);
 
             if (publishingPageTransformationInformation.KeepPageSpecificPermissions)
             {
-                sourceContext.Load(publishingPageTransformationInformation.SourcePage, p => p.HasUniqueRoleAssignments);
+                publishingPageTransformationInformation.SourcePage.LoadBatch(p => p.HasUniqueRoleAssignments);
             }
             try
             {
-                sourceClientContext.ExecuteQueryRetry();
+                sourceClientContext.Execute();
             }
-            catch (ServerException se)
+            catch (ServiceException se)
             {
-                if (se.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                if (se.IsNotFound())
                 {
                     pagesLibrary = null;
                 }
@@ -1014,9 +1009,15 @@ namespace PnP.Core.Modernization.Publishing
             }
 
             var sitePagesServerRelativeUrl = UrlUtility.Combine(targetClientContext.Web.ServerRelativeUrl, "sitepages");
-            var file = targetClientContext.Web.GetFileByServerRelativeUrl($"{sitePagesServerRelativeUrl}/{publishingPageTransformationInformation.Folder}{publishingPageTransformationInformation.TargetPageName}");
-            targetClientContext.Web.Context.Load(file, f => f.Exists, f => f.ListItemAllFields);
-            targetClientContext.ExecuteQueryRetry();
+            IFile file = null;
+            try
+            {
+                file = targetClientContext.Web.GetFileByServerRelativeUrl($"{sitePagesServerRelativeUrl}/{publishingPageTransformationInformation.Folder}{publishingPageTransformationInformation.TargetPageName}", f => f.ListItemAllFields);
+            }
+            catch (ServiceException ex) when (ex.IsNotFound())
+            {
+                // The caller distinguishes a missing page from authorization and service failures.
+            }
 
             if (pagesLibrary == null)
             {
@@ -1024,7 +1025,7 @@ namespace PnP.Core.Modernization.Publishing
                 throw new ArgumentNullException(LogStrings.Error_MissingSitePagesLibrary);
             }
 
-            if (!file.Exists)
+            if (file == null)
             {
                 LogInfo(LogStrings.TransformPageDoesNotExistInWeb, LogStrings.Heading_Load); //Not an error this is a check
                 throw new PageDoesNotExistInWebException($"{publishingPageTransformationInformation.TargetPageName} - {LogStrings.TransformPageDoesNotExistInWeb}");

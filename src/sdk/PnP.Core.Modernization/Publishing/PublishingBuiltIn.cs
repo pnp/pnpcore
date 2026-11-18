@@ -1,20 +1,21 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
+using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PnP.Core.Modernization.Publishing
 {
     public class PublishingBuiltIn: FunctionsBase
     {
-        private ClientContext sourceClientContext;
-        private ClientContext targetClientContext;
+        private PnPContext sourceClientContext;
+        private PnPContext targetClientContext;
         private HtmlParser parser;
         private BuiltIn builtIn;
         private BaseTransformationInformation baseTransformationInformation;
@@ -28,7 +29,7 @@ namespace PnP.Core.Modernization.Publishing
         /// <param name="sourceClientContext">The ClientContext for the source </param>
         /// <param name="targetClientContext"></param>
         /// <param name="logObservers"></param>
-        public PublishingBuiltIn(BaseTransformationInformation baseTransformationInformation, ClientContext sourceClientContext, ClientContext targetClientContext, IList<ILogObserver> logObservers = null) : base(sourceClientContext)
+        public PublishingBuiltIn(BaseTransformationInformation baseTransformationInformation, PnPContext sourceClientContext, PnPContext targetClientContext, IList<ILogObserver> logObservers = null) : base(sourceClientContext)
         {
             if (logObservers != null)
             {
@@ -233,6 +234,29 @@ namespace PnP.Core.Modernization.Publishing
         #endregion
 
         #region Image functions
+        private bool IsPublishingImageMarkup(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+            var trimmed = value.Trim();
+            if (trimmed.StartsWith("<img", StringComparison.OrdinalIgnoreCase) ||
+                trimmed.StartsWith("<a", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+            if (!trimmed.StartsWith("<div", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+            using (var document = parser.ParseDocument(value))
+            {
+                var wrapper = document.Body?.FirstElementChild;
+                return wrapper?.ClassList.Contains("ms-rtestate-field") == true && wrapper.QuerySelector("img") != null;
+            }
+        }
+
         /// <summary>
         /// Returns the server relative image url of a Publishing Image field value
         /// </summary>
@@ -245,7 +269,7 @@ namespace PnP.Core.Modernization.Publishing
         public string ToImageUrl(string htmlImage)
         {
             // If the image string is not a html image representation then simply return the trimmed value. If an image has a link it's wrapped in an anchor tag
-            if (string.IsNullOrEmpty(htmlImage) || !(htmlImage.Trim().StartsWith("<img", System.StringComparison.InvariantCultureIgnoreCase) || htmlImage.Trim().StartsWith("<a", System.StringComparison.InvariantCultureIgnoreCase)))
+            if (!IsPublishingImageMarkup(htmlImage))
             {
                 return htmlImage;
             }
@@ -282,7 +306,7 @@ namespace PnP.Core.Modernization.Publishing
         public string ToImageAltText(string htmlImage)
         {
             // If the image string is not a html image representation then simply return the trimmed value. If an image has a link it's wrapped in an anchor tag
-            if (string.IsNullOrEmpty(htmlImage) || !(htmlImage.Trim().StartsWith("<img", System.StringComparison.InvariantCultureIgnoreCase) || htmlImage.Trim().StartsWith("<a", System.StringComparison.InvariantCultureIgnoreCase)))
+            if (!IsPublishingImageMarkup(htmlImage))
             {
                 return htmlImage;
             }
@@ -313,7 +337,7 @@ namespace PnP.Core.Modernization.Publishing
         public string ToImageAnchor(string htmlImage)
         {
             // If the image string is not a html image representation then simply return the trimmed value. If an image has a link it's wrapped in an anchor tag
-            if (string.IsNullOrEmpty(htmlImage) || !(htmlImage.Trim().StartsWith("<img", System.StringComparison.InvariantCultureIgnoreCase) || htmlImage.Trim().StartsWith("<a", System.StringComparison.InvariantCultureIgnoreCase)))
+            if (!IsPublishingImageMarkup(htmlImage))
             {
                 return htmlImage;
             }
@@ -397,7 +421,7 @@ namespace PnP.Core.Modernization.Publishing
             }
 
             // If the image string is a html image representation
-            if (image.Trim().StartsWith("<img", System.StringComparison.InvariantCultureIgnoreCase) || image.Trim().StartsWith("<a", System.StringComparison.InvariantCultureIgnoreCase))
+            if (IsPublishingImageMarkup(image))
             {
                 image = ToImageUrl(image);
             }
@@ -414,7 +438,7 @@ namespace PnP.Core.Modernization.Publishing
             if (imageProperties.TryGetValue("ImageUniqueId", out string uniqueIdString))
             {
                 uniqueIdString = uniqueIdString.Replace("-", "");
-                string extension = System.IO.Path.GetExtension(previewServerRelativeUrl);
+                string extension = Path.GetExtension(previewServerRelativeUrl);
                 if (!string.IsNullOrEmpty(extension))
                 {
                     extension = extension.Replace(".", "");
@@ -447,7 +471,7 @@ namespace PnP.Core.Modernization.Publishing
             if (int.TryParse(userId, out int userIdInt))
             {
                 // Get the user information from the source site
-                var author = Cache.CacheManager.Instance.GetUserFromUserList(this.sourceClientContext, userIdInt);
+                var author = CacheManager.Instance.GetUserFromUserList(this.sourceClientContext, userIdInt);
 
                 // If the provided ID is a group then no point in continuing...
                 if (author != null && !author.IsGroup)
@@ -464,7 +488,7 @@ namespace PnP.Core.Modernization.Publishing
                     if (!string.IsNullOrEmpty(newUpn) && !newUpn.Equals(author.Upn, StringComparison.InvariantCultureIgnoreCase))
                     {
                         // We'll need to retrieve the info from this user again as we've mapped to another user account in the target site
-                        author = Cache.CacheManager.Instance.GetUserFromUserList(this.targetClientContext, newUpn);
+                        author = CacheManager.Instance.GetUserFromUserList(this.targetClientContext, newUpn);
 
                         if (author == null)
                         {
@@ -531,7 +555,7 @@ namespace PnP.Core.Modernization.Publishing
             {
                 if (Guid.TryParse(term, out Guid termId))
                 {
-                    var termInfo = Cache.CacheManager.Instance.GetTermFromId(this.targetClientContext, termId);
+                    var termInfo = CacheManager.Instance.GetTermFromId(this.targetClientContext, termId);
 
                     if (termInfo != null)
                     {

@@ -1,88 +1,38 @@
-﻿using Microsoft.SharePoint.Client;
-using PnP.Core.Modernization.Transform;
+
+
+using System;
 using System.IO;
-using File = Microsoft.SharePoint.Client.File;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Modernization.Extensions
 {
+    /// <summary>
+    /// File-content helpers for SharePoint Online modernization.
+    /// </summary>
     public static class FileFolderExtensions
     {
+        /// <summary>
+        /// Reads a SharePoint file as text, detecting a byte-order mark when present.
+        /// </summary>
+        public static string GetFileByServerRelativeUrlAsString(this IWeb web, string serverRelativeUrl) =>
+            GetFileByServerRelativeUrlAsStringAsync(web, serverRelativeUrl).GetAwaiter().GetResult();
 
         /// <summary>
-        /// Returns a file as string
+        /// Reads a SharePoint file through the Core REST pipeline.
         /// </summary>
-        /// <param name="web">The Web to process</param>
-        /// <param name="serverRelativeUrl">The server relative URL to the file</param>
-        /// <returns>The file contents as a string</returns>
-        /// <remarks>#
-        /// 
-        ///     Based on https://github.com/SharePoint/PnP-Sites-Core/blob/master/Core/OfficeDevPnP.Core/Extensions/FileFolderExtensions.cs
-        ///     Modified to force onpremises support
-        ///     
-        /// </remarks>
-        public static string GetFileByServerRelativeUrlAsString(this Web web, string serverRelativeUrl)
+        public static async Task<string> GetFileByServerRelativeUrlAsStringAsync(this IWeb web, string serverRelativeUrl)
         {
-
-            var file = web.GetFileByServerRelativeUrl(serverRelativeUrl);
-            var context = web.Context;
-            context.Load(file);
-            context.ExecuteQueryRetry();
-
-            var spVersion = BaseTransform.GetVersion(context);
-
-            Stream sourceStream;
-            if (spVersion == SPVersion.SP2010)
+            if (web == null)
             {
-                throw new System.Exception("SharePoint 2010 is not supported");
-                //sourceStream = new MemoryStream();
-
-                //if (context.HasPendingRequest)
-                //{
-                //    context.ExecuteQueryRetry();
-                //}
-
-                //var fileBinary = File.OpenBinaryDirect((ClientContext)context, serverRelativeUrl);
-                //context.ExecuteQueryRetry();
-                //Stream tempSourceStream = fileBinary.Stream;
-
-                //CopyStream(tempSourceStream, sourceStream);
-                //sourceStream.Seek(0, SeekOrigin.Begin);
+                throw new ArgumentNullException(nameof(web));
             }
-            else
+            SharePointOnlineSupport.Validate(web.PnPContext);
+            var file = await web.GetFileByServerRelativeUrlAsync(serverRelativeUrl).ConfigureAwait(false);
+            using (var stream = await file.GetContentAsync().ConfigureAwait(false))
+            using (var reader = new StreamReader(stream))
             {
-                ClientResult<Stream> stream = file.OpenBinaryStream();
-                web.Context.ExecuteQueryRetry();
-                sourceStream = stream.Value;
+                return await reader.ReadToEndAsync().ConfigureAwait(false);
             }
-            string returnString = string.Empty;
-
-            using (Stream memStream = new MemoryStream())
-            {
-                CopyStream(sourceStream, memStream);
-                memStream.Position = 0;
-
-                using (var reader = new StreamReader(memStream))
-                {
-                    returnString = reader.ReadToEnd();
-                }
-            }
-
-            return returnString;
         }
-
-        #region Helper methods
-        private static void CopyStream(Stream source, Stream destination)
-        {
-            byte[] buffer = new byte[32768];
-            int bytesRead;
-
-            do
-            {
-                bytesRead = source.Read(buffer, 0, buffer.Length);
-                destination.Write(buffer, 0, bytesRead);
-
-            } while (bytesRead != 0);
-        }
-        #endregion
     }
 }

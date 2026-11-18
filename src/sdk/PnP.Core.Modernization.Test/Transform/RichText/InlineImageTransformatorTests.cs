@@ -1,5 +1,4 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PnP.Core.Modernization;
@@ -8,14 +7,13 @@ using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Test.Transform.RichText
 {
@@ -27,6 +25,13 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         private const string ImageUrl = "/sites/source/SiteAssets/image.png";
         private const string TargetImageUrl = "/sites/target/SiteAssets/SitePages/page/image.png";
         private static readonly Uri SourcePageUrl = new Uri(SiteUrl + "/Pages/page.aspx");
+        private PnPContext coreContext;
+
+        [TestCleanup]
+        public void DisposeCoreContext()
+        {
+            coreContext?.Dispose();
+        }
 
         [DataTestMethod]
         [DataRow("47494638376110000800", 16, 8)]
@@ -97,8 +102,8 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 Assert.AreEqual("beforeafter", document.Body.TextContent);
             }
 
-            page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
-            page.Verify(p => p.NewWebPart(It.IsAny<PnPCore.IPageComponent>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
+            page.Verify(p => p.NewWebPart(It.IsAny<IPageComponent>()), Times.Never);
             observer.Verify(log => log.Info(It.Is<LogEntry>(entry =>
                 entry.Message.Contains("Keeping SharePoint system image") &&
                 !entry.Message.Contains("?") && !entry.Message.Contains("#"))), Times.Once);
@@ -149,7 +154,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
             var result = CreateTransformator(page).Transform($"<img src='{source}'>");
 
             Assert.IsTrue(result.Contains("imagePlugin"));
-            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
         }
 
         [TestMethod]
@@ -166,7 +171,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
 
             Assert.AreEqual(source, imported.AbsoluteUri);
             Assert.IsTrue(result.Contains("imagePlugin"));
-            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
         }
 
         [DataTestMethod]
@@ -185,8 +190,8 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 Assert.AreEqual(TargetImageUrl, document.QuerySelector(".imagePlugin").GetAttribute("data-imageurl"));
                 Assert.AreEqual(0, document.QuerySelectorAll("p .imagePlugin, strong .imagePlugin").Length);
             }
-            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
-            page.Verify(p => p.NewWebPart(It.IsAny<PnPCore.IPageComponent>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
+            page.Verify(p => p.NewWebPart(It.IsAny<IPageComponent>()), Times.Never);
         }
 
         [TestMethod]
@@ -212,17 +217,17 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         [TestMethod]
         public void Transform_PreservesDimensionsAndEncodesAltTextAndLinks()
         {
-            PnPCore.PageImageOptions options = null;
+            PageImageOptions options = null;
             var page = CreatePage();
-            page.Setup(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PnPCore.PageImageOptions>()))
-                .Callback<PnPCore.IPageText, string, PnPCore.PageImageOptions>((_, __, value) => options = value)
-                .Returns<PnPCore.IPageText, string, PnPCore.PageImageOptions>((_, url, value) => ImageSnippet(url, value));
+            page.Setup(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PageImageOptions>()))
+                .Callback<IPageText, string, PageImageOptions>((_, __, value) => options = value)
+                .Returns<IPageText, string, PageImageOptions>((_, url, value) => ImageSnippet(url, value));
             var html = $"<a href='https://example.org/?a=1&amp;b=&quot;two&quot;'><img src='{ImageUrl}' alt='A &quot;quote&quot; &amp; &lt;tag&gt;' width='100' height='50' style='width: 240px; height: 120px; float: right'></a>";
             using (var document = new HtmlParser().ParseDocument(CreateTransformator(page).Transform(html)))
             {
                 Assert.AreEqual(240, options.Width);
                 Assert.AreEqual(120, options.Height);
-                Assert.AreEqual(PnPCore.PageImageAlignment.Right, options.Alignment);
+                Assert.AreEqual(PageImageAlignment.Right, options.Alignment);
                 var image = document.QuerySelector(".imagePlugin");
                 Assert.AreEqual("A \"quote\" & <tag>", image.GetAttribute("data-alttext"));
                 Assert.AreEqual("https://example.org/?a=1&b=\"two\"", image.GetAttribute("data-linkurl"));
@@ -249,8 +254,8 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         public void Transform_DoesNotStretchPixelImagesToSdkDefaultPercentage(string style, string expectedPercentage)
         {
             var page = CreatePage();
-            page.Setup(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PnPCore.PageImageOptions>()))
-                .Returns<PnPCore.IPageText, string, PnPCore.PageImageOptions>((_, url, options) =>
+            page.Setup(p => p.GetInlineImage(null, TargetImageUrl, It.IsAny<PageImageOptions>()))
+                .Returns<IPageText, string, PageImageOptions>((_, url, options) =>
                 {
                     options.WidthPercentage ??= 100;
                     return ImageSnippet(url, options);
@@ -276,7 +281,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 imageLookup: _ => new Dictionary<string, string> { ["ImageWidth"] = "320", ["ImageHeight"] = "160" });
             var result = transformator.Transform($"<img src='{ImageUrl}' {attributes}>");
             page.Verify(p => p.GetInlineImage(null, TargetImageUrl,
-                It.Is<PnPCore.PageImageOptions>(options => options.Width == width && options.Height == height)), Times.Once);
+                It.Is<PageImageOptions>(options => options.Width == width && options.Height == height)), Times.Once);
             using (var document = new HtmlParser().ParseDocument(result))
             {
                 Assert.IsFalse(document.QuerySelector(".imagePlugin").HasAttribute("data-widthpercentage"));
@@ -293,7 +298,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
             var html = $"<img src='{ImageUrl}' height='80'>";
             Assert.AreEqual(html, transformator.Transform(html));
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry => entry.Message.Contains("specified height"))), Times.Once);
-            page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
         }
 
         [TestMethod]
@@ -335,7 +340,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 entry.Message.Contains("Removed") && entry.Message.Contains("missing, empty or whitespace-only src") &&
                 entry.Message.Contains("source HTML"))), Times.Once);
             observer.Verify(log => log.Warning(It.IsAny<LogEntry>()), Times.Once);
-            page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
         }
 
         [DataTestMethod]
@@ -353,7 +358,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
 
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry =>
                 entry.Message.Contains("Retaining the original image HTML"))), Times.Once);
-            page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
         }
 
         [TestMethod]
@@ -412,7 +417,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 Assert.AreEqual(0, document.QuerySelectorAll("img").Length);
                 Assert.AreEqual("Before  After", document.Body.TextContent);
             }
-            page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
+            page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
             observer.Verify(log => log.Warning(It.Is<LogEntry>(entry =>
                 entry.Message.Contains("native external CK5 image") && !entry.Message.Contains("secret-token"))), Times.Once);
         }
@@ -433,7 +438,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         public void Transform_CK4TargetFailsBeforeTransferringAssets()
         {
             var page = CreatePage();
-            page.SetupGet(p => p.EditorType).Returns(PnPCore.EditorType.CK4);
+            page.SetupGet(p => p.EditorType).Returns(EditorType.CK4);
             var observer = new Mock<ILogObserver>();
             var transformator = new InlineImageTransformator(page.Object, SourcePageUrl,
                 _ => throw new AssertFailedException("No asset transfer should occur"), value => value, new[] { observer.Object });
@@ -517,7 +522,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 new ContentTransformator(context, context, page.Object, LoadMapping(), information).Transform(parts);
 
                 Assert.AreEqual(1, controls.Count);
-                var text = controls.Single() as PnPCore.IPageText;
+                var text = controls.Single() as IPageText;
                 Assert.IsNotNull(text);
                 using (var document = new HtmlParser().ParseDocument(text.Text))
                 {
@@ -526,7 +531,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     Assert.AreEqual("beforeafter", document.Body.TextContent);
                     Assert.AreEqual(ImageUrl, document.QuerySelector(".imagePlugin").GetAttribute("data-imageurl"));
                 }
-                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
             }
         }
 
@@ -551,8 +556,8 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     .TransformPlusSplit(new List<WebPartEntity> { source }, true, true);
                 new ContentTransformator(context, context, page.Object, LoadMapping(), information).Transform(parts);
 
-                Assert.AreEqual("Content editor contains script and could not be loaded.", ((PnPCore.IPageText)controls.Single()).Text);
-                page.Verify(p => p.GetInlineImage(It.IsAny<PnPCore.IPageText>(), It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
+                Assert.AreEqual("Content editor contains script and could not be loaded.", ((IPageText)controls.Single()).Text);
+                page.Verify(p => p.GetInlineImage(It.IsAny<IPageText>(), It.IsAny<string>(), It.IsAny<PageImageOptions>()), Times.Never);
             }
         }
 
@@ -578,7 +583,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     _ => throw new AssertFailedException("No external import should occur"));
 
                 Assert.AreEqual(1, controls.Count);
-                using (var document = new HtmlParser().ParseDocument(((PnPCore.IPageText)controls.Single()).Text))
+                using (var document = new HtmlParser().ParseDocument(((IPageText)controls.Single()).Text))
                 {
                     Assert.AreEqual(0, document.QuerySelectorAll("img").Length);
                     CollectionAssert.AreEqual(new[] { "one", "two", "three", "four" },
@@ -587,7 +592,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     Assert.AreEqual(1, document.QuerySelectorAll("li > .imagePlugin").Length);
                     Assert.AreEqual("beforeafter", document.Body.TextContent);
                 }
-                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Exactly(4));
+                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()), Times.Exactly(4));
                 observer.Verify(log => log.Warning(It.Is<LogEntry>(entry =>
                     entry.Message.Contains("missing, empty or whitespace-only src"))), Times.Exactly(4));
                 observer.Verify(log => log.Warning(It.IsAny<LogEntry>()), Times.Exactly(4));
@@ -602,9 +607,9 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 var page = CreatePage();
                 var controls = ConfigureCanvas(page);
                 var observer = new Mock<ILogObserver>();
-                page.SetupSequence(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()))
+                page.SetupSequence(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()))
                     .Throws(new FileNotFoundException("Missing image"))
-                    .Returns(ImageSnippet(ImageUrl, new PnPCore.PageImageOptions { Width = 160, Height = 80 }));
+                    .Returns(ImageSnippet(ImageUrl, new PageImageOptions { Width = 160, Height = 80 }));
                 var source = WikiText($"<p>before<img src='{ImageUrl}' alt='keep' style='height: 42px; width: 84px'>" +
                     $"<img src='{ImageUrl}' alt='present' width='160' height='80'>after</p>");
                 var information = new PageTransformationInformation(null);
@@ -615,7 +620,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 transformator.SavePage(page.Object, "target.aspx", information, context,
                     _ => throw new AssertFailedException("Internal images must not be retried as external images"));
 
-                using (var document = new HtmlParser().ParseDocument(((PnPCore.IPageText)controls.Single()).Text))
+                using (var document = new HtmlParser().ParseDocument(((IPageText)controls.Single()).Text))
                 {
                     Assert.AreEqual(ImageUrl, document.QuerySelector("p > img").GetAttribute("src"));
                     Assert.AreEqual("height: 42px; width: 84px", document.QuerySelector("img").GetAttribute("style"));
@@ -623,7 +628,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     Assert.AreEqual(1, document.QuerySelectorAll(".imagePlugin").Length);
                     Assert.AreEqual("present", document.QuerySelector(".imagePlugin").GetAttribute("data-alttext"));
                 }
-                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Exactly(2));
+                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()), Times.Exactly(2));
                 observer.Verify(log => log.Warning(It.Is<LogEntry>(entry => entry.Message.Contains("Missing image"))), Times.Once);
             }
         }
@@ -647,7 +652,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 transformator.SavePage(page.Object, "target.aspx", information, context,
                     _ => throw new AssertFailedException("Internal images must not be imported"));
 
-                using (var document = new HtmlParser().ParseDocument(((PnPCore.IPageText)controls.Single()).Text))
+                using (var document = new HtmlParser().ParseDocument(((IPageText)controls.Single()).Text))
                 {
                     var link = document.QuerySelector("p > a[href='/details']");
                     Assert.IsNotNull(link);
@@ -663,8 +668,8 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     Assert.AreEqual(1, document.QuerySelectorAll(".imagePlugin").Length);
                     Assert.AreEqual(1, document.QuerySelectorAll("img").Length);
                 }
-                page.Verify(p => p.GetInlineImage(null, "/_layouts/images/icgen.gif", It.IsAny<PnPCore.PageImageOptions>()), Times.Never);
-                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+                page.Verify(p => p.GetInlineImage(null, "/_layouts/images/icgen.gif", It.IsAny<PageImageOptions>()), Times.Never);
+                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
                 observer.Verify(log => log.Info(It.Is<LogEntry>(entry => entry.Message.Contains("Keeping SharePoint system icon"))), Times.Once);
                 observer.Verify(log => log.Warning(It.IsAny<LogEntry>()), Times.Never);
                 observer.Verify(log => log.Error(It.IsAny<LogEntry>()), Times.Never);
@@ -708,14 +713,14 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         {
             using (var context = CreateContext())
             {
-                var sourcePage = context.Web.Lists.GetByTitle("Pages").GetItemById(1);
+                var sourcePage = CoreTestContext.Item(context);
                 sourcePage[Constants.FileRefField] = "/sites/source/Pages/folder/page.aspx";
                 var page = CreatePage();
                 var builtIn = new BuiltIn(new PageTransformationInformation(sourcePage), context, context, page.Object);
 
                 builtIn.TransformInlineImages("<img src='../../SiteAssets/image.png' width='160' height='80'>");
 
-                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+                page.Verify(p => p.GetInlineImage(null, ImageUrl, It.IsAny<PageImageOptions>()), Times.Once);
             }
         }
 
@@ -740,7 +745,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                     _ => { events.Add("import"); return TargetImageUrl; });
 
                 CollectionAssert.AreEqual(new[] { "save", "import", "save" }, events);
-                var text = (PnPCore.IPageText)controls.Single();
+                var text = (IPageText)controls.Single();
                 Assert.IsTrue(text.Text.Contains("imagePlugin"));
                 Assert.IsTrue(text.Text.Contains(TargetImageUrl));
             }
@@ -749,7 +754,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         [TestMethod]
         public void BuiltInConversion_DoesNotCopyTargetHostImagesFromADifferentSourceHost()
         {
-            using (var source = CreateContext("https://legacy.example/sites/source"))
+            using (var source = CreateContext("https://legacy.sharepoint.com/sites/source"))
             using (var target = CreateContext("https://contoso.sharepoint.com/sites/target"))
             {
                 var page = CreatePage();
@@ -758,7 +763,7 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                 const string path = "/sites/target/SiteAssets/image.png";
                 var result = builtIn.TransformInlineImages($"<img src='https://contoso.sharepoint.com{path}' width='160' height='80'>");
 
-                page.Verify(value => value.GetInlineImage(null, path, It.IsAny<PnPCore.PageImageOptions>()), Times.Once);
+                page.Verify(value => value.GetInlineImage(null, path, It.IsAny<PageImageOptions>()), Times.Once);
                 Assert.IsTrue(result.Contains("imagePlugin"));
                 observer.Verify(value => value.Warning(It.IsAny<LogEntry>()), Times.Never);
                 observer.Verify(value => value.Error(It.IsAny<LogEntry>()), Times.Never);
@@ -772,9 +777,9 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         public void EmptyTextCleanup_RemovesOnlyEmptyControls(string html, int expectedCount)
         {
             var page = CreatePage();
-            var text = new Mock<PnPCore.IPageText>();
+            var text = new Mock<IPageText>();
             text.SetupGet(value => value.Text).Returns(html);
-            var controls = new List<PnPCore.ICanvasControl> { text.Object };
+            var controls = new List<ICanvasControl> { text.Object };
             page.SetupGet(value => value.Controls).Returns(controls);
 
             new TestPageTransformator().RemoveEmptyTextParts(page.Object);
@@ -786,45 +791,50 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         {
         }
 
-        private static InlineImageTransformator CreateTransformator(Mock<PnPCore.IPage> page, ILogObserver observer = null)
+        private static InlineImageTransformator CreateTransformator(Mock<IPage> page, ILogObserver observer = null)
         {
             return new InlineImageTransformator(page.Object, SourcePageUrl, _ => TargetImageUrl, value => value,
                 observer == null ? null : new[] { observer });
         }
 
-        private static Mock<PnPCore.IPage> CreatePage()
+        private static Mock<IPage> CreatePage()
         {
-            var page = new Mock<PnPCore.IPage>();
-            page.SetupGet(p => p.EditorType).Returns(PnPCore.EditorType.CK5);
+            var page = new Mock<IPage>();
+            page.SetupGet(p => p.EditorType).Returns(EditorType.CK5);
             page.SetupGet(p => p.PageTitle).Returns("page");
-            page.Setup(p => p.GetInlineImage(null, It.IsAny<string>(), It.IsAny<PnPCore.PageImageOptions>()))
-                .Returns<PnPCore.IPageText, string, PnPCore.PageImageOptions>((_, url, options) => ImageSnippet(url, options));
+            page.Setup(p => p.GetInlineImage(null, It.IsAny<string>(), It.IsAny<PageImageOptions>()))
+                .Returns<IPageText, string, PageImageOptions>((_, url, options) => ImageSnippet(url, options));
             return page;
         }
 
-        private static string ImageSnippet(string url, PnPCore.PageImageOptions options)
+        private static string ImageSnippet(string url, PageImageOptions options)
         {
             return $"<div class=\"imagePlugin\" style=\"background-color:transparent;position:relative;\" data-alignment=\"{options.Alignment}\" data-imageurl=\"{url}\" data-uploading=\"0\" data-height=\"{options.Height.GetValueOrDefault()}\" data-width=\"{options.Width.GetValueOrDefault()}\" data-widthpercentage=\"{options.WidthPercentage ?? 100}\" data-alttext=\"\" data-linkurl=\"\"></div>";
         }
 
-        private static List<PnPCore.ICanvasControl> ConfigureCanvas(Mock<PnPCore.IPage> page)
+        private List<ICanvasControl> ConfigureCanvas(Mock<IPage> page)
         {
-            var controls = new List<PnPCore.ICanvasControl>();
+            if (coreContext == null)
+            {
+                coreContext = CoreTestContext.Create(SiteUrl);
+            }
+            page.SetupGet(p => p.PnPContext).Returns(coreContext);
+            var controls = new List<ICanvasControl>();
             page.SetupGet(p => p.Controls).Returns(controls);
-            var column = new Mock<PnPCore.ICanvasColumn>();
+            var column = new Mock<ICanvasColumn>();
             column.SetupGet(c => c.Controls).Returns(controls);
-            var section = new Mock<PnPCore.ICanvasSection>();
-            section.SetupGet(s => s.Columns).Returns(new List<PnPCore.ICanvasColumn> { column.Object });
-            page.SetupGet(p => p.Sections).Returns(new List<PnPCore.ICanvasSection> { section.Object });
-            page.Setup(p => p.AvailablePageComponents(null)).Returns(new List<PnPCore.IPageComponent>());
+            var section = new Mock<ICanvasSection>();
+            section.SetupGet(s => s.Columns).Returns(new List<ICanvasColumn> { column.Object });
+            page.SetupGet(p => p.Sections).Returns(new List<ICanvasSection> { section.Object });
+            page.Setup(p => p.AvailablePageComponentsAsync(null)).ReturnsAsync(new List<IPageComponent>());
             page.Setup(p => p.NewTextPart(It.IsAny<string>())).Returns(() =>
             {
-                var text = new Mock<PnPCore.IPageText>();
+                var text = new Mock<IPageText>();
                 text.SetupAllProperties();
                 return text.Object;
             });
-            page.Setup(p => p.AddControl(It.IsAny<PnPCore.ICanvasControl>(), column.Object, It.IsAny<int>()))
-                .Callback<PnPCore.ICanvasControl, PnPCore.ICanvasColumn, int, PnPCore.ControlFlexLayoutPosition>((control, _, order, position) => controls.Add(control));
+            page.Setup(p => p.AddControl(It.IsAny<ICanvasControl>(), column.Object, It.IsAny<int>()))
+                .Callback<ICanvasControl, ICanvasColumn, int, ControlFlexLayoutPosition>((control, _, order, position) => controls.Add(control));
             return controls;
         }
 
@@ -845,51 +855,26 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
             }
         }
 
-        private static ClientContext CreateContext(string siteUrl = SiteUrl)
+        private static PnPContext CreateContext(string siteUrl = SiteUrl)
         {
             CacheManager.Instance.SetSharePointVersion(new Uri(siteUrl), SPVersion.SPO);
-            var provider = new MockEntryResponseProvider();
             var web = new Dictionary<string, object>
             {
-                ["_ObjectType_"] = "SP.Web", ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
-                ["Id"] = "/Guid(413af984-d496-45ef-82d6-a2835dca7d49)/"
+                ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
+                ["Id"] = "413af984-d496-45ef-82d6-a2835dca7d49"
             };
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
+            return CoreTestContext.WithFile(siteUrl, new
             {
-                Url = siteUrl, PropertyName = "Web", ReturnValue = web
-            });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = siteUrl, PropertyName = "Site",
-                ReturnValue = new Dictionary<string, object>
+                ListId = "80e43d5d-5fd0-48f3-86ea-db933db5e21b",
+                UniqueId = "296c36c4-8b73-4fc7-9800-64855534d108",
+                Properties = new Dictionary<string, object>
                 {
-                    ["_ObjectType_"] = "SP.Site", ["Url"] = siteUrl, ["ServerRelativeUrl"] = new Uri(siteUrl).AbsolutePath,
-                    ["Id"] = "/Guid(e7f8587b-0764-4b08-a5dd-bd33683daa4e)/", ["RootWeb"] = web
+                    ["vti_lastwidth"] = "320", ["vti_lastheight"] = "160"
                 }
-            });
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
+            }, web, new Dictionary<string, object>
             {
-                Url = siteUrl, Method = "GetFileByServerRelativeUrl",
-                ReturnValue = new Dictionary<string, object>
-                {
-                    ["_ObjectType_"] = "SP.File",
-                    ["ListId"] = "/Guid(80e43d5d-5fd0-48f3-86ea-db933db5e21b)/",
-                    ["UniqueId"] = "/Guid(296c36c4-8b73-4fc7-9800-64855534d108)/",
-                    ["Properties"] = new Dictionary<string, object>
-                    {
-                        ["_ObjectType_"] = "SP.PropertyValues", ["vti_lastwidth"] = "320", ["vti_lastheight"] = "160"
-                    }
-                }
+                ["Id"] = "e7f8587b-0764-4b08-a5dd-bd33683daa4e", ["RootWeb"] = web
             });
-            var context = new ClientContext(siteUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider)
-            };
-            context.Load(context.Web, value => value.Id, value => value.Url, value => value.ServerRelativeUrl);
-            context.Load(context.Site, value => value.Id, value => value.Url, value => value.ServerRelativeUrl,
-                value => value.RootWeb.ServerRelativeUrl);
-            context.ExecuteQuery();
-            return context;
         }
     }
 }

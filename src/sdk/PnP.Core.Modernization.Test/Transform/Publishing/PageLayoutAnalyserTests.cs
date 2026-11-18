@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.SharePoint.Client;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Publishing;
 
@@ -40,7 +40,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
 
                 //This will need option for target output location
                 Assert.IsNotNull(result);
-                Assert.IsTrue(result.Count > 0);
+                Assert.IsTrue(result.AsRequested().Any());
 
             }
         }
@@ -68,10 +68,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             using (var sourceClientContext = TestCommon.CreateClientContext())
             {
                 // Source Context could be a site collection
-                ClientContext contextToUse;
+                PnPContext contextToUse;
                 if (sourceClientContext.Web.IsSubSite())
                 {
-                    string siteCollectionUrl = sourceClientContext.Site.EnsureProperty(o => o.Url);
+                    var siteCollectionUrl = sourceClientContext.Site.EnsureProperty(o => o.Url);
                     contextToUse = sourceClientContext.Clone(siteCollectionUrl);
                 }
                 else
@@ -86,7 +86,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
 
                 var result = string.Empty;
                 if(layout!= null){
-                    ListItem item = layout.EnsureProperty(o=> o.ListItemAllFields);
+                    var item = layout.EnsureProperty(o=> o.ListItemAllFields);
                     
                     pageLayoutAnalyser.AnalysePageLayout(item);
                     result = pageLayoutAnalyser.GenerateMappingFile();
@@ -112,9 +112,9 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 var publishingPage = sourceClientContext.Web.GetFileByServerRelativeUrl(pageUrl);
 
                 var result = string.Empty;
-                if (publishingPage != null && publishingPage.ServerObjectIsNull != true)
+                if (publishingPage != null)
                 {
-                    ListItem item = publishingPage.EnsureProperty(o => o.ListItemAllFields);
+                    var item = publishingPage.EnsureProperty(o => o.ListItemAllFields);
 
                     pageLayoutAnalyser.AnalysePageLayoutFromPublishingPage(item);
                     result = pageLayoutAnalyser.GenerateMappingFile();
@@ -137,10 +137,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             using (var sourceClientContext = TestCommon.CreateClientContext())
             {
                 // Source Context could be a site collection
-                ClientContext contextToUse;
+                PnPContext contextToUse;
                 if (sourceClientContext.Web.IsSubSite())
                 {
-                    string siteCollectionUrl = sourceClientContext.Site.EnsureProperty(o => o.Url);
+                    var siteCollectionUrl = sourceClientContext.Site.EnsureProperty(o => o.Url);
                     contextToUse = sourceClientContext.Clone(siteCollectionUrl);
                 }
                 else
@@ -156,7 +156,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
                 var results = new List<Tuple<string,string>>();
                 if (layout != null)
                 {
-                    ListItem item = layout.EnsureProperty(o => o.ListItemAllFields);
+                    var item = layout.EnsureProperty(o => o.ListItemAllFields);
 
                     results.AddRange(pageLayoutAnalyser.ExtractWebPartPrefixesFromNamespaces(item));
                 }

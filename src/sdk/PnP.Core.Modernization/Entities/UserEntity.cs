@@ -39,6 +39,10 @@ namespace PnP.Core.Modernization.Entities
         [JsonIgnore]
         public string LoginName { get; set; }
 
+        public string Email { get; set; }
+
+        public string Title { get; set; }
+
         /// <summary>
         /// Is this a group?
         /// </summary>

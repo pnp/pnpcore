@@ -1,6 +1,5 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
@@ -23,7 +22,7 @@ namespace PnP.Core.Modernization.Pages
         /// <param name="page">ListItem holding the page to analyze</param>
         /// <param name="pageTransformation">Page transformation information</param>
         /// <param name="logObservers"></param>
-        public WikiPage(ListItem page, PageTransformation pageTransformation, IList<ILogObserver> logObservers = null) 
+        public WikiPage(IListItem page, PageTransformation pageTransformation, IList<ILogObserver> logObservers = null)
             : base(page, null, pageTransformation, logObservers)
         {
         }
@@ -39,31 +38,31 @@ namespace PnP.Core.Modernization.Pages
 
             //Load the page
             var wikiPageUrl = page[Constants.FileRefField].ToString();
-            var wikiPage = cc.Web.GetFileByServerRelativeUrl(wikiPageUrl);
-            cc.Load(wikiPage);
-            cc.ExecuteQueryRetry();
+            IFile wikiPage = cc.Web.GetFileByServerRelativeUrl(wikiPageUrl);
+            wikiPage.LoadBatch();
+            cc.Execute();
 
             string pageContents = null;
                 
             if (!isBlogPage)
             {
                 // Load wiki content in HTML parser
-                if (page.FieldValues[Constants.WikiField] == null)
+                if (page.Values[Constants.WikiField] == null)
                 {
                     throw new Exception("WikiField contents was set to null, this is an invalid and empty wiki page.");
                 }
 
-                pageContents = page.FieldValues[Constants.WikiField].ToString();
+                pageContents = page.Values[Constants.WikiField].ToString();
             }
             else
             {
                 // Load wiki content in HTML parser
-                if (page.FieldValues[Constants.BodyField] == null)
+                if (page.Values[Constants.BodyField] == null)
                 {
                     throw new Exception("Body contents was set to null, this is an invalid and empty blog page.");
                 }
 
-                pageContents = page.FieldValues[Constants.BodyField].ToString();
+                pageContents = page.Values[Constants.BodyField].ToString();
             }
 
             var htmlDoc = parser.ParseDocument(pageContents);
@@ -73,7 +72,7 @@ namespace PnP.Core.Modernization.Pages
                 layout = PageLayout.Wiki_OneColumn;
             }
 
-            List<BasePage.WebPartPlaceHolder> webPartsToRetrieve = new List<BasePage.WebPartPlaceHolder>();
+            List<WebPartPlaceHolder> webPartsToRetrieve = new List<WebPartPlaceHolder>();
 
             var rows = htmlDoc.All.Where(p => p.LocalName == "tr");
             int rowCount = 0;
@@ -101,15 +100,7 @@ namespace PnP.Core.Modernization.Pages
             // Bulk load the needed web part information
             if (webPartsToRetrieve.Count > 0)
             {
-                var spVersion = GetVersion(cc);
-                if (spVersion == SPVersion.SP2010 || spVersion == SPVersion.SP2013Legacy || spVersion == SPVersion.SP2016Legacy)
-                {
-                    LoadWebPartsInWikiContentFromOnPremisesServer(webparts, wikiPage, webPartsToRetrieve);
-                }
-                else
-                {
-                    LoadWebPartsInWikiContentFromServer(webparts, wikiPage, webPartsToRetrieve);
-                }
+                LoadWebPartsInWikiContentFromServer(webparts, wikiPage, webPartsToRetrieve);
             }
             else
             {

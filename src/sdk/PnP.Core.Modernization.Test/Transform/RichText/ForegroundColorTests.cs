@@ -3,14 +3,11 @@ using AngleSharp.Css.Dom;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using PnP.Core.Modernization.Transform;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -179,38 +176,12 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
         {
             const string sourceUrl = "https://contoso.sharepoint.com/sites/source";
             const string targetUrl = "https://contoso.sharepoint.com/sites/target";
-            var provider = new MockEntryResponseProvider();
-            foreach (var url in new[] { sourceUrl, targetUrl })
+            using (var source = CoreTestContext.Create(sourceUrl, (request, _) =>
             {
-                foreach (var property in new[] { "Site", "Web" })
-                {
-                    provider.ResponseEntries.Add(new MockResponseEntry<object>
-                    {
-                        Url = url,
-                        PropertyName = property,
-                        ReturnValue = new Dictionary<string, object>
-                        {
-                            ["_ObjectType_"] = "SP." + property,
-                            ["Url"] = url,
-                            ["ServerRelativeUrl"] = new Uri(url).AbsolutePath
-                        }
-                    });
-                }
-            }
-            provider.ResponseEntries.Add(new MockResponseEntry<object>
-            {
-                Url = sourceUrl,
-                Method = "GetThemeShadeByName",
-                ReturnValue = "FF00485B"
-            });
-            using (var source = new ClientContext(sourceUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider)
-            })
-            using (var target = new ClientContext(targetUrl)
-            {
-                WebRequestExecutorFactory = new MockWebRequestExecutorFactory(provider)
-            })
+                StringAssert.Contains(request.RequestUri.AbsoluteUri.ToLowerInvariant(), "getthemeshadebyname");
+                return CoreTestContext.Json(new { value = "FF00485B" });
+            }))
+            using (var target = CoreTestContext.Create(targetUrl))
             {
                 var builtIn = new BuiltIn(new PageTransformationInformation(null) { SkipUrlRewrite = true },
                     sameWeb ? source : target, sameWeb ? null : source);
@@ -221,15 +192,14 @@ namespace PnP.Core.Modernization.Test.Transform.RichText
                         result.QuerySelector("#field").GetStyle().GetBackgroundColor());
                 }
 
-                var unexpectedRequest = new Mock<IMockResponseProvider>(MockBehavior.Strict);
-                source.WebRequestExecutorFactory = new MockWebRequestExecutorFactory(unexpectedRequest.Object);
+                CoreTestContext.SetResponse(source, (_, _) =>
+                    throw new AssertFailedException("The resolved theme shade must be cached."));
                 using (var result = Parse(builtIn.TextCleanup("<font id='field' class='ms-rteThemeForeColor-6-0 ms-rteThemeBackColor-6-0'>Field</font>", "false")))
                 {
                     AssertColor(result, "#field", "#00485b");
                     Assert.AreEqual(result.QuerySelector("#field").GetStyle().GetColor(),
                         result.QuerySelector("#field").GetStyle().GetBackgroundColor());
                 }
-                unexpectedRequest.VerifyNoOtherCalls();
             }
         }
 

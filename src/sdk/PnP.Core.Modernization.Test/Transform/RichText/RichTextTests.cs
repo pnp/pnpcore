@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Transform;
 using System;
@@ -46,10 +45,10 @@ namespace PnP.Core.Modernization.Tests.Transform.RichText
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("richtext_");
+                var pages = WebExtensions.GetPages(cc.Web,"richtext_");
                 //var pages = cc.Web.GetPages("temp2");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     //CacheManager.Instance.ClearClientSideComponents();
 

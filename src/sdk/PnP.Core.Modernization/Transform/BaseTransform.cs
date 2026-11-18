@@ -1,11 +1,13 @@
 ﻿using AngleSharp;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace PnP.Core.Modernization.Transform
 {
@@ -200,18 +202,29 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="clientContext"></param>
         /// <returns></returns>
-        public static string GetExactVersion(ClientRuntimeContext clientContext)
+        public static string GetExactVersion(PnPContext clientContext)
         {
-            Uri urlUri = new Uri(clientContext.Url);
-
-            if (!string.IsNullOrEmpty(CacheManager.Instance.GetExactSharePointVersion(urlUri)))
+            SharePointOnlineSupport.Validate(clientContext);
+            var cached = CacheManager.Instance.GetExactSharePointVersion(clientContext.Uri);
+            if (!string.IsNullOrEmpty(cached))
             {
-                return CacheManager.Instance.GetExactSharePointVersion(urlUri);
+                return cached;
             }
-            else
+            var response = clientContext.Web.ExecuteRequest(new ApiRequest(
+                HttpMethod.Post, ApiRequestType.SPORest,
+                "_api/contextinfo", null, new Dictionary<string, string>
+                {
+                    ["Accept"] = "application/json;odata=nometadata"
+                }));
+            using (var json = JsonDocument.Parse(response.Response))
             {
-                GetVersion(clientContext);
-                return CacheManager.Instance.GetExactSharePointVersion(urlUri);
+                var value = json.RootElement.GetProperty("LibraryVersion").GetString();
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new InvalidDataException("SharePoint did not return its library version.");
+                }
+                CacheManager.Instance.SetExactSharePointVersion(clientContext.Uri, value);
+                return value;
             }
         }
 
@@ -220,109 +233,10 @@ namespace PnP.Core.Modernization.Transform
         /// </summary>
         /// <param name="clientContext"></param>
         /// <returns></returns>
-        public static SPVersion GetVersion(ClientRuntimeContext clientContext)
+        public static SPVersion GetVersion(PnPContext clientContext)
         {
-            Uri urlUri = new Uri(clientContext.Url);
-
-            var spVersionFromCache = CacheManager.Instance.GetSharePointVersion(urlUri); 
-            if (spVersionFromCache != SPVersion.Unknown)
-            {
-                return spVersionFromCache;
-            }
-            else
-            {
-                try
-                {
-                    
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"{urlUri.Scheme}://{urlUri.DnsSafeHost}:{urlUri.Port}/_vti_pvt/service.cnf");
-                    //request.Credentials = clientContext.Credentials;
-                    request.AddAuthenticationData(clientContext as ClientContext);
-
-                    var response = request.GetResponse();
-
-                    using (var dataStream = response.GetResponseStream())
-                    {
-                        // Open the stream using a StreamReader for easy access.
-                        using (System.IO.StreamReader reader = new System.IO.StreamReader(dataStream))
-                        {
-                            // Read the content.Will be in this format
-                            // SPO:
-                            // vti_encoding: SR | utf8 - nl
-                            // vti_extenderversion: SR | 16.0.0.8929
-                            // SP2019:
-                            // vti_encoding:SR|utf8-nl
-                            // vti_extenderversion:SR|16.0.0.10340
-                            // SP2016:
-                            // vti_encoding: SR | utf8 - nl
-                            // vti_extenderversion: SR | 16.0.0.4732
-                            // SP2013:
-                            // vti_encoding:SR|utf8-nl
-                            // vti_extenderversion: SR | 15.0.0.4505
-                            // Version numbers from https://buildnumbers.wordpress.com/sharepoint/
-
-                            // Microsoft Developer Blog - 
-                            //      https://developer.microsoft.com/en-us/sharepoint/blogs/updated-versions-of-the-sharepoint-on-premises-csom-nuget-packages/
-                            // Todd Klindt's Blog - 
-                            //      http://www.toddklindt.com/sp2010builds
-                            //      http://www.toddklindt.com/sp2013builds
-                            //      http://www.toddklindt.com/sp2016builds
-                            //      http://www.toddklindt.com/sp2019builds
-
-
-                            string version = reader.ReadToEnd().Split('|')[2].Trim();
-                            CacheManager.Instance.SetExactSharePointVersion(urlUri, version);
-
-                            if (Version.TryParse(version, out Version v))
-                            {
-                                if (v.Major == 14)
-                                {
-                                    CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SP2010);
-                                    return SPVersion.SP2010;
-                                }
-                                else if (v.Major == 15)
-                                {
-                                    // You can change the output to SP2013 to use standard CSOM calls.
-                                    CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SP2013Legacy);
-                                    return SPVersion.SP2013Legacy;
-
-                                }
-                                else if (v.Major == 16)
-                                {
-                                    if (v.MinorRevision < 6000)
-                                    {
-                                        //if(v.MinorRevision < 4690)
-                                        //{
-                                        //    // Pre May 2018 CU
-                                        //    CacheManager.Instance.SharepointVersions.TryAdd(urlUri, SPVersion.SP2016Legacy);
-                                        //    return SPVersion.SP2016Legacy;
-                                        //}
-                                        
-                                        CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SP2016Legacy);
-                                        return SPVersion.SP2016Legacy;
-                                    }
-                                    // Set to 12000 because some SPO reports as 12012 and SP2019 build numbers are increasing very slowly
-                                    else if (v.MinorRevision > 10300 && v.MinorRevision < 12000)
-                                    {
-                                        CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SP2019);
-                                        return SPVersion.SP2019;
-                                    }
-                                    else
-                                    {
-                                        CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SPO);
-                                        return SPVersion.SPO;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (WebException)
-                {
-                    // todo
-                }
-            }
-
-            CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SPO);
+            SharePointOnlineSupport.Validate(clientContext);
+            CacheManager.Instance.SetSharePointVersion(clientContext.Uri, SPVersion.SPO);
             return SPVersion.SPO;
         }
         #endregion

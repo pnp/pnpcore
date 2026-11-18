@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace PnP.Core.Modernization
 {
@@ -112,7 +113,7 @@ namespace PnP.Core.Modernization
             try
             {
 
-                var fields = typeof(WebParts).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                var fields = typeof(WebParts).GetFields(BindingFlags.Public | BindingFlags.Static);
 
                 foreach (var field in fields)
                 {

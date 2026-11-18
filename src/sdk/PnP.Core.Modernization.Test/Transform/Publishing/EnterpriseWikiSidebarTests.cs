@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using PnP.Core.Model.SharePoint;
+
 using PnP.Core.Modernization.Publishing;
 using System;
 using System.Collections.Generic;
@@ -68,11 +68,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         {
             var fixture = new PageFixture();
             var section = fixture.AddSection(CanvasSectionTemplate.OneColumn, 1);
-            var other = fixture.NewWebPart(new PageComponent
-            {
-                Id = EnterpriseWikiSidebar.ComponentId,
-                Manifest = "{\"preconfiguredEntries\":[{\"properties\":{\"controlKind\":\"publishing.other\"}}]}"
-            });
+            var component = new Mock<IPageComponent>();
+            component.SetupGet(p => p.Id).Returns(EnterpriseWikiSidebar.ComponentId);
+            component.SetupGet(p => p.Manifest).Returns("{\"preconfiguredEntries\":[{\"properties\":{\"controlKind\":\"publishing.other\"}}]}");
+            var other = fixture.NewWebPart(component.Object);
             fixture.AddControl(other, section.DefaultColumn, 1);
             EnterpriseWikiSidebar.Ensure(fixture.Page.Object);
             Assert.AreEqual(2, fixture.Controls.OfType<IPageWebPart>().Count());

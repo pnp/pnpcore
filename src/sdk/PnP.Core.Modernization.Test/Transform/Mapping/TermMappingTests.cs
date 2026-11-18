@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Publishing;
 using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
@@ -31,42 +31,6 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
         }
 
         [TestMethod]
-        public void TermMappingTransformatorTest_PassThrough()
-        {
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext())
-                {
-                    PublishingPageTransformationInformation pti = new PublishingPageTransformationInformation()
-                    {
-                        // If target page exists, then overwrite it
-                        Overwrite = true,
-
-                        // Don't log test runs
-                        SkipTelemetry = true,
-
-                        //Permissions are should work given cross domain with mapping
-                        KeepPageSpecificPermissions = true,
-
-                        // Term store mapping
-                        TermMappingFile = string.Empty,
-                        SkipTermStoreMapping = false
-                    };
-
-                    TermTransformator termTransformator = new TermTransformator(pti, sourceClientContext, targetClientContext, null);
-
-                    var inputLabel = "pass-through-test";
-                    var inputGuid = Guid.NewGuid();
-                    var result = termTransformator.Transform(new Entities.TermData() { TermGuid = inputGuid, TermLabel = inputLabel });
-                    Console.WriteLine(inputLabel + " and " + inputGuid);
-
-                    Assert.AreEqual(inputLabel, result.TermLabel);
-                    Assert.AreEqual(inputGuid, result.TermGuid);
-                }
-            }
-        }
-
-        [TestMethod]
         public void BasicOnlineWikiPage_TermMappingTest()
         {
             using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
@@ -81,7 +45,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
 
                     pages.FailTestIfZero();
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -137,7 +101,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
 
                     pages.FailTestIfZero();
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -178,111 +142,6 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
         }
 
         [TestMethod]
-        public void BasicOnPremWikiPage_TermMappingTest()
-        {
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext(TestCommon.AppSetting("SPOnPremTeamSiteUrl")))
-                {
-                    var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
-                    //pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose: true));
-                    pageTransformator.RegisterObserver(new UnitTestLogObserver());
-
-                    var pages = sourceClientContext.Web.GetPagesFromList("Site Pages", pageNameStartsWith: "WKP-2010-BasicTest");
-
-                    pages.FailTestIfZero();
-
-                    foreach (var page in pages)
-                    {
-                        PageTransformationInformation pti = new PageTransformationInformation(page)
-                        {
-                            // If target page exists, then overwrite it
-                            Overwrite = true,
-
-                            // Don't log test runs
-                            SkipTelemetry = true,
-
-                            //Permissions are unlikely to work given cross domain
-                            KeepPageSpecificPermissions = false,
-
-                            // Term store mapping
-                            TermMappingFile = @"..\..\Transform\Mapping\term_mapping_sample.csv",
-
-                            //Should process default mapping
-                            SkipTermStoreMapping = false,
-
-                            CopyPageMetadata = true
-
-                        };
-
-                        Console.WriteLine("SharePoint Version: {0}", pti.SourceVersion);
-
-                        pti.MappingProperties["SummaryLinksToQuickLinks"] = "true";
-                        pti.MappingProperties["UseCommunityScriptEditor"] = "true";
-
-                        var result = pageTransformator.Transform(pti);
-                    }
-
-                    pageTransformator.FlushObservers();
-
-                }
-            }
-        }
-
-        [TestMethod]
-        public void BasicOnPremWikiPage_TermMappingPathsOnlyTest()
-        {
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext(TestCommon.AppSetting("SPOnPremTeamSiteUrl")))
-                {
-                    var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
-                    //pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose: true));
-                    pageTransformator.RegisterObserver(new UnitTestLogObserver());
-
-                    //SP2010
-                    var pages = sourceClientContext.Web.GetPagesFromList("Site Pages", pageNameStartsWith: "WKP-2010-Quantum");
-
-                    pages.FailTestIfZero();
-
-                    foreach (var page in pages)
-                    {
-                        PageTransformationInformation pti = new PageTransformationInformation(page)
-                        {
-                            // If target page exists, then overwrite it
-                            Overwrite = true,
-
-                            // Don't log test runs
-                            SkipTelemetry = true,
-
-                            //Permissions are unlikely to work given cross domain
-                            KeepPageSpecificPermissions = false,
-
-                            // Term store mapping
-                            TermMappingFile = @"..\..\Transform\Mapping\term_mapping_paths_sample.csv",
-
-                            //Should process default mapping
-                            SkipTermStoreMapping = false,
-
-                            CopyPageMetadata = true
-
-                        };
-
-                        Console.WriteLine("SharePoint Version: {0}", pti.SourceVersion);
-
-                        pti.MappingProperties["SummaryLinksToQuickLinks"] = "true";
-                        pti.MappingProperties["UseCommunityScriptEditor"] = "true";
-
-                        var result = pageTransformator.Transform(pti);
-                    }
-
-                    pageTransformator.FlushObservers();
-
-                }
-            }
-        }
-
-        [TestMethod]
         public void BasicOnlinePublishingPage_TermDefaultTest()
         {
             using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
@@ -297,7 +156,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
 
                     pages.FailTestIfZero();
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PublishingPageTransformationInformation pti = new PublishingPageTransformationInformation(page)
                         {
@@ -348,7 +207,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
 
                     pages.FailTestIfZero();
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PublishingPageTransformationInformation pti = new PublishingPageTransformationInformation(page)
                         {
@@ -383,56 +242,6 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
         }
 
         [TestMethod]
-        public void BasicOnPremPublishingPage_TermMappingTest()
-        {
-            using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
-            {
-                using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext())
-                {
-                    var pageTransformator = new PublishingPageTransformator(sourceClientContext, targetClientContext, @"C:\temp\onprem-mapping-all-test.xml");
-                    //pageTransformator.RegisterObserver(new MarkdownObserver(folder: "c:\\temp", includeVerbose: true));
-                    pageTransformator.RegisterObserver(new UnitTestLogObserver(true));
-
-                    //2013
-                    var pages = sourceClientContext.Web.GetPagesFromList("Pages", folder: "News", pageNameStartsWith: "Our-new-IT-suite-is-mint");
-                    //2010
-                    //var pages = sourceClientContext.Web.GetPagesFromList("Pages", pageNameStartsWith: "Article-2010-Taxonomy");
-
-                    pages.FailTestIfZero();
-
-                    foreach (var page in pages)
-                    {
-                        PublishingPageTransformationInformation pti = new PublishingPageTransformationInformation(page)
-                        {
-                            // If target page exists, then overwrite it
-                            Overwrite = true,
-
-                            // Don't log test runs
-                            SkipTelemetry = true,
-
-                            //Permissions are unlikely to work given cross domain
-                            KeepPageSpecificPermissions = false,
-
-                            // Term store mapping
-                            TermMappingFile = @"..\..\Transform\Mapping\term_mapping_sample.csv"                            
-                           
-                        };
-
-                        Console.WriteLine("SharePoint Version: {0}", pti.SourceVersion);
-
-                        pti.MappingProperties["SummaryLinksToQuickLinks"] = "true";
-                        pti.MappingProperties["UseCommunityScriptEditor"] = "true";
-
-                        var result = pageTransformator.Transform(pti);
-                    }
-
-                    pageTransformator.FlushObservers();
-
-                }
-            }
-        }
-
-        [TestMethod]
         public void CacheTermStoreSiteCollectionByIdTest()
         {
             using (var targetClientContext = TestCommon.CreateClientContext(TestCommon.AppSetting("SPOTargetSiteUrl")))
@@ -448,7 +257,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
                         new Guid("dc2cca62-cf9a-4a61-b672-4aa7d0b6a179"), Guid.Empty, false);
 
                     // Need to have the term store populated values
-                    var result = Cache.CacheManager.Instance.GetTransformTermCacheTermById(sourceClientContext, new Guid("ac625b0a-0459-4d23-bc96-0970abd1029d"));
+                    var result = CacheManager.Instance.GetTransformTermCacheTermById(sourceClientContext, new Guid("ac625b0a-0459-4d23-bc96-0970abd1029d"));
                     var expectedLabel = "Announcements";
 
                     Assert.AreEqual(expectedLabel, result.TermLabel);
@@ -473,7 +282,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
 
                     // Need to have the term store populated values
                     var expectedLabel = "Announcements";
-                    var result = Cache.CacheManager.Instance.GetTransformTermCacheTermByName(sourceClientContext, expectedLabel);
+                    var result = CacheManager.Instance.GetTransformTermCacheTermByName(sourceClientContext, expectedLabel);
 
                     Assert.IsTrue(result.Count > 0);
 
@@ -499,7 +308,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
                         new Guid("dc2cca62-cf9a-4a61-b672-4aa7d0b6a179"), Guid.Empty, false);
 
                     // Need to have the term store populated values
-                    var result = Cache.CacheManager.Instance.GetTransformTermCacheTermById(sourceClientContext, new Guid("c9cbb11b-77ed-4890-ae24-ee103002c46b"));
+                    var result = CacheManager.Instance.GetTransformTermCacheTermById(sourceClientContext, new Guid("c9cbb11b-77ed-4890-ae24-ee103002c46b"));
                     var expectedLabel = "PnPTransform";
 
                     Assert.AreEqual(expectedLabel, result.TermLabel);
@@ -602,51 +411,6 @@ namespace PnP.Core.Modernization.Tests.Transform.Mapping
             var expected = "bf53dc87-0092-47bf-8463-ee69cde66b93";
 
             Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void WebServiceFallBackGetTermSetTest()
-        {
-            using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext(TestCommon.AppSetting("SPOnPremTeamSiteUrl")))
-            {
-                    
-                var sspId = "bf53dc87-0092-47bf-8463-ee69cde66b93";
-                var termSetId = "5e8a3614-8777-4eb0-9890-e3a6ac466396"; //SP2010
-
-                // Need to have the term store populated values
-                // Announcements
-                var results = TermTransformator.CallTaxonomyWebServiceFindTermSetId(sourceClientContext, new Guid(sspId), new Guid(termSetId));
-                foreach (var result in results)
-                {
-                    Console.WriteLine("{0} - {1}", result.Key, result.Value.TermPath);
-                }
-
-                Assert.IsTrue(results != default);
-                Assert.IsTrue(results.Count > 0);
-            }
-        }
-
-        [TestMethod]
-        public void WebServiceFallBackGetChildTermsTest()
-        {
-            using (var sourceClientContext = TestCommon.CreateOnPremisesClientContext(TestCommon.AppSetting("SPOnPremTeamSiteUrl")))
-            {
-                var sspId = "bf53dc87-0092-47bf-8463-ee69cde66b93";
-                var termSetId = "5e8a3614-8777-4eb0-9890-e3a6ac466396"; //SP2010
-                var termId = "abeeb936-3ab9-40ce-aba1-a2e236c915d3";
-                var path = "UNIT|TEST";
-
-                // Need to have the term store populated values
-                // Announcements
-                var results = TermTransformator.CallTaxonomyWebServiceFindChildTerms(sourceClientContext, new Guid(sspId), new Guid(termSetId), new Guid(termId), path);
-                foreach(var result in results)
-                {
-                    Console.WriteLine("{0} - {1}", result.Key, result.Value.TermPath);
-                }
-                    
-                Assert.IsTrue(results != default);
-                Assert.IsTrue(results.Count > 0);
-            }
         }
 
     }

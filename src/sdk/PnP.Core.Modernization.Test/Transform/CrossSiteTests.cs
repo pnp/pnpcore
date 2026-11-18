@@ -1,7 +1,7 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Cache;
 using PnP.Core.Modernization.Entities;
+using PnP.Core.Modernization.Pages;
 using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
 using System;
@@ -15,7 +15,7 @@ namespace PnP.Core.Modernization.Tests.Transform
     {
         class TestLayout : ILayoutTransformator
         {
-            public void Transform(Tuple<Pages.PageLayout, List<WebPartEntity>> pageData)
+            public void Transform(Tuple<PageLayout, List<WebPartEntity>> pageData)
             {
                 throw new NotImplementedException();
             }
@@ -67,7 +67,7 @@ namespace PnP.Core.Modernization.Tests.Transform
 
                     var pages = sourceClientContext.Web.GetBlogsFromList(CacheManager.Instance.GetBlogListName(sourceClientContext), "k");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -147,9 +147,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
                     pageTransformator.RegisterObserver(new UnitTestLogObserver());
 
-                    var pages = sourceClientContext.Web.GetPages("richtext_1");
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"richtext_1");
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -215,9 +215,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                     var pageTransformator = new PageTransformator(sourceClientContext, targetClientContext);
                     pageTransformator.RegisterObserver(new UnitTestLogObserver());
 
-                    var pages = sourceClientContext.Web.GetPages("wpp_with"); //Specific page - aim for one file
+                    var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp_with"); //Specific page - aim for one file
 
-                    foreach (var page in pages)
+                    foreach (IListItem page in pages)
                     {
                         PageTransformationInformation pti = new PageTransformationInformation(page)
                         {
@@ -254,9 +254,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(sourceClientContext);
                 pageTransformator.RegisterObserver(new UnitTestLogObserver());
 
-                var pages = sourceClientContext.Web.GetPages("wpp_with");
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp_with");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -316,9 +316,9 @@ namespace PnP.Core.Modernization.Tests.Transform
                 var pageTransformator = new PageTransformator(sourceClientContext);
                 pageTransformator.RegisterObserver(new UnitTestLogObserver());
 
-                var pages = sourceClientContext.Web.GetPages("wpp_with"); //Specific page - aim for one file
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wpp_with"); //Specific page - aim for one file
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {
@@ -356,9 +356,9 @@ namespace PnP.Core.Modernization.Tests.Transform
             {
                 var pageTransformator = new PageTransformator(sourceClientContext);
 
-                var pages = sourceClientContext.Web.GetPages("wk");
+                var pages = WebExtensions.GetPages(sourceClientContext.Web,"wk");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     PageTransformationInformation pti = new PageTransformationInformation(page)
                     {

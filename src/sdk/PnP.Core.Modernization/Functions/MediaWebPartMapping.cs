@@ -1,9 +1,9 @@
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -11,11 +11,11 @@ namespace PnP.Core.Modernization.Functions
 {
     internal sealed class MediaWebPartMapping : FunctionsBase
     {
-        private readonly ClientContext sourceClientContext;
-        private readonly ListItem sourcePage;
+        private readonly PnPContext sourceClientContext;
+        private readonly IListItem sourcePage;
 
-        internal MediaWebPartMapping(ClientContext targetContext, ClientContext sourceContext,
-            ListItem sourcePage, IList<ILogObserver> logObservers) : base(targetContext)
+        internal MediaWebPartMapping(PnPContext targetContext, PnPContext sourceContext,
+            IListItem sourcePage, IList<ILogObserver> logObservers) : base(targetContext)
         {
             this.sourceClientContext = sourceContext;
             this.sourcePage = sourcePage;
@@ -31,9 +31,9 @@ namespace PnP.Core.Modernization.Functions
         internal Dictionary<string, string> ResolveConfiguration(string mediaSource, string embedCode,
             string videoSetSource, bool configureFromContext)
         {
-            var source = this.sourceClientContext ?? this.clientContext;
-            ListItem item = null;
-            ClientContext itemContext = source;
+            PnPContext source = this.sourceClientContext ?? this.clientContext;
+            IListItem item = null;
+            PnPContext itemContext = source;
             try
             {
                 if (configureFromContext)
@@ -50,9 +50,9 @@ namespace PnP.Core.Modernization.Functions
                     var address = ResolveMediaUrl(videoSetSource, source);
                     RequireSharePointMediaOrigin(address, source);
                     itemContext = GetMediaWebContext(source, address.AbsoluteUri);
-                    item = itemContext.Web.GetListItem(Uri.UnescapeDataString(address.AbsolutePath));
-                    itemContext.Load(item);
-                    itemContext.ExecuteQueryRetry();
+                    item = itemContext.Web.GetFolderByServerRelativeUrl(Uri.UnescapeDataString(address.AbsolutePath), f => f.ListItemAllFields).ListItemAllFields;
+                    item.LoadBatch();
+                    itemContext.Execute();
                 }
 
                 if (item != null)
@@ -103,7 +103,7 @@ namespace PnP.Core.Modernization.Functions
                     ["ResolvedMediaSource"] = media.AbsolutePath
                 };
             }
-            catch (ServerException ex) when (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+            catch (ServiceException ex) when (ex.IsNotFound())
             {
                 throw MediaUnavailable($"Media web part VideoSetSource '{videoSetSource}' was not found or is inaccessible.");
             }
@@ -118,32 +118,31 @@ namespace PnP.Core.Modernization.Functions
 
         internal string ToFileProperties(string resolvedMediaSource, string transferredMediaSource)
         {
-            var source = this.sourceClientContext ?? this.clientContext;
+            PnPContext source = this.sourceClientContext ?? this.clientContext;
             var retainedSource = string.Equals(resolvedMediaSource, transferredMediaSource, StringComparison.Ordinal);
-            var context = retainedSource ? source : this.clientContext;
+            PnPContext context = retainedSource ? source : this.clientContext;
             var path = retainedSource ? Uri.UnescapeDataString(resolvedMediaSource) : transferredMediaSource;
             if (string.IsNullOrWhiteSpace(path) || !path.StartsWith("/", StringComparison.Ordinal) ||
                 path.StartsWith("//", StringComparison.Ordinal))
             {
                 throw MediaUnavailable("Media web part asset handling did not return a file path.");
             }
-            if (retainedSource && !source.Url.Equals(this.clientContext.Url, StringComparison.OrdinalIgnoreCase))
+            if (retainedSource && !source.Uri.AbsoluteUri.Equals(this.clientContext.Uri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
             {
                 LogWarning($"Media file '{path}' was not transferred; retaining its source location and identities. Verify destination users have access.", LogStrings.Heading_BuiltInFunctions);
             }
-            var fileUrl = new Uri(context.Url).GetLeftPart(UriPartial.Authority) +
+            var fileUrl = new Uri(context.Uri.AbsoluteUri).GetLeftPart(UriPartial.Authority) +
                 string.Join("/", path.Split('/').Select(Uri.EscapeDataString));
-            ClientContext fileContext = context;
+            PnPContext fileContext = context;
             try
             {
                 fileContext = GetMediaWebContext(context, fileUrl);
-                var file = fileContext.Web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(path));
-                fileContext.Load(file, value => value.Exists, value => value.Name, value => value.ServerRelativeUrl,
-                    value => value.UniqueId, value => value.ListId, value => value.Author);
-                fileContext.Load(fileContext.Web, value => value.Id, value => value.Url);
-                fileContext.Load(fileContext.Site, value => value.Id);
-                fileContext.ExecuteQueryRetry();
-                if (!file.Exists || file.UniqueId == Guid.Empty || file.ListId == Guid.Empty)
+                IFile file = fileContext.Web.GetFileByServerRelativeUrl(path);
+                file.LoadBatch(value => value.Name,value => value.ServerRelativeUrl, value => value.UniqueId,value => value.ListId,value => value.Author);
+                fileContext.Web.LoadBatch(value => value.Id,value => value.Url);
+                fileContext.Site.LoadBatch(value => value.Id);
+                fileContext.Execute();
+                if (file.UniqueId == Guid.Empty || file.ListId == Guid.Empty)
                 {
                     throw MediaUnavailable($"Media file '{fileUrl}' could not be resolved to a SharePoint file.");
                 }
@@ -159,7 +158,7 @@ namespace PnP.Core.Modernization.Functions
                     ["dataVersion"] = "1.4",
                     ["properties"] = new JObject
                     {
-                        ["file"] = new Uri(fileContext.Web.Url).GetLeftPart(UriPartial.Authority) +
+                        ["file"] = fileContext.Web.Url.GetLeftPart(UriPartial.Authority) +
                             string.Join("/", file.ServerRelativeUrl.Split('/').Select(Uri.EscapeDataString)),
                         ["serverRelativeUrl"] = file.ServerRelativeUrl,
                         ["title"] = file.Name,
@@ -178,7 +177,7 @@ namespace PnP.Core.Modernization.Functions
                 };
                 return EncodeWebPartMappingJson(data);
             }
-            catch (ServerException ex) when (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+            catch (ServiceException ex) when (ex.IsNotFound())
             {
                 throw MediaUnavailable($"Media file '{fileUrl}' was not found or is inaccessible.");
             }
@@ -191,16 +190,16 @@ namespace PnP.Core.Modernization.Functions
             }
         }
 
-        private static string GetMediaField(ListItem item, string name)
+        private static string GetMediaField(IListItem item, string name)
         {
-            if (!item.FieldValues.TryGetValue(name, out var value) || value == null)
+            if (!item.Values.TryGetValue(name, out var value) || value == null)
             {
                 return "";
             }
-            return value is FieldUrlValue url ? url.Url : value.ToString();
+            return value is IFieldUrlValue url ? url.Url : value.ToString();
         }
 
-        private Uri ResolveMediaUrl(string value, ClientContext source)
+        private Uri ResolveMediaUrl(string value, PnPContext source)
         {
             if (string.IsNullOrWhiteSpace(value) || value.Any(char.IsControl) || value.Contains("\\") ||
                 !Uri.TryCreate(new Uri(source.Web.GetUrl().TrimEnd('/') + "/"), value.Trim(), out var address) ||
@@ -211,7 +210,7 @@ namespace PnP.Core.Modernization.Functions
             return address;
         }
 
-        private void RequireSharePointMediaOrigin(Uri address, ClientContext source)
+        private void RequireSharePointMediaOrigin(Uri address, PnPContext source)
         {
             if (!address.GetLeftPart(UriPartial.Authority).Equals(new Uri(source.Web.GetUrl()).GetLeftPart(UriPartial.Authority),
                 StringComparison.OrdinalIgnoreCase))
@@ -220,18 +219,17 @@ namespace PnP.Core.Modernization.Functions
             }
         }
 
-        private ClientContext GetMediaWebContext(ClientContext context, string fileUrl)
+        private PnPContext GetMediaWebContext(PnPContext context, string fileUrl)
         {
-            var webUrl = Web.GetWebUrlFromPageUrl(context, fileUrl);
-            context.ExecuteQueryRetry();
-            if (string.IsNullOrWhiteSpace(webUrl.Value))
+            var webUrl = SharePointRest.GetWebUrlFromPageUrl(context, new Uri(fileUrl));
+            if (string.IsNullOrWhiteSpace(webUrl))
             {
                 throw MediaUnavailable($"The SharePoint web for media '{fileUrl}' could not be resolved.");
             }
-            return webUrl.Value.Equals(context.Url, StringComparison.OrdinalIgnoreCase) ? context : context.Clone(webUrl.Value);
+            return webUrl.Equals(context.Uri.AbsoluteUri, StringComparison.OrdinalIgnoreCase) ? context : context.Clone(new Uri(webUrl));
         }
 
-        private string MediaToEmbedProperties(string embedCode, ClientContext source)
+        private string MediaToEmbedProperties(string embedCode, PnPContext source)
         {
             using (var document = new HtmlParser().ParseDocument(embedCode))
             {
@@ -256,7 +254,7 @@ namespace PnP.Core.Modernization.Functions
                     var value = iframe.GetAttribute(dimension);
                     if (int.TryParse(value, out var pixels) && pixels > 0)
                     {
-                        normalized.SetAttribute(dimension, pixels.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                        normalized.SetAttribute(dimension, pixels.ToString(CultureInfo.InvariantCulture));
                     }
                 }
                 if (iframe.HasAttribute("allowfullscreen"))

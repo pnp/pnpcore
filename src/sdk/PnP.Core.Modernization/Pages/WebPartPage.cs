@@ -1,7 +1,5 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.WebParts;
-using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+﻿using PnP.Core.Modernization.Entities;
+
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
@@ -24,7 +22,7 @@ namespace PnP.Core.Modernization.Pages
         /// <param name="pageFile">File holding the page (for pages living outside of a library)</param>
         /// <param name="pageTransformation">Page transformation information</param>
         /// <param name="logObservers"></param>
-        public WebPartPage(ListItem page, File pageFile, PageTransformation pageTransformation, IList<ILogObserver> logObservers = null) : base(page, pageFile, pageTransformation, logObservers)
+        public WebPartPage(IListItem page, IFile pageFile, PageTransformation pageTransformation, IList<ILogObserver> logObservers = null) : base(page, pageFile, pageTransformation, logObservers)
         {
         }
         #endregion
@@ -40,7 +38,7 @@ namespace PnP.Core.Modernization.Pages
 
             //Load the page
             string webPartPageUrl = null;
-            File webPartPage = null;
+            IFile webPartPage = null;
 
             if (this.page != null)
             {
@@ -54,17 +52,16 @@ namespace PnP.Core.Modernization.Pages
             }
 
             // Load page properties
-            var pageProperties = webPartPage.Properties;
-            cc.Load(pageProperties);
+            IPropertyValues pageProperties = webPartPage.Properties;
+            webPartPage.LoadBatch(f => f.Properties);
 
             // Load web parts on web part page
             // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
             //       only possible option to add parsing of the raw page aspx file.
-            var limitedWPManager = webPartPage.GetLimitedWebPartManager(PersonalizationScope.Shared);
-            cc.Load(limitedWPManager);
+            var limitedWPManager = new ClassicWebPartReader(webPartPage);
 
-            IEnumerable<WebPartDefinition> webParts = cc.LoadQuery(limitedWPManager.WebParts.IncludeWithDefaultProperties(wp => wp.Id, wp => wp.ZoneId, wp => wp.WebPart.ExportMode, wp => wp.WebPart.Title, wp => wp.WebPart.ZoneIndex, wp => wp.WebPart.IsClosed, wp => wp.WebPart.Hidden, wp => wp.WebPart.Properties));
-            cc.ExecuteQueryRetry();
+            var webParts = limitedWPManager.Read();
+            cc.Execute();
 
             // Check page type
             var layout = GetLayout(pageProperties);
@@ -82,8 +79,6 @@ namespace PnP.Core.Modernization.Pages
                         WebPartType = "",
                     });
                 }
-
-                bool isDirty = false;
                 foreach(var foundWebPart in webPartsToRetrieve)
                 {
                     // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
@@ -95,15 +90,10 @@ namespace PnP.Core.Modernization.Pages
                         }
                     }
 
-                    if (foundWebPart.WebPartDefinition.WebPart.ExportMode == WebPartExportMode.All)
+                    if (foundWebPart.WebPartDefinition.WebPart.ExportMode == ClassicWebPartExportMode.All)
                     {
-                        foundWebPart.WebPartXml = limitedWPManager.ExportWebPart(foundWebPart.WebPartDefinition.Id);
-                        isDirty = true;
+                        foundWebPart.WebPartXml = limitedWPManager.Export(foundWebPart.WebPartDefinition.Id);
                     }
-                }
-                if (isDirty)
-                {
-                    cc.ExecuteQueryRetry();
                 }
 
                 foreach (var foundWebPart in webPartsToRetrieve)
@@ -117,14 +107,14 @@ namespace PnP.Core.Modernization.Pages
                         }
                     }
 
-                    if (foundWebPart.WebPartDefinition.WebPart.ExportMode != WebPartExportMode.All)
+                    if (foundWebPart.WebPartDefinition.WebPart.ExportMode != ClassicWebPartExportMode.All)
                     {
                         // Use different approach to determine type as we can't export the web part XML without indroducing a change
-                        foundWebPart.WebPartType = GetTypeFromProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues);
+                        foundWebPart.WebPartType = GetTypeFromProperties(foundWebPart.WebPartDefinition.WebPart.Properties);
                     }
                     else
                     {
-                        foundWebPart.WebPartType = GetType(foundWebPart.WebPartXml.Value);
+                        foundWebPart.WebPartType = GetType(foundWebPart.WebPartXml);
                     }
 
                     LogInfo(string.Format(LogStrings.ContentTransformFoundSourceWebParts,
@@ -143,7 +133,7 @@ namespace PnP.Core.Modernization.Pages
                         ZoneIndex = (uint)foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
                         Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
-                        Properties = Properties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, foundWebPart.WebPartType, foundWebPart.WebPartXml ==null ? "" : foundWebPart.WebPartXml.Value),
+                        Properties = Properties(foundWebPart.WebPartDefinition.WebPart.Properties, foundWebPart.WebPartType, foundWebPart.WebPartXml ==null ? "" : foundWebPart.WebPartXml),
                     });
                 }
             }
@@ -513,9 +503,10 @@ namespace PnP.Core.Modernization.Pages
         /// </summary>
         /// <param name="pageProperties">Properties of the web part page file</param>
         /// <returns>Used layout</returns>
-        internal PageLayout GetLayout(PropertyValues pageProperties)
+        internal PageLayout GetLayout(IPropertyValues pageProperties)
         {
-            return GetLayoutFromSetupPath(pageProperties.FieldValues.TryGetValue("vti_setuppath", out var setupPath) ? setupPath?.ToString() : null);
+            pageProperties.Values.TryGetValue("vti_setuppath", out var setupPath);
+            return GetLayoutFromSetupPath(setupPath?.ToString());
         }
 
         internal static PageLayout GetLayoutFromSetupPath(string setupPath)

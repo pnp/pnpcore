@@ -1,14 +1,16 @@
 # Modernization migration tests
 
-The original test corpus and fixtures are retained from Framework commit
-`f5b37d64d457143e4b3367ea0594fbcd18cd2f68`.
+The corpus originated at Framework commit
+`f5b37d64d457143e4b3367ea0594fbcd18cd2f68`. Online cases and fixtures are retained;
+on-premises execution cases are replaced by explicit unsupported-platform
+checks. Legacy layout names do not make an Online fixture on-premises.
 
 | Category | Execution |
 | --- | --- |
-| `Offline` | Pure transformation and mocked CSOM tests; selected by default and in CI. |
-| `Integration` | Imported legacy scenarios using `TestCommon`/`App.config`; require manual fixture and authentication review. |
+| `Offline` | Pure transformation, Core-interface mocks, and HTTP-backed Core contexts; selected by default and in CI. |
+| `Integration` | Imported Online scenarios using `TestCommon`/`App.config` for fixture URLs and Core certificate authentication; require manual fixture review. |
 | `Manual` | Imported HTML file-output exercise with a machine-specific path; never selected by default. |
-| `Live` | New opt-in smoke checks of the local library's public transformation entry points. |
+| `Live` | Opt-in smoke checks of the local library's public transformation and Core-native reporting entry points. |
 
 `offline.runsettings` protects an unfiltered `dotnet test` invocation from
 running legacy tenant-writing scenarios. An explicit `--filter` overrides that
@@ -19,7 +21,7 @@ selection. Some imported integration tests are exploratory or conclude with
 
 `MigrationLiveTests` authenticates with a certificate in `CurrentUser\My`.
 It does not export the key or use the installed PnP PowerShell module. Its output
-records the actual loaded Modernization/Core/Framework assembly paths. These
+records the actual loaded Modernization/Core/Core Auth assembly paths. These
 are direct local-library checks, not `ConvertTo-PnPPage` command coverage.
 
 Use approved, existing fixtures without images or asset-transfer requirements.
@@ -31,6 +33,16 @@ Each deletes only its exact run-owned destination in `finally` and verifies
 cleanup. The tests do not activate features, create libraries, publish pages,
 swap source names, or change permissions. Do not select arbitrary production
 pages: their embedded parts can have additional migration requirements.
+
+`CoreReportCreatesModernPageAndCleansUpOwnedFolder` uses the configured wiki
+destination's existing Site Pages library. It writes one report in a new,
+GUID-named folder, verifies the modern-page marker, title and Markdown control,
+then deletes only that exact run-owned folder and verifies cleanup. The report
+path and certificate authentication use Core APIs without a Framework bridge.
+
+Offline HTTP fixtures use the public Core factory and reject unexpected
+requests; no Core friend assembly or test-only changes to another SDK project
+are required.
 
 Configure these environment variables locally:
 

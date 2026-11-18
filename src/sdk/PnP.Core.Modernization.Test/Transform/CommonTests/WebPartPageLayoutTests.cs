@@ -1,7 +1,6 @@
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using PnP.Core.Model.SharePoint;
+
 using PnP.Core.Modernization.Entities;
 using PnP.Core.Modernization.Pages;
 using PnP.Core.Modernization.Transform;
@@ -15,6 +14,13 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
     [TestCategory("Offline")]
     public class WebPartPageLayoutTests
     {
+        private static PnPContext CreateContext() => CoreTestContext.WithFile(
+            "https://contoso.sharepoint.com/sites/source", new
+            {
+                UniqueId = Guid.NewGuid(), ServerRelativeUrl = "/sites/source/default.aspx",
+                Properties = new Dictionary<string, object>()
+            });
+
         public static IEnumerable<object[]> SetupPaths
         {
             get
@@ -44,9 +50,9 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
 
         [DataTestMethod]
         [DynamicData(nameof(SetupPaths))]
-        public void SetupPathsMatchInBothAnalyzersWithCasingAndPrefixes(string setupPath, PageLayout expected)
+        public void SetupPathsMatchInOnlineAnalyzerWithCasingAndPrefixes(string setupPath, PageLayout expected)
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 var file = context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx");
                 var analyzer = new WebPartPage(null, file, new PageTransformation());
@@ -58,14 +64,6 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
                 {
                     file.Properties["vti_setuppath"] = path;
                     Assert.AreEqual(expected, analyzer.GetLayout(file.Properties), path);
-                    foreach (var separator in new[] { "&#92;", "&#x5C;", "\\" })
-                    {
-                        var encoded = path.Replace("\\", separator);
-                        var document = $"<ul><li>vti_setuppath\n<li>SR|{encoded}\n<li>vti_generator\n<li>SR|SharePoint</ul>";
-                        Assert.AreEqual(expected, WebPartPageOnPremises.GetLayoutFromWebServicesDocument(document), document);
-                        document = $"<UL><LI>VTI_SETUPPATH</LI><LI>SR|{encoded}</LI></UL>";
-                        Assert.AreEqual(expected, WebPartPageOnPremises.GetLayoutFromWebServicesDocument(document), document);
-                    }
                 }
             }
         }
@@ -81,14 +79,12 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         public void UnknownSetupPathsRemainCustom(string path)
         {
             Assert.AreEqual(PageLayout.WebPart_Custom, WebPartPage.GetLayoutFromSetupPath(path));
-            Assert.AreEqual(PageLayout.WebPart_Custom,
-                WebPartPageOnPremises.GetLayoutFromWebServicesDocument($"<li>vti_setuppath<li>SR|{path}<li>vti_generator"));
         }
 
         [TestMethod]
         public void MissingSetupPathDoesNotInferLayoutFromPageContent()
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 var file = context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx");
                 var analyzer = new WebPartPage(null, file, new PageTransformation());
@@ -96,9 +92,6 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
                 file.Properties["vti_setuppath"] = null;
                 Assert.AreEqual(PageLayout.WebPart_Custom, analyzer.GetLayout(file.Properties));
             }
-            Assert.AreEqual(PageLayout.WebPart_Custom, WebPartPageOnPremises.GetLayoutFromWebServicesDocument(null));
-            Assert.AreEqual(PageLayout.WebPart_Custom,
-                WebPartPageOnPremises.GetLayoutFromWebServicesDocument(@"<p>SiteTemplates&#92;STS&#92;defaultdws.aspx</p>"));
             Assert.AreEqual(PageLayout.WebPart_FullPageVertical, WebPartPage.GetLayoutFromSetupPath("bpstd.aspx"));
         }
 
@@ -129,13 +122,12 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         [DataRow(PageLayout.WebPart_Custom, "Right", 1, 1)]
         public void ZonesHaveStableCoordinates(PageLayout layout, string zone, int row, int column)
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 var file = context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx");
                 foreach (var analyzer in new WebPartPage[]
                 {
-                    new WebPartPage(null, file, new PageTransformation()),
-                    new WebPartPageOnPremises(null, file, new PageTransformation())
+                    new WebPartPage(null, file, new PageTransformation())
                 })
                 {
                     foreach (var id in new[] { zone, zone.ToLowerInvariant(), zone.ToUpperInvariant() })
@@ -212,7 +204,7 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         [DataRow(PageLayout.WebPart_ProjectSite)]
         public void TemplateDescriptionIsEncodedAndPrecedesTopWithoutChangingZoneOrder(PageLayout layout)
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 context.Web.Description = "Research & planning <script>alert('x')</script>";
                 var analyzer = new WebPartPage(null, context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx"), new PageTransformation());
@@ -240,14 +232,13 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         [DataRow(PageLayout.WebPart_ProjectSite)]
         public void DescriptionsWithoutWebPartsWorkWithFileOnlyAnalyzers(PageLayout layout)
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 context.Web.Description = "Description only";
                 var file = context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx");
                 foreach (var analyzer in new WebPartPage[]
                 {
-                    new WebPartPage(null, file, new PageTransformation()),
-                    new WebPartPageOnPremises(null, file, new PageTransformation())
+                    new WebPartPage(null, file, new PageTransformation())
                 })
                 {
                     var parts = new List<WebPartEntity>();
@@ -265,7 +256,7 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         [DataRow(" \r\n ")]
         public void EmptyTemplateDescriptionsDoNotShiftContent(string description)
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 context.Web.Description = description;
                 var analyzer = new WebPartPage(null, context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx"), new PageTransformation());
@@ -282,7 +273,7 @@ namespace PnP.Core.Modernization.Tests.Transform.CommonTests
         [TestMethod]
         public void OtherTemplatesDoNotLoadOrInsertDescriptions()
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/source"))
+            using (var context = CreateContext())
             {
                 var analyzer = new WebPartPage(null, context.Web.GetFileByServerRelativeUrl("/sites/source/default.aspx"), new PageTransformation());
                 foreach (var layout in Enum.GetValues(typeof(PageLayout)).Cast<PageLayout>()

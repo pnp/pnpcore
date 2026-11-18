@@ -1,5 +1,4 @@
-﻿using Microsoft.SharePoint.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Modernization.Transform;
 using System;
 
@@ -41,10 +40,10 @@ namespace PnP.Core.Modernization.Tests.Transform.Detection
             {
                 var pageTransformator = new PageTransformator(cc);
 
-                var pages = cc.Web.GetPages("Detection_");
+                var pages = WebExtensions.GetPages(cc.Web,"Detection_");
                 //var pages = cc.Web.GetPages("temp2");
 
-                foreach (var page in pages)
+                foreach (IListItem page in pages)
                 {
                     try
                     {

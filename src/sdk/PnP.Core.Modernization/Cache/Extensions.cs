@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace PnP.Core.Modernization.Cache
             JsonSerializerOptions serializerOptions = GetSerializerOptions();
 
             var json = JsonSerializer.Serialize(obj, serializerOptions);
-            return System.Text.Encoding.UTF8.GetBytes(json);
+            return Encoding.UTF8.GetBytes(json);
         }
 
         private static JsonSerializerOptions GetSerializerOptions()
@@ -54,7 +55,7 @@ namespace PnP.Core.Modernization.Cache
 
             JsonSerializerOptions serializerOptions = GetSerializerOptions();
 
-            var jsonString = System.Text.Encoding.UTF8.GetString(byteArray);
+            var jsonString = Encoding.UTF8.GetString(byteArray);
             return JsonSerializer.Deserialize<T>(jsonString, serializerOptions);
         }
 

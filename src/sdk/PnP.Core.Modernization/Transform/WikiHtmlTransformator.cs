@@ -1,15 +1,14 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Modernization.Entities;
-using PnP.Core.Modernization.Extensions;
+
 using PnP.Core.Modernization.Functions;
 using PnP.Core.Modernization.Telemetry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PnPCore = PnP.Core.Model.SharePoint;
+
 
 namespace PnP.Core.Modernization.Transform
 {
@@ -19,8 +18,8 @@ namespace PnP.Core.Modernization.Transform
     public class WikiHtmlTransformator: BaseTransform
     {
         private HtmlParser parser;
-        private ClientContext sourceContext;
-        private PnPCore.IPage page;
+        private PnPContext sourceContext;
+        private IPage page;
         private Dictionary<string, string> mappingProperties;
         private BuiltIn builtInFunctions;
 
@@ -28,7 +27,7 @@ namespace PnP.Core.Modernization.Transform
         /// <summary>
         /// Default constructor
         /// </summary>
-        public WikiHtmlTransformator(ClientContext sourceContext, ClientContext targetContext, PnPCore.IPage page, BaseTransformationInformation basePageTransformationInformation, IList<ILogObserver> logObservers = null)
+        public WikiHtmlTransformator(PnPContext sourceContext, PnPContext targetContext, IPage page, BaseTransformationInformation basePageTransformationInformation, IList<ILogObserver> logObservers = null)
         {
             //Register any existing observers
             if (logObservers != null)

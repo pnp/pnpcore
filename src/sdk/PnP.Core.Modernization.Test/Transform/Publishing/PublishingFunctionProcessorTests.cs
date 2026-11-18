@@ -9,6 +9,21 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
     {
         public string ExpectedPropertyName = "Title";
 
+        [DataTestMethod]
+        [DataRow("<img alt='Original image' src='/images/photo.png'>", "")]
+        [DataRow("<div class='ms-rtestate-field'><img alt='Original image' src='/images/photo.png'></div>", "")]
+        [DataRow("<div class='ms-rtestate-field'><a href='/guide'><img alt='Original image' src='/images/photo.png'></a></div>", "/guide")]
+        public void PublishingImageFunctionsAcceptCoreRestStreamWrappers(string html, string anchor)
+        {
+            using var context = CoreTestContext.Create();
+            var functions = new PublishingBuiltIn(new PublishingPageTransformationInformation(null), context, context);
+
+            Assert.AreEqual("/images/photo.png", functions.ToImageUrl(html));
+            Assert.AreEqual("Original image", functions.ToImageAltText(html));
+            Assert.AreEqual(anchor, functions.ToImageAnchor(html));
+            Assert.AreEqual("/images/plain.png", functions.ToImageUrl("/images/plain.png"));
+        }
+
         [TestMethod]
         public void ResolveFunctionToken_SimpleReplacementTest()
         {

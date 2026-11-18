@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Microsoft.SharePoint.Client;
 
 namespace PnP.Core.Modernization
 {
     /// <summary>
-    /// Class holding extension methods for the Microsoft.SharePoint.Client.Site object
+    /// SharePoint Online modernization extensions for Core sites.
     /// </summary>
     public static class SiteExtensionsModernization
     {
@@ -15,24 +14,25 @@ namespace PnP.Core.Modernization
         /// </summary>
         /// <param name="site">Site to find all sub site for</param>
         /// <returns>IEnumerable of strings holding the sub site urls</returns>
-        public static IEnumerable<string> GetAllSubSites(this Site site)
+        public static IEnumerable<string> GetAllSubSites(this ISite site)
         {
-            var siteContext = site.Context;
-            siteContext.Load(site, s => s.Url);
-            siteContext.ExecuteQueryRetry();
+            PnPContext siteContext = site.PnPContext;
+            SharePointOnlineSupport.Validate(siteContext);
+            site.LoadBatch(s => s.Url);
+            siteContext.Execute();
             var queue = new Queue<string>();
-            queue.Enqueue(site.Url);
+            queue.Enqueue(site.Url.AbsoluteUri);
             while (queue.Count > 0)
             {
                 var currentUrl = queue.Dequeue();
                 try
                 {
-                    using (var webContext = siteContext.Clone(currentUrl))
+                    using (PnPContext webContext = siteContext.Clone(new Uri(currentUrl)))
                     {
-                        var webs = webContext.Web.GetSubwebsForCurrentUser(null);
-                        webContext.Load(webs);
-                        webContext.ExecuteQueryRetry();
-                        foreach(var subWeb in webs)
+                        IWebCollection webs = webContext.Web.Webs;
+                        webs.LoadBatch();
+                        webContext.Execute();
+                        foreach(IWeb subWeb in webs)
                         {
                             // Ensure these props are loaded...sometimes the initial load did not handle this
                             subWeb.EnsureProperties(s => s.Url, s => s.WebTemplate);
@@ -41,7 +41,7 @@ namespace PnP.Core.Modernization
                             if (!subWeb.WebTemplate.Equals("App", StringComparison.InvariantCultureIgnoreCase) &&
                                 !subWeb.WebTemplate.Equals("ACCSVC", StringComparison.InvariantCultureIgnoreCase))
                             {
-                                queue.Enqueue(subWeb.Url);
+                                queue.Enqueue(subWeb.Url.AbsoluteUri);
                             }
                         }
                     }

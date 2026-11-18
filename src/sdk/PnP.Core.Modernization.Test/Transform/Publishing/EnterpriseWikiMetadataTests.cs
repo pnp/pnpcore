@@ -1,12 +1,14 @@
-using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using PnP.Core.Modernization.Publishing;
-using PnP.Framework.Utilities.UnitTests.Model;
-using PnP.Framework.Utilities.UnitTests.Web;
+using PnP.Core.Modernization.Extensions;
+
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
+using System.Net.Http;
 
 namespace PnP.Core.Modernization.Tests.Transform.Publishing
 {
@@ -38,7 +40,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         [TestMethod]
         public void SwitchingFlagRestoresLegacyMappingAndSidebarBehavior()
         {
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/wiki"))
+            using (var context = CoreTestContext.Create("https://contoso.sharepoint.com/sites/wiki"))
             {
                 var transformator = new PublishingPageTransformator(context, context, new PageTransformation(), null);
                 var information = new PublishingPageTransformationInformation(null) { IsEnterpriseWikiPage = true };
@@ -67,7 +69,7 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var layout = custom.PageLayouts.Single(l => l.Name == "EnterpriseWiki");
             layout.MetaData.Field.Single(f => f.Name == EnterpriseWikiPagePreparation.CategoryFieldName).TargetFieldName = "CustomCategories";
             custom.PageLayouts = new[] { layout };
-            using (var context = new ClientContext("https://contoso.sharepoint.com/sites/wiki"))
+            using (var context = CoreTestContext.Create("https://contoso.sharepoint.com/sites/wiki"))
             {
                 var transformator = new PublishingPageTransformator(context, context, new PageTransformation(), custom);
                 foreach (var enabled in new[] { false, true })
@@ -101,6 +103,81 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         }
 
         [TestMethod]
+        public void TaxonomyMetadataLoadsThroughTheFieldCollection()
+        {
+            var id = Guid.NewGuid();
+            var termSetId = Guid.NewGuid();
+            var storeId = Guid.NewGuid();
+            using var context = CoreTestContext.Create();
+            var list = CoreTestContext.Item(context).ParentList;
+            CoreTestContext.SetResponse(context, (request, _) =>
+            {
+                Assert.AreEqual(HttpMethod.Get, request.Method);
+                StringAssert.EndsWith(request.RequestUri.AbsolutePath, "/Fields");
+                StringAssert.Contains(Uri.UnescapeDataString(request.RequestUri.Query), id.ToString());
+                return CoreTestContext.Json(new
+                {
+                    value = new[] { new
+                    {
+                        Id = id, InternalName = "Categories", TypeAsString = "TaxonomyFieldTypeMulti",
+                        TermSetId = termSetId, SspId = storeId, AllowMultipleValues = true
+                    } }
+                });
+            });
+            var field = PublishingMetadataTransformator.LoadTaxonomyField(list, id);
+            Assert.AreEqual(termSetId, field.TermSetId);
+            Assert.AreEqual(storeId, field.SspId);
+            Assert.IsTrue(field.AllowMultipleValues);
+        }
+
+        [TestMethod]
+        public void EmptyCoreUserSentinelIsNotARatingVoter()
+        {
+            var fields = History(Array.Empty<int>(), "", 0, 0);
+            fields["RatedBy"] = UserValue(-1);
+            Assert.AreEqual(0, EnterpriseWikiRatings.Read(fields).Count);
+            fields["Ratings"] = "5,";
+            fields["RatingCount"] = 1;
+            fields["AverageRating"] = 5;
+            Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiRatings.Read(fields));
+        }
+
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void UnloadedTaxonomyWrapperRequiresExplicitEmptyServerValue(bool empty)
+        {
+            using var context = CoreTestContext.Create();
+            var item = CoreTestContext.Item(context);
+            var value = new Mock<IFieldTaxonomyValue>();
+            value.SetupGet(term => term.TermId).Throws(new ClientException(ErrorType.PropertyNotLoaded, "TermId"));
+            item["Categories"] = value.Object;
+            var field = Mock.Of<IField>(definition => definition.InternalName == "Categories" && definition.EntityPropertyName == "Categories");
+            CoreTestContext.SetResponse(context, (request, _) =>
+            {
+                Assert.AreEqual(HttpMethod.Get, request.Method);
+                return CoreTestContext.Json(new { Categories = empty ? Array.Empty<string>() : new[] { "A nonempty category" } });
+            });
+            if (empty)
+            {
+                Assert.IsNull(field.ReadTaxonomyValue(item));
+                Assert.AreSame(value.Object, item["Categories"], "Reading an empty field must not modify the source item.");
+            }
+            else
+            {
+                Assert.ThrowsException<InvalidOperationException>(() => field.ReadTaxonomyValue(item));
+            }
+        }
+
+        [TestMethod]
+        public void NonemptyScalarUserDoesNotMasqueradeAsEmptyHistory()
+        {
+            var fields = History(Array.Empty<int>(), "", 0, 0);
+            fields["RatedBy"] = UserValue(41);
+            Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiRatings.Read(fields));
+        }
+
+        [TestMethod]
         public void UnloadedFieldsAreNotAnEmptyHistory()
         {
             Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiRatings.Read(new Dictionary<string, object>()));
@@ -124,26 +201,35 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var response = new RatingResponseProvider();
             using (var context = response.CreateContext())
             {
-                var source = context.Web.Lists.GetByTitle("Pages").GetItemById(1);
+                var source = response.CreateItem(context);
                 response.Values = History(Array.Empty<int>(), "", 0, 0);
                 foreach (var name in response.Values.Keys.Where(name => omitted == "all" || name == omitted).ToArray())
                 {
                     response.Values.Remove(name);
                 }
-                context.Load(source);
-                context.ExecuteQueryRetry();
-                Assert.IsFalse(source.FieldValues.ContainsKey(omitted == "all" ? "RatedBy" : omitted));
+                source.LoadBatch();
+                context.Execute();
+                Assert.IsFalse(source.Values.ContainsKey(omitted == "all" ? "RatedBy" : omitted));
 
                 response.Values = RatingResponseProvider.VotedHistory();
                 var snapshot = EnterpriseWikiRatings.Read(source);
 
                 Assert.AreEqual(2, response.RequestCount);
-                var request = XElement.Parse(response.LastRequest);
-                foreach (var name in new[] { "RatedBy", "Ratings", "RatingCount", "AverageRating" })
+                var selection = Uri.UnescapeDataString(response.LastRequest.Query).TrimStart('?')
+                    .Split('&').SingleOrDefault(part => part.StartsWith("$select=", StringComparison.OrdinalIgnoreCase));
+                // Core currently reloads expando fields with a full-item GET. If a projection is used,
+                // all four fields must still come from the same request, not just the missing field.
+                if (selection != null)
                 {
-                    Assert.IsTrue(request.Descendants().Any(e => e.Name.LocalName == "Property" &&
-                        (string)e.Attribute("Name") == name), $"Missing explicit load of {name}.");
+                    var selectedFields = selection.Substring("$select=".Length).Split(',');
+                    foreach (var name in new[] { "RatedBy", "Ratings", "RatingCount", "AverageRating" })
+                    {
+                        Assert.IsTrue(selectedFields.Contains("*") || selectedFields.Contains(name) || selectedFields.Contains(name + "Id"),
+                            $"Missing REST selection of {name}.");
+                    }
                 }
+                Assert.IsTrue(response.LastRequest.AbsolutePath.EndsWith("/items(1)", StringComparison.OrdinalIgnoreCase));
+                Assert.IsInstanceOfType<IFieldValueCollection>(source["RatedBy"]);
                 CollectionAssert.AreEqual(new[] { 41, 12 }, snapshot.Voters.Select(v => v.LookupId).ToArray());
                 CollectionAssert.AreEqual(new[] { 2, 5 }, snapshot.Scores);
                 Assert.AreEqual(2, snapshot.Count);
@@ -157,9 +243,9 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             var response = new RatingResponseProvider { Values = RatingResponseProvider.VotedHistory() };
             using (var context = response.CreateContext())
             {
-                var source = context.Web.Lists.GetByTitle("Pages").GetItemById(1);
-                context.Load(source);
-                context.ExecuteQueryRetry();
+                var source = response.CreateItem(context);
+                source.LoadBatch();
+                context.Execute();
                 var snapshot = EnterpriseWikiRatings.Read(source);
                 Assert.AreEqual(1, response.RequestCount);
                 Assert.AreEqual(2, snapshot.Count);
@@ -167,18 +253,34 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             }
         }
 
-        [TestMethod]
-        public void ReloadThatStillOmitsRatingFieldsFailsClosed()
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void MissingRestRatingFieldsUseCoreProtocolAndStillFailClosed(bool complete)
         {
-            var response = new RatingResponseProvider();
-            using (var context = response.CreateContext())
+            using (var context = CoreTestContext.Create())
             {
-                var source = context.Web.Lists.GetByTitle("Pages").GetItemById(1);
-                context.Load(source);
-                context.ExecuteQueryRetry();
-                var exception = Assert.ThrowsException<InvalidOperationException>(() => EnterpriseWikiRatings.Read(source));
-                StringAssert.Contains(exception.Message, "missing or not loaded");
-                Assert.AreEqual(2, response.RequestCount);
+                var source = new Mock<IListItem>();
+                source.SetupGet(item => item.Values).Returns(CoreTestContext.Item(context).Values);
+                source.SetupGet(item => item.Id).Returns(1);
+                source.SetupGet(item => item.PnPContext).Returns(context);
+                var loaded = CoreTestContext.Item(context, 2);
+                if (complete)
+                    foreach (var pair in History(Array.Empty<int>(), "", 0, 0)) loaded[pair.Key] = pair.Value;
+                var result = new Mock<ICamlQueryCsomResult>();
+                result.SetupGet(value => value.Items).Returns(new[] { loaded });
+                var list = new Mock<IList>();
+                list.Setup(value => value.LoadItemsByCamlQueryViaCsom(It.IsAny<CamlQueryOptions>())).Returns(result.Object);
+                source.SetupGet(item => item.ParentList).Returns(list.Object);
+                if (complete)
+                    Assert.AreEqual(0, EnterpriseWikiRatings.Read(source.Object).Count);
+                else
+                    StringAssert.Contains(Assert.ThrowsException<InvalidOperationException>(() =>
+                        EnterpriseWikiRatings.Read(source.Object)).Message, "missing or not loaded");
+                list.Verify(value => value.LoadItemsByCamlQueryViaCsom(It.Is<CamlQueryOptions>(query =>
+                    query.ViewXml.Contains("RatedBy") && query.ViewXml.Contains("Ratings") &&
+                    query.ViewXml.Contains("RatingCount") && query.ViewXml.Contains("AverageRating") &&
+                    query.ViewXml.Contains("<RowLimit>1</RowLimit>"))), Times.Once);
             }
         }
 
@@ -203,65 +305,98 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         public void RemapsUsersWithoutReorderingOrDroppingScores()
         {
             var source = EnterpriseWikiRatings.Read(History(new[] { 41, 12 }, "2,5,", 2, 3.5));
-            var target = source.MapVoters(v => new FieldUserValue { LookupId = v.LookupId == 41 ? 8 : 99 });
+            var target = source.MapVoters(v => UserValue(v.LookupId == 41 ? 8 : 99));
             CollectionAssert.AreEqual(new[] { 8, 99 }, target.Voters.Select(v => v.LookupId).ToArray());
             CollectionAssert.AreEqual(new[] { 2, 5 }, target.Scores);
             Assert.AreEqual("2,5,", target.Ratings);
             Assert.AreEqual(3.5, target.Average);
             CollectionAssert.AreEqual(new[] { 41, 12 }, source.Voters.Select(v => v.LookupId).ToArray());
             Assert.ThrowsException<InvalidOperationException>(() => source.MapVoters(_ => null));
-            Assert.ThrowsException<InvalidOperationException>(() => source.MapVoters(_ => new FieldUserValue { LookupId = 8 }));
+            Assert.ThrowsException<InvalidOperationException>(() => source.MapVoters(_ => UserValue(8)));
         }
 
-        private sealed class RatingResponseProvider : IMockResponseProvider
+        private sealed class RatingResponseProvider
         {
             private const string Url = "https://contoso.sharepoint.com/sites/wiki";
+            private Guid listId;
             internal Dictionary<string, object> Values { get; set; } = new Dictionary<string, object>();
             internal int RequestCount { get; private set; }
-            internal string LastRequest { get; private set; }
+            internal Uri LastRequest { get; private set; }
 
-            internal ClientContext CreateContext() =>
-                new ClientContext(Url) { WebRequestExecutorFactory = new MockWebRequestExecutorFactory(this) };
+            internal PnPContext CreateContext() => CoreTestContext.Create(Url, Respond);
 
-            internal static Dictionary<string, object> VotedHistory() => new Dictionary<string, object>
+            internal IListItem CreateItem(PnPContext context)
             {
-                ["RatedBy"] = new[]
-                {
-                    new { _ObjectType_ = "SP.FieldUserValue", LookupId = 41, LookupValue = "First voter" },
-                    new { _ObjectType_ = "SP.FieldUserValue", LookupId = 12, LookupValue = "Second voter" }
-                },
-                ["Ratings"] = "2,5,",
-                ["RatingCount"] = 2,
-                ["AverageRating"] = 3.5
+                var item = CoreTestContext.Item(context);
+                listId = ((IList)item.Parent.Parent).Id;
+                return item;
+            }
+
+            internal static Dictionary<string, object> VotedHistory() => History(new[] { 41, 12 }, "2,5,", 2, 3.5);
+
+            private static object[] Fields() => new[]
+            {
+                new { Id = new Guid("4d64b067-08c3-43dc-a87b-8b8e01673313"), InternalName = "RatedBy", Title = "Rated By", FieldTypeKind = 20, TypeAsString = "UserMulti" },
+                new { Id = new Guid("434f51fb-ffd2-4a0e-a03b-ca3131ac67ba"), InternalName = "Ratings", Title = "Ratings", FieldTypeKind = 3, TypeAsString = "Note" },
+                new { Id = new Guid("b1996002-9167-45e5-a4df-b2c41c6723c7"), InternalName = "RatingCount", Title = "Rating Count", FieldTypeKind = 9, TypeAsString = "RatingCount" },
+                new { Id = new Guid("5a14d1ab-1513-48c7-97b3-657a5ba6c742"), InternalName = "AverageRating", Title = "Average Rating", FieldTypeKind = 9, TypeAsString = "AverageRating" }
             };
 
-            public string GetResponse(string url, string verb, string body)
+            private HttpResponseMessage Respond(HttpRequestMessage request, string body)
             {
+                Assert.AreEqual(HttpMethod.Get, request.Method, "Reading rating history must not write to SharePoint.");
+                var path = request.RequestUri.AbsolutePath;
+                if (path.EndsWith("/fields", StringComparison.OrdinalIgnoreCase))
+                {
+                    return CoreTestContext.Json(new { value = Fields() });
+                }
+                if (!path.Contains("/items", StringComparison.OrdinalIgnoreCase))
+                {
+                    var list = new
+                    {
+                        Id = listId,
+                        Title = "Pages",
+                        ListItemEntityTypeFullName = "SP.Data.PagesItem",
+                        Fields = Fields()
+                    };
+                    if (path.EndsWith("/lists", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return CoreTestContext.Json(new { value = new[] { list } });
+                    }
+                    if (path.Contains("/lists(", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return CoreTestContext.Json(list);
+                    }
+                    throw new InvalidOperationException($"Unexpected rating fixture request: {request.Method} {request.RequestUri}");
+                }
+
                 RequestCount++;
-                LastRequest = body;
+                LastRequest = request.RequestUri;
                 var values = new Dictionary<string, object>(Values)
                 {
-                    ["_ObjectType_"] = "SP.ListItem",
-                    ["_ObjectIdentity_"] = "RatingSource",
-                    ["ID"] = 1
+                    ["odata.type"] = "SP.Data.PagesItem",
+                    ["odata.id"] = $"{Url}/_api/Web/Lists(guid'{listId}')/Items(1)",
+                    ["Id"] = 1
                 };
                 if (values.TryGetValue("RatedBy", out var voters))
                 {
                     values.Remove("RatedBy");
-                    values["RatedBy$SP.FieldUserValue$  Array"] = voters;
+                    values["RatedById"] = voters == null ? null :
+                        ((IEnumerable<IFieldUserValue>)voters).Select(voter => voter.LookupId).ToArray();
                 }
-                var provider = new MockEntryResponseProvider();
-                provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = Url, Method = "GetItemById", ReturnValue = values });
-                provider.ResponseEntries.Add(new MockResponseEntry<object> { Url = Url, PropertyName = "RatingSource", ReturnValue = values });
-                return provider.GetResponse(url, verb, body);
+                return path.EndsWith("/items", StringComparison.OrdinalIgnoreCase)
+                    ? CoreTestContext.Json(new { value = new[] { values } })
+                    : CoreTestContext.Json(values);
             }
         }
+
+        private static IFieldUserValue UserValue(int id) => Mock.Of<IFieldUserValue>(user => user.LookupId == id);
 
         private static Dictionary<string, object> History(int[] voters, string scores, int count, double average)
         {
             return new Dictionary<string, object>
             {
-                ["RatedBy"] = voters.Select(id => new FieldUserValue { LookupId = id }).ToArray(),
+                ["RatedBy"] = voters.Select(UserValue).ToArray(),
                 ["Ratings"] = scores,
                 ["RatingCount"] = count,
                 ["AverageRating"] = average

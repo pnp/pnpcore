@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PnP.Core.Modernization\PnP.Core.Modernization.csproj" />
+    <ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Transform\**\*.xml;Transform\**\*.csv;Transform\**\*.html;Transform\**\*.aspx;Transform\**\*.jpg;Transform\**\*.png;Transform\**\*.pptx"
