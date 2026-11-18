@@ -22,7 +22,7 @@
       "additionalProperties": false,
       "properties": {
         "DoNotWaitForSitesToBeFullyCreated": {
-          "description": "By default the engine will wait for sites to be completely created. You can select to no wait for this, while sites are being created by the server asynchronously in the background."
+          "description": "By default the engine will wait for sites to be completely created. You can select to no wait for this, while sites are being created by the server asynchronously in the background.",
           "type": "boolean"
         }
       }
