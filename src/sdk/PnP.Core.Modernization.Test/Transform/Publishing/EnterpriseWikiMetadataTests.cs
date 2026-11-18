@@ -7,6 +7,7 @@ using PnP.Core.Modernization.Extensions;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 
@@ -145,14 +146,15 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
         [DataTestMethod]
         [DataRow(true)]
         [DataRow(false)]
-        public void UnloadedTaxonomyWrapperRequiresExplicitEmptyServerValue(bool empty)
+        public void UnloadedTaxonomyWrapperRejectsMalformedNonemptyValues(bool empty)
         {
             using var context = CoreTestContext.Create();
             var item = CoreTestContext.Item(context);
             var value = new Mock<IFieldTaxonomyValue>();
             value.SetupGet(term => term.TermId).Throws(new ClientException(ErrorType.PropertyNotLoaded, "TermId"));
             item["Categories"] = value.Object;
-            var field = Mock.Of<IField>(definition => definition.InternalName == "Categories" && definition.EntityPropertyName == "Categories");
+            var field = Mock.Of<IField>(definition => definition.InternalName == "Categories" &&
+                definition.EntityPropertyName == "Categories" && definition.TypeAsString == "TaxonomyFieldTypeMulti");
             CoreTestContext.SetResponse(context, (request, _) =>
             {
                 Assert.AreEqual(HttpMethod.Get, request.Method);
@@ -167,6 +169,45 @@ namespace PnP.Core.Modernization.Tests.Transform.Publishing
             {
                 Assert.ThrowsException<InvalidOperationException>(() => field.ReadTaxonomyValue(item));
             }
+        }
+
+        [DataTestMethod]
+        [DataRow(false, 1)]
+        [DataRow(true, 1)]
+        [DataRow(true, 2)]
+        public void UnloadedPopulatedTaxonomyValuesAreHydratedWithoutChangingSource(bool multiple, int count)
+        {
+            using var context = CoreTestContext.Create();
+            var item = CoreTestContext.Item(context);
+            var unloaded = new Mock<IFieldTaxonomyValue>();
+            unloaded.SetupGet(value => value.TermId).Throws(new ClientException(ErrorType.PropertyNotLoaded, "TermId"));
+            item["Categories"] = unloaded.Object;
+            var terms = Enumerable.Range(0, count).Select(index => new { TermGuid = Guid.NewGuid(), Label = "Category " + index }).ToArray();
+            var field = new Mock<IField>();
+            field.SetupGet(value => value.InternalName).Returns("Categories");
+            field.SetupGet(value => value.EntityPropertyName).Returns("Categories");
+            field.SetupGet(value => value.TypeAsString).Returns(multiple ? "TaxonomyFieldTypeMulti" : "TaxonomyFieldType");
+            field.Setup(value => value.NewFieldTaxonomyValue(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Returns((Guid id, string label, int wssId) => new FieldTaxonomyValue(id, label, wssId));
+            field.Setup(value => value.NewFieldValueCollection(It.IsAny<IEnumerable<IFieldValue>>()))
+                .Returns((IEnumerable<IFieldValue> values) =>
+                {
+                    var collection = new Mock<IFieldValueCollection>();
+                    collection.SetupGet(value => value.Values).Returns(new ObservableCollection<IFieldValue>(values));
+                    return collection.Object;
+                });
+            CoreTestContext.SetResponse(context, (request, _) =>
+            {
+                Assert.AreEqual(HttpMethod.Get, request.Method);
+                return CoreTestContext.Json(new Dictionary<string, object> { ["Categories"] = multiple ? (object)terms : terms[0] });
+            });
+
+            var loaded = field.Object.ReadTaxonomyValue(item);
+            var values = multiple ? ((IFieldValueCollection)loaded).Values.Cast<IFieldTaxonomyValue>().ToArray() :
+                new[] { (IFieldTaxonomyValue)loaded };
+            CollectionAssert.AreEqual(terms.Select(value => value.TermGuid).ToArray(), values.Select(value => value.TermId).ToArray());
+            CollectionAssert.AreEqual(terms.Select(value => value.Label).ToArray(), values.Select(value => value.Label).ToArray());
+            Assert.AreSame(unloaded.Object, item["Categories"]);
         }
 
         [TestMethod]

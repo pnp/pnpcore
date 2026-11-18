@@ -18,19 +18,42 @@ namespace PnP.Core.Modernization.Extensions
                 }
                 catch (ClientException exception) when (exception.Error.Type == ErrorType.PropertyNotLoaded)
                 {
-                    // Core's CAML reader can return an uninitialized wrapper for an explicitly empty field.
+                    // Core's CAML reader can leave taxonomy wrappers uninitialized, including populated fields.
                     var raw = SharePointRest.Request(item.PnPContext,
                         $"_api/web/lists(guid'{item.ParentList.Id}')/items({item.Id})?$select={field.EntityPropertyName}");
-                    if (raw.TryGetProperty(field.EntityPropertyName, out var property) &&
-                        (property.ValueKind == JsonValueKind.Null ||
-                         property.ValueKind == JsonValueKind.Array && property.GetArrayLength() == 0))
+                    if (raw.TryGetProperty(field.EntityPropertyName, out var property))
                     {
-                        return null;
+                        if (property.ValueKind == JsonValueKind.Null ||
+                            property.ValueKind == JsonValueKind.Array && property.GetArrayLength() == 0)
+                        {
+                            return null;
+                        }
+                        if (field.TypeAsString == "TaxonomyFieldTypeMulti" && property.ValueKind == JsonValueKind.Array)
+                        {
+                            var terms = property.EnumerateArray().Select(restTerm => ReadRestTerm(field, restTerm)).ToArray();
+                            return field.NewFieldValueCollection(terms);
+                        }
+                        if (field.TypeAsString == "TaxonomyFieldType" && property.ValueKind == JsonValueKind.Object)
+                        {
+                            return ReadRestTerm(field, property);
+                        }
                     }
-                    throw new InvalidOperationException($"Taxonomy field '{field.InternalName}' has unloaded term data and was not explicitly empty.", exception);
+                    throw new InvalidOperationException($"Taxonomy field '{field.InternalName}' has unloaded term data and REST did not return a supported value.", exception);
                 }
             }
             return value;
+        }
+
+        private static IFieldTaxonomyValue ReadRestTerm(IField field, JsonElement value)
+        {
+            if (value.ValueKind != JsonValueKind.Object ||
+                !value.TryGetProperty("TermGuid", out var id) || id.ValueKind != JsonValueKind.String ||
+                !Guid.TryParse(id.GetString(), out var termId) || termId == Guid.Empty ||
+                !value.TryGetProperty("Label", out var label) || label.ValueKind != JsonValueKind.String)
+            {
+                throw new InvalidOperationException($"Taxonomy field '{field.InternalName}' contains invalid REST term data.");
+            }
+            return field.NewFieldTaxonomyValue(termId, label.GetString());
         }
 
         internal static IFieldValueCollection ParseTaxonomyValues(this IField field, string values)

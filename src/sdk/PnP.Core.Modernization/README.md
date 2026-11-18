@@ -48,6 +48,9 @@ Removing the managed SDK does not remove all SharePoint protocols:
   `LoadItemsByCamlQueryViaCsom` protocol implementation: REST rendering/edit values
   omit the links' URLs, groups and formatting. The fallback reads one source
   item and does not change it or introduce a managed SDK dependency.
+- Taxonomy values left uninitialized by Core's CAML reader are hydrated from
+  REST using public Core field factories, preserving populated terms without
+  modifying the source item.
 - Enterprise Wiki rating readback also uses Core's CAML reader when REST omits
   the native hidden rating fields. Empty user sentinels are not voters, and
   incomplete or inconsistent rating histories still fail validation.
