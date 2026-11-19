@@ -1,19 +1,5 @@
 # Build scripts and tools
 
-## Transitional modernization package
-
-The build scripts also compile and pack `PnP.Core.Modernization`, but it is
-deliberately absent from their NuGet push lists during migration verification.
-It still depends on PnP Framework and CSOM; this is not the retirement release.
-No binary package ZIP is regenerated as part of the source migration.
-
-Before enabling publication, approve the required live/platform verification,
-add the assembly/package to the external PnP PowerShell signing/ZIP-producing
-workflow and signing configuration, and then add the package to the applicable
-push/cleanup lists. `publish-nightly.ps1` publishes the supplied ZIP contents;
-it does not build or sign a newly added project. Do not put an unapproved
-modernization package into that release ZIP.
-
 ## Instructions to release a new minor version
 
 Releasing a new minor PnP Core version takes these steps:

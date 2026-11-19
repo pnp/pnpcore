@@ -1,159 +1,169 @@
-# Page modernization: migration and CSOM retirement
+# Modernizing classic pages
 
-`PnP.Core.Modernization` contains the page modernization engine imported from
-PnP Framework. It includes wiki, web-part, blog, publishing, and Enterprise Wiki
-transformators, default mapping XML/XSD resources, custom function support,
-asset transfer, metadata, permissions, user/term/URL mapping, and reporting.
+The `PnP.Core.Modernization` package converts classic SharePoint Online pages into modern pages. It supports wiki pages, web part pages, blog posts, publishing pages, and Enterprise Wiki pages. Mappings describe how to turn their content and web parts into modern sections and controls.
 
-The library uses Core contexts and models, without PnP Framework or the managed
-SharePoint Client SDK. **Only SharePoint Online is supported**; on-premises
-sources and destinations are rejected. Removing managed dependencies does not
-make every operation REST/Graph-only; the protocol boundary is documented below.
+Use this package to transform existing classic content. To create or edit modern pages directly, use the [pages API](pages-intro.md).
 
-## What changed
-
-The complete modernization subtree and dedicated test corpus were imported from
-[`pnp/pnpframework` commit `f5b37d64d457143e4b3367ea0594fbcd18cd2f68`](https://github.com/pnp/pnpframework/tree/f5b37d64d457143e4b3367ea0594fbcd18cd2f68/src/lib/PnP.Framework/Modernization).
-The library has its own assembly/package and uses the `PnP.Core.Modernization`
-namespace. Default mapping resource names use the new prefix; XML schema
-namespaces and mapping semantics are unchanged.
-
-The bundled CAML builder uses `PnP.Core.Modernization.Caml`. Transformation
-constructors now accept `PnPContext`, and source pages use `IListItem`.
-The existing Core `IPage` writer and synchronous transformation entry points
-are retained. Authentication and context lifetimes belong to the caller.
-
-The imported extensions formerly in `Microsoft.SharePoint.Client`,
-`System.Net`, and `AngleSharp.Dom` now live in `PnP.Core.Modernization`.
-Call the modernization extensions explicitly when another imported namespace
-defines a method with the same name:
+Modernization works with authenticated `PnPContext` instances created through `PnPContextFactory`, as explained in the [overview article](readme.md). The examples below use these namespaces:
 
 ```csharp
-using PnP.Core.Model.SharePoint;
+using System;
+using PnP.Core.Modernization.Publishing;
+using PnP.Core.Modernization.Telemetry.Observers;
 using PnP.Core.Modernization.Transform;
 using ModernizationWeb = PnP.Core.Modernization.WebExtensions;
+```
 
-// sourceContext and targetContext are caller-owned, authenticated PnPContexts.
-var pages = ModernizationWeb.GetPages(sourceContext.Web, "Example");
-var transformator = new PageTransformator(
-    sourceContext, targetContext, BasePageTransformator.LoadDefaultWebPartMapping());
-foreach (IListItem sourcePage in pages)
+Choose the transformator and configuration object for your source:
+
+| Source | Transformator | Configuration |
+| --- | --- | --- |
+| Wiki pages, web part pages, blog posts | `PageTransformator` | `PageTransformationInformation` |
+| Publishing and Enterprise Wiki pages | `PublishingPageTransformator` | `PublishingPageTransformationInformation` |
+
+Both configuration objects take the source page's `IListItem`. Calling `Transform` creates the modern page and returns its URL.
+
+## Transforming wiki and web part pages
+
+This example transforms pages whose names start with `Classic` in the site's Site Pages library. Each result gets a new name and is saved as a draft in the same site.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    var information = new PageTransformationInformation(sourcePage)
+    var transformator = new PageTransformator(
+        context, BasePageTransformator.LoadDefaultWebPartMapping());
+    transformator.RegisterObserver(new ConsoleObserver());
+
+    foreach (var sourcePage in ModernizationWeb.GetPages(context.Web, "Classic"))
     {
-        TargetPageName = $"Example-{sourcePage.Id}-modern.aspx",
-        Overwrite = false,
-        PublishCreatedPage = false,
-        SkipTelemetry = true
-    };
-    string destination = transformator.Transform(information);
+        var information = new PageTransformationInformation(sourcePage)
+        {
+            TargetPageName = $"Modern-{sourcePage.Id}.aspx",
+            Overwrite = false,
+            PublishCreatedPage = false
+        };
+
+        string modernPageUrl = transformator.Transform(information);
+        Console.WriteLine(modernPageUrl);
+    }
 }
 ```
 
-Choose a unique destination name for each source page in real batch migrations.
-Do not treat the sample as authorization to overwrite or publish existing pages.
-The model overload above uses the embedded mapping. File-based constructors
-retain their existing behavior: `webpartmapping.xml` must be available in the
-working directory or its `Modernization` subdirectory.
+`ModernizationWeb.GetPages` loads classic source items, rather than the modern `IPage` objects returned by `context.Web.GetPages`. For web part pages in another library, use `ModernizationWeb.GetPagesFromList(context.Web, "SiteAssets")`. For blog posts, use `ModernizationWeb.GetBlogsFromList(context.Web, "Posts")` with the same `PageTransformator`.
 
-For in-place publishing, use
-`PnP.Core.Modernization.Publishing.PublishingPageTransformator.CreateInPlace(
-sourceContext, BasePageTransformator.LoadDefaultWebPartMapping(), null)`.
-The source web must already meet the existing Site Pages/feature prerequisites.
-The port does not enable features or change site policy to make a migration run.
-
-Rebuild custom function libraries against the new assembly and update any
-assembly-qualified references or resource lookups using the old namespace.
-Do not mix Framework transformation options or model objects with their new
-Modernization equivalents; they are different managed types.
-
-## Core models and protocol boundary
-
-Files, fields, users, permissions, and metadata use Core interfaces. Multi-value
-user, lookup, and taxonomy fields use `IFieldValueCollection.Values`; create
-destination values with the target field's `NewFieldUserValue`,
-`NewFieldTaxonomyValue`, and `NewFieldValueCollection` factories. Custom
-function constructors must also use Core types. Clone contexts by URL with
-`Clone(Uri)`, not `Clone(string)` (which selects a named configuration).
-
-Core controls upload chunking. The legacy `fileChunkSizeInMB` parameter remains
-accepted but no longer controls the actual chunk size. Term-set traversal uses
-Core's Microsoft Graph term-store API and requires corresponding Graph
-authentication and read permissions. LDAP-based user resolution is unsupported.
-
-`MarkdownToSharePointObserver` now accepts a Core `IWeb`, not a CSOM
-`ClientContext`, and `EnsureDestination` returns Core `IFolder`. The caller owns
-the web's `PnPContext` and must keep it alive while the observer is used.
-The observer uses the Core request pipeline for the SharePoint REST
-`lists/ensuresitepageslibrary` operation, then Core folder and page APIs.
+To write wiki or web part pages to another site, pass a destination context to the constructor:
 
 ```csharp
-using PnP.Core.Modernization.Telemetry.Observers;
-
-// targetPnPContext is a separately authenticated PnPContext owned by the caller.
-var observer = new MarkdownToSharePointObserver(
-    targetPnPContext.Web, folderName: "Transformation-Reports");
-transformator.RegisterObserver(observer);
-// Run transformations before flushing their accumulated report.
-string reportPage = await observer.FlushAsync(clearLogData: true);
+var transformator = new PageTransformator(
+    sourceContext, targetContext, BasePageTransformator.LoadDefaultWebPartMapping());
 ```
 
-`FlushAsync` returns the page name relative to Site Pages, propagates failures,
-and clears buffered logs only after success when requested. An empty folder
-name saves at the library root; nested relative folder names are retained.
-The synchronous `Flush` entry point retains its existing console-error reporting.
-Neither method takes ownership of or disposes the supplied Core context.
+## Transforming publishing pages
 
-| Area | Implementation |
+`PublishingPageTransformator` uses page layout mappings to turn publishing fields into modern content. This example reads articles from the source site's Pages library and creates modern pages in the destination site's Site Pages library.
+
+```csharp
+using (var sourceContext = await pnpContextFactory.CreateAsync("PublishingSite"))
+using (var targetContext = await pnpContextFactory.CreateAsync("ModernSite"))
+{
+    var transformator = new PublishingPageTransformator(
+        sourceContext, targetContext,
+        BasePageTransformator.LoadDefaultWebPartMapping(), null);
+    transformator.RegisterObserver(new ConsoleObserver());
+
+    foreach (var sourcePage in ModernizationWeb.GetPagesFromList(
+        sourceContext.Web, "Pages", "Article"))
+    {
+        var information = new PublishingPageTransformationInformation(sourcePage)
+        {
+            TargetPageName = $"Modern-{sourcePage.Id}.aspx",
+            Overwrite = false,
+            PublishCreatedPage = false
+        };
+
+        string modernPageUrl = transformator.Transform(information);
+        Console.WriteLine(modernPageUrl);
+    }
+}
+```
+
+The final constructor argument is an optional custom page layout mapping model. Passing `null` uses the built-in layout mappings. To transform publishing pages within the same web, use `PublishingPageTransformator.CreateInPlace` as shown below.
+
+### Enterprise Wiki pages
+
+Transform Enterprise Wiki pages within their existing web. Set `EnableEnterpriseWikiCapabilities` to preserve category and rating metadata and prepare the corresponding Site Pages library columns using the existing site definitions.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("EnterpriseWiki"))
+{
+    var transformator = PublishingPageTransformator.CreateInPlace(
+        context, BasePageTransformator.LoadDefaultWebPartMapping(), null);
+    transformator.RegisterObserver(new ConsoleObserver());
+
+    foreach (var sourcePage in ModernizationWeb.GetPagesFromList(
+        context.Web, "Pages", "Handbook"))
+    {
+        var information = new PublishingPageTransformationInformation(sourcePage)
+        {
+            TargetPageName = $"Modern-{sourcePage.Id}.aspx",
+            EnableEnterpriseWikiCapabilities = true,
+            IncludeEnterpriseWikiSidebar = true,
+            Overwrite = false,
+            PublishCreatedPage = false
+        };
+
+        string modernPageUrl = transformator.Transform(information);
+        Console.WriteLine(modernPageUrl);
+    }
+}
+```
+
+The web needs the Site Pages feature enabled and the native category and rating site columns, including the category term set. `IncludeEnterpriseWikiSidebar` adds the category and rating control to the modern page; set it to `false` when the site does not support the modern Enterprise Wiki sidebar renderer. The metadata is still copied when the sidebar is disabled.
+
+## Configuring the result
+
+Both transformation information classes expose these options:
+
+| Property | Purpose |
 | --- | --- |
-| Target component identity/discovery | Core `IWeb` / `IPage`; no managed-CSOM lookup |
-| SharePoint report storage | Core interfaces and REST; async entry points available |
-| Classic extraction | REST web-part metadata and JSON POST XML export; source export settings are not changed |
-| Assets, metadata, permissions and users | Core models, field factories and REST |
-| Base templates | Existing `PnP.Core.Provisioning` APIs |
-| Term-set traversal | Core Microsoft Graph term-store API |
-| Bare-ID term-label lookup | A narrow authenticated ProcessQuery wrapper, without managed CSOM |
-| Non-empty publishing Summary Links | Core's existing CAML protocol reader; REST exposes labels but loses link targets and formatting |
-| On-premises/SOAP/LDAP paths | Removed or explicitly rejected |
+| `TargetPageName` | Name of the modern page, including `.aspx`. |
+| `Overwrite` | Replace an existing target page. Defaults to `false`. |
+| `PublishCreatedPage` | Publish the result. Defaults to `true`; set to `false` to save a draft. |
+| `KeepPageSpecificPermissions` | Copy the source page's unique permissions. Defaults to `true`. |
+| `KeepPageCreationModificationInformation` | Preserve the source page's creation and modification information. Defaults to `false`. |
+| `PostAsNews` | Create the result as a news post. Defaults to `false`. |
 
-`Services\Core\CSOM\TaxonomyLookup.cs` is the remaining explicit protocol
-fallback. A bare term ID does not supply the term-set ID required by the modern
-term-store API, and Core has no public equivalent for that lookup. The wrapper
-builds XML safely, authenticates with the supplied Core provider, uses Core's
-configured HTTP client, validates responses, and propagates service errors.
-Core may itself use ProcessQuery for some supported operations. This is managed
-SDK retirement, not a promise that `client.svc` is never called.
+For wiki and web part pages, set `PageTransformationInformation.CopyPageMetadata` to `true` to copy additional page metadata. Publishing metadata is configured through the page layout mappings.
 
-## Build and verification
+## Customizing mappings
 
-From the repository root:
+`BasePageTransformator.LoadDefaultWebPartMapping()` loads the embedded web part mapping model. Web part mappings select the modern controls and their properties; publishing page layout mappings also define how source fields supply content and metadata.
 
-```powershell
-dotnet build src\sdk\PnP.Core.Modernization\PnP.Core.Modernization.csproj --configuration Release
-dotnet test src\sdk\PnP.Core.Modernization.Test\PnP.Core.Modernization.Test.csproj --filter TestCategory=Offline
-dotnet pack src\sdk\PnP.Core.Modernization\PnP.Core.Modernization.csproj --configuration Release --no-build
+To use custom XML mappings, pass their paths to the transformator:
+
+```csharp
+var transformator = new PublishingPageTransformator(
+    sourceContext, targetContext,
+    @"C:\Mappings\webpartmapping.xml",
+    @"C:\Mappings\pagelayoutmapping.xml");
 ```
 
-The library targets `netstandard2.0`, `net8.0`, `net9.0`, and `net10.0`; its
-MSTest project runs on `net10.0`. Default test settings select only `Offline`
-tests. Legacy `Integration` and `Manual` tests remain in the project but are not
-silently treated as passing offline tests.
+Custom publishing layout mappings are merged with the built-in mappings. Transformation information also accepts `UrlMappingFile`, `UserMappingFile`, and `TermMappingFile` for URL, user, and taxonomy mappings. Mapping between term sets requires Microsoft Graph term-store read permissions.
 
-See the test project's README for opt-in, certificate-authenticated `Live`
-smoke checks. Live environment configuration and credentials must remain outside
-the repository. On-premises execution tests are no longer supported; classic
-layouts with legacy names, including 2010 layouts hosted in SharePoint Online,
-remain in scope. Successful compilation alone does not establish migration
-fidelity for every page or web part.
+## Reading transformation reports
 
-## Release and retirement boundary
+Register log observers before calling `Transform` to capture progress, warnings, and errors. The examples use `ConsoleObserver` for console output. `MarkdownObserver` writes a local Markdown report, while `MarkdownToSharePointObserver` saves a report page in SharePoint.
 
-Build scripts compile and pack the package, but do not add it to
-their NuGet push lists. Before publication, approve live/platform coverage and
-update the external signing/package-ZIP producer documented in `build\README.MD`.
-The generic nightly ZIP publisher does not establish that the new DLL has been
-signed or that its migration verification is complete.
+With a transformator and transformation information configured, save a SharePoint report as follows:
 
-Dependency removal follows the preserved migration checkpoint as a separate
-phase. Its verification must use the current local build, not results from
-the earlier Framework-dependent checkpoint.
+```csharp
+var observer = new MarkdownToSharePointObserver(
+    targetContext.Web, folderName: "Transformation-Reports");
+transformator.RegisterObserver(observer);
+
+transformator.Transform(information);
+
+string reportPage = await observer.FlushAsync();
+```
+
+`FlushAsync` saves the accumulated report and returns its name relative to Site Pages. Keep the report context alive until the report has been saved. Review warnings and errors as well as the generated pages: an individual component or metadata field can fail without stopping the whole transformation.
