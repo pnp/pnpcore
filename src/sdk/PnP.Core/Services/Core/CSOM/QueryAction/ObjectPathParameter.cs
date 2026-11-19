@@ -1,7 +1,7 @@
 using PnP.Core.Services.Core.CSOM.QueryAction;
 using System.Globalization;
 
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
     /// <summary>
     /// A parameter that refers to another object path in the same request, rather than carrying a

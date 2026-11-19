@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.Taxonomy;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests;
