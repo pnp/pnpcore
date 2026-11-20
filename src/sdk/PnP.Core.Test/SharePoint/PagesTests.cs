@@ -3834,6 +3834,56 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Miscellaneous
+        [TestMethod]
+        public async Task LoadPagePreservesEncodedWebPartProperties()
+        {
+            const string webPartId = "11111111-1111-4111-8111-111111111111";
+            const string htmlContent = "<div title=\"&quot;\">&amp; &lt; &#39;</div>";
+            const string script = "const quote = '&quot;';";
+            const string text = "&quot; &amp; &lt; &gt; &#39; &#x22; &amp;quot;";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var pages = await context.Web.GetPagesAsync("Home");
+                Assert.AreEqual(1, pages.Count);
+                var page = pages.Single();
+                var webPart = page.Controls.OfType<IPageWebPart>().Single(p => p.WebPartId == webPartId);
+
+                Assert.AreEqual(htmlContent, webPart.Properties.GetProperty("htmlContent").GetString());
+                Assert.AreEqual(script, webPart.Properties.GetProperty("script").GetString());
+                Assert.AreEqual(text, webPart.Properties.GetProperty("text").GetString());
+
+                var document = new HtmlParser().ParseDocument(((PageWebPart)webPart).ToHtml(1));
+                var serializedWebPartData = document.QuerySelector("[data-sp-webpartdata]").GetAttribute("data-sp-webpartdata");
+                var serializedProperties = JsonSerializer.Deserialize<JsonElement>(serializedWebPartData).GetProperty("properties");
+                Assert.AreEqual(htmlContent, serializedProperties.GetProperty("htmlContent").GetString());
+                Assert.AreEqual(script, serializedProperties.GetProperty("script").GetString());
+                Assert.AreEqual(text, serializedProperties.GetProperty("text").GetString());
+
+                var news = page.Controls.OfType<IPageWebPart>().Single(p => p.WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.News));
+                Assert.AreEqual("FeaturedNews", news.Properties.GetProperty("layoutId").GetString());
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadPageRecoversLegacyDoubleDecodedQuote()
+        {
+            const string webPartId = "11111111-1111-4111-8111-111111111111";
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var pages = await context.Web.GetPagesAsync("Home");
+                Assert.AreEqual(1, pages.Count);
+                var webPart = pages.Single().Controls.OfType<IPageWebPart>().Single(p => p.WebPartId == webPartId);
+
+                Assert.AreEqual("const quote = '\"';", webPart.Properties.GetProperty("script").GetString());
+
+                var document = new HtmlParser().ParseDocument(((PageWebPart)webPart).ToHtml(1));
+                var serializedWebPartData = document.QuerySelector("[data-sp-webpartdata]").GetAttribute("data-sp-webpartdata");
+                var serializedProperties = JsonSerializer.Deserialize<JsonElement>(serializedWebPartData).GetProperty("properties");
+                Assert.AreEqual("const quote = '\"';", serializedProperties.GetProperty("script").GetString());
+            }
+        }
+
         private static string CallEscapeJsonValues(string input)
         {
             var method = typeof(PageWebPart).GetMethod("EscapeJsonValues", BindingFlags.NonPublic | BindingFlags.Static);
