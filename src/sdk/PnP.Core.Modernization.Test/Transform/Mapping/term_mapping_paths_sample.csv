@@ -1,0 +1,9 @@
+﻿PnP|Sauce|PnPTransform|On-Premises|Classic Page,PnP|Katchup|PnPTransform|Online|Modern Page
+PnP|Sauce|PnPTransform|On-Premises|Publishing Page,PnP|Katchup|PnPTransform|Online|Modern Page
+PnP|Sauce|PnPTransform|On-Premises|Site Page,PnP|Katchup|PnPTransform|Online|Modern Page
+PnP|Sauce|PnPTransform|On-Premises|Site Page,PnP|Katchup|PnPTransform|From|SharePoint 2013
+
+PnP|Sauce|PnPTransform|On-Premises|SitePages,PnP|Katchup|PnPTransform|From|NodeDoesNotExist
+PnP|Sauce|PnPTransform|On-Premises|NodeDoesNotExist,PnP|Katchup|PnPTransform|From|SharePoint 2013
+
+DEFAULT|Sauce|Team Site|Wiki Page,PnP|Katchup|PnPTransform|From|SharePoint 2010

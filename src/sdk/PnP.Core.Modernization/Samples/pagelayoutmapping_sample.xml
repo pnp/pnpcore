@@ -1,0 +1,56 @@
+﻿<PublishingPageTransformation xmlns="http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema">
+  <AddOns>
+    <!-- Assembly can contain either a fully qualified path or just the dll name. In the latter case we depend on .Net assembly resolving to find the assembly -->
+    <!-- <AddOn Name="Custom" Type="SharePoint.Modernization.Framework.SampleAddOn.MyCustomFunctions" Assembly="C:\github\BertPnPTools\Solutions\SharePoint.Modernization\SharePoint.Modernization.Framework\bin\Debug\SharePoint.Modernization.Framework.SampleAddOn.dll" />-->
+  </AddOns>
+  <PageLayouts>
+    <!-- Allow for choice of content type, layout and header -->
+    <PageLayout Name="ArticleLeft" AssociatedContentType="" PageLayoutTemplate="TwoColumnsWithHeader" PageHeader="Custom">
+      <!-- Page header construction: will override value defined in PageTransformationInformation settings -->
+      <Header Type="FullWidthImage" Alignment="Left">
+        <Field Name="PublishingRollupImage" HeaderProperty="ImageServerRelativeUrl" Functions="ToImageUrl({PublishingRollupImage})" />
+        <Field Name="ArticleByLine" HeaderProperty="TopicHeader" Functions=""/>        
+      </Header>      
+      <!-- Some fields become metadata. Use functions to "rewrite" field content when needed -->
+      <MetaData ShowPageProperties="true" PagePropertiesRow="1" PagePropertiesColumn="2" PagePropertiesOrder="7">
+        <Field Name="Title" TargetFieldName="Title" Functions="" ShowInPageProperties="true"/>
+        <Field Name="SeoKeywords" TargetFieldName="" Functions=""/>
+        <!-- Functions allow to 'add' new fields to the metadata collection -->
+        <Field Name="MyCustomField" TargetFieldName="MyCustomField" Functions="ConsolidateCustomField({MyCustomField}); {ExtraField}=SplitCustomField({MyCustomField})" />
+      </MetaData>
+      <!-- Some fields will be represented by content on the page (=web parts) -->
+      <WebParts>
+        <!-- Map a field to one of the existing supported web parts in the webpartmapping file. Specify column that will hold this web part -->
+        <Field Name="PublishingPageImage" TargetWebPart="SharePointPnP.Modernization.WikiImagePart" Row="1" Column="1">
+          <!--Use function to rewrite the provided field content 
+                e.g <img alt="" src="/sites/devportal/PublishingImages/page-travel-instructions.jpg?RenditionID=2" style="BORDER: 0px solid; "> to /sites/devportal/PublishingImages/page-travel-instructions.jpg -->
+          <Property Name="ImageUrl" Type="string" Functions="ToImageUrl({PublishingPageImage})"/>
+          <Property Name="AlternativeText" Type="string" Functions="ToImageAltText({PublishingPageImage})" />
+        </Field>
+        <Field Name="PublishingPageContent" TargetWebPart="SharePointPnP.Modernization.WikiTextPart" Row="1" Column="2">
+          <!-- No function specified, means the content of the PublishingPageContent field will be assigned to the value of the first listed web part property -->
+          <Property Name="Text" Type="string" Functions="" />
+        </Field>
+        <Field Name="SummaryLinks" TargetWebPart="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" Row="1" Column="3">
+          <!-- No function specified, means the content of the PublishingPageContent field will be assigned to the value of the first listed web part property -->
+          <Property Name="SummaryLinkStore" Type="string" />
+        </Field>
+      </WebParts>
+      <!-- Web parts live in a web part zone...define which column will hold the web parts in a given zone -->
+      <WebPartZones>
+        <WebPartZone ZoneIndex="0" ZoneId="mywebpartzone" Row="2" Column="1"/>
+      </WebPartZones>
+      <!-- Web parts might also be "fixed", meaning embedded in the page layout. These web parts need to be 
+           defined with their respective properties as they're not discoverable by API's -->
+      <FixedWebParts>
+        <WebPart Row="2" Column="1" Order="1" Type="Microsoft.SharePoint.WebPartPages.ImageWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+          <Property Name="ImageLink" Type="string" Value=""/>
+          <Property Name="AlternativeText" Type="string" Value=""/>
+          <Property Name="VerticalAlignment" Type="string" Value=""/>
+          <Property Name="HorizontalAlignment" Type="string" Value=""/>
+          <Property Name="BackgroundColor" Type="string" Value=""/>
+        </WebPart>
+      </FixedWebParts>
+    </PageLayout>
+  </PageLayouts>
+</PublishingPageTransformation>

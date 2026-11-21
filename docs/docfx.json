@@ -16,6 +16,11 @@
           "files": [ "**.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src/sdk/PnP.Core.Admin"
+        },
+        {
+          "files": [ "**.csproj" ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "../src/sdk/PnP.Core.Modernization"
         }
       ],
       "dest": "api",
