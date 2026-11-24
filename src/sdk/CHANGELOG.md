@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
 - Removed application insights #1915 [adam-it - Adam Wójcik]
+- Updated EndBug/add-and-commit to a commit hash in docfx workflow #1938 [Lil-Clanky - Marnix de Jong]
 
 ## [1.19]
 
