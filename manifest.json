@@ -10202,11 +10202,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "api/toc.html"
-        },
         ".json": {
           "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -10295,11 +10295,11 @@
       "type": "Toc",
       "source_relative_path": "contributing/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "contributing/toc.html"
-        },
         ".json": {
           "relative_path": "contributing/toc.json"
+        },
+        ".html": {
+          "relative_path": "contributing/toc.html"
         }
       },
       "version": ""
@@ -10688,11 +10688,11 @@
       "type": "Toc",
       "source_relative_path": "demos/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "demos/toc.html"
-        },
         ".json": {
           "relative_path": "demos/toc.json"
+        },
+        ".html": {
+          "relative_path": "demos/toc.html"
         }
       },
       "version": ""
@@ -10911,11 +10911,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""
@@ -11084,11 +11084,11 @@
       "type": "Toc",
       "source_relative_path": "tutorials/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "tutorials/toc.html"
-        },
         ".json": {
           "relative_path": "tutorials/toc.json"
+        },
+        ".html": {
+          "relative_path": "tutorials/toc.html"
         }
       },
       "version": ""
@@ -11937,11 +11937,11 @@
       "type": "Toc",
       "source_relative_path": "using-the-sdk/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/toc.html"
-        },
         ".json": {
           "relative_path": "using-the-sdk/toc.json"
+        },
+        ".html": {
+          "relative_path": "using-the-sdk/toc.html"
         }
       },
       "version": ""
