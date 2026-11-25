@@ -10,12 +10,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support for .NET 11 #1925 [gautamdsheth - Gautam Sheth]
+
 ### Changed
 
 - Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
 - Removed application insights #1915 [adam-it - Adam Wójcik]
 - Updated EndBug/add-and-commit to a commit hash in docfx workflow #1938 [Lil-Clanky - Marnix de Jong]
 - Added support for modern header footer #1859 [czullu - Christian Zuellig] [nicolaor - Rene Nicolao]
+- Dropped support for .NET 8/9 #1925 [gautamdsheth - Gautam Sheth]
 
 ## [1.19]
 
