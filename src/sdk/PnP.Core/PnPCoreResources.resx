@@ -168,6 +168,9 @@
   <data name="Exception_GraphBetaNotAllowed" xml:space="preserve">
     <value>Adding this entity requires the use of the Graph beta endpoint</value>
   </data>
+  <data name="Exception_InstanceWasConsolidatedInBatch" xml:space="preserve">
+    <value>This model instance was consolidated with another request for the same key in the same batch, use the instance returned by the first request for that key instead</value>
+  </data>
   <data name="Exception_InstanceWasDeleted" xml:space="preserve">
     <value>This model instance was deleted, you can't use it anymore</value>
   </data>

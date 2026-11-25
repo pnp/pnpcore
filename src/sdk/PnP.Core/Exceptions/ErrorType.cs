@@ -120,6 +120,14 @@
         /// <summary>
         /// Too many retries of a request in a Graph batch happened
         /// </summary>
-        TooManyBatchRetries
+        TooManyBatchRetries,
+
+        // Batching. Appended rather than grouped with InstanceWasDeleted because this enum has no
+        // explicit values, so inserting a member in the middle renumbers every member after it
+
+        /// <summary>
+        /// This model instance was consolidated with another request for the same key in the same batch, use the instance returned by the first request for that key instead
+        /// </summary>
+        InstanceWasConsolidatedInBatch
     }
 }
