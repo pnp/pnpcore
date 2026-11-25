@@ -19,7 +19,7 @@ jobs:
     steps:
     # prevent parallel executions
     - name: Wait for actions to finish
-      uses: softprops/turnstyle@3805450be63b8c80577dc253e8c17e9132036df4 # v3.3.3
+      uses: softprops/turnstyle@ec9869921df7799d5afea364f4026770f3760342 # v3.3.5
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
     # Checks-out dev branch
@@ -36,7 +36,7 @@ jobs:
         path: gh-pages
     # Setup .NET (required for DocFx)
     - name: Setup .NET
-      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
       with:
         dotnet-version: 8.x
     # Install docfx as a .NET global tool
@@ -49,7 +49,7 @@ jobs:
         ./dev/docs/build.ps1
     # Add, commit and push the changes
     - name: Add & Commit & Push
-      uses: EndBug/add-and-commit@v10
+      uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10.0.0
       with:
         # The directory where your repository is located. You should use actions/checkout first to set it up
         cwd: ./gh-pages
