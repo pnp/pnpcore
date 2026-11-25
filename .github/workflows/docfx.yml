@@ -38,10 +38,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
       with:
-        dotnet-version: 8.x
+        dotnet-version: 11.x
     # Install docfx as a .NET global tool
     - name: Install dependencies
-      run: dotnet tool install -g docfx --version 2.78.5
+      run: dotnet tool install -g docfx --version 2.81.0
     # Build docs
     - name: Build docs
       shell: pwsh
