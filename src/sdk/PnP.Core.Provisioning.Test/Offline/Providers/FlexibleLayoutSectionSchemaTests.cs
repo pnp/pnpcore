@@ -91,6 +91,54 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
 
         [TestMethod]
         [TestCategory("Offline")]
+        public void Serialize_SchemaWithoutVerticalSectionsRejectsNonFlexibleVerticalSections()
+        {
+            var template = CreateTemplate(withTranslation: false);
+            template.ClientSidePages[0].Sections.Add(new CanvasSection
+            {
+                Type = CanvasSectionType.OneColumnVerticalSection,
+                Order = 4,
+            });
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2019_03);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+            NotSupportedException exception = Assert.ThrowsException<NotSupportedException>(
+                () => formatter.ToFormattedTemplate(template));
+
+            StringAssert.Contains(exception.Message, nameof(CanvasSectionType.OneColumnVerticalSection));
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
+        public void Serialize_SchemaWithoutVerticalSectionsFlattensFlexibleVerticalControls()
+        {
+#pragma warning disable CS0618 // Type or member is obsolete
+            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2019_03);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+            XDocument document;
+            using (Stream serialized = formatter.ToFormattedTemplate(CreateTemplate(withTranslation: false)))
+            {
+                document = XDocument.Load(serialized);
+            }
+
+            XNamespace schemaNamespace = "http://schemas.dev.office.com/PnP/2019/03/ProvisioningSchema";
+            XElement verticalSection = document.Descendants(schemaNamespace + "Section")
+                .Single(section => (int?)section.Attribute("Order") == 2);
+            Assert.AreEqual("OneColumn", (string)verticalSection.Attribute("Type"));
+
+            XElement[] controls = verticalSection.Descendants()
+                .Where(control => control.Attribute("Column") != null)
+                .ToArray();
+
+            CollectionAssert.AreEqual(new[] { "1", "1" }, controls.Select(control => (string)control.Attribute("Column")).ToArray());
+            CollectionAssert.AreEqual(new[] { "1", "2" }, controls.Select(control => (string)control.Attribute("Order")).ToArray());
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
         [DynamicData(nameof(SchemaVersions), DynamicDataSourceType.Method)]
         public void Serialize_OutputValidatesAgainstItsSchema(string namespaceUri)
         {

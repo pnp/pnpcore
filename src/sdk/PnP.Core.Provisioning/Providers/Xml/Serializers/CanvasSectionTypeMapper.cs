@@ -6,11 +6,26 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers
 {
     internal static class CanvasSectionTypeMapper
     {
+        internal static void ValidateSchemaValue(CanvasSectionType sectionType, Type schemaEnumType)
+        {
+            bool isFlexibleLayoutSection = sectionType == CanvasSectionType.FlexibleLayoutSection
+                || sectionType == CanvasSectionType.FlexibleLayoutVerticalSection;
+
+            if (!Enum.IsDefined(schemaEnumType, sectionType.ToString()) && !isFlexibleLayoutSection)
+            {
+                throw new NotSupportedException(
+                    $"Schema {schemaEnumType.Namespace} does not support canvas section type '{sectionType}'. " +
+                    "Use a schema version that supports this section type.");
+            }
+        }
+
         /// <summary>
         /// Converts a model section type to the value of the schema's CanvasSectionType enum.
         /// </summary>
         internal static object ToSchemaValue(CanvasSectionType sectionType, Type schemaEnumType)
         {
+            ValidateSchemaValue(sectionType, schemaEnumType);
+
             string name = sectionType.ToString();
 
             if (!Enum.IsDefined(schemaEnumType, name)
