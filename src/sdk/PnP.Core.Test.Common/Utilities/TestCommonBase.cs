@@ -19,8 +19,6 @@ namespace PnP.Core.Test.Common.Utilities
     {
         internal const string PnPCoreSDKTestPrefix = "PNP_SDK_TEST_";
 
-        internal const string TestInstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
-
         protected const string AsyncSuffix = "_Async";
         protected const string PnPCoreSDKTestSite = "pnpcoresdktestsite";
         protected const string PnPCoreSDKTestUser = "pnpcoresdktestuser";
@@ -53,11 +51,6 @@ namespace PnP.Core.Test.Common.Utilities
         /// Name of the tenant admin center site configuration
         /// </summary>
         internal static string TenantAdminCenterSite { get { return "TenantAdminCenterSite"; } }
-
-        /// <summary>
-        /// Name of the default Syntex Content Center test site confguration
-        /// </summary>
-        internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
 
         /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
@@ -124,14 +117,10 @@ namespace PnP.Core.Test.Common.Utilities
         private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
         {
             if (Mocking &&
-                configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == HomeTestSite)
+                configurationName == ClassicSTS0TestSite || configurationName == HomeTestSite)
             {
                 var configuration = GetConfigurationSettings();
-                if (configurationName == SyntexContentCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
-                {
-                    configurationName = TestSite;
-                }
-                else if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
+                if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
                 {
                     configurationName = TestSite;
                 }
@@ -142,26 +131,6 @@ namespace PnP.Core.Test.Common.Utilities
             }
 
             return configurationName;
-        }
-
-        internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
-            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
-            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
-        {
-            // Obtain factory (cached)
-            var factory = BuildContextFactory();
-
-            // Remove Async suffix
-            if (testName.EndsWith(AsyncSuffix))
-            {
-                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
-            }
-
-
-            // Configure the factory for our testing mode
-            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
-
-            return await (factory as TestPnPContextFactory).CreateWithTelemetryManagerAsync(configurationName, telemetryManager).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> GetContextWithoutInitializationAsync(string configurationName, int id = 0,
@@ -304,7 +273,6 @@ namespace PnP.Core.Test.Common.Utilities
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
                 string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
                 string tenantAdminCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TenantAdminCenterSite:SiteUrl");
-                string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
                 string homeSiteUrl = configuration.GetValue<string>("PnPCore:Sites:HomeTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
@@ -314,7 +282,6 @@ namespace PnP.Core.Test.Common.Utilities
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
                     classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
                     tenantAdminCenterSiteUrl = "https://bertonline-admin.sharepoint.com";
-                    syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
                     homeSiteUrl = "https://bertonline.sharepoint.com";
                 }
 
@@ -351,11 +318,6 @@ namespace PnP.Core.Test.Common.Utilities
                 if (!string.IsNullOrEmpty(tenantAdminCenterSiteUrl))
                 {
                     TestUris.Add("TenantAdminCenterSite", new Uri(tenantAdminCenterSiteUrl));
-                }
-
-                if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
-                {
-                    TestUris.Add("SyntexContentCenterTestSite", new Uri(syntexContentCenterSiteUrl));
                 }
 
                 if (!string.IsNullOrEmpty(homeSiteUrl))
@@ -419,20 +381,6 @@ namespace PnP.Core.Test.Common.Utilities
             }
         }
 
-
-        /// <summary>
-        /// Points the SDK telemetry at the test Azure AppInsights instance instead of the production one.
-        /// Must run before the first TelemetryManager is created: Application Insights v3 freezes a
-        /// TelemetryConfiguration as soon as a TelemetryClient is built from it, so the key cannot be
-        /// changed afterwards. Call this from an [AssemblyInitialize] method.
-        /// </summary>
-        internal static void UseTestTelemetryInstance()
-        {
-            if (!RunningInGitHubWorkflow())
-            {
-                TelemetryManager.InstrumentationKey = TestInstrumentationKey;
-            }
-        }
 
         internal static bool RunningInGitHubWorkflow()
         {

@@ -684,34 +684,6 @@ namespace PnP.Core.Model.SharePoint
         public Task<IListItem> AddListFolderBatchAsync(Batch batch, string path, string parentFolder = null, string contentTypeId = "0x0120");
 
         /// <summary>
-        /// Classifies and extracts all unprocessed files in the list
-        /// </summary>
-        /// <param name="force">Also classify and extract files that were processed before</param>
-        /// <param name="pageSize">Page size used when loading the files in this library</param>
-        /// <returns>Information about the created classify and extract requests</returns>
-        Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500);
-
-        /// <summary>
-        /// Classifies and extracts all unprocessed files in the list
-        /// </summary>
-        /// <param name="force">Also classify and extract files that were processed before</param>
-        /// <param name="pageSize">Page size used when loading the files in this library</param>
-        /// <returns>Information about the created classify and extract requests</returns>
-        List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500);
-
-        /// <summary>
-        /// Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue
-        /// </summary>
-        /// <returns>Information about the created classify and extract requests</returns>
-        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync();
-
-        /// <summary>
-        /// Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue
-        /// </summary>
-        /// <returns>Information about the created classify and extract requests</returns>
-        ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
-
-        /// <summary>
         /// Returns a list of flow instances connected to this list
         /// </summary>
         /// <returns>List of connected flow instances</returns>

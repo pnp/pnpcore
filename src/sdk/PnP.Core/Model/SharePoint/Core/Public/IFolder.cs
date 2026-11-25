@@ -320,21 +320,6 @@ namespace PnP.Core.Model.SharePoint
         public void Rename(string name);
         #endregion
 
-        #region Syntex support
-        /// <summary>
-        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
-        /// </summary>
-        /// <returns>Information about the created classify and extract requests</returns>
-        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync();
-
-        /// <summary>
-        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
-        /// </summary>
-        /// <returns>Information about the created classify and extract requests</returns>
-        ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
-
-        #endregion
-
         #region Files
         /// <summary>
         /// Find files in the folder, can be slow as it iterates over all the files in the folder and it's sub folders. If performance

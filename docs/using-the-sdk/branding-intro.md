@@ -87,10 +87,21 @@ chrome.Navigation.Visible = false;
 chrome.Footer.Enabled = true;
 chrome.Footer.Emphasis = FooterVariantThemeType.None;
 chrome.Footer.Layout = FooterLayoutType.Extended;
-chrome.Footer.DisplayName == "Contoso";
+chrome.Footer.LinkAlignment = FooterLinkAlignment.Left;
+chrome.Footer.DisplayName = "Contoso";
+chrome.Header.OverlayColor = OverlayColorType.Black;
+chrome.Header.OverlayOpacity = 40;
+chrome.Header.OverlayGradientDirection = OverlayGradientDirectionType.TopToBottom;
+chrome.Footer.OverlayColor = OverlayColorType.DarkGradient;
+chrome.Footer.OverlayOpacity = 60;
+chrome.Footer.OverlayGradientDirection = OverlayGradientDirectionType.TopToBottom;
 
 await context.Web.GetBrandingManager().SetChromeOptionsAsync(chrome);
 ```
+
+Header and footer overlay settings are optional. `OverlayColor` accepts a solid color or a gradient (`White`, `Black`, `LightGradient`, `DarkGradient`). `OverlayOpacity` is a value from 0 to 100. `OverlayGradientDirection` is used when the overlay color is a gradient. Leave `OverlayColor` at `OverlayColorType.None` when the site should keep no overlay. `ColorIndexInLightMode` and `ColorIndexInDarkMode` are returned by SharePoint and are currently always `-1`.
+
+Footer link alignment is available on sites with communication site features. `FooterLinkAlignment.Left` and `FooterLinkAlignment.Right` control how the footer links are aligned.
 
 ## Set and reset the header images
 
@@ -148,3 +159,39 @@ await chrome.Footer.SetLogoAsync("parker-ms-300.png", File.OpenRead($".{Path.Dir
 // Clear the footer logo
 await chrome.Footer.ClearLogoAsync();
 ```
+
+## Set and clear the footer background image
+
+On a site with communication site features you can set a footer background image via the `SetFooterBackgroundImage` methods. Clearing the footer background can be done using the `ClearFooterBackgroundImage` methods. The optional focal point values work the same way as for the header background image.
+
+```csharp
+var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
+
+// Set the footer background with a custom focal point
+await chrome.Footer.SetFooterBackgroundImageAsync("footer.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}footer.jpg"), 23.35, 34.66, true);
+
+// Clear the footer background image
+await chrome.Footer.ClearFooterBackgroundImageAsync();
+```
+
+## Set a font package
+
+SharePoint exposes three font package lists. `GetOutOfBoxFontPackages` returns the built-in packages, `GetFontPackages` returns the packages from the brand center, and `GetSiteFontPackages` returns the packages installed on the current site. Apply one with `SetOutOfBoxFontPackage` or `SetFontPackage`.
+
+```csharp
+var outOfBoxFonts = await context.Web.GetBrandingManager().GetOutOfBoxFontPackagesAsync();
+var aptos = outOfBoxFonts.FirstOrDefault(p => p.Title == "Aptos-Aptos Serif");
+if (aptos != null)
+{
+    await context.Web.GetBrandingManager().SetOutOfBoxFontPackageAsync(aptos.ID);
+}
+
+var brandCenterFonts = await context.Web.GetBrandingManager().GetFontPackagesAsync();
+var brandFont = brandCenterFonts.FirstOrDefault(p => !p.IsHidden);
+if (brandFont != null)
+{
+    await context.Web.GetBrandingManager().SetFontPackageAsync(brandFont.ID);
+}
+```
+
+`IsHidden` marks a package that should not appear in the font picker. `PackageJson` contains the package settings as a JSON string.

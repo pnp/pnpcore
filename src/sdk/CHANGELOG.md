@@ -6,7 +6,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## 1.19 - Unreleased
+## 1.20
+
+### Added
+
+- Added support for .NET 11 #1925 [gautamdsheth - Gautam Sheth]
+
+### Changed
+
+- Allowed setting web part inside of a full width section #1882 [adam-it - Adam Wójcik]
+- Removed application insights #1915 [adam-it - Adam Wójcik]
+- Updated EndBug/add-and-commit to a commit hash in docfx workflow #1938 [Lil-Clanky - Marnix de Jong]
+- Added support for modern header footer #1859 [czullu - Christian Zuellig] [nicolaor - Rene Nicolao]
+- Dropped support for .NET 8/9 #1925 [gautamdsheth - Gautam Sheth]
+
+## [1.19]
 
 ### Added 
 
@@ -30,6 +44,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added handling of unpublished News pages at template extraction #1881 [Magnus-K-work - Magnus-K-work]
 - Skipped consolidated away models when loading extra pages in a batch #1887 [svermaak - svermaak]
 - Fixed folder creation in SharePoint lists #1884 [nicolaor - Rene Nicolao]
+- Fixed loss of visible no-image page headers on load/save #1908 [YifengMao - Yifeng]
+- Fixed handling ListInstance content type binding #1907 [gszdev - gszdev]
+- Fixed TokenParser - Taxonomy, TermStore (nested QueryProperties using Graph) #1906 [gszdev - gszdev]
+- Removed SharePoint Syntex support #1875 [adam-it - Adam Wójcik]
+- Updated the HandleValidateAddAndUpdateResponse in the ListItem to pass on the error code and error message if present #1819 [Guflly - Guflly]
+- Added flag to handle page published status #1885 [Magnus-K-work - Magnus-K-work]
 
 ## [1.18]
 

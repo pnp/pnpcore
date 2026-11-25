@@ -172,10 +172,6 @@
     href: sites-copymovecontent.md
   - name: Hub Site
     href: sites-hubsites.md
-- name: SharePoint Syntex
-  items:
-  - name: Overview
-    href: syntex-intro.md
 - name: Social
   items:
   - name: Content following

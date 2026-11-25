@@ -14,7 +14,7 @@ We recommend always running the most recent stable version.
 | Latest stable (1.16.x and newer) | ✅ Yes  |
 | Older releases   | ❌ No (upgrade to latest) |
 
-The SDK targets `.NET Standard 2.0`, `.NET 8.0`, `.NET 9.0`, and `.NET 10.0`.
+The SDK targets `.NET Standard 2.0`, `.NET 10.0`, and `.NET 11.0`.
 Keep your runtime patched, as some security fixes come from the underlying
 .NET runtime and dependencies (e.g. MSAL / `Microsoft.Identity.Client`).
 

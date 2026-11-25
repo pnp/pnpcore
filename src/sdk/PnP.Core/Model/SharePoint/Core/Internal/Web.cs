@@ -1260,83 +1260,6 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        #region Syntex support
-
-        public async Task<bool> IsSyntexEnabledAsync()
-        {
-            ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/MachineLearningCaptureEnabled", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
-            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
-
-            return machineLearningCaptureEnabled.GetBoolean();
-        }
-
-        public bool IsSyntexEnabled()
-        {
-            return IsSyntexEnabledAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> IsSyntexEnabledForCurrentUserAsync()
-        {
-            ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/UserSyntexEnabled", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
-            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
-
-            return machineLearningCaptureEnabled.GetBoolean();
-        }
-
-        public bool IsSyntexEnabledForCurrentUser()
-        {
-            return IsSyntexEnabledForCurrentUserAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> IsSyntexContentCenterAsync()
-        {
-            await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
-            return IsSyntexContentCenterCheck();
-        }
-
-        private bool IsSyntexContentCenterCheck()
-        {
-            // Syntex Content Center sites use a specific template
-            if (WebTemplate == "CONTENTCTR")
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool IsSyntexContentCenter()
-        {
-            return IsSyntexContentCenterAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<ISyntexContentCenter> AsSyntexContentCenterAsync()
-        {
-            if (await IsSyntexContentCenterAsync().ConfigureAwait(false))
-            {
-                SyntexContentCenter syntexContentCenter = new SyntexContentCenter()
-                {
-                    Web = this
-                };
-
-                return syntexContentCenter;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public ISyntexContentCenter AsSyntexContentCenter()
-        {
-            return AsSyntexContentCenterAsync().GetAwaiter().GetResult();
-        }
-        #endregion
-
         #region Hub Sites
 
         /// <summary>
@@ -1727,12 +1650,6 @@ namespace PnP.Core.Model.SharePoint
         public async Task<bool> HasCommunicationSiteFeaturesAsync()
         {
             await EnsurePropertiesAsync(p => p.WebTemplate, p => p.Features).ConfigureAwait(false);
-
-            // Syntex Content Center did enable communication site features in a different manner
-            if (IsSyntexContentCenterCheck())
-            {
-                return true;
-            }
 
             // Was the communication site feature enabled?
             var communicationSiteFeature = Guid.Parse("f39dad74-ea79-46ef-9ef7-fe2370754f6f");

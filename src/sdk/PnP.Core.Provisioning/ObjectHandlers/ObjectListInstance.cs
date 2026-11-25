@@ -599,7 +599,12 @@ namespace PnP.Core.Provisioning.ObjectHandlers
 
                 if (binding.Remove)
                 {
-                    if (onList != null)
+                    if (onList != null
+                        // avoid removing content types which should be added (maybe a template contains base content types that should be removed)
+                        && !templateList.ContentTypeBindings.Any(ctb =>
+                            !ctb.Remove
+                            && ctb.ContentTypeId.Length > binding.ContentTypeId.Length
+                            && onList.StringId.StartsWith(ctb.ContentTypeId, StringComparison.OrdinalIgnoreCase))) 
                     {
                         await onList.DeleteAsync().ConfigureAwait(false);
                         listContentTypes.Remove(onList);

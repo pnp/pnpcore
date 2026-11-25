@@ -35,7 +35,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.Resolvers
                     var value = (String)l.GetType().GetProperty("Value").GetValue(l);
 
                     parameterItem.GetType().GetProperty("Key").SetValue(parameterItem, key);
-                    parameterItem.GetType().GetProperty("Text").SetValue(parameterItem, new String[] { value });
+                    parameterItem.GetType().GetProperty("Text").SetValue(parameterItem, value);
 
                     result.SetValue(parameterItem, index);
                     index++;

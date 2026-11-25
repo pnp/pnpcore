@@ -30,8 +30,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         private bool includeContentTypesFromSyndication = true;
         private bool includeHiddenLists = false;
         private bool includeAllClientSidePages = false;
-
-
+        private bool extractPageAsPublished = true;
 
         /// <summary>
         /// Provisioning Progress Delegate
@@ -113,7 +112,7 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         }
 
         /// <summary>
-        /// Do composed look files (theme files, site logo, alternate css) need to be persisted to storage when 
+        /// Do composed look files (theme files, site logo, alternate css) need to be persisted to storage when
         /// we're "getting" a template
         /// </summary>
         [Obsolete("Use PersistBrandingFiles instead")]
@@ -323,6 +322,15 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         }
 
         /// <summary>
+        /// Declares whether Page templates should be extracted as Published or not
+        /// </summary>
+        public bool ExtractPageAsPublished
+        {
+            get => extractPageAsPublished;
+            set => extractPageAsPublished = value;
+        }
+
+        /// <summary>
         /// Optional argument to specify the collection of lists to extract
         /// </summary>
         public List<String> ListsToExtract { get; set; } = new List<String>();
@@ -331,11 +339,10 @@ namespace PnP.Core.Provisioning.ObjectHandlers
         /// List which contains information about resource tokens used and/or created during the extraction of a template.
         /// </summary>
         internal List<Tuple<string, int, string>> ResourceTokens { get; } = new List<Tuple<string, int, string>>();
-        
+
         /// <summary>
         /// Extraction configuration coming from JSON
         /// </summary>
         internal Model.Configuration.ExtractConfiguration ExtractConfiguration { get; set; }
-
     }
 }

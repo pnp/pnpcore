@@ -84,9 +84,6 @@ namespace PnP.Core.Provisioning.Model.Configuration
         [JsonPropertyName("publishing")]
         public Publishing.ExtractPublishingConfiguration Publishing { get; set; } = new Publishing.ExtractPublishingConfiguration();
 
-        [JsonPropertyName("syntexModels")]
-        public SyntexModels.ExtractSyntexModelsConfiguration SyntexModels { get; set; } = new SyntexModels.ExtractSyntexModelsConfiguration();
-
         public static ExtractConfiguration FromCreationInformation(ProvisioningTemplateCreationInformation information)
         {
             var config = new ExtractConfiguration
@@ -149,6 +146,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
             config.MultiLanguage.ResourceFilePrefix = information.ResourceFilePrefix;
             config.Publishing.Persist = information.PersistPublishingFiles;
             config.Publishing.IncludeNativePublishingFiles = information.IncludeNativePublishingFiles;
+            config.Pages.ExtractPageAsPublished = information.ExtractPageAsPublished;
             config.SearchSettings.Include = information.IncludeSearchConfiguration;
             return config;
         }
@@ -179,6 +177,7 @@ namespace PnP.Core.Provisioning.Model.Configuration
                 BaseTemplate = baseTemplate,
                 FileConnector = this.FileConnector,
                 IncludeAllClientSidePages = this.Pages.IncludeAllClientSidePages,
+                ExtractPageAsPublished = this.Pages.ExtractPageAsPublished,
                 IncludeHiddenLists = this.Lists.IncludeHiddenLists,
                 IncludeSiteGroups = this.SiteSecurity.IncludeSiteGroups,
                 ContentTypeGroupsToInclude = this.ContentTypes.Groups,
