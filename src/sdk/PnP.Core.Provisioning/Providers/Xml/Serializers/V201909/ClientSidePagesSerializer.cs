@@ -62,6 +62,22 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201909
                             expressions,
                             recursive: true)
                         as IEnumerable<ClientSidePage>);
+
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
+
+                foreach (var page in template.ClientSidePages)
+                {
+                    CanvasSectionTypeMapper.RestoreFlexibleLayoutSections(page, canvasSectionTypeType);
+
+                    if (page.Translations != null)
+                    {
+                        foreach (var translation in page.Translations)
+                        {
+                            CanvasSectionTypeMapper.RestoreFlexibleLayoutSections(translation, canvasSectionTypeType);
+                        }
+                    }
+                }
             }
         }
 

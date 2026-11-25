@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
+using System.Text;
 using System.Xml.Linq;
 
 using File = System.IO.File;
@@ -169,13 +171,56 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
         [TestMethod]
         [TestCategory("Offline")]
         [DynamicData(nameof(SchemaVersionsWithoutFlexibleLayoutSections), DynamicDataSourceType.Method)]
-        public void RoundTrip_OlderSchemaLosesTheFlexibleLayout(string namespaceUri)
+        public void RoundTrip_OlderSchemaRestoresFlexibleLayoutSectionsFromControlData(string namespaceUri)
         {
             ProvisioningTemplate roundTripped = RoundTrip(namespaceUri);
 
-            CollectionAssert.AreEqual(
-                new[] { CanvasSectionType.OneColumn, CanvasSectionType.OneColumnVerticalSection, CanvasSectionType.OneColumn },
-                roundTripped.ClientSidePages[0].Sections.Select(s => s.Type).ToList());
+            CollectionAssert.AreEqual(SectionTypes, roundTripped.ClientSidePages[0].Sections.Select(s => s.Type).ToList());
+            CollectionAssert.AreEqual(SectionTypes, roundTripped.ClientSidePages[0].Translations[0].Sections.Select(s => s.Type).ToList());
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
+        public void Deserialize_RestoresFlexibleLayoutSectionsFromLegacyTemplates()
+        {
+            // Flexible sections as PnP Framework writes them to schemas without flexible section types.
+            string xml = $@"<pnp:Provisioning xmlns:pnp=""{XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09}"">
+  <pnp:Preferences Generator=""PnP.Framework"" />
+  <pnp:Templates ID=""CONTAINER-TEMPLATE"">
+    <pnp:ProvisioningTemplate ID=""LegacyFlexibleLayout"" Version=""1"">
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PageName=""Flexible.aspx"" Title=""Flexible"">
+          <pnp:Sections>
+            <pnp:Section Order=""1"" Type=""OneColumn"">
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType=""Text"" Column=""1"" Order=""1"" JsonControlData=""{SecurityElement.Escape(FlexibleControlData)}"" />
+              </pnp:Controls>
+            </pnp:Section>
+            <pnp:Section Order=""2"" Type=""OneColumnVerticalSection"">
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType=""Text"" Column=""1"" Order=""1"" JsonControlData=""{SecurityElement.Escape(FlexibleControlData)}"" />
+                <pnp:CanvasControl WebPartType=""Text"" Column=""2"" Order=""1"" JsonControlData=""{SecurityElement.Escape(VerticalColumnControlData)}"" />
+              </pnp:Controls>
+            </pnp:Section>
+            <pnp:Section Order=""3"" Type=""OneColumn"">
+              <pnp:Controls>
+                <pnp:CanvasControl WebPartType=""Text"" Column=""1"" Order=""1"" JsonControlData=""{SecurityElement.Escape(OneColumnControlData)}"" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>";
+
+            ProvisioningTemplate template;
+            using (Stream legacy = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
+            {
+                template = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09).ToProvisioningTemplate(legacy);
+            }
+
+            CollectionAssert.AreEqual(SectionTypes, template.ClientSidePages[0].Sections.Select(s => s.Type).ToList());
         }
 
         [TestMethod]
