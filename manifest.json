@@ -4688,6 +4688,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FooterLinkAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FooterLinkAlignment.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.FooterLinkAlignment",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.FooterLinkAlignment.yml\" sourcestartlinenumber=\"1\">specifies the alignment of links in the footer</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.FooterVariantThemeType.yml",
       "output": {
         ".html": {
@@ -4839,6 +4853,76 @@
       "IsMRef": true,
       "Title": "PnP.Core.Model.SharePoint.IBasePermissions",
       "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBasePermissions.yml\" sourcestartlinenumber=\"1\">Defines the granted permission mask</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IBrandcenterConfiguration",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBrandcenterConfiguration.yml\" sourcestartlinenumber=\"1\">Interface for /_api/brandcenter/configuration</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssets.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IBrandcenterOrgAssets",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssets.yml\" sourcestartlinenumber=\"1\">Represents the organizational assets in the Brand Center configuration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibrary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibrary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibrary",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibrary.yml\" sourcestartlinenumber=\"1\">Represents an organizational assets library in the Brand Center configuration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibraryCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibraryCollection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibraryCollection",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBrandcenterOrgAssetsLibraryCollection.yml\" sourcestartlinenumber=\"1\">Represents a collection of organizational assets libraries in the Brand Center configuration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterSPResourcePath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IBrandcenterSPResourcePath.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IBrandcenterSPResourcePath",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IBrandcenterSPResourcePath.yml\" sourcestartlinenumber=\"1\">Represents a SharePoint resource path in the Brand Center configuration.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -5763,6 +5847,48 @@
       "IsMRef": true,
       "Title": "PnP.Core.Model.SharePoint.IFollowingInfo",
       "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IFollowingInfo.yml\" sourcestartlinenumber=\"1\">Represents metadata information about your following data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFontOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFontOption.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IFontOption",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IFontOption.yml\" sourcestartlinenumber=\"1\">specify font to use for header / footer</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFontOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFontOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IFontOptions",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IFontOptions.yml\" sourcestartlinenumber=\"1\">Options to configure a the site font in ChromeOptions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFontPackage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFontPackage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.IFontPackage",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.IFontPackage.yml\" sourcestartlinenumber=\"1\">Returned by\n/_api/OutOfBoxFontPackages\n/_api/SiteFontPackages\n/_api/FontPackages</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -6967,6 +7093,34 @@
       "IsMRef": true,
       "Title": "PnP.Core.Model.SharePoint.NavigationType",
       "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.NavigationType.yml\" sourcestartlinenumber=\"1\">Navigation type</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.OverlayColorType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.OverlayColorType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.OverlayColorType",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.OverlayColorType.yml\" sourcestartlinenumber=\"1\">Specifies the available overlay color types that can be applied to header or footer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.OverlayGradientDirectionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.OverlayGradientDirectionType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PnP.Core.Model.SharePoint.OverlayGradientDirectionType",
+      "Summary": "<p sourcefile=\"api/PnP.Core.Model.SharePoint.OverlayGradientDirectionType.yml\" sourcestartlinenumber=\"1\">Defines the possible directions for an overlay gradient layout.</p>\n"
     },
     {
       "type": "ManagedReference",

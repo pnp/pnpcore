@@ -154,10 +154,19 @@ chrome.Navigation.Visible = false;
 chrome.Footer.Enabled = true;
 chrome.Footer.Emphasis = FooterVariantThemeType.None;
 chrome.Footer.Layout = FooterLayoutType.Extended;
-chrome.Footer.DisplayName == &quot;Contoso&quot;;
+chrome.Footer.LinkAlignment = FooterLinkAlignment.Left;
+chrome.Footer.DisplayName = &quot;Contoso&quot;;
+chrome.Header.OverlayColor = OverlayColorType.Black;
+chrome.Header.OverlayOpacity = 40;
+chrome.Header.OverlayGradientDirection = OverlayGradientDirectionType.TopToBottom;
+chrome.Footer.OverlayColor = OverlayColorType.DarkGradient;
+chrome.Footer.OverlayOpacity = 60;
+chrome.Footer.OverlayGradientDirection = OverlayGradientDirectionType.TopToBottom;
 
 await context.Web.GetBrandingManager().SetChromeOptionsAsync(chrome);
 </code></pre>
+<p>Header and footer overlay settings are optional. <code>OverlayColor</code> accepts a solid color or a gradient (<code>White</code>, <code>Black</code>, <code>LightGradient</code>, <code>DarkGradient</code>). <code>OverlayOpacity</code> is a value from 0 to 100. <code>OverlayGradientDirection</code> is used when the overlay color is a gradient. Leave <code>OverlayColor</code> at <code>OverlayColorType.None</code> when the site should keep no overlay. <code>ColorIndexInLightMode</code> and <code>ColorIndexInDarkMode</code> are returned by SharePoint and are currently always <code>-1</code>.</p>
+<p>Footer link alignment is available on sites with communication site features. <code>FooterLinkAlignment.Left</code> and <code>FooterLinkAlignment.Right</code> control how the footer links are aligned.</p>
 <h2 id="set-and-reset-the-header-images">Set and reset the header images</h2>
 <p>When configuring a header you can set the site logo and the site logo thumbnail (square image used for example in search). Depending on the header layout setting you can also set the header background image.</p>
 <h3 id="set-and-reset-the-site-logo-and-site-logo-thumbnail">Set and reset the site logo and site logo thumbnail</h3>
@@ -201,6 +210,33 @@ await chrome.Footer.SetLogoAsync(&quot;parker-ms-300.png&quot;, File.OpenRead($&
 // Clear the footer logo
 await chrome.Footer.ClearLogoAsync();
 </code></pre>
+<h2 id="set-and-clear-the-footer-background-image">Set and clear the footer background image</h2>
+<p>On a site with communication site features you can set a footer background image via the <code>SetFooterBackgroundImage</code> methods. Clearing the footer background can be done using the <code>ClearFooterBackgroundImage</code> methods. The optional focal point values work the same way as for the header background image.</p>
+<pre><code class="lang-csharp">var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
+
+// Set the footer background with a custom focal point
+await chrome.Footer.SetFooterBackgroundImageAsync(&quot;footer.jpg&quot;, File.OpenRead($&quot;.{Path.DirectorySeparatorChar}footer.jpg&quot;), 23.35, 34.66, true);
+
+// Clear the footer background image
+await chrome.Footer.ClearFooterBackgroundImageAsync();
+</code></pre>
+<h2 id="set-a-font-package">Set a font package</h2>
+<p>SharePoint exposes three font package lists. <code>GetOutOfBoxFontPackages</code> returns the built-in packages, <code>GetFontPackages</code> returns the packages from the brand center, and <code>GetSiteFontPackages</code> returns the packages installed on the current site. Apply one with <code>SetOutOfBoxFontPackage</code> or <code>SetFontPackage</code>.</p>
+<pre><code class="lang-csharp">var outOfBoxFonts = await context.Web.GetBrandingManager().GetOutOfBoxFontPackagesAsync();
+var aptos = outOfBoxFonts.FirstOrDefault(p =&gt; p.Title == &quot;Aptos-Aptos Serif&quot;);
+if (aptos != null)
+{
+    await context.Web.GetBrandingManager().SetOutOfBoxFontPackageAsync(aptos.ID);
+}
+
+var brandCenterFonts = await context.Web.GetBrandingManager().GetFontPackagesAsync();
+var brandFont = brandCenterFonts.FirstOrDefault(p =&gt; !p.IsHidden);
+if (brandFont != null)
+{
+    await context.Web.GetBrandingManager().SetFontPackageAsync(brandFont.ID);
+}
+</code></pre>
+<p><code>IsHidden</code> marks a package that should not appear in the font picker. <code>PackageJson</code> contains the package settings as a JSON string.</p>
 
 </article>
 
