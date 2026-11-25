@@ -13608,6 +13608,12 @@ references:
   commentId: F:PnP.Core.ErrorType.GraphServiceError
   fullName: PnP.Core.ErrorType.GraphServiceError
   nameWithType: ErrorType.GraphServiceError
+- uid: PnP.Core.ErrorType.InstanceWasConsolidatedInBatch
+  name: InstanceWasConsolidatedInBatch
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_InstanceWasConsolidatedInBatch
+  commentId: F:PnP.Core.ErrorType.InstanceWasConsolidatedInBatch
+  fullName: PnP.Core.ErrorType.InstanceWasConsolidatedInBatch
+  nameWithType: ErrorType.InstanceWasConsolidatedInBatch
 - uid: PnP.Core.ErrorType.InstanceWasDeleted
   name: InstanceWasDeleted
   href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_InstanceWasDeleted
