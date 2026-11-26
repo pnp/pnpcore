@@ -13,7 +13,28 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers
         /// Restores the flexible layout sections that schemas without flexible layout section types store as the
         /// one-column sections they are built on. The flexible layout is recognized from the control data.
         /// </summary>
-        internal static void RestoreFlexibleLayoutSections(BaseClientSidePage page, Type schemaEnumType)
+        internal static void RestoreFlexibleLayoutSections(ProvisioningTemplate template, Type schemaEnumType)
+        {
+            if (template?.ClientSidePages == null)
+            {
+                return;
+            }
+
+            foreach (var page in template.ClientSidePages)
+            {
+                RestoreFlexibleLayoutSections(page, schemaEnumType);
+
+                if (page.Translations != null)
+                {
+                    foreach (var translation in page.Translations)
+                    {
+                        RestoreFlexibleLayoutSections(translation, schemaEnumType);
+                    }
+                }
+            }
+        }
+
+        private static void RestoreFlexibleLayoutSections(BaseClientSidePage page, Type schemaEnumType)
         {
             if (page?.Sections == null || Enum.IsDefined(schemaEnumType, nameof(CanvasSectionType.FlexibleLayoutSection)))
             {

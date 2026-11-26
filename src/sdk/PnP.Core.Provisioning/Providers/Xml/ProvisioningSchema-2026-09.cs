@@ -266,7 +266,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V202609 {
         
         private bool requiredField;
         
-        private string[] textField;
+        private string textField;
         
         public PreferencesParameter() {
             this.requiredField = false;
@@ -294,7 +294,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V202609 {
         }
         
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }
@@ -1943,10 +1943,10 @@ namespace PnP.Core.Provisioning.Providers.Xml.V202609 {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2026/09/ProvisioningSchema")]
     public partial class TeamTemplate : BaseTeam {
         
-        private string[] textField;
+        private string textField;
         
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }
@@ -11909,7 +11909,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V202609 {
         
         private bool overwriteField;
         
-        private string[] textField;
+        private string textField;
         
         public Theme() {
             this.isInvertedField = false;
@@ -11949,7 +11949,7 @@ namespace PnP.Core.Provisioning.Providers.Xml.V202609 {
         }
         
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        public string Text {
             get {
                 return this.textField;
             }

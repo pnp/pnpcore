@@ -62,6 +62,11 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                             expressions,
                             recursive: true)
                         as IEnumerable<ClientSidePage>);
+
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
+
+                CanvasSectionTypeMapper.RestoreFlexibleLayoutSections(template, canvasSectionTypeType);
             }
         }
 

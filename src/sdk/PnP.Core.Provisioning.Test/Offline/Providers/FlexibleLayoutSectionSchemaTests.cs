@@ -170,6 +170,34 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
 
         [TestMethod]
         [TestCategory("Offline")]
+        public void RoundTrip_Schema201903RestoresFlexibleLayoutSectionsFromControlData()
+        {
+#pragma warning disable CS0618 // Type or member is obsolete
+            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2019_03);
+#pragma warning restore CS0618 // Type or member is obsolete
+            ProvisioningTemplate template;
+            using (Stream fixture = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "TestAssets", "Templates", "ProvisioningSchema-2019-03-FullSample-01.xml")))
+            {
+                template = formatter.ToProvisioningTemplate(fixture);
+            }
+
+            ClientSidePage page = template.ClientSidePages.Single(p => p.PageName == "SamplePage");
+            page.Sections[0].Type = CanvasSectionType.FlexibleLayoutSection;
+            page.Sections[0].Controls[0].JsonControlData = FlexibleControlData;
+
+            ProvisioningTemplate roundTripped;
+            using (Stream serialized = formatter.ToFormattedTemplate(template))
+            {
+                roundTripped = formatter.ToProvisioningTemplate(serialized);
+            }
+
+            ClientSidePage roundTrippedPage = roundTripped.ClientSidePages.Single(p => p.PageName == "SamplePage");
+            Assert.AreEqual(CanvasSectionType.FlexibleLayoutSection, roundTrippedPage.Sections[0].Type);
+            StringAssert.Contains(roundTrippedPage.Sections[0].Controls[0].JsonControlData, "\"sectionFactor\":100");
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
         [DynamicData(nameof(SchemaVersionsWithoutFlexibleLayoutSections), DynamicDataSourceType.Method)]
         public void RoundTrip_OlderSchemaRestoresFlexibleLayoutSectionsFromControlData(string namespaceUri)
         {
