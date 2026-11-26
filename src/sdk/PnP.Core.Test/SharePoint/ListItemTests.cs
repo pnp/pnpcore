@@ -11,7 +11,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -236,120 +238,178 @@ namespace PnP.Core.Test.SharePoint
 
         #region Long, float and decimal value tests
 
-        /// <summary>
-        /// Regression test for https://github.com/pnp/pnpcore/issues/1888: long, float and decimal values were sent to
-        /// AddValidateUpdateItemUsingPath and ValidateUpdateListItem as JSON numbers, which SharePoint rejects with
-        /// "Cannot convert a primitive value to the expected type 'Edm.String'".
-        /// </summary>
+        // Regression tests for https://github.com/pnp/pnpcore/issues/1888: long, float and decimal values were sent to
+        // AddValidateUpdateItemUsingPath and ValidateUpdateListItem as JSON numbers, which SharePoint rejects with
+        // "Cannot convert a primitive value to the expected type 'Edm.String'".
+        //
+        // Offline by design. The add/update is queued into a batch and the generated payload is inspected rather than
+        // executed, so no recorded responses are needed. Building the payload normally loads the web's regional
+        // settings from the server first, which is why these tests populate them up front.
+
         [TestMethod]
-        public async Task AddAndUpdateLongFloatDecimalValuesBatchTest()
+        public async Task AddLongFloatDecimalValuesGeneratesStringFieldValues()
         {
             //TestCommon.Instance.Mocking = false;
-            string listTitle = TestCommon.GetPnPSdkTestAssetName("AddAndUpdateLongFloatDecimalValuesBatchTest");
-            string fldText = "NotesField";
-            string fldNumber = "AmountField";
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var list = BuildOfflineList(context, decimalSeparator: ".");
+                var batch = context.NewBatch();
 
-                if (!TestCommon.Instance.Mocking && myList != null)
+                await list.Items.AddBatchAsync(batch, new Dictionary<string, object>
                 {
-                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
-                }
+                    { "Title", "Issue 1888" },
+                    { "Long", 5000000000L },
+                    { "NegativeLong", -42L },
+                    { "Float", 0.1f },
+                    { "Decimal", 5.5m },
+                    { "Int", 12 },
+                    { "Double", 0.1d },
+                });
 
-                if (myList == null)
-                {
-                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                }
+                Assert.AreEqual(1, batch.Requests.Count);
+                var request = batch.Requests.First().Value;
+                Assert.AreEqual(HttpMethod.Post, request.Method);
+                Assert.IsTrue(request.ApiCall.Request.EndsWith($"/_api/Web/Lists(guid'{list.Id}')/AddValidateUpdateItemUsingPath"), $"Unexpected request: {request.ApiCall.Request}");
 
-                try
-                {
-                    await myList.Fields.AddTextAsync(fldText, new FieldTextOptions()
-                    {
-                        Group = "TEST GROUP",
-                        AddToDefaultView = true,
-                    });
-
-                    await myList.Fields.AddNumberAsync(fldNumber, new FieldNumberOptions()
-                    {
-                        Group = "TEST GROUP",
-                        AddToDefaultView = true,
-                    });
-
-                    // Both the text and the number field must accept each value type
-                    var addValues = new Dictionary<string, object>
-                    {
-                        { "long", 5000000000L },
-                        { "float", 0.1f },
-                        { "decimal", 5.5m },
-                    };
-
-                    var addedItems = new Dictionary<string, IListItem>();
-                    foreach (var addValue in addValues)
-                    {
-                        addedItems.Add(addValue.Key, await myList.Items.AddBatchAsync(new Dictionary<string, object>
-                        {
-                            { "Title", addValue.Key },
-                            { fldText, addValue.Value },
-                            { fldNumber, addValue.Value }
-                        }));
-                    }
-                    await context.ExecuteAsync();
-
-                    string separator = context.Web.RegionalSettings.DecimalSeparator;
-
-                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                    {
-                        var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                        await myList2.LoadAsync(p => p.Items);
-                        var items = myList2.Items.AsRequested().ToList();
-
-                        Assert.AreEqual(3, items.Count);
-                        AssertItemValues(items, "long", "5000000000", 5000000000d);
-                        AssertItemValues(items, "float", $"0{separator}1", 0.1d);
-                        AssertItemValues(items, "decimal", $"5{separator}5", 5.5d);
-                    }
-
-                    var updateValues = new Dictionary<string, object>
-                    {
-                        { "long", -42L },
-                        { "float", 0.7f },
-                        { "decimal", 6.75m },
-                    };
-
-                    foreach (var updateValue in updateValues)
-                    {
-                        var item = addedItems[updateValue.Key];
-                        item[fldText] = updateValue.Value;
-                        item[fldNumber] = updateValue.Value;
-                        await item.UpdateBatchAsync();
-                    }
-                    await context.ExecuteAsync();
-
-                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-                    {
-                        var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                        await myList3.LoadAsync(p => p.Items);
-                        var items = myList3.Items.AsRequested().ToList();
-
-                        AssertItemValues(items, "long", "-42", -42d);
-                        AssertItemValues(items, "float", $"0{separator}7", 0.7d);
-                        AssertItemValues(items, "decimal", $"6{separator}75", 6.75d);
-                    }
-                }
-                finally
-                {
-                    await myList.DeleteAsync();
-                }
+                var formValues = GetFormValues(request);
+                Assert.AreEqual(7, formValues.Count);
+                AssertStringFieldValue(formValues, "Title", "Issue 1888");
+                AssertStringFieldValue(formValues, "Long", "5000000000");
+                AssertStringFieldValue(formValues, "NegativeLong", "-42");
+                // Not 0.100000001490116, which is what widening the float to a double gives
+                AssertStringFieldValue(formValues, "Float", "0.1");
+                AssertStringFieldValue(formValues, "Decimal", "5.5");
+                // int and double already worked, they must keep producing the same payload
+                AssertStringFieldValue(formValues, "Int", "12");
+                AssertStringFieldValue(formValues, "Double", "0.1");
             }
+        }
 
-            void AssertItemValues(List<IListItem> items, string title, string expectedText, double expectedNumber)
+        [TestMethod]
+        public async Task UpdateLongFloatDecimalValuesGeneratesStringFieldValues()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
             {
-                var item = items.First(p => p.Title == title);
-                Assert.AreEqual(expectedText, item[fldText]);
-                Assert.AreEqual(expectedNumber, Convert.ToDouble(item[fldNumber]));
+                var list = BuildOfflineList(context, decimalSeparator: ".");
+                var item = BuildOfflineListItem(list, 7);
+                var batch = context.NewBatch();
+
+                item["Long"] = 5000000000L;
+                item["NegativeLong"] = -42L;
+                item["Float"] = 0.1f;
+                item["Decimal"] = 5.5m;
+                item["Int"] = 12;
+                item["Double"] = 0.1d;
+                await item.UpdateBatchAsync(batch);
+
+                Assert.AreEqual(1, batch.Requests.Count);
+                var request = batch.Requests.First().Value;
+                Assert.AreEqual(HttpMethod.Post, request.Method);
+                Assert.IsTrue(request.ApiCall.Request.EndsWith($"/_api/web/lists/getbyid(guid'{list.Id}')/items(7)/ValidateUpdateListItem"), $"Unexpected request: {request.ApiCall.Request}");
+
+                var formValues = GetFormValues(request);
+                Assert.AreEqual(6, formValues.Count);
+                AssertStringFieldValue(formValues, "Long", "5000000000");
+                AssertStringFieldValue(formValues, "NegativeLong", "-42");
+                AssertStringFieldValue(formValues, "Float", "0.1");
+                AssertStringFieldValue(formValues, "Decimal", "5.5");
+                AssertStringFieldValue(formValues, "Int", "12");
+                AssertStringFieldValue(formValues, "Double", "0.1");
             }
+        }
+
+        [TestMethod]
+        public async Task AddAndUpdateFloatDecimalValuesUseTheSiteDecimalSeparator()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite))
+            {
+                var list = BuildOfflineList(context, decimalSeparator: ",");
+                var item = BuildOfflineListItem(list, 7);
+                var batch = context.NewBatch();
+
+                await list.Items.AddBatchAsync(batch, new Dictionary<string, object>
+                {
+                    { "Long", 5000000000L },
+                    { "Float", 0.1f },
+                    { "Decimal", 5.5m },
+                    { "Double", 0.1d },
+                });
+
+                item["Long"] = -42L;
+                item["Float"] = 0.7f;
+                item["Decimal"] = 6.75m;
+                item["Double"] = 0.7d;
+                await item.UpdateBatchAsync(batch);
+
+                Assert.AreEqual(2, batch.Requests.Count);
+
+                var addFormValues = GetFormValues(batch.Requests.Values.Single(p => p.ApiCall.Request.EndsWith("/AddValidateUpdateItemUsingPath")));
+                AssertStringFieldValue(addFormValues, "Long", "5000000000");
+                AssertStringFieldValue(addFormValues, "Float", "0,1");
+                AssertStringFieldValue(addFormValues, "Decimal", "5,5");
+                AssertStringFieldValue(addFormValues, "Double", "0,1");
+
+                var updateFormValues = GetFormValues(batch.Requests.Values.Single(p => p.ApiCall.Request.EndsWith("/ValidateUpdateListItem")));
+                AssertStringFieldValue(updateFormValues, "Long", "-42");
+                AssertStringFieldValue(updateFormValues, "Float", "0,7");
+                AssertStringFieldValue(updateFormValues, "Decimal", "6,75");
+                AssertStringFieldValue(updateFormValues, "Double", "0,7");
+            }
+        }
+
+        private static Core.Model.SharePoint.List BuildOfflineList(PnPContext context, string decimalSeparator)
+        {
+            // Adding or updating an item loads these from the server unless they're already available, and numbers
+            // are formatted with the site's decimal separator
+            var regionalSettings = context.Web.RegionalSettings as RegionalSettings;
+            regionalSettings.DecimalSeparator = decimalSeparator;
+            regionalSettings.DateSeparator = "/";
+            regionalSettings.Requested = true;
+            regionalSettings.TimeZone.Requested = true;
+
+            var list = new Core.Model.SharePoint.List
+            {
+                PnPContext = context,
+                Parent = context.Web.Lists,
+                Id = Guid.NewGuid()
+            };
+            // Normally set when the list is loaded, the item urls are built from it
+            list.AddMetadata(PnPConstants.MetaDataRestId, list.Id.ToString());
+
+            return list;
+        }
+
+        private static ListItem BuildOfflineListItem(Core.Model.SharePoint.List list, int id)
+        {
+            var item = new ListItem
+            {
+                PnPContext = list.PnPContext,
+                Parent = list.Items,
+                Id = id
+            };
+            // Normally set when the item is loaded, the update url is built from it
+            item.AddMetadata(PnPConstants.MetaDataRestId, id.ToString());
+
+            return item;
+        }
+
+        private static Dictionary<string, JsonElement> GetFormValues(BatchRequest request)
+        {
+            using (var body = JsonDocument.Parse(request.ApiCall.JsonBody))
+            {
+                return body.RootElement.GetProperty("formValues").EnumerateArray()
+                    .ToDictionary(p => p.GetProperty("FieldName").GetString(), p => p.GetProperty("FieldValue").Clone());
+            }
+        }
+
+        private static void AssertStringFieldValue(Dictionary<string, JsonElement> formValues, string fieldName, string expected)
+        {
+            Assert.IsTrue(formValues.ContainsKey(fieldName), $"{fieldName} is missing from formValues");
+            // SharePoint only accepts FieldValue as a string, a JSON number is what caused the Edm.String error
+            Assert.AreEqual(JsonValueKind.String, formValues[fieldName].ValueKind, $"{fieldName} was sent as {formValues[fieldName].GetRawText()}");
+            Assert.AreEqual(expected, formValues[fieldName].GetString());
         }
 
         #endregion
