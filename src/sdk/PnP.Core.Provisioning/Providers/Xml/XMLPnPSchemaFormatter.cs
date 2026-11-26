@@ -25,7 +25,7 @@ namespace PnP.Core.Provisioning.Providers.Xml
         {
             get
             {
-                return (new XMLPnPSchemaV202609Serializer());
+                return (new XMLPnPSchemaV202209Serializer());
             }
         }
 
