@@ -62,6 +62,11 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                             expressions,
                             recursive: true)
                         as IEnumerable<ClientSidePage>);
+
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
+
+                CanvasSectionTypeMapper.RestoreFlexibleLayoutSections(template, canvasSectionTypeType);
             }
         }
 
@@ -73,6 +78,17 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                 var clientSidePageType = Type.GetType(clientSidePageTypeName, true);
                 var canvasSectionTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSection, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasSectionType = Type.GetType(canvasSectionTypeName, true);
+                var canvasSectionTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasSectionType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
+                var canvasSectionTypeType = Type.GetType(canvasSectionTypeTypeName, true);
+
+                foreach (var page in template.ClientSidePages)
+                {
+                    foreach (var section in page.Sections)
+                    {
+                        CanvasSectionTypeMapper.ValidateSchemaValue(section.Type, canvasSectionTypeType);
+                    }
+                }
+
                 var canvasControlTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControl, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
                 var canvasControlType = Type.GetType(canvasControlTypeName, true);
                 var canvasControlWebPartTypeTypeName = $"{PnPSerializationScope.Current?.BaseSchemaNamespace}.CanvasControlWebPartType, {PnPSerializationScope.Current?.BaseSchemaAssemblyName}";
@@ -90,6 +106,12 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
                     { $"{canvasSectionType}.OrderSpecified", new ExpressionValueResolver((s, p) => true) },
 
                     { $"{canvasSectionType}.TypeSpecified", new ExpressionValueResolver((s, p) => true) },
+
+                    {
+                        $"{canvasSectionType}.Type",
+                        new ExpressionValueResolver(
+                        (s, p) => CanvasSectionTypeMapper.ToSchemaValue((CanvasSectionType)p, canvasSectionTypeType))
+                    },
 
                     {
                         $"{canvasControlType}.WebPartType",
@@ -122,6 +144,30 @@ namespace PnP.Core.Provisioning.Providers.Xml.Serializers.V201807
 
                 expressions.Add($"{clientSidePageType}.Security", new PropertyObjectTypeResolver(objectSecurityType, "Security"));
                 expressions.Add($"{objectSecurityType}.BreakRoleInheritance", new RoleAssignmentsFromModelToSchemaTypeResolver());
+
+                expressions.Add($"{canvasSectionType}.Controls", new ExpressionValueResolver((s, p) =>
+                {
+                    var section = (CanvasSection)s;
+                    var controls = PnPObjectsMapper.MapObjects(
+                        p,
+                        new CollectionFromModelToSchemaTypeResolver(canvasControlType),
+                        expressions,
+                        recursive: true) as Array;
+
+                    if (section.Type == CanvasSectionType.FlexibleLayoutVerticalSection
+                        && !Enum.IsDefined(canvasSectionTypeType, nameof(CanvasSectionType.OneColumnVerticalSection))
+                        && controls != null)
+                    {
+                        for (int index = 0; index < controls.Length; index++)
+                        {
+                            object control = controls.GetValue(index);
+                            control.GetPublicInstanceProperty("Column").SetValue(control, 1);
+                            control.GetPublicInstanceProperty("Order").SetValue(control, index + 1);
+                        }
+                    }
+
+                    return controls;
+                }));
 
                 persistence.GetPublicInstanceProperty("ClientSidePages")
                     .SetValue(

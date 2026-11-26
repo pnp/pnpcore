@@ -31,6 +31,7 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
             yield return new object[] { "ProvisioningSchema-2020-02-FullSample-01.xml", XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2020_02 };
             yield return new object[] { "ProvisioningSchema-2021-03-FullSample-01.xml", XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2021_03 };
             yield return new object[] { "ProvisioningSchema-2022-09-FullSample-01.xml", XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09 };
+            yield return new object[] { "ProvisioningSchema-2026-09-FullSample-01.xml", XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2026_09 };
         }
 
         private static string TemplatesFolder => Path.Combine(AppContext.BaseDirectory, "TestAssets", "Templates");
@@ -241,12 +242,12 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
 
         [TestMethod]
         [TestCategory("Offline")]
-        public void ToXml_UsesTheLatestSchemaByDefault()
+        public void ToXml_UsesSchema202209ByDefault()
         {
-            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09);
+            ITemplateFormatter formatter = XMLPnPSchemaFormatter.GetSpecificFormatter(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2026_09);
 
             ProvisioningTemplate template;
-            using (Stream fixture = OpenFixture("ProvisioningSchema-2022-09-FullSample-01.xml"))
+            using (Stream fixture = OpenFixture("ProvisioningSchema-2026-09-FullSample-01.xml"))
             {
                 template = formatter.ToProvisioningTemplate(fixture);
             }
@@ -254,8 +255,17 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
             string xml = template.ToXML();
 
             Assert.IsFalse(string.IsNullOrEmpty(xml));
-            Assert.IsTrue(xml.Contains(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09),
-                "ToXML() should emit the latest schema namespace.");
+            Assert.AreEqual(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09, XDocument.Parse(xml).Root.Name.NamespaceName,
+                "ToXML() should emit the default schema namespace.");
+        }
+
+        [TestMethod]
+        [TestCategory("Offline")]
+        public void Formatter_UnknownNamespaceFallsBackToDefaultSchema()
+        {
+            var formatter = (IXMLSchemaFormatter)XMLPnPSchemaFormatter.GetSpecificFormatter("urn:unknown");
+
+            Assert.AreEqual(XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09, formatter.NamespaceUri);
         }
     }
 }
