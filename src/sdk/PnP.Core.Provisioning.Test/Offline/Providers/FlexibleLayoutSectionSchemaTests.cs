@@ -61,13 +61,22 @@ namespace PnP.Core.Provisioning.Test.Offline.Providers
 
         [TestMethod]
         [TestCategory("Offline")]
-        public void Serialize_LatestSchemaWritesFlexibleLayoutSections()
+        public void Serialize_DefaultSchemaPreservesFlexibleLayoutInControlData()
         {
             string xml = CreateTemplate(withTranslation: false).ToXML();
+            XDocument document = XDocument.Parse(xml);
+            XNamespace schemaNamespace = XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09;
 
-            StringAssert.Contains(xml, XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2026_09);
-            StringAssert.Contains(xml, "Type=\"FlexibleLayoutSection\"");
-            StringAssert.Contains(xml, "Type=\"FlexibleLayoutVerticalSection\"");
+            Assert.AreEqual(schemaNamespace.NamespaceName, document.Root.Name.NamespaceName);
+            CollectionAssert.AreEqual(
+                new[] { "OneColumn", "OneColumnVerticalSection", "OneColumn" },
+                document.Descendants(schemaNamespace + "Section").Select(s => (string)s.Attribute("Type")).ToArray());
+
+            using (Stream serialized = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
+            {
+                ProvisioningTemplate roundTripped = XMLPnPSchemaFormatter.LatestFormatter.ToProvisioningTemplate(serialized);
+                CollectionAssert.AreEqual(SectionTypes, roundTripped.ClientSidePages[0].Sections.Select(s => s.Type).ToList());
+            }
         }
 
         [TestMethod]

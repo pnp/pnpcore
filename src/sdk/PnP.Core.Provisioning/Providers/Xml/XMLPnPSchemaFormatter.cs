@@ -79,8 +79,9 @@ namespace PnP.Core.Provisioning.Providers.Xml
                 case XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2022_09:
                     return new XMLPnPSchemaV202209Serializer();
                 case XMLConstants.PROVISIONING_SCHEMA_NAMESPACE_2026_09:
-                default:
                     return new XMLPnPSchemaV202609Serializer();
+                default:
+                    return new XMLPnPSchemaV202209Serializer();
             }
         }
 
