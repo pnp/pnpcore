@@ -25,6 +25,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Offline\Csom\Snapshots\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="TestAssets\Templates\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
 using PnP.Core.Provisioning.Model;
-using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.UserResources;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;

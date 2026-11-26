@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace PnP.Core.Provisioning.Services.Core.CSOM
+namespace PnP.Core.Services.Core.CSOM
 {
     /// <summary>
     /// Builds the CSOM object identity strings that address an already-existing server object.

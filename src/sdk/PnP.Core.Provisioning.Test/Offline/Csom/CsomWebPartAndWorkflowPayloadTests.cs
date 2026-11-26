@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Provisioning.Model;
-using PnP.Core.Provisioning.Services.Core.CSOM;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.WebParts;
 using PnP.Core.Provisioning.Services.Core.CSOM.Requests.Workflows;
 using PnP.Core.Services.Core.CSOM;
