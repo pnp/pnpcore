@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Added support for .NET 11 #1925 [gautamdsheth - Gautam Sheth]
 - Added page filter for template extraction #1926 [Magnus-K-work - Magnus-K-work]
+- Added new provisioning schema - added flexible layout support #1883 [adam-it - Adam Wójcik]
 
 ### Changed
 
