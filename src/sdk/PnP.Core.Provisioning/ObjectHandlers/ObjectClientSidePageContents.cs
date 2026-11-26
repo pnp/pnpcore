@@ -122,26 +122,70 @@ namespace PnP.Core.Provisioning.ObjectHandlers
                 LinkTranslationsToTheirSources(pagesToExport);
 
                 bool includeAllPages = configuration?.Pages?.IncludeAllClientSidePages ?? false;
+                var requestedPages = new HashSet<string>(
+                    configuration?.Pages?.PageNames ?? Enumerable.Empty<string>(),
+                    StringComparer.OrdinalIgnoreCase);
+
+                List<PageToExport> selectedPages = pagesToExport
+                    .Where(p => IsSelected(p, requestedPages, includeAllPages))
+                    .OrderBy(p => p.IsTranslation)
+                    .ToList();
+
+                WarnAboutUnmatchedPageNames(context, requestedPages, pagesToExport);
+
                 var helper = new ClientSidePageContentsHelper();
 
                 await context.Web.LoadAsync(w => w.ServerRelativeUrl).ConfigureAwait(false);
 
                 int currentPageIndex = 1;
-                foreach (PageToExport page in pagesToExport.OrderBy(p => p.IsTranslation))
+                foreach (PageToExport page in selectedPages)
                 {
-                    if (includeAllPages || page.IsHomePage)
-                    {
-                        WriteSubProgress("ClientSidePage",
-                            !string.IsNullOrWhiteSpace(page.PageName) ? page.PageName : page.PageUrl,
-                            currentPageIndex, pagesToExport.Count);
+                    WriteSubProgress("ClientSidePage",
+                        !string.IsNullOrWhiteSpace(page.PageName) ? page.PageName : page.PageUrl,
+                        currentPageIndex++, selectedPages.Count);
 
-                        await helper.ExtractClientSidePageAsync(context, template, configuration, page, MessagesDelegate).ConfigureAwait(false);
-                    }
-
-                    currentPageIndex++;
+                    await helper.ExtractClientSidePageAsync(context, template, configuration, page, MessagesDelegate).ConfigureAwait(false);
                 }
 
                 return template;
+            }
+        }
+
+        /// <summary>
+        /// Decides whether a surveyed page is extracted. An explicit page list wins over
+        /// <c>IncludeAllClientSidePages</c>; translations follow their source page.
+        /// </summary>
+        internal static bool IsSelected(PageToExport page, HashSet<string> requestedPages, bool includeAllPages)
+        {
+            if (requestedPages.Count > 0)
+            {
+                return requestedPages.Contains(page.PageName)
+                    || (page.IsTranslation && !string.IsNullOrEmpty(page.SourcePageName)
+                        && requestedPages.Contains(page.SourcePageName));
+            }
+
+            return includeAllPages || page.IsHomePage;
+        }
+
+        /// <summary>
+        /// Warns about requested page names that do not match any modern page in the pages library.
+        /// </summary>
+        private void WarnAboutUnmatchedPageNames(PnPContext context, HashSet<string> requestedPages, List<PageToExport> pagesToExport)
+        {
+            if (requestedPages.Count == 0)
+            {
+                return;
+            }
+
+            var existingPages = new HashSet<string>(pagesToExport.Select(p => p.PageName), StringComparer.OrdinalIgnoreCase);
+
+            foreach (string requestedPage in requestedPages.Where(r => !existingPages.Contains(r)))
+            {
+                string message = $"The requested page '{requestedPage}' was not found in the pages library and was not extracted. " +
+                    "Page names are relative to the pages library, page templates must include their folder (e.g. 'Templates/Page.aspx').";
+
+                context.Logger?.LogWarning("{Source}: {Message}", Constants.LOGGING_SOURCE, message);
+                WriteMessage(message, ProvisioningMessageType.Warning);
             }
         }
 
