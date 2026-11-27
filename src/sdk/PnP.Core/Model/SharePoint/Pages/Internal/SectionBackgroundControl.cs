@@ -203,7 +203,7 @@ namespace PnP.Core.Model.SharePoint
             StringBuilder html = new StringBuilder();
 
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
-            html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
+            html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{WebUtility.HtmlEncode(JsonWebPartData)}"">");
             html.Append($@"<div {WebPartComponentIdAttribute}=""""></div>");
             html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
             RenderHtmlProperties(ref html);
@@ -314,8 +314,7 @@ namespace PnP.Core.Model.SharePoint
                     // This is a valid web part
                     WebPartData = wpDiv.GetAttribute(WebPartAttribute);
 
-                    // Decode the html encoded string
-                    decodedWebPart = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
+                    decodedWebPart = wpDiv.GetAttribute(WebPartDataAttribute);
                 }
                 else
                 {
@@ -341,7 +340,16 @@ namespace PnP.Core.Model.SharePoint
                 return;
             }
 
-            var wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
+            JsonElement wpJObject;
+            try
+            {
+                wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
+            }
+            catch (JsonException) when (wpDiv != null)
+            {
+                // The HTML parser already decodes attribute entities. Preserve the legacy decoding for payloads that need additional decoding.
+                wpJObject = JsonSerializer.Deserialize<JsonElement>(WebUtility.HtmlDecode(decodedWebPart));
+            }
 
             if (wpJObject.TryGetProperty("title", out JsonElement titleProperty))
             {

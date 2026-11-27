@@ -3653,6 +3653,27 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task LoadPagePreservesEncodedSectionBackgroundProperties()
+        {
+            const string zoneId = "fed1887c-145d-42fc-a459-ffc27f0cd3fa";
+            const string fileName = "R&amp;D &quot;team&quot; &lt;1&gt;.jpg";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var pages = await context.Web.GetPagesAsync("Home");
+                Assert.AreEqual(1, pages.Count);
+                var sectionBackground = pages.Single().Controls.OfType<SectionBackgroundControl>().Single();
+
+                Assert.AreEqual(fileName, sectionBackground.Properties.GetProperty("zoneBackground").GetProperty(zoneId).GetProperty("imageData").GetProperty("fileName").GetString());
+
+                var document = new HtmlParser().ParseDocument(sectionBackground.ToHtml(1));
+                var serializedWebPartData = document.QuerySelector("[data-sp-webpartdata]").GetAttribute("data-sp-webpartdata");
+                var serializedProperties = JsonSerializer.Deserialize<JsonElement>(serializedWebPartData).GetProperty("properties");
+                Assert.AreEqual(fileName, serializedProperties.GetProperty("zoneBackground").GetProperty(zoneId).GetProperty("imageData").GetProperty("fileName").GetString());
+            }
+        }
+
         private static string CallEscapeJsonValues(string input)
         {
             var method = typeof(PageWebPart).GetMethod("EscapeJsonValues", BindingFlags.NonPublic | BindingFlags.Static);
