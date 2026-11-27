@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Dropped support for .NET 8/9 #1925 [gautamdsheth - Gautam Sheth]
 - Added explanation why a model consolidated away inside a batch cannot be used #1922 [svermaak - svermaak]
 - Fixed list item add/update for long, float and decimal values #1914 [turquoise-turtle - turquoise-turtle]
+- Added HTML entity preservation when extracting and saving page web parts #1932 [bcameron1231 - Beau Cameron]
 
 ## [1.19]
 
