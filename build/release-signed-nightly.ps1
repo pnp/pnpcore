@@ -18,6 +18,8 @@ Write-Host "Building PnP.Core.Admin version $version..."
 dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
 Write-Host "Building PnP.Core.Provisioning version $version..."
 dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Provisioning\PnP.Core.Provisioning.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
+Write-Host "Building PnP.Core.Modernization version $version..."
+dotnet build $PSScriptRoot\..\src\sdk\PnP.Core.Modernization\PnP.Core.Modernization.csproj --configuration Release --no-incremental --force --nologo /p:Version=$version
 
 # Sign the binaries
 Write-Host "Signing the binaries..."
@@ -32,6 +34,8 @@ Write-Host "Packinging PnP.Core.Admin version $version..."
 dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core.Admin\PnP.Core.Admin.csproj --configuration Release --no-build /p:PackageVersion=$version
 Write-Host "Packinging PnP.Core.Provisioning version $version..."
 dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core.Provisioning\PnP.Core.Provisioning.csproj --configuration Release --no-build /p:PackageVersion=$version
+Write-Host "Packing transitional PnP.Core.Modernization version $version (not published)"
+dotnet pack $PSScriptRoot\..\src\sdk\PnP.Core.Modernization\PnP.Core.Modernization.csproj --configuration Release --no-build /p:PackageVersion=$version
 
 # Sign the nuget package is not needed as Nuget signs the package automatically
 

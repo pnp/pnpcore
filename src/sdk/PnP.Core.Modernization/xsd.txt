@@ -1,0 +1,2 @@
+﻿xsd.exe webpartmapping.xsd /c /n:PnP.Core.Modernization
+xsd.exe pagelayoutmapping.xsd /c /n:PnP.Core.Modernization.Publishing

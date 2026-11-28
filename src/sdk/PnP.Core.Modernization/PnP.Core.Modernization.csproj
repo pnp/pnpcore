@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <RootNamespace>PnP.Core.Modernization</RootNamespace>
+    <AssemblyName>PnP.Core.Modernization</AssemblyName>
+    <Version>1.19.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>The SharePoint Online page modernization engine for PnP Core SDK.</Description>
+    <Authors>PnP</Authors>
+    <Company>PnP</Company>
+    <Copyright>PnP 2025</Copyright>
+    <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <Deterministic>true</Deterministic>
+    <PackageIcon>nugeticon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Preserve upstream's documentation and async behavior during the migration-only phase. -->
+    <NoWarn>$(NoWarn);CS1591;CA2007</NoWarn>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+    <ProjectReference Include="..\PnP.Core.Provisioning\PnP.Core.Provisioning.csproj" />
+    <PackageReference Include="AngleSharp.Css" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.0-*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="webpartmapping.xml" />
+    <EmbeddedResource Include="webpartmapping.xsd" />
+    <EmbeddedResource Include="Publishing\pagelayoutmapping.xml" />
+    <EmbeddedResource Include="Publishing\pagelayoutmapping.xsd" />
+    <None Update="webpartmapping.xml" CopyToOutputDirectory="Always" />
+    <None Update="Nuget\webpartmapping.xml" CopyToOutputDirectory="Always" />
+    <None Remove="nugeticon.png;README.md;LICENSE;Caml\credits.txt" />
+    <None Include="nugeticon.png;README.md;LICENSE" Pack="true" PackagePath="\" />
+    <None Include="Caml\credits.txt" Pack="true" PackagePath="notices" />
+  </ItemGroup>
+</Project>

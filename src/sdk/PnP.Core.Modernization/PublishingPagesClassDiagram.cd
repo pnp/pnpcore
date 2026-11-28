@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingPageTransformator" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAACAAAAAAAAAAQAAQggAAAAAAAAAAAAAAAQAg=</HashCode>
+      <FileName>Publishing\PublishingPageTransformator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PageLayoutManager">
+    <Position X="8.25" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAABAQAAIAQAAAAAAAAAAAABQAAAA=</HashCode>
+      <FileName>Publishing\PageLayoutManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PageLayoutAnalyser">
+    <Position X="0.5" Y="8" Width="4" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="PnP.Core.Modernization.Publishing.PageLayoutAnalyser.ExtractedHtmlBlocksEntity">
+        <TypeIdentifier>
+          <NewMemberFileName>Publishing\PageLayoutAnalyser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAEACQAAAQAAAAQAAAAwACAIAEABgBAABAAAgBAwI4E=</HashCode>
+      <FileName>Publishing\PageLayoutAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingBuiltIn">
+    <Position X="3.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAQAAQAABIQAAASAAAAAEAAgAAUAIAA=</HashCode>
+      <FileName>Publishing\PublishingBuiltIn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingFunctionProcessor">
+    <Position X="0.75" Y="3" Width="2.5" />
+    <NestedTypes>
+      <Enum Name="PnP.Core.Modernization.Publishing.PublishingFunctionProcessor.FieldType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Publishing\PublishingFunctionProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAQEgAABAAAAAQAAAAAAAAAAAUAQAA=</HashCode>
+      <FileName>Publishing\PublishingFunctionProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingLayoutTransformator" BaseTypeListCollapsed="true">
+    <Position X="13" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Publishing\PublishingLayoutTransformator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingMetadataTransformator">
+    <Position X="7" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAkAAABAQAIAAIAAAAAAAAAAEAQAA=</HashCode>
+      <FileName>Publishing\PublishingMetadataTransformator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingPageHeaderTransformator">
+    <Position X="5" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABBAAAAAAABACAIAAAAAAAIAAAAAEAQAA=</HashCode>
+      <FileName>Publishing\PublishingPageHeaderTransformator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Publishing.PublishingPageTransformationInformation">
+    <Position X="11.5" Y="8" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Publishing\PublishingPageTransformationInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Functions.BaseFunctionProcessor">
+    <Position X="1" Y="0.5" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="PnP.Core.Modernization.Functions.BaseFunctionProcessor.FunctionType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Functions\BaseFunctionProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="PnP.Core.Modernization.Functions.BaseFunctionProcessor.FunctionParameter" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Functions\BaseFunctionProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="PnP.Core.Modernization.Functions.BaseFunctionProcessor.FunctionDefinition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Functions\BaseFunctionProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="PnP.Core.Modernization.Functions.BaseFunctionProcessor.AddOnType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Functions\BaseFunctionProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Functions\BaseFunctionProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Transform.BaseTransformationInformation">
+    <Position X="12.75" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgIAAAAABAAAAACAIAAAQIAAAAEAAAgCAAAAAKAABAA=</HashCode>
+      <FileName>Transform\BaseTransformationInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Transform.BaseTransform">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAAAQAAAIAAAAAAAAAAIAgJIAAAAAAACAAAAAE=</HashCode>
+      <FileName>Transform\BaseTransform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PnP.Core.Modernization.Functions.FunctionsBase">
+    <Position X="7.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Functions\FunctionsBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
